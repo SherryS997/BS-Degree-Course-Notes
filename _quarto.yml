@@ -1,0 +1,43 @@
+project:
+  type: website
+  output-dir: docs
+
+css:
+  - https://lalten.github.io/lmweb/style/latinmodern-roman.css
+  - https://lalten.github.io/lmweb/style/latinmodern-mono.css
+mainfont: "Latin Modern Roman"
+fontsize: 14pt
+fontfamilyoptions: "oblique"
+monofont: "Latin Modern Mono"
+highlight-style: "tango"
+
+website:
+  title: "BS Degree Notes"
+  sidebar:
+    collapse-level: 1
+    style: "docked"
+    search: true
+    contents:
+      - href: index.qmd
+        text: Home
+      - section: "Deep Learning"
+        contents: 
+          - href: pages/DL/Week01_1.md
+            text: Week 1.1
+          - href: pages/DL/Week01_2.md
+            text: Week 1.2
+      - section: "AI: Search Methods"
+        contents: 
+          - href: pages/AI/Week01.md
+            text: Week 1
+      - section: "Software Testing"
+        contents: 
+          - href: pages/ST/Week01.md
+            text: Week 1
+
+format:
+  html:
+    theme: 
+      light: [zephyr, styles_light.scss]
+      dark: [darkly, styles.scss]
+    toc: true

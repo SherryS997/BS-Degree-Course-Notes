@@ -1,0 +1,837 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.3.450">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>BS Degree Notes – week01</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+
+<link rel="stylesheet" href="https://lalten.github.io/lmweb/style/latinmodern-roman.css">
+<link rel="stylesheet" href="https://lalten.github.io/lmweb/style/latinmodern-mono.css">
+</head>
+
+<body class="nav-sidebar docked">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../pages/ST/Week01.html">Software Testing</a></li><li class="breadcrumb-item"><a href="../../pages/ST/Week01.html">Week 1</a></li></ol></nav>
+      <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+      </a>
+      <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation docked overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="../../">BS Degree Notes</a> 
+        <div class="sidebar-tools-main">
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Home</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="false">
+ <span class="menu-text">Deep Learning</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../pages/DL/Week01_1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 1.1</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../pages/DL/Week01_2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 1.2</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="false">
+ <span class="menu-text">AI: Search Methods</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../pages/AI/Week01.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 1</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true">
+ <span class="menu-text">Software Testing</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../pages/ST/Week01.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">Week 1</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#software-development-life-cycle-sdlc" id="toc-software-development-life-cycle-sdlc" class="nav-link active" data-scroll-target="#software-development-life-cycle-sdlc">Software Development Life Cycle (SDLC)</a>
+  <ul class="collapse">
+  <li><a href="#introduction-to-software-development-life-cycle-sdlc" id="toc-introduction-to-software-development-life-cycle-sdlc" class="nav-link" data-scroll-target="#introduction-to-software-development-life-cycle-sdlc">Introduction to Software Development Life Cycle (SDLC)</a></li>
+  <li><a href="#phases-of-sdlc" id="toc-phases-of-sdlc" class="nav-link" data-scroll-target="#phases-of-sdlc">Phases of SDLC</a>
+  <ul class="collapse">
+  <li><a href="#planning-and-requirements-definition" id="toc-planning-and-requirements-definition" class="nav-link" data-scroll-target="#planning-and-requirements-definition">1. Planning and Requirements Definition</a></li>
+  <li><a href="#design-and-architecture" id="toc-design-and-architecture" class="nav-link" data-scroll-target="#design-and-architecture">2. Design and Architecture</a></li>
+  <li><a href="#coding-development-phase" id="toc-coding-development-phase" class="nav-link" data-scroll-target="#coding-development-phase">3. Coding (Development) Phase</a></li>
+  <li><a href="#testing-phase" id="toc-testing-phase" class="nav-link" data-scroll-target="#testing-phase">4. Testing Phase</a></li>
+  <li><a href="#maintenance-phase" id="toc-maintenance-phase" class="nav-link" data-scroll-target="#maintenance-phase">5. Maintenance Phase</a></li>
+  </ul></li>
+  <li><a href="#sdlc-models" id="toc-sdlc-models" class="nav-link" data-scroll-target="#sdlc-models">SDLC Models</a>
+  <ul class="collapse">
+  <li><a href="#v-model" id="toc-v-model" class="nav-link" data-scroll-target="#v-model">1. V Model</a></li>
+  <li><a href="#agile-software-development" id="toc-agile-software-development" class="nav-link" data-scroll-target="#agile-software-development">2. Agile Software Development</a></li>
+  </ul></li>
+  <li><a href="#other-sdlc-models" id="toc-other-sdlc-models" class="nav-link" data-scroll-target="#other-sdlc-models">Other SDLC Models</a></li>
+  <li><a href="#umbrella-activities" id="toc-umbrella-activities" class="nav-link" data-scroll-target="#umbrella-activities">Umbrella Activities</a>
+  <ul class="collapse">
+  <li><a href="#project-management" id="toc-project-management" class="nav-link" data-scroll-target="#project-management">1. Project Management</a></li>
+  <li><a href="#documentation" id="toc-documentation" class="nav-link" data-scroll-target="#documentation">2. Documentation</a></li>
+  <li><a href="#quality-assurance" id="toc-quality-assurance" class="nav-link" data-scroll-target="#quality-assurance">3. Quality Assurance</a></li>
+  </ul></li>
+  </ul></li>
+  <li><a href="#introduction-to-terminology-and-types" id="toc-introduction-to-terminology-and-types" class="nav-link" data-scroll-target="#introduction-to-terminology-and-types">Introduction to Terminology and Types</a>
+  <ul class="collapse">
+  <li><a href="#introduction" id="toc-introduction" class="nav-link" data-scroll-target="#introduction">Introduction</a>
+  <ul class="collapse">
+  <li><a href="#definition-of-software-testing" id="toc-definition-of-software-testing" class="nav-link" data-scroll-target="#definition-of-software-testing">Definition of Software Testing</a></li>
+  <li><a href="#goals-of-software-testing" id="toc-goals-of-software-testing" class="nav-link" data-scroll-target="#goals-of-software-testing">Goals of Software Testing</a></li>
+  </ul></li>
+  <li><a href="#standard-glossary" id="toc-standard-glossary" class="nav-link" data-scroll-target="#standard-glossary">Standard Glossary</a></li>
+  <li><a href="#historical-perspective" id="toc-historical-perspective" class="nav-link" data-scroll-target="#historical-perspective">Historical Perspective</a></li>
+  <li><a href="#testing-terminology" id="toc-testing-terminology" class="nav-link" data-scroll-target="#testing-terminology">Testing Terminology</a></li>
+  <li><a href="#types-of-testing" id="toc-types-of-testing" class="nav-link" data-scroll-target="#types-of-testing">Types of Testing</a></li>
+  <li><a href="#quality-parameters-testing" id="toc-quality-parameters-testing" class="nav-link" data-scroll-target="#quality-parameters-testing">Quality Parameters Testing</a></li>
+  <li><a href="#methods-of-testing" id="toc-methods-of-testing" class="nav-link" data-scroll-target="#methods-of-testing">Methods of Testing</a></li>
+  <li><a href="#testing-activities" id="toc-testing-activities" class="nav-link" data-scroll-target="#testing-activities">Testing Activities</a></li>
+  </ul></li>
+  <li><a href="#testing-goals-and-process-levels" id="toc-testing-goals-and-process-levels" class="nav-link" data-scroll-target="#testing-goals-and-process-levels">Testing Goals and Process Levels</a>
+  <ul class="collapse">
+  <li><a href="#introduction-1" id="toc-introduction-1" class="nav-link" data-scroll-target="#introduction-1">Introduction</a></li>
+  <li><a href="#testing-process-maturity-levels" id="toc-testing-process-maturity-levels" class="nav-link" data-scroll-target="#testing-process-maturity-levels">Testing Process Maturity Levels</a></li>
+  <li><a href="#significance-for-the-course" id="toc-significance-for-the-course" class="nav-link" data-scroll-target="#significance-for-the-course">Significance for the Course</a></li>
+  <li><a href="#controllability-and-observability" id="toc-controllability-and-observability" class="nav-link" data-scroll-target="#controllability-and-observability">Controllability and Observability</a></li>
+  <li><a href="#illustration" id="toc-illustration" class="nav-link" data-scroll-target="#illustration">Illustration</a></li>
+  <li><a href="#test-automation-tool-junit" id="toc-test-automation-tool-junit" class="nav-link" data-scroll-target="#test-automation-tool-junit">Test Automation Tool: JUnit</a></li>
+  </ul></li>
+  <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion">Conclusion</a></li>
+  <li><a href="#points-to-remember" id="toc-points-to-remember" class="nav-link" data-scroll-target="#points-to-remember">Points to Remember</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+
+
+<section id="software-development-life-cycle-sdlc" class="level1">
+<h1>Software Development Life Cycle (SDLC)</h1>
+<section id="introduction-to-software-development-life-cycle-sdlc" class="level2">
+<h2 class="anchored" data-anchor-id="introduction-to-software-development-life-cycle-sdlc">Introduction to Software Development Life Cycle (SDLC)</h2>
+<p>In the dynamic realm of the software industry, the Software Development Life Cycle (SDLC) emerges as a pivotal and systematic process encompassing various stages: designing, developing, testing, and releasing software. Its ultimate objective is to deliver software of the highest quality, aligning with customer expectations. Guiding this intricate process is the ISO/IEC standard 10207, which meticulously defines software lifecycle processes.</p>
+</section>
+<section id="phases-of-sdlc" class="level2">
+<h2 class="anchored" data-anchor-id="phases-of-sdlc">Phases of SDLC</h2>
+<section id="planning-and-requirements-definition" class="level3">
+<h3 class="anchored" data-anchor-id="planning-and-requirements-definition">1. Planning and Requirements Definition</h3>
+<p>The initial phase involves a meticulous identification of development goals, stakeholders, and feasibility studies. Rigorous analysis, validation, and documentation of requirements take precedence. A comprehensive project plan is then crafted, incorporating timelines and resource allocation.</p>
+</section>
+<section id="design-and-architecture" class="level3">
+<h3 class="anchored" data-anchor-id="design-and-architecture">2. Design and Architecture</h3>
+<p>This phase delves into the intricate details of software modules and internals. Designing identifies these modules, while architecture defines module connections, operating systems, databases, and user interface aspects. Feasibility studies and system-level test cases are conducted, culminating in the creation of design and architecture documents.</p>
+</section>
+<section id="coding-development-phase" class="level3">
+<h3 class="anchored" data-anchor-id="coding-development-phase">3. Coding (Development) Phase</h3>
+<p>Implementation of low-level design in adherence to coding guidelines takes center stage in this phase. Developers, in turn, conduct unit testing, while project management tools meticulously track progress. The output comprises executable code, comprehensive documentation, and meticulously crafted unit test cases.</p>
+</section>
+<section id="testing-phase" class="level3">
+<h3 class="anchored" data-anchor-id="testing-phase">4. Testing Phase</h3>
+<p>The testing phase is a critical juncture where software undergoes thorough examination for defects. This includes integration testing, system testing, and acceptance testing. The iterative process of defect identification, rectification, and retesting continues until all functionalities meet the defined criteria. The output comprises detailed test cases and comprehensive test documentation.</p>
+</section>
+<section id="maintenance-phase" class="level3">
+<h3 class="anchored" data-anchor-id="maintenance-phase">5. Maintenance Phase</h3>
+<p>Post-deployment, the maintenance phase kicks in, addressing errors post-release and accommodating customer feature requests. Regression testing ensures continued software integrity, with both reusing and creating new test cases as necessary.</p>
+</section>
+</section>
+<section id="sdlc-models" class="level2">
+<h2 class="anchored" data-anchor-id="sdlc-models">SDLC Models</h2>
+<section id="v-model" class="level3">
+<h3 class="anchored" data-anchor-id="v-model">1. V Model</h3>
+<p>The V Model stands out for its emphasis on testing, incorporating both verification and validation. It follows a traditional waterfall model, mapping testing phases directly to corresponding development phases. This model places a premium on thorough testing practices.</p>
+</section>
+<section id="agile-software-development" class="level3">
+<h3 class="anchored" data-anchor-id="agile-software-development">2. Agile Software Development</h3>
+<p>An amalgamation of methodologies, Agile Software Development prioritizes adaptability and rapid development. This involves developing in small, manageable subsets with incremental releases, fostering quick delivery, customer interactions, and rapid response. Agile models often include iterations or sprints.</p>
+</section>
+</section>
+<section id="other-sdlc-models" class="level2">
+<h2 class="anchored" data-anchor-id="other-sdlc-models">Other SDLC Models</h2>
+<p>Beyond the V Model and Agile, the software industry features a myriad of other SDLC models, each with its unique approach. Models like Big Bang, Rapid Application Development, Incremental Model, and the Waterfall Model cater to diverse project requirements and circumstances.</p>
+</section>
+<section id="umbrella-activities" class="level2">
+<h2 class="anchored" data-anchor-id="umbrella-activities">Umbrella Activities</h2>
+<section id="project-management" class="level3">
+<h3 class="anchored" data-anchor-id="project-management">1. Project Management</h3>
+<p>Integral to SDLC are umbrella activities, including project management. This involves team management, task delegation, resource planning, duration estimation, intermediate releases, and overall project planning.</p>
+</section>
+<section id="documentation" class="level3">
+<h3 class="anchored" data-anchor-id="documentation">2. Documentation</h3>
+<p>Documentation forms the backbone of SDLC, with essential artifacts encompassing code, test cases, and various documents. The Requirements Traceability Matrix (RTM) emerges as a crucial tool, linking artifacts across different phases and ensuring a seamless flow of information.</p>
+</section>
+<section id="quality-assurance" class="level3">
+<h3 class="anchored" data-anchor-id="quality-assurance">3. Quality Assurance</h3>
+<p>Ensuring the readiness of software for the market involves dedicated efforts from software quality auditors, inspection teams, and certification and accreditation teams. Quality Assurance activities play a vital role in maintaining the overall integrity and reliability of the software product.</p>
+</section>
+</section>
+</section>
+<section id="introduction-to-terminology-and-types" class="level1">
+<h1>Introduction to Terminology and Types</h1>
+<section id="introduction" class="level2">
+<h2 class="anchored" data-anchor-id="introduction">Introduction</h2>
+<section id="definition-of-software-testing" class="level3">
+<h3 class="anchored" data-anchor-id="definition-of-software-testing">Definition of Software Testing</h3>
+<p>Software testing is a comprehensive process involving the scrutiny of various artifacts, including code, design, architecture documents, and requirements documents. The core objective is to validate and verify these artifacts, ensuring the software’s reliability and functionality.</p>
+</section>
+<section id="goals-of-software-testing" class="level3">
+<h3 class="anchored" data-anchor-id="goals-of-software-testing">Goals of Software Testing</h3>
+<p>The overarching goals encompass providing an unbiased, independent assessment of the software, verifying its compliance with business capabilities, and evaluating associated risks that may impact its performance.</p>
+</section>
+</section>
+<section id="standard-glossary" class="level2">
+<h2 class="anchored" data-anchor-id="standard-glossary">Standard Glossary</h2>
+<ul>
+<li><p><strong>Verification:</strong> This process determines whether the products meet specified requirements at various stages of the software development life cycle.</p></li>
+<li><p><strong>Validation:</strong> Evaluation of the software at the end of the development phase, ensuring it aligns with standards and intended usage.</p></li>
+<li><p><strong>Fault:</strong> A static defect within the software, often originating from a mistake made during development.</p></li>
+<li><p><strong>Failure:</strong> The visible, external manifestation of incorrect behavior resulting from a fault.</p></li>
+<li><p><strong>Error:</strong> The incorrect state of the program when a failure occurs, indicating a deviation from the intended behavior.</p></li>
+</ul>
+</section>
+<section id="historical-perspective" class="level2">
+<h2 class="anchored" data-anchor-id="historical-perspective">Historical Perspective</h2>
+<p>Drawing from the historical lens, luminaries like Edison and Lovelace utilized terms such as “bug” and “error” to emphasize the iterative process of identifying and rectifying faults and difficulties in inventions.</p>
+</section>
+<section id="testing-terminology" class="level2">
+<h2 class="anchored" data-anchor-id="testing-terminology">Testing Terminology</h2>
+<ul>
+<li><p><strong>Test Case:</strong> A comprehensive entity comprising test inputs and expected outputs, evaluated by executing the test case on the code.</p></li>
+<li><p><strong>Test Case ID:</strong> An identifier crucial for retrieval and management of test cases.</p></li>
+<li><p><strong>Traceability:</strong> The establishment of links connecting test cases to specific requirements, ensuring thorough validation.</p></li>
+</ul>
+</section>
+<section id="types-of-testing" class="level2">
+<h2 class="anchored" data-anchor-id="types-of-testing">Types of Testing</h2>
+<ol type="1">
+<li><p><strong>Unit Testing:</strong> A meticulous examination carried out by developers during the coding phase to test individual methods.</p></li>
+<li><p><strong>Integration Testing:</strong> An evaluation of the interaction between diverse software components.</p></li>
+<li><p><strong>System Testing:</strong> A holistic examination of the entire system to ensure alignment with design requirements.</p></li>
+<li><p><strong>Acceptance Testing:</strong> Conducted by end customers to validate that the delivered software meets all committed requirements.</p></li>
+</ol>
+</section>
+<section id="quality-parameters-testing" class="level2">
+<h2 class="anchored" data-anchor-id="quality-parameters-testing">Quality Parameters Testing</h2>
+<ul>
+<li><p><strong>Functional Testing:</strong> Ensures the software functions precisely as intended.</p></li>
+<li><p><strong>Stress Testing:</strong> Evaluates software performance under extreme conditions to assess its robustness.</p></li>
+<li><p><strong>Performance Testing:</strong> Verifies if the software responds within specified time limits under varying conditions.</p></li>
+<li><p><strong>Usability Testing:</strong> Ensures the software offers a user-friendly interface, enhancing the overall user experience.</p></li>
+<li><p><strong>Regression Testing:</strong> Validates that existing functionalities continue to work seamlessly after software changes.</p></li>
+</ul>
+</section>
+<section id="methods-of-testing" class="level2">
+<h2 class="anchored" data-anchor-id="methods-of-testing">Methods of Testing</h2>
+<ul>
+<li><p><strong>Black Box Testing:</strong> A method that evaluates the software without delving into its internal structure, relying solely on inputs and requirements.</p></li>
+<li><p><strong>White Box Testing:</strong> Testing carried out with a comprehensive understanding of the software’s internal structure, design, and code.</p></li>
+<li><p><strong>Gray Box Testing:</strong> An intermediate approach that combines elements of both black box and white box testing.</p></li>
+</ul>
+</section>
+<section id="testing-activities" class="level2">
+<h2 class="anchored" data-anchor-id="testing-activities">Testing Activities</h2>
+<ol type="1">
+<li><strong>Test Case Design:</strong>
+<ul>
+<li>Critical for efficiently identifying defects.</li>
+<li>Requires a blend of computer science expertise, domain knowledge, and mathematical proficiency.</li>
+<li>Emphasis on the development of effective test case design algorithms. </li>
+</ul></li>
+<li><strong>Test Automation:</strong>
+<ul>
+<li>Involves the conversion of test cases into executable scripts.</li>
+<li>Addresses preparatory steps and incorporates concepts of observability and controllability.</li>
+<li>Utilizes both open-source and proprietary test automation tools.</li>
+</ul></li>
+<li><strong>Execution:</strong>
+<ul>
+<li>Automated process involving the execution of test cases.</li>
+<li>Utilizes a selection of open-source or proprietary tools chosen by the organization.</li>
+</ul></li>
+<li><strong>Evaluation:</strong>
+<ul>
+<li>The critical analysis of test results to determine correctness.</li>
+<li>Manual intervention may be required for fault isolation.</li>
+<li>Crucial for drawing inferences about the software’s quality.</li>
+</ul></li>
+</ol>
+</section>
+</section>
+<section id="testing-goals-and-process-levels" class="level1">
+<h1>Testing Goals and Process Levels</h1>
+<section id="introduction-1" class="level2">
+<h2 class="anchored" data-anchor-id="introduction-1">Introduction</h2>
+<p>In the realm of software testing, the pursuit of testing goals is intricately tied to the specificities of the software product in question and the maturity of an organization’s quality processes. This diversity in objectives and approaches underscores the importance of comprehending the nuanced landscape of testing process levels, which range from the rudimentary Level 0 to the pinnacle of maturity at Level 4.</p>
+</section>
+<section id="testing-process-maturity-levels" class="level2">
+<h2 class="anchored" data-anchor-id="testing-process-maturity-levels">Testing Process Maturity Levels</h2>
+<ol type="1">
+<li><p><strong>Level 0: Low Maturity</strong></p>
+<p>At this embryonic stage, there is an absence of a clear demarcation between testing and debugging activities. The predominant focus revolves around expedient product releases, potentially at the expense of a rigorous testing regimen.</p></li>
+<li><p><strong>Level 1: Testing for Correctness</strong></p>
+<p>The next tier witnesses a paradigm shift as testing endeavors to validate software correctness. However, a common misunderstanding prevails — an attempt to prove complete correctness through testing, an inherently unattainable feat.</p></li>
+<li><p><strong>Level 2: Finding Errors</strong></p>
+<p>As organizations ascend to Level 2, there is a conscious recognition of testing as a mechanism to unearth errors by actively showcasing failures. However, a resistance lingers when it comes to acknowledging and addressing errors identified in the code.</p></li>
+<li><p><strong>Level 3: Sophisticated Testing</strong></p>
+<p>Level 3 marks a watershed moment where testing is not merely a reactive measure but is embraced as a robust technique for both identifying and eliminating errors. A collaborative ethos emerges, with a collective effort to mitigate risks in software development.</p></li>
+<li><p><strong>Level 4: Mature Process-Oriented Testing</strong></p>
+<p>At the pinnacle of maturity, testing transcends mere procedural activities; it metamorphoses into a mental discipline. Integrated seamlessly into mainstream development, the focus is on continuous quality improvement. Here, test engineers and developers synergize their efforts to deliver software of the highest quality.</p></li>
+</ol>
+</section>
+<section id="significance-for-the-course" class="level2">
+<h2 class="anchored" data-anchor-id="significance-for-the-course">Significance for the Course</h2>
+<p>Understanding the nuances of testing process levels assumes paramount importance as it serves as the bedrock for tailoring testing approaches. The focus of this course is strategically directed towards the technical intricacies relevant to Levels 3 and 4, where testing is not just a process but an integral aspect of the software development mindset.</p>
+</section>
+<section id="controllability-and-observability" class="level2">
+<h2 class="anchored" data-anchor-id="controllability-and-observability">Controllability and Observability</h2>
+<ul>
+<li><p><strong>Controllability:</strong> This pertains to the ability to provide inputs and execute the software module. It underscores the necessity of having a structured approach to govern the input parameters and execution environment.</p></li>
+<li><p><strong>Observability:</strong> The study and recording of outputs form the crux of observability. This involves a meticulous examination of the software’s responses, contributing significantly to the overall understanding of its behavior.</p></li>
+</ul>
+</section>
+<section id="illustration" class="level2">
+<h2 class="anchored" data-anchor-id="illustration">Illustration</h2>
+<p>The challenges of controllability and observability find illustration in real-world scenarios. Designing effective test cases becomes paramount to ensure both the reachability of various modules and the meticulous observation of their outputs. This practical application reinforces the theoretical concepts discussed in the course.</p>
+</section>
+<section id="test-automation-tool-junit" class="level2">
+<h2 class="anchored" data-anchor-id="test-automation-tool-junit">Test Automation Tool: JUnit</h2>
+<p>The course introduces JUnit as the designated test automation tool. JUnit’s utility is elucidated through a discussion of its prefix and postfix annotations, providing a structured approach to manage controllability and observability. Subsequent classes delve into both the theoretical underpinnings and the hands-on application of JUnit, ensuring a comprehensive understanding of its role in the testing process.</p>
+</section>
+</section>
+<section id="conclusion" class="level1">
+<h1>Conclusion</h1>
+<p>In this comprehensive exploration of Software Development Life Cycle (SDLC) and Software Testing, we’ve delved into the intricacies of the development process, testing methodologies, and the critical role of quality assurance. The SDLC, guided by the ISO/IEC standard 10207, unfolds through phases like Planning, Design, Coding, Testing, and Maintenance. Various SDLC models, such as the V Model and Agile, cater to diverse project requirements, emphasizing thorough testing practices and adaptability.</p>
+<p>The umbrella activities of Project Management, Documentation, and Quality Assurance form the backbone of SDLC, ensuring seamless project execution, comprehensive documentation, and software reliability. The introduction to terminology and types in software testing, along with a historical perspective, offers a holistic view of the discipline.</p>
+<p>The lecture further explores testing terminology, types of testing, quality parameters testing, and methods of testing. It sheds light on crucial aspects like test case design, test automation, execution, and evaluation. The discussion on Testing Goals and Process Levels provides insights into the diverse maturity levels, ranging from Level 0 to Level 4, where testing transforms from a reactive measure to a mature, process-oriented discipline.</p>
+</section>
+<section id="points-to-remember" class="level1">
+<h1>Points to Remember</h1>
+<ol type="1">
+<li><strong>SDLC Phases:</strong>
+<ul>
+<li>Planning and Requirements Definition</li>
+<li>Design and Architecture</li>
+<li>Coding (Development) Phase</li>
+<li>Testing Phase</li>
+<li>Maintenance Phase</li>
+</ul></li>
+<li><strong>SDLC Models:</strong>
+<ul>
+<li>V Model: Emphasis on testing, verification, and validation.</li>
+<li>Agile Software Development: Prioritizes adaptability and rapid development.</li>
+</ul></li>
+<li><strong>Umbrella Activities:</strong>
+<ul>
+<li>Project Management: Team management, task delegation, resource planning.</li>
+<li>Documentation: Essential artifacts, Requirements Traceability Matrix (RTM).</li>
+<li>Quality Assurance: Ensures software readiness and overall integrity.</li>
+</ul></li>
+<li><strong>Testing Goals:</strong>
+<ul>
+<li>Validation and verification of artifacts.</li>
+<li>Unbiased, independent assessment of software.</li>
+<li>Evaluation of compliance with business capabilities.</li>
+</ul></li>
+<li><strong>Testing Process Levels:</strong>
+<ul>
+<li>Level 0 to Level 4, representing increasing maturity.</li>
+<li>Level 4 signifies a mature, process-oriented testing mindset.</li>
+</ul></li>
+<li><strong>Controllability and Observability:</strong>
+<ul>
+<li>Controllability: Structured approach to input parameters and execution.</li>
+<li>Observability: Meticulous examination of software responses.</li>
+</ul></li>
+<li><strong>Test Automation Tool: JUnit:</strong>
+<ul>
+<li>Designated tool for test automation.</li>
+<li>Prefix and postfix annotations for structured controllability and observability.</li>
+</ul></li>
+</ol>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const disableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'prefetch';
+    }
+  }
+  const enableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'stylesheet';
+    }
+  }
+  const manageTransitions = (selector, allowTransitions) => {
+    const els = window.document.querySelectorAll(selector);
+    for (let i=0; i < els.length; i++) {
+      const el = els[i];
+      if (allowTransitions) {
+        el.classList.remove('notransition');
+      } else {
+        el.classList.add('notransition');
+      }
+    }
+  }
+  const toggleColorMode = (alternate) => {
+    // Switch the stylesheets
+    const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+    manageTransitions('#quarto-margin-sidebar .nav-link', false);
+    if (alternate) {
+      enableStylesheet(alternateStylesheets);
+      for (const sheetNode of alternateStylesheets) {
+        if (sheetNode.id === "quarto-bootstrap") {
+          toggleBodyColorMode(sheetNode);
+        }
+      }
+    } else {
+      disableStylesheet(alternateStylesheets);
+      toggleBodyColorPrimary();
+    }
+    manageTransitions('#quarto-margin-sidebar .nav-link', true);
+    // Switch the toggles
+    const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+    for (let i=0; i < toggles.length; i++) {
+      const toggle = toggles[i];
+      if (toggle) {
+        if (alternate) {
+          toggle.classList.add("alternate");     
+        } else {
+          toggle.classList.remove("alternate");
+        }
+      }
+    }
+    // Hack to workaround the fact that safari doesn't
+    // properly recolor the scrollbar when toggling (#1455)
+    if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+      manageTransitions("body", false);
+      window.scrollTo(0, 1);
+      setTimeout(() => {
+        window.scrollTo(0, 0);
+        manageTransitions("body", true);
+      }, 40);  
+    }
+  }
+  const isFileUrl = () => { 
+    return window.location.protocol === 'file:';
+  }
+  const hasAlternateSentinel = () => {  
+    let styleSentinel = getColorSchemeSentinel();
+    if (styleSentinel !== null) {
+      return styleSentinel === "alternate";
+    } else {
+      return false;
+    }
+  }
+  const setStyleSentinel = (alternate) => {
+    const value = alternate ? "alternate" : "default";
+    if (!isFileUrl()) {
+      window.localStorage.setItem("quarto-color-scheme", value);
+    } else {
+      localAlternateSentinel = value;
+    }
+  }
+  const getColorSchemeSentinel = () => {
+    if (!isFileUrl()) {
+      const storageValue = window.localStorage.getItem("quarto-color-scheme");
+      return storageValue != null ? storageValue : localAlternateSentinel;
+    } else {
+      return localAlternateSentinel;
+    }
+  }
+  let localAlternateSentinel = 'default';
+  // Dark / light mode switch
+  window.quartoToggleColorScheme = () => {
+    // Read the current dark / light value 
+    let toAlternate = !hasAlternateSentinel();
+    toggleColorMode(toAlternate);
+    setStyleSentinel(toAlternate);
+  };
+  // Ensure there is a toggle, if there isn't float one in the top right
+  if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+    const a = window.document.createElement('a');
+    a.classList.add('top-right');
+    a.classList.add('quarto-color-scheme-toggle');
+    a.href = "";
+    a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+    const i = window.document.createElement("i");
+    i.classList.add('bi');
+    a.appendChild(i);
+    window.document.body.appendChild(a);
+  }
+  // Switch to dark mode if need be
+  if (hasAlternateSentinel()) {
+    toggleColorMode(true);
+  } else {
+    toggleColorMode(false);
+  }
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>

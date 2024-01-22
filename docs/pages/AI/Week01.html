@@ -1,0 +1,1282 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.3.450">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>BS Degree Notes – week01</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+
+<link rel="stylesheet" href="https://lalten.github.io/lmweb/style/latinmodern-roman.css">
+<link rel="stylesheet" href="https://lalten.github.io/lmweb/style/latinmodern-mono.css">
+</head>
+
+<body class="nav-sidebar docked">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../pages/AI/Week01.html">AI: Search Methods</a></li><li class="breadcrumb-item"><a href="../../pages/AI/Week01.html">Week 1</a></li></ol></nav>
+      <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+      </a>
+      <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation docked overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="../../">BS Degree Notes</a> 
+        <div class="sidebar-tools-main">
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Home</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="false">
+ <span class="menu-text">Deep Learning</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../pages/DL/Week01_1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 1.1</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../pages/DL/Week01_2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 1.2</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
+ <span class="menu-text">AI: Search Methods</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../pages/AI/Week01.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">Week 1</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="false">
+ <span class="menu-text">Software Testing</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../pages/ST/Week01.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 1</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#a-decade-of-machine-learning" id="toc-a-decade-of-machine-learning" class="nav-link active" data-scroll-target="#a-decade-of-machine-learning">A Decade of Machine Learning</a>
+  <ul class="collapse">
+  <li><a href="#overview-of-the-past-decade-in-machine-learning" id="toc-overview-of-the-past-decade-in-machine-learning" class="nav-link" data-scroll-target="#overview-of-the-past-decade-in-machine-learning">Overview of the Past Decade in Machine Learning</a></li>
+  <li><a href="#key-drivers-of-ml-advancements" id="toc-key-drivers-of-ml-advancements" class="nav-link" data-scroll-target="#key-drivers-of-ml-advancements">Key Drivers of ML Advancements</a></li>
+  <li><a href="#evolution-of-neural-networks" id="toc-evolution-of-neural-networks" class="nav-link" data-scroll-target="#evolution-of-neural-networks">Evolution of Neural Networks</a>
+  <ul class="collapse">
+  <li><a href="#perceptron-era" id="toc-perceptron-era" class="nav-link" data-scroll-target="#perceptron-era">Perceptron Era</a></li>
+  <li><a href="#multi-layer-perceptron" id="toc-multi-layer-perceptron" class="nav-link" data-scroll-target="#multi-layer-perceptron">Multi-Layer Perceptron</a></li>
+  <li><a href="#deep-neural-networks-in-computer-vision" id="toc-deep-neural-networks-in-computer-vision" class="nav-link" data-scroll-target="#deep-neural-networks-in-computer-vision">Deep Neural Networks in Computer Vision</a></li>
+  </ul></li>
+  <li><a href="#training-process-of-neural-networks" id="toc-training-process-of-neural-networks" class="nav-link" data-scroll-target="#training-process-of-neural-networks">Training Process of Neural Networks</a>
+  <ul class="collapse">
+  <li><a href="#supervised-training" id="toc-supervised-training" class="nav-link" data-scroll-target="#supervised-training">Supervised Training</a></li>
+  <li><a href="#applications-of-deep-neural-networks" id="toc-applications-of-deep-neural-networks" class="nav-link" data-scroll-target="#applications-of-deep-neural-networks">Applications of Deep Neural Networks</a></li>
+  </ul></li>
+  <li><a href="#machine-learning-in-internet-interaction" id="toc-machine-learning-in-internet-interaction" class="nav-link" data-scroll-target="#machine-learning-in-internet-interaction">Machine Learning in Internet Interaction</a>
+  <ul class="collapse">
+  <li><a href="#user-as-data" id="toc-user-as-data" class="nav-link" data-scroll-target="#user-as-data">User as Data</a></li>
+  <li><a href="#animal-like-abilities-vs.-human-level-intelligence" id="toc-animal-like-abilities-vs.-human-level-intelligence" class="nav-link" data-scroll-target="#animal-like-abilities-vs.-human-level-intelligence">Animal-Like Abilities vs.&nbsp;Human-Level Intelligence</a></li>
+  </ul></li>
+  <li><a href="#performance-vs.-competence-in-machine-learning" id="toc-performance-vs.-competence-in-machine-learning" class="nav-link" data-scroll-target="#performance-vs.-competence-in-machine-learning">Performance vs.&nbsp;Competence in Machine Learning</a>
+  <ul class="collapse">
+  <li><a href="#specialization-of-neural-networks" id="toc-specialization-of-neural-networks" class="nav-link" data-scroll-target="#specialization-of-neural-networks">Specialization of Neural Networks</a></li>
+  </ul></li>
+  <li><a href="#game-of-go-and-reinforcement-learning" id="toc-game-of-go-and-reinforcement-learning" class="nav-link" data-scroll-target="#game-of-go-and-reinforcement-learning">Game of Go and Reinforcement Learning</a>
+  <ul class="collapse">
+  <li><a href="#alphago-triumph" id="toc-alphago-triumph" class="nav-link" data-scroll-target="#alphago-triumph">Alphago Triumph</a></li>
+  </ul></li>
+  </ul></li>
+  <li><a href="#human-cognitive-architecture" id="toc-human-cognitive-architecture" class="nav-link" data-scroll-target="#human-cognitive-architecture">Human Cognitive Architecture</a>
+  <ul class="collapse">
+  <li><a href="#human-cognition-and-ai" id="toc-human-cognition-and-ai" class="nav-link" data-scroll-target="#human-cognition-and-ai">Human Cognition and AI</a>
+  <ul class="collapse">
+  <li><a href="#cognitive-landscape" id="toc-cognitive-landscape" class="nav-link" data-scroll-target="#cognitive-landscape">Cognitive Landscape</a></li>
+  <li><a href="#symbolic-reasoning" id="toc-symbolic-reasoning" class="nav-link" data-scroll-target="#symbolic-reasoning">Symbolic Reasoning</a></li>
+  </ul></li>
+  <li><a href="#distinguishing-ai-from-machine-learning" id="toc-distinguishing-ai-from-machine-learning" class="nav-link" data-scroll-target="#distinguishing-ai-from-machine-learning">Distinguishing AI from Machine Learning</a>
+  <ul class="collapse">
+  <li><a href="#ai-emphasis" id="toc-ai-emphasis" class="nav-link" data-scroll-target="#ai-emphasis">AI Emphasis</a></li>
+  <li><a href="#machine-learning-focus" id="toc-machine-learning-focus" class="nav-link" data-scroll-target="#machine-learning-focus">Machine Learning Focus</a></li>
+  </ul></li>
+  <li><a href="#knowledge-representation-in-ai" id="toc-knowledge-representation-in-ai" class="nav-link" data-scroll-target="#knowledge-representation-in-ai">Knowledge Representation in AI</a>
+  <ul class="collapse">
+  <li><a href="#declarative-knowledge" id="toc-declarative-knowledge" class="nav-link" data-scroll-target="#declarative-knowledge">Declarative Knowledge</a></li>
+  <li><a href="#inferences-in-ai" id="toc-inferences-in-ai" class="nav-link" data-scroll-target="#inferences-in-ai">Inferences in AI</a></li>
+  </ul></li>
+  <li><a href="#symbolic-representation-in-ai" id="toc-symbolic-representation-in-ai" class="nav-link" data-scroll-target="#symbolic-representation-in-ai">Symbolic Representation in AI</a>
+  <ul class="collapse">
+  <li><a href="#defining-symbols" id="toc-defining-symbols" class="nav-link" data-scroll-target="#defining-symbols">Defining Symbols</a></li>
+  <li><a href="#meaning-of-symbols" id="toc-meaning-of-symbols" class="nav-link" data-scroll-target="#meaning-of-symbols">Meaning of Symbols</a></li>
+  </ul></li>
+  <li><a href="#semiotics-and-biosemiotics" id="toc-semiotics-and-biosemiotics" class="nav-link" data-scroll-target="#semiotics-and-biosemiotics">Semiotics and Biosemiotics</a>
+  <ul class="collapse">
+  <li><a href="#semiotics" id="toc-semiotics" class="nav-link" data-scroll-target="#semiotics">Semiotics</a></li>
+  <li><a href="#biosemiotics" id="toc-biosemiotics" class="nav-link" data-scroll-target="#biosemiotics">Biosemiotics</a></li>
+  </ul></li>
+  <li><a href="#reasoning-mechanisms-in-ai" id="toc-reasoning-mechanisms-in-ai" class="nav-link" data-scroll-target="#reasoning-mechanisms-in-ai">Reasoning Mechanisms in AI</a>
+  <ul class="collapse">
+  <li><a href="#formal-reasoning" id="toc-formal-reasoning" class="nav-link" data-scroll-target="#formal-reasoning">Formal Reasoning</a></li>
+  <li><a href="#conceptualizing-algorithms" id="toc-conceptualizing-algorithms" class="nav-link" data-scroll-target="#conceptualizing-algorithms">Conceptualizing Algorithms</a></li>
+  </ul></li>
+  <li><a href="#automation-vs.-ai" id="toc-automation-vs.-ai" class="nav-link" data-scroll-target="#automation-vs.-ai">Automation vs.&nbsp;AI</a>
+  <ul class="collapse">
+  <li><a href="#navigating-overlap" id="toc-navigating-overlap" class="nav-link" data-scroll-target="#navigating-overlap">Navigating Overlap</a></li>
+  </ul></li>
+  <li><a href="#machine-learnings-role-in-ai" id="toc-machine-learnings-role-in-ai" class="nav-link" data-scroll-target="#machine-learnings-role-in-ai">Machine Learning’s Role in AI</a>
+  <ul class="collapse">
+  <li><a href="#ml-as-a-component" id="toc-ml-as-a-component" class="nav-link" data-scroll-target="#ml-as-a-component">ML as a Component</a></li>
+  </ul></li>
+  <li><a href="#clarifying-data-science-in-ai" id="toc-clarifying-data-science-in-ai" class="nav-link" data-scroll-target="#clarifying-data-science-in-ai">Clarifying Data Science in AI</a>
+  <ul class="collapse">
+  <li><a href="#datas-multifaceted-role" id="toc-datas-multifaceted-role" class="nav-link" data-scroll-target="#datas-multifaceted-role">Data’s Multifaceted Role</a></li>
+  </ul></li>
+  </ul></li>
+  <li><a href="#history-and-philosophy" id="toc-history-and-philosophy" class="nav-link" data-scroll-target="#history-and-philosophy">History and Philosophy</a>
+  <ul class="collapse">
+  <li><a href="#introduction-to-ai-and-definitions" id="toc-introduction-to-ai-and-definitions" class="nav-link" data-scroll-target="#introduction-to-ai-and-definitions">Introduction to AI and Definitions:</a>
+  <ul class="collapse">
+  <li><a href="#section" id="toc-section" class="nav-link" data-scroll-target="#section"></a></li>
+  </ul></li>
+  <li><a href="#fundamental-questions-in-ai" id="toc-fundamental-questions-in-ai" class="nav-link" data-scroll-target="#fundamental-questions-in-ai">Fundamental Questions in AI:</a>
+  <ul class="collapse">
+  <li><a href="#questions-about-intelligence" id="toc-questions-about-intelligence" class="nav-link" data-scroll-target="#questions-about-intelligence">Questions about Intelligence:</a></li>
+  </ul></li>
+  <li><a href="#turing-test-and-challenges" id="toc-turing-test-and-challenges" class="nav-link" data-scroll-target="#turing-test-and-challenges">Turing Test and Challenges:</a>
+  <ul class="collapse">
+  <li><a href="#alan-turings-turing-test" id="toc-alan-turings-turing-test" class="nav-link" data-scroll-target="#alan-turings-turing-test">Alan Turing’s Turing Test:</a></li>
+  <li><a href="#hector-levesques-alternative-vinograd-schemas" id="toc-hector-levesques-alternative-vinograd-schemas" class="nav-link" data-scroll-target="#hector-levesques-alternative-vinograd-schemas">Hector Levesque’s Alternative: Vinograd Schemas</a></li>
+  </ul></li>
+  <li><a href="#vinograd-schemas-examples" id="toc-vinograd-schemas-examples" class="nav-link" data-scroll-target="#vinograd-schemas-examples">Vinograd Schemas Examples:</a></li>
+  </ul></li>
+  <li><a href="#minds-and-machines" id="toc-minds-and-machines" class="nav-link" data-scroll-target="#minds-and-machines">Minds and Machines</a>
+  <ul class="collapse">
+  <li><a href="#introduction-to-intelligence-and-ai-goals" id="toc-introduction-to-intelligence-and-ai-goals" class="nav-link" data-scroll-target="#introduction-to-intelligence-and-ai-goals">Introduction to Intelligence and AI Goals</a>
+  <ul class="collapse">
+  <li><a href="#galileo-galilei-1623" id="toc-galileo-galilei-1623" class="nav-link" data-scroll-target="#galileo-galilei-1623">Galileo Galilei (1623)</a></li>
+  <li><a href="#thomas-hobbs" id="toc-thomas-hobbs" class="nav-link" data-scroll-target="#thomas-hobbs">Thomas Hobbs</a></li>
+  <li><a href="#rené-descartes" id="toc-rené-descartes" class="nav-link" data-scroll-target="#rené-descartes">René Descartes</a></li>
+  </ul></li>
+  <li><a href="#early-concepts-of-thinking-machines" id="toc-early-concepts-of-thinking-machines" class="nav-link" data-scroll-target="#early-concepts-of-thinking-machines">Early Concepts of Thinking Machines</a>
+  <ul class="collapse">
+  <li><a href="#jacquard-looms" id="toc-jacquard-looms" class="nav-link" data-scroll-target="#jacquard-looms">Jacquard Looms</a></li>
+  <li><a href="#charles-babbage-and-augusta-ada-byron" id="toc-charles-babbage-and-augusta-ada-byron" class="nav-link" data-scroll-target="#charles-babbage-and-augusta-ada-byron">Charles Babbage and Augusta Ada Byron</a></li>
+  </ul></li>
+  <li><a href="#mechanical-calculators-and-early-computers" id="toc-mechanical-calculators-and-early-computers" class="nav-link" data-scroll-target="#mechanical-calculators-and-early-computers">Mechanical Calculators and Early Computers</a>
+  <ul class="collapse">
+  <li><a href="#pascals-calculator-and-leibnizs-step-drum" id="toc-pascals-calculator-and-leibnizs-step-drum" class="nav-link" data-scroll-target="#pascals-calculator-and-leibnizs-step-drum">Pascal’s Calculator and Leibniz’s Step Drum</a></li>
+  <li><a href="#eniac-electronic-numerical-integrator-and-computer" id="toc-eniac-electronic-numerical-integrator-and-computer" class="nav-link" data-scroll-target="#eniac-electronic-numerical-integrator-and-computer">ENIAC (Electronic Numerical Integrator and Computer)</a></li>
+  </ul></li>
+  </ul></li>
+  <li><a href="#modern-times" id="toc-modern-times" class="nav-link" data-scroll-target="#modern-times">Modern Times</a>
+  <ul class="collapse">
+  <li><a href="#introduction" id="toc-introduction" class="nav-link" data-scroll-target="#introduction">Introduction</a>
+  <ul class="collapse">
+  <li><a href="#coined-terminology" id="toc-coined-terminology" class="nav-link" data-scroll-target="#coined-terminology">Coined Terminology</a></li>
+  </ul></li>
+  <li><a href="#key-figures" id="toc-key-figures" class="nav-link" data-scroll-target="#key-figures">Key Figures</a>
+  <ul class="collapse">
+  <li><a href="#john-mccarthy" id="toc-john-mccarthy" class="nav-link" data-scroll-target="#john-mccarthy">1. John McCarthy</a></li>
+  <li><a href="#marvin-minsky" id="toc-marvin-minsky" class="nav-link" data-scroll-target="#marvin-minsky">2. Marvin Minsky</a></li>
+  <li><a href="#nathaniel-rochester" id="toc-nathaniel-rochester" class="nav-link" data-scroll-target="#nathaniel-rochester">3. Nathaniel Rochester</a></li>
+  <li><a href="#claude-shannon" id="toc-claude-shannon" class="nav-link" data-scroll-target="#claude-shannon">4. Claude Shannon</a></li>
+  <li><a href="#herbert-simon-and-allen-newell" id="toc-herbert-simon-and-allen-newell" class="nav-link" data-scroll-target="#herbert-simon-and-allen-newell">5. Herbert Simon and Allen Newell</a></li>
+  </ul></li>
+  <li><a href="#physical-symbol-systems" id="toc-physical-symbol-systems" class="nav-link" data-scroll-target="#physical-symbol-systems">Physical Symbol Systems</a>
+  <ul class="collapse">
+  <li><a href="#symbolic-representation" id="toc-symbolic-representation" class="nav-link" data-scroll-target="#symbolic-representation">Symbolic Representation</a></li>
+  </ul></li>
+  <li><a href="#philosophical-considerations" id="toc-philosophical-considerations" class="nav-link" data-scroll-target="#philosophical-considerations">Philosophical Considerations</a>
+  <ul class="collapse">
+  <li><a href="#copernican-shift" id="toc-copernican-shift" class="nav-link" data-scroll-target="#copernican-shift">Copernican Shift</a></li>
+  </ul></li>
+  <li><a href="#representation-and-reasoning" id="toc-representation-and-reasoning" class="nav-link" data-scroll-target="#representation-and-reasoning">Representation and Reasoning</a>
+  <ul class="collapse">
+  <li><a href="#human-reasoning" id="toc-human-reasoning" class="nav-link" data-scroll-target="#human-reasoning">Human Reasoning</a></li>
+  </ul></li>
+  </ul></li>
+  <li><a href="#problem-solving" id="toc-problem-solving" class="nav-link" data-scroll-target="#problem-solving">Problem Solving</a>
+  <ul class="collapse">
+  <li><a href="#introduction-to-problem-solving" id="toc-introduction-to-problem-solving" class="nav-link" data-scroll-target="#introduction-to-problem-solving">Introduction to Problem Solving</a>
+  <ul class="collapse">
+  <li><a href="#problem-solving-framework" id="toc-problem-solving-framework" class="nav-link" data-scroll-target="#problem-solving-framework">Problem-Solving Framework</a></li>
+  </ul></li>
+  <li><a href="#two-approaches-to-problem-solving" id="toc-two-approaches-to-problem-solving" class="nav-link" data-scroll-target="#two-approaches-to-problem-solving">Two Approaches to Problem Solving</a>
+  <ul class="collapse">
+  <li><a href="#model-based-reasoning-search-methods" id="toc-model-based-reasoning-search-methods" class="nav-link" data-scroll-target="#model-based-reasoning-search-methods">1. Model-Based Reasoning (Search Methods)</a></li>
+  <li><a href="#knowledge-based-approach" id="toc-knowledge-based-approach" class="nav-link" data-scroll-target="#knowledge-based-approach">2. Knowledge-Based Approach</a></li>
+  </ul></li>
+  <li><a href="#rubiks-cube-example" id="toc-rubiks-cube-example" class="nav-link" data-scroll-target="#rubiks-cube-example">Rubik’s Cube Example</a>
+  <ul class="collapse">
+  <li><a href="#learning-dynamics" id="toc-learning-dynamics" class="nav-link" data-scroll-target="#learning-dynamics">Learning Dynamics</a></li>
+  </ul></li>
+  <li><a href="#sudoku-example" id="toc-sudoku-example" class="nav-link" data-scroll-target="#sudoku-example">Sudoku Example</a>
+  <ul class="collapse">
+  <li><a href="#combined-approach" id="toc-combined-approach" class="nav-link" data-scroll-target="#combined-approach">Combined Approach</a></li>
+  </ul></li>
+  <li><a href="#role-of-logic-in-problem-solving" id="toc-role-of-logic-in-problem-solving" class="nav-link" data-scroll-target="#role-of-logic-in-problem-solving">Role of Logic in Problem Solving</a>
+  <ul class="collapse">
+  <li><a href="#logical-components" id="toc-logical-components" class="nav-link" data-scroll-target="#logical-components">Logical Components</a></li>
+  </ul></li>
+  <li><a href="#map-coloring-problem" id="toc-map-coloring-problem" class="nav-link" data-scroll-target="#map-coloring-problem">Map Coloring Problem</a>
+  <ul class="collapse">
+  <li><a href="#constraint-graph-representation" id="toc-constraint-graph-representation" class="nav-link" data-scroll-target="#constraint-graph-representation">Constraint Graph Representation</a></li>
+  </ul></li>
+  </ul></li>
+  <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion">Conclusion</a>
+  <ul class="collapse">
+  <li><a href="#key-takeaways" id="toc-key-takeaways" class="nav-link" data-scroll-target="#key-takeaways">Key Takeaways</a></li>
+  </ul></li>
+  <li><a href="#points-to-remember" id="toc-points-to-remember" class="nav-link" data-scroll-target="#points-to-remember">Points to Remember</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+
+
+<section id="a-decade-of-machine-learning" class="level1">
+<h1>A Decade of Machine Learning</h1>
+<section id="overview-of-the-past-decade-in-machine-learning" class="level2">
+<h2 class="anchored" data-anchor-id="overview-of-the-past-decade-in-machine-learning">Overview of the Past Decade in Machine Learning</h2>
+<p>The preceding decade has marked a significant upswing in interest and advancements within the realm of machine learning (ML). This surge is attributable to the confluence of increased data availability facilitated by the ubiquity of the internet and the simultaneous enhancement of computational power. Central to this transformation has been the evolution of sophisticated training algorithms, particularly within the domain of deep learning.</p>
+</section>
+<section id="key-drivers-of-ml-advancements" class="level2">
+<h2 class="anchored" data-anchor-id="key-drivers-of-ml-advancements">Key Drivers of ML Advancements</h2>
+<ol type="1">
+<li><p><strong>Data Explosion:</strong> The pervasive nature of the internet has ushered in an unparalleled era of data abundance, fundamentally reshaping the landscape of machine learning.</p></li>
+<li><p><strong>Increased Computing Power:</strong> Strides in computing capabilities have substantially amplified the processing capabilities for handling vast datasets, a crucial enabler for ML progress.</p></li>
+<li><p><strong>Neural Network Advancements:</strong> Noteworthy progress in training algorithms, especially those tailored for neural networks, has played a pivotal role in propelling the field forward.</p></li>
+</ol>
+</section>
+<section id="evolution-of-neural-networks" class="level2">
+<h2 class="anchored" data-anchor-id="evolution-of-neural-networks">Evolution of Neural Networks</h2>
+<section id="perceptron-era" class="level3">
+<h3 class="anchored" data-anchor-id="perceptron-era">Perceptron Era</h3>
+<p>The foundational era witnessed the inception of the perceptron, a single-layered neural network devised as a binary classifier by McCulloch and Pitts in 1943. However, the limitation of this era lay in the perceptron’s ability to only classify linearly separable classes.</p>
+</section>
+<section id="multi-layer-perceptron" class="level3">
+<h3 class="anchored" data-anchor-id="multi-layer-perceptron">Multi-Layer Perceptron</h3>
+<p>The subsequent evolution involved the introduction of the multi-layer perceptron by Rumelhart, Hinton, and Williams. This innovation addressed the limitations associated with linear separability, with the popularization of the backpropagation algorithm for training feedforward networks.</p>
+</section>
+<section id="deep-neural-networks-in-computer-vision" class="level3">
+<h3 class="anchored" data-anchor-id="deep-neural-networks-in-computer-vision">Deep Neural Networks in Computer Vision</h3>
+<p>Deep neural networks, characterized by numerous hidden layers, emerged as a game-changer in computer vision tasks. The breakthrough in 2012 by Hinton, LeCun, and Bengio underscored the efficacy of deep neural networks in recognizing diverse object types. The general architecture encompasses input layers, hidden layers, and output layers.</p>
+</section>
+</section>
+<section id="training-process-of-neural-networks" class="level2">
+<h2 class="anchored" data-anchor-id="training-process-of-neural-networks">Training Process of Neural Networks</h2>
+<section id="supervised-training" class="level3">
+<h3 class="anchored" data-anchor-id="supervised-training">Supervised Training</h3>
+<p>The training process predominantly involves supervised learning, wherein images are presented alongside their corresponding expected outputs. The iterative application of the backpropagation algorithm facilitates weight adjustments based on the disparity between predicted and expected outputs. Consequently, neural networks acquire the ability to classify and distinguish input data through repetitive exposure.</p>
+</section>
+<section id="applications-of-deep-neural-networks" class="level3">
+<h3 class="anchored" data-anchor-id="applications-of-deep-neural-networks">Applications of Deep Neural Networks</h3>
+<section id="medical-diagnosis" class="level4">
+<h4 class="anchored" data-anchor-id="medical-diagnosis">Medical Diagnosis</h4>
+<p>Deep neural networks exhibit excellence in medical diagnosis, particularly in discerning diseases from images, as evidenced in the domain of breast cancer detection.</p>
+</section>
+<section id="face-recognition" class="level4">
+<h4 class="anchored" data-anchor-id="face-recognition">Face Recognition</h4>
+<p>The instrumental role of deep neural networks in face recognition is noteworthy, aiding in the identification of individuals within images.</p>
+</section>
+<section id="app-example-face2gene" class="level4">
+<h4 class="anchored" data-anchor-id="app-example-face2gene">App Example: Face2Gene</h4>
+<p>The Face2Gene app serves as a tangible manifestation of the successful application of deep neural networks. It aids medical professionals in diagnosing genetic disorders based on facial features, showcasing the practical impact of this technology.</p>
+</section>
+</section>
+</section>
+<section id="machine-learning-in-internet-interaction" class="level2">
+<h2 class="anchored" data-anchor-id="machine-learning-in-internet-interaction">Machine Learning in Internet Interaction</h2>
+<section id="user-as-data" class="level3">
+<h3 class="anchored" data-anchor-id="user-as-data">User as Data</h3>
+<p>The dynamic interaction of users with the internet inadvertently transforms them into valuable data points for machine learning algorithms. These algorithms, wielded by major tech entities, classify users to customize ads and optimize overall user experiences.</p>
+</section>
+<section id="animal-like-abilities-vs.-human-level-intelligence" class="level3">
+<h3 class="anchored" data-anchor-id="animal-like-abilities-vs.-human-level-intelligence">Animal-Like Abilities vs.&nbsp;Human-Level Intelligence</h3>
+<section id="animal-like-abilities" class="level4">
+<h4 class="anchored" data-anchor-id="animal-like-abilities">Animal-Like Abilities</h4>
+<p>Machine learning, particularly in pattern recognition, demonstrates capabilities akin to those observed in the animal kingdom. However, it falls short of encompassing the comprehensive cognitive functions characteristic of human intelligence.</p>
+</section>
+<section id="human-level-intelligence" class="level4">
+<h4 class="anchored" data-anchor-id="human-level-intelligence">Human-Level Intelligence</h4>
+<p>Human cognitive abilities span goal-directed, autonomous action, and a capacity for collective approaches. Distinctive human attributes include planning, wealth accumulation, home-building, and fostering societal diversification.</p>
+</section>
+</section>
+</section>
+<section id="performance-vs.-competence-in-machine-learning" class="level2">
+<h2 class="anchored" data-anchor-id="performance-vs.-competence-in-machine-learning">Performance vs.&nbsp;Competence in Machine Learning</h2>
+<section id="specialization-of-neural-networks" class="level3">
+<h3 class="anchored" data-anchor-id="specialization-of-neural-networks">Specialization of Neural Networks</h3>
+<p>Neural networks showcase proficiency in specific tasks but lack a holistic understanding of the world. The inherent brittleness of machine learning necessitates meticulous preparation, coding, and specialized training for diverse problem domains.</p>
+</section>
+</section>
+<section id="game-of-go-and-reinforcement-learning" class="level2">
+<h2 class="anchored" data-anchor-id="game-of-go-and-reinforcement-learning">Game of Go and Reinforcement Learning</h2>
+<section id="alphago-triumph" class="level3">
+<h3 class="anchored" data-anchor-id="alphago-triumph">Alphago Triumph</h3>
+<p>The triumph of Alphago, developed by DeepMind, stands out as a testament to the success achievable through reinforcement learning. This approach played a pivotal role in training the program for strategic decision-making. Subsequent iterations, such as Alphago Zero and AlphaZero, demonstrated the capacity to learn autonomously without human intervention and master multiple games simultaneously.</p>
+</section>
+</section>
+</section>
+<section id="human-cognitive-architecture" class="level1">
+<h1>Human Cognitive Architecture</h1>
+<section id="human-cognition-and-ai" class="level2">
+<h2 class="anchored" data-anchor-id="human-cognition-and-ai">Human Cognition and AI</h2>
+<section id="cognitive-landscape" class="level3">
+<h3 class="anchored" data-anchor-id="cognitive-landscape">Cognitive Landscape</h3>
+<p>Human intelligence engages in a myriad of activities such as logic, representation, planning, reasoning, and search. The crux of these cognitive endeavors lies in symbolic reasoning, a substantial facet of the human cognitive load.</p>
+</section>
+<section id="symbolic-reasoning" class="level3">
+<h3 class="anchored" data-anchor-id="symbolic-reasoning">Symbolic Reasoning</h3>
+<p>Symbolic reasoning, integral to human cognition, involves the management of symbolic knowledge representation and intricate problem-solving processes.</p>
+</section>
+</section>
+<section id="distinguishing-ai-from-machine-learning" class="level2">
+<h2 class="anchored" data-anchor-id="distinguishing-ai-from-machine-learning">Distinguishing AI from Machine Learning</h2>
+<section id="ai-emphasis" class="level3">
+<h3 class="anchored" data-anchor-id="ai-emphasis">AI Emphasis</h3>
+<p>Within the domain of Artificial Intelligence (AI), the spotlight is on symbolic knowledge representation and advanced problem-solving methodologies.</p>
+</section>
+<section id="machine-learning-focus" class="level3">
+<h3 class="anchored" data-anchor-id="machine-learning-focus">Machine Learning Focus</h3>
+<p>In contrast, Machine Learning (ML) gravitates towards interpreting data, with applications ranging from recommender systems to predictive analytics and classification.</p>
+</section>
+</section>
+<section id="knowledge-representation-in-ai" class="level2">
+<h2 class="anchored" data-anchor-id="knowledge-representation-in-ai">Knowledge Representation in AI</h2>
+<section id="declarative-knowledge" class="level3">
+<h3 class="anchored" data-anchor-id="declarative-knowledge">Declarative Knowledge</h3>
+<p>Aligning with the cognitive domain of humans, explicit symbolic representation, known as declarative knowledge, assumes a pivotal role. It encompasses the representation of the world and engages in reasoned deductions.</p>
+</section>
+<section id="inferences-in-ai" class="level3">
+<h3 class="anchored" data-anchor-id="inferences-in-ai">Inferences in AI</h3>
+<p>AI agents showcase a spectrum of inferences, ranging from deductive reasoning based on logic to plausible or probabilistic inferences that incorporate an element of likelihood.</p>
+</section>
+</section>
+<section id="symbolic-representation-in-ai" class="level2">
+<h2 class="anchored" data-anchor-id="symbolic-representation-in-ai">Symbolic Representation in AI</h2>
+<section id="defining-symbols" class="level3">
+<h3 class="anchored" data-anchor-id="defining-symbols">Defining Symbols</h3>
+<p>Symbols, representing abstract concepts, manifest in diverse forms. For example, the number (7) can be expressed in various ways, illustrating the distinction between the conceptualization of numbers and their symbolic representations.</p>
+</section>
+<section id="meaning-of-symbols" class="level3">
+<h3 class="anchored" data-anchor-id="meaning-of-symbols">Meaning of Symbols</h3>
+<p>The significance of symbols is socially agreed upon, forming the foundation for semiotic systems. Whether in road signs or linguistic characters, symbols encapsulate shared meanings.</p>
+</section>
+</section>
+<section id="semiotics-and-biosemiotics" class="level2">
+<h2 class="anchored" data-anchor-id="semiotics-and-biosemiotics">Semiotics and Biosemiotics</h2>
+<section id="semiotics" class="level3">
+<h3 class="anchored" data-anchor-id="semiotics">Semiotics</h3>
+<p>Semiotics, the scientific study of symbols in spoken and written languages, lays the groundwork for comprehending human communication and representation.</p>
+</section>
+<section id="biosemiotics" class="level3">
+<h3 class="anchored" data-anchor-id="biosemiotics">Biosemiotics</h3>
+<p>Delving deeper, Biosemiotics explores the emergence of complex behavior when simple systems engage in symbolic communication. This is exemplified by phenomena such as ant trails utilizing pheromones.</p>
+</section>
+</section>
+<section id="reasoning-mechanisms-in-ai" class="level2">
+<h2 class="anchored" data-anchor-id="reasoning-mechanisms-in-ai">Reasoning Mechanisms in AI</h2>
+<section id="formal-reasoning" class="level3">
+<h3 class="anchored" data-anchor-id="formal-reasoning">Formal Reasoning</h3>
+<p>In the context of AI, reasoning involves the systematic manipulation of symbols in a meaningful manner. This encompasses algorithms for fundamental operations like addition and multiplication, extending to more intricate processes like the Fourier transform.</p>
+</section>
+<section id="conceptualizing-algorithms" class="level3">
+<h3 class="anchored" data-anchor-id="conceptualizing-algorithms">Conceptualizing Algorithms</h3>
+<p>Understanding AI algorithms necessitates a conceptual grasp of symbolic manipulations. For instance, multiplication algorithms entail conceptualizing the multiplication of unit digits and the subsequent shifting of results.</p>
+</section>
+</section>
+<section id="automation-vs.-ai" class="level2">
+<h2 class="anchored" data-anchor-id="automation-vs.-ai">Automation vs.&nbsp;AI</h2>
+<section id="navigating-overlap" class="level3">
+<h3 class="anchored" data-anchor-id="navigating-overlap">Navigating Overlap</h3>
+<p>While Automation and AI share common ground, not all automated systems integrate AI. For instance, implementations such as train reservation systems or basic online shopping may lack substantial AI components.</p>
+</section>
+</section>
+<section id="machine-learnings-role-in-ai" class="level2">
+<h2 class="anchored" data-anchor-id="machine-learnings-role-in-ai">Machine Learning’s Role in AI</h2>
+<section id="ml-as-a-component" class="level3">
+<h3 class="anchored" data-anchor-id="ml-as-a-component">ML as a Component</h3>
+<p>Machine Learning constitutes one facet of the multifaceted field of AI. Examples such as self-driving cars leverage ML for tasks including pattern recognition, speech processing, and object classification.</p>
+</section>
+</section>
+<section id="clarifying-data-science-in-ai" class="level2">
+<h2 class="anchored" data-anchor-id="clarifying-data-science-in-ai">Clarifying Data Science in AI</h2>
+<section id="datas-multifaceted-role" class="level3">
+<h3 class="anchored" data-anchor-id="datas-multifaceted-role">Data’s Multifaceted Role</h3>
+<p>Data science, encompassing elements of statistics, AI, and machine learning, plays a crucial role in the broader field of AI. It serves as a foundational component but does not encapsulate the entirety of AI.</p>
+</section>
+</section>
+</section>
+<section id="history-and-philosophy" class="level1">
+<h1>History and Philosophy</h1>
+<section id="introduction-to-ai-and-definitions" class="level2">
+<h2 class="anchored" data-anchor-id="introduction-to-ai-and-definitions">Introduction to AI and Definitions:</h2>
+<section id="section" class="level3">
+<h3 class="anchored" data-anchor-id="section"></h3>
+<p>Definitions of AI:</p>
+<ul>
+<li><strong>Herbert Simon:</strong> Programs are considered intelligent if they display behaviors regarded as intelligent in humans.</li>
+<li><strong>Bar and Feigenbaum:</strong> AI seeks to comprehend the systematic behavior of information processing systems, analogous to physicists and biologists in their respective domains.</li>
+<li><strong>Elaine Rich:</strong> AI involves solving exponentially hard problems in polynomial time, leveraging domain-specific knowledge.</li>
+<li><strong>John Hoagland:</strong> AI’s goal is to create machines with minds of their own, treating thinking and computing as fundamentally interconnected.</li>
+</ul>
+</section>
+</section>
+<section id="fundamental-questions-in-ai" class="level2">
+<h2 class="anchored" data-anchor-id="fundamental-questions-in-ai">Fundamental Questions in AI:</h2>
+<section id="questions-about-intelligence" class="level3">
+<h3 class="anchored" data-anchor-id="questions-about-intelligence">Questions about Intelligence:</h3>
+<p>Various perspectives exist on what constitutes intelligence, encompassing language use, reasoning, and learning. Ongoing debates revolve around whether machines can genuinely exhibit thinking, with insights from philosophers like Roger Penrose exploring quantum mechanics in the human brain.</p>
+</section>
+</section>
+<section id="turing-test-and-challenges" class="level2">
+<h2 class="anchored" data-anchor-id="turing-test-and-challenges">Turing Test and Challenges:</h2>
+<section id="alan-turings-turing-test" class="level3">
+<h3 class="anchored" data-anchor-id="alan-turings-turing-test">Alan Turing’s Turing Test:</h3>
+<p>The evaluation of machine intelligence through its ability to convincingly engage in natural language conversations with a human judge forms the essence of the Turing Test. Associated challenges include situations where chatbots may impress but lack genuine intelligence. The Löbner Prize Competition attempts a similar test.</p>
+</section>
+<section id="hector-levesques-alternative-vinograd-schemas" class="level3">
+<h3 class="anchored" data-anchor-id="hector-levesques-alternative-vinograd-schemas">Hector Levesque’s Alternative: Vinograd Schemas</h3>
+<p>An alternate test proposed by Hector Levesque challenges a machine’s understanding through multiple-choice questions that require subject matter knowledge.</p>
+</section>
+</section>
+<section id="vinograd-schemas-examples" class="level2">
+<h2 class="anchored" data-anchor-id="vinograd-schemas-examples">Vinograd Schemas Examples:</h2>
+<ol type="1">
+<li><p><strong>Example 1:</strong></p>
+<ul>
+<li><em>Original Sentence:</em> “The city council refused the demonstrators a permit because they feared violence.”</li>
+<li><em>Alternate Sentence:</em> “The city council refused the demonstrators a permit because they advocated violence.”</li>
+<li><em>Question:</em> What does “they” refer to? Options: Council, Demonstrators.</li>
+</ul></li>
+<li><p><strong>Example 2:</strong></p>
+<ul>
+<li><em>Original Sentence:</em> “John took the water bottle out of the backpack so that it would be lighter.”</li>
+<li><em>Alternate Sentence:</em> “John took the water bottle out of the backpack so that it would be handy.”</li>
+<li><em>Question:</em> What does “it” refer to? Options: Backpack, Water Bottle.</li>
+</ul></li>
+<li><p><strong>Example 3:</strong></p>
+<ul>
+<li><em>Original Sentence:</em> “The trophy would not fit into the brown suitcase because it was too small.”</li>
+<li><em>Alternate Sentence:</em> “The trophy would not fit into the brown suitcase because it was too big.”</li>
+<li><em>Question:</em> What does “it” refer to? Options: Trophy, Brown Suitcase.</li>
+</ul></li>
+<li><p><strong>Example 4:</strong></p>
+<ul>
+<li><em>Original Sentence:</em> “The lawyer asked the witness a question but he was reluctant to repeat it.”</li>
+<li><em>Alternate Sentence:</em> “The lawyer asked the witness a question but he was reluctant to answer it.”</li>
+<li><em>Question:</em> Who was reluctant? Options: Lawyer, Witness.</li>
+</ul></li>
+</ol>
+</section>
+</section>
+<section id="minds-and-machines" class="level1">
+<h1>Minds and Machines</h1>
+<section id="introduction-to-intelligence-and-ai-goals" class="level2">
+<h2 class="anchored" data-anchor-id="introduction-to-intelligence-and-ai-goals">Introduction to Intelligence and AI Goals</h2>
+<p>In the exploration of artificial intelligence (AI), the concept of intelligence takes center stage. AI endeavors to construct intelligent agents capable of complex problem-solving. A historical glimpse into European thinkers sheds light on the roots of AI ideologies.</p>
+<section id="galileo-galilei-1623" class="level3">
+<h3 class="anchored" data-anchor-id="galileo-galilei-1623">Galileo Galilei (1623)</h3>
+<p>In his 1623 publication, Galileo Galilei delves into the subjective nature of sensory experiences. He contends that taste, odors, and colors are subjective perceptions residing in consciousness. Galileo challenges the idea that these qualities exist inherently in external objects. Moreover, he posits that philosophy is expressed through the language of mathematics.</p>
+</section>
+<section id="thomas-hobbs" class="level3">
+<h3 class="anchored" data-anchor-id="thomas-hobbs">Thomas Hobbs</h3>
+<p>Thomas Hobbs, often referred to as the grandfather of AI, introduces the notion that thinking involves the manipulation of symbols. He associates reasoning with computation, not in the contemporary sense of computers, but as a form of mathematical operations. Hobbs views computation as the sum of many things added together or the determination of the remainder when one thing is subtracted from another.</p>
+</section>
+<section id="rené-descartes" class="level3">
+<h3 class="anchored" data-anchor-id="rené-descartes">René Descartes</h3>
+<p>Building on Galileo’s ideas, Descartes extends the concept that animals are intricate machines, reserving acknowledgment of a mind solely for humans. He aligns thought with symbols and introduces the mind-body dualism, raising questions about the interaction between the mental world and the physical body.</p>
+</section>
+</section>
+<section id="early-concepts-of-thinking-machines" class="level2">
+<h2 class="anchored" data-anchor-id="early-concepts-of-thinking-machines">Early Concepts of Thinking Machines</h2>
+<p>The early stages of envisioning thinking machines were influenced by the use of punch cards in the textile industry’s Jacquard looms.</p>
+<section id="jacquard-looms" class="level3">
+<h3 class="anchored" data-anchor-id="jacquard-looms">Jacquard Looms</h3>
+<p>Punch cards were employed to control patterns in textile looms. This concept of punched cards was later adapted for programming early computers, emphasizing a transition from controlling patterns to controlling programs.</p>
+</section>
+<section id="charles-babbage-and-augusta-ada-byron" class="level3">
+<h3 class="anchored" data-anchor-id="charles-babbage-and-augusta-ada-byron">Charles Babbage and Augusta Ada Byron</h3>
+<p>Charles Babbage, a mathematician and inventor, conceptualized the Difference Engine and the Analytic Engine. Augusta Ada Byron, daughter of Lord Byron, collaborated with Babbage and is recognized as the world’s first programmer. She envisioned computers going beyond mere number crunching, foreseeing applications in music composition and AI-like capabilities.</p>
+</section>
+</section>
+<section id="mechanical-calculators-and-early-computers" class="level2">
+<h2 class="anchored" data-anchor-id="mechanical-calculators-and-early-computers">Mechanical Calculators and Early Computers</h2>
+<p>The evolution of mechanical calculators and the emergence of early electronic computers marked significant progress in computational capabilities.</p>
+<section id="pascals-calculator-and-leibnizs-step-drum" class="level3">
+<h3 class="anchored" data-anchor-id="pascals-calculator-and-leibnizs-step-drum">Pascal’s Calculator and Leibniz’s Step Drum</h3>
+<p>Pascal’s mechanical calculator incorporated Latin Lantern gears, performing basic arithmetic operations. Leibniz introduced the step drum, a mechanism for counting and representing numbers. Both contributed to the development of early calculating machines.</p>
+</section>
+<section id="eniac-electronic-numerical-integrator-and-computer" class="level3">
+<h3 class="anchored" data-anchor-id="eniac-electronic-numerical-integrator-and-computer">ENIAC (Electronic Numerical Integrator and Computer)</h3>
+<p>ENIAC, the first electronic computer, boasted over 17,000 vacuum tubes. Despite its immense size and weight, it laid the foundation for electronic computing. Augusta Ada Byron’s visionary insights into the potential of computers started to materialize with the advent of ENIAC.</p>
+</section>
+</section>
+</section>
+<section id="modern-times" class="level1">
+<h1>Modern Times</h1>
+<section id="introduction" class="level2">
+<h2 class="anchored" data-anchor-id="introduction">Introduction</h2>
+<p>The course provides a comprehensive exploration of the evolution and fundamental principles of Artificial Intelligence (AI). With historical roots reaching back to the 1300s, early attempts by figures like Jazari and Ramon Llull set the stage for the development of AI.</p>
+<section id="coined-terminology" class="level3">
+<h3 class="anchored" data-anchor-id="coined-terminology">Coined Terminology</h3>
+<p>The term “Artificial Intelligence” was officially coined by John McCarthy during the Dartmouth Conference in 1956. This landmark event, organized alongside Marvin Minsky and Claude Shannon, aimed to investigate the potential for machines to simulate human intelligence through precise descriptions.</p>
+</section>
+</section>
+<section id="key-figures" class="level2">
+<h2 class="anchored" data-anchor-id="key-figures">Key Figures</h2>
+<section id="john-mccarthy" class="level3">
+<h3 class="anchored" data-anchor-id="john-mccarthy">1. John McCarthy</h3>
+<ul>
+<li>Credited with Naming AI</li>
+<li>Assistant Professor at Dartmouth</li>
+<li>Designer of Lisp Programming Language</li>
+<li>Contributions to Logic and Common Sense Reasoning</li>
+</ul>
+</section>
+<section id="marvin-minsky" class="level3">
+<h3 class="anchored" data-anchor-id="marvin-minsky">2. Marvin Minsky</h3>
+<ul>
+<li>Co-founder of MIT AI Lab</li>
+<li>Notable for Frame Systems (Foundation of OOP)</li>
+<li>Author of “The Society of the Mind” and “The Emotional Machine”</li>
+</ul>
+</section>
+<section id="nathaniel-rochester" class="level3">
+<h3 class="anchored" data-anchor-id="nathaniel-rochester">3. Nathaniel Rochester</h3>
+<ul>
+<li>IBM Engineer</li>
+<li>Designer of IBM 701</li>
+<li>Supervised Arthur Samuel and the Checkers-playing Program</li>
+</ul>
+</section>
+<section id="claude-shannon" class="level3">
+<h3 class="anchored" data-anchor-id="claude-shannon">4. Claude Shannon</h3>
+<ul>
+<li>Father of Information Theory</li>
+<li>Mathematician at Bell Labs</li>
+</ul>
+</section>
+<section id="herbert-simon-and-allen-newell" class="level3">
+<h3 class="anchored" data-anchor-id="herbert-simon-and-allen-newell">5. Herbert Simon and Allen Newell</h3>
+<ul>
+<li>Developers of Logic Theorist (LT) Program</li>
+<li>Pioneers in Symbolic AI</li>
+<li>Introduction of Physical Symbol Systems</li>
+<li>Simon’s Diverse Scholarship (Nobel Prize in Economics)</li>
+</ul>
+</section>
+</section>
+<section id="physical-symbol-systems" class="level2">
+<h2 class="anchored" data-anchor-id="physical-symbol-systems">Physical Symbol Systems</h2>
+<section id="symbolic-representation" class="level3">
+<h3 class="anchored" data-anchor-id="symbolic-representation">Symbolic Representation</h3>
+<p>Symbol systems represent perceptible entities and adhere to formal laws, mirroring the structure of the physical world. Simon and Newell’s hypothesis posits that a Physical Symbol System is both necessary and sufficient for general intelligent action, distinguishing it from sub-symbolic AI, where information is stored in weights without explicit symbols.</p>
+</section>
+</section>
+<section id="philosophical-considerations" class="level2">
+<h2 class="anchored" data-anchor-id="philosophical-considerations">Philosophical Considerations</h2>
+<section id="copernican-shift" class="level3">
+<h3 class="anchored" data-anchor-id="copernican-shift">Copernican Shift</h3>
+<section id="galileos-distinction-between-thought-and-reality" class="level4">
+<h4 class="anchored" data-anchor-id="galileos-distinction-between-thought-and-reality">Galileo’s Distinction Between Thought and Reality</h4>
+<p>Galileo Galilei’s intellectual endeavors were marked by a profound separation between the realm of thought and the objective reality. This conceptual wedge laid the foundation for a nuanced understanding of how human cognition interfaces with the external world.</p>
+</section>
+<section id="copernicus-challenge-to-the-geocentric-model-emphasizing-subjectivity" class="level4">
+<h4 class="anchored" data-anchor-id="copernicus-challenge-to-the-geocentric-model-emphasizing-subjectivity">Copernicus’ Challenge to the Geocentric Model, Emphasizing Subjectivity</h4>
+<p>Copernicus, through his revolutionary heliocentric model, not only challenged the prevailing geocentric view but also underscored the subjectivity inherent in our interpretations of celestial motions. This shift forced a reconsideration of humanity’s position in the cosmos.</p>
+</section>
+<section id="human-creation-of-mental-models-reality-comprising-fundamental-particles" class="level4">
+<h4 class="anchored" data-anchor-id="human-creation-of-mental-models-reality-comprising-fundamental-particles">Human Creation of Mental Models; Reality Comprising Fundamental Particles</h4>
+<p>Humans engage in the active creation of mental models to comprehend the intricacies of reality. The Copernican Shift extends to the microscopic realm, where the abundant nature of fundamental particles renders them unsuitable as standalone elements of representation. Instead, reality is approached through disciplined ontologies, focusing on entities like atoms, molecules, or cells based on the context of study.</p>
+</section>
+<section id="illustration-through-the-powers-of-ten-film" class="level4">
+<h4 class="anchored" data-anchor-id="illustration-through-the-powers-of-ten-film">Illustration through the Powers of Ten Film</h4>
+<p>The Powers of Ten film serves as a captivating medium to illustrate the Copernican Shift, visually portraying the vastness and intricacies of the universe at different scales. This cinematic exploration emphasizes the dynamic interplay between our mental representations and the expansive reality they seek to capture.</p>
+</section>
+</section>
+</section>
+<section id="representation-and-reasoning" class="level2">
+<h2 class="anchored" data-anchor-id="representation-and-reasoning">Representation and Reasoning</h2>
+<section id="human-reasoning" class="level3">
+<h3 class="anchored" data-anchor-id="human-reasoning">Human Reasoning</h3>
+<section id="human-reasoning-involves-symbolic-representations" class="level4">
+<h4 class="anchored" data-anchor-id="human-reasoning-involves-symbolic-representations">Human Reasoning Involves Symbolic Representations</h4>
+<p>In the realm of human cognition, symbolic representations play a pivotal role in the process of reasoning. These symbols serve as cognitive tools that humans manipulate to make sense of the world around them.</p>
+</section>
+<section id="fundamental-particles-unsuitable-as-elements-of-representation-due-to-abundance" class="level4">
+<h4 class="anchored" data-anchor-id="fundamental-particles-unsuitable-as-elements-of-representation-due-to-abundance">Fundamental Particles Unsuitable as Elements of Representation due to Abundance</h4>
+<p>Despite the fundamental nature of particles, their sheer abundance makes them impractical as elemental units of representation. Human cognition necessitates a selective focus, leading to the adoption of more manageable entities like atoms, molecules, or cells, depending on the specific domain of study.</p>
+</section>
+<section id="representation-depends-on-the-focus-of-study-e.g.-atoms-molecules-cells" class="level4">
+<h4 class="anchored" data-anchor-id="representation-depends-on-the-focus-of-study-e.g.-atoms-molecules-cells">Representation Depends on the Focus of Study (e.g., Atoms, Molecules, Cells)</h4>
+<p>The choice of representation is intricately tied to the focus of study. Whether delving into the microscopic realm of atoms or exploring the complexity of biological systems at the cellular level, the selection of representational units is driven by the demands of the specific discipline.</p>
+</section>
+<section id="discipline-specific-ontologies-define-level-of-detail-in-representations" class="level4">
+<h4 class="anchored" data-anchor-id="discipline-specific-ontologies-define-level-of-detail-in-representations">Discipline-specific Ontologies Define Level of Detail in Representations</h4>
+<p>Discipline-specific ontologies play a crucial role in determining the level of detail embedded in representations. These structured frameworks provide a systematic approach to capturing and organizing knowledge within distinct domains.</p>
+</section>
+</section>
+</section>
+</section>
+<section id="problem-solving" class="level1">
+<h1>Problem Solving</h1>
+<section id="introduction-to-problem-solving" class="level2">
+<h2 class="anchored" data-anchor-id="introduction-to-problem-solving">Introduction to Problem Solving</h2>
+<p>In the expansive domain of Artificial Intelligence (AI), problem-solving emerges as the orchestrated actions of autonomous agents navigating predefined objectives within dynamic environments. This course delves into the intricacies of problem-solving, elucidating the diverse methodologies encapsulated within search methods.</p>
+<section id="problem-solving-framework" class="level3">
+<h3 class="anchored" data-anchor-id="problem-solving-framework">Problem-Solving Framework</h3>
+<ol type="1">
+<li><strong>Agent and Environment:</strong>
+<ul>
+<li>Autonomous agents operate within a world defined by specific objectives and a repertoire of actions. Decision-making unfolds in real-time, navigating challenges posed by incomplete knowledge and the concurrent activities of other agents.</li>
+</ul></li>
+<li><strong>Simplifying Assumptions:</strong>
+<ul>
+<li>Initial simplifications envision a static world with a solitary agent making decisions, providing foundational insights into fundamental problem-solving principles.</li>
+</ul></li>
+</ol>
+</section>
+</section>
+<section id="two-approaches-to-problem-solving" class="level2">
+<h2 class="anchored" data-anchor-id="two-approaches-to-problem-solving">Two Approaches to Problem Solving</h2>
+<section id="model-based-reasoning-search-methods" class="level3">
+<h3 class="anchored" data-anchor-id="model-based-reasoning-search-methods">1. Model-Based Reasoning (Search Methods)</h3>
+<section id="definition" class="level4">
+<h4 class="anchored" data-anchor-id="definition">Definition:</h4>
+<p>Model-Based Reasoning involves grounded reasoning in first principles or search approaches, wherein agents experiment with diverse actions to discern their efficacy.</p>
+</section>
+<section id="assumptions" class="level4">
+<h4 class="anchored" data-anchor-id="assumptions">Assumptions:</h4>
+<p>This approach assumes a static world, complete knowledge, and actions that never fail, forming the foundational basis for problem-solving methodologies.</p>
+</section>
+</section>
+<section id="knowledge-based-approach" class="level3">
+<h3 class="anchored" data-anchor-id="knowledge-based-approach">2. Knowledge-Based Approach</h3>
+<section id="characteristics" class="level4">
+<h4 class="anchored" data-anchor-id="characteristics">Characteristics:</h4>
+<p>The Knowledge-Based Approach draws upon a societal structure rich in stored experiences, leveraging accumulated knowledge for effective problem-solving. It encompasses memory-based reasoning, case-based reasoning, and machine learning paradigms.</p>
+</section>
+</section>
+</section>
+<section id="rubiks-cube-example" class="level2">
+<h2 class="anchored" data-anchor-id="rubiks-cube-example">Rubik’s Cube Example</h2>
+<p>The Rubik’s Cube serves as an illustrative example, elucidating the dichotomy between knowledge-based and search-based problem-solving approaches.</p>
+<section id="learning-dynamics" class="level3">
+<h3 class="anchored" data-anchor-id="learning-dynamics">Learning Dynamics</h3>
+<ol type="1">
+<li><strong>Initial Challenge:</strong>
+<ul>
+<li>The Rubik’s Cube presents an initial challenge devoid of a known solution, necessitating exploratory actions.</li>
+</ul></li>
+<li><strong>Evolution of Knowledge:</strong>
+<ul>
+<li>Over time, individuals develop efficient solving methods through experiential learning, showcasing the adaptive nature of human problem-solving.</li>
+</ul></li>
+<li><strong>Deep Reinforcement Learning:</strong>
+<ul>
+<li>The introduction of deep reinforcement learning emphasizes autonomous learning without human guidance, mirroring aspects of artificial intelligence.</li>
+</ul></li>
+</ol>
+</section>
+</section>
+<section id="sudoku-example" class="level2">
+<h2 class="anchored" data-anchor-id="sudoku-example">Sudoku Example</h2>
+<p>The Sudoku puzzle exemplifies the synergy between search and reasoning in problem-solving, offering insights into the nuanced interplay of diverse problem-solving methodologies.</p>
+<section id="combined-approach" class="level3">
+<h3 class="anchored" data-anchor-id="combined-approach">Combined Approach</h3>
+<ol type="1">
+<li><strong>Search Methods:</strong>
+<ul>
+<li>Basic search algorithms, such as depth-first search and breadth-first search, lay the foundation for problem-solving endeavors.</li>
+</ul></li>
+<li><strong>Reasoning:</strong>
+<ul>
+<li>Reasoning techniques refine available options, harmonizing search methodologies with informed decision-making for a holistic problem-solving strategy.</li>
+</ul></li>
+</ol>
+</section>
+</section>
+<section id="role-of-logic-in-problem-solving" class="level2">
+<h2 class="anchored" data-anchor-id="role-of-logic-in-problem-solving">Role of Logic in Problem Solving</h2>
+<p>Logic, particularly first-order logic, assumes a pivotal role in representing knowledge and facilitating deductive reasoning within the problem-solving paradigm.</p>
+<section id="logical-components" class="level3">
+<h3 class="anchored" data-anchor-id="logical-components">Logical Components</h3>
+<ol type="1">
+<li><strong>Deductive Reasoning:</strong>
+<ul>
+<li>Logic functions as a tool for deductive reasoning, employing principles such as deduction, induction, abduction, and plausible reasoning to navigate complex problem spaces.</li>
+</ul></li>
+<li><strong>Constraint Processing:</strong>
+<ul>
+<li>Logic, search methods, and other reasoning approaches converge under the umbrella of constraint processing, offering a comprehensive framework for addressing intricate problem scenarios.</li>
+</ul></li>
+</ol>
+</section>
+</section>
+<section id="map-coloring-problem" class="level2">
+<h2 class="anchored" data-anchor-id="map-coloring-problem">Map Coloring Problem</h2>
+<p>The Map Coloring Problem stands as an exemplary challenge within AI, involving the assignment of colors to regions while adhering to specific constraints.</p>
+<section id="constraint-graph-representation" class="level3">
+<h3 class="anchored" data-anchor-id="constraint-graph-representation">Constraint Graph Representation</h3>
+<ol type="1">
+<li><strong>Graph Transformation:</strong>
+<ul>
+<li>Regions and their color preferences undergo a transformative process, manifesting as a constraint graph that encapsulates the intricacies of the problem.</li>
+</ul></li>
+<li><strong>Algorithmic Solutions:</strong>
+<ul>
+<li>Constraint processing algorithms come to the forefront as viable solutions to graph-related problems, showcasing the practical application of logical problem-solving methodologies.</li>
+</ul></li>
+</ol>
+</section>
+</section>
+</section>
+<section id="conclusion" class="level1">
+<h1>Conclusion</h1>
+<p>The lecture notes provide a comprehensive journey through the decade-long evolution of machine learning, the intricate workings of neural networks, the applications of AI in various domains, the historical and philosophical foundations of artificial intelligence, and the problem-solving methodologies encapsulated within the AI domain. As we delve into the rich tapestry of AI, several key themes emerge, illustrating the dynamic interplay of data, computing power, and algorithmic advancements.</p>
+<section id="key-takeaways" class="level2">
+<h2 class="anchored" data-anchor-id="key-takeaways">Key Takeaways</h2>
+<ol type="1">
+<li><strong>Decade of Machine Learning:</strong>
+<ul>
+<li>The surge in machine learning over the past decade is attributed to increased data availability, enhanced computing power, and advancements in training algorithms, particularly within the domain of deep learning. </li>
+</ul></li>
+<li><strong>Neural Network Evolution:</strong>
+<ul>
+<li>From the foundational perceptron era to the transformative deep neural networks in computer vision, the evolution of neural networks has played a pivotal role in shaping the landscape of AI.</li>
+</ul></li>
+<li><strong>Training Process:</strong>
+<ul>
+<li>Supervised training, especially in medical diagnosis and face recognition, showcases the practical applications of deep neural networks in real-world scenarios.</li>
+</ul></li>
+<li><strong>Machine Learning in Internet Interaction:</strong>
+<ul>
+<li>Users’ dynamic interaction with the internet transforms them into valuable data points, shaping the customization of ads and optimizing user experiences.</li>
+</ul></li>
+<li><strong>Performance vs.&nbsp;Competence:</strong>
+<ul>
+<li>Neural networks exhibit proficiency in specific tasks but lack a holistic understanding of the world, highlighting the need for specialized training.</li>
+</ul></li>
+<li><strong>Game of Go and Reinforcement Learning:</strong>
+<ul>
+<li>The triumph of AlphaGo exemplifies the success achievable through reinforcement learning, showcasing the capacity for autonomous learning without human intervention.</li>
+</ul></li>
+<li><strong>Human Cognitive Architecture:</strong>
+<ul>
+<li>Understanding human cognitive abilities, symbolic reasoning, and the distinction between AI and machine learning provides insights into the complex realm of intelligence.</li>
+</ul></li>
+<li><strong>History and Philosophy:</strong>
+<ul>
+<li>The historical roots of AI, key figures in AI development, and philosophical considerations underscore the interdisciplinary nature of artificial intelligence.</li>
+</ul></li>
+<li><strong>Physical Symbol Systems:</strong>
+<ul>
+<li>Symbolic representation, as proposed by Simon and Newell, forms the basis for general intelligent action, distinguishing it from sub-symbolic AI.</li>
+</ul></li>
+<li><strong>Problem Solving:</strong>
+<ul>
+<li>Two approaches, model-based reasoning and knowledge-based approaches, along with the role of logic, contribute to nuanced problem-solving methodologies.</li>
+</ul></li>
+<li><strong>Map Coloring Problem:</strong>
+<ul>
+<li>The Map Coloring Problem serves as a concrete example, highlighting the integration of graph theory, constraint processing, and algorithmic solutions in logical problem-solving. </li>
+</ul></li>
+</ol>
+</section>
+</section>
+<section id="points-to-remember" class="level1">
+<h1>Points to Remember</h1>
+<ul>
+<li>The confluence of increased data availability, enhanced computing power, and advanced training algorithms has fueled the surge in machine learning over the past decade.</li>
+<li>Neural networks, from perceptrons to deep networks, have transformed the field, particularly in computer vision applications.</li>
+<li>Supervised training, exemplified in medical diagnosis and face recognition, demonstrates the practical impact of deep neural networks.</li>
+<li>Users’ interaction with the internet serves as valuable data for machine learning algorithms, shaping personalized experiences.</li>
+<li>Neural networks exhibit proficiency in specific tasks but lack a holistic understanding, necessitating specialized training.</li>
+<li>The triumph of AlphaGo showcases the success achievable through reinforcement learning, emphasizing autonomous learning capabilities.</li>
+<li>Understanding human cognitive architecture, symbolic reasoning, and the distinction between AI and machine learning provides foundational insights.</li>
+<li>The historical roots of AI, key figures in its development, and philosophical considerations highlight the interdisciplinary nature of artificial intelligence.</li>
+<li>Physical symbol systems, as proposed by Simon and Newell, form the foundation for general intelligent action in AI.</li>
+<li>Problem-solving in AI encompasses model-based reasoning, knowledge-based approaches, and the integration of logic for deductive reasoning.</li>
+<li>The Map Coloring Problem exemplifies the synergy between graph theory, constraint processing, and logical problem-solving methodologies.</li>
+</ul>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const disableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'prefetch';
+    }
+  }
+  const enableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'stylesheet';
+    }
+  }
+  const manageTransitions = (selector, allowTransitions) => {
+    const els = window.document.querySelectorAll(selector);
+    for (let i=0; i < els.length; i++) {
+      const el = els[i];
+      if (allowTransitions) {
+        el.classList.remove('notransition');
+      } else {
+        el.classList.add('notransition');
+      }
+    }
+  }
+  const toggleColorMode = (alternate) => {
+    // Switch the stylesheets
+    const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+    manageTransitions('#quarto-margin-sidebar .nav-link', false);
+    if (alternate) {
+      enableStylesheet(alternateStylesheets);
+      for (const sheetNode of alternateStylesheets) {
+        if (sheetNode.id === "quarto-bootstrap") {
+          toggleBodyColorMode(sheetNode);
+        }
+      }
+    } else {
+      disableStylesheet(alternateStylesheets);
+      toggleBodyColorPrimary();
+    }
+    manageTransitions('#quarto-margin-sidebar .nav-link', true);
+    // Switch the toggles
+    const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+    for (let i=0; i < toggles.length; i++) {
+      const toggle = toggles[i];
+      if (toggle) {
+        if (alternate) {
+          toggle.classList.add("alternate");     
+        } else {
+          toggle.classList.remove("alternate");
+        }
+      }
+    }
+    // Hack to workaround the fact that safari doesn't
+    // properly recolor the scrollbar when toggling (#1455)
+    if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+      manageTransitions("body", false);
+      window.scrollTo(0, 1);
+      setTimeout(() => {
+        window.scrollTo(0, 0);
+        manageTransitions("body", true);
+      }, 40);  
+    }
+  }
+  const isFileUrl = () => { 
+    return window.location.protocol === 'file:';
+  }
+  const hasAlternateSentinel = () => {  
+    let styleSentinel = getColorSchemeSentinel();
+    if (styleSentinel !== null) {
+      return styleSentinel === "alternate";
+    } else {
+      return false;
+    }
+  }
+  const setStyleSentinel = (alternate) => {
+    const value = alternate ? "alternate" : "default";
+    if (!isFileUrl()) {
+      window.localStorage.setItem("quarto-color-scheme", value);
+    } else {
+      localAlternateSentinel = value;
+    }
+  }
+  const getColorSchemeSentinel = () => {
+    if (!isFileUrl()) {
+      const storageValue = window.localStorage.getItem("quarto-color-scheme");
+      return storageValue != null ? storageValue : localAlternateSentinel;
+    } else {
+      return localAlternateSentinel;
+    }
+  }
+  let localAlternateSentinel = 'default';
+  // Dark / light mode switch
+  window.quartoToggleColorScheme = () => {
+    // Read the current dark / light value 
+    let toAlternate = !hasAlternateSentinel();
+    toggleColorMode(toAlternate);
+    setStyleSentinel(toAlternate);
+  };
+  // Ensure there is a toggle, if there isn't float one in the top right
+  if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+    const a = window.document.createElement('a');
+    a.classList.add('top-right');
+    a.classList.add('quarto-color-scheme-toggle');
+    a.href = "";
+    a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+    const i = window.document.createElement("i");
+    i.classList.add('bi');
+    a.appendChild(i);
+    window.document.body.appendChild(a);
+  }
+  // Switch to dark mode if need be
+  if (hasAlternateSentinel()) {
+    toggleColorMode(true);
+  } else {
+    toggleColorMode(false);
+  }
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>
