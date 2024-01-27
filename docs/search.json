@@ -392,6 +392,202 @@
     "text": "Key Takeaways\n\nDecade of Machine Learning:\n\nThe surge in machine learning over the past decade is attributed to increased data availability, enhanced computing power, and advancements in training algorithms, particularly within the domain of deep learning. \n\nNeural Network Evolution:\n\nFrom the foundational perceptron era to the transformative deep neural networks in computer vision, the evolution of neural networks has played a pivotal role in shaping the landscape of AI.\n\nTraining Process:\n\nSupervised training, especially in medical diagnosis and face recognition, showcases the practical applications of deep neural networks in real-world scenarios.\n\nMachine Learning in Internet Interaction:\n\nUsers’ dynamic interaction with the internet transforms them into valuable data points, shaping the customization of ads and optimizing user experiences.\n\nPerformance vs. Competence:\n\nNeural networks exhibit proficiency in specific tasks but lack a holistic understanding of the world, highlighting the need for specialized training.\n\nGame of Go and Reinforcement Learning:\n\nThe triumph of AlphaGo exemplifies the success achievable through reinforcement learning, showcasing the capacity for autonomous learning without human intervention.\n\nHuman Cognitive Architecture:\n\nUnderstanding human cognitive abilities, symbolic reasoning, and the distinction between AI and machine learning provides insights into the complex realm of intelligence.\n\nHistory and Philosophy:\n\nThe historical roots of AI, key figures in AI development, and philosophical considerations underscore the interdisciplinary nature of artificial intelligence.\n\nPhysical Symbol Systems:\n\nSymbolic representation, as proposed by Simon and Newell, forms the basis for general intelligent action, distinguishing it from sub-symbolic AI.\n\nProblem Solving:\n\nTwo approaches, model-based reasoning and knowledge-based approaches, along with the role of logic, contribute to nuanced problem-solving methodologies.\n\nMap Coloring Problem:\n\nThe Map Coloring Problem serves as a concrete example, highlighting the integration of graph theory, constraint processing, and algorithmic solutions in logical problem-solving."
   },
   {
+    "objectID": "pages/DL/Week01_1.html",
+    "href": "pages/DL/Week01_1.html",
+    "title": "A Historical Overview of Deep Learning",
+    "section": "",
+    "text": "In the early stages of understanding neural networks, Joseph von Gerlach’s 1871 proposition of the Reticular theory posited a continuous network for the nervous system. Supporting evidence came from Golgi’s staining technique. The debate shifted with Santiago Ramón y Cajal’s 1891 Neuron doctrine, proposing discrete individual cells forming a network. This sparked the Nobel Prize conflict in 1906, ultimately resolved through electron microscopy. The ensuing discourse revolved around the balance between localized and distributed processing in the brain.\n\n\n\nIn 1943, McCulloch and Pitts presented a model of the neuron, laying the groundwork for artificial neurons. A significant stride occurred in 1957 when Frank Rosenblatt introduced the perceptron model, featuring weighted inputs. However, the limitations of a single perceptron were identified by Minsky and Papert in 1969.\n\n\n\nThe period from 1957 to 1969 marked the “Spring of AI,” characterized by optimism, funding, and interest. Yet, Minsky and Papert’s critique ushered in the “Winter of AI.” The emergence of backpropagation in 1986, popularized by Rumelhart and Hinton, and the acknowledgment of gradient descent (discovered by Cauchy in the 19th century) marked a shift in the AI landscape.\n\n\n\nThe Universal Approximation Theorem, introduced in 1989, elucidates how a multi-layered neural network can approximate any function. Emphasis is placed on the significance of the number of neurons for achieving superior approximation.\n\n\n\nA disparity between theoretical knowledge and practical challenges in training deep neural networks emerged. Stability and convergence issues with backpropagation were identified in practice. However, progress in convolutional neural networks over two decades has been noteworthy."
+  },
+  {
+    "objectID": "pages/DL/Week01_1.html#biological-neurons-and-theories",
+    "href": "pages/DL/Week01_1.html#biological-neurons-and-theories",
+    "title": "A Historical Overview of Deep Learning",
+    "section": "",
+    "text": "In the early stages of understanding neural networks, Joseph von Gerlach’s 1871 proposition of the Reticular theory posited a continuous network for the nervous system. Supporting evidence came from Golgi’s staining technique. The debate shifted with Santiago Ramón y Cajal’s 1891 Neuron doctrine, proposing discrete individual cells forming a network. This sparked the Nobel Prize conflict in 1906, ultimately resolved through electron microscopy. The ensuing discourse revolved around the balance between localized and distributed processing in the brain."
+  },
+  {
+    "objectID": "pages/DL/Week01_1.html#artificial-neurons-and-the-perceptron",
+    "href": "pages/DL/Week01_1.html#artificial-neurons-and-the-perceptron",
+    "title": "A Historical Overview of Deep Learning",
+    "section": "",
+    "text": "In 1943, McCulloch and Pitts presented a model of the neuron, laying the groundwork for artificial neurons. A significant stride occurred in 1957 when Frank Rosenblatt introduced the perceptron model, featuring weighted inputs. However, the limitations of a single perceptron were identified by Minsky and Papert in 1969."
+  },
+  {
+    "objectID": "pages/DL/Week01_1.html#spring-to-winter-of-ai",
+    "href": "pages/DL/Week01_1.html#spring-to-winter-of-ai",
+    "title": "A Historical Overview of Deep Learning",
+    "section": "",
+    "text": "The period from 1957 to 1969 marked the “Spring of AI,” characterized by optimism, funding, and interest. Yet, Minsky and Papert’s critique ushered in the “Winter of AI.” The emergence of backpropagation in 1986, popularized by Rumelhart and Hinton, and the acknowledgment of gradient descent (discovered by Cauchy in the 19th century) marked a shift in the AI landscape."
+  },
+  {
+    "objectID": "pages/DL/Week01_1.html#universal-approximation-theorem",
+    "href": "pages/DL/Week01_1.html#universal-approximation-theorem",
+    "title": "A Historical Overview of Deep Learning",
+    "section": "",
+    "text": "The Universal Approximation Theorem, introduced in 1989, elucidates how a multi-layered neural network can approximate any function. Emphasis is placed on the significance of the number of neurons for achieving superior approximation."
+  },
+  {
+    "objectID": "pages/DL/Week01_1.html#practical-challenges-and-progress",
+    "href": "pages/DL/Week01_1.html#practical-challenges-and-progress",
+    "title": "A Historical Overview of Deep Learning",
+    "section": "",
+    "text": "A disparity between theoretical knowledge and practical challenges in training deep neural networks emerged. Stability and convergence issues with backpropagation were identified in practice. However, progress in convolutional neural networks over two decades has been noteworthy."
+  },
+  {
+    "objectID": "pages/DL/Week01_1.html#introduction",
+    "href": "pages/DL/Week01_1.html#introduction",
+    "title": "A Historical Overview of Deep Learning",
+    "section": "Introduction",
+    "text": "Introduction\n\nHistorical Perspective\nDeep learning encountered challenges in training via backpropagation. Jeff Hinton’s group proposed a crucial weight initialization idea in 2016, fostering stable training. The improved availability of computing power and data around 2006 laid the foundation for success."
+  },
+  {
+    "objectID": "pages/DL/Week01_1.html#early-challenges-and-solutions",
+    "href": "pages/DL/Week01_1.html#early-challenges-and-solutions",
+    "title": "A Historical Overview of Deep Learning",
+    "section": "Early Challenges and Solutions",
+    "text": "Early Challenges and Solutions\n\nUnsupervised Pre-training\nBetween 2007 and 2009, investigations into the effectiveness of unsupervised pre-training led to insights that shaped optimization and regularization algorithms. The course will delve into topics such as initializations, regularizations, and optimizations."
+  },
+  {
+    "objectID": "pages/DL/Week01_1.html#emergence-of-deep-learning",
+    "href": "pages/DL/Week01_1.html#emergence-of-deep-learning",
+    "title": "A Historical Overview of Deep Learning",
+    "section": "Emergence of Deep Learning",
+    "text": "Emergence of Deep Learning\n\nPractical Utility\nDeep learning applications started winning competitions, including handwriting recognition on the MNIST dataset, speech recognition, and visual pattern recognition like traffic sign data.\n\n\nImageNet Challenge (2012-2016)\nThe ImageNet challenge, a pivotal turning point, witnessed the evolution from ZFNet to ResNet (152 layers), achieving a remarkable 3.6% error rate in 2016, surpassing human performance."
+  },
+  {
+    "objectID": "pages/DL/Week01_1.html#transition-period-2012-2016",
+    "href": "pages/DL/Week01_1.html#transition-period-2012-2016",
+    "title": "A Historical Overview of Deep Learning",
+    "section": "Transition Period (2012-2016)",
+    "text": "Transition Period (2012-2016)\n\nGolden Period of Deep Learning\nThe universal acceptance of deep learning marked its golden period, with convolutional neural networks dominating image-related problems. Similar trends were observed in natural language processing (NLP) and speech processing."
+  },
+  {
+    "objectID": "pages/DL/Week01_1.html#from-cats-to-convolutional-neural-networks",
+    "href": "pages/DL/Week01_1.html#from-cats-to-convolutional-neural-networks",
+    "title": "A Historical Overview of Deep Learning",
+    "section": "From Cats to Convolutional Neural Networks",
+    "text": "From Cats to Convolutional Neural Networks\n\nMotivation from Neural Science (1959)\nAn experiment with a cat’s brain in 1959 revealed different parts activated for different stick positions, motivating the concept of receptive fields in convolutional neural networks (CNNs).\n\n\nNeocognitron Model (1980)\nInspired by distributed processing observed in the cat experiment, the Neocognitron model utilized receptive fields for different parts of the network.\n\n\nLeNet Model (1989)\nJan Lecun’s contribution to deep learning, the LeNet model, was employed for recognizing handwritten digits, finding applications in postal services for automated sorting of letters.\n\n\nLeNet-5 Model (1998)\nFurther improvements on the LeNet model, introducing the MNIST dataset for testing CNNs."
+  },
+  {
+    "objectID": "pages/DL/Week01_1.html#history-of-deep-learning",
+    "href": "pages/DL/Week01_1.html#history-of-deep-learning",
+    "title": "A Historical Overview of Deep Learning",
+    "section": "History of Deep Learning",
+    "text": "History of Deep Learning\n\n1950s: Enthusiasm in AI.\n1990s: Convolutional Neural Networks (CNNs) used for real-world problems, challenges with large networks and training.\n2006-2012: Advances in deep learning, successful training for ImageNet challenges.\n2016 onwards: Acceleration with better optimization methods (Nesterov’s method), leading to faster convergence.\nOptimization Algorithms: Adagrad, RMSprop, Adam, AdamW, etc., focus on faster and better convergence."
+  },
+  {
+    "objectID": "pages/DL/Week01_1.html#activation-functions",
+    "href": "pages/DL/Week01_1.html#activation-functions",
+    "title": "A Historical Overview of Deep Learning",
+    "section": "Activation Functions",
+    "text": "Activation Functions\nThe evolution from the logistic function to various activation functions (ReLU, Leaky ReLU, Parametric ReLU, Tanh, etc.) aimed at stabilizing training, achieving better performance, and faster convergence. The use of improved activation functions contributed to enhanced stability and performance."
+  },
+  {
+    "objectID": "pages/DL/Week01_1.html#sequence-processing",
+    "href": "pages/DL/Week01_1.html#sequence-processing",
+    "title": "A Historical Overview of Deep Learning",
+    "section": "Sequence Processing",
+    "text": "Sequence Processing\nIntroduction to problems involving sequences in deep learning, featuring Recurrent Neural Networks (RNNs) proposed in 1982 for sequence processing. Long Short-Term Memory Cells (LSTMs) were introduced in 1997 to address the vanishing gradient problem. By 2014, RNNs and LSTMs dominated natural language processing (NLP) and speech applications. In 2017, Transformer networks started replacing RNNs and LSTMs in sequence learning."
+  },
+  {
+    "objectID": "pages/DL/Week01_1.html#game-playing-with-deep-learning",
+    "href": "pages/DL/Week01_1.html#game-playing-with-deep-learning",
+    "title": "A Historical Overview of Deep Learning",
+    "section": "Game Playing with Deep Learning",
+    "text": "Game Playing with Deep Learning\n\n2015: Deep Reinforcement Learning (DRL) agents beat humans in Atari games.\nBreakthrough in Go game playing using DRL in 2015.\n2016: DRL-based agents beat professional poker players.\nComplex strategy games like Dota 2 mastered by DRL agents.\nIntroduction of OpenAI Gym as a toolkit for developing and comparing reinforcement learning algorithms.\nEmergence of AlphaStar and MuZero for mastering multiple games and tasks."
+  },
+  {
+    "objectID": "pages/DL/Week01_1.html#general-trends-in-deep-reinforcement-learning",
+    "href": "pages/DL/Week01_1.html#general-trends-in-deep-reinforcement-learning",
+    "title": "A Historical Overview of Deep Learning",
+    "section": "General Trends in Deep Reinforcement Learning",
+    "text": "General Trends in Deep Reinforcement Learning\nDeep RL agents consistently outperforming humans in various complex games, progressing from simple environments to mastering complex strategy games. The trend is towards developing “master of all” models (e.g., MuZero) for general intelligence in multiple tasks."
+  },
+  {
+    "objectID": "pages/DL/Week01_1.html#overview",
+    "href": "pages/DL/Week01_1.html#overview",
+    "title": "A Historical Overview of Deep Learning",
+    "section": "Overview",
+    "text": "Overview\n\nRevival and Advances\nA recap of deep learning’s revival and recent advances, reflecting an increasing interest in real-world problem-solving and challenges.\n\n\nAI Publications Growth\nThe Stanford AI Index Report highlights a significant increase in AI publications, indicating exponential growth across machine learning, computer vision, and NLP.\n\n\nFunding and Startups\nThe rise of AI startups, coupled with the interest from major tech companies, has led to exponential growth in AI-related patent filings."
+  },
+  {
+    "objectID": "pages/DL/Week01_1.html#evolution-of-neural-network-models",
+    "href": "pages/DL/Week01_1.html#evolution-of-neural-network-models",
+    "title": "A Historical Overview of Deep Learning",
+    "section": "Evolution of Neural Network Models",
+    "text": "Evolution of Neural Network Models\n\nIntroduction of Transformers\nIn 2017, transformers were introduced, revolutionizing AI and finding success in NLP, subsequently adopted in other domains.\n\n\nMachine Translation and Transformers\nA historical overview of machine translation, emphasizing the shift from IBM models to neural machine translation. The impact of sequence-to-sequence models (2014) and transformers (2017) is discussed.\n\n\nTransformer-based Models\nThe BERT model (2018) with a focus on pre-training, the evolution of models with increasing parameters from GPT-3 (175 billion) to 1.6 trillion parameters, and a comparison with human brain synapses provide perspective."
+  },
+  {
+    "objectID": "pages/DL/Week01_1.html#transformers-in-vision",
+    "href": "pages/DL/Week01_1.html#transformers-in-vision",
+    "title": "A Historical Overview of Deep Learning",
+    "section": "Transformers in Vision",
+    "text": "Transformers in Vision\n\nAdoption in Image\nClassification The evolution of image classification models, starting with AlexNet (2012), is traced. Transformers entered image classification and object detection in 2019, marking a paradigm shift towards transformers in state-of-the-art models."
+  },
+  {
+    "objectID": "pages/DL/Week01_1.html#generative-models",
+    "href": "pages/DL/Week01_1.html#generative-models",
+    "title": "A Historical Overview of Deep Learning",
+    "section": "Generative Models",
+    "text": "Generative Models\n\nOverview\nAn introduction to generative models for image synthesis, covering the evolution from variation autoencoders to GANs (Generative Adversarial Networks). Recent developments in diffusion-based models overcoming GAN drawbacks are discussed.\n\n\nDALL-E and DALL-E 2\nDALL-E’s capability to generate realistic images based on text prompts is explored. The introduction of DALL-E 2, a diffusion-based model, exceeding expectations, is highlighted with examples of generated images showcasing photorealistic results.\n\n\nExciting Times in Generative Models\nThe exploration of generative models for realistic image generation is showcased, with examples of prompts generating photorealistic images illustrating field advancements."
+  },
+  {
+    "objectID": "pages/DL/Week01_1.html#introduction-1",
+    "href": "pages/DL/Week01_1.html#introduction-1",
+    "title": "A Historical Overview of Deep Learning",
+    "section": "Introduction",
+    "text": "Introduction\nRapid advancements in deep learning have yielded powerful models trained on large datasets, showcasing impressive results. However, there is a growing need for sanity, interpretability, fairness, and responsibility in deploying these models."
+  },
+  {
+    "objectID": "pages/DL/Week01_1.html#paradox-of-deep-learning",
+    "href": "pages/DL/Week01_1.html#paradox-of-deep-learning",
+    "title": "A Historical Overview of Deep Learning",
+    "section": "Paradox of Deep Learning",
+    "text": "Paradox of Deep Learning\nDespite the high capacity of deep learning models, they exhibit remarkable performance. Challenges include numerical instability, sharp minima, and susceptibility to adversarial examples."
+  },
+  {
+    "objectID": "pages/DL/Week01_1.html#calls-for-sanity",
+    "href": "pages/DL/Week01_1.html#calls-for-sanity",
+    "title": "A Historical Overview of Deep Learning",
+    "section": "Calls for Sanity",
+    "text": "Calls for Sanity\nEmphasis is placed on explainability and interpretability to comprehend model decisions. Advances include workshops on human interpretability, tools like the Clever Hans toolkit to identify model reliance on cues, and benchmarking on adversarial examples."
+  },
+  {
+    "objectID": "pages/DL/Week01_1.html#fairness-and-responsibility",
+    "href": "pages/DL/Week01_1.html#fairness-and-responsibility",
+    "title": "A Historical Overview of Deep Learning",
+    "section": "Fairness and Responsibility",
+    "text": "Fairness and Responsibility\nIncreasing awareness of biases in AI models, particularly in facial recognition and criminal risk predictions, has led to concerns about fairness. Efforts such as the AI audit challenge at Stanford focus on building non-discriminatory models."
+  },
+  {
+    "objectID": "pages/DL/Week01_1.html#green-ai",
+    "href": "pages/DL/Week01_1.html#green-ai",
+    "title": "A Historical Overview of Deep Learning",
+    "section": "Green AI",
+    "text": "Green AI\nRising environmental concerns due to the high computational power and energy consumption of deep learning models have spurred calls for responsible AI, extending to the environmental impact. There is a push for more energy-efficient models."
+  },
+  {
+    "objectID": "pages/DL/Week01_1.html#exciting-times-in-ai",
+    "href": "pages/DL/Week01_1.html#exciting-times-in-ai",
+    "title": "A Historical Overview of Deep Learning",
+    "section": "Exciting Times in AI",
+    "text": "Exciting Times in AI\nThe AI revolution is influencing scientific research, evident in DeepMind’s AlphaFold predicting protein folding. Applications in astronomy, predicting galaxy aging, and generating images for fundamental variables in experimental data are emerging. There is an emphasis on efficient deep learning for mobile devices, edge computing, and addressing constraints of power, storage, and real-time processing."
+  },
+  {
+    "objectID": "about.html",
+    "href": "about.html",
+    "title": "About",
+    "section": "",
+    "text": "About this site"
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "BS Degree Notes",
+    "section": "",
+    "text": "I put the course notes for my own easy perusal."
+  },
+  {
     "objectID": "pages/DL/Week01_2.html",
     "href": "pages/DL/Week01_2.html",
     "title": "Motivation from Biological Neuron",
@@ -609,200 +805,347 @@
     "text": "Proof\n\nSetup\nDefine \\(P'\\) as the union of \\(P\\) and the negation of \\(N\\). Normalize all inputs for convenience.\n\n\nAssumptions and Definitions\nAssume the existence of a normalized solution vector \\(\\mathbf{w^*}\\). Define the minimum dot product, \\(\\delta\\), as the minimum value obtained by dot products between \\(\\mathbf{w^*}\\) and points in \\(P'\\).\n\n\nPerceptron Learning Algorithm\nThe perceptron learning algorithm can be expressed as follows:\n\nInitialization:\n\nInitialize weight vector \\(\\mathbf{w}\\) randomly.\n\nIteration:\n\nAt each iteration, randomly select a point \\(\\mathbf{p}\\) from \\(P'\\).\nIf the condition \\(\\mathbf{w}^T\\mathbf{p} \\geq 0\\) is not satisfied, update \\(\\mathbf{w}\\) by \\(\\mathbf{w} = \\mathbf{w} + \\mathbf{p}\\).\n\n\n\n\nNormalization and Definitions\nNormalize all inputs, ensuring the norm of \\(\\mathbf{p}\\) is 1. Define the numerator of \\(\\cos \\beta\\) as the dot product between \\(\\mathbf{w^*}\\) and the updated weight vector at each iteration.\n\n\nNumerator Analysis\nShow that the numerator is greater than or equal to \\(\\delta\\) for each iteration.\nFor a randomly selected \\(\\mathbf{p}\\), if \\(\\mathbf{w}^T\\mathbf{p} &lt; 0\\) and an update is performed, the numerator is:\n\\[\n\\mathbf{w^*} \\cdot (\\mathbf{w} + \\mathbf{p}) \\geq \\delta\n\\]\n\n\nDenominator Analysis\nExpand the denominator, the square of the norm of the updated weight vector:\n\\[\n\\|\\mathbf{w} + \\mathbf{p}\\|^2 = \\|\\mathbf{w}\\|^2 + 2\\mathbf{w}^T\\mathbf{p} + \\|\\mathbf{p}\\|^2\n\\]\nShow that the denominator is less than or equal to a value involving \\(k\\), the number of updates made:\n\\[\n\\|\\mathbf{w} + \\mathbf{p}\\|^2 \\leq \\|\\mathbf{w^*}\\|^2 + k\n\\]\n\n\nCombining Numerator and Denominator\nUse the definition of \\(\\cos \\beta\\) to conclude that \\(\\cos \\beta\\) is greater than or equal to a certain quantity involving the square root of \\(k\\):\n\\[\n\\cos \\beta \\geq \\frac{\\delta}{\\sqrt{k}}\n\\]"
   },
   {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "BS Degree Notes",
+    "objectID": "pages/DL/Week02.html",
+    "href": "pages/DL/Week02.html",
+    "title": "Deep Learning Foundations: From Boolean Functions to Universal Approximation",
     "section": "",
-    "text": "I put the course notes for my own easy perusal."
+    "text": "Boolean functions, fundamental to computational logic, pose challenges when it comes to their linear separability. The perceptron learning algorithm, known for its guarantees with linearly separable data, encounters limitations when dealing with certain boolean functions. This module delves into the intricacies of these functions and explores the concept of linear separability.\n\n\n\n\n\nThe XOR function, denoted as \\(f(x_1, x_2)\\), outputs 1 when exactly one of its inputs is 1. It follows the logic: \\[f(0,0) \\rightarrow 0, \\, f(0,1) \\rightarrow 1, \\, f(1,0) \\rightarrow 1, \\, f(1,1) \\rightarrow 0\\]\n\n\n\nAttempting to implement XOR using a perceptron leads to a set of four inequalities. These conditions, when applied to weights (\\(w_0, w_1, w_2\\)), cannot be simultaneously satisfied. Geometrically, this signifies the inability to draw a line that separates positive and negative points in the XOR function.\n\n\n\n\nReal-world data often deviates from the assumption of linear separability. For instance, individuals with similar characteristics may exhibit diverse preferences, challenging the effectiveness of linear decision boundaries.\n\n\n\nRecognizing the limitations of a single perceptron in handling non-linearly separable data, a proposed solution involves using a network of perceptrons. This approach aims to extend the capability of handling complex, non-linearly separable boolean functions.\n\n\n\nBoolean functions with \\(n\\) inputs offer a wide range of possibilities, such as AND, OR, and others. The total number of boolean functions from \\(n\\) inputs is given by \\(2^{2^n}\\). The discussion extends to the linear separability of these boolean functions.\n\n\n\nOut of the \\(2^{2^n}\\) boolean functions, some are not linearly separable. The precise count of non-linearly separable functions remains an unsolved problem, highlighting the need for robust methods capable of handling such cases."
   },
   {
-    "objectID": "about.html",
-    "href": "about.html",
-    "title": "About",
+    "objectID": "pages/DL/Week02.html#introduction",
+    "href": "pages/DL/Week02.html#introduction",
+    "title": "Deep Learning Foundations: From Boolean Functions to Universal Approximation",
     "section": "",
-    "text": "About this site"
+    "text": "Boolean functions, fundamental to computational logic, pose challenges when it comes to their linear separability. The perceptron learning algorithm, known for its guarantees with linearly separable data, encounters limitations when dealing with certain boolean functions. This module delves into the intricacies of these functions and explores the concept of linear separability."
   },
   {
-    "objectID": "pages/DL/Week01_1.html",
-    "href": "pages/DL/Week01_1.html",
-    "title": "A Historical Overview of Deep Learning",
+    "objectID": "pages/DL/Week02.html#xor-function-analysis",
+    "href": "pages/DL/Week02.html#xor-function-analysis",
+    "title": "Deep Learning Foundations: From Boolean Functions to Universal Approximation",
     "section": "",
-    "text": "In the early stages of understanding neural networks, Joseph von Gerlach’s 1871 proposition of the Reticular theory posited a continuous network for the nervous system. Supporting evidence came from Golgi’s staining technique. The debate shifted with Santiago Ramón y Cajal’s 1891 Neuron doctrine, proposing discrete individual cells forming a network. This sparked the Nobel Prize conflict in 1906, ultimately resolved through electron microscopy. The ensuing discourse revolved around the balance between localized and distributed processing in the brain.\n\n\n\nIn 1943, McCulloch and Pitts presented a model of the neuron, laying the groundwork for artificial neurons. A significant stride occurred in 1957 when Frank Rosenblatt introduced the perceptron model, featuring weighted inputs. However, the limitations of a single perceptron were identified by Minsky and Papert in 1969.\n\n\n\nThe period from 1957 to 1969 marked the “Spring of AI,” characterized by optimism, funding, and interest. Yet, Minsky and Papert’s critique ushered in the “Winter of AI.” The emergence of backpropagation in 1986, popularized by Rumelhart and Hinton, and the acknowledgment of gradient descent (discovered by Cauchy in the 19th century) marked a shift in the AI landscape.\n\n\n\nThe Universal Approximation Theorem, introduced in 1989, elucidates how a multi-layered neural network can approximate any function. Emphasis is placed on the significance of the number of neurons for achieving superior approximation.\n\n\n\nA disparity between theoretical knowledge and practical challenges in training deep neural networks emerged. Stability and convergence issues with backpropagation were identified in practice. However, progress in convolutional neural networks over two decades has been noteworthy."
+    "text": "The XOR function, denoted as \\(f(x_1, x_2)\\), outputs 1 when exactly one of its inputs is 1. It follows the logic: \\[f(0,0) \\rightarrow 0, \\, f(0,1) \\rightarrow 1, \\, f(1,0) \\rightarrow 1, \\, f(1,1) \\rightarrow 0\\]\n\n\n\nAttempting to implement XOR using a perceptron leads to a set of four inequalities. These conditions, when applied to weights (\\(w_0, w_1, w_2\\)), cannot be simultaneously satisfied. Geometrically, this signifies the inability to draw a line that separates positive and negative points in the XOR function."
   },
   {
-    "objectID": "pages/DL/Week01_1.html#biological-neurons-and-theories",
-    "href": "pages/DL/Week01_1.html#biological-neurons-and-theories",
-    "title": "A Historical Overview of Deep Learning",
+    "objectID": "pages/DL/Week02.html#implications-for-real-world-data",
+    "href": "pages/DL/Week02.html#implications-for-real-world-data",
+    "title": "Deep Learning Foundations: From Boolean Functions to Universal Approximation",
     "section": "",
-    "text": "In the early stages of understanding neural networks, Joseph von Gerlach’s 1871 proposition of the Reticular theory posited a continuous network for the nervous system. Supporting evidence came from Golgi’s staining technique. The debate shifted with Santiago Ramón y Cajal’s 1891 Neuron doctrine, proposing discrete individual cells forming a network. This sparked the Nobel Prize conflict in 1906, ultimately resolved through electron microscopy. The ensuing discourse revolved around the balance between localized and distributed processing in the brain."
+    "text": "Real-world data often deviates from the assumption of linear separability. For instance, individuals with similar characteristics may exhibit diverse preferences, challenging the effectiveness of linear decision boundaries."
   },
   {
-    "objectID": "pages/DL/Week01_1.html#artificial-neurons-and-the-perceptron",
-    "href": "pages/DL/Week01_1.html#artificial-neurons-and-the-perceptron",
-    "title": "A Historical Overview of Deep Learning",
+    "objectID": "pages/DL/Week02.html#network-of-perceptrons",
+    "href": "pages/DL/Week02.html#network-of-perceptrons",
+    "title": "Deep Learning Foundations: From Boolean Functions to Universal Approximation",
     "section": "",
-    "text": "In 1943, McCulloch and Pitts presented a model of the neuron, laying the groundwork for artificial neurons. A significant stride occurred in 1957 when Frank Rosenblatt introduced the perceptron model, featuring weighted inputs. However, the limitations of a single perceptron were identified by Minsky and Papert in 1969."
+    "text": "Recognizing the limitations of a single perceptron in handling non-linearly separable data, a proposed solution involves using a network of perceptrons. This approach aims to extend the capability of handling complex, non-linearly separable boolean functions."
   },
   {
-    "objectID": "pages/DL/Week01_1.html#spring-to-winter-of-ai",
-    "href": "pages/DL/Week01_1.html#spring-to-winter-of-ai",
-    "title": "A Historical Overview of Deep Learning",
+    "objectID": "pages/DL/Week02.html#boolean-functions-from-n-inputs",
+    "href": "pages/DL/Week02.html#boolean-functions-from-n-inputs",
+    "title": "Deep Learning Foundations: From Boolean Functions to Universal Approximation",
     "section": "",
-    "text": "The period from 1957 to 1969 marked the “Spring of AI,” characterized by optimism, funding, and interest. Yet, Minsky and Papert’s critique ushered in the “Winter of AI.” The emergence of backpropagation in 1986, popularized by Rumelhart and Hinton, and the acknowledgment of gradient descent (discovered by Cauchy in the 19th century) marked a shift in the AI landscape."
+    "text": "Boolean functions with \\(n\\) inputs offer a wide range of possibilities, such as AND, OR, and others. The total number of boolean functions from \\(n\\) inputs is given by \\(2^{2^n}\\). The discussion extends to the linear separability of these boolean functions."
   },
   {
-    "objectID": "pages/DL/Week01_1.html#universal-approximation-theorem",
-    "href": "pages/DL/Week01_1.html#universal-approximation-theorem",
-    "title": "A Historical Overview of Deep Learning",
+    "objectID": "pages/DL/Week02.html#challenge-of-non-linear-separability",
+    "href": "pages/DL/Week02.html#challenge-of-non-linear-separability",
+    "title": "Deep Learning Foundations: From Boolean Functions to Universal Approximation",
     "section": "",
-    "text": "The Universal Approximation Theorem, introduced in 1989, elucidates how a multi-layered neural network can approximate any function. Emphasis is placed on the significance of the number of neurons for achieving superior approximation."
+    "text": "Out of the \\(2^{2^n}\\) boolean functions, some are not linearly separable. The precise count of non-linearly separable functions remains an unsolved problem, highlighting the need for robust methods capable of handling such cases."
   },
   {
-    "objectID": "pages/DL/Week01_1.html#practical-challenges-and-progress",
-    "href": "pages/DL/Week01_1.html#practical-challenges-and-progress",
-    "title": "A Historical Overview of Deep Learning",
-    "section": "",
-    "text": "A disparity between theoretical knowledge and practical challenges in training deep neural networks emerged. Stability and convergence issues with backpropagation were identified in practice. However, progress in convolutional neural networks over two decades has been noteworthy."
+    "objectID": "pages/DL/Week02.html#introduction-to-multi-layer-perceptrons",
+    "href": "pages/DL/Week02.html#introduction-to-multi-layer-perceptrons",
+    "title": "Deep Learning Foundations: From Boolean Functions to Universal Approximation",
+    "section": "Introduction to Multi-Layer Perceptrons",
+    "text": "Introduction to Multi-Layer Perceptrons\nMulti-Layer Perceptrons (MLPs) constitute a pivotal advancement in artificial neural networks. These networks boast a layered architecture, each layer serving a distinct role in processing information.\n\nLayers in an MLP\n\nInput Layer:\n\nComprising nodes representing input features (\\(x_1, x_2, ..., x_n\\)).\n\nHidden Layer:\n\nFeatures multiple perceptrons introducing non-linearities to the network.\n\nOutput Layer:\n\nHouses a single perceptron providing the final network output.\n\n\n\n\nWeights and Bias\n\nConnection Characteristics:\n\nWeights (\\(w\\)) and a bias term (\\(w_0\\)) define the connections between nodes.\n\nWeighted Sum and Activation:\n\nThe weighted sum of inputs, combined with the bias, influences perceptron activation."
   },
   {
-    "objectID": "pages/DL/Week01_1.html#introduction",
-    "href": "pages/DL/Week01_1.html#introduction",
-    "title": "A Historical Overview of Deep Learning",
-    "section": "Introduction",
-    "text": "Introduction\n\nHistorical Perspective\nDeep learning encountered challenges in training via backpropagation. Jeff Hinton’s group proposed a crucial weight initialization idea in 2016, fostering stable training. The improved availability of computing power and data around 2006 laid the foundation for success."
+    "objectID": "pages/DL/Week02.html#representation-of-boolean-functions-in-mlps",
+    "href": "pages/DL/Week02.html#representation-of-boolean-functions-in-mlps",
+    "title": "Deep Learning Foundations: From Boolean Functions to Universal Approximation",
+    "section": "Representation of Boolean Functions in MLPs",
+    "text": "Representation of Boolean Functions in MLPs\n\nNetwork Structure for Boolean Functions\n\nHidden Layer Configuration:\n\nFor a boolean function with \\(n\\) inputs, the hidden layer consists of \\(2^n\\) perceptrons.\n\nWeight and Bias Adjustment:\n\nWeights and biases are adjusted to meet boolean logic conditions for accurate function representation.\n\n\n\n\nBoolean Function Implementation\n\nPerceptron Activation Conditions:\n\nEach perceptron in the hidden layer selectively fires based on specific input combinations.\n\nXOR Function Illustration:\n\nUsing the XOR function as an example, conditions on weights (\\(w_1, w_2, w_3, w_4\\)) are established for faithful representation.\n\nExtension to \\(n\\) Inputs:\n\nGeneralizing the approach to \\(n\\) inputs involves \\(2^n\\) perceptrons in the hidden layer.\nConditions for output layer weights are derived to ensure accurate representation."
   },
   {
-    "objectID": "pages/DL/Week01_1.html#early-challenges-and-solutions",
-    "href": "pages/DL/Week01_1.html#early-challenges-and-solutions",
-    "title": "A Historical Overview of Deep Learning",
-    "section": "Early Challenges and Solutions",
-    "text": "Early Challenges and Solutions\n\nUnsupervised Pre-training\nBetween 2007 and 2009, investigations into the effectiveness of unsupervised pre-training led to insights that shaped optimization and regularization algorithms. The course will delve into topics such as initializations, regularizations, and optimizations."
+    "objectID": "pages/DL/Week02.html#representation-power-and-implications",
+    "href": "pages/DL/Week02.html#representation-power-and-implications",
+    "title": "Deep Learning Foundations: From Boolean Functions to Universal Approximation",
+    "section": "Representation Power and Implications",
+    "text": "Representation Power and Implications\n\nRepresentation Power Theorem\n\nTheorem Statement:\n\nAny boolean function of \\(n\\) inputs can be precisely represented by an MLP.\n\nSuggested MLP Structure:\n\nAn MLP with \\(2^n\\) perceptrons in the hidden layer and 1 perceptron in the output layer is deemed sufficient.\n\n\n\n\nPractical Considerations\n\nChallenges with Growing \\(n\\):\n\nThe exponential increase in perceptrons as \\(n\\) grows poses practical challenges.\n\nReal-World Applications:\n\nManaging and computing with a large number of perceptrons may be challenging in practical applications."
   },
   {
-    "objectID": "pages/DL/Week01_1.html#emergence-of-deep-learning",
-    "href": "pages/DL/Week01_1.html#emergence-of-deep-learning",
-    "title": "A Historical Overview of Deep Learning",
-    "section": "Emergence of Deep Learning",
-    "text": "Emergence of Deep Learning\n\nPractical Utility\nDeep learning applications started winning competitions, including handwriting recognition on the MNIST dataset, speech recognition, and visual pattern recognition like traffic sign data.\n\n\nImageNet Challenge (2012-2016)\nThe ImageNet challenge, a pivotal turning point, witnessed the evolution from ZFNet to ResNet (152 layers), achieving a remarkable 3.6% error rate in 2016, surpassing human performance."
+    "objectID": "pages/DL/Week02.html#transition-from-perceptrons-to-sigmoid-neurons",
+    "href": "pages/DL/Week02.html#transition-from-perceptrons-to-sigmoid-neurons",
+    "title": "Deep Learning Foundations: From Boolean Functions to Universal Approximation",
+    "section": "Transition from Perceptrons to Sigmoid Neurons",
+    "text": "Transition from Perceptrons to Sigmoid Neurons\n\nBinary Output Limitation\nPerceptrons, governed by binary output based on the weighted sum of inputs exceeding a threshold, exhibit a binary decision boundary. This rigid characteristic proves restrictive in scenarios where a more gradual decision-making process is preferred.\n\n\nReal-Valued Inputs and Outputs\nThe shift towards sigmoid neurons arises in the context of addressing arbitrary functions \\(Y = f(X)\\), wherein \\(X \\in \\mathbb{R}^n\\) and \\(Y \\in \\mathbb{R}\\). This entails the consideration of real numbers for both inputs and outputs. Examples include predicting oil quantity based on salinity, density, pressure, temperature, and marine diversity, as well as determining bank interest rates considering factors like salary, family size, previous loans, and defaults."
   },
   {
-    "objectID": "pages/DL/Week01_1.html#transition-period-2012-2016",
-    "href": "pages/DL/Week01_1.html#transition-period-2012-2016",
-    "title": "A Historical Overview of Deep Learning",
-    "section": "Transition Period (2012-2016)",
-    "text": "Transition Period (2012-2016)\n\nGolden Period of Deep Learning\nThe universal acceptance of deep learning marked its golden period, with convolutional neural networks dominating image-related problems. Similar trends were observed in natural language processing (NLP) and speech processing."
+    "objectID": "pages/DL/Week02.html#objective",
+    "href": "pages/DL/Week02.html#objective",
+    "title": "Deep Learning Foundations: From Boolean Functions to Universal Approximation",
+    "section": "Objective",
+    "text": "Objective\nThe primary objective is to construct a neural network capable of accurately approximating or representing real-valued functions, ensuring the proximity of the network’s output to actual values present in the training data."
   },
   {
-    "objectID": "pages/DL/Week01_1.html#from-cats-to-convolutional-neural-networks",
-    "href": "pages/DL/Week01_1.html#from-cats-to-convolutional-neural-networks",
-    "title": "A Historical Overview of Deep Learning",
-    "section": "From Cats to Convolutional Neural Networks",
-    "text": "From Cats to Convolutional Neural Networks\n\nMotivation from Neural Science (1959)\nAn experiment with a cat’s brain in 1959 revealed different parts activated for different stick positions, motivating the concept of receptive fields in convolutional neural networks (CNNs).\n\n\nNeocognitron Model (1980)\nInspired by distributed processing observed in the cat experiment, the Neocognitron model utilized receptive fields for different parts of the network.\n\n\nLeNet Model (1989)\nJan Lecun’s contribution to deep learning, the LeNet model, was employed for recognizing handwritten digits, finding applications in postal services for automated sorting of letters.\n\n\nLeNet-5 Model (1998)\nFurther improvements on the LeNet model, introducing the MNIST dataset for testing CNNs."
+    "objectID": "pages/DL/Week02.html#introduction-to-sigmoid-neurons",
+    "href": "pages/DL/Week02.html#introduction-to-sigmoid-neurons",
+    "title": "Deep Learning Foundations: From Boolean Functions to Universal Approximation",
+    "section": "Introduction to Sigmoid Neurons",
+    "text": "Introduction to Sigmoid Neurons\n\nSigmoid Function\nSigmoid neurons employ the sigmoid function (logistic function) to introduce smoothness in decision-making. Mathematically represented as: \\[\\sigma(z) = \\frac{1}{1 + e^{-z}}\\] where \\(z\\) denotes the weighted sum of inputs.\n\n\nSigmoid Function Properties\n\nAs \\(z\\) tends to positive infinity: \\(\\lim_{{z \\to \\infty}} \\sigma(z) = 1\\)\nAs \\(z\\) tends to negative infinity: \\(\\lim_{{z \\to -\\infty}} \\sigma(z) = 0\\)\nAt \\(W^T X = 0\\): \\(\\sigma(0) = \\frac{1}{2}\\)\n\nThe sigmoid function transforms outputs into the range [0, 1], facilitating a probabilistic interpretation.\n\n\nComparison with Perceptron\nContrasting with the perceptron function, the sigmoid function exhibits smoothness and continuity. The perceptron function lacks differentiability at the abrupt change in value, whereas the sigmoid function is differentiable."
   },
   {
-    "objectID": "pages/DL/Week01_1.html#history-of-deep-learning",
-    "href": "pages/DL/Week01_1.html#history-of-deep-learning",
-    "title": "A Historical Overview of Deep Learning",
-    "section": "History of Deep Learning",
-    "text": "History of Deep Learning\n\n1950s: Enthusiasm in AI.\n1990s: Convolutional Neural Networks (CNNs) used for real-world problems, challenges with large networks and training.\n2006-2012: Advances in deep learning, successful training for ImageNet challenges.\n2016 onwards: Acceleration with better optimization methods (Nesterov’s method), leading to faster convergence.\nOptimization Algorithms: Adagrad, RMSprop, Adam, AdamW, etc., focus on faster and better convergence."
+    "objectID": "pages/DL/Week02.html#importance-of-differentiability",
+    "href": "pages/DL/Week02.html#importance-of-differentiability",
+    "title": "Deep Learning Foundations: From Boolean Functions to Universal Approximation",
+    "section": "Importance of Differentiability",
+    "text": "Importance of Differentiability\nDifferentiability holds paramount importance for various machine learning algorithms, particularly in derivative-related operations. The application of calculus in neural network training and optimization is streamlined by the differentiability of the sigmoid neuron’s activation function."
   },
   {
-    "objectID": "pages/DL/Week01_1.html#activation-functions",
-    "href": "pages/DL/Week01_1.html#activation-functions",
-    "title": "A Historical Overview of Deep Learning",
-    "section": "Activation Functions",
-    "text": "Activation Functions\nThe evolution from the logistic function to various activation functions (ReLU, Leaky ReLU, Parametric ReLU, Tanh, etc.) aimed at stabilizing training, achieving better performance, and faster convergence. The use of improved activation functions contributed to enhanced stability and performance."
-  },
-  {
-    "objectID": "pages/DL/Week01_1.html#sequence-processing",
-    "href": "pages/DL/Week01_1.html#sequence-processing",
-    "title": "A Historical Overview of Deep Learning",
-    "section": "Sequence Processing",
-    "text": "Sequence Processing\nIntroduction to problems involving sequences in deep learning, featuring Recurrent Neural Networks (RNNs) proposed in 1982 for sequence processing. Long Short-Term Memory Cells (LSTMs) were introduced in 1997 to address the vanishing gradient problem. By 2014, RNNs and LSTMs dominated natural language processing (NLP) and speech applications. In 2017, Transformer networks started replacing RNNs and LSTMs in sequence learning."
-  },
-  {
-    "objectID": "pages/DL/Week01_1.html#game-playing-with-deep-learning",
-    "href": "pages/DL/Week01_1.html#game-playing-with-deep-learning",
-    "title": "A Historical Overview of Deep Learning",
-    "section": "Game Playing with Deep Learning",
-    "text": "Game Playing with Deep Learning\n\n2015: Deep Reinforcement Learning (DRL) agents beat humans in Atari games.\nBreakthrough in Go game playing using DRL in 2015.\n2016: DRL-based agents beat professional poker players.\nComplex strategy games like Dota 2 mastered by DRL agents.\nIntroduction of OpenAI Gym as a toolkit for developing and comparing reinforcement learning algorithms.\nEmergence of AlphaStar and MuZero for mastering multiple games and tasks."
-  },
-  {
-    "objectID": "pages/DL/Week01_1.html#general-trends-in-deep-reinforcement-learning",
-    "href": "pages/DL/Week01_1.html#general-trends-in-deep-reinforcement-learning",
-    "title": "A Historical Overview of Deep Learning",
-    "section": "General Trends in Deep Reinforcement Learning",
-    "text": "General Trends in Deep Reinforcement Learning\nDeep RL agents consistently outperforming humans in various complex games, progressing from simple environments to mastering complex strategy games. The trend is towards developing “master of all” models (e.g., MuZero) for general intelligence in multiple tasks."
-  },
-  {
-    "objectID": "pages/DL/Week01_1.html#overview",
-    "href": "pages/DL/Week01_1.html#overview",
-    "title": "A Historical Overview of Deep Learning",
+    "objectID": "pages/DL/Week02.html#overview",
+    "href": "pages/DL/Week02.html#overview",
+    "title": "Deep Learning Foundations: From Boolean Functions to Universal Approximation",
     "section": "Overview",
-    "text": "Overview\n\nRevival and Advances\nA recap of deep learning’s revival and recent advances, reflecting an increasing interest in real-world problem-solving and challenges.\n\n\nAI Publications Growth\nThe Stanford AI Index Report highlights a significant increase in AI publications, indicating exponential growth across machine learning, computer vision, and NLP.\n\n\nFunding and Startups\nThe rise of AI startups, coupled with the interest from major tech companies, has led to exponential growth in AI-related patent filings."
+    "text": "Overview\nIn the realm of supervised machine learning, the fundamental objective is to comprehend the intricate structure of the setup, which encompasses various components crucial for effective model training. These components include the dataset, model representation, the learning algorithm, and the definition of an objective function."
   },
   {
-    "objectID": "pages/DL/Week01_1.html#evolution-of-neural-network-models",
-    "href": "pages/DL/Week01_1.html#evolution-of-neural-network-models",
-    "title": "A Historical Overview of Deep Learning",
-    "section": "Evolution of Neural Network Models",
-    "text": "Evolution of Neural Network Models\n\nIntroduction of Transformers\nIn 2017, transformers were introduced, revolutionizing AI and finding success in NLP, subsequently adopted in other domains.\n\n\nMachine Translation and Transformers\nA historical overview of machine translation, emphasizing the shift from IBM models to neural machine translation. The impact of sequence-to-sequence models (2014) and transformers (2017) is discussed.\n\n\nTransformer-based Models\nThe BERT model (2018) with a focus on pre-training, the evolution of models with increasing parameters from GPT-3 (175 billion) to 1.6 trillion parameters, and a comparison with human brain synapses provide perspective."
+    "objectID": "pages/DL/Week02.html#components",
+    "href": "pages/DL/Week02.html#components",
+    "title": "Deep Learning Foundations: From Boolean Functions to Universal Approximation",
+    "section": "Components",
+    "text": "Components\n\nData Representation\nThe dataset, denoted as \\((x_i, y_i)\\), is pivotal to the learning process. Here, \\(x_i\\) signifies an \\(m\\)-dimensional input vector, while \\(y_i\\) represents a real-valued output associated with the given input. The dataset essentially comprises a collection of such input-output pairs.\n\n\nModel Assumption\nA critical assumption in this paradigm is that the output \\(y\\) is contingent upon the input \\(x\\), expressed as \\(y = f(x)\\). However, the specific form of the function \\(f\\) remains elusive, prompting the need for learning algorithms to discern it from the provided data.\n\nLearning Algorithm\nThe learning algorithm employed in this context is the Gradient Descent algorithm. This iterative approach facilitates the adjustment of model parameters, ensuring a continuous refinement of the model’s approximation.\n\n\n\nObjective Function (Loss Function)\nCentral to the learning process is the formulation of an objective function, commonly referred to as the Loss Function. Mathematically, it is defined as follows:\n\\[\\mathcal{L}(\\theta) = \\sum_{i=1}^{n} \\text{Difference}(y_{\\hat{i}}, y_i)\\]\nHere, \\(\\theta\\) denotes the parameters of the model, and \\(\\text{Difference}(y_{\\hat{i}}, y_i)\\) quantifies the dissimilarity between the predicted (\\(y_{\\hat{i}}\\)) and actual (\\(y_i\\)) values."
   },
   {
-    "objectID": "pages/DL/Week01_1.html#transformers-in-vision",
-    "href": "pages/DL/Week01_1.html#transformers-in-vision",
-    "title": "A Historical Overview of Deep Learning",
-    "section": "Transformers in Vision",
-    "text": "Transformers in Vision\n\nAdoption in Image\nClassification The evolution of image classification models, starting with AlexNet (2012), is traced. Transformers entered image classification and object detection in 2019, marking a paradigm shift towards transformers in state-of-the-art models."
+    "objectID": "pages/DL/Week02.html#objective-function-details",
+    "href": "pages/DL/Week02.html#objective-function-details",
+    "title": "Deep Learning Foundations: From Boolean Functions to Universal Approximation",
+    "section": "Objective Function Details",
+    "text": "Objective Function Details\n\nDifference Function (Squared Error Loss)\nThe Difference Function, an integral component of the Loss Function, is expressed as:\n\\[\\text{Difference}(\\hat{y}, y) = (\\hat{y} - y)^2\\]\nThe squaring operation is implemented to ensure that both positive and negative errors contribute to the overall loss without canceling each other out."
   },
   {
-    "objectID": "pages/DL/Week01_1.html#generative-models",
-    "href": "pages/DL/Week01_1.html#generative-models",
-    "title": "A Historical Overview of Deep Learning",
-    "section": "Generative Models",
-    "text": "Generative Models\n\nOverview\nAn introduction to generative models for image synthesis, covering the evolution from variation autoencoders to GANs (Generative Adversarial Networks). Recent developments in diffusion-based models overcoming GAN drawbacks are discussed.\n\n\nDALL-E and DALL-E 2\nDALL-E’s capability to generate realistic images based on text prompts is explored. The introduction of DALL-E 2, a diffusion-based model, exceeding expectations, is highlighted with examples of generated images showcasing photorealistic results.\n\n\nExciting Times in Generative Models\nThe exploration of generative models for realistic image generation is showcased, with examples of prompts generating photorealistic images illustrating field advancements."
+    "objectID": "pages/DL/Week02.html#analogy-with-learning-trigonometry",
+    "href": "pages/DL/Week02.html#analogy-with-learning-trigonometry",
+    "title": "Deep Learning Foundations: From Boolean Functions to Universal Approximation",
+    "section": "Analogy with Learning Trigonometry",
+    "text": "Analogy with Learning Trigonometry\n\nTraining Phase\nAnalogous to mastering a chapter in a textbook, the training phase strives for zero or minimal errors on the content encapsulated within the training dataset.\n\n\nValidation Phase\nResembling the solving of exercises at the end of a chapter, the validation phase allows for revisiting and enhancing comprehension based on additional exercises.\n\n\nTest Phase (Exam)\nThe test phase simulates a real-world scenario where the model encounters new data. Unlike the training and validation phases, there is no opportunity for revisiting and refining the learned information."
   },
   {
-    "objectID": "pages/DL/Week01_1.html#introduction-1",
-    "href": "pages/DL/Week01_1.html#introduction-1",
-    "title": "A Historical Overview of Deep Learning",
+    "objectID": "pages/DL/Week02.html#introduction-1",
+    "href": "pages/DL/Week02.html#introduction-1",
+    "title": "Deep Learning Foundations: From Boolean Functions to Universal Approximation",
     "section": "Introduction",
-    "text": "Introduction\nRapid advancements in deep learning have yielded powerful models trained on large datasets, showcasing impressive results. However, there is a growing need for sanity, interpretability, fairness, and responsibility in deploying these models."
+    "text": "Introduction\nSupervised machine learning involves the development of algorithms to learn parameters for a given model. This process aims to minimize the difference between predicted and actual values using a defined objective function. In this context, we explore a simplified model with one input, connected by weight (\\(w\\)), and a bias (\\(b\\)).\n\nModel Representation\nThe model is represented as \\(f(\\mathbf{x}) = -w \\mathbf{x} + b\\), where \\(\\mathbf{x}\\) is the input vector. The task is to determine an algorithm that learns the optimal values for \\(w\\) and \\(b\\) using training data.\n\n\nTraining Objective\nThe training objective involves minimizing the average difference between predicted values (\\(f(\\mathbf{x})\\)) and actual values (\\(y\\)) over all training points. The process requires finding the optimal \\(w\\) and \\(b\\) values that achieve this minimum loss."
   },
   {
-    "objectID": "pages/DL/Week01_1.html#paradox-of-deep-learning",
-    "href": "pages/DL/Week01_1.html#paradox-of-deep-learning",
-    "title": "A Historical Overview of Deep Learning",
-    "section": "Paradox of Deep Learning",
-    "text": "Paradox of Deep Learning\nDespite the high capacity of deep learning models, they exhibit remarkable performance. Challenges include numerical instability, sharp minima, and susceptibility to adversarial examples."
+    "objectID": "pages/DL/Week02.html#training-data",
+    "href": "pages/DL/Week02.html#training-data",
+    "title": "Deep Learning Foundations: From Boolean Functions to Universal Approximation",
+    "section": "Training Data",
+    "text": "Training Data\nThe training data consists of pairs \\((\\mathbf{x}, y)\\), where \\(\\mathbf{x}\\) represents the input, and \\(y\\) corresponds to the output. The loss function is defined as the average difference between predicted and actual values across all training points."
   },
   {
-    "objectID": "pages/DL/Week01_1.html#calls-for-sanity",
-    "href": "pages/DL/Week01_1.html#calls-for-sanity",
-    "title": "A Historical Overview of Deep Learning",
-    "section": "Calls for Sanity",
-    "text": "Calls for Sanity\nEmphasis is placed on explainability and interpretability to comprehend model decisions. Advances include workshops on human interpretability, tools like the Clever Hans toolkit to identify model reliance on cues, and benchmarking on adversarial examples."
+    "objectID": "pages/DL/Week02.html#loss-function",
+    "href": "pages/DL/Week02.html#loss-function",
+    "title": "Deep Learning Foundations: From Boolean Functions to Universal Approximation",
+    "section": "Loss Function",
+    "text": "Loss Function\nThe loss function is expressed as:\n\\[\\mathcal{L}(w, b) = \\frac{1}{N} \\sum_{i=1}^{N} \\left| f(\\mathbf{x}_i) - y_i \\right|\\]\nHere, \\(N\\) is the number of training points, \\(\\mathbf{x}_i\\) is the input for the \\(i\\)-th point, and \\(y_i\\) is the corresponding actual output."
   },
   {
-    "objectID": "pages/DL/Week01_1.html#fairness-and-responsibility",
-    "href": "pages/DL/Week01_1.html#fairness-and-responsibility",
-    "title": "A Historical Overview of Deep Learning",
-    "section": "Fairness and Responsibility",
-    "text": "Fairness and Responsibility\nIncreasing awareness of biases in AI models, particularly in facial recognition and criminal risk predictions, has led to concerns about fairness. Efforts such as the AI audit challenge at Stanford focus on building non-discriminatory models."
+    "objectID": "pages/DL/Week02.html#trial-and-error-approach",
+    "href": "pages/DL/Week02.html#trial-and-error-approach",
+    "title": "Deep Learning Foundations: From Boolean Functions to Universal Approximation",
+    "section": "Trial-and-Error Approach",
+    "text": "Trial-and-Error Approach\nTo illustrate the concept, a trial-and-error approach is employed initially. Random values for \\(w\\) and \\(b\\) are chosen, and the loss is calculated. Adjustments are made iteratively to minimize the loss. This process involves systematically changing \\(w\\) and \\(b\\) values until an optimal solution is found.\n\nVisualization with Error Surface\nA 3D surface plot is used to visualize the loss in the \\(w-b\\) plane. This plot aids in identifying regions of low and high loss. However, the impracticality of exhaustively exploring this surface for large datasets is acknowledged due to computational constraints."
   },
   {
-    "objectID": "pages/DL/Week01_1.html#green-ai",
-    "href": "pages/DL/Week01_1.html#green-ai",
-    "title": "A Historical Overview of Deep Learning",
-    "section": "Green AI",
-    "text": "Green AI\nRising environmental concerns due to the high computational power and energy consumption of deep learning models have spurred calls for responsible AI, extending to the environmental impact. There is a push for more energy-efficient models."
+    "objectID": "pages/DL/Week02.html#introduction-2",
+    "href": "pages/DL/Week02.html#introduction-2",
+    "title": "Deep Learning Foundations: From Boolean Functions to Universal Approximation",
+    "section": "Introduction",
+    "text": "Introduction\nThe transcript delves into the intricacies of parameter optimization, focusing on the goal of efficiently traversing the error surface to reach the minimum error. The parameters of interest, denoted as \\(\\theta\\), are expressed as vectors, specifically encompassing \\(W\\) and \\(B\\) in the context of a toy network."
   },
   {
-    "objectID": "pages/DL/Week01_1.html#exciting-times-in-ai",
-    "href": "pages/DL/Week01_1.html#exciting-times-in-ai",
-    "title": "A Historical Overview of Deep Learning",
-    "section": "Exciting Times in AI",
-    "text": "Exciting Times in AI\nThe AI revolution is influencing scientific research, evident in DeepMind’s AlphaFold predicting protein folding. Applications in astronomy, predicting galaxy aging, and generating images for fundamental variables in experimental data are emerging. There is an emphasis on efficient deep learning for mobile devices, edge computing, and addressing constraints of power, storage, and real-time processing."
+    "objectID": "pages/DL/Week02.html#update-rule-with-conservative-movement",
+    "href": "pages/DL/Week02.html#update-rule-with-conservative-movement",
+    "title": "Deep Learning Foundations: From Boolean Functions to Universal Approximation",
+    "section": "Update Rule with Conservative Movement",
+    "text": "Update Rule with Conservative Movement\nThe update rule for altering \\(\\theta\\) entails a meticulous adjustment of the parameters. The process involves taking a measured step, determined by a scalar \\(\\eta\\), in the direction of \\(\\Delta\\theta\\), which encapsulates the parameter changes. This introduces a level of conservatism in the parameter adjustments, promoting stability in the optimization process."
+  },
+  {
+    "objectID": "pages/DL/Week02.html#taylor-series-for-function-approximation",
+    "href": "pages/DL/Week02.html#taylor-series-for-function-approximation",
+    "title": "Deep Learning Foundations: From Boolean Functions to Universal Approximation",
+    "section": "Taylor Series for Function Approximation",
+    "text": "Taylor Series for Function Approximation\n\nOverview\nThe lecture introduces the Taylor series, a powerful mathematical tool for approximating functions that exhibit continuous differentiability. This method enables the representation of a function through polynomials, allowing for varying degrees of precision in the approximation.\n\n\nLinear Approximation\nLinear approximation entails the establishment of a tangent line at a specific point on the function. This approach provides an initial approximation, and the accuracy is contingent on the chosen neighborhood size, denoted as \\(\\varepsilon\\).\n\n\nQuadratic and Higher-Order Approximations\nQuadratic and higher-order approximations extend the accuracy of the approximation by incorporating additional terms. The lecture underscores the importance of selecting a small neighborhood for these approximations to maintain efficacy."
+  },
+  {
+    "objectID": "pages/DL/Week02.html#extending-concepts-to-multiple-dimensions",
+    "href": "pages/DL/Week02.html#extending-concepts-to-multiple-dimensions",
+    "title": "Deep Learning Foundations: From Boolean Functions to Universal Approximation",
+    "section": "Extending Concepts to Multiple Dimensions",
+    "text": "Extending Concepts to Multiple Dimensions\nThe discussion expands to functions with two variables, exemplifying how linear and quadratic approximations operate in multidimensional spaces. The lecture underscores the critical role of confined neighborhoods (\\(\\varepsilon\\)) in ensuring the precision of the Taylor series method across varying dimensions."
+  },
+  {
+    "objectID": "pages/DL/Week02.html#introduction-3",
+    "href": "pages/DL/Week02.html#introduction-3",
+    "title": "Deep Learning Foundations: From Boolean Functions to Universal Approximation",
+    "section": "Introduction",
+    "text": "Introduction\nIn the realm of optimization for machine learning models, the process of iteratively updating parameters to minimize a loss function is a fundamental concept. One key technique employed in this context is gradient descent. This discussion delves into the intricate mathematical foundations underpinning gradient descent, focusing on the decision criteria for parameter updates and the optimization of the update vector."
+  },
+  {
+    "objectID": "pages/DL/Week02.html#taylor-series-expansion",
+    "href": "pages/DL/Week02.html#taylor-series-expansion",
+    "title": "Deep Learning Foundations: From Boolean Functions to Universal Approximation",
+    "section": "Taylor Series Expansion",
+    "text": "Taylor Series Expansion\n\nObjective\nThe overarching objective is to determine an optimal change in parameters, denoted as \\(\\Delta\\theta\\) (represented as \\(\\mathbf{U}\\)), to minimize the loss function \\(\\mathcal{L}(\\theta)\\).\n\n\nLinear Approximation\nUtilizing the Taylor series, the loss function at a nearby point \\(\\theta + \\Delta\\theta\\) is approximated linearly as: \\[\\mathcal{L}(\\theta + \\Delta\\theta) \\approx \\mathcal{L}(\\theta) + \\eta\\mathbf{U}^T\\nabla \\mathcal{L}(\\theta)\\] Here, \\(\\eta\\) is a small positive scalar, ensuring a negligible difference."
+  },
+  {
+    "objectID": "pages/DL/Week02.html#mathematical-aspects-of-gradient-descent",
+    "href": "pages/DL/Week02.html#mathematical-aspects-of-gradient-descent",
+    "title": "Deep Learning Foundations: From Boolean Functions to Universal Approximation",
+    "section": "Mathematical Aspects of Gradient Descent",
+    "text": "Mathematical Aspects of Gradient Descent\n\nGradient\nThe gradient \\(\\nabla \\mathcal{L}(\\theta)\\) is introduced as a vector comprising partial derivatives of the loss function with respect to its parameters. For a function \\(y = W^2 + B^2\\) with two variables, the gradient is expressed as \\([2W, 2B]\\).\n\n\nSecond Order Derivative (Hessian)\nThe concept of the Hessian matrix, representing the second-order derivative, is introduced. This matrix provides insights into the curvature of the loss function. In the case of a two-variable function, the Hessian is illustrated as a \\(2\\times2\\) matrix."
+  },
+  {
+    "objectID": "pages/DL/Week02.html#decision-criteria-for-parameter-updates",
+    "href": "pages/DL/Week02.html#decision-criteria-for-parameter-updates",
+    "title": "Deep Learning Foundations: From Boolean Functions to Universal Approximation",
+    "section": "Decision Criteria for Parameter Updates",
+    "text": "Decision Criteria for Parameter Updates\n\nLinear Approximation and Criteria\nThe focus shifts to linear approximation, with higher-order terms neglected when \\(\\eta\\) is small. The decision criteria for a favorable parameter update is based on the condition: \\[\\eta\\mathbf{U}^T\\nabla \\mathcal{L}(\\theta) &lt; 0\\]"
+  },
+  {
+    "objectID": "pages/DL/Week02.html#optimization-of-update-vector-mathbfu",
+    "href": "pages/DL/Week02.html#optimization-of-update-vector-mathbfu",
+    "title": "Deep Learning Foundations: From Boolean Functions to Universal Approximation",
+    "section": "Optimization of Update Vector \\(\\mathbf{U}\\)",
+    "text": "Optimization of Update Vector \\(\\mathbf{U}\\)\n\nAngle \\(\\beta\\) and Cosine\nOptimizing the update vector involves considering the angle \\(\\beta\\) between \\(\\mathbf{U}\\) and the gradient vector. The cosine of \\(\\beta\\), denoted as \\(\\cos(\\beta)\\), is explored, and its range is discussed.\n\n\nOptimal Update for Maximum Descent\nIn the pursuit of maximum descent, the optimal scenario arises when \\(\\cos(\\beta) = -1\\), indicating that the angle \\(\\beta\\) is 180 degrees, signifying movement in the direction opposite to the gradient vector. This aligns with the well-known rule in gradient descent: “Move in the direction opposite to the gradient.”"
+  },
+  {
+    "objectID": "pages/DL/Week02.html#overview-2",
+    "href": "pages/DL/Week02.html#overview-2",
+    "title": "Deep Learning Foundations: From Boolean Functions to Universal Approximation",
+    "section": "Overview",
+    "text": "Overview\nIn the pursuit of optimizing the parameters of a sigmoid neuron, the lecture primarily delves into the application of the gradient descent algorithm. The primary objective is to minimize the associated loss function, thereby identifying optimal values for the neuron’s weights (\\(W\\)) and bias (\\(B\\))."
+  },
+  {
+    "objectID": "pages/DL/Week02.html#key-concepts",
+    "href": "pages/DL/Week02.html#key-concepts",
+    "title": "Deep Learning Foundations: From Boolean Functions to Universal Approximation",
+    "section": "Key Concepts",
+    "text": "Key Concepts\n\n1. Gradient Descent Rule\nThe gradient descent rule serves as an iterative optimization technique employed to minimize the loss function. The core update rule is defined as follows:\n\\[\nW = W - \\eta \\cdot \\frac{\\partial \\mathcal{L}}{\\partial W}, \\quad B = B - \\eta \\cdot \\frac{\\partial \\mathcal{L}}{\\partial B}\n\\]\nThis iterative process aims to iteratively refine the parameters (\\(W\\) and \\(B\\)) based on the computed partial derivatives of the loss function.\n\n\n2. Derivative Computation\n\n2.1 Derivative of Loss with Respect to \\(W\\)\nThe partial derivative of the loss function with respect to weights (\\(\\frac{\\partial \\mathcal{L}}{\\partial W}\\)) is computed through the application of the chain rule. In the context of the sigmoid function, the derivative is obtained as follows:\n\\[\n\\frac{\\partial \\mathcal{L}}{\\partial W} = \\sum_i \\left(f(x_i) - y_i\\right) \\cdot f(x_i) \\cdot \\left(1 - f(x_i)\\right) \\cdot X_i\n\\]\nHere, \\(f(x_i)\\) represents the sigmoid function applied to the input \\(x_i\\) associated with data point \\(i\\).\n\n\n2.2 Derivative of Loss with Respect to \\(B\\)\nSimilarly, the partial derivative of the loss function with respect to bias (\\(\\frac{\\partial \\mathcal{L}}{\\partial B}\\)) is derived as:\n\\[\n\\frac{\\partial \\mathcal{L}}{\\partial B} = \\sum_i \\left(f(x_i) - y_i\\right) \\cdot f(x_i) \\cdot \\left(1 - f(x_i)\\right)\n\\]\nThe introduction of \\(X_i\\) is omitted in this case, as it pertains to the bias term.\n\n\n\n3. Algorithm Execution\nThe algorithmic execution involves several key steps:\n\nInitialization:\n\nRandom initialization of weights (\\(W\\)) and bias (\\(B\\)).\nSetting the learning rate (\\(\\eta\\)) and maximum iterations.\n\nGradient Computation:\n\nIterating over all data points, computing the partial derivatives for \\(W\\) and \\(B\\) using the derived formulas.\n\nParameter Update:\n\nApplying the gradient descent update rule to iteratively adjust the weights and bias.\n\n\n\n\n4. Loss Surface Visualization\nThe lecture introduces the concept of visualizing the loss function surface in the \\(W-B\\) plane. This visual aid illustrates the algorithm’s movement along the surface, consistently reducing the loss.\n\n\n5. Observations\nThe lecture emphasizes crucial observations:\n\nLoss Reduction:\n\nEnsuring that at each iteration, the algorithm systematically decreases the loss.\n\nHyperparameter Impact:\n\nAcknowledging the influence of the learning rate (\\(\\eta\\)) on convergence and potential overshooting.\n\nExperimentation:\n\nEncouraging experimentation with diverse initializations and learning rates for a comprehensive understanding."
+  },
+  {
+    "objectID": "pages/DL/Week02.html#introduction-4",
+    "href": "pages/DL/Week02.html#introduction-4",
+    "title": "Deep Learning Foundations: From Boolean Functions to Universal Approximation",
+    "section": "Introduction",
+    "text": "Introduction\nThe representation power of a multi-layer network, particularly employing sigmoid neurons, is the focal point of this discussion. The objective is to establish a theorem analogous to the one developed for perceptrons, specifically emphasizing the network’s capability to approximate any continuous function."
+  },
+  {
+    "objectID": "pages/DL/Week02.html#universal-approximation-theorem",
+    "href": "pages/DL/Week02.html#universal-approximation-theorem",
+    "title": "Deep Learning Foundations: From Boolean Functions to Universal Approximation",
+    "section": "Universal Approximation Theorem",
+    "text": "Universal Approximation Theorem\nThe Universal Approximation Theorem posits that a multi-layer network with a single hidden layer possesses the capacity to approximate any continuous function with precision. This approximation is achieved by manipulating the weights and biases associated with the sigmoid neurons within the hidden layer."
+  },
+  {
+    "objectID": "pages/DL/Week02.html#tower-functions-illustration",
+    "href": "pages/DL/Week02.html#tower-functions-illustration",
+    "title": "Deep Learning Foundations: From Boolean Functions to Universal Approximation",
+    "section": "Tower Functions Illustration",
+    "text": "Tower Functions Illustration\nTo illustrate the approximation process, the concept of towers of functions is introduced. This entails deconstructing an arbitrary function into a summation of tower functions, wherein each tower is represented by sigmoid neurons. The amalgamation of these towers serves to approximate the original function."
+  },
+  {
+    "objectID": "pages/DL/Week02.html#tower-construction-process",
+    "href": "pages/DL/Week02.html#tower-construction-process",
+    "title": "Deep Learning Foundations: From Boolean Functions to Universal Approximation",
+    "section": "Tower Construction Process",
+    "text": "Tower Construction Process\nThe construction of towers involves the utilization of sigmoid neurons with exceptionally high weights, approaching infinity. This strategic choice mimics step functions. By subtracting these step functions, a tower-like structure is formed. Notably, the width and position of the tower are modulated by adjusting the biases of the sigmoid neurons."
+  },
+  {
+    "objectID": "pages/DL/Week02.html#tower-maker-neural-network",
+    "href": "pages/DL/Week02.html#tower-maker-neural-network",
+    "title": "Deep Learning Foundations: From Boolean Functions to Universal Approximation",
+    "section": "Tower Maker Neural Network",
+    "text": "Tower Maker Neural Network\n\nArchitecture\nThe lecture introduces a neural network architecture termed the “Tower Maker.” This architecture comprises two sigmoid neurons characterized by high weights. The subtraction of their outputs yields a function resembling a tower.\n\n\nSigmoid Neuron Configuration\nThe sigmoid neurons within the Tower Maker are configured with exceedingly high weights, akin to infinity. This configuration transforms the sigmoid functions into step functions, pivotal in constructing tower-like shapes.\n\n\nBias Adjustment\nControl over the width and position of the tower is exercised through the manipulation of biases associated with the sigmoid neurons. Adjusting these biases ensures the customization of the tower function according to specific requirements."
+  },
+  {
+    "objectID": "pages/DL/Week02.html#linear-function-integration",
+    "href": "pages/DL/Week02.html#linear-function-integration",
+    "title": "Deep Learning Foundations: From Boolean Functions to Universal Approximation",
+    "section": "Linear Function Integration",
+    "text": "Linear Function Integration\nAn additional layer is incorporated into the Tower Maker architecture to integrate linear functions. This augmentation enhances the network’s ability to generate tower functions based on the input parameters."
+  },
+  {
+    "objectID": "pages/DL/Week02.html#network-adjustment-for-precision",
+    "href": "pages/DL/Week02.html#network-adjustment-for-precision",
+    "title": "Deep Learning Foundations: From Boolean Functions to Universal Approximation",
+    "section": "Network Adjustment for Precision",
+    "text": "Network Adjustment for Precision\nThe lecture underscores the correlation between the desired precision (represented by epsilon) and the network’s complexity. As the precision requirement increases, a more intricate network with an augmented number of neurons in the hidden layer becomes imperative. However, it is acknowledged that practical implementation may encounter challenges as the network’s size expands."
+  },
+  {
+    "objectID": "pages/DL/Week02.html#single-input-function",
+    "href": "pages/DL/Week02.html#single-input-function",
+    "title": "Deep Learning Foundations: From Boolean Functions to Universal Approximation",
+    "section": "Single Input Function",
+    "text": "Single Input Function\nConsider a function with a single input (\\(x\\)) plotted on the x-axis and corresponding output (\\(y\\)) on the y-axis. This introductory scenario involves the use of a sigmoid neuron function, denoted by:\n\\[f(x) = \\frac{1}{1 + e^{-(wx + b)}}\\]\nwhere:\n\n\\(w\\) represents the weight associated with the input.\n\\(b\\) is the bias term.\nThe sigmoid function smoothly transitions between 0 and 1."
+  },
+  {
+    "objectID": "pages/DL/Week02.html#two-input-function",
+    "href": "pages/DL/Week02.html#two-input-function",
+    "title": "Deep Learning Foundations: From Boolean Functions to Universal Approximation",
+    "section": "Two Input Function",
+    "text": "Two Input Function\nExpanding the scope to a two-input function, let’s consider an example related to oil mining, where salinity (\\(x_1\\)) and pressure (\\(x_2\\)) serve as inputs. The challenge is to establish a decision boundary separating points indicating the presence (orange) and absence (blue) of oil.\nA linear decision boundary proves inadequate, prompting the need for a more complex function."
+  },
+  {
+    "objectID": "pages/DL/Week02.html#building-a-tower-in-2d",
+    "href": "pages/DL/Week02.html#building-a-tower-in-2d",
+    "title": "Deep Learning Foundations: From Boolean Functions to Universal Approximation",
+    "section": "Building a Tower in 2D",
+    "text": "Building a Tower in 2D\nTo construct a tower-like structure, two sigmoid neurons are introduced, each handling one input (\\(x_1\\) and \\(x_2\\)). The sigmoid function takes the form:\n\\[f(x) = \\frac{1}{1 + e^{-(w_ix_i + b)}}\\]\nHere, \\(i\\) denotes the input index (1 or 2), \\(w_i\\) is the associated weight, and \\(b\\) is the bias term. Adjusting weights (\\(w_1\\) and \\(w_2\\)) results in step functions, dictating the slope of the tower in different directions.\nCombining these sigmoid neurons produces an open tower structure in one direction."
+  },
+  {
+    "objectID": "pages/DL/Week02.html#closing-the-tower",
+    "href": "pages/DL/Week02.html#closing-the-tower",
+    "title": "Deep Learning Foundations: From Boolean Functions to Universal Approximation",
+    "section": "Closing the Tower",
+    "text": "Closing the Tower\nTo enclose the tower from all sides, two additional sigmoid neurons (h13 and h14) are introduced. These neurons, with specific weight configurations, contribute to the formation of walls in different directions. Subtracting the outputs of these sigmoid neurons results in a structure with walls on all four sides but an open top."
+  },
+  {
+    "objectID": "pages/DL/Week02.html#thresholding-to-get-a-closed-tower",
+    "href": "pages/DL/Week02.html#thresholding-to-get-a-closed-tower",
+    "title": "Deep Learning Foundations: From Boolean Functions to Universal Approximation",
+    "section": "Thresholding to Get a Closed Tower",
+    "text": "Thresholding to Get a Closed Tower\nTo address the open top issue, thresholding is introduced. A sigmoid function with a switch-over point at 1 is applied to the structure’s output. This process retains only the portion of the structure above level 1, effectively closing the tower."
+  },
+  {
+    "objectID": "pages/DL/Week02.html#extending-to-higher-dimensions",
+    "href": "pages/DL/Week02.html#extending-to-higher-dimensions",
+    "title": "Deep Learning Foundations: From Boolean Functions to Universal Approximation",
+    "section": "Extending to Higher Dimensions",
+    "text": "Extending to Higher Dimensions\nGeneralizing this approach to n-dimensional inputs, the methodology remains consistent. For a single input (\\(x\\)), two neurons suffice; for two inputs (\\(x_1\\) and \\(x_2\\)), four neurons are necessary. The number of neurons in the middle layer increases with higher dimensions, extending the method to handle arbitrary functions."
+  },
+  {
+    "objectID": "pages/DL/Week02.html#universal-approximation-theorem-1",
+    "href": "pages/DL/Week02.html#universal-approximation-theorem-1",
+    "title": "Deep Learning Foundations: From Boolean Functions to Universal Approximation",
+    "section": "Universal Approximation Theorem",
+    "text": "Universal Approximation Theorem\nThis construction aligns with the Universal Approximation Theorem, asserting that a neural network, given a sufficient number of neurons, can approximate any arbitrary function to a desired precision."
+  },
+  {
+    "objectID": "pages/DL/Week02.html#implications-for-deep-learning",
+    "href": "pages/DL/Week02.html#implications-for-deep-learning",
+    "title": "Deep Learning Foundations: From Boolean Functions to Universal Approximation",
+    "section": "Implications for Deep Learning",
+    "text": "Implications for Deep Learning\nThis methodology underscores the flexibility of deep neural networks in approximating complex functions encountered in real-world applications. The ability to systematically construct networks capable of representing intricate relationships contributes to the effectiveness of deep learning models."
+  },
+  {
+    "objectID": "pages/DL/Week02.html#points-to-remember",
+    "href": "pages/DL/Week02.html#points-to-remember",
+    "title": "Deep Learning Foundations: From Boolean Functions to Universal Approximation",
+    "section": "Points to Remember",
+    "text": "Points to Remember\n\nBoolean Functions and Linear Separability:\n\nPerceptrons face challenges with non-linearly separable boolean functions.\nMulti-layer perceptrons (MLPs) extend capabilities for handling complex functions.\n\nSigmoid Neurons and Differentiability:\n\nSigmoid neurons introduce smoothness in decision-making.\nDifferentiability is crucial for optimization in neural network training.\n\nGradient Descent: Mathematical Foundation:\n\nTaylor series expansion facilitates linear approximation in gradient descent.\nDecision criteria for parameter updates involve linear approximation conditions.\n\nTower Maker and Universal Approximation Theorem:\n\nThe Universal Approximation Theorem states that a single hidden layer in a neural network can approximate any continuous function.\nTower Maker architecture showcases the construction of towers using sigmoid neurons.\n\nDeep Learning Flexibility:\n\nDeep neural networks are flexible in approximating complex functions.\nThe Tower Maker architecture demonstrates the power of neural networks in constructing intricate representations.\n\n\nThis week’s exploration laid the groundwork for understanding the core principles and capabilities of neural networks, setting the stage for further exploration into advanced topics in deep learning."
   },
   {
     "objectID": "pages/SE/Week01.html",
