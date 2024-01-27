@@ -60,6 +60,7 @@ The Softmax strategy employs a mathematical function to convert estimated action
 $$P(A_i) = \frac{e^{Q(A_i) / \tau}}{\sum_{j} e^{Q(A_j) / \tau}}$$
 
 Where:
+
 - $Q(A_i)$ represents the estimated value of action $A_i$,
 - $\tau$ is the temperature parameter.
 

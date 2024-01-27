@@ -439,7 +439,11 @@ ul.task-list li input[type="checkbox"] {
 <h3 class="anchored" data-anchor-id="softmax">Softmax</h3>
 <p>The Softmax strategy employs a mathematical function to convert estimated action values into a probability distribution. The Softmax function is defined as:</p>
 <p><span class="math display">\[P(A_i) = \frac{e^{Q(A_i) / \tau}}{\sum_{j} e^{Q(A_j) / \tau}}\]</span></p>
-<p>Where: - <span class="math inline">\(Q(A_i)\)</span> represents the estimated value of action <span class="math inline">\(A_i\)</span>, - <span class="math inline">\(\tau\)</span> is the temperature parameter.</p>
+<p>Where:</p>
+<ul>
+<li><span class="math inline">\(Q(A_i)\)</span> represents the estimated value of action <span class="math inline">\(A_i\)</span>,</li>
+<li><span class="math inline">\(\tau\)</span> is the temperature parameter.</li>
+</ul>
 <p>The temperature parameter (<span class="math inline">\(\tau\)</span>) controls the sensitivity to differences in estimated values. When <span class="math inline">\(\tau\)</span> is high, the probability distribution becomes more uniform, favoring exploration. Conversely, a low <span class="math inline">\(\tau\)</span> emphasizes exploiting the best-known action. Softmax also provides asymptotic convergence, ensuring exploration of all actions over time.</p>
 </section>
 </section>
