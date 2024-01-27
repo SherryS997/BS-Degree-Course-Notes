@@ -1,0 +1,1110 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.3.450">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>BS Degree Notes - Decoding Decision-Making: From Multi-Arm Bandits to Full Reinforcement Learning</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<link rel="stylesheet" href="https://lalten.github.io/lmweb/style/latinmodern-roman.css">
+<link rel="stylesheet" href="https://lalten.github.io/lmweb/style/latinmodern-mono.css">
+</head>
+
+<body class="nav-sidebar docked">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../pages/RL/Week01_1.html">Reinforcement Learning</a></li><li class="breadcrumb-item"><a href="../../pages/RL/Week02.html">Week 2</a></li></ol></nav>
+      <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+      </a>
+      <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation docked overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="../../">BS Degree Notes</a> 
+        <div class="sidebar-tools-main">
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Home</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="false">
+ <span class="menu-text">Deep Learning</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../pages/DL/Week01_1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 1.1</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../pages/DL/Week01_2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 1.2</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../pages/DL/Week02.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 2</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="false">
+ <span class="menu-text">AI: Search Methods</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../pages/AI/Week01.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 1</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="false">
+ <span class="menu-text">Software Testing</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../pages/ST/Week01.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 1</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="false">
+ <span class="menu-text">Software Engineering</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../pages/SE/Week01.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 1</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true">
+ <span class="menu-text">Reinforcement Learning</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../pages/RL/Week01_1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 1.1</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../pages/RL/Week01_2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 1.2</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../pages/RL/Week02.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">Week 2</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#multi-arm-bandit-problem" id="toc-multi-arm-bandit-problem" class="nav-link active" data-scroll-target="#multi-arm-bandit-problem">Multi-Arm Bandit Problem</a>
+  <ul class="collapse">
+  <li><a href="#problem-formulation" id="toc-problem-formulation" class="nav-link" data-scroll-target="#problem-formulation">Problem Formulation</a></li>
+  <li><a href="#notations-and-definitions" id="toc-notations-and-definitions" class="nav-link" data-scroll-target="#notations-and-definitions">Notations and Definitions</a></li>
+  <li><a href="#estimating-expected-reward" id="toc-estimating-expected-reward" class="nav-link" data-scroll-target="#estimating-expected-reward">Estimating Expected Reward</a></li>
+  <li><a href="#updating-estimated-reward" id="toc-updating-estimated-reward" class="nav-link" data-scroll-target="#updating-estimated-reward">Updating Estimated Reward</a></li>
+  <li><a href="#challenges-and-considerations" id="toc-challenges-and-considerations" class="nav-link" data-scroll-target="#challenges-and-considerations">Challenges and Considerations</a></li>
+  <li><a href="#multi-arm-bandit-analogy" id="toc-multi-arm-bandit-analogy" class="nav-link" data-scroll-target="#multi-arm-bandit-analogy">Multi-Arm Bandit Analogy</a></li>
+  <li><a href="#learning-rate-alpha" id="toc-learning-rate-alpha" class="nav-link" data-scroll-target="#learning-rate-alpha">Learning Rate (<span class="math inline">\(\alpha\)</span>)</a></li>
+  <li><a href="#actions-and-reward-probabilities" id="toc-actions-and-reward-probabilities" class="nav-link" data-scroll-target="#actions-and-reward-probabilities">Actions and Reward Probabilities</a></li>
+  <li><a href="#exploitation-challenge" id="toc-exploitation-challenge" class="nav-link" data-scroll-target="#exploitation-challenge">Exploitation Challenge</a></li>
+  <li><a href="#exploration-strategies" id="toc-exploration-strategies" class="nav-link" data-scroll-target="#exploration-strategies">Exploration Strategies</a>
+  <ul class="collapse">
+  <li><a href="#epsilon-greedy" id="toc-epsilon-greedy" class="nav-link" data-scroll-target="#epsilon-greedy">Epsilon-Greedy</a></li>
+  <li><a href="#softmax" id="toc-softmax" class="nav-link" data-scroll-target="#softmax">Softmax</a></li>
+  </ul></li>
+  <li><a href="#temperature-parameter-tau" id="toc-temperature-parameter-tau" class="nav-link" data-scroll-target="#temperature-parameter-tau">Temperature Parameter (<span class="math inline">\(\tau\)</span>)</a></li>
+  </ul></li>
+  <li><a href="#regret-and-pac-frameworks" id="toc-regret-and-pac-frameworks" class="nav-link" data-scroll-target="#regret-and-pac-frameworks">Regret and PAC Frameworks</a>
+  <ul class="collapse">
+  <li><a href="#regret-minimization" id="toc-regret-minimization" class="nav-link" data-scroll-target="#regret-minimization">Regret Minimization</a>
+  <ul class="collapse">
+  <li><a href="#definition-of-regret" id="toc-definition-of-regret" class="nav-link" data-scroll-target="#definition-of-regret">Definition of Regret</a></li>
+  <li><a href="#objective" id="toc-objective" class="nav-link" data-scroll-target="#objective">Objective</a></li>
+  </ul></li>
+  <li><a href="#total-rewards-maximization" id="toc-total-rewards-maximization" class="nav-link" data-scroll-target="#total-rewards-maximization">Total Rewards Maximization</a>
+  <ul class="collapse">
+  <li><a href="#learning-curve" id="toc-learning-curve" class="nav-link" data-scroll-target="#learning-curve">Learning Curve</a></li>
+  <li><a href="#quick-learning" id="toc-quick-learning" class="nav-link" data-scroll-target="#quick-learning">Quick Learning</a></li>
+  </ul></li>
+  <li><a href="#pac-framework" id="toc-pac-framework" class="nav-link" data-scroll-target="#pac-framework">PAC Framework</a>
+  <ul class="collapse">
+  <li><a href="#definition" id="toc-definition" class="nav-link" data-scroll-target="#definition">Definition</a></li>
+  <li><a href="#trade-off" id="toc-trade-off" class="nav-link" data-scroll-target="#trade-off">Trade-off</a></li>
+  </ul></li>
+  <li><a href="#median-elimination-algorithm" id="toc-median-elimination-algorithm" class="nav-link" data-scroll-target="#median-elimination-algorithm">Median Elimination Algorithm</a>
+  <ul class="collapse">
+  <li><a href="#round-based-approach" id="toc-round-based-approach" class="nav-link" data-scroll-target="#round-based-approach">Round-Based Approach</a></li>
+  <li><a href="#sample-complexity" id="toc-sample-complexity" class="nav-link" data-scroll-target="#sample-complexity">Sample Complexity</a></li>
+  </ul></li>
+  <li><a href="#upper-confidence-bound-ucb-algorithm" id="toc-upper-confidence-bound-ucb-algorithm" class="nav-link" data-scroll-target="#upper-confidence-bound-ucb-algorithm">Upper Confidence Bound (UCB) Algorithm</a>
+  <ul class="collapse">
+  <li><a href="#objective-1" id="toc-objective-1" class="nav-link" data-scroll-target="#objective-1">Objective</a></li>
+  <li><a href="#implementation" id="toc-implementation" class="nav-link" data-scroll-target="#implementation">Implementation</a></li>
+  </ul></li>
+  <li><a href="#thompson-sampling" id="toc-thompson-sampling" class="nav-link" data-scroll-target="#thompson-sampling">Thompson Sampling</a>
+  <ul class="collapse">
+  <li><a href="#bayesian-approach" id="toc-bayesian-approach" class="nav-link" data-scroll-target="#bayesian-approach">Bayesian Approach</a></li>
+  <li><a href="#regret-optimality" id="toc-regret-optimality" class="nav-link" data-scroll-target="#regret-optimality">Regret Optimality</a></li>
+  <li><a href="#advantage-over-ucb" id="toc-advantage-over-ucb" class="nav-link" data-scroll-target="#advantage-over-ucb">Advantage over UCB</a></li>
+  </ul></li>
+  </ul></li>
+  <li><a href="#upper-confidence-bound-ucb" id="toc-upper-confidence-bound-ucb" class="nav-link" data-scroll-target="#upper-confidence-bound-ucb">Upper Confidence Bound (UCB)</a>
+  <ul class="collapse">
+  <li><a href="#introduction" id="toc-introduction" class="nav-link" data-scroll-target="#introduction">Introduction</a></li>
+  <li><a href="#challenges-with-epsilon-greedy" id="toc-challenges-with-epsilon-greedy" class="nav-link" data-scroll-target="#challenges-with-epsilon-greedy">Challenges with Epsilon-Greedy</a>
+  <ul class="collapse">
+  <li><a href="#expected-value-maintenance" id="toc-expected-value-maintenance" class="nav-link" data-scroll-target="#expected-value-maintenance">Expected Value Maintenance</a></li>
+  <li><a href="#wasted-samples-and-regret-impact" id="toc-wasted-samples-and-regret-impact" class="nav-link" data-scroll-target="#wasted-samples-and-regret-impact">Wasted Samples and Regret Impact</a></li>
+  </ul></li>
+  <li><a href="#ucb-a-solution-to-exploration-challenges" id="toc-ucb-a-solution-to-exploration-challenges" class="nav-link" data-scroll-target="#ucb-a-solution-to-exploration-challenges">UCB: A Solution to Exploration Challenges</a>
+  <ul class="collapse">
+  <li><a href="#introduction-of-confidence-intervals" id="toc-introduction-of-confidence-intervals" class="nav-link" data-scroll-target="#introduction-of-confidence-intervals">Introduction of Confidence Intervals</a></li>
+  <li><a href="#action-selection-mechanism" id="toc-action-selection-mechanism" class="nav-link" data-scroll-target="#action-selection-mechanism">Action Selection Mechanism</a></li>
+  <li><a href="#regret-minimization-1" id="toc-regret-minimization-1" class="nav-link" data-scroll-target="#regret-minimization-1">Regret Minimization</a></li>
+  </ul></li>
+  <li><a href="#advantages-of-ucb" id="toc-advantages-of-ucb" class="nav-link" data-scroll-target="#advantages-of-ucb">Advantages of UCB</a>
+  <ul class="collapse">
+  <li><a href="#efficient-exploration" id="toc-efficient-exploration" class="nav-link" data-scroll-target="#efficient-exploration">Efficient Exploration</a></li>
+  <li><a href="#regret-optimality-1" id="toc-regret-optimality-1" class="nav-link" data-scroll-target="#regret-optimality-1">Regret Optimality</a></li>
+  <li><a href="#simplicity-and-practical-performance" id="toc-simplicity-and-practical-performance" class="nav-link" data-scroll-target="#simplicity-and-practical-performance">Simplicity and Practical Performance</a></li>
+  </ul></li>
+  </ul></li>
+  <li><a href="#contextual-bandits" id="toc-contextual-bandits" class="nav-link" data-scroll-target="#contextual-bandits">Contextual Bandits</a>
+  <ul class="collapse">
+  <li><a href="#introduction-1" id="toc-introduction-1" class="nav-link" data-scroll-target="#introduction-1">Introduction</a></li>
+  <li><a href="#contextual-bandits-a-conceptual-framework" id="toc-contextual-bandits-a-conceptual-framework" class="nav-link" data-scroll-target="#contextual-bandits-a-conceptual-framework">Contextual Bandits: A Conceptual Framework</a>
+  <ul class="collapse">
+  <li><a href="#traditional-bandits-vs.-contextual-bandits" id="toc-traditional-bandits-vs.-contextual-bandits" class="nav-link" data-scroll-target="#traditional-bandits-vs.-contextual-bandits">Traditional Bandits vs.&nbsp;Contextual Bandits</a></li>
+  <li><a href="#motivation-for-contextual-bandits" id="toc-motivation-for-contextual-bandits" class="nav-link" data-scroll-target="#motivation-for-contextual-bandits">Motivation for Contextual Bandits</a></li>
+  </ul></li>
+  <li><a href="#challenges-and-solutions" id="toc-challenges-and-solutions" class="nav-link" data-scroll-target="#challenges-and-solutions">Challenges and Solutions</a>
+  <ul class="collapse">
+  <li><a href="#individual-bandits-per-user-training-difficulties" id="toc-individual-bandits-per-user-training-difficulties" class="nav-link" data-scroll-target="#individual-bandits-per-user-training-difficulties">Individual Bandits per User: Training Difficulties</a></li>
+  <li><a href="#grouping-users-based-on-features" id="toc-grouping-users-based-on-features" class="nav-link" data-scroll-target="#grouping-users-based-on-features">Grouping Users Based on Features</a></li>
+  </ul></li>
+  <li><a href="#mathematical-foundations" id="toc-mathematical-foundations" class="nav-link" data-scroll-target="#mathematical-foundations">Mathematical Foundations</a>
+  <ul class="collapse">
+  <li><a href="#linear-parameterization-of-features" id="toc-linear-parameterization-of-features" class="nav-link" data-scroll-target="#linear-parameterization-of-features">Linear Parameterization of Features</a></li>
+  <li><a href="#contextual-bandits-for-actions-and-context" id="toc-contextual-bandits-for-actions-and-context" class="nav-link" data-scroll-target="#contextual-bandits-for-actions-and-context">Contextual Bandits for Actions and Context</a></li>
+  <li><a href="#linucb-algorithm" id="toc-linucb-algorithm" class="nav-link" data-scroll-target="#linucb-algorithm">LinUCB Algorithm</a></li>
+  <li><a href="#advantages-of-contextual-bandits" id="toc-advantages-of-contextual-bandits" class="nav-link" data-scroll-target="#advantages-of-contextual-bandits">Advantages of Contextual Bandits</a></li>
+  </ul></li>
+  <li><a href="#contextual-bandits-in-the-reinforcement-learning-spectrum" id="toc-contextual-bandits-in-the-reinforcement-learning-spectrum" class="nav-link" data-scroll-target="#contextual-bandits-in-the-reinforcement-learning-spectrum">Contextual Bandits in the Reinforcement Learning Spectrum</a></li>
+  </ul></li>
+  <li><a href="#full-reinforcement" id="toc-full-reinforcement" class="nav-link" data-scroll-target="#full-reinforcement">Full Reinforcement</a>
+  <ul class="collapse">
+  <li><a href="#full-reinforcement-learning-problem" id="toc-full-reinforcement-learning-problem" class="nav-link" data-scroll-target="#full-reinforcement-learning-problem">Full Reinforcement Learning Problem</a>
+  <ul class="collapse">
+  <li><a href="#sequence-of-decisions" id="toc-sequence-of-decisions" class="nav-link" data-scroll-target="#sequence-of-decisions">Sequence of Decisions</a></li>
+  <li><a href="#delayed-rewards" id="toc-delayed-rewards" class="nav-link" data-scroll-target="#delayed-rewards">Delayed Rewards</a></li>
+  <li><a href="#context-dependent-sequences" id="toc-context-dependent-sequences" class="nav-link" data-scroll-target="#context-dependent-sequences">Context-Dependent Sequences</a></li>
+  </ul></li>
+  <li><a href="#temporal-distance-and-stochasticity" id="toc-temporal-distance-and-stochasticity" class="nav-link" data-scroll-target="#temporal-distance-and-stochasticity">Temporal Distance and Stochasticity</a>
+  <ul class="collapse">
+  <li><a href="#stochastic-environment" id="toc-stochastic-environment" class="nav-link" data-scroll-target="#stochastic-environment">Stochastic Environment</a></li>
+  <li><a href="#need-for-stochastic-models" id="toc-need-for-stochastic-models" class="nav-link" data-scroll-target="#need-for-stochastic-models">Need for Stochastic Models</a></li>
+  </ul></li>
+  <li><a href="#reinforcement-learning-framework" id="toc-reinforcement-learning-framework" class="nav-link" data-scroll-target="#reinforcement-learning-framework">Reinforcement Learning Framework</a>
+  <ul class="collapse">
+  <li><a href="#agent-environment-interaction" id="toc-agent-environment-interaction" class="nav-link" data-scroll-target="#agent-environment-interaction">Agent-Environment Interaction</a></li>
+  <li><a href="#stochasticity-in-state-transitions" id="toc-stochasticity-in-state-transitions" class="nav-link" data-scroll-target="#stochasticity-in-state-transitions">Stochasticity in State Transitions</a></li>
+  <li><a href="#evaluation-and-rewards" id="toc-evaluation-and-rewards" class="nav-link" data-scroll-target="#evaluation-and-rewards">Evaluation and Rewards</a></li>
+  </ul></li>
+  <li><a href="#temporal-difference-in-rewards" id="toc-temporal-difference-in-rewards" class="nav-link" data-scroll-target="#temporal-difference-in-rewards">Temporal Difference in Rewards</a>
+  <ul class="collapse">
+  <li><a href="#example-tic-tac-toe" id="toc-example-tic-tac-toe" class="nav-link" data-scroll-target="#example-tic-tac-toe">Example: Tic-Tac-Toe</a></li>
+  </ul></li>
+  <li><a href="#full-rl-problem-solving-approach" id="toc-full-rl-problem-solving-approach" class="nav-link" data-scroll-target="#full-rl-problem-solving-approach">Full RL Problem Solving Approach</a>
+  <ul class="collapse">
+  <li><a href="#sequence-of-bandit-problems" id="toc-sequence-of-bandit-problems" class="nav-link" data-scroll-target="#sequence-of-bandit-problems">Sequence of Bandit Problems</a></li>
+  <li><a href="#dynamic-programming" id="toc-dynamic-programming" class="nav-link" data-scroll-target="#dynamic-programming">Dynamic Programming</a></li>
+  </ul></li>
+  </ul></li>
+  <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion">Conclusion</a>
+  <ul class="collapse">
+  <li><a href="#points-to-remember" id="toc-points-to-remember" class="nav-link" data-scroll-target="#points-to-remember">Points to Remember</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Decoding Decision-Making: From Multi-Arm Bandits to Full Reinforcement Learning</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+</header>
+
+<section id="multi-arm-bandit-problem" class="level1">
+<h1>Multi-Arm Bandit Problem</h1>
+<section id="problem-formulation" class="level3">
+<h3 class="anchored" data-anchor-id="problem-formulation">Problem Formulation</h3>
+<p>The MAB problem conceptualizes actions as arms, each associated with a reward drawn from a probability distribution. The quest is to identify the arm with the highest mean reward, denoted as <span class="math inline">\(\mu^*\)</span>, and consistently exploit it for maximum cumulative reward.</p>
+</section>
+<section id="notations-and-definitions" class="level3">
+<h3 class="anchored" data-anchor-id="notations-and-definitions">Notations and Definitions</h3>
+<ul>
+<li><strong><span class="math inline">\(r_{i,k}\)</span></strong>: Reward obtained when selecting the <span class="math inline">\(i\)</span>-th action for the <span class="math inline">\(k\)</span>-th time.</li>
+<li><strong><span class="math inline">\(Q(a_i)\)</span></strong>: Expected reward for selecting action <span class="math inline">\(a_i\)</span> based on historical experiences.</li>
+<li><strong><span class="math inline">\(Q(a^*)\)</span></strong>: The action maximizing the expected reward.</li>
+<li><strong><span class="math inline">\(\mu_i\)</span></strong>: True average reward for selecting action <span class="math inline">\(a_i\)</span>.</li>
+</ul>
+</section>
+<section id="estimating-expected-reward" class="level2">
+<h2 class="anchored" data-anchor-id="estimating-expected-reward">Estimating Expected Reward</h2>
+<p>The estimation of <span class="math inline">\(Q(a_i)\)</span> involves aggregating observed rewards for action <span class="math inline">\(a_i\)</span> and dividing by the number of times the action is taken. Mathematically:</p>
+<p><span class="math display">\[Q(a_i) = \frac{\sum_{k=1}^{n_i} r_{i,k}}{n_i}\]</span></p>
+<p>Here, <span class="math inline">\(n_i\)</span> represents the number of times action <span class="math inline">\(a_i\)</span> is chosen.</p>
+</section>
+<section id="updating-estimated-reward" class="level2">
+<h2 class="anchored" data-anchor-id="updating-estimated-reward">Updating Estimated Reward</h2>
+<p>The dynamic nature of the estimation process demands continuous updates. The formula for updating the estimate employs a learning rate (<span class="math inline">\(\alpha\)</span>) to adjust for new information:</p>
+<p><span class="math display">\[Q_{k+1}(a_i) = Q_k(a_i) + \alpha [r_{i,k} - Q_k(a_i)]\]</span></p>
+<p>In this formula, <span class="math inline">\(Q_{k+1}(a_i)\)</span> is the updated estimate, <span class="math inline">\(Q_k(a_i)\)</span> is the current estimate, <span class="math inline">\(r_{i,k}\)</span> is the latest reward, and <span class="math inline">\(\alpha\)</span> governs the rate of adaptation.</p>
+</section>
+<section id="challenges-and-considerations" class="level2">
+<h2 class="anchored" data-anchor-id="challenges-and-considerations">Challenges and Considerations</h2>
+<p>Navigating the exploration-exploitation dilemma requires a delicate balance. Striking the right equilibrium ensures optimal learning and maximizes cumulative rewards over time.</p>
+</section>
+<section id="multi-arm-bandit-analogy" class="level2">
+<h2 class="anchored" data-anchor-id="multi-arm-bandit-analogy">Multi-Arm Bandit Analogy</h2>
+<p>An analogy is drawn to a slot machine (one-arm bandit) with multiple levers (arms), each having distinct probabilities of payoff. The challenge mirrors that of identifying the lever (action) with the highest probability of payoff (mean reward).</p>
+</section>
+<section id="learning-rate-alpha" class="level2">
+<h2 class="anchored" data-anchor-id="learning-rate-alpha">Learning Rate (<span class="math inline">\(\alpha\)</span>)</h2>
+<p>The learning rate (<span class="math inline">\(\alpha\)</span>) serves as a crucial parameter influencing the rate at which the model adapts to new information. Choices of <span class="math inline">\(\alpha\)</span> lead to variations in the update rule, determining the emphasis on recent versus older rewards.</p>
+</section>
+<section id="actions-and-reward-probabilities" class="level2">
+<h2 class="anchored" data-anchor-id="actions-and-reward-probabilities">Actions and Reward Probabilities</h2>
+<p>Consider two actions, <span class="math inline">\(A_1\)</span> and <span class="math inline">\(A_2\)</span>, each having distinct reward probabilities. For <span class="math inline">\(A_1\)</span>, the rewards are <span class="math inline">\(+1\)</span> with a probability of <span class="math inline">\(0.8\)</span> and <span class="math inline">\(0\)</span> with a probability of <span class="math inline">\(0.2\)</span>. On the other hand, <span class="math inline">\(A_2\)</span> yields <span class="math inline">\(+1\)</span> with a probability of <span class="math inline">\(0.6\)</span> and <span class="math inline">\(0\)</span> with a probability of <span class="math inline">\(0.4\)</span>.</p>
+</section>
+<section id="exploitation-challenge" class="level2">
+<h2 class="anchored" data-anchor-id="exploitation-challenge">Exploitation Challenge</h2>
+<p>A challenge arises when choosing actions based on initial rewards. If, for instance, <span class="math inline">\(A_2\)</span> is selected first and a reward of <span class="math inline">\(+1\)</span> is obtained, there is a risk of getting stuck with <span class="math inline">\(A_2\)</span> due to its higher immediate reward probability. The same issue arises if starting with <span class="math inline">\(A_1\)</span>.</p>
+</section>
+<section id="exploration-strategies" class="level2">
+<h2 class="anchored" data-anchor-id="exploration-strategies">Exploration Strategies</h2>
+<section id="epsilon-greedy" class="level3">
+<h3 class="anchored" data-anchor-id="epsilon-greedy">Epsilon-Greedy</h3>
+<p>The Epsilon-Greedy strategy involves a balance between exploitation and exploration. It mainly consists of selecting the action with the highest estimated value most of the time (<span class="math inline">\(1 - \epsilon\)</span>), while occasionally exploring other actions with a probability of <span class="math inline">\(\epsilon\)</span>. Here, <span class="math inline">\(\epsilon\)</span> is a small value, typically <span class="math inline">\(0.1\)</span> or <span class="math inline">\(0.01\)</span>, determining the exploration rate. The strategy ensures asymptotic convergence, guaranteeing exploration of all actions in the long run.</p>
+</section>
+<section id="softmax" class="level3">
+<h3 class="anchored" data-anchor-id="softmax">Softmax</h3>
+<p>The Softmax strategy employs a mathematical function to convert estimated action values into a probability distribution. The Softmax function is defined as:</p>
+<p><span class="math display">\[P(A_i) = \frac{e^{Q(A_i) / \tau}}{\sum_{j} e^{Q(A_j) / \tau}}\]</span></p>
+<p>Where: - <span class="math inline">\(Q(A_i)\)</span> represents the estimated value of action <span class="math inline">\(A_i\)</span>, - <span class="math inline">\(\tau\)</span> is the temperature parameter.</p>
+<p>The temperature parameter (<span class="math inline">\(\tau\)</span>) controls the sensitivity to differences in estimated values. When <span class="math inline">\(\tau\)</span> is high, the probability distribution becomes more uniform, favoring exploration. Conversely, a low <span class="math inline">\(\tau\)</span> emphasizes exploiting the best-known action. Softmax also provides asymptotic convergence, ensuring exploration of all actions over time.</p>
+</section>
+</section>
+<section id="temperature-parameter-tau" class="level2">
+<h2 class="anchored" data-anchor-id="temperature-parameter-tau">Temperature Parameter (<span class="math inline">\(\tau\)</span>)</h2>
+<p>The temperature parameter, <span class="math inline">\(\tau\)</span>, is a crucial factor in the Softmax strategy. A higher <span class="math inline">\(\tau\)</span> results in a more uniform probability distribution, making exploration more likely. Conversely, a lower <span class="math inline">\(\tau\)</span> amplifies differences in estimated values, making the strategy closer to a greedy approach.</p>
+</section>
+</section>
+<section id="regret-and-pac-frameworks" class="level1">
+<h1>Regret and PAC Frameworks</h1>
+<section id="regret-minimization" class="level2">
+<h2 class="anchored" data-anchor-id="regret-minimization">Regret Minimization</h2>
+<section id="definition-of-regret" class="level3">
+<h3 class="anchored" data-anchor-id="definition-of-regret">Definition of Regret</h3>
+<p>Regret, denoted as <span class="math inline">\(R_T\)</span>, quantifies the total loss in rewards incurred due to the agent’s lack of knowledge about the optimal action during the initial <span class="math inline">\(T\)</span> time steps. It is defined as the difference between the cumulative reward obtained by an optimal strategy and the cumulative reward obtained by the learning algorithm.</p>
+<p><span class="math display">\[R_T = \sum_{t=1}^T \mu^* - \mathbb{E}\left[\sum_{t=1}^T r_{a_t}(t)\right]\]</span></p>
+<p>where:</p>
+<ul>
+<li><span class="math inline">\(\mu^*\)</span> is the expected reward of the optimal arm,</li>
+<li><span class="math inline">\(r_{a_t}(t)\)</span> is the reward obtained at time <span class="math inline">\(t\)</span> from action <span class="math inline">\(a_t\)</span>,</li>
+<li><span class="math inline">\(a_t\)</span> is the action selected by the learning algorithm at time <span class="math inline">\(t\)</span>.</li>
+</ul>
+</section>
+<section id="objective" class="level3">
+<h3 class="anchored" data-anchor-id="objective">Objective</h3>
+<p>The primary goal is to minimize regret by quickly identifying and exploiting the optimal arm. In dynamic scenarios, like news recommendation, where the optimal action may change frequently, minimizing regret becomes crucial for effective decision-making.</p>
+</section>
+</section>
+<section id="total-rewards-maximization" class="level2">
+<h2 class="anchored" data-anchor-id="total-rewards-maximization">Total Rewards Maximization</h2>
+<section id="learning-curve" class="level3">
+<h3 class="anchored" data-anchor-id="learning-curve">Learning Curve</h3>
+<p>In the context of the multi-arm bandit problem, the learning curve represents the evolution of cumulative rewards over time. The objective is to minimize the area under this curve, signifying the loss incurred before reaching optimal performance.</p>
+<p><span class="math display">\[R(t) = \sum_{\tau=1}^t \mu^* - \mathbb{E}\left[\sum_{\tau=1}^t r_{a_\tau}(\tau)\right]\]</span></p>
+<p>Here, <span class="math inline">\(R(t)\)</span> represents the cumulative regret up to time <span class="math inline">\(t\)</span>.</p>
+</section>
+<section id="quick-learning" class="level3">
+<h3 class="anchored" data-anchor-id="quick-learning">Quick Learning</h3>
+<p>In scenarios like news recommendation, algorithms must adapt swiftly to changing optimal arms. The emphasis is on achieving quick learning to minimize the region under the learning curve and accelerate the convergence to optimal performance.</p>
+</section>
+</section>
+<section id="pac-framework" class="level2">
+<h2 class="anchored" data-anchor-id="pac-framework">PAC Framework</h2>
+<section id="definition" class="level3">
+<h3 class="anchored" data-anchor-id="definition">Definition</h3>
+<p>The Probably Approximately Correct (PAC) framework aims to minimize the number of samples required to find an approximately correct solution. It introduces the concept of an <span class="math inline">\(\epsilon\)</span>-optimal arm, where an arm is considered approximately correct if its expected reward is within <span class="math inline">\(\epsilon\)</span> of the true optimal reward.</p>
+<p><span class="math display">\[|\hat{\mu}_a - \mu^*| \leq \epsilon\]</span></p>
+<p>The PAC framework also incorporates a confidence parameter <span class="math inline">\(\delta\)</span>, representing the probability that the algorithm fails to provide an <span class="math inline">\(\epsilon\)</span>-optimal arm.</p>
+</section>
+<section id="trade-off" class="level3">
+<h3 class="anchored" data-anchor-id="trade-off">Trade-off</h3>
+<p>Choosing suitable values for <span class="math inline">\(\epsilon\)</span> and <span class="math inline">\(\delta\)</span> involves a trade-off between the acceptable performance loss (<span class="math inline">\(\epsilon\)</span>) and the confidence in achieving this performance (<span class="math inline">\(\delta\)</span>). This trade-off ensures robustness in the face of uncertainty.</p>
+</section>
+</section>
+<section id="median-elimination-algorithm" class="level2">
+<h2 class="anchored" data-anchor-id="median-elimination-algorithm">Median Elimination Algorithm</h2>
+<section id="round-based-approach" class="level3">
+<h3 class="anchored" data-anchor-id="round-based-approach">Round-Based Approach</h3>
+<p>The Median Elimination Algorithm divides the learning process into rounds. In each round, the algorithm samples each arm and eliminates those with estimated rewards below the median, reducing the set of candidate arms.</p>
+</section>
+<section id="sample-complexity" class="level3">
+<h3 class="anchored" data-anchor-id="sample-complexity">Sample Complexity</h3>
+<p>The total sample complexity is determined by the sum of samples drawn in each round. The algorithm guarantees that at least one arm remains <span class="math inline">\(\epsilon\)</span>-optimal with high probability.</p>
+</section>
+</section>
+<section id="upper-confidence-bound-ucb-algorithm" class="level2">
+<h2 class="anchored" data-anchor-id="upper-confidence-bound-ucb-algorithm">Upper Confidence Bound (UCB) Algorithm</h2>
+<section id="objective-1" class="level3">
+<h3 class="anchored" data-anchor-id="objective-1">Objective</h3>
+<p>The UCB algorithm aims to achieve regret optimality by efficiently balancing exploration and exploitation. Unlike round-based approaches, UCB1 selects arms based on upper confidence bounds of estimated rewards.</p>
+</section>
+<section id="implementation" class="level3">
+<h3 class="anchored" data-anchor-id="implementation">Implementation</h3>
+<p>UCB1 is known for its simplicity and ease of implementation. It provides practical performance in scenarios like ad or news placement, where quick learning and adaptability are crucial.</p>
+</section>
+</section>
+<section id="thompson-sampling" class="level2">
+<h2 class="anchored" data-anchor-id="thompson-sampling">Thompson Sampling</h2>
+<section id="bayesian-approach" class="level3">
+<h3 class="anchored" data-anchor-id="bayesian-approach">Bayesian Approach</h3>
+<p>Thompson Sampling adopts a Bayesian approach, modeling uncertainty in the bandit problem through probability distributions. It leverages Bayesian inference to update beliefs about the reward distributions associated with each arm.</p>
+</section>
+<section id="regret-optimality" class="level3">
+<h3 class="anchored" data-anchor-id="regret-optimality">Regret Optimality</h3>
+<p>Agarwal and Goyal (2012) demonstrated that Thompson Sampling achieves regret optimality. This means that, asymptotically, the cumulative regret approaches the lower bound, signifying optimal learning performance.</p>
+</section>
+<section id="advantage-over-ucb" class="level3">
+<h3 class="anchored" data-anchor-id="advantage-over-ucb">Advantage over UCB</h3>
+<p>Thompson Sampling tends to have better constants than UCB-based methods, providing improved practical performance. It is particularly advantageous in scenarios where the underlying distribution of arms is uncertain.</p>
+</section>
+</section>
+</section>
+<section id="upper-confidence-bound-ucb" class="level1">
+<h1>Upper Confidence Bound (UCB)</h1>
+<section id="introduction" class="level2">
+<h2 class="anchored" data-anchor-id="introduction">Introduction</h2>
+<p>In the realm of reinforcement learning, the Upper Confidence Bound (UCB) algorithm stands out as an effective strategy for addressing the multi-armed bandit problem. This algorithm offers a nuanced approach to the exploration-exploitation trade-off, mitigating the drawbacks associated with simpler strategies such as Epsilon-Greedy.</p>
+</section>
+<section id="challenges-with-epsilon-greedy" class="level2">
+<h2 class="anchored" data-anchor-id="challenges-with-epsilon-greedy">Challenges with Epsilon-Greedy</h2>
+<section id="expected-value-maintenance" class="level3">
+<h3 class="anchored" data-anchor-id="expected-value-maintenance">Expected Value Maintenance</h3>
+<p>In the Epsilon-Greedy approach, the algorithm maintains the expected values (Q values) for each arm. However, a crucial limitation arises during exploration. The algorithm, guided by a fixed exploration probability (Epsilon), often expends valuable samples on suboptimal arms.</p>
+</section>
+<section id="wasted-samples-and-regret-impact" class="level3">
+<h3 class="anchored" data-anchor-id="wasted-samples-and-regret-impact">Wasted Samples and Regret Impact</h3>
+<p>The consequences of this exploration strategy are two-fold. Firstly, it results in wasted opportunities, as the algorithm neglects gathering valuable information about potentially optimal arms in favor of the suboptimal ones. Secondly, the impact on regret is substantial, particularly when selecting arms with low rewards.</p>
+</section>
+</section>
+<section id="ucb-a-solution-to-exploration-challenges" class="level2">
+<h2 class="anchored" data-anchor-id="ucb-a-solution-to-exploration-challenges">UCB: A Solution to Exploration Challenges</h2>
+<section id="introduction-of-confidence-intervals" class="level3">
+<h3 class="anchored" data-anchor-id="introduction-of-confidence-intervals">Introduction of Confidence Intervals</h3>
+<p>UCB introduces a novel approach by not only maintaining mean estimates (Q values) for each arm but also incorporating confidence intervals. These intervals signify the algorithm’s confidence that the true value of Q for a particular arm lies within a specified range. </p>
+</section>
+<section id="action-selection-mechanism" class="level3">
+<h3 class="anchored" data-anchor-id="action-selection-mechanism">Action Selection Mechanism</h3>
+<p>The key to UCB’s success lies in its action selection mechanism. Instead of relying solely on mean estimates, it considers an upper confidence bound for each arm. Mathematically, this can be expressed as:</p>
+<p><span class="math display">\[\text{UCB}_{j} = \bar{X}_{j} + \sqrt{\frac{2 \ln{N}}{n_{j}}}\]</span></p>
+<p>Here,</p>
+<ul>
+<li><span class="math inline">\(\bar{X}_{j}\)</span> is the mean estimate for arm j.</li>
+<li><span class="math inline">\(N\)</span> is the total number of actions taken.</li>
+<li><span class="math inline">\(n_{j}\)</span> represents the number of times arm j has been played.</li>
+</ul>
+<p>This formulation balances exploration and exploitation, with the exploration term gradually diminishing as the number of plays (<span class="math inline">\(n_{j}\)</span>) increases.</p>
+</section>
+<section id="regret-minimization-1" class="level3">
+<h3 class="anchored" data-anchor-id="regret-minimization-1">Regret Minimization</h3>
+<p>UCB is designed to minimize regret, a measure of the algorithm’s deviation from the optimal strategy. The regret for playing a suboptimal arm (arm J) is limited by:</p>
+<p><span class="math display">\[\text{Regret}_{J} \leq 8 \Delta_{J} \ln{N}\]</span></p>
+<p>Here,</p>
+<ul>
+<li><span class="math inline">\(\Delta_{J}\)</span> represents the difference between the optimal arm’s expected reward and that of arm J.</li>
+</ul>
+</section>
+</section>
+<section id="advantages-of-ucb" class="level2">
+<h2 class="anchored" data-anchor-id="advantages-of-ucb">Advantages of UCB</h2>
+<section id="efficient-exploration" class="level3">
+<h3 class="anchored" data-anchor-id="efficient-exploration">Efficient Exploration</h3>
+<p>UCB efficiently focuses exploration efforts on arms with the potential for high rewards, reducing the occurrence of wasted samples on suboptimal choices.</p>
+</section>
+<section id="regret-optimality-1" class="level3">
+<h3 class="anchored" data-anchor-id="regret-optimality-1">Regret Optimality</h3>
+<p>By limiting the number of plays for suboptimal arms, UCB minimizes regret and ensures that the algorithm converges towards optimal choices over time.</p>
+</section>
+<section id="simplicity-and-practical-performance" class="level3">
+<h3 class="anchored" data-anchor-id="simplicity-and-practical-performance">Simplicity and Practical Performance</h3>
+<p>UCB’s elegance lies in its simplicity of implementation, requiring no random number generation for exploration. This simplicity, coupled with its strong performance in practical scenarios, establishes UCB as a formidable algorithm for real-world applications.</p>
+</section>
+</section>
+</section>
+<section id="contextual-bandits" class="level1">
+<h1>Contextual Bandits</h1>
+<section id="introduction-1" class="level2">
+<h2 class="anchored" data-anchor-id="introduction-1">Introduction</h2>
+<p>The focus of this discussion is on addressing the challenge of customization in online platforms, specifically in the realms of ad selection and news story recommendations. The proposed solution is the utilization of contextual bandits, an extension of traditional bandit algorithms designed to incorporate user-specific attributes for a more personalized experience.</p>
+</section>
+<section id="contextual-bandits-a-conceptual-framework" class="level2">
+<h2 class="anchored" data-anchor-id="contextual-bandits-a-conceptual-framework">Contextual Bandits: A Conceptual Framework</h2>
+<section id="traditional-bandits-vs.-contextual-bandits" class="level3">
+<h3 class="anchored" data-anchor-id="traditional-bandits-vs.-contextual-bandits">Traditional Bandits vs.&nbsp;Contextual Bandits</h3>
+<p>Traditional bandit algorithms involve the selection of actions without considering any contextual information. Contextual bandits, on the other hand, extend this paradigm by introducing the consideration of features related to both users and the available actions.</p>
+</section>
+<section id="motivation-for-contextual-bandits" class="level3">
+<h3 class="anchored" data-anchor-id="motivation-for-contextual-bandits">Motivation for Contextual Bandits</h3>
+<p>The motivation behind introducing contextual bandits arises from the inherent challenge of tailoring recommendations for each user. In the context of ad selection and news story recommendations, a one-size-fits-all approach proves inadequate. Contextual bandits address this by accommodating user-specific features in the decision-making process.</p>
+</section>
+</section>
+<section id="challenges-and-solutions" class="level2">
+<h2 class="anchored" data-anchor-id="challenges-and-solutions">Challenges and Solutions</h2>
+<section id="individual-bandits-per-user-training-difficulties" class="level3">
+<h3 class="anchored" data-anchor-id="individual-bandits-per-user-training-difficulties">Individual Bandits per User: Training Difficulties</h3>
+<p>A significant challenge in implementing bandit algorithms for each user lies in the impracticality of training due to the extensive user base. Users’ infrequent visits to pages make it challenging to accumulate sufficient training data.</p>
+</section>
+<section id="grouping-users-based-on-features" class="level3">
+<h3 class="anchored" data-anchor-id="grouping-users-based-on-features">Grouping Users Based on Features</h3>
+<p>To overcome the challenges of individual bandits per user, a strategy is proposed wherein users are grouped based on a set of parameters such as age, gender, and browsing behavior. This grouping allows for a more efficient handling of user features.</p>
+</section>
+</section>
+<section id="mathematical-foundations" class="level2">
+<h2 class="anchored" data-anchor-id="mathematical-foundations">Mathematical Foundations</h2>
+<section id="linear-parameterization-of-features" class="level3">
+<h3 class="anchored" data-anchor-id="linear-parameterization-of-features">Linear Parameterization of Features</h3>
+<p>In contextual bandits, the mean (<span class="math inline">\(\mu\)</span>) and variance (<span class="math inline">\(\sigma\)</span>) of the reward distribution associated with each action are influenced by user features. This relationship is commonly expressed through linear parameterization. Mathematically, this can be represented as:</p>
+<p><span class="math display">\[\mu_{a,s} = \mathbf{w}_a \cdot \mathbf{X}_s\]</span></p>
+<p>Where:</p>
+<ul>
+<li><span class="math inline">\(\mu_{a,s}\)</span> is the mean for action <span class="math inline">\(a\)</span> and user features <span class="math inline">\(s\)</span>.</li>
+<li><span class="math inline">\(\mathbf{w}_a\)</span> is the weight vector associated with action <span class="math inline">\(a\)</span>.</li>
+<li><span class="math inline">\(\mathbf{X}_s\)</span> represents the feature vector for user <span class="math inline">\(s\)</span>.</li>
+</ul>
+</section>
+<section id="contextual-bandits-for-actions-and-context" class="level3">
+<h3 class="anchored" data-anchor-id="contextual-bandits-for-actions-and-context">Contextual Bandits for Actions and Context</h3>
+<p>Extending the mathematical framework, features are considered not only for users but also for actions. This enhancement allows for a more nuanced approach, facilitating the reuse of information when actions change. The revised equation becomes:</p>
+<p><span class="math display">\[Q_{s,a} = \mathbf{w}_a \cdot \mathbf{X}_s\]</span></p>
+<p>Here, <span class="math inline">\(Q_{s,a}\)</span> represents the expected reward for action <span class="math inline">\(a\)</span> given user features <span class="math inline">\(s\)</span>.</p>
+</section>
+<section id="linucb-algorithm" class="level3">
+<h3 class="anchored" data-anchor-id="linucb-algorithm">LinUCB Algorithm</h3>
+<p>The LinUCB algorithm is introduced as a practical implementation of contextual bandits. It leverages ridge regression to predict expected rewards, creating a linear function of features. The ridge regression is expressed as:</p>
+<p><span class="math display">\[\hat{\mathbf{w}}_a = \arg \min_{\mathbf{w}_a} \sum_{t=1}^{T} (r_{t,a} - \mathbf{w}_a \cdot \mathbf{X}_{t,s})^2 + \lambda \|\mathbf{w}_a\|_2^2\]</span></p>
+<p>Where:</p>
+<ul>
+<li><span class="math inline">\(\hat{\mathbf{w}}_a\)</span> is the estimated weight vector for action <span class="math inline">\(a\)</span>.</li>
+<li><span class="math inline">\(r_{t,a}\)</span> is the observed reward for action <span class="math inline">\(a\)</span> at time <span class="math inline">\(t\)</span>.</li>
+<li><span class="math inline">\(\mathbf{X}_{t,s}\)</span> is the feature vector for user <span class="math inline">\(s\)</span> at time <span class="math inline">\(t\)</span>.</li>
+<li><span class="math inline">\(\lambda\)</span> is the regularization parameter.</li>
+</ul>
+</section>
+<section id="advantages-of-contextual-bandits" class="level3">
+<h3 class="anchored" data-anchor-id="advantages-of-contextual-bandits">Advantages of Contextual Bandits</h3>
+<p>Contextual bandits offer several advantages: - Personalized recommendations based on user features. - Efficient learning and adaptation even when the set of actions changes.</p>
+</section>
+</section>
+<section id="contextual-bandits-in-the-reinforcement-learning-spectrum" class="level2">
+<h2 class="anchored" data-anchor-id="contextual-bandits-in-the-reinforcement-learning-spectrum">Contextual Bandits in the Reinforcement Learning Spectrum</h2>
+<p>Contextual bandits serve as a crucial link between traditional bandits and full reinforcement learning. While considering both actions and context, they do not explicitly address the sequence, providing a bridge in the learning spectrum.</p>
+</section>
+</section>
+<section id="full-reinforcement" class="level1">
+<h1>Full Reinforcement</h1>
+<section id="full-reinforcement-learning-problem" class="level2">
+<h2 class="anchored" data-anchor-id="full-reinforcement-learning-problem">Full Reinforcement Learning Problem</h2>
+<section id="sequence-of-decisions" class="level3">
+<h3 class="anchored" data-anchor-id="sequence-of-decisions">Sequence of Decisions</h3>
+<p>In contrast, the full RL problem involves a sequence of actions. Each decision influences subsequent situations, introducing complexity compared to the immediate and contextual Bandit problems.</p>
+</section>
+<section id="delayed-rewards" class="level3">
+<h3 class="anchored" data-anchor-id="delayed-rewards">Delayed Rewards</h3>
+<p>Unlike Bandits, the RL problem deals with delayed rewards. The consequences of an action may not manifest immediately but rather at the conclusion of a sequence of decisions. This delayed reward challenges the agent to associate distant outcomes with earlier choices.</p>
+</section>
+<section id="context-dependent-sequences" class="level3">
+<h3 class="anchored" data-anchor-id="context-dependent-sequences">Context-Dependent Sequences</h3>
+<p>Moreover, the sequence of problems in RL is context-dependent. The nature of the second problem depends on the action taken in the first, introducing an interdependence that was absent in contextual Bandit scenarios.</p>
+</section>
+</section>
+<section id="temporal-distance-and-stochasticity" class="level2">
+<h2 class="anchored" data-anchor-id="temporal-distance-and-stochasticity">Temporal Distance and Stochasticity</h2>
+<p>The concept of temporal distance in RL, where rewards are tied to actions in the past, is essential. Additionally, RL often involves stochastic environments, where variations or noise influence the outcomes.</p>
+<section id="stochastic-environment" class="level3">
+<h3 class="anchored" data-anchor-id="stochastic-environment">Stochastic Environment</h3>
+<p>Stochasticity in the environment implies uncertainty in the response to an action. For instance, in a maze-running scenario, the mouse’s decision might lead to different outcomes due to environmental variability.</p>
+</section>
+<section id="need-for-stochastic-models" class="level3">
+<h3 class="anchored" data-anchor-id="need-for-stochastic-models">Need for Stochastic Models</h3>
+<p>Stochastic environments are employed in RL due to the impracticality of measuring or modeling every aspect precisely. For example, even in a simple coin toss, various unobservable factors contribute to the randomness observed.</p>
+</section>
+</section>
+<section id="reinforcement-learning-framework" class="level2">
+<h2 class="anchored" data-anchor-id="reinforcement-learning-framework">Reinforcement Learning Framework</h2>
+<section id="agent-environment-interaction" class="level3">
+<h3 class="anchored" data-anchor-id="agent-environment-interaction">Agent-Environment Interaction</h3>
+<p>The RL framework comprises an agent and an environment in close interaction. The agent senses the environment’s state, takes actions, and receives rewards, leading to a continuous loop of interaction.</p>
+</section>
+<section id="stochasticity-in-state-transitions" class="level3">
+<h3 class="anchored" data-anchor-id="stochasticity-in-state-transitions">Stochasticity in State Transitions</h3>
+<p>Both state transitions and action selections can be stochastic, adding an element of unpredictability to the RL setting. The agent’s decisions are based on incomplete information and uncertain outcomes.</p>
+</section>
+<section id="evaluation-and-rewards" class="level3">
+<h3 class="anchored" data-anchor-id="evaluation-and-rewards">Evaluation and Rewards</h3>
+<p>Central to RL is the concept of evaluation through rewards. The agent’s goal is to learn a mapping from states to actions, aiming to maximize cumulative rewards over the long term.</p>
+</section>
+</section>
+<section id="temporal-difference-in-rewards" class="level2">
+<h2 class="anchored" data-anchor-id="temporal-difference-in-rewards">Temporal Difference in Rewards</h2>
+<p>The delayed and noisy nature of rewards in RL introduces the need for temporal difference considerations. Agents must predict future rewards based on their current actions, leading to a more intricate decision-making process.</p>
+<section id="example-tic-tac-toe" class="level3">
+<h3 class="anchored" data-anchor-id="example-tic-tac-toe">Example: Tic-Tac-Toe</h3>
+<p>Illustrating this, in a game of tic-tac-toe, a move made early in the game may strongly influence the eventual outcome, even though the final reward is received only at the game’s end.</p>
+</section>
+</section>
+<section id="full-rl-problem-solving-approach" class="level2">
+<h2 class="anchored" data-anchor-id="full-rl-problem-solving-approach">Full RL Problem Solving Approach</h2>
+<section id="sequence-of-bandit-problems" class="level3">
+<h3 class="anchored" data-anchor-id="sequence-of-bandit-problems">Sequence of Bandit Problems</h3>
+<p>To solve the full RL problem, a sequence of Bandit problems is employed. Each state-action pair corresponds to a Bandit problem that the agent must solve, and the solutions cascade to form a comprehensive strategy.</p>
+</section>
+<section id="dynamic-programming" class="level3">
+<h3 class="anchored" data-anchor-id="dynamic-programming">Dynamic Programming</h3>
+<p>The solution approach aligns with dynamic programming, where the value derived from solving one Bandit problem serves as the reward for the preceding state-action pair. This recursive approach forms the basis for tackling the complexity of RL scenarios.</p>
+</section>
+</section>
+</section>
+<section id="conclusion" class="level1">
+<h1>Conclusion</h1>
+<p>The exploration of the Multi-Arm Bandit Problem has provided valuable insights into the challenges of balancing exploration and exploitation in decision-making. We delved into various strategies such as Epsilon-Greedy, Softmax, and contextual bandits, each addressing specific aspects of the problem. The exploration-exploitation dilemma is a fundamental concern, and understanding strategies like Thompson Sampling, Upper Confidence Bound (UCB), and LinUCB has enriched our comprehension of efficient decision-making in dynamic environments.</p>
+<p>The concept of regret in the Regret Minimization framework highlighted the importance of quick learning and adaptive strategies in scenarios like news recommendation. The Probably Approximately Correct (PAC) framework introduced the notion of an <span class="math inline">\(\epsilon\)</span>-optimal arm, emphasizing the trade-off between performance loss and confidence.</p>
+<p>Moving to the Full Reinforcement Learning (RL) spectrum, we recognized the increased complexity introduced by sequences of decisions, delayed rewards, and stochastic environments. The temporal difference in rewards became crucial in understanding the agent’s decision-making process and the need for predicting future outcomes.</p>
+<p>In solving the Full RL Problem, the approach of treating it as a sequence of Bandit problems provided a structured methodology. Dynamic programming emerged as a powerful tool, allowing the agent to recursively learn and optimize its decision-making strategy over time.</p>
+<section id="points-to-remember" class="level2">
+<h2 class="anchored" data-anchor-id="points-to-remember">Points to Remember</h2>
+<ol type="1">
+<li><p><strong>Multi-Arm Bandit Problem</strong>: Conceptualizes actions as arms, each with a reward drawn from a probability distribution. Balancing exploration and exploitation is crucial for optimal learning and cumulative rewards.</p></li>
+<li><p><strong>Exploration Strategies</strong>:</p>
+<ul>
+<li><strong>Epsilon-Greedy</strong>: Balances exploitation and exploration, with a small exploration rate (<span class="math inline">\(\epsilon\)</span>).</li>
+<li><strong>Softmax</strong>: Converts estimated action values into a probability distribution, controlled by a temperature parameter (<span class="math inline">\(\tau\)</span>).</li>
+</ul></li>
+<li><p><strong>Regret Minimization Framework</strong>: Aims to minimize regret (<span class="math inline">\(R_T\)</span>), the total loss in rewards compared to an optimal strategy. Efficient learning and quick adaptation are essential in dynamic scenarios.</p></li>
+<li><p><strong>PAC Framework</strong>: Probably Approximately Correct framework introduces the concept of an <span class="math inline">\(\epsilon\)</span>-optimal arm, balancing performance loss (<span class="math inline">\(\epsilon\)</span>) and confidence (<span class="math inline">\(\delta\)</span>).</p></li>
+<li><p><strong>UCB Algorithm</strong>: Upper Confidence Bound algorithm efficiently balances exploration and exploitation by considering confidence intervals. It minimizes regret and converges towards optimal choices over time.</p></li>
+<li><p><strong>Contextual Bandits</strong>: Extend traditional bandits by incorporating user-specific features for personalized recommendations. The LinUCB algorithm is a practical implementation.</p></li>
+<li><p><strong>Full Reinforcement Learning (RL)</strong>: Involves sequences of decisions, delayed rewards, and stochastic environments. Temporal difference considerations become crucial in predicting future rewards.</p></li>
+<li><p><strong>Dynamic Programming in RL</strong>: Solving the Full RL Problem involves treating it as a sequence of Bandit problems, employing dynamic programming for recursive learning and optimization.</p></li>
+</ol>
+<p>The journey through Multi-Arm Bandit Problems, regret minimization, contextual bandits, and Full RL has equipped us with a comprehensive understanding of decision-making in uncertain and dynamic environments. These concepts provide a solid foundation for addressing challenges in various real-world scenarios.</p>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const disableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'prefetch';
+    }
+  }
+  const enableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'stylesheet';
+    }
+  }
+  const manageTransitions = (selector, allowTransitions) => {
+    const els = window.document.querySelectorAll(selector);
+    for (let i=0; i < els.length; i++) {
+      const el = els[i];
+      if (allowTransitions) {
+        el.classList.remove('notransition');
+      } else {
+        el.classList.add('notransition');
+      }
+    }
+  }
+  const toggleColorMode = (alternate) => {
+    // Switch the stylesheets
+    const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+    manageTransitions('#quarto-margin-sidebar .nav-link', false);
+    if (alternate) {
+      enableStylesheet(alternateStylesheets);
+      for (const sheetNode of alternateStylesheets) {
+        if (sheetNode.id === "quarto-bootstrap") {
+          toggleBodyColorMode(sheetNode);
+        }
+      }
+    } else {
+      disableStylesheet(alternateStylesheets);
+      toggleBodyColorPrimary();
+    }
+    manageTransitions('#quarto-margin-sidebar .nav-link', true);
+    // Switch the toggles
+    const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+    for (let i=0; i < toggles.length; i++) {
+      const toggle = toggles[i];
+      if (toggle) {
+        if (alternate) {
+          toggle.classList.add("alternate");     
+        } else {
+          toggle.classList.remove("alternate");
+        }
+      }
+    }
+    // Hack to workaround the fact that safari doesn't
+    // properly recolor the scrollbar when toggling (#1455)
+    if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+      manageTransitions("body", false);
+      window.scrollTo(0, 1);
+      setTimeout(() => {
+        window.scrollTo(0, 0);
+        manageTransitions("body", true);
+      }, 40);  
+    }
+  }
+  const isFileUrl = () => { 
+    return window.location.protocol === 'file:';
+  }
+  const hasAlternateSentinel = () => {  
+    let styleSentinel = getColorSchemeSentinel();
+    if (styleSentinel !== null) {
+      return styleSentinel === "alternate";
+    } else {
+      return false;
+    }
+  }
+  const setStyleSentinel = (alternate) => {
+    const value = alternate ? "alternate" : "default";
+    if (!isFileUrl()) {
+      window.localStorage.setItem("quarto-color-scheme", value);
+    } else {
+      localAlternateSentinel = value;
+    }
+  }
+  const getColorSchemeSentinel = () => {
+    if (!isFileUrl()) {
+      const storageValue = window.localStorage.getItem("quarto-color-scheme");
+      return storageValue != null ? storageValue : localAlternateSentinel;
+    } else {
+      return localAlternateSentinel;
+    }
+  }
+  let localAlternateSentinel = 'default';
+  // Dark / light mode switch
+  window.quartoToggleColorScheme = () => {
+    // Read the current dark / light value 
+    let toAlternate = !hasAlternateSentinel();
+    toggleColorMode(toAlternate);
+    setStyleSentinel(toAlternate);
+  };
+  // Ensure there is a toggle, if there isn't float one in the top right
+  if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+    const a = window.document.createElement('a');
+    a.classList.add('top-right');
+    a.classList.add('quarto-color-scheme-toggle');
+    a.href = "";
+    a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+    const i = window.document.createElement("i");
+    i.classList.add('bi');
+    a.appendChild(i);
+    window.document.body.appendChild(a);
+  }
+  // Switch to dark mode if need be
+  if (hasAlternateSentinel()) {
+    toggleColorMode(true);
+  } else {
+    toggleColorMode(false);
+  }
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>

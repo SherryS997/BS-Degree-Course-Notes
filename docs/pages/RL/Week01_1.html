@@ -1,0 +1,943 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.3.450">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>BS Degree Notes - Reinforcement Learning Unveiled: From Theory to Triumph in AI Applications</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+
+<link rel="stylesheet" href="https://lalten.github.io/lmweb/style/latinmodern-roman.css">
+<link rel="stylesheet" href="https://lalten.github.io/lmweb/style/latinmodern-mono.css">
+</head>
+
+<body class="nav-sidebar docked">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../pages/RL/Week01_1.html">Reinforcement Learning</a></li><li class="breadcrumb-item"><a href="../../pages/RL/Week01_1.html">Week 1.1</a></li></ol></nav>
+      <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+      </a>
+      <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation docked overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="../../">BS Degree Notes</a> 
+        <div class="sidebar-tools-main">
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Home</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="false">
+ <span class="menu-text">Deep Learning</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../pages/DL/Week01_1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 1.1</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../pages/DL/Week01_2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 1.2</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../pages/DL/Week02.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 2</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="false">
+ <span class="menu-text">AI: Search Methods</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../pages/AI/Week01.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 1</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="false">
+ <span class="menu-text">Software Testing</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../pages/ST/Week01.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 1</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="false">
+ <span class="menu-text">Software Engineering</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../pages/SE/Week01.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 1</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true">
+ <span class="menu-text">Reinforcement Learning</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../pages/RL/Week01_1.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">Week 1.1</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../pages/RL/Week01_2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 1.2</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../pages/RL/Week02.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 2</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#reinforcement-learning-comprehensive-overview" id="toc-reinforcement-learning-comprehensive-overview" class="nav-link active" data-scroll-target="#reinforcement-learning-comprehensive-overview">Reinforcement Learning: Comprehensive Overview</a>
+  <ul class="collapse">
+  <li><a href="#introduction-to-machine-learning" id="toc-introduction-to-machine-learning" class="nav-link" data-scroll-target="#introduction-to-machine-learning">Introduction to Machine Learning</a></li>
+  <li><a href="#fundamentals-of-reinforcement-learning" id="toc-fundamentals-of-reinforcement-learning" class="nav-link" data-scroll-target="#fundamentals-of-reinforcement-learning">Fundamentals of Reinforcement Learning</a>
+  <ul class="collapse">
+  <li><a href="#distinctive-characteristics-of-rl" id="toc-distinctive-characteristics-of-rl" class="nav-link" data-scroll-target="#distinctive-characteristics-of-rl">Distinctive Characteristics of RL</a></li>
+  </ul></li>
+  <li><a href="#contrast-with-supervised-learning" id="toc-contrast-with-supervised-learning" class="nav-link" data-scroll-target="#contrast-with-supervised-learning">Contrast with Supervised Learning</a>
+  <ul class="collapse">
+  <li><a href="#supervised-learning" id="toc-supervised-learning" class="nav-link" data-scroll-target="#supervised-learning">Supervised Learning</a></li>
+  <li><a href="#reinforcement-learning" id="toc-reinforcement-learning" class="nav-link" data-scroll-target="#reinforcement-learning">Reinforcement Learning</a></li>
+  </ul></li>
+  <li><a href="#learning-paradigm-in-reinforcement-learning" id="toc-learning-paradigm-in-reinforcement-learning" class="nav-link" data-scroll-target="#learning-paradigm-in-reinforcement-learning">Learning Paradigm in Reinforcement Learning</a>
+  <ul class="collapse">
+  <li><a href="#behavioral-psychology-underpinnings" id="toc-behavioral-psychology-underpinnings" class="nav-link" data-scroll-target="#behavioral-psychology-underpinnings">Behavioral Psychology Underpinnings</a></li>
+  </ul></li>
+  <li><a href="#applications-of-reinforcement-learning" id="toc-applications-of-reinforcement-learning" class="nav-link" data-scroll-target="#applications-of-reinforcement-learning">Applications of Reinforcement Learning</a>
+  <ul class="collapse">
+  <li><a href="#autonomous-systems" id="toc-autonomous-systems" class="nav-link" data-scroll-target="#autonomous-systems">Autonomous Systems</a></li>
+  <li><a href="#humanoid-control" id="toc-humanoid-control" class="nav-link" data-scroll-target="#humanoid-control">Humanoid Control</a></li>
+  <li><a href="#complex-environments" id="toc-complex-environments" class="nav-link" data-scroll-target="#complex-environments">Complex Environments</a></li>
+  <li><a href="#uncertain-environments" id="toc-uncertain-environments" class="nav-link" data-scroll-target="#uncertain-environments">Uncertain Environments</a></li>
+  <li><a href="#cognitively-motivated-learning" id="toc-cognitively-motivated-learning" class="nav-link" data-scroll-target="#cognitively-motivated-learning">Cognitively Motivated Learning</a></li>
+  <li><a href="#customization-and-personalization" id="toc-customization-and-personalization" class="nav-link" data-scroll-target="#customization-and-personalization">Customization and Personalization</a></li>
+  </ul></li>
+  <li><a href="#success-stories-and-advancements" id="toc-success-stories-and-advancements" class="nav-link" data-scroll-target="#success-stories-and-advancements">Success Stories and Advancements</a></li>
+  </ul></li>
+  <li><a href="#reinforcement-learning-in-personalization-and-customization" id="toc-reinforcement-learning-in-personalization-and-customization" class="nav-link" data-scroll-target="#reinforcement-learning-in-personalization-and-customization">Reinforcement Learning in Personalization and Customization</a>
+  <ul class="collapse">
+  <li><a href="#customization-on-yahoo-news" id="toc-customization-on-yahoo-news" class="nav-link" data-scroll-target="#customization-on-yahoo-news">Customization on Yahoo News</a>
+  <ul class="collapse">
+  <li><a href="#overview" id="toc-overview" class="nav-link" data-scroll-target="#overview">Overview</a></li>
+  <li><a href="#manual-labeling-challenges" id="toc-manual-labeling-challenges" class="nav-link" data-scroll-target="#manual-labeling-challenges">Manual Labeling Challenges</a></li>
+  <li><a href="#reinforcement-learning-solution" id="toc-reinforcement-learning-solution" class="nav-link" data-scroll-target="#reinforcement-learning-solution">Reinforcement Learning Solution</a></li>
+  </ul></li>
+  <li><a href="#ad-selection-in-computational-advertising" id="toc-ad-selection-in-computational-advertising" class="nav-link" data-scroll-target="#ad-selection-in-computational-advertising">Ad Selection in Computational Advertising</a>
+  <ul class="collapse">
+  <li><a href="#computational-advertising" id="toc-computational-advertising" class="nav-link" data-scroll-target="#computational-advertising">Computational Advertising</a></li>
+  <li><a href="#reinforcement-learning-for-ad-selection" id="toc-reinforcement-learning-for-ad-selection" class="nav-link" data-scroll-target="#reinforcement-learning-for-ad-selection">Reinforcement Learning for Ad Selection</a></li>
+  </ul></li>
+  <li><a href="#reinforcement-learning-in-recommendation-engines" id="toc-reinforcement-learning-in-recommendation-engines" class="nav-link" data-scroll-target="#reinforcement-learning-in-recommendation-engines">Reinforcement Learning in Recommendation Engines</a>
+  <ul class="collapse">
+  <li><a href="#traditional-recommendation-systems" id="toc-traditional-recommendation-systems" class="nav-link" data-scroll-target="#traditional-recommendation-systems">Traditional Recommendation Systems</a></li>
+  <li><a href="#trial-and-error-with-reinforcement-learning" id="toc-trial-and-error-with-reinforcement-learning" class="nav-link" data-scroll-target="#trial-and-error-with-reinforcement-learning">Trial-and-Error with Reinforcement Learning</a></li>
+  </ul></li>
+  <li><a href="#content-and-comment-recommendations" id="toc-content-and-comment-recommendations" class="nav-link" data-scroll-target="#content-and-comment-recommendations">Content and Comment Recommendations</a>
+  <ul class="collapse">
+  <li><a href="#content-recommendation-systems" id="toc-content-recommendation-systems" class="nav-link" data-scroll-target="#content-recommendation-systems">Content Recommendation Systems</a></li>
+  <li><a href="#comment-recommendations" id="toc-comment-recommendations" class="nav-link" data-scroll-target="#comment-recommendations">Comment Recommendations</a></li>
+  </ul></li>
+  </ul></li>
+  <li><a href="#advancements-in-reinforcement-learning" id="toc-advancements-in-reinforcement-learning" class="nav-link" data-scroll-target="#advancements-in-reinforcement-learning">Advancements in Reinforcement Learning</a>
+  <ul class="collapse">
+  <li><a href="#beyond-human-knowledge" id="toc-beyond-human-knowledge" class="nav-link" data-scroll-target="#beyond-human-knowledge">Beyond Human Knowledge</a>
+  <ul class="collapse">
+  <li><a href="#reinforcement-learning-autonomy" id="toc-reinforcement-learning-autonomy" class="nav-link" data-scroll-target="#reinforcement-learning-autonomy">Reinforcement Learning Autonomy</a></li>
+  <li><a href="#breakthrough-in-2014" id="toc-breakthrough-in-2014" class="nav-link" data-scroll-target="#breakthrough-in-2014">Breakthrough in 2014</a></li>
+  </ul></li>
+  <li><a href="#success-in-strategic-games" id="toc-success-in-strategic-games" class="nav-link" data-scroll-target="#success-in-strategic-games">Success in Strategic Games</a>
+  <ul class="collapse">
+  <li><a href="#alphagos-triumph" id="toc-alphagos-triumph" class="nav-link" data-scroll-target="#alphagos-triumph">AlphaGo’s Triumph</a></li>
+  <li><a href="#alphazeros-versatility" id="toc-alphazeros-versatility" class="nav-link" data-scroll-target="#alphazeros-versatility">AlphaZero’s Versatility</a></li>
+  </ul></li>
+  <li><a href="#applications-beyond-gaming" id="toc-applications-beyond-gaming" class="nav-link" data-scroll-target="#applications-beyond-gaming">Applications Beyond Gaming</a>
+  <ul class="collapse">
+  <li><a href="#rl-in-real-world-challenges" id="toc-rl-in-real-world-challenges" class="nav-link" data-scroll-target="#rl-in-real-world-challenges">RL in Real-world Challenges</a></li>
+  <li><a href="#impact-on-combinatorial-optimization" id="toc-impact-on-combinatorial-optimization" class="nav-link" data-scroll-target="#impact-on-combinatorial-optimization">Impact on Combinatorial Optimization</a></li>
+  </ul></li>
+  </ul></li>
+  <li><a href="#rls-impact-on-problem-solving" id="toc-rls-impact-on-problem-solving" class="nav-link" data-scroll-target="#rls-impact-on-problem-solving">RL’s Impact on Problem Solving</a>
+  <ul class="collapse">
+  <li><a href="#control-systems-and-optimization" id="toc-control-systems-and-optimization" class="nav-link" data-scroll-target="#control-systems-and-optimization">Control Systems and Optimization</a>
+  <ul class="collapse">
+  <li><a href="#rl-in-control-systems" id="toc-rl-in-control-systems" class="nav-link" data-scroll-target="#rl-in-control-systems">RL in Control Systems</a></li>
+  <li><a href="#airport-conveyor-belt-control" id="toc-airport-conveyor-belt-control" class="nav-link" data-scroll-target="#airport-conveyor-belt-control">Airport Conveyor Belt Control</a></li>
+  </ul></li>
+  <li><a href="#connections-with-neuroscience-and-psychology" id="toc-connections-with-neuroscience-and-psychology" class="nav-link" data-scroll-target="#connections-with-neuroscience-and-psychology">Connections with Neuroscience and Psychology</a>
+  <ul class="collapse">
+  <li><a href="#roots-in-behavioral-psychology" id="toc-roots-in-behavioral-psychology" class="nav-link" data-scroll-target="#roots-in-behavioral-psychology">Roots in Behavioral Psychology</a></li>
+  <li><a href="#interaction-with-neuroscience" id="toc-interaction-with-neuroscience" class="nav-link" data-scroll-target="#interaction-with-neuroscience">Interaction with Neuroscience</a></li>
+  </ul></li>
+  <li><a href="#real-world-applications-of-rl" id="toc-real-world-applications-of-rl" class="nav-link" data-scroll-target="#real-world-applications-of-rl">Real-world Applications of RL</a>
+  <ul class="collapse">
+  <li><a href="#intelligent-tutoring-systems" id="toc-intelligent-tutoring-systems" class="nav-link" data-scroll-target="#intelligent-tutoring-systems">Intelligent Tutoring Systems</a></li>
+  <li><a href="#rl-in-dialogue-systems-and-chatbots" id="toc-rl-in-dialogue-systems-and-chatbots" class="nav-link" data-scroll-target="#rl-in-dialogue-systems-and-chatbots">RL in Dialogue Systems and Chatbots</a></li>
+  </ul></li>
+  </ul></li>
+  <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion">Conclusion</a>
+  <ul class="collapse">
+  <li><a href="#points-to-remember" id="toc-points-to-remember" class="nav-link" data-scroll-target="#points-to-remember">Points to Remember</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Reinforcement Learning Unveiled: From Theory to Triumph in AI Applications</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+</header>
+
+<section id="reinforcement-learning-comprehensive-overview" class="level1">
+<h1>Reinforcement Learning: Comprehensive Overview</h1>
+<section id="introduction-to-machine-learning" class="level2">
+<h2 class="anchored" data-anchor-id="introduction-to-machine-learning">Introduction to Machine Learning</h2>
+<p>In the realm of machine learning, a predominant paradigm involves the acquisition of knowledge through the learning of functions that map input features to specific outputs. This conventional approach, known as supervised learning, relies on the provision of explicit instructions and training data to inform the learning process. Typically, the model generalizes from examples presented during training to make predictions or classifications on new, unseen data.</p>
+</section>
+<section id="fundamentals-of-reinforcement-learning" class="level2">
+<h2 class="anchored" data-anchor-id="fundamentals-of-reinforcement-learning">Fundamentals of Reinforcement Learning</h2>
+<p>Reinforcement Learning (RL), in contrast, embodies a distinctive methodology centered around trial-and-error learning within systems characterized by intricate and challenging control dynamics. In the RL framework, explicit instructions are eschewed in favor of evaluating actions based on received rewards and punishments. This departure from prescriptive learning mirrors the way humans acquire skills such as cycling or walking, where trial and error, coupled with feedback, plays a pivotal role.</p>
+<section id="distinctive-characteristics-of-rl" class="level3">
+<h3 class="anchored" data-anchor-id="distinctive-characteristics-of-rl">Distinctive Characteristics of RL</h3>
+<ul>
+<li><p><strong>Trial and Error Approach:</strong> RL stands out for its reliance on the iterative process of trying various actions and subsequently gauging their efficacy through outcomes, be they positive rewards or negative consequences.</p></li>
+<li><p><strong>Absence of Upfront Instructions:</strong> Unlike supervised learning, RL lacks a predetermined set of instructions provided beforehand. Instead, the system learns by interacting with its environment and adapting based on the consequences of its actions.</p></li>
+</ul>
+</section>
+</section>
+<section id="contrast-with-supervised-learning" class="level2">
+<h2 class="anchored" data-anchor-id="contrast-with-supervised-learning">Contrast with Supervised Learning</h2>
+<p>The dichotomy between supervised learning and reinforcement learning can be elucidated by highlighting their fundamental disparities.</p>
+<section id="supervised-learning" class="level3">
+<h3 class="anchored" data-anchor-id="supervised-learning">Supervised Learning</h3>
+<p>In supervised learning, explicit instructions are imparted to the learning algorithm upfront. The model is trained to generate outputs conforming to the provided instructions, drawing insights from labeled examples.</p>
+</section>
+<section id="reinforcement-learning" class="level3">
+<h3 class="anchored" data-anchor-id="reinforcement-learning">Reinforcement Learning</h3>
+<p>Conversely, reinforcement learning refrains from pre-established instructions. Actions are executed, and their merit is subsequently appraised through a feedback mechanism of rewards and punishments. The system learns to optimize its behavior based on experiential outcomes.</p>
+</section>
+</section>
+<section id="learning-paradigm-in-reinforcement-learning" class="level2">
+<h2 class="anchored" data-anchor-id="learning-paradigm-in-reinforcement-learning">Learning Paradigm in Reinforcement Learning</h2>
+<p>Drawing parallels with how humans assimilate complex skills, reinforcement learning aligns with a trial-and-error learning paradigm. Consider the analogy of a child learning to cycle; the process involves attempts, feedback (both positive and negative), and an eventual refinement of the skill through repeated iterations.</p>
+<section id="behavioral-psychology-underpinnings" class="level3">
+<h3 class="anchored" data-anchor-id="behavioral-psychology-underpinnings">Behavioral Psychology Underpinnings</h3>
+<p>Rooted in behavioral psychology, reinforcement learning embodies a system’s interaction with its environment, learning through the consequences of its actions. The classical example of Pavlov’s dog underscores the association of stimuli (bell ringing) with rewards (food), illustrating the behavioral conditioning inherent in RL principles.</p>
+</section>
+</section>
+<section id="applications-of-reinforcement-learning" class="level2">
+<h2 class="anchored" data-anchor-id="applications-of-reinforcement-learning">Applications of Reinforcement Learning</h2>
+<p>Reinforcement learning finds diverse applications across various domains, demonstrating its efficacy in addressing complex challenges.</p>
+<section id="autonomous-systems" class="level3">
+<h3 class="anchored" data-anchor-id="autonomous-systems">Autonomous Systems</h3>
+<p>In domains like autonomous driving or the control of a helicopter, reinforcement learning proves invaluable. The ability to navigate complex environments and execute intricate maneuvers showcases the adaptability of RL in real-world scenarios.</p>
+</section>
+<section id="humanoid-control" class="level3">
+<h3 class="anchored" data-anchor-id="humanoid-control">Humanoid Control</h3>
+<p>Humanoid robots, engaged in tasks like playing soccer, leverage reinforcement learning to master complex movements, such as kicking a ball. This exemplifies the adaptability of RL in training systems to perform dynamic and agile actions.</p>
+</section>
+<section id="complex-environments" class="level3">
+<h3 class="anchored" data-anchor-id="complex-environments">Complex Environments</h3>
+<p>Reinforcement learning excels in navigating cluttered and intricate spaces, offering a more pragmatic approach compared to conventional control methods. Examples range from traffic scenarios to multi-roomed buildings.</p>
+</section>
+<section id="uncertain-environments" class="level3">
+<h3 class="anchored" data-anchor-id="uncertain-environments">Uncertain Environments</h3>
+<p>When dealing with stochastic systems and probabilistic outcomes, reinforcement learning provides an effective solution. Its application in scenarios where precise control or prediction is challenging due to inherent uncertainty demonstrates its versatility.</p>
+</section>
+<section id="cognitively-motivated-learning" class="level3">
+<h3 class="anchored" data-anchor-id="cognitively-motivated-learning">Cognitively Motivated Learning</h3>
+<p>In tasks requiring human-like cognitive processes, such as determining where to focus attention in a complex environment, reinforcement learning, under the banner of cognitively motivated learning, strives to emulate human decision-making patterns.</p>
+</section>
+<section id="customization-and-personalization" class="level3">
+<h3 class="anchored" data-anchor-id="customization-and-personalization">Customization and Personalization</h3>
+<p>Reinforcement learning extends its utility to customization and personalization tasks in various industries. Tailoring products or services based on individual preferences underscores its role in enhancing user experiences.</p>
+</section>
+</section>
+<section id="success-stories-and-advancements" class="level2">
+<h2 class="anchored" data-anchor-id="success-stories-and-advancements">Success Stories and Advancements</h2>
+<p>The success of reinforcement learning in solving real-world challenges is underscored by notable achievements such as ChatGPT. Ongoing advancements contribute to its widespread adoption, positioning RL as a potent tool for addressing intricate problems characterized by complexity, uncertainty, and human-like decision-making processes.</p>
+</section>
+</section>
+<section id="reinforcement-learning-in-personalization-and-customization" class="level1">
+<h1>Reinforcement Learning in Personalization and Customization</h1>
+<section id="customization-on-yahoo-news" class="level2">
+<h2 class="anchored" data-anchor-id="customization-on-yahoo-news">Customization on Yahoo News</h2>
+<section id="overview" class="level3">
+<h3 class="anchored" data-anchor-id="overview">Overview</h3>
+<p>Customization involves tailoring content based on user preferences and behavior. Yahoo News, for example, uses a personalized approach in presenting news stories to users.</p>
+</section>
+<section id="manual-labeling-challenges" class="level3">
+<h3 class="anchored" data-anchor-id="manual-labeling-challenges">Manual Labeling Challenges</h3>
+<p>Due to the dynamic nature of news content and the vast user diversity, manual labeling of stories for individual users is impractical. It is neither feasible nor efficient to have editors constantly labeling stories for the millions of users who access the platform.</p>
+</section>
+<section id="reinforcement-learning-solution" class="level3">
+<h3 class="anchored" data-anchor-id="reinforcement-learning-solution">Reinforcement Learning Solution</h3>
+<p>To address this challenge, a reinforcement learning (RL) approach is employed. Instead of explicit human instructions, RL utilizes user interactions as feedback for personalization. Editors initially select a set of stories, and based on user actions (clicks or dislikes), the system learns to predict the likelihood of future user interactions. This way, the content presented to users becomes customized based on their preferences.</p>
+</section>
+</section>
+<section id="ad-selection-in-computational-advertising" class="level2">
+<h2 class="anchored" data-anchor-id="ad-selection-in-computational-advertising">Ad Selection in Computational Advertising</h2>
+<section id="computational-advertising" class="level3">
+<h3 class="anchored" data-anchor-id="computational-advertising">Computational Advertising</h3>
+<p>Computational advertising is a field that involves the automated selection of relevant advertisements for users, a process crucial for revenue generation, especially for platforms like Google.</p>
+</section>
+<section id="reinforcement-learning-for-ad-selection" class="level3">
+<h3 class="anchored" data-anchor-id="reinforcement-learning-for-ad-selection">Reinforcement Learning for Ad Selection</h3>
+<p>In ad selection, RL plays a key role in determining the probability of a user clicking on a specific ad. User interactions, such as clicks or dislikes, serve as positive or negative feedback. This information refines the ad selection process, making it more effective in presenting ads that are likely to engage users.</p>
+</section>
+</section>
+<section id="reinforcement-learning-in-recommendation-engines" class="level2">
+<h2 class="anchored" data-anchor-id="reinforcement-learning-in-recommendation-engines">Reinforcement Learning in Recommendation Engines</h2>
+<section id="traditional-recommendation-systems" class="level3">
+<h3 class="anchored" data-anchor-id="traditional-recommendation-systems">Traditional Recommendation Systems</h3>
+<p>Recommendation engines traditionally employ collaborative filtering, using methods like “customers who bought this item also bought.” However, this approach has limitations in handling a vast pool of potential recommendations.</p>
+</section>
+<section id="trial-and-error-with-reinforcement-learning" class="level3">
+<h3 class="anchored" data-anchor-id="trial-and-error-with-reinforcement-learning">Trial-and-Error with Reinforcement Learning</h3>
+<p>Reinforcement learning complements traditional methods by introducing a trial-and-error layer. Users’ feedback becomes a crucial component in refining recommendations over time. This allows the system to adapt to changing user preferences dynamically.</p>
+</section>
+</section>
+<section id="content-and-comment-recommendations" class="level2">
+<h2 class="anchored" data-anchor-id="content-and-comment-recommendations">Content and Comment Recommendations</h2>
+<section id="content-recommendation-systems" class="level3">
+<h3 class="anchored" data-anchor-id="content-recommendation-systems">Content Recommendation Systems</h3>
+<p>RL is applied in content recommendation systems, leveraging user history and feedback to personalize suggestions. This goes beyond conventional methods and incorporates a trial-and-error approach for more accurate predictions.</p>
+</section>
+<section id="comment-recommendations" class="level3">
+<h3 class="anchored" data-anchor-id="comment-recommendations">Comment Recommendations</h3>
+<p>In websites where comments are displayed, RL is utilized to reorder and present comments based on user feedback. Thumbs up or thumbs down serve as positive and negative rewards, influencing the order in which comments are displayed.</p>
+</section>
+</section>
+</section>
+<section id="advancements-in-reinforcement-learning" class="level1">
+<h1>Advancements in Reinforcement Learning</h1>
+<section id="beyond-human-knowledge" class="level2">
+<h2 class="anchored" data-anchor-id="beyond-human-knowledge">Beyond Human Knowledge</h2>
+<section id="reinforcement-learning-autonomy" class="level3">
+<h3 class="anchored" data-anchor-id="reinforcement-learning-autonomy">Reinforcement Learning Autonomy</h3>
+<p>Reinforcement learning demonstrates the capability to operate autonomously without explicit human guidance. Early successes, such as Jerry Tesauro’s TD Gammon in backgammon, exemplify RL’s ability to learn from self-play.</p>
+</section>
+<section id="breakthrough-in-2014" class="level3">
+<h3 class="anchored" data-anchor-id="breakthrough-in-2014">Breakthrough in 2014</h3>
+<p>A pivotal moment occurred in 2014 when DeepMind trained RL agents to play Atari games. This breakthrough showcased RL’s capacity to learn complex tasks with minimal input, opening the door to widespread replication of success stories.</p>
+</section>
+</section>
+<section id="success-in-strategic-games" class="level2">
+<h2 class="anchored" data-anchor-id="success-in-strategic-games">Success in Strategic Games</h2>
+<section id="alphagos-triumph" class="level3">
+<h3 class="anchored" data-anchor-id="alphagos-triumph">AlphaGo’s Triumph</h3>
+<p>DeepMind’s AlphaGo achieved unprecedented success by defeating the world champion in the ancient game of Go. RL’s application extended to mastering various strategy games, surpassing human-level performance in competitive scenarios.</p>
+</section>
+<section id="alphazeros-versatility" class="level3">
+<h3 class="anchored" data-anchor-id="alphazeros-versatility">AlphaZero’s Versatility</h3>
+<p>AlphaZero demonstrated versatility by playing and excelling in multiple games, including chess and shogi. Its success showcased RL’s ability to adapt and learn across diverse gaming environments without relying on human data.</p>
+</section>
+</section>
+<section id="applications-beyond-gaming" class="level2">
+<h2 class="anchored" data-anchor-id="applications-beyond-gaming">Applications Beyond Gaming</h2>
+<section id="rl-in-real-world-challenges" class="level3">
+<h3 class="anchored" data-anchor-id="rl-in-real-world-challenges">RL in Real-world Challenges</h3>
+<p>Reinforcement learning’s success in gaming applications paved the way for its adoption in solving real-world challenges. RL is utilized in optimizing data center cooling, controlling chemical plants, and even improving airport conveyor belt efficiency.</p>
+</section>
+<section id="impact-on-combinatorial-optimization" class="level3">
+<h3 class="anchored" data-anchor-id="impact-on-combinatorial-optimization">Impact on Combinatorial Optimization</h3>
+<p>RL has played a crucial role in solving combinatorial optimization problems, including scheduling, routing, and call admission control. Its application extends to diverse domains, showcasing its versatility in addressing complex decision-making challenges.</p>
+</section>
+</section>
+</section>
+<section id="rls-impact-on-problem-solving" class="level1">
+<h1>RL’s Impact on Problem Solving</h1>
+<section id="control-systems-and-optimization" class="level2">
+<h2 class="anchored" data-anchor-id="control-systems-and-optimization">Control Systems and Optimization</h2>
+<section id="rl-in-control-systems" class="level3">
+<h3 class="anchored" data-anchor-id="rl-in-control-systems">RL in Control Systems</h3>
+<p>Reinforcement learning finds applications in controlling various systems, from chemical plants to robot navigation. Its adaptability and ability to optimize processes make it a valuable tool in real-world applications.</p>
+</section>
+<section id="airport-conveyor-belt-control" class="level3">
+<h3 class="anchored" data-anchor-id="airport-conveyor-belt-control">Airport Conveyor Belt Control</h3>
+<p>An interesting application involves using RL to control conveyor belts in airports. RL-based controllers aim to ensure timely package delivery, showcasing the technology’s potential in optimizing large-scale logistical systems.</p>
+</section>
+</section>
+<section id="connections-with-neuroscience-and-psychology" class="level2">
+<h2 class="anchored" data-anchor-id="connections-with-neuroscience-and-psychology">Connections with Neuroscience and Psychology</h2>
+<section id="roots-in-behavioral-psychology" class="level3">
+<h3 class="anchored" data-anchor-id="roots-in-behavioral-psychology">Roots in Behavioral Psychology</h3>
+<p>Reinforcement learning has roots in behavioral psychology, emphasizing learning through trial and error. This connection provides insights into human decision-making processes.</p>
+</section>
+<section id="interaction-with-neuroscience" class="level3">
+<h3 class="anchored" data-anchor-id="interaction-with-neuroscience">Interaction with Neuroscience</h3>
+<p>RL’s impact extends to neuroscience, with some suggesting that RL could be a primary mechanism of learning in certain brain regions. This reciprocal interaction enriches both the computational neuroscience and RL fields.</p>
+</section>
+</section>
+<section id="real-world-applications-of-rl" class="level2">
+<h2 class="anchored" data-anchor-id="real-world-applications-of-rl">Real-world Applications of RL</h2>
+<section id="intelligent-tutoring-systems" class="level3">
+<h3 class="anchored" data-anchor-id="intelligent-tutoring-systems">Intelligent Tutoring Systems</h3>
+<p>Reinforcement learning contributes to the development of intelligent tutoring systems, providing personalized and adaptive learning experiences for students based on their interactions.</p>
+</section>
+<section id="rl-in-dialogue-systems-and-chatbots" class="level3">
+<h3 class="anchored" data-anchor-id="rl-in-dialogue-systems-and-chatbots">RL in Dialogue Systems and Chatbots</h3>
+<p>Dialogue systems and chatbots benefit from RL, enabling more natural and context-aware interactions. RL’s trial-and-error learning enhances these systems’ ability to understand and respond to user inputs effectively.</p>
+</section>
+</section>
+</section>
+<section id="conclusion" class="level1">
+<h1>Conclusion</h1>
+<p>In conclusion, the comprehensive overview of Reinforcement Learning (RL) provides a deep understanding of its fundamental principles, distinctive characteristics, and diverse applications. The contrast with supervised learning highlights RL’s unique trial-and-error approach, where actions are evaluated based on received rewards and punishments rather than explicit instructions. The behavioral psychology underpinnings and parallels with human learning further enrich the conceptual framework of RL.</p>
+<p>The success stories and advancements underscore RL’s impact on solving real-world challenges, ranging from autonomous systems and humanoid control to customization and personalization tasks. Notable achievements like ChatGPT and breakthroughs in strategic games demonstrate RL’s versatility and autonomous learning capabilities. The connections with neuroscience and psychology highlight the interdisciplinary nature of RL, contributing to advancements in fields beyond traditional machine learning.</p>
+<section id="points-to-remember" class="level2">
+<h2 class="anchored" data-anchor-id="points-to-remember">Points to Remember</h2>
+<ol type="1">
+<li><strong>Fundamentals of RL</strong>
+<ul>
+<li>RL is distinguished by a trial-and-error approach, relying on received rewards and punishments for learning.</li>
+<li>Unlike supervised learning, RL lacks upfront instructions, allowing the system to adapt through interaction with its environment. </li>
+</ul></li>
+<li><strong>Contrast with Supervised Learning</strong>
+<ul>
+<li>Supervised learning relies on explicit instructions provided beforehand, while RL refrains from pre-established instructions.</li>
+</ul></li>
+<li><strong>Learning Paradigm in RL</strong>
+<ul>
+<li>RL aligns with a trial-and-error learning paradigm, resembling how humans acquire complex skills through attempts, feedback, and refinement.</li>
+</ul></li>
+<li><strong>Applications of RL</strong>
+<ul>
+<li>RL excels in domains such as autonomous systems, humanoid control, complex environments, uncertain environments, cognitively motivated learning, and customization/personalization tasks.</li>
+<li>Success stories like ChatGPT showcase RL’s efficacy in addressing intricate problems.</li>
+</ul></li>
+<li><strong>RL in Personalization and Customization</strong>
+<ul>
+<li>RL is applied in platforms like Yahoo News for content customization, utilizing user interactions as feedback.</li>
+<li>Computational advertising and recommendation engines leverage RL for ad selection and dynamic adaptation to changing user preferences.</li>
+</ul></li>
+<li><strong>Advancements in RL</strong>
+<ul>
+<li>RL demonstrates autonomy in learning, as seen in early successes like TD Gammon and breakthroughs in gaming applications.</li>
+<li>Success in strategic games, such as AlphaGo and AlphaZero, highlights RL’s adaptability and versatility.</li>
+</ul></li>
+<li><strong>RL’s Impact on Problem Solving</strong>
+<ul>
+<li>RL contributes to solving real-world challenges in areas like data center cooling, chemical plant control, and combinatorial optimization.</li>
+<li>Applications in control systems, airport conveyor belt control, and connections with neuroscience showcase RL’s broad impact.</li>
+</ul></li>
+<li><strong>Real-world Applications of RL</strong>
+<ul>
+<li>RL is instrumental in intelligent tutoring systems, providing personalized learning experiences.</li>
+<li>Dialogue systems and chatbots benefit from RL, enhancing natural and context-aware interactions.</li>
+</ul></li>
+</ol>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const disableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'prefetch';
+    }
+  }
+  const enableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'stylesheet';
+    }
+  }
+  const manageTransitions = (selector, allowTransitions) => {
+    const els = window.document.querySelectorAll(selector);
+    for (let i=0; i < els.length; i++) {
+      const el = els[i];
+      if (allowTransitions) {
+        el.classList.remove('notransition');
+      } else {
+        el.classList.add('notransition');
+      }
+    }
+  }
+  const toggleColorMode = (alternate) => {
+    // Switch the stylesheets
+    const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+    manageTransitions('#quarto-margin-sidebar .nav-link', false);
+    if (alternate) {
+      enableStylesheet(alternateStylesheets);
+      for (const sheetNode of alternateStylesheets) {
+        if (sheetNode.id === "quarto-bootstrap") {
+          toggleBodyColorMode(sheetNode);
+        }
+      }
+    } else {
+      disableStylesheet(alternateStylesheets);
+      toggleBodyColorPrimary();
+    }
+    manageTransitions('#quarto-margin-sidebar .nav-link', true);
+    // Switch the toggles
+    const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+    for (let i=0; i < toggles.length; i++) {
+      const toggle = toggles[i];
+      if (toggle) {
+        if (alternate) {
+          toggle.classList.add("alternate");     
+        } else {
+          toggle.classList.remove("alternate");
+        }
+      }
+    }
+    // Hack to workaround the fact that safari doesn't
+    // properly recolor the scrollbar when toggling (#1455)
+    if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+      manageTransitions("body", false);
+      window.scrollTo(0, 1);
+      setTimeout(() => {
+        window.scrollTo(0, 0);
+        manageTransitions("body", true);
+      }, 40);  
+    }
+  }
+  const isFileUrl = () => { 
+    return window.location.protocol === 'file:';
+  }
+  const hasAlternateSentinel = () => {  
+    let styleSentinel = getColorSchemeSentinel();
+    if (styleSentinel !== null) {
+      return styleSentinel === "alternate";
+    } else {
+      return false;
+    }
+  }
+  const setStyleSentinel = (alternate) => {
+    const value = alternate ? "alternate" : "default";
+    if (!isFileUrl()) {
+      window.localStorage.setItem("quarto-color-scheme", value);
+    } else {
+      localAlternateSentinel = value;
+    }
+  }
+  const getColorSchemeSentinel = () => {
+    if (!isFileUrl()) {
+      const storageValue = window.localStorage.getItem("quarto-color-scheme");
+      return storageValue != null ? storageValue : localAlternateSentinel;
+    } else {
+      return localAlternateSentinel;
+    }
+  }
+  let localAlternateSentinel = 'default';
+  // Dark / light mode switch
+  window.quartoToggleColorScheme = () => {
+    // Read the current dark / light value 
+    let toAlternate = !hasAlternateSentinel();
+    toggleColorMode(toAlternate);
+    setStyleSentinel(toAlternate);
+  };
+  // Ensure there is a toggle, if there isn't float one in the top right
+  if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+    const a = window.document.createElement('a');
+    a.classList.add('top-right');
+    a.classList.add('quarto-color-scheme-toggle');
+    a.href = "";
+    a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+    const i = window.document.createElement("i");
+    i.classList.add('bi');
+    a.appendChild(i);
+    window.document.body.appendChild(a);
+  }
+  // Switch to dark mode if need be
+  if (hasAlternateSentinel()) {
+    toggleColorMode(true);
+  } else {
+    toggleColorMode(false);
+  }
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>
