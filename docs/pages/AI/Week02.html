@@ -1,0 +1,1469 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.3.450">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>BS Degree Notes - State Space Search and Search Algorithms Overview</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<link rel="stylesheet" href="https://lalten.github.io/lmweb/style/latinmodern-roman.css">
+<link rel="stylesheet" href="https://lalten.github.io/lmweb/style/latinmodern-mono.css">
+</head>
+
+<body class="nav-sidebar docked">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../pages/AI/Week01.html">AI: Search Methods</a></li><li class="breadcrumb-item"><a href="../../pages/AI/Week02.html">Week 2</a></li></ol></nav>
+      <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+      </a>
+      <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation docked overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="../../">BS Degree Notes</a> 
+        <div class="sidebar-tools-main">
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Home</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="false">
+ <span class="menu-text">Deep Learning</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../pages/DL/Week01_1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 1.1</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../pages/DL/Week01_2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 1.2</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../pages/DL/Week02.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 2</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
+ <span class="menu-text">AI: Search Methods</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../pages/AI/Week01.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 1</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../pages/AI/Week02.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">Week 2</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="false">
+ <span class="menu-text">Software Testing</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../pages/ST/Week01.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 1</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="false">
+ <span class="menu-text">Software Engineering</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../pages/SE/Week01.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 1</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="false">
+ <span class="menu-text">Reinforcement Learning</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../pages/RL/Week01_1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 1.1</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../pages/RL/Week01_2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 1.2</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../pages/RL/Week02.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 2</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#state-space-search" id="toc-state-space-search" class="nav-link active" data-scroll-target="#state-space-search">State Space Search</a>
+  <ul class="collapse">
+  <li><a href="#introduction-to-search-algorithms-in-ai" id="toc-introduction-to-search-algorithms-in-ai" class="nav-link" data-scroll-target="#introduction-to-search-algorithms-in-ai">Introduction to Search Algorithms in AI</a></li>
+  <li><a href="#state-space-search-1" id="toc-state-space-search-1" class="nav-link" data-scroll-target="#state-space-search-1">State Space Search</a>
+  <ul class="collapse">
+  <li><a href="#overview" id="toc-overview" class="nav-link" data-scroll-target="#overview">Overview</a></li>
+  <li><a href="#components-of-state-space-search" id="toc-components-of-state-space-search" class="nav-link" data-scroll-target="#components-of-state-space-search">Components of State Space Search</a></li>
+  </ul></li>
+  <li><a href="#search-algorithms-overview" id="toc-search-algorithms-overview" class="nav-link" data-scroll-target="#search-algorithms-overview">Search Algorithms Overview</a></li>
+  <li><a href="#sample-problems-in-state-space-search" id="toc-sample-problems-in-state-space-search" class="nav-link" data-scroll-target="#sample-problems-in-state-space-search">Sample Problems in State Space Search</a>
+  <ul class="collapse">
+  <li><a href="#water-jug-problem" id="toc-water-jug-problem" class="nav-link" data-scroll-target="#water-jug-problem">1. Water Jug Problem</a></li>
+  <li><a href="#eight-puzzle" id="toc-eight-puzzle" class="nav-link" data-scroll-target="#eight-puzzle">2. Eight Puzzle</a></li>
+  <li><a href="#missionaries-and-cannibals-problem" id="toc-missionaries-and-cannibals-problem" class="nav-link" data-scroll-target="#missionaries-and-cannibals-problem">3. Missionaries and Cannibals Problem</a></li>
+  <li><a href="#n-queens-problem" id="toc-n-queens-problem" class="nav-link" data-scroll-target="#n-queens-problem">4. N-Queens Problem</a></li>
+  <li><a href="#traveling-salesman-problem" id="toc-traveling-salesman-problem" class="nav-link" data-scroll-target="#traveling-salesman-problem">5. Traveling Salesman Problem</a></li>
+  <li><a href="#maze-solving" id="toc-maze-solving" class="nav-link" data-scroll-target="#maze-solving">6. Maze Solving</a></li>
+  </ul></li>
+  </ul></li>
+  <li><a href="#general-search-algorithms" id="toc-general-search-algorithms" class="nav-link" data-scroll-target="#general-search-algorithms">General Search Algorithms</a>
+  <ul class="collapse">
+  <li><a href="#introduction" id="toc-introduction" class="nav-link" data-scroll-target="#introduction">Introduction</a></li>
+  <li><a href="#components-of-state-space-search-1" id="toc-components-of-state-space-search-1" class="nav-link" data-scroll-target="#components-of-state-space-search-1">Components of State Space Search</a>
+  <ul class="collapse">
+  <li><a href="#start-and-goal-states" id="toc-start-and-goal-states" class="nav-link" data-scroll-target="#start-and-goal-states">1. Start and Goal States</a></li>
+  <li><a href="#move-gen-function" id="toc-move-gen-function" class="nav-link" data-scroll-target="#move-gen-function">2. Move Gen Function</a></li>
+  <li><a href="#goal-test-function" id="toc-goal-test-function" class="nav-link" data-scroll-target="#goal-test-function">3. Goal Test Function</a></li>
+  <li><a href="#scene-nodes-and-candidate-nodes" id="toc-scene-nodes-and-candidate-nodes" class="nav-link" data-scroll-target="#scene-nodes-and-candidate-nodes">4. Scene Nodes and Candidate Nodes</a></li>
+  </ul></li>
+  <li><a href="#simple-search-1-algorithm" id="toc-simple-search-1-algorithm" class="nav-link" data-scroll-target="#simple-search-1-algorithm">Simple Search 1 Algorithm</a>
+  <ul class="collapse">
+  <li><a href="#algorithm-overview" id="toc-algorithm-overview" class="nav-link" data-scroll-target="#algorithm-overview">Algorithm Overview</a></li>
+  <li><a href="#node-selection" id="toc-node-selection" class="nav-link" data-scroll-target="#node-selection">Node Selection</a></li>
+  <li><a href="#graph-exploration" id="toc-graph-exploration" class="nav-link" data-scroll-target="#graph-exploration">Graph Exploration</a></li>
+  <li><a href="#pseudocode-for-simple-search-1" id="toc-pseudocode-for-simple-search-1" class="nav-link" data-scroll-target="#pseudocode-for-simple-search-1">Pseudocode for Simple Search 1</a></li>
+  <li><a href="#challenge---cyclic-exploration" id="toc-challenge---cyclic-exploration" class="nav-link" data-scroll-target="#challenge---cyclic-exploration">Challenge - Cyclic Exploration</a></li>
+  </ul></li>
+  <li><a href="#simple-search-2-algorithm" id="toc-simple-search-2-algorithm" class="nav-link" data-scroll-target="#simple-search-2-algorithm">Simple Search 2 Algorithm</a>
+  <ul class="collapse">
+  <li><a href="#introduction-of-closed-set" id="toc-introduction-of-closed-set" class="nav-link" data-scroll-target="#introduction-of-closed-set">Introduction of Closed Set</a></li>
+  <li><a href="#purpose-of-closed-set" id="toc-purpose-of-closed-set" class="nav-link" data-scroll-target="#purpose-of-closed-set">Purpose of Closed Set</a></li>
+  <li><a href="#algorithm-adjustment" id="toc-algorithm-adjustment" class="nav-link" data-scroll-target="#algorithm-adjustment">Algorithm Adjustment</a></li>
+  <li><a href="#pseudocode-for-simple-search-2" id="toc-pseudocode-for-simple-search-2" class="nav-link" data-scroll-target="#pseudocode-for-simple-search-2">Pseudocode for Simple Search 2</a></li>
+  <li><a href="#improved-exploration" id="toc-improved-exploration" class="nav-link" data-scroll-target="#improved-exploration">Improved Exploration</a></li>
+  </ul></li>
+  <li><a href="#consideration---solution-path" id="toc-consideration---solution-path" class="nav-link" data-scroll-target="#consideration---solution-path">Consideration - Solution Path</a></li>
+  <li><a href="#impact-of-algorithm-choice" id="toc-impact-of-algorithm-choice" class="nav-link" data-scroll-target="#impact-of-algorithm-choice">Impact of Algorithm Choice</a></li>
+  </ul></li>
+  <li><a href="#planning-problems-configuration-problems" id="toc-planning-problems-configuration-problems" class="nav-link" data-scroll-target="#planning-problems-configuration-problems">Planning Problems, Configuration Problems</a>
+  <ul class="collapse">
+  <li><a href="#problem-classification" id="toc-problem-classification" class="nav-link" data-scroll-target="#problem-classification">Problem Classification</a>
+  <ul class="collapse">
+  <li><a href="#configuration-problems" id="toc-configuration-problems" class="nav-link" data-scroll-target="#configuration-problems">Configuration Problems</a></li>
+  <li><a href="#planning-problems" id="toc-planning-problems" class="nav-link" data-scroll-target="#planning-problems">Planning Problems</a></li>
+  </ul></li>
+  <li><a href="#graph-representation" id="toc-graph-representation" class="nav-link" data-scroll-target="#graph-representation">Graph Representation</a>
+  <ul class="collapse">
+  <li><a href="#node-pairs" id="toc-node-pairs" class="nav-link" data-scroll-target="#node-pairs">Node Pairs</a></li>
+  </ul></li>
+  <li><a href="#path-reconstruction" id="toc-path-reconstruction" class="nav-link" data-scroll-target="#path-reconstruction">Path Reconstruction</a></li>
+  <li><a href="#search-algorithm-overview" id="toc-search-algorithm-overview" class="nav-link" data-scroll-target="#search-algorithm-overview">Search Algorithm Overview</a>
+  <ul class="collapse">
+  <li><a href="#deterministic-approach" id="toc-deterministic-approach" class="nav-link" data-scroll-target="#deterministic-approach">Deterministic Approach</a></li>
+  <li><a href="#list-structure" id="toc-list-structure" class="nav-link" data-scroll-target="#list-structure">List Structure</a></li>
+  </ul></li>
+  <li><a href="#notational-conventions" id="toc-notational-conventions" class="nav-link" data-scroll-target="#notational-conventions">Notational Conventions</a>
+  <ul class="collapse">
+  <li><a href="#list-notation" id="toc-list-notation" class="nav-link" data-scroll-target="#list-notation">List Notation</a></li>
+  <li><a href="#tuple-notation" id="toc-tuple-notation" class="nav-link" data-scroll-target="#tuple-notation">Tuple Notation</a></li>
+  </ul></li>
+  <li><a href="#algorithm-refinement" id="toc-algorithm-refinement" class="nav-link" data-scroll-target="#algorithm-refinement">Algorithm Refinement</a></li>
+  </ul></li>
+  <li><a href="#depth-first-search-dfs-algorithm" id="toc-depth-first-search-dfs-algorithm" class="nav-link" data-scroll-target="#depth-first-search-dfs-algorithm">Depth-First Search (DFS) Algorithm</a>
+  <ul class="collapse">
+  <li><a href="#initialization" id="toc-initialization" class="nav-link" data-scroll-target="#initialization">Initialization</a></li>
+  <li><a href="#main-algorithm" id="toc-main-algorithm" class="nav-link" data-scroll-target="#main-algorithm">Main Algorithm</a></li>
+  <li><a href="#ancillary-functions" id="toc-ancillary-functions" class="nav-link" data-scroll-target="#ancillary-functions">Ancillary Functions</a>
+  <ul class="collapse">
+  <li><a href="#reconstructpath-function" id="toc-reconstructpath-function" class="nav-link" data-scroll-target="#reconstructpath-function">RECONSTRUCTPATH Function</a></li>
+  <li><a href="#makepairs-function" id="toc-makepairs-function" class="nav-link" data-scroll-target="#makepairs-function">MAKEPAIRS Function</a></li>
+  <li><a href="#removeseen-function" id="toc-removeseen-function" class="nav-link" data-scroll-target="#removeseen-function">REMOVESEEN Function</a></li>
+  </ul></li>
+  </ul></li>
+  <li><a href="#breadth-first-search-bfs-algorithm" id="toc-breadth-first-search-bfs-algorithm" class="nav-link" data-scroll-target="#breadth-first-search-bfs-algorithm">Breadth-First Search (BFS) Algorithm</a>
+  <ul class="collapse">
+  <li><a href="#initialization-1" id="toc-initialization-1" class="nav-link" data-scroll-target="#initialization-1">Initialization</a></li>
+  <li><a href="#main-algorithm-1" id="toc-main-algorithm-1" class="nav-link" data-scroll-target="#main-algorithm-1">Main Algorithm</a></li>
+  </ul></li>
+  <li><a href="#analysis-of-depth-first-search-dfs-and-breadth-first-search-bfs" id="toc-analysis-of-depth-first-search-dfs-and-breadth-first-search-bfs" class="nav-link" data-scroll-target="#analysis-of-depth-first-search-dfs-and-breadth-first-search-bfs">Analysis of Depth First Search (DFS) and Breadth-First Search (BFS)</a>
+  <ul class="collapse">
+  <li><a href="#analysis-of-dfs" id="toc-analysis-of-dfs" class="nav-link" data-scroll-target="#analysis-of-dfs">Analysis of DFS</a>
+  <ul class="collapse">
+  <li><a href="#overview-1" id="toc-overview-1" class="nav-link" data-scroll-target="#overview-1">Overview</a></li>
+  <li><a href="#exploration-strategy" id="toc-exploration-strategy" class="nav-link" data-scroll-target="#exploration-strategy">Exploration Strategy</a></li>
+  <li><a href="#behavior" id="toc-behavior" class="nav-link" data-scroll-target="#behavior">Behavior</a></li>
+  <li><a href="#time-complexity" id="toc-time-complexity" class="nav-link" data-scroll-target="#time-complexity">Time Complexity</a></li>
+  <li><a href="#space-complexity" id="toc-space-complexity" class="nav-link" data-scroll-target="#space-complexity">Space Complexity</a></li>
+  </ul></li>
+  <li><a href="#analysis-of-bfs" id="toc-analysis-of-bfs" class="nav-link" data-scroll-target="#analysis-of-bfs">Analysis of BFS</a>
+  <ul class="collapse">
+  <li><a href="#overview-2" id="toc-overview-2" class="nav-link" data-scroll-target="#overview-2">Overview</a></li>
+  <li><a href="#exploration-strategy-1" id="toc-exploration-strategy-1" class="nav-link" data-scroll-target="#exploration-strategy-1">Exploration Strategy</a></li>
+  <li><a href="#behavior-1" id="toc-behavior-1" class="nav-link" data-scroll-target="#behavior-1">Behavior</a></li>
+  <li><a href="#time-complexity-1" id="toc-time-complexity-1" class="nav-link" data-scroll-target="#time-complexity-1">Time Complexity</a></li>
+  <li><a href="#space-complexity-1" id="toc-space-complexity-1" class="nav-link" data-scroll-target="#space-complexity-1">Space Complexity</a></li>
+  </ul></li>
+  <li><a href="#comparison" id="toc-comparison" class="nav-link" data-scroll-target="#comparison">Comparison</a>
+  <ul class="collapse">
+  <li><a href="#time-complexity-2" id="toc-time-complexity-2" class="nav-link" data-scroll-target="#time-complexity-2">Time Complexity</a></li>
+  <li><a href="#space-complexity-2" id="toc-space-complexity-2" class="nav-link" data-scroll-target="#space-complexity-2">Space Complexity</a></li>
+  <li><a href="#quality-of-solution" id="toc-quality-of-solution" class="nav-link" data-scroll-target="#quality-of-solution">Quality of Solution</a></li>
+  <li><a href="#completeness" id="toc-completeness" class="nav-link" data-scroll-target="#completeness">Completeness</a></li>
+  </ul></li>
+  </ul></li>
+  <li><a href="#search-methods-for-problem-solving" id="toc-search-methods-for-problem-solving" class="nav-link" data-scroll-target="#search-methods-for-problem-solving">Search Methods for Problem Solving</a>
+  <ul class="collapse">
+  <li><a href="#search-space-characteristics-and-solution-strategies" id="toc-search-space-characteristics-and-solution-strategies" class="nav-link" data-scroll-target="#search-space-characteristics-and-solution-strategies">Search Space Characteristics and Solution Strategies</a>
+  <ul class="collapse">
+  <li><a href="#infinite-search-space-dilemma" id="toc-infinite-search-space-dilemma" class="nav-link" data-scroll-target="#infinite-search-space-dilemma">Infinite Search Space Dilemma</a></li>
+  </ul></li>
+  <li><a href="#depth-bounded-depth-first-search" id="toc-depth-bounded-depth-first-search" class="nav-link" data-scroll-target="#depth-bounded-depth-first-search">Depth-Bounded Depth-First Search</a>
+  <ul class="collapse">
+  <li><a href="#strategy-overview" id="toc-strategy-overview" class="nav-link" data-scroll-target="#strategy-overview">Strategy Overview</a></li>
+  </ul></li>
+  <li><a href="#depth-bounded-dfs-with-node-counting" id="toc-depth-bounded-dfs-with-node-counting" class="nav-link" data-scroll-target="#depth-bounded-dfs-with-node-counting">Depth-Bounded DFS with Node Counting</a>
+  <ul class="collapse">
+  <li><a href="#enhanced-exploration" id="toc-enhanced-exploration" class="nav-link" data-scroll-target="#enhanced-exploration">Enhanced Exploration</a></li>
+  </ul></li>
+  <li><a href="#depth-first-iterative-deepening-dfid" id="toc-depth-first-iterative-deepening-dfid" class="nav-link" data-scroll-target="#depth-first-iterative-deepening-dfid">Depth-First Iterative Deepening (DFID)</a>
+  <ul class="collapse">
+  <li><a href="#iterative-depth-expansion" id="toc-iterative-depth-expansion" class="nav-link" data-scroll-target="#iterative-depth-expansion">Iterative Depth Expansion</a></li>
+  </ul></li>
+  <li><a href="#path-reconstruction-challenges" id="toc-path-reconstruction-challenges" class="nav-link" data-scroll-target="#path-reconstruction-challenges">Path Reconstruction Challenges</a>
+  <ul class="collapse">
+  <li><a href="#dilemma-overview" id="toc-dilemma-overview" class="nav-link" data-scroll-target="#dilemma-overview">Dilemma Overview</a></li>
+  </ul></li>
+  <li><a href="#dfid-in-chess-programming" id="toc-dfid-in-chess-programming" class="nav-link" data-scroll-target="#dfid-in-chess-programming">DFID in Chess Programming</a>
+  <ul class="collapse">
+  <li><a href="#tactical-application" id="toc-tactical-application" class="nav-link" data-scroll-target="#tactical-application">Tactical Application</a></li>
+  </ul></li>
+  <li><a href="#combinatorial-explosion-and-dfid" id="toc-combinatorial-explosion-and-dfid" class="nav-link" data-scroll-target="#combinatorial-explosion-and-dfid">Combinatorial Explosion and DFID</a>
+  <ul class="collapse">
+  <li><a href="#coping-with-exponential-growth" id="toc-coping-with-exponential-growth" class="nav-link" data-scroll-target="#coping-with-exponential-growth">Coping with Exponential Growth</a></li>
+  </ul></li>
+  <li><a href="#blind-uninformed-search" id="toc-blind-uninformed-search" class="nav-link" data-scroll-target="#blind-uninformed-search">Blind (Uninformed) Search</a>
+  <ul class="collapse">
+  <li><a href="#fixed-behaviors" id="toc-fixed-behaviors" class="nav-link" data-scroll-target="#fixed-behaviors">Fixed Behaviors</a></li>
+  </ul></li>
+  </ul></li>
+  <li><a href="#depth-first-iterative-deepening-dfid-1" id="toc-depth-first-iterative-deepening-dfid-1" class="nav-link" data-scroll-target="#depth-first-iterative-deepening-dfid-1">Depth-First Iterative Deepening (DFID)</a>
+  <ul class="collapse">
+  <li><a href="#dfid-n-dfid-with-node-reopening" id="toc-dfid-n-dfid-with-node-reopening" class="nav-link" data-scroll-target="#dfid-n-dfid-with-node-reopening">DFID-N: DFID with Node Reopening</a></li>
+  <li><a href="#dfid-c-dfid-with-closed-node-reopening" id="toc-dfid-c-dfid-with-closed-node-reopening" class="nav-link" data-scroll-target="#dfid-c-dfid-with-closed-node-reopening">DFID-C: DFID with Closed Node Reopening</a></li>
+  <li><a href="#ancillary-functions-for-dfid-c" id="toc-ancillary-functions-for-dfid-c" class="nav-link" data-scroll-target="#ancillary-functions-for-dfid-c">Ancillary Functions for DFID-C</a>
+  <ul class="collapse">
+  <li><a href="#makepairsnodelist-parent-depth" id="toc-makepairsnodelist-parent-depth" class="nav-link" data-scroll-target="#makepairsnodelist-parent-depth">MAKEPAIRS(nodeList, parent, depth)</a></li>
+  <li><a href="#reconstructpathnodepair-closed" id="toc-reconstructpathnodepair-closed" class="nav-link" data-scroll-target="#reconstructpathnodepair-closed">RECONSTRUCTPATH(nodePair, CLOSED)</a></li>
+  </ul></li>
+  </ul></li>
+  <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion">Conclusion</a>
+  <ul class="collapse">
+  <li><a href="#points-to-remember" id="toc-points-to-remember" class="nav-link" data-scroll-target="#points-to-remember">Points to Remember</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">State Space Search and Search Algorithms Overview</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+</header>
+
+<section id="state-space-search" class="level1">
+<h1>State Space Search</h1>
+<section id="introduction-to-search-algorithms-in-ai" class="level2">
+<h2 class="anchored" data-anchor-id="introduction-to-search-algorithms-in-ai">Introduction to Search Algorithms in AI</h2>
+<p>In the realm of Artificial Intelligence, the study of search algorithms plays a pivotal role in problem-solving strategies. These algorithms, designed to explore the state space of a given problem, can be categorized into brute force search, informed search, and a general algorithmic approach. To illustrate these concepts, we delve into the map coloring problem, showcasing various problem-solving strategies.</p>
+</section>
+<section id="state-space-search-1" class="level2">
+<h2 class="anchored" data-anchor-id="state-space-search-1">State Space Search</h2>
+<section id="overview" class="level3">
+<h3 class="anchored" data-anchor-id="overview">Overview</h3>
+<p>State space search involves representing a problem as a graph, where each node represents a unique state, and edges denote possible moves between states. The primary goal of this course is to explore general search methods, incorporating heuristic techniques for improved efficiency. The methods under consideration include state space search and constraint processing.</p>
+</section>
+<section id="components-of-state-space-search" class="level3">
+<h3 class="anchored" data-anchor-id="components-of-state-space-search">Components of State Space Search</h3>
+<section id="state-representation" class="level4">
+<h4 class="anchored" data-anchor-id="state-representation">1. State Representation</h4>
+<p>States are representations of specific situations in a given problem. These states are treated as nodes within the search space graph, with each node denoted by a symbol, such as <span class="math inline">\(s\)</span>. The state space, essentially an implicit graph, is defined by a move generation function.</p>
+</section>
+<section id="move-generation" class="level4">
+<h4 class="anchored" data-anchor-id="move-generation">2. Move Generation</h4>
+<p>A move generation function is critical in navigating the state space. It determines the possible moves from a given state, producing a set of neighboring states. In functional terms, this function, denoted as <span class="math inline">\(MoveGen(s)\)</span>, takes a state <span class="math inline">\(s\)</span> as input and returns a set of states, or neighbors, achievable from the current state.</p>
+</section>
+<section id="state-space-exploration" class="level4">
+<h4 class="anchored" data-anchor-id="state-space-exploration">3. State Space Exploration</h4>
+<p>The exploration of the state space is facilitated by a search algorithm, which employs the move generation function to navigate through the graph. The algorithm terminates based on the results of a goal test function.</p>
+</section>
+<section id="goal-test" class="level4">
+<h4 class="anchored" data-anchor-id="goal-test">4. Goal Test</h4>
+<p>The goal test function, denoted as <span class="math inline">\(GoalTest(s)\)</span>, checks whether a given state <span class="math inline">\(s\)</span> is the desired goal state. It serves as the criterion for terminating the search algorithm.</p>
+</section>
+</section>
+</section>
+<section id="search-algorithms-overview" class="level2">
+<h2 class="anchored" data-anchor-id="search-algorithms-overview">Search Algorithms Overview</h2>
+<p>General search methods are designed to create adaptable algorithms capable of addressing a variety of problems. The two primary approaches discussed in this course are state space search and constraint processing, with a primary focus on the former.</p>
+</section>
+<section id="sample-problems-in-state-space-search" class="level2">
+<h2 class="anchored" data-anchor-id="sample-problems-in-state-space-search">Sample Problems in State Space Search</h2>
+<section id="water-jug-problem" class="level3">
+<h3 class="anchored" data-anchor-id="water-jug-problem">1. Water Jug Problem</h3>
+<section id="problem-description" class="level4">
+<h4 class="anchored" data-anchor-id="problem-description">Problem Description</h4>
+<p>The water jug problem involves three jugs with different capacities, requiring the measurement of a specific amount of water.</p>
+</section>
+<section id="representation" class="level4">
+<h4 class="anchored" data-anchor-id="representation">Representation</h4>
+<p>States are described as a list of three numbers, representing the water levels in each jug.</p>
+</section>
+<section id="moves" class="level4">
+<h4 class="anchored" data-anchor-id="moves">Moves</h4>
+<p>Moves involve pouring water between jugs, and the goal test function is contingent on achieving the desired water measurement.</p>
+</section>
+</section>
+<section id="eight-puzzle" class="level3">
+<h3 class="anchored" data-anchor-id="eight-puzzle">2. Eight Puzzle</h3>
+<section id="problem-description-1" class="level4">
+<h4 class="anchored" data-anchor-id="problem-description-1">Problem Description</h4>
+<p>The eight puzzle, a two-dimensional puzzle, requires rearranging tiles to achieve a specific configuration.</p>
+</section>
+<section id="representation-1" class="level4">
+<h4 class="anchored" data-anchor-id="representation-1">Representation</h4>
+<p>States are represented by an 8-puzzle configuration, and moves involve sliding tiles into the blank space.</p>
+</section>
+<section id="goal-test-1" class="level4">
+<h4 class="anchored" data-anchor-id="goal-test-1">Goal Test</h4>
+<p>The goal test function checks whether the configuration matches the desired goal configuration.</p>
+</section>
+</section>
+<section id="missionaries-and-cannibals-problem" class="level3">
+<h3 class="anchored" data-anchor-id="missionaries-and-cannibals-problem">3. Missionaries and Cannibals Problem</h3>
+<section id="problem-description-2" class="level4">
+<h4 class="anchored" data-anchor-id="problem-description-2">Problem Description</h4>
+<p>This classic problem involves transporting individuals across a river without violating specific constraints.</p>
+</section>
+<section id="representations" class="level4">
+<h4 class="anchored" data-anchor-id="representations">Representations</h4>
+<p>Various representations are discussed, including objects on the left bank or based on the boat’s location.</p>
+</section>
+<section id="goal-test-2" class="level4">
+<h4 class="anchored" data-anchor-id="goal-test-2">Goal Test</h4>
+<p>The goal test function checks for a specific configuration that adheres to the constraints.</p>
+</section>
+</section>
+<section id="n-queens-problem" class="level3">
+<h3 class="anchored" data-anchor-id="n-queens-problem">4. N-Queens Problem</h3>
+<section id="problem-description-3" class="level4">
+<h4 class="anchored" data-anchor-id="problem-description-3">Problem Description</h4>
+<p>The N-Queens problem requires placing N queens on an N×N chessboard with no mutual attacks.</p>
+</section>
+<section id="representation-2" class="level4">
+<h4 class="anchored" data-anchor-id="representation-2">Representation</h4>
+<p>Solving involves finding a valid arrangement of queens on the chessboard.</p>
+</section>
+</section>
+<section id="traveling-salesman-problem" class="level3">
+<h3 class="anchored" data-anchor-id="traveling-salesman-problem">5. Traveling Salesman Problem</h3>
+<section id="problem-description-4" class="level4">
+<h4 class="anchored" data-anchor-id="problem-description-4">Problem Description</h4>
+<p>The traveling salesman problem involves finding the optimal tour, with the lowest cost, visiting each city exactly once and returning to the starting city.</p>
+</section>
+<section id="objective" class="level4">
+<h4 class="anchored" data-anchor-id="objective">Objective</h4>
+<p>The objective is to discover the tour with the lowest cost, a challenging problem with factorial time complexity.</p>
+</section>
+</section>
+<section id="maze-solving" class="level3">
+<h3 class="anchored" data-anchor-id="maze-solving">6. Maze Solving</h3>
+<section id="problem-description-5" class="level4">
+<h4 class="anchored" data-anchor-id="problem-description-5">Problem Description</h4>
+<p>Maze solving requires finding a path through a maze from the entrance to the exit.</p>
+</section>
+<section id="representation-3" class="level4">
+<h4 class="anchored" data-anchor-id="representation-3">Representation</h4>
+<p>The maze can be represented as a graph, with each node representing a choice point.</p>
+</section>
+<section id="goal" class="level4">
+<h4 class="anchored" data-anchor-id="goal">Goal</h4>
+<p>The goal is to find a path through the maze to reach the exit.</p>
+</section>
+</section>
+</section>
+</section>
+<section id="general-search-algorithms" class="level1">
+<h1>General Search Algorithms</h1>
+<section id="introduction" class="level2">
+<h2 class="anchored" data-anchor-id="introduction">Introduction</h2>
+<p>In the pursuit of developing domain-independent problem-solving algorithms within the realm of artificial intelligence (AI), the focus is on general search algorithms. These algorithms aim to provide solutions to diverse problems in a domain-independent form. This discussion revolves around two key algorithms: “Simple Search 1” and its modification, “Simple Search 2.”</p>
+</section>
+<section id="components-of-state-space-search-1" class="level2">
+<h2 class="anchored" data-anchor-id="components-of-state-space-search-1">Components of State Space Search</h2>
+<section id="start-and-goal-states" class="level3">
+<h3 class="anchored" data-anchor-id="start-and-goal-states">1. Start and Goal States</h3>
+<p>The state space comprises a set of states, a defined start state, and a specified goal state. These elements form the foundational framework for problem-solving in AI.</p>
+</section>
+<section id="move-gen-function" class="level3">
+<h3 class="anchored" data-anchor-id="move-gen-function">2. Move Gen Function</h3>
+<p>The move generation function, denoted as $ (n) $, serves as a domain-specific function responsible for generating the neighbors of a given node $ n $. Importantly, it dynamically constructs the graph as the algorithm progresses.</p>
+</section>
+<section id="goal-test-function" class="level3">
+<h3 class="anchored" data-anchor-id="goal-test-function">3. Goal Test Function</h3>
+<p>The goal test function, $ (n) $, determines whether a given state $ n $ aligns with the defined goal state. This function plays a crucial role in assessing the success of the search algorithm.</p>
+</section>
+<section id="scene-nodes-and-candidate-nodes" class="level3">
+<h3 class="anchored" data-anchor-id="scene-nodes-and-candidate-nodes">4. Scene Nodes and Candidate Nodes</h3>
+<p>In the process of state space search, two categories of nodes emerge: scene nodes and candidate nodes. - <strong>Scene Nodes:</strong> These nodes represent states that have been visited and tested for the goal. They are stored in a set or list termed “closed.” - <strong>Candidate Nodes:</strong> Generated by the move gen function, these nodes are candidates for exploration but have not yet been visited. They are stored in a set or list referred to as “open.”</p>
+</section>
+</section>
+<section id="simple-search-1-algorithm" class="level2">
+<h2 class="anchored" data-anchor-id="simple-search-1-algorithm">Simple Search 1 Algorithm</h2>
+<section id="algorithm-overview" class="level3">
+<h3 class="anchored" data-anchor-id="algorithm-overview">Algorithm Overview</h3>
+<p>The “Simple Search 1” algorithm adheres to the generate-and-test approach, a fundamental strategy in AI problem-solving. The algorithm iteratively generates nodes, tests them for the goal, and continues until either the goal is found or the open set becomes empty.</p>
+</section>
+<section id="node-selection" class="level3">
+<h3 class="anchored" data-anchor-id="node-selection">Node Selection</h3>
+<p>A node is selected from the open set. If this node corresponds to the goal state, the algorithm terminates successfully. Otherwise, the process continues.</p>
+</section>
+<section id="graph-exploration" class="level3">
+<h3 class="anchored" data-anchor-id="graph-exploration">Graph Exploration</h3>
+<p>The algorithm leverages the move gen function to generate neighbors of the selected node. These generated nodes are then added to the open set for further exploration.</p>
+</section>
+<section id="pseudocode-for-simple-search-1" class="level3">
+<h3 class="anchored" data-anchor-id="pseudocode-for-simple-search-1">Pseudocode for Simple Search 1</h3>
+<pre class="plaintext"><code>OPEN ← {S}
+while OPEN is not empty
+   Pick some node N from OPEN
+   OPEN ← OPEN - {N}
+   if GoalTest(N) = TRUE
+     return N
+   else 
+     OPEN ← OPEN ∪ MoveGen(N)
+return null</code></pre>
+</section>
+<section id="challenge---cyclic-exploration" class="level3">
+<h3 class="anchored" data-anchor-id="challenge---cyclic-exploration">Challenge - Cyclic Exploration</h3>
+<p>A notable challenge with “Simple Search 1” is its susceptibility to entering cycles, leading to the revisiting of nodes without making progress. This cyclic exploration issue poses a potential impediment to the algorithm’s effectiveness.</p>
+</section>
+</section>
+<section id="simple-search-2-algorithm" class="level2">
+<h2 class="anchored" data-anchor-id="simple-search-2-algorithm">Simple Search 2 Algorithm</h2>
+<section id="introduction-of-closed-set" class="level3">
+<h3 class="anchored" data-anchor-id="introduction-of-closed-set">Introduction of Closed Set</h3>
+<p>To address the cyclic exploration problem, “Simple Search 2” introduces a new set named “closed.” This set serves as a repository for scene nodes, preventing their reevaluation during the search process.</p>
+</section>
+<section id="purpose-of-closed-set" class="level3">
+<h3 class="anchored" data-anchor-id="purpose-of-closed-set">Purpose of Closed Set</h3>
+<p>The closed set’s primary function is to avoid revisiting nodes already assessed for the goal. By maintaining a record of scene nodes, the algorithm reduces the search space and mitigates the cyclic exploration challenge.</p>
+</section>
+<section id="algorithm-adjustment" class="level3">
+<h3 class="anchored" data-anchor-id="algorithm-adjustment">Algorithm Adjustment</h3>
+<p>The node selected from the open set is now moved to the closed set before testing for the goal. Additionally, during the generation of neighbors, nodes already present in the closed set are excluded from being added to the open set.</p>
+</section>
+<section id="pseudocode-for-simple-search-2" class="level3">
+<h3 class="anchored" data-anchor-id="pseudocode-for-simple-search-2">Pseudocode for Simple Search 2</h3>
+<pre class="plaintext"><code>OPEN ← {S}
+CLOSED ← empty set
+while OPEN is not empty
+   Pick some node N from OPEN
+   OPEN ← OPEN – {N}
+   CLOSED ← CLOSED ∪ {N}
+   if GoalTest(N) = TRUE 
+     return N 
+   else 
+     OPEN ← OPEN ∪ (MoveGen(N) – CLOSED)
+return null  </code></pre>
+</section>
+<section id="improved-exploration" class="level3">
+<h3 class="anchored" data-anchor-id="improved-exploration">Improved Exploration</h3>
+<p>“Simple Search 2” demonstrates enhanced efficiency by minimizing the search space. The exclusion of nodes already visited contributes to a more focused exploration, addressing the cyclic exploration issue encountered in “Simple Search 1.”</p>
+</section>
+</section>
+<section id="consideration---solution-path" class="level2">
+<h2 class="anchored" data-anchor-id="consideration---solution-path">Consideration - Solution Path</h2>
+<p>While both algorithms aim to find the goal node, it’s essential to note that they do not provide the solution path. The goal test confirms the existence of a solution without specifying the sequence of states leading to it. Further considerations may be necessary to obtain the complete solution path.</p>
+</section>
+<section id="impact-of-algorithm-choice" class="level2">
+<h2 class="anchored" data-anchor-id="impact-of-algorithm-choice">Impact of Algorithm Choice</h2>
+<p>The choice of algorithm significantly influences the exploration of the search space. Different algorithms may yield distinct search spaces for the same state space. The efficiency and effectiveness of the search process hinge on the algorithm’s ability to circumvent cyclic exploration and avoid unnecessary node revisits.</p>
+</section>
+</section>
+<section id="planning-problems-configuration-problems" class="level1">
+<h1>Planning Problems, Configuration Problems</h1>
+<section id="problem-classification" class="level2">
+<h2 class="anchored" data-anchor-id="problem-classification">Problem Classification</h2>
+<p>In the realm of state space search, two distinctive problem types emerge: Configuration Problems and Planning Problems.</p>
+<section id="configuration-problems" class="level3">
+<h3 class="anchored" data-anchor-id="configuration-problems">Configuration Problems</h3>
+<p>Configuration problems involve seeking a state that satisfies a given description. For instance, classic problems like the N-Queens puzzle, Sudoku, Map Coloring, and others fall into this category. The primary objective is to identify a state that adheres to the specified criteria.</p>
+</section>
+<section id="planning-problems" class="level3">
+<h3 class="anchored" data-anchor-id="planning-problems">Planning Problems</h3>
+<p>Contrarily, planning problems revolve around scenarios where the goal is either explicitly known or described, and the pursuit is directed towards determining the optimal path to that goal. This type includes real-world situations such as finding a suitable restaurant, where the algorithm must discern both the destination and the most efficient route.</p>
+</section>
+</section>
+<section id="graph-representation" class="level2">
+<h2 class="anchored" data-anchor-id="graph-representation">Graph Representation</h2>
+<p>In the context of state space search, the graph serves as the fundamental model. Each node within this graph represents a unique state. However, in planning problems, the goal extends beyond merely reaching the final state; it includes the necessity to ascertain the path leading to that state.</p>
+<section id="node-pairs" class="level3">
+<h3 class="anchored" data-anchor-id="node-pairs">Node Pairs</h3>
+<p>To address this, the concept of node pairs is introduced. In this representation, every node is accompanied by information about its parent node. This augmentation proves pivotal when reconstructing the path to the goal.</p>
+</section>
+</section>
+<section id="path-reconstruction" class="level2">
+<h2 class="anchored" data-anchor-id="path-reconstruction">Path Reconstruction</h2>
+<p>Efficient path reconstruction relies on the inclusion of node pairs within the search space. As the algorithm traverses the search space and identifies the goal state, the closed list—housing node pairs—facilitates the backward tracing of the path. Each node pair encapsulates information about the current node and its parent, enabling a step-by-step reconstruction.</p>
+</section>
+<section id="search-algorithm-overview" class="level2">
+<h2 class="anchored" data-anchor-id="search-algorithm-overview">Search Algorithm Overview</h2>
+<p>The overarching search algorithm is designed to systematically explore the search space, attempting different paths until a viable route to the goal state is discovered.</p>
+<section id="deterministic-approach" class="level3">
+<h3 class="anchored" data-anchor-id="deterministic-approach">Deterministic Approach</h3>
+<p>In contrast to the initial non-deterministic approach of picking any node from the open set, the algorithm undergoes a modification. It transitions to a deterministic strategy, consistently selecting the node positioned at the head of the open list.</p>
+</section>
+<section id="list-structure" class="level3">
+<h3 class="anchored" data-anchor-id="list-structure">List Structure</h3>
+<p>The traditional use of sets for open and closed is superseded by the adoption of lists. This shift is accompanied by a preference for adding new nodes to a specified location in the list, influencing their order and impact on the search algorithm.</p>
+</section>
+</section>
+<section id="notational-conventions" class="level2">
+<h2 class="anchored" data-anchor-id="notational-conventions">Notational Conventions</h2>
+<section id="list-notation" class="level3">
+<h3 class="anchored" data-anchor-id="list-notation">List Notation</h3>
+<ul>
+<li>The empty list is represented as square brackets: <span class="math inline">\([]\)</span>.</li>
+<li>Operations include the colon operator for adding an element to the head of a list and the plus plus operator for appending two lists.</li>
+<li>Essential functions, such as head and tail, serve in extracting elements and conducting tests.</li>
+</ul>
+</section>
+<section id="tuple-notation" class="level3">
+<h3 class="anchored" data-anchor-id="tuple-notation">Tuple Notation</h3>
+<p>Tuples, denoted by parentheses, accommodate ordered elements. Accessing tuple elements involves positional identification or leveraging built-in functions like first and second.</p>
+<p>For further reference on operations and functions, refer to this <a href="BON-AI-SMPS-2022-Week-02-Notes-List-and-Tuple-Quick-Reference-v0.3.pdf" target="_blank">pdf</a>.</p>
+</section>
+</section>
+<section id="algorithm-refinement" class="level2">
+<h2 class="anchored" data-anchor-id="algorithm-refinement">Algorithm Refinement</h2>
+<p>The transition from non-deterministic node selection to a deterministic strategy represents a pivotal refinement. This evolution ensures the consistent selection of the node residing at the forefront of the open list. Additionally, the determination of where new nodes are inserted in the list assumes significance, shaping their influence on the algorithm’s behavior.</p>
+</section>
+</section>
+<section id="depth-first-search-dfs-algorithm" class="level1">
+<h1>Depth-First Search (DFS) Algorithm</h1>
+<p>Depth-First Search (DFS) is a systematic algorithm for traversing and searching through the state space of a problem. It explores as far as possible along each branch before backtracking. The algorithm is outlined as follows:</p>
+<section id="initialization" class="level2">
+<h2 class="anchored" data-anchor-id="initialization">Initialization</h2>
+<pre class="plaintext"><code>- OPEN ← (S, null) : []
+- CLOSED ← empty list</code></pre>
+<p>The algorithm starts with an open list containing the start node <code>(S, null)</code> where <code>S</code> is the start node, and <code>null</code> represents the absence of a parent. The CLOSED list is initially empty.</p>
+</section>
+<section id="main-algorithm" class="level2">
+<h2 class="anchored" data-anchor-id="main-algorithm">Main Algorithm</h2>
+<pre class="plaintext"><code>- while OPEN is not empty
+  - nodePair ← head OPEN
+  - (N, _) ← nodePair
+  - if GoalTest(N) = TRUE
+    - return RECONSTRUCTPATH(nodePair, CLOSED)
+  - else CLOSED ← nodePair : CLOSED
+    - neighbours ← MoveGen(N)
+    - newNodes ← REMOVESEEN(neighbours, OPEN, CLOSED)
+    - newPairs ← MAKEPAIRS(newNodes, N)
+    - OPEN ← newPairs ++ (tail OPEN)
+- return empty list</code></pre>
+<p>The algorithm iteratively selects the first element from the open list and explores the node <code>(N, _)</code>. If the goal test is satisfied, it calls the <code>RECONSTRUCTPATH</code> function. Otherwise, it adds the node pair to the closed list, generates and filters the children using <code>REMOVESEEN</code>, creates pairs with parents using <code>MAKEPAIRS</code>, and appends them to the front of the open list.</p>
+</section>
+<section id="ancillary-functions" class="level2">
+<h2 class="anchored" data-anchor-id="ancillary-functions">Ancillary Functions</h2>
+<section id="reconstructpath-function" class="level3">
+<h3 class="anchored" data-anchor-id="reconstructpath-function">RECONSTRUCTPATH Function</h3>
+<pre class="plaintext"><code>- RECONSTRUCTPATH(nodePair, CLOSED)
+  - SKIPTO(parent, nodePairs)
+    - if parent = first head nodePairs
+      - return nodePairs
+    - else return SKIPTO(parent, tail nodePairs)
+  - (node, parent) ← nodePair
+  - path ← node : []
+  - while parent is not null
+    - path ← parent : path
+    - CLOSED ← SKIPTO(parent, CLOSED)
+    - (_, parent) ← head CLOSED
+  - return path</code></pre>
+<p>The <code>RECONSTRUCTPATH</code> function traces back from the goal node to the start node using parent pointers stored in the CLOSED list.</p>
+</section>
+<section id="makepairs-function" class="level3">
+<h3 class="anchored" data-anchor-id="makepairs-function">MAKEPAIRS Function</h3>
+<pre class="plaintext"><code>- MAKEPAIRS(nodeList, parent)
+  - if nodeList is empty
+    - return empty list
+  - else return (head nodeList, parent) : MAKEPAIRS(tail nodeList, parent)</code></pre>
+<p>The <code>MAKEPAIRS</code> function takes a list of nodes and a parent, creating pairs with each node and the given parent.</p>
+</section>
+<section id="removeseen-function" class="level3">
+<h3 class="anchored" data-anchor-id="removeseen-function">REMOVESEEN Function</h3>
+<pre class="plaintext"><code>- REMOVESEEN(nodeList, OPEN, CLOSED)
+  - if nodeList is empty
+    - return empty list
+  - else node ← head nodeList
+    - if OCCURSIN(node, OPEN) or OCCURSIN(node, CLOSED)
+      - return REMOVESEEN(tail nodeList, OPEN, CLOSED)
+    - else return node : REMOVESEEN(tail nodeList, OPEN, CLOSED)</code></pre>
+<p>The <code>REMOVESEEN</code> function filters out nodes already present in the OPEN or CLOSED lists.</p>
+</section>
+</section>
+</section>
+<section id="breadth-first-search-bfs-algorithm" class="level1">
+<h1>Breadth-First Search (BFS) Algorithm</h1>
+<p>Breadth-First Search (BFS) is another systematic algorithm for traversing and searching through the state space. It explores all the neighbor nodes at the present depth before moving on to nodes at the next depth level. The algorithm is structurally similar to DFS with the key difference in how new nodes are added to the OPEN list.</p>
+<section id="initialization-1" class="level2">
+<h2 class="anchored" data-anchor-id="initialization-1">Initialization</h2>
+<pre class="plaintext"><code>- OPEN ← (S, null) : []
+- CLOSED ← empty list</code></pre>
+<p>Similar to DFS, BFS starts with an open list containing the start node <code>(S, null)</code> and an empty CLOSED list.</p>
+</section>
+<section id="main-algorithm-1" class="level2">
+<h2 class="anchored" data-anchor-id="main-algorithm-1">Main Algorithm</h2>
+<pre class="plaintext"><code>- while OPEN is not empty
+  - nodePair ← head OPEN
+  - (N, _) ← nodePair
+  - if GoalTest(N) = TRUE
+    - return RECONSTRUCTPATH(nodePair, CLOSED)
+  - else CLOSED ← nodePair : CLOSED
+    - neighbours ← MoveGen(N)
+    - newNodes ← REMOVESEEN(neighbours, OPEN, CLOSED)
+    - newPairs ← MAKEPAIRS(newNodes, N)
+    - OPEN ← (tail OPEN) ++ newPairs
+- return empty list</code></pre>
+<p>The main algorithm for BFS is identical to DFS, except for the addition of new nodes to the end of the OPEN list.</p>
+</section>
+</section>
+<section id="analysis-of-depth-first-search-dfs-and-breadth-first-search-bfs" class="level1">
+<h1>Analysis of Depth First Search (DFS) and Breadth-First Search (BFS)</h1>
+<section id="analysis-of-dfs" class="level2">
+<h2 class="anchored" data-anchor-id="analysis-of-dfs">Analysis of DFS</h2>
+<section id="overview-1" class="level3">
+<h3 class="anchored" data-anchor-id="overview-1">Overview</h3>
+<p>Depth First Search (DFS) is a search algorithm employed in problem-solving within the field of Artificial Intelligence. It is characterized by its treatment of the open set as a stack, following the Last In, First Out (LIFO) principle.</p>
+</section>
+<section id="exploration-strategy" class="level3">
+<h3 class="anchored" data-anchor-id="exploration-strategy">Exploration Strategy</h3>
+<p>DFS explores the search tree in a deep-first manner, descending into the tree until it reaches a dead end. Upon encountering a dead end, the algorithm backtracks to explore alternative paths.</p>
+</section>
+<section id="behavior" class="level3">
+<h3 class="anchored" data-anchor-id="behavior">Behavior</h3>
+<p>DFS tends to find paths that are farther from the source node, emphasizing deep exploration rather than a systematic examination of all possibilities. It exhibits a distinct behavior of diving deep into the search tree.</p>
+</section>
+<section id="time-complexity" class="level3">
+<h3 class="anchored" data-anchor-id="time-complexity">Time Complexity</h3>
+<p>The time complexity of DFS is exponential and can be expressed as <span class="math inline">\(O(b^d)\)</span>, where <span class="math inline">\(b\)</span> represents the branching factor of the search tree, and <span class="math inline">\(d\)</span> is the depth. This exponential growth can lead to infinite loops in scenarios with infinite search spaces.</p>
+</section>
+<section id="space-complexity" class="level3">
+<h3 class="anchored" data-anchor-id="space-complexity">Space Complexity</h3>
+<p>DFS demonstrates linear space complexity. The space required is proportional to the depth of the search tree, making it more space-efficient compared to other algorithms with exponential space growth.</p>
+</section>
+</section>
+<section id="analysis-of-bfs" class="level2">
+<h2 class="anchored" data-anchor-id="analysis-of-bfs">Analysis of BFS</h2>
+<section id="overview-2" class="level3">
+<h3 class="anchored" data-anchor-id="overview-2">Overview</h3>
+<p>Breadth First Search (BFS) is another search algorithm used in problem-solving for Artificial Intelligence. Unlike DFS, BFS treats the open set as a queue, adhering to the First In, First Out (FIFO) principle.</p>
+</section>
+<section id="exploration-strategy-1" class="level3">
+<h3 class="anchored" data-anchor-id="exploration-strategy-1">Exploration Strategy</h3>
+<p>BFS explores the search tree level by level, starting from the source node and moving outward systematically. It ensures a conservative approach by prioritizing paths closer to the source.</p>
+</section>
+<section id="behavior-1" class="level3">
+<h3 class="anchored" data-anchor-id="behavior-1">Behavior</h3>
+<p>BFS is designed to find paths that are closer to the source node, ensuring a more methodical exploration of the search tree. It guarantees the discovery of the shortest path due to its systematic approach.</p>
+</section>
+<section id="time-complexity-1" class="level3">
+<h3 class="anchored" data-anchor-id="time-complexity-1">Time Complexity</h3>
+<p>Similar to DFS, BFS exhibits exponential time complexity, expressed as <span class="math inline">\(O(b^d)\)</span>, where <span class="math inline">\(b\)</span> is the branching factor, and <span class="math inline">\(d\)</span> is the depth. However, BFS explores paths of increasing length systematically, ensuring the identification of the shortest path.</p>
+</section>
+<section id="space-complexity-1" class="level3">
+<h3 class="anchored" data-anchor-id="space-complexity-1">Space Complexity</h3>
+<p>BFS has exponential space complexity, with the size of the open set growing exponentially. This makes BFS less space-efficient compared to DFS, but it guarantees finding the shortest path.</p>
+</section>
+</section>
+<section id="comparison" class="level2">
+<h2 class="anchored" data-anchor-id="comparison">Comparison</h2>
+<section id="time-complexity-2" class="level3">
+<h3 class="anchored" data-anchor-id="time-complexity-2">Time Complexity</h3>
+<p>Both DFS and BFS share exponential time complexity, posing challenges in scenarios with large search trees.</p>
+</section>
+<section id="space-complexity-2" class="level3">
+<h3 class="anchored" data-anchor-id="space-complexity-2">Space Complexity</h3>
+<p>DFS outperforms BFS in terms of space efficiency, having linear space complexity compared to BFS’s exponential growth.</p>
+</section>
+<section id="quality-of-solution" class="level3">
+<h3 class="anchored" data-anchor-id="quality-of-solution">Quality of Solution</h3>
+<p>DFS does not guarantee the shortest path, while BFS ensures the identification of the shortest path due to its systematic exploration.</p>
+</section>
+<section id="completeness" class="level3">
+<h3 class="anchored" data-anchor-id="completeness">Completeness</h3>
+<p>DFS may not be complete, especially in infinite search spaces, where it can get lost in infinite paths. On the other hand, BFS is complete, provided there exists a path of finite length from the source to the goal.</p>
+</section>
+</section>
+</section>
+<section id="search-methods-for-problem-solving" class="level1">
+<h1>Search Methods for Problem Solving</h1>
+<section id="search-space-characteristics-and-solution-strategies" class="level2">
+<h2 class="anchored" data-anchor-id="search-space-characteristics-and-solution-strategies">Search Space Characteristics and Solution Strategies</h2>
+<section id="infinite-search-space-dilemma" class="level3">
+<h3 class="anchored" data-anchor-id="infinite-search-space-dilemma">Infinite Search Space Dilemma</h3>
+<p>When confronted with an infinite search space, the choice between Depth-First Search (DFS) and Breadth-First Search (BFS) becomes contingent upon the problem’s specifics. BFS is the preferred option if the search space is infinite but a solution is known to exist. Conversely, DFS might be more suitable if the search space is finite, albeit without guaranteeing the shortest path.</p>
+</section>
+</section>
+<section id="depth-bounded-depth-first-search" class="level2">
+<h2 class="anchored" data-anchor-id="depth-bounded-depth-first-search">Depth-Bounded Depth-First Search</h2>
+<section id="strategy-overview" class="level3">
+<h3 class="anchored" data-anchor-id="strategy-overview">Strategy Overview</h3>
+<p>Depth-Bounded Depth-First Search strikes a balance between the characteristics of DFS and BFS. It limits the exploration depth, ensuring linear space complexity while compromising on completeness and the guarantee of finding the shortest path. The algorithm delves into the search space up to a specified depth, potentially missing the goal if it exceeds this depth.</p>
+</section>
+</section>
+<section id="depth-bounded-dfs-with-node-counting" class="level2">
+<h2 class="anchored" data-anchor-id="depth-bounded-dfs-with-node-counting">Depth-Bounded DFS with Node Counting</h2>
+<section id="enhanced-exploration" class="level3">
+<h3 class="anchored" data-anchor-id="enhanced-exploration">Enhanced Exploration</h3>
+<p>An augmentation to Depth-Bounded DFS involves incorporating node counting during the search process. This count of visited nodes provides additional insights, proving advantageous in certain problem scenarios and facilitating subsequent analysis.</p>
+</section>
+</section>
+<section id="depth-first-iterative-deepening-dfid" class="level2">
+<h2 class="anchored" data-anchor-id="depth-first-iterative-deepening-dfid">Depth-First Iterative Deepening (DFID)</h2>
+<section id="iterative-depth-expansion" class="level3">
+<h3 class="anchored" data-anchor-id="iterative-depth-expansion">Iterative Depth Expansion</h3>
+<p>DFID emerges as a solution that combines the strengths of DFS and BFS. It iteratively increases the depth limit for DFS until a solution is encountered. The algorithm mitigates the risk of failing to find a path due to depth constraints but introduces the challenge of revisiting nodes multiple times. The careful tracking of node counts prevents infinite loops and enhances overall efficiency.</p>
+</section>
+</section>
+<section id="path-reconstruction-challenges" class="level2">
+<h2 class="anchored" data-anchor-id="path-reconstruction-challenges">Path Reconstruction Challenges</h2>
+<section id="dilemma-overview" class="level3">
+<h3 class="anchored" data-anchor-id="dilemma-overview">Dilemma Overview</h3>
+<p>Path reconstruction poses challenges, particularly when multiple paths to the goal exist. The lecture delves into the complexities of maintaining closed lists and the importance of judiciously selecting parents during the path reconstruction process.</p>
+</section>
+</section>
+<section id="dfid-in-chess-programming" class="level2">
+<h2 class="anchored" data-anchor-id="dfid-in-chess-programming">DFID in Chess Programming</h2>
+<section id="tactical-application" class="level3">
+<h3 class="anchored" data-anchor-id="tactical-application">Tactical Application</h3>
+<p>DFID finds practical application in chess programming, particularly in scenarios where players face time constraints. The algorithm’s iterative deepening approach accommodates the limited time available for move selection.</p>
+</section>
+</section>
+<section id="combinatorial-explosion-and-dfid" class="level2">
+<h2 class="anchored" data-anchor-id="combinatorial-explosion-and-dfid">Combinatorial Explosion and DFID</h2>
+<section id="coping-with-exponential-growth" class="level3">
+<h3 class="anchored" data-anchor-id="coping-with-exponential-growth">Coping with Exponential Growth</h3>
+<p>The lecture acknowledges the pervasive issue of combinatorial explosion, where search trees exhibit exponential growth. DFID addresses this challenge by iteratively searching with incrementally expanding depth limits. An in-depth analysis delves into the trade-offs between time and space, revealing the algorithm’s resilience in the face of increasing complexities.</p>
+</section>
+</section>
+<section id="blind-uninformed-search" class="level2">
+<h2 class="anchored" data-anchor-id="blind-uninformed-search">Blind (Uninformed) Search</h2>
+<section id="fixed-behaviors" class="level3">
+<h3 class="anchored" data-anchor-id="fixed-behaviors">Fixed Behaviors</h3>
+<p>Blind searches, including DFS, BFS, and DFID, are characterized as uninformed strategies. These approaches lack awareness of the goal’s location during exploration, adhering to predetermined behaviors irrespective of the goal’s position.</p>
+</section>
+</section>
+</section>
+<section id="depth-first-iterative-deepening-dfid-1" class="level1">
+<h1>Depth-First Iterative Deepening (DFID)</h1>
+<p>Depth-First Iterative Deepening (DFID) is a search algorithm that combines the depth-first search (DFS) strategy with iterative deepening. The objective is to search the solution space while maintaining a balance between space complexity and optimality in finding the shortest path.</p>
+<section id="dfid-n-dfid-with-node-reopening" class="level2">
+<h2 class="anchored" data-anchor-id="dfid-n-dfid-with-node-reopening">DFID-N: DFID with Node Reopening</h2>
+<p>DFID-N opens only new nodes (nodes not already present in OPEN/CLOSED) and does not reopen any nodes. It aims to find the solution with linear space complexity.</p>
+<section id="dfid-ns" class="level4">
+<h4 class="anchored" data-anchor-id="dfid-ns">DFID-N(<span class="math inline">\(s\)</span>)</h4>
+<pre class="plaintext"><code>count ← -1
+path ← empty list
+depthBound ← 0
+
+repeat 
+    previousCount ← count 
+    (count, path) ← DB-DFS-N(s, depthBound)
+    depthBound ← depthBound + 1 
+until (path is not empty) or (previousCount = count)
+
+return path</code></pre>
+</section>
+<section id="db-dfs-ns-depthbound" class="level4">
+<h4 class="anchored" data-anchor-id="db-dfs-ns-depthbound">DB-DFS-N(<span class="math inline">\(s\)</span>, depthBound)</h4>
+<ul>
+<li>Opens only new nodes, i.e., nodes neither in OPEN nor in CLOSED.</li>
+<li>Does not reopen any nodes.</li>
+</ul>
+<pre class="plaintext"><code>count ← 0 
+OPEN ← (s, null, 0): []
+CLOSED ← empty list 
+
+while OPEN is not empty 
+    nodePair ← head OPEN 
+    (N, _, depth)← nodePair 
+    
+    if GoalTest(N) == TRUE 
+        return (count, ReconstructPath(nodePair, CLOSED))
+    
+    else CLOSED← nodePair : CLOSED 
+    
+    if depth &lt; depthBound 
+        neighbours ← MoveGen(N)
+        newNodes ← SEE(neighbours, OPEN, CLOSED)
+        newPairs ← MAKEPAIRS(newNodes, N, depth + 1 )
+        OPEN ← newPairs ++ tail OPEN 
+        
+        count ← count + length newPairs
+    
+    else OPEN = tail OPEN 
+
+return (count, empty list)</code></pre>
+</section>
+</section>
+<section id="dfid-c-dfid-with-closed-node-reopening" class="level2">
+<h2 class="anchored" data-anchor-id="dfid-c-dfid-with-closed-node-reopening">DFID-C: DFID with Closed Node Reopening</h2>
+<p>DFID-C opens new nodes (nodes not already present in OPEN/CLOSED) and also reopens nodes present in CLOSED but not present in OPEN.</p>
+<section id="dfid-cs" class="level4">
+<h4 class="anchored" data-anchor-id="dfid-cs">DFID-C(<span class="math inline">\(s\)</span>)</h4>
+<pre class="plaintext"><code>count ← -1
+path ← empty list
+depthBound ← 0
+
+repeat 
+    previousCount ← count 
+    (count, path) ← DB-DFS-C(s, depthBound)
+    depthBound ← depthBound + 1 
+until (path is not empty) or (previousCount = count)
+
+return path</code></pre>
+</section>
+<section id="db-dfs-cs-depthbound" class="level4">
+<h4 class="anchored" data-anchor-id="db-dfs-cs-depthbound">DB-DFS-C(<span class="math inline">\(s\)</span>, depthBound)</h4>
+<ul>
+<li>Opens new nodes, i.e., nodes neither in OPEN nor in CLOSED.</li>
+<li>Reopens nodes present in CLOSED and not present in OPEN.</li>
+</ul>
+<pre class="plaintext"><code>count ← 0 
+OPEN ← (s, null, 0): []
+CLOSED ← empty list 
+
+while OPEN is not empty 
+    nodePair ← head OPEN 
+    (N, _, depth)← nodePair 
+    
+    if GoalTest(N) == TRUE 
+        return (count, ReconstructPath(nodePair, CLOSED))
+    
+    else CLOSED ← nodePair : CLOSED 
+    
+    if depth &lt; depthBound 
+        neighbours ← MoveGen(N)
+        newNodes ← SEE(neighbours, OPEN, CLOSED)
+        newPairs ← MAKEPAIRS(newNodes, N, depth + 1 )
+        OPEN ← newPairs ++ tail OPEN 
+        
+        count ← count + length newPairs
+    
+    else OPEN = tail OPEN 
+
+return (count, empty list)</code></pre>
+</section>
+</section>
+<section id="ancillary-functions-for-dfid-c" class="level2">
+<h2 class="anchored" data-anchor-id="ancillary-functions-for-dfid-c">Ancillary Functions for DFID-C</h2>
+<section id="makepairsnodelist-parent-depth" class="level3">
+<h3 class="anchored" data-anchor-id="makepairsnodelist-parent-depth">MAKEPAIRS(nodeList, parent, depth)</h3>
+<ul>
+<li>Creates node pairs from the given node list, parent, and depth.</li>
+<li>Returns a list of node pairs.</li>
+</ul>
+<pre class="plaintext"><code>if nodeList is empty
+    return empty list
+else nodePair ← (head nodeList, parent, depth)
+    return nodePair : MAKEPAIRS(tail nodeList, parent, depth)</code></pre>
+</section>
+<section id="reconstructpathnodepair-closed" class="level3">
+<h3 class="anchored" data-anchor-id="reconstructpathnodepair-closed">RECONSTRUCTPATH(nodePair, CLOSED)</h3>
+<ul>
+<li>Reconstructs the path using the given node pair and CLOSED list.</li>
+<li>Returns the reconstructed path.</li>
+</ul>
+<pre class="plaintext"><code>SKIPTo(parent, nodePairs, depth)
+    if (parent, ..., depth) = head nodePairs
+        return nodePairs
+    else return SKIPTo(parent, tail nodePairs, depth)
+
+(node, parent, depth) ← nodePair
+path ← node : []
+
+while parent is not null 
+    path ← parent : path 
+    CLOSED ← SKIPTo(parent, CLOSED, depth − 1 )
+    (_, _, parent, depth) ← head CLOSED 
+
+return path</code></pre>
+</section>
+</section>
+</section>
+<section id="conclusion" class="level1">
+<h1>Conclusion</h1>
+<p>This week’s lecture notes extensively covered the topic of State Space Search, focusing on algorithms such as Depth-First Search (DFS), Breadth-First Search (BFS), Depth-First Iterative Deepening (DFID), and variations like DFID-N and DFID-C. The exploration of search space, components of state space search, and various sample problems provided a comprehensive understanding of the underlying concepts.</p>
+<p>The discussion on Blind (Uninformed) Search, search space characteristics, solution strategies, and the challenges of path reconstruction enriched the knowledge on problem-solving in artificial intelligence. The detailed pseudocode, algorithms, and ancillary functions for DFS, BFS, and DFID, along with their analyses, offered practical insights into their applications and limitations.</p>
+<p>The inclusion of DFID in chess programming and its relevance in coping with combinatorial explosion highlighted the real-world applications and adaptability of these algorithms. The lecture also introduced Depth-Bounded DFS with Node Counting, emphasizing the importance of counting nodes for analysis and optimization.</p>
+<p>In summary, this week’s material deepened the understanding of search methods for problem-solving in AI, providing a solid foundation for tackling complex problems and optimizing algorithmic approaches.</p>
+<section id="points-to-remember" class="level2">
+<h2 class="anchored" data-anchor-id="points-to-remember">Points to Remember</h2>
+<ol type="1">
+<li><strong>State Space Search Overview:</strong>
+<ul>
+<li>State space search involves representing problems as graphs, where nodes represent unique states and edges denote possible moves.</li>
+<li>Components include state representation, move generation, state space exploration, and goal test.</li>
+</ul></li>
+<li><strong>Search Algorithms:</strong>
+<ul>
+<li>Various search algorithms, such as DFS and BFS, offer different exploration strategies and have implications for time and space complexity.</li>
+<li>DFID combines the strengths of DFS and BFS, iteratively increasing depth limits.</li>
+</ul></li>
+<li><strong>Algorithmic Variations:</strong>
+<ul>
+<li>DFID-N opens only new nodes, aiming for linear space complexity.</li>
+<li>DFID-C reopens nodes in CLOSED, providing a balance between space complexity and optimality.</li>
+</ul></li>
+<li><strong>Ancillary Functions:</strong>
+<ul>
+<li>Ancillary functions like RECONSTRUCTPATH play a crucial role in path reconstruction for algorithms like DFID.</li>
+</ul></li>
+<li><strong>Real-World Applications:</strong>
+<ul>
+<li>Algorithms like DFID find practical applications in chess programming, demonstrating adaptability in time-constrained scenarios.</li>
+</ul></li>
+<li><strong>Combinatorial Explosion and Optimization:</strong>
+<ul>
+<li>Combinatorial explosion is addressed by iterative deepening approaches like DFID, balancing time and space considerations.</li>
+</ul></li>
+<li><strong>Blind (Uninformed) Search:</strong>
+<ul>
+<li>Blind searches, including DFS, BFS, and DFID, lack knowledge of the goal’s location during exploration.</li>
+</ul></li>
+<li><strong>Path Reconstruction Challenges:</strong>
+<ul>
+<li>Path reconstruction challenges arise, especially when multiple paths to the goal exist, emphasizing the importance of closed lists.</li>
+</ul></li>
+<li><strong>Depth-Bounded DFS with Node Counting:</strong>
+<ul>
+<li>Depth-Bounded DFS with node counting provides insights into the number of visited nodes during exploration.</li>
+</ul></li>
+<li><strong>Configurations and Planning Problems:</strong>
+<ul>
+<li>State space search involves configuration problems (satisfying criteria) and planning problems (finding optimal paths to a known goal).</li>
+</ul></li>
+</ol>
+<p>These key points collectively contribute to a comprehensive understanding of state space search algorithms, their variations, and their applications in artificial intelligence problem-solving.</p>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const disableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'prefetch';
+    }
+  }
+  const enableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'stylesheet';
+    }
+  }
+  const manageTransitions = (selector, allowTransitions) => {
+    const els = window.document.querySelectorAll(selector);
+    for (let i=0; i < els.length; i++) {
+      const el = els[i];
+      if (allowTransitions) {
+        el.classList.remove('notransition');
+      } else {
+        el.classList.add('notransition');
+      }
+    }
+  }
+  const toggleColorMode = (alternate) => {
+    // Switch the stylesheets
+    const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+    manageTransitions('#quarto-margin-sidebar .nav-link', false);
+    if (alternate) {
+      enableStylesheet(alternateStylesheets);
+      for (const sheetNode of alternateStylesheets) {
+        if (sheetNode.id === "quarto-bootstrap") {
+          toggleBodyColorMode(sheetNode);
+        }
+      }
+    } else {
+      disableStylesheet(alternateStylesheets);
+      toggleBodyColorPrimary();
+    }
+    manageTransitions('#quarto-margin-sidebar .nav-link', true);
+    // Switch the toggles
+    const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+    for (let i=0; i < toggles.length; i++) {
+      const toggle = toggles[i];
+      if (toggle) {
+        if (alternate) {
+          toggle.classList.add("alternate");     
+        } else {
+          toggle.classList.remove("alternate");
+        }
+      }
+    }
+    // Hack to workaround the fact that safari doesn't
+    // properly recolor the scrollbar when toggling (#1455)
+    if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+      manageTransitions("body", false);
+      window.scrollTo(0, 1);
+      setTimeout(() => {
+        window.scrollTo(0, 0);
+        manageTransitions("body", true);
+      }, 40);  
+    }
+  }
+  const isFileUrl = () => { 
+    return window.location.protocol === 'file:';
+  }
+  const hasAlternateSentinel = () => {  
+    let styleSentinel = getColorSchemeSentinel();
+    if (styleSentinel !== null) {
+      return styleSentinel === "alternate";
+    } else {
+      return false;
+    }
+  }
+  const setStyleSentinel = (alternate) => {
+    const value = alternate ? "alternate" : "default";
+    if (!isFileUrl()) {
+      window.localStorage.setItem("quarto-color-scheme", value);
+    } else {
+      localAlternateSentinel = value;
+    }
+  }
+  const getColorSchemeSentinel = () => {
+    if (!isFileUrl()) {
+      const storageValue = window.localStorage.getItem("quarto-color-scheme");
+      return storageValue != null ? storageValue : localAlternateSentinel;
+    } else {
+      return localAlternateSentinel;
+    }
+  }
+  let localAlternateSentinel = 'default';
+  // Dark / light mode switch
+  window.quartoToggleColorScheme = () => {
+    // Read the current dark / light value 
+    let toAlternate = !hasAlternateSentinel();
+    toggleColorMode(toAlternate);
+    setStyleSentinel(toAlternate);
+  };
+  // Ensure there is a toggle, if there isn't float one in the top right
+  if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+    const a = window.document.createElement('a');
+    a.classList.add('top-right');
+    a.classList.add('quarto-color-scheme-toggle');
+    a.href = "";
+    a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+    const i = window.document.createElement("i");
+    i.classList.add('bi');
+    a.appendChild(i);
+    window.document.body.appendChild(a);
+  }
+  // Switch to dark mode if need be
+  if (hasAlternateSentinel()) {
+    toggleColorMode(true);
+  } else {
+    toggleColorMode(false);
+  }
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>

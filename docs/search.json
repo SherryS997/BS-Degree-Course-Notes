@@ -546,6 +546,671 @@
     "text": "Points to Remember\n\nIncremental System Development: Large-scale systems, like those employed by industry leaders such as Amazon, evolve incrementally, emphasizing the construction of components or modules before their integration.\nRequirement Specification: The software development process begins with a deep understanding of the problem, studying existing components, and defining system requirements derived from thorough analyses.\nSoftware Design and Development: The design phase is crucial, providing a macroscopic perspective of the entire system and offering advantages such as consistency, efficiency enhancement, and future-proofing. Effective documentation and collaborative coding are imperative during the development phase.\nTesting and Maintenance: Testing is critical to ensure software behavior aligns with requirements, and maintenance involves continuous monitoring, code changes, and feature additions to enhance software functionality.\nWaterfall Model: A structured, sequential model with phases like gathering requirements, design, coding, testing, and maintenance. However, it has drawbacks, including increased cost and time.\nPrototype Model: Advocates creating a working prototype before actual development to enhance understanding but may incur augmented development costs.\nSpiral Model: Integrates features from both waterfall and prototype models, fostering an iterative process, but each iteration may extend over a considerable duration.\nAgile Development: A response to challenges faced by traditional approaches, characterized by an iterative and incremental model. Agile methodologies include Extreme Programming (XP), Scrum, and Kanban.\nAgile Manifesto Principles:\n\nIndividuals and interactions over processes and tools.\nWorking software over comprehensive documentation.\nCustomer collaboration over contract negotiation.\nResponding to change over following a plan.\n\nChoosing the Development Perspective: Factors influencing the choice between plan and document perspective and Agile perspective include requirements fixity, client availability, system characteristics, team distribution, team familiarity, and regulatory constraints."
   },
   {
+    "objectID": "pages/AI/Week01.html",
+    "href": "pages/AI/Week01.html",
+    "title": "A Decade of Machine Learning",
+    "section": "",
+    "text": "The preceding decade has marked a significant upswing in interest and advancements within the realm of machine learning (ML). This surge is attributable to the confluence of increased data availability facilitated by the ubiquity of the internet and the simultaneous enhancement of computational power. Central to this transformation has been the evolution of sophisticated training algorithms, particularly within the domain of deep learning.\n\n\n\n\nData Explosion: The pervasive nature of the internet has ushered in an unparalleled era of data abundance, fundamentally reshaping the landscape of machine learning.\nIncreased Computing Power: Strides in computing capabilities have substantially amplified the processing capabilities for handling vast datasets, a crucial enabler for ML progress.\nNeural Network Advancements: Noteworthy progress in training algorithms, especially those tailored for neural networks, has played a pivotal role in propelling the field forward.\n\n\n\n\n\n\nThe foundational era witnessed the inception of the perceptron, a single-layered neural network devised as a binary classifier by McCulloch and Pitts in 1943. However, the limitation of this era lay in the perceptron’s ability to only classify linearly separable classes.\n\n\n\nThe subsequent evolution involved the introduction of the multi-layer perceptron by Rumelhart, Hinton, and Williams. This innovation addressed the limitations associated with linear separability, with the popularization of the backpropagation algorithm for training feedforward networks.\n\n\n\nDeep neural networks, characterized by numerous hidden layers, emerged as a game-changer in computer vision tasks. The breakthrough in 2012 by Hinton, LeCun, and Bengio underscored the efficacy of deep neural networks in recognizing diverse object types. The general architecture encompasses input layers, hidden layers, and output layers.\n\n\n\n\n\n\nThe training process predominantly involves supervised learning, wherein images are presented alongside their corresponding expected outputs. The iterative application of the backpropagation algorithm facilitates weight adjustments based on the disparity between predicted and expected outputs. Consequently, neural networks acquire the ability to classify and distinguish input data through repetitive exposure.\n\n\n\n\n\nDeep neural networks exhibit excellence in medical diagnosis, particularly in discerning diseases from images, as evidenced in the domain of breast cancer detection.\n\n\n\nThe instrumental role of deep neural networks in face recognition is noteworthy, aiding in the identification of individuals within images.\n\n\n\nThe Face2Gene app serves as a tangible manifestation of the successful application of deep neural networks. It aids medical professionals in diagnosing genetic disorders based on facial features, showcasing the practical impact of this technology.\n\n\n\n\n\n\n\nThe dynamic interaction of users with the internet inadvertently transforms them into valuable data points for machine learning algorithms. These algorithms, wielded by major tech entities, classify users to customize ads and optimize overall user experiences.\n\n\n\n\n\nMachine learning, particularly in pattern recognition, demonstrates capabilities akin to those observed in the animal kingdom. However, it falls short of encompassing the comprehensive cognitive functions characteristic of human intelligence.\n\n\n\nHuman cognitive abilities span goal-directed, autonomous action, and a capacity for collective approaches. Distinctive human attributes include planning, wealth accumulation, home-building, and fostering societal diversification.\n\n\n\n\n\n\n\nNeural networks showcase proficiency in specific tasks but lack a holistic understanding of the world. The inherent brittleness of machine learning necessitates meticulous preparation, coding, and specialized training for diverse problem domains.\n\n\n\n\n\n\nThe triumph of Alphago, developed by DeepMind, stands out as a testament to the success achievable through reinforcement learning. This approach played a pivotal role in training the program for strategic decision-making. Subsequent iterations, such as Alphago Zero and AlphaZero, demonstrated the capacity to learn autonomously without human intervention and master multiple games simultaneously."
+  },
+  {
+    "objectID": "pages/AI/Week01.html#overview-of-the-past-decade-in-machine-learning",
+    "href": "pages/AI/Week01.html#overview-of-the-past-decade-in-machine-learning",
+    "title": "A Decade of Machine Learning",
+    "section": "",
+    "text": "The preceding decade has marked a significant upswing in interest and advancements within the realm of machine learning (ML). This surge is attributable to the confluence of increased data availability facilitated by the ubiquity of the internet and the simultaneous enhancement of computational power. Central to this transformation has been the evolution of sophisticated training algorithms, particularly within the domain of deep learning."
+  },
+  {
+    "objectID": "pages/AI/Week01.html#key-drivers-of-ml-advancements",
+    "href": "pages/AI/Week01.html#key-drivers-of-ml-advancements",
+    "title": "A Decade of Machine Learning",
+    "section": "",
+    "text": "Data Explosion: The pervasive nature of the internet has ushered in an unparalleled era of data abundance, fundamentally reshaping the landscape of machine learning.\nIncreased Computing Power: Strides in computing capabilities have substantially amplified the processing capabilities for handling vast datasets, a crucial enabler for ML progress.\nNeural Network Advancements: Noteworthy progress in training algorithms, especially those tailored for neural networks, has played a pivotal role in propelling the field forward."
+  },
+  {
+    "objectID": "pages/AI/Week01.html#evolution-of-neural-networks",
+    "href": "pages/AI/Week01.html#evolution-of-neural-networks",
+    "title": "A Decade of Machine Learning",
+    "section": "",
+    "text": "The foundational era witnessed the inception of the perceptron, a single-layered neural network devised as a binary classifier by McCulloch and Pitts in 1943. However, the limitation of this era lay in the perceptron’s ability to only classify linearly separable classes.\n\n\n\nThe subsequent evolution involved the introduction of the multi-layer perceptron by Rumelhart, Hinton, and Williams. This innovation addressed the limitations associated with linear separability, with the popularization of the backpropagation algorithm for training feedforward networks.\n\n\n\nDeep neural networks, characterized by numerous hidden layers, emerged as a game-changer in computer vision tasks. The breakthrough in 2012 by Hinton, LeCun, and Bengio underscored the efficacy of deep neural networks in recognizing diverse object types. The general architecture encompasses input layers, hidden layers, and output layers."
+  },
+  {
+    "objectID": "pages/AI/Week01.html#training-process-of-neural-networks",
+    "href": "pages/AI/Week01.html#training-process-of-neural-networks",
+    "title": "A Decade of Machine Learning",
+    "section": "",
+    "text": "The training process predominantly involves supervised learning, wherein images are presented alongside their corresponding expected outputs. The iterative application of the backpropagation algorithm facilitates weight adjustments based on the disparity between predicted and expected outputs. Consequently, neural networks acquire the ability to classify and distinguish input data through repetitive exposure.\n\n\n\n\n\nDeep neural networks exhibit excellence in medical diagnosis, particularly in discerning diseases from images, as evidenced in the domain of breast cancer detection.\n\n\n\nThe instrumental role of deep neural networks in face recognition is noteworthy, aiding in the identification of individuals within images.\n\n\n\nThe Face2Gene app serves as a tangible manifestation of the successful application of deep neural networks. It aids medical professionals in diagnosing genetic disorders based on facial features, showcasing the practical impact of this technology."
+  },
+  {
+    "objectID": "pages/AI/Week01.html#machine-learning-in-internet-interaction",
+    "href": "pages/AI/Week01.html#machine-learning-in-internet-interaction",
+    "title": "A Decade of Machine Learning",
+    "section": "",
+    "text": "The dynamic interaction of users with the internet inadvertently transforms them into valuable data points for machine learning algorithms. These algorithms, wielded by major tech entities, classify users to customize ads and optimize overall user experiences.\n\n\n\n\n\nMachine learning, particularly in pattern recognition, demonstrates capabilities akin to those observed in the animal kingdom. However, it falls short of encompassing the comprehensive cognitive functions characteristic of human intelligence.\n\n\n\nHuman cognitive abilities span goal-directed, autonomous action, and a capacity for collective approaches. Distinctive human attributes include planning, wealth accumulation, home-building, and fostering societal diversification."
+  },
+  {
+    "objectID": "pages/AI/Week01.html#performance-vs.-competence-in-machine-learning",
+    "href": "pages/AI/Week01.html#performance-vs.-competence-in-machine-learning",
+    "title": "A Decade of Machine Learning",
+    "section": "",
+    "text": "Neural networks showcase proficiency in specific tasks but lack a holistic understanding of the world. The inherent brittleness of machine learning necessitates meticulous preparation, coding, and specialized training for diverse problem domains."
+  },
+  {
+    "objectID": "pages/AI/Week01.html#game-of-go-and-reinforcement-learning",
+    "href": "pages/AI/Week01.html#game-of-go-and-reinforcement-learning",
+    "title": "A Decade of Machine Learning",
+    "section": "",
+    "text": "The triumph of Alphago, developed by DeepMind, stands out as a testament to the success achievable through reinforcement learning. This approach played a pivotal role in training the program for strategic decision-making. Subsequent iterations, such as Alphago Zero and AlphaZero, demonstrated the capacity to learn autonomously without human intervention and master multiple games simultaneously."
+  },
+  {
+    "objectID": "pages/AI/Week01.html#human-cognition-and-ai",
+    "href": "pages/AI/Week01.html#human-cognition-and-ai",
+    "title": "A Decade of Machine Learning",
+    "section": "Human Cognition and AI",
+    "text": "Human Cognition and AI\n\nCognitive Landscape\nHuman intelligence engages in a myriad of activities such as logic, representation, planning, reasoning, and search. The crux of these cognitive endeavors lies in symbolic reasoning, a substantial facet of the human cognitive load.\n\n\nSymbolic Reasoning\nSymbolic reasoning, integral to human cognition, involves the management of symbolic knowledge representation and intricate problem-solving processes."
+  },
+  {
+    "objectID": "pages/AI/Week01.html#distinguishing-ai-from-machine-learning",
+    "href": "pages/AI/Week01.html#distinguishing-ai-from-machine-learning",
+    "title": "A Decade of Machine Learning",
+    "section": "Distinguishing AI from Machine Learning",
+    "text": "Distinguishing AI from Machine Learning\n\nAI Emphasis\nWithin the domain of Artificial Intelligence (AI), the spotlight is on symbolic knowledge representation and advanced problem-solving methodologies.\n\n\nMachine Learning Focus\nIn contrast, Machine Learning (ML) gravitates towards interpreting data, with applications ranging from recommender systems to predictive analytics and classification."
+  },
+  {
+    "objectID": "pages/AI/Week01.html#knowledge-representation-in-ai",
+    "href": "pages/AI/Week01.html#knowledge-representation-in-ai",
+    "title": "A Decade of Machine Learning",
+    "section": "Knowledge Representation in AI",
+    "text": "Knowledge Representation in AI\n\nDeclarative Knowledge\nAligning with the cognitive domain of humans, explicit symbolic representation, known as declarative knowledge, assumes a pivotal role. It encompasses the representation of the world and engages in reasoned deductions.\n\n\nInferences in AI\nAI agents showcase a spectrum of inferences, ranging from deductive reasoning based on logic to plausible or probabilistic inferences that incorporate an element of likelihood."
+  },
+  {
+    "objectID": "pages/AI/Week01.html#symbolic-representation-in-ai",
+    "href": "pages/AI/Week01.html#symbolic-representation-in-ai",
+    "title": "A Decade of Machine Learning",
+    "section": "Symbolic Representation in AI",
+    "text": "Symbolic Representation in AI\n\nDefining Symbols\nSymbols, representing abstract concepts, manifest in diverse forms. For example, the number (7) can be expressed in various ways, illustrating the distinction between the conceptualization of numbers and their symbolic representations.\n\n\nMeaning of Symbols\nThe significance of symbols is socially agreed upon, forming the foundation for semiotic systems. Whether in road signs or linguistic characters, symbols encapsulate shared meanings."
+  },
+  {
+    "objectID": "pages/AI/Week01.html#semiotics-and-biosemiotics",
+    "href": "pages/AI/Week01.html#semiotics-and-biosemiotics",
+    "title": "A Decade of Machine Learning",
+    "section": "Semiotics and Biosemiotics",
+    "text": "Semiotics and Biosemiotics\n\nSemiotics\nSemiotics, the scientific study of symbols in spoken and written languages, lays the groundwork for comprehending human communication and representation.\n\n\nBiosemiotics\nDelving deeper, Biosemiotics explores the emergence of complex behavior when simple systems engage in symbolic communication. This is exemplified by phenomena such as ant trails utilizing pheromones."
+  },
+  {
+    "objectID": "pages/AI/Week01.html#reasoning-mechanisms-in-ai",
+    "href": "pages/AI/Week01.html#reasoning-mechanisms-in-ai",
+    "title": "A Decade of Machine Learning",
+    "section": "Reasoning Mechanisms in AI",
+    "text": "Reasoning Mechanisms in AI\n\nFormal Reasoning\nIn the context of AI, reasoning involves the systematic manipulation of symbols in a meaningful manner. This encompasses algorithms for fundamental operations like addition and multiplication, extending to more intricate processes like the Fourier transform.\n\n\nConceptualizing Algorithms\nUnderstanding AI algorithms necessitates a conceptual grasp of symbolic manipulations. For instance, multiplication algorithms entail conceptualizing the multiplication of unit digits and the subsequent shifting of results."
+  },
+  {
+    "objectID": "pages/AI/Week01.html#automation-vs.-ai",
+    "href": "pages/AI/Week01.html#automation-vs.-ai",
+    "title": "A Decade of Machine Learning",
+    "section": "Automation vs. AI",
+    "text": "Automation vs. AI\n\nNavigating Overlap\nWhile Automation and AI share common ground, not all automated systems integrate AI. For instance, implementations such as train reservation systems or basic online shopping may lack substantial AI components."
+  },
+  {
+    "objectID": "pages/AI/Week01.html#machine-learnings-role-in-ai",
+    "href": "pages/AI/Week01.html#machine-learnings-role-in-ai",
+    "title": "A Decade of Machine Learning",
+    "section": "Machine Learning’s Role in AI",
+    "text": "Machine Learning’s Role in AI\n\nML as a Component\nMachine Learning constitutes one facet of the multifaceted field of AI. Examples such as self-driving cars leverage ML for tasks including pattern recognition, speech processing, and object classification."
+  },
+  {
+    "objectID": "pages/AI/Week01.html#clarifying-data-science-in-ai",
+    "href": "pages/AI/Week01.html#clarifying-data-science-in-ai",
+    "title": "A Decade of Machine Learning",
+    "section": "Clarifying Data Science in AI",
+    "text": "Clarifying Data Science in AI\n\nData’s Multifaceted Role\nData science, encompassing elements of statistics, AI, and machine learning, plays a crucial role in the broader field of AI. It serves as a foundational component but does not encapsulate the entirety of AI."
+  },
+  {
+    "objectID": "pages/AI/Week01.html#introduction-to-ai-and-definitions",
+    "href": "pages/AI/Week01.html#introduction-to-ai-and-definitions",
+    "title": "A Decade of Machine Learning",
+    "section": "Introduction to AI and Definitions:",
+    "text": "Introduction to AI and Definitions:\n\n\nDefinitions of AI:\n\nHerbert Simon: Programs are considered intelligent if they display behaviors regarded as intelligent in humans.\nBar and Feigenbaum: AI seeks to comprehend the systematic behavior of information processing systems, analogous to physicists and biologists in their respective domains.\nElaine Rich: AI involves solving exponentially hard problems in polynomial time, leveraging domain-specific knowledge.\nJohn Hoagland: AI’s goal is to create machines with minds of their own, treating thinking and computing as fundamentally interconnected."
+  },
+  {
+    "objectID": "pages/AI/Week01.html#fundamental-questions-in-ai",
+    "href": "pages/AI/Week01.html#fundamental-questions-in-ai",
+    "title": "A Decade of Machine Learning",
+    "section": "Fundamental Questions in AI:",
+    "text": "Fundamental Questions in AI:\n\nQuestions about Intelligence:\nVarious perspectives exist on what constitutes intelligence, encompassing language use, reasoning, and learning. Ongoing debates revolve around whether machines can genuinely exhibit thinking, with insights from philosophers like Roger Penrose exploring quantum mechanics in the human brain."
+  },
+  {
+    "objectID": "pages/AI/Week01.html#turing-test-and-challenges",
+    "href": "pages/AI/Week01.html#turing-test-and-challenges",
+    "title": "A Decade of Machine Learning",
+    "section": "Turing Test and Challenges:",
+    "text": "Turing Test and Challenges:\n\nAlan Turing’s Turing Test:\nThe evaluation of machine intelligence through its ability to convincingly engage in natural language conversations with a human judge forms the essence of the Turing Test. Associated challenges include situations where chatbots may impress but lack genuine intelligence. The Löbner Prize Competition attempts a similar test.\n\n\nHector Levesque’s Alternative: Vinograd Schemas\nAn alternate test proposed by Hector Levesque challenges a machine’s understanding through multiple-choice questions that require subject matter knowledge."
+  },
+  {
+    "objectID": "pages/AI/Week01.html#vinograd-schemas-examples",
+    "href": "pages/AI/Week01.html#vinograd-schemas-examples",
+    "title": "A Decade of Machine Learning",
+    "section": "Vinograd Schemas Examples:",
+    "text": "Vinograd Schemas Examples:\n\nExample 1:\n\nOriginal Sentence: “The city council refused the demonstrators a permit because they feared violence.”\nAlternate Sentence: “The city council refused the demonstrators a permit because they advocated violence.”\nQuestion: What does “they” refer to? Options: Council, Demonstrators.\n\nExample 2:\n\nOriginal Sentence: “John took the water bottle out of the backpack so that it would be lighter.”\nAlternate Sentence: “John took the water bottle out of the backpack so that it would be handy.”\nQuestion: What does “it” refer to? Options: Backpack, Water Bottle.\n\nExample 3:\n\nOriginal Sentence: “The trophy would not fit into the brown suitcase because it was too small.”\nAlternate Sentence: “The trophy would not fit into the brown suitcase because it was too big.”\nQuestion: What does “it” refer to? Options: Trophy, Brown Suitcase.\n\nExample 4:\n\nOriginal Sentence: “The lawyer asked the witness a question but he was reluctant to repeat it.”\nAlternate Sentence: “The lawyer asked the witness a question but he was reluctant to answer it.”\nQuestion: Who was reluctant? Options: Lawyer, Witness."
+  },
+  {
+    "objectID": "pages/AI/Week01.html#introduction-to-intelligence-and-ai-goals",
+    "href": "pages/AI/Week01.html#introduction-to-intelligence-and-ai-goals",
+    "title": "A Decade of Machine Learning",
+    "section": "Introduction to Intelligence and AI Goals",
+    "text": "Introduction to Intelligence and AI Goals\nIn the exploration of artificial intelligence (AI), the concept of intelligence takes center stage. AI endeavors to construct intelligent agents capable of complex problem-solving. A historical glimpse into European thinkers sheds light on the roots of AI ideologies.\n\nGalileo Galilei (1623)\nIn his 1623 publication, Galileo Galilei delves into the subjective nature of sensory experiences. He contends that taste, odors, and colors are subjective perceptions residing in consciousness. Galileo challenges the idea that these qualities exist inherently in external objects. Moreover, he posits that philosophy is expressed through the language of mathematics.\n\n\nThomas Hobbs\nThomas Hobbs, often referred to as the grandfather of AI, introduces the notion that thinking involves the manipulation of symbols. He associates reasoning with computation, not in the contemporary sense of computers, but as a form of mathematical operations. Hobbs views computation as the sum of many things added together or the determination of the remainder when one thing is subtracted from another.\n\n\nRené Descartes\nBuilding on Galileo’s ideas, Descartes extends the concept that animals are intricate machines, reserving acknowledgment of a mind solely for humans. He aligns thought with symbols and introduces the mind-body dualism, raising questions about the interaction between the mental world and the physical body."
+  },
+  {
+    "objectID": "pages/AI/Week01.html#early-concepts-of-thinking-machines",
+    "href": "pages/AI/Week01.html#early-concepts-of-thinking-machines",
+    "title": "A Decade of Machine Learning",
+    "section": "Early Concepts of Thinking Machines",
+    "text": "Early Concepts of Thinking Machines\nThe early stages of envisioning thinking machines were influenced by the use of punch cards in the textile industry’s Jacquard looms.\n\nJacquard Looms\nPunch cards were employed to control patterns in textile looms. This concept of punched cards was later adapted for programming early computers, emphasizing a transition from controlling patterns to controlling programs.\n\n\nCharles Babbage and Augusta Ada Byron\nCharles Babbage, a mathematician and inventor, conceptualized the Difference Engine and the Analytic Engine. Augusta Ada Byron, daughter of Lord Byron, collaborated with Babbage and is recognized as the world’s first programmer. She envisioned computers going beyond mere number crunching, foreseeing applications in music composition and AI-like capabilities."
+  },
+  {
+    "objectID": "pages/AI/Week01.html#mechanical-calculators-and-early-computers",
+    "href": "pages/AI/Week01.html#mechanical-calculators-and-early-computers",
+    "title": "A Decade of Machine Learning",
+    "section": "Mechanical Calculators and Early Computers",
+    "text": "Mechanical Calculators and Early Computers\nThe evolution of mechanical calculators and the emergence of early electronic computers marked significant progress in computational capabilities.\n\nPascal’s Calculator and Leibniz’s Step Drum\nPascal’s mechanical calculator incorporated Latin Lantern gears, performing basic arithmetic operations. Leibniz introduced the step drum, a mechanism for counting and representing numbers. Both contributed to the development of early calculating machines.\n\n\nENIAC (Electronic Numerical Integrator and Computer)\nENIAC, the first electronic computer, boasted over 17,000 vacuum tubes. Despite its immense size and weight, it laid the foundation for electronic computing. Augusta Ada Byron’s visionary insights into the potential of computers started to materialize with the advent of ENIAC."
+  },
+  {
+    "objectID": "pages/AI/Week01.html#introduction",
+    "href": "pages/AI/Week01.html#introduction",
+    "title": "A Decade of Machine Learning",
+    "section": "Introduction",
+    "text": "Introduction\nThe course provides a comprehensive exploration of the evolution and fundamental principles of Artificial Intelligence (AI). With historical roots reaching back to the 1300s, early attempts by figures like Jazari and Ramon Llull set the stage for the development of AI.\n\nCoined Terminology\nThe term “Artificial Intelligence” was officially coined by John McCarthy during the Dartmouth Conference in 1956. This landmark event, organized alongside Marvin Minsky and Claude Shannon, aimed to investigate the potential for machines to simulate human intelligence through precise descriptions."
+  },
+  {
+    "objectID": "pages/AI/Week01.html#key-figures",
+    "href": "pages/AI/Week01.html#key-figures",
+    "title": "A Decade of Machine Learning",
+    "section": "Key Figures",
+    "text": "Key Figures\n\n1. John McCarthy\n\nCredited with Naming AI\nAssistant Professor at Dartmouth\nDesigner of Lisp Programming Language\nContributions to Logic and Common Sense Reasoning\n\n\n\n2. Marvin Minsky\n\nCo-founder of MIT AI Lab\nNotable for Frame Systems (Foundation of OOP)\nAuthor of “The Society of the Mind” and “The Emotional Machine”\n\n\n\n3. Nathaniel Rochester\n\nIBM Engineer\nDesigner of IBM 701\nSupervised Arthur Samuel and the Checkers-playing Program\n\n\n\n4. Claude Shannon\n\nFather of Information Theory\nMathematician at Bell Labs\n\n\n\n5. Herbert Simon and Allen Newell\n\nDevelopers of Logic Theorist (LT) Program\nPioneers in Symbolic AI\nIntroduction of Physical Symbol Systems\nSimon’s Diverse Scholarship (Nobel Prize in Economics)"
+  },
+  {
+    "objectID": "pages/AI/Week01.html#physical-symbol-systems",
+    "href": "pages/AI/Week01.html#physical-symbol-systems",
+    "title": "A Decade of Machine Learning",
+    "section": "Physical Symbol Systems",
+    "text": "Physical Symbol Systems\n\nSymbolic Representation\nSymbol systems represent perceptible entities and adhere to formal laws, mirroring the structure of the physical world. Simon and Newell’s hypothesis posits that a Physical Symbol System is both necessary and sufficient for general intelligent action, distinguishing it from sub-symbolic AI, where information is stored in weights without explicit symbols."
+  },
+  {
+    "objectID": "pages/AI/Week01.html#philosophical-considerations",
+    "href": "pages/AI/Week01.html#philosophical-considerations",
+    "title": "A Decade of Machine Learning",
+    "section": "Philosophical Considerations",
+    "text": "Philosophical Considerations\n\nCopernican Shift\n\nGalileo’s Distinction Between Thought and Reality\nGalileo Galilei’s intellectual endeavors were marked by a profound separation between the realm of thought and the objective reality. This conceptual wedge laid the foundation for a nuanced understanding of how human cognition interfaces with the external world.\n\n\nCopernicus’ Challenge to the Geocentric Model, Emphasizing Subjectivity\nCopernicus, through his revolutionary heliocentric model, not only challenged the prevailing geocentric view but also underscored the subjectivity inherent in our interpretations of celestial motions. This shift forced a reconsideration of humanity’s position in the cosmos.\n\n\nHuman Creation of Mental Models; Reality Comprising Fundamental Particles\nHumans engage in the active creation of mental models to comprehend the intricacies of reality. The Copernican Shift extends to the microscopic realm, where the abundant nature of fundamental particles renders them unsuitable as standalone elements of representation. Instead, reality is approached through disciplined ontologies, focusing on entities like atoms, molecules, or cells based on the context of study.\n\n\nIllustration through the Powers of Ten Film\nThe Powers of Ten film serves as a captivating medium to illustrate the Copernican Shift, visually portraying the vastness and intricacies of the universe at different scales. This cinematic exploration emphasizes the dynamic interplay between our mental representations and the expansive reality they seek to capture."
+  },
+  {
+    "objectID": "pages/AI/Week01.html#representation-and-reasoning",
+    "href": "pages/AI/Week01.html#representation-and-reasoning",
+    "title": "A Decade of Machine Learning",
+    "section": "Representation and Reasoning",
+    "text": "Representation and Reasoning\n\nHuman Reasoning\n\nHuman Reasoning Involves Symbolic Representations\nIn the realm of human cognition, symbolic representations play a pivotal role in the process of reasoning. These symbols serve as cognitive tools that humans manipulate to make sense of the world around them.\n\n\nFundamental Particles Unsuitable as Elements of Representation due to Abundance\nDespite the fundamental nature of particles, their sheer abundance makes them impractical as elemental units of representation. Human cognition necessitates a selective focus, leading to the adoption of more manageable entities like atoms, molecules, or cells, depending on the specific domain of study.\n\n\nRepresentation Depends on the Focus of Study (e.g., Atoms, Molecules, Cells)\nThe choice of representation is intricately tied to the focus of study. Whether delving into the microscopic realm of atoms or exploring the complexity of biological systems at the cellular level, the selection of representational units is driven by the demands of the specific discipline.\n\n\nDiscipline-specific Ontologies Define Level of Detail in Representations\nDiscipline-specific ontologies play a crucial role in determining the level of detail embedded in representations. These structured frameworks provide a systematic approach to capturing and organizing knowledge within distinct domains."
+  },
+  {
+    "objectID": "pages/AI/Week01.html#introduction-to-problem-solving",
+    "href": "pages/AI/Week01.html#introduction-to-problem-solving",
+    "title": "A Decade of Machine Learning",
+    "section": "Introduction to Problem Solving",
+    "text": "Introduction to Problem Solving\nIn the expansive domain of Artificial Intelligence (AI), problem-solving emerges as the orchestrated actions of autonomous agents navigating predefined objectives within dynamic environments. This course delves into the intricacies of problem-solving, elucidating the diverse methodologies encapsulated within search methods.\n\nProblem-Solving Framework\n\nAgent and Environment:\n\nAutonomous agents operate within a world defined by specific objectives and a repertoire of actions. Decision-making unfolds in real-time, navigating challenges posed by incomplete knowledge and the concurrent activities of other agents.\n\nSimplifying Assumptions:\n\nInitial simplifications envision a static world with a solitary agent making decisions, providing foundational insights into fundamental problem-solving principles."
+  },
+  {
+    "objectID": "pages/AI/Week01.html#two-approaches-to-problem-solving",
+    "href": "pages/AI/Week01.html#two-approaches-to-problem-solving",
+    "title": "A Decade of Machine Learning",
+    "section": "Two Approaches to Problem Solving",
+    "text": "Two Approaches to Problem Solving\n\n1. Model-Based Reasoning (Search Methods)\n\nDefinition:\nModel-Based Reasoning involves grounded reasoning in first principles or search approaches, wherein agents experiment with diverse actions to discern their efficacy.\n\n\nAssumptions:\nThis approach assumes a static world, complete knowledge, and actions that never fail, forming the foundational basis for problem-solving methodologies.\n\n\n\n2. Knowledge-Based Approach\n\nCharacteristics:\nThe Knowledge-Based Approach draws upon a societal structure rich in stored experiences, leveraging accumulated knowledge for effective problem-solving. It encompasses memory-based reasoning, case-based reasoning, and machine learning paradigms."
+  },
+  {
+    "objectID": "pages/AI/Week01.html#rubiks-cube-example",
+    "href": "pages/AI/Week01.html#rubiks-cube-example",
+    "title": "A Decade of Machine Learning",
+    "section": "Rubik’s Cube Example",
+    "text": "Rubik’s Cube Example\nThe Rubik’s Cube serves as an illustrative example, elucidating the dichotomy between knowledge-based and search-based problem-solving approaches.\n\nLearning Dynamics\n\nInitial Challenge:\n\nThe Rubik’s Cube presents an initial challenge devoid of a known solution, necessitating exploratory actions.\n\nEvolution of Knowledge:\n\nOver time, individuals develop efficient solving methods through experiential learning, showcasing the adaptive nature of human problem-solving.\n\nDeep Reinforcement Learning:\n\nThe introduction of deep reinforcement learning emphasizes autonomous learning without human guidance, mirroring aspects of artificial intelligence."
+  },
+  {
+    "objectID": "pages/AI/Week01.html#sudoku-example",
+    "href": "pages/AI/Week01.html#sudoku-example",
+    "title": "A Decade of Machine Learning",
+    "section": "Sudoku Example",
+    "text": "Sudoku Example\nThe Sudoku puzzle exemplifies the synergy between search and reasoning in problem-solving, offering insights into the nuanced interplay of diverse problem-solving methodologies.\n\nCombined Approach\n\nSearch Methods:\n\nBasic search algorithms, such as depth-first search and breadth-first search, lay the foundation for problem-solving endeavors.\n\nReasoning:\n\nReasoning techniques refine available options, harmonizing search methodologies with informed decision-making for a holistic problem-solving strategy."
+  },
+  {
+    "objectID": "pages/AI/Week01.html#role-of-logic-in-problem-solving",
+    "href": "pages/AI/Week01.html#role-of-logic-in-problem-solving",
+    "title": "A Decade of Machine Learning",
+    "section": "Role of Logic in Problem Solving",
+    "text": "Role of Logic in Problem Solving\nLogic, particularly first-order logic, assumes a pivotal role in representing knowledge and facilitating deductive reasoning within the problem-solving paradigm.\n\nLogical Components\n\nDeductive Reasoning:\n\nLogic functions as a tool for deductive reasoning, employing principles such as deduction, induction, abduction, and plausible reasoning to navigate complex problem spaces.\n\nConstraint Processing:\n\nLogic, search methods, and other reasoning approaches converge under the umbrella of constraint processing, offering a comprehensive framework for addressing intricate problem scenarios."
+  },
+  {
+    "objectID": "pages/AI/Week01.html#map-coloring-problem",
+    "href": "pages/AI/Week01.html#map-coloring-problem",
+    "title": "A Decade of Machine Learning",
+    "section": "Map Coloring Problem",
+    "text": "Map Coloring Problem\nThe Map Coloring Problem stands as an exemplary challenge within AI, involving the assignment of colors to regions while adhering to specific constraints.\n\nConstraint Graph Representation\n\nGraph Transformation:\n\nRegions and their color preferences undergo a transformative process, manifesting as a constraint graph that encapsulates the intricacies of the problem.\n\nAlgorithmic Solutions:\n\nConstraint processing algorithms come to the forefront as viable solutions to graph-related problems, showcasing the practical application of logical problem-solving methodologies."
+  },
+  {
+    "objectID": "pages/AI/Week01.html#key-takeaways",
+    "href": "pages/AI/Week01.html#key-takeaways",
+    "title": "A Decade of Machine Learning",
+    "section": "Key Takeaways",
+    "text": "Key Takeaways\n\nDecade of Machine Learning:\n\nThe surge in machine learning over the past decade is attributed to increased data availability, enhanced computing power, and advancements in training algorithms, particularly within the domain of deep learning. \n\nNeural Network Evolution:\n\nFrom the foundational perceptron era to the transformative deep neural networks in computer vision, the evolution of neural networks has played a pivotal role in shaping the landscape of AI.\n\nTraining Process:\n\nSupervised training, especially in medical diagnosis and face recognition, showcases the practical applications of deep neural networks in real-world scenarios.\n\nMachine Learning in Internet Interaction:\n\nUsers’ dynamic interaction with the internet transforms them into valuable data points, shaping the customization of ads and optimizing user experiences.\n\nPerformance vs. Competence:\n\nNeural networks exhibit proficiency in specific tasks but lack a holistic understanding of the world, highlighting the need for specialized training.\n\nGame of Go and Reinforcement Learning:\n\nThe triumph of AlphaGo exemplifies the success achievable through reinforcement learning, showcasing the capacity for autonomous learning without human intervention.\n\nHuman Cognitive Architecture:\n\nUnderstanding human cognitive abilities, symbolic reasoning, and the distinction between AI and machine learning provides insights into the complex realm of intelligence.\n\nHistory and Philosophy:\n\nThe historical roots of AI, key figures in AI development, and philosophical considerations underscore the interdisciplinary nature of artificial intelligence.\n\nPhysical Symbol Systems:\n\nSymbolic representation, as proposed by Simon and Newell, forms the basis for general intelligent action, distinguishing it from sub-symbolic AI.\n\nProblem Solving:\n\nTwo approaches, model-based reasoning and knowledge-based approaches, along with the role of logic, contribute to nuanced problem-solving methodologies.\n\nMap Coloring Problem:\n\nThe Map Coloring Problem serves as a concrete example, highlighting the integration of graph theory, constraint processing, and algorithmic solutions in logical problem-solving."
+  },
+  {
+    "objectID": "pages/DL/Week01_1.html",
+    "href": "pages/DL/Week01_1.html",
+    "title": "A Historical Overview of Deep Learning",
+    "section": "",
+    "text": "In the early stages of understanding neural networks, Joseph von Gerlach’s 1871 proposition of the Reticular theory posited a continuous network for the nervous system. Supporting evidence came from Golgi’s staining technique. The debate shifted with Santiago Ramón y Cajal’s 1891 Neuron doctrine, proposing discrete individual cells forming a network. This sparked the Nobel Prize conflict in 1906, ultimately resolved through electron microscopy. The ensuing discourse revolved around the balance between localized and distributed processing in the brain.\n\n\n\nIn 1943, McCulloch and Pitts presented a model of the neuron, laying the groundwork for artificial neurons. A significant stride occurred in 1957 when Frank Rosenblatt introduced the perceptron model, featuring weighted inputs. However, the limitations of a single perceptron were identified by Minsky and Papert in 1969.\n\n\n\nThe period from 1957 to 1969 marked the “Spring of AI,” characterized by optimism, funding, and interest. Yet, Minsky and Papert’s critique ushered in the “Winter of AI.” The emergence of backpropagation in 1986, popularized by Rumelhart and Hinton, and the acknowledgment of gradient descent (discovered by Cauchy in the 19th century) marked a shift in the AI landscape.\n\n\n\nThe Universal Approximation Theorem, introduced in 1989, elucidates how a multi-layered neural network can approximate any function. Emphasis is placed on the significance of the number of neurons for achieving superior approximation.\n\n\n\nA disparity between theoretical knowledge and practical challenges in training deep neural networks emerged. Stability and convergence issues with backpropagation were identified in practice. However, progress in convolutional neural networks over two decades has been noteworthy."
+  },
+  {
+    "objectID": "pages/DL/Week01_1.html#biological-neurons-and-theories",
+    "href": "pages/DL/Week01_1.html#biological-neurons-and-theories",
+    "title": "A Historical Overview of Deep Learning",
+    "section": "",
+    "text": "In the early stages of understanding neural networks, Joseph von Gerlach’s 1871 proposition of the Reticular theory posited a continuous network for the nervous system. Supporting evidence came from Golgi’s staining technique. The debate shifted with Santiago Ramón y Cajal’s 1891 Neuron doctrine, proposing discrete individual cells forming a network. This sparked the Nobel Prize conflict in 1906, ultimately resolved through electron microscopy. The ensuing discourse revolved around the balance between localized and distributed processing in the brain."
+  },
+  {
+    "objectID": "pages/DL/Week01_1.html#artificial-neurons-and-the-perceptron",
+    "href": "pages/DL/Week01_1.html#artificial-neurons-and-the-perceptron",
+    "title": "A Historical Overview of Deep Learning",
+    "section": "",
+    "text": "In 1943, McCulloch and Pitts presented a model of the neuron, laying the groundwork for artificial neurons. A significant stride occurred in 1957 when Frank Rosenblatt introduced the perceptron model, featuring weighted inputs. However, the limitations of a single perceptron were identified by Minsky and Papert in 1969."
+  },
+  {
+    "objectID": "pages/DL/Week01_1.html#spring-to-winter-of-ai",
+    "href": "pages/DL/Week01_1.html#spring-to-winter-of-ai",
+    "title": "A Historical Overview of Deep Learning",
+    "section": "",
+    "text": "The period from 1957 to 1969 marked the “Spring of AI,” characterized by optimism, funding, and interest. Yet, Minsky and Papert’s critique ushered in the “Winter of AI.” The emergence of backpropagation in 1986, popularized by Rumelhart and Hinton, and the acknowledgment of gradient descent (discovered by Cauchy in the 19th century) marked a shift in the AI landscape."
+  },
+  {
+    "objectID": "pages/DL/Week01_1.html#universal-approximation-theorem",
+    "href": "pages/DL/Week01_1.html#universal-approximation-theorem",
+    "title": "A Historical Overview of Deep Learning",
+    "section": "",
+    "text": "The Universal Approximation Theorem, introduced in 1989, elucidates how a multi-layered neural network can approximate any function. Emphasis is placed on the significance of the number of neurons for achieving superior approximation."
+  },
+  {
+    "objectID": "pages/DL/Week01_1.html#practical-challenges-and-progress",
+    "href": "pages/DL/Week01_1.html#practical-challenges-and-progress",
+    "title": "A Historical Overview of Deep Learning",
+    "section": "",
+    "text": "A disparity between theoretical knowledge and practical challenges in training deep neural networks emerged. Stability and convergence issues with backpropagation were identified in practice. However, progress in convolutional neural networks over two decades has been noteworthy."
+  },
+  {
+    "objectID": "pages/DL/Week01_1.html#introduction",
+    "href": "pages/DL/Week01_1.html#introduction",
+    "title": "A Historical Overview of Deep Learning",
+    "section": "Introduction",
+    "text": "Introduction\n\nHistorical Perspective\nDeep learning encountered challenges in training via backpropagation. Jeff Hinton’s group proposed a crucial weight initialization idea in 2016, fostering stable training. The improved availability of computing power and data around 2006 laid the foundation for success."
+  },
+  {
+    "objectID": "pages/DL/Week01_1.html#early-challenges-and-solutions",
+    "href": "pages/DL/Week01_1.html#early-challenges-and-solutions",
+    "title": "A Historical Overview of Deep Learning",
+    "section": "Early Challenges and Solutions",
+    "text": "Early Challenges and Solutions\n\nUnsupervised Pre-training\nBetween 2007 and 2009, investigations into the effectiveness of unsupervised pre-training led to insights that shaped optimization and regularization algorithms. The course will delve into topics such as initializations, regularizations, and optimizations."
+  },
+  {
+    "objectID": "pages/DL/Week01_1.html#emergence-of-deep-learning",
+    "href": "pages/DL/Week01_1.html#emergence-of-deep-learning",
+    "title": "A Historical Overview of Deep Learning",
+    "section": "Emergence of Deep Learning",
+    "text": "Emergence of Deep Learning\n\nPractical Utility\nDeep learning applications started winning competitions, including handwriting recognition on the MNIST dataset, speech recognition, and visual pattern recognition like traffic sign data.\n\n\nImageNet Challenge (2012-2016)\nThe ImageNet challenge, a pivotal turning point, witnessed the evolution from ZFNet to ResNet (152 layers), achieving a remarkable 3.6% error rate in 2016, surpassing human performance."
+  },
+  {
+    "objectID": "pages/DL/Week01_1.html#transition-period-2012-2016",
+    "href": "pages/DL/Week01_1.html#transition-period-2012-2016",
+    "title": "A Historical Overview of Deep Learning",
+    "section": "Transition Period (2012-2016)",
+    "text": "Transition Period (2012-2016)\n\nGolden Period of Deep Learning\nThe universal acceptance of deep learning marked its golden period, with convolutional neural networks dominating image-related problems. Similar trends were observed in natural language processing (NLP) and speech processing."
+  },
+  {
+    "objectID": "pages/DL/Week01_1.html#from-cats-to-convolutional-neural-networks",
+    "href": "pages/DL/Week01_1.html#from-cats-to-convolutional-neural-networks",
+    "title": "A Historical Overview of Deep Learning",
+    "section": "From Cats to Convolutional Neural Networks",
+    "text": "From Cats to Convolutional Neural Networks\n\nMotivation from Neural Science (1959)\nAn experiment with a cat’s brain in 1959 revealed different parts activated for different stick positions, motivating the concept of receptive fields in convolutional neural networks (CNNs).\n\n\nNeocognitron Model (1980)\nInspired by distributed processing observed in the cat experiment, the Neocognitron model utilized receptive fields for different parts of the network.\n\n\nLeNet Model (1989)\nJan Lecun’s contribution to deep learning, the LeNet model, was employed for recognizing handwritten digits, finding applications in postal services for automated sorting of letters.\n\n\nLeNet-5 Model (1998)\nFurther improvements on the LeNet model, introducing the MNIST dataset for testing CNNs."
+  },
+  {
+    "objectID": "pages/DL/Week01_1.html#history-of-deep-learning",
+    "href": "pages/DL/Week01_1.html#history-of-deep-learning",
+    "title": "A Historical Overview of Deep Learning",
+    "section": "History of Deep Learning",
+    "text": "History of Deep Learning\n\n1950s: Enthusiasm in AI.\n1990s: Convolutional Neural Networks (CNNs) used for real-world problems, challenges with large networks and training.\n2006-2012: Advances in deep learning, successful training for ImageNet challenges.\n2016 onwards: Acceleration with better optimization methods (Nesterov’s method), leading to faster convergence.\nOptimization Algorithms: Adagrad, RMSprop, Adam, AdamW, etc., focus on faster and better convergence."
+  },
+  {
+    "objectID": "pages/DL/Week01_1.html#activation-functions",
+    "href": "pages/DL/Week01_1.html#activation-functions",
+    "title": "A Historical Overview of Deep Learning",
+    "section": "Activation Functions",
+    "text": "Activation Functions\nThe evolution from the logistic function to various activation functions (ReLU, Leaky ReLU, Parametric ReLU, Tanh, etc.) aimed at stabilizing training, achieving better performance, and faster convergence. The use of improved activation functions contributed to enhanced stability and performance."
+  },
+  {
+    "objectID": "pages/DL/Week01_1.html#sequence-processing",
+    "href": "pages/DL/Week01_1.html#sequence-processing",
+    "title": "A Historical Overview of Deep Learning",
+    "section": "Sequence Processing",
+    "text": "Sequence Processing\nIntroduction to problems involving sequences in deep learning, featuring Recurrent Neural Networks (RNNs) proposed in 1982 for sequence processing. Long Short-Term Memory Cells (LSTMs) were introduced in 1997 to address the vanishing gradient problem. By 2014, RNNs and LSTMs dominated natural language processing (NLP) and speech applications. In 2017, Transformer networks started replacing RNNs and LSTMs in sequence learning."
+  },
+  {
+    "objectID": "pages/DL/Week01_1.html#game-playing-with-deep-learning",
+    "href": "pages/DL/Week01_1.html#game-playing-with-deep-learning",
+    "title": "A Historical Overview of Deep Learning",
+    "section": "Game Playing with Deep Learning",
+    "text": "Game Playing with Deep Learning\n\n2015: Deep Reinforcement Learning (DRL) agents beat humans in Atari games.\nBreakthrough in Go game playing using DRL in 2015.\n2016: DRL-based agents beat professional poker players.\nComplex strategy games like Dota 2 mastered by DRL agents.\nIntroduction of OpenAI Gym as a toolkit for developing and comparing reinforcement learning algorithms.\nEmergence of AlphaStar and MuZero for mastering multiple games and tasks."
+  },
+  {
+    "objectID": "pages/DL/Week01_1.html#general-trends-in-deep-reinforcement-learning",
+    "href": "pages/DL/Week01_1.html#general-trends-in-deep-reinforcement-learning",
+    "title": "A Historical Overview of Deep Learning",
+    "section": "General Trends in Deep Reinforcement Learning",
+    "text": "General Trends in Deep Reinforcement Learning\nDeep RL agents consistently outperforming humans in various complex games, progressing from simple environments to mastering complex strategy games. The trend is towards developing “master of all” models (e.g., MuZero) for general intelligence in multiple tasks."
+  },
+  {
+    "objectID": "pages/DL/Week01_1.html#overview",
+    "href": "pages/DL/Week01_1.html#overview",
+    "title": "A Historical Overview of Deep Learning",
+    "section": "Overview",
+    "text": "Overview\n\nRevival and Advances\nA recap of deep learning’s revival and recent advances, reflecting an increasing interest in real-world problem-solving and challenges.\n\n\nAI Publications Growth\nThe Stanford AI Index Report highlights a significant increase in AI publications, indicating exponential growth across machine learning, computer vision, and NLP.\n\n\nFunding and Startups\nThe rise of AI startups, coupled with the interest from major tech companies, has led to exponential growth in AI-related patent filings."
+  },
+  {
+    "objectID": "pages/DL/Week01_1.html#evolution-of-neural-network-models",
+    "href": "pages/DL/Week01_1.html#evolution-of-neural-network-models",
+    "title": "A Historical Overview of Deep Learning",
+    "section": "Evolution of Neural Network Models",
+    "text": "Evolution of Neural Network Models\n\nIntroduction of Transformers\nIn 2017, transformers were introduced, revolutionizing AI and finding success in NLP, subsequently adopted in other domains.\n\n\nMachine Translation and Transformers\nA historical overview of machine translation, emphasizing the shift from IBM models to neural machine translation. The impact of sequence-to-sequence models (2014) and transformers (2017) is discussed.\n\n\nTransformer-based Models\nThe BERT model (2018) with a focus on pre-training, the evolution of models with increasing parameters from GPT-3 (175 billion) to 1.6 trillion parameters, and a comparison with human brain synapses provide perspective."
+  },
+  {
+    "objectID": "pages/DL/Week01_1.html#transformers-in-vision",
+    "href": "pages/DL/Week01_1.html#transformers-in-vision",
+    "title": "A Historical Overview of Deep Learning",
+    "section": "Transformers in Vision",
+    "text": "Transformers in Vision\n\nAdoption in Image\nClassification The evolution of image classification models, starting with AlexNet (2012), is traced. Transformers entered image classification and object detection in 2019, marking a paradigm shift towards transformers in state-of-the-art models."
+  },
+  {
+    "objectID": "pages/DL/Week01_1.html#generative-models",
+    "href": "pages/DL/Week01_1.html#generative-models",
+    "title": "A Historical Overview of Deep Learning",
+    "section": "Generative Models",
+    "text": "Generative Models\n\nOverview\nAn introduction to generative models for image synthesis, covering the evolution from variation autoencoders to GANs (Generative Adversarial Networks). Recent developments in diffusion-based models overcoming GAN drawbacks are discussed.\n\n\nDALL-E and DALL-E 2\nDALL-E’s capability to generate realistic images based on text prompts is explored. The introduction of DALL-E 2, a diffusion-based model, exceeding expectations, is highlighted with examples of generated images showcasing photorealistic results.\n\n\nExciting Times in Generative Models\nThe exploration of generative models for realistic image generation is showcased, with examples of prompts generating photorealistic images illustrating field advancements."
+  },
+  {
+    "objectID": "pages/DL/Week01_1.html#introduction-1",
+    "href": "pages/DL/Week01_1.html#introduction-1",
+    "title": "A Historical Overview of Deep Learning",
+    "section": "Introduction",
+    "text": "Introduction\nRapid advancements in deep learning have yielded powerful models trained on large datasets, showcasing impressive results. However, there is a growing need for sanity, interpretability, fairness, and responsibility in deploying these models."
+  },
+  {
+    "objectID": "pages/DL/Week01_1.html#paradox-of-deep-learning",
+    "href": "pages/DL/Week01_1.html#paradox-of-deep-learning",
+    "title": "A Historical Overview of Deep Learning",
+    "section": "Paradox of Deep Learning",
+    "text": "Paradox of Deep Learning\nDespite the high capacity of deep learning models, they exhibit remarkable performance. Challenges include numerical instability, sharp minima, and susceptibility to adversarial examples."
+  },
+  {
+    "objectID": "pages/DL/Week01_1.html#calls-for-sanity",
+    "href": "pages/DL/Week01_1.html#calls-for-sanity",
+    "title": "A Historical Overview of Deep Learning",
+    "section": "Calls for Sanity",
+    "text": "Calls for Sanity\nEmphasis is placed on explainability and interpretability to comprehend model decisions. Advances include workshops on human interpretability, tools like the Clever Hans toolkit to identify model reliance on cues, and benchmarking on adversarial examples."
+  },
+  {
+    "objectID": "pages/DL/Week01_1.html#fairness-and-responsibility",
+    "href": "pages/DL/Week01_1.html#fairness-and-responsibility",
+    "title": "A Historical Overview of Deep Learning",
+    "section": "Fairness and Responsibility",
+    "text": "Fairness and Responsibility\nIncreasing awareness of biases in AI models, particularly in facial recognition and criminal risk predictions, has led to concerns about fairness. Efforts such as the AI audit challenge at Stanford focus on building non-discriminatory models."
+  },
+  {
+    "objectID": "pages/DL/Week01_1.html#green-ai",
+    "href": "pages/DL/Week01_1.html#green-ai",
+    "title": "A Historical Overview of Deep Learning",
+    "section": "Green AI",
+    "text": "Green AI\nRising environmental concerns due to the high computational power and energy consumption of deep learning models have spurred calls for responsible AI, extending to the environmental impact. There is a push for more energy-efficient models."
+  },
+  {
+    "objectID": "pages/DL/Week01_1.html#exciting-times-in-ai",
+    "href": "pages/DL/Week01_1.html#exciting-times-in-ai",
+    "title": "A Historical Overview of Deep Learning",
+    "section": "Exciting Times in AI",
+    "text": "Exciting Times in AI\nThe AI revolution is influencing scientific research, evident in DeepMind’s AlphaFold predicting protein folding. Applications in astronomy, predicting galaxy aging, and generating images for fundamental variables in experimental data are emerging. There is an emphasis on efficient deep learning for mobile devices, edge computing, and addressing constraints of power, storage, and real-time processing."
+  },
+  {
+    "objectID": "about.html",
+    "href": "about.html",
+    "title": "About",
+    "section": "",
+    "text": "About this site"
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "BS Degree Notes",
+    "section": "",
+    "text": "I put the course notes for my own easy perusal."
+  },
+  {
+    "objectID": "pages/DL/Week01_2.html",
+    "href": "pages/DL/Week01_2.html",
+    "title": "Motivation from Biological Neuron",
+    "section": "",
+    "text": "Artificial neurons, the foundational units in artificial neural networks, find their roots in biological neurons, a term coined in the 1890s to describe the brain’s processing units.\n\n\n\n\n\n\nDendrite: Functions as a signal receiver from other neurons.\nSynapse: The connection point between neurons.\nSoma: The central processing unit for information.\nAxon: Transmits processed information to other neurons.\n\n\n\n\nIn a simplified depiction, sense organs interact with the external environment, and neurons process this information, potentially resulting in physical responses, such as laughter.\n\n\n\n\n\nLayered Structure: Neurons are organized into layers.\nInterconnected Network: The human brain comprises approximately 100 billion neurons.\nDivision of Work: Neurons may specialize in processing specific information types.\nExample: Neurons responding to visual, auditory, or textual stimuli.\n\n\n\n\n\n\nNeural networks with multiple layers.\n\n\n\nInitial neurons interact with sensory organs, and subsequent layers perform increasingly intricate processing.\n\n\n\nUsing a cartoon illustration: Neurons in the visual cortex detect edges, form features, and recognize objects.\n\n\n\n\nLayer 1: Detects edges and corners.\nSubsequent Layers: Organize information into features and recognize complex objects.\n\n\n\n\nEach layer processes more abstract representations of the input.\n\n\n\nInput traverses through layers, resulting in a physical response."
+  },
+  {
+    "objectID": "pages/DL/Week01_2.html#introduction",
+    "href": "pages/DL/Week01_2.html#introduction",
+    "title": "Motivation from Biological Neuron",
+    "section": "",
+    "text": "Artificial neurons, the foundational units in artificial neural networks, find their roots in biological neurons, a term coined in the 1890s to describe the brain’s processing units."
+  },
+  {
+    "objectID": "pages/DL/Week01_2.html#biological-neurons",
+    "href": "pages/DL/Week01_2.html#biological-neurons",
+    "title": "Motivation from Biological Neuron",
+    "section": "",
+    "text": "Dendrite: Functions as a signal receiver from other neurons.\nSynapse: The connection point between neurons.\nSoma: The central processing unit for information.\nAxon: Transmits processed information to other neurons.\n\n\n\n\nIn a simplified depiction, sense organs interact with the external environment, and neurons process this information, potentially resulting in physical responses, such as laughter."
+  },
+  {
+    "objectID": "pages/DL/Week01_2.html#neural-network-architecture",
+    "href": "pages/DL/Week01_2.html#neural-network-architecture",
+    "title": "Motivation from Biological Neuron",
+    "section": "",
+    "text": "Layered Structure: Neurons are organized into layers.\nInterconnected Network: The human brain comprises approximately 100 billion neurons.\nDivision of Work: Neurons may specialize in processing specific information types.\nExample: Neurons responding to visual, auditory, or textual stimuli."
+  },
+  {
+    "objectID": "pages/DL/Week01_2.html#multi-layer-perceptrons-mlps",
+    "href": "pages/DL/Week01_2.html#multi-layer-perceptrons-mlps",
+    "title": "Motivation from Biological Neuron",
+    "section": "",
+    "text": "Neural networks with multiple layers.\n\n\n\nInitial neurons interact with sensory organs, and subsequent layers perform increasingly intricate processing.\n\n\n\nUsing a cartoon illustration: Neurons in the visual cortex detect edges, form features, and recognize objects.\n\n\n\n\nLayer 1: Detects edges and corners.\nSubsequent Layers: Organize information into features and recognize complex objects.\n\n\n\n\nEach layer processes more abstract representations of the input.\n\n\n\nInput traverses through layers, resulting in a physical response."
+  },
+  {
+    "objectID": "pages/DL/Week01_2.html#introduction-1",
+    "href": "pages/DL/Week01_2.html#introduction-1",
+    "title": "Motivation from Biological Neuron",
+    "section": "Introduction",
+    "text": "Introduction\n\nObjective: Comprehend the McCulloch-Pitts neuron, a simplified computational model inspired by biological neurons.\nHistorical Context: Proposed in 1943 by McCulloch (neuroscientist) and Pitts (logician).\nPurpose: Emulate the brain’s complex processing for decision-making."
+  },
+  {
+    "objectID": "pages/DL/Week01_2.html#neuron-structure",
+    "href": "pages/DL/Week01_2.html#neuron-structure",
+    "title": "Motivation from Biological Neuron",
+    "section": "Neuron Structure",
+    "text": "Neuron Structure\n\nComponents: Divided into two parts - g and f.\ng (Aggregation): Aggregates binary inputs via a simple summation process.\nf (Decision): Makes a binary decision based on the aggregation.\nExcitatory and Inhibitory Inputs: Inputs can be either excitatory (positive) or inhibitory (negative)."
+  },
+  {
+    "objectID": "pages/DL/Week01_2.html#functionality",
+    "href": "pages/DL/Week01_2.html#functionality",
+    "title": "Motivation from Biological Neuron",
+    "section": "Functionality",
+    "text": "Functionality\n\nAggregation Function g(x):\n\nRepresents the sum of all inputs using the formula \\(g(x) = \\sum_{i=1}^{n} x_i\\), where \\(x_i\\) is a binary input (0 or 1).\n\nDecision Function f(g(x)):\n\nUtilizes a threshold parameter \\(\\theta\\) to determine firing.\nDecision is \\(f(g(x)) = \\begin{cases} 1 & \\text{if } g(x) \\geq \\theta \\\\ 0 & \\text{otherwise} \\end{cases}\\)."
+  },
+  {
+    "objectID": "pages/DL/Week01_2.html#boolean-function-implementation",
+    "href": "pages/DL/Week01_2.html#boolean-function-implementation",
+    "title": "Motivation from Biological Neuron",
+    "section": "Boolean Function Implementation",
+    "text": "Boolean Function Implementation\n\nExamples:\n\nImplemented using McCulloch-Pitts neuron for boolean functions like AND, OR, NOR, and NOT.\nExcitatory and inhibitory inputs utilized based on boolean function logic."
+  },
+  {
+    "objectID": "pages/DL/Week01_2.html#geometric-interpretation",
+    "href": "pages/DL/Week01_2.html#geometric-interpretation",
+    "title": "Motivation from Biological Neuron",
+    "section": "Geometric Interpretation",
+    "text": "Geometric Interpretation\n\nIn 2D:\n\nDraws a line to separate input space into two halves.\n\nIn 3D:\n\nUses a plane for separation.\n\nFor n Inputs:\n\nUtilizes a hyperplane for linear separation."
+  },
+  {
+    "objectID": "pages/DL/Week01_2.html#linear-separability",
+    "href": "pages/DL/Week01_2.html#linear-separability",
+    "title": "Motivation from Biological Neuron",
+    "section": "Linear Separability",
+    "text": "Linear Separability\n\nDefinition: Boolean functions representable by a single McCulloch-Pitts neuron are linearly separable.\nImplication: Implies the existence of a plane (or hyperplane) separating points with output 0 and 1."
+  },
+  {
+    "objectID": "pages/DL/Week01_2.html#introduction-2",
+    "href": "pages/DL/Week01_2.html#introduction-2",
+    "title": "Motivation from Biological Neuron",
+    "section": "Introduction",
+    "text": "Introduction\nPerceptrons, introduced by Frank Rosenblatt circa 1958, extend the concept of McCulloch-Pitts neurons with non-Boolean inputs, input weights, and a learning algorithm for weight adjustment."
+  },
+  {
+    "objectID": "pages/DL/Week01_2.html#perceptron-model",
+    "href": "pages/DL/Week01_2.html#perceptron-model",
+    "title": "Motivation from Biological Neuron",
+    "section": "Perceptron Model",
+    "text": "Perceptron Model\n\nMathematical Representation\nThe perceptron is represented as \\(y = 1\\) if \\(\\sum_{i=1}^{n} w_i x_i \\geq \\text{threshold}\\); otherwise, \\(y = 0\\).\n\nNotable Differences\n\nInputs can be real, not just Boolean.\nIntroduction of weights, denoted by \\(w_i\\), indicating input importance.\nLearning algorithm to adapt weights based on data.\n\n\n\n\nNeater Formulation\nThe equation is rearranged for simplicity: \\(\\sum_{i=0}^{n} w_i x_i \\geq 0\\), where \\(x_0 = 1\\) and \\(w_0 = -\\text{threshold}\\)."
+  },
+  {
+    "objectID": "pages/DL/Week01_2.html#motivation-for-boolean-functions",
+    "href": "pages/DL/Week01_2.html#motivation-for-boolean-functions",
+    "title": "Motivation from Biological Neuron",
+    "section": "Motivation for Boolean Functions",
+    "text": "Motivation for Boolean Functions\nBoolean functions provide a foundation for understanding perceptrons. For instance, predicting movie preferences using Boolean inputs such as actor, director, and genre."
+  },
+  {
+    "objectID": "pages/DL/Week01_2.html#importance-of-weights",
+    "href": "pages/DL/Week01_2.html#importance-of-weights",
+    "title": "Motivation from Biological Neuron",
+    "section": "Importance of Weights",
+    "text": "Importance of Weights\nWeights signify the importance of specific inputs in decision-making. Learning from data helps adjust weights, reflecting user preferences. For example, assigning a high weight to the director may heavily influence the decision to watch a movie."
+  },
+  {
+    "objectID": "pages/DL/Week01_2.html#bias-w_0",
+    "href": "pages/DL/Week01_2.html#bias-w_0",
+    "title": "Motivation from Biological Neuron",
+    "section": "Bias (\\(w_0\\))",
+    "text": "Bias (\\(w_0\\))\n\\(w_0\\) acts as a bias or prior, influencing decision-making. It represents the initial bias or prejudice in decision-making. Adjusting \\(w_0\\) alters the decision threshold, accommodating user preferences."
+  },
+  {
+    "objectID": "pages/DL/Week01_2.html#implementing-boolean-functions",
+    "href": "pages/DL/Week01_2.html#implementing-boolean-functions",
+    "title": "Motivation from Biological Neuron",
+    "section": "Implementing Boolean Functions",
+    "text": "Implementing Boolean Functions\nPerceptrons can implement Boolean functions with linear decision boundaries. For instance, implementing the OR function with a perceptron involves a geometric interpretation where a line separates positive and negative regions based on inputs."
+  },
+  {
+    "objectID": "pages/DL/Week01_2.html#errors-and-adjustments",
+    "href": "pages/DL/Week01_2.html#errors-and-adjustments",
+    "title": "Motivation from Biological Neuron",
+    "section": "Errors and Adjustments",
+    "text": "Errors and Adjustments\nErrors arise when the decision boundary misclassifies inputs. The learning algorithm adjusts weights iteratively to minimize errors and enhance accuracy. It’s an iterative process where weights are modified until the desired decision boundary is achieved."
+  },
+  {
+    "objectID": "pages/DL/Week01_2.html#introduction-3",
+    "href": "pages/DL/Week01_2.html#introduction-3",
+    "title": "Motivation from Biological Neuron",
+    "section": "Introduction",
+    "text": "Introduction\nThis section delves into errors within the context of perceptrons and introduces error surfaces as a recurring theme in the course, with a focus on understanding errors related to linear separability."
+  },
+  {
+    "objectID": "pages/DL/Week01_2.html#perceptron-for-and-function",
+    "href": "pages/DL/Week01_2.html#perceptron-for-and-function",
+    "title": "Motivation from Biological Neuron",
+    "section": "Perceptron for AND Function",
+    "text": "Perceptron for AND Function\nConsideration of the AND function showcases an output of 1 for a specific input (green) and 0 for others (red). The decision is based on \\(w_0 + w_1x_1 + w_2x_2 \\geq 0\\), with \\(w_0\\) fixed at -1. Exploration of the impact of \\(w_1\\) and \\(w_2\\) on the decision boundary is undertaken."
+  },
+  {
+    "objectID": "pages/DL/Week01_2.html#errors-and-decision-boundaries",
+    "href": "pages/DL/Week01_2.html#errors-and-decision-boundaries",
+    "title": "Motivation from Biological Neuron",
+    "section": "Errors and Decision Boundaries",
+    "text": "Errors and Decision Boundaries\nDemonstration of errors occurs with specific \\(w_1\\) and \\(w_2\\) values, showcasing misclassified points due to incorrect decision boundaries. Variability in errors is noted based on different weight values."
+  },
+  {
+    "objectID": "pages/DL/Week01_2.html#error-function",
+    "href": "pages/DL/Week01_2.html#error-function",
+    "title": "Motivation from Biological Neuron",
+    "section": "Error Function",
+    "text": "Error Function\nViewing error as a function of \\(w_1\\) and \\(w_2\\) is introduced. The concept of error surfaces is brought in, where error is plotted against \\(w_1\\) and \\(w_2\\) values, each region on the surface corresponding to a distinct error level."
+  },
+  {
+    "objectID": "pages/DL/Week01_2.html#visualizing-the-error-surface",
+    "href": "pages/DL/Week01_2.html#visualizing-the-error-surface",
+    "title": "Motivation from Biological Neuron",
+    "section": "Visualizing the Error Surface",
+    "text": "Visualizing the Error Surface\nThe error surface is plotted for \\(w_1\\) and \\(w_2\\) values in the range -4 to +4. Each region on the surface corresponds to a distinct error level, highlighting the utility of visualizations in comprehending perceptron behavior."
+  },
+  {
+    "objectID": "pages/DL/Week01_2.html#perceptron-learning-algorithm",
+    "href": "pages/DL/Week01_2.html#perceptron-learning-algorithm",
+    "title": "Motivation from Biological Neuron",
+    "section": "Perceptron Learning Algorithm",
+    "text": "Perceptron Learning Algorithm\nExploration of the necessity for an algorithmic approach to finding optimal \\(w_1\\) and \\(w_2\\) values is undertaken. Limitations in visual inspection, especially in higher dimensions, are acknowledged. A teaser for the upcoming module on the perceptron learning algorithm is provided as a solution for finding suitable weight values algorithmically."
+  },
+  {
+    "objectID": "pages/DL/Week01_2.html#overview",
+    "href": "pages/DL/Week01_2.html#overview",
+    "title": "Motivation from Biological Neuron",
+    "section": "Overview",
+    "text": "Overview\nThis module focuses on the Perceptron Learning Algorithm, building upon the perceptron’s concept and introducing a method to iteratively adjust weights for accurate binary classification."
+  },
+  {
+    "objectID": "pages/DL/Week01_2.html#motivation",
+    "href": "pages/DL/Week01_2.html#motivation",
+    "title": "Motivation from Biological Neuron",
+    "section": "Motivation",
+    "text": "Motivation\nThe perceptron, initially designed for boolean functions, finds practical application in real-world scenarios. Consider a movie recommendation system based on past preferences, where features include both boolean and real-valued inputs. The goal is to learn weights that enable accurate predictions for new inputs."
+  },
+  {
+    "objectID": "pages/DL/Week01_2.html#algorithm",
+    "href": "pages/DL/Week01_2.html#algorithm",
+    "title": "Motivation from Biological Neuron",
+    "section": "Algorithm",
+    "text": "Algorithm\n\nNotations\n\n\\(p\\): Inputs with label 1 (positive points)\n\\(n\\): Inputs with label 0 (negative points)\n\n\n\nConvergence\nConvergence is achieved when all positive points satisfy \\(\\sum w_i x_i &gt; 0\\) and all negative points satisfy \\(\\sum w_i x_i &lt; 0\\).\n\n\nSteps\n\nInitialization: Randomly initialize weights \\(w\\).\nIterative Update:\n\nWhile not converged:\n\nPick a random point \\(x\\) from \\(p \\cup n\\).\nIf \\(x\\) is in \\(p\\) and \\(w^T x &lt; 0\\), update \\(w = w + x\\).\nIf \\(x\\) is in \\(n\\) and \\(w^T x \\geq 0\\), update \\(w = w - x\\)."
+  },
+  {
+    "objectID": "pages/DL/Week01_2.html#geometric-interpretation-1",
+    "href": "pages/DL/Week01_2.html#geometric-interpretation-1",
+    "title": "Motivation from Biological Neuron",
+    "section": "Geometric Interpretation",
+    "text": "Geometric Interpretation\nUnderstanding the geometric relationship involves recognizing that the angle between \\(w\\) and a point on the decision boundary is 90 degrees. Positive points’ angles should be acute (&lt; 90 degrees), and negative points’ angles should be obtuse (&gt; 90 degrees). Iteratively adjusting \\(w\\) aligns it better with correctly classified points."
+  },
+  {
+    "objectID": "pages/DL/Week01_2.html#introduction-4",
+    "href": "pages/DL/Week01_2.html#introduction-4",
+    "title": "Motivation from Biological Neuron",
+    "section": "Introduction",
+    "text": "Introduction\nThe objective of this lecture is to present a formal proof establishing the convergence of the perceptron learning algorithm. The primary focus is to rigorously determine whether the algorithm exhibits convergence or continues weight updates indefinitely."
+  },
+  {
+    "objectID": "pages/DL/Week01_2.html#definitions",
+    "href": "pages/DL/Week01_2.html#definitions",
+    "title": "Motivation from Biological Neuron",
+    "section": "Definitions",
+    "text": "Definitions\n\nAbsolutely Linearly Separable Sets\n\nConsider two sets, \\(P\\) and \\(N\\), in an \\(n\\)-dimensional space. They are deemed absolutely linearly separable if there exist \\(n + 1\\) real numbers \\(w_0\\) to \\(w_n\\) such that the following conditions hold: \\[\nw_0x_0 + w_1x_1 + \\ldots + w_nx_n \\geq 0 \\quad \\text{for every } \\mathbf{x} \\in P\n\\] \\[\nw_0x_0 + w_1x_1 + \\ldots + w_nx_n &lt; 0 \\quad \\text{for every } \\mathbf{x} \\in N\n\\]\n\nPerceptron Learning Algorithm Convergence Theorem\n\nIf sets \\(P\\) and \\(N\\) are finite and linearly separable, the perceptron learning algorithm will update the weight vector a finite number of times. This implies that after a finite number of steps, the algorithm will find a weight vector \\(\\mathbf{w}\\) capable of separating sets \\(P\\) and \\(N\\)."
+  },
+  {
+    "objectID": "pages/DL/Week01_2.html#proof",
+    "href": "pages/DL/Week01_2.html#proof",
+    "title": "Motivation from Biological Neuron",
+    "section": "Proof",
+    "text": "Proof\n\nSetup\nDefine \\(P'\\) as the union of \\(P\\) and the negation of \\(N\\). Normalize all inputs for convenience.\n\n\nAssumptions and Definitions\nAssume the existence of a normalized solution vector \\(\\mathbf{w^*}\\). Define the minimum dot product, \\(\\delta\\), as the minimum value obtained by dot products between \\(\\mathbf{w^*}\\) and points in \\(P'\\).\n\n\nPerceptron Learning Algorithm\nThe perceptron learning algorithm can be expressed as follows:\n\nInitialization:\n\nInitialize weight vector \\(\\mathbf{w}\\) randomly.\n\nIteration:\n\nAt each iteration, randomly select a point \\(\\mathbf{p}\\) from \\(P'\\).\nIf the condition \\(\\mathbf{w}^T\\mathbf{p} \\geq 0\\) is not satisfied, update \\(\\mathbf{w}\\) by \\(\\mathbf{w} = \\mathbf{w} + \\mathbf{p}\\).\n\n\n\n\nNormalization and Definitions\nNormalize all inputs, ensuring the norm of \\(\\mathbf{p}\\) is 1. Define the numerator of \\(\\cos \\beta\\) as the dot product between \\(\\mathbf{w^*}\\) and the updated weight vector at each iteration.\n\n\nNumerator Analysis\nShow that the numerator is greater than or equal to \\(\\delta\\) for each iteration.\nFor a randomly selected \\(\\mathbf{p}\\), if \\(\\mathbf{w}^T\\mathbf{p} &lt; 0\\) and an update is performed, the numerator is:\n\\[\n\\mathbf{w^*} \\cdot (\\mathbf{w} + \\mathbf{p}) \\geq \\delta\n\\]\n\n\nDenominator Analysis\nExpand the denominator, the square of the norm of the updated weight vector:\n\\[\n\\|\\mathbf{w} + \\mathbf{p}\\|^2 = \\|\\mathbf{w}\\|^2 + 2\\mathbf{w}^T\\mathbf{p} + \\|\\mathbf{p}\\|^2\n\\]\nShow that the denominator is less than or equal to a value involving \\(k\\), the number of updates made:\n\\[\n\\|\\mathbf{w} + \\mathbf{p}\\|^2 \\leq \\|\\mathbf{w^*}\\|^2 + k\n\\]\n\n\nCombining Numerator and Denominator\nUse the definition of \\(\\cos \\beta\\) to conclude that \\(\\cos \\beta\\) is greater than or equal to a certain quantity involving the square root of \\(k\\):\n\\[\n\\cos \\beta \\geq \\frac{\\delta}{\\sqrt{k}}\n\\]"
+  },
+  {
     "objectID": "pages/DL/Week02.html",
     "href": "pages/DL/Week02.html",
     "title": "Deep Learning Foundations: From Boolean Functions to Universal Approximation",
@@ -889,669 +1554,263 @@
     "text": "Points to Remember\n\nBoolean Functions and Linear Separability:\n\nPerceptrons face challenges with non-linearly separable boolean functions.\nMulti-layer perceptrons (MLPs) extend capabilities for handling complex functions.\n\nSigmoid Neurons and Differentiability:\n\nSigmoid neurons introduce smoothness in decision-making.\nDifferentiability is crucial for optimization in neural network training.\n\nGradient Descent: Mathematical Foundation:\n\nTaylor series expansion facilitates linear approximation in gradient descent.\nDecision criteria for parameter updates involve linear approximation conditions.\n\nTower Maker and Universal Approximation Theorem:\n\nThe Universal Approximation Theorem states that a single hidden layer in a neural network can approximate any continuous function.\nTower Maker architecture showcases the construction of towers using sigmoid neurons.\n\nDeep Learning Flexibility:\n\nDeep neural networks are flexible in approximating complex functions.\nThe Tower Maker architecture demonstrates the power of neural networks in constructing intricate representations.\n\n\nThis week’s exploration laid the groundwork for understanding the core principles and capabilities of neural networks, setting the stage for further exploration into advanced topics in deep learning."
   },
   {
-    "objectID": "pages/DL/Week01_2.html",
-    "href": "pages/DL/Week01_2.html",
-    "title": "Motivation from Biological Neuron",
+    "objectID": "pages/AI/Week02.html",
+    "href": "pages/AI/Week02.html",
+    "title": "State Space Search and Search Algorithms Overview",
     "section": "",
-    "text": "Artificial neurons, the foundational units in artificial neural networks, find their roots in biological neurons, a term coined in the 1890s to describe the brain’s processing units.\n\n\n\n\n\n\nDendrite: Functions as a signal receiver from other neurons.\nSynapse: The connection point between neurons.\nSoma: The central processing unit for information.\nAxon: Transmits processed information to other neurons.\n\n\n\n\nIn a simplified depiction, sense organs interact with the external environment, and neurons process this information, potentially resulting in physical responses, such as laughter.\n\n\n\n\n\nLayered Structure: Neurons are organized into layers.\nInterconnected Network: The human brain comprises approximately 100 billion neurons.\nDivision of Work: Neurons may specialize in processing specific information types.\nExample: Neurons responding to visual, auditory, or textual stimuli.\n\n\n\n\n\n\nNeural networks with multiple layers.\n\n\n\nInitial neurons interact with sensory organs, and subsequent layers perform increasingly intricate processing.\n\n\n\nUsing a cartoon illustration: Neurons in the visual cortex detect edges, form features, and recognize objects.\n\n\n\n\nLayer 1: Detects edges and corners.\nSubsequent Layers: Organize information into features and recognize complex objects.\n\n\n\n\nEach layer processes more abstract representations of the input.\n\n\n\nInput traverses through layers, resulting in a physical response."
+    "text": "In the realm of Artificial Intelligence, the study of search algorithms plays a pivotal role in problem-solving strategies. These algorithms, designed to explore the state space of a given problem, can be categorized into brute force search, informed search, and a general algorithmic approach. To illustrate these concepts, we delve into the map coloring problem, showcasing various problem-solving strategies.\n\n\n\n\n\nState space search involves representing a problem as a graph, where each node represents a unique state, and edges denote possible moves between states. The primary goal of this course is to explore general search methods, incorporating heuristic techniques for improved efficiency. The methods under consideration include state space search and constraint processing.\n\n\n\n\n\nStates are representations of specific situations in a given problem. These states are treated as nodes within the search space graph, with each node denoted by a symbol, such as \\(s\\). The state space, essentially an implicit graph, is defined by a move generation function.\n\n\n\nA move generation function is critical in navigating the state space. It determines the possible moves from a given state, producing a set of neighboring states. In functional terms, this function, denoted as \\(MoveGen(s)\\), takes a state \\(s\\) as input and returns a set of states, or neighbors, achievable from the current state.\n\n\n\nThe exploration of the state space is facilitated by a search algorithm, which employs the move generation function to navigate through the graph. The algorithm terminates based on the results of a goal test function.\n\n\n\nThe goal test function, denoted as \\(GoalTest(s)\\), checks whether a given state \\(s\\) is the desired goal state. It serves as the criterion for terminating the search algorithm.\n\n\n\n\n\nGeneral search methods are designed to create adaptable algorithms capable of addressing a variety of problems. The two primary approaches discussed in this course are state space search and constraint processing, with a primary focus on the former.\n\n\n\n\n\n\n\nThe water jug problem involves three jugs with different capacities, requiring the measurement of a specific amount of water.\n\n\n\nStates are described as a list of three numbers, representing the water levels in each jug.\n\n\n\nMoves involve pouring water between jugs, and the goal test function is contingent on achieving the desired water measurement.\n\n\n\n\n\n\nThe eight puzzle, a two-dimensional puzzle, requires rearranging tiles to achieve a specific configuration.\n\n\n\nStates are represented by an 8-puzzle configuration, and moves involve sliding tiles into the blank space.\n\n\n\nThe goal test function checks whether the configuration matches the desired goal configuration.\n\n\n\n\n\n\nThis classic problem involves transporting individuals across a river without violating specific constraints.\n\n\n\nVarious representations are discussed, including objects on the left bank or based on the boat’s location.\n\n\n\nThe goal test function checks for a specific configuration that adheres to the constraints.\n\n\n\n\n\n\nThe N-Queens problem requires placing N queens on an N×N chessboard with no mutual attacks.\n\n\n\nSolving involves finding a valid arrangement of queens on the chessboard.\n\n\n\n\n\n\nThe traveling salesman problem involves finding the optimal tour, with the lowest cost, visiting each city exactly once and returning to the starting city.\n\n\n\nThe objective is to discover the tour with the lowest cost, a challenging problem with factorial time complexity.\n\n\n\n\n\n\nMaze solving requires finding a path through a maze from the entrance to the exit.\n\n\n\nThe maze can be represented as a graph, with each node representing a choice point.\n\n\n\nThe goal is to find a path through the maze to reach the exit."
   },
   {
-    "objectID": "pages/DL/Week01_2.html#introduction",
-    "href": "pages/DL/Week01_2.html#introduction",
-    "title": "Motivation from Biological Neuron",
+    "objectID": "pages/AI/Week02.html#introduction-to-search-algorithms-in-ai",
+    "href": "pages/AI/Week02.html#introduction-to-search-algorithms-in-ai",
+    "title": "State Space Search and Search Algorithms Overview",
     "section": "",
-    "text": "Artificial neurons, the foundational units in artificial neural networks, find their roots in biological neurons, a term coined in the 1890s to describe the brain’s processing units."
+    "text": "In the realm of Artificial Intelligence, the study of search algorithms plays a pivotal role in problem-solving strategies. These algorithms, designed to explore the state space of a given problem, can be categorized into brute force search, informed search, and a general algorithmic approach. To illustrate these concepts, we delve into the map coloring problem, showcasing various problem-solving strategies."
   },
   {
-    "objectID": "pages/DL/Week01_2.html#biological-neurons",
-    "href": "pages/DL/Week01_2.html#biological-neurons",
-    "title": "Motivation from Biological Neuron",
+    "objectID": "pages/AI/Week02.html#state-space-search-1",
+    "href": "pages/AI/Week02.html#state-space-search-1",
+    "title": "State Space Search and Search Algorithms Overview",
     "section": "",
-    "text": "Dendrite: Functions as a signal receiver from other neurons.\nSynapse: The connection point between neurons.\nSoma: The central processing unit for information.\nAxon: Transmits processed information to other neurons.\n\n\n\n\nIn a simplified depiction, sense organs interact with the external environment, and neurons process this information, potentially resulting in physical responses, such as laughter."
+    "text": "State space search involves representing a problem as a graph, where each node represents a unique state, and edges denote possible moves between states. The primary goal of this course is to explore general search methods, incorporating heuristic techniques for improved efficiency. The methods under consideration include state space search and constraint processing.\n\n\n\n\n\nStates are representations of specific situations in a given problem. These states are treated as nodes within the search space graph, with each node denoted by a symbol, such as \\(s\\). The state space, essentially an implicit graph, is defined by a move generation function.\n\n\n\nA move generation function is critical in navigating the state space. It determines the possible moves from a given state, producing a set of neighboring states. In functional terms, this function, denoted as \\(MoveGen(s)\\), takes a state \\(s\\) as input and returns a set of states, or neighbors, achievable from the current state.\n\n\n\nThe exploration of the state space is facilitated by a search algorithm, which employs the move generation function to navigate through the graph. The algorithm terminates based on the results of a goal test function.\n\n\n\nThe goal test function, denoted as \\(GoalTest(s)\\), checks whether a given state \\(s\\) is the desired goal state. It serves as the criterion for terminating the search algorithm."
   },
   {
-    "objectID": "pages/DL/Week01_2.html#neural-network-architecture",
-    "href": "pages/DL/Week01_2.html#neural-network-architecture",
-    "title": "Motivation from Biological Neuron",
+    "objectID": "pages/AI/Week02.html#search-algorithms-overview",
+    "href": "pages/AI/Week02.html#search-algorithms-overview",
+    "title": "State Space Search and Search Algorithms Overview",
     "section": "",
-    "text": "Layered Structure: Neurons are organized into layers.\nInterconnected Network: The human brain comprises approximately 100 billion neurons.\nDivision of Work: Neurons may specialize in processing specific information types.\nExample: Neurons responding to visual, auditory, or textual stimuli."
+    "text": "General search methods are designed to create adaptable algorithms capable of addressing a variety of problems. The two primary approaches discussed in this course are state space search and constraint processing, with a primary focus on the former."
   },
   {
-    "objectID": "pages/DL/Week01_2.html#multi-layer-perceptrons-mlps",
-    "href": "pages/DL/Week01_2.html#multi-layer-perceptrons-mlps",
-    "title": "Motivation from Biological Neuron",
+    "objectID": "pages/AI/Week02.html#sample-problems-in-state-space-search",
+    "href": "pages/AI/Week02.html#sample-problems-in-state-space-search",
+    "title": "State Space Search and Search Algorithms Overview",
     "section": "",
-    "text": "Neural networks with multiple layers.\n\n\n\nInitial neurons interact with sensory organs, and subsequent layers perform increasingly intricate processing.\n\n\n\nUsing a cartoon illustration: Neurons in the visual cortex detect edges, form features, and recognize objects.\n\n\n\n\nLayer 1: Detects edges and corners.\nSubsequent Layers: Organize information into features and recognize complex objects.\n\n\n\n\nEach layer processes more abstract representations of the input.\n\n\n\nInput traverses through layers, resulting in a physical response."
+    "text": "The water jug problem involves three jugs with different capacities, requiring the measurement of a specific amount of water.\n\n\n\nStates are described as a list of three numbers, representing the water levels in each jug.\n\n\n\nMoves involve pouring water between jugs, and the goal test function is contingent on achieving the desired water measurement.\n\n\n\n\n\n\nThe eight puzzle, a two-dimensional puzzle, requires rearranging tiles to achieve a specific configuration.\n\n\n\nStates are represented by an 8-puzzle configuration, and moves involve sliding tiles into the blank space.\n\n\n\nThe goal test function checks whether the configuration matches the desired goal configuration.\n\n\n\n\n\n\nThis classic problem involves transporting individuals across a river without violating specific constraints.\n\n\n\nVarious representations are discussed, including objects on the left bank or based on the boat’s location.\n\n\n\nThe goal test function checks for a specific configuration that adheres to the constraints.\n\n\n\n\n\n\nThe N-Queens problem requires placing N queens on an N×N chessboard with no mutual attacks.\n\n\n\nSolving involves finding a valid arrangement of queens on the chessboard.\n\n\n\n\n\n\nThe traveling salesman problem involves finding the optimal tour, with the lowest cost, visiting each city exactly once and returning to the starting city.\n\n\n\nThe objective is to discover the tour with the lowest cost, a challenging problem with factorial time complexity.\n\n\n\n\n\n\nMaze solving requires finding a path through a maze from the entrance to the exit.\n\n\n\nThe maze can be represented as a graph, with each node representing a choice point.\n\n\n\nThe goal is to find a path through the maze to reach the exit."
   },
   {
-    "objectID": "pages/DL/Week01_2.html#introduction-1",
-    "href": "pages/DL/Week01_2.html#introduction-1",
-    "title": "Motivation from Biological Neuron",
+    "objectID": "pages/AI/Week02.html#introduction",
+    "href": "pages/AI/Week02.html#introduction",
+    "title": "State Space Search and Search Algorithms Overview",
     "section": "Introduction",
-    "text": "Introduction\n\nObjective: Comprehend the McCulloch-Pitts neuron, a simplified computational model inspired by biological neurons.\nHistorical Context: Proposed in 1943 by McCulloch (neuroscientist) and Pitts (logician).\nPurpose: Emulate the brain’s complex processing for decision-making."
+    "text": "Introduction\nIn the pursuit of developing domain-independent problem-solving algorithms within the realm of artificial intelligence (AI), the focus is on general search algorithms. These algorithms aim to provide solutions to diverse problems in a domain-independent form. This discussion revolves around two key algorithms: “Simple Search 1” and its modification, “Simple Search 2.”"
   },
   {
-    "objectID": "pages/DL/Week01_2.html#neuron-structure",
-    "href": "pages/DL/Week01_2.html#neuron-structure",
-    "title": "Motivation from Biological Neuron",
-    "section": "Neuron Structure",
-    "text": "Neuron Structure\n\nComponents: Divided into two parts - g and f.\ng (Aggregation): Aggregates binary inputs via a simple summation process.\nf (Decision): Makes a binary decision based on the aggregation.\nExcitatory and Inhibitory Inputs: Inputs can be either excitatory (positive) or inhibitory (negative)."
+    "objectID": "pages/AI/Week02.html#components-of-state-space-search-1",
+    "href": "pages/AI/Week02.html#components-of-state-space-search-1",
+    "title": "State Space Search and Search Algorithms Overview",
+    "section": "Components of State Space Search",
+    "text": "Components of State Space Search\n\n1. Start and Goal States\nThe state space comprises a set of states, a defined start state, and a specified goal state. These elements form the foundational framework for problem-solving in AI.\n\n\n2. Move Gen Function\nThe move generation function, denoted as $ (n) $, serves as a domain-specific function responsible for generating the neighbors of a given node $ n $. Importantly, it dynamically constructs the graph as the algorithm progresses.\n\n\n3. Goal Test Function\nThe goal test function, $ (n) $, determines whether a given state $ n $ aligns with the defined goal state. This function plays a crucial role in assessing the success of the search algorithm.\n\n\n4. Scene Nodes and Candidate Nodes\nIn the process of state space search, two categories of nodes emerge: scene nodes and candidate nodes. - Scene Nodes: These nodes represent states that have been visited and tested for the goal. They are stored in a set or list termed “closed.” - Candidate Nodes: Generated by the move gen function, these nodes are candidates for exploration but have not yet been visited. They are stored in a set or list referred to as “open.”"
   },
   {
-    "objectID": "pages/DL/Week01_2.html#functionality",
-    "href": "pages/DL/Week01_2.html#functionality",
-    "title": "Motivation from Biological Neuron",
-    "section": "Functionality",
-    "text": "Functionality\n\nAggregation Function g(x):\n\nRepresents the sum of all inputs using the formula \\(g(x) = \\sum_{i=1}^{n} x_i\\), where \\(x_i\\) is a binary input (0 or 1).\n\nDecision Function f(g(x)):\n\nUtilizes a threshold parameter \\(\\theta\\) to determine firing.\nDecision is \\(f(g(x)) = \\begin{cases} 1 & \\text{if } g(x) \\geq \\theta \\\\ 0 & \\text{otherwise} \\end{cases}\\)."
+    "objectID": "pages/AI/Week02.html#simple-search-1-algorithm",
+    "href": "pages/AI/Week02.html#simple-search-1-algorithm",
+    "title": "State Space Search and Search Algorithms Overview",
+    "section": "Simple Search 1 Algorithm",
+    "text": "Simple Search 1 Algorithm\n\nAlgorithm Overview\nThe “Simple Search 1” algorithm adheres to the generate-and-test approach, a fundamental strategy in AI problem-solving. The algorithm iteratively generates nodes, tests them for the goal, and continues until either the goal is found or the open set becomes empty.\n\n\nNode Selection\nA node is selected from the open set. If this node corresponds to the goal state, the algorithm terminates successfully. Otherwise, the process continues.\n\n\nGraph Exploration\nThe algorithm leverages the move gen function to generate neighbors of the selected node. These generated nodes are then added to the open set for further exploration.\n\n\nPseudocode for Simple Search 1\nOPEN ← {S}\nwhile OPEN is not empty\n   Pick some node N from OPEN\n   OPEN ← OPEN - {N}\n   if GoalTest(N) = TRUE\n     return N\n   else \n     OPEN ← OPEN ∪ MoveGen(N)\nreturn null\n\n\nChallenge - Cyclic Exploration\nA notable challenge with “Simple Search 1” is its susceptibility to entering cycles, leading to the revisiting of nodes without making progress. This cyclic exploration issue poses a potential impediment to the algorithm’s effectiveness."
   },
   {
-    "objectID": "pages/DL/Week01_2.html#boolean-function-implementation",
-    "href": "pages/DL/Week01_2.html#boolean-function-implementation",
-    "title": "Motivation from Biological Neuron",
-    "section": "Boolean Function Implementation",
-    "text": "Boolean Function Implementation\n\nExamples:\n\nImplemented using McCulloch-Pitts neuron for boolean functions like AND, OR, NOR, and NOT.\nExcitatory and inhibitory inputs utilized based on boolean function logic."
+    "objectID": "pages/AI/Week02.html#simple-search-2-algorithm",
+    "href": "pages/AI/Week02.html#simple-search-2-algorithm",
+    "title": "State Space Search and Search Algorithms Overview",
+    "section": "Simple Search 2 Algorithm",
+    "text": "Simple Search 2 Algorithm\n\nIntroduction of Closed Set\nTo address the cyclic exploration problem, “Simple Search 2” introduces a new set named “closed.” This set serves as a repository for scene nodes, preventing their reevaluation during the search process.\n\n\nPurpose of Closed Set\nThe closed set’s primary function is to avoid revisiting nodes already assessed for the goal. By maintaining a record of scene nodes, the algorithm reduces the search space and mitigates the cyclic exploration challenge.\n\n\nAlgorithm Adjustment\nThe node selected from the open set is now moved to the closed set before testing for the goal. Additionally, during the generation of neighbors, nodes already present in the closed set are excluded from being added to the open set.\n\n\nPseudocode for Simple Search 2\nOPEN ← {S}\nCLOSED ← empty set\nwhile OPEN is not empty\n   Pick some node N from OPEN\n   OPEN ← OPEN – {N}\n   CLOSED ← CLOSED ∪ {N}\n   if GoalTest(N) = TRUE \n     return N \n   else \n     OPEN ← OPEN ∪ (MoveGen(N) – CLOSED)\nreturn null  \n\n\nImproved Exploration\n“Simple Search 2” demonstrates enhanced efficiency by minimizing the search space. The exclusion of nodes already visited contributes to a more focused exploration, addressing the cyclic exploration issue encountered in “Simple Search 1.”"
   },
   {
-    "objectID": "pages/DL/Week01_2.html#geometric-interpretation",
-    "href": "pages/DL/Week01_2.html#geometric-interpretation",
-    "title": "Motivation from Biological Neuron",
-    "section": "Geometric Interpretation",
-    "text": "Geometric Interpretation\n\nIn 2D:\n\nDraws a line to separate input space into two halves.\n\nIn 3D:\n\nUses a plane for separation.\n\nFor n Inputs:\n\nUtilizes a hyperplane for linear separation."
+    "objectID": "pages/AI/Week02.html#consideration---solution-path",
+    "href": "pages/AI/Week02.html#consideration---solution-path",
+    "title": "State Space Search and Search Algorithms Overview",
+    "section": "Consideration - Solution Path",
+    "text": "Consideration - Solution Path\nWhile both algorithms aim to find the goal node, it’s essential to note that they do not provide the solution path. The goal test confirms the existence of a solution without specifying the sequence of states leading to it. Further considerations may be necessary to obtain the complete solution path."
   },
   {
-    "objectID": "pages/DL/Week01_2.html#linear-separability",
-    "href": "pages/DL/Week01_2.html#linear-separability",
-    "title": "Motivation from Biological Neuron",
-    "section": "Linear Separability",
-    "text": "Linear Separability\n\nDefinition: Boolean functions representable by a single McCulloch-Pitts neuron are linearly separable.\nImplication: Implies the existence of a plane (or hyperplane) separating points with output 0 and 1."
+    "objectID": "pages/AI/Week02.html#impact-of-algorithm-choice",
+    "href": "pages/AI/Week02.html#impact-of-algorithm-choice",
+    "title": "State Space Search and Search Algorithms Overview",
+    "section": "Impact of Algorithm Choice",
+    "text": "Impact of Algorithm Choice\nThe choice of algorithm significantly influences the exploration of the search space. Different algorithms may yield distinct search spaces for the same state space. The efficiency and effectiveness of the search process hinge on the algorithm’s ability to circumvent cyclic exploration and avoid unnecessary node revisits."
   },
   {
-    "objectID": "pages/DL/Week01_2.html#introduction-2",
-    "href": "pages/DL/Week01_2.html#introduction-2",
-    "title": "Motivation from Biological Neuron",
-    "section": "Introduction",
-    "text": "Introduction\nPerceptrons, introduced by Frank Rosenblatt circa 1958, extend the concept of McCulloch-Pitts neurons with non-Boolean inputs, input weights, and a learning algorithm for weight adjustment."
+    "objectID": "pages/AI/Week02.html#problem-classification",
+    "href": "pages/AI/Week02.html#problem-classification",
+    "title": "State Space Search and Search Algorithms Overview",
+    "section": "Problem Classification",
+    "text": "Problem Classification\nIn the realm of state space search, two distinctive problem types emerge: Configuration Problems and Planning Problems.\n\nConfiguration Problems\nConfiguration problems involve seeking a state that satisfies a given description. For instance, classic problems like the N-Queens puzzle, Sudoku, Map Coloring, and others fall into this category. The primary objective is to identify a state that adheres to the specified criteria.\n\n\nPlanning Problems\nContrarily, planning problems revolve around scenarios where the goal is either explicitly known or described, and the pursuit is directed towards determining the optimal path to that goal. This type includes real-world situations such as finding a suitable restaurant, where the algorithm must discern both the destination and the most efficient route."
   },
   {
-    "objectID": "pages/DL/Week01_2.html#perceptron-model",
-    "href": "pages/DL/Week01_2.html#perceptron-model",
-    "title": "Motivation from Biological Neuron",
-    "section": "Perceptron Model",
-    "text": "Perceptron Model\n\nMathematical Representation\nThe perceptron is represented as \\(y = 1\\) if \\(\\sum_{i=1}^{n} w_i x_i \\geq \\text{threshold}\\); otherwise, \\(y = 0\\).\n\nNotable Differences\n\nInputs can be real, not just Boolean.\nIntroduction of weights, denoted by \\(w_i\\), indicating input importance.\nLearning algorithm to adapt weights based on data.\n\n\n\n\nNeater Formulation\nThe equation is rearranged for simplicity: \\(\\sum_{i=0}^{n} w_i x_i \\geq 0\\), where \\(x_0 = 1\\) and \\(w_0 = -\\text{threshold}\\)."
+    "objectID": "pages/AI/Week02.html#graph-representation",
+    "href": "pages/AI/Week02.html#graph-representation",
+    "title": "State Space Search and Search Algorithms Overview",
+    "section": "Graph Representation",
+    "text": "Graph Representation\nIn the context of state space search, the graph serves as the fundamental model. Each node within this graph represents a unique state. However, in planning problems, the goal extends beyond merely reaching the final state; it includes the necessity to ascertain the path leading to that state.\n\nNode Pairs\nTo address this, the concept of node pairs is introduced. In this representation, every node is accompanied by information about its parent node. This augmentation proves pivotal when reconstructing the path to the goal."
   },
   {
-    "objectID": "pages/DL/Week01_2.html#motivation-for-boolean-functions",
-    "href": "pages/DL/Week01_2.html#motivation-for-boolean-functions",
-    "title": "Motivation from Biological Neuron",
-    "section": "Motivation for Boolean Functions",
-    "text": "Motivation for Boolean Functions\nBoolean functions provide a foundation for understanding perceptrons. For instance, predicting movie preferences using Boolean inputs such as actor, director, and genre."
+    "objectID": "pages/AI/Week02.html#path-reconstruction",
+    "href": "pages/AI/Week02.html#path-reconstruction",
+    "title": "State Space Search and Search Algorithms Overview",
+    "section": "Path Reconstruction",
+    "text": "Path Reconstruction\nEfficient path reconstruction relies on the inclusion of node pairs within the search space. As the algorithm traverses the search space and identifies the goal state, the closed list—housing node pairs—facilitates the backward tracing of the path. Each node pair encapsulates information about the current node and its parent, enabling a step-by-step reconstruction."
   },
   {
-    "objectID": "pages/DL/Week01_2.html#importance-of-weights",
-    "href": "pages/DL/Week01_2.html#importance-of-weights",
-    "title": "Motivation from Biological Neuron",
-    "section": "Importance of Weights",
-    "text": "Importance of Weights\nWeights signify the importance of specific inputs in decision-making. Learning from data helps adjust weights, reflecting user preferences. For example, assigning a high weight to the director may heavily influence the decision to watch a movie."
+    "objectID": "pages/AI/Week02.html#search-algorithm-overview",
+    "href": "pages/AI/Week02.html#search-algorithm-overview",
+    "title": "State Space Search and Search Algorithms Overview",
+    "section": "Search Algorithm Overview",
+    "text": "Search Algorithm Overview\nThe overarching search algorithm is designed to systematically explore the search space, attempting different paths until a viable route to the goal state is discovered.\n\nDeterministic Approach\nIn contrast to the initial non-deterministic approach of picking any node from the open set, the algorithm undergoes a modification. It transitions to a deterministic strategy, consistently selecting the node positioned at the head of the open list.\n\n\nList Structure\nThe traditional use of sets for open and closed is superseded by the adoption of lists. This shift is accompanied by a preference for adding new nodes to a specified location in the list, influencing their order and impact on the search algorithm."
   },
   {
-    "objectID": "pages/DL/Week01_2.html#bias-w_0",
-    "href": "pages/DL/Week01_2.html#bias-w_0",
-    "title": "Motivation from Biological Neuron",
-    "section": "Bias (\\(w_0\\))",
-    "text": "Bias (\\(w_0\\))\n\\(w_0\\) acts as a bias or prior, influencing decision-making. It represents the initial bias or prejudice in decision-making. Adjusting \\(w_0\\) alters the decision threshold, accommodating user preferences."
+    "objectID": "pages/AI/Week02.html#notational-conventions",
+    "href": "pages/AI/Week02.html#notational-conventions",
+    "title": "State Space Search and Search Algorithms Overview",
+    "section": "Notational Conventions",
+    "text": "Notational Conventions\n\nList Notation\n\nThe empty list is represented as square brackets: \\([]\\).\nOperations include the colon operator for adding an element to the head of a list and the plus plus operator for appending two lists.\nEssential functions, such as head and tail, serve in extracting elements and conducting tests.\n\n\n\nTuple Notation\nTuples, denoted by parentheses, accommodate ordered elements. Accessing tuple elements involves positional identification or leveraging built-in functions like first and second.\nFor further reference on operations and functions, refer to this pdf."
   },
   {
-    "objectID": "pages/DL/Week01_2.html#implementing-boolean-functions",
-    "href": "pages/DL/Week01_2.html#implementing-boolean-functions",
-    "title": "Motivation from Biological Neuron",
-    "section": "Implementing Boolean Functions",
-    "text": "Implementing Boolean Functions\nPerceptrons can implement Boolean functions with linear decision boundaries. For instance, implementing the OR function with a perceptron involves a geometric interpretation where a line separates positive and negative regions based on inputs."
+    "objectID": "pages/AI/Week02.html#algorithm-refinement",
+    "href": "pages/AI/Week02.html#algorithm-refinement",
+    "title": "State Space Search and Search Algorithms Overview",
+    "section": "Algorithm Refinement",
+    "text": "Algorithm Refinement\nThe transition from non-deterministic node selection to a deterministic strategy represents a pivotal refinement. This evolution ensures the consistent selection of the node residing at the forefront of the open list. Additionally, the determination of where new nodes are inserted in the list assumes significance, shaping their influence on the algorithm’s behavior."
   },
   {
-    "objectID": "pages/DL/Week01_2.html#errors-and-adjustments",
-    "href": "pages/DL/Week01_2.html#errors-and-adjustments",
-    "title": "Motivation from Biological Neuron",
-    "section": "Errors and Adjustments",
-    "text": "Errors and Adjustments\nErrors arise when the decision boundary misclassifies inputs. The learning algorithm adjusts weights iteratively to minimize errors and enhance accuracy. It’s an iterative process where weights are modified until the desired decision boundary is achieved."
+    "objectID": "pages/AI/Week02.html#initialization",
+    "href": "pages/AI/Week02.html#initialization",
+    "title": "State Space Search and Search Algorithms Overview",
+    "section": "Initialization",
+    "text": "Initialization\n- OPEN ← (S, null) : []\n- CLOSED ← empty list\nThe algorithm starts with an open list containing the start node (S, null) where S is the start node, and null represents the absence of a parent. The CLOSED list is initially empty."
   },
   {
-    "objectID": "pages/DL/Week01_2.html#introduction-3",
-    "href": "pages/DL/Week01_2.html#introduction-3",
-    "title": "Motivation from Biological Neuron",
-    "section": "Introduction",
-    "text": "Introduction\nThis section delves into errors within the context of perceptrons and introduces error surfaces as a recurring theme in the course, with a focus on understanding errors related to linear separability."
+    "objectID": "pages/AI/Week02.html#main-algorithm",
+    "href": "pages/AI/Week02.html#main-algorithm",
+    "title": "State Space Search and Search Algorithms Overview",
+    "section": "Main Algorithm",
+    "text": "Main Algorithm\n- while OPEN is not empty\n  - nodePair ← head OPEN\n  - (N, _) ← nodePair\n  - if GoalTest(N) = TRUE\n    - return RECONSTRUCTPATH(nodePair, CLOSED)\n  - else CLOSED ← nodePair : CLOSED\n    - neighbours ← MoveGen(N)\n    - newNodes ← REMOVESEEN(neighbours, OPEN, CLOSED)\n    - newPairs ← MAKEPAIRS(newNodes, N)\n    - OPEN ← newPairs ++ (tail OPEN)\n- return empty list\nThe algorithm iteratively selects the first element from the open list and explores the node (N, _). If the goal test is satisfied, it calls the RECONSTRUCTPATH function. Otherwise, it adds the node pair to the closed list, generates and filters the children using REMOVESEEN, creates pairs with parents using MAKEPAIRS, and appends them to the front of the open list."
   },
   {
-    "objectID": "pages/DL/Week01_2.html#perceptron-for-and-function",
-    "href": "pages/DL/Week01_2.html#perceptron-for-and-function",
-    "title": "Motivation from Biological Neuron",
-    "section": "Perceptron for AND Function",
-    "text": "Perceptron for AND Function\nConsideration of the AND function showcases an output of 1 for a specific input (green) and 0 for others (red). The decision is based on \\(w_0 + w_1x_1 + w_2x_2 \\geq 0\\), with \\(w_0\\) fixed at -1. Exploration of the impact of \\(w_1\\) and \\(w_2\\) on the decision boundary is undertaken."
+    "objectID": "pages/AI/Week02.html#ancillary-functions",
+    "href": "pages/AI/Week02.html#ancillary-functions",
+    "title": "State Space Search and Search Algorithms Overview",
+    "section": "Ancillary Functions",
+    "text": "Ancillary Functions\n\nRECONSTRUCTPATH Function\n- RECONSTRUCTPATH(nodePair, CLOSED)\n  - SKIPTO(parent, nodePairs)\n    - if parent = first head nodePairs\n      - return nodePairs\n    - else return SKIPTO(parent, tail nodePairs)\n  - (node, parent) ← nodePair\n  - path ← node : []\n  - while parent is not null\n    - path ← parent : path\n    - CLOSED ← SKIPTO(parent, CLOSED)\n    - (_, parent) ← head CLOSED\n  - return path\nThe RECONSTRUCTPATH function traces back from the goal node to the start node using parent pointers stored in the CLOSED list.\n\n\nMAKEPAIRS Function\n- MAKEPAIRS(nodeList, parent)\n  - if nodeList is empty\n    - return empty list\n  - else return (head nodeList, parent) : MAKEPAIRS(tail nodeList, parent)\nThe MAKEPAIRS function takes a list of nodes and a parent, creating pairs with each node and the given parent.\n\n\nREMOVESEEN Function\n- REMOVESEEN(nodeList, OPEN, CLOSED)\n  - if nodeList is empty\n    - return empty list\n  - else node ← head nodeList\n    - if OCCURSIN(node, OPEN) or OCCURSIN(node, CLOSED)\n      - return REMOVESEEN(tail nodeList, OPEN, CLOSED)\n    - else return node : REMOVESEEN(tail nodeList, OPEN, CLOSED)\nThe REMOVESEEN function filters out nodes already present in the OPEN or CLOSED lists."
   },
   {
-    "objectID": "pages/DL/Week01_2.html#errors-and-decision-boundaries",
-    "href": "pages/DL/Week01_2.html#errors-and-decision-boundaries",
-    "title": "Motivation from Biological Neuron",
-    "section": "Errors and Decision Boundaries",
-    "text": "Errors and Decision Boundaries\nDemonstration of errors occurs with specific \\(w_1\\) and \\(w_2\\) values, showcasing misclassified points due to incorrect decision boundaries. Variability in errors is noted based on different weight values."
+    "objectID": "pages/AI/Week02.html#initialization-1",
+    "href": "pages/AI/Week02.html#initialization-1",
+    "title": "State Space Search and Search Algorithms Overview",
+    "section": "Initialization",
+    "text": "Initialization\n- OPEN ← (S, null) : []\n- CLOSED ← empty list\nSimilar to DFS, BFS starts with an open list containing the start node (S, null) and an empty CLOSED list."
   },
   {
-    "objectID": "pages/DL/Week01_2.html#error-function",
-    "href": "pages/DL/Week01_2.html#error-function",
-    "title": "Motivation from Biological Neuron",
-    "section": "Error Function",
-    "text": "Error Function\nViewing error as a function of \\(w_1\\) and \\(w_2\\) is introduced. The concept of error surfaces is brought in, where error is plotted against \\(w_1\\) and \\(w_2\\) values, each region on the surface corresponding to a distinct error level."
+    "objectID": "pages/AI/Week02.html#main-algorithm-1",
+    "href": "pages/AI/Week02.html#main-algorithm-1",
+    "title": "State Space Search and Search Algorithms Overview",
+    "section": "Main Algorithm",
+    "text": "Main Algorithm\n- while OPEN is not empty\n  - nodePair ← head OPEN\n  - (N, _) ← nodePair\n  - if GoalTest(N) = TRUE\n    - return RECONSTRUCTPATH(nodePair, CLOSED)\n  - else CLOSED ← nodePair : CLOSED\n    - neighbours ← MoveGen(N)\n    - newNodes ← REMOVESEEN(neighbours, OPEN, CLOSED)\n    - newPairs ← MAKEPAIRS(newNodes, N)\n    - OPEN ← (tail OPEN) ++ newPairs\n- return empty list\nThe main algorithm for BFS is identical to DFS, except for the addition of new nodes to the end of the OPEN list."
   },
   {
-    "objectID": "pages/DL/Week01_2.html#visualizing-the-error-surface",
-    "href": "pages/DL/Week01_2.html#visualizing-the-error-surface",
-    "title": "Motivation from Biological Neuron",
-    "section": "Visualizing the Error Surface",
-    "text": "Visualizing the Error Surface\nThe error surface is plotted for \\(w_1\\) and \\(w_2\\) values in the range -4 to +4. Each region on the surface corresponds to a distinct error level, highlighting the utility of visualizations in comprehending perceptron behavior."
+    "objectID": "pages/AI/Week02.html#analysis-of-dfs",
+    "href": "pages/AI/Week02.html#analysis-of-dfs",
+    "title": "State Space Search and Search Algorithms Overview",
+    "section": "Analysis of DFS",
+    "text": "Analysis of DFS\n\nOverview\nDepth First Search (DFS) is a search algorithm employed in problem-solving within the field of Artificial Intelligence. It is characterized by its treatment of the open set as a stack, following the Last In, First Out (LIFO) principle.\n\n\nExploration Strategy\nDFS explores the search tree in a deep-first manner, descending into the tree until it reaches a dead end. Upon encountering a dead end, the algorithm backtracks to explore alternative paths.\n\n\nBehavior\nDFS tends to find paths that are farther from the source node, emphasizing deep exploration rather than a systematic examination of all possibilities. It exhibits a distinct behavior of diving deep into the search tree.\n\n\nTime Complexity\nThe time complexity of DFS is exponential and can be expressed as \\(O(b^d)\\), where \\(b\\) represents the branching factor of the search tree, and \\(d\\) is the depth. This exponential growth can lead to infinite loops in scenarios with infinite search spaces.\n\n\nSpace Complexity\nDFS demonstrates linear space complexity. The space required is proportional to the depth of the search tree, making it more space-efficient compared to other algorithms with exponential space growth."
   },
   {
-    "objectID": "pages/DL/Week01_2.html#perceptron-learning-algorithm",
-    "href": "pages/DL/Week01_2.html#perceptron-learning-algorithm",
-    "title": "Motivation from Biological Neuron",
-    "section": "Perceptron Learning Algorithm",
-    "text": "Perceptron Learning Algorithm\nExploration of the necessity for an algorithmic approach to finding optimal \\(w_1\\) and \\(w_2\\) values is undertaken. Limitations in visual inspection, especially in higher dimensions, are acknowledged. A teaser for the upcoming module on the perceptron learning algorithm is provided as a solution for finding suitable weight values algorithmically."
+    "objectID": "pages/AI/Week02.html#analysis-of-bfs",
+    "href": "pages/AI/Week02.html#analysis-of-bfs",
+    "title": "State Space Search and Search Algorithms Overview",
+    "section": "Analysis of BFS",
+    "text": "Analysis of BFS\n\nOverview\nBreadth First Search (BFS) is another search algorithm used in problem-solving for Artificial Intelligence. Unlike DFS, BFS treats the open set as a queue, adhering to the First In, First Out (FIFO) principle.\n\n\nExploration Strategy\nBFS explores the search tree level by level, starting from the source node and moving outward systematically. It ensures a conservative approach by prioritizing paths closer to the source.\n\n\nBehavior\nBFS is designed to find paths that are closer to the source node, ensuring a more methodical exploration of the search tree. It guarantees the discovery of the shortest path due to its systematic approach.\n\n\nTime Complexity\nSimilar to DFS, BFS exhibits exponential time complexity, expressed as \\(O(b^d)\\), where \\(b\\) is the branching factor, and \\(d\\) is the depth. However, BFS explores paths of increasing length systematically, ensuring the identification of the shortest path.\n\n\nSpace Complexity\nBFS has exponential space complexity, with the size of the open set growing exponentially. This makes BFS less space-efficient compared to DFS, but it guarantees finding the shortest path."
   },
   {
-    "objectID": "pages/DL/Week01_2.html#overview",
-    "href": "pages/DL/Week01_2.html#overview",
-    "title": "Motivation from Biological Neuron",
-    "section": "Overview",
-    "text": "Overview\nThis module focuses on the Perceptron Learning Algorithm, building upon the perceptron’s concept and introducing a method to iteratively adjust weights for accurate binary classification."
+    "objectID": "pages/AI/Week02.html#comparison",
+    "href": "pages/AI/Week02.html#comparison",
+    "title": "State Space Search and Search Algorithms Overview",
+    "section": "Comparison",
+    "text": "Comparison\n\nTime Complexity\nBoth DFS and BFS share exponential time complexity, posing challenges in scenarios with large search trees.\n\n\nSpace Complexity\nDFS outperforms BFS in terms of space efficiency, having linear space complexity compared to BFS’s exponential growth.\n\n\nQuality of Solution\nDFS does not guarantee the shortest path, while BFS ensures the identification of the shortest path due to its systematic exploration.\n\n\nCompleteness\nDFS may not be complete, especially in infinite search spaces, where it can get lost in infinite paths. On the other hand, BFS is complete, provided there exists a path of finite length from the source to the goal."
   },
   {
-    "objectID": "pages/DL/Week01_2.html#motivation",
-    "href": "pages/DL/Week01_2.html#motivation",
-    "title": "Motivation from Biological Neuron",
-    "section": "Motivation",
-    "text": "Motivation\nThe perceptron, initially designed for boolean functions, finds practical application in real-world scenarios. Consider a movie recommendation system based on past preferences, where features include both boolean and real-valued inputs. The goal is to learn weights that enable accurate predictions for new inputs."
+    "objectID": "pages/AI/Week02.html#search-space-characteristics-and-solution-strategies",
+    "href": "pages/AI/Week02.html#search-space-characteristics-and-solution-strategies",
+    "title": "State Space Search and Search Algorithms Overview",
+    "section": "Search Space Characteristics and Solution Strategies",
+    "text": "Search Space Characteristics and Solution Strategies\n\nInfinite Search Space Dilemma\nWhen confronted with an infinite search space, the choice between Depth-First Search (DFS) and Breadth-First Search (BFS) becomes contingent upon the problem’s specifics. BFS is the preferred option if the search space is infinite but a solution is known to exist. Conversely, DFS might be more suitable if the search space is finite, albeit without guaranteeing the shortest path."
   },
   {
-    "objectID": "pages/DL/Week01_2.html#algorithm",
-    "href": "pages/DL/Week01_2.html#algorithm",
-    "title": "Motivation from Biological Neuron",
-    "section": "Algorithm",
-    "text": "Algorithm\n\nNotations\n\n\\(p\\): Inputs with label 1 (positive points)\n\\(n\\): Inputs with label 0 (negative points)\n\n\n\nConvergence\nConvergence is achieved when all positive points satisfy \\(\\sum w_i x_i &gt; 0\\) and all negative points satisfy \\(\\sum w_i x_i &lt; 0\\).\n\n\nSteps\n\nInitialization: Randomly initialize weights \\(w\\).\nIterative Update:\n\nWhile not converged:\n\nPick a random point \\(x\\) from \\(p \\cup n\\).\nIf \\(x\\) is in \\(p\\) and \\(w^T x &lt; 0\\), update \\(w = w + x\\).\nIf \\(x\\) is in \\(n\\) and \\(w^T x \\geq 0\\), update \\(w = w - x\\)."
+    "objectID": "pages/AI/Week02.html#depth-bounded-depth-first-search",
+    "href": "pages/AI/Week02.html#depth-bounded-depth-first-search",
+    "title": "State Space Search and Search Algorithms Overview",
+    "section": "Depth-Bounded Depth-First Search",
+    "text": "Depth-Bounded Depth-First Search\n\nStrategy Overview\nDepth-Bounded Depth-First Search strikes a balance between the characteristics of DFS and BFS. It limits the exploration depth, ensuring linear space complexity while compromising on completeness and the guarantee of finding the shortest path. The algorithm delves into the search space up to a specified depth, potentially missing the goal if it exceeds this depth."
   },
   {
-    "objectID": "pages/DL/Week01_2.html#geometric-interpretation-1",
-    "href": "pages/DL/Week01_2.html#geometric-interpretation-1",
-    "title": "Motivation from Biological Neuron",
-    "section": "Geometric Interpretation",
-    "text": "Geometric Interpretation\nUnderstanding the geometric relationship involves recognizing that the angle between \\(w\\) and a point on the decision boundary is 90 degrees. Positive points’ angles should be acute (&lt; 90 degrees), and negative points’ angles should be obtuse (&gt; 90 degrees). Iteratively adjusting \\(w\\) aligns it better with correctly classified points."
+    "objectID": "pages/AI/Week02.html#depth-bounded-dfs-with-node-counting",
+    "href": "pages/AI/Week02.html#depth-bounded-dfs-with-node-counting",
+    "title": "State Space Search and Search Algorithms Overview",
+    "section": "Depth-Bounded DFS with Node Counting",
+    "text": "Depth-Bounded DFS with Node Counting\n\nEnhanced Exploration\nAn augmentation to Depth-Bounded DFS involves incorporating node counting during the search process. This count of visited nodes provides additional insights, proving advantageous in certain problem scenarios and facilitating subsequent analysis."
   },
   {
-    "objectID": "pages/DL/Week01_2.html#introduction-4",
-    "href": "pages/DL/Week01_2.html#introduction-4",
-    "title": "Motivation from Biological Neuron",
-    "section": "Introduction",
-    "text": "Introduction\nThe objective of this lecture is to present a formal proof establishing the convergence of the perceptron learning algorithm. The primary focus is to rigorously determine whether the algorithm exhibits convergence or continues weight updates indefinitely."
+    "objectID": "pages/AI/Week02.html#depth-first-iterative-deepening-dfid",
+    "href": "pages/AI/Week02.html#depth-first-iterative-deepening-dfid",
+    "title": "State Space Search and Search Algorithms Overview",
+    "section": "Depth-First Iterative Deepening (DFID)",
+    "text": "Depth-First Iterative Deepening (DFID)\n\nIterative Depth Expansion\nDFID emerges as a solution that combines the strengths of DFS and BFS. It iteratively increases the depth limit for DFS until a solution is encountered. The algorithm mitigates the risk of failing to find a path due to depth constraints but introduces the challenge of revisiting nodes multiple times. The careful tracking of node counts prevents infinite loops and enhances overall efficiency."
   },
   {
-    "objectID": "pages/DL/Week01_2.html#definitions",
-    "href": "pages/DL/Week01_2.html#definitions",
-    "title": "Motivation from Biological Neuron",
-    "section": "Definitions",
-    "text": "Definitions\n\nAbsolutely Linearly Separable Sets\n\nConsider two sets, \\(P\\) and \\(N\\), in an \\(n\\)-dimensional space. They are deemed absolutely linearly separable if there exist \\(n + 1\\) real numbers \\(w_0\\) to \\(w_n\\) such that the following conditions hold: \\[\nw_0x_0 + w_1x_1 + \\ldots + w_nx_n \\geq 0 \\quad \\text{for every } \\mathbf{x} \\in P\n\\] \\[\nw_0x_0 + w_1x_1 + \\ldots + w_nx_n &lt; 0 \\quad \\text{for every } \\mathbf{x} \\in N\n\\]\n\nPerceptron Learning Algorithm Convergence Theorem\n\nIf sets \\(P\\) and \\(N\\) are finite and linearly separable, the perceptron learning algorithm will update the weight vector a finite number of times. This implies that after a finite number of steps, the algorithm will find a weight vector \\(\\mathbf{w}\\) capable of separating sets \\(P\\) and \\(N\\)."
+    "objectID": "pages/AI/Week02.html#path-reconstruction-challenges",
+    "href": "pages/AI/Week02.html#path-reconstruction-challenges",
+    "title": "State Space Search and Search Algorithms Overview",
+    "section": "Path Reconstruction Challenges",
+    "text": "Path Reconstruction Challenges\n\nDilemma Overview\nPath reconstruction poses challenges, particularly when multiple paths to the goal exist. The lecture delves into the complexities of maintaining closed lists and the importance of judiciously selecting parents during the path reconstruction process."
   },
   {
-    "objectID": "pages/DL/Week01_2.html#proof",
-    "href": "pages/DL/Week01_2.html#proof",
-    "title": "Motivation from Biological Neuron",
-    "section": "Proof",
-    "text": "Proof\n\nSetup\nDefine \\(P'\\) as the union of \\(P\\) and the negation of \\(N\\). Normalize all inputs for convenience.\n\n\nAssumptions and Definitions\nAssume the existence of a normalized solution vector \\(\\mathbf{w^*}\\). Define the minimum dot product, \\(\\delta\\), as the minimum value obtained by dot products between \\(\\mathbf{w^*}\\) and points in \\(P'\\).\n\n\nPerceptron Learning Algorithm\nThe perceptron learning algorithm can be expressed as follows:\n\nInitialization:\n\nInitialize weight vector \\(\\mathbf{w}\\) randomly.\n\nIteration:\n\nAt each iteration, randomly select a point \\(\\mathbf{p}\\) from \\(P'\\).\nIf the condition \\(\\mathbf{w}^T\\mathbf{p} \\geq 0\\) is not satisfied, update \\(\\mathbf{w}\\) by \\(\\mathbf{w} = \\mathbf{w} + \\mathbf{p}\\).\n\n\n\n\nNormalization and Definitions\nNormalize all inputs, ensuring the norm of \\(\\mathbf{p}\\) is 1. Define the numerator of \\(\\cos \\beta\\) as the dot product between \\(\\mathbf{w^*}\\) and the updated weight vector at each iteration.\n\n\nNumerator Analysis\nShow that the numerator is greater than or equal to \\(\\delta\\) for each iteration.\nFor a randomly selected \\(\\mathbf{p}\\), if \\(\\mathbf{w}^T\\mathbf{p} &lt; 0\\) and an update is performed, the numerator is:\n\\[\n\\mathbf{w^*} \\cdot (\\mathbf{w} + \\mathbf{p}) \\geq \\delta\n\\]\n\n\nDenominator Analysis\nExpand the denominator, the square of the norm of the updated weight vector:\n\\[\n\\|\\mathbf{w} + \\mathbf{p}\\|^2 = \\|\\mathbf{w}\\|^2 + 2\\mathbf{w}^T\\mathbf{p} + \\|\\mathbf{p}\\|^2\n\\]\nShow that the denominator is less than or equal to a value involving \\(k\\), the number of updates made:\n\\[\n\\|\\mathbf{w} + \\mathbf{p}\\|^2 \\leq \\|\\mathbf{w^*}\\|^2 + k\n\\]\n\n\nCombining Numerator and Denominator\nUse the definition of \\(\\cos \\beta\\) to conclude that \\(\\cos \\beta\\) is greater than or equal to a certain quantity involving the square root of \\(k\\):\n\\[\n\\cos \\beta \\geq \\frac{\\delta}{\\sqrt{k}}\n\\]"
+    "objectID": "pages/AI/Week02.html#dfid-in-chess-programming",
+    "href": "pages/AI/Week02.html#dfid-in-chess-programming",
+    "title": "State Space Search and Search Algorithms Overview",
+    "section": "DFID in Chess Programming",
+    "text": "DFID in Chess Programming\n\nTactical Application\nDFID finds practical application in chess programming, particularly in scenarios where players face time constraints. The algorithm’s iterative deepening approach accommodates the limited time available for move selection."
   },
   {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "BS Degree Notes",
-    "section": "",
-    "text": "I put the course notes for my own easy perusal."
+    "objectID": "pages/AI/Week02.html#combinatorial-explosion-and-dfid",
+    "href": "pages/AI/Week02.html#combinatorial-explosion-and-dfid",
+    "title": "State Space Search and Search Algorithms Overview",
+    "section": "Combinatorial Explosion and DFID",
+    "text": "Combinatorial Explosion and DFID\n\nCoping with Exponential Growth\nThe lecture acknowledges the pervasive issue of combinatorial explosion, where search trees exhibit exponential growth. DFID addresses this challenge by iteratively searching with incrementally expanding depth limits. An in-depth analysis delves into the trade-offs between time and space, revealing the algorithm’s resilience in the face of increasing complexities."
   },
   {
-    "objectID": "about.html",
-    "href": "about.html",
-    "title": "About",
-    "section": "",
-    "text": "About this site"
+    "objectID": "pages/AI/Week02.html#blind-uninformed-search",
+    "href": "pages/AI/Week02.html#blind-uninformed-search",
+    "title": "State Space Search and Search Algorithms Overview",
+    "section": "Blind (Uninformed) Search",
+    "text": "Blind (Uninformed) Search\n\nFixed Behaviors\nBlind searches, including DFS, BFS, and DFID, are characterized as uninformed strategies. These approaches lack awareness of the goal’s location during exploration, adhering to predetermined behaviors irrespective of the goal’s position."
   },
   {
-    "objectID": "pages/DL/Week01_1.html",
-    "href": "pages/DL/Week01_1.html",
-    "title": "A Historical Overview of Deep Learning",
-    "section": "",
-    "text": "In the early stages of understanding neural networks, Joseph von Gerlach’s 1871 proposition of the Reticular theory posited a continuous network for the nervous system. Supporting evidence came from Golgi’s staining technique. The debate shifted with Santiago Ramón y Cajal’s 1891 Neuron doctrine, proposing discrete individual cells forming a network. This sparked the Nobel Prize conflict in 1906, ultimately resolved through electron microscopy. The ensuing discourse revolved around the balance between localized and distributed processing in the brain.\n\n\n\nIn 1943, McCulloch and Pitts presented a model of the neuron, laying the groundwork for artificial neurons. A significant stride occurred in 1957 when Frank Rosenblatt introduced the perceptron model, featuring weighted inputs. However, the limitations of a single perceptron were identified by Minsky and Papert in 1969.\n\n\n\nThe period from 1957 to 1969 marked the “Spring of AI,” characterized by optimism, funding, and interest. Yet, Minsky and Papert’s critique ushered in the “Winter of AI.” The emergence of backpropagation in 1986, popularized by Rumelhart and Hinton, and the acknowledgment of gradient descent (discovered by Cauchy in the 19th century) marked a shift in the AI landscape.\n\n\n\nThe Universal Approximation Theorem, introduced in 1989, elucidates how a multi-layered neural network can approximate any function. Emphasis is placed on the significance of the number of neurons for achieving superior approximation.\n\n\n\nA disparity between theoretical knowledge and practical challenges in training deep neural networks emerged. Stability and convergence issues with backpropagation were identified in practice. However, progress in convolutional neural networks over two decades has been noteworthy."
+    "objectID": "pages/AI/Week02.html#dfid-n-dfid-with-node-reopening",
+    "href": "pages/AI/Week02.html#dfid-n-dfid-with-node-reopening",
+    "title": "State Space Search and Search Algorithms Overview",
+    "section": "DFID-N: DFID with Node Reopening",
+    "text": "DFID-N: DFID with Node Reopening\nDFID-N opens only new nodes (nodes not already present in OPEN/CLOSED) and does not reopen any nodes. It aims to find the solution with linear space complexity.\n\nDFID-N(\\(s\\))\ncount ← -1\npath ← empty list\ndepthBound ← 0\n\nrepeat \n    previousCount ← count \n    (count, path) ← DB-DFS-N(s, depthBound)\n    depthBound ← depthBound + 1 \nuntil (path is not empty) or (previousCount = count)\n\nreturn path\n\n\nDB-DFS-N(\\(s\\), depthBound)\n\nOpens only new nodes, i.e., nodes neither in OPEN nor in CLOSED.\nDoes not reopen any nodes.\n\ncount ← 0 \nOPEN ← (s, null, 0): []\nCLOSED ← empty list \n\nwhile OPEN is not empty \n    nodePair ← head OPEN \n    (N, _, depth)← nodePair \n    \n    if GoalTest(N) == TRUE \n        return (count, ReconstructPath(nodePair, CLOSED))\n    \n    else CLOSED← nodePair : CLOSED \n    \n    if depth &lt; depthBound \n        neighbours ← MoveGen(N)\n        newNodes ← SEE(neighbours, OPEN, CLOSED)\n        newPairs ← MAKEPAIRS(newNodes, N, depth + 1 )\n        OPEN ← newPairs ++ tail OPEN \n        \n        count ← count + length newPairs\n    \n    else OPEN = tail OPEN \n\nreturn (count, empty list)"
   },
   {
-    "objectID": "pages/DL/Week01_1.html#biological-neurons-and-theories",
-    "href": "pages/DL/Week01_1.html#biological-neurons-and-theories",
-    "title": "A Historical Overview of Deep Learning",
-    "section": "",
-    "text": "In the early stages of understanding neural networks, Joseph von Gerlach’s 1871 proposition of the Reticular theory posited a continuous network for the nervous system. Supporting evidence came from Golgi’s staining technique. The debate shifted with Santiago Ramón y Cajal’s 1891 Neuron doctrine, proposing discrete individual cells forming a network. This sparked the Nobel Prize conflict in 1906, ultimately resolved through electron microscopy. The ensuing discourse revolved around the balance between localized and distributed processing in the brain."
+    "objectID": "pages/AI/Week02.html#dfid-c-dfid-with-closed-node-reopening",
+    "href": "pages/AI/Week02.html#dfid-c-dfid-with-closed-node-reopening",
+    "title": "State Space Search and Search Algorithms Overview",
+    "section": "DFID-C: DFID with Closed Node Reopening",
+    "text": "DFID-C: DFID with Closed Node Reopening\nDFID-C opens new nodes (nodes not already present in OPEN/CLOSED) and also reopens nodes present in CLOSED but not present in OPEN.\n\nDFID-C(\\(s\\))\ncount ← -1\npath ← empty list\ndepthBound ← 0\n\nrepeat \n    previousCount ← count \n    (count, path) ← DB-DFS-C(s, depthBound)\n    depthBound ← depthBound + 1 \nuntil (path is not empty) or (previousCount = count)\n\nreturn path\n\n\nDB-DFS-C(\\(s\\), depthBound)\n\nOpens new nodes, i.e., nodes neither in OPEN nor in CLOSED.\nReopens nodes present in CLOSED and not present in OPEN.\n\ncount ← 0 \nOPEN ← (s, null, 0): []\nCLOSED ← empty list \n\nwhile OPEN is not empty \n    nodePair ← head OPEN \n    (N, _, depth)← nodePair \n    \n    if GoalTest(N) == TRUE \n        return (count, ReconstructPath(nodePair, CLOSED))\n    \n    else CLOSED ← nodePair : CLOSED \n    \n    if depth &lt; depthBound \n        neighbours ← MoveGen(N)\n        newNodes ← SEE(neighbours, OPEN, CLOSED)\n        newPairs ← MAKEPAIRS(newNodes, N, depth + 1 )\n        OPEN ← newPairs ++ tail OPEN \n        \n        count ← count + length newPairs\n    \n    else OPEN = tail OPEN \n\nreturn (count, empty list)"
   },
   {
-    "objectID": "pages/DL/Week01_1.html#artificial-neurons-and-the-perceptron",
-    "href": "pages/DL/Week01_1.html#artificial-neurons-and-the-perceptron",
-    "title": "A Historical Overview of Deep Learning",
-    "section": "",
-    "text": "In 1943, McCulloch and Pitts presented a model of the neuron, laying the groundwork for artificial neurons. A significant stride occurred in 1957 when Frank Rosenblatt introduced the perceptron model, featuring weighted inputs. However, the limitations of a single perceptron were identified by Minsky and Papert in 1969."
+    "objectID": "pages/AI/Week02.html#ancillary-functions-for-dfid-c",
+    "href": "pages/AI/Week02.html#ancillary-functions-for-dfid-c",
+    "title": "State Space Search and Search Algorithms Overview",
+    "section": "Ancillary Functions for DFID-C",
+    "text": "Ancillary Functions for DFID-C\n\nMAKEPAIRS(nodeList, parent, depth)\n\nCreates node pairs from the given node list, parent, and depth.\nReturns a list of node pairs.\n\nif nodeList is empty\n    return empty list\nelse nodePair ← (head nodeList, parent, depth)\n    return nodePair : MAKEPAIRS(tail nodeList, parent, depth)\n\n\nRECONSTRUCTPATH(nodePair, CLOSED)\n\nReconstructs the path using the given node pair and CLOSED list.\nReturns the reconstructed path.\n\nSKIPTo(parent, nodePairs, depth)\n    if (parent, ..., depth) = head nodePairs\n        return nodePairs\n    else return SKIPTo(parent, tail nodePairs, depth)\n\n(node, parent, depth) ← nodePair\npath ← node : []\n\nwhile parent is not null \n    path ← parent : path \n    CLOSED ← SKIPTo(parent, CLOSED, depth − 1 )\n    (_, _, parent, depth) ← head CLOSED \n\nreturn path"
   },
   {
-    "objectID": "pages/DL/Week01_1.html#spring-to-winter-of-ai",
-    "href": "pages/DL/Week01_1.html#spring-to-winter-of-ai",
-    "title": "A Historical Overview of Deep Learning",
-    "section": "",
-    "text": "The period from 1957 to 1969 marked the “Spring of AI,” characterized by optimism, funding, and interest. Yet, Minsky and Papert’s critique ushered in the “Winter of AI.” The emergence of backpropagation in 1986, popularized by Rumelhart and Hinton, and the acknowledgment of gradient descent (discovered by Cauchy in the 19th century) marked a shift in the AI landscape."
-  },
-  {
-    "objectID": "pages/DL/Week01_1.html#universal-approximation-theorem",
-    "href": "pages/DL/Week01_1.html#universal-approximation-theorem",
-    "title": "A Historical Overview of Deep Learning",
-    "section": "",
-    "text": "The Universal Approximation Theorem, introduced in 1989, elucidates how a multi-layered neural network can approximate any function. Emphasis is placed on the significance of the number of neurons for achieving superior approximation."
-  },
-  {
-    "objectID": "pages/DL/Week01_1.html#practical-challenges-and-progress",
-    "href": "pages/DL/Week01_1.html#practical-challenges-and-progress",
-    "title": "A Historical Overview of Deep Learning",
-    "section": "",
-    "text": "A disparity between theoretical knowledge and practical challenges in training deep neural networks emerged. Stability and convergence issues with backpropagation were identified in practice. However, progress in convolutional neural networks over two decades has been noteworthy."
-  },
-  {
-    "objectID": "pages/DL/Week01_1.html#introduction",
-    "href": "pages/DL/Week01_1.html#introduction",
-    "title": "A Historical Overview of Deep Learning",
-    "section": "Introduction",
-    "text": "Introduction\n\nHistorical Perspective\nDeep learning encountered challenges in training via backpropagation. Jeff Hinton’s group proposed a crucial weight initialization idea in 2016, fostering stable training. The improved availability of computing power and data around 2006 laid the foundation for success."
-  },
-  {
-    "objectID": "pages/DL/Week01_1.html#early-challenges-and-solutions",
-    "href": "pages/DL/Week01_1.html#early-challenges-and-solutions",
-    "title": "A Historical Overview of Deep Learning",
-    "section": "Early Challenges and Solutions",
-    "text": "Early Challenges and Solutions\n\nUnsupervised Pre-training\nBetween 2007 and 2009, investigations into the effectiveness of unsupervised pre-training led to insights that shaped optimization and regularization algorithms. The course will delve into topics such as initializations, regularizations, and optimizations."
-  },
-  {
-    "objectID": "pages/DL/Week01_1.html#emergence-of-deep-learning",
-    "href": "pages/DL/Week01_1.html#emergence-of-deep-learning",
-    "title": "A Historical Overview of Deep Learning",
-    "section": "Emergence of Deep Learning",
-    "text": "Emergence of Deep Learning\n\nPractical Utility\nDeep learning applications started winning competitions, including handwriting recognition on the MNIST dataset, speech recognition, and visual pattern recognition like traffic sign data.\n\n\nImageNet Challenge (2012-2016)\nThe ImageNet challenge, a pivotal turning point, witnessed the evolution from ZFNet to ResNet (152 layers), achieving a remarkable 3.6% error rate in 2016, surpassing human performance."
-  },
-  {
-    "objectID": "pages/DL/Week01_1.html#transition-period-2012-2016",
-    "href": "pages/DL/Week01_1.html#transition-period-2012-2016",
-    "title": "A Historical Overview of Deep Learning",
-    "section": "Transition Period (2012-2016)",
-    "text": "Transition Period (2012-2016)\n\nGolden Period of Deep Learning\nThe universal acceptance of deep learning marked its golden period, with convolutional neural networks dominating image-related problems. Similar trends were observed in natural language processing (NLP) and speech processing."
-  },
-  {
-    "objectID": "pages/DL/Week01_1.html#from-cats-to-convolutional-neural-networks",
-    "href": "pages/DL/Week01_1.html#from-cats-to-convolutional-neural-networks",
-    "title": "A Historical Overview of Deep Learning",
-    "section": "From Cats to Convolutional Neural Networks",
-    "text": "From Cats to Convolutional Neural Networks\n\nMotivation from Neural Science (1959)\nAn experiment with a cat’s brain in 1959 revealed different parts activated for different stick positions, motivating the concept of receptive fields in convolutional neural networks (CNNs).\n\n\nNeocognitron Model (1980)\nInspired by distributed processing observed in the cat experiment, the Neocognitron model utilized receptive fields for different parts of the network.\n\n\nLeNet Model (1989)\nJan Lecun’s contribution to deep learning, the LeNet model, was employed for recognizing handwritten digits, finding applications in postal services for automated sorting of letters.\n\n\nLeNet-5 Model (1998)\nFurther improvements on the LeNet model, introducing the MNIST dataset for testing CNNs."
-  },
-  {
-    "objectID": "pages/DL/Week01_1.html#history-of-deep-learning",
-    "href": "pages/DL/Week01_1.html#history-of-deep-learning",
-    "title": "A Historical Overview of Deep Learning",
-    "section": "History of Deep Learning",
-    "text": "History of Deep Learning\n\n1950s: Enthusiasm in AI.\n1990s: Convolutional Neural Networks (CNNs) used for real-world problems, challenges with large networks and training.\n2006-2012: Advances in deep learning, successful training for ImageNet challenges.\n2016 onwards: Acceleration with better optimization methods (Nesterov’s method), leading to faster convergence.\nOptimization Algorithms: Adagrad, RMSprop, Adam, AdamW, etc., focus on faster and better convergence."
-  },
-  {
-    "objectID": "pages/DL/Week01_1.html#activation-functions",
-    "href": "pages/DL/Week01_1.html#activation-functions",
-    "title": "A Historical Overview of Deep Learning",
-    "section": "Activation Functions",
-    "text": "Activation Functions\nThe evolution from the logistic function to various activation functions (ReLU, Leaky ReLU, Parametric ReLU, Tanh, etc.) aimed at stabilizing training, achieving better performance, and faster convergence. The use of improved activation functions contributed to enhanced stability and performance."
-  },
-  {
-    "objectID": "pages/DL/Week01_1.html#sequence-processing",
-    "href": "pages/DL/Week01_1.html#sequence-processing",
-    "title": "A Historical Overview of Deep Learning",
-    "section": "Sequence Processing",
-    "text": "Sequence Processing\nIntroduction to problems involving sequences in deep learning, featuring Recurrent Neural Networks (RNNs) proposed in 1982 for sequence processing. Long Short-Term Memory Cells (LSTMs) were introduced in 1997 to address the vanishing gradient problem. By 2014, RNNs and LSTMs dominated natural language processing (NLP) and speech applications. In 2017, Transformer networks started replacing RNNs and LSTMs in sequence learning."
-  },
-  {
-    "objectID": "pages/DL/Week01_1.html#game-playing-with-deep-learning",
-    "href": "pages/DL/Week01_1.html#game-playing-with-deep-learning",
-    "title": "A Historical Overview of Deep Learning",
-    "section": "Game Playing with Deep Learning",
-    "text": "Game Playing with Deep Learning\n\n2015: Deep Reinforcement Learning (DRL) agents beat humans in Atari games.\nBreakthrough in Go game playing using DRL in 2015.\n2016: DRL-based agents beat professional poker players.\nComplex strategy games like Dota 2 mastered by DRL agents.\nIntroduction of OpenAI Gym as a toolkit for developing and comparing reinforcement learning algorithms.\nEmergence of AlphaStar and MuZero for mastering multiple games and tasks."
-  },
-  {
-    "objectID": "pages/DL/Week01_1.html#general-trends-in-deep-reinforcement-learning",
-    "href": "pages/DL/Week01_1.html#general-trends-in-deep-reinforcement-learning",
-    "title": "A Historical Overview of Deep Learning",
-    "section": "General Trends in Deep Reinforcement Learning",
-    "text": "General Trends in Deep Reinforcement Learning\nDeep RL agents consistently outperforming humans in various complex games, progressing from simple environments to mastering complex strategy games. The trend is towards developing “master of all” models (e.g., MuZero) for general intelligence in multiple tasks."
-  },
-  {
-    "objectID": "pages/DL/Week01_1.html#overview",
-    "href": "pages/DL/Week01_1.html#overview",
-    "title": "A Historical Overview of Deep Learning",
-    "section": "Overview",
-    "text": "Overview\n\nRevival and Advances\nA recap of deep learning’s revival and recent advances, reflecting an increasing interest in real-world problem-solving and challenges.\n\n\nAI Publications Growth\nThe Stanford AI Index Report highlights a significant increase in AI publications, indicating exponential growth across machine learning, computer vision, and NLP.\n\n\nFunding and Startups\nThe rise of AI startups, coupled with the interest from major tech companies, has led to exponential growth in AI-related patent filings."
-  },
-  {
-    "objectID": "pages/DL/Week01_1.html#evolution-of-neural-network-models",
-    "href": "pages/DL/Week01_1.html#evolution-of-neural-network-models",
-    "title": "A Historical Overview of Deep Learning",
-    "section": "Evolution of Neural Network Models",
-    "text": "Evolution of Neural Network Models\n\nIntroduction of Transformers\nIn 2017, transformers were introduced, revolutionizing AI and finding success in NLP, subsequently adopted in other domains.\n\n\nMachine Translation and Transformers\nA historical overview of machine translation, emphasizing the shift from IBM models to neural machine translation. The impact of sequence-to-sequence models (2014) and transformers (2017) is discussed.\n\n\nTransformer-based Models\nThe BERT model (2018) with a focus on pre-training, the evolution of models with increasing parameters from GPT-3 (175 billion) to 1.6 trillion parameters, and a comparison with human brain synapses provide perspective."
-  },
-  {
-    "objectID": "pages/DL/Week01_1.html#transformers-in-vision",
-    "href": "pages/DL/Week01_1.html#transformers-in-vision",
-    "title": "A Historical Overview of Deep Learning",
-    "section": "Transformers in Vision",
-    "text": "Transformers in Vision\n\nAdoption in Image\nClassification The evolution of image classification models, starting with AlexNet (2012), is traced. Transformers entered image classification and object detection in 2019, marking a paradigm shift towards transformers in state-of-the-art models."
-  },
-  {
-    "objectID": "pages/DL/Week01_1.html#generative-models",
-    "href": "pages/DL/Week01_1.html#generative-models",
-    "title": "A Historical Overview of Deep Learning",
-    "section": "Generative Models",
-    "text": "Generative Models\n\nOverview\nAn introduction to generative models for image synthesis, covering the evolution from variation autoencoders to GANs (Generative Adversarial Networks). Recent developments in diffusion-based models overcoming GAN drawbacks are discussed.\n\n\nDALL-E and DALL-E 2\nDALL-E’s capability to generate realistic images based on text prompts is explored. The introduction of DALL-E 2, a diffusion-based model, exceeding expectations, is highlighted with examples of generated images showcasing photorealistic results.\n\n\nExciting Times in Generative Models\nThe exploration of generative models for realistic image generation is showcased, with examples of prompts generating photorealistic images illustrating field advancements."
-  },
-  {
-    "objectID": "pages/DL/Week01_1.html#introduction-1",
-    "href": "pages/DL/Week01_1.html#introduction-1",
-    "title": "A Historical Overview of Deep Learning",
-    "section": "Introduction",
-    "text": "Introduction\nRapid advancements in deep learning have yielded powerful models trained on large datasets, showcasing impressive results. However, there is a growing need for sanity, interpretability, fairness, and responsibility in deploying these models."
-  },
-  {
-    "objectID": "pages/DL/Week01_1.html#paradox-of-deep-learning",
-    "href": "pages/DL/Week01_1.html#paradox-of-deep-learning",
-    "title": "A Historical Overview of Deep Learning",
-    "section": "Paradox of Deep Learning",
-    "text": "Paradox of Deep Learning\nDespite the high capacity of deep learning models, they exhibit remarkable performance. Challenges include numerical instability, sharp minima, and susceptibility to adversarial examples."
-  },
-  {
-    "objectID": "pages/DL/Week01_1.html#calls-for-sanity",
-    "href": "pages/DL/Week01_1.html#calls-for-sanity",
-    "title": "A Historical Overview of Deep Learning",
-    "section": "Calls for Sanity",
-    "text": "Calls for Sanity\nEmphasis is placed on explainability and interpretability to comprehend model decisions. Advances include workshops on human interpretability, tools like the Clever Hans toolkit to identify model reliance on cues, and benchmarking on adversarial examples."
-  },
-  {
-    "objectID": "pages/DL/Week01_1.html#fairness-and-responsibility",
-    "href": "pages/DL/Week01_1.html#fairness-and-responsibility",
-    "title": "A Historical Overview of Deep Learning",
-    "section": "Fairness and Responsibility",
-    "text": "Fairness and Responsibility\nIncreasing awareness of biases in AI models, particularly in facial recognition and criminal risk predictions, has led to concerns about fairness. Efforts such as the AI audit challenge at Stanford focus on building non-discriminatory models."
-  },
-  {
-    "objectID": "pages/DL/Week01_1.html#green-ai",
-    "href": "pages/DL/Week01_1.html#green-ai",
-    "title": "A Historical Overview of Deep Learning",
-    "section": "Green AI",
-    "text": "Green AI\nRising environmental concerns due to the high computational power and energy consumption of deep learning models have spurred calls for responsible AI, extending to the environmental impact. There is a push for more energy-efficient models."
-  },
-  {
-    "objectID": "pages/DL/Week01_1.html#exciting-times-in-ai",
-    "href": "pages/DL/Week01_1.html#exciting-times-in-ai",
-    "title": "A Historical Overview of Deep Learning",
-    "section": "Exciting Times in AI",
-    "text": "Exciting Times in AI\nThe AI revolution is influencing scientific research, evident in DeepMind’s AlphaFold predicting protein folding. Applications in astronomy, predicting galaxy aging, and generating images for fundamental variables in experimental data are emerging. There is an emphasis on efficient deep learning for mobile devices, edge computing, and addressing constraints of power, storage, and real-time processing."
-  },
-  {
-    "objectID": "pages/AI/Week01.html",
-    "href": "pages/AI/Week01.html",
-    "title": "A Decade of Machine Learning",
-    "section": "",
-    "text": "The preceding decade has marked a significant upswing in interest and advancements within the realm of machine learning (ML). This surge is attributable to the confluence of increased data availability facilitated by the ubiquity of the internet and the simultaneous enhancement of computational power. Central to this transformation has been the evolution of sophisticated training algorithms, particularly within the domain of deep learning.\n\n\n\n\nData Explosion: The pervasive nature of the internet has ushered in an unparalleled era of data abundance, fundamentally reshaping the landscape of machine learning.\nIncreased Computing Power: Strides in computing capabilities have substantially amplified the processing capabilities for handling vast datasets, a crucial enabler for ML progress.\nNeural Network Advancements: Noteworthy progress in training algorithms, especially those tailored for neural networks, has played a pivotal role in propelling the field forward.\n\n\n\n\n\n\nThe foundational era witnessed the inception of the perceptron, a single-layered neural network devised as a binary classifier by McCulloch and Pitts in 1943. However, the limitation of this era lay in the perceptron’s ability to only classify linearly separable classes.\n\n\n\nThe subsequent evolution involved the introduction of the multi-layer perceptron by Rumelhart, Hinton, and Williams. This innovation addressed the limitations associated with linear separability, with the popularization of the backpropagation algorithm for training feedforward networks.\n\n\n\nDeep neural networks, characterized by numerous hidden layers, emerged as a game-changer in computer vision tasks. The breakthrough in 2012 by Hinton, LeCun, and Bengio underscored the efficacy of deep neural networks in recognizing diverse object types. The general architecture encompasses input layers, hidden layers, and output layers.\n\n\n\n\n\n\nThe training process predominantly involves supervised learning, wherein images are presented alongside their corresponding expected outputs. The iterative application of the backpropagation algorithm facilitates weight adjustments based on the disparity between predicted and expected outputs. Consequently, neural networks acquire the ability to classify and distinguish input data through repetitive exposure.\n\n\n\n\n\nDeep neural networks exhibit excellence in medical diagnosis, particularly in discerning diseases from images, as evidenced in the domain of breast cancer detection.\n\n\n\nThe instrumental role of deep neural networks in face recognition is noteworthy, aiding in the identification of individuals within images.\n\n\n\nThe Face2Gene app serves as a tangible manifestation of the successful application of deep neural networks. It aids medical professionals in diagnosing genetic disorders based on facial features, showcasing the practical impact of this technology.\n\n\n\n\n\n\n\nThe dynamic interaction of users with the internet inadvertently transforms them into valuable data points for machine learning algorithms. These algorithms, wielded by major tech entities, classify users to customize ads and optimize overall user experiences.\n\n\n\n\n\nMachine learning, particularly in pattern recognition, demonstrates capabilities akin to those observed in the animal kingdom. However, it falls short of encompassing the comprehensive cognitive functions characteristic of human intelligence.\n\n\n\nHuman cognitive abilities span goal-directed, autonomous action, and a capacity for collective approaches. Distinctive human attributes include planning, wealth accumulation, home-building, and fostering societal diversification.\n\n\n\n\n\n\n\nNeural networks showcase proficiency in specific tasks but lack a holistic understanding of the world. The inherent brittleness of machine learning necessitates meticulous preparation, coding, and specialized training for diverse problem domains.\n\n\n\n\n\n\nThe triumph of Alphago, developed by DeepMind, stands out as a testament to the success achievable through reinforcement learning. This approach played a pivotal role in training the program for strategic decision-making. Subsequent iterations, such as Alphago Zero and AlphaZero, demonstrated the capacity to learn autonomously without human intervention and master multiple games simultaneously."
-  },
-  {
-    "objectID": "pages/AI/Week01.html#overview-of-the-past-decade-in-machine-learning",
-    "href": "pages/AI/Week01.html#overview-of-the-past-decade-in-machine-learning",
-    "title": "A Decade of Machine Learning",
-    "section": "",
-    "text": "The preceding decade has marked a significant upswing in interest and advancements within the realm of machine learning (ML). This surge is attributable to the confluence of increased data availability facilitated by the ubiquity of the internet and the simultaneous enhancement of computational power. Central to this transformation has been the evolution of sophisticated training algorithms, particularly within the domain of deep learning."
-  },
-  {
-    "objectID": "pages/AI/Week01.html#key-drivers-of-ml-advancements",
-    "href": "pages/AI/Week01.html#key-drivers-of-ml-advancements",
-    "title": "A Decade of Machine Learning",
-    "section": "",
-    "text": "Data Explosion: The pervasive nature of the internet has ushered in an unparalleled era of data abundance, fundamentally reshaping the landscape of machine learning.\nIncreased Computing Power: Strides in computing capabilities have substantially amplified the processing capabilities for handling vast datasets, a crucial enabler for ML progress.\nNeural Network Advancements: Noteworthy progress in training algorithms, especially those tailored for neural networks, has played a pivotal role in propelling the field forward."
-  },
-  {
-    "objectID": "pages/AI/Week01.html#evolution-of-neural-networks",
-    "href": "pages/AI/Week01.html#evolution-of-neural-networks",
-    "title": "A Decade of Machine Learning",
-    "section": "",
-    "text": "The foundational era witnessed the inception of the perceptron, a single-layered neural network devised as a binary classifier by McCulloch and Pitts in 1943. However, the limitation of this era lay in the perceptron’s ability to only classify linearly separable classes.\n\n\n\nThe subsequent evolution involved the introduction of the multi-layer perceptron by Rumelhart, Hinton, and Williams. This innovation addressed the limitations associated with linear separability, with the popularization of the backpropagation algorithm for training feedforward networks.\n\n\n\nDeep neural networks, characterized by numerous hidden layers, emerged as a game-changer in computer vision tasks. The breakthrough in 2012 by Hinton, LeCun, and Bengio underscored the efficacy of deep neural networks in recognizing diverse object types. The general architecture encompasses input layers, hidden layers, and output layers."
-  },
-  {
-    "objectID": "pages/AI/Week01.html#training-process-of-neural-networks",
-    "href": "pages/AI/Week01.html#training-process-of-neural-networks",
-    "title": "A Decade of Machine Learning",
-    "section": "",
-    "text": "The training process predominantly involves supervised learning, wherein images are presented alongside their corresponding expected outputs. The iterative application of the backpropagation algorithm facilitates weight adjustments based on the disparity between predicted and expected outputs. Consequently, neural networks acquire the ability to classify and distinguish input data through repetitive exposure.\n\n\n\n\n\nDeep neural networks exhibit excellence in medical diagnosis, particularly in discerning diseases from images, as evidenced in the domain of breast cancer detection.\n\n\n\nThe instrumental role of deep neural networks in face recognition is noteworthy, aiding in the identification of individuals within images.\n\n\n\nThe Face2Gene app serves as a tangible manifestation of the successful application of deep neural networks. It aids medical professionals in diagnosing genetic disorders based on facial features, showcasing the practical impact of this technology."
-  },
-  {
-    "objectID": "pages/AI/Week01.html#machine-learning-in-internet-interaction",
-    "href": "pages/AI/Week01.html#machine-learning-in-internet-interaction",
-    "title": "A Decade of Machine Learning",
-    "section": "",
-    "text": "The dynamic interaction of users with the internet inadvertently transforms them into valuable data points for machine learning algorithms. These algorithms, wielded by major tech entities, classify users to customize ads and optimize overall user experiences.\n\n\n\n\n\nMachine learning, particularly in pattern recognition, demonstrates capabilities akin to those observed in the animal kingdom. However, it falls short of encompassing the comprehensive cognitive functions characteristic of human intelligence.\n\n\n\nHuman cognitive abilities span goal-directed, autonomous action, and a capacity for collective approaches. Distinctive human attributes include planning, wealth accumulation, home-building, and fostering societal diversification."
-  },
-  {
-    "objectID": "pages/AI/Week01.html#performance-vs.-competence-in-machine-learning",
-    "href": "pages/AI/Week01.html#performance-vs.-competence-in-machine-learning",
-    "title": "A Decade of Machine Learning",
-    "section": "",
-    "text": "Neural networks showcase proficiency in specific tasks but lack a holistic understanding of the world. The inherent brittleness of machine learning necessitates meticulous preparation, coding, and specialized training for diverse problem domains."
-  },
-  {
-    "objectID": "pages/AI/Week01.html#game-of-go-and-reinforcement-learning",
-    "href": "pages/AI/Week01.html#game-of-go-and-reinforcement-learning",
-    "title": "A Decade of Machine Learning",
-    "section": "",
-    "text": "The triumph of Alphago, developed by DeepMind, stands out as a testament to the success achievable through reinforcement learning. This approach played a pivotal role in training the program for strategic decision-making. Subsequent iterations, such as Alphago Zero and AlphaZero, demonstrated the capacity to learn autonomously without human intervention and master multiple games simultaneously."
-  },
-  {
-    "objectID": "pages/AI/Week01.html#human-cognition-and-ai",
-    "href": "pages/AI/Week01.html#human-cognition-and-ai",
-    "title": "A Decade of Machine Learning",
-    "section": "Human Cognition and AI",
-    "text": "Human Cognition and AI\n\nCognitive Landscape\nHuman intelligence engages in a myriad of activities such as logic, representation, planning, reasoning, and search. The crux of these cognitive endeavors lies in symbolic reasoning, a substantial facet of the human cognitive load.\n\n\nSymbolic Reasoning\nSymbolic reasoning, integral to human cognition, involves the management of symbolic knowledge representation and intricate problem-solving processes."
-  },
-  {
-    "objectID": "pages/AI/Week01.html#distinguishing-ai-from-machine-learning",
-    "href": "pages/AI/Week01.html#distinguishing-ai-from-machine-learning",
-    "title": "A Decade of Machine Learning",
-    "section": "Distinguishing AI from Machine Learning",
-    "text": "Distinguishing AI from Machine Learning\n\nAI Emphasis\nWithin the domain of Artificial Intelligence (AI), the spotlight is on symbolic knowledge representation and advanced problem-solving methodologies.\n\n\nMachine Learning Focus\nIn contrast, Machine Learning (ML) gravitates towards interpreting data, with applications ranging from recommender systems to predictive analytics and classification."
-  },
-  {
-    "objectID": "pages/AI/Week01.html#knowledge-representation-in-ai",
-    "href": "pages/AI/Week01.html#knowledge-representation-in-ai",
-    "title": "A Decade of Machine Learning",
-    "section": "Knowledge Representation in AI",
-    "text": "Knowledge Representation in AI\n\nDeclarative Knowledge\nAligning with the cognitive domain of humans, explicit symbolic representation, known as declarative knowledge, assumes a pivotal role. It encompasses the representation of the world and engages in reasoned deductions.\n\n\nInferences in AI\nAI agents showcase a spectrum of inferences, ranging from deductive reasoning based on logic to plausible or probabilistic inferences that incorporate an element of likelihood."
-  },
-  {
-    "objectID": "pages/AI/Week01.html#symbolic-representation-in-ai",
-    "href": "pages/AI/Week01.html#symbolic-representation-in-ai",
-    "title": "A Decade of Machine Learning",
-    "section": "Symbolic Representation in AI",
-    "text": "Symbolic Representation in AI\n\nDefining Symbols\nSymbols, representing abstract concepts, manifest in diverse forms. For example, the number (7) can be expressed in various ways, illustrating the distinction between the conceptualization of numbers and their symbolic representations.\n\n\nMeaning of Symbols\nThe significance of symbols is socially agreed upon, forming the foundation for semiotic systems. Whether in road signs or linguistic characters, symbols encapsulate shared meanings."
-  },
-  {
-    "objectID": "pages/AI/Week01.html#semiotics-and-biosemiotics",
-    "href": "pages/AI/Week01.html#semiotics-and-biosemiotics",
-    "title": "A Decade of Machine Learning",
-    "section": "Semiotics and Biosemiotics",
-    "text": "Semiotics and Biosemiotics\n\nSemiotics\nSemiotics, the scientific study of symbols in spoken and written languages, lays the groundwork for comprehending human communication and representation.\n\n\nBiosemiotics\nDelving deeper, Biosemiotics explores the emergence of complex behavior when simple systems engage in symbolic communication. This is exemplified by phenomena such as ant trails utilizing pheromones."
-  },
-  {
-    "objectID": "pages/AI/Week01.html#reasoning-mechanisms-in-ai",
-    "href": "pages/AI/Week01.html#reasoning-mechanisms-in-ai",
-    "title": "A Decade of Machine Learning",
-    "section": "Reasoning Mechanisms in AI",
-    "text": "Reasoning Mechanisms in AI\n\nFormal Reasoning\nIn the context of AI, reasoning involves the systematic manipulation of symbols in a meaningful manner. This encompasses algorithms for fundamental operations like addition and multiplication, extending to more intricate processes like the Fourier transform.\n\n\nConceptualizing Algorithms\nUnderstanding AI algorithms necessitates a conceptual grasp of symbolic manipulations. For instance, multiplication algorithms entail conceptualizing the multiplication of unit digits and the subsequent shifting of results."
-  },
-  {
-    "objectID": "pages/AI/Week01.html#automation-vs.-ai",
-    "href": "pages/AI/Week01.html#automation-vs.-ai",
-    "title": "A Decade of Machine Learning",
-    "section": "Automation vs. AI",
-    "text": "Automation vs. AI\n\nNavigating Overlap\nWhile Automation and AI share common ground, not all automated systems integrate AI. For instance, implementations such as train reservation systems or basic online shopping may lack substantial AI components."
-  },
-  {
-    "objectID": "pages/AI/Week01.html#machine-learnings-role-in-ai",
-    "href": "pages/AI/Week01.html#machine-learnings-role-in-ai",
-    "title": "A Decade of Machine Learning",
-    "section": "Machine Learning’s Role in AI",
-    "text": "Machine Learning’s Role in AI\n\nML as a Component\nMachine Learning constitutes one facet of the multifaceted field of AI. Examples such as self-driving cars leverage ML for tasks including pattern recognition, speech processing, and object classification."
-  },
-  {
-    "objectID": "pages/AI/Week01.html#clarifying-data-science-in-ai",
-    "href": "pages/AI/Week01.html#clarifying-data-science-in-ai",
-    "title": "A Decade of Machine Learning",
-    "section": "Clarifying Data Science in AI",
-    "text": "Clarifying Data Science in AI\n\nData’s Multifaceted Role\nData science, encompassing elements of statistics, AI, and machine learning, plays a crucial role in the broader field of AI. It serves as a foundational component but does not encapsulate the entirety of AI."
-  },
-  {
-    "objectID": "pages/AI/Week01.html#introduction-to-ai-and-definitions",
-    "href": "pages/AI/Week01.html#introduction-to-ai-and-definitions",
-    "title": "A Decade of Machine Learning",
-    "section": "Introduction to AI and Definitions:",
-    "text": "Introduction to AI and Definitions:\n\n\nDefinitions of AI:\n\nHerbert Simon: Programs are considered intelligent if they display behaviors regarded as intelligent in humans.\nBar and Feigenbaum: AI seeks to comprehend the systematic behavior of information processing systems, analogous to physicists and biologists in their respective domains.\nElaine Rich: AI involves solving exponentially hard problems in polynomial time, leveraging domain-specific knowledge.\nJohn Hoagland: AI’s goal is to create machines with minds of their own, treating thinking and computing as fundamentally interconnected."
-  },
-  {
-    "objectID": "pages/AI/Week01.html#fundamental-questions-in-ai",
-    "href": "pages/AI/Week01.html#fundamental-questions-in-ai",
-    "title": "A Decade of Machine Learning",
-    "section": "Fundamental Questions in AI:",
-    "text": "Fundamental Questions in AI:\n\nQuestions about Intelligence:\nVarious perspectives exist on what constitutes intelligence, encompassing language use, reasoning, and learning. Ongoing debates revolve around whether machines can genuinely exhibit thinking, with insights from philosophers like Roger Penrose exploring quantum mechanics in the human brain."
-  },
-  {
-    "objectID": "pages/AI/Week01.html#turing-test-and-challenges",
-    "href": "pages/AI/Week01.html#turing-test-and-challenges",
-    "title": "A Decade of Machine Learning",
-    "section": "Turing Test and Challenges:",
-    "text": "Turing Test and Challenges:\n\nAlan Turing’s Turing Test:\nThe evaluation of machine intelligence through its ability to convincingly engage in natural language conversations with a human judge forms the essence of the Turing Test. Associated challenges include situations where chatbots may impress but lack genuine intelligence. The Löbner Prize Competition attempts a similar test.\n\n\nHector Levesque’s Alternative: Vinograd Schemas\nAn alternate test proposed by Hector Levesque challenges a machine’s understanding through multiple-choice questions that require subject matter knowledge."
-  },
-  {
-    "objectID": "pages/AI/Week01.html#vinograd-schemas-examples",
-    "href": "pages/AI/Week01.html#vinograd-schemas-examples",
-    "title": "A Decade of Machine Learning",
-    "section": "Vinograd Schemas Examples:",
-    "text": "Vinograd Schemas Examples:\n\nExample 1:\n\nOriginal Sentence: “The city council refused the demonstrators a permit because they feared violence.”\nAlternate Sentence: “The city council refused the demonstrators a permit because they advocated violence.”\nQuestion: What does “they” refer to? Options: Council, Demonstrators.\n\nExample 2:\n\nOriginal Sentence: “John took the water bottle out of the backpack so that it would be lighter.”\nAlternate Sentence: “John took the water bottle out of the backpack so that it would be handy.”\nQuestion: What does “it” refer to? Options: Backpack, Water Bottle.\n\nExample 3:\n\nOriginal Sentence: “The trophy would not fit into the brown suitcase because it was too small.”\nAlternate Sentence: “The trophy would not fit into the brown suitcase because it was too big.”\nQuestion: What does “it” refer to? Options: Trophy, Brown Suitcase.\n\nExample 4:\n\nOriginal Sentence: “The lawyer asked the witness a question but he was reluctant to repeat it.”\nAlternate Sentence: “The lawyer asked the witness a question but he was reluctant to answer it.”\nQuestion: Who was reluctant? Options: Lawyer, Witness."
-  },
-  {
-    "objectID": "pages/AI/Week01.html#introduction-to-intelligence-and-ai-goals",
-    "href": "pages/AI/Week01.html#introduction-to-intelligence-and-ai-goals",
-    "title": "A Decade of Machine Learning",
-    "section": "Introduction to Intelligence and AI Goals",
-    "text": "Introduction to Intelligence and AI Goals\nIn the exploration of artificial intelligence (AI), the concept of intelligence takes center stage. AI endeavors to construct intelligent agents capable of complex problem-solving. A historical glimpse into European thinkers sheds light on the roots of AI ideologies.\n\nGalileo Galilei (1623)\nIn his 1623 publication, Galileo Galilei delves into the subjective nature of sensory experiences. He contends that taste, odors, and colors are subjective perceptions residing in consciousness. Galileo challenges the idea that these qualities exist inherently in external objects. Moreover, he posits that philosophy is expressed through the language of mathematics.\n\n\nThomas Hobbs\nThomas Hobbs, often referred to as the grandfather of AI, introduces the notion that thinking involves the manipulation of symbols. He associates reasoning with computation, not in the contemporary sense of computers, but as a form of mathematical operations. Hobbs views computation as the sum of many things added together or the determination of the remainder when one thing is subtracted from another.\n\n\nRené Descartes\nBuilding on Galileo’s ideas, Descartes extends the concept that animals are intricate machines, reserving acknowledgment of a mind solely for humans. He aligns thought with symbols and introduces the mind-body dualism, raising questions about the interaction between the mental world and the physical body."
-  },
-  {
-    "objectID": "pages/AI/Week01.html#early-concepts-of-thinking-machines",
-    "href": "pages/AI/Week01.html#early-concepts-of-thinking-machines",
-    "title": "A Decade of Machine Learning",
-    "section": "Early Concepts of Thinking Machines",
-    "text": "Early Concepts of Thinking Machines\nThe early stages of envisioning thinking machines were influenced by the use of punch cards in the textile industry’s Jacquard looms.\n\nJacquard Looms\nPunch cards were employed to control patterns in textile looms. This concept of punched cards was later adapted for programming early computers, emphasizing a transition from controlling patterns to controlling programs.\n\n\nCharles Babbage and Augusta Ada Byron\nCharles Babbage, a mathematician and inventor, conceptualized the Difference Engine and the Analytic Engine. Augusta Ada Byron, daughter of Lord Byron, collaborated with Babbage and is recognized as the world’s first programmer. She envisioned computers going beyond mere number crunching, foreseeing applications in music composition and AI-like capabilities."
-  },
-  {
-    "objectID": "pages/AI/Week01.html#mechanical-calculators-and-early-computers",
-    "href": "pages/AI/Week01.html#mechanical-calculators-and-early-computers",
-    "title": "A Decade of Machine Learning",
-    "section": "Mechanical Calculators and Early Computers",
-    "text": "Mechanical Calculators and Early Computers\nThe evolution of mechanical calculators and the emergence of early electronic computers marked significant progress in computational capabilities.\n\nPascal’s Calculator and Leibniz’s Step Drum\nPascal’s mechanical calculator incorporated Latin Lantern gears, performing basic arithmetic operations. Leibniz introduced the step drum, a mechanism for counting and representing numbers. Both contributed to the development of early calculating machines.\n\n\nENIAC (Electronic Numerical Integrator and Computer)\nENIAC, the first electronic computer, boasted over 17,000 vacuum tubes. Despite its immense size and weight, it laid the foundation for electronic computing. Augusta Ada Byron’s visionary insights into the potential of computers started to materialize with the advent of ENIAC."
-  },
-  {
-    "objectID": "pages/AI/Week01.html#introduction",
-    "href": "pages/AI/Week01.html#introduction",
-    "title": "A Decade of Machine Learning",
-    "section": "Introduction",
-    "text": "Introduction\nThe course provides a comprehensive exploration of the evolution and fundamental principles of Artificial Intelligence (AI). With historical roots reaching back to the 1300s, early attempts by figures like Jazari and Ramon Llull set the stage for the development of AI.\n\nCoined Terminology\nThe term “Artificial Intelligence” was officially coined by John McCarthy during the Dartmouth Conference in 1956. This landmark event, organized alongside Marvin Minsky and Claude Shannon, aimed to investigate the potential for machines to simulate human intelligence through precise descriptions."
-  },
-  {
-    "objectID": "pages/AI/Week01.html#key-figures",
-    "href": "pages/AI/Week01.html#key-figures",
-    "title": "A Decade of Machine Learning",
-    "section": "Key Figures",
-    "text": "Key Figures\n\n1. John McCarthy\n\nCredited with Naming AI\nAssistant Professor at Dartmouth\nDesigner of Lisp Programming Language\nContributions to Logic and Common Sense Reasoning\n\n\n\n2. Marvin Minsky\n\nCo-founder of MIT AI Lab\nNotable for Frame Systems (Foundation of OOP)\nAuthor of “The Society of the Mind” and “The Emotional Machine”\n\n\n\n3. Nathaniel Rochester\n\nIBM Engineer\nDesigner of IBM 701\nSupervised Arthur Samuel and the Checkers-playing Program\n\n\n\n4. Claude Shannon\n\nFather of Information Theory\nMathematician at Bell Labs\n\n\n\n5. Herbert Simon and Allen Newell\n\nDevelopers of Logic Theorist (LT) Program\nPioneers in Symbolic AI\nIntroduction of Physical Symbol Systems\nSimon’s Diverse Scholarship (Nobel Prize in Economics)"
-  },
-  {
-    "objectID": "pages/AI/Week01.html#physical-symbol-systems",
-    "href": "pages/AI/Week01.html#physical-symbol-systems",
-    "title": "A Decade of Machine Learning",
-    "section": "Physical Symbol Systems",
-    "text": "Physical Symbol Systems\n\nSymbolic Representation\nSymbol systems represent perceptible entities and adhere to formal laws, mirroring the structure of the physical world. Simon and Newell’s hypothesis posits that a Physical Symbol System is both necessary and sufficient for general intelligent action, distinguishing it from sub-symbolic AI, where information is stored in weights without explicit symbols."
-  },
-  {
-    "objectID": "pages/AI/Week01.html#philosophical-considerations",
-    "href": "pages/AI/Week01.html#philosophical-considerations",
-    "title": "A Decade of Machine Learning",
-    "section": "Philosophical Considerations",
-    "text": "Philosophical Considerations\n\nCopernican Shift\n\nGalileo’s Distinction Between Thought and Reality\nGalileo Galilei’s intellectual endeavors were marked by a profound separation between the realm of thought and the objective reality. This conceptual wedge laid the foundation for a nuanced understanding of how human cognition interfaces with the external world.\n\n\nCopernicus’ Challenge to the Geocentric Model, Emphasizing Subjectivity\nCopernicus, through his revolutionary heliocentric model, not only challenged the prevailing geocentric view but also underscored the subjectivity inherent in our interpretations of celestial motions. This shift forced a reconsideration of humanity’s position in the cosmos.\n\n\nHuman Creation of Mental Models; Reality Comprising Fundamental Particles\nHumans engage in the active creation of mental models to comprehend the intricacies of reality. The Copernican Shift extends to the microscopic realm, where the abundant nature of fundamental particles renders them unsuitable as standalone elements of representation. Instead, reality is approached through disciplined ontologies, focusing on entities like atoms, molecules, or cells based on the context of study.\n\n\nIllustration through the Powers of Ten Film\nThe Powers of Ten film serves as a captivating medium to illustrate the Copernican Shift, visually portraying the vastness and intricacies of the universe at different scales. This cinematic exploration emphasizes the dynamic interplay between our mental representations and the expansive reality they seek to capture."
-  },
-  {
-    "objectID": "pages/AI/Week01.html#representation-and-reasoning",
-    "href": "pages/AI/Week01.html#representation-and-reasoning",
-    "title": "A Decade of Machine Learning",
-    "section": "Representation and Reasoning",
-    "text": "Representation and Reasoning\n\nHuman Reasoning\n\nHuman Reasoning Involves Symbolic Representations\nIn the realm of human cognition, symbolic representations play a pivotal role in the process of reasoning. These symbols serve as cognitive tools that humans manipulate to make sense of the world around them.\n\n\nFundamental Particles Unsuitable as Elements of Representation due to Abundance\nDespite the fundamental nature of particles, their sheer abundance makes them impractical as elemental units of representation. Human cognition necessitates a selective focus, leading to the adoption of more manageable entities like atoms, molecules, or cells, depending on the specific domain of study.\n\n\nRepresentation Depends on the Focus of Study (e.g., Atoms, Molecules, Cells)\nThe choice of representation is intricately tied to the focus of study. Whether delving into the microscopic realm of atoms or exploring the complexity of biological systems at the cellular level, the selection of representational units is driven by the demands of the specific discipline.\n\n\nDiscipline-specific Ontologies Define Level of Detail in Representations\nDiscipline-specific ontologies play a crucial role in determining the level of detail embedded in representations. These structured frameworks provide a systematic approach to capturing and organizing knowledge within distinct domains."
-  },
-  {
-    "objectID": "pages/AI/Week01.html#introduction-to-problem-solving",
-    "href": "pages/AI/Week01.html#introduction-to-problem-solving",
-    "title": "A Decade of Machine Learning",
-    "section": "Introduction to Problem Solving",
-    "text": "Introduction to Problem Solving\nIn the expansive domain of Artificial Intelligence (AI), problem-solving emerges as the orchestrated actions of autonomous agents navigating predefined objectives within dynamic environments. This course delves into the intricacies of problem-solving, elucidating the diverse methodologies encapsulated within search methods.\n\nProblem-Solving Framework\n\nAgent and Environment:\n\nAutonomous agents operate within a world defined by specific objectives and a repertoire of actions. Decision-making unfolds in real-time, navigating challenges posed by incomplete knowledge and the concurrent activities of other agents.\n\nSimplifying Assumptions:\n\nInitial simplifications envision a static world with a solitary agent making decisions, providing foundational insights into fundamental problem-solving principles."
-  },
-  {
-    "objectID": "pages/AI/Week01.html#two-approaches-to-problem-solving",
-    "href": "pages/AI/Week01.html#two-approaches-to-problem-solving",
-    "title": "A Decade of Machine Learning",
-    "section": "Two Approaches to Problem Solving",
-    "text": "Two Approaches to Problem Solving\n\n1. Model-Based Reasoning (Search Methods)\n\nDefinition:\nModel-Based Reasoning involves grounded reasoning in first principles or search approaches, wherein agents experiment with diverse actions to discern their efficacy.\n\n\nAssumptions:\nThis approach assumes a static world, complete knowledge, and actions that never fail, forming the foundational basis for problem-solving methodologies.\n\n\n\n2. Knowledge-Based Approach\n\nCharacteristics:\nThe Knowledge-Based Approach draws upon a societal structure rich in stored experiences, leveraging accumulated knowledge for effective problem-solving. It encompasses memory-based reasoning, case-based reasoning, and machine learning paradigms."
-  },
-  {
-    "objectID": "pages/AI/Week01.html#rubiks-cube-example",
-    "href": "pages/AI/Week01.html#rubiks-cube-example",
-    "title": "A Decade of Machine Learning",
-    "section": "Rubik’s Cube Example",
-    "text": "Rubik’s Cube Example\nThe Rubik’s Cube serves as an illustrative example, elucidating the dichotomy between knowledge-based and search-based problem-solving approaches.\n\nLearning Dynamics\n\nInitial Challenge:\n\nThe Rubik’s Cube presents an initial challenge devoid of a known solution, necessitating exploratory actions.\n\nEvolution of Knowledge:\n\nOver time, individuals develop efficient solving methods through experiential learning, showcasing the adaptive nature of human problem-solving.\n\nDeep Reinforcement Learning:\n\nThe introduction of deep reinforcement learning emphasizes autonomous learning without human guidance, mirroring aspects of artificial intelligence."
-  },
-  {
-    "objectID": "pages/AI/Week01.html#sudoku-example",
-    "href": "pages/AI/Week01.html#sudoku-example",
-    "title": "A Decade of Machine Learning",
-    "section": "Sudoku Example",
-    "text": "Sudoku Example\nThe Sudoku puzzle exemplifies the synergy between search and reasoning in problem-solving, offering insights into the nuanced interplay of diverse problem-solving methodologies.\n\nCombined Approach\n\nSearch Methods:\n\nBasic search algorithms, such as depth-first search and breadth-first search, lay the foundation for problem-solving endeavors.\n\nReasoning:\n\nReasoning techniques refine available options, harmonizing search methodologies with informed decision-making for a holistic problem-solving strategy."
-  },
-  {
-    "objectID": "pages/AI/Week01.html#role-of-logic-in-problem-solving",
-    "href": "pages/AI/Week01.html#role-of-logic-in-problem-solving",
-    "title": "A Decade of Machine Learning",
-    "section": "Role of Logic in Problem Solving",
-    "text": "Role of Logic in Problem Solving\nLogic, particularly first-order logic, assumes a pivotal role in representing knowledge and facilitating deductive reasoning within the problem-solving paradigm.\n\nLogical Components\n\nDeductive Reasoning:\n\nLogic functions as a tool for deductive reasoning, employing principles such as deduction, induction, abduction, and plausible reasoning to navigate complex problem spaces.\n\nConstraint Processing:\n\nLogic, search methods, and other reasoning approaches converge under the umbrella of constraint processing, offering a comprehensive framework for addressing intricate problem scenarios."
-  },
-  {
-    "objectID": "pages/AI/Week01.html#map-coloring-problem",
-    "href": "pages/AI/Week01.html#map-coloring-problem",
-    "title": "A Decade of Machine Learning",
-    "section": "Map Coloring Problem",
-    "text": "Map Coloring Problem\nThe Map Coloring Problem stands as an exemplary challenge within AI, involving the assignment of colors to regions while adhering to specific constraints.\n\nConstraint Graph Representation\n\nGraph Transformation:\n\nRegions and their color preferences undergo a transformative process, manifesting as a constraint graph that encapsulates the intricacies of the problem.\n\nAlgorithmic Solutions:\n\nConstraint processing algorithms come to the forefront as viable solutions to graph-related problems, showcasing the practical application of logical problem-solving methodologies."
-  },
-  {
-    "objectID": "pages/AI/Week01.html#key-takeaways",
-    "href": "pages/AI/Week01.html#key-takeaways",
-    "title": "A Decade of Machine Learning",
-    "section": "Key Takeaways",
-    "text": "Key Takeaways\n\nDecade of Machine Learning:\n\nThe surge in machine learning over the past decade is attributed to increased data availability, enhanced computing power, and advancements in training algorithms, particularly within the domain of deep learning. \n\nNeural Network Evolution:\n\nFrom the foundational perceptron era to the transformative deep neural networks in computer vision, the evolution of neural networks has played a pivotal role in shaping the landscape of AI.\n\nTraining Process:\n\nSupervised training, especially in medical diagnosis and face recognition, showcases the practical applications of deep neural networks in real-world scenarios.\n\nMachine Learning in Internet Interaction:\n\nUsers’ dynamic interaction with the internet transforms them into valuable data points, shaping the customization of ads and optimizing user experiences.\n\nPerformance vs. Competence:\n\nNeural networks exhibit proficiency in specific tasks but lack a holistic understanding of the world, highlighting the need for specialized training.\n\nGame of Go and Reinforcement Learning:\n\nThe triumph of AlphaGo exemplifies the success achievable through reinforcement learning, showcasing the capacity for autonomous learning without human intervention.\n\nHuman Cognitive Architecture:\n\nUnderstanding human cognitive abilities, symbolic reasoning, and the distinction between AI and machine learning provides insights into the complex realm of intelligence.\n\nHistory and Philosophy:\n\nThe historical roots of AI, key figures in AI development, and philosophical considerations underscore the interdisciplinary nature of artificial intelligence.\n\nPhysical Symbol Systems:\n\nSymbolic representation, as proposed by Simon and Newell, forms the basis for general intelligent action, distinguishing it from sub-symbolic AI.\n\nProblem Solving:\n\nTwo approaches, model-based reasoning and knowledge-based approaches, along with the role of logic, contribute to nuanced problem-solving methodologies.\n\nMap Coloring Problem:\n\nThe Map Coloring Problem serves as a concrete example, highlighting the integration of graph theory, constraint processing, and algorithmic solutions in logical problem-solving."
+    "objectID": "pages/AI/Week02.html#points-to-remember",
+    "href": "pages/AI/Week02.html#points-to-remember",
+    "title": "State Space Search and Search Algorithms Overview",
+    "section": "Points to Remember",
+    "text": "Points to Remember\n\nState Space Search Overview:\n\nState space search involves representing problems as graphs, where nodes represent unique states and edges denote possible moves.\nComponents include state representation, move generation, state space exploration, and goal test.\n\nSearch Algorithms:\n\nVarious search algorithms, such as DFS and BFS, offer different exploration strategies and have implications for time and space complexity.\nDFID combines the strengths of DFS and BFS, iteratively increasing depth limits.\n\nAlgorithmic Variations:\n\nDFID-N opens only new nodes, aiming for linear space complexity.\nDFID-C reopens nodes in CLOSED, providing a balance between space complexity and optimality.\n\nAncillary Functions:\n\nAncillary functions like RECONSTRUCTPATH play a crucial role in path reconstruction for algorithms like DFID.\n\nReal-World Applications:\n\nAlgorithms like DFID find practical applications in chess programming, demonstrating adaptability in time-constrained scenarios.\n\nCombinatorial Explosion and Optimization:\n\nCombinatorial explosion is addressed by iterative deepening approaches like DFID, balancing time and space considerations.\n\nBlind (Uninformed) Search:\n\nBlind searches, including DFS, BFS, and DFID, lack knowledge of the goal’s location during exploration.\n\nPath Reconstruction Challenges:\n\nPath reconstruction challenges arise, especially when multiple paths to the goal exist, emphasizing the importance of closed lists.\n\nDepth-Bounded DFS with Node Counting:\n\nDepth-Bounded DFS with node counting provides insights into the number of visited nodes during exploration.\n\nConfigurations and Planning Problems:\n\nState space search involves configuration problems (satisfying criteria) and planning problems (finding optimal paths to a known goal).\n\n\nThese key points collectively contribute to a comprehensive understanding of state space search algorithms, their variations, and their applications in artificial intelligence problem-solving."
   },
   {
     "objectID": "pages/ST/Week01.html",
