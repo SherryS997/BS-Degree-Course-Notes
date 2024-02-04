@@ -1,0 +1,1309 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.4.549">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>BS Degree Notes - Software Requirements: Gathering, Analysis, and Development Methodologies</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="https://lalten.github.io/lmweb/style/latinmodern-roman.css">
+<link rel="stylesheet" href="https://lalten.github.io/lmweb/style/latinmodern-mono.css">
+</head>
+
+<body class="nav-sidebar docked">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">
+      BS Degree Notes
+      </li></ol></nav>
+        <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="../../">BS Degree Notes</a> 
+        <div class="sidebar-tools-main">
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Home</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="false">
+ <span class="menu-text">Deep Learning</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../pages/DL/Week01_1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 1.1</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../pages/DL/Week01_2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 1.2</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../pages/DL/Week02.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 2</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="false">
+ <span class="menu-text">AI: Search Methods</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../pages/AI/Week01.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 1</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../pages/AI/Week02.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 2</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="false">
+ <span class="menu-text">Software Testing</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../pages/ST/Week01.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 1</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="false">
+ <span class="menu-text">Software Engineering</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../pages/SE/Week01.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 1</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="false">
+ <span class="menu-text">Reinforcement Learning</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../pages/RL/Week01_1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 1.1</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../pages/RL/Week01_2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 1.2</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../pages/RL/Week02.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 2</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#identifying-requirements" id="toc-identifying-requirements" class="nav-link active" data-scroll-target="#identifying-requirements">Identifying Requirements</a>
+  <ul class="collapse">
+  <li><a href="#importance-of-requirement-identification" id="toc-importance-of-requirement-identification" class="nav-link" data-scroll-target="#importance-of-requirement-identification">Importance of Requirement Identification</a></li>
+  <li><a href="#process-of-requirement-identification" id="toc-process-of-requirement-identification" class="nav-link" data-scroll-target="#process-of-requirement-identification">Process of Requirement Identification</a></li>
+  <li><a href="#methods-for-requirement-gathering" id="toc-methods-for-requirement-gathering" class="nav-link" data-scroll-target="#methods-for-requirement-gathering">Methods for Requirement Gathering</a></li>
+  <li><a href="#challenges-in-requirement-gathering" id="toc-challenges-in-requirement-gathering" class="nav-link" data-scroll-target="#challenges-in-requirement-gathering">Challenges in Requirement Gathering</a></li>
+  <li><a href="#requirement-analysis" id="toc-requirement-analysis" class="nav-link" data-scroll-target="#requirement-analysis">Requirement Analysis</a></li>
+  </ul></li>
+  <li><a href="#requirement-gathering-and-analysis" id="toc-requirement-gathering-and-analysis" class="nav-link" data-scroll-target="#requirement-gathering-and-analysis">Requirement Gathering and Analysis</a>
+  <ul class="collapse">
+  <li><a href="#introduction" id="toc-introduction" class="nav-link" data-scroll-target="#introduction">Introduction</a></li>
+  <li><a href="#requirement-collection-techniques" id="toc-requirement-collection-techniques" class="nav-link" data-scroll-target="#requirement-collection-techniques">Requirement Collection Techniques</a>
+  <ul class="collapse">
+  <li><a href="#questionnaires" id="toc-questionnaires" class="nav-link" data-scroll-target="#questionnaires">Questionnaires</a></li>
+  <li><a href="#interviews" id="toc-interviews" class="nav-link" data-scroll-target="#interviews">Interviews</a></li>
+  <li><a href="#focus-groups" id="toc-focus-groups" class="nav-link" data-scroll-target="#focus-groups">Focus Groups</a></li>
+  <li><a href="#observations" id="toc-observations" class="nav-link" data-scroll-target="#observations">Observations</a></li>
+  <li><a href="#documentation" id="toc-documentation" class="nav-link" data-scroll-target="#documentation">Documentation</a></li>
+  </ul></li>
+  <li><a href="#summary-of-requirement-gathering-techniques" id="toc-summary-of-requirement-gathering-techniques" class="nav-link" data-scroll-target="#summary-of-requirement-gathering-techniques">Summary of Requirement Gathering Techniques</a></li>
+  <li><a href="#requirement-gathering-guidelines" id="toc-requirement-gathering-guidelines" class="nav-link" data-scroll-target="#requirement-gathering-guidelines">Requirement Gathering Guidelines</a></li>
+  </ul></li>
+  <li><a href="#software-requirements-analysis" id="toc-software-requirements-analysis" class="nav-link" data-scroll-target="#software-requirements-analysis">Software Requirements Analysis</a>
+  <ul class="collapse">
+  <li><a href="#introduction-1" id="toc-introduction-1" class="nav-link" data-scroll-target="#introduction-1">Introduction</a>
+  <ul class="collapse">
+  <li><a href="#identifying-requirements-1" id="toc-identifying-requirements-1" class="nav-link" data-scroll-target="#identifying-requirements-1">Identifying Requirements</a></li>
+  </ul></li>
+  <li><a href="#functional-requirements" id="toc-functional-requirements" class="nav-link" data-scroll-target="#functional-requirements">Functional Requirements</a>
+  <ul class="collapse">
+  <li><a href="#definition-5" id="toc-definition-5" class="nav-link" data-scroll-target="#definition-5">Definition</a></li>
+  <li><a href="#characteristics" id="toc-characteristics" class="nav-link" data-scroll-target="#characteristics">Characteristics</a></li>
+  </ul></li>
+  <li><a href="#non-functional-requirements" id="toc-non-functional-requirements" class="nav-link" data-scroll-target="#non-functional-requirements">Non-Functional Requirements</a>
+  <ul class="collapse">
+  <li><a href="#distinctive-nature" id="toc-distinctive-nature" class="nav-link" data-scroll-target="#distinctive-nature">Distinctive Nature</a></li>
+  <li><a href="#exemplification" id="toc-exemplification" class="nav-link" data-scroll-target="#exemplification">Exemplification</a></li>
+  <li><a href="#holistic-consideration" id="toc-holistic-consideration" class="nav-link" data-scroll-target="#holistic-consideration">Holistic Consideration</a></li>
+  </ul></li>
+  </ul></li>
+  <li><a href="#organizing-software-requirements" id="toc-organizing-software-requirements" class="nav-link" data-scroll-target="#organizing-software-requirements">Organizing Software Requirements</a>
+  <ul class="collapse">
+  <li><a href="#introduction-2" id="toc-introduction-2" class="nav-link" data-scroll-target="#introduction-2">Introduction</a></li>
+  <li><a href="#plan-and-document-model-in-software-engineering" id="toc-plan-and-document-model-in-software-engineering" class="nav-link" data-scroll-target="#plan-and-document-model-in-software-engineering">Plan and Document Model in Software Engineering</a></li>
+  <li><a href="#structure-of-the-srs-document" id="toc-structure-of-the-srs-document" class="nav-link" data-scroll-target="#structure-of-the-srs-document">Structure of the SRS Document</a>
+  <ul class="collapse">
+  <li><a href="#table-of-contents" id="toc-table-of-contents" class="nav-link" data-scroll-target="#table-of-contents"><em>1. Table of Contents</em></a></li>
+  <li><a href="#sections-1-and-2-broad-system-overview" id="toc-sections-1-and-2-broad-system-overview" class="nav-link" data-scroll-target="#sections-1-and-2-broad-system-overview"><em>2. Sections 1 and 2: Broad System Overview</em></a></li>
+  <li><a href="#section-3---detailed-requirements" id="toc-section-3---detailed-requirements" class="nav-link" data-scroll-target="#section-3---detailed-requirements"><em>3. Section 3 - Detailed Requirements</em></a></li>
+  </ul></li>
+  <li><a href="#significance-of-the-srs-document" id="toc-significance-of-the-srs-document" class="nav-link" data-scroll-target="#significance-of-the-srs-document">Significance of the SRS Document</a>
+  <ul class="collapse">
+  <li><a href="#agreement-facilitation" id="toc-agreement-facilitation" class="nav-link" data-scroll-target="#agreement-facilitation"><em>1. Agreement Facilitation</em></a></li>
+  <li><a href="#reduction-of-rework" id="toc-reduction-of-rework" class="nav-link" data-scroll-target="#reduction-of-rework"><em>2. Reduction of Rework</em></a></li>
+  <li><a href="#cost-and-schedule-estimation" id="toc-cost-and-schedule-estimation" class="nav-link" data-scroll-target="#cost-and-schedule-estimation"><em>3. Cost and Schedule Estimation</em></a></li>
+  <li><a href="#facilitation-of-future-extensions" id="toc-facilitation-of-future-extensions" class="nav-link" data-scroll-target="#facilitation-of-future-extensions"><em>4. Facilitation of Future Extensions</em></a></li>
+  </ul></li>
+  <li><a href="#drawback-of-srs-documentation-overload" id="toc-drawback-of-srs-documentation-overload" class="nav-link" data-scroll-target="#drawback-of-srs-documentation-overload">Drawback of SRS: Documentation Overload</a></li>
+  </ul></li>
+  <li><a href="#behavior-driven-development-bdd" id="toc-behavior-driven-development-bdd" class="nav-link" data-scroll-target="#behavior-driven-development-bdd">Behavior-Driven Development (BDD)</a>
+  <ul class="collapse">
+  <li><a href="#introduction-to-bdd" id="toc-introduction-to-bdd" class="nav-link" data-scroll-target="#introduction-to-bdd">Introduction to BDD</a></li>
+  <li><a href="#behavior-driven-design-bdd" id="toc-behavior-driven-design-bdd" class="nav-link" data-scroll-target="#behavior-driven-design-bdd">Behavior-Driven Design (BDD)</a></li>
+  <li><a href="#user-stories" id="toc-user-stories" class="nav-link" data-scroll-target="#user-stories">User Stories</a>
+  <ul class="collapse">
+  <li><a href="#user-story-examples" id="toc-user-story-examples" class="nav-link" data-scroll-target="#user-story-examples">User Story Examples</a></li>
+  </ul></li>
+  <li><a href="#benefits-of-user-stories" id="toc-benefits-of-user-stories" class="nav-link" data-scroll-target="#benefits-of-user-stories">Benefits of User Stories</a></li>
+  <li><a href="#guidelines-for-crafting-good-user-stories-smart" id="toc-guidelines-for-crafting-good-user-stories-smart" class="nav-link" data-scroll-target="#guidelines-for-crafting-good-user-stories-smart">Guidelines for Crafting Good User Stories (SMART)</a></li>
+  <li><a href="#drawbacks-of-user-stories" id="toc-drawbacks-of-user-stories" class="nav-link" data-scroll-target="#drawbacks-of-user-stories">Drawbacks of User Stories</a></li>
+  </ul></li>
+  <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion">Conclusion</a>
+  <ul class="collapse">
+  <li><a href="#points-to-remember" id="toc-points-to-remember" class="nav-link" data-scroll-target="#points-to-remember">Points to Remember</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Software Requirements: Gathering, Analysis, and Development Methodologies</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="identifying-requirements" class="level1">
+<h1>Identifying Requirements</h1>
+<section id="importance-of-requirement-identification" class="level2">
+<h2 class="anchored" data-anchor-id="importance-of-requirement-identification">Importance of Requirement Identification</h2>
+<p>In the realm of software engineering, meticulous attention to the identification and documentation of software requirements is paramount. Failure to allocate sufficient time and effort to this process can result in a substantial misalignment between user expectations and the actual deliverables produced by developers. The significance of requirement identification lies in its twofold purpose: firstly, to comprehend the desires of the customers and, secondly, to ensure a harmonious agreement between the developers’ understanding and the customers’ expectations. This mutual understanding is crucial, as any deviation may lead to a pronounced escalation in development costs.</p>
+</section>
+<section id="process-of-requirement-identification" class="level2">
+<h2 class="anchored" data-anchor-id="process-of-requirement-identification">Process of Requirement Identification</h2>
+<p>The initiation of the requirement identification process involves a comprehensive understanding of the customers, who may range from internal to external stakeholders with diverse roles and profiles. Categorizing users into primary, secondary, and tertiary roles provides a structured approach:</p>
+<ul>
+<li><p><strong>Primary Users:</strong> Directly interact with the system. Examples include independent sellers, sales teams of consumer companies, authors, and publishers.</p></li>
+<li><p><strong>Secondary Users:</strong> Utilize the system through an intermediary. For instance, sales managers who monitor sales numbers and profits.</p></li>
+<li><p><strong>Tertiary Users:</strong> Affected by the system without direct interaction. This category encompasses entities like logistics/shipping companies, banks, and buyers on platforms such as Amazon.</p></li>
+</ul>
+</section>
+<section id="methods-for-requirement-gathering" class="level2">
+<h2 class="anchored" data-anchor-id="methods-for-requirement-gathering">Methods for Requirement Gathering</h2>
+<p>The process of gathering requirements necessitates a systematic approach, employing methods such as basic interviews, studying existing documentation, conducting focus groups, and observing user interactions. This systematic gathering ensures a holistic understanding of the diverse needs of users.</p>
+</section>
+<section id="challenges-in-requirement-gathering" class="level2">
+<h2 class="anchored" data-anchor-id="challenges-in-requirement-gathering">Challenges in Requirement Gathering</h2>
+<p>The intricacies of requirement gathering present various challenges, including:</p>
+<ul>
+<li><p><strong>Diverse Stakeholder Contributions:</strong> Different stakeholders may contribute varied and potentially conflicting requirements, necessitating careful consideration and resolution.</p></li>
+<li><p><strong>Ambiguity:</strong> Ambiguous requirements arise when terms, such as “manage,” are subject to diverse interpretations by users and developers. Resolving such ambiguity is vital for precision.</p></li>
+<li><p><strong>Inconsistency:</strong> Inconsistencies or contradictions in requirements, such as conflicting payment crediting frequencies, require resolution to maintain coherence in system development.</p></li>
+<li><p><strong>Incompleteness:</strong> Some requirements may be incomplete, overlooking crucial aspects of implementation. This underscores the need for clarity and thoroughness in the gathering process.</p></li>
+</ul>
+</section>
+<section id="requirement-analysis" class="level2">
+<h2 class="anchored" data-anchor-id="requirement-analysis">Requirement Analysis</h2>
+<p>Once requirements are gathered, a meticulous analysis is imperative. This involves:</p>
+<ul>
+<li><p><strong>Clarifying Ambiguities:</strong> Ensuring a shared understanding of terms and concepts to prevent diverse interpretations.</p></li>
+<li><p><strong>Resolving Inconsistencies:</strong> Addressing conflicts or contradictions in requirements to maintain coherence in the development process.</p></li>
+<li><p><strong>Completing Requirements:</strong> Ensuring that all aspects of implementation are considered to avoid oversights and incompleteness.</p></li>
+</ul>
+</section>
+</section>
+<section id="requirement-gathering-and-analysis" class="level1">
+<h1>Requirement Gathering and Analysis</h1>
+<section id="introduction" class="level2">
+<h2 class="anchored" data-anchor-id="introduction">Introduction</h2>
+<p>In the realm of software engineering, the process of <strong>requirement gathering</strong> is fundamental to understanding and delineating the needs of a diverse user base. In this module, we delve into the intricacies of identifying and analyzing requirements, using the Amazon Seller portal as a practical example.</p>
+</section>
+<section id="requirement-collection-techniques" class="level2">
+<h2 class="anchored" data-anchor-id="requirement-collection-techniques">Requirement Collection Techniques</h2>
+<section id="questionnaires" class="level3">
+<h3 class="anchored" data-anchor-id="questionnaires">Questionnaires</h3>
+<section id="definition" class="level4">
+<h4 class="anchored" data-anchor-id="definition">Definition</h4>
+<p>A <strong>questionnaire</strong> is a systematic tool comprising a series of questions designed to extract precise information from users.</p>
+</section>
+<section id="application" class="level4">
+<h4 class="anchored" data-anchor-id="application">Application</h4>
+<p>This technique proves particularly effective when engaging with a broad user base dispersed across varying geographical locations. For instance, surveying sales team managers on their online selling experiences can yield valuable insights.</p>
+</section>
+</section>
+<section id="interviews" class="level3">
+<h3 class="anchored" data-anchor-id="interviews">Interviews</h3>
+<section id="definition-1" class="level4">
+<h4 class="anchored" data-anchor-id="definition-1">Definition</h4>
+<p><strong>Interviews</strong> involve posing a set of questions to users, categorized as either structured, unstructured, or semi-structured.</p>
+</section>
+<section id="purpose" class="level4">
+<h4 class="anchored" data-anchor-id="purpose">Purpose</h4>
+<p>Structured interviews adhere to a predefined set of questions, while unstructured interviews are more flexible, allowing for exploration based on user responses. These interviews serve the purpose of understanding user issues and eliciting diverse scenarios. For example, probing independent sellers on platform preferences elucidates crucial insights.</p>
+</section>
+</section>
+<section id="focus-groups" class="level3">
+<h3 class="anchored" data-anchor-id="focus-groups">Focus Groups</h3>
+<section id="definition-2" class="level4">
+<h4 class="anchored" data-anchor-id="definition-2">Definition</h4>
+<p><strong>Focus groups</strong> bring together stakeholders to engage in discussions concerning system issues and requirements.</p>
+</section>
+<section id="advantages" class="level4">
+<h4 class="anchored" data-anchor-id="advantages">Advantages</h4>
+<p>This technique facilitates consensus-building and identifies areas of conflict or disagreement. By conducting focus groups with stakeholders from different industries, varied expectations and requirements can be uncovered.</p>
+</section>
+</section>
+<section id="observations" class="level3">
+<h3 class="anchored" data-anchor-id="observations">Observations</h3>
+<section id="definition-3" class="level4">
+<h4 class="anchored" data-anchor-id="definition-3">Definition</h4>
+<p><strong>Observations</strong> entail spending time with stakeholders in their natural settings, shadowing them, and noting their day-to-day tasks.</p>
+</section>
+<section id="application-1" class="level4">
+<h4 class="anchored" data-anchor-id="application-1">Application</h4>
+<p>By observing how tasks are performed, such as the selling process in physical shops, requirements for the online setting can be extrapolated. For instance, understanding customer interactions in a physical shop aids in the design of online recommendation systems.</p>
+</section>
+</section>
+<section id="documentation" class="level3">
+<h3 class="anchored" data-anchor-id="documentation">Documentation</h3>
+<section id="definition-4" class="level4">
+<h4 class="anchored" data-anchor-id="definition-4">Definition</h4>
+<p><strong>Documentation</strong> refers to written procedures, rules, manuals, or regulations that provide guidelines for specific tasks.</p>
+</section>
+<section id="significance" class="level4">
+<h4 class="anchored" data-anchor-id="significance">Significance</h4>
+<p>In the context of a seller portal, compliance with bank regulations, such as adding seller accounts and handling monetary transactions, is crucial. Documentation aids in understanding and incorporating these requirements.</p>
+</section>
+</section>
+</section>
+<section id="summary-of-requirement-gathering-techniques" class="level2">
+<h2 class="anchored" data-anchor-id="summary-of-requirement-gathering-techniques">Summary of Requirement Gathering Techniques</h2>
+<p>In summary, various <strong>requirement gathering techniques</strong> serve distinct purposes:</p>
+<ul>
+<li><strong>Questionnaires:</strong> Suited for obtaining specific answers.</li>
+<li><strong>Interviews:</strong> Effective in exploring issues and scenarios.</li>
+<li><strong>Focus Groups:</strong> Facilitate collection of multiple viewpoints.</li>
+<li><strong>Observations:</strong> Provide insights into the context of user tasks.</li>
+<li><strong>Documentation:</strong> Offer guidelines through procedures, regulations, and standards.</li>
+</ul>
+</section>
+<section id="requirement-gathering-guidelines" class="level2">
+<h2 class="anchored" data-anchor-id="requirement-gathering-guidelines">Requirement Gathering Guidelines</h2>
+<ol type="1">
+<li><strong>Stakeholder Focus:</strong> Identify and address the needs of all stakeholder groups, encompassing primary, secondary, and tertiary users.</li>
+<li><strong>Technique Combination:</strong> Utilize a blend of requirement gathering techniques, each serving a unique purpose.</li>
+<li><strong>Pilot Sessions:</strong> Prioritize running pilot sessions to ensure the efficacy of data gathering techniques.</li>
+<li><strong>Resource Considerations:</strong> Acknowledge the expenses and time-intensive nature of the data gathering process.</li>
+<li><strong>Pragmatic Approach:</strong> Recognize the need for pragmatism in navigating complexities inherent in requirement gathering.</li>
+</ol>
+</section>
+</section>
+<section id="software-requirements-analysis" class="level1">
+<h1>Software Requirements Analysis</h1>
+<section id="introduction-1" class="level2">
+<h2 class="anchored" data-anchor-id="introduction-1">Introduction</h2>
+<section id="identifying-requirements-1" class="level3">
+<h3 class="anchored" data-anchor-id="identifying-requirements-1">Identifying Requirements</h3>
+<p>In the realm of software engineering, the process of requirement identification is multifaceted. Employing techniques such as interviews, documentation scrutiny, and questionnaires aids in discerning the varied characteristics inherent in software requirements.</p>
+</section>
+</section>
+<section id="functional-requirements" class="level2">
+<h2 class="anchored" data-anchor-id="functional-requirements">Functional Requirements</h2>
+<section id="definition-5" class="level3">
+<h3 class="anchored" data-anchor-id="definition-5">Definition</h3>
+<p>Functional requirements constitute the backbone of system functionalities. Analogous to mathematical functions <span class="math inline">\(f: A \rightarrow B\)</span>, these requirements delineate the transformation of inputs from set <span class="math inline">\(A\)</span> to corresponding outputs in set <span class="math inline">\(B\)</span>. A quintessential example encapsulates the notion: <em>“A seller can add or delete items from their catalog.”</em></p>
+</section>
+<section id="characteristics" class="level3">
+<h3 class="anchored" data-anchor-id="characteristics">Characteristics</h3>
+<p>Functional requirements pivot on user actions and inputs, elucidating the dynamic interplay between user-driven commands and the ensuing system responses.</p>
+</section>
+</section>
+<section id="non-functional-requirements" class="level2">
+<h2 class="anchored" data-anchor-id="non-functional-requirements">Non-Functional Requirements</h2>
+<section id="distinctive-nature" class="level3">
+<h3 class="anchored" data-anchor-id="distinctive-nature">Distinctive Nature</h3>
+<p>In stark contrast, non-functional requirements transcend specific functionalities, focusing on dictating the system’s behavior rather than delineating discrete functions. Consider the exemplar: <em>“When a new product is added, it must show up on the user’s interface within five seconds.”</em> Non-functional requirements, unlike their functional counterparts, do not manifest as explicit functions mapping inputs to outputs.</p>
+</section>
+<section id="exemplification" class="level3">
+<h3 class="anchored" data-anchor-id="exemplification">Exemplification</h3>
+<section id="reliability" class="level4">
+<h4 class="anchored" data-anchor-id="reliability">Reliability</h4>
+<p>Reliability surfaces as a cardinal non-functional requirement, quantifying the system’s consistency over time within a stable operating milieu. In the context of software, reliability assumes paramount importance, especially in critical operations like inventory management within a seller portal.</p>
+</section>
+<section id="robustness" class="level4">
+<h4 class="anchored" data-anchor-id="robustness">Robustness</h4>
+<p>Robustness augments the software system’s resilience by delineating its ability to rebound from errors and gracefully handle unexpected inputs. In the context of a seller portal, robustness guarantees the system’s adeptness at managing large data volumes, high traffic, and erratic user inputs.</p>
+</section>
+</section>
+<section id="holistic-consideration" class="level3">
+<h3 class="anchored" data-anchor-id="holistic-consideration">Holistic Consideration</h3>
+<p>Beyond reliability and robustness, the software development landscape encompasses an array of additional non-functional requirements:</p>
+<ul>
+<li><strong>Performance:</strong> Dictating adherence to specified performance benchmarks.</li>
+<li><strong>Portability:</strong> Ensuring adaptability across diverse platforms without necessitating modifications.</li>
+<li><strong>Security:</strong> Safeguarding the system against unauthorized access and upholding data integrity.</li>
+<li><strong>Interoperability:</strong> Ensuring seamless collaboration with other systems.</li>
+</ul>
+</section>
+</section>
+</section>
+<section id="organizing-software-requirements" class="level1">
+<h1>Organizing Software Requirements</h1>
+<section id="introduction-2" class="level2">
+<h2 class="anchored" data-anchor-id="introduction-2">Introduction</h2>
+<p>The previous module delved into the meticulous process of gathering and analyzing software requirements, distinguishing between functional and non-functional aspects. In this module, our focus shifts towards the crucial task of effectively organizing these requirements for streamlined software development.</p>
+</section>
+<section id="plan-and-document-model-in-software-engineering" class="level2">
+<h2 class="anchored" data-anchor-id="plan-and-document-model-in-software-engineering">Plan and Document Model in Software Engineering</h2>
+<p>In adherence to the plan and document model in software engineering, substantial emphasis is placed on planning and documenting the software development process. A pivotal role is played by the system analyst, who collaborates with the software team to gather and organize requirements. The culmination of this process is the creation of a Software Requirements Specification (SRS) document.</p>
+</section>
+<section id="structure-of-the-srs-document" class="level2">
+<h2 class="anchored" data-anchor-id="structure-of-the-srs-document">Structure of the SRS Document</h2>
+<section id="table-of-contents" class="level3">
+<h3 class="anchored" data-anchor-id="table-of-contents"><em>1. Table of Contents</em></h3>
+<p>The SRS document features a comprehensive table of contents, outlining various sections and subsections.</p>
+</section>
+<section id="sections-1-and-2-broad-system-overview" class="level3">
+<h3 class="anchored" data-anchor-id="sections-1-and-2-broad-system-overview"><em>2. Sections 1 and 2: Broad System Overview</em></h3>
+<p>These sections provide a detailed overview of the software system, encompassing its purpose, scope, definitions, acronyms, abbreviations, perspective, functions, constraints, assumptions, and dependencies.</p>
+</section>
+<section id="section-3---detailed-requirements" class="level3">
+<h3 class="anchored" data-anchor-id="section-3---detailed-requirements"><em>3. Section 3 - Detailed Requirements</em></h3>
+<p>This pivotal section elaborates on the specific requirements of the software system.</p>
+<ul>
+<li><h4 id="external-interface-requirements" class="anchored"><em>3.1 External Interface Requirements</em></h4>
+<ul>
+<li>User interfaces, including sample screen images, GUI standards, and screen layout.</li>
+<li>Hardware interfaces detailing the interaction between hardware and software.</li>
+<li>Software interfaces outlining connections with other software components.</li>
+<li>Communication interfaces specifying required software communication.</li>
+</ul></li>
+<li><h4 id="system-features" class="anchored"><em>3.2 System Features</em></h4>
+<ul>
+<li>Outlining high-level functions (system features).</li>
+<li>Inclusion of functional requirements for each system feature.</li>
+</ul></li>
+<li><h4 id="to-3.6---non-functional-requirements" class="anchored"><em>3.3 to 3.6 - Non-Functional Requirements</em></h4>
+<ul>
+<li>Comprehensive details regarding non-functional requirements, such as performance, security, etc.</li>
+</ul></li>
+</ul>
+</section>
+</section>
+<section id="significance-of-the-srs-document" class="level2">
+<h2 class="anchored" data-anchor-id="significance-of-the-srs-document">Significance of the SRS Document</h2>
+<p>The Software Requirements Specification document holds paramount importance in the software development process.</p>
+<section id="agreement-facilitation" class="level3">
+<h3 class="anchored" data-anchor-id="agreement-facilitation"><em>1. Agreement Facilitation</em></h3>
+<ul>
+<li>Facilitates agreement between customers and developers.</li>
+<li>Customers review and accept the SRS document, establishing mutual expectations.</li>
+</ul>
+</section>
+<section id="reduction-of-rework" class="level3">
+<h3 class="anchored" data-anchor-id="reduction-of-rework"><em>2. Reduction of Rework</em></h3>
+<ul>
+<li>Mandates stakeholders to rigorously consider requirements pre-design and development.</li>
+<li>Results in a reduction of changes in later stages of development.</li>
+</ul>
+</section>
+<section id="cost-and-schedule-estimation" class="level3">
+<h3 class="anchored" data-anchor-id="cost-and-schedule-estimation"><em>3. Cost and Schedule Estimation</em></h3>
+<ul>
+<li>Provides a foundational basis for estimating costs and schedules.</li>
+<li>Size estimation derived from requirements aids in estimating effort and cost.</li>
+<li>Empowers project managers to formulate a structured development schedule.</li>
+</ul>
+</section>
+<section id="facilitation-of-future-extensions" class="level3">
+<h3 class="anchored" data-anchor-id="facilitation-of-future-extensions"><em>4. Facilitation of Future Extensions</em></h3>
+<ul>
+<li>Serves as a foundational basis for planning future enhancements.</li>
+<li>Enables seamless adaptation and extension of the software system.</li>
+</ul>
+</section>
+</section>
+<section id="drawback-of-srs-documentation-overload" class="level2">
+<h2 class="anchored" data-anchor-id="drawback-of-srs-documentation-overload">Drawback of SRS: Documentation Overload</h2>
+<p>Despite its merits, the SRS process necessitates a substantial volume of documentation, making it most practical when dealing with fixed requirements.</p>
+</section>
+</section>
+<section id="behavior-driven-development-bdd" class="level1">
+<h1>Behavior-Driven Development (BDD)</h1>
+<section id="introduction-to-bdd" class="level2">
+<h2 class="anchored" data-anchor-id="introduction-to-bdd">Introduction to BDD</h2>
+<p>Behavior-Driven Development (BDD) serves as a strategic approach in software engineering, particularly adept at handling dynamic and uncertain requirements within the development process. This methodology aligns seamlessly with the Agile perspective, emphasizing continuous stakeholder interaction and the iterative creation of functional prototypes over short development cycles.</p>
+</section>
+<section id="behavior-driven-design-bdd" class="level2">
+<h2 class="anchored" data-anchor-id="behavior-driven-design-bdd">Behavior-Driven Design (BDD)</h2>
+<p>BDD centers its focus on understanding the behavioral intricacies of an application both prior to and during the development phase. This strategic emphasis aims to mitigate potential miscommunication pitfalls that often arise when dealing with evolving project requirements. In the realm of BDD, traditional Software Requirements Specification (SRS) documents make way for a more dynamic entity known as “user stories.”</p>
+</section>
+<section id="user-stories" class="level2">
+<h2 class="anchored" data-anchor-id="user-stories">User Stories</h2>
+<p>User stories are succinct, plain-language representations of desired user interactions with a software product. These narratives adhere to the role-feature-benefit pattern, encapsulating the identity of the user, the desired action, and the ensuing value or benefit. This shift towards user stories provides a more agile and adaptable alternative to the conventional SRS documentation.</p>
+<section id="user-story-examples" class="level3">
+<h3 class="anchored" data-anchor-id="user-story-examples">User Story Examples</h3>
+<ol type="1">
+<li><strong>Viewing Inventory:</strong>
+<ul>
+<li>As an independent seller, I want to view my inventory so that I can take stock of low-quantity products.</li>
+</ul></li>
+<li><strong>Tracking Customer Feedback:</strong>
+<ul>
+<li>As an independent seller, I want to view my customers’ feedback for each product so that I can identify pertinent issues.</li>
+</ul></li>
+</ol>
+</section>
+</section>
+<section id="benefits-of-user-stories" class="level2">
+<h2 class="anchored" data-anchor-id="benefits-of-user-stories">Benefits of User Stories</h2>
+<ol type="1">
+<li><strong>Lightweight Requirements:</strong>
+<ul>
+<li>User stories offer a streamlined and lightweight alternative to the more cumbersome SRS documentation.</li>
+</ul></li>
+<li><strong>Prioritization and Planning:</strong>
+<ul>
+<li>Stakeholders can strategically plan and prioritize development efforts based on the encapsulated user stories.</li>
+</ul></li>
+<li><strong>Reduced Misunderstanding:</strong>
+<ul>
+<li>By concentrating on behavioral expectations rather than detailed implementation specifics, user stories contribute to minimizing misunderstandings between stakeholders.</li>
+</ul></li>
+<li><strong>Facilitates Conversations:</strong>
+<ul>
+<li>The adoption of user stories fosters interactive discussions between end-users and the development team. This collaborative approach often leads to the creation of simpler and more valuable solutions.</li>
+</ul></li>
+</ol>
+</section>
+<section id="guidelines-for-crafting-good-user-stories-smart" class="level2">
+<h2 class="anchored" data-anchor-id="guidelines-for-crafting-good-user-stories-smart">Guidelines for Crafting Good User Stories (SMART)</h2>
+<ol type="1">
+<li><strong>Specific:</strong>
+<ul>
+<li>User stories should exhibit specificity, providing clear and unambiguous details regarding the required implementation.</li>
+</ul></li>
+<li><strong>Measurable:</strong>
+<ul>
+<li>Each user story should be designed with testability in mind, ensuring that measurable outcomes can be derived.</li>
+</ul></li>
+<li><strong>Achievable:</strong>
+<ul>
+<li>Ideal user stories should be implementable within a single agile iteration, typically spanning one to two weeks.</li>
+</ul></li>
+<li><strong>Relevant:</strong>
+<ul>
+<li>User stories must align with the overall business objectives, offering tangible value to one or more stakeholders.</li>
+</ul></li>
+<li><strong>Time-Boxed:</strong>
+<ul>
+<li>Implementation efforts associated with a user story should cease if the allocated time surpasses the predefined limit. This necessitates a reassessment or potential subdivision of the user story.</li>
+</ul></li>
+</ol>
+</section>
+<section id="drawbacks-of-user-stories" class="level2">
+<h2 class="anchored" data-anchor-id="drawbacks-of-user-stories">Drawbacks of User Stories</h2>
+<ol type="1">
+<li><strong>Continuous Customer Contact:</strong>
+<ul>
+<li>Sustaining continuous customer involvement throughout the development process may prove challenging or economically unfeasible.</li>
+</ul></li>
+<li><strong>Scaling Issues:</strong>
+<ul>
+<li>BDD may encounter scalability challenges, particularly in the context of expansive software development projects or applications with stringent safety requirements. These scenarios often demand extensive pre-implementation planning and documentation, aspects that might not align seamlessly with the agile nature of BDD.</li>
+</ul></li>
+</ol>
+</section>
+</section>
+<section id="conclusion" class="level1">
+<h1>Conclusion</h1>
+<p>In the realm of software engineering, the process of identifying, gathering, and analyzing requirements stands as a foundational pillar for successful software development. The significance of meticulous requirement identification cannot be overstated, as it forms the basis for aligning user expectations with the deliverables produced by developers. The intricate process involves understanding diverse stakeholders, employing various gathering techniques, and addressing challenges such as ambiguity, inconsistency, and incompleteness.</p>
+<p>The Software Requirements Specification (SRS) document plays a pivotal role in organizing and documenting requirements, serving as a cornerstone for agreement between customers and developers. Despite its benefits, the SRS process comes with the challenge of documentation overload, making it most practical when dealing with fixed requirements.</p>
+<p>Behavior-Driven Development (BDD) introduces a dynamic and agile approach to software development, emphasizing continuous stakeholder interaction and the creation of user stories over traditional SRS documentation. User stories offer a lightweight alternative, focusing on behavioral expectations and fostering interactive discussions between end-users and the development team.</p>
+<section id="points-to-remember" class="level2">
+<h2 class="anchored" data-anchor-id="points-to-remember">Points to Remember</h2>
+<ol type="1">
+<li><strong>Importance of Requirement Identification:</strong>
+<ul>
+<li>Meticulous attention to identifying and documenting software requirements is paramount to align user expectations with actual deliverables.</li>
+</ul></li>
+<li><strong>Methods for Requirement Gathering:</strong>
+<ul>
+<li>Techniques such as questionnaires, interviews, focus groups, observations, and documentation are employed to systematically gather diverse user needs.</li>
+</ul></li>
+<li><strong>Challenges in Requirement Gathering:</strong>
+<ul>
+<li>Diverse stakeholder contributions, ambiguity, inconsistency, and incompleteness pose challenges that need careful consideration and resolution.</li>
+</ul></li>
+<li><strong>Functional and Non-Functional Requirements:</strong>
+<ul>
+<li>Functional requirements focus on system functionalities, while non-functional requirements dictate the system’s behavior, encompassing aspects like reliability, robustness, performance, security, portability, and interoperability.</li>
+</ul></li>
+<li><strong>Software Requirements Analysis:</strong>
+<ul>
+<li>Analysis involves clarifying ambiguities, resolving inconsistencies, and ensuring completeness of requirements.</li>
+</ul></li>
+<li><strong>Organizing Software Requirements:</strong>
+<ul>
+<li>The SRS document, following the plan and document model, plays a crucial role in organizing requirements for effective software development.</li>
+</ul></li>
+<li><strong>Behavior-Driven Development (BDD):</strong>
+<ul>
+<li>BDD offers an agile approach, replacing traditional SRS with user stories for better adaptability to dynamic requirements.</li>
+</ul></li>
+<li><strong>User Stories:</strong>
+<ul>
+<li>User stories are lightweight, plain-language representations of desired user interactions, fostering prioritization, reduced misunderstanding, and interactive discussions.</li>
+</ul></li>
+<li><strong>Guidelines for Crafting Good User Stories (SMART):</strong>
+<ul>
+<li>User stories should be Specific, Measurable, Achievable, Relevant, and Time-Boxed, ensuring clarity and testability.</li>
+</ul></li>
+<li><strong>Drawbacks of User Stories:</strong>
+<ul>
+<li>Continuous customer contact may be challenging, and scalability issues may arise in expansive projects or applications with stringent safety requirements.</li>
+</ul></li>
+</ol>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const disableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'prefetch';
+    }
+  }
+  const enableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'stylesheet';
+    }
+  }
+  const manageTransitions = (selector, allowTransitions) => {
+    const els = window.document.querySelectorAll(selector);
+    for (let i=0; i < els.length; i++) {
+      const el = els[i];
+      if (allowTransitions) {
+        el.classList.remove('notransition');
+      } else {
+        el.classList.add('notransition');
+      }
+    }
+  }
+  const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+    const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+    const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+    let newTheme = '';
+    if(darkModeDefault) {
+      newTheme = isAlternate ? baseTheme : alternateTheme;
+    } else {
+      newTheme = isAlternate ? alternateTheme : baseTheme;
+    }
+    const changeGiscusTheme = () => {
+      // From: https://github.com/giscus/giscus/issues/336
+      const sendMessage = (message) => {
+        const iframe = document.querySelector('iframe.giscus-frame');
+        if (!iframe) return;
+        iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+      }
+      sendMessage({
+        setConfig: {
+          theme: newTheme
+        }
+      });
+    }
+    const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+    if (isGiscussLoaded) {
+      changeGiscusTheme();
+    }
+  }
+  const toggleColorMode = (alternate) => {
+    // Switch the stylesheets
+    const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+    manageTransitions('#quarto-margin-sidebar .nav-link', false);
+    if (alternate) {
+      enableStylesheet(alternateStylesheets);
+      for (const sheetNode of alternateStylesheets) {
+        if (sheetNode.id === "quarto-bootstrap") {
+          toggleBodyColorMode(sheetNode);
+        }
+      }
+    } else {
+      disableStylesheet(alternateStylesheets);
+      toggleBodyColorPrimary();
+    }
+    manageTransitions('#quarto-margin-sidebar .nav-link', true);
+    // Switch the toggles
+    const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+    for (let i=0; i < toggles.length; i++) {
+      const toggle = toggles[i];
+      if (toggle) {
+        if (alternate) {
+          toggle.classList.add("alternate");     
+        } else {
+          toggle.classList.remove("alternate");
+        }
+      }
+    }
+    // Hack to workaround the fact that safari doesn't
+    // properly recolor the scrollbar when toggling (#1455)
+    if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+      manageTransitions("body", false);
+      window.scrollTo(0, 1);
+      setTimeout(() => {
+        window.scrollTo(0, 0);
+        manageTransitions("body", true);
+      }, 40);  
+    }
+  }
+  const isFileUrl = () => { 
+    return window.location.protocol === 'file:';
+  }
+  const hasAlternateSentinel = () => {  
+    let styleSentinel = getColorSchemeSentinel();
+    if (styleSentinel !== null) {
+      return styleSentinel === "alternate";
+    } else {
+      return false;
+    }
+  }
+  const setStyleSentinel = (alternate) => {
+    const value = alternate ? "alternate" : "default";
+    if (!isFileUrl()) {
+      window.localStorage.setItem("quarto-color-scheme", value);
+    } else {
+      localAlternateSentinel = value;
+    }
+  }
+  const getColorSchemeSentinel = () => {
+    if (!isFileUrl()) {
+      const storageValue = window.localStorage.getItem("quarto-color-scheme");
+      return storageValue != null ? storageValue : localAlternateSentinel;
+    } else {
+      return localAlternateSentinel;
+    }
+  }
+  const darkModeDefault = false;
+  let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+  // Dark / light mode switch
+  window.quartoToggleColorScheme = () => {
+    // Read the current dark / light value 
+    let toAlternate = !hasAlternateSentinel();
+    toggleColorMode(toAlternate);
+    setStyleSentinel(toAlternate);
+    toggleGiscusIfUsed(toAlternate, darkModeDefault);
+  };
+  // Ensure there is a toggle, if there isn't float one in the top right
+  if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+    const a = window.document.createElement('a');
+    a.classList.add('top-right');
+    a.classList.add('quarto-color-scheme-toggle');
+    a.href = "";
+    a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+    const i = window.document.createElement("i");
+    i.classList.add('bi');
+    a.appendChild(i);
+    window.document.body.appendChild(a);
+  }
+  // Switch to dark mode if need be
+  if (hasAlternateSentinel()) {
+    toggleColorMode(true);
+  } else {
+    toggleColorMode(false);
+  }
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>
