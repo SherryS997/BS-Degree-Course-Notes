@@ -1,0 +1,1476 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.4.549">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>BS Degree Notes - Exploring Heuristic Search and Optimization Techniques</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="https://lalten.github.io/lmweb/style/latinmodern-roman.css">
+<link rel="stylesheet" href="https://lalten.github.io/lmweb/style/latinmodern-mono.css">
+</head>
+
+<body class="nav-sidebar docked">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../pages/AI/Week01.html">AI: Search Methods</a></li><li class="breadcrumb-item"><a href="../../pages/AI/Week03.html">Week 3</a></li></ol></nav>
+        <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="../../">BS Degree Notes</a> 
+        <div class="sidebar-tools-main">
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Home</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="false">
+ <span class="menu-text">Deep Learning</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../pages/DL/Week01_1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 1.1</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../pages/DL/Week01_2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 1.2</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../pages/DL/Week02.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 2</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../pages/DL/Week03.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 3</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
+ <span class="menu-text">AI: Search Methods</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../pages/AI/Week01.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 1</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../pages/AI/Week02.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 2</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../pages/AI/Week03.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">Week 3</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="false">
+ <span class="menu-text">Software Testing</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../pages/ST/Week01.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 1</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../pages/ST/Week02.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 2</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="false">
+ <span class="menu-text">Software Engineering</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../pages/SE/Week01.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 1</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../pages/SE/Week02.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 2</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="false">
+ <span class="menu-text">Reinforcement Learning</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../pages/RL/Week01_1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 1.1</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../pages/RL/Week01_2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 1.2</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../pages/RL/Week02.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 2</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#heuristic-search" id="toc-heuristic-search" class="nav-link active" data-scroll-target="#heuristic-search">Heuristic Search</a>
+  <ul class="collapse">
+  <li><a href="#introduction" id="toc-introduction" class="nav-link" data-scroll-target="#introduction">Introduction</a></li>
+  <li><a href="#blind-search-algorithms" id="toc-blind-search-algorithms" class="nav-link" data-scroll-target="#blind-search-algorithms">Blind Search Algorithms</a></li>
+  <li><a href="#heuristic-search-a-sense-of-direction" id="toc-heuristic-search-a-sense-of-direction" class="nav-link" data-scroll-target="#heuristic-search-a-sense-of-direction">Heuristic Search: A Sense of Direction</a>
+  <ul class="collapse">
+  <li><a href="#inspiration-from-nature" id="toc-inspiration-from-nature" class="nav-link" data-scroll-target="#inspiration-from-nature">Inspiration from Nature</a></li>
+  <li><a href="#heuristic-function" id="toc-heuristic-function" class="nav-link" data-scroll-target="#heuristic-function">Heuristic Function</a></li>
+  </ul></li>
+  <li><a href="#types-of-heuristic-functions" id="toc-types-of-heuristic-functions" class="nav-link" data-scroll-target="#types-of-heuristic-functions">Types of Heuristic Functions</a>
+  <ul class="collapse">
+  <li><a href="#hamming-distance-h_1" id="toc-hamming-distance-h_1" class="nav-link" data-scroll-target="#hamming-distance-h_1">Hamming Distance (<span class="math inline">\(h_1\)</span>)</a></li>
+  <li><a href="#manhattan-distance" id="toc-manhattan-distance" class="nav-link" data-scroll-target="#manhattan-distance">Manhattan Distance</a></li>
+  </ul></li>
+  <li><a href="#application-of-heuristic-search" id="toc-application-of-heuristic-search" class="nav-link" data-scroll-target="#application-of-heuristic-search">Application of Heuristic Search</a>
+  <ul class="collapse">
+  <li><a href="#best-first-search-algorithm" id="toc-best-first-search-algorithm" class="nav-link" data-scroll-target="#best-first-search-algorithm">Best First Search Algorithm</a></li>
+  </ul></li>
+  <li><a href="#real-world-examples" id="toc-real-world-examples" class="nav-link" data-scroll-target="#real-world-examples">Real-world Examples</a>
+  <ul class="collapse">
+  <li><a href="#geographical-route-finding" id="toc-geographical-route-finding" class="nav-link" data-scroll-target="#geographical-route-finding">Geographical Route Finding</a></li>
+  <li><a href="#puzzle-solving" id="toc-puzzle-solving" class="nav-link" data-scroll-target="#puzzle-solving">Puzzle Solving</a></li>
+  </ul></li>
+  <li><a href="#considerations-and-limitations" id="toc-considerations-and-limitations" class="nav-link" data-scroll-target="#considerations-and-limitations">Considerations and Limitations</a></li>
+  </ul></li>
+  <li><a href="#hill-climbing" id="toc-hill-climbing" class="nav-link" data-scroll-target="#hill-climbing">Hill Climbing</a>
+  <ul class="collapse">
+  <li><a href="#overview" id="toc-overview" class="nav-link" data-scroll-target="#overview">Overview</a>
+  <ul class="collapse">
+  <li><a href="#algorithmic-framework" id="toc-algorithmic-framework" class="nav-link" data-scroll-target="#algorithmic-framework">Algorithmic Framework</a></li>
+  </ul></li>
+  <li><a href="#hill-climbing-algorithm" id="toc-hill-climbing-algorithm" class="nav-link" data-scroll-target="#hill-climbing-algorithm">Hill-Climbing Algorithm</a>
+  <ul class="collapse">
+  <li><a href="#pseudocode" id="toc-pseudocode" class="nav-link" data-scroll-target="#pseudocode">Pseudocode</a></li>
+  <li><a href="#detailed-explanation" id="toc-detailed-explanation" class="nav-link" data-scroll-target="#detailed-explanation">Detailed Explanation</a></li>
+  </ul></li>
+  <li><a href="#advantages-and-disadvantages" id="toc-advantages-and-disadvantages" class="nav-link" data-scroll-target="#advantages-and-disadvantages">Advantages and Disadvantages</a>
+  <ul class="collapse">
+  <li><a href="#advantages" id="toc-advantages" class="nav-link" data-scroll-target="#advantages">Advantages</a></li>
+  <li><a href="#disadvantages" id="toc-disadvantages" class="nav-link" data-scroll-target="#disadvantages">Disadvantages</a></li>
+  </ul></li>
+  <li><a href="#applications" id="toc-applications" class="nav-link" data-scroll-target="#applications">Applications</a></li>
+  <li><a href="#extensions-and-alternatives" id="toc-extensions-and-alternatives" class="nav-link" data-scroll-target="#extensions-and-alternatives">Extensions and Alternatives</a>
+  <ul class="collapse">
+  <li><a href="#deterministic-methods" id="toc-deterministic-methods" class="nav-link" data-scroll-target="#deterministic-methods">Deterministic Methods</a></li>
+  <li><a href="#randomized-methods" id="toc-randomized-methods" class="nav-link" data-scroll-target="#randomized-methods">Randomized Methods</a></li>
+  </ul></li>
+  </ul></li>
+  <li><a href="#solution-space-search" id="toc-solution-space-search" class="nav-link" data-scroll-target="#solution-space-search">Solution Space Search</a>
+  <ul class="collapse">
+  <li><a href="#solution-space-search-1" id="toc-solution-space-search-1" class="nav-link" data-scroll-target="#solution-space-search-1">Solution Space Search</a>
+  <ul class="collapse">
+  <li><a href="#definition" id="toc-definition" class="nav-link" data-scroll-target="#definition">Definition</a></li>
+  <li><a href="#configuration-problems" id="toc-configuration-problems" class="nav-link" data-scroll-target="#configuration-problems">Configuration Problems</a></li>
+  <li><a href="#planning-problems" id="toc-planning-problems" class="nav-link" data-scroll-target="#planning-problems">Planning Problems</a></li>
+  </ul></li>
+  <li><a href="#synthesis-vs.-perturbation" id="toc-synthesis-vs.-perturbation" class="nav-link" data-scroll-target="#synthesis-vs.-perturbation">Synthesis vs.&nbsp;Perturbation</a>
+  <ul class="collapse">
+  <li><a href="#synthesis-methods" id="toc-synthesis-methods" class="nav-link" data-scroll-target="#synthesis-methods">Synthesis Methods</a></li>
+  <li><a href="#perturbation-methods" id="toc-perturbation-methods" class="nav-link" data-scroll-target="#perturbation-methods">Perturbation Methods</a></li>
+  </ul></li>
+  <li><a href="#sat-problem-boolean-satisfiability-problem" id="toc-sat-problem-boolean-satisfiability-problem" class="nav-link" data-scroll-target="#sat-problem-boolean-satisfiability-problem">SAT Problem (Boolean Satisfiability Problem)</a>
+  <ul class="collapse">
+  <li><a href="#problem-statement" id="toc-problem-statement" class="nav-link" data-scroll-target="#problem-statement">Problem Statement</a></li>
+  <li><a href="#complexity-analysis" id="toc-complexity-analysis" class="nav-link" data-scroll-target="#complexity-analysis">Complexity Analysis</a></li>
+  </ul></li>
+  <li><a href="#traveling-salesperson-problem-tsp" id="toc-traveling-salesperson-problem-tsp" class="nav-link" data-scroll-target="#traveling-salesperson-problem-tsp">Traveling Salesperson Problem (TSP)</a>
+  <ul class="collapse">
+  <li><a href="#problem-definition" id="toc-problem-definition" class="nav-link" data-scroll-target="#problem-definition">Problem Definition</a></li>
+  <li><a href="#complexity-analysis-1" id="toc-complexity-analysis-1" class="nav-link" data-scroll-target="#complexity-analysis-1">Complexity Analysis</a></li>
+  </ul></li>
+  <li><a href="#greedy-constructive-methods-for-tsp" id="toc-greedy-constructive-methods-for-tsp" class="nav-link" data-scroll-target="#greedy-constructive-methods-for-tsp">Greedy Constructive Methods for TSP</a>
+  <ul class="collapse">
+  <li><a href="#nearest-neighbor-heuristic" id="toc-nearest-neighbor-heuristic" class="nav-link" data-scroll-target="#nearest-neighbor-heuristic">Nearest Neighbor Heuristic</a></li>
+  <li><a href="#greedy-heuristic" id="toc-greedy-heuristic" class="nav-link" data-scroll-target="#greedy-heuristic">Greedy Heuristic</a></li>
+  </ul></li>
+  <li><a href="#savings-heuristic-for-tsp" id="toc-savings-heuristic-for-tsp" class="nav-link" data-scroll-target="#savings-heuristic-for-tsp">Savings Heuristic for TSP</a>
+  <ul class="collapse">
+  <li><a href="#methodology" id="toc-methodology" class="nav-link" data-scroll-target="#methodology">Methodology</a></li>
+  <li><a href="#implementation" id="toc-implementation" class="nav-link" data-scroll-target="#implementation">Implementation</a></li>
+  </ul></li>
+  <li><a href="#perturbation-operators-for-tsp" id="toc-perturbation-operators-for-tsp" class="nav-link" data-scroll-target="#perturbation-operators-for-tsp">Perturbation Operators for TSP</a>
+  <ul class="collapse">
+  <li><a href="#tour-city-exchange" id="toc-tour-city-exchange" class="nav-link" data-scroll-target="#tour-city-exchange">Tour City Exchange</a></li>
+  <li><a href="#edge-exchange" id="toc-edge-exchange" class="nav-link" data-scroll-target="#edge-exchange">Edge Exchange</a></li>
+  <li><a href="#three-edge-exchange" id="toc-three-edge-exchange" class="nav-link" data-scroll-target="#three-edge-exchange">Three Edge Exchange</a></li>
+  </ul></li>
+  <li><a href="#complexity-analysis-of-sat-and-tsp" id="toc-complexity-analysis-of-sat-and-tsp" class="nav-link" data-scroll-target="#complexity-analysis-of-sat-and-tsp">Complexity Analysis of SAT and TSP</a>
+  <ul class="collapse">
+  <li><a href="#sat-complexity" id="toc-sat-complexity" class="nav-link" data-scroll-target="#sat-complexity">SAT Complexity</a></li>
+  <li><a href="#tsp-complexity" id="toc-tsp-complexity" class="nav-link" data-scroll-target="#tsp-complexity">TSP Complexity</a></li>
+  </ul></li>
+  <li><a href="#time-complexity-analysis" id="toc-time-complexity-analysis" class="nav-link" data-scroll-target="#time-complexity-analysis">Time Complexity Analysis</a>
+  <ul class="collapse">
+  <li><a href="#sat-time-complexity" id="toc-sat-time-complexity" class="nav-link" data-scroll-target="#sat-time-complexity">SAT Time Complexity</a></li>
+  <li><a href="#tsp-time-complexity" id="toc-tsp-time-complexity" class="nav-link" data-scroll-target="#tsp-time-complexity">TSP Time Complexity</a></li>
+  </ul></li>
+  </ul></li>
+  <li><a href="#deterministic-local-search" id="toc-deterministic-local-search" class="nav-link" data-scroll-target="#deterministic-local-search">Deterministic Local Search</a>
+  <ul class="collapse">
+  <li><a href="#exploration-in-search" id="toc-exploration-in-search" class="nav-link" data-scroll-target="#exploration-in-search">Exploration in Search</a>
+  <ul class="collapse">
+  <li><a href="#need-for-exploration" id="toc-need-for-exploration" class="nav-link" data-scroll-target="#need-for-exploration">Need for Exploration</a></li>
+  </ul></li>
+  <li><a href="#beam-search" id="toc-beam-search" class="nav-link" data-scroll-target="#beam-search">Beam Search</a>
+  <ul class="collapse">
+  <li><a href="#exploration-strategy" id="toc-exploration-strategy" class="nav-link" data-scroll-target="#exploration-strategy">Exploration Strategy</a></li>
+  <li><a href="#pseudocode-1" id="toc-pseudocode-1" class="nav-link" data-scroll-target="#pseudocode-1">Pseudocode</a></li>
+  </ul></li>
+  <li><a href="#variable-neighborhood-descent-vnd" id="toc-variable-neighborhood-descent-vnd" class="nav-link" data-scroll-target="#variable-neighborhood-descent-vnd">Variable Neighborhood Descent (VND)</a>
+  <ul class="collapse">
+  <li><a href="#algorithm" id="toc-algorithm" class="nav-link" data-scroll-target="#algorithm">Algorithm</a></li>
+  <li><a href="#pseudocode-2" id="toc-pseudocode-2" class="nav-link" data-scroll-target="#pseudocode-2">Pseudocode</a></li>
+  </ul></li>
+  <li><a href="#best-neighbor-search" id="toc-best-neighbor-search" class="nav-link" data-scroll-target="#best-neighbor-search">Best Neighbor Search</a>
+  <ul class="collapse">
+  <li><a href="#exploration-strategy-1" id="toc-exploration-strategy-1" class="nav-link" data-scroll-target="#exploration-strategy-1">Exploration Strategy</a></li>
+  <li><a href="#pseudocode-3" id="toc-pseudocode-3" class="nav-link" data-scroll-target="#pseudocode-3">Pseudocode</a></li>
+  </ul></li>
+  <li><a href="#iterated-hill-climbing" id="toc-iterated-hill-climbing" class="nav-link" data-scroll-target="#iterated-hill-climbing">Iterated Hill Climbing</a>
+  <ul class="collapse">
+  <li><a href="#randomized-exploration" id="toc-randomized-exploration" class="nav-link" data-scroll-target="#randomized-exploration">Randomized Exploration</a></li>
+  <li><a href="#pseudocode-4" id="toc-pseudocode-4" class="nav-link" data-scroll-target="#pseudocode-4">Pseudocode</a></li>
+  </ul></li>
+  </ul></li>
+  <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion">Conclusion</a>
+  <ul class="collapse">
+  <li><a href="#points-to-remember" id="toc-points-to-remember" class="nav-link" data-scroll-target="#points-to-remember">Points to Remember</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../pages/AI/Week01.html">AI: Search Methods</a></li><li class="breadcrumb-item"><a href="../../pages/AI/Week03.html">Week 3</a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title">Exploring Heuristic Search and Optimization Techniques</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="heuristic-search" class="level1">
+<h1>Heuristic Search</h1>
+<section id="introduction" class="level2">
+<h2 class="anchored" data-anchor-id="introduction">Introduction</h2>
+<p>In the realm of artificial intelligence, the quest for efficient problem-solving algorithms has led to the development of heuristic search methods. Unlike blind search algorithms, which explore the search space without any sense of direction, heuristic search algorithms leverage domain-specific knowledge to guide their exploration towards promising regions.</p>
+</section>
+<section id="blind-search-algorithms" class="level2">
+<h2 class="anchored" data-anchor-id="blind-search-algorithms">Blind Search Algorithms</h2>
+<p>Blind search algorithms, such as Depth First Search (DFS), Breadth First Search (BFS), and Depth First Iterative Deepening (DFID), navigate the search space without considering the location of the goal. These algorithms follow predetermined trajectories, regardless of the goal’s position.</p>
+</section>
+<section id="heuristic-search-a-sense-of-direction" class="level2">
+<h2 class="anchored" data-anchor-id="heuristic-search-a-sense-of-direction">Heuristic Search: A Sense of Direction</h2>
+<p>Heuristic search introduces a sense of direction by incorporating heuristic functions, which estimate the distance of each node from the goal. This allows the algorithm to prioritize nodes that are closer to the goal, leading to more efficient exploration of the search space.</p>
+<section id="inspiration-from-nature" class="level3">
+<h3 class="anchored" data-anchor-id="inspiration-from-nature">Inspiration from Nature</h3>
+<p>Nature often provides inspiration for solving complex problems. In the case of heuristic search, the concept of gravity serves as a metaphor. Similar to how water flows downhill, guided by the pull of gravity, heuristic search algorithms aim to “flow” towards regions with lower estimated distances to the goal.</p>
+</section>
+<section id="heuristic-function" class="level3">
+<h3 class="anchored" data-anchor-id="heuristic-function">Heuristic Function</h3>
+<p>A crucial component of heuristic search is the heuristic function, denoted as <span class="math inline">\(h(N)\)</span>, which assigns a numerical value to each node representing its estimated distance from the goal. These values guide the search algorithm in selecting the most promising nodes for exploration.</p>
+</section>
+</section>
+<section id="types-of-heuristic-functions" class="level2">
+<h2 class="anchored" data-anchor-id="types-of-heuristic-functions">Types of Heuristic Functions</h2>
+<p>Heuristic functions can vary based on the problem domain and the specific characteristics of the problem being solved. Two common types of heuristic functions are:</p>
+<section id="hamming-distance-h_1" class="level3">
+<h3 class="anchored" data-anchor-id="hamming-distance-h_1">Hamming Distance (<span class="math inline">\(h_1\)</span>)</h3>
+<p>The Hamming distance heuristic, denoted as <span class="math inline">\(h_1\)</span>, counts the number of elements that are out of place in a given state compared to the goal state. It provides a simple measure of proximity to the goal, where lower values indicate states that are closer to the goal.</p>
+</section>
+<section id="manhattan-distance" class="level3">
+<h3 class="anchored" data-anchor-id="manhattan-distance">Manhattan Distance</h3>
+<p>The Manhattan distance heuristic calculates the total distance that each element must move to reach its goal position. It is particularly useful for grid-based problems where movements are restricted to horizontal and vertical directions. The Manhattan distance is computed as follows:</p>
+<p><span class="math display">\[
+h_{\text{Manhattan}}(N) = \sum_{i=1}^{n} \left| x_i - x_{\text{goal}} \right| + \left| y_i - y_{\text{goal}} \right|
+\]</span></p>
+<p>where <span class="math inline">\((x_i, y_i)\)</span> represents the coordinates of element <span class="math inline">\(i\)</span> in the current state <span class="math inline">\(N\)</span>, and <span class="math inline">\((x_{\text{goal}}, y_{\text{goal}})\)</span> represents the coordinates of the goal position.</p>
+</section>
+</section>
+<section id="application-of-heuristic-search" class="level2">
+<h2 class="anchored" data-anchor-id="application-of-heuristic-search">Application of Heuristic Search</h2>
+<p>Heuristic search algorithms, such as Best First Search, find applications in various domains, including route finding, puzzle solving, and optimization problems. These algorithms leverage heuristic functions to efficiently navigate large search spaces and find optimal solutions.</p>
+<section id="best-first-search-algorithm" class="level3">
+<h3 class="anchored" data-anchor-id="best-first-search-algorithm">Best First Search Algorithm</h3>
+<p>The Best First Search algorithm prioritizes nodes for exploration based on their heuristic values, aiming to minimize the estimated distance to the goal. The algorithm operates as follows:</p>
+<ol type="1">
+<li><code>OPEN &lt;- (S, null, h(S)) : []</code></li>
+<li><code>CLOSED &lt;- empty list</code></li>
+<li><code>while OPEN is not empty</code>
+<ol start="4" type="1">
+<li><code>nodePair &lt;- head OPEN</code></li>
+<li><code>(N, _, _) &lt;- nodePair</code></li>
+<li><code>if GoalTest(N) = TRUE</code>
+<ol start="7" type="1">
+<li><code>return RECONSTRUCTPATH(nodePair, CLOSED)</code></li>
+</ol></li>
+<li><code>else CLOSED &lt;- nodePair : CLOSED</code>
+<ol start="9" type="1">
+<li><code>neighbours &lt;- MoveGen(N)</code></li>
+<li><code>newNodes &lt;- REMOVESEEN(neighbours, OPEN, CLOSED)</code></li>
+<li><code>newPairs &lt;- MAKEPAIRS(newNodes, N)</code></li>
+</ol></li>
+<li><code>OPEN &lt;- sort_h(newPairs ++ tail OPEN)</code></li>
+</ol></li>
+<li><code>return empty list</code></li>
+</ol>
+</section>
+</section>
+<section id="real-world-examples" class="level2">
+<h2 class="anchored" data-anchor-id="real-world-examples">Real-world Examples</h2>
+<p>Heuristic search algorithms are applied to real-world problems to find optimal solutions efficiently. Two examples illustrate the application of heuristic search in different domains:</p>
+<section id="geographical-route-finding" class="level3">
+<h3 class="anchored" data-anchor-id="geographical-route-finding">Geographical Route Finding</h3>
+<p>In geographical route finding, heuristic search aids in identifying optimal routes between locations. By considering factors such as distance and terrain, the algorithm navigates the search space to find the most efficient path from the start to the goal location.</p>
+</section>
+<section id="puzzle-solving" class="level3">
+<h3 class="anchored" data-anchor-id="puzzle-solving">Puzzle Solving</h3>
+<p>Heuristic search algorithms are commonly used to solve puzzles, such as the Eight Puzzle. By evaluating the heuristic value of each state, the algorithm explores the search space to find the shortest path to the goal state, minimizing the number of moves required to solve the puzzle.</p>
+</section>
+</section>
+<section id="considerations-and-limitations" class="level2">
+<h2 class="anchored" data-anchor-id="considerations-and-limitations">Considerations and Limitations</h2>
+<p>While heuristic search algorithms offer a principled approach to problem-solving, several considerations and limitations should be taken into account:</p>
+<ul>
+<li><p><strong>Effectiveness of Heuristic Functions:</strong> The performance of heuristic search algorithms heavily depends on the accuracy of the heuristic functions employed. Imperfect heuristics may lead to suboptimal solutions or increased computational overhead.</p></li>
+<li><p><strong>Complexity of the Environment:</strong> Heuristic search algorithms may struggle to navigate complex environments with obstacles or constraints that are not fully captured by the heuristic function. In such cases, the algorithm’s performance may be suboptimal.</p></li>
+<li><p><strong>Trade-off between Efficiency and Optimality:</strong> Heuristic search algorithms aim to strike a balance between exploration efficiency and solution optimality. While these algorithms prioritize exploration towards promising regions, they may not always guarantee finding the shortest path to the goal.</p></li>
+</ul>
+</section>
+</section>
+<section id="hill-climbing" class="level1">
+<h1>Hill Climbing</h1>
+<p>Hill climbing is a heuristic search algorithm used in artificial intelligence (AI) to solve optimization problems. It is a local search algorithm that aims to find the best possible solution by iteratively moving towards higher-elevation points (better solutions) within a problem space. In this detailed textbook-style overview, we delve into the workings, advantages, disadvantages, and applications of hill climbing algorithms.</p>
+<section id="overview" class="level2">
+<h2 class="anchored" data-anchor-id="overview">Overview</h2>
+<p>Hill climbing algorithms are designed to navigate through the search space of a problem by gradually improving upon the current solution. The algorithm begins with an initial solution and iteratively explores neighboring solutions, moving towards the one that maximizes (or minimizes) an objective function, also known as a heuristic evaluation function. The process continues until a local optimum (or maximum) is reached, where no neighboring solution yields a better result.</p>
+<section id="algorithmic-framework" class="level3">
+<h3 class="anchored" data-anchor-id="algorithmic-framework">Algorithmic Framework</h3>
+<p>The basic framework of the hill climbing algorithm can be outlined as follows:</p>
+<ol type="1">
+<li><strong>Initialization</strong>: Start with an initial solution <span class="math inline">\(S\)</span>.</li>
+<li><strong>Main Loop</strong>: Repeat the following steps until no better solution can be found:
+<ul>
+<li><strong>Exploration</strong>: Generate neighboring solutions from the current solution <span class="math inline">\(N\)</span>.</li>
+<li><strong>Evaluation</strong>: Evaluate each neighboring solution using a heuristic function <span class="math inline">\(h(N)\)</span>.</li>
+<li><strong>Selection</strong>: Move to the neighboring solution <span class="math inline">\(N\)</span> that maximizes (or minimizes) the heuristic function.</li>
+</ul></li>
+<li><strong>Termination</strong>: Return the best solution found.</li>
+</ol>
+</section>
+</section>
+<section id="hill-climbing-algorithm" class="level2">
+<h2 class="anchored" data-anchor-id="hill-climbing-algorithm">Hill-Climbing Algorithm</h2>
+<section id="pseudocode" class="level3">
+<h3 class="anchored" data-anchor-id="pseudocode">Pseudocode</h3>
+<p>The hill climbing algorithm can be represented in pseudocode as follows:</p>
+<pre><code>N &lt;- S
+do bestEver &lt;- N
+N &lt;- head(sort_h(MOVEGEN(bestEver)))
+while h(N) is better than h(bestEver)
+    bestEver &lt;- N
+    N &lt;- head(sort_h(MOVEGEN(bestEver)))
+return bestEver</code></pre>
+<p>Here, <span class="math inline">\(S\)</span> represents the initial solution, <span class="math inline">\(N\)</span> represents the current solution, <span class="math inline">\(h(N)\)</span> is the heuristic evaluation function, and <span class="math inline">\(MOVEGEN\)</span> generates neighboring solutions. The algorithm iteratively updates the current solution to the best neighboring solution until no better solution can be found.</p>
+</section>
+<section id="detailed-explanation" class="level3">
+<h3 class="anchored" data-anchor-id="detailed-explanation">Detailed Explanation</h3>
+<ol type="1">
+<li><strong>Initialization</strong>: Set <span class="math inline">\(N\)</span> to the initial solution <span class="math inline">\(S\)</span>.</li>
+<li><strong>Main Loop</strong>:
+<ul>
+<li>Set <span class="math inline">\(\text{bestEver}\)</span> to <span class="math inline">\(N\)</span> to keep track of the best solution found so far.</li>
+<li>Generate neighboring solutions from <span class="math inline">\(\text{bestEver}\)</span> using the <span class="math inline">\(\text{MOVEGEN}\)</span> function.</li>
+<li>Sort the generated solutions based on the heuristic function <span class="math inline">\(h(N)\)</span> and select the best one as the new current solution <span class="math inline">\(N\)</span>.</li>
+<li>Repeat the process until no better solution can be found.</li>
+</ul></li>
+<li><strong>Termination</strong>: Return the best solution found, stored in <span class="math inline">\(\text{bestEver}\)</span>.</li>
+</ol>
+</section>
+</section>
+<section id="advantages-and-disadvantages" class="level2">
+<h2 class="anchored" data-anchor-id="advantages-and-disadvantages">Advantages and Disadvantages</h2>
+<section id="advantages" class="level3">
+<h3 class="anchored" data-anchor-id="advantages">Advantages</h3>
+<ul>
+<li><strong>Efficiency</strong>: Hill climbing is computationally efficient, especially in problems with a large search space, as it only explores neighboring solutions.</li>
+<li><strong>Simplicity</strong>: The algorithm is straightforward to implement and understand, making it accessible for various optimization tasks.</li>
+<li><strong>Constant Space Complexity</strong>: It requires constant memory space, making it suitable for resource-constrained environments.</li>
+</ul>
+</section>
+<section id="disadvantages" class="level3">
+<h3 class="anchored" data-anchor-id="disadvantages">Disadvantages</h3>
+<ul>
+<li><strong>Local Optima</strong>: Hill climbing algorithms are prone to getting stuck in local optima, failing to find the global optimum if present.</li>
+<li><strong>Limited Scope</strong>: Due to its greedy nature, hill climbing may overlook better solutions that require moving away from the current solution.</li>
+<li><strong>Heuristic Dependence</strong>: The effectiveness of hill climbing heavily relies on the quality of the heuristic function used, which may not always accurately guide the search.</li>
+</ul>
+</section>
+</section>
+<section id="applications" class="level2">
+<h2 class="anchored" data-anchor-id="applications">Applications</h2>
+<p>Hill climbing algorithms find applications in various domains where optimization is required. Some common applications include:</p>
+<ul>
+<li><strong>Puzzle Solving</strong>: In puzzles like the 8 puzzle or Rubik’s cube, hill climbing can be used to find solutions by navigating through the state space.</li>
+<li><strong>Optimization Problems</strong>: Hill climbing is employed in optimization tasks such as scheduling, routing, and resource allocation to find near-optimal solutions within a limited time frame.</li>
+</ul>
+</section>
+<section id="extensions-and-alternatives" class="level2">
+<h2 class="anchored" data-anchor-id="extensions-and-alternatives">Extensions and Alternatives</h2>
+<section id="deterministic-methods" class="level3">
+<h3 class="anchored" data-anchor-id="deterministic-methods">Deterministic Methods</h3>
+<ul>
+<li><strong>Simulated Annealing</strong>: A probabilistic optimization technique that allows the algorithm to escape local optima by occasionally accepting worse solutions based on a temperature parameter.</li>
+<li><strong>Genetic Algorithms</strong>: Inspired by the process of natural selection, genetic algorithms explore the search space through a population of candidate solutions, allowing for diversity and exploration.</li>
+</ul>
+</section>
+<section id="randomized-methods" class="level3">
+<h3 class="anchored" data-anchor-id="randomized-methods">Randomized Methods</h3>
+<ul>
+<li><strong>Random Restart Hill Climbing</strong>: A variant of hill climbing that periodically restarts the search from different initial solutions to overcome local optima.</li>
+<li><strong>Tabu Search</strong>: An iterative search method that uses memory structures to avoid revisiting previously explored solutions, enhancing exploration capabilities.</li>
+</ul>
+</section>
+</section>
+</section>
+<section id="solution-space-search" class="level1">
+<h1>Solution Space Search</h1>
+<p>In the field of artificial intelligence (AI), solution space search plays a pivotal role in solving complex problems. This approach involves exploring various potential solutions within a defined search space to find an optimal or satisfactory outcome. In this comprehensive discussion, we delve into the intricacies of solution space search, examining its application in problems such as the Boolean Satisfiability Problem (SAT) and the Traveling Salesperson Problem (TSP). We also explore different search algorithms, perturbation operators, and the complexities associated with these problems.</p>
+<section id="solution-space-search-1" class="level2">
+<h2 class="anchored" data-anchor-id="solution-space-search-1">Solution Space Search</h2>
+<p>In the realm of solution space search, the focus is on formulating the problem in such a way that finding the goal node directly corresponds to discovering the solution. This approach simplifies the search process by eliminating the need for reconstructing the solution path.</p>
+<section id="definition" class="level3">
+<h3 class="anchored" data-anchor-id="definition">Definition</h3>
+<p>Solution space search involves defining the search problem in a manner where reaching the goal node signifies finding the solution. This formulation streamlines the search process, as each node in the search space represents a potential solution candidate.</p>
+</section>
+<section id="configuration-problems" class="level3">
+<h3 class="anchored" data-anchor-id="configuration-problems">Configuration Problems</h3>
+<p>Configuration problems align seamlessly with the concept of solution space search, as every node in the search space serves as a candidate solution. The evaluation of candidate solutions is based on their adherence to the goal description.</p>
+</section>
+<section id="planning-problems" class="level3">
+<h3 class="anchored" data-anchor-id="planning-problems">Planning Problems</h3>
+<p>Even planning problems can be tackled using solution space search techniques, wherein each node represents a candidate plan. This approach, known as plan space planning, enables the exploration of various planning strategies to achieve the desired outcome.</p>
+</section>
+</section>
+<section id="synthesis-vs.-perturbation" class="level2">
+<h2 class="anchored" data-anchor-id="synthesis-vs.-perturbation">Synthesis vs.&nbsp;Perturbation</h2>
+<p>In solution space search, two fundamental approaches are employed: synthesis and perturbation. These methods offer distinct strategies for generating and evaluating candidate solutions.</p>
+<section id="synthesis-methods" class="level3">
+<h3 class="anchored" data-anchor-id="synthesis-methods">Synthesis Methods</h3>
+<p>Synthesis methods adopt a constructive approach, wherein the solution is built incrementally from an initial state. For instance, in problems like the N-Queen problem, the solution is constructed piece by piece, gradually moving towards the goal state.</p>
+</section>
+<section id="perturbation-methods" class="level3">
+<h3 class="anchored" data-anchor-id="perturbation-methods">Perturbation Methods</h3>
+<p>Perturbation methods involve modifying existing candidate solutions to explore alternative paths in the search space. By introducing changes such as shuffling arrays or altering solution representations, perturbation techniques generate new candidate solutions for evaluation.</p>
+</section>
+</section>
+<section id="sat-problem-boolean-satisfiability-problem" class="level2">
+<h2 class="anchored" data-anchor-id="sat-problem-boolean-satisfiability-problem">SAT Problem (Boolean Satisfiability Problem)</h2>
+<p>The Boolean Satisfiability Problem, commonly referred to as SAT, is a fundamental problem in computer science and artificial intelligence. It involves determining whether a given Boolean formula can be satisfied by assigning truth values to its variables.</p>
+<section id="problem-statement" class="level3">
+<h3 class="anchored" data-anchor-id="problem-statement">Problem Statement</h3>
+<p>Given a Boolean formula comprising propositional variables, the task is to find an assignment of truth values to these variables such that the formula evaluates to true. This problem is often studied in conjunctive normal form (CNF), where the formula consists of clauses connected by conjunctions.</p>
+</section>
+<section id="complexity-analysis" class="level3">
+<h3 class="anchored" data-anchor-id="complexity-analysis">Complexity Analysis</h3>
+<p>SAT is classified as NP-complete, indicating its high computational complexity. While verifying a solution can be done in polynomial time, finding the solution itself often requires exponential time, rendering brute force approaches impractical for large instances of the problem.</p>
+</section>
+</section>
+<section id="traveling-salesperson-problem-tsp" class="level2">
+<h2 class="anchored" data-anchor-id="traveling-salesperson-problem-tsp">Traveling Salesperson Problem (TSP)</h2>
+<p>The Traveling Salesperson Problem is another classic problem in the realm of optimization and combinatorial optimization. It involves finding the shortest possible tour that visits each city exactly once and returns to the starting city.</p>
+<section id="problem-definition" class="level3">
+<h3 class="anchored" data-anchor-id="problem-definition">Problem Definition</h3>
+<p>In the TSP, a set of cities is given, along with the distances between each pair of cities. The objective is to determine the optimal tour that minimizes the total distance traveled while visiting each city exactly once.</p>
+</section>
+<section id="complexity-analysis-1" class="level3">
+<h3 class="anchored" data-anchor-id="complexity-analysis-1">Complexity Analysis</h3>
+<p>TSP is categorized as NP-hard, indicating its high computational complexity similar to SAT. The problem requires factorial time to solve, as the number of possible tours grows exponentially with the number of cities.</p>
+</section>
+</section>
+<section id="greedy-constructive-methods-for-tsp" class="level2">
+<h2 class="anchored" data-anchor-id="greedy-constructive-methods-for-tsp">Greedy Constructive Methods for TSP</h2>
+<p>In tackling the TSP, various heuristic algorithms are employed to construct feasible solutions. Greedy constructive methods prioritize efficiency by iteratively adding elements to the solution based on certain criteria.</p>
+<section id="nearest-neighbor-heuristic" class="level3">
+<h3 class="anchored" data-anchor-id="nearest-neighbor-heuristic">Nearest Neighbor Heuristic</h3>
+<p>The Nearest Neighbor Heuristic is a simple yet effective approach that starts from a chosen city and iteratively selects the nearest unvisited city as the next destination. While intuitive, this method may not always produce optimal solutions.</p>
+</section>
+<section id="greedy-heuristic" class="level3">
+<h3 class="anchored" data-anchor-id="greedy-heuristic">Greedy Heuristic</h3>
+<p>The Greedy Heuristic operates similarly to Kruskal’s algorithm for finding minimum spanning trees. It selects edges with the shortest distance and adds them to the tour, avoiding the creation of smaller loops.</p>
+</section>
+</section>
+<section id="savings-heuristic-for-tsp" class="level2">
+<h2 class="anchored" data-anchor-id="savings-heuristic-for-tsp">Savings Heuristic for TSP</h2>
+<p>The Savings Heuristic is a popular approach for solving the TSP, particularly in scenarios where efficiency is paramount. This method leverages savings in cost to guide the construction of the tour.</p>
+<section id="methodology" class="level3">
+<h3 class="anchored" data-anchor-id="methodology">Methodology</h3>
+<p>The Savings Heuristic begins by creating tours of length 2 anchored on a base vertex. It then performs merge operations to combine these tours, optimizing the total cost while ensuring the connectivity of the tour.</p>
+</section>
+<section id="implementation" class="level3">
+<h3 class="anchored" data-anchor-id="implementation">Implementation</h3>
+<p>By iteratively merging tours and maximizing cost savings, the Savings Heuristic generates feasible solutions that often exhibit competitive performance compared to other methods.</p>
+</section>
+</section>
+<section id="perturbation-operators-for-tsp" class="level2">
+<h2 class="anchored" data-anchor-id="perturbation-operators-for-tsp">Perturbation Operators for TSP</h2>
+<p>In addition to constructive methods, perturbation operators play a crucial role in exploring alternative solutions within the search space of the TSP. These operators facilitate the generation of diverse candidate solutions through systematic modifications.</p>
+<section id="tour-city-exchange" class="level3">
+<h3 class="anchored" data-anchor-id="tour-city-exchange">Tour City Exchange</h3>
+<p>The Tour City Exchange operator involves swapping the positions of two cities in the tour sequence. By rearranging the order of cities, this operator explores different tour configurations within the search space.</p>
+</section>
+<section id="edge-exchange" class="level3">
+<h3 class="anchored" data-anchor-id="edge-exchange">Edge Exchange</h3>
+<p>Alternatively, the Edge Exchange operator focuses on modifying the edges in the tour rather than the cities themselves. By rearranging the connectivity between cities, this operator aims to improve the overall tour quality.</p>
+</section>
+<section id="three-edge-exchange" class="level3">
+<h3 class="anchored" data-anchor-id="three-edge-exchange">Three Edge Exchange</h3>
+<p>For more significant modifications, the Three Edge Exchange operator removes three edges from the tour and reconstructs the tour based on the remaining connectivity. This operator enables the exploration of alternative tour structures.</p>
+</section>
+</section>
+<section id="complexity-analysis-of-sat-and-tsp" class="level2">
+<h2 class="anchored" data-anchor-id="complexity-analysis-of-sat-and-tsp">Complexity Analysis of SAT and TSP</h2>
+<p>Both SAT and TSP pose significant computational challenges due to their inherent complexity and large search spaces. Understanding the computational complexity of these problems is crucial for devising efficient solution approaches.</p>
+<section id="sat-complexity" class="level3">
+<h3 class="anchored" data-anchor-id="sat-complexity">SAT Complexity</h3>
+<p>SAT is classified as NP-complete, indicating that it requires exponential time to solve in the worst case. Despite being verifiable in polynomial time, finding the solution itself often involves exhaustive search or heuristic methods.</p>
+</section>
+<section id="tsp-complexity" class="level3">
+<h3 class="anchored" data-anchor-id="tsp-complexity">TSP Complexity</h3>
+<p>Similarly, TSP is categorized as NP-hard, implying that it requires factorial time to solve as</p>
+<p>the problem size increases. The exponential growth in the number of possible tours presents a formidable challenge for exact solution techniques.</p>
+</section>
+</section>
+<section id="time-complexity-analysis" class="level2">
+<h2 class="anchored" data-anchor-id="time-complexity-analysis">Time Complexity Analysis</h2>
+<p>The time complexity of solving SAT and TSP instances is a critical consideration, particularly when dealing with large-scale problem instances. Understanding the computational limitations is essential for selecting appropriate solution strategies.</p>
+<section id="sat-time-complexity" class="level3">
+<h3 class="anchored" data-anchor-id="sat-time-complexity">SAT Time Complexity</h3>
+<p>For SAT instances, the time required to find a solution increases exponentially with the number of variables and clauses. Even with efficient algorithms, solving large instances of SAT may require significant computational resources.</p>
+</section>
+<section id="tsp-time-complexity" class="level3">
+<h3 class="anchored" data-anchor-id="tsp-time-complexity">TSP Time Complexity</h3>
+<p>Similarly, the time complexity of solving TSP instances grows factorially with the number of cities. Despite the existence of heuristic methods, exact solution techniques for TSP remain impractical for instances with a large number of cities.</p>
+</section>
+</section>
+</section>
+<section id="deterministic-local-search" class="level1">
+<h1>Deterministic Local Search</h1>
+<p>In the realm of artificial intelligence (AI), deterministic local search methods aim to navigate solution or plan spaces efficiently, with a focus on avoiding local optima. This section delves into various algorithms designed to tackle this challenge, emphasizing the balance between exploitation and exploration to optimize the search process.</p>
+<section id="exploration-in-search" class="level2">
+<h2 class="anchored" data-anchor-id="exploration-in-search">Exploration in Search</h2>
+<p>While hill climbing efficiently exploits local gradients, it lacks the capability to explore diverse regions of the search space. To overcome this limitation, exploration becomes imperative. Exploration involves deviating from the current trajectory to uncover new paths that may lead to superior solutions.</p>
+<section id="need-for-exploration" class="level3">
+<h3 class="anchored" data-anchor-id="need-for-exploration">Need for Exploration</h3>
+<ul>
+<li><strong>Escaping Local Optima:</strong> Exploration is necessary to escape local optima and discover potentially better solutions.</li>
+<li><strong>Heuristic Limitations:</strong> Relying solely on heuristic functions may restrict the search to familiar regions, hindering exploration.</li>
+<li><strong>Balancing Exploitation and Exploration:</strong> A balanced approach is required to ensure both exploitation and exploration are effectively utilized in the search process.</li>
+</ul>
+</section>
+</section>
+<section id="beam-search" class="level2">
+<h2 class="anchored" data-anchor-id="beam-search">Beam Search</h2>
+<p>Beam search represents a simple yet effective strategy to augment exploration in the search space. Instead of focusing solely on the best neighbor, beam search considers multiple options at each level of the search. By maintaining a beam width parameter, the algorithm keeps track of the best candidate solutions, increasing the likelihood of discovering the goal node.</p>
+<section id="exploration-strategy" class="level3">
+<h3 class="anchored" data-anchor-id="exploration-strategy">Exploration Strategy</h3>
+<ul>
+<li><strong>Consideration of Multiple Candidates:</strong> Beam search diverges from the traditional approach by considering multiple candidate solutions simultaneously.</li>
+<li><strong>Beam Width Parameter:</strong> The beam width parameter dictates the number of candidates retained at each level of the search.</li>
+<li><strong>Enhanced Exploration:</strong> By maintaining multiple candidates, beam search explores diverse solution paths, fostering exploration in the search space.</li>
+</ul>
+</section>
+<section id="pseudocode-1" class="level3">
+<h3 class="anchored" data-anchor-id="pseudocode-1">Pseudocode</h3>
+<ol type="1">
+<li><code>OPEN ← S : []</code></li>
+<li><code>N ← S</code></li>
+<li><code>do bestEver ← N</code>
+<ol start="4" type="1">
+<li><strong>if</strong> <code>GOAL-TEST(OPEN) = TRUE</code></li>
+<li><strong>then</strong> <code>return goal from OPEN</code></li>
+<li><strong>else</strong> <code>neighbours ← MOVE-GEN(OPEN)</code>
+<ol start="7" type="1">
+<li><code>OPEN ← take w (sort neighbours)</code></li>
+<li><code>N ← head OPEN</code> ▷ best in new layer</li>
+</ol></li>
+</ol></li>
+<li><strong>while</strong> <code>h(N)</code> <strong>is better than</strong> <code>h(bestEver)</code></li>
+<li><code>return bestEver</code></li>
+</ol>
+</section>
+</section>
+<section id="variable-neighborhood-descent-vnd" class="level2">
+<h2 class="anchored" data-anchor-id="variable-neighborhood-descent-vnd">Variable Neighborhood Descent (VND)</h2>
+<p>Variable neighborhood descent offers a sophisticated approach to balance exploitation and exploration by sequentially employing different neighborhood functions. This adaptive strategy allows the algorithm to transition from sparse to denser neighborhoods as the search progresses, effectively navigating the search space while optimizing computational resources.</p>
+<section id="algorithm" class="level3">
+<h3 class="anchored" data-anchor-id="algorithm">Algorithm</h3>
+<ul>
+<li><strong>Sequential Neighborhood Exploration:</strong> VND iteratively explores different neighborhood functions to traverse the search space.</li>
+<li><strong>Adaptive Strategy:</strong> The algorithm dynamically adjusts the neighborhood density based on the search progress.</li>
+<li><strong>Optimizing Resource Usage:</strong> By varying neighborhood functions, VND optimizes computational resources while maintaining search efficiency.</li>
+</ul>
+</section>
+<section id="pseudocode-2" class="level3">
+<h3 class="anchored" data-anchor-id="pseudocode-2">Pseudocode</h3>
+<ol type="1">
+<li><code>MoveGenList ← MOVEGEN1 : MOVEGEN2 : ... : MOVEGENn : []</code></li>
+<li><code>bestNode ← S</code></li>
+<li><code>while MoveGenList is not empty</code>
+<ol start="4" type="1">
+<li><code>bestNode ← HILL-CLIMBING(bestNode, head MoveGenList)</code></li>
+<li><code>MoveGenList ← tail MoveGenList</code></li>
+</ol></li>
+<li><code>return bestNode</code></li>
+</ol>
+</section>
+</section>
+<section id="best-neighbor-search" class="level2">
+<h2 class="anchored" data-anchor-id="best-neighbor-search">Best Neighbor Search</h2>
+<p>In contrast to traditional hill climbing, which moves only to better neighbors, the best neighbor search algorithm considers moving to the best neighbor regardless of improvement. This approach introduces variability in the search process, potentially leading to exploration of alternative solution paths.</p>
+<section id="exploration-strategy-1" class="level3">
+<h3 class="anchored" data-anchor-id="exploration-strategy-1">Exploration Strategy</h3>
+<ul>
+<li><strong>Diverse Solution Paths:</strong> Best neighbor search explores diverse solution paths by considering the best neighbor at each step.</li>
+<li><strong>Varied Movement:</strong> Unlike traditional hill climbing, which moves strictly to better neighbors, this algorithm allows for movement to any best neighbor, regardless of improvement.</li>
+</ul>
+</section>
+<section id="pseudocode-3" class="level3">
+<h3 class="anchored" data-anchor-id="pseudocode-3">Pseudocode</h3>
+<ol type="1">
+<li><code>N ← S</code></li>
+<li><code>bestSeen ← S</code></li>
+<li><strong>until some termination condition</strong>
+<ol start="4" type="1">
+<li><code>N ← best MOVEGEN(N)</code></li>
+<li><strong>if</strong> <code>N</code> <strong>is better than</strong> <code>bestSeen</code>
+<ol start="6" type="1">
+<li><code>bestSeen ← N</code></li>
+</ol></li>
+</ol></li>
+<li><code>return bestSeen</code></li>
+</ol>
+</section>
+</section>
+<section id="iterated-hill-climbing" class="level2">
+<h2 class="anchored" data-anchor-id="iterated-hill-climbing">Iterated Hill Climbing</h2>
+<p>Iterated hill climbing presents a randomized approach to local search, leveraging multiple iterations from randomly chosen starting points. By diversifying the starting points, this algorithm enhances exploration, increasing the likelihood of finding global optima.</p>
+<section id="randomized-exploration" class="level3">
+<h3 class="anchored" data-anchor-id="randomized-exploration">Randomized Exploration</h3>
+<ul>
+<li><strong>Diversified Starting Points:</strong> Iterated hill climbing initiates multiple search iterations from random starting points.</li>
+<li><strong>Exploration Enhancement:</strong> By exploring from different starting points, the algorithm increases the chances of discovering optimal solutions.</li>
+</ul>
+</section>
+<section id="pseudocode-4" class="level3">
+<h3 class="anchored" data-anchor-id="pseudocode-4">Pseudocode</h3>
+<ol type="1">
+<li><code>bestNode ← random candidate solution</code></li>
+<li><code>repeat N times</code></li>
+<li><code>currentBest ← HILL-CLIMBING(new random candidate solution)</code></li>
+<li><strong>if</strong> <code>h(currentBest)</code> <strong>is better than</strong> <code>h(bestNode)</code></li>
+<li><code>bestNode ← currentBest</code></li>
+<li><code>return bestNode</code></li>
+</ol>
+</section>
+</section>
+</section>
+<section id="conclusion" class="level1">
+<h1>Conclusion</h1>
+<p>The lecture notes provide a comprehensive overview of heuristic search methods, focusing on techniques such as hill climbing, solution space search, and deterministic local search. These methods play a crucial role in solving complex problems efficiently, with applications ranging from route finding to puzzle solving. By leveraging domain-specific knowledge and exploring diverse solution paths, heuristic search algorithms offer principled approaches to problem-solving in artificial intelligence.</p>
+<section id="points-to-remember" class="level2">
+<h2 class="anchored" data-anchor-id="points-to-remember">Points to Remember</h2>
+<ol type="1">
+<li><strong>Heuristic Search Methods:</strong>
+<ul>
+<li>Heuristic search algorithms leverage domain-specific knowledge to guide exploration towards promising regions in the search space.</li>
+<li>Unlike blind search algorithms, heuristic search methods incorporate heuristic functions to estimate the distance to the goal and prioritize exploration accordingly.</li>
+</ul></li>
+<li><strong>Types of Heuristic Functions:</strong>
+<ul>
+<li>Hamming distance and Manhattan distance are common heuristic functions used in various problem domains.</li>
+<li>These functions provide estimates of proximity to the goal, guiding the search algorithm towards optimal solutions.</li>
+</ul></li>
+<li><strong>Application of Heuristic Search:</strong>
+<ul>
+<li>Heuristic search algorithms find applications in route finding, puzzle solving, optimization, and various other domains requiring efficient problem-solving techniques.</li>
+<li>Best First Search is a prominent heuristic search algorithm that prioritizes exploration based on heuristic values.</li>
+</ul></li>
+<li><strong>Hill Climbing Algorithm:</strong>
+<ul>
+<li>Hill climbing is a local search algorithm used for optimization problems, aiming to find the best possible solution by iteratively moving towards higher-elevation points in the search space.</li>
+<li>It is prone to getting stuck in local optima and relies heavily on the quality of the heuristic function.</li>
+</ul></li>
+<li><strong>Solution Space Search:</strong>
+<ul>
+<li>Solution space search involves exploring potential solutions within a defined search space, with each node representing a candidate solution.</li>
+<li>Configuration problems and planning problems can be addressed using solution space search techniques.</li>
+</ul></li>
+<li><strong>Complexity Analysis:</strong>
+<ul>
+<li>Problems like SAT and TSP are classified as NP-complete and NP-hard, respectively, indicating their high computational complexity.</li>
+<li>Exact solution techniques for these problems often require exponential time, making heuristic and approximate methods essential.</li>
+</ul></li>
+<li><strong>Deterministic Local Search:</strong>
+<ul>
+<li>Deterministic local search methods, such as beam search, variable neighborhood descent, and iterated hill climbing, balance exploitation and exploration to navigate the search space efficiently.</li>
+<li>These methods offer strategies to avoid local optima and enhance exploration by considering diverse solution paths.</li>
+</ul></li>
+<li><strong>Exploration in Search:</strong>
+<ul>
+<li>Exploration is crucial for escaping local optima and discovering superior solutions.</li>
+<li>Methods like beam search and iterated hill climbing introduce variability in the search process to explore alternative solution paths.</li>
+</ul></li>
+<li><strong>Perturbation Operators:</strong>
+<ul>
+<li>Perturbation operators, such as tour city exchange and edge exchange, facilitate the generation of diverse candidate solutions in optimization problems like the TSP.</li>
+</ul></li>
+<li><strong>Efficiency and Optimality Trade-off:</strong>
+<ul>
+<li>Heuristic search algorithms aim to strike a balance between exploration efficiency and solution optimality.</li>
+<li>While prioritizing exploration towards promising regions, these algorithms may not always guarantee finding the shortest path to the goal.</li>
+</ul></li>
+</ol>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const disableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'prefetch';
+    }
+  }
+  const enableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'stylesheet';
+    }
+  }
+  const manageTransitions = (selector, allowTransitions) => {
+    const els = window.document.querySelectorAll(selector);
+    for (let i=0; i < els.length; i++) {
+      const el = els[i];
+      if (allowTransitions) {
+        el.classList.remove('notransition');
+      } else {
+        el.classList.add('notransition');
+      }
+    }
+  }
+  const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+    const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+    const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+    let newTheme = '';
+    if(darkModeDefault) {
+      newTheme = isAlternate ? baseTheme : alternateTheme;
+    } else {
+      newTheme = isAlternate ? alternateTheme : baseTheme;
+    }
+    const changeGiscusTheme = () => {
+      // From: https://github.com/giscus/giscus/issues/336
+      const sendMessage = (message) => {
+        const iframe = document.querySelector('iframe.giscus-frame');
+        if (!iframe) return;
+        iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+      }
+      sendMessage({
+        setConfig: {
+          theme: newTheme
+        }
+      });
+    }
+    const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+    if (isGiscussLoaded) {
+      changeGiscusTheme();
+    }
+  }
+  const toggleColorMode = (alternate) => {
+    // Switch the stylesheets
+    const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+    manageTransitions('#quarto-margin-sidebar .nav-link', false);
+    if (alternate) {
+      enableStylesheet(alternateStylesheets);
+      for (const sheetNode of alternateStylesheets) {
+        if (sheetNode.id === "quarto-bootstrap") {
+          toggleBodyColorMode(sheetNode);
+        }
+      }
+    } else {
+      disableStylesheet(alternateStylesheets);
+      toggleBodyColorPrimary();
+    }
+    manageTransitions('#quarto-margin-sidebar .nav-link', true);
+    // Switch the toggles
+    const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+    for (let i=0; i < toggles.length; i++) {
+      const toggle = toggles[i];
+      if (toggle) {
+        if (alternate) {
+          toggle.classList.add("alternate");     
+        } else {
+          toggle.classList.remove("alternate");
+        }
+      }
+    }
+    // Hack to workaround the fact that safari doesn't
+    // properly recolor the scrollbar when toggling (#1455)
+    if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+      manageTransitions("body", false);
+      window.scrollTo(0, 1);
+      setTimeout(() => {
+        window.scrollTo(0, 0);
+        manageTransitions("body", true);
+      }, 40);  
+    }
+  }
+  const isFileUrl = () => { 
+    return window.location.protocol === 'file:';
+  }
+  const hasAlternateSentinel = () => {  
+    let styleSentinel = getColorSchemeSentinel();
+    if (styleSentinel !== null) {
+      return styleSentinel === "alternate";
+    } else {
+      return false;
+    }
+  }
+  const setStyleSentinel = (alternate) => {
+    const value = alternate ? "alternate" : "default";
+    if (!isFileUrl()) {
+      window.localStorage.setItem("quarto-color-scheme", value);
+    } else {
+      localAlternateSentinel = value;
+    }
+  }
+  const getColorSchemeSentinel = () => {
+    if (!isFileUrl()) {
+      const storageValue = window.localStorage.getItem("quarto-color-scheme");
+      return storageValue != null ? storageValue : localAlternateSentinel;
+    } else {
+      return localAlternateSentinel;
+    }
+  }
+  const darkModeDefault = false;
+  let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+  // Dark / light mode switch
+  window.quartoToggleColorScheme = () => {
+    // Read the current dark / light value 
+    let toAlternate = !hasAlternateSentinel();
+    toggleColorMode(toAlternate);
+    setStyleSentinel(toAlternate);
+    toggleGiscusIfUsed(toAlternate, darkModeDefault);
+  };
+  // Ensure there is a toggle, if there isn't float one in the top right
+  if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+    const a = window.document.createElement('a');
+    a.classList.add('top-right');
+    a.classList.add('quarto-color-scheme-toggle');
+    a.href = "";
+    a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+    const i = window.document.createElement("i");
+    i.classList.add('bi');
+    a.appendChild(i);
+    window.document.body.appendChild(a);
+  }
+  // Switch to dark mode if need be
+  if (hasAlternateSentinel()) {
+    toggleColorMode(true);
+  } else {
+    toggleColorMode(false);
+  }
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>
