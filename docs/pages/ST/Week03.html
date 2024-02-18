@@ -1,0 +1,1465 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.4.549">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>BS Degree Notes - Graph-Based Approaches and Coverage Criteria</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+
+<link rel="stylesheet" href="https://lalten.github.io/lmweb/style/latinmodern-roman.css">
+<link rel="stylesheet" href="https://lalten.github.io/lmweb/style/latinmodern-sans.css">
+<link rel="stylesheet" href="https://lalten.github.io/lmweb/style/latinmodern-mono.css">
+</head>
+
+<body class="nav-sidebar docked">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../pages/ST/Week01.html">Software Testing</a></li><li class="breadcrumb-item"><a href="../../pages/ST/Week03.html">Week 3</a></li></ol></nav>
+        <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="../../">BS Degree Notes</a> 
+        <div class="sidebar-tools-main">
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Home</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="false">
+ <span class="menu-text">Deep Learning</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../pages/DL/Week01_1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 1.1</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../pages/DL/Week01_2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 1.2</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../pages/DL/Week02.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 2</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../pages/DL/Week03.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 3</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../pages/DL/Week04.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 4</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="false">
+ <span class="menu-text">AI: Search Methods</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../pages/AI/Week01.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 1</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../pages/AI/Week02.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 2</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../pages/AI/Week03.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 3</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../pages/AI/Week04.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 4</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true">
+ <span class="menu-text">Software Testing</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../pages/ST/Week01.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 1</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../pages/ST/Week02.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 2</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../pages/ST/Week03.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">Week 3</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../pages/ST/Week04.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 4</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="false">
+ <span class="menu-text">Software Engineering</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../pages/SE/Week01.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 1</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../pages/SE/Week02.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 2</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../pages/SE/Week03.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 3</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../pages/SE/Week04.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 4</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="false">
+ <span class="menu-text">Reinforcement Learning</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../pages/RL/Week01_1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 1.1</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../pages/RL/Week01_2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 1.2</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../pages/RL/Week02.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 2</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#control-flow-graphs" id="toc-control-flow-graphs" class="nav-link active" data-scroll-target="#control-flow-graphs">Control Flow Graphs</a>
+  <ul class="collapse">
+  <li><a href="#introduction-to-control-flow-graphs" id="toc-introduction-to-control-flow-graphs" class="nav-link" data-scroll-target="#introduction-to-control-flow-graphs">Introduction to Control Flow Graphs</a></li>
+  <li><a href="#deriving-cfgs-from-code" id="toc-deriving-cfgs-from-code" class="nav-link" data-scroll-target="#deriving-cfgs-from-code">Deriving CFGs from Code</a>
+  <ul class="collapse">
+  <li><a href="#identification-of-basic-blocks" id="toc-identification-of-basic-blocks" class="nav-link" data-scroll-target="#identification-of-basic-blocks">Identification of Basic Blocks</a></li>
+  <li><a href="#mapping-control-structures" id="toc-mapping-control-structures" class="nav-link" data-scroll-target="#mapping-control-structures">Mapping Control Structures</a></li>
+  <li><a href="#utilizing-tools" id="toc-utilizing-tools" class="nav-link" data-scroll-target="#utilizing-tools">Utilizing Tools</a></li>
+  </ul></li>
+  <li><a href="#structural-coverage-criteria" id="toc-structural-coverage-criteria" class="nav-link" data-scroll-target="#structural-coverage-criteria">Structural Coverage Criteria</a>
+  <ul class="collapse">
+  <li><a href="#node-coverage" id="toc-node-coverage" class="nav-link" data-scroll-target="#node-coverage">Node Coverage</a></li>
+  <li><a href="#edge-coverage" id="toc-edge-coverage" class="nav-link" data-scroll-target="#edge-coverage">Edge Coverage</a></li>
+  <li><a href="#edge-pair-coverage" id="toc-edge-pair-coverage" class="nav-link" data-scroll-target="#edge-pair-coverage">Edge Pair Coverage</a></li>
+  <li><a href="#prime-path-coverage" id="toc-prime-path-coverage" class="nav-link" data-scroll-target="#prime-path-coverage">Prime Path Coverage</a></li>
+  </ul></li>
+  <li><a href="#examples-of-cfgs" id="toc-examples-of-cfgs" class="nav-link" data-scroll-target="#examples-of-cfgs">Examples of CFGs</a>
+  <ul class="collapse">
+  <li><a href="#if-statements" id="toc-if-statements" class="nav-link" data-scroll-target="#if-statements">If Statements</a></li>
+  <li><a href="#loops" id="toc-loops" class="nav-link" data-scroll-target="#loops">Loops</a></li>
+  <li><a href="#switch-case-statements" id="toc-switch-case-statements" class="nav-link" data-scroll-target="#switch-case-statements">Switch Case Statements</a></li>
+  </ul></li>
+  <li><a href="#applying-structural-coverage-criteria" id="toc-applying-structural-coverage-criteria" class="nav-link" data-scroll-target="#applying-structural-coverage-criteria">Applying Structural Coverage Criteria</a>
+  <ul class="collapse">
+  <li><a href="#edge-coverage-1" id="toc-edge-coverage-1" class="nav-link" data-scroll-target="#edge-coverage-1">Edge Coverage</a></li>
+  <li><a href="#edge-pair-coverage-1" id="toc-edge-pair-coverage-1" class="nav-link" data-scroll-target="#edge-pair-coverage-1">Edge Pair Coverage</a></li>
+  <li><a href="#prime-path-coverage-1" id="toc-prime-path-coverage-1" class="nav-link" data-scroll-target="#prime-path-coverage-1">Prime Path Coverage</a></li>
+  </ul></li>
+  <li><a href="#potential-errors-and-debugging" id="toc-potential-errors-and-debugging" class="nav-link" data-scroll-target="#potential-errors-and-debugging">Potential Errors and Debugging</a></li>
+  </ul></li>
+  <li><a href="#data-flow-analysis" id="toc-data-flow-analysis" class="nav-link" data-scroll-target="#data-flow-analysis">Data Flow Analysis</a>
+  <ul class="collapse">
+  <li><a href="#introduction" id="toc-introduction" class="nav-link" data-scroll-target="#introduction">Introduction</a></li>
+  <li><a href="#data-flow-representation" id="toc-data-flow-representation" class="nav-link" data-scroll-target="#data-flow-representation">Data Flow Representation</a>
+  <ul class="collapse">
+  <li><a href="#control-flow-graphs-1" id="toc-control-flow-graphs-1" class="nav-link" data-scroll-target="#control-flow-graphs-1">Control Flow Graphs</a></li>
+  <li><a href="#definitions-and-uses" id="toc-definitions-and-uses" class="nav-link" data-scroll-target="#definitions-and-uses">Definitions and Uses</a></li>
+  </ul></li>
+  <li><a href="#def-use-du-pairs" id="toc-def-use-du-pairs" class="nav-link" data-scroll-target="#def-use-du-pairs">Def-Use (DU) Pairs</a>
+  <ul class="collapse">
+  <li><a href="#definition" id="toc-definition" class="nav-link" data-scroll-target="#definition">Definition</a></li>
+  <li><a href="#use" id="toc-use" class="nav-link" data-scroll-target="#use">Use</a></li>
+  <li><a href="#def-use-path" id="toc-def-use-path" class="nav-link" data-scroll-target="#def-use-path">Def-Use Path</a></li>
+  </ul></li>
+  <li><a href="#graphical-representation" id="toc-graphical-representation" class="nav-link" data-scroll-target="#graphical-representation">Graphical Representation</a>
+  <ul class="collapse">
+  <li><a href="#nodes-and-edges" id="toc-nodes-and-edges" class="nav-link" data-scroll-target="#nodes-and-edges">Nodes and Edges</a></li>
+  <li><a href="#marking-definitions-and-uses" id="toc-marking-definitions-and-uses" class="nav-link" data-scroll-target="#marking-definitions-and-uses">Marking Definitions and Uses</a></li>
+  </ul></li>
+  <li><a href="#example-control-flow-graph" id="toc-example-control-flow-graph" class="nav-link" data-scroll-target="#example-control-flow-graph">Example Control Flow Graph</a>
+  <ul class="collapse">
+  <li><a href="#graph-layout" id="toc-graph-layout" class="nav-link" data-scroll-target="#graph-layout">Graph Layout</a></li>
+  <li><a href="#marking-definitions-and-uses-1" id="toc-marking-definitions-and-uses-1" class="nav-link" data-scroll-target="#marking-definitions-and-uses-1">Marking Definitions and Uses</a></li>
+  </ul></li>
+  <li><a href="#data-flow-analysis-techniques" id="toc-data-flow-analysis-techniques" class="nav-link" data-scroll-target="#data-flow-analysis-techniques">Data Flow Analysis Techniques</a>
+  <ul class="collapse">
+  <li><a href="#data-definition-and-use-paths" id="toc-data-definition-and-use-paths" class="nav-link" data-scroll-target="#data-definition-and-use-paths">Data Definition and Use Paths</a></li>
+  <li><a href="#predicate-and-computation-uses" id="toc-predicate-and-computation-uses" class="nav-link" data-scroll-target="#predicate-and-computation-uses">Predicate and Computation Uses</a></li>
+  </ul></li>
+  </ul></li>
+  <li><a href="#data-flow-coverage-criteria" id="toc-data-flow-coverage-criteria" class="nav-link" data-scroll-target="#data-flow-coverage-criteria">Data Flow Coverage Criteria</a>
+  <ul class="collapse">
+  <li><a href="#introduction-to-data-flow-coverage-criteria" id="toc-introduction-to-data-flow-coverage-criteria" class="nav-link" data-scroll-target="#introduction-to-data-flow-coverage-criteria">Introduction to Data Flow Coverage Criteria</a>
+  <ul class="collapse">
+  <li><a href="#definitions" id="toc-definitions" class="nav-link" data-scroll-target="#definitions">Definitions</a></li>
+  </ul></li>
+  <li><a href="#types-of-data-flow-coverage-criteria" id="toc-types-of-data-flow-coverage-criteria" class="nav-link" data-scroll-target="#types-of-data-flow-coverage-criteria">Types of Data Flow Coverage Criteria</a>
+  <ul class="collapse">
+  <li><a href="#each-definition-reaches-at-least-one-use" id="toc-each-definition-reaches-at-least-one-use" class="nav-link" data-scroll-target="#each-definition-reaches-at-least-one-use">Each Definition Reaches at Least One Use</a></li>
+  <li><a href="#every-definition-reaches-all-possible-uses" id="toc-every-definition-reaches-all-possible-uses" class="nav-link" data-scroll-target="#every-definition-reaches-all-possible-uses">Every Definition Reaches All Possible Uses</a></li>
+  <li><a href="#every-definition-reaches-all-possible-uses-through-all-possible-du-paths" id="toc-every-definition-reaches-all-possible-uses-through-all-possible-du-paths" class="nav-link" data-scroll-target="#every-definition-reaches-all-possible-uses-through-all-possible-du-paths">Every Definition Reaches All Possible Uses Through All Possible DU Paths</a></li>
+  </ul></li>
+  <li><a href="#subsumption-and-comparison-with-structural-coverage-criteria" id="toc-subsumption-and-comparison-with-structural-coverage-criteria" class="nav-link" data-scroll-target="#subsumption-and-comparison-with-structural-coverage-criteria">Subsumption and Comparison with Structural Coverage Criteria</a>
+  <ul class="collapse">
+  <li><a href="#relationship-with-structural-coverage-criteria" id="toc-relationship-with-structural-coverage-criteria" class="nav-link" data-scroll-target="#relationship-with-structural-coverage-criteria">Relationship with Structural Coverage Criteria</a></li>
+  <li><a href="#subsumption-analysis" id="toc-subsumption-analysis" class="nav-link" data-scroll-target="#subsumption-analysis">Subsumption Analysis</a></li>
+  </ul></li>
+  <li><a href="#challenges-and-considerations" id="toc-challenges-and-considerations" class="nav-link" data-scroll-target="#challenges-and-considerations">Challenges and Considerations</a>
+  <ul class="collapse">
+  <li><a href="#automation-and-tooling" id="toc-automation-and-tooling" class="nav-link" data-scroll-target="#automation-and-tooling">Automation and Tooling</a></li>
+  <li><a href="#techniques-for-test-data-generation" id="toc-techniques-for-test-data-generation" class="nav-link" data-scroll-target="#techniques-for-test-data-generation">Techniques for Test Data Generation</a></li>
+  </ul></li>
+  </ul></li>
+  <li><a href="#graph-based-coverage-criteria" id="toc-graph-based-coverage-criteria" class="nav-link" data-scroll-target="#graph-based-coverage-criteria">Graph-Based Coverage Criteria</a>
+  <ul class="collapse">
+  <li><a href="#overview-of-data-flow-coverage-criteria" id="toc-overview-of-data-flow-coverage-criteria" class="nav-link" data-scroll-target="#overview-of-data-flow-coverage-criteria">Overview of Data Flow Coverage Criteria</a>
+  <ul class="collapse">
+  <li><a href="#definitions-and-concepts" id="toc-definitions-and-concepts" class="nav-link" data-scroll-target="#definitions-and-concepts">Definitions and Concepts</a></li>
+  </ul></li>
+  <li><a href="#example-statistics-program" id="toc-example-statistics-program" class="nav-link" data-scroll-target="#example-statistics-program">Example: Statistics Program</a>
+  <ul class="collapse">
+  <li><a href="#control-flow-graph-cfg-analysis" id="toc-control-flow-graph-cfg-analysis" class="nav-link" data-scroll-target="#control-flow-graph-cfg-analysis">Control Flow Graph (CFG) Analysis</a></li>
+  <li><a href="#annotating-nodes-and-edges" id="toc-annotating-nodes-and-edges" class="nav-link" data-scroll-target="#annotating-nodes-and-edges">Annotating Nodes and Edges</a></li>
+  <li><a href="#identification-of-du-pairs" id="toc-identification-of-du-pairs" class="nav-link" data-scroll-target="#identification-of-du-pairs">Identification of DU Pairs</a></li>
+  <li><a href="#generating-test-cases" id="toc-generating-test-cases" class="nav-link" data-scroll-target="#generating-test-cases">Generating Test Cases</a></li>
+  </ul></li>
+  <li><a href="#test-case-generation-strategies" id="toc-test-case-generation-strategies" class="nav-link" data-scroll-target="#test-case-generation-strategies">Test Case Generation Strategies</a>
+  <ul class="collapse">
+  <li><a href="#parts-that-skip-the-loop" id="toc-parts-that-skip-the-loop" class="nav-link" data-scroll-target="#parts-that-skip-the-loop">Parts that Skip the Loop</a></li>
+  <li><a href="#parts-requiring-one-iteration-of-the-loop" id="toc-parts-requiring-one-iteration-of-the-loop" class="nav-link" data-scroll-target="#parts-requiring-one-iteration-of-the-loop">Parts Requiring One Iteration of the Loop</a></li>
+  <li><a href="#parts-requiring-multiple-iterations-of-the-loop" id="toc-parts-requiring-multiple-iterations-of-the-loop" class="nav-link" data-scroll-target="#parts-requiring-multiple-iterations-of-the-loop">Parts Requiring Multiple Iterations of the Loop</a></li>
+  </ul></li>
+  <li><a href="#example-test-cases" id="toc-example-test-cases" class="nav-link" data-scroll-target="#example-test-cases">Example Test Cases</a>
+  <ul class="collapse">
+  <li><a href="#single-element-array-test-case" id="toc-single-element-array-test-case" class="nav-link" data-scroll-target="#single-element-array-test-case">Single-Element Array Test Case</a></li>
+  <li><a href="#three-element-array-test-case" id="toc-three-element-array-test-case" class="nav-link" data-scroll-target="#three-element-array-test-case">Three-Element Array Test Case</a></li>
+  <li><a href="#zero-length-array-test-case" id="toc-zero-length-array-test-case" class="nav-link" data-scroll-target="#zero-length-array-test-case">Zero-Length Array Test Case</a></li>
+  </ul></li>
+  <li><a href="#evaluation-of-data-flow-coverage" id="toc-evaluation-of-data-flow-coverage" class="nav-link" data-scroll-target="#evaluation-of-data-flow-coverage">Evaluation of Data Flow Coverage</a>
+  <ul class="collapse">
+  <li><a href="#challenges-in-automated-computation" id="toc-challenges-in-automated-computation" class="nav-link" data-scroll-target="#challenges-in-automated-computation">Challenges in Automated Computation</a></li>
+  <li><a href="#effectiveness-in-bug-detection" id="toc-effectiveness-in-bug-detection" class="nav-link" data-scroll-target="#effectiveness-in-bug-detection">Effectiveness in Bug Detection</a></li>
+  </ul></li>
+  </ul></li>
+  <li><a href="#unit-testing-with-graphs" id="toc-unit-testing-with-graphs" class="nav-link" data-scroll-target="#unit-testing-with-graphs">Unit Testing with Graphs</a>
+  <ul class="collapse">
+  <li><a href="#introduction-1" id="toc-introduction-1" class="nav-link" data-scroll-target="#introduction-1">Introduction</a></li>
+  <li><a href="#control-flow-graphs-cfgs" id="toc-control-flow-graphs-cfgs" class="nav-link" data-scroll-target="#control-flow-graphs-cfgs">Control Flow Graphs (CFGs)</a>
+  <ul class="collapse">
+  <li><a href="#structural-coverage-criteria-1" id="toc-structural-coverage-criteria-1" class="nav-link" data-scroll-target="#structural-coverage-criteria-1">Structural Coverage Criteria</a></li>
+  </ul></li>
+  <li><a href="#data-flow-graphs" id="toc-data-flow-graphs" class="nav-link" data-scroll-target="#data-flow-graphs">Data Flow Graphs</a>
+  <ul class="collapse">
+  <li><a href="#definition-and-structure" id="toc-definition-and-structure" class="nav-link" data-scroll-target="#definition-and-structure">Definition and Structure</a></li>
+  <li><a href="#coverage-criteria" id="toc-coverage-criteria" class="nav-link" data-scroll-target="#coverage-criteria">Coverage Criteria</a></li>
+  </ul></li>
+  <li><a href="#relationship-between-coverage-criteria" id="toc-relationship-between-coverage-criteria" class="nav-link" data-scroll-target="#relationship-between-coverage-criteria">Relationship Between Coverage Criteria</a></li>
+  <li><a href="#choosing-coverage-criteria" id="toc-choosing-coverage-criteria" class="nav-link" data-scroll-target="#choosing-coverage-criteria">Choosing Coverage Criteria</a></li>
+  <li><a href="#application-and-tools" id="toc-application-and-tools" class="nav-link" data-scroll-target="#application-and-tools">Application and Tools</a></li>
+  </ul></li>
+  <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion">Conclusion</a>
+  <ul class="collapse">
+  <li><a href="#points-to-remember" id="toc-points-to-remember" class="nav-link" data-scroll-target="#points-to-remember">Points to Remember</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../pages/ST/Week01.html">Software Testing</a></li><li class="breadcrumb-item"><a href="../../pages/ST/Week03.html">Week 3</a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title">Graph-Based Approaches and Coverage Criteria</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="control-flow-graphs" class="level1">
+<h1>Control Flow Graphs</h1>
+<p>Control Flow Graphs (CFGs) are a fundamental tool in software testing, providing a graphical representation of a program’s control flow. This allows testers to systematically analyze program logic and derive test cases for thorough testing. In this comprehensive guide, we will delve into the concept of CFGs, their construction from code, and the application of structural coverage criteria for effective testing.</p>
+<section id="introduction-to-control-flow-graphs" class="level2">
+<h2 class="anchored" data-anchor-id="introduction-to-control-flow-graphs">Introduction to Control Flow Graphs</h2>
+<p>Control Flow Graphs (CFGs) are graphical representations of the flow of control within a program. They consist of nodes, which represent statements or basic blocks, and edges, which represent the flow of control between statements. CFGs are invaluable in software testing as they provide a visual depiction of program execution, aiding testers in understanding and analyzing program behavior.</p>
+</section>
+<section id="deriving-cfgs-from-code" class="level2">
+<h2 class="anchored" data-anchor-id="deriving-cfgs-from-code">Deriving CFGs from Code</h2>
+<p>To construct a CFG from code, we follow a systematic approach:</p>
+<section id="identification-of-basic-blocks" class="level3">
+<h3 class="anchored" data-anchor-id="identification-of-basic-blocks">Identification of Basic Blocks</h3>
+<p>Begin by identifying basic blocks within the code. Basic blocks are contiguous sequences of statements without any branching. They form the building blocks of the CFG.</p>
+</section>
+<section id="mapping-control-structures" class="level3">
+<h3 class="anchored" data-anchor-id="mapping-control-structures">Mapping Control Structures</h3>
+<p>Map control structures such as if statements, loops, switch cases, and exception handling to nodes and edges in the CFG. Decision nodes represent conditions, with branches for true and false conditions. Each case in a switch statement corresponds to a branch, and exception handling is represented by appropriate nodes and edges.</p>
+</section>
+<section id="utilizing-tools" class="level3">
+<h3 class="anchored" data-anchor-id="utilizing-tools">Utilizing Tools</h3>
+<p>While CFGs can be constructed manually, many Integrated Development Environments (IDEs) offer tools to automatically generate CFGs from code. These tools can streamline the process and aid in understanding program flow.</p>
+</section>
+</section>
+<section id="structural-coverage-criteria" class="level2">
+<h2 class="anchored" data-anchor-id="structural-coverage-criteria">Structural Coverage Criteria</h2>
+<p>Structural coverage criteria are used to derive test cases from CFGs, ensuring thorough testing of program logic. Several coverage criteria are commonly used:</p>
+<section id="node-coverage" class="level3">
+<h3 class="anchored" data-anchor-id="node-coverage">Node Coverage</h3>
+<p>Node coverage ensures that every node in the CFG is executed at least once during testing. This criterion helps identify unexecuted statements or unreachable code.</p>
+</section>
+<section id="edge-coverage" class="level3">
+<h3 class="anchored" data-anchor-id="edge-coverage">Edge Coverage</h3>
+<p>Edge coverage ensures that every edge in the CFG is traversed at least once during testing. By traversing all edges, testers can ensure that every possible path through the program is tested.</p>
+</section>
+<section id="edge-pair-coverage" class="level3">
+<h3 class="anchored" data-anchor-id="edge-pair-coverage">Edge Pair Coverage</h3>
+<p>Edge pair coverage extends edge coverage by requiring the traversal of pairs of edges, testing combinations of paths through the program. This criterion helps uncover interactions between different parts of the program.</p>
+</section>
+<section id="prime-path-coverage" class="level3">
+<h3 class="anchored" data-anchor-id="prime-path-coverage">Prime Path Coverage</h3>
+<p>Prime path coverage aims to traverse every prime path in the CFG. A prime path is a maximal path that does not contain any other path. By covering prime paths, testers can achieve thorough testing of the program’s control flow.</p>
+</section>
+</section>
+<section id="examples-of-cfgs" class="level2">
+<h2 class="anchored" data-anchor-id="examples-of-cfgs">Examples of CFGs</h2>
+<p>Let’s explore some examples of CFGs derived from common control structures:</p>
+<section id="if-statements" class="level3">
+<h3 class="anchored" data-anchor-id="if-statements">If Statements</h3>
+<div class="sourceCode" id="cb1"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>If (condition) {</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    then branch</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>} else {</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    else branch</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>In the CFG, decision nodes represent the condition, with edges leading to the then and else branches.</p>
+</section>
+<section id="loops" class="level3">
+<h3 class="anchored" data-anchor-id="loops">Loops</h3>
+<div class="sourceCode" id="cb2"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>While (condition) {</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    loop body}</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>The CFG for a while loop includes a decision node for the loop condition, with edges representing the loop body and the continuation of the loop.</p>
+</section>
+<section id="switch-case-statements" class="level3">
+<h3 class="anchored" data-anchor-id="switch-case-statements">Switch Case Statements</h3>
+<div class="sourceCode" id="cb3"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>Switch (variable) {</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    Case (value_1) : { statements_1 }</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    Case (value_2) : { statements_2 }</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>    Default: { default statements }</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Each case in a switch statement corresponds to a branch in the CFG, with edges leading to the statements within each case.</p>
+</section>
+</section>
+<section id="applying-structural-coverage-criteria" class="level2">
+<h2 class="anchored" data-anchor-id="applying-structural-coverage-criteria">Applying Structural Coverage Criteria</h2>
+<p>To apply structural coverage criteria to a CFG, testers identify and execute test paths that satisfy the coverage criteria. For example:</p>
+<section id="edge-coverage-1" class="level3">
+<h3 class="anchored" data-anchor-id="edge-coverage-1">Edge Coverage</h3>
+<p>Test paths must traverse all edges in the CFG, ensuring that every possible path through the program is tested.</p>
+</section>
+<section id="edge-pair-coverage-1" class="level3">
+<h3 class="anchored" data-anchor-id="edge-pair-coverage-1">Edge Pair Coverage</h3>
+<p>Test paths must cover pairs of edges, testing combinations of paths to uncover interactions between different parts of the program.</p>
+</section>
+<section id="prime-path-coverage-1" class="level3">
+<h3 class="anchored" data-anchor-id="prime-path-coverage-1">Prime Path Coverage</h3>
+<p>Test paths must traverse every prime path in the CFG, achieving thorough testing of the program’s control flow.</p>
+</section>
+</section>
+<section id="potential-errors-and-debugging" class="level2">
+<h2 class="anchored" data-anchor-id="potential-errors-and-debugging">Potential Errors and Debugging</h2>
+<p>CFG analysis can uncover potential errors in the code, such as division by zero or unhandled exceptions. By thoroughly testing all paths through the program, testers can identify and address these errors before deployment.</p>
+</section>
+</section>
+<section id="data-flow-analysis" class="level1">
+<h1>Data Flow Analysis</h1>
+<p>Data flow analysis plays a crucial role in software testing by providing insights into how data moves through a program or function. This analysis involves examining the flow of variables, their definitions, and uses within the code. By understanding data flow patterns, testers can design more effective test cases and ensure comprehensive coverage of the codebase.</p>
+<section id="introduction" class="level2">
+<h2 class="anchored" data-anchor-id="introduction">Introduction</h2>
+<p>In software testing, ensuring thorough coverage of the code is essential to detect potential bugs and vulnerabilities. While structural coverage criteria like node and edge coverage provide insights into the execution paths of a program, they may not capture all aspects of its behavior. Data flow analysis complements structural coverage by focusing on how data values propagate through the program.</p>
+</section>
+<section id="data-flow-representation" class="level2">
+<h2 class="anchored" data-anchor-id="data-flow-representation">Data Flow Representation</h2>
+<section id="control-flow-graphs-1" class="level3">
+<h3 class="anchored" data-anchor-id="control-flow-graphs-1">Control Flow Graphs</h3>
+<p>Control flow graphs (CFGs) are commonly used to represent the control flow of a program. In a CFG, nodes represent statements or basic blocks, while edges denote the flow of control between them. By augmenting CFGs with data flow information, testers can analyze how variables are defined and used at different points in the code.</p>
+</section>
+<section id="definitions-and-uses" class="level3">
+<h3 class="anchored" data-anchor-id="definitions-and-uses">Definitions and Uses</h3>
+<p>In data flow analysis, a <strong>definition</strong> of a variable occurs when a value is stored into memory for that variable. This typically happens at assignment statements or initialization points in the code. On the other hand, a <strong>use</strong> of a variable refers to a location where the stored value of the variable is accessed. Uses can occur in various contexts, such as assignment statements, expressions, or decision statements like if conditions.</p>
+</section>
+</section>
+<section id="def-use-du-pairs" class="level2">
+<h2 class="anchored" data-anchor-id="def-use-du-pairs">Def-Use (DU) Pairs</h2>
+<p>Def-Use (DU) pairs are fundamental to data flow analysis as they represent the relationship between variable definitions and uses within the code. A DU pair consists of two locations: a definition location (Def) where the variable is defined, and a use location (Use) where the variable is used.</p>
+<section id="definition" class="level3">
+<h3 class="anchored" data-anchor-id="definition">Definition</h3>
+<p>The definition of a variable occurs at a specific point in the code where its value is assigned or initialized. This point is marked by a statement where memory allocation for the variable occurs, and a value is stored into that memory location.</p>
+</section>
+<section id="use" class="level3">
+<h3 class="anchored" data-anchor-id="use">Use</h3>
+<p>The use of a variable refers to a location in the code where the stored value of the variable is retrieved and utilized. This can happen in various contexts, including assignment statements, expressions, or decision statements like if conditions.</p>
+</section>
+<section id="def-use-path" class="level3">
+<h3 class="anchored" data-anchor-id="def-use-path">Def-Use Path</h3>
+<p>A Def-Use (DU) path represents a simple path from a variable’s definition to its use within the code. This path ensures that there are no redefinitions of the variable’s value along the way, providing a clear flow of data from its origin to its consumption.</p>
+</section>
+</section>
+<section id="graphical-representation" class="level2">
+<h2 class="anchored" data-anchor-id="graphical-representation">Graphical Representation</h2>
+<section id="nodes-and-edges" class="level3">
+<h3 class="anchored" data-anchor-id="nodes-and-edges">Nodes and Edges</h3>
+<p>In a control flow graph (CFG), nodes represent individual statements or basic blocks within the code. Edges connect these nodes and represent the flow of control between them. By analyzing the relationships between nodes and edges, testers can gain insights into the program’s control and data flow.</p>
+</section>
+<section id="marking-definitions-and-uses" class="level3">
+<h3 class="anchored" data-anchor-id="marking-definitions-and-uses">Marking Definitions and Uses</h3>
+<p>To perform data flow analysis, definitions and uses of variables are marked on nodes and edges of the CFG. Definitions typically occur on nodes, indicating where variables are initialized or assigned values. Uses, on the other hand, can occur on both nodes and edges, depending on the context in which the variable is accessed.</p>
+</section>
+</section>
+<section id="example-control-flow-graph" class="level2">
+<h2 class="anchored" data-anchor-id="example-control-flow-graph">Example Control Flow Graph</h2>
+<p>To illustrate data flow analysis in action, let’s consider a sample control flow graph representing a simple program. This program consists of multiple statements and control structures, providing opportunities for variable definitions and uses.</p>
+<section id="graph-layout" class="level3">
+<h3 class="anchored" data-anchor-id="graph-layout">Graph Layout</h3>
+<p>The control flow graph is laid out with nodes representing statements or basic blocks and edges representing the flow of control between them. Each node is labeled with the corresponding statement, and edges indicate the transitions between statements.</p>
+</section>
+<section id="marking-definitions-and-uses-1" class="level3">
+<h3 class="anchored" data-anchor-id="marking-definitions-and-uses-1">Marking Definitions and Uses</h3>
+<p>Definitions of variables are marked on nodes where values are assigned or initialized. Uses of variables are marked on nodes or edges where the stored values are accessed or utilized in computations or decision-making.</p>
+</section>
+</section>
+<section id="data-flow-analysis-techniques" class="level2">
+<h2 class="anchored" data-anchor-id="data-flow-analysis-techniques">Data Flow Analysis Techniques</h2>
+<section id="data-definition-and-use-paths" class="level3">
+<h3 class="anchored" data-anchor-id="data-definition-and-use-paths">Data Definition and Use Paths</h3>
+<p>Data flow analysis involves tracing the paths of variable definitions and uses within the code. A data definition (Def) occurs when a variable’s value is updated, while a data use (Use) occurs when the variable’s value is retrieved or utilized. By analyzing these paths, testers can identify potential issues such as unused variables or uninitialized variables.</p>
+</section>
+<section id="predicate-and-computation-uses" class="level3">
+<h3 class="anchored" data-anchor-id="predicate-and-computation-uses">Predicate and Computation Uses</h3>
+<p>In addition to standard uses of variables in expressions or assignments, data flow analysis distinguishes between predicate uses and computation uses. Predicate uses occur in decision statements like if conditions or loops, where variables are used to determine control flow. Computation uses, on the other hand, occur in computational statements where variables are used for calculations or output generation.</p>
+</section>
+</section>
+</section>
+<section id="data-flow-coverage-criteria" class="level1">
+<h1>Data Flow Coverage Criteria</h1>
+<p>In software testing, data flow coverage criteria play a crucial role in ensuring thorough testing of programs by focusing on how data flows from its definition to its use within the program. This comprehensive approach helps identify potential errors and vulnerabilities in software systems. In this section, we will delve into the various aspects of data flow coverage criteria, including definitions, types, subsumption, and challenges.</p>
+<section id="introduction-to-data-flow-coverage-criteria" class="level2">
+<h2 class="anchored" data-anchor-id="introduction-to-data-flow-coverage-criteria">Introduction to Data Flow Coverage Criteria</h2>
+<p>Data flow coverage criteria are a set of principles and techniques used in software testing to analyze how data moves through a program. By examining the paths taken by variables from their definition to their use, testers can identify potential flaws or inefficiencies in the software.</p>
+<section id="definitions" class="level3">
+<h3 class="anchored" data-anchor-id="definitions">Definitions</h3>
+<ul>
+<li><p><strong>DU Paths:</strong> DU paths, short for Definition-Use Paths, are sequences of operations that track the flow of data from its definition to its use within a program. These paths are crucial for understanding how variables are manipulated and utilized throughout the code.</p></li>
+<li><p><strong>DP Sets:</strong> DP sets, or Definition Path Sets, encompass all DU paths starting at a particular node for a given variable. They provide a comprehensive view of how variables are defined and used within the program.</p></li>
+<li><p><strong>DUP Sets:</strong> DUP sets, or Definition-Use Pair Sets, group DU paths based on both their starting and ending nodes. This grouping facilitates a more nuanced analysis of variable usage patterns, allowing testers to identify potential issues more effectively.</p></li>
+</ul>
+</section>
+</section>
+<section id="types-of-data-flow-coverage-criteria" class="level2">
+<h2 class="anchored" data-anchor-id="types-of-data-flow-coverage-criteria">Types of Data Flow Coverage Criteria</h2>
+<p>There are several types of data flow coverage criteria, each with its own focus and requirements. These criteria help ensure thorough testing of software systems by examining different aspects of data flow within the program.</p>
+<section id="each-definition-reaches-at-least-one-use" class="level3">
+<h3 class="anchored" data-anchor-id="each-definition-reaches-at-least-one-use">Each Definition Reaches at Least One Use</h3>
+<p>This criterion mandates that every definition of a variable within the program must reach at least one corresponding use. This ensures that no defined variable goes unused throughout the execution of the program, thereby reducing the likelihood of potential errors or inefficiencies.</p>
+</section>
+<section id="every-definition-reaches-all-possible-uses" class="level3">
+<h3 class="anchored" data-anchor-id="every-definition-reaches-all-possible-uses">Every Definition Reaches All Possible Uses</h3>
+<p>In this criterion, each definition of a variable must reach all possible uses within the program. This ensures comprehensive coverage of all potential variable usage scenarios, enabling testers to identify and address any issues related to variable manipulation or utilization.</p>
+</section>
+<section id="every-definition-reaches-all-possible-uses-through-all-possible-du-paths" class="level3">
+<h3 class="anchored" data-anchor-id="every-definition-reaches-all-possible-uses-through-all-possible-du-paths">Every Definition Reaches All Possible Uses Through All Possible DU Paths</h3>
+<p>The most stringent criterion requires that each variable definition reaches all possible uses through all available DU paths. This comprehensive approach ensures thorough testing of variable usage patterns and helps identify even the most subtle errors or vulnerabilities in the software.</p>
+</section>
+</section>
+<section id="subsumption-and-comparison-with-structural-coverage-criteria" class="level2">
+<h2 class="anchored" data-anchor-id="subsumption-and-comparison-with-structural-coverage-criteria">Subsumption and Comparison with Structural Coverage Criteria</h2>
+<p>Subsumption refers to the relationship between different coverage criteria, where achieving a more comprehensive criterion automatically satisfies less comprehensive ones. In the context of data flow coverage criteria, subsumption helps testers prioritize their testing efforts and focus on the most critical aspects of variable usage within the program.</p>
+<section id="relationship-with-structural-coverage-criteria" class="level3">
+<h3 class="anchored" data-anchor-id="relationship-with-structural-coverage-criteria">Relationship with Structural Coverage Criteria</h3>
+<p>Structural coverage criteria, such as node and edge coverage, focus on testing different aspects of the program’s structure, such as control flow and decision points. While structural coverage criteria are essential for ensuring code coverage, they may not always capture the intricacies of data flow within the program.</p>
+</section>
+<section id="subsumption-analysis" class="level3">
+<h3 class="anchored" data-anchor-id="subsumption-analysis">Subsumption Analysis</h3>
+<ul>
+<li><p><strong>All DU Paths Coverage Subsumes All Uses Coverage:</strong> Achieving coverage of all DU paths automatically satisfies the requirement of covering all uses of variables within the program.</p></li>
+<li><p><strong>Prime Path Coverage Subsumes All DU Paths Coverage:</strong> Prime path coverage, a structural coverage criterion, encompasses all DU paths coverage, indicating its expressive power in capturing both structural and data flow aspects of the program.</p></li>
+</ul>
+</section>
+</section>
+<section id="challenges-and-considerations" class="level2">
+<h2 class="anchored" data-anchor-id="challenges-and-considerations">Challenges and Considerations</h2>
+<p>Data flow testing presents several challenges and considerations that testers must address to ensure effective testing of software systems. These challenges include the complexity of analyzing variable usage patterns, generating control flow graphs, and automating the testing process.</p>
+<section id="automation-and-tooling" class="level3">
+<h3 class="anchored" data-anchor-id="automation-and-tooling">Automation and Tooling</h3>
+<p>To overcome the challenges associated with data flow testing, testers can leverage automation tools and techniques to streamline the testing process. These tools can help generate control flow graphs, identify DU paths, and generate test data, making the testing process more efficient and effective.</p>
+</section>
+<section id="techniques-for-test-data-generation" class="level3">
+<h3 class="anchored" data-anchor-id="techniques-for-test-data-generation">Techniques for Test Data Generation</h3>
+<p>Various techniques, such as symbolic execution, model checking, and random testing, can aid in test data generation for data flow coverage. These techniques help testers generate comprehensive test cases that cover a wide range of variable usage scenarios, ensuring thorough testing of the software system.</p>
+</section>
+</section>
+</section>
+<section id="graph-based-coverage-criteria" class="level1">
+<h1>Graph-Based Coverage Criteria</h1>
+<p>In software testing, coverage criteria play a vital role in assessing the thoroughness of test cases. One such advanced approach is graph-based coverage criteria, which extends traditional structural coverage criteria by considering the flow of data within a program. This comprehensive method aims to ensure that every variable is properly defined and utilized throughout the code execution. In this discourse, we delve into the intricacies of graph-based coverage criteria, with a focus on data flow coverage.</p>
+<section id="overview-of-data-flow-coverage-criteria" class="level2">
+<h2 class="anchored" data-anchor-id="overview-of-data-flow-coverage-criteria">Overview of Data Flow Coverage Criteria</h2>
+<p>Data flow coverage criteria are a subset of graph-based coverage criteria that emphasize the movement of data within a program. They aim to validate that each variable is correctly defined and utilized from its point of definition to its point of use. This ensures that the program behaves as intended and minimizes the risk of logical errors caused by incorrect data flow.</p>
+<section id="definitions-and-concepts" class="level3">
+<h3 class="anchored" data-anchor-id="definitions-and-concepts">Definitions and Concepts</h3>
+<p>To understand data flow coverage criteria, it’s crucial to grasp some fundamental concepts:</p>
+<ul>
+<li><p><strong>Definition-Use (DU) Path</strong>: A DU path for a variable ( v ) is a path in the program’s control flow graph (CFG) that starts from the variable’s definition and ends at its use, without encountering any redefinitions along the way.</p></li>
+<li><p><strong>Coverage Criteria</strong>:</p>
+<ul>
+<li><strong>All Definitions Coverage</strong>: Ensures that every variable definition reaches at least one use.</li>
+<li><strong>All Uses Coverage</strong>: Ensures that every definition of a variable reaches all its possible uses.</li>
+<li><strong>All DU Path Coverage</strong>: Requires consideration of all possible paths from a variable’s definition to its uses.</li>
+</ul></li>
+</ul>
+</section>
+</section>
+<section id="example-statistics-program" class="level2">
+<h2 class="anchored" data-anchor-id="example-statistics-program">Example: Statistics Program</h2>
+<p>To illustrate data flow coverage criteria, let’s consider a statistics program designed to compute various statistical parameters from an array of numbers. This program serves as a practical example to demonstrate the application of graph-based coverage criteria.</p>
+<section id="control-flow-graph-cfg-analysis" class="level3">
+<h3 class="anchored" data-anchor-id="control-flow-graph-cfg-analysis">Control Flow Graph (CFG) Analysis</h3>
+<p>The first step in applying data flow coverage criteria is to analyze the program’s control flow graph (CFG). The CFG represents the flow of control within the program, with nodes representing individual statements and edges representing transitions between statements.</p>
+</section>
+<section id="annotating-nodes-and-edges" class="level3">
+<h3 class="anchored" data-anchor-id="annotating-nodes-and-edges">Annotating Nodes and Edges</h3>
+<p>Once the CFG is constructed, each node is annotated with the variables defined and used at that particular statement. Similarly, edges are annotated with variables used along the control flow path represented by the edge.</p>
+</section>
+<section id="identification-of-du-pairs" class="level3">
+<h3 class="anchored" data-anchor-id="identification-of-du-pairs">Identification of DU Pairs</h3>
+<p>For each variable in the program, DU pairs are identified, indicating where the variable is defined and where it is used. This process involves traversing the CFG and noting the paths from each definition to its corresponding use.</p>
+</section>
+<section id="generating-test-cases" class="level3">
+<h3 class="anchored" data-anchor-id="generating-test-cases">Generating Test Cases</h3>
+<p>Based on the identified DU paths, test cases are generated to achieve the desired coverage criteria. These test cases aim to ensure that every variable is correctly defined and utilized throughout the program execution.</p>
+</section>
+</section>
+<section id="test-case-generation-strategies" class="level2">
+<h2 class="anchored" data-anchor-id="test-case-generation-strategies">Test Case Generation Strategies</h2>
+<p>Test case generation in data flow coverage criteria involves considering different scenarios to ensure comprehensive testing. This section outlines various strategies for generating test cases based on the identified DU paths.</p>
+<section id="parts-that-skip-the-loop" class="level3">
+<h3 class="anchored" data-anchor-id="parts-that-skip-the-loop">Parts that Skip the Loop</h3>
+<p>Some DU paths may skip one or more loops in the program. Test cases targeting these paths aim to validate the behavior of the program when certain loops are bypassed.</p>
+</section>
+<section id="parts-requiring-one-iteration-of-the-loop" class="level3">
+<h3 class="anchored" data-anchor-id="parts-requiring-one-iteration-of-the-loop">Parts Requiring One Iteration of the Loop</h3>
+<p>Other DU paths may require at least one iteration of a loop to reach the variable’s use. Test cases for these paths ensure that the program behaves correctly during loop iterations.</p>
+</section>
+<section id="parts-requiring-multiple-iterations-of-the-loop" class="level3">
+<h3 class="anchored" data-anchor-id="parts-requiring-multiple-iterations-of-the-loop">Parts Requiring Multiple Iterations of the Loop</h3>
+<p>Certain DU paths may require multiple iterations of a loop to reach the variable’s use. Test cases targeting these paths validate the program’s behavior under repetitive loop execution.</p>
+</section>
+</section>
+<section id="example-test-cases" class="level2">
+<h2 class="anchored" data-anchor-id="example-test-cases">Example Test Cases</h2>
+<p>To illustrate the generation of test cases, let’s consider specific scenarios for the statistics program discussed earlier.</p>
+<section id="single-element-array-test-case" class="level3">
+<h3 class="anchored" data-anchor-id="single-element-array-test-case">Single-Element Array Test Case</h3>
+<p>Suppose we have a test case where the input array contains only a single element. In this scenario, the test case should cover paths entering both loops exactly once, ensuring proper execution of the program logic.</p>
+</section>
+<section id="three-element-array-test-case" class="level3">
+<h3 class="anchored" data-anchor-id="three-element-array-test-case">Three-Element Array Test Case</h3>
+<p>For a test case with a three-element array input, the program should cover paths requiring at least two iterations of each loop. This test case validates the behavior of the program during multiple iterations of the loops.</p>
+</section>
+<section id="zero-length-array-test-case" class="level3">
+<h3 class="anchored" data-anchor-id="zero-length-array-test-case">Zero-Length Array Test Case</h3>
+<p>Additionally, a test case with a zero-length array input should be considered to validate how the program handles edge cases. However, this scenario may reveal potential errors, such as index out of bounds exceptions, highlighting the importance of robust exception handling in the code.</p>
+</section>
+</section>
+<section id="evaluation-of-data-flow-coverage" class="level2">
+<h2 class="anchored" data-anchor-id="evaluation-of-data-flow-coverage">Evaluation of Data Flow Coverage</h2>
+<p>Achieving high data flow coverage is essential for effective software testing, as it helps uncover potential bugs and vulnerabilities in the code. While automated computation of all DU paths remains challenging, heuristic-based approaches and empirical studies have shown the effectiveness of data flow coverage in identifying defects.</p>
+<section id="challenges-in-automated-computation" class="level3">
+<h3 class="anchored" data-anchor-id="challenges-in-automated-computation">Challenges in Automated Computation</h3>
+<p>Automatically computing all DU paths in a program is a complex and challenging task, often bordering on program analysis and software testing. The inherent complexity of modern software systems makes it difficult to devise automated algorithms for precise DU path computation.</p>
+</section>
+<section id="effectiveness-in-bug-detection" class="level3">
+<h3 class="anchored" data-anchor-id="effectiveness-in-bug-detection">Effectiveness in Bug Detection</h3>
+<p>Empirical studies have demonstrated that high data flow coverage correlates with increased effectiveness in bug detection compared to traditional coverage criteria like branch or edge coverage. This highlights the significance of data flow analysis in ensuring software quality and reliability.</p>
+</section>
+</section>
+</section>
+<section id="unit-testing-with-graphs" class="level1">
+<h1>Unit Testing with Graphs</h1>
+<section id="introduction-1" class="level2">
+<h2 class="anchored" data-anchor-id="introduction-1">Introduction</h2>
+<p>In the realm of software testing, unit testing stands as a crucial phase in ensuring the reliability and functionality of individual components within a larger codebase. A particularly effective approach to unit testing involves the utilization of graphs to model the intricate flow of control and data within software artifacts. This comprehensive guide aims to delve into the intricacies of unit testing with graphs, exploring the concepts of Control Flow Graphs (CFGs) and Data Flow Graphs, elucidating various coverage criteria, and providing insights into their practical application.</p>
+</section>
+<section id="control-flow-graphs-cfgs" class="level2">
+<h2 class="anchored" data-anchor-id="control-flow-graphs-cfgs">Control Flow Graphs (CFGs)</h2>
+<p>Control Flow Graphs (CFGs) serve as abstract representations of the control flow within a method or function in a software artifact. At its core, a CFG comprises nodes that denote individual statements or basic blocks within the code, interconnected by edges that signify the flow of control between them.</p>
+<section id="structural-coverage-criteria-1" class="level3">
+<h3 class="anchored" data-anchor-id="structural-coverage-criteria-1">Structural Coverage Criteria</h3>
+<p>Structural coverage criteria, essential for thorough unit testing, are based on CFGs and aim to ensure adequate test coverage of the code. Two primary coverage criteria within this domain include:</p>
+<section id="node-coverage-1" class="level4">
+<h4 class="anchored" data-anchor-id="node-coverage-1">Node Coverage</h4>
+<p>Node coverage entails the creation of test cases to ensure the execution of every basic block within the code. By traversing each node in the CFG, test cases can be designed to encompass all possible paths through the code, thereby minimizing the likelihood of undiscovered errors.</p>
+</section>
+<section id="edge-coverage-2" class="level4">
+<h4 class="anchored" data-anchor-id="edge-coverage-2">Edge Coverage</h4>
+<p>Edge coverage, a more comprehensive criterion, necessitates the execution of every possible transfer of control between statements within the code. This entails traversing each edge in the CFG, ensuring that all decision points, loops, and transfer of control mechanisms are thoroughly exercised during testing.</p>
+</section>
+<section id="prime-paths-coverage" class="level4">
+<h4 class="anchored" data-anchor-id="prime-paths-coverage">Prime Paths Coverage</h4>
+<p>Prime paths coverage represents a specialized criterion particularly suited for testing loops within the code. Prime paths, which denote maximal simple paths within the CFG, encompass all possible execution paths through loops, including scenarios where the loop is executed multiple times or bypassed entirely. By covering prime paths, testers can effectively validate the functionality and robustness of loop constructs within the code.</p>
+</section>
+</section>
+</section>
+<section id="data-flow-graphs" class="level2">
+<h2 class="anchored" data-anchor-id="data-flow-graphs">Data Flow Graphs</h2>
+<p>While CFGs provide insights into the control flow structure of a software artifact, Data Flow Graphs augment this representation by incorporating information pertaining to variable definitions and uses within the code.</p>
+<section id="definition-and-structure" class="level3">
+<h3 class="anchored" data-anchor-id="definition-and-structure">Definition and Structure</h3>
+<p>Data Flow Graphs, derived from CFGs, annotate nodes and edges with additional information regarding variable definitions and uses. This augmentation facilitates a deeper understanding of how data propagates through the code, enabling testers to devise more comprehensive test cases.</p>
+</section>
+<section id="coverage-criteria" class="level3">
+<h3 class="anchored" data-anchor-id="coverage-criteria">Coverage Criteria</h3>
+<p>The coverage criteria associated with Data Flow Graphs focus on ensuring adequate coverage of variable definitions and uses within the code. Three primary coverage criteria within this domain include:</p>
+<section id="all-definitions-coverage" class="level4">
+<h4 class="anchored" data-anchor-id="all-definitions-coverage">All Definitions Coverage</h4>
+<p>All Definitions Coverage mandates that every defined variable within the code is subsequently utilized. By verifying that each variable definition is followed by at least one use, testers can ascertain the integrity of variable assignments within the code.</p>
+</section>
+<section id="all-uses-coverage" class="level4">
+<h4 class="anchored" data-anchor-id="all-uses-coverage">All Uses Coverage</h4>
+<p>All Uses Coverage aims to ensure that every definition of a variable reaches all possible uses within the code. This criterion necessitates the creation of test cases that track the flow of variable values from their definitions to all potential usage points, thereby validating the correctness of variable propagation.</p>
+</section>
+<section id="all-du-paths-coverage" class="level4">
+<h4 class="anchored" data-anchor-id="all-du-paths-coverage">All DU Paths Coverage</h4>
+<p>All DU Paths Coverage represents the most exhaustive criterion, requiring test cases to traverse every possible path through the code while ensuring that every variable definition reaches every possible use. By meticulously analyzing the flow of data through the code, testers can uncover potential vulnerabilities and errors in variable handling mechanisms.</p>
+</section>
+</section>
+</section>
+<section id="relationship-between-coverage-criteria" class="level2">
+<h2 class="anchored" data-anchor-id="relationship-between-coverage-criteria">Relationship Between Coverage Criteria</h2>
+<p>An understanding of the relationships between different coverage criteria is essential for devising effective testing strategies. Within the realm of unit testing with graphs, several key relationships exist:</p>
+<ul>
+<li>Prime Paths Coverage subsumes All DU Paths Coverage, as it inherently encompasses all possible execution paths through the code, including those involving variable definitions and uses.</li>
+<li>All Uses Coverage subsumes Edge Coverage, as ensuring that every variable definition reaches all possible uses inherently entails traversing all edges in the CFG.</li>
+</ul>
+</section>
+<section id="choosing-coverage-criteria" class="level2">
+<h2 class="anchored" data-anchor-id="choosing-coverage-criteria">Choosing Coverage Criteria</h2>
+<p>When selecting coverage criteria for unit testing, it is imperative to consider both theoretical principles and empirical evidence of effectiveness. While a plethora of coverage criteria exists, empirical studies have highlighted the efficacy of certain criteria in practice. Notable criteria include:</p>
+<ul>
+<li>All DU Paths Coverage</li>
+<li>Prime Paths Coverage</li>
+<li>All Uses Coverage</li>
+<li>Edge Coverage</li>
+<li>Node Coverage</li>
+</ul>
+</section>
+<section id="application-and-tools" class="level2">
+<h2 class="anchored" data-anchor-id="application-and-tools">Application and Tools</h2>
+<p>In practice, the generation and utilization of graphs for unit testing purposes can be facilitated by a myriad of tools and techniques. Integrated development environments (IDEs) such as Visual Studio and Eclipse often provide plugins or built-in functionality for generating Control Flow Graphs from code. Additionally, specialized tools, such as those offered by academic institutions like George Mason University, can aid in automating the generation of test cases based on graph coverage criteria.</p>
+</section>
+</section>
+<section id="conclusion" class="level1">
+<h1>Conclusion</h1>
+<p>Unit testing with graphs, particularly utilizing Control Flow Graphs (CFGs) and Data Flow Graphs, offers a systematic approach to ensure thorough testing of software artifacts. By modeling code structure and data flow, testers can derive comprehensive coverage criteria and generate effective test cases. This approach enhances the reliability and robustness of software systems by uncovering potential errors and vulnerabilities during the development phase. Moving forward, continued research and innovation in graph-based testing methodologies will further advance the field of software testing, ultimately leading to the creation of more reliable and resilient software products.</p>
+<section id="points-to-remember" class="level2">
+<h2 class="anchored" data-anchor-id="points-to-remember">Points to Remember</h2>
+<ol type="1">
+<li><strong>Control Flow Graphs (CFGs):</strong>
+<ul>
+<li>Represent the flow of control within a program using nodes and edges.</li>
+<li>Coverage criteria include Node Coverage, Edge Coverage, and Prime Paths Coverage.</li>
+<li>Useful for structural coverage analysis and testing of loops.</li>
+</ul></li>
+<li><strong>Data Flow Analysis:</strong>
+<ul>
+<li>Augments CFGs with information about variable definitions and uses.</li>
+<li>Coverage criteria include All Definitions Coverage, All Uses Coverage, and All DU Paths Coverage.</li>
+<li>Ensures thorough testing of variable handling mechanisms.</li>
+</ul></li>
+<li><strong>Relationship Between Coverage Criteria:</strong>
+<ul>
+<li>Prime Paths Coverage subsumes All DU Paths Coverage.</li>
+<li>All Uses Coverage subsumes Edge Coverage.</li>
+</ul></li>
+<li><strong>Choosing Coverage Criteria:</strong>
+<ul>
+<li>Select criteria based on theoretical principles and empirical evidence.</li>
+<li>Criteria such as All DU Paths Coverage, Prime Paths Coverage, and All Uses Coverage are effective in practice.</li>
+</ul></li>
+<li><strong>Application and Tools:</strong>
+<ul>
+<li>Utilize IDEs and specialized tools for generating CFGs and automating test case generation.</li>
+<li>Tools like those provided by academic institutions can aid in the testing process.</li>
+</ul></li>
+<li><strong>Test Case Generation Strategies:</strong>
+<ul>
+<li>Consider scenarios such as loop iterations and edge cases for comprehensive test coverage.</li>
+<li>Generate test cases based on identified DU paths to ensure thorough testing of variable usage patterns.</li>
+</ul></li>
+<li><strong>Challenges and Considerations:</strong>
+<ul>
+<li>Automated computation of all DU paths remains challenging.</li>
+<li>Empirical studies highlight the effectiveness of data flow coverage in bug detection.</li>
+</ul></li>
+</ol>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const disableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'prefetch';
+    }
+  }
+  const enableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'stylesheet';
+    }
+  }
+  const manageTransitions = (selector, allowTransitions) => {
+    const els = window.document.querySelectorAll(selector);
+    for (let i=0; i < els.length; i++) {
+      const el = els[i];
+      if (allowTransitions) {
+        el.classList.remove('notransition');
+      } else {
+        el.classList.add('notransition');
+      }
+    }
+  }
+  const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+    const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+    const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+    let newTheme = '';
+    if(darkModeDefault) {
+      newTheme = isAlternate ? baseTheme : alternateTheme;
+    } else {
+      newTheme = isAlternate ? alternateTheme : baseTheme;
+    }
+    const changeGiscusTheme = () => {
+      // From: https://github.com/giscus/giscus/issues/336
+      const sendMessage = (message) => {
+        const iframe = document.querySelector('iframe.giscus-frame');
+        if (!iframe) return;
+        iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+      }
+      sendMessage({
+        setConfig: {
+          theme: newTheme
+        }
+      });
+    }
+    const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+    if (isGiscussLoaded) {
+      changeGiscusTheme();
+    }
+  }
+  const toggleColorMode = (alternate) => {
+    // Switch the stylesheets
+    const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+    manageTransitions('#quarto-margin-sidebar .nav-link', false);
+    if (alternate) {
+      enableStylesheet(alternateStylesheets);
+      for (const sheetNode of alternateStylesheets) {
+        if (sheetNode.id === "quarto-bootstrap") {
+          toggleBodyColorMode(sheetNode);
+        }
+      }
+    } else {
+      disableStylesheet(alternateStylesheets);
+      toggleBodyColorPrimary();
+    }
+    manageTransitions('#quarto-margin-sidebar .nav-link', true);
+    // Switch the toggles
+    const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+    for (let i=0; i < toggles.length; i++) {
+      const toggle = toggles[i];
+      if (toggle) {
+        if (alternate) {
+          toggle.classList.add("alternate");     
+        } else {
+          toggle.classList.remove("alternate");
+        }
+      }
+    }
+    // Hack to workaround the fact that safari doesn't
+    // properly recolor the scrollbar when toggling (#1455)
+    if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+      manageTransitions("body", false);
+      window.scrollTo(0, 1);
+      setTimeout(() => {
+        window.scrollTo(0, 0);
+        manageTransitions("body", true);
+      }, 40);  
+    }
+  }
+  const isFileUrl = () => { 
+    return window.location.protocol === 'file:';
+  }
+  const hasAlternateSentinel = () => {  
+    let styleSentinel = getColorSchemeSentinel();
+    if (styleSentinel !== null) {
+      return styleSentinel === "alternate";
+    } else {
+      return false;
+    }
+  }
+  const setStyleSentinel = (alternate) => {
+    const value = alternate ? "alternate" : "default";
+    if (!isFileUrl()) {
+      window.localStorage.setItem("quarto-color-scheme", value);
+    } else {
+      localAlternateSentinel = value;
+    }
+  }
+  const getColorSchemeSentinel = () => {
+    if (!isFileUrl()) {
+      const storageValue = window.localStorage.getItem("quarto-color-scheme");
+      return storageValue != null ? storageValue : localAlternateSentinel;
+    } else {
+      return localAlternateSentinel;
+    }
+  }
+  const darkModeDefault = false;
+  let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+  // Dark / light mode switch
+  window.quartoToggleColorScheme = () => {
+    // Read the current dark / light value 
+    let toAlternate = !hasAlternateSentinel();
+    toggleColorMode(toAlternate);
+    setStyleSentinel(toAlternate);
+    toggleGiscusIfUsed(toAlternate, darkModeDefault);
+  };
+  // Ensure there is a toggle, if there isn't float one in the top right
+  if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+    const a = window.document.createElement('a');
+    a.classList.add('top-right');
+    a.classList.add('quarto-color-scheme-toggle');
+    a.href = "";
+    a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+    const i = window.document.createElement("i");
+    i.classList.add('bi');
+    a.appendChild(i);
+    window.document.body.appendChild(a);
+  }
+  // Switch to dark mode if need be
+  if (hasAlternateSentinel()) {
+    toggleColorMode(true);
+  } else {
+    toggleColorMode(false);
+  }
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

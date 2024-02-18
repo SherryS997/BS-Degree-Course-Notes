@@ -1,0 +1,1694 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.4.549">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>BS Degree Notes - Stochastic Algorithms for Search Methods</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="https://lalten.github.io/lmweb/style/latinmodern-roman.css">
+<link rel="stylesheet" href="https://lalten.github.io/lmweb/style/latinmodern-sans.css">
+<link rel="stylesheet" href="https://lalten.github.io/lmweb/style/latinmodern-mono.css">
+</head>
+
+<body class="nav-sidebar docked">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../pages/AI/Week01.html">AI: Search Methods</a></li><li class="breadcrumb-item"><a href="../../pages/AI/Week04.html">Week 4</a></li></ol></nav>
+        <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="../../">BS Degree Notes</a> 
+        <div class="sidebar-tools-main">
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Home</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="false">
+ <span class="menu-text">Deep Learning</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../pages/DL/Week01_1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 1.1</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../pages/DL/Week01_2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 1.2</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../pages/DL/Week02.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 2</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../pages/DL/Week03.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 3</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../pages/DL/Week04.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 4</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
+ <span class="menu-text">AI: Search Methods</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../pages/AI/Week01.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 1</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../pages/AI/Week02.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 2</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../pages/AI/Week03.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 3</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../pages/AI/Week04.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">Week 4</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="false">
+ <span class="menu-text">Software Testing</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../pages/ST/Week01.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 1</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../pages/ST/Week02.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 2</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../pages/ST/Week03.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 3</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../pages/ST/Week04.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 4</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="false">
+ <span class="menu-text">Software Engineering</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../pages/SE/Week01.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 1</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../pages/SE/Week02.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 2</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../pages/SE/Week03.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 3</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../pages/SE/Week04.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 4</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="false">
+ <span class="menu-text">Reinforcement Learning</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../pages/RL/Week01_1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 1.1</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../pages/RL/Week01_2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 1.2</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../pages/RL/Week02.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 2</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#iterated-hill-climbing" id="toc-iterated-hill-climbing" class="nav-link active" data-scroll-target="#iterated-hill-climbing">Iterated Hill Climbing</a>
+  <ul class="collapse">
+  <li><a href="#introduction-to-local-search-escape" id="toc-introduction-to-local-search-escape" class="nav-link" data-scroll-target="#introduction-to-local-search-escape">Introduction to Local Search Escape</a></li>
+  <li><a href="#understanding-sat-problem" id="toc-understanding-sat-problem" class="nav-link" data-scroll-target="#understanding-sat-problem">Understanding SAT Problem</a>
+  <ul class="collapse">
+  <li><a href="#conjunctive-normal-form-cnf" id="toc-conjunctive-normal-form-cnf" class="nav-link" data-scroll-target="#conjunctive-normal-form-cnf">Conjunctive Normal Form (CNF)</a></li>
+  <li><a href="#satisfiability" id="toc-satisfiability" class="nav-link" data-scroll-target="#satisfiability">Satisfiability</a></li>
+  </ul></li>
+  <li><a href="#complexity-of-sat-problems" id="toc-complexity-of-sat-problems" class="nav-link" data-scroll-target="#complexity-of-sat-problems">Complexity of SAT Problems</a>
+  <ul class="collapse">
+  <li><a href="#sat-problems" id="toc-sat-problems" class="nav-link" data-scroll-target="#sat-problems">2SAT Problems</a></li>
+  <li><a href="#np-completeness-of-3sat-problems" id="toc-np-completeness-of-3sat-problems" class="nav-link" data-scroll-target="#np-completeness-of-3sat-problems">NP-Completeness of 3SAT Problems</a></li>
+  <li><a href="#exponential-time-complexity" id="toc-exponential-time-complexity" class="nav-link" data-scroll-target="#exponential-time-complexity">Exponential Time Complexity</a></li>
+  </ul></li>
+  <li><a href="#probability-of-satisfiability-in-3sat" id="toc-probability-of-satisfiability-in-3sat" class="nav-link" data-scroll-target="#probability-of-satisfiability-in-3sat">Probability of Satisfiability in 3SAT</a>
+  <ul class="collapse">
+  <li><a href="#observations" id="toc-observations" class="nav-link" data-scroll-target="#observations">Observations</a></li>
+  <li><a href="#threshold-behavior" id="toc-threshold-behavior" class="nav-link" data-scroll-target="#threshold-behavior">Threshold Behavior</a></li>
+  </ul></li>
+  <li><a href="#iterated-hill-climbing-algorithm" id="toc-iterated-hill-climbing-algorithm" class="nav-link" data-scroll-target="#iterated-hill-climbing-algorithm">Iterated Hill Climbing Algorithm</a>
+  <ul class="collapse">
+  <li><a href="#algorithm-description" id="toc-algorithm-description" class="nav-link" data-scroll-target="#algorithm-description">Algorithm Description</a></li>
+  <li><a href="#pseudocode" id="toc-pseudocode" class="nav-link" data-scroll-target="#pseudocode">Pseudocode</a></li>
+  <li><a href="#explanation-of-pseudocode" id="toc-explanation-of-pseudocode" class="nav-link" data-scroll-target="#explanation-of-pseudocode">Explanation of Pseudocode</a></li>
+  <li><a href="#example-application" id="toc-example-application" class="nav-link" data-scroll-target="#example-application">Example Application</a></li>
+  <li><a href="#complexity-analysis" id="toc-complexity-analysis" class="nav-link" data-scroll-target="#complexity-analysis">Complexity Analysis</a></li>
+  <li><a href="#advantages-and-limitations" id="toc-advantages-and-limitations" class="nav-link" data-scroll-target="#advantages-and-limitations">Advantages and Limitations</a></li>
+  </ul></li>
+  <li><a href="#stochastic-actions-in-local-search" id="toc-stochastic-actions-in-local-search" class="nav-link" data-scroll-target="#stochastic-actions-in-local-search">Stochastic Actions in Local Search</a>
+  <ul class="collapse">
+  <li><a href="#decision-making-process" id="toc-decision-making-process" class="nav-link" data-scroll-target="#decision-making-process">Decision-Making Process</a></li>
+  <li><a href="#probabilistic-movement" id="toc-probabilistic-movement" class="nav-link" data-scroll-target="#probabilistic-movement">Probabilistic Movement</a></li>
+  </ul></li>
+  </ul></li>
+  <li><a href="#stochastic-local-search-algorithms" id="toc-stochastic-local-search-algorithms" class="nav-link" data-scroll-target="#stochastic-local-search-algorithms">Stochastic Local Search Algorithms</a>
+  <ul class="collapse">
+  <li><a href="#introduction-to-stochastic-local-search" id="toc-introduction-to-stochastic-local-search" class="nav-link" data-scroll-target="#introduction-to-stochastic-local-search">Introduction to Stochastic Local Search</a></li>
+  <li><a href="#stochastic-hill-climbing" id="toc-stochastic-hill-climbing" class="nav-link" data-scroll-target="#stochastic-hill-climbing">Stochastic Hill Climbing</a>
+  <ul class="collapse">
+  <li><a href="#sigmoid-function" id="toc-sigmoid-function" class="nav-link" data-scroll-target="#sigmoid-function">Sigmoid Function</a></li>
+  <li><a href="#annealing-process" id="toc-annealing-process" class="nav-link" data-scroll-target="#annealing-process">Annealing Process</a></li>
+  </ul></li>
+  <li><a href="#simulated-annealing" id="toc-simulated-annealing" class="nav-link" data-scroll-target="#simulated-annealing">Simulated Annealing</a>
+  <ul class="collapse">
+  <li><a href="#algorithm-overview" id="toc-algorithm-overview" class="nav-link" data-scroll-target="#algorithm-overview">Algorithm Overview</a></li>
+  <li><a href="#pseudocode-1" id="toc-pseudocode-1" class="nav-link" data-scroll-target="#pseudocode-1">Pseudocode</a></li>
+  <li><a href="#steps-of-the-algorithm" id="toc-steps-of-the-algorithm" class="nav-link" data-scroll-target="#steps-of-the-algorithm">Steps of the Algorithm</a></li>
+  </ul></li>
+  <li><a href="#effect-of-temperature-and-delta-e" id="toc-effect-of-temperature-and-delta-e" class="nav-link" data-scroll-target="#effect-of-temperature-and-delta-e">Effect of Temperature and Delta E</a>
+  <ul class="collapse">
+  <li><a href="#temperature-influence" id="toc-temperature-influence" class="nav-link" data-scroll-target="#temperature-influence">Temperature Influence</a></li>
+  <li><a href="#delta-e-influence" id="toc-delta-e-influence" class="nav-link" data-scroll-target="#delta-e-influence">Delta E Influence</a></li>
+  </ul></li>
+  <li><a href="#applications-and-advantages" id="toc-applications-and-advantages" class="nav-link" data-scroll-target="#applications-and-advantages">Applications and Advantages</a></li>
+  </ul></li>
+  <li><a href="#genetic-algorithms" id="toc-genetic-algorithms" class="nav-link" data-scroll-target="#genetic-algorithms">Genetic Algorithms</a>
+  <ul class="collapse">
+  <li><a href="#introduction-to-genetic-algorithms" id="toc-introduction-to-genetic-algorithms" class="nav-link" data-scroll-target="#introduction-to-genetic-algorithms">Introduction to Genetic Algorithms</a></li>
+  <li><a href="#basic-concepts" id="toc-basic-concepts" class="nav-link" data-scroll-target="#basic-concepts">Basic Concepts</a>
+  <ul class="collapse">
+  <li><a href="#encoding-candidates-as-chromosomes" id="toc-encoding-candidates-as-chromosomes" class="nav-link" data-scroll-target="#encoding-candidates-as-chromosomes">Encoding Candidates as Chromosomes</a></li>
+  <li><a href="#fitness-function" id="toc-fitness-function" class="nav-link" data-scroll-target="#fitness-function">Fitness Function</a></li>
+  <li><a href="#selection" id="toc-selection" class="nav-link" data-scroll-target="#selection">Selection</a></li>
+  <li><a href="#reproduction" id="toc-reproduction" class="nav-link" data-scroll-target="#reproduction">Reproduction</a></li>
+  <li><a href="#crossover" id="toc-crossover" class="nav-link" data-scroll-target="#crossover">Crossover</a></li>
+  <li><a href="#mutation" id="toc-mutation" class="nav-link" data-scroll-target="#mutation">Mutation</a></li>
+  </ul></li>
+  <li><a href="#algorithm-workflow" id="toc-algorithm-workflow" class="nav-link" data-scroll-target="#algorithm-workflow">Algorithm Workflow</a>
+  <ul class="collapse">
+  <li><a href="#explanation-of-steps" id="toc-explanation-of-steps" class="nav-link" data-scroll-target="#explanation-of-steps">Explanation of Steps</a></li>
+  </ul></li>
+  <li><a href="#applications-of-genetic-algorithms" id="toc-applications-of-genetic-algorithms" class="nav-link" data-scroll-target="#applications-of-genetic-algorithms">Applications of Genetic Algorithms</a></li>
+  <li><a href="#advantages-and-limitations-1" id="toc-advantages-and-limitations-1" class="nav-link" data-scroll-target="#advantages-and-limitations-1">Advantages and Limitations</a>
+  <ul class="collapse">
+  <li><a href="#advantages" id="toc-advantages" class="nav-link" data-scroll-target="#advantages">Advantages</a></li>
+  <li><a href="#limitations" id="toc-limitations" class="nav-link" data-scroll-target="#limitations">Limitations</a></li>
+  </ul></li>
+  </ul></li>
+  <li><a href="#solving-the-travelling-salesman-problem-tsp-using-genetic-algorithms-gas" id="toc-solving-the-travelling-salesman-problem-tsp-using-genetic-algorithms-gas" class="nav-link" data-scroll-target="#solving-the-travelling-salesman-problem-tsp-using-genetic-algorithms-gas">Solving the Travelling Salesman Problem (TSP) Using Genetic Algorithms (GAs)</a>
+  <ul class="collapse">
+  <li><a href="#introduction-to-tsp" id="toc-introduction-to-tsp" class="nav-link" data-scroll-target="#introduction-to-tsp">Introduction to TSP</a></li>
+  <li><a href="#utilizing-genetic-algorithms-for-tsp" id="toc-utilizing-genetic-algorithms-for-tsp" class="nav-link" data-scroll-target="#utilizing-genetic-algorithms-for-tsp">Utilizing Genetic Algorithms for TSP</a>
+  <ul class="collapse">
+  <li><a href="#population-initialization" id="toc-population-initialization" class="nav-link" data-scroll-target="#population-initialization">Population Initialization</a></li>
+  <li><a href="#fitness-function-1" id="toc-fitness-function-1" class="nav-link" data-scroll-target="#fitness-function-1">Fitness Function</a></li>
+  <li><a href="#representation" id="toc-representation" class="nav-link" data-scroll-target="#representation">Representation</a></li>
+  </ul></li>
+  <li><a href="#crossover-functions-for-tsp" id="toc-crossover-functions-for-tsp" class="nav-link" data-scroll-target="#crossover-functions-for-tsp">Crossover Functions for TSP</a></li>
+  <li><a href="#different-representations-for-tsp" id="toc-different-representations-for-tsp" class="nav-link" data-scroll-target="#different-representations-for-tsp">Different Representations for TSP</a>
+  <ul class="collapse">
+  <li><a href="#path-representation" id="toc-path-representation" class="nav-link" data-scroll-target="#path-representation">Path Representation</a></li>
+  <li><a href="#adjacency-representation" id="toc-adjacency-representation" class="nav-link" data-scroll-target="#adjacency-representation">Adjacency Representation</a></li>
+  <li><a href="#ordinal-representation" id="toc-ordinal-representation" class="nav-link" data-scroll-target="#ordinal-representation">Ordinal Representation</a></li>
+  </ul></li>
+  <li><a href="#crossover-operators-for-adjacency-representation" id="toc-crossover-operators-for-adjacency-representation" class="nav-link" data-scroll-target="#crossover-operators-for-adjacency-representation">Crossover Operators for Adjacency Representation</a>
+  <ul class="collapse">
+  <li><a href="#importance-of-specialized-crossover-operators" id="toc-importance-of-specialized-crossover-operators" class="nav-link" data-scroll-target="#importance-of-specialized-crossover-operators">Importance of Specialized Crossover Operators</a></li>
+  </ul></li>
+  <li><a href="#advantages-of-ordinal-representation" id="toc-advantages-of-ordinal-representation" class="nav-link" data-scroll-target="#advantages-of-ordinal-representation">Advantages of Ordinal Representation</a></li>
+  </ul></li>
+  <li><a href="#emergent-systems-and-ant-colony-optimization" id="toc-emergent-systems-and-ant-colony-optimization" class="nav-link" data-scroll-target="#emergent-systems-and-ant-colony-optimization">Emergent Systems and Ant Colony Optimization</a>
+  <ul class="collapse">
+  <li><a href="#emergent-systems" id="toc-emergent-systems" class="nav-link" data-scroll-target="#emergent-systems">Emergent Systems</a>
+  <ul class="collapse">
+  <li><a href="#cellular-automaton" id="toc-cellular-automaton" class="nav-link" data-scroll-target="#cellular-automaton">Cellular Automaton</a></li>
+  <li><a href="#fractals" id="toc-fractals" class="nav-link" data-scroll-target="#fractals">Fractals</a></li>
+  </ul></li>
+  <li><a href="#the-human-brain" id="toc-the-human-brain" class="nav-link" data-scroll-target="#the-human-brain">The Human Brain</a>
+  <ul class="collapse">
+  <li><a href="#modeling-neurons" id="toc-modeling-neurons" class="nav-link" data-scroll-target="#modeling-neurons">Modeling Neurons</a></li>
+  </ul></li>
+  <li><a href="#artificial-neural-networks-ann" id="toc-artificial-neural-networks-ann" class="nav-link" data-scroll-target="#artificial-neural-networks-ann">Artificial Neural Networks (ANN)</a>
+  <ul class="collapse">
+  <li><a href="#feedforward-neural-networks" id="toc-feedforward-neural-networks" class="nav-link" data-scroll-target="#feedforward-neural-networks">Feedforward Neural Networks</a></li>
+  <li><a href="#training-and-backpropagation" id="toc-training-and-backpropagation" class="nav-link" data-scroll-target="#training-and-backpropagation">Training and Backpropagation</a></li>
+  </ul></li>
+  <li><a href="#ant-colony-optimization-aco" id="toc-ant-colony-optimization-aco" class="nav-link" data-scroll-target="#ant-colony-optimization-aco">Ant Colony Optimization (ACO)</a>
+  <ul class="collapse">
+  <li><a href="#inspiration-from-ant-behavior" id="toc-inspiration-from-ant-behavior" class="nav-link" data-scroll-target="#inspiration-from-ant-behavior">Inspiration from Ant Behavior</a></li>
+  <li><a href="#the-traveling-salesman-problem-tsp" id="toc-the-traveling-salesman-problem-tsp" class="nav-link" data-scroll-target="#the-traveling-salesman-problem-tsp">The Traveling Salesman Problem (TSP)</a></li>
+  <li><a href="#aco-algorithm" id="toc-aco-algorithm" class="nav-link" data-scroll-target="#aco-algorithm">ACO Algorithm</a></li>
+  <li><a href="#applications-of-aco" id="toc-applications-of-aco" class="nav-link" data-scroll-target="#applications-of-aco">Applications of ACO</a></li>
+  </ul></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../pages/AI/Week01.html">AI: Search Methods</a></li><li class="breadcrumb-item"><a href="../../pages/AI/Week04.html">Week 4</a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title">Stochastic Algorithms for Search Methods</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="iterated-hill-climbing" class="level1">
+<h1>Iterated Hill Climbing</h1>
+<section id="introduction-to-local-search-escape" class="level2">
+<h2 class="anchored" data-anchor-id="introduction-to-local-search-escape">Introduction to Local Search Escape</h2>
+<p>Local search algorithms are employed in artificial intelligence (AI) to navigate through large search spaces in pursuit of optimal solutions. As the search space expands, finding the global optimum becomes increasingly challenging. Deterministic methods, such as beam search, variable neighborhood descent, and Tabu search, offer strategies to overcome local optima. However, in practical applications, stochastic methods are often favored due to their ability to introduce randomness into the search process.</p>
+</section>
+<section id="understanding-sat-problem" class="level2">
+<h2 class="anchored" data-anchor-id="understanding-sat-problem">Understanding SAT Problem</h2>
+<p>The SAT (Satisfiability) problem is a fundamental challenge in computer science, particularly in the context of Boolean satisfiability testing. It involves determining whether a given Boolean formula can be satisfied by assigning truth values to its variables.</p>
+<section id="conjunctive-normal-form-cnf" class="level3">
+<h3 class="anchored" data-anchor-id="conjunctive-normal-form-cnf">Conjunctive Normal Form (CNF)</h3>
+<p>A typical representation of the SAT problem involves converting the Boolean formula into conjunctive normal form (CNF). In CNF, the formula consists of clauses connected by logical “and” operators. Each clause represents a disjunction of literals, where a literal is either a variable or its negation.</p>
+<p>Mathematically, a CNF formula <span class="math inline">\(\phi\)</span> can be expressed as:</p>
+<p><span class="math display">\[
+\phi = (l_{1,1} \vee l_{1,2} \vee \ldots \vee l_{1,k_1}) \wedge (l_{2,1} \vee l_{2,2} \vee \ldots \vee l_{2,k_2}) \wedge \ldots \wedge (l_{m,1} \vee l_{m,2} \vee \ldots \vee l_{m,k_m})
+\]</span></p>
+<p>where <span class="math inline">\(m\)</span> is the number of clauses, and <span class="math inline">\(k_i\)</span> represents the number of literals in the <span class="math inline">\(i\)</span>-th clause.</p>
+</section>
+<section id="satisfiability" class="level3">
+<h3 class="anchored" data-anchor-id="satisfiability">Satisfiability</h3>
+<p>The goal in the SAT problem is to find an assignment of truth values to the variables that satisfies all clauses in the formula. This means that each clause must evaluate to true under the assigned truth values.</p>
+</section>
+</section>
+<section id="complexity-of-sat-problems" class="level2">
+<h2 class="anchored" data-anchor-id="complexity-of-sat-problems">Complexity of SAT Problems</h2>
+<p>The complexity of solving SAT problems varies depending on the structure of the formula.</p>
+<section id="sat-problems" class="level3">
+<h3 class="anchored" data-anchor-id="sat-problems">2SAT Problems</h3>
+<p>In 2SAT problems, each clause contains at most two literals. These problems can be solved efficiently in polynomial time.</p>
+</section>
+<section id="np-completeness-of-3sat-problems" class="level3">
+<h3 class="anchored" data-anchor-id="np-completeness-of-3sat-problems">NP-Completeness of 3SAT Problems</h3>
+<p>However, when the number of literals per clause increases, as in 3SAT problems, the computational complexity grows exponentially. 3SAT problems belong to the class of NP-complete problems, indicating that they are among the most challenging problems in terms of computational complexity.</p>
+</section>
+<section id="exponential-time-complexity" class="level3">
+<h3 class="anchored" data-anchor-id="exponential-time-complexity">Exponential Time Complexity</h3>
+<p>NP-complete problems require exponential time for solution, making them computationally hard to solve. Despite extensive research, no polynomial-time algorithm has been discovered for solving NP-complete problems.</p>
+</section>
+</section>
+<section id="probability-of-satisfiability-in-3sat" class="level2">
+<h2 class="anchored" data-anchor-id="probability-of-satisfiability-in-3sat">Probability of Satisfiability in 3SAT</h2>
+<p>Experimental studies have shown that the probability of satisfiability in 3SAT problems exhibits a distinct behavior based on the ratio of clauses to variables.</p>
+<section id="observations" class="level3">
+<h3 class="anchored" data-anchor-id="observations">Observations</h3>
+<p>As the ratio of clauses to variables increases, the probability of satisfiability decreases. This phenomenon is illustrated by a significant drop in the probability of finding a satisfying assignment beyond a certain threshold.</p>
+</section>
+<section id="threshold-behavior" class="level3">
+<h3 class="anchored" data-anchor-id="threshold-behavior">Threshold Behavior</h3>
+<p>The probability of satisfiability remains relatively high when the ratio of clauses to variables is below a critical threshold. However, beyond this threshold, the probability decreases sharply, indicating a diminishing likelihood of finding a satisfying assignment.</p>
+</section>
+</section>
+<section id="iterated-hill-climbing-algorithm" class="level2">
+<h2 class="anchored" data-anchor-id="iterated-hill-climbing-algorithm">Iterated Hill Climbing Algorithm</h2>
+<p>Iterated Hill Climbing is a heuristic algorithm used in optimization problems to escape local optima by exploring multiple starting points iteratively. This section presents a detailed explanation of the Iterated Hill Climbing algorithm along with the provided pseudocode.</p>
+<section id="algorithm-description" class="level3">
+<h3 class="anchored" data-anchor-id="algorithm-description">Algorithm Description</h3>
+<p>The Iterated Hill Climbing algorithm begins with a randomly chosen candidate solution. It then iterates through a specified number of times, each time performing hill climbing from a new random starting point. The algorithm aims to find the best solution among the ones generated during the iterations.</p>
+</section>
+<section id="pseudocode" class="level3">
+<h3 class="anchored" data-anchor-id="pseudocode">Pseudocode</h3>
+<pre><code>ITERATED-HILL-CLIMBING(N)
+1. bestNode ← random candidate solution
+2. repeat N times
+3.     currentBest ← HILL-CLIMBING(new random candidate solution)
+4.     if h(currentBest) is better than h(bestNode)
+5.         bestNode ← currentBest
+6. return bestNode</code></pre>
+<ul>
+<li><span class="math inline">\(N\)</span>: Number of iterations</li>
+<li><span class="math inline">\(\text{bestNode}\)</span>: Current best solution</li>
+<li><span class="math inline">\(\text{currentBest}\)</span>: Solution obtained from hill climbing at each iteration</li>
+<li><span class="math inline">\(h()\)</span>: Evaluation function to determine the quality of a solution</li>
+</ul>
+<p>The pseudocode outlines the steps of the Iterated Hill Climbing algorithm, where it repeatedly performs hill climbing from different starting points and updates the best solution if a better one is found.</p>
+</section>
+<section id="explanation-of-pseudocode" class="level3">
+<h3 class="anchored" data-anchor-id="explanation-of-pseudocode">Explanation of Pseudocode</h3>
+<ol type="1">
+<li><strong>Initialization</strong>: Initialize the bestNode with a randomly chosen candidate solution.</li>
+<li><strong>Iteration</strong>: Repeat the process <span class="math inline">\(N\)</span> times.</li>
+<li><strong>Hill Climbing</strong>: Perform hill climbing from a new random candidate solution and obtain the current best solution.</li>
+<li><strong>Evaluation</strong>: Compare the current best solution with the overall best solution (<span class="math inline">\(bestNode\)</span>).</li>
+<li><strong>Update</strong>: If the current best solution is better than the overall best solution, update <span class="math inline">\(bestNode\)</span> with the current best solution.</li>
+<li><strong>Return</strong>: Return the <span class="math inline">\(bestNode\)</span> as the final solution after all iterations are completed.</li>
+</ol>
+</section>
+<section id="example-application" class="level3">
+<h3 class="anchored" data-anchor-id="example-application">Example Application</h3>
+<p>Consider an optimization problem where the objective is to maximize a certain function. The Iterated Hill Climbing algorithm can be applied to find the input values that yield the maximum output of the function. By exploring multiple starting points and performing hill climbing iteratively, the algorithm aims to find the global maximum.</p>
+</section>
+<section id="complexity-analysis" class="level3">
+<h3 class="anchored" data-anchor-id="complexity-analysis">Complexity Analysis</h3>
+<p>The time complexity of the Iterated Hill Climbing algorithm depends on the number of iterations (<span class="math inline">\(N\)</span>) and the complexity of the hill climbing process. Generally, it requires multiple iterations, each involving the execution of the hill climbing algorithm. Therefore, the overall time complexity is influenced by both the number of iterations and the complexity of hill climbing.</p>
+</section>
+<section id="advantages-and-limitations" class="level3">
+<h3 class="anchored" data-anchor-id="advantages-and-limitations">Advantages and Limitations</h3>
+<p><strong>Advantages:</strong></p>
+<ul>
+<li>Exploration of Multiple Starting Points: Iterated Hill Climbing explores different regions of the search space by starting from multiple random points.</li>
+<li>Escape Local Optima: By iteratively performing hill climbing from various starting points, the algorithm increases the chances of escaping local optima and finding better solutions.</li>
+</ul>
+<p><strong>Limitations:</strong></p>
+<ul>
+<li>Computational Overhead: The algorithm requires multiple iterations, which may increase computational overhead, especially for large problem instances.</li>
+<li>Convergence to Suboptimal Solutions: Depending on the choice of starting points and the effectiveness of the hill climbing process, the algorithm may converge to suboptimal solutions.</li>
+</ul>
+</section>
+</section>
+<section id="stochastic-actions-in-local-search" class="level2">
+<h2 class="anchored" data-anchor-id="stochastic-actions-in-local-search">Stochastic Actions in Local Search</h2>
+<p>Stochastic actions in local search involve probabilistic decision-making to determine whether to move from one node to another.</p>
+<section id="decision-making-process" class="level3">
+<h3 class="anchored" data-anchor-id="decision-making-process">Decision-Making Process</h3>
+<p>In contrast to deterministic move generation, where decisions are made based on predetermined criteria, stochastic actions introduce randomness into the decision-making process.</p>
+</section>
+<section id="probabilistic-movement" class="level3">
+<h3 class="anchored" data-anchor-id="probabilistic-movement">Probabilistic Movement</h3>
+<p>The question arises as to whether a given node should transition to the next node probabilistically. This probabilistic approach adds a layer of randomness to the search process, potentially leading to more diverse exploration of the search space.</p>
+</section>
+</section>
+</section>
+<section id="stochastic-local-search-algorithms" class="level1">
+<h1>Stochastic Local Search Algorithms</h1>
+<p>In the domain of artificial intelligence, search algorithms play a crucial role in finding optimal solutions to various problems. Stochastic local search algorithms are a class of search methods that employ randomness in decision-making processes. These algorithms combine aspects of both exploration and exploitation to navigate through solution spaces efficiently. In this section, we delve into the concepts of stochastic local search, including algorithms like stochastic hill climbing and simulated annealing.</p>
+<section id="introduction-to-stochastic-local-search" class="level2">
+<h2 class="anchored" data-anchor-id="introduction-to-stochastic-local-search">Introduction to Stochastic Local Search</h2>
+<p>Stochastic local search algorithms differ from traditional search methods in that they incorporate randomness into their decision-making processes. While conventional search algorithms like hill climbing focus on exploiting the current best solution, stochastic local search algorithms introduce randomness to explore alternative solutions. By combining exploration and exploitation, these algorithms can effectively traverse solution spaces and avoid getting stuck in local optima.</p>
+</section>
+<section id="stochastic-hill-climbing" class="level2">
+<h2 class="anchored" data-anchor-id="stochastic-hill-climbing">Stochastic Hill Climbing</h2>
+<p>Stochastic hill climbing is a variant of the classic hill climbing algorithm. Unlike traditional hill climbing, which always moves to the best neighboring solution, stochastic hill climbing introduces randomness in selecting the next move. This randomness allows the algorithm to explore suboptimal solutions with a certain probability. The decision to accept or reject a move is determined by a sigmoid function, which computes the probability based on the difference in evaluation functions and a temperature parameter.</p>
+<section id="sigmoid-function" class="level3">
+<h3 class="anchored" data-anchor-id="sigmoid-function">Sigmoid Function</h3>
+<p>The sigmoid function plays a crucial role in stochastic hill climbing by determining the probability of accepting a move. It is defined as:</p>
+<p><span class="math display">\[
+P(move) = \frac{1}{1 + e^{-\frac{\Delta E}{T}}}
+\]</span></p>
+<p>Where:</p>
+<ul>
+<li><span class="math inline">\(P(move)\)</span> is the probability of accepting the move.</li>
+<li><span class="math inline">\(\Delta E\)</span> is the difference in evaluation functions between the current solution and the neighboring solution.</li>
+<li><span class="math inline">\(T\)</span> is the temperature parameter, which controls the degree of randomness in the decision-making process.</li>
+</ul>
+<p>The sigmoid function outputs a value between 0 and 1, indicating the likelihood of accepting the move. A higher probability suggests a greater inclination towards exploring the neighboring solution, while a lower probability favors exploitation of the current solution.</p>
+</section>
+<section id="annealing-process" class="level3">
+<h3 class="anchored" data-anchor-id="annealing-process">Annealing Process</h3>
+<p>The concept of annealing, borrowed from metallurgy and materials science, inspired the design of simulated annealing algorithms. Annealing is a heat treatment process used to modify the properties of materials by heating them to high temperatures and gradually cooling them down. This controlled cooling process allows the material to settle into a low-energy state, minimizing defects and enhancing its properties.</p>
+</section>
+</section>
+<section id="simulated-annealing" class="level2">
+<h2 class="anchored" data-anchor-id="simulated-annealing">Simulated Annealing</h2>
+<p>Simulated Annealing is a probabilistic optimization algorithm that mimics the annealing process in metallurgy, where a material is heated and then gradually cooled to attain a more stable state. In the context of optimization, Simulated Annealing starts with exploration and gradually transitions to exploitation, allowing the algorithm to escape local optima and converge to better solutions.</p>
+<section id="algorithm-overview" class="level3">
+<h3 class="anchored" data-anchor-id="algorithm-overview">Algorithm Overview</h3>
+<p>The Simulated Annealing algorithm operates on a candidate solution space, seeking to find the optimal or near-optimal solution. It iteratively explores neighboring solutions and probabilistically accepts moves that lead to better solutions, even if they initially worsen the objective function. This probabilistic acceptance criterion is based on the Metropolis-Hastings algorithm, ensuring that the algorithm can escape local optima.</p>
+</section>
+<section id="pseudocode-1" class="level3">
+<h3 class="anchored" data-anchor-id="pseudocode-1">Pseudocode</h3>
+<pre><code>SIMULATED-ANNEALING
+1. node ← random candidate solution or start node
+2. bestNode ← node
+3. T ← some large value
+4. for time ← 1 to number-of-epochs
+5.     while some termination criteria
+6.         neighbour ← RANDOM-NEIGHBOUR(node)
+7.         ΔE ← eval(neighbour) – eval(node)
+8.         if random(0,1) &lt; 1/(1 + e^–ΔE/T)
+9.             node ← neighbour
+10.        if eval(node) is better than eval(bestNode)
+11.            bestNode ← node
+12.        T ← COOLING-FUNCTION(T, time)
+13. return bestNode</code></pre>
+</section>
+<section id="steps-of-the-algorithm" class="level3">
+<h3 class="anchored" data-anchor-id="steps-of-the-algorithm">Steps of the Algorithm</h3>
+<ol type="1">
+<li><strong>Initialization:</strong>
+<ul>
+<li>Start with a random candidate solution or a predefined start node.</li>
+<li>Initialize the best solution (<code>bestNode</code>) to the initial node.</li>
+<li>Set the initial temperature <code>T</code> to a large value.</li>
+</ul></li>
+<li><strong>Iterations:</strong>
+<ul>
+<li>Iterate over a fixed number of epochs, adjusting the temperature after each epoch.</li>
+<li>Within each epoch, continue until some termination criteria are met, such as reaching a maximum number of iterations or achieving a desired level of optimization.</li>
+</ul></li>
+<li><strong>Neighbor Generation:</strong>
+<ul>
+<li>Generate a neighboring solution (<code>neighbour</code>) by applying a random transformation to the current solution (<code>node</code>). This transformation could involve perturbations, swaps, or other local modifications.</li>
+</ul></li>
+<li><strong>Evaluation:</strong>
+<ul>
+<li>Calculate the difference in the evaluation function (<code>ΔE</code>) between the current solution (<code>node</code>) and the neighboring solution (<code>neighbour</code>).</li>
+<li>The evaluation function represents the objective or cost function to be optimized.</li>
+</ul></li>
+<li><strong>Acceptance Probability:</strong>
+<ul>
+<li>Determine whether to accept the neighboring solution based on a probabilistic criterion.</li>
+<li>The probability of acceptance is computed using the Metropolis criterion: <span class="math display">\[
+P(\text{accept}) = \frac{1}{1 + e^{-\Delta E / T}}
+\]</span> where:
+<ul>
+<li><span class="math inline">\(\Delta E\)</span> is the difference in evaluation values between the neighboring solution and the current solution.</li>
+<li><span class="math inline">\(T\)</span> is the current temperature.</li>
+<li><span class="math inline">\(e\)</span> is the base of the natural logarithm.</li>
+<li>The acceptance probability decreases as <span class="math inline">\(\Delta E\)</span> increases and as <span class="math inline">\(T\)</span> decreases, favoring moves that improve the solution or exploring with higher temperatures.</li>
+</ul></li>
+</ul></li>
+<li><strong>Update Current Solution:</strong>
+<ul>
+<li>If the neighboring solution is accepted, update the current solution (<code>node</code>) to the neighboring solution.</li>
+<li>If the evaluation of the new solution (<code>node</code>) is better than the evaluation of the best solution (<code>bestNode</code>), update the best solution to the current solution.</li>
+</ul></li>
+<li><strong>Temperature Cooling:</strong>
+<ul>
+<li>After each iteration or epoch, decrease the temperature (<code>T</code>) using a cooling function.</li>
+<li>The cooling function typically reduces the temperature gradually, allowing the algorithm to transition from exploration to exploitation.</li>
+</ul></li>
+<li><strong>Return:</strong>
+<ul>
+<li>Return the best solution (<code>bestNode</code>) found during the iterations.</li>
+</ul></li>
+</ol>
+</section>
+</section>
+<section id="effect-of-temperature-and-delta-e" class="level2">
+<h2 class="anchored" data-anchor-id="effect-of-temperature-and-delta-e">Effect of Temperature and Delta E</h2>
+<p>The temperature parameter <span class="math inline">\(T\)</span> and the difference in evaluation functions <span class="math inline">\(\Delta E\)</span> significantly influence the behavior of simulated annealing. By adjusting these parameters, the algorithm can adapt its exploration-exploitation strategy to navigate solution spaces effectively.</p>
+<section id="temperature-influence" class="level3">
+<h3 class="anchored" data-anchor-id="temperature-influence">Temperature Influence</h3>
+<ul>
+<li><strong>High Temperature</strong>: At high temperatures, the probability of accepting a move is close to 0.5, regardless of the difference in evaluation functions. This randomness facilitates exploration and allows the algorithm to escape local optima.</li>
+<li><strong>Low Temperature</strong>: As the temperature decreases, the algorithm becomes more deterministic, favoring exploitation of better solutions. At very low temperatures, only moves leading to improvements are accepted, resembling traditional hill climbing.</li>
+</ul>
+</section>
+<section id="delta-e-influence" class="level3">
+<h3 class="anchored" data-anchor-id="delta-e-influence">Delta E Influence</h3>
+<ul>
+<li><strong>Positive Delta E</strong>: When the difference in evaluation functions is positive, indicating a better neighboring solution, the probability of accepting the move increases. Simulated annealing prioritizes moves that lead to improvements in the objective function.</li>
+<li><strong>Negative Delta E</strong>: Conversely, when the difference in evaluation functions is negative, indicating a worse neighboring solution, the probability of accepting the move decreases. Suboptimal moves are less likely to be accepted as the algorithm transitions towards exploitation.</li>
+</ul>
+</section>
+</section>
+<section id="applications-and-advantages" class="level2">
+<h2 class="anchored" data-anchor-id="applications-and-advantages">Applications and Advantages</h2>
+<p>Simulated annealing has found widespread applications in various domains, including optimization, scheduling, and machine learning. Its ability to balance exploration and exploitation makes it particularly suitable for problems with complex solution spaces and multiple local optima. Compared to traditional optimization algorithms, simulated annealing offers several advantages, including robustness, scalability, and the ability to escape local optima.</p>
+</section>
+</section>
+<section id="genetic-algorithms" class="level1">
+<h1>Genetic Algorithms</h1>
+<p>Genetic algorithms (GAs) are a class of optimization algorithms inspired by the process of natural selection in biology. They are heuristic, stochastic, and adaptive search algorithms used to solve optimization problems. Genetic algorithms operate on a population of candidate solutions, mimicking the process of evolution to iteratively improve solutions towards the optimal or near-optimal solution.</p>
+<section id="introduction-to-genetic-algorithms" class="level2">
+<h2 class="anchored" data-anchor-id="introduction-to-genetic-algorithms">Introduction to Genetic Algorithms</h2>
+<p>Genetic algorithms, developed by John Holland in 1975 and popularized by his student David Goldberg, are a subset of evolutionary algorithms used to solve optimization problems. These algorithms operate on a population of potential solutions, which evolve over successive generations.</p>
+</section>
+<section id="basic-concepts" class="level2">
+<h2 class="anchored" data-anchor-id="basic-concepts">Basic Concepts</h2>
+<section id="encoding-candidates-as-chromosomes" class="level3">
+<h3 class="anchored" data-anchor-id="encoding-candidates-as-chromosomes">Encoding Candidates as Chromosomes</h3>
+<p>In genetic algorithms, candidates are represented as chromosomes, which consist of genes. Genes can be thought of as components or parameters of the candidate solutions. The encoding of candidates into chromosomes is a crucial step, as it determines how the genetic operators, such as crossover and mutation, will manipulate the candidate solutions.</p>
+</section>
+<section id="fitness-function" class="level3">
+<h3 class="anchored" data-anchor-id="fitness-function">Fitness Function</h3>
+<p>A fitness function evaluates the quality of a candidate solution based on its ability to solve the optimization problem. It assigns a numerical value, known as fitness, to each candidate, indicating how well it performs relative to other candidates. The fitness function guides the selection process in genetic algorithms, determining which candidates are more likely to be selected for reproduction.</p>
+</section>
+<section id="selection" class="level3">
+<h3 class="anchored" data-anchor-id="selection">Selection</h3>
+<p>Selection is the process of choosing candidate solutions from the current population for reproduction based on their fitness values. Candidates with higher fitness values are more likely to be selected for reproduction, mimicking the principle of “survival of the fittest” in natural selection.</p>
+</section>
+<section id="reproduction" class="level3">
+<h3 class="anchored" data-anchor-id="reproduction">Reproduction</h3>
+<p>Reproduction involves generating offspring from selected parent candidates. In genetic algorithms, reproduction typically involves two main operators: crossover and mutation. Crossover involves combining genetic material from two parent candidates to create offspring, while mutation introduces random changes to the genetic material of offspring.</p>
+</section>
+<section id="crossover" class="level3">
+<h3 class="anchored" data-anchor-id="crossover">Crossover</h3>
+<p>Crossover is a genetic operator that combines genetic material from two parent candidates to create offspring. It mimics the process of genetic recombination in natural reproduction. Different crossover techniques, such as single-point crossover and multi-point crossover, can be used to generate diverse offspring.</p>
+</section>
+<section id="mutation" class="level3">
+<h3 class="anchored" data-anchor-id="mutation">Mutation</h3>
+<p>Mutation is a genetic operator that introduces random changes to the genetic material of offspring. It helps maintain genetic diversity within the population and can prevent premature convergence to suboptimal solutions. Mutation typically occurs with a low probability, ensuring that only a small percentage of offspring undergo genetic changes.</p>
+</section>
+</section>
+<section id="algorithm-workflow" class="level2">
+<h2 class="anchored" data-anchor-id="algorithm-workflow">Algorithm Workflow</h2>
+<p>Below is the pseudocode for the genetic algorithm, outlining the key steps involved in its execution:</p>
+<pre><code>GENETIC-ALGORITHM()
+
+1. P ← create N candidate solutions ▶ initial population
+2. repeat
+3.     compute fitness value for each member of P
+4.     S ← with probability proportional to fitness value, randomly select N members from P
+5.     offspring ← partition S into two halves, and randomly mate and crossover members to generate N offspring
+6.     with a low probability mutate a few offspring
+7.     replace k weakest members of P with k strongest offspring 
+8. until some termination criteria 
+9. return the best member of P </code></pre>
+<section id="explanation-of-steps" class="level3">
+<h3 class="anchored" data-anchor-id="explanation-of-steps">Explanation of Steps</h3>
+<p>Now, let’s delve into each step of the genetic algorithm pseudocode to understand its significance in optimizing solutions:</p>
+<ol type="1">
+<li><strong>Initialization (Line 1)</strong>:
+<ul>
+<li>The algorithm starts by creating an initial population <code>P</code> consisting of <code>N</code> candidate solutions.</li>
+</ul></li>
+<li><strong>Evaluation (Lines 3-4)</strong>:
+<ul>
+<li>The fitness value for each member of the population <code>P</code> is computed to assess how well each solution performs with respect to the problem’s objectives.</li>
+</ul></li>
+<li><strong>Selection (Line 4)</strong>:
+<ul>
+<li>With a probability proportional to the fitness value, <code>N</code> members are randomly selected from the population <code>P</code> to form the selected set <code>S</code>. This step ensures that solutions with higher fitness values have a greater chance of being selected, simulating the principle of “survival of the fittest”.</li>
+</ul></li>
+<li><strong>Crossover (Line 5)</strong>:
+<ul>
+<li>The selected set <code>S</code> is partitioned into two halves, and members are randomly paired to mate and undergo crossover to generate <code>N</code> offspring solutions. Crossover facilitates the exchange of genetic information between parent solutions, potentially producing offspring with improved characteristics.</li>
+</ul></li>
+<li><strong>Mutation (Line 6)</strong>:
+<ul>
+<li>With a low probability, a few offspring undergo mutation, where random changes are introduced to their genetic makeup. Mutation adds diversity to the population and prevents premature convergence to suboptimal solutions.</li>
+</ul></li>
+<li><strong>Replacement (Line 7)</strong>:
+<ul>
+<li>The <code>k</code> weakest members of the population <code>P</code> are replaced with the <code>k</code> strongest offspring solutions. This step ensures the continual improvement of the population by retaining the most promising solutions discovered during the evolutionary process.</li>
+</ul></li>
+<li><strong>Termination (Line 8)</strong>:
+<ul>
+<li>The algorithm iterates through the steps until a termination criteria is met, which could be a predefined number of generations, reaching a satisfactory solution, or other stopping conditions.</li>
+</ul></li>
+<li><strong>Return Best Solution (Line 9)</strong>:
+<ul>
+<li>Finally, the best member of the population <code>P</code>, typically the one with the highest fitness value, is returned as the optimal or near-optimal solution to the optimization problem.</li>
+</ul></li>
+</ol>
+</section>
+</section>
+<section id="applications-of-genetic-algorithms" class="level2">
+<h2 class="anchored" data-anchor-id="applications-of-genetic-algorithms">Applications of Genetic Algorithms</h2>
+<p>Genetic algorithms have been successfully applied to a wide range of optimization problems in various domains, including engineering, finance, bioinformatics, and computer science. Some common applications of genetic algorithms include:</p>
+<ul>
+<li>Optimization of complex engineering designs</li>
+<li>Financial portfolio optimization</li>
+<li>Protein structure prediction in bioinformatics</li>
+<li>Routing and scheduling problems in logistics and transportation</li>
+<li>Machine learning model optimization</li>
+</ul>
+</section>
+<section id="advantages-and-limitations-1" class="level2">
+<h2 class="anchored" data-anchor-id="advantages-and-limitations-1">Advantages and Limitations</h2>
+<section id="advantages" class="level3">
+<h3 class="anchored" data-anchor-id="advantages">Advantages</h3>
+<ul>
+<li>Versatility: Genetic algorithms can solve a wide range of optimization problems across different domains.</li>
+<li>Parallelism: The parallel nature of genetic algorithms allows for efficient exploration of solution spaces using parallel computing techniques.</li>
+<li>Robustness: Genetic algorithms are robust to noise and can handle problems with noisy or incomplete information.</li>
+<li>Global Optimization: Genetic algorithms are capable of finding globally optimal or near-optimal solutions, unlike traditional optimization techniques that may get stuck in local optima.</li>
+</ul>
+</section>
+<section id="limitations" class="level3">
+<h3 class="anchored" data-anchor-id="limitations">Limitations</h3>
+<ul>
+<li>Computational Complexity: Genetic algorithms can be computationally intensive, especially for problems with large solution spaces or complex fitness landscapes.</li>
+<li>Tuning Parameters: Genetic algorithms require careful tuning of parameters such as population size, crossover rate, and mutation rate to achieve optimal performance.</li>
+<li>Premature Convergence: Genetic algorithms may converge prematurely to suboptimal solutions if the population diversity is not maintained or if the parameters are poorly chosen.</li>
+<li>Domain Knowledge: Genetic algorithms may require domain-specific knowledge for effective problem encoding and parameter tuning, limiting their applicability in some domains.</li>
+</ul>
+</section>
+</section>
+</section>
+<section id="solving-the-travelling-salesman-problem-tsp-using-genetic-algorithms-gas" class="level1">
+<h1>Solving the Travelling Salesman Problem (TSP) Using Genetic Algorithms (GAs)</h1>
+<section id="introduction-to-tsp" class="level2">
+<h2 class="anchored" data-anchor-id="introduction-to-tsp">Introduction to TSP</h2>
+<p>The Travelling Salesman Problem (TSP) stands as one of the quintessential challenges in the realm of computer science. In its essence, TSP involves determining the most efficient route a salesman can take to visit a set of cities exactly once and then return to the original city. This problem holds significant importance due to its wide-ranging applications in logistics, transportation, and network optimization.</p>
+</section>
+<section id="utilizing-genetic-algorithms-for-tsp" class="level2">
+<h2 class="anchored" data-anchor-id="utilizing-genetic-algorithms-for-tsp">Utilizing Genetic Algorithms for TSP</h2>
+<p>Genetic Algorithms (GAs) present a powerful computational approach to address complex optimization problems like TSP. The fundamental principle behind GAs involves mimicking the process of natural selection and evolution to iteratively improve candidate solutions. TSP, being a combinatorial optimization problem, poses unique challenges that necessitate tailored approaches within the framework of genetic algorithms.</p>
+<section id="population-initialization" class="level3">
+<h3 class="anchored" data-anchor-id="population-initialization">Population Initialization</h3>
+<p>The GA procedure for TSP commences with the initialization of a population comprising candidate solutions, often represented as permutations of cities. These permutations constitute potential tours that the travelling salesman could undertake.</p>
+</section>
+<section id="fitness-function-1" class="level3">
+<h3 class="anchored" data-anchor-id="fitness-function-1">Fitness Function</h3>
+<p>A crucial component of the GA methodology is the fitness function, which quantifies the quality of each candidate solution. In the context of TSP, the fitness function typically corresponds to the total distance or cost associated with a particular tour. The objective is to minimize this cost, signifying the desire to find the shortest possible route.</p>
+</section>
+<section id="representation" class="level3">
+<h3 class="anchored" data-anchor-id="representation">Representation</h3>
+<p>Traditionally, TSP tours are represented as permutations of cities, with the assumption that the salesman returns to the starting city upon completing the tour. This representation facilitates the application of genetic operators such as crossover and mutation.</p>
+</section>
+</section>
+<section id="crossover-functions-for-tsp" class="level2">
+<h2 class="anchored" data-anchor-id="crossover-functions-for-tsp">Crossover Functions for TSP</h2>
+<p>In the context of solving the Travelling Salesman Problem (TSP) using genetic algorithms (GAs), specialized crossover functions play a crucial role in generating new candidate solutions while ensuring the integrity of the problem constraints. Here, we delve into the intricacies of these crossover functions tailored specifically for TSP:</p>
+<ol type="1">
+<li><p><strong>Single Point Crossover:</strong></p>
+<ul>
+<li><em>Traditional Approach:</em> Single point crossover is a common genetic operator where a single crossover point is randomly selected, and the genetic material beyond that point is exchanged between two parent solutions to produce offspring.</li>
+<li><em>Challenge in TSP:</em> In TSP, applying single point crossover directly poses challenges due to the inherent constraints of visiting each city exactly once. The resulting offspring may violate this constraint by containing repeated cities, thereby yielding invalid tours.</li>
+<li><em>Limitation:</em> The single point crossover method fails to ensure the production of valid TSP tours and may require additional constraints or post-processing steps to rectify invalid offspring.</li>
+</ul></li>
+<li><p><strong>Cycle Crossover:</strong></p></li>
+</ol>
+<div style="text-align:center;">
+<p><iframe center="" width="560" height="315" src="https://www.youtube.com/embed/85pIA2TYsUs?si=nTocjIUuf5KB67Gw?controls=0&amp;mute=1" frameborder="0" allowfullscreen=""></iframe></p>
+</div>
+<ul>
+<li><em>Overview:</em> Cycle crossover addresses the limitations of single point crossover by identifying cycles within parent tours and leveraging this information to generate valid offspring.</li>
+<li><em>Process:</em>
+<ul>
+<li>Identify Cycles: Begin by identifying cycles within the parent tours, where each cycle consists of cities located in the same positions in both parent solutions.</li>
+<li>Create Offspring: Copy alternating cycles from the parent solutions to generate offspring, ensuring that the integrity of each cycle is preserved.</li>
+</ul></li>
+<li><em>Advantages:</em> Cycle crossover guarantees the production of valid TSP tours in the offspring, making it well-suited for solving TSP using genetic algorithms.</li>
+</ul>
+<ol start="3" type="1">
+<li><strong>Partially Mapped Crossover (PMX):</strong></li>
+</ol>
+<div style="text-align:center;">
+<p><iframe center="" width="560" height="315" src="https://www.youtube.com/embed/c2ft8AG8JKE?si=OTOcVypE8IN0nDas?controls=0&amp;mute=1" frameborder="0" allowfullscreen=""></iframe></p>
+</div>
+<ul>
+<li><em>Methodology:</em> PMX offers an alternative approach to crossover by mapping sub-tours between parent solutions and completing the tour based on this mapping.</li>
+<li><em>Process:</em>
+<ul>
+<li>Map Sub-Tours: Identify corresponding sub-tours between parent solutions and map them to the offspring.</li>
+<li>Complete Tour: Fill in the remaining cities in the offspring while ensuring that no cities are repeated, thereby preserving tour validity.</li>
+</ul></li>
+<li><em>Benefits:</em> PMX effectively combines genetic material from both parents while maintaining the integrity of TSP tours, making it a valuable crossover function for TSP.</li>
+</ul>
+<ol start="4" type="1">
+<li><p><strong>Order Crossover:</strong></p>
+<ul>
+<li><em>Integration of Single Point and Cycle Crossover:</em> Order crossover combines elements from both single point and cycle crossover methods to generate offspring.</li>
+<li><em>Procedure:</em>
+<ul>
+<li>Copy Sub-Tour: Begin by copying a sub-tour from one parent solution to the offspring.</li>
+<li>Maintain Order: Fill in the remaining cities in the offspring in the order they occur in the other parent solution, ensuring tour validity.</li>
+</ul></li>
+<li><em>Result:</em> Order crossover facilitates the production of valid offspring while introducing diversity in the genetic material, thereby enhancing the exploration of the solution space in TSP.</li>
+</ul></li>
+</ol>
+</section>
+<section id="different-representations-for-tsp" class="level2">
+<h2 class="anchored" data-anchor-id="different-representations-for-tsp">Different Representations for TSP</h2>
+<p>When addressing the Travelling Salesman Problem (TSP) within the context of genetic algorithms (GAs), the choice of representation for TSP tours significantly influences the efficiency and effectiveness of the optimization process. Several representations have been explored, each offering unique advantages and challenges. Let’s delve into each representation in detail:</p>
+<section id="path-representation" class="level3">
+<h3 class="anchored" data-anchor-id="path-representation">Path Representation</h3>
+<ul>
+<li><strong>Description</strong>: The path representation describes a TSP tour as a sequence of cities visited in a specific order.</li>
+<li><strong>Advantages</strong>:
+<ul>
+<li>Intuitive visualization: Path representation simplifies the visualization of tours by presenting them in a sequential manner.</li>
+<li>Straightforward interpretation: It allows for easy interpretation of tours, making it accessible to human understanding.</li>
+</ul></li>
+<li><strong>Challenges</strong>:
+<ul>
+<li>Limited compatibility with certain crossover operations: Path representation may pose challenges in crossover operations that require manipulation of tour segments, such as cycle crossover.</li>
+</ul></li>
+</ul>
+</section>
+<section id="adjacency-representation" class="level3">
+<h3 class="anchored" data-anchor-id="adjacency-representation">Adjacency Representation</h3>
+<ul>
+<li><strong>Description</strong>: In the adjacency representation, TSP tours are viewed in terms of the connections between cities.</li>
+<li><strong>Mechanism</strong>:
+<ul>
+<li>Index construction: An index of cities is constructed based on their alphabetical order or another predefined criterion.</li>
+<li>Arrangement of cities: Cities are arranged in the adjacency representation based on their adjacency to one another.</li>
+</ul></li>
+<li><strong>Advantages</strong>:
+<ul>
+<li>Efficient traversal algorithms: The adjacency representation facilitates the development of efficient traversal algorithms by focusing on city connections.</li>
+<li>Effective crossover operations: Certain crossover operations, such as alternating edges crossover, are well-suited for the adjacency representation due to its emphasis on city connections.</li>
+</ul></li>
+<li><strong>Challenges</strong>:
+<ul>
+<li>Validity constraints: Not every permutation of cities in the adjacency representation corresponds to a valid TSP tour. Some permutations may violate the constraint of visiting each city exactly once.</li>
+</ul></li>
+</ul>
+</section>
+<section id="ordinal-representation" class="level3">
+<h3 class="anchored" data-anchor-id="ordinal-representation">Ordinal Representation</h3>
+<ul>
+<li><strong>Description</strong>: The ordinal representation involves assigning numeric indices to cities based on their order of visitation in a tour.</li>
+<li><strong>Mechanism</strong>:
+<ul>
+<li>Numeric indexing: Cities are assigned numeric indices corresponding to their order of visitation in a tour.</li>
+<li>Index manipulation: As cities are visited, their indices are decremented, ensuring unique indices for each city.</li>
+</ul></li>
+<li><strong>Advantages</strong>:
+<ul>
+<li>Compatibility with single point crossover: The ordinal representation is particularly well-suited for single point crossover, as it ensures the production of valid offspring.</li>
+<li>Simplified crossover operations: Single point crossover can be efficiently implemented in the ordinal representation, simplifying the crossover process.</li>
+</ul></li>
+<li><strong>Challenges</strong>:
+<ul>
+<li>Conversion overhead: While the ordinal representation offers advantages in crossover operations, it may require conversion to and from other representations for visualization and interpretation purposes.</li>
+</ul></li>
+</ul>
+</section>
+</section>
+<section id="crossover-operators-for-adjacency-representation" class="level2">
+<h2 class="anchored" data-anchor-id="crossover-operators-for-adjacency-representation">Crossover Operators for Adjacency Representation</h2>
+<p>When dealing with the adjacency representation of TSP tours, specialized crossover operators are required to ensure the production of valid offspring. Here, we delve into the intricacies of these crossover methods and their significance in optimizing TSP solutions:</p>
+<ol type="1">
+<li><p><strong>Alternating Edges Crossover</strong>:</p>
+<ul>
+<li><strong>Concept</strong>: Alternating Edges Crossover constructs offspring by alternating between edges from the parent tours.</li>
+<li><strong>Process</strong>:
+<ul>
+<li>Start with a city X and choose the next city Y from Parent 1.</li>
+<li>Select the subsequent city from Parent 2, ensuring that it does not lead to a repeated city or a dead end.</li>
+<li>Repeat this process of alternating between parent tours until a complete tour is constructed for the offspring.</li>
+</ul></li>
+<li><strong>Significance</strong>: This approach ensures the production of valid tours while introducing diversity in the genetic material.</li>
+</ul></li>
+<li><p><strong>Heuristic Crossover</strong>:</p>
+<ul>
+<li><strong>Concept</strong>: Heuristic crossover aims to construct offspring by selecting the next city from the parent that leads to a shorter tour.</li>
+<li><strong>Process</strong>:
+<ul>
+<li>For each city, choose the next city from Parent 1 or Parent 2, whichever results in a shorter tour.</li>
+<li>Prioritize cities that contribute to reducing the overall tour distance.</li>
+</ul></li>
+<li><strong>Significance</strong>: By leveraging heuristic information, this crossover method guides the construction process towards shorter and more optimal tours, thereby improving the quality of offspring.</li>
+</ul></li>
+</ol>
+<section id="importance-of-specialized-crossover-operators" class="level3">
+<h3 class="anchored" data-anchor-id="importance-of-specialized-crossover-operators">Importance of Specialized Crossover Operators</h3>
+<ul>
+<li><strong>Validity</strong>: Ensuring the production of valid tours is crucial in the context of TSP optimization. Specialized crossover operators tailored for adjacency representation play a pivotal role in maintaining tour validity.</li>
+<li><strong>Efficiency</strong>: By incorporating heuristic information and leveraging the unique characteristics of adjacency representation, these crossover methods facilitate the generation of high-quality offspring in a computationally efficient manner.</li>
+<li><strong>Diversity</strong>: The use of specialized crossover operators introduces diversity in the genetic material, enhancing the exploration of the solution space and mitigating the risk of premature convergence to suboptimal solutions.</li>
+</ul>
+</section>
+</section>
+<section id="advantages-of-ordinal-representation" class="level2">
+<h2 class="anchored" data-anchor-id="advantages-of-ordinal-representation">Advantages of Ordinal Representation</h2>
+<p>The ordinal representation of TSP tours offers several advantages over traditional permutation-based representations, particularly in the context of genetic algorithms (GAs). These advantages stem from the unique characteristics of the ordinal representation, which facilitate efficient crossover operations and enhance the overall performance of genetic algorithms for TSP.</p>
+<ol type="1">
+<li><strong>Compatibility with Single Point Crossover</strong>:
+<ul>
+<li>One of the primary advantages of the ordinal representation is its seamless compatibility with single point crossover. Unlike permutation-based representations, where single point crossover may produce invalid offspring with repeated cities, the ordinal representation ensures the generation of valid tours during the crossover process.</li>
+<li>The ordinal representation achieves this by assigning numeric indices to cities based on their order of visitation in a tour. This numerical ordering simplifies the crossover operation, as it guarantees that each city appears exactly once in the offspring tour.</li>
+</ul></li>
+<li><strong>Preservation of Tour Validity</strong>:
+<ul>
+<li>By maintaining the integrity of tours and preventing the occurrence of repeated cities, the ordinal representation preserves the validity of offspring generated through single point crossover.</li>
+<li>This preservation of tour validity is crucial for ensuring that the genetic algorithm explores feasible solutions throughout the optimization process. Invalid tours would lead to premature convergence or infeasible solutions, hindering the algorithm’s effectiveness in finding optimal or near-optimal solutions to the TSP.</li>
+</ul></li>
+<li><strong>Facilitation of Genetic Operations</strong>:
+<ul>
+<li>The ordinal representation facilitates various genetic operations, including crossover and mutation, by providing a structured and easily manipulable representation of TSP tours.</li>
+<li>During crossover, the ordinal representation simplifies the selection of crossover points and the generation of offspring, as the numeric indices directly correspond to the order of cities in the tour.</li>
+<li>Additionally, mutation operations can be efficiently implemented in the ordinal representation by randomly modifying the numeric indices of cities, thereby introducing diversity into the population of candidate solutions.</li>
+</ul></li>
+<li><strong>Efficient Exploration of Solution Space</strong>:
+<ul>
+<li>The ordinal representation enables efficient exploration of the solution space by ensuring that each crossover operation produces valid offspring tours.</li>
+<li>This efficiency is particularly advantageous in large-scale TSP instances, where the search space is vast and computational resources are limited. By avoiding the generation of invalid solutions, the ordinal representation accelerates the convergence of the genetic algorithm towards optimal or near-optimal solutions.</li>
+</ul></li>
+<li><strong>Simplicity of Implementation</strong>:
+<ul>
+<li>From a practical standpoint, the ordinal representation offers simplicity of implementation and ease of integration into genetic algorithm frameworks.</li>
+<li>The straightforward nature of the ordinal representation simplifies the development of genetic algorithms for TSP, as researchers and practitioners can focus on algorithmic refinement and experimentation rather than grappling with complex representation schemes.</li>
+</ul></li>
+</ol>
+</section>
+</section>
+<section id="emergent-systems-and-ant-colony-optimization" class="level1">
+<h1>Emergent Systems and Ant Colony Optimization</h1>
+<section id="emergent-systems" class="level2">
+<h2 class="anchored" data-anchor-id="emergent-systems">Emergent Systems</h2>
+<p>Emergent systems study the phenomenon where complex behavior arises from interactions among simple components. Examples of emergent systems include ant colonies, flocking behavior of birds, termite mounds, stock market behaviors, and the formation of sand dunes.</p>
+<section id="cellular-automaton" class="level3">
+<h3 class="anchored" data-anchor-id="cellular-automaton">Cellular Automaton</h3>
+<p>One notable example of emergent behavior is John Conway’s Cellular Automaton, known as the Game of Life. In this system, an infinite array of cells obey simple rules determining their state, either alive or dead, based on the number of live neighbors. Despite these basic rules, the Game of Life exhibits stable and persistent patterns.</p>
+</section>
+<section id="fractals" class="level3">
+<h3 class="anchored" data-anchor-id="fractals">Fractals</h3>
+<p>Fractals are infinitely complex patterns repeating at different scales, created through a recursive process. They are observed in nature in structures like trees, rivers, and coastlines. An example of a fractal is the Sierpinski triangle, which demonstrates self-similarity across different scales.</p>
+</section>
+</section>
+<section id="the-human-brain" class="level2">
+<h2 class="anchored" data-anchor-id="the-human-brain">The Human Brain</h2>
+<p>The human brain is hailed as the most complex object in the known universe, comprising approximately (100 ^9) neurons. These neurons communicate through chemical and electrical signals via synapses, forming intricate networks. Each neuron can connect with thousands of others, resulting in around (100 ^{12}) nerve connections. The brain constantly forms and modifies these connections, leading to unique patterns of connectivity.</p>
+<section id="modeling-neurons" class="level3">
+<h3 class="anchored" data-anchor-id="modeling-neurons">Modeling Neurons</h3>
+<p>Computational models simplify neurons as simple devices contributing to emergent complexity. These models represent neurons as nodes in artificial neural networks (ANN), which mimic the brain’s interconnected structure.</p>
+</section>
+</section>
+<section id="artificial-neural-networks-ann" class="level2">
+<h2 class="anchored" data-anchor-id="artificial-neural-networks-ann">Artificial Neural Networks (ANN)</h2>
+<p>ANNs are computational models inspired by the structure and function of biological neural networks in the brain. They consist of interconnected nodes, or neurons, organized into layers.</p>
+<section id="feedforward-neural-networks" class="level3">
+<h3 class="anchored" data-anchor-id="feedforward-neural-networks">Feedforward Neural Networks</h3>
+<p>Feedforward neural networks are a common type of ANN consisting of input, hidden, and output layers. Information flows from the input layer through the hidden layers to the output layer.</p>
+</section>
+<section id="training-and-backpropagation" class="level3">
+<h3 class="anchored" data-anchor-id="training-and-backpropagation">Training and Backpropagation</h3>
+<p>Training an ANN involves presenting labeled patterns to the network and adjusting weights to minimize errors using a technique called backpropagation. This iterative process fine-tunes the network’s parameters to improve its performance on the given task.</p>
+</section>
+</section>
+<section id="ant-colony-optimization-aco" class="level2">
+<h2 class="anchored" data-anchor-id="ant-colony-optimization-aco">Ant Colony Optimization (ACO)</h2>
+<p>Ant Colony Optimization (ACO) is a metaheuristic optimization algorithm inspired by the foraging behavior of ants. It is designed to tackle combinatorial optimization problems by mimicking the collective intelligence and cooperation observed in ant colonies. This section will delve into the intricacies of ACO, exploring its inspiration from ant behavior, the problem it addresses, the algorithmic approach, and its applications across various domains.</p>
+<section id="inspiration-from-ant-behavior" class="level3">
+<h3 class="anchored" data-anchor-id="inspiration-from-ant-behavior">Inspiration from Ant Behavior</h3>
+<p>Ants are highly organized social insects that exhibit remarkable collective behavior. When foraging for food, ants leave pheromone trails on the ground, allowing them to communicate with other colony members and guide them to food sources efficiently. As ants find food and return to the colony, they reinforce these trails by depositing more pheromone, making the paths to food sources more attractive.</p>
+<p>ACO draws inspiration from this behavior, leveraging the principles of pheromone communication and collective decision-making to solve optimization problems. Instead of individual ants foraging for food, artificial ants traverse the solution space of an optimization problem, leaving virtual pheromone trails that guide the search process.</p>
+</section>
+<section id="the-traveling-salesman-problem-tsp" class="level3">
+<h3 class="anchored" data-anchor-id="the-traveling-salesman-problem-tsp">The Traveling Salesman Problem (TSP)</h3>
+<p>One of the classic problems that ACO addresses is the Traveling Salesman Problem (TSP). In the TSP, a salesman must visit a set of cities exactly once and return to the starting city, minimizing the total distance traveled. This problem is NP-hard, meaning that finding an optimal solution becomes increasingly difficult as the number of cities increases.</p>
+<p>ACO offers a promising approach to tackle the TSP and similar combinatorial optimization problems by leveraging the principles of exploration and exploitation inspired by ant foraging behavior.</p>
+</section>
+<section id="aco-algorithm" class="level3">
+<h3 class="anchored" data-anchor-id="aco-algorithm">ACO Algorithm</h3>
+<p>The Ant Colony Optimization (ACO) algorithm is a metaheuristic optimization technique inspired by the foraging behavior of ants. It is particularly effective in solving combinatorial optimization problems such as the Traveling Salesman Problem (TSP). This section provides a detailed exploration of the ACO algorithm, elucidating its key components and the underlying mathematical formulations.</p>
+<section id="initialization" class="level4">
+<h4 class="anchored" data-anchor-id="initialization">Initialization</h4>
+<p>The ACO algorithm begins by initializing a population of artificial ants, each representing a potential solution to the optimization problem. Let <span class="math inline">\(N\)</span> denote the number of cities in the TSP, and <span class="math inline">\(M\)</span> represent the number of artificial ants in the population. Initially, each ant is assigned a random tour, ensuring exploration of the solution space.</p>
+</section>
+<section id="tour-construction" class="level4">
+<h4 class="anchored" data-anchor-id="tour-construction">Tour Construction</h4>
+<p>During the tour construction phase, each ant probabilistically selects the next city to visit based on a combination of pheromone trails and heuristic information. Let <span class="math inline">\(\tau_{ij}\)</span> represent the amount of pheromone on the edge connecting cities <span class="math inline">\(i\)</span> and <span class="math inline">\(j\)</span>, and <span class="math inline">\(\eta_{ij}\)</span> denote the heuristic information, such as the inverse of the distance between cities.</p>
+<p>The probability <span class="math inline">\(p_{ij}^k\)</span> that the <span class="math inline">\(k\)</span>th ant moves from city <span class="math inline">\(i\)</span> to city <span class="math inline">\(j\)</span> at time step <span class="math inline">\(t\)</span> is calculated using the following equation:</p>
+<p><span class="math display">\[
+p_{ij}^k = \frac{{(\tau_{ij})^\alpha \cdot (\eta_{ij})^\beta}}{{\sum_{l \in allowed} (\tau_{il})^\alpha \cdot (\eta_{il})^\beta}}
+\]</span></p>
+<p>Where:</p>
+<ul>
+<li><span class="math inline">\(\alpha\)</span> and <span class="math inline">\(\beta\)</span> are parameters that control the relative importance of pheromone trails and heuristic information, respectively.</li>
+<li><span class="math inline">\(allowed\)</span> represents the set of neighboring cities that the ant <span class="math inline">\(k\)</span> can visit from the current city <span class="math inline">\(i\)</span>.</li>
+</ul>
+<p>Ants construct their tours by iteratively selecting the next city to visit based on the calculated probabilities. This process combines exploration of new paths with exploitation of promising routes based on pheromone trails and heuristic information.</p>
+</section>
+<section id="pheromone-update" class="level4">
+<h4 class="anchored" data-anchor-id="pheromone-update">Pheromone Update</h4>
+<p>After completing a tour, ants deposit pheromone on the edges they traversed, with the amount of pheromone deposited inversely proportional to the length of the tour. Let <span class="math inline">\(L_k\)</span> represent the length of the tour found by the <span class="math inline">\(k\)</span>th ant. The pheromone update rule is given by:</p>
+<p><span class="math display">\[
+\Delta \tau_{ij} = \frac{Q}{{L_k}}
+\]</span></p>
+<p>Where <span class="math inline">\(Q\)</span> is a constant representing the pheromone deposit amount.</p>
+<p>Additionally, pheromone evaporation is applied to all edges to prevent the accumulation of outdated information and promote exploration of new paths. Let <span class="math inline">\(\rho\)</span> denote the evaporation rate, with <span class="math inline">\(0 \leq \rho \leq 1\)</span>. The pheromone evaporation rule is expressed as:</p>
+<p><span class="math display">\[
+\tau_{ij} \leftarrow (1 - \rho) \cdot \tau_{ij}
+\]</span></p>
+<p>These pheromone updates ensure that better-quality solutions receive more pheromone deposits, leading to the reinforcement of paths that contribute to improved solutions over time.</p>
+</section>
+<section id="iterative-improvement" class="level4">
+<h4 class="anchored" data-anchor-id="iterative-improvement">Iterative Improvement</h4>
+<p>The ACO algorithm iterates through multiple generations, with ants constructing tours, depositing pheromone, and updating the solution. Over successive iterations, the pheromone trails converge towards optimal solutions, guiding the search process towards promising regions of the solution space.</p>
+</section>
+</section>
+<section id="applications-of-aco" class="level3">
+<h3 class="anchored" data-anchor-id="applications-of-aco">Applications of ACO</h3>
+<p>ACO has demonstrated remarkable efficacy in solving a wide range of combinatorial optimization problems beyond the TSP. Its versatility and ability to find near-optimal solutions make it a valuable tool in various domains, including:</p>
+<ul>
+<li>Vehicle routing and scheduling</li>
+<li>Network design and optimization</li>
+<li>Resource allocation and management</li>
+<li>Manufacturing and production scheduling</li>
+<li>Telecommunications and routing optimization</li>
+</ul>
+
+
+</section>
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const disableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'prefetch';
+    }
+  }
+  const enableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'stylesheet';
+    }
+  }
+  const manageTransitions = (selector, allowTransitions) => {
+    const els = window.document.querySelectorAll(selector);
+    for (let i=0; i < els.length; i++) {
+      const el = els[i];
+      if (allowTransitions) {
+        el.classList.remove('notransition');
+      } else {
+        el.classList.add('notransition');
+      }
+    }
+  }
+  const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+    const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+    const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+    let newTheme = '';
+    if(darkModeDefault) {
+      newTheme = isAlternate ? baseTheme : alternateTheme;
+    } else {
+      newTheme = isAlternate ? alternateTheme : baseTheme;
+    }
+    const changeGiscusTheme = () => {
+      // From: https://github.com/giscus/giscus/issues/336
+      const sendMessage = (message) => {
+        const iframe = document.querySelector('iframe.giscus-frame');
+        if (!iframe) return;
+        iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+      }
+      sendMessage({
+        setConfig: {
+          theme: newTheme
+        }
+      });
+    }
+    const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+    if (isGiscussLoaded) {
+      changeGiscusTheme();
+    }
+  }
+  const toggleColorMode = (alternate) => {
+    // Switch the stylesheets
+    const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+    manageTransitions('#quarto-margin-sidebar .nav-link', false);
+    if (alternate) {
+      enableStylesheet(alternateStylesheets);
+      for (const sheetNode of alternateStylesheets) {
+        if (sheetNode.id === "quarto-bootstrap") {
+          toggleBodyColorMode(sheetNode);
+        }
+      }
+    } else {
+      disableStylesheet(alternateStylesheets);
+      toggleBodyColorPrimary();
+    }
+    manageTransitions('#quarto-margin-sidebar .nav-link', true);
+    // Switch the toggles
+    const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+    for (let i=0; i < toggles.length; i++) {
+      const toggle = toggles[i];
+      if (toggle) {
+        if (alternate) {
+          toggle.classList.add("alternate");     
+        } else {
+          toggle.classList.remove("alternate");
+        }
+      }
+    }
+    // Hack to workaround the fact that safari doesn't
+    // properly recolor the scrollbar when toggling (#1455)
+    if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+      manageTransitions("body", false);
+      window.scrollTo(0, 1);
+      setTimeout(() => {
+        window.scrollTo(0, 0);
+        manageTransitions("body", true);
+      }, 40);  
+    }
+  }
+  const isFileUrl = () => { 
+    return window.location.protocol === 'file:';
+  }
+  const hasAlternateSentinel = () => {  
+    let styleSentinel = getColorSchemeSentinel();
+    if (styleSentinel !== null) {
+      return styleSentinel === "alternate";
+    } else {
+      return false;
+    }
+  }
+  const setStyleSentinel = (alternate) => {
+    const value = alternate ? "alternate" : "default";
+    if (!isFileUrl()) {
+      window.localStorage.setItem("quarto-color-scheme", value);
+    } else {
+      localAlternateSentinel = value;
+    }
+  }
+  const getColorSchemeSentinel = () => {
+    if (!isFileUrl()) {
+      const storageValue = window.localStorage.getItem("quarto-color-scheme");
+      return storageValue != null ? storageValue : localAlternateSentinel;
+    } else {
+      return localAlternateSentinel;
+    }
+  }
+  const darkModeDefault = false;
+  let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+  // Dark / light mode switch
+  window.quartoToggleColorScheme = () => {
+    // Read the current dark / light value 
+    let toAlternate = !hasAlternateSentinel();
+    toggleColorMode(toAlternate);
+    setStyleSentinel(toAlternate);
+    toggleGiscusIfUsed(toAlternate, darkModeDefault);
+  };
+  // Ensure there is a toggle, if there isn't float one in the top right
+  if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+    const a = window.document.createElement('a');
+    a.classList.add('top-right');
+    a.classList.add('quarto-color-scheme-toggle');
+    a.href = "";
+    a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+    const i = window.document.createElement("i");
+    i.classList.add('bi');
+    a.appendChild(i);
+    window.document.body.appendChild(a);
+  }
+  // Switch to dark mode if need be
+  if (hasAlternateSentinel()) {
+    toggleColorMode(true);
+  } else {
+    toggleColorMode(false);
+  }
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>
