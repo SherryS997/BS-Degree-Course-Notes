@@ -277,6 +277,7 @@ Where:
 ### Advantages of Contextual Bandits
 
 Contextual bandits offer several advantages:
+
 - Personalized recommendations based on user features.
 - Efficient learning and adaptation even when the set of actions changes.
 

@@ -93,9 +93,7 @@ The back propagation algorithm serves as the cornerstone of parameter learning i
 During the forward pass, input data is propagated through the network, and pre-activation and activation values are computed for each layer.
 
 ### Backward Pass
-During the backward pass,
-
- gradients of the loss function with respect to network parameters are computed recursively using the chain rule of calculus. These gradients are then used to update the parameters in the direction that minimizes the loss function.
+During the backward pass, gradients of the loss function with respect to network parameters are computed recursively using the chain rule of calculus. These gradients are then used to update the parameters in the direction that minimizes the loss function.
 
 ### Update Rule
 The update rule dictates how the network parameters are adjusted based on the computed gradients. Common choices include gradient descent, stochastic gradient descent, and variants such as Adam and RMSprop.

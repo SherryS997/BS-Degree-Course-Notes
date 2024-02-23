@@ -154,9 +154,9 @@ The learning algorithm employed in this context is the Gradient Descent algorith
 ### Objective Function (Loss Function)
 Central to the learning process is the formulation of an objective function, commonly referred to as the Loss Function. Mathematically, it is defined as follows:
 
-$$\mathcal{L}(\theta) = \sum_{i=1}^{n} \text{Difference}(y_{\hat{i}}, y_i)$$
+$$\mathcal{L}(\theta) = \sum_{i=1}^{n} \text{Difference}(\hat{y_{i}}, y_i)$$
 
-Here, $\theta$ denotes the parameters of the model, and $\text{Difference}(y_{\hat{i}}, y_i)$ quantifies the dissimilarity between the predicted ($y_{\hat{i}}$) and actual ($y_i$) values.
+Here, $\theta$ denotes the parameters of the model, and $\text{Difference}(\hat{y_{i}}, y_i)$ quantifies the dissimilarity between the predicted ($\hat{y_{i}}$) and actual ($y_i$) values.
 
 ## Objective Function Details
 

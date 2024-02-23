@@ -218,17 +218,17 @@ To address scenarios where prime paths might necessitate traversing loops, two c
 
 1. **Side Trips**:
 
-   - **Definition**: A test path $p$ is considered to have a side trip towards a subpath $q$ if every edge in $q$ appears in $p$ in the same order.
+   - **Definition**: A test path $p$ tours a subpath $q$ with side trips if every edge in $q$ is also in $p$ in the same order, allowing for the inclusion of a sidetrip as long as it returns to the same node.
    
-   - **Explanation**: Side trips allow for the traversal of a subpath $q$ within the main test path $p$, ensuring that the edges in $q$ are followed in the same sequence as they appear in $p$.
+   - **Explanation**: Side trips enable the traversal of a subpath $q$ within the main test path $p$, ensuring that the edges in $q$ are followed in the same sequence as they appear in $p$. The key distinction with side trips is that they permit deviations from the main path as long as the path returns to the same node.
    
-   - **Purpose**: The concept of side trips is particularly useful when dealing with loops in control flow graphs. It allows for the inclusion of loop-related paths within the main test path, contributing to a more practical and feasible testing scenario.
+   - **Purpose**: The concept of side trips is particularly useful when dealing with loops in control flow graphs. It allows for the inclusion of loop-related paths within the main test path $p$, contributing to a more practical and feasible testing scenario.
 
 2. **Detours**:
 
-   - **Definition**: A test path $p$ is considered to have a detour towards a subpath $q$ if every node in $q$ appears in $p$ in the same order.
+   - **Definition**: A test path $p$ tours a subpath $q$ with detours if every node in $q$ is also in $p$ in the same order, permitting detours from the prime path at a successor of a given node.
    
-   - **Explanation**: Detours enable the traversal of a subpath $q$ within the main test path $p$, ensuring that the nodes in $q$ are visited in the same sequence as they appear in $p$.
+   - **Explanation**: Detours facilitate the traversal of a subpath $q$ within the main test path $p$, ensuring that the nodes in $q$ are visited in the same sequence as they appear in $p$. Unlike side trips, detours allow for deviations from the main path at specific nodes, returning to the prime path at a successor of the detoured node.
    
    - **Purpose**: Similar to side trips, detours offer a mechanism to accommodate loops in control flow graphs during testing. They provide flexibility by allowing the inclusion of paths related to loops, contributing to a more realistic testing approach.
 
