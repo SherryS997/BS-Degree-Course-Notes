@@ -1837,6 +1837,325 @@
     ]
   },
   {
+    "objectID": "pages/AI/Week05.html",
+    "href": "pages/AI/Week05.html",
+    "title": "Finding Optimal TSP Tours",
+    "section": "",
+    "text": "The Branch and Bound algorithm is a fundamental technique employed in optimization problems, particularly in combinatorial optimization, to efficiently find the optimal solution within a search space. This algorithm systematically explores the solution space by dividing it into smaller subspaces and effectively pruning unpromising branches to focus on regions likely to contain the optimal solution.\n\n\n\nTo illustrate the workings of the Branch and Bound algorithm, let’s consider a specific optimization problem: finding the shortest tour among five cities. The objective is to determine the optimal route that visits each city exactly once and returns to the starting point, minimizing the total distance traveled.\n\n\n\nThe Branch and Bound algorithm begins with an initial set of all possible candidates, denoted as \\(S_0\\). Each candidate represents a potential solution or partial tour. A crucial aspect of the algorithm is the computation of lower bound estimates, which serve as a guide for pruning the search space.\nThe lower bound estimates are calculated based on certain constraints, such as:\n\nConstraint 1: Each city should be visited exactly once in the tour.\nConstraint 2: Subtours that violate optimality should be excluded from consideration.\n\n\n\n\nOne of the key considerations in the Branch and Bound algorithm is the trade-off between the accuracy of estimates and the computation time required to compute them. More accurate estimates may necessitate additional computational effort but can lead to better pruning of the search space, resulting in faster convergence to the optimal solution.\n\n\n\nThe algorithm iteratively refines the candidates in the search space by either including or excluding edges in the tour. This process continues until fully refined nodes, representing complete tours, are identified.\n\n\nAt each iteration, the algorithm considers whether to include or exclude specific edges in the tour. This decision is based on the impact it has on the overall cost of the tour and the satisfaction of optimality constraints.\n\n\n\nThe Branch and Bound algorithm prunes unpromising branches of the search tree based on the lower bound estimates. By eliminating regions of the search space that cannot contain the optimal solution, the algorithm focuses its efforts on exploring more promising areas.\n\n\n\n\nThe algorithm terminates when a fully refined node with the lowest estimated cost is found. This fully refined node represents an actual tour with its actual cost and guarantees that no other solution in the search space can have a lower actual cost.\n\n\n\nA fundamental trade-off exists between the search process and the accuracy of estimation in the Branch and Bound algorithm. Higher estimated costs on open nodes delay exploration, as nodes with lower actual costs are prioritized for refinement.\n\n\n\nThe Branch and Bound algorithm operates within the framework of State Space Search, which involves systematically exploring the search space while utilizing lower bound estimates to guide the search towards the optimal solution. This approach ensures that the algorithm efficiently converges to the optimal solution while minimizing computational overhead.",
+    "crumbs": [
+      "AI: Search Methods",
+      "Week 5"
+    ]
+  },
+  {
+    "objectID": "pages/AI/Week05.html#introduction-to-branch-and-bound-algorithm",
+    "href": "pages/AI/Week05.html#introduction-to-branch-and-bound-algorithm",
+    "title": "Finding Optimal TSP Tours",
+    "section": "",
+    "text": "The Branch and Bound algorithm is a fundamental technique employed in optimization problems, particularly in combinatorial optimization, to efficiently find the optimal solution within a search space. This algorithm systematically explores the solution space by dividing it into smaller subspaces and effectively pruning unpromising branches to focus on regions likely to contain the optimal solution.",
+    "crumbs": [
+      "AI: Search Methods",
+      "Week 5"
+    ]
+  },
+  {
+    "objectID": "pages/AI/Week05.html#overview-of-the-example-problem",
+    "href": "pages/AI/Week05.html#overview-of-the-example-problem",
+    "title": "Finding Optimal TSP Tours",
+    "section": "",
+    "text": "To illustrate the workings of the Branch and Bound algorithm, let’s consider a specific optimization problem: finding the shortest tour among five cities. The objective is to determine the optimal route that visits each city exactly once and returns to the starting point, minimizing the total distance traveled.",
+    "crumbs": [
+      "AI: Search Methods",
+      "Week 5"
+    ]
+  },
+  {
+    "objectID": "pages/AI/Week05.html#initialization-and-lower-bound-estimates",
+    "href": "pages/AI/Week05.html#initialization-and-lower-bound-estimates",
+    "title": "Finding Optimal TSP Tours",
+    "section": "",
+    "text": "The Branch and Bound algorithm begins with an initial set of all possible candidates, denoted as \\(S_0\\). Each candidate represents a potential solution or partial tour. A crucial aspect of the algorithm is the computation of lower bound estimates, which serve as a guide for pruning the search space.\nThe lower bound estimates are calculated based on certain constraints, such as:\n\nConstraint 1: Each city should be visited exactly once in the tour.\nConstraint 2: Subtours that violate optimality should be excluded from consideration.",
+    "crumbs": [
+      "AI: Search Methods",
+      "Week 5"
+    ]
+  },
+  {
+    "objectID": "pages/AI/Week05.html#trade-off-between-accuracy-and-computation-time",
+    "href": "pages/AI/Week05.html#trade-off-between-accuracy-and-computation-time",
+    "title": "Finding Optimal TSP Tours",
+    "section": "",
+    "text": "One of the key considerations in the Branch and Bound algorithm is the trade-off between the accuracy of estimates and the computation time required to compute them. More accurate estimates may necessitate additional computational effort but can lead to better pruning of the search space, resulting in faster convergence to the optimal solution.",
+    "crumbs": [
+      "AI: Search Methods",
+      "Week 5"
+    ]
+  },
+  {
+    "objectID": "pages/AI/Week05.html#iterative-refinement-of-candidates",
+    "href": "pages/AI/Week05.html#iterative-refinement-of-candidates",
+    "title": "Finding Optimal TSP Tours",
+    "section": "",
+    "text": "The algorithm iteratively refines the candidates in the search space by either including or excluding edges in the tour. This process continues until fully refined nodes, representing complete tours, are identified.\n\n\nAt each iteration, the algorithm considers whether to include or exclude specific edges in the tour. This decision is based on the impact it has on the overall cost of the tour and the satisfaction of optimality constraints.\n\n\n\nThe Branch and Bound algorithm prunes unpromising branches of the search tree based on the lower bound estimates. By eliminating regions of the search space that cannot contain the optimal solution, the algorithm focuses its efforts on exploring more promising areas.",
+    "crumbs": [
+      "AI: Search Methods",
+      "Week 5"
+    ]
+  },
+  {
+    "objectID": "pages/AI/Week05.html#termination-condition",
+    "href": "pages/AI/Week05.html#termination-condition",
+    "title": "Finding Optimal TSP Tours",
+    "section": "",
+    "text": "The algorithm terminates when a fully refined node with the lowest estimated cost is found. This fully refined node represents an actual tour with its actual cost and guarantees that no other solution in the search space can have a lower actual cost.",
+    "crumbs": [
+      "AI: Search Methods",
+      "Week 5"
+    ]
+  },
+  {
+    "objectID": "pages/AI/Week05.html#trade-off-between-search-and-estimation",
+    "href": "pages/AI/Week05.html#trade-off-between-search-and-estimation",
+    "title": "Finding Optimal TSP Tours",
+    "section": "",
+    "text": "A fundamental trade-off exists between the search process and the accuracy of estimation in the Branch and Bound algorithm. Higher estimated costs on open nodes delay exploration, as nodes with lower actual costs are prioritized for refinement.",
+    "crumbs": [
+      "AI: Search Methods",
+      "Week 5"
+    ]
+  },
+  {
+    "objectID": "pages/AI/Week05.html#branch-and-bound-within-the-state-space-search-framework",
+    "href": "pages/AI/Week05.html#branch-and-bound-within-the-state-space-search-framework",
+    "title": "Finding Optimal TSP Tours",
+    "section": "",
+    "text": "The Branch and Bound algorithm operates within the framework of State Space Search, which involves systematically exploring the search space while utilizing lower bound estimates to guide the search towards the optimal solution. This approach ensures that the algorithm efficiently converges to the optimal solution while minimizing computational overhead.",
+    "crumbs": [
+      "AI: Search Methods",
+      "Week 5"
+    ]
+  },
+  {
+    "objectID": "pages/AI/Week05.html#introduction",
+    "href": "pages/AI/Week05.html#introduction",
+    "title": "Finding Optimal TSP Tours",
+    "section": "Introduction",
+    "text": "Introduction\nIn the realm of artificial intelligence (AI), the exploration of search methods is crucial for problem-solving. These methods aim to navigate through complex state spaces to find optimal solutions efficiently. In this discussion, we delve into the concepts and algorithms associated with search methods, focusing particularly on the Branch and Bound algorithm and its comparison with Dijkstra’s Algorithm. Additionally, we explore the integration of these concepts in the A* algorithm for enhanced efficiency in problem-solving.",
+    "crumbs": [
+      "AI: Search Methods",
+      "Week 5"
+    ]
+  },
+  {
+    "objectID": "pages/AI/Week05.html#branch-and-bound-algorithm",
+    "href": "pages/AI/Week05.html#branch-and-bound-algorithm",
+    "title": "Finding Optimal TSP Tours",
+    "section": "Branch and Bound Algorithm",
+    "text": "Branch and Bound Algorithm\n\nOverview\nThe Branch and Bound algorithm serves as a fundamental approach for finding optimal solutions in state spaces with edge costs. Unlike blind search algorithms, which may overlook the optimality of solutions, Branch and Bound ensures the exploration of all potential solutions while organizing the search space systematically.\n\n\nObjective\nThe primary objective of Branch and Bound is to identify the optimal solution within a state space characterized by edge costs. By extending or refining partial paths systematically, the algorithm aims to prune parts of the search space that are unlikely to contain better solutions.\n\n\nComparison with Blind Search Algorithms\nBranch and Bound distinguishes itself from blind search algorithms such as Depth First Search (DFS) and Breadth First Search (BFS) in terms of its approach to solution exploration.\n\nDepth First Search (DFS)\nDFS ventures optimistically into the search space, prioritizing deep exploration without guaranteeing the optimality of solutions.\n\n\nBreadth First Search (BFS)\nBFS, on the other hand, focuses on shallow candidates, aiming for the shortest path from the start node to the goal node. However, it may not always guarantee the optimal solution.\n\n\nDepth First Iterative Deepening\nDepth First Iterative Deepening combines elements of DFS and BFS, mimicking BFS while operating as a depth-first algorithm. Despite its similarities to BFS, it may still lack the assurance of optimality.\n\n\n\nHeuristic Functions\nIn the quest for optimal solutions, heuristic functions play a crucial role in estimating distances to the goal. By leveraging these estimates, algorithms can expedite the search process by prioritizing nodes that appear to be closer to the goal.",
+    "crumbs": [
+      "AI: Search Methods",
+      "Week 5"
+    ]
+  },
+  {
+    "objectID": "pages/AI/Week05.html#dijkstras-algorithm",
+    "href": "pages/AI/Week05.html#dijkstras-algorithm",
+    "title": "Finding Optimal TSP Tours",
+    "section": "Dijkstra’s Algorithm",
+    "text": "Dijkstra’s Algorithm\n\nOverview\nDijkstra’s Algorithm represents another prominent approach to finding optimal paths, particularly in graph-based problems. It focuses on determining the shortest paths from a source node to all other nodes within the graph.\n\n\nKey Steps\nDijkstra’s Algorithm follows a systematic procedure to identify the shortest paths within a graph, encompassing the following key steps:\n\nInitialization: Assign infinite cost estimates to all nodes except the start node.\nExploration: Select the cheapest white node and update its cost, marking it as black to signify its exploration.\nRelaxation: Examine the neighbors of the newly explored node and update their costs if a cheaper path is discovered.\nPath Tracking: Maintain parent pointers to track the optimal path from the start node to each explored node.\n\n\n\nApplication to Problem Solving\nIn problem-solving scenarios, Dijkstra’s Algorithm proves effective in systematically exploring paths within a graph to identify the shortest path to each node. By iteratively updating node costs and parent pointers, the algorithm converges towards the optimal solution efficiently.\n\n\nComparison with Branch and Bound\nWhile both Branch and Bound and Dijkstra’s Algorithm aim for optimal solutions, they exhibit differences in their approach and applicability to various problem domains.\n\nDirectionality\nBranch and Bound lacks a sense of directionality, often exploring the entire search space extensively before reaching the optimal solution. In contrast, Dijkstra’s Algorithm systematically explores paths from the start node to all other nodes, ensuring optimality but without a predetermined direction.\n\n\nEfficiency vs. Optimality\nWhile Dijkstra’s Algorithm guarantees optimality in pathfinding, it may sacrifice efficiency due to its exhaustive exploration of paths. Branch and Bound, on the other hand, balances optimality with efficiency by organizing the search space strategically and pruning unlikely paths.",
+    "crumbs": [
+      "AI: Search Methods",
+      "Week 5"
+    ]
+  },
+  {
+    "objectID": "pages/AI/Week05.html#introduction-to-a-star-algorithm",
+    "href": "pages/AI/Week05.html#introduction-to-a-star-algorithm",
+    "title": "Finding Optimal TSP Tours",
+    "section": "Introduction to A-star Algorithm",
+    "text": "Introduction to A-star Algorithm\nA-star, also known as A* algorithm, was introduced by Hart, Nilsson, and Raphael in 1968 at the Stanford Research Institute (now called SRI International). It is considered an extension of Dijkstra’s algorithm, incorporating heuristics to improve performance. The algorithm aims to find the shortest path from a start node to a goal node in a graph, taking into account both the actual cost incurred (g-value) and an estimated cost to reach the goal (h-value).",
+    "crumbs": [
+      "AI: Search Methods",
+      "Week 5"
+    ]
+  },
+  {
+    "objectID": "pages/AI/Week05.html#components-of-a-star-algorithm",
+    "href": "pages/AI/Week05.html#components-of-a-star-algorithm",
+    "title": "Finding Optimal TSP Tours",
+    "section": "Components of A-star Algorithm",
+    "text": "Components of A-star Algorithm\nThe A-star algorithm consists of several key components:\n\nHeuristic Function (h(n)): A heuristic function estimates the cost from a given node to the goal node. It provides a guiding heuristic to help prioritize nodes during the search process.\n\\[ h(n) \\]\nActual Cost (g(n)): The actual cost represents the cumulative cost of reaching a node from the start node along the current path. It is used to compute the total cost of a solution path.\n\\[ g(n) \\]\nCombined Cost (f(n)): The combined cost, denoted as f(n), is the sum of the actual cost (g(n)) and the heuristic cost (h(n)). It represents the estimated total cost of the solution path passing through node n.\n\\[ f(n) = g(n) + h(n) \\]\nOpen List and Closed List: A-star maintains two lists: the open list, which contains nodes that are candidates for expansion, and the closed list, which stores nodes that have already been explored.",
+    "crumbs": [
+      "AI: Search Methods",
+      "Week 5"
+    ]
+  },
+  {
+    "objectID": "pages/AI/Week05.html#algorithm-workflow",
+    "href": "pages/AI/Week05.html#algorithm-workflow",
+    "title": "Finding Optimal TSP Tours",
+    "section": "Algorithm Workflow",
+    "text": "Algorithm Workflow\nThe A-star algorithm follows a systematic workflow to explore the search space and find the optimal path:\n\nInitialization:\n\nSet the default value of g for every node to positive infinity.\nSet the parent of the start node to null.\nInitialize the g-value of the start node to 0.\nCompute the f-value of the start node as the sum of its g-value and h-value.\n\n\\[ f(S) = g(S) + h(S) \\]\n\nAdd the start node to the open list.\n\nMain Loop:\n\nWhile the open list is not empty:\n\nSelect the node with the lowest f-value from the open list (denoted as N) for expansion.\nRemove N from the open list and add it to the closed list.\nCheck if N is the goal node. If so, return the solution path.\nGenerate the neighbors of N and compute their f-values.\nUpdate the g-values and parent pointers for the neighbors if a better path is found.\nManage three cases:\n\nIf a neighbor node is new, add it to the open list.\nIf a neighbor node is already on the open list, update its g-value if a better path is found.\nIf a neighbor node is on the closed list, propagate the improvement to its children.\n\n\n\nPropagation of Improvement:\n\nIf a node with an improved path is on the closed list, propagate the improvement to its children recursively.\nFor each neighbor of the node, check if the new path has a lower cost than the previous one.\nUpdate the parent pointer and g-value of the neighbor node if necessary.\nRecursively propagate the improvement if the neighbor node is also on the closed list.",
+    "crumbs": [
+      "AI: Search Methods",
+      "Week 5"
+    ]
+  },
+  {
+    "objectID": "pages/AI/Week05.html#illustrative-example",
+    "href": "pages/AI/Week05.html#illustrative-example",
+    "title": "Finding Optimal TSP Tours",
+    "section": "Illustrative Example",
+    "text": "Illustrative Example\nConsider a small example to illustrate how A-star expands nodes and updates costs:\n\nDefault value of \\(g\\) for every node is +∞.\n\\(parent(S)\\) ← null.\n\\(g(S)\\) ← 0.\n\\(f(S)\\) ← \\(g(S) + h(S)\\).\n\\(OPEN\\) ← \\(S\\): \\(\\left[\\right]\\).\n\\(CLOSED\\) ← empty list.\nWhile \\(OPEN\\) is not empty:\n\n\\(N\\) ← remove node with lowest \\(f\\) value from \\(OPEN\\).\nAdd \\(N\\) to \\(CLOSED\\).\n\n\nIf \\(GOAL\\text{-}TEST(N) = \\text{TRUE}\\):\n\nReturn \\(RECONSTRUCT\\text{-}PATH(N)\\).\n\nFor each \\(M\\) in \\(MOVE\\text{-}GEN(N)\\):\n\nIf \\(g(M) &gt; g(N) + k(N, M)\\):\n\n\\(parent(M)\\) ← \\(N\\)\n\\(g(M)\\) ← \\(g(N) + k(N, M)\\)\n\\(f(M)\\) ← \\(g(M) + h(M)\\)\n\n\n\nIf \\(M\\) is in \\(OPEN\\):\n\nContinue.\n\nElse if \\(M\\) is in \\(CLOSED\\):\n\nPROPAGATEIMPROVEMENT(M).\n\nElse add \\(M\\) to \\(OPEN\\) ▶️ \\(M\\) is new.\n\n\nReturn empty list.",
+    "crumbs": [
+      "AI: Search Methods",
+      "Week 5"
+    ]
+  },
+  {
+    "objectID": "pages/AI/Week05.html#comparison-with-best-first-search",
+    "href": "pages/AI/Week05.html#comparison-with-best-first-search",
+    "title": "Finding Optimal TSP Tours",
+    "section": "Comparison with Best-First Search",
+    "text": "Comparison with Best-First Search\nA-star differs from traditional best-first search methods in its approach to exploring the search space. While best-first search prioritizes nodes based solely on heuristic values, A-star combines heuristic information with actual path costs to guide the search efficiently towards the goal state. This combination allows A-star to find optimal solutions while also considering the efficiency of the search process.",
+    "crumbs": [
+      "AI: Search Methods",
+      "Week 5"
+    ]
+  },
+  {
+    "objectID": "pages/AI/Week05.html#introduction-to-a-star-algorithm-1",
+    "href": "pages/AI/Week05.html#introduction-to-a-star-algorithm-1",
+    "title": "Finding Optimal TSP Tours",
+    "section": "Introduction to A star Algorithm",
+    "text": "Introduction to A star Algorithm\nThe A star algorithm, a fundamental method in artificial intelligence, amalgamates the efficacies of Dijkstra’s shortest path algorithm with heuristic approaches to expedite the discovery of optimal solutions within search spaces. This algorithm is chiefly employed in problems where finding the optimal path from a start node to a goal node is paramount.",
+    "crumbs": [
+      "AI: Search Methods",
+      "Week 5"
+    ]
+  },
+  {
+    "objectID": "pages/AI/Week05.html#conditions-for-guaranteeing-optimal-solutions",
+    "href": "pages/AI/Week05.html#conditions-for-guaranteeing-optimal-solutions",
+    "title": "Finding Optimal TSP Tours",
+    "section": "Conditions for Guaranteeing Optimal Solutions",
+    "text": "Conditions for Guaranteeing Optimal Solutions\nIn the quest for optimality, it’s imperative to discern the conditions under which the A star algorithm operates. The algorithm considers three critical scenarios during its execution:\n\nAdding New Nodes to Open: This entails the incorporation of new nodes into the open set for further exploration.\nUpdating Paths to Nodes Already on Open: Here, the algorithm revisits nodes already present in the open set and updates their paths if more efficient alternatives are discovered.\nFinding Newer Paths to Nodes on Closed: This scenario involves the potential for uncovering superior paths to nodes that have been closed off.",
+    "crumbs": [
+      "AI: Search Methods",
+      "Week 5"
+    ]
+  },
+  {
+    "objectID": "pages/AI/Week05.html#optimal-values-and-heuristic-functions",
+    "href": "pages/AI/Week05.html#optimal-values-and-heuristic-functions",
+    "title": "Finding Optimal TSP Tours",
+    "section": "Optimal Values and Heuristic Functions",
+    "text": "Optimal Values and Heuristic Functions\nTo facilitate a deeper understanding of the algorithm’s behavior, it’s essential to introduce the concept of optimal values and heuristic functions:\n\n\\(g^*(n)\\): Represents the optimal cost from the start node to node \\(n\\).\n\\(h^*(n)\\): Signifies the optimal cost from node \\(n\\) to the goal node.\n\\(f^*(n)\\): Denotes the optimal cost of a path from the start to the goal via node \\(n\\).\n\nThese values serve as guiding principles for the algorithm’s decision-making process, albeit their actual values may remain unknown during execution. Notably, the optimal cost from the start to a given node \\(n\\) (\\(g^*(n)\\)) typically falls short of the actual cost (\\(g(n)\\)), owing to the algorithm’s inherent uncertainty regarding the optimal path.",
+    "crumbs": [
+      "AI: Search Methods",
+      "Week 5"
+    ]
+  },
+  {
+    "objectID": "pages/AI/Week05.html#admissibility-of-a-star",
+    "href": "pages/AI/Week05.html#admissibility-of-a-star",
+    "title": "Finding Optimal TSP Tours",
+    "section": "Admissibility of A star",
+    "text": "Admissibility of A star\nAn algorithm earns the badge of admissibility when it reliably furnishes the optimal solution, provided such a solution exists. The A star algorithm, distinguished by its appended star superscript, is hailed as an admissible method. To qualify as admissible, the algorithm must satisfy the following conditions:\n\nFinite Branching Factor: The algorithm must grapple with a finite branching factor, even in scenarios where the total number of nodes in the graph spans to infinity.\nCost Condition: Each edge within the graph must exhibit a cost greater than a predetermined minuscule constant \\(\\epsilon\\).\nHeuristic Function: The heuristic function employed by the algorithm must consistently underestimate the distance to the goal (\\(h(n) \\leq h^*(n)\\)).",
+    "crumbs": [
+      "AI: Search Methods",
+      "Week 5"
+    ]
+  },
+  {
+    "objectID": "pages/AI/Week05.html#example-illustrating-heuristic-functions",
+    "href": "pages/AI/Week05.html#example-illustrating-heuristic-functions",
+    "title": "Finding Optimal TSP Tours",
+    "section": "Example Illustrating Heuristic Functions",
+    "text": "Example Illustrating Heuristic Functions\nTo elucidate the impact of heuristic functions on the algorithm’s decision-making process, consider a hypothetical scenario where the algorithm confronts the choice between two nodes, \\(P\\) and \\(Q\\), each accompanied by known and estimated costs. In the presence of an overestimating function (yielding higher heuristic values), the algorithm may erroneously opt for \\(Q\\) as the proximate node to the goal. Conversely, an underestimating function (with lower heuristic values) would correctly identify \\(P\\) as the closer node, consequently steering the algorithm towards the optimal solution.",
+    "crumbs": [
+      "AI: Search Methods",
+      "Week 5"
+    ]
+  },
+  {
+    "objectID": "pages/AI/Week05.html#termination-for-finite-graphs",
+    "href": "pages/AI/Week05.html#termination-for-finite-graphs",
+    "title": "Finding Optimal TSP Tours",
+    "section": "Termination for Finite Graphs",
+    "text": "Termination for Finite Graphs\nIn examining the termination of A* for finite graphs, we consider the behavior of the algorithm within each cycle of its main loop. Central to this discussion is the process by which A* selects nodes from the “open” list and subsequently moves them to the “closed” list. This mechanism ensures that each node in the graph is visited at most once during the algorithm’s execution. Crucially, since the number of nodes in the graph is finite, A* will terminate after a finite number of cycles. This termination guarantees that the algorithm will definitively report whether a path to the goal exists or not within the given graph.",
+    "crumbs": [
+      "AI: Search Methods",
+      "Week 5"
+    ]
+  },
+  {
+    "objectID": "pages/AI/Week05.html#open-list-contains-optimal-path-node",
+    "href": "pages/AI/Week05.html#open-list-contains-optimal-path-node",
+    "title": "Finding Optimal TSP Tours",
+    "section": "Open List Contains Optimal Path Node",
+    "text": "Open List Contains Optimal Path Node\nA significant property of A* lies in its ability to maintain an optimal path to the goal node within its “open” list. By construction, the algorithm ensures that at any given point during its execution, there exists a node from the optimal path on the “open” list. This assertion stems from the iterative nature of A*, where nodes along the optimal path are successively added to and removed from the “open” list. Consequently, the “open” list consistently contains a node, denoted as \\(n'\\), from the optimal path, thereby facilitating the algorithm’s progress towards identifying the optimal solution.\nMoreover, it is imperative to note that the \\(f\\)-value of this node \\(n'\\) does not exceed the optimal cost to the goal. This assertion is grounded in the heuristic nature of A*, where the evaluation function \\(f(n)\\) comprises the sum of the actual cost \\(g(n)\\) and the heuristic estimate \\(h(n)\\). As \\(n'\\) lies on the optimal path, its actual cost \\(g(n')\\) coincides with the optimal cost \\(g^*(n')\\). Additionally, the underestimation property of the heuristic function \\(h(n)\\) ensures that \\(h(n') \\leq h^*(n')\\), where \\(h^*(n')\\) represents the true cost from \\(n'\\) to the goal. Consequently, the \\(f\\)-value of \\(n'\\) remains less than or equal to the optimal cost, thereby affirming its significance in the search process.",
+    "crumbs": [
+      "AI: Search Methods",
+      "Week 5"
+    ]
+  },
+  {
+    "objectID": "pages/AI/Week05.html#finding-a-path-in-infinite-graphs",
+    "href": "pages/AI/Week05.html#finding-a-path-in-infinite-graphs",
+    "title": "Finding Optimal TSP Tours",
+    "section": "Finding a Path in Infinite Graphs",
+    "text": "Finding a Path in Infinite Graphs\nIn contrast to finite graphs, the termination and correctness of A* in infinite graphs pose unique challenges. However, through careful analysis, we establish the algorithm’s efficacy in finding a path even in scenarios with infinite graph structures. Central to this discussion is the notion of epsilon, a finite value utilized to ensure progress in the search process.\nA* employs a strategy wherein nodes with the lowest \\(f\\)-value are prioritized for expansion. As the algorithm explores various paths within the graph, the actual cost \\(g(n)\\) of each partial solution incrementally increases by a finite value greater than epsilon. This incremental increase in cost serves to prevent the existence of infinite paths with finite cost, thereby guiding the algorithm towards a definitive solution. Furthermore, given the finite nature of the branching factor, A* ensures that only a finite number of partial solutions, cheaper than the optimal cost, are considered during its execution.\nThis meticulous selection and evaluation process, coupled with the epsilon threshold, enable A* to traverse the graph effectively, eventually converging upon a solution path to the goal node. Thus, even in scenarios with infinite graphs, A* exhibits a robust capability to identify a path to the goal, provided finite cost constraints are met.",
+    "crumbs": [
+      "AI: Search Methods",
+      "Week 5"
+    ]
+  },
+  {
+    "objectID": "pages/AI/Week05.html#finding-the-least-cost-path",
+    "href": "pages/AI/Week05.html#finding-the-least-cost-path",
+    "title": "Finding Optimal TSP Tours",
+    "section": "Finding the Least Cost Path",
+    "text": "Finding the Least Cost Path\nThe ultimate objective of A* lies in identifying the least cost path to the goal node. In pursuit of this goal, the algorithm employs a proof by contradiction to establish the optimality of its solution. By assuming the termination of A* without finding an optimal cost path, we derive a contradiction that invalidates such an assumption. This contradiction arises from the fundamental properties of A, wherein the algorithm’s selection criteria prioritize nodes with lower \\(f\\)-values, thereby guiding it towards the optimal solution. Consequently, A terminates only upon discovering the optimal cost path to the goal, reaffirming its efficacy in pathfinding scenarios.",
+    "crumbs": [
+      "AI: Search Methods",
+      "Week 5"
+    ]
+  },
+  {
+    "objectID": "pages/AI/Week05.html#node-expansion-and-heuristic-functions",
+    "href": "pages/AI/Week05.html#node-expansion-and-heuristic-functions",
+    "title": "Finding Optimal TSP Tours",
+    "section": "Node Expansion and Heuristic Functions",
+    "text": "Node Expansion and Heuristic Functions\nA critical aspect influencing the behavior of A* is the selection and evaluation of nodes during its execution. Notably, for every node expanded by A*, its \\(f\\)-value remains bounded by the optimal cost, irrespective of its position relative to the optimal path. This property underscores the algorithm’s adherence to admissible heuristics, where the estimation of node costs remains consistent with the true optimal cost.\nCentral to this discussion is the role of heuristic functions in guiding A* towards the goal node. These functions provide estimates of the remaining cost from a given node to the goal, thereby influencing the selection of nodes for expansion. Importantly, A* leverages heuristic functions that consistently underestimate the true cost, ensuring the optimality of its solution while traversing the search space.",
+    "crumbs": [
+      "AI: Search Methods",
+      "Week 5"
+    ]
+  },
+  {
+    "objectID": "pages/AI/Week05.html#comparison-of-heuristic-functions",
+    "href": "pages/AI/Week05.html#comparison-of-heuristic-functions",
+    "title": "Finding Optimal TSP Tours",
+    "section": "Comparison of Heuristic Functions",
+    "text": "Comparison of Heuristic Functions\nA noteworthy aspect of A* lies in its sensitivity to the quality of heuristic functions utilized in the search process. By comparing different heuristic functions, we gain insights into their impact on the algorithm’s efficiency and performance. Specifically, heuristic functions that provide more informed estimates of node costs tend to result in faster convergence towards the optimal solution.\nIn comparing two admissible versions of A* utilizing distinct heuristic functions, denoted as \\(h_1\\) and \\(h_2\\), we observe a direct relationship between the informativeness of the heuristic and the algorithm’s search efficiency. Notably, if \\(h_2\\) consistently provides higher estimates than \\(h_1\\) for all nodes, it is deemed more informed and closer to the true optimal cost. Consequently, A* employing \\(h_2\\) is expected to explore a smaller search space and converge faster towards the optimal solution compared to its counterpart utilizing \\(h_1\\).\nThis relationship underscores the significance of heuristic selection in optimizing the performance of A* and highlights the potential trade-offs between search efficiency and heuristic informativeness.",
+    "crumbs": [
+      "AI: Search Methods",
+      "Week 5"
+    ]
+  },
+  {
+    "objectID": "pages/AI/Week05.html#variations-of-a",
+    "href": "pages/AI/Week05.html#variations-of-a",
+    "title": "Finding Optimal TSP Tours",
+    "section": "Variations of A*",
+    "text": "Variations of A*\nWhile the basic A* algorithm provides a robust framework for pathfinding, variations and adaptations exist to address specific challenges and optimization objectives. These variations aim to enhance the algorithm’s efficiency and effectiveness in diverse problem domains, often at the cost of sacrificing certain properties such as admissibility.\nOne such variation involves the exploration of leaner and meaner versions of A*, wherein the emphasis is placed on minimizing either space or time complexity, or both, while maintaining a degree of admissibility. These adaptations leverage insights from the quality of the available heuristic function to tailor the search process to specific requirements. By striking a balance between computational resources and solution optimality, these variations offer tailored solutions to pathfinding problems in various contexts.\nIn summary, the proof of admissibility in A* algorithm underscores its effectiveness in traversing finite and infinite graphs to identify optimal paths to the goal node. Through meticulous analysis and adherence to admissible heuristics, A* exhibits robustness and efficiency in pathfinding scenarios, making it a versatile tool in algorithmic problem-solving.",
+    "crumbs": [
+      "AI: Search Methods",
+      "Week 5"
+    ]
+  },
+  {
     "objectID": "pages/AI/Week03.html",
     "href": "pages/AI/Week03.html",
     "title": "Exploring Heuristic Search and Optimization Techniques",
@@ -2538,6 +2857,424 @@
     "crumbs": [
       "AI: Search Methods",
       "Week 1"
+    ]
+  },
+  {
+    "objectID": "pages/DL/Week05.html",
+    "href": "pages/DL/Week05.html",
+    "title": "Adaptive Learning Rates",
+    "section": "",
+    "text": "In the realm of deep learning, optimization algorithms play a crucial role in training neural networks. One such algorithm is gradient descent, which aims to minimize a loss function by iteratively updating the parameters of the network. However, traditional gradient descent algorithms often struggle with finding an appropriate learning rate that balances convergence speed and stability across different regions of the optimization landscape. This is where adaptive learning rates come into play.\n\n\n\nAdaptive learning rate algorithms dynamically adjust the learning rate during training based on the history of gradients and the current position in the optimization landscape. This adaptive behavior allows for faster convergence in regions with gentle gradients and more cautious updates in steep regions to prevent overshooting.\n\n\nTraditional gradient descent algorithms use a fixed learning rate, which may lead to suboptimal convergence behavior, especially in scenarios where the optimization landscape is highly variable. Adaptive learning rates address this issue by dynamically adjusting the learning rate based on the gradient’s magnitude and direction, resulting in improved convergence and training efficiency.\n\n\n\n\nTo understand the application of adaptive learning rates, let’s first revisit the representation of a neural network. Consider a neural network with \\(L\\) layers, where each layer is composed of neurons. The input to the network is represented by \\(\\mathbf{x}\\), and the output is represented by \\(\\mathbf{y}\\).\n\n\nAt each layer \\(i\\), the network applies a set of weights \\(\\mathbf{W}^{(i)}\\) and biases \\(\\mathbf{b}^{(i)}\\) to transform the input into a pre-activation vector \\(\\mathbf{a}^{(i)}\\). The pre-activation vector is then passed through an activation function \\(\\mathbf{g}^{(i)}(\\cdot)\\) to produce the activation vector \\(\\mathbf{h}^{(i)}\\). This process is repeated for each subsequent layer until the final output is obtained.\n\n\n\nDuring training, the network’s parameters, including weights and biases, are updated iteratively to minimize a loss function \\(\\mathcal{L}(\\theta_t)\\), where \\(\\theta_t\\) represents the parameters at iteration \\(t\\). The optimization process involves computing the gradient of the loss function with respect to the parameters and adjusting the parameters in the direction that minimizes the loss.\n\n\n\n\nNow, let’s delve into the derivation of adaptive learning rates and their significance in optimizing neural networks.\n\n\nConsider a scenario where the input features \\(\\mathbf{x}\\) include sparse features, i.e., features that are often zero across many training instances. In such cases, the derivative of the loss function with respect to the weights corresponding to sparse features tends to be small due to the frequent occurrence of zero values.\nMathematically, let’s denote the derivative of the loss function \\(\\mathcal{L}\\) with respect to a weight \\(\\mathbf{W}_j^{(i)}\\) as \\(\\frac{\\partial \\mathcal{L}}{\\partial \\mathbf{W}_j^{(i)}}\\). If a feature \\(x_j\\) is sparse, the derivative can be expressed as:\n\\[\n\\frac{\\partial \\mathcal{L}}{\\partial \\mathbf{W}_j^{(i)}} = \\sum_{k=1}^{m} \\frac{\\partial \\mathcal{L}}{\\partial \\mathbf{a}^{(i)}} \\cdot x_j\n\\]\nWhere \\(m\\) represents the total number of training instances, and \\(x_j\\) is the value of the sparse feature.\n\n\n\nSparse features lead to sparse updates during gradient descent, as the derivatives associated with these features are small. Consequently, the weights corresponding to sparse features experience minimal changes during optimization, potentially impeding the network’s ability to learn from these features effectively.\n\n\n\nTo address the issue of sparse updates for weights associated with sparse features, adaptive learning rates offer a solution. By dynamically adjusting the learning rate based on the sparsity of features, adaptive learning rates ensure that weights corresponding to sparse features receive meaningful updates, allowing the network to effectively leverage the information provided by these features.\n\n\n\n\nThe implementation of adaptive learning rates involves designing algorithms that automatically adjust the learning rate based on the sparsity of features. This requires a systematic approach to ensure efficient optimization across millions of features without manual intervention.\n\n\nLet’s denote the learning rate at iteration \\(t\\) as \\(\\eta_t\\). To adaptively adjust the learning rate based on the sparsity of features, we can define a function \\(\\eta_t = f(\\mathbf{x}_t)\\), where \\(\\mathbf{x}_t\\) represents the input data at iteration \\(t\\).\nOne approach to defining the adaptive learning rate function is to incorporate a measure of feature sparsity into the learning rate calculation. For example, we can define \\(\\eta_t\\) as follows:\n\\[\n\\eta_t = \\eta_0 \\cdot \\text{sparsity\\_factor}(\\mathbf{x}_t)\n\\]\nWhere \\(\\eta_0\\) represents the initial learning rate, and \\(\\text{sparsity\\_factor}(\\mathbf{x}_t)\\) is a function that quantifies the sparsity of the input data at iteration \\(t\\).\n\n\n\nBy incorporating adaptive learning rates into the optimization process, neural networks can effectively leverage sparse features for improved performance. Adaptive learning rates ensure that weights associated with sparse features receive sufficient updates, allowing the network to learn meaningful representations from sparse data.",
+    "crumbs": [
+      "Deep Learning",
+      "Week 5"
+    ]
+  },
+  {
+    "objectID": "pages/DL/Week05.html#introduction",
+    "href": "pages/DL/Week05.html#introduction",
+    "title": "Adaptive Learning Rates",
+    "section": "",
+    "text": "In the realm of deep learning, optimization algorithms play a crucial role in training neural networks. One such algorithm is gradient descent, which aims to minimize a loss function by iteratively updating the parameters of the network. However, traditional gradient descent algorithms often struggle with finding an appropriate learning rate that balances convergence speed and stability across different regions of the optimization landscape. This is where adaptive learning rates come into play.",
+    "crumbs": [
+      "Deep Learning",
+      "Week 5"
+    ]
+  },
+  {
+    "objectID": "pages/DL/Week05.html#adaptive-learning-rate-concepts",
+    "href": "pages/DL/Week05.html#adaptive-learning-rate-concepts",
+    "title": "Adaptive Learning Rates",
+    "section": "",
+    "text": "Adaptive learning rate algorithms dynamically adjust the learning rate during training based on the history of gradients and the current position in the optimization landscape. This adaptive behavior allows for faster convergence in regions with gentle gradients and more cautious updates in steep regions to prevent overshooting.\n\n\nTraditional gradient descent algorithms use a fixed learning rate, which may lead to suboptimal convergence behavior, especially in scenarios where the optimization landscape is highly variable. Adaptive learning rates address this issue by dynamically adjusting the learning rate based on the gradient’s magnitude and direction, resulting in improved convergence and training efficiency.",
+    "crumbs": [
+      "Deep Learning",
+      "Week 5"
+    ]
+  },
+  {
+    "objectID": "pages/DL/Week05.html#neural-network-representation",
+    "href": "pages/DL/Week05.html#neural-network-representation",
+    "title": "Adaptive Learning Rates",
+    "section": "",
+    "text": "To understand the application of adaptive learning rates, let’s first revisit the representation of a neural network. Consider a neural network with \\(L\\) layers, where each layer is composed of neurons. The input to the network is represented by \\(\\mathbf{x}\\), and the output is represented by \\(\\mathbf{y}\\).\n\n\nAt each layer \\(i\\), the network applies a set of weights \\(\\mathbf{W}^{(i)}\\) and biases \\(\\mathbf{b}^{(i)}\\) to transform the input into a pre-activation vector \\(\\mathbf{a}^{(i)}\\). The pre-activation vector is then passed through an activation function \\(\\mathbf{g}^{(i)}(\\cdot)\\) to produce the activation vector \\(\\mathbf{h}^{(i)}\\). This process is repeated for each subsequent layer until the final output is obtained.\n\n\n\nDuring training, the network’s parameters, including weights and biases, are updated iteratively to minimize a loss function \\(\\mathcal{L}(\\theta_t)\\), where \\(\\theta_t\\) represents the parameters at iteration \\(t\\). The optimization process involves computing the gradient of the loss function with respect to the parameters and adjusting the parameters in the direction that minimizes the loss.",
+    "crumbs": [
+      "Deep Learning",
+      "Week 5"
+    ]
+  },
+  {
+    "objectID": "pages/DL/Week05.html#derivation-of-adaptive-learning-rates",
+    "href": "pages/DL/Week05.html#derivation-of-adaptive-learning-rates",
+    "title": "Adaptive Learning Rates",
+    "section": "",
+    "text": "Now, let’s delve into the derivation of adaptive learning rates and their significance in optimizing neural networks.\n\n\nConsider a scenario where the input features \\(\\mathbf{x}\\) include sparse features, i.e., features that are often zero across many training instances. In such cases, the derivative of the loss function with respect to the weights corresponding to sparse features tends to be small due to the frequent occurrence of zero values.\nMathematically, let’s denote the derivative of the loss function \\(\\mathcal{L}\\) with respect to a weight \\(\\mathbf{W}_j^{(i)}\\) as \\(\\frac{\\partial \\mathcal{L}}{\\partial \\mathbf{W}_j^{(i)}}\\). If a feature \\(x_j\\) is sparse, the derivative can be expressed as:\n\\[\n\\frac{\\partial \\mathcal{L}}{\\partial \\mathbf{W}_j^{(i)}} = \\sum_{k=1}^{m} \\frac{\\partial \\mathcal{L}}{\\partial \\mathbf{a}^{(i)}} \\cdot x_j\n\\]\nWhere \\(m\\) represents the total number of training instances, and \\(x_j\\) is the value of the sparse feature.\n\n\n\nSparse features lead to sparse updates during gradient descent, as the derivatives associated with these features are small. Consequently, the weights corresponding to sparse features experience minimal changes during optimization, potentially impeding the network’s ability to learn from these features effectively.\n\n\n\nTo address the issue of sparse updates for weights associated with sparse features, adaptive learning rates offer a solution. By dynamically adjusting the learning rate based on the sparsity of features, adaptive learning rates ensure that weights corresponding to sparse features receive meaningful updates, allowing the network to effectively leverage the information provided by these features.",
+    "crumbs": [
+      "Deep Learning",
+      "Week 5"
+    ]
+  },
+  {
+    "objectID": "pages/DL/Week05.html#implementing-adaptive-learning-rates",
+    "href": "pages/DL/Week05.html#implementing-adaptive-learning-rates",
+    "title": "Adaptive Learning Rates",
+    "section": "",
+    "text": "The implementation of adaptive learning rates involves designing algorithms that automatically adjust the learning rate based on the sparsity of features. This requires a systematic approach to ensure efficient optimization across millions of features without manual intervention.\n\n\nLet’s denote the learning rate at iteration \\(t\\) as \\(\\eta_t\\). To adaptively adjust the learning rate based on the sparsity of features, we can define a function \\(\\eta_t = f(\\mathbf{x}_t)\\), where \\(\\mathbf{x}_t\\) represents the input data at iteration \\(t\\).\nOne approach to defining the adaptive learning rate function is to incorporate a measure of feature sparsity into the learning rate calculation. For example, we can define \\(\\eta_t\\) as follows:\n\\[\n\\eta_t = \\eta_0 \\cdot \\text{sparsity\\_factor}(\\mathbf{x}_t)\n\\]\nWhere \\(\\eta_0\\) represents the initial learning rate, and \\(\\text{sparsity\\_factor}(\\mathbf{x}_t)\\) is a function that quantifies the sparsity of the input data at iteration \\(t\\).\n\n\n\nBy incorporating adaptive learning rates into the optimization process, neural networks can effectively leverage sparse features for improved performance. Adaptive learning rates ensure that weights associated with sparse features receive sufficient updates, allowing the network to learn meaningful representations from sparse data.",
+    "crumbs": [
+      "Deep Learning",
+      "Week 5"
+    ]
+  },
+  {
+    "objectID": "pages/DL/Week05.html#introduction-1",
+    "href": "pages/DL/Week05.html#introduction-1",
+    "title": "Adaptive Learning Rates",
+    "section": "Introduction",
+    "text": "Introduction\nAdaGrad is a powerful optimization algorithm used in deep learning to adaptively adjust the learning rate during training. It addresses the challenge of selecting an appropriate learning rate for different features in the input data. This method ensures that features with frequent updates receive smaller learning rates, while features with sparse updates receive larger learning rates, leading to more effective and efficient training of neural networks.",
+    "crumbs": [
+      "Deep Learning",
+      "Week 5"
+    ]
+  },
+  {
+    "objectID": "pages/DL/Week05.html#update-rule-for-adagrad",
+    "href": "pages/DL/Week05.html#update-rule-for-adagrad",
+    "title": "Adaptive Learning Rates",
+    "section": "Update Rule for AdaGrad",
+    "text": "Update Rule for AdaGrad\nThe core idea behind AdaGrad is to adjust the learning rate for each feature based on its update history. This is achieved by maintaining a history of the squared gradients for each feature and dividing the learning rate by the square root of this history. Mathematically, the update rule for AdaGrad can be expressed as follows:\n\\[\n\\mathbf{v}_t = \\mathbf{v}_{t-1} + \\left( \\frac{\\partial \\mathcal{L}(\\theta_t)}{\\partial \\mathbf{W}_t} \\right)^2\n\\]\n\\[\n\\mathbf{W}_{t+1} = \\mathbf{W}_t - \\frac{\\eta}{\\sqrt{\\mathbf{v}_t + \\epsilon}} \\frac{\\partial \\mathcal{L}(\\theta_t)}{\\partial \\mathbf{W}_t}\n\\]\nWhere:\n\n\\(\\mathbf{v}_t\\) is the accumulated squared gradients.\n\\(\\eta\\) is the learning rate.\n\\(\\epsilon\\) is a small constant added to the denominator for numerical stability.\n\\(\\frac{\\partial \\mathcal{L}(\\theta_t)}{\\partial \\mathbf{W}_t}\\) is the gradient of the loss function with respect to the weights at iteration \\(t\\).\n\\(\\mathbf{W}_t\\) represents the weights at iteration \\(t\\).\n\nSimilarly, the update rule for the bias terms \\(\\mathbf{b}_t\\) can be derived using the same principle.",
+    "crumbs": [
+      "Deep Learning",
+      "Week 5"
+    ]
+  },
+  {
+    "objectID": "pages/DL/Week05.html#implementation-in-code",
+    "href": "pages/DL/Week05.html#implementation-in-code",
+    "title": "Adaptive Learning Rates",
+    "section": "Implementation in Code",
+    "text": "Implementation in Code\nIn code, the AdaGrad algorithm involves accumulating the squared gradients and updating the weights and biases accordingly. The update equations for weights and biases can be implemented as follows:\nv_W += (dW ** 2)\nW -= (learning_rate / np.sqrt(v_W + eps)) * dW\nv_b += (db ** 2)\nb -= (learning_rate / np.sqrt(v_b + eps)) * db\nWhere:\n\nv_W and v_b are the accumulated squared gradients for weights and biases, respectively.\ndW and db are the gradients of the loss function with respect to the weights and biases.\nlearning_rate is the learning rate.\neps is a small constant for numerical stability.",
+    "crumbs": [
+      "Deep Learning",
+      "Week 5"
+    ]
+  },
+  {
+    "objectID": "pages/DL/Week05.html#experimental-results-and-analysis",
+    "href": "pages/DL/Week05.html#experimental-results-and-analysis",
+    "title": "Adaptive Learning Rates",
+    "section": "Experimental Results and Analysis",
+    "text": "Experimental Results and Analysis\nIn an experiment, AdaGrad was applied to training data with both sparse and dense features. It demonstrated the ability to make proportionate movements in the direction of sparse features, despite their small updates. However, one observation was that as the training progressed, AdaGrad’s effective learning rate decreased significantly, potentially causing slow convergence near the minimum.",
+    "crumbs": [
+      "Deep Learning",
+      "Week 5"
+    ]
+  },
+  {
+    "objectID": "pages/DL/Week05.html#visual-analysis-of-adagrad-behavior",
+    "href": "pages/DL/Week05.html#visual-analysis-of-adagrad-behavior",
+    "title": "Adaptive Learning Rates",
+    "section": "Visual Analysis of AdaGrad Behavior",
+    "text": "Visual Analysis of AdaGrad Behavior\nVisual analysis of AdaGrad’s behavior revealed that it was able to move proportionately in the direction of both sparse and dense features. However, as the training progressed, AdaGrad’s effective learning rate decreased exponentially due to the accumulation of update history.",
+    "crumbs": [
+      "Deep Learning",
+      "Week 5"
+    ]
+  },
+  {
+    "objectID": "pages/DL/Week05.html#challenges-and-limitations",
+    "href": "pages/DL/Week05.html#challenges-and-limitations",
+    "title": "Adaptive Learning Rates",
+    "section": "Challenges and Limitations",
+    "text": "Challenges and Limitations\nWhile AdaGrad successfully adapted the learning rate for both sparse and dense features, it faced challenges as training progressed. The effective learning rate for dense features became so small that it hindered movement in the direction of sparse features, leading to slower convergence. The accumulation of update history posed a challenge near the minimum, where gradients became small but the history remained large, causing the effective learning rate to decrease excessively.",
+    "crumbs": [
+      "Deep Learning",
+      "Week 5"
+    ]
+  },
+  {
+    "objectID": "pages/DL/Week05.html#potential-improvements",
+    "href": "pages/DL/Week05.html#potential-improvements",
+    "title": "Adaptive Learning Rates",
+    "section": "Potential Improvements",
+    "text": "Potential Improvements\nOne potential improvement could be to explore variations of AdaGrad that address the issue of excessively small effective learning rates. Adding a momentum term to AdaGrad could potentially combine the advantages of momentum-based algorithms with adaptive learning rates, improving convergence speed and performance. However, further research and experimentation are needed to explore these possibilities and address the limitations of AdaGrad effectively.",
+    "crumbs": [
+      "Deep Learning",
+      "Week 5"
+    ]
+  },
+  {
+    "objectID": "pages/DL/Week05.html#introduction-2",
+    "href": "pages/DL/Week05.html#introduction-2",
+    "title": "Adaptive Learning Rates",
+    "section": "Introduction",
+    "text": "Introduction\nIn the realm of deep learning, optimization algorithms play a crucial role in training neural networks effectively. One such algorithm is RMSprop, short for Root Mean Square Propagation, which addresses some of the limitations of previous optimization methods like AdaGrad. In this lecture module, we delve into the intricacies of RMSprop, its formulation, and its behavior during the training process.",
+    "crumbs": [
+      "Deep Learning",
+      "Week 5"
+    ]
+  },
+  {
+    "objectID": "pages/DL/Week05.html#motivation-for-rmsprop",
+    "href": "pages/DL/Week05.html#motivation-for-rmsprop",
+    "title": "Adaptive Learning Rates",
+    "section": "Motivation for RMSprop",
+    "text": "Motivation for RMSprop\nThe motivation behind RMSprop stems from the need to address the aggressive decay of learning rates in optimization algorithms as the training progresses. In AdaGrad, for instance, the denominator in the update rule accumulates the squares of past gradients, causing the learning rate to diminish rapidly, especially for frequently updated parameters. This phenomenon inhibits the convergence of the optimization process, leading to suboptimal solutions.",
+    "crumbs": [
+      "Deep Learning",
+      "Week 5"
+    ]
+  },
+  {
+    "objectID": "pages/DL/Week05.html#formulation-of-rmsprop",
+    "href": "pages/DL/Week05.html#formulation-of-rmsprop",
+    "title": "Adaptive Learning Rates",
+    "section": "Formulation of RMSprop",
+    "text": "Formulation of RMSprop\nTo mitigate the rapid growth of the denominator in AdaGrad, RMSprop introduces a scaling mechanism by modifying the update rule. Instead of accumulating the squares of gradients indiscriminately, RMSprop employs an exponentially decaying average of past squared gradients. This is achieved by introducing a decay factor, typically denoted as \\(\\beta\\), which controls the rate at which the history is accumulated. The modified update rule for the denominator \\(v_t\\) in RMSprop is given by:\n\\[ v_t = \\beta v_{t-1} + (1 - \\beta) (\\nabla \\mathcal{L})^2 \\]\nwhere:\n\n\\(v_t\\) represents the accumulated history of squared gradients at iteration \\(t\\).\n\\(\\beta\\) is a hyperparameter controlling the exponential decay rate.\n\\(\\nabla \\mathcal{L}\\) denotes the gradient of the loss function.",
+    "crumbs": [
+      "Deep Learning",
+      "Week 5"
+    ]
+  },
+  {
+    "objectID": "pages/DL/Week05.html#key-insights-into-rmsprop",
+    "href": "pages/DL/Week05.html#key-insights-into-rmsprop",
+    "title": "Adaptive Learning Rates",
+    "section": "Key Insights into RMSprop",
+    "text": "Key Insights into RMSprop\n\nExponentially Decaying Average\nThe crux of RMSprop lies in the use of an exponentially decaying average for accumulating the history of squared gradients. This approach ensures that the denominator \\(v_t\\) grows less aggressively compared to AdaGrad, thereby stabilizing the effective learning rate.\n\n\nControl over Learning Rate Decay\nBy scaling down the growth of the denominator with the help of the decay factor \\(\\beta\\), RMSprop prevents the rapid decline of the effective learning rate. This control over the learning rate decay allows for smoother convergence during optimization.\n\n\nComparison with AdaGrad\nIn contrast to AdaGrad, where the denominator accumulates gradients without any decay, RMSprop offers a more controlled approach by incorporating an exponentially decaying average. This modification alleviates the issue of overly aggressive learning rate decay encountered in AdaGrad.",
+    "crumbs": [
+      "Deep Learning",
+      "Week 5"
+    ]
+  },
+  {
+    "objectID": "pages/DL/Week05.html#behavior-of-rmsprop-during-training",
+    "href": "pages/DL/Week05.html#behavior-of-rmsprop-during-training",
+    "title": "Adaptive Learning Rates",
+    "section": "Behavior of RMSprop during Training",
+    "text": "Behavior of RMSprop during Training\n\nEffect on Learning Rate\nDuring the training process, RMSprop dynamically adjusts the effective learning rate based on the magnitude of gradients encountered. In regions with steep gradients, the learning rate decreases gradually to prevent overshooting, while in flatter regions, it increases to expedite convergence.\n\n\nSensitivity to Initial Learning Rate\nOne notable aspect of RMSprop is its sensitivity to the initial learning rate (\\(\\eta_0\\)). The choice of \\(\\eta_0\\) can significantly impact the convergence behavior of the algorithm, leading to variations in convergence speed and stability.\n\n\nOscillation Phenomenon\nIn some scenarios, RMSprop may exhibit oscillations around the minima during optimization. These oscillations stem from the interplay between the learning rate and the curvature of the loss surface. If the learning rate becomes constant and the curvature allows for symmetric oscillations, the optimization process may oscillate between different points on the loss surface.",
+    "crumbs": [
+      "Deep Learning",
+      "Week 5"
+    ]
+  },
+  {
+    "objectID": "pages/DL/Week05.html#addressing-sensitivity-to-initial-learning-rate",
+    "href": "pages/DL/Week05.html#addressing-sensitivity-to-initial-learning-rate",
+    "title": "Adaptive Learning Rates",
+    "section": "Addressing Sensitivity to Initial Learning Rate",
+    "text": "Addressing Sensitivity to Initial Learning Rate\n\nAdaptive Learning Rate Adjustment\nTo mitigate the sensitivity to the initial learning rate, researchers have proposed adaptive techniques that dynamically adjust the learning rate during training. These methods aim to alleviate the reliance on manually tuning the initial learning rate, thereby improving the robustness of optimization algorithms like RMSprop.\n\n\nExperimental Exploration\nEmpirical studies have shown that the choice of initial learning rate (\\(\\eta_0\\)) can significantly impact the convergence behavior of RMSprop. Researchers often conduct experiments with different values of \\(\\eta_0\\) to determine the optimal setting for specific datasets and network architectures.",
+    "crumbs": [
+      "Deep Learning",
+      "Week 5"
+    ]
+  },
+  {
+    "objectID": "pages/DL/Week05.html#introduction-3",
+    "href": "pages/DL/Week05.html#introduction-3",
+    "title": "Adaptive Learning Rates",
+    "section": "Introduction",
+    "text": "Introduction\nIn the domain of deep learning, optimization algorithms play a crucial role in training neural networks effectively. One such algorithm is AdaDelta, which is designed to address challenges such as choosing an appropriate learning rate and dealing with varying magnitudes of gradients during training. This algorithm dynamically adapts the learning rate based on past gradients, allowing for smoother convergence and improved performance. In this section, we delve into the details of the AdaDelta algorithm, its key components, and its application in optimizing neural network parameters.",
+    "crumbs": [
+      "Deep Learning",
+      "Week 5"
+    ]
+  },
+  {
+    "objectID": "pages/DL/Week05.html#overview-of-adadelta",
+    "href": "pages/DL/Week05.html#overview-of-adadelta",
+    "title": "Adaptive Learning Rates",
+    "section": "Overview of AdaDelta",
+    "text": "Overview of AdaDelta\nAdaDelta is an extension of the RMSprop optimization algorithm, which aims to mitigate its dependency on an initial learning rate. Unlike traditional methods that require manual tuning of hyperparameters like the learning rate, AdaDelta automatically adjusts the learning rate during training based on past gradients and accumulated updates.",
+    "crumbs": [
+      "Deep Learning",
+      "Week 5"
+    ]
+  },
+  {
+    "objectID": "pages/DL/Week05.html#mathematical-formulation-1",
+    "href": "pages/DL/Week05.html#mathematical-formulation-1",
+    "title": "Adaptive Learning Rates",
+    "section": "Mathematical Formulation",
+    "text": "Mathematical Formulation\nLet’s define some key variables and equations used in AdaDelta:\nVariables:\n\n\\(\\mathbf{u}_t\\): Velocity at iteration \\(t\\)\n\\(v_t\\): Accumulated history of squared gradients at iteration \\(t\\)\n\\(\\beta\\): Hyperparameter controlling the exponential decay rate\n\nEquations:\n\nUpdate Rule: \\[ \\Delta \\mathbf{W}_t = - \\frac{\\sqrt{\\mathbf{u}_{t-1} + \\epsilon}}{\\sqrt{v_t + \\epsilon}} \\cdot \\nabla \\mathcal{L} \\]\nUpdate Velocity: \\[ \\mathbf{u}_t = \\beta \\cdot \\mathbf{u}_{t-1} + (1 - \\beta) \\cdot (\\Delta \\mathbf{W}_t)^2 \\]\nParameter Update: \\[ \\mathbf{W}_{t+1} = \\mathbf{W}_t + \\Delta \\mathbf{W}_t \\]",
+    "crumbs": [
+      "Deep Learning",
+      "Week 5"
+    ]
+  },
+  {
+    "objectID": "pages/DL/Week05.html#key-concepts",
+    "href": "pages/DL/Week05.html#key-concepts",
+    "title": "Adaptive Learning Rates",
+    "section": "Key Concepts",
+    "text": "Key Concepts\n\nExponential Moving Averages\nAdaDelta utilizes exponential moving averages to compute the update velocity and accumulated history of squared gradients. This involves maintaining a running average of past gradients and squared gradients, weighted by the decay factor \\(\\beta\\). By doing so, AdaDelta can adaptively adjust the learning rate based on the magnitude and variance of gradients encountered during training.\n\n\nRatio of Updates\nThe AdaDelta algorithm calculates the update as a ratio of two variables: \\(\\mathbf{u}_t\\) and \\(v_t\\). This ratio serves as a scaling factor for the gradient, allowing AdaDelta to effectively modulate the learning rate based on the historical behavior of gradients.\n\n\nAdaptive Learning Rate\nUnlike traditional optimization algorithms that rely on a fixed learning rate, AdaDelta dynamically adjusts the learning rate based on the accumulated history of gradients. This adaptive nature enables AdaDelta to navigate complex optimization landscapes more efficiently and converge to optimal solutions with fewer iterations.",
+    "crumbs": [
+      "Deep Learning",
+      "Week 5"
+    ]
+  },
+  {
+    "objectID": "pages/DL/Week05.html#algorithm-workflow",
+    "href": "pages/DL/Week05.html#algorithm-workflow",
+    "title": "Adaptive Learning Rates",
+    "section": "Algorithm Workflow",
+    "text": "Algorithm Workflow\nNow, let’s outline the step-by-step workflow of the AdaDelta algorithm:\n\nInitialization:\n\nInitialize parameters and variables, including \\(\\mathbf{W}\\), \\(\\mathbf{u}\\), and \\(v\\).\nSet hyperparameters such as \\(\\beta\\) and \\(\\epsilon\\).\n\nCompute Gradient:\n\nCalculate the gradient of the loss function with respect to the model parameters (\\(\\nabla \\mathcal{L}\\)).\n\nUpdate Velocity:\n\nUpdate the velocity (\\(\\mathbf{u}_t\\)) using the current gradient and the decay factor \\(\\beta\\).\n\nCompute Update:\n\nCompute the update (\\(\\Delta \\mathbf{W}_t\\)) using the ratio of \\(\\mathbf{u}_t\\) and \\(v_t\\).\n\nParameter Update:\n\nUpdate the model parameters (\\(\\mathbf{W}\\)) using the computed update.\n\nRepeat:\n\nIterate through steps 2-5 for multiple epochs or until convergence criteria are met.",
+    "crumbs": [
+      "Deep Learning",
+      "Week 5"
+    ]
+  },
+  {
+    "objectID": "pages/DL/Week05.html#advantages-of-adadelta",
+    "href": "pages/DL/Week05.html#advantages-of-adadelta",
+    "title": "Adaptive Learning Rates",
+    "section": "Advantages of AdaDelta",
+    "text": "Advantages of AdaDelta\nAdaDelta offers several advantages over traditional optimization algorithms:\n\nAutomatic Learning Rate Adjustment:\n\nAdaDelta eliminates the need for manually tuning the learning rate by adapting it dynamically based on past gradients.\n\nImproved Convergence:\n\nBy adjusting the learning rate according to the historical behavior of gradients, AdaDelta can converge more smoothly and efficiently.\n\nRobustness to Hyperparameters:\n\nAdaDelta’s reliance on only a few hyperparameters, such as \\(\\beta\\), makes it more robust and easier to use compared to algorithms with additional tuning parameters.",
+    "crumbs": [
+      "Deep Learning",
+      "Week 5"
+    ]
+  },
+  {
+    "objectID": "pages/DL/Week05.html#comparison-with-other-adaptive-algorithms",
+    "href": "pages/DL/Week05.html#comparison-with-other-adaptive-algorithms",
+    "title": "Adaptive Learning Rates",
+    "section": "Comparison with Other Adaptive Algorithms",
+    "text": "Comparison with Other Adaptive Algorithms\nAdam algorithm exhibits favorable convergence properties compared to other adaptive algorithms such as AdaDelta and RMSprop. By incorporating both momentum and adaptive learning rate mechanisms, Adam achieves faster convergence while avoiding the learning rate decay issues encountered in RMSprop.\n\nExperimental Results\nEmpirical studies have demonstrated the superior performance of Adam in terms of convergence speed and generalization ability. By dynamically adjusting the learning rate based on past gradients and squared gradients, Adam effectively navigates the loss landscape, leading to faster convergence and improved model performance.",
+    "crumbs": [
+      "Deep Learning",
+      "Week 5"
+    ]
+  },
+  {
+    "objectID": "pages/DL/Week05.html#introduction-4",
+    "href": "pages/DL/Week05.html#introduction-4",
+    "title": "Adaptive Learning Rates",
+    "section": "Introduction",
+    "text": "Introduction\nIn deep learning, optimization algorithms play a crucial role in training neural networks efficiently. Understanding different norms and their implications on optimization is essential for designing effective optimization techniques. In this discussion, we delve into LP Norms and their significance in optimization algorithms, particularly focusing on the Adam optimizer.",
+    "crumbs": [
+      "Deep Learning",
+      "Week 5"
+    ]
+  },
+  {
+    "objectID": "pages/DL/Week05.html#lp-norms",
+    "href": "pages/DL/Week05.html#lp-norms",
+    "title": "Adaptive Learning Rates",
+    "section": "LP Norms",
+    "text": "LP Norms\nLP Norm is a mathematical concept used to measure the size of a vector in a space. It is defined by the following formula:\n\\[\n\\| \\mathbf{x} \\|_p = \\left( \\sum_{i=1}^{n} |x_i|^p \\right)^{1/p}\n\\]\nwhere \\(\\mathbf{x}\\) is the input vector, \\(p\\) is a parameter, and \\(n\\) is the dimensionality of the vector.\n\nL2 Norm\nThe L2 Norm, also known as the Euclidean Norm, is a special case of the LP Norm where \\(p = 2\\). It is calculated by taking the square root of the sum of squares of the vector components:\n\\[\n\\| \\mathbf{x} \\|_2 = \\sqrt{\\sum_{i=1}^{n} |x_i|^2}\n\\]\nThe L2 Norm is widely used in deep learning for regularization and optimization purposes.\n\n\nL Infinity Norm\nThe L Infinity Norm, denoted as \\(\\| \\mathbf{x} \\|_{\\infty}\\), represents the maximum absolute value of the vector components:\n\\[\n\\| \\mathbf{x} \\|_{\\infty} = \\max_{i} |x_i|\n\\]\nIt simplifies computations and is particularly useful in scenarios where the maximum magnitude of the elements is of interest.",
+    "crumbs": [
+      "Deep Learning",
+      "Week 5"
+    ]
+  },
+  {
+    "objectID": "pages/DL/Week05.html#optimization-with-lp-norms",
+    "href": "pages/DL/Week05.html#optimization-with-lp-norms",
+    "title": "Adaptive Learning Rates",
+    "section": "Optimization with LP Norms",
+    "text": "Optimization with LP Norms\nOptimization algorithms in deep learning often involve computing gradients and updating model parameters iteratively. The choice of norm used in these algorithms can have significant implications on convergence and performance.\n\nAdam Optimizer with Exponentially Weighted L2 Norm\nThe Adam optimizer is a popular choice for training neural networks due to its adaptive learning rate mechanism. It incorporates an exponentially weighted L2 Norm of gradients to adaptively adjust the learning rate for each parameter.\nThe update rule for the Adam optimizer involves maintaining two exponentially decaying moving averages: \\(m_t\\) for the first moment (mean) and \\(v_t\\) for the second moment (uncentered variance) of the gradients.\n\\[\nm_t = \\beta_1 m_{t-1} + (1 - \\beta_1) \\nabla \\mathcal{L}_t\n\\]\n\\[\nv_t = \\beta_2 v_{t-1} + (1 - \\beta_2) (\\nabla \\mathcal{L}_t)^2\n\\]\nwhere \\(\\beta_1\\) and \\(\\beta_2\\) are hyperparameters controlling the exponential decay rates, \\(\\nabla \\mathcal{L}_t\\) is the gradient of the loss function at iteration \\(t\\).\n\n\nAdam Max: Introducing Max Norm\nIn the context of the Adam optimizer, the use of L2 Norm for computing the gradient’s magnitude may lead to numerical instability, especially when dealing with large values of \\(p\\). To address this issue, we explore the possibility of using the L Infinity Norm (Max Norm) instead.\nThe Max Norm, defined as \\(\\| \\mathbf{x} \\|_{\\infty} = \\max_{i} |x_i|\\), simplifies to selecting the maximum absolute value from the vector components.\n\n\nBenefits of Using Max Norm\n\nSimplicity: The Max Norm computation is straightforward and does not involve complex mathematical operations.\nStability: Max Norm avoids numerical instability issues associated with large values of \\(p\\) in LP Norms, making it a robust choice for optimization algorithms.\n\n\n\nUpdate Rule for Adam Max\nThe update rule for Adam Max, a variant of the Adam optimizer using Max Norm, is derived by replacing the L2 Norm computation with the Max Norm for computing the second moment \\(v_t\\).\n\\[\nv_t = \\beta_2 v_{t-1} + (1 - \\beta_2) \\| \\nabla \\mathcal{L}_t \\|_{\\infty}^2\n\\]\nThis modification simplifies the computation and enhances the stability of the optimization process.",
+    "crumbs": [
+      "Deep Learning",
+      "Week 5"
+    ]
+  },
+  {
+    "objectID": "pages/DL/Week05.html#comparison-with-l2-norm",
+    "href": "pages/DL/Week05.html#comparison-with-l2-norm",
+    "title": "Adaptive Learning Rates",
+    "section": "Comparison with L2 Norm",
+    "text": "Comparison with L2 Norm\nTo understand the practical implications of using Max Norm in optimization, let’s compare its performance with the traditional L2 Norm approach.\n\nScenario 1: Sparse Gradients\nIn scenarios where gradients alternate between high and zero values, the Max Norm maintains a more consistent learning rate compared to the L2 Norm. This stability ensures smoother convergence during training, especially when dealing with sparse features.\n\n\nScenario 2: Zero Inputs\nWhen encountering zero inputs, the Max Norm prevents unnecessary fluctuations in the learning rate. Unlike the L2 Norm, which may amplify changes even with zero gradients, the Max Norm remains stable and preserves the learning rate effectively.",
+    "crumbs": [
+      "Deep Learning",
+      "Week 5"
+    ]
+  },
+  {
+    "objectID": "pages/DL/Week05.html#introduction-5",
+    "href": "pages/DL/Week05.html#introduction-5",
+    "title": "Adaptive Learning Rates",
+    "section": "Introduction",
+    "text": "Introduction\nNesterov Accelerated Gradient Descent (NAG) is an optimization algorithm used in training neural networks. It is an extension of the standard momentum-based gradient descent method. The key idea behind NAG is to improve upon the momentum-based approach by incorporating the Nesterov’s accelerated gradient (NAG) concept, also known as the lookahead effect. In this module, we explore how to integrate Nesterov Accelerated Gradient Descent into the Adam optimizer.",
+    "crumbs": [
+      "Deep Learning",
+      "Week 5"
+    ]
+  },
+  {
+    "objectID": "pages/DL/Week05.html#rewriting-nag-equations",
+    "href": "pages/DL/Week05.html#rewriting-nag-equations",
+    "title": "Adaptive Learning Rates",
+    "section": "Rewriting NAG Equations",
+    "text": "Rewriting NAG Equations\n\nOriginal NAG Update Rule\nThe original NAG update rule involves computing the gradient at a lookahead value and then updating the parameters based on this lookahead gradient. This approach involves cumbersome computations and redundant calculations.\n\n\nSimplifying NAG Equations\nTo simplify the NAG equations and integrate them into the Adam optimizer, we need to rewrite the update rule in a more compact and efficient manner. The goal is to eliminate redundant computations and express all equations in terms of the current time step (\\(t\\)) and the next time step (\\(t + 1\\)).",
+    "crumbs": [
+      "Deep Learning",
+      "Week 5"
+    ]
+  },
+  {
+    "objectID": "pages/DL/Week05.html#modified-nag-equations",
+    "href": "pages/DL/Week05.html#modified-nag-equations",
+    "title": "Adaptive Learning Rates",
+    "section": "Modified NAG Equations",
+    "text": "Modified NAG Equations\n\nUpdate Rule for Nesterov Accelerated Gradient Descent\nThe update rule for Nesterov Accelerated Gradient Descent (NAG) involves the following steps:\n\nCompute the gradient at the current parameter values.\nCompute the lookahead gradient at the next parameter values using the gradient computed in step 1.\nUpdate the parameters using a combination of the current gradient and the lookahead gradient.\n\n\n\nMathematical Formulation of NAG\nThe Nesterov Accelerated Gradient Descent update rule can be expressed as follows:\n\\[\n\\mathbf{u}_{t+1} = \\beta \\mathbf{u}_t + \\eta \\nabla \\mathcal{L}(\\theta_t - \\beta \\mathbf{u}_t)\n\\]\n\\[\nv_{t+1} = \\beta_2 v_t + (1 - \\beta_2) (\\nabla \\mathcal{L}_t)^2\n\\]\n\\[\n\\theta_{t+1} = \\theta_t - \\frac{\\eta}{\\sqrt{v_{t+1}} + \\epsilon} \\left( \\beta_1 \\mathbf{u}_{t+1} + (1 - \\beta_1) \\nabla \\mathcal{L}_t \\right)\n\\]\nwhere:\n\n\\(\\mathbf{u}_t\\) represents the velocity at iteration \\(t\\).\n\\(v_t\\) represents the accumulated history of squared gradients at iteration \\(t\\).\n\\(\\beta\\) is a hyperparameter controlling the exponential decay rate for the velocity.\n\\(\\beta_1\\) and \\(\\beta_2\\) are hyperparameters controlling the exponential decay rates for the velocity and squared gradients, respectively.\n\\(\\eta\\) is the learning rate.\n\\(\\epsilon\\) is a small constant to prevent division by zero.",
+    "crumbs": [
+      "Deep Learning",
+      "Week 5"
+    ]
+  },
+  {
+    "objectID": "pages/DL/Week05.html#practical-considerations-and-conclusion",
+    "href": "pages/DL/Week05.html#practical-considerations-and-conclusion",
+    "title": "Adaptive Learning Rates",
+    "section": "Practical Considerations and Conclusion",
+    "text": "Practical Considerations and Conclusion\n\nChoosing the Optimizer\nIn practical applications, choosing the right optimizer is crucial for achieving good performance in training neural networks. While there are various optimization algorithms available, Adam optimizer is widely used due to its effectiveness in many scenarios. However, other variants such as Nesterov Accelerated Gradient Descent (NAG) can also be considered, especially when dealing with specific optimization challenges.\n\n\nLearning Rate Schedules\nIn addition to selecting the optimizer, tuning the learning rate schedule is another important aspect of training deep learning models. Proper adjustment of the learning rate can significantly impact the convergence and stability of the optimization process. Experimenting with different learning rate schedules and monitoring the training process can help determine the optimal settings for achieving desired performance.",
+    "crumbs": [
+      "Deep Learning",
+      "Week 5"
+    ]
+  },
+  {
+    "objectID": "pages/DL/Week05.html#introduction-to-learning-rate-schedules",
+    "href": "pages/DL/Week05.html#introduction-to-learning-rate-schedules",
+    "title": "Adaptive Learning Rates",
+    "section": "Introduction to Learning Rate Schedules",
+    "text": "Introduction to Learning Rate Schedules\nIn neural network training, the learning rate (\\(\\eta\\)) determines the step size during gradient descent optimization. Choosing an appropriate learning rate schedule can significantly impact the convergence and performance of the model. Different learning rate schedules adjust the learning rate over time to facilitate effective optimization.",
+    "crumbs": [
+      "Deep Learning",
+      "Week 5"
+    ]
+  },
+  {
+    "objectID": "pages/DL/Week05.html#epoch-based-learning-rate-schemes",
+    "href": "pages/DL/Week05.html#epoch-based-learning-rate-schemes",
+    "title": "Adaptive Learning Rates",
+    "section": "Epoch-Based Learning Rate Schemes",
+    "text": "Epoch-Based Learning Rate Schemes\nEpoch-based learning rate schemes adjust the learning rate based on the number of training epochs. Common approaches include step decay and exponential decay.\n\nStep Decay\nIn step decay, the learning rate is reduced by a factor (\\(\\gamma\\)) after a fixed number of epochs (\\(\\tau\\)). Mathematically, it can be expressed as:\n\\[ \\eta_t = \\eta_0 \\times \\gamma^{\\lfloor \\frac{t}{\\tau} \\rfloor} \\]\nwhere \\(\\eta_t\\) is the learning rate at iteration \\(t\\), \\(\\eta_0\\) is the initial learning rate, \\(\\gamma\\) is the decay factor, and \\(\\tau\\) is the step size.\n\n\nExponential Decay\nExponential decay reduces the learning rate exponentially over time. The learning rate at iteration \\(t\\) is given by:\n\\[ \\eta_t = \\eta_0 \\times e^{-\\lambda t} \\]\nwhere \\(\\lambda\\) controls the rate of decay.",
+    "crumbs": [
+      "Deep Learning",
+      "Week 5"
+    ]
+  },
+  {
+    "objectID": "pages/DL/Week05.html#adaptive-learning-rate-schemes",
+    "href": "pages/DL/Week05.html#adaptive-learning-rate-schemes",
+    "title": "Adaptive Learning Rates",
+    "section": "Adaptive Learning Rate Schemes",
+    "text": "Adaptive Learning Rate Schemes\nAdaptive learning rate schemes dynamically adjust the learning rate based on past gradients or other parameters. Examples include Adagrad, RMSProp, ADA Delta, Adam, and Adamax.\n\nAdagrad\nAdagrad adapts the learning rate for each parameter based on the magnitude of its gradients. It scales the learning rate inversely proportional to the square root of the sum of squared gradients.\n\\[ \\eta_t = \\frac{\\eta_0}{\\sqrt{v_t + \\epsilon}} \\]\nwhere \\(v_t\\) represents the accumulated history of squared gradients at iteration \\(t\\) and \\(\\epsilon\\) is a small constant to prevent division by zero.\n\n\nRMSProp\nRMSProp improves upon Adagrad by using a moving average of squared gradients for scaling the learning rate. It addresses the diminishing learning rate problem in Adagrad by using a decay rate \\(\\beta\\).\n\\[ v_t = \\beta v_{t-1} + (1 - \\beta) (\\nabla \\mathcal{L}_t)^2 \\]\nwhere \\(\\nabla \\mathcal{L}_t\\) denotes the gradient of the loss function at iteration \\(t\\).\n\n\nADA Delta\nADA Delta further enhances RMSProp by replacing the learning rate with the root mean square (RMS) of parameter updates.\n\\[ \\eta_t = \\sqrt{\\frac{v_{t-1} + \\epsilon}{v_t + \\epsilon}} \\]\n\n\nAdam\nAdam combines the advantages of both RMSProp and momentum optimization. It maintains two moving averages for gradients and squared gradients.\n\\[ \\mathbf{u}_t = \\beta_1 \\mathbf{u}_{t-1} + (1 - \\beta_1) \\nabla \\mathcal{L}_t \\] \\[ v_t = \\beta_2 v_{t-1} + (1 - \\beta_2) (\\nabla \\mathcal{L}_t)^2 \\] \\[ \\eta_t = \\frac{\\eta}{\\sqrt{v_t + \\epsilon}} \\]\nwhere \\(\\beta_1\\) and \\(\\beta_2\\) are hyperparameters controlling the exponential decay rates.\n\n\nAdamax\nAdamax is a variant of Adam that replaces the \\(L_2\\) norm with the \\(L_{\\infty}\\) norm.",
+    "crumbs": [
+      "Deep Learning",
+      "Week 5"
+    ]
+  },
+  {
+    "objectID": "pages/DL/Week05.html#cyclic-learning-rate-schedules",
+    "href": "pages/DL/Week05.html#cyclic-learning-rate-schedules",
+    "title": "Adaptive Learning Rates",
+    "section": "Cyclic Learning Rate Schedules",
+    "text": "Cyclic Learning Rate Schedules\nCyclic learning rate schedules alternate between increasing and decreasing the learning rate over a predefined range.\n\nTriangular Schedule\nThe triangular schedule cyclically increases the learning rate from a minimum to maximum value and back. It helps escape saddle points by periodically increasing the learning rate.\n\\[ \\eta_t = \\eta_{\\text{min}} + (\\eta_{\\text{max}} - \\eta_{\\text{min}}) \\times \\text{max}(0, 1 - |\\frac{T}{\\mu} - 2 \\lfloor \\frac{T}{\\mu} \\rfloor - 1|) \\]\nwhere \\(\\mu\\) is the period of the cycle.\n\n\nCosine Annealing\nCosine annealing smoothly decreases the learning rate using a cosine function. It converges faster compared to fixed learning rates.\n\\[ \\eta_t = \\eta_{\\text{min}} + \\frac{1}{2} (\\eta_{\\text{max}} - \\eta_{\\text{min}}) (1 + \\cos(\\frac{T}{T_{\\text{max}}} \\pi)) \\]\nwhere \\(T\\) is the current epoch and \\(T_{\\text{max}}\\) is the restart interval.\n\n\nWarm Restart\nWarm restart involves quickly jumping from the minimum to maximum learning rate and then decaying. It is popular in Transformer architectures.",
+    "crumbs": [
+      "Deep Learning",
+      "Week 5"
     ]
   },
   {
@@ -4384,6 +5121,281 @@
     ]
   },
   {
+    "objectID": "pages/DL/Week06.html",
+    "href": "pages/DL/Week06.html",
+    "title": "Regularization",
+    "section": "",
+    "text": "Regularization techniques play a crucial role in deep learning to address the challenge of overfitting, where the model learns to memorize the training data rather than generalize well to unseen data. In this section, we delve into the concept of regularization, discussing its importance, various techniques, and the trade-off between bias and variance.\n\n\nIn deep learning, models often consist of millions of parameters, while the training data may be limited to only a few million samples. This scenario leads to overparameterization, where the model has more parameters than the available training data points. Consequently, overparameterized models are prone to overfitting, wherein they capture noise and idiosyncrasies in the training data, resulting in poor generalization performance.\n\n\n\nThe bias-variance trade-off is a fundamental concept in machine learning and deep learning. It refers to the balance between bias and variance in the model’s predictions.\n\n\nBias represents the error introduced by the model’s simplifying assumptions or its inability to capture the underlying structure of the data. In simpler terms, bias measures how much the average prediction of the model deviates from the true value.\nFor a regression problem, if the predicted values consistently differ from the actual values, the model is said to have high bias. Conversely, if the model’s predictions closely match the true values, it has low bias.\n\n\n\nVariance quantifies the variability of the model’s predictions across different training datasets. It measures how much the model’s predictions vary for different training samples.\nModels with high variance are sensitive to small fluctuations in the training data, often resulting in overfitting. On the other hand, models with low variance produce consistent predictions across different datasets.\n\n\n\nThere exists a trade-off between bias and variance: reducing bias typically increases variance, and vice versa. Finding the right balance between bias and variance is crucial for building models that generalize well to unseen data.\n\n\n\n\nTo illustrate the bias-variance trade-off, consider the task of fitting a curve to a set of data points sampled from a sinusoidal function. We compare two models:\n\nSimple Model: A linear function \\(Y = MX + C\\)\nComplex Model: A degree 25 polynomial\n\nThe simple model has low capacity, as it contains only a few parameters, while the complex model has high capacity due to its larger number of parameters.\n\n\n\nAfter training the models on different samples of the data, we observe the following:\n\nSimple Model:\n\nProduces similar predictions across different datasets (low variance).\nHowever, the average prediction deviates significantly from the true curve (high bias).\n\nComplex Model:\n\nExhibits varied predictions across different datasets (high variance).\nThe average prediction closely matches the true curve (low bias).\n\n\nThese observations highlight the trade-off between bias and variance: simple models tend to underfit the data (high bias, low variance), while complex models tend to overfit (low bias, high variance).\n\n\n\nWe can formally define bias and variance as follows:\n\n\nThe bias of a model is the expected difference between the average prediction of the model and the true value. Mathematically, it can be expressed as:\n\\[ \\text{Bias} = \\mathbb{E}[\\hat{y}] - y \\]\nWhere: - \\(\\hat{y}\\) represents the average prediction of the model. - \\(y\\) denotes the true value.\nFor simple models, the bias tends to be high, indicating a large deviation between the average prediction and the true value. In contrast, complex models exhibit low bias, as their average prediction closely approximates the true value.\n\n\n\nThe variance of a model is the expected squared difference between the model’s prediction and its average prediction. Mathematically, it can be defined as:\n\\[ \\text{Variance} = \\mathbb{E}[(\\hat{y} - \\mathbb{E}[\\hat{y}])^2] \\]\nWhere: - \\(\\hat{y}\\) represents the model’s prediction. - \\(\\mathbb{E}[\\hat{y}]\\) denotes the average prediction of the model.\nFor simple models, the variance tends to be low, indicating consistent predictions across different datasets. In contrast, complex models exhibit high variance, as their predictions vary widely across different datasets.\n\n\n\n\nThe bias-variance trade-off underscores the need to strike a balance between bias and variance to achieve optimal model performance. Models with excessively high bias may fail to capture the underlying patterns in the data, leading to underfitting. Conversely, models with excessively high variance may capture noise and idiosyncrasies in the training data, leading to overfitting.",
+    "crumbs": [
+      "Deep Learning",
+      "Week 6"
+    ]
+  },
+  {
+    "objectID": "pages/DL/Week06.html#introduction",
+    "href": "pages/DL/Week06.html#introduction",
+    "title": "Regularization",
+    "section": "",
+    "text": "In deep learning, models often consist of millions of parameters, while the training data may be limited to only a few million samples. This scenario leads to overparameterization, where the model has more parameters than the available training data points. Consequently, overparameterized models are prone to overfitting, wherein they capture noise and idiosyncrasies in the training data, resulting in poor generalization performance.",
+    "crumbs": [
+      "Deep Learning",
+      "Week 6"
+    ]
+  },
+  {
+    "objectID": "pages/DL/Week06.html#bias-variance-trade-off",
+    "href": "pages/DL/Week06.html#bias-variance-trade-off",
+    "title": "Regularization",
+    "section": "",
+    "text": "The bias-variance trade-off is a fundamental concept in machine learning and deep learning. It refers to the balance between bias and variance in the model’s predictions.\n\n\nBias represents the error introduced by the model’s simplifying assumptions or its inability to capture the underlying structure of the data. In simpler terms, bias measures how much the average prediction of the model deviates from the true value.\nFor a regression problem, if the predicted values consistently differ from the actual values, the model is said to have high bias. Conversely, if the model’s predictions closely match the true values, it has low bias.\n\n\n\nVariance quantifies the variability of the model’s predictions across different training datasets. It measures how much the model’s predictions vary for different training samples.\nModels with high variance are sensitive to small fluctuations in the training data, often resulting in overfitting. On the other hand, models with low variance produce consistent predictions across different datasets.\n\n\n\nThere exists a trade-off between bias and variance: reducing bias typically increases variance, and vice versa. Finding the right balance between bias and variance is crucial for building models that generalize well to unseen data.",
+    "crumbs": [
+      "Deep Learning",
+      "Week 6"
+    ]
+  },
+  {
+    "objectID": "pages/DL/Week06.html#example-fitting-a-curve",
+    "href": "pages/DL/Week06.html#example-fitting-a-curve",
+    "title": "Regularization",
+    "section": "",
+    "text": "To illustrate the bias-variance trade-off, consider the task of fitting a curve to a set of data points sampled from a sinusoidal function. We compare two models:\n\nSimple Model: A linear function \\(Y = MX + C\\)\nComplex Model: A degree 25 polynomial\n\nThe simple model has low capacity, as it contains only a few parameters, while the complex model has high capacity due to its larger number of parameters.",
+    "crumbs": [
+      "Deep Learning",
+      "Week 6"
+    ]
+  },
+  {
+    "objectID": "pages/DL/Week06.html#observations",
+    "href": "pages/DL/Week06.html#observations",
+    "title": "Regularization",
+    "section": "",
+    "text": "After training the models on different samples of the data, we observe the following:\n\nSimple Model:\n\nProduces similar predictions across different datasets (low variance).\nHowever, the average prediction deviates significantly from the true curve (high bias).\n\nComplex Model:\n\nExhibits varied predictions across different datasets (high variance).\nThe average prediction closely matches the true curve (low bias).\n\n\nThese observations highlight the trade-off between bias and variance: simple models tend to underfit the data (high bias, low variance), while complex models tend to overfit (low bias, high variance).",
+    "crumbs": [
+      "Deep Learning",
+      "Week 6"
+    ]
+  },
+  {
+    "objectID": "pages/DL/Week06.html#formalization",
+    "href": "pages/DL/Week06.html#formalization",
+    "title": "Regularization",
+    "section": "",
+    "text": "We can formally define bias and variance as follows:\n\n\nThe bias of a model is the expected difference between the average prediction of the model and the true value. Mathematically, it can be expressed as:\n\\[ \\text{Bias} = \\mathbb{E}[\\hat{y}] - y \\]\nWhere: - \\(\\hat{y}\\) represents the average prediction of the model. - \\(y\\) denotes the true value.\nFor simple models, the bias tends to be high, indicating a large deviation between the average prediction and the true value. In contrast, complex models exhibit low bias, as their average prediction closely approximates the true value.\n\n\n\nThe variance of a model is the expected squared difference between the model’s prediction and its average prediction. Mathematically, it can be defined as:\n\\[ \\text{Variance} = \\mathbb{E}[(\\hat{y} - \\mathbb{E}[\\hat{y}])^2] \\]\nWhere: - \\(\\hat{y}\\) represents the model’s prediction. - \\(\\mathbb{E}[\\hat{y}]\\) denotes the average prediction of the model.\nFor simple models, the variance tends to be low, indicating consistent predictions across different datasets. In contrast, complex models exhibit high variance, as their predictions vary widely across different datasets.",
+    "crumbs": [
+      "Deep Learning",
+      "Week 6"
+    ]
+  },
+  {
+    "objectID": "pages/DL/Week06.html#trade-off-revisited",
+    "href": "pages/DL/Week06.html#trade-off-revisited",
+    "title": "Regularization",
+    "section": "",
+    "text": "The bias-variance trade-off underscores the need to strike a balance between bias and variance to achieve optimal model performance. Models with excessively high bias may fail to capture the underlying patterns in the data, leading to underfitting. Conversely, models with excessively high variance may capture noise and idiosyncrasies in the training data, leading to overfitting.",
+    "crumbs": [
+      "Deep Learning",
+      "Week 6"
+    ]
+  },
+  {
+    "objectID": "pages/DL/Week06.html#introduction-1",
+    "href": "pages/DL/Week06.html#introduction-1",
+    "title": "Regularization",
+    "section": "Introduction",
+    "text": "Introduction\nIn the realm of deep learning, understanding the behavior of models on both training and test data is crucial for assessing their performance and generalization capabilities. This discussion delves into the concepts of train error versus test error, elucidating their significance in model evaluation and guiding the quest for optimal model complexity.",
+    "crumbs": [
+      "Deep Learning",
+      "Week 6"
+    ]
+  },
+  {
+    "objectID": "pages/DL/Week06.html#mean-square-error-mse",
+    "href": "pages/DL/Week06.html#mean-square-error-mse",
+    "title": "Regularization",
+    "section": "Mean Square Error (MSE)",
+    "text": "Mean Square Error (MSE)\nWhen a deep learning model predicts the output vector \\(\\mathbf{y}\\) for a given input vector \\(\\mathbf{x}\\), the mean square error (MSE) serves as a metric to quantify the predictive accuracy. Formally, the MSE is computed as the expectation of the squared difference between the predicted and actual outputs:\n\\[\n\\text{MSE} = \\mathbb{E}[(\\hat{\\mathbf{y}} - \\mathbf{y})^2]\n\\]\nwhere \\(\\hat{\\mathbf{y}}\\) represents the network’s output, and \\(\\mathbf{y}\\) denotes the ground truth output. This expectation captures the average discrepancy between the predicted and true outputs over all possible input-output pairs.",
+    "crumbs": [
+      "Deep Learning",
+      "Week 6"
+    ]
+  },
+  {
+    "objectID": "pages/DL/Week06.html#dependency-on-bias-and-variance",
+    "href": "pages/DL/Week06.html#dependency-on-bias-and-variance",
+    "title": "Regularization",
+    "section": "Dependency on Bias and Variance",
+    "text": "Dependency on Bias and Variance\nThe expected error on unseen data is intricately tied to two fundamental properties of a model: bias and variance.\n\nBias\nBias refers to the model’s tendency to systematically under- or overestimate the true values. High bias indicates that the model is too simplistic and fails to capture the underlying patterns in the data. In mathematical terms, bias can be represented as:\n\\[\n\\text{Bias}(\\mathbf{f}) = \\mathbb{E}[\\hat{\\mathbf{y}} - \\mathbf{y}]\n\\]\n\n\nVariance\nVariance, on the other hand, measures the model’s sensitivity to fluctuations in the training data. High variance implies that the model is overly complex and excessively responsive to small variations in the training set. Mathematically, variance can be expressed as:\n\\[\n\\text{Var}(\\mathbf{f}) = \\mathbb{E}[(\\hat{\\mathbf{y}} - \\mathbb{E}[\\hat{\\mathbf{y}}])^2]\n\\]\n\n\nTrade-off\nAchieving low error on unseen data necessitates striking a delicate balance between bias and variance. However, bias and variance are often in tension with each other, making it challenging to simultaneously minimize both.",
+    "crumbs": [
+      "Deep Learning",
+      "Week 6"
+    ]
+  },
+  {
+    "objectID": "pages/DL/Week06.html#training-and-test-errors",
+    "href": "pages/DL/Week06.html#training-and-test-errors",
+    "title": "Regularization",
+    "section": "Training and Test Errors",
+    "text": "Training and Test Errors\nIn the context of model evaluation, two pivotal metrics emerge: training error and test error.\n\nTraining Error\nThe training error quantifies the discrepancy between the model’s predictions and the actual outputs on the training data. It serves as a proxy for how well the model fits the training data. Mathematically, the training error is computed as the average squared error over the training set:\n\\[\n\\text{Training Error} = \\frac{1}{N} \\sum_{i=1}^{N} (\\hat{y}_i - y_i)^2\n\\]\nwhere \\(N\\) is the number of training samples, \\(\\hat{y}_i\\) denotes the predicted output for the \\(i\\)-th sample, and \\(y_i\\) represents the true output.\n\n\nTest Error\nIn contrast, the test error gauges the model’s performance on unseen data that was not used during training. It provides insights into the model’s generalization ability. Similar to the training error, the test error is calculated as the average squared error over the test set:\n\\[\n\\text{Test Error} = \\frac{1}{M} \\sum_{i=1}^{M} (\\hat{y}_i - y_i)^2\n\\]\nwhere \\(M\\) is the number of test samples, \\(\\hat{y}_i\\) denotes the predicted output for the \\(i\\)-th test sample, and \\(y_i\\) represents the true output.",
+    "crumbs": [
+      "Deep Learning",
+      "Week 6"
+    ]
+  },
+  {
+    "objectID": "pages/DL/Week06.html#model-complexity-and-error",
+    "href": "pages/DL/Week06.html#model-complexity-and-error",
+    "title": "Regularization",
+    "section": "Model Complexity and Error",
+    "text": "Model Complexity and Error\nThe relationship between model complexity and error is a central theme in deep learning.\n\nImpact of Complexity\nIncreasing the complexity of a model often leads to a reduction in training error. Complex models possess greater capacity to capture intricate patterns in the training data, resulting in improved performance on seen data points.\n\n\nOverfitting\nHowever, excessively complex models run the risk of overfitting, wherein they memorize the training data’s noise and fail to generalize to new, unseen data. This phenomenon is reflected in an increase in test error despite a decrease in training error.\n\n\nFinding the Sweet Spot\nThe quest for optimal model complexity entails navigating the trade-off between training and test errors. The goal is to identify the “sweet spot” where the model achieves minimal test error without succumbing to overfitting.",
+    "crumbs": [
+      "Deep Learning",
+      "Week 6"
+    ]
+  },
+  {
+    "objectID": "pages/DL/Week06.html#formal-definitions",
+    "href": "pages/DL/Week06.html#formal-definitions",
+    "title": "Regularization",
+    "section": "Formal Definitions",
+    "text": "Formal Definitions\nFormally defining the training and test errors provides a rigorous framework for model evaluation.\n\nTraining Error\nThe training error, denoted as \\(\\text{Err}_{\\text{train}}\\), is computed as the average squared error over the training set:\n\\[\n\\text{Err}_{\\text{train}} = \\frac{1}{N} \\sum_{i=1}^{N} (\\hat{y}_i - y_i)^2\n\\]\n\n\nTest Error\nSimilarly, the test error, denoted as \\(\\text{Err}_{\\text{test}}\\), is calculated as the average squared error over the test set:\n\\[\n\\text{Err}_{\\text{test}} = \\frac{1}{M} \\sum_{i=1}^{M} (\\hat{y}_i - y_i)^2\n\\]",
+    "crumbs": [
+      "Deep Learning",
+      "Week 6"
+    ]
+  },
+  {
+    "objectID": "pages/DL/Week06.html#validation-data",
+    "href": "pages/DL/Week06.html#validation-data",
+    "title": "Regularization",
+    "section": "Validation Data",
+    "text": "Validation Data\nWhile training error provides insights into the model’s performance on seen data points, true evaluation necessitates validation or test data.\n\nRole of Validation Data\nValidation data serves as an independent benchmark for assessing a model’s generalization ability. Unlike training data, validation data enables the evaluation of the model’s performance on unseen data points, thus offering a more accurate representation of its capabilities.\n\n\nPreventing Overfitting\nMonitoring test error on validation data facilitates the detection of overfitting. A rise in test error signals the need to curb model complexity to prevent overfitting and ensure robust generalization.",
+    "crumbs": [
+      "Deep Learning",
+      "Week 6"
+    ]
+  },
+  {
+    "objectID": "pages/DL/Week06.html#introduction-2",
+    "href": "pages/DL/Week06.html#introduction-2",
+    "title": "Regularization",
+    "section": "Introduction",
+    "text": "Introduction\nIn the realm of deep learning, understanding the relationship between data and the underlying true function is crucial for effective modeling. This relationship is often obscured by noise, necessitating approximation techniques to infer the true function. In this discussion, we delve into the process of approximating the true function and estimating the associated mean square error (MSE) to evaluate model performance.",
+    "crumbs": [
+      "Deep Learning",
+      "Week 6"
+    ]
+  },
+  {
+    "objectID": "pages/DL/Week06.html#data-and-true-function-relationship",
+    "href": "pages/DL/Week06.html#data-and-true-function-relationship",
+    "title": "Regularization",
+    "section": "Data and True Function Relationship",
+    "text": "Data and True Function Relationship\nConsider a dataset \\(D\\) comprising both training and test points, where \\(D\\) encompasses \\(M\\) training points and \\(n\\) test points. Within this dataset, there exists a true function \\(f\\) that maps input data \\(\\mathbf{x}\\) to output predictions \\(\\mathbf{y}\\), subject to some noise \\(\\varepsilon\\). Mathematically, this relationship is represented as:\n\\[\n\\mathbf{y} = f(\\mathbf{x}) + \\varepsilon\n\\]\nHere, \\(\\mathbf{y}\\) is related to \\(\\mathbf{x}\\) via \\(f\\), albeit with added noise \\(\\varepsilon\\). We assume \\(\\varepsilon\\) follows a zero-centered normal distribution with a small variance \\(\\sigma^2\\).",
+    "crumbs": [
+      "Deep Learning",
+      "Week 6"
+    ]
+  },
+  {
+    "objectID": "pages/DL/Week06.html#approximating-the-true-function",
+    "href": "pages/DL/Week06.html#approximating-the-true-function",
+    "title": "Regularization",
+    "section": "Approximating the True Function",
+    "text": "Approximating the True Function\nSince the true function \\(f\\) is unknown, it must be approximated using a surrogate function \\(\\hat{f}\\). The parameters of \\(\\hat{f}\\) are estimated using the training data \\(T\\), a subset of \\(D\\). Consequently, the prediction of the output becomes:\n\\[\n\\mathbf{y} = \\hat{f}(\\mathbf{x})\n\\]\nBy approximating \\(f\\) with \\(\\hat{f}\\), we aim to capture the underlying relationship between the input data and the output predictions.",
+    "crumbs": [
+      "Deep Learning",
+      "Week 6"
+    ]
+  },
+  {
+    "objectID": "pages/DL/Week06.html#mean-square-error-mse-1",
+    "href": "pages/DL/Week06.html#mean-square-error-mse-1",
+    "title": "Regularization",
+    "section": "Mean Square Error (MSE)",
+    "text": "Mean Square Error (MSE)\nCentral to assessing model performance is the mean square error (MSE), which quantifies the disparity between predicted and true values. Formally, the MSE is expressed as:\n\\[\n\\mathbb{E}[(\\hat{f}(\\mathbf{x}) - f(\\mathbf{x}))^2]\n\\]\nThis represents the average squared difference between the predicted value \\(\\hat{f}(\\mathbf{x})\\) and the true value \\(f(\\mathbf{x})\\), computed over numerous samples.",
+    "crumbs": [
+      "Deep Learning",
+      "Week 6"
+    ]
+  },
+  {
+    "objectID": "pages/DL/Week06.html#estimating-the-mse",
+    "href": "pages/DL/Week06.html#estimating-the-mse",
+    "title": "Regularization",
+    "section": "Estimating the MSE",
+    "text": "Estimating the MSE\nDirectly estimating \\(\\mathbb{E}[(\\hat{f}(\\mathbf{x}) - f(\\mathbf{x}))^2]\\) is infeasible due to the unknown true function \\(f(\\mathbf{x})\\). Instead, an empirical estimation approach is employed. This involves computing the average square error between predicted and true values using available data. Thus, the empirical estimate substitutes the true expectation with an average computed from observed samples.",
+    "crumbs": [
+      "Deep Learning",
+      "Week 6"
+    ]
+  },
+  {
+    "objectID": "pages/DL/Week06.html#empirical-estimation-analogies",
+    "href": "pages/DL/Week06.html#empirical-estimation-analogies",
+    "title": "Regularization",
+    "section": "Empirical Estimation Analogies",
+    "text": "Empirical Estimation Analogies\nEmpirical estimation of expectations is a common practice across various disciplines. An analogy can be drawn to computing the average number of goals scored in football matches based on a limited set of observed matches. Similarly, in deep learning, the empirical estimate of the MSE is derived from a finite set of training and test data.",
+    "crumbs": [
+      "Deep Learning",
+      "Week 6"
+    ]
+  },
+  {
+    "objectID": "pages/DL/Week06.html#computing-the-empirical-estimate",
+    "href": "pages/DL/Week06.html#computing-the-empirical-estimate",
+    "title": "Regularization",
+    "section": "Computing the Empirical Estimate",
+    "text": "Computing the Empirical Estimate\nTo compute the empirical estimate of the MSE, the average squared difference between predicted and true values is calculated over the test set. The expected value of \\(\\varepsilon^2\\) is \\(\\sigma^2\\), representing the variance of the noise.",
+    "crumbs": [
+      "Deep Learning",
+      "Week 6"
+    ]
+  },
+  {
+    "objectID": "pages/DL/Week06.html#handling-covariance-term",
+    "href": "pages/DL/Week06.html#handling-covariance-term",
+    "title": "Regularization",
+    "section": "Handling Covariance Term",
+    "text": "Handling Covariance Term\nDuring the derivation of the MSE, a covariance term arises between the noise \\(\\varepsilon\\) and the difference between predicted and true values \\(\\hat{f}(\\mathbf{x}) - f(\\mathbf{x})\\). Understanding the influence of this covariance term is essential for accurate estimation of the MSE.",
+    "crumbs": [
+      "Deep Learning",
+      "Week 6"
+    ]
+  },
+  {
+    "objectID": "pages/DL/Week06.html#independence-of-covariance-term",
+    "href": "pages/DL/Week06.html#independence-of-covariance-term",
+    "title": "Regularization",
+    "section": "Independence of Covariance Term",
+    "text": "Independence of Covariance Term\nThe noise \\(\\varepsilon\\) is independent of the difference \\(\\hat{f}(\\mathbf{x}) - f(\\mathbf{x})\\) since the test data used to compute \\(\\varepsilon\\) does not participate in the training of \\(\\hat{f}(\\mathbf{x})\\). Consequently, the covariance between \\(\\varepsilon\\) and \\(\\hat{f}(\\mathbf{x}) - f(\\mathbf{x})\\) is zero.",
+    "crumbs": [
+      "Deep Learning",
+      "Week 6"
+    ]
+  },
+  {
+    "objectID": "pages/DL/Week06.html#impact-on-estimation",
+    "href": "pages/DL/Week06.html#impact-on-estimation",
+    "title": "Regularization",
+    "section": "Impact on Estimation",
+    "text": "Impact on Estimation\nWhen estimating the MSE from test data, the covariance term becomes zero, simplifying the estimation process. Thus, the true error is closely approximated by the empirical test error plus a small constant (\\(\\sigma^2\\)).",
+    "crumbs": [
+      "Deep Learning",
+      "Week 6"
+    ]
+  },
+  {
+    "objectID": "pages/DL/Week06.html#avoiding-bias-in-estimation",
+    "href": "pages/DL/Week06.html#avoiding-bias-in-estimation",
+    "title": "Regularization",
+    "section": "Avoiding Bias in Estimation",
+    "text": "Avoiding Bias in Estimation\nEstimating model performance solely from training data yields overly optimistic results. To obtain a more accurate assessment, the test error, which reflects the true error, should be employed. By empirically estimating the error from test data, a realistic depiction of model performance can be attained.",
+    "crumbs": [
+      "Deep Learning",
+      "Week 6"
+    ]
+  },
+  {
     "objectID": "pages/AI/Week02.html",
     "href": "pages/AI/Week02.html",
     "title": "State Space Search and Search Algorithms Overview",
@@ -5085,6 +6097,446 @@
     "crumbs": [
       "AI: Search Methods",
       "Week 4"
+    ]
+  },
+  {
+    "objectID": "pages/AI/Week06.html",
+    "href": "pages/AI/Week06.html",
+    "title": "Weighted A* (WA*)",
+    "section": "",
+    "text": "Weighted A* (WA) is one such variation that attempts to strike a balance between space efficiency and optimality. In WA, the heuristic function \\(h\\) is multiplied by a weight \\(w\\) to influence the search process. This adjustment allows for greater exploration of informed paths while potentially sacrificing optimality.\nMathematically, WA* is represented as follows:\n\\[\nf_w(n) = g(n) + w \\times h(n)\n\\]\nwhere:\n\n\\(f_w(n)\\) is the modified evaluation function with the weight \\(w\\).\n\\(g(n)\\) and \\(h(n)\\) retain their meanings as in traditional A*.\n\n\n\nA* is known for its ability to find the optimal cost path by considering both the actual cost of reaching a node from the start node (\\(g(n)\\)) and the estimated cost from that node to the goal (\\(h(n)\\)). This combination of actual and estimated costs ensures that A* explores the search space efficiently while guaranteeing optimality.\nOn the other hand, Best First Search (BFS) prioritizes nodes solely based on their estimated distance to the goal, without considering the actual cost. While BFS may terminate more quickly than A*, it does not guarantee optimality and may lead to suboptimal solutions in certain cases.\n\n\n\nWeighted A* introduces a weight parameter \\(w\\) to adjust the relative influence of the heuristic function (\\(h(n)\\)) compared to the actual cost (\\(g(n)\\)). By varying this weight parameter, Weighted A* allows for a trade-off between the behaviors of A* and BFS.\n\nLow Weight (\\(w \\approx 0\\)): When the weight parameter is close to zero, Weighted A* behaves similarly to BFS, prioritizing nodes based primarily on their estimated distance to the goal. This can lead to faster termination but may sacrifice optimality.\nHigh Weight (\\(w \\rightarrow \\infty\\)): Conversely, when the weight parameter tends to infinity, Weighted A* behaves more like A, giving greater importance to the actual cost of reaching a node from the start. In this case, Weighted A aims to find the optimal cost path, similar to A*.\n\n\n\n\nThe behavior of Weighted A* is influenced by the chosen weight parameter \\(w\\). Higher weight values emphasize the heuristic function more, leading to faster termination but potentially sacrificing optimality. Lower weight values prioritize the actual cost, ensuring optimality but potentially leading to longer search times.\n\n\n\nTo understand the behavior of Weighted A*, consider an illustrative example with a graph consisting of a start node, a goal node, and multiple paths connecting them. Each path has intermediate nodes with associated costs, and the goal is to find the optimal cost path from the start to the goal.\n\nNode Selection: Best First Search prioritizes nodes solely based on their estimated distance to the goal. In contrast, Weighted A* considers both the actual cost of reaching a node from the start and the estimated distance to the goal, with the weight parameter determining the relative importance of these factors.\nOptimality vs. Speed: Weighted A* offers a trade-off between optimality and speed of termination. By adjusting the weight parameter, the algorithm can prioritize either finding the optimal cost path or terminating more quickly at the expense of optimality.\n\n\n\n\nComparing Weighted A* with other search algorithms such as A*, BFS, and Branch and Bound provides insights into their respective strengths and weaknesses.\n\nBranch and Bound: This algorithm explores the entire search space, ensuring optimality but potentially leading to higher exploration costs. While it guarantees finding the optimal path, it may be less efficient in terms of search time.\nA* Algorithm: A* strikes a balance between exploration and optimality by considering both the actual cost and the estimated distance to the goal. This allows it to find the optimal cost path more efficiently compared to Branch and Bound.\nWeighted A* (with \\(w = 2\\)): With a higher weight parameter, Weighted A* prioritizes the heuristic function more, leading to faster termination but potentially sacrificing optimality. While it may explore fewer nodes compared to A*, it may not always find the optimal path.\nBest First Search: Best First Search prioritizes nodes solely based on their estimated distance to the goal, without considering the actual cost. While it may terminate more quickly than A*, it does not guarantee optimality and may lead to suboptimal solutions.\n\n\n\n\nThe influence of the heuristic function in Weighted A* and other search algorithms plays a crucial role in determining their behavior and performance.\n\nTowards the Goal: As the algorithm progresses towards the goal, the influence of the heuristic function decreases. This is reflected in the decreasing heuristic values as the algorithm approaches the goal.\nEffect on F Values: In A, the f values may increase as the algorithm progresses towards the goal due to the decreasing influence of the heuristic function. Weighted A, with a variable weight function based on the heuristic value, may exhibit different behaviors depending on the chosen weight parameter.\n\n\n\n\nUnderstanding the implications of the heuristic function’s behavior can provide valuable insights into the performance and characteristics of search algorithms.\n\nConsistency Condition: When the heuristic function satisfies the consistency condition, A* guarantees finding the optimal path to any node along the way. This condition influences the behavior of A* and may affect the algorithm’s optimality.",
+    "crumbs": [
+      "AI: Search Methods",
+      "Week 6"
+    ]
+  },
+  {
+    "objectID": "pages/AI/Week06.html#comparison-with-a-and-best-first-search-bfs",
+    "href": "pages/AI/Week06.html#comparison-with-a-and-best-first-search-bfs",
+    "title": "Weighted A* (WA*)",
+    "section": "",
+    "text": "A* is known for its ability to find the optimal cost path by considering both the actual cost of reaching a node from the start node (\\(g(n)\\)) and the estimated cost from that node to the goal (\\(h(n)\\)). This combination of actual and estimated costs ensures that A* explores the search space efficiently while guaranteeing optimality.\nOn the other hand, Best First Search (BFS) prioritizes nodes solely based on their estimated distance to the goal, without considering the actual cost. While BFS may terminate more quickly than A*, it does not guarantee optimality and may lead to suboptimal solutions in certain cases.",
+    "crumbs": [
+      "AI: Search Methods",
+      "Week 6"
+    ]
+  },
+  {
+    "objectID": "pages/AI/Week06.html#trade-off-in-weighted-a",
+    "href": "pages/AI/Week06.html#trade-off-in-weighted-a",
+    "title": "Weighted A* (WA*)",
+    "section": "",
+    "text": "Weighted A* introduces a weight parameter \\(w\\) to adjust the relative influence of the heuristic function (\\(h(n)\\)) compared to the actual cost (\\(g(n)\\)). By varying this weight parameter, Weighted A* allows for a trade-off between the behaviors of A* and BFS.\n\nLow Weight (\\(w \\approx 0\\)): When the weight parameter is close to zero, Weighted A* behaves similarly to BFS, prioritizing nodes based primarily on their estimated distance to the goal. This can lead to faster termination but may sacrifice optimality.\nHigh Weight (\\(w \\rightarrow \\infty\\)): Conversely, when the weight parameter tends to infinity, Weighted A* behaves more like A, giving greater importance to the actual cost of reaching a node from the start. In this case, Weighted A aims to find the optimal cost path, similar to A*.",
+    "crumbs": [
+      "AI: Search Methods",
+      "Week 6"
+    ]
+  },
+  {
+    "objectID": "pages/AI/Week06.html#behavior-of-weighted-a",
+    "href": "pages/AI/Week06.html#behavior-of-weighted-a",
+    "title": "Weighted A* (WA*)",
+    "section": "",
+    "text": "The behavior of Weighted A* is influenced by the chosen weight parameter \\(w\\). Higher weight values emphasize the heuristic function more, leading to faster termination but potentially sacrificing optimality. Lower weight values prioritize the actual cost, ensuring optimality but potentially leading to longer search times.",
+    "crumbs": [
+      "AI: Search Methods",
+      "Week 6"
+    ]
+  },
+  {
+    "objectID": "pages/AI/Week06.html#illustrative-example",
+    "href": "pages/AI/Week06.html#illustrative-example",
+    "title": "Weighted A* (WA*)",
+    "section": "",
+    "text": "To understand the behavior of Weighted A*, consider an illustrative example with a graph consisting of a start node, a goal node, and multiple paths connecting them. Each path has intermediate nodes with associated costs, and the goal is to find the optimal cost path from the start to the goal.\n\nNode Selection: Best First Search prioritizes nodes solely based on their estimated distance to the goal. In contrast, Weighted A* considers both the actual cost of reaching a node from the start and the estimated distance to the goal, with the weight parameter determining the relative importance of these factors.\nOptimality vs. Speed: Weighted A* offers a trade-off between optimality and speed of termination. By adjusting the weight parameter, the algorithm can prioritize either finding the optimal cost path or terminating more quickly at the expense of optimality.",
+    "crumbs": [
+      "AI: Search Methods",
+      "Week 6"
+    ]
+  },
+  {
+    "objectID": "pages/AI/Week06.html#comparison-of-algorithms",
+    "href": "pages/AI/Week06.html#comparison-of-algorithms",
+    "title": "Weighted A* (WA*)",
+    "section": "",
+    "text": "Comparing Weighted A* with other search algorithms such as A*, BFS, and Branch and Bound provides insights into their respective strengths and weaknesses.\n\nBranch and Bound: This algorithm explores the entire search space, ensuring optimality but potentially leading to higher exploration costs. While it guarantees finding the optimal path, it may be less efficient in terms of search time.\nA* Algorithm: A* strikes a balance between exploration and optimality by considering both the actual cost and the estimated distance to the goal. This allows it to find the optimal cost path more efficiently compared to Branch and Bound.\nWeighted A* (with \\(w = 2\\)): With a higher weight parameter, Weighted A* prioritizes the heuristic function more, leading to faster termination but potentially sacrificing optimality. While it may explore fewer nodes compared to A*, it may not always find the optimal path.\nBest First Search: Best First Search prioritizes nodes solely based on their estimated distance to the goal, without considering the actual cost. While it may terminate more quickly than A*, it does not guarantee optimality and may lead to suboptimal solutions.",
+    "crumbs": [
+      "AI: Search Methods",
+      "Week 6"
+    ]
+  },
+  {
+    "objectID": "pages/AI/Week06.html#heuristic-function-influence",
+    "href": "pages/AI/Week06.html#heuristic-function-influence",
+    "title": "Weighted A* (WA*)",
+    "section": "",
+    "text": "The influence of the heuristic function in Weighted A* and other search algorithms plays a crucial role in determining their behavior and performance.\n\nTowards the Goal: As the algorithm progresses towards the goal, the influence of the heuristic function decreases. This is reflected in the decreasing heuristic values as the algorithm approaches the goal.\nEffect on F Values: In A, the f values may increase as the algorithm progresses towards the goal due to the decreasing influence of the heuristic function. Weighted A, with a variable weight function based on the heuristic value, may exhibit different behaviors depending on the chosen weight parameter.",
+    "crumbs": [
+      "AI: Search Methods",
+      "Week 6"
+    ]
+  },
+  {
+    "objectID": "pages/AI/Week06.html#implications-of-heuristic-function-behavior",
+    "href": "pages/AI/Week06.html#implications-of-heuristic-function-behavior",
+    "title": "Weighted A* (WA*)",
+    "section": "",
+    "text": "Understanding the implications of the heuristic function’s behavior can provide valuable insights into the performance and characteristics of search algorithms.\n\nConsistency Condition: When the heuristic function satisfies the consistency condition, A* guarantees finding the optimal path to any node along the way. This condition influences the behavior of A* and may affect the algorithm’s optimality.",
+    "crumbs": [
+      "AI: Search Methods",
+      "Week 6"
+    ]
+  },
+  {
+    "objectID": "pages/AI/Week06.html#introduction",
+    "href": "pages/AI/Week06.html#introduction",
+    "title": "Weighted A* (WA*)",
+    "section": "Introduction",
+    "text": "Introduction\nIn the realm of artificial intelligence (AI), the A* search algorithm stands out as a fundamental tool for finding optimal paths in problem-solving tasks. However, as computational challenges grow, there arises a need to develop variations of A* that optimize space utilization without compromising the algorithm’s admissibility. This exploration leads to the development of leaner versions of A* that strike a balance between space efficiency and computational time.",
+    "crumbs": [
+      "AI: Search Methods",
+      "Week 6"
+    ]
+  },
+  {
+    "objectID": "pages/AI/Week06.html#space-efficient-variations-of-a",
+    "href": "pages/AI/Week06.html#space-efficient-variations-of-a",
+    "title": "Weighted A* (WA*)",
+    "section": "Space-Efficient Variations of A*",
+    "text": "Space-Efficient Variations of A*\n\nMotivation\nWhile A* provides an efficient means of finding optimal paths, its space requirements can become prohibitive for problems with large state spaces. As such, there is a growing interest in developing variants of A* that reduce space complexity while maintaining the algorithm’s admissibility.\n\n\nIterative Deepening A* (IDA*)\nIterative Deepening A* (IDA) is another space-efficient variant of A that borrows concepts from iterative deepening depth-first search (IDDFS). IDA* operates by conducting a series of depth-first searches with increasing depth limits until a solution is found. This iterative approach allows for space savings by exploring only a portion of the search space at a time.\nMathematically, the core idea of IDA* involves iteratively increasing the depth limit \\(D\\) until a solution is discovered. This process ensures optimality while mitigating space requirements.",
+    "crumbs": [
+      "AI: Search Methods",
+      "Week 6"
+    ]
+  },
+  {
+    "objectID": "pages/AI/Week06.html#recursive-best-first-search-rbfs",
+    "href": "pages/AI/Week06.html#recursive-best-first-search-rbfs",
+    "title": "Weighted A* (WA*)",
+    "section": "Recursive Best-First Search (RBFS)",
+    "text": "Recursive Best-First Search (RBFS)\nRecursive Best-First Search (RBFS) is a space-efficient search algorithm that blends the principles of best-first search with backtracking. Introduced by Richard Korf in 1991, RBFS maintains a linear space complexity while exploring nodes in a best-first order.\nRBFS operates by maintaining two values for each node: its estimated cost to the goal and the second-best estimated cost. This approach allows RBFS to efficiently explore the search space while ensuring directionality in the search process.",
+    "crumbs": [
+      "AI: Search Methods",
+      "Week 6"
+    ]
+  },
+  {
+    "objectID": "pages/AI/Week06.html#monotoneconsistency-condition",
+    "href": "pages/AI/Week06.html#monotoneconsistency-condition",
+    "title": "Weighted A* (WA*)",
+    "section": "Monotone/Consistency Condition",
+    "text": "Monotone/Consistency Condition\nThe monotone or consistency condition is a crucial property that ensures the optimality of A* search. This condition dictates that A* will find the optimal path to every node it selects from the open list, akin to the behavior of Dijkstra’s algorithm.\nMathematically, the consistency condition is expressed as follows:\n\\[\nf(n) \\leq g(n') + h(n')\n\\]\nwhere:\n\n\\(n'\\) is any successor of node \\(n\\).\n\\(f(n)\\) represents the estimated total cost of the cheapest path from the initial state to node \\(n\\).\n\\(g(n')\\) is the cost of the path from the initial state to successor node \\(n'\\).\n\\(h(n')\\) is the heuristic estimate of the cost from successor node \\(n'\\) to the goal state.",
+    "crumbs": [
+      "AI: Search Methods",
+      "Week 6"
+    ]
+  },
+  {
+    "objectID": "pages/AI/Week06.html#introduction-1",
+    "href": "pages/AI/Week06.html#introduction-1",
+    "title": "Weighted A* (WA*)",
+    "section": "Introduction",
+    "text": "Introduction\nThe A* algorithm stands as a cornerstone in the realm of pathfinding algorithms, renowned for its ability to efficiently find optimal paths in various domains. It achieves this feat through a combination of heuristic guidance and systematic exploration. Central to the effectiveness of A* is the concept of admissibility, which ensures that the algorithm consistently converges to the optimal solution while exploring the search space. One critical condition that reinforces the optimality of A* is the monotone condition, also known as the consistency condition. In this discourse, we delve into the intricacies of the monotone condition, its significance, and its implications on the behavior of the A* algorithm.",
+    "crumbs": [
+      "AI: Search Methods",
+      "Week 6"
+    ]
+  },
+  {
+    "objectID": "pages/AI/Week06.html#admissibility-in-a-algorithm",
+    "href": "pages/AI/Week06.html#admissibility-in-a-algorithm",
+    "title": "Weighted A* (WA*)",
+    "section": "Admissibility in A* Algorithm",
+    "text": "Admissibility in A* Algorithm\nBefore delving into the specifics of the monotone condition, it is imperative to comprehend the broader context of admissibility within the A* algorithm. Admissibility refers to the property wherein the heuristic function employed by the algorithm consistently underestimates the true cost of reaching the goal from any given state. This underestimation ensures that A* prioritizes nodes for exploration based on their potential to lead to the optimal solution. Admissibility hinges on three fundamental criteria:\n\nFinite Branching Factor: The number of successor states from any given state must be finite, ensuring that the search space remains manageable.\nMinimal Edge Costs: Every edge in the search graph must possess a cost at least as large as a small constant, typically denoted as \\(\\epsilon\\). This condition prevents the algorithm from traversing excessively costly paths prematurely.\nHeuristic Underestimation: The heuristic function employed by A* must consistently underestimate the true cost of reaching the goal state from any given state. Mathematically, this condition is expressed as \\(h(n) \\leq h^*(n)\\), where \\(h(n)\\) represents the heuristic estimate and \\(h^*(n)\\) represents the true cost.",
+    "crumbs": [
+      "AI: Search Methods",
+      "Week 6"
+    ]
+  },
+  {
+    "objectID": "pages/AI/Week06.html#the-monotone-condition-1",
+    "href": "pages/AI/Week06.html#the-monotone-condition-1",
+    "title": "Weighted A* (WA*)",
+    "section": "The Monotone Condition",
+    "text": "The Monotone Condition\n\nDefinition and Conceptual Framework\nThe monotone condition, also known as the consistency condition, serves as an additional criterion for ensuring the optimality of the A* algorithm. It posits that the heuristic values assigned to successive nodes along a path to the goal must exhibit a certain relationship with the actual edge costs. Formally, for any node \\(n\\) that succeeds node \\(m\\) on a path to the goal:\n\\[ h(m) - h(n) \\leq c(m, n) \\]\nHere, \\(h(m)\\) and \\(h(n)\\) denote the heuristic values of nodes \\(m\\) and \\(n\\), respectively, while \\(c(m, n)\\) represents the cost of the edge connecting nodes \\(m\\) and \\(n\\). In essence, the monotone condition stipulates that the difference between the heuristic values of successive nodes must not exceed the actual cost of traversing the corresponding edge.\n\n\nImplications and Significance\nThe adherence to the monotone condition imbues the A* algorithm with several notable advantages:\n\n1. Optimal Path Selection\nBy satisfying the monotone condition, A* ensures that it always selects the optimal path to every node it expands from the open set. This guarantees that the algorithm consistently progresses towards the goal state along the most efficient trajectory, thereby minimizing computational overhead.\n\n\n2. Elimination of Cost Propagation in Closed Nodes\nThe monotone condition obviates the need for certain operations, such as improved cost propagation, within closed nodes. Unlike conventional A* implementations where cost updates may propagate through closed nodes, the adherence to the monotone condition renders such operations redundant. Consequently, the algorithm’s execution becomes more streamlined and efficient.",
+    "crumbs": [
+      "AI: Search Methods",
+      "Week 6"
+    ]
+  },
+  {
+    "objectID": "pages/AI/Week06.html#illustrative-example-1",
+    "href": "pages/AI/Week06.html#illustrative-example-1",
+    "title": "Weighted A* (WA*)",
+    "section": "Illustrative Example",
+    "text": "Illustrative Example\nTo elucidate the practical implications of the monotone condition, consider a scenario wherein A* navigates a grid-based environment using the Manhattan distance heuristic. In such a setting, the heuristic values assigned to nodes represent their Manhattan distances from the goal state. Let us examine a simplified graph excerpt to illustrate the application of the monotone condition:\n\\[\n\\begin{array}{c c c c c}\n\\text{Nodes} & \\text{Heuristic Value (h)} & \\text{Edge Cost (c)} \\\\\n\\hline\nH & 120 & - \\\\\nO & 100 & 23 \\\\\nE & 120 & 33 \\\\\nB & 110 & 33 \\\\\nL & 140 & 32 \\\\\nP & 150 & 32 \\\\\nS & 160 & 21 \\\\\nU & 140 & 21 \\\\\n\\end{array}\n\\]\nIn this graph, each node’s heuristic value corresponds to its Manhattan distance from the goal state. Upon scrutiny, it becomes evident that the difference between the heuristic values of successive nodes adheres to the monotone condition. For instance, consider the nodes \\(H\\) and \\(O\\). The difference in their heuristic values is \\(|120 - 100| = 20\\), which is less than the corresponding edge cost of \\(23\\). Similar observations hold true for other node pairs, thereby validating the monotone condition’s applicability in this context.",
+    "crumbs": [
+      "AI: Search Methods",
+      "Week 6"
+    ]
+  },
+  {
+    "objectID": "pages/AI/Week06.html#consequences-of-monotone-condition",
+    "href": "pages/AI/Week06.html#consequences-of-monotone-condition",
+    "title": "Weighted A* (WA*)",
+    "section": "Consequences of Monotone Condition",
+    "text": "Consequences of Monotone Condition\n\nNon-decreasing \\(f\\) Values\nAn immediate consequence of satisfying the monotone condition is the emergence of non-decreasing \\(f\\) values along optimal paths. This phenomenon ensures that as the algorithm progresses towards the goal state, the cumulative cost of reaching any intermediate node increases monotonically. Consequently, A* consistently prioritizes nodes along paths that lead to the optimal solution, enhancing its convergence properties.\n\n\nOptimal Path Identification\nThe monotone condition guarantees that at the point of expansion, A* selects nodes that lie on optimal paths to the goal state. In essence, the algorithm not only identifies the optimal path to the goal but also ensures optimality at every intermediate node along the trajectory. This robustness underscores A*’s efficacy in navigating complex search spaces while maintaining optimality.\n\n\nStreamlined Algorithmic Execution\nBy virtue of adhering to the monotone condition, A* obviates the need for certain operations, such as improved cost propagation within closed nodes. In conventional A* implementations, cost updates may propagate through closed nodes to refine the search process. However, the monotone condition eliminates such requirements, simplifying the algorithm’s execution and reducing computational overhead.",
+    "crumbs": [
+      "AI: Search Methods",
+      "Week 6"
+    ]
+  },
+  {
+    "objectID": "pages/AI/Week06.html#future-considerations-and-applications",
+    "href": "pages/AI/Week06.html#future-considerations-and-applications",
+    "title": "Weighted A* (WA*)",
+    "section": "Future Considerations and Applications",
+    "text": "Future Considerations and Applications\nThe successful integration of the monotone condition into the A* algorithm paves the way for exploring novel avenues in algorithmic design and optimization. One particularly intriguing domain is that of sequence alignment in computational biology. In this context, the ability to prune closed nodes efficiently becomes paramount, especially when dealing with large-scale sequence datasets. By leveraging the principles underlying the monotone condition, researchers can devise innovative algorithms tailored to address the unique challenges posed by sequence alignment problems.",
+    "crumbs": [
+      "AI: Search Methods",
+      "Week 6"
+    ]
+  },
+  {
+    "objectID": "pages/AI/Week06.html#introduction-to-nucleic-acid-sequences",
+    "href": "pages/AI/Week06.html#introduction-to-nucleic-acid-sequences",
+    "title": "Weighted A* (WA*)",
+    "section": "Introduction to Nucleic Acid Sequences",
+    "text": "Introduction to Nucleic Acid Sequences\nNucleic acid sequences are fundamental in biology, delineating the precise order of nucleotides within DNA or RNA molecules. These sequences, composed of adenine (\\(A\\)), cytosine (\\(C\\)), guanine (\\(G\\)), and thymine (\\(T\\)), serve as the blueprint for genetic information transmission and protein synthesis. The linear arrangement of these nucleotides forms alleles, dictating various biological functions and traits.",
+    "crumbs": [
+      "AI: Search Methods",
+      "Week 6"
+    ]
+  },
+  {
+    "objectID": "pages/AI/Week06.html#sequence-alignment-problem",
+    "href": "pages/AI/Week06.html#sequence-alignment-problem",
+    "title": "Weighted A* (WA*)",
+    "section": "Sequence Alignment Problem",
+    "text": "Sequence Alignment Problem\nThe sequence alignment problem is pivotal in bioinformatics, aiming to assess the similarity between two amino acid sequences. This comparison holds significant implications for understanding evolutionary relationships, genetic mutations, and protein structure-function relationships.\n\nNeedleman-Wunsch Algorithm\nIn 1970, Needleman and Wunsch devised a dynamic programming algorithm to address the sequence alignment problem. This algorithm employs a dynamic programming approach to compute the optimal alignment between two sequences. By systematically evaluating all possible alignments and assigning scores based on matching residues and gap insertions, the Needleman-Wunsch algorithm provides a comprehensive solution to the sequence alignment problem.\n\n\nObjective of Sequence Alignment\nThe primary objective of sequence alignment is to maximize the similarity between the aligned sequences while accommodating for variations such as gaps and mismatches. By quantifying the degree of similarity through alignment scores, biologists gain insights into evolutionary relatedness, functional conservation, and genetic divergence.\n\n\nPenalties in Sequence Alignment\nIn the context of sequence alignment, penalties are assigned to mismatches and gap insertions to quantify the cost of alignment.\n\nMismatch Penalty: When different characters are aligned, a penalty is incurred to reflect the degree of divergence between the sequences.\nGap Penalty (Indel Penalty): Inserting a gap in one or both sequences incurs a penalty, reflecting the potential for insertions or deletions in genetic sequences.",
+    "crumbs": [
+      "AI: Search Methods",
+      "Week 6"
+    ]
+  },
+  {
+    "objectID": "pages/AI/Week06.html#similarity-functions",
+    "href": "pages/AI/Week06.html#similarity-functions",
+    "title": "Weighted A* (WA*)",
+    "section": "Similarity Functions",
+    "text": "Similarity Functions\nSequence alignment transforms the problem into a maximization task, aiming to maximize the similarity between aligned sequences while minimizing penalties associated with mismatches and gap insertions. Various similarity functions are employed to assign scores to aligned residues, facilitating the comparison and evaluation of different alignments.\n\nExamples of Similarity Functions\n\nSimple Scoring Scheme: Assigns scores based on matches, mismatches, and gap insertions. For instance, a match may receive a positive score (\\(+1\\)), while a mismatch or gap insertion may incur a negative penalty.\nFine-Grained Scoring Scheme: Assigns different weights to aligned residues based on their biochemical properties and evolutionary conservation. For example, aligning identical amino acids may receive a higher weight than aligning dissimilar residues.",
+    "crumbs": [
+      "AI: Search Methods",
+      "Week 6"
+    ]
+  },
+  {
+    "objectID": "pages/AI/Week06.html#sequence-alignment-as-graph-search",
+    "href": "pages/AI/Week06.html#sequence-alignment-as-graph-search",
+    "title": "Weighted A* (WA*)",
+    "section": "Sequence Alignment as Graph Search",
+    "text": "Sequence Alignment as Graph Search\nIn computational biology, the sequence alignment problem can be conceptualized as a graph search problem, where nodes represent alignment states, and edges denote possible alignment moves.\n\nRepresentation\n\nNodes: Represent different states of sequence alignment, including aligned residues and gap insertions.\nEdges: Correspond to alignment moves, such as matching residues, inserting gaps, or extending alignments.\n\n\n\nMoves in Sequence Alignment\n\nDiagonal Move: Aligning two residues from the input sequences.\nHorizontal Move: Inserting a gap in one sequence while maintaining alignment in the other sequence.\nVertical Move: Inserting a gap in the other sequence while maintaining alignment in the first sequence.\n\n\n\nCost of Alignment Moves\nEach alignment move incurs a cost, reflecting the penalty associated with mismatches or gap insertions.",
+    "crumbs": [
+      "AI: Search Methods",
+      "Week 6"
+    ]
+  },
+  {
+    "objectID": "pages/AI/Week06.html#complexity-analysis",
+    "href": "pages/AI/Week06.html#complexity-analysis",
+    "title": "Weighted A* (WA*)",
+    "section": "Complexity Analysis",
+    "text": "Complexity Analysis\nAnalyzing the computational complexity of sequence alignment algorithms provides insights into their efficiency and scalability, especially when dealing with large genetic sequences.\n\nState Space Complexity\nThe state space complexity of sequence alignment algorithms grows quadratically with the depth of the search space. This growth is attributed to the combinatorial nature of alignments, where each additional residue increases the number of possible alignments exponentially.\n\n\nNumber of Paths\nThe number of possible alignment paths increases combinatorially with the introduction of diagonal moves, which allow for the alignment of different residues from the input sequences.\n\n\nOpen vs. Closed Lists\n\nOpen List: Maintains nodes that are currently under consideration for expansion during the search process. The size of the open list grows linearly with the depth of the search.\nClosed List: Stores nodes that have been explored or expanded during the search. The size of the closed list grows quadratically, posing memory constraints in large-scale sequence alignment problems.",
+    "crumbs": [
+      "AI: Search Methods",
+      "Week 6"
+    ]
+  },
+  {
+    "objectID": "pages/AI/Week06.html#motivation-for-pruning-strategies",
+    "href": "pages/AI/Week06.html#motivation-for-pruning-strategies",
+    "title": "Weighted A* (WA*)",
+    "section": "Motivation for Pruning Strategies",
+    "text": "Motivation for Pruning Strategies\nEfficient pruning of the closed list is imperative in mitigating memory overheads and improving the efficiency of sequence alignment algorithms. By reducing redundant node expansions and minimizing memory consumption, pruning strategies enhance the scalability and applicability of sequence alignment algorithms.\n\nMonotone Condition\nThe monotone condition, enforced by heuristic functions, ensures that nodes explored during the search process are not revisited. By preventing redundant node expansions, the monotone condition reduces the size of the closed list and improves search efficiency.\n\n\nFuture Directions\nFuture research in sequence alignment algorithms will focus on developing advanced pruning strategies to further optimize memory utilization and computational efficiency. By leveraging heuristic functions and algorithmic optimizations, researchers aim to address the computational challenges associated with large-scale sequence alignment problems.",
+    "crumbs": [
+      "AI: Search Methods",
+      "Week 6"
+    ]
+  },
+  {
+    "objectID": "pages/AI/Week06.html#introduction-2",
+    "href": "pages/AI/Week06.html#introduction-2",
+    "title": "Weighted A* (WA*)",
+    "section": "Introduction",
+    "text": "Introduction\nIn the realm of Artificial Intelligence (AI), search algorithms play a pivotal role in finding optimal solutions to complex problems. One such algorithm, A, is renowned for its efficiency in navigating search spaces using heuristic information. However, the performance of A can be hindered by the exponential growth of space and time requirements, particularly when dealing with imperfect heuristic functions. To mitigate these challenges, researchers have proposed various pruning strategies aimed at reducing the memory overhead associated with A* search. This discussion delves into the motivations behind pruning closed lists in A* and explores different approaches to optimize search efficiency while maintaining solution optimality.",
+    "crumbs": [
+      "AI: Search Methods",
+      "Week 6"
+    ]
+  },
+  {
+    "objectID": "pages/AI/Week06.html#motivation-for-pruning-closed-lists",
+    "href": "pages/AI/Week06.html#motivation-for-pruning-closed-lists",
+    "title": "Weighted A* (WA*)",
+    "section": "Motivation for Pruning Closed Lists",
+    "text": "Motivation for Pruning Closed Lists\nThe A* algorithm, while effective, can incur significant computational costs, especially when operating in domains with large state spaces and imperfect heuristic functions. In such scenarios, the algorithm’s memory requirements grow exponentially, posing practical limitations on its applicability. To address this issue, researchers have sought alternative strategies that enable more efficient memory utilization without compromising solution quality.",
+    "crumbs": [
+      "AI: Search Methods",
+      "Week 6"
+    ]
+  },
+  {
+    "objectID": "pages/AI/Week06.html#recap-of-the-sequencer-alignment-problem",
+    "href": "pages/AI/Week06.html#recap-of-the-sequencer-alignment-problem",
+    "title": "Weighted A* (WA*)",
+    "section": "Recap of the Sequencer Alignment Problem",
+    "text": "Recap of the Sequencer Alignment Problem\nBefore delving into pruning strategies, it’s essential to understand the underlying challenges posed by problems with large search spaces, such as the sequencer alignment problem. In this context, the open and closed lists in A* tend to grow linearly and quadratically, respectively, as the search progresses. This exponential growth in memory consumption necessitates the exploration of novel techniques to manage search space effectively.",
+    "crumbs": [
+      "AI: Search Methods",
+      "Week 6"
+    ]
+  },
+  {
+    "objectID": "pages/AI/Week06.html#previous-reductions-in-space-usage",
+    "href": "pages/AI/Week06.html#previous-reductions-in-space-usage",
+    "title": "Weighted A* (WA*)",
+    "section": "Previous Reductions in Space Usage",
+    "text": "Previous Reductions in Space Usage\nPrevious efforts to alleviate the space complexity of A* include the introduction of weighted A* and other heuristic-based search algorithms. Weighted A* assigns different weights to heuristic estimates, allowing for more flexibility in balancing computational costs and solution quality. Additionally, algorithms such as branch and bound, A, wA, and best-first search have been explored, each offering varying degrees of space efficiency.",
+    "crumbs": [
+      "AI: Search Methods",
+      "Week 6"
+    ]
+  },
+  {
+    "objectID": "pages/AI/Week06.html#monotone-condition-in-a",
+    "href": "pages/AI/Week06.html#monotone-condition-in-a",
+    "title": "Weighted A* (WA*)",
+    "section": "Monotone Condition in A*",
+    "text": "Monotone Condition in A*\nCentral to the efficiency of A* is the monotone condition, which requires that the heuristic function underestimates the cost of every edge in the graph. This condition ensures that A* always selects an optimal path to each explored node, thereby minimizing the risk of revisiting previously traversed states. By adhering to the monotone condition, A* can effectively prune search branches that lead to suboptimal solutions, thereby improving computational efficiency.",
+    "crumbs": [
+      "AI: Search Methods",
+      "Week 6"
+    ]
+  },
+  {
+    "objectID": "pages/AI/Week06.html#role-of-closed-list-in-search",
+    "href": "pages/AI/Week06.html#role-of-closed-list-in-search",
+    "title": "Weighted A* (WA*)",
+    "section": "Role of Closed List in Search",
+    "text": "Role of Closed List in Search\nThe closed list in A* serves two primary purposes: to prevent infinite loops and to facilitate path reconstruction upon reaching the goal state. By maintaining a record of visited nodes, the algorithm can avoid revisiting states that have already been explored. Additionally, the closed list enables the reconstruction of the optimal path from the start state to the goal state, ensuring the completeness and correctness of the solution.",
+    "crumbs": [
+      "AI: Search Methods",
+      "Week 6"
+    ]
+  },
+  {
+    "objectID": "pages/AI/Week06.html#frontier-search-by-korf-and-zhang",
+    "href": "pages/AI/Week06.html#frontier-search-by-korf-and-zhang",
+    "title": "Weighted A* (WA*)",
+    "section": "Frontier Search by Korf and Zhang",
+    "text": "Frontier Search by Korf and Zhang\nOne notable approach to reducing memory overhead in A* is frontier search, proposed by Korf and Zhang. This technique focuses on maintaining only the nodes present on the open list while discarding those on the closed list. By eliminating redundant nodes from the search space, frontier search can significantly reduce memory consumption without sacrificing solution quality.\n\nFrontier Search Mechanism\nFrontier search employs a tabu list to prevent the generation of nodes that have already been explored or are on the closed list. This tabu list effectively prunes search branches that lead to previously visited states, allowing the algorithm to focus on unexplored regions of the search space. By selectively discarding closed nodes, frontier search can maintain search efficiency while conserving memory resources.\n\n\nDivide and Conquer Frontier Search\nIn addition to frontier search, Korf and Zhang introduced the concept of divide and conquer frontier search. This approach involves maintaining a set of relay nodes that serve as key waypoints in the search space. By strategically placing relay nodes at critical junctures, the algorithm can reconstruct the optimal path from the start state to the goal state more efficiently.\n\n\nTrade-off in Time and Space\nWhile divide and conquer frontier search offers significant space savings, it comes at the cost of increased time complexity due to recursive path reconstruction. The algorithm must perform additional recursive calls to reconstruct the optimal path using relay nodes, resulting in a trade-off between time and space efficiency. Despite this trade-off, divide and conquer frontier search remains a viable strategy for managing memory overhead in A*.",
+    "crumbs": [
+      "AI: Search Methods",
+      "Week 6"
+    ]
+  },
+  {
+    "objectID": "pages/AI/Week06.html#smart-memory-graph-search-by-hansen-and-zhou",
+    "href": "pages/AI/Week06.html#smart-memory-graph-search-by-hansen-and-zhou",
+    "title": "Weighted A* (WA*)",
+    "section": "Smart Memory Graph Search by Hansen and Zhou",
+    "text": "Smart Memory Graph Search by Hansen and Zhou\nBuilding upon the principles of frontier search, Hansen and Zhou proposed a more adaptive approach known as smart memory graph search. Unlike traditional frontier search algorithms, smart memory graph search dynamically adjusts its pruning strategy based on available memory resources. By monitoring memory usage in real-time, the algorithm can determine the optimal balance between space efficiency and solution quality.\n\nBoundary Nodes and Relay Nodes\nSmart memory graph search identifies boundary nodes within the search space, which serve as key markers for path reconstruction. These boundary nodes help prevent the algorithm from revisiting previously explored regions, thereby reducing redundant computation. Additionally, boundary nodes can be converted into relay nodes when memory constraints dictate the need for more aggressive pruning.\n\n\nSparse-Memory Graph Search (SMGS)\nSparse-Memory Graph Search (SMGS) stands as a significant advancement in the realm of graph search algorithms, particularly focusing on memory optimization while retaining the efficacy of the A* algorithm. In this comprehensive exposition, we delve into the intricate workings of SMGS, elucidating its foundational principles, operational mechanisms, and memory management strategies.\nSMGS, or Sparse-Memory Graph Search, represents a strategic evolution of the A* algorithm, tailored to address the burgeoning memory requirements inherent in large-scale graph search problems. By judiciously managing memory allocation and utilization, SMGS endeavors to strike a delicate balance between computational efficiency and memory conservation.\n\nPseudocode:\n\nSMGS (Sparse-Memory Graph Search) is a memory optimized version of the A* algorithm.\nThere is no change to the OPEN list.\nThe CLOSED list is split into:\n\nBOUNDARY nodes (unrestricted memory)\nKERNEL nodes (a fixed-size memory)\n\nKERNEL memory is periodically cleared to make way for new KERNEL nodes.\n\n\n\nStructural Components\n\n1. OPEN List\nIn conformity with the traditional A* algorithm, SMGS maintains the OPEN list, serving as the repository for nodes awaiting exploration during the search process. No alterations are made to the structure or operation of the OPEN list in SMGS.\n\n\n2. CLOSED List\nThe CLOSED list in SMGS undergoes a paradigmatic transformation, dividing into two distinct categories:\n\n- Boundary Nodes\nBoundary nodes represent a pivotal component of the CLOSED list, enjoying unrestricted memory allocation. These nodes serve as the vanguards delineating the boundary between explored and unexplored regions of the search space, facilitating efficient traversal and exploration.\n\n\n- Kernel Nodes\nIn contrast, kernel nodes are allocated a fixed-size memory segment, adhering to a stringent memory utilization policy. This segmentation enables periodic clearance of kernel memory, ensuring the continuous availability of memory resources and mitigating the risk of memory saturation.\n\n\n\n\nMemory Management Strategy\n\nDynamic Allocation of Boundary Nodes\nBoundary nodes, being allocated from an unrestricted memory pool, play a central role in guiding the search process. Their unbounded memory allocation affords them the capacity to retain crucial information pertinent to search traversal, thereby facilitating informed decision-making and efficient exploration.\n\n\nPeriodic Clearance of Kernel Memory\nKernel nodes, residing within a fixed-size memory segment, operate within a more constrained memory environment. To circumvent the risk of memory saturation, SMGS implements a dynamic memory allocation strategy whereby kernel memory is periodically cleared to accommodate new kernel nodes. This ensures the optimal utilization of memory resources while sustaining the integrity and efficiency of the search process.",
+    "crumbs": [
+      "AI: Search Methods",
+      "Week 6"
+    ]
+  },
+  {
+    "objectID": "pages/AI/Week06.html#operational-framework",
+    "href": "pages/AI/Week06.html#operational-framework",
+    "title": "Weighted A* (WA*)",
+    "section": "Operational Framework",
+    "text": "Operational Framework\nThe operational framework of SMGS is underpinned by the seamless integration of memory optimization principles and search efficiency considerations. By dynamically managing memory allocation and utilization, SMGS endeavors to navigate the complexities of large-scale graph search problems while mitigating the adverse effects of memory constraints.",
+    "crumbs": [
+      "AI: Search Methods",
+      "Week 6"
+    ]
+  },
+  {
+    "objectID": "pages/AI/Week06.html#exponential-growth-and-search-spaces",
+    "href": "pages/AI/Week06.html#exponential-growth-and-search-spaces",
+    "title": "Weighted A* (WA*)",
+    "section": "Exponential Growth and Search Spaces",
+    "text": "Exponential Growth and Search Spaces\nSearch spaces in AI algorithms often exhibit exponential growth, especially as the search progresses to deeper levels. This growth is particularly evident in the OPEN list, where the number of successors increases exponentially with each level of the search tree. For example, if a node has \\(B\\) children, then at the next level, there will be \\(B^2\\) successors, and so on. This exponential growth poses a challenge for search algorithms like A*, which aim to find optimal solutions while managing computational resources efficiently.",
+    "crumbs": [
+      "AI: Search Methods",
+      "Week 6"
+    ]
+  },
+  {
+    "objectID": "pages/AI/Week06.html#managing-open-beam-search",
+    "href": "pages/AI/Week06.html#managing-open-beam-search",
+    "title": "Weighted A* (WA*)",
+    "section": "Managing OPEN: Beam Search",
+    "text": "Managing OPEN: Beam Search\nOne approach to mitigate the rapid growth of the OPEN list is to employ beam search, a variant of hill climbing that restricts the number of successors considered at each level. In beam search, a fixed beam width \\(w\\) is specified, and only the \\(w\\) best successors are retained at each level of the search. This restriction helps in controlling the size of the OPEN list and reduces the computational burden of the algorithm.",
+    "crumbs": [
+      "AI: Search Methods",
+      "Week 6"
+    ]
+  },
+  {
+    "objectID": "pages/AI/Week06.html#beam-search-and-optimal-solutions",
+    "href": "pages/AI/Week06.html#beam-search-and-optimal-solutions",
+    "title": "Weighted A* (WA*)",
+    "section": "Beam Search and Optimal Solutions",
+    "text": "Beam Search and Optimal Solutions\nWhile beam search offers a practical solution for managing the OPEN list, it is important to note that it may not always yield optimal solutions. Unlike hill climbing, which prioritizes better successors, beam search selects successors based on their \\(f\\)-values, where \\(f\\) represents the evaluation function used in A* search. Since \\(f\\)-values tend to increase with depth in the search tree, beam search may overlook potentially better solutions in favor of nodes with lower \\(f\\)-values at shallower levels.",
+    "crumbs": [
+      "AI: Search Methods",
+      "Week 6"
+    ]
+  },
+  {
+    "objectID": "pages/AI/Week06.html#upper-bound-cost-and-pruning",
+    "href": "pages/AI/Week06.html#upper-bound-cost-and-pruning",
+    "title": "Weighted A* (WA*)",
+    "section": "Upper Bound Cost and Pruning",
+    "text": "Upper Bound Cost and Pruning\nDespite its limitations, beam search can be leveraged to obtain an upper bound on the solution cost. This upper bound, denoted as \\(U\\), serves as a reference point for pruning the search space further. By using beam search to find a path to the goal node, we can determine an upper bound on the solution cost. This upper bound can then be utilized to prune nodes with \\(f\\)-values exceeding \\(U\\), effectively reducing the search space and improving computational efficiency.",
+    "crumbs": [
+      "AI: Search Methods",
+      "Week 6"
+    ]
+  },
+  {
+    "objectID": "pages/AI/Week06.html#breadth-first-heuristic-search-bfhs",
+    "href": "pages/AI/Week06.html#breadth-first-heuristic-search-bfhs",
+    "title": "Weighted A* (WA*)",
+    "section": "Breadth-First Heuristic Search (BFHS)",
+    "text": "Breadth-First Heuristic Search (BFHS)\nAn extension of beam search, known as breadth-first heuristic search (BFHS), aims to enhance the traditional breadth-first search (BFS) algorithm by incorporating heuristic information. In BFHS, the search is constrained to nodes with \\(f\\)-values less than the upper bound \\(U\\) obtained from beam search. This restriction helps in limiting the search space to promising regions while still maintaining the breadth-first exploration strategy.",
+    "crumbs": [
+      "AI: Search Methods",
+      "Week 6"
+    ]
+  },
+  {
+    "objectID": "pages/AI/Week06.html#beam-stack-search-integrating-backtracking",
+    "href": "pages/AI/Week06.html#beam-stack-search-integrating-backtracking",
+    "title": "Weighted A* (WA*)",
+    "section": "Beam Stack Search: Integrating Backtracking",
+    "text": "Beam Stack Search: Integrating Backtracking\nBeam stack search introduces backtracking into the beam search framework, allowing for more flexible exploration of the search space. In this approach, a beam stack is maintained, containing information about the lowest and highest \\(f\\)-values within the beam at each level. This beam stack guides the search process, enabling efficient exploration while ensuring that the search remains within the upper bound cost \\(U\\).",
+    "crumbs": [
+      "AI: Search Methods",
+      "Week 6"
+    ]
+  },
+  {
+    "objectID": "pages/AI/Week06.html#divide-and-conquer-beam-stack-search",
+    "href": "pages/AI/Week06.html#divide-and-conquer-beam-stack-search",
+    "title": "Weighted A* (WA*)",
+    "section": "Divide and Conquer Beam Stack Search",
+    "text": "Divide and Conquer Beam Stack Search\nTo further optimize space complexity, divide and conquer beam stack search maintains only three layers of nodes: open, boundary, and relay. By regenerating nodes from the start node as needed and utilizing the information stored in the beam stack, this approach achieves a constant space complexity. Despite its space-saving benefits, divide and conquer beam stack search may not always yield optimal solutions due to its reliance on beam search and backtracking.",
+    "crumbs": [
+      "AI: Search Methods",
+      "Week 6"
     ]
   },
   {
@@ -6192,7 +7644,7 @@
     "href": "pages/ST/Week04.html#decision-to-decision-dd-paths",
     "title": "Integration Testing and FSMs",
     "section": "Decision to Decision (DD) Paths",
-    "text": "Decision to Decision (DD) Paths\n\nConcept\nDecision to Decision (DD) paths represent paths between decision points within the control flow graph. These paths are characterized by traversing from one decision point to another, excluding the decision points themselves.\n\n\nIdentification\nDD paths are identified by considering the paths that lead from one decision point to another within the control flow graph. This analysis excludes the decision points themselves, focusing solely on the traversal between them.\n\n\nFormal Definition\nFormally, a DD path is defined as a set of vertices in the control flow graph that satisfies one of the following conditions:\n\nIt consists of a single vertex with an in-degree of 0 (initial vertex) or an out-degree of 0 (terminal vertex).\nIt includes a single vertex with both in-degree and out-degree greater than or equal to 2 (decision vertices).\nIt comprises a single vertex with both in-degree and out-degree equal to 1, representing a non-decision node.\nIt forms a maximal chain of length greater than or equal to 1, characterized by a sequence of vertices with each having an in-degree and out-degree of 1.\n\n\n\nApplication\nWhile DD paths may not be as widely utilized as other coverage criteria, understanding them contributes to a comprehensive understanding of the software testing landscape. These paths offer insights into traversal patterns within the control flow graph, aiding in the design of effective test suites.",
+    "text": "Decision to Decision (DD) Paths\n\nConcept\nDecision to Decision (DD) paths represent paths between decision points within the control flow graph. These paths are characterized by traversing from one decision point to another, excluding the decision points themselves.\n\n\nIdentification\nDD paths are identified by considering the paths that lead from one decision point to another within the control flow graph. This analysis excludes the decision points themselves, focusing solely on the traversal between them.\n\n\nFormal Definition\nFormally, a DD path is defined as a set of vertices in the control flow graph that satisfies one of the following conditions:\n\nIt consists of a single vertex with an in-degree of 0 (initial vertex) or an out-degree of 0 (terminal vertex).\nIt includes a single vertex with both in-degree or out-degree greater than or equal to 2 (decision vertices).\nIt comprises a single vertex with both in-degree and out-degree equal to 1, representing a non-decision node.\nIt forms a maximal chain of length greater than or equal to 1, characterized by a sequence of vertices with each having an in-degree and out-degree of 1.\n\n\n\nApplication\nWhile DD paths may not be as widely utilized as other coverage criteria, understanding them contributes to a comprehensive understanding of the software testing landscape. These paths offer insights into traversal patterns within the control flow graph, aiding in the design of effective test suites.",
     "crumbs": [
       "Software Testing",
       "Week 4"

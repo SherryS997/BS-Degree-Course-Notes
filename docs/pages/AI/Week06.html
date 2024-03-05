@@ -1,0 +1,1458 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.4.550">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>BS Degree Notes</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="https://lalten.github.io/lmweb/style/latinmodern-roman.css">
+<link rel="stylesheet" href="https://lalten.github.io/lmweb/style/latinmodern-sans.css">
+<link rel="stylesheet" href="https://lalten.github.io/lmweb/style/latinmodern-mono.css">
+</head>
+
+<body class="nav-sidebar docked">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../pages/AI/Week01.html">AI: Search Methods</a></li><li class="breadcrumb-item"><a href="../../pages/AI/Week06.html">Week 6</a></li></ol></nav>
+        <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="../../">BS Degree Notes</a> 
+        <div class="sidebar-tools-main">
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Home</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="false">
+ <span class="menu-text">Deep Learning</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../pages/DL/Week01_1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 1.1</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../pages/DL/Week01_2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 1.2</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../pages/DL/Week02.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 2</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../pages/DL/Week03.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 3</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../pages/DL/Week04.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 4</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../pages/DL/Week05.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 5</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../pages/DL/Week06.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 6</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
+ <span class="menu-text">AI: Search Methods</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../pages/AI/Week01.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 1</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../pages/AI/Week02.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 2</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../pages/AI/Week03.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 3</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../pages/AI/Week04.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 4</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../pages/AI/Week05.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 5</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../pages/AI/Week06.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">Week 6</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="false">
+ <span class="menu-text">Software Testing</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../pages/ST/Week01.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 1</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../pages/ST/Week02.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 2</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../pages/ST/Week03.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 3</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../pages/ST/Week04.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 4</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="false">
+ <span class="menu-text">Software Engineering</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../pages/SE/Week01.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 1</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../pages/SE/Week02.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 2</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../pages/SE/Week03.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 3</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../pages/SE/Week04.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 4</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="false">
+ <span class="menu-text">Reinforcement Learning</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../pages/RL/Week01_1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 1.1</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../pages/RL/Week01_2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 1.2</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../pages/RL/Week02.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 2</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#weighted-a-wa" id="toc-weighted-a-wa" class="nav-link active" data-scroll-target="#weighted-a-wa">Weighted A* (WA*)</a>
+  <ul class="collapse">
+  <li><a href="#comparison-with-a-and-best-first-search-bfs" id="toc-comparison-with-a-and-best-first-search-bfs" class="nav-link" data-scroll-target="#comparison-with-a-and-best-first-search-bfs">Comparison with A* and Best First Search (BFS)</a></li>
+  <li><a href="#trade-off-in-weighted-a" id="toc-trade-off-in-weighted-a" class="nav-link" data-scroll-target="#trade-off-in-weighted-a">Trade-off in Weighted A*</a></li>
+  <li><a href="#behavior-of-weighted-a" id="toc-behavior-of-weighted-a" class="nav-link" data-scroll-target="#behavior-of-weighted-a">Behavior of Weighted A*</a></li>
+  <li><a href="#illustrative-example" id="toc-illustrative-example" class="nav-link" data-scroll-target="#illustrative-example">Illustrative Example</a></li>
+  <li><a href="#comparison-of-algorithms" id="toc-comparison-of-algorithms" class="nav-link" data-scroll-target="#comparison-of-algorithms">Comparison of Algorithms</a></li>
+  <li><a href="#heuristic-function-influence" id="toc-heuristic-function-influence" class="nav-link" data-scroll-target="#heuristic-function-influence">Heuristic Function Influence</a></li>
+  <li><a href="#implications-of-heuristic-function-behavior" id="toc-implications-of-heuristic-function-behavior" class="nav-link" data-scroll-target="#implications-of-heuristic-function-behavior">Implications of Heuristic Function Behavior</a></li>
+  </ul></li>
+  <li><a href="#a-search-algorithm-space-optimized-versions" id="toc-a-search-algorithm-space-optimized-versions" class="nav-link" data-scroll-target="#a-search-algorithm-space-optimized-versions">A* Search Algorithm: Space-Optimized Versions</a>
+  <ul class="collapse">
+  <li><a href="#introduction" id="toc-introduction" class="nav-link" data-scroll-target="#introduction">Introduction</a></li>
+  <li><a href="#space-efficient-variations-of-a" id="toc-space-efficient-variations-of-a" class="nav-link" data-scroll-target="#space-efficient-variations-of-a">Space-Efficient Variations of A*</a>
+  <ul class="collapse">
+  <li><a href="#motivation" id="toc-motivation" class="nav-link" data-scroll-target="#motivation">Motivation</a></li>
+  <li><a href="#iterative-deepening-a-ida" id="toc-iterative-deepening-a-ida" class="nav-link" data-scroll-target="#iterative-deepening-a-ida">Iterative Deepening A* (IDA*)</a></li>
+  </ul></li>
+  <li><a href="#recursive-best-first-search-rbfs" id="toc-recursive-best-first-search-rbfs" class="nav-link" data-scroll-target="#recursive-best-first-search-rbfs">Recursive Best-First Search (RBFS)</a></li>
+  <li><a href="#monotoneconsistency-condition" id="toc-monotoneconsistency-condition" class="nav-link" data-scroll-target="#monotoneconsistency-condition">Monotone/Consistency Condition</a></li>
+  </ul></li>
+  <li><a href="#the-monotone-condition" id="toc-the-monotone-condition" class="nav-link" data-scroll-target="#the-monotone-condition">The Monotone Condition</a>
+  <ul class="collapse">
+  <li><a href="#introduction-1" id="toc-introduction-1" class="nav-link" data-scroll-target="#introduction-1">Introduction</a></li>
+  <li><a href="#admissibility-in-a-algorithm" id="toc-admissibility-in-a-algorithm" class="nav-link" data-scroll-target="#admissibility-in-a-algorithm">Admissibility in A* Algorithm</a></li>
+  <li><a href="#the-monotone-condition-1" id="toc-the-monotone-condition-1" class="nav-link" data-scroll-target="#the-monotone-condition-1">The Monotone Condition</a>
+  <ul class="collapse">
+  <li><a href="#definition-and-conceptual-framework" id="toc-definition-and-conceptual-framework" class="nav-link" data-scroll-target="#definition-and-conceptual-framework">Definition and Conceptual Framework</a></li>
+  <li><a href="#implications-and-significance" id="toc-implications-and-significance" class="nav-link" data-scroll-target="#implications-and-significance">Implications and Significance</a></li>
+  </ul></li>
+  <li><a href="#illustrative-example-1" id="toc-illustrative-example-1" class="nav-link" data-scroll-target="#illustrative-example-1">Illustrative Example</a></li>
+  <li><a href="#consequences-of-monotone-condition" id="toc-consequences-of-monotone-condition" class="nav-link" data-scroll-target="#consequences-of-monotone-condition">Consequences of Monotone Condition</a>
+  <ul class="collapse">
+  <li><a href="#non-decreasing-f-values" id="toc-non-decreasing-f-values" class="nav-link" data-scroll-target="#non-decreasing-f-values">Non-decreasing <span class="math inline">\(f\)</span> Values</a></li>
+  <li><a href="#optimal-path-identification" id="toc-optimal-path-identification" class="nav-link" data-scroll-target="#optimal-path-identification">Optimal Path Identification</a></li>
+  <li><a href="#streamlined-algorithmic-execution" id="toc-streamlined-algorithmic-execution" class="nav-link" data-scroll-target="#streamlined-algorithmic-execution">Streamlined Algorithmic Execution</a></li>
+  </ul></li>
+  <li><a href="#future-considerations-and-applications" id="toc-future-considerations-and-applications" class="nav-link" data-scroll-target="#future-considerations-and-applications">Future Considerations and Applications</a></li>
+  </ul></li>
+  <li><a href="#sequence-alignment-in-biology" id="toc-sequence-alignment-in-biology" class="nav-link" data-scroll-target="#sequence-alignment-in-biology">Sequence Alignment in Biology</a>
+  <ul class="collapse">
+  <li><a href="#introduction-to-nucleic-acid-sequences" id="toc-introduction-to-nucleic-acid-sequences" class="nav-link" data-scroll-target="#introduction-to-nucleic-acid-sequences">Introduction to Nucleic Acid Sequences</a></li>
+  <li><a href="#sequence-alignment-problem" id="toc-sequence-alignment-problem" class="nav-link" data-scroll-target="#sequence-alignment-problem">Sequence Alignment Problem</a>
+  <ul class="collapse">
+  <li><a href="#needleman-wunsch-algorithm" id="toc-needleman-wunsch-algorithm" class="nav-link" data-scroll-target="#needleman-wunsch-algorithm">Needleman-Wunsch Algorithm</a></li>
+  <li><a href="#objective-of-sequence-alignment" id="toc-objective-of-sequence-alignment" class="nav-link" data-scroll-target="#objective-of-sequence-alignment">Objective of Sequence Alignment</a></li>
+  <li><a href="#penalties-in-sequence-alignment" id="toc-penalties-in-sequence-alignment" class="nav-link" data-scroll-target="#penalties-in-sequence-alignment">Penalties in Sequence Alignment</a></li>
+  </ul></li>
+  <li><a href="#similarity-functions" id="toc-similarity-functions" class="nav-link" data-scroll-target="#similarity-functions">Similarity Functions</a>
+  <ul class="collapse">
+  <li><a href="#examples-of-similarity-functions" id="toc-examples-of-similarity-functions" class="nav-link" data-scroll-target="#examples-of-similarity-functions">Examples of Similarity Functions</a></li>
+  </ul></li>
+  <li><a href="#sequence-alignment-as-graph-search" id="toc-sequence-alignment-as-graph-search" class="nav-link" data-scroll-target="#sequence-alignment-as-graph-search">Sequence Alignment as Graph Search</a>
+  <ul class="collapse">
+  <li><a href="#representation" id="toc-representation" class="nav-link" data-scroll-target="#representation">Representation</a></li>
+  <li><a href="#moves-in-sequence-alignment" id="toc-moves-in-sequence-alignment" class="nav-link" data-scroll-target="#moves-in-sequence-alignment">Moves in Sequence Alignment</a></li>
+  <li><a href="#cost-of-alignment-moves" id="toc-cost-of-alignment-moves" class="nav-link" data-scroll-target="#cost-of-alignment-moves">Cost of Alignment Moves</a></li>
+  </ul></li>
+  <li><a href="#complexity-analysis" id="toc-complexity-analysis" class="nav-link" data-scroll-target="#complexity-analysis">Complexity Analysis</a>
+  <ul class="collapse">
+  <li><a href="#state-space-complexity" id="toc-state-space-complexity" class="nav-link" data-scroll-target="#state-space-complexity">State Space Complexity</a></li>
+  <li><a href="#number-of-paths" id="toc-number-of-paths" class="nav-link" data-scroll-target="#number-of-paths">Number of Paths</a></li>
+  <li><a href="#open-vs.-closed-lists" id="toc-open-vs.-closed-lists" class="nav-link" data-scroll-target="#open-vs.-closed-lists">Open vs.&nbsp;Closed Lists</a></li>
+  </ul></li>
+  <li><a href="#motivation-for-pruning-strategies" id="toc-motivation-for-pruning-strategies" class="nav-link" data-scroll-target="#motivation-for-pruning-strategies">Motivation for Pruning Strategies</a>
+  <ul class="collapse">
+  <li><a href="#monotone-condition" id="toc-monotone-condition" class="nav-link" data-scroll-target="#monotone-condition">Monotone Condition</a></li>
+  <li><a href="#future-directions" id="toc-future-directions" class="nav-link" data-scroll-target="#future-directions">Future Directions</a></li>
+  </ul></li>
+  </ul></li>
+  <li><a href="#pruning-closed-in-a" id="toc-pruning-closed-in-a" class="nav-link" data-scroll-target="#pruning-closed-in-a">Pruning <code>CLOSED</code> in A*</a>
+  <ul class="collapse">
+  <li><a href="#introduction-2" id="toc-introduction-2" class="nav-link" data-scroll-target="#introduction-2">Introduction</a></li>
+  <li><a href="#motivation-for-pruning-closed-lists" id="toc-motivation-for-pruning-closed-lists" class="nav-link" data-scroll-target="#motivation-for-pruning-closed-lists">Motivation for Pruning Closed Lists</a></li>
+  <li><a href="#recap-of-the-sequencer-alignment-problem" id="toc-recap-of-the-sequencer-alignment-problem" class="nav-link" data-scroll-target="#recap-of-the-sequencer-alignment-problem">Recap of the Sequencer Alignment Problem</a></li>
+  <li><a href="#previous-reductions-in-space-usage" id="toc-previous-reductions-in-space-usage" class="nav-link" data-scroll-target="#previous-reductions-in-space-usage">Previous Reductions in Space Usage</a></li>
+  <li><a href="#monotone-condition-in-a" id="toc-monotone-condition-in-a" class="nav-link" data-scroll-target="#monotone-condition-in-a">Monotone Condition in A*</a></li>
+  <li><a href="#role-of-closed-list-in-search" id="toc-role-of-closed-list-in-search" class="nav-link" data-scroll-target="#role-of-closed-list-in-search">Role of Closed List in Search</a></li>
+  <li><a href="#frontier-search-by-korf-and-zhang" id="toc-frontier-search-by-korf-and-zhang" class="nav-link" data-scroll-target="#frontier-search-by-korf-and-zhang">Frontier Search by Korf and Zhang</a>
+  <ul class="collapse">
+  <li><a href="#frontier-search-mechanism" id="toc-frontier-search-mechanism" class="nav-link" data-scroll-target="#frontier-search-mechanism">Frontier Search Mechanism</a></li>
+  <li><a href="#divide-and-conquer-frontier-search" id="toc-divide-and-conquer-frontier-search" class="nav-link" data-scroll-target="#divide-and-conquer-frontier-search">Divide and Conquer Frontier Search</a></li>
+  <li><a href="#trade-off-in-time-and-space" id="toc-trade-off-in-time-and-space" class="nav-link" data-scroll-target="#trade-off-in-time-and-space">Trade-off in Time and Space</a></li>
+  </ul></li>
+  <li><a href="#smart-memory-graph-search-by-hansen-and-zhou" id="toc-smart-memory-graph-search-by-hansen-and-zhou" class="nav-link" data-scroll-target="#smart-memory-graph-search-by-hansen-and-zhou">Smart Memory Graph Search by Hansen and Zhou</a>
+  <ul class="collapse">
+  <li><a href="#boundary-nodes-and-relay-nodes" id="toc-boundary-nodes-and-relay-nodes" class="nav-link" data-scroll-target="#boundary-nodes-and-relay-nodes">Boundary Nodes and Relay Nodes</a></li>
+  <li><a href="#sparse-memory-graph-search-smgs" id="toc-sparse-memory-graph-search-smgs" class="nav-link" data-scroll-target="#sparse-memory-graph-search-smgs">Sparse-Memory Graph Search (SMGS)</a></li>
+  </ul></li>
+  <li><a href="#operational-framework" id="toc-operational-framework" class="nav-link" data-scroll-target="#operational-framework">Operational Framework</a></li>
+  </ul></li>
+  <li><a href="#pruning-open-in-a" id="toc-pruning-open-in-a" class="nav-link" data-scroll-target="#pruning-open-in-a">Pruning <code>OPEN</code> in A*</a>
+  <ul class="collapse">
+  <li><a href="#exponential-growth-and-search-spaces" id="toc-exponential-growth-and-search-spaces" class="nav-link" data-scroll-target="#exponential-growth-and-search-spaces">Exponential Growth and Search Spaces</a></li>
+  <li><a href="#managing-open-beam-search" id="toc-managing-open-beam-search" class="nav-link" data-scroll-target="#managing-open-beam-search">Managing OPEN: Beam Search</a></li>
+  <li><a href="#beam-search-and-optimal-solutions" id="toc-beam-search-and-optimal-solutions" class="nav-link" data-scroll-target="#beam-search-and-optimal-solutions">Beam Search and Optimal Solutions</a></li>
+  <li><a href="#upper-bound-cost-and-pruning" id="toc-upper-bound-cost-and-pruning" class="nav-link" data-scroll-target="#upper-bound-cost-and-pruning">Upper Bound Cost and Pruning</a></li>
+  <li><a href="#breadth-first-heuristic-search-bfhs" id="toc-breadth-first-heuristic-search-bfhs" class="nav-link" data-scroll-target="#breadth-first-heuristic-search-bfhs">Breadth-First Heuristic Search (BFHS)</a></li>
+  <li><a href="#beam-stack-search-integrating-backtracking" id="toc-beam-stack-search-integrating-backtracking" class="nav-link" data-scroll-target="#beam-stack-search-integrating-backtracking">Beam Stack Search: Integrating Backtracking</a></li>
+  <li><a href="#divide-and-conquer-beam-stack-search" id="toc-divide-and-conquer-beam-stack-search" class="nav-link" data-scroll-target="#divide-and-conquer-beam-stack-search">Divide and Conquer Beam Stack Search</a></li>
+  </ul></li>
+  <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion">Conclusion</a></li>
+  <li><a href="#points-to-remember" id="toc-points-to-remember" class="nav-link" data-scroll-target="#points-to-remember">Points to Remember</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+
+
+
+<section id="weighted-a-wa" class="level1">
+<h1>Weighted A* (WA*)</h1>
+<p>Weighted A* (WA<em>) is one such variation that attempts to strike a balance between space efficiency and optimality. In WA</em>, the heuristic function <span class="math inline">\(h\)</span> is multiplied by a weight <span class="math inline">\(w\)</span> to influence the search process. This adjustment allows for greater exploration of informed paths while potentially sacrificing optimality.</p>
+<p>Mathematically, WA* is represented as follows:</p>
+<p><span class="math display">\[
+f_w(n) = g(n) + w \times h(n)
+\]</span></p>
+<p>where:</p>
+<ul>
+<li><span class="math inline">\(f_w(n)\)</span> is the modified evaluation function with the weight <span class="math inline">\(w\)</span>.</li>
+<li><span class="math inline">\(g(n)\)</span> and <span class="math inline">\(h(n)\)</span> retain their meanings as in traditional A*.</li>
+</ul>
+<section id="comparison-with-a-and-best-first-search-bfs" class="level2">
+<h2 class="anchored" data-anchor-id="comparison-with-a-and-best-first-search-bfs">Comparison with A* and Best First Search (BFS)</h2>
+<p>A* is known for its ability to find the optimal cost path by considering both the actual cost of reaching a node from the start node (<span class="math inline">\(g(n)\)</span>) and the estimated cost from that node to the goal (<span class="math inline">\(h(n)\)</span>). This combination of actual and estimated costs ensures that A* explores the search space efficiently while guaranteeing optimality.</p>
+<p>On the other hand, Best First Search (BFS) prioritizes nodes solely based on their estimated distance to the goal, without considering the actual cost. While BFS may terminate more quickly than A*, it does not guarantee optimality and may lead to suboptimal solutions in certain cases.</p>
+</section>
+<section id="trade-off-in-weighted-a" class="level2">
+<h2 class="anchored" data-anchor-id="trade-off-in-weighted-a">Trade-off in Weighted A*</h2>
+<p>Weighted A* introduces a weight parameter <span class="math inline">\(w\)</span> to adjust the relative influence of the heuristic function (<span class="math inline">\(h(n)\)</span>) compared to the actual cost (<span class="math inline">\(g(n)\)</span>). By varying this weight parameter, Weighted A* allows for a trade-off between the behaviors of A* and BFS.</p>
+<ul>
+<li><p><strong>Low Weight (<span class="math inline">\(w \approx 0\)</span>):</strong> When the weight parameter is close to zero, Weighted A* behaves similarly to BFS, prioritizing nodes based primarily on their estimated distance to the goal. This can lead to faster termination but may sacrifice optimality.</p></li>
+<li><p><strong>High Weight (<span class="math inline">\(w \rightarrow \infty\)</span>):</strong> Conversely, when the weight parameter tends to infinity, Weighted A* behaves more like A<em>, giving greater importance to the actual cost of reaching a node from the start. In this case, Weighted A</em> aims to find the optimal cost path, similar to A*.</p></li>
+</ul>
+</section>
+<section id="behavior-of-weighted-a" class="level2">
+<h2 class="anchored" data-anchor-id="behavior-of-weighted-a">Behavior of Weighted A*</h2>
+<p>The behavior of Weighted A* is influenced by the chosen weight parameter <span class="math inline">\(w\)</span>. Higher weight values emphasize the heuristic function more, leading to faster termination but potentially sacrificing optimality. Lower weight values prioritize the actual cost, ensuring optimality but potentially leading to longer search times.</p>
+</section>
+<section id="illustrative-example" class="level2">
+<h2 class="anchored" data-anchor-id="illustrative-example">Illustrative Example</h2>
+<p>To understand the behavior of Weighted A*, consider an illustrative example with a graph consisting of a start node, a goal node, and multiple paths connecting them. Each path has intermediate nodes with associated costs, and the goal is to find the optimal cost path from the start to the goal.</p>
+<ul>
+<li><p><strong>Node Selection:</strong> Best First Search prioritizes nodes solely based on their estimated distance to the goal. In contrast, Weighted A* considers both the actual cost of reaching a node from the start and the estimated distance to the goal, with the weight parameter determining the relative importance of these factors.</p></li>
+<li><p><strong>Optimality vs.&nbsp;Speed:</strong> Weighted A* offers a trade-off between optimality and speed of termination. By adjusting the weight parameter, the algorithm can prioritize either finding the optimal cost path or terminating more quickly at the expense of optimality.</p></li>
+</ul>
+</section>
+<section id="comparison-of-algorithms" class="level2">
+<h2 class="anchored" data-anchor-id="comparison-of-algorithms">Comparison of Algorithms</h2>
+<p>Comparing Weighted A* with other search algorithms such as A*, BFS, and Branch and Bound provides insights into their respective strengths and weaknesses.</p>
+<ul>
+<li><p><strong>Branch and Bound:</strong> This algorithm explores the entire search space, ensuring optimality but potentially leading to higher exploration costs. While it guarantees finding the optimal path, it may be less efficient in terms of search time.</p></li>
+<li><p><strong>A* Algorithm:</strong> A* strikes a balance between exploration and optimality by considering both the actual cost and the estimated distance to the goal. This allows it to find the optimal cost path more efficiently compared to Branch and Bound.</p></li>
+<li><p><strong>Weighted A* (with <span class="math inline">\(w = 2\)</span>):</strong> With a higher weight parameter, Weighted A* prioritizes the heuristic function more, leading to faster termination but potentially sacrificing optimality. While it may explore fewer nodes compared to A*, it may not always find the optimal path.</p></li>
+<li><p><strong>Best First Search:</strong> Best First Search prioritizes nodes solely based on their estimated distance to the goal, without considering the actual cost. While it may terminate more quickly than A*, it does not guarantee optimality and may lead to suboptimal solutions.</p></li>
+</ul>
+</section>
+<section id="heuristic-function-influence" class="level2">
+<h2 class="anchored" data-anchor-id="heuristic-function-influence">Heuristic Function Influence</h2>
+<p>The influence of the heuristic function in Weighted A* and other search algorithms plays a crucial role in determining their behavior and performance.</p>
+<ul>
+<li><p><strong>Towards the Goal:</strong> As the algorithm progresses towards the goal, the influence of the heuristic function decreases. This is reflected in the decreasing heuristic values as the algorithm approaches the goal.</p></li>
+<li><p><strong>Effect on F Values:</strong> In A<em>, the f values may increase as the algorithm progresses towards the goal due to the decreasing influence of the heuristic function. Weighted A</em>, with a variable weight function based on the heuristic value, may exhibit different behaviors depending on the chosen weight parameter.</p></li>
+</ul>
+</section>
+<section id="implications-of-heuristic-function-behavior" class="level2">
+<h2 class="anchored" data-anchor-id="implications-of-heuristic-function-behavior">Implications of Heuristic Function Behavior</h2>
+<p>Understanding the implications of the heuristic function’s behavior can provide valuable insights into the performance and characteristics of search algorithms.</p>
+<ul>
+<li><strong>Consistency Condition:</strong> When the heuristic function satisfies the consistency condition, A* guarantees finding the optimal path to any node along the way. This condition influences the behavior of A* and may affect the algorithm’s optimality.</li>
+</ul>
+</section>
+</section>
+<section id="a-search-algorithm-space-optimized-versions" class="level1">
+<h1>A* Search Algorithm: Space-Optimized Versions</h1>
+<section id="introduction" class="level2">
+<h2 class="anchored" data-anchor-id="introduction">Introduction</h2>
+<p>In the realm of artificial intelligence (AI), the A* search algorithm stands out as a fundamental tool for finding optimal paths in problem-solving tasks. However, as computational challenges grow, there arises a need to develop variations of A* that optimize space utilization without compromising the algorithm’s admissibility. This exploration leads to the development of leaner versions of A* that strike a balance between space efficiency and computational time.</p>
+</section>
+<section id="space-efficient-variations-of-a" class="level2">
+<h2 class="anchored" data-anchor-id="space-efficient-variations-of-a">Space-Efficient Variations of A*</h2>
+<section id="motivation" class="level3">
+<h3 class="anchored" data-anchor-id="motivation">Motivation</h3>
+<p>While A* provides an efficient means of finding optimal paths, its space requirements can become prohibitive for problems with large state spaces. As such, there is a growing interest in developing variants of A* that reduce space complexity while maintaining the algorithm’s admissibility.</p>
+</section>
+<section id="iterative-deepening-a-ida" class="level3">
+<h3 class="anchored" data-anchor-id="iterative-deepening-a-ida">Iterative Deepening A* (IDA*)</h3>
+<p>Iterative Deepening A* (IDA<em>) is another space-efficient variant of A</em> that borrows concepts from iterative deepening depth-first search (IDDFS). IDA* operates by conducting a series of depth-first searches with increasing depth limits until a solution is found. This iterative approach allows for space savings by exploring only a portion of the search space at a time.</p>
+<p>Mathematically, the core idea of IDA* involves iteratively increasing the depth limit <span class="math inline">\(D\)</span> until a solution is discovered. This process ensures optimality while mitigating space requirements.</p>
+</section>
+</section>
+<section id="recursive-best-first-search-rbfs" class="level2">
+<h2 class="anchored" data-anchor-id="recursive-best-first-search-rbfs">Recursive Best-First Search (RBFS)</h2>
+<p>Recursive Best-First Search (RBFS) is a space-efficient search algorithm that blends the principles of best-first search with backtracking. Introduced by Richard Korf in 1991, RBFS maintains a linear space complexity while exploring nodes in a best-first order.</p>
+<p>RBFS operates by maintaining two values for each node: its estimated cost to the goal and the second-best estimated cost. This approach allows RBFS to efficiently explore the search space while ensuring directionality in the search process.</p>
+</section>
+<section id="monotoneconsistency-condition" class="level2">
+<h2 class="anchored" data-anchor-id="monotoneconsistency-condition">Monotone/Consistency Condition</h2>
+<p>The monotone or consistency condition is a crucial property that ensures the optimality of A* search. This condition dictates that A* will find the optimal path to every node it selects from the open list, akin to the behavior of Dijkstra’s algorithm.</p>
+<p>Mathematically, the consistency condition is expressed as follows:</p>
+<p><span class="math display">\[
+f(n) \leq g(n') + h(n')
+\]</span></p>
+<p>where:</p>
+<ul>
+<li><span class="math inline">\(n'\)</span> is any successor of node <span class="math inline">\(n\)</span>.</li>
+<li><span class="math inline">\(f(n)\)</span> represents the estimated total cost of the cheapest path from the initial state to node <span class="math inline">\(n\)</span>.</li>
+<li><span class="math inline">\(g(n')\)</span> is the cost of the path from the initial state to successor node <span class="math inline">\(n'\)</span>.</li>
+<li><span class="math inline">\(h(n')\)</span> is the heuristic estimate of the cost from successor node <span class="math inline">\(n'\)</span> to the goal state.</li>
+</ul>
+</section>
+</section>
+<section id="the-monotone-condition" class="level1">
+<h1>The Monotone Condition</h1>
+<section id="introduction-1" class="level2">
+<h2 class="anchored" data-anchor-id="introduction-1">Introduction</h2>
+<p>The A* algorithm stands as a cornerstone in the realm of pathfinding algorithms, renowned for its ability to efficiently find optimal paths in various domains. It achieves this feat through a combination of heuristic guidance and systematic exploration. Central to the effectiveness of A* is the concept of admissibility, which ensures that the algorithm consistently converges to the optimal solution while exploring the search space. One critical condition that reinforces the optimality of A* is the monotone condition, also known as the consistency condition. In this discourse, we delve into the intricacies of the monotone condition, its significance, and its implications on the behavior of the A* algorithm.</p>
+</section>
+<section id="admissibility-in-a-algorithm" class="level2">
+<h2 class="anchored" data-anchor-id="admissibility-in-a-algorithm">Admissibility in A* Algorithm</h2>
+<p>Before delving into the specifics of the monotone condition, it is imperative to comprehend the broader context of admissibility within the A* algorithm. Admissibility refers to the property wherein the heuristic function employed by the algorithm consistently underestimates the true cost of reaching the goal from any given state. This underestimation ensures that A* prioritizes nodes for exploration based on their potential to lead to the optimal solution. Admissibility hinges on three fundamental criteria:</p>
+<ol type="1">
+<li><strong>Finite Branching Factor:</strong> The number of successor states from any given state must be finite, ensuring that the search space remains manageable.</li>
+<li><strong>Minimal Edge Costs:</strong> Every edge in the search graph must possess a cost at least as large as a small constant, typically denoted as <span class="math inline">\(\epsilon\)</span>. This condition prevents the algorithm from traversing excessively costly paths prematurely.</li>
+<li><strong>Heuristic Underestimation:</strong> The heuristic function employed by A* must consistently underestimate the true cost of reaching the goal state from any given state. Mathematically, this condition is expressed as <span class="math inline">\(h(n) \leq h^*(n)\)</span>, where <span class="math inline">\(h(n)\)</span> represents the heuristic estimate and <span class="math inline">\(h^*(n)\)</span> represents the true cost.</li>
+</ol>
+</section>
+<section id="the-monotone-condition-1" class="level2">
+<h2 class="anchored" data-anchor-id="the-monotone-condition-1">The Monotone Condition</h2>
+<section id="definition-and-conceptual-framework" class="level3">
+<h3 class="anchored" data-anchor-id="definition-and-conceptual-framework">Definition and Conceptual Framework</h3>
+<p>The monotone condition, also known as the consistency condition, serves as an additional criterion for ensuring the optimality of the A* algorithm. It posits that the heuristic values assigned to successive nodes along a path to the goal must exhibit a certain relationship with the actual edge costs. Formally, for any node <span class="math inline">\(n\)</span> that succeeds node <span class="math inline">\(m\)</span> on a path to the goal:</p>
+<p><span class="math display">\[ h(m) - h(n) \leq c(m, n) \]</span></p>
+<p>Here, <span class="math inline">\(h(m)\)</span> and <span class="math inline">\(h(n)\)</span> denote the heuristic values of nodes <span class="math inline">\(m\)</span> and <span class="math inline">\(n\)</span>, respectively, while <span class="math inline">\(c(m, n)\)</span> represents the cost of the edge connecting nodes <span class="math inline">\(m\)</span> and <span class="math inline">\(n\)</span>. In essence, the monotone condition stipulates that the difference between the heuristic values of successive nodes must not exceed the actual cost of traversing the corresponding edge.</p>
+</section>
+<section id="implications-and-significance" class="level3">
+<h3 class="anchored" data-anchor-id="implications-and-significance">Implications and Significance</h3>
+<p>The adherence to the monotone condition imbues the A* algorithm with several notable advantages:</p>
+<section id="optimal-path-selection" class="level4">
+<h4 class="anchored" data-anchor-id="optimal-path-selection">1. Optimal Path Selection</h4>
+<p>By satisfying the monotone condition, A* ensures that it always selects the optimal path to every node it expands from the open set. This guarantees that the algorithm consistently progresses towards the goal state along the most efficient trajectory, thereby minimizing computational overhead.</p>
+</section>
+<section id="elimination-of-cost-propagation-in-closed-nodes" class="level4">
+<h4 class="anchored" data-anchor-id="elimination-of-cost-propagation-in-closed-nodes">2. Elimination of Cost Propagation in Closed Nodes</h4>
+<p>The monotone condition obviates the need for certain operations, such as improved cost propagation, within closed nodes. Unlike conventional A* implementations where cost updates may propagate through closed nodes, the adherence to the monotone condition renders such operations redundant. Consequently, the algorithm’s execution becomes more streamlined and efficient.</p>
+</section>
+</section>
+</section>
+<section id="illustrative-example-1" class="level2">
+<h2 class="anchored" data-anchor-id="illustrative-example-1">Illustrative Example</h2>
+<p>To elucidate the practical implications of the monotone condition, consider a scenario wherein A* navigates a grid-based environment using the Manhattan distance heuristic. In such a setting, the heuristic values assigned to nodes represent their Manhattan distances from the goal state. Let us examine a simplified graph excerpt to illustrate the application of the monotone condition:</p>
+<p><span class="math display">\[
+\begin{array}{c c c c c}
+\text{Nodes} &amp; \text{Heuristic Value (h)} &amp; \text{Edge Cost (c)} \\
+\hline
+H &amp; 120 &amp; - \\
+O &amp; 100 &amp; 23 \\
+E &amp; 120 &amp; 33 \\
+B &amp; 110 &amp; 33 \\
+L &amp; 140 &amp; 32 \\
+P &amp; 150 &amp; 32 \\
+S &amp; 160 &amp; 21 \\
+U &amp; 140 &amp; 21 \\
+\end{array}
+\]</span></p>
+<p>In this graph, each node’s heuristic value corresponds to its Manhattan distance from the goal state. Upon scrutiny, it becomes evident that the difference between the heuristic values of successive nodes adheres to the monotone condition. For instance, consider the nodes <span class="math inline">\(H\)</span> and <span class="math inline">\(O\)</span>. The difference in their heuristic values is <span class="math inline">\(|120 - 100| = 20\)</span>, which is less than the corresponding edge cost of <span class="math inline">\(23\)</span>. Similar observations hold true for other node pairs, thereby validating the monotone condition’s applicability in this context.</p>
+</section>
+<section id="consequences-of-monotone-condition" class="level2">
+<h2 class="anchored" data-anchor-id="consequences-of-monotone-condition">Consequences of Monotone Condition</h2>
+<section id="non-decreasing-f-values" class="level3">
+<h3 class="anchored" data-anchor-id="non-decreasing-f-values">Non-decreasing <span class="math inline">\(f\)</span> Values</h3>
+<p>An immediate consequence of satisfying the monotone condition is the emergence of non-decreasing <span class="math inline">\(f\)</span> values along optimal paths. This phenomenon ensures that as the algorithm progresses towards the goal state, the cumulative cost of reaching any intermediate node increases monotonically. Consequently, A* consistently prioritizes nodes along paths that lead to the optimal solution, enhancing its convergence properties.</p>
+</section>
+<section id="optimal-path-identification" class="level3">
+<h3 class="anchored" data-anchor-id="optimal-path-identification">Optimal Path Identification</h3>
+<p>The monotone condition guarantees that at the point of expansion, A* selects nodes that lie on optimal paths to the goal state. In essence, the algorithm not only identifies the optimal path to the goal but also ensures optimality at every intermediate node along the trajectory. This robustness underscores A*’s efficacy in navigating complex search spaces while maintaining optimality.</p>
+</section>
+<section id="streamlined-algorithmic-execution" class="level3">
+<h3 class="anchored" data-anchor-id="streamlined-algorithmic-execution">Streamlined Algorithmic Execution</h3>
+<p>By virtue of adhering to the monotone condition, A* obviates the need for certain operations, such as improved cost propagation within closed nodes. In conventional A* implementations, cost updates may propagate through closed nodes to refine the search process. However, the monotone condition eliminates such requirements, simplifying the algorithm’s execution and reducing computational overhead.</p>
+</section>
+</section>
+<section id="future-considerations-and-applications" class="level2">
+<h2 class="anchored" data-anchor-id="future-considerations-and-applications">Future Considerations and Applications</h2>
+<p>The successful integration of the monotone condition into the A* algorithm paves the way for exploring novel avenues in algorithmic design and optimization. One particularly intriguing domain is that of sequence alignment in computational biology. In this context, the ability to prune closed nodes efficiently becomes paramount, especially when dealing with large-scale sequence datasets. By leveraging the principles underlying the monotone condition, researchers can devise innovative algorithms tailored to address the unique challenges posed by sequence alignment problems.</p>
+</section>
+</section>
+<section id="sequence-alignment-in-biology" class="level1">
+<h1>Sequence Alignment in Biology</h1>
+<section id="introduction-to-nucleic-acid-sequences" class="level2">
+<h2 class="anchored" data-anchor-id="introduction-to-nucleic-acid-sequences">Introduction to Nucleic Acid Sequences</h2>
+<p>Nucleic acid sequences are fundamental in biology, delineating the precise order of nucleotides within DNA or RNA molecules. These sequences, composed of adenine (<span class="math inline">\(A\)</span>), cytosine (<span class="math inline">\(C\)</span>), guanine (<span class="math inline">\(G\)</span>), and thymine (<span class="math inline">\(T\)</span>), serve as the blueprint for genetic information transmission and protein synthesis. The linear arrangement of these nucleotides forms alleles, dictating various biological functions and traits.</p>
+</section>
+<section id="sequence-alignment-problem" class="level2">
+<h2 class="anchored" data-anchor-id="sequence-alignment-problem">Sequence Alignment Problem</h2>
+<p>The sequence alignment problem is pivotal in bioinformatics, aiming to assess the similarity between two amino acid sequences. This comparison holds significant implications for understanding evolutionary relationships, genetic mutations, and protein structure-function relationships.</p>
+<section id="needleman-wunsch-algorithm" class="level3">
+<h3 class="anchored" data-anchor-id="needleman-wunsch-algorithm">Needleman-Wunsch Algorithm</h3>
+<p>In 1970, Needleman and Wunsch devised a dynamic programming algorithm to address the sequence alignment problem. This algorithm employs a dynamic programming approach to compute the optimal alignment between two sequences. By systematically evaluating all possible alignments and assigning scores based on matching residues and gap insertions, the Needleman-Wunsch algorithm provides a comprehensive solution to the sequence alignment problem.</p>
+</section>
+<section id="objective-of-sequence-alignment" class="level3">
+<h3 class="anchored" data-anchor-id="objective-of-sequence-alignment">Objective of Sequence Alignment</h3>
+<p>The primary objective of sequence alignment is to maximize the similarity between the aligned sequences while accommodating for variations such as gaps and mismatches. By quantifying the degree of similarity through alignment scores, biologists gain insights into evolutionary relatedness, functional conservation, and genetic divergence.</p>
+</section>
+<section id="penalties-in-sequence-alignment" class="level3">
+<h3 class="anchored" data-anchor-id="penalties-in-sequence-alignment">Penalties in Sequence Alignment</h3>
+<p>In the context of sequence alignment, penalties are assigned to mismatches and gap insertions to quantify the cost of alignment.</p>
+<ul>
+<li><strong>Mismatch Penalty</strong>: When different characters are aligned, a penalty is incurred to reflect the degree of divergence between the sequences.</li>
+<li><strong>Gap Penalty (Indel Penalty)</strong>: Inserting a gap in one or both sequences incurs a penalty, reflecting the potential for insertions or deletions in genetic sequences.</li>
+</ul>
+</section>
+</section>
+<section id="similarity-functions" class="level2">
+<h2 class="anchored" data-anchor-id="similarity-functions">Similarity Functions</h2>
+<p>Sequence alignment transforms the problem into a maximization task, aiming to maximize the similarity between aligned sequences while minimizing penalties associated with mismatches and gap insertions. Various similarity functions are employed to assign scores to aligned residues, facilitating the comparison and evaluation of different alignments.</p>
+<section id="examples-of-similarity-functions" class="level3">
+<h3 class="anchored" data-anchor-id="examples-of-similarity-functions">Examples of Similarity Functions</h3>
+<ul>
+<li><p><strong>Simple Scoring Scheme</strong>: Assigns scores based on matches, mismatches, and gap insertions. For instance, a match may receive a positive score (<span class="math inline">\(+1\)</span>), while a mismatch or gap insertion may incur a negative penalty.</p></li>
+<li><p><strong>Fine-Grained Scoring Scheme</strong>: Assigns different weights to aligned residues based on their biochemical properties and evolutionary conservation. For example, aligning identical amino acids may receive a higher weight than aligning dissimilar residues.</p></li>
+</ul>
+</section>
+</section>
+<section id="sequence-alignment-as-graph-search" class="level2">
+<h2 class="anchored" data-anchor-id="sequence-alignment-as-graph-search">Sequence Alignment as Graph Search</h2>
+<p>In computational biology, the sequence alignment problem can be conceptualized as a graph search problem, where nodes represent alignment states, and edges denote possible alignment moves.</p>
+<section id="representation" class="level3">
+<h3 class="anchored" data-anchor-id="representation">Representation</h3>
+<ul>
+<li><strong>Nodes</strong>: Represent different states of sequence alignment, including aligned residues and gap insertions.</li>
+<li><strong>Edges</strong>: Correspond to alignment moves, such as matching residues, inserting gaps, or extending alignments.</li>
+</ul>
+</section>
+<section id="moves-in-sequence-alignment" class="level3">
+<h3 class="anchored" data-anchor-id="moves-in-sequence-alignment">Moves in Sequence Alignment</h3>
+<ul>
+<li><strong>Diagonal Move</strong>: Aligning two residues from the input sequences.</li>
+<li><strong>Horizontal Move</strong>: Inserting a gap in one sequence while maintaining alignment in the other sequence.</li>
+<li><strong>Vertical Move</strong>: Inserting a gap in the other sequence while maintaining alignment in the first sequence.</li>
+</ul>
+</section>
+<section id="cost-of-alignment-moves" class="level3">
+<h3 class="anchored" data-anchor-id="cost-of-alignment-moves">Cost of Alignment Moves</h3>
+<p>Each alignment move incurs a cost, reflecting the penalty associated with mismatches or gap insertions.</p>
+</section>
+</section>
+<section id="complexity-analysis" class="level2">
+<h2 class="anchored" data-anchor-id="complexity-analysis">Complexity Analysis</h2>
+<p>Analyzing the computational complexity of sequence alignment algorithms provides insights into their efficiency and scalability, especially when dealing with large genetic sequences.</p>
+<section id="state-space-complexity" class="level3">
+<h3 class="anchored" data-anchor-id="state-space-complexity">State Space Complexity</h3>
+<p>The state space complexity of sequence alignment algorithms grows quadratically with the depth of the search space. This growth is attributed to the combinatorial nature of alignments, where each additional residue increases the number of possible alignments exponentially.</p>
+</section>
+<section id="number-of-paths" class="level3">
+<h3 class="anchored" data-anchor-id="number-of-paths">Number of Paths</h3>
+<p>The number of possible alignment paths increases combinatorially with the introduction of diagonal moves, which allow for the alignment of different residues from the input sequences.</p>
+</section>
+<section id="open-vs.-closed-lists" class="level3">
+<h3 class="anchored" data-anchor-id="open-vs.-closed-lists">Open vs.&nbsp;Closed Lists</h3>
+<ul>
+<li><strong>Open List</strong>: Maintains nodes that are currently under consideration for expansion during the search process. The size of the open list grows linearly with the depth of the search.</li>
+<li><strong>Closed List</strong>: Stores nodes that have been explored or expanded during the search. The size of the closed list grows quadratically, posing memory constraints in large-scale sequence alignment problems.</li>
+</ul>
+</section>
+</section>
+<section id="motivation-for-pruning-strategies" class="level2">
+<h2 class="anchored" data-anchor-id="motivation-for-pruning-strategies">Motivation for Pruning Strategies</h2>
+<p>Efficient pruning of the closed list is imperative in mitigating memory overheads and improving the efficiency of sequence alignment algorithms. By reducing redundant node expansions and minimizing memory consumption, pruning strategies enhance the scalability and applicability of sequence alignment algorithms.</p>
+<section id="monotone-condition" class="level3">
+<h3 class="anchored" data-anchor-id="monotone-condition">Monotone Condition</h3>
+<p>The monotone condition, enforced by heuristic functions, ensures that nodes explored during the search process are not revisited. By preventing redundant node expansions, the monotone condition reduces the size of the closed list and improves search efficiency.</p>
+</section>
+<section id="future-directions" class="level3">
+<h3 class="anchored" data-anchor-id="future-directions">Future Directions</h3>
+<p>Future research in sequence alignment algorithms will focus on developing advanced pruning strategies to further optimize memory utilization and computational efficiency. By leveraging heuristic functions and algorithmic optimizations, researchers aim to address the computational challenges associated with large-scale sequence alignment problems.</p>
+</section>
+</section>
+</section>
+<section id="pruning-closed-in-a" class="level1">
+<h1>Pruning <code>CLOSED</code> in A*</h1>
+<section id="introduction-2" class="level2">
+<h2 class="anchored" data-anchor-id="introduction-2">Introduction</h2>
+<p>In the realm of Artificial Intelligence (AI), search algorithms play a pivotal role in finding optimal solutions to complex problems. One such algorithm, A<em>, is renowned for its efficiency in navigating search spaces using heuristic information. However, the performance of A</em> can be hindered by the exponential growth of space and time requirements, particularly when dealing with imperfect heuristic functions. To mitigate these challenges, researchers have proposed various pruning strategies aimed at reducing the memory overhead associated with A* search. This discussion delves into the motivations behind pruning closed lists in A* and explores different approaches to optimize search efficiency while maintaining solution optimality.</p>
+</section>
+<section id="motivation-for-pruning-closed-lists" class="level2">
+<h2 class="anchored" data-anchor-id="motivation-for-pruning-closed-lists">Motivation for Pruning Closed Lists</h2>
+<p>The A* algorithm, while effective, can incur significant computational costs, especially when operating in domains with large state spaces and imperfect heuristic functions. In such scenarios, the algorithm’s memory requirements grow exponentially, posing practical limitations on its applicability. To address this issue, researchers have sought alternative strategies that enable more efficient memory utilization without compromising solution quality.</p>
+</section>
+<section id="recap-of-the-sequencer-alignment-problem" class="level2">
+<h2 class="anchored" data-anchor-id="recap-of-the-sequencer-alignment-problem">Recap of the Sequencer Alignment Problem</h2>
+<p>Before delving into pruning strategies, it’s essential to understand the underlying challenges posed by problems with large search spaces, such as the sequencer alignment problem. In this context, the open and closed lists in A* tend to grow linearly and quadratically, respectively, as the search progresses. This exponential growth in memory consumption necessitates the exploration of novel techniques to manage search space effectively.</p>
+</section>
+<section id="previous-reductions-in-space-usage" class="level2">
+<h2 class="anchored" data-anchor-id="previous-reductions-in-space-usage">Previous Reductions in Space Usage</h2>
+<p>Previous efforts to alleviate the space complexity of A* include the introduction of weighted A* and other heuristic-based search algorithms. Weighted A* assigns different weights to heuristic estimates, allowing for more flexibility in balancing computational costs and solution quality. Additionally, algorithms such as branch and bound, A<em>, wA</em>, and best-first search have been explored, each offering varying degrees of space efficiency.</p>
+</section>
+<section id="monotone-condition-in-a" class="level2">
+<h2 class="anchored" data-anchor-id="monotone-condition-in-a">Monotone Condition in A*</h2>
+<p>Central to the efficiency of A* is the monotone condition, which requires that the heuristic function underestimates the cost of every edge in the graph. This condition ensures that A* always selects an optimal path to each explored node, thereby minimizing the risk of revisiting previously traversed states. By adhering to the monotone condition, A* can effectively prune search branches that lead to suboptimal solutions, thereby improving computational efficiency.</p>
+</section>
+<section id="role-of-closed-list-in-search" class="level2">
+<h2 class="anchored" data-anchor-id="role-of-closed-list-in-search">Role of Closed List in Search</h2>
+<p>The closed list in A* serves two primary purposes: to prevent infinite loops and to facilitate path reconstruction upon reaching the goal state. By maintaining a record of visited nodes, the algorithm can avoid revisiting states that have already been explored. Additionally, the closed list enables the reconstruction of the optimal path from the start state to the goal state, ensuring the completeness and correctness of the solution.</p>
+</section>
+<section id="frontier-search-by-korf-and-zhang" class="level2">
+<h2 class="anchored" data-anchor-id="frontier-search-by-korf-and-zhang">Frontier Search by Korf and Zhang</h2>
+<p>One notable approach to reducing memory overhead in A* is frontier search, proposed by Korf and Zhang. This technique focuses on maintaining only the nodes present on the open list while discarding those on the closed list. By eliminating redundant nodes from the search space, frontier search can significantly reduce memory consumption without sacrificing solution quality.</p>
+<section id="frontier-search-mechanism" class="level3">
+<h3 class="anchored" data-anchor-id="frontier-search-mechanism">Frontier Search Mechanism</h3>
+<p>Frontier search employs a tabu list to prevent the generation of nodes that have already been explored or are on the closed list. This tabu list effectively prunes search branches that lead to previously visited states, allowing the algorithm to focus on unexplored regions of the search space. By selectively discarding closed nodes, frontier search can maintain search efficiency while conserving memory resources.</p>
+</section>
+<section id="divide-and-conquer-frontier-search" class="level3">
+<h3 class="anchored" data-anchor-id="divide-and-conquer-frontier-search">Divide and Conquer Frontier Search</h3>
+<p>In addition to frontier search, Korf and Zhang introduced the concept of divide and conquer frontier search. This approach involves maintaining a set of relay nodes that serve as key waypoints in the search space. By strategically placing relay nodes at critical junctures, the algorithm can reconstruct the optimal path from the start state to the goal state more efficiently.</p>
+</section>
+<section id="trade-off-in-time-and-space" class="level3">
+<h3 class="anchored" data-anchor-id="trade-off-in-time-and-space">Trade-off in Time and Space</h3>
+<p>While divide and conquer frontier search offers significant space savings, it comes at the cost of increased time complexity due to recursive path reconstruction. The algorithm must perform additional recursive calls to reconstruct the optimal path using relay nodes, resulting in a trade-off between time and space efficiency. Despite this trade-off, divide and conquer frontier search remains a viable strategy for managing memory overhead in A*.</p>
+</section>
+</section>
+<section id="smart-memory-graph-search-by-hansen-and-zhou" class="level2">
+<h2 class="anchored" data-anchor-id="smart-memory-graph-search-by-hansen-and-zhou">Smart Memory Graph Search by Hansen and Zhou</h2>
+<p>Building upon the principles of frontier search, Hansen and Zhou proposed a more adaptive approach known as smart memory graph search. Unlike traditional frontier search algorithms, smart memory graph search dynamically adjusts its pruning strategy based on available memory resources. By monitoring memory usage in real-time, the algorithm can determine the optimal balance between space efficiency and solution quality.</p>
+<section id="boundary-nodes-and-relay-nodes" class="level3">
+<h3 class="anchored" data-anchor-id="boundary-nodes-and-relay-nodes">Boundary Nodes and Relay Nodes</h3>
+<p>Smart memory graph search identifies boundary nodes within the search space, which serve as key markers for path reconstruction. These boundary nodes help prevent the algorithm from revisiting previously explored regions, thereby reducing redundant computation. Additionally, boundary nodes can be converted into relay nodes when memory constraints dictate the need for more aggressive pruning.</p>
+</section>
+<section id="sparse-memory-graph-search-smgs" class="level3">
+<h3 class="anchored" data-anchor-id="sparse-memory-graph-search-smgs">Sparse-Memory Graph Search (SMGS)</h3>
+<p>Sparse-Memory Graph Search (SMGS) stands as a significant advancement in the realm of graph search algorithms, particularly focusing on memory optimization while retaining the efficacy of the A* algorithm. In this comprehensive exposition, we delve into the intricate workings of SMGS, elucidating its foundational principles, operational mechanisms, and memory management strategies.</p>
+<p>SMGS, or Sparse-Memory Graph Search, represents a strategic evolution of the A* algorithm, tailored to address the burgeoning memory requirements inherent in large-scale graph search problems. By judiciously managing memory allocation and utilization, SMGS endeavors to strike a delicate balance between computational efficiency and memory conservation.</p>
+<section id="pseudocode" class="level4">
+<h4 class="anchored" data-anchor-id="pseudocode">Pseudocode:</h4>
+<ol type="1">
+<li><strong>SMGS (Sparse-Memory Graph Search)</strong> is a memory optimized version of the A* algorithm.</li>
+<li>There is no change to the OPEN list.</li>
+<li>The CLOSED list is split into:
+<ul>
+<li><strong>BOUNDARY nodes</strong> (unrestricted memory)</li>
+<li><strong>KERNEL nodes</strong> (a fixed-size memory)</li>
+</ul></li>
+<li>KERNEL memory is periodically cleared to make way for new KERNEL nodes.</li>
+</ol>
+</section>
+<section id="structural-components" class="level4">
+<h4 class="anchored" data-anchor-id="structural-components">Structural Components</h4>
+<section id="open-list" class="level5">
+<h5 class="anchored" data-anchor-id="open-list">1. OPEN List</h5>
+<p>In conformity with the traditional A* algorithm, SMGS maintains the OPEN list, serving as the repository for nodes awaiting exploration during the search process. No alterations are made to the structure or operation of the OPEN list in SMGS.</p>
+</section>
+<section id="closed-list" class="level5">
+<h5 class="anchored" data-anchor-id="closed-list">2. CLOSED List</h5>
+<p>The CLOSED list in SMGS undergoes a paradigmatic transformation, dividing into two distinct categories:</p>
+<section id="boundary-nodes" class="level6">
+<h6 class="anchored" data-anchor-id="boundary-nodes">- Boundary Nodes</h6>
+<p>Boundary nodes represent a pivotal component of the CLOSED list, enjoying unrestricted memory allocation. These nodes serve as the vanguards delineating the boundary between explored and unexplored regions of the search space, facilitating efficient traversal and exploration.</p>
+</section>
+<section id="kernel-nodes" class="level6">
+<h6 class="anchored" data-anchor-id="kernel-nodes">- Kernel Nodes</h6>
+<p>In contrast, kernel nodes are allocated a fixed-size memory segment, adhering to a stringent memory utilization policy. This segmentation enables periodic clearance of kernel memory, ensuring the continuous availability of memory resources and mitigating the risk of memory saturation.</p>
+</section>
+</section>
+</section>
+<section id="memory-management-strategy" class="level4">
+<h4 class="anchored" data-anchor-id="memory-management-strategy">Memory Management Strategy</h4>
+<section id="dynamic-allocation-of-boundary-nodes" class="level5">
+<h5 class="anchored" data-anchor-id="dynamic-allocation-of-boundary-nodes">Dynamic Allocation of Boundary Nodes</h5>
+<p>Boundary nodes, being allocated from an unrestricted memory pool, play a central role in guiding the search process. Their unbounded memory allocation affords them the capacity to retain crucial information pertinent to search traversal, thereby facilitating informed decision-making and efficient exploration.</p>
+</section>
+<section id="periodic-clearance-of-kernel-memory" class="level5">
+<h5 class="anchored" data-anchor-id="periodic-clearance-of-kernel-memory">Periodic Clearance of Kernel Memory</h5>
+<p>Kernel nodes, residing within a fixed-size memory segment, operate within a more constrained memory environment. To circumvent the risk of memory saturation, SMGS implements a dynamic memory allocation strategy whereby kernel memory is periodically cleared to accommodate new kernel nodes. This ensures the optimal utilization of memory resources while sustaining the integrity and efficiency of the search process.</p>
+</section>
+</section>
+</section>
+</section>
+<section id="operational-framework" class="level2">
+<h2 class="anchored" data-anchor-id="operational-framework">Operational Framework</h2>
+<p>The operational framework of SMGS is underpinned by the seamless integration of memory optimization principles and search efficiency considerations. By dynamically managing memory allocation and utilization, SMGS endeavors to navigate the complexities of large-scale graph search problems while mitigating the adverse effects of memory constraints.</p>
+</section>
+</section>
+<section id="pruning-open-in-a" class="level1">
+<h1>Pruning <code>OPEN</code> in A*</h1>
+<p>In the realm of artificial intelligence (AI) search algorithms, the management of search spaces is crucial for efficient exploration and optimal solution finding. One significant aspect of this management is the pruning of the OPEN list, which tends to grow rapidly as the search progresses. In this discussion, we delve into various techniques for pruning OPEN in the context of the A* search algorithm.</p>
+<section id="exponential-growth-and-search-spaces" class="level2">
+<h2 class="anchored" data-anchor-id="exponential-growth-and-search-spaces">Exponential Growth and Search Spaces</h2>
+<p>Search spaces in AI algorithms often exhibit exponential growth, especially as the search progresses to deeper levels. This growth is particularly evident in the OPEN list, where the number of successors increases exponentially with each level of the search tree. For example, if a node has <span class="math inline">\(B\)</span> children, then at the next level, there will be <span class="math inline">\(B^2\)</span> successors, and so on. This exponential growth poses a challenge for search algorithms like A*, which aim to find optimal solutions while managing computational resources efficiently.</p>
+</section>
+<section id="managing-open-beam-search" class="level2">
+<h2 class="anchored" data-anchor-id="managing-open-beam-search">Managing OPEN: Beam Search</h2>
+<p>One approach to mitigate the rapid growth of the OPEN list is to employ beam search, a variant of hill climbing that restricts the number of successors considered at each level. In beam search, a fixed beam width <span class="math inline">\(w\)</span> is specified, and only the <span class="math inline">\(w\)</span> best successors are retained at each level of the search. This restriction helps in controlling the size of the OPEN list and reduces the computational burden of the algorithm.</p>
+</section>
+<section id="beam-search-and-optimal-solutions" class="level2">
+<h2 class="anchored" data-anchor-id="beam-search-and-optimal-solutions">Beam Search and Optimal Solutions</h2>
+<p>While beam search offers a practical solution for managing the OPEN list, it is important to note that it may not always yield optimal solutions. Unlike hill climbing, which prioritizes better successors, beam search selects successors based on their <span class="math inline">\(f\)</span>-values, where <span class="math inline">\(f\)</span> represents the evaluation function used in A* search. Since <span class="math inline">\(f\)</span>-values tend to increase with depth in the search tree, beam search may overlook potentially better solutions in favor of nodes with lower <span class="math inline">\(f\)</span>-values at shallower levels.</p>
+</section>
+<section id="upper-bound-cost-and-pruning" class="level2">
+<h2 class="anchored" data-anchor-id="upper-bound-cost-and-pruning">Upper Bound Cost and Pruning</h2>
+<p>Despite its limitations, beam search can be leveraged to obtain an upper bound on the solution cost. This upper bound, denoted as <span class="math inline">\(U\)</span>, serves as a reference point for pruning the search space further. By using beam search to find a path to the goal node, we can determine an upper bound on the solution cost. This upper bound can then be utilized to prune nodes with <span class="math inline">\(f\)</span>-values exceeding <span class="math inline">\(U\)</span>, effectively reducing the search space and improving computational efficiency.</p>
+</section>
+<section id="breadth-first-heuristic-search-bfhs" class="level2">
+<h2 class="anchored" data-anchor-id="breadth-first-heuristic-search-bfhs">Breadth-First Heuristic Search (BFHS)</h2>
+<p>An extension of beam search, known as breadth-first heuristic search (BFHS), aims to enhance the traditional breadth-first search (BFS) algorithm by incorporating heuristic information. In BFHS, the search is constrained to nodes with <span class="math inline">\(f\)</span>-values less than the upper bound <span class="math inline">\(U\)</span> obtained from beam search. This restriction helps in limiting the search space to promising regions while still maintaining the breadth-first exploration strategy.</p>
+</section>
+<section id="beam-stack-search-integrating-backtracking" class="level2">
+<h2 class="anchored" data-anchor-id="beam-stack-search-integrating-backtracking">Beam Stack Search: Integrating Backtracking</h2>
+<p>Beam stack search introduces backtracking into the beam search framework, allowing for more flexible exploration of the search space. In this approach, a beam stack is maintained, containing information about the lowest and highest <span class="math inline">\(f\)</span>-values within the beam at each level. This beam stack guides the search process, enabling efficient exploration while ensuring that the search remains within the upper bound cost <span class="math inline">\(U\)</span>.</p>
+</section>
+<section id="divide-and-conquer-beam-stack-search" class="level2">
+<h2 class="anchored" data-anchor-id="divide-and-conquer-beam-stack-search">Divide and Conquer Beam Stack Search</h2>
+<p>To further optimize space complexity, divide and conquer beam stack search maintains only three layers of nodes: open, boundary, and relay. By regenerating nodes from the start node as needed and utilizing the information stored in the beam stack, this approach achieves a constant space complexity. Despite its space-saving benefits, divide and conquer beam stack search may not always yield optimal solutions due to its reliance on beam search and backtracking.</p>
+</section>
+</section>
+<section id="conclusion" class="level1">
+<h1>Conclusion</h1>
+<p>In this extensive exploration of search algorithms and their applications in various domains, we have covered a wide range of topics, from the fundamental principles of A* and its variations to the intricacies of sequence alignment in biology. We delved into the motivations behind pruning strategies in A* and examined innovative approaches such as frontier search, smart memory graph search, and beam stack search. Through these discussions, we gained insights into the challenges posed by large search spaces and the strategies employed to manage computational resources efficiently. By understanding the theoretical foundations and practical implications of these algorithms, we are better equipped to tackle complex optimization problems in diverse fields, ranging from artificial intelligence to computational biology.</p>
+</section>
+<section id="points-to-remember" class="level1">
+<h1>Points to Remember</h1>
+<ol type="1">
+<li><strong>A* and its Variations</strong>:
+<ul>
+<li>A* is a fundamental search algorithm used in artificial intelligence for finding optimal paths.</li>
+<li>Variations such as Weighted A* (WA*) allow for trade-offs between optimality and computational efficiency.</li>
+<li>Iterative Deepening A* (IDA<em>) and Recursive Best-First Search (RBFS) are space-efficient variations of A</em>.</li>
+</ul></li>
+<li><strong>Sequence Alignment in Biology</strong>:
+<ul>
+<li>Sequence alignment is crucial in bioinformatics for assessing similarity between nucleic acid sequences.</li>
+<li>The Needleman-Wunsch algorithm is a dynamic programming approach for sequence alignment.</li>
+<li>Similarity functions and penalties are used to quantify the degree of similarity and cost of alignment.</li>
+</ul></li>
+<li><strong>Graph Search and Pruning</strong>:
+<ul>
+<li>Sequence alignment and A* can be conceptualized as graph search problems.</li>
+<li>Pruning strategies like the monotone condition and frontier search optimize memory usage in A*.</li>
+<li>Beam search variants and divide and conquer approaches enhance efficiency while managing the OPEN list.</li>
+</ul></li>
+<li><strong>Smart Memory Graph Search</strong>:
+<ul>
+<li>Smart memory graph search dynamically adjusts pruning strategies based on available memory.</li>
+<li>Sparse-Memory Graph Search (SMGS) optimizes memory usage in large-scale graph search problems.</li>
+<li>It utilizes boundary nodes and kernel nodes to balance memory allocation and computational efficiency.</li>
+</ul></li>
+<li><strong>Beam Stack Search</strong>:
+<ul>
+<li>Beam stack search integrates backtracking into beam search, enabling more flexible exploration.</li>
+<li>Divide and conquer beam stack search achieves constant space complexity by maintaining only essential layers of nodes.</li>
+</ul></li>
+<li><strong>Applications</strong>:
+<ul>
+<li>These algorithms find applications in various domains, including artificial intelligence, bioinformatics, and optimization problems.</li>
+<li>Understanding their principles and trade-offs is essential for designing efficient solutions to complex problems.</li>
+</ul></li>
+</ol>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const disableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'prefetch';
+    }
+  }
+  const enableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'stylesheet';
+    }
+  }
+  const manageTransitions = (selector, allowTransitions) => {
+    const els = window.document.querySelectorAll(selector);
+    for (let i=0; i < els.length; i++) {
+      const el = els[i];
+      if (allowTransitions) {
+        el.classList.remove('notransition');
+      } else {
+        el.classList.add('notransition');
+      }
+    }
+  }
+  const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+    const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+    const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+    let newTheme = '';
+    if(darkModeDefault) {
+      newTheme = isAlternate ? baseTheme : alternateTheme;
+    } else {
+      newTheme = isAlternate ? alternateTheme : baseTheme;
+    }
+    const changeGiscusTheme = () => {
+      // From: https://github.com/giscus/giscus/issues/336
+      const sendMessage = (message) => {
+        const iframe = document.querySelector('iframe.giscus-frame');
+        if (!iframe) return;
+        iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+      }
+      sendMessage({
+        setConfig: {
+          theme: newTheme
+        }
+      });
+    }
+    const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+    if (isGiscussLoaded) {
+      changeGiscusTheme();
+    }
+  }
+  const toggleColorMode = (alternate) => {
+    // Switch the stylesheets
+    const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+    manageTransitions('#quarto-margin-sidebar .nav-link', false);
+    if (alternate) {
+      enableStylesheet(alternateStylesheets);
+      for (const sheetNode of alternateStylesheets) {
+        if (sheetNode.id === "quarto-bootstrap") {
+          toggleBodyColorMode(sheetNode);
+        }
+      }
+    } else {
+      disableStylesheet(alternateStylesheets);
+      toggleBodyColorPrimary();
+    }
+    manageTransitions('#quarto-margin-sidebar .nav-link', true);
+    // Switch the toggles
+    const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+    for (let i=0; i < toggles.length; i++) {
+      const toggle = toggles[i];
+      if (toggle) {
+        if (alternate) {
+          toggle.classList.add("alternate");     
+        } else {
+          toggle.classList.remove("alternate");
+        }
+      }
+    }
+    // Hack to workaround the fact that safari doesn't
+    // properly recolor the scrollbar when toggling (#1455)
+    if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+      manageTransitions("body", false);
+      window.scrollTo(0, 1);
+      setTimeout(() => {
+        window.scrollTo(0, 0);
+        manageTransitions("body", true);
+      }, 40);  
+    }
+  }
+  const isFileUrl = () => { 
+    return window.location.protocol === 'file:';
+  }
+  const hasAlternateSentinel = () => {  
+    let styleSentinel = getColorSchemeSentinel();
+    if (styleSentinel !== null) {
+      return styleSentinel === "alternate";
+    } else {
+      return false;
+    }
+  }
+  const setStyleSentinel = (alternate) => {
+    const value = alternate ? "alternate" : "default";
+    if (!isFileUrl()) {
+      window.localStorage.setItem("quarto-color-scheme", value);
+    } else {
+      localAlternateSentinel = value;
+    }
+  }
+  const getColorSchemeSentinel = () => {
+    if (!isFileUrl()) {
+      const storageValue = window.localStorage.getItem("quarto-color-scheme");
+      return storageValue != null ? storageValue : localAlternateSentinel;
+    } else {
+      return localAlternateSentinel;
+    }
+  }
+  const darkModeDefault = false;
+  let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+  // Dark / light mode switch
+  window.quartoToggleColorScheme = () => {
+    // Read the current dark / light value 
+    let toAlternate = !hasAlternateSentinel();
+    toggleColorMode(toAlternate);
+    setStyleSentinel(toAlternate);
+    toggleGiscusIfUsed(toAlternate, darkModeDefault);
+  };
+  // Ensure there is a toggle, if there isn't float one in the top right
+  if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+    const a = window.document.createElement('a');
+    a.classList.add('top-right');
+    a.classList.add('quarto-color-scheme-toggle');
+    a.href = "";
+    a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+    const i = window.document.createElement("i");
+    i.classList.add('bi');
+    a.appendChild(i);
+    window.document.body.appendChild(a);
+  }
+  // Switch to dark mode if need be
+  if (hasAlternateSentinel()) {
+    toggleColorMode(true);
+  } else {
+    toggleColorMode(false);
+  }
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

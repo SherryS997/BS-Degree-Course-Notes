@@ -376,7 +376,7 @@ DD paths are identified by considering the paths that lead from one decision poi
 Formally, a DD path is defined as a set of vertices in the control flow graph that satisfies one of the following conditions:
 
 1. It consists of a single vertex with an in-degree of 0 (initial vertex) or an out-degree of 0 (terminal vertex).
-2. It includes a single vertex with both in-degree and out-degree greater than or equal to 2 (decision vertices).
+2. It includes a single vertex with both in-degree or out-degree greater than or equal to 2 (decision vertices).
 3. It comprises a single vertex with both in-degree and out-degree equal to 1, representing a non-decision node.
 4. It forms a maximal chain of length greater than or equal to 1, characterized by a sequence of vertices with each having an in-degree and out-degree of 1.
 

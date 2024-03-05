@@ -1,0 +1,1320 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.4.550">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>BS Degree Notes</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="https://lalten.github.io/lmweb/style/latinmodern-roman.css">
+<link rel="stylesheet" href="https://lalten.github.io/lmweb/style/latinmodern-sans.css">
+<link rel="stylesheet" href="https://lalten.github.io/lmweb/style/latinmodern-mono.css">
+</head>
+
+<body class="nav-sidebar docked">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../pages/AI/Week01.html">AI: Search Methods</a></li><li class="breadcrumb-item"><a href="../../pages/AI/Week05.html">Week 5</a></li></ol></nav>
+        <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="../../">BS Degree Notes</a> 
+        <div class="sidebar-tools-main">
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Home</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="false">
+ <span class="menu-text">Deep Learning</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../pages/DL/Week01_1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 1.1</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../pages/DL/Week01_2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 1.2</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../pages/DL/Week02.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 2</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../pages/DL/Week03.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 3</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../pages/DL/Week04.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 4</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../pages/DL/Week05.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 5</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../pages/DL/Week06.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 6</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
+ <span class="menu-text">AI: Search Methods</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../pages/AI/Week01.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 1</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../pages/AI/Week02.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 2</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../pages/AI/Week03.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 3</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../pages/AI/Week04.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 4</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../pages/AI/Week05.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">Week 5</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../pages/AI/Week06.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 6</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="false">
+ <span class="menu-text">Software Testing</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../pages/ST/Week01.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 1</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../pages/ST/Week02.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 2</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../pages/ST/Week03.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 3</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../pages/ST/Week04.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 4</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="false">
+ <span class="menu-text">Software Engineering</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../pages/SE/Week01.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 1</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../pages/SE/Week02.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 2</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../pages/SE/Week03.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 3</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../pages/SE/Week04.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 4</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="false">
+ <span class="menu-text">Reinforcement Learning</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../pages/RL/Week01_1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 1.1</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../pages/RL/Week01_2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 1.2</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../pages/RL/Week02.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 2</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#finding-optimal-tsp-tours" id="toc-finding-optimal-tsp-tours" class="nav-link active" data-scroll-target="#finding-optimal-tsp-tours">Finding Optimal TSP Tours</a>
+  <ul class="collapse">
+  <li><a href="#introduction-to-branch-and-bound-algorithm" id="toc-introduction-to-branch-and-bound-algorithm" class="nav-link" data-scroll-target="#introduction-to-branch-and-bound-algorithm">Introduction to Branch and Bound Algorithm</a></li>
+  <li><a href="#overview-of-the-example-problem" id="toc-overview-of-the-example-problem" class="nav-link" data-scroll-target="#overview-of-the-example-problem">Overview of the Example Problem</a></li>
+  <li><a href="#initialization-and-lower-bound-estimates" id="toc-initialization-and-lower-bound-estimates" class="nav-link" data-scroll-target="#initialization-and-lower-bound-estimates">Initialization and Lower Bound Estimates</a></li>
+  <li><a href="#trade-off-between-accuracy-and-computation-time" id="toc-trade-off-between-accuracy-and-computation-time" class="nav-link" data-scroll-target="#trade-off-between-accuracy-and-computation-time">Trade-off Between Accuracy and Computation Time</a></li>
+  <li><a href="#iterative-refinement-of-candidates" id="toc-iterative-refinement-of-candidates" class="nav-link" data-scroll-target="#iterative-refinement-of-candidates">Iterative Refinement of Candidates</a>
+  <ul class="collapse">
+  <li><a href="#inclusion-and-exclusion-of-edges" id="toc-inclusion-and-exclusion-of-edges" class="nav-link" data-scroll-target="#inclusion-and-exclusion-of-edges">Inclusion and Exclusion of Edges</a></li>
+  <li><a href="#pruning-unpromising-branches" id="toc-pruning-unpromising-branches" class="nav-link" data-scroll-target="#pruning-unpromising-branches">Pruning Unpromising Branches</a></li>
+  </ul></li>
+  <li><a href="#termination-condition" id="toc-termination-condition" class="nav-link" data-scroll-target="#termination-condition">Termination Condition</a></li>
+  <li><a href="#trade-off-between-search-and-estimation" id="toc-trade-off-between-search-and-estimation" class="nav-link" data-scroll-target="#trade-off-between-search-and-estimation">Trade-off Between Search and Estimation</a></li>
+  <li><a href="#branch-and-bound-within-the-state-space-search-framework" id="toc-branch-and-bound-within-the-state-space-search-framework" class="nav-link" data-scroll-target="#branch-and-bound-within-the-state-space-search-framework">Branch and Bound within the State Space Search Framework</a></li>
+  </ul></li>
+  <li><a href="#optimal-pathfinding-algorithms" id="toc-optimal-pathfinding-algorithms" class="nav-link" data-scroll-target="#optimal-pathfinding-algorithms">Optimal Pathfinding Algorithms</a>
+  <ul class="collapse">
+  <li><a href="#introduction" id="toc-introduction" class="nav-link" data-scroll-target="#introduction">Introduction</a></li>
+  <li><a href="#branch-and-bound-algorithm" id="toc-branch-and-bound-algorithm" class="nav-link" data-scroll-target="#branch-and-bound-algorithm">Branch and Bound Algorithm</a>
+  <ul class="collapse">
+  <li><a href="#overview" id="toc-overview" class="nav-link" data-scroll-target="#overview">Overview</a></li>
+  <li><a href="#objective" id="toc-objective" class="nav-link" data-scroll-target="#objective">Objective</a></li>
+  <li><a href="#comparison-with-blind-search-algorithms" id="toc-comparison-with-blind-search-algorithms" class="nav-link" data-scroll-target="#comparison-with-blind-search-algorithms">Comparison with Blind Search Algorithms</a></li>
+  <li><a href="#heuristic-functions" id="toc-heuristic-functions" class="nav-link" data-scroll-target="#heuristic-functions">Heuristic Functions</a></li>
+  </ul></li>
+  <li><a href="#dijkstras-algorithm" id="toc-dijkstras-algorithm" class="nav-link" data-scroll-target="#dijkstras-algorithm">Dijkstra’s Algorithm</a>
+  <ul class="collapse">
+  <li><a href="#overview-1" id="toc-overview-1" class="nav-link" data-scroll-target="#overview-1">Overview</a></li>
+  <li><a href="#key-steps" id="toc-key-steps" class="nav-link" data-scroll-target="#key-steps">Key Steps</a></li>
+  <li><a href="#application-to-problem-solving" id="toc-application-to-problem-solving" class="nav-link" data-scroll-target="#application-to-problem-solving">Application to Problem Solving</a></li>
+  <li><a href="#comparison-with-branch-and-bound" id="toc-comparison-with-branch-and-bound" class="nav-link" data-scroll-target="#comparison-with-branch-and-bound">Comparison with Branch and Bound</a></li>
+  </ul></li>
+  </ul></li>
+  <li><a href="#a-star-algorithm" id="toc-a-star-algorithm" class="nav-link" data-scroll-target="#a-star-algorithm">A-star Algorithm</a>
+  <ul class="collapse">
+  <li><a href="#introduction-to-a-star-algorithm" id="toc-introduction-to-a-star-algorithm" class="nav-link" data-scroll-target="#introduction-to-a-star-algorithm">Introduction to A-star Algorithm</a></li>
+  <li><a href="#components-of-a-star-algorithm" id="toc-components-of-a-star-algorithm" class="nav-link" data-scroll-target="#components-of-a-star-algorithm">Components of A-star Algorithm</a></li>
+  <li><a href="#algorithm-workflow" id="toc-algorithm-workflow" class="nav-link" data-scroll-target="#algorithm-workflow">Algorithm Workflow</a></li>
+  <li><a href="#illustrative-example" id="toc-illustrative-example" class="nav-link" data-scroll-target="#illustrative-example">Illustrative Example</a></li>
+  <li><a href="#comparison-with-best-first-search" id="toc-comparison-with-best-first-search" class="nav-link" data-scroll-target="#comparison-with-best-first-search">Comparison with Best-First Search</a></li>
+  </ul></li>
+  <li><a href="#admissibility-of-a" id="toc-admissibility-of-a" class="nav-link" data-scroll-target="#admissibility-of-a">Admissibility of A*</a>
+  <ul class="collapse">
+  <li><a href="#introduction-to-a-star-algorithm-1" id="toc-introduction-to-a-star-algorithm-1" class="nav-link" data-scroll-target="#introduction-to-a-star-algorithm-1">Introduction to A star Algorithm</a></li>
+  <li><a href="#conditions-for-guaranteeing-optimal-solutions" id="toc-conditions-for-guaranteeing-optimal-solutions" class="nav-link" data-scroll-target="#conditions-for-guaranteeing-optimal-solutions">Conditions for Guaranteeing Optimal Solutions</a></li>
+  <li><a href="#optimal-values-and-heuristic-functions" id="toc-optimal-values-and-heuristic-functions" class="nav-link" data-scroll-target="#optimal-values-and-heuristic-functions">Optimal Values and Heuristic Functions</a></li>
+  <li><a href="#admissibility-of-a-star" id="toc-admissibility-of-a-star" class="nav-link" data-scroll-target="#admissibility-of-a-star">Admissibility of A star</a></li>
+  <li><a href="#example-illustrating-heuristic-functions" id="toc-example-illustrating-heuristic-functions" class="nav-link" data-scroll-target="#example-illustrating-heuristic-functions">Example Illustrating Heuristic Functions</a></li>
+  </ul></li>
+  <li><a href="#proof-of-admissibility-in-a-algorithm" id="toc-proof-of-admissibility-in-a-algorithm" class="nav-link" data-scroll-target="#proof-of-admissibility-in-a-algorithm">Proof of Admissibility in A* Algorithm</a>
+  <ul class="collapse">
+  <li><a href="#termination-for-finite-graphs" id="toc-termination-for-finite-graphs" class="nav-link" data-scroll-target="#termination-for-finite-graphs">Termination for Finite Graphs</a></li>
+  <li><a href="#open-list-contains-optimal-path-node" id="toc-open-list-contains-optimal-path-node" class="nav-link" data-scroll-target="#open-list-contains-optimal-path-node">Open List Contains Optimal Path Node</a></li>
+  <li><a href="#finding-a-path-in-infinite-graphs" id="toc-finding-a-path-in-infinite-graphs" class="nav-link" data-scroll-target="#finding-a-path-in-infinite-graphs">Finding a Path in Infinite Graphs</a></li>
+  <li><a href="#finding-the-least-cost-path" id="toc-finding-the-least-cost-path" class="nav-link" data-scroll-target="#finding-the-least-cost-path">Finding the Least Cost Path</a></li>
+  <li><a href="#node-expansion-and-heuristic-functions" id="toc-node-expansion-and-heuristic-functions" class="nav-link" data-scroll-target="#node-expansion-and-heuristic-functions">Node Expansion and Heuristic Functions</a></li>
+  <li><a href="#comparison-of-heuristic-functions" id="toc-comparison-of-heuristic-functions" class="nav-link" data-scroll-target="#comparison-of-heuristic-functions">Comparison of Heuristic Functions</a></li>
+  <li><a href="#variations-of-a" id="toc-variations-of-a" class="nav-link" data-scroll-target="#variations-of-a">Variations of A*</a></li>
+  </ul></li>
+  <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion">Conclusion</a></li>
+  <li><a href="#points-to-remember" id="toc-points-to-remember" class="nav-link" data-scroll-target="#points-to-remember">Points to Remember</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+
+
+
+<section id="finding-optimal-tsp-tours" class="level1">
+<h1>Finding Optimal TSP Tours</h1>
+<section id="introduction-to-branch-and-bound-algorithm" class="level2">
+<h2 class="anchored" data-anchor-id="introduction-to-branch-and-bound-algorithm">Introduction to Branch and Bound Algorithm</h2>
+<p>The Branch and Bound algorithm is a fundamental technique employed in optimization problems, particularly in combinatorial optimization, to efficiently find the optimal solution within a search space. This algorithm systematically explores the solution space by dividing it into smaller subspaces and effectively pruning unpromising branches to focus on regions likely to contain the optimal solution.</p>
+</section>
+<section id="overview-of-the-example-problem" class="level2">
+<h2 class="anchored" data-anchor-id="overview-of-the-example-problem">Overview of the Example Problem</h2>
+<p>To illustrate the workings of the Branch and Bound algorithm, let’s consider a specific optimization problem: finding the shortest tour among five cities. The objective is to determine the optimal route that visits each city exactly once and returns to the starting point, minimizing the total distance traveled.</p>
+</section>
+<section id="initialization-and-lower-bound-estimates" class="level2">
+<h2 class="anchored" data-anchor-id="initialization-and-lower-bound-estimates">Initialization and Lower Bound Estimates</h2>
+<p>The Branch and Bound algorithm begins with an initial set of all possible candidates, denoted as <span class="math inline">\(S_0\)</span>. Each candidate represents a potential solution or partial tour. A crucial aspect of the algorithm is the computation of lower bound estimates, which serve as a guide for pruning the search space.</p>
+<p>The lower bound estimates are calculated based on certain constraints, such as:</p>
+<ol type="1">
+<li><strong>Constraint 1</strong>: Each city should be visited exactly once in the tour.</li>
+<li><strong>Constraint 2</strong>: Subtours that violate optimality should be excluded from consideration.</li>
+</ol>
+</section>
+<section id="trade-off-between-accuracy-and-computation-time" class="level2">
+<h2 class="anchored" data-anchor-id="trade-off-between-accuracy-and-computation-time">Trade-off Between Accuracy and Computation Time</h2>
+<p>One of the key considerations in the Branch and Bound algorithm is the trade-off between the accuracy of estimates and the computation time required to compute them. More accurate estimates may necessitate additional computational effort but can lead to better pruning of the search space, resulting in faster convergence to the optimal solution.</p>
+</section>
+<section id="iterative-refinement-of-candidates" class="level2">
+<h2 class="anchored" data-anchor-id="iterative-refinement-of-candidates">Iterative Refinement of Candidates</h2>
+<p>The algorithm iteratively refines the candidates in the search space by either including or excluding edges in the tour. This process continues until fully refined nodes, representing complete tours, are identified.</p>
+<section id="inclusion-and-exclusion-of-edges" class="level3">
+<h3 class="anchored" data-anchor-id="inclusion-and-exclusion-of-edges">Inclusion and Exclusion of Edges</h3>
+<p>At each iteration, the algorithm considers whether to include or exclude specific edges in the tour. This decision is based on the impact it has on the overall cost of the tour and the satisfaction of optimality constraints.</p>
+</section>
+<section id="pruning-unpromising-branches" class="level3">
+<h3 class="anchored" data-anchor-id="pruning-unpromising-branches">Pruning Unpromising Branches</h3>
+<p>The Branch and Bound algorithm prunes unpromising branches of the search tree based on the lower bound estimates. By eliminating regions of the search space that cannot contain the optimal solution, the algorithm focuses its efforts on exploring more promising areas.</p>
+</section>
+</section>
+<section id="termination-condition" class="level2">
+<h2 class="anchored" data-anchor-id="termination-condition">Termination Condition</h2>
+<p>The algorithm terminates when a fully refined node with the lowest estimated cost is found. This fully refined node represents an actual tour with its actual cost and guarantees that no other solution in the search space can have a lower actual cost.</p>
+</section>
+<section id="trade-off-between-search-and-estimation" class="level2">
+<h2 class="anchored" data-anchor-id="trade-off-between-search-and-estimation">Trade-off Between Search and Estimation</h2>
+<p>A fundamental trade-off exists between the search process and the accuracy of estimation in the Branch and Bound algorithm. Higher estimated costs on open nodes delay exploration, as nodes with lower actual costs are prioritized for refinement.</p>
+</section>
+<section id="branch-and-bound-within-the-state-space-search-framework" class="level2">
+<h2 class="anchored" data-anchor-id="branch-and-bound-within-the-state-space-search-framework">Branch and Bound within the State Space Search Framework</h2>
+<p>The Branch and Bound algorithm operates within the framework of State Space Search, which involves systematically exploring the search space while utilizing lower bound estimates to guide the search towards the optimal solution. This approach ensures that the algorithm efficiently converges to the optimal solution while minimizing computational overhead.</p>
+</section>
+</section>
+<section id="optimal-pathfinding-algorithms" class="level1">
+<h1>Optimal Pathfinding Algorithms</h1>
+<section id="introduction" class="level2">
+<h2 class="anchored" data-anchor-id="introduction">Introduction</h2>
+<p>In the realm of artificial intelligence (AI), the exploration of search methods is crucial for problem-solving. These methods aim to navigate through complex state spaces to find optimal solutions efficiently. In this discussion, we delve into the concepts and algorithms associated with search methods, focusing particularly on the Branch and Bound algorithm and its comparison with Dijkstra’s Algorithm. Additionally, we explore the integration of these concepts in the A* algorithm for enhanced efficiency in problem-solving.</p>
+</section>
+<section id="branch-and-bound-algorithm" class="level2">
+<h2 class="anchored" data-anchor-id="branch-and-bound-algorithm">Branch and Bound Algorithm</h2>
+<section id="overview" class="level3">
+<h3 class="anchored" data-anchor-id="overview">Overview</h3>
+<p>The Branch and Bound algorithm serves as a fundamental approach for finding optimal solutions in state spaces with edge costs. Unlike blind search algorithms, which may overlook the optimality of solutions, Branch and Bound ensures the exploration of all potential solutions while organizing the search space systematically.</p>
+</section>
+<section id="objective" class="level3">
+<h3 class="anchored" data-anchor-id="objective">Objective</h3>
+<p>The primary objective of Branch and Bound is to identify the optimal solution within a state space characterized by edge costs. By extending or refining partial paths systematically, the algorithm aims to prune parts of the search space that are unlikely to contain better solutions.</p>
+</section>
+<section id="comparison-with-blind-search-algorithms" class="level3">
+<h3 class="anchored" data-anchor-id="comparison-with-blind-search-algorithms">Comparison with Blind Search Algorithms</h3>
+<p>Branch and Bound distinguishes itself from blind search algorithms such as Depth First Search (DFS) and Breadth First Search (BFS) in terms of its approach to solution exploration.</p>
+<section id="depth-first-search-dfs" class="level4">
+<h4 class="anchored" data-anchor-id="depth-first-search-dfs">Depth First Search (DFS)</h4>
+<p>DFS ventures optimistically into the search space, prioritizing deep exploration without guaranteeing the optimality of solutions.</p>
+</section>
+<section id="breadth-first-search-bfs" class="level4">
+<h4 class="anchored" data-anchor-id="breadth-first-search-bfs">Breadth First Search (BFS)</h4>
+<p>BFS, on the other hand, focuses on shallow candidates, aiming for the shortest path from the start node to the goal node. However, it may not always guarantee the optimal solution.</p>
+</section>
+<section id="depth-first-iterative-deepening" class="level4">
+<h4 class="anchored" data-anchor-id="depth-first-iterative-deepening">Depth First Iterative Deepening</h4>
+<p>Depth First Iterative Deepening combines elements of DFS and BFS, mimicking BFS while operating as a depth-first algorithm. Despite its similarities to BFS, it may still lack the assurance of optimality.</p>
+</section>
+</section>
+<section id="heuristic-functions" class="level3">
+<h3 class="anchored" data-anchor-id="heuristic-functions">Heuristic Functions</h3>
+<p>In the quest for optimal solutions, heuristic functions play a crucial role in estimating distances to the goal. By leveraging these estimates, algorithms can expedite the search process by prioritizing nodes that appear to be closer to the goal.</p>
+</section>
+</section>
+<section id="dijkstras-algorithm" class="level2">
+<h2 class="anchored" data-anchor-id="dijkstras-algorithm">Dijkstra’s Algorithm</h2>
+<section id="overview-1" class="level3">
+<h3 class="anchored" data-anchor-id="overview-1">Overview</h3>
+<p>Dijkstra’s Algorithm represents another prominent approach to finding optimal paths, particularly in graph-based problems. It focuses on determining the shortest paths from a source node to all other nodes within the graph.</p>
+</section>
+<section id="key-steps" class="level3">
+<h3 class="anchored" data-anchor-id="key-steps">Key Steps</h3>
+<p>Dijkstra’s Algorithm follows a systematic procedure to identify the shortest paths within a graph, encompassing the following key steps:</p>
+<ol type="1">
+<li><strong>Initialization</strong>: Assign infinite cost estimates to all nodes except the start node.</li>
+<li><strong>Exploration</strong>: Select the cheapest white node and update its cost, marking it as black to signify its exploration.</li>
+<li><strong>Relaxation</strong>: Examine the neighbors of the newly explored node and update their costs if a cheaper path is discovered.</li>
+<li><strong>Path Tracking</strong>: Maintain parent pointers to track the optimal path from the start node to each explored node.</li>
+</ol>
+</section>
+<section id="application-to-problem-solving" class="level3">
+<h3 class="anchored" data-anchor-id="application-to-problem-solving">Application to Problem Solving</h3>
+<p>In problem-solving scenarios, Dijkstra’s Algorithm proves effective in systematically exploring paths within a graph to identify the shortest path to each node. By iteratively updating node costs and parent pointers, the algorithm converges towards the optimal solution efficiently.</p>
+</section>
+<section id="comparison-with-branch-and-bound" class="level3">
+<h3 class="anchored" data-anchor-id="comparison-with-branch-and-bound">Comparison with Branch and Bound</h3>
+<p>While both Branch and Bound and Dijkstra’s Algorithm aim for optimal solutions, they exhibit differences in their approach and applicability to various problem domains.</p>
+<section id="directionality" class="level4">
+<h4 class="anchored" data-anchor-id="directionality">Directionality</h4>
+<p>Branch and Bound lacks a sense of directionality, often exploring the entire search space extensively before reaching the optimal solution. In contrast, Dijkstra’s Algorithm systematically explores paths from the start node to all other nodes, ensuring optimality but without a predetermined direction.</p>
+</section>
+<section id="efficiency-vs.-optimality" class="level4">
+<h4 class="anchored" data-anchor-id="efficiency-vs.-optimality">Efficiency vs.&nbsp;Optimality</h4>
+<p>While Dijkstra’s Algorithm guarantees optimality in pathfinding, it may sacrifice efficiency due to its exhaustive exploration of paths. Branch and Bound, on the other hand, balances optimality with efficiency by organizing the search space strategically and pruning unlikely paths.</p>
+</section>
+</section>
+</section>
+</section>
+<section id="a-star-algorithm" class="level1">
+<h1>A-star Algorithm</h1>
+<p>The A-star algorithm is a widely-used search algorithm in artificial intelligence, particularly in problem-solving scenarios where finding an optimal path from a start state to a goal state is required. It combines the efficiency of heuristic search methods with the optimality guarantees of traditional algorithms like Dijkstra’s algorithm.</p>
+<section id="introduction-to-a-star-algorithm" class="level2">
+<h2 class="anchored" data-anchor-id="introduction-to-a-star-algorithm">Introduction to A-star Algorithm</h2>
+<p>A-star, also known as A* algorithm, was introduced by Hart, Nilsson, and Raphael in 1968 at the Stanford Research Institute (now called SRI International). It is considered an extension of Dijkstra’s algorithm, incorporating heuristics to improve performance. The algorithm aims to find the shortest path from a start node to a goal node in a graph, taking into account both the actual cost incurred (g-value) and an estimated cost to reach the goal (h-value).</p>
+</section>
+<section id="components-of-a-star-algorithm" class="level2">
+<h2 class="anchored" data-anchor-id="components-of-a-star-algorithm">Components of A-star Algorithm</h2>
+<p>The A-star algorithm consists of several key components:</p>
+<ol type="1">
+<li><p><strong>Heuristic Function (h(n)):</strong> A heuristic function estimates the cost from a given node to the goal node. It provides a guiding heuristic to help prioritize nodes during the search process.</p>
+<p><span class="math display">\[ h(n) \]</span></p></li>
+<li><p><strong>Actual Cost (g(n)):</strong> The actual cost represents the cumulative cost of reaching a node from the start node along the current path. It is used to compute the total cost of a solution path.</p>
+<p><span class="math display">\[ g(n) \]</span></p></li>
+<li><p><strong>Combined Cost (f(n)):</strong> The combined cost, denoted as f(n), is the sum of the actual cost (g(n)) and the heuristic cost (h(n)). It represents the estimated total cost of the solution path passing through node n.</p>
+<p><span class="math display">\[ f(n) = g(n) + h(n) \]</span></p></li>
+<li><p><strong>Open List and Closed List:</strong> A-star maintains two lists: the open list, which contains nodes that are candidates for expansion, and the closed list, which stores nodes that have already been explored.</p></li>
+</ol>
+</section>
+<section id="algorithm-workflow" class="level2">
+<h2 class="anchored" data-anchor-id="algorithm-workflow">Algorithm Workflow</h2>
+<p>The A-star algorithm follows a systematic workflow to explore the search space and find the optimal path:</p>
+<ol type="1">
+<li><p><strong>Initialization:</strong></p>
+<ul>
+<li>Set the default value of g for every node to positive infinity.</li>
+<li>Set the parent of the start node to null.</li>
+<li>Initialize the g-value of the start node to 0.</li>
+<li>Compute the f-value of the start node as the sum of its g-value and h-value.</li>
+</ul>
+<p><span class="math display">\[ f(S) = g(S) + h(S) \]</span></p>
+<ul>
+<li>Add the start node to the open list.</li>
+</ul></li>
+<li><p><strong>Main Loop:</strong></p>
+<ul>
+<li>While the open list is not empty:
+<ul>
+<li>Select the node with the lowest f-value from the open list (denoted as N) for expansion.</li>
+<li>Remove N from the open list and add it to the closed list.</li>
+<li>Check if N is the goal node. If so, return the solution path.</li>
+<li>Generate the neighbors of N and compute their f-values.</li>
+<li>Update the g-values and parent pointers for the neighbors if a better path is found.</li>
+<li>Manage three cases:
+<ol type="1">
+<li>If a neighbor node is new, add it to the open list.</li>
+<li>If a neighbor node is already on the open list, update its g-value if a better path is found.</li>
+<li>If a neighbor node is on the closed list, propagate the improvement to its children.</li>
+</ol></li>
+</ul></li>
+</ul></li>
+<li><p><strong>Propagation of Improvement:</strong></p>
+<ul>
+<li>If a node with an improved path is on the closed list, propagate the improvement to its children recursively.</li>
+<li>For each neighbor of the node, check if the new path has a lower cost than the previous one.</li>
+<li>Update the parent pointer and g-value of the neighbor node if necessary.</li>
+<li>Recursively propagate the improvement if the neighbor node is also on the closed list.</li>
+</ul></li>
+</ol>
+</section>
+<section id="illustrative-example" class="level2">
+<h2 class="anchored" data-anchor-id="illustrative-example">Illustrative Example</h2>
+<p>Consider a small example to illustrate how A-star expands nodes and updates costs:</p>
+<ol type="1">
+<li><p>Default value of <span class="math inline">\(g\)</span> for every node is +∞.</p></li>
+<li><p><span class="math inline">\(parent(S)\)</span> ← null.</p></li>
+<li><p><span class="math inline">\(g(S)\)</span> ← 0.</p></li>
+<li><p><span class="math inline">\(f(S)\)</span> ← <span class="math inline">\(g(S) + h(S)\)</span>.</p></li>
+<li><p><span class="math inline">\(OPEN\)</span> ← <span class="math inline">\(S\)</span>: <span class="math inline">\(\left[\right]\)</span>.</p></li>
+<li><p><span class="math inline">\(CLOSED\)</span> ← empty list.</p></li>
+<li><p>While <span class="math inline">\(OPEN\)</span> is not empty:</p>
+<ul>
+<li><span class="math inline">\(N\)</span> ← remove node with lowest <span class="math inline">\(f\)</span> value from <span class="math inline">\(OPEN\)</span>.</li>
+<li>Add <span class="math inline">\(N\)</span> to <span class="math inline">\(CLOSED\)</span>.</li>
+</ul>
+<ol start="11" type="1">
+<li>If <span class="math inline">\(GOAL\text{-}TEST(N) = \text{TRUE}\)</span>:
+<ul>
+<li>Return <span class="math inline">\(RECONSTRUCT\text{-}PATH(N)\)</span>.</li>
+</ul></li>
+<li>For each <span class="math inline">\(M\)</span> in <span class="math inline">\(MOVE\text{-}GEN(N)\)</span>:
+<ul>
+<li>If <span class="math inline">\(g(M) &gt; g(N) + k(N, M)\)</span>:
+<ul>
+<li><span class="math inline">\(parent(M)\)</span> ← <span class="math inline">\(N\)</span></li>
+<li><span class="math inline">\(g(M)\)</span> ← <span class="math inline">\(g(N) + k(N, M)\)</span></li>
+<li><span class="math inline">\(f(M)\)</span> ← <span class="math inline">\(g(M) + h(M)\)</span></li>
+</ul></li>
+</ul>
+<ol start="16" type="1">
+<li>If <span class="math inline">\(M\)</span> is in <span class="math inline">\(OPEN\)</span>:
+<ul>
+<li>Continue.</li>
+</ul></li>
+<li>Else if <span class="math inline">\(M\)</span> is in <span class="math inline">\(CLOSED\)</span>:
+<ul>
+<li>PROPAGATEIMPROVEMENT(M).</li>
+</ul></li>
+<li>Else add <span class="math inline">\(M\)</span> to <span class="math inline">\(OPEN\)</span> ▶️ <span class="math inline">\(M\)</span> is new.</li>
+</ol></li>
+</ol></li>
+<li><p>Return empty list.</p></li>
+</ol>
+</section>
+<section id="comparison-with-best-first-search" class="level2">
+<h2 class="anchored" data-anchor-id="comparison-with-best-first-search">Comparison with Best-First Search</h2>
+<p>A-star differs from traditional best-first search methods in its approach to exploring the search space. While best-first search prioritizes nodes based solely on heuristic values, A-star combines heuristic information with actual path costs to guide the search efficiently towards the goal state. This combination allows A-star to find optimal solutions while also considering the efficiency of the search process.</p>
+</section>
+</section>
+<section id="admissibility-of-a" class="level1">
+<h1>Admissibility of A*</h1>
+<section id="introduction-to-a-star-algorithm-1" class="level2">
+<h2 class="anchored" data-anchor-id="introduction-to-a-star-algorithm-1">Introduction to A star Algorithm</h2>
+<p>The A star algorithm, a fundamental method in artificial intelligence, amalgamates the efficacies of Dijkstra’s shortest path algorithm with heuristic approaches to expedite the discovery of optimal solutions within search spaces. This algorithm is chiefly employed in problems where finding the optimal path from a start node to a goal node is paramount.</p>
+</section>
+<section id="conditions-for-guaranteeing-optimal-solutions" class="level2">
+<h2 class="anchored" data-anchor-id="conditions-for-guaranteeing-optimal-solutions">Conditions for Guaranteeing Optimal Solutions</h2>
+<p>In the quest for optimality, it’s imperative to discern the conditions under which the A star algorithm operates. The algorithm considers three critical scenarios during its execution:</p>
+<ol type="1">
+<li><strong>Adding New Nodes to Open:</strong> This entails the incorporation of new nodes into the open set for further exploration.</li>
+<li><strong>Updating Paths to Nodes Already on Open:</strong> Here, the algorithm revisits nodes already present in the open set and updates their paths if more efficient alternatives are discovered.</li>
+<li><strong>Finding Newer Paths to Nodes on Closed:</strong> This scenario involves the potential for uncovering superior paths to nodes that have been closed off.</li>
+</ol>
+</section>
+<section id="optimal-values-and-heuristic-functions" class="level2">
+<h2 class="anchored" data-anchor-id="optimal-values-and-heuristic-functions">Optimal Values and Heuristic Functions</h2>
+<p>To facilitate a deeper understanding of the algorithm’s behavior, it’s essential to introduce the concept of optimal values and heuristic functions:</p>
+<ul>
+<li><span class="math inline">\(g^*(n)\)</span>: Represents the optimal cost from the start node to node <span class="math inline">\(n\)</span>.</li>
+<li><span class="math inline">\(h^*(n)\)</span>: Signifies the optimal cost from node <span class="math inline">\(n\)</span> to the goal node.</li>
+<li><span class="math inline">\(f^*(n)\)</span>: Denotes the optimal cost of a path from the start to the goal via node <span class="math inline">\(n\)</span>.</li>
+</ul>
+<p>These values serve as guiding principles for the algorithm’s decision-making process, albeit their actual values may remain unknown during execution. Notably, the optimal cost from the start to a given node <span class="math inline">\(n\)</span> (<span class="math inline">\(g^*(n)\)</span>) typically falls short of the actual cost (<span class="math inline">\(g(n)\)</span>), owing to the algorithm’s inherent uncertainty regarding the optimal path.</p>
+</section>
+<section id="admissibility-of-a-star" class="level2">
+<h2 class="anchored" data-anchor-id="admissibility-of-a-star">Admissibility of A star</h2>
+<p>An algorithm earns the badge of admissibility when it reliably furnishes the optimal solution, provided such a solution exists. The A star algorithm, distinguished by its appended star superscript, is hailed as an admissible method. To qualify as admissible, the algorithm must satisfy the following conditions:</p>
+<ol type="1">
+<li><strong>Finite Branching Factor:</strong> The algorithm must grapple with a finite branching factor, even in scenarios where the total number of nodes in the graph spans to infinity.</li>
+<li><strong>Cost Condition:</strong> Each edge within the graph must exhibit a cost greater than a predetermined minuscule constant <span class="math inline">\(\epsilon\)</span>.</li>
+<li><strong>Heuristic Function:</strong> The heuristic function employed by the algorithm must consistently underestimate the distance to the goal (<span class="math inline">\(h(n) \leq h^*(n)\)</span>).</li>
+</ol>
+</section>
+<section id="example-illustrating-heuristic-functions" class="level2">
+<h2 class="anchored" data-anchor-id="example-illustrating-heuristic-functions">Example Illustrating Heuristic Functions</h2>
+<p>To elucidate the impact of heuristic functions on the algorithm’s decision-making process, consider a hypothetical scenario where the algorithm confronts the choice between two nodes, <span class="math inline">\(P\)</span> and <span class="math inline">\(Q\)</span>, each accompanied by known and estimated costs. In the presence of an overestimating function (yielding higher heuristic values), the algorithm may erroneously opt for <span class="math inline">\(Q\)</span> as the proximate node to the goal. Conversely, an underestimating function (with lower heuristic values) would correctly identify <span class="math inline">\(P\)</span> as the closer node, consequently steering the algorithm towards the optimal solution.</p>
+</section>
+</section>
+<section id="proof-of-admissibility-in-a-algorithm" class="level1">
+<h1>Proof of Admissibility in A* Algorithm</h1>
+<p>A fundamental aspect in the study of search algorithms is ensuring their termination and correctness, particularly in the context of finite and infinite graphs. The A* algorithm, a popular choice for pathfinding problems, demonstrates such properties through a rigorous proof of admissibility.</p>
+<section id="termination-for-finite-graphs" class="level2">
+<h2 class="anchored" data-anchor-id="termination-for-finite-graphs">Termination for Finite Graphs</h2>
+<p>In examining the termination of A* for finite graphs, we consider the behavior of the algorithm within each cycle of its main loop. Central to this discussion is the process by which A* selects nodes from the “open” list and subsequently moves them to the “closed” list. This mechanism ensures that each node in the graph is visited at most once during the algorithm’s execution. Crucially, since the number of nodes in the graph is finite, A* will terminate after a finite number of cycles. This termination guarantees that the algorithm will definitively report whether a path to the goal exists or not within the given graph.</p>
+</section>
+<section id="open-list-contains-optimal-path-node" class="level2">
+<h2 class="anchored" data-anchor-id="open-list-contains-optimal-path-node">Open List Contains Optimal Path Node</h2>
+<p>A significant property of A* lies in its ability to maintain an optimal path to the goal node within its “open” list. By construction, the algorithm ensures that at any given point during its execution, there exists a node from the optimal path on the “open” list. This assertion stems from the iterative nature of A*, where nodes along the optimal path are successively added to and removed from the “open” list. Consequently, the “open” list consistently contains a node, denoted as <span class="math inline">\(n'\)</span>, from the optimal path, thereby facilitating the algorithm’s progress towards identifying the optimal solution.</p>
+<p>Moreover, it is imperative to note that the <span class="math inline">\(f\)</span>-value of this node <span class="math inline">\(n'\)</span> does not exceed the optimal cost to the goal. This assertion is grounded in the heuristic nature of A*, where the evaluation function <span class="math inline">\(f(n)\)</span> comprises the sum of the actual cost <span class="math inline">\(g(n)\)</span> and the heuristic estimate <span class="math inline">\(h(n)\)</span>. As <span class="math inline">\(n'\)</span> lies on the optimal path, its actual cost <span class="math inline">\(g(n')\)</span> coincides with the optimal cost <span class="math inline">\(g^*(n')\)</span>. Additionally, the underestimation property of the heuristic function <span class="math inline">\(h(n)\)</span> ensures that <span class="math inline">\(h(n') \leq h^*(n')\)</span>, where <span class="math inline">\(h^*(n')\)</span> represents the true cost from <span class="math inline">\(n'\)</span> to the goal. Consequently, the <span class="math inline">\(f\)</span>-value of <span class="math inline">\(n'\)</span> remains less than or equal to the optimal cost, thereby affirming its significance in the search process.</p>
+</section>
+<section id="finding-a-path-in-infinite-graphs" class="level2">
+<h2 class="anchored" data-anchor-id="finding-a-path-in-infinite-graphs">Finding a Path in Infinite Graphs</h2>
+<p>In contrast to finite graphs, the termination and correctness of A* in infinite graphs pose unique challenges. However, through careful analysis, we establish the algorithm’s efficacy in finding a path even in scenarios with infinite graph structures. Central to this discussion is the notion of epsilon, a finite value utilized to ensure progress in the search process.</p>
+<p>A* employs a strategy wherein nodes with the lowest <span class="math inline">\(f\)</span>-value are prioritized for expansion. As the algorithm explores various paths within the graph, the actual cost <span class="math inline">\(g(n)\)</span> of each partial solution incrementally increases by a finite value greater than epsilon. This incremental increase in cost serves to prevent the existence of infinite paths with finite cost, thereby guiding the algorithm towards a definitive solution. Furthermore, given the finite nature of the branching factor, A* ensures that only a finite number of partial solutions, cheaper than the optimal cost, are considered during its execution.</p>
+<p>This meticulous selection and evaluation process, coupled with the epsilon threshold, enable A* to traverse the graph effectively, eventually converging upon a solution path to the goal node. Thus, even in scenarios with infinite graphs, A* exhibits a robust capability to identify a path to the goal, provided finite cost constraints are met.</p>
+</section>
+<section id="finding-the-least-cost-path" class="level2">
+<h2 class="anchored" data-anchor-id="finding-the-least-cost-path">Finding the Least Cost Path</h2>
+<p>The ultimate objective of A* lies in identifying the least cost path to the goal node. In pursuit of this goal, the algorithm employs a proof by contradiction to establish the optimality of its solution. By assuming the termination of A* without finding an optimal cost path, we derive a contradiction that invalidates such an assumption. This contradiction arises from the fundamental properties of A<em>, wherein the algorithm’s selection criteria prioritize nodes with lower <span class="math inline">\(f\)</span>-values, thereby guiding it towards the optimal solution. Consequently, A</em> terminates only upon discovering the optimal cost path to the goal, reaffirming its efficacy in pathfinding scenarios.</p>
+</section>
+<section id="node-expansion-and-heuristic-functions" class="level2">
+<h2 class="anchored" data-anchor-id="node-expansion-and-heuristic-functions">Node Expansion and Heuristic Functions</h2>
+<p>A critical aspect influencing the behavior of A* is the selection and evaluation of nodes during its execution. Notably, for every node expanded by A*, its <span class="math inline">\(f\)</span>-value remains bounded by the optimal cost, irrespective of its position relative to the optimal path. This property underscores the algorithm’s adherence to admissible heuristics, where the estimation of node costs remains consistent with the true optimal cost.</p>
+<p>Central to this discussion is the role of heuristic functions in guiding A* towards the goal node. These functions provide estimates of the remaining cost from a given node to the goal, thereby influencing the selection of nodes for expansion. Importantly, A* leverages heuristic functions that consistently underestimate the true cost, ensuring the optimality of its solution while traversing the search space.</p>
+</section>
+<section id="comparison-of-heuristic-functions" class="level2">
+<h2 class="anchored" data-anchor-id="comparison-of-heuristic-functions">Comparison of Heuristic Functions</h2>
+<p>A noteworthy aspect of A* lies in its sensitivity to the quality of heuristic functions utilized in the search process. By comparing different heuristic functions, we gain insights into their impact on the algorithm’s efficiency and performance. Specifically, heuristic functions that provide more informed estimates of node costs tend to result in faster convergence towards the optimal solution.</p>
+<p>In comparing two admissible versions of A* utilizing distinct heuristic functions, denoted as <span class="math inline">\(h_1\)</span> and <span class="math inline">\(h_2\)</span>, we observe a direct relationship between the informativeness of the heuristic and the algorithm’s search efficiency. Notably, if <span class="math inline">\(h_2\)</span> consistently provides higher estimates than <span class="math inline">\(h_1\)</span> for all nodes, it is deemed more informed and closer to the true optimal cost. Consequently, A* employing <span class="math inline">\(h_2\)</span> is expected to explore a smaller search space and converge faster towards the optimal solution compared to its counterpart utilizing <span class="math inline">\(h_1\)</span>.</p>
+<p>This relationship underscores the significance of heuristic selection in optimizing the performance of A* and highlights the potential trade-offs between search efficiency and heuristic informativeness.</p>
+</section>
+<section id="variations-of-a" class="level2">
+<h2 class="anchored" data-anchor-id="variations-of-a">Variations of A*</h2>
+<p>While the basic A* algorithm provides a robust framework for pathfinding, variations and adaptations exist to address specific challenges and optimization objectives. These variations aim to enhance the algorithm’s efficiency and effectiveness in diverse problem domains, often at the cost of sacrificing certain properties such as admissibility.</p>
+<p>One such variation involves the exploration of leaner and meaner versions of A*, wherein the emphasis is placed on minimizing either space or time complexity, or both, while maintaining a degree of admissibility. These adaptations leverage insights from the quality of the available heuristic function to tailor the search process to specific requirements. By striking a balance between computational resources and solution optimality, these variations offer tailored solutions to pathfinding problems in various contexts.</p>
+<p>In summary, the proof of admissibility in A* algorithm underscores its effectiveness in traversing finite and infinite graphs to identify optimal paths to the goal node. Through meticulous analysis and adherence to admissible heuristics, A* exhibits robustness and efficiency in pathfinding scenarios, making it a versatile tool in algorithmic problem-solving.</p>
+</section>
+</section>
+<section id="conclusion" class="level1">
+<h1>Conclusion</h1>
+<p>In this comprehensive exploration, we delved into the intricacies of finding optimal solutions in various problem domains, particularly focusing on the Branch and Bound algorithm and the A* algorithm. We began by elucidating the fundamental principles of Branch and Bound, highlighting its systematic approach to optimizing solutions within a search space. Through an illustrative example, we demonstrated how the algorithm refines candidates iteratively while pruning unpromising branches to converge towards the optimal solution efficiently.</p>
+<p>Subsequently, we transitioned to an in-depth discussion on optimal pathfinding algorithms, where we introduced Dijkstra’s Algorithm alongside A*. By comparing their methodologies and applications, we unveiled the unique characteristics and trade-offs associated with each algorithm, emphasizing the role of heuristic functions in enhancing search efficiency.</p>
+<p>Furthermore, we explored the admissibility of the A* algorithm, elucidating its termination conditions and the properties that guarantee optimality in both finite and infinite graphs. Through meticulous analysis and proof, we established the efficacy of A* in traversing search spaces while maintaining admissibility and efficiency.</p>
+<p>In essence, the journey through optimal pathfinding algorithms underscores the synergy between theoretical principles and practical applications, offering valuable insights into algorithmic problem-solving across diverse domains.</p>
+</section>
+<section id="points-to-remember" class="level1">
+<h1>Points to Remember</h1>
+<ol type="1">
+<li><p><strong>Branch and Bound Algorithm</strong>:</p>
+<ul>
+<li>Utilized in optimization problems to find optimal solutions within a search space.</li>
+<li>Systematically explores the solution space by refining candidates and pruning unpromising branches.</li>
+<li>Initialization involves generating initial candidates and computing lower bound estimates.</li>
+<li>Trade-off between accuracy of estimates and computation time influences algorithm performance.</li>
+<li>Iterative refinement of candidates involves inclusion/exclusion of edges and pruning unpromising branches.</li>
+<li>Termination condition is met when a fully refined node with the lowest estimated cost is found.</li>
+</ul></li>
+<li><p><strong>Optimal Pathfinding Algorithms</strong>:</p>
+<ul>
+<li>Branch and Bound vs.&nbsp;Dijkstra’s Algorithm: Branch and Bound focuses on global optimization while Dijkstra’s Algorithm finds shortest paths from a source node.</li>
+<li>A* Algorithm combines the efficiency of heuristic search with the optimality guarantees of Dijkstra’s Algorithm.</li>
+<li>Components of A* include heuristic function, actual cost, combined cost, open list, and closed list.</li>
+<li>Algorithm workflow involves initialization, main loop, and propagation of improvement.</li>
+<li>Comparison with Best-First Search highlights the incorporation of actual path costs in A*.</li>
+</ul></li>
+<li><p><strong>Admissibility of A* Algorithm</strong>:</p>
+<ul>
+<li>A* algorithm guarantees optimal solutions under specific conditions.</li>
+<li>Termination for finite graphs is ensured by visiting each node at most once.</li>
+<li>Open list contains node from optimal path, with <span class="math inline">\(f\)</span>-value not exceeding optimal cost.</li>
+<li>Epsilon threshold prevents infinite paths with finite cost in infinite graphs.</li>
+<li>Proof of admissibility relies on finite branching factor, cost condition, and underestimating heuristic function.</li>
+</ul></li>
+<li><p><strong>Variations of A</strong>*:</p>
+<ul>
+<li>Adaptations of A* algorithm tailor its performance to specific optimization objectives.</li>
+<li>Leaner and meaner versions focus on minimizing space or time complexity while maintaining admissibility.</li>
+<li>Heuristic selection impacts search efficiency and convergence towards optimal solutions.</li>
+</ul></li>
+</ol>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const disableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'prefetch';
+    }
+  }
+  const enableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'stylesheet';
+    }
+  }
+  const manageTransitions = (selector, allowTransitions) => {
+    const els = window.document.querySelectorAll(selector);
+    for (let i=0; i < els.length; i++) {
+      const el = els[i];
+      if (allowTransitions) {
+        el.classList.remove('notransition');
+      } else {
+        el.classList.add('notransition');
+      }
+    }
+  }
+  const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+    const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+    const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+    let newTheme = '';
+    if(darkModeDefault) {
+      newTheme = isAlternate ? baseTheme : alternateTheme;
+    } else {
+      newTheme = isAlternate ? alternateTheme : baseTheme;
+    }
+    const changeGiscusTheme = () => {
+      // From: https://github.com/giscus/giscus/issues/336
+      const sendMessage = (message) => {
+        const iframe = document.querySelector('iframe.giscus-frame');
+        if (!iframe) return;
+        iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+      }
+      sendMessage({
+        setConfig: {
+          theme: newTheme
+        }
+      });
+    }
+    const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+    if (isGiscussLoaded) {
+      changeGiscusTheme();
+    }
+  }
+  const toggleColorMode = (alternate) => {
+    // Switch the stylesheets
+    const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+    manageTransitions('#quarto-margin-sidebar .nav-link', false);
+    if (alternate) {
+      enableStylesheet(alternateStylesheets);
+      for (const sheetNode of alternateStylesheets) {
+        if (sheetNode.id === "quarto-bootstrap") {
+          toggleBodyColorMode(sheetNode);
+        }
+      }
+    } else {
+      disableStylesheet(alternateStylesheets);
+      toggleBodyColorPrimary();
+    }
+    manageTransitions('#quarto-margin-sidebar .nav-link', true);
+    // Switch the toggles
+    const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+    for (let i=0; i < toggles.length; i++) {
+      const toggle = toggles[i];
+      if (toggle) {
+        if (alternate) {
+          toggle.classList.add("alternate");     
+        } else {
+          toggle.classList.remove("alternate");
+        }
+      }
+    }
+    // Hack to workaround the fact that safari doesn't
+    // properly recolor the scrollbar when toggling (#1455)
+    if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+      manageTransitions("body", false);
+      window.scrollTo(0, 1);
+      setTimeout(() => {
+        window.scrollTo(0, 0);
+        manageTransitions("body", true);
+      }, 40);  
+    }
+  }
+  const isFileUrl = () => { 
+    return window.location.protocol === 'file:';
+  }
+  const hasAlternateSentinel = () => {  
+    let styleSentinel = getColorSchemeSentinel();
+    if (styleSentinel !== null) {
+      return styleSentinel === "alternate";
+    } else {
+      return false;
+    }
+  }
+  const setStyleSentinel = (alternate) => {
+    const value = alternate ? "alternate" : "default";
+    if (!isFileUrl()) {
+      window.localStorage.setItem("quarto-color-scheme", value);
+    } else {
+      localAlternateSentinel = value;
+    }
+  }
+  const getColorSchemeSentinel = () => {
+    if (!isFileUrl()) {
+      const storageValue = window.localStorage.getItem("quarto-color-scheme");
+      return storageValue != null ? storageValue : localAlternateSentinel;
+    } else {
+      return localAlternateSentinel;
+    }
+  }
+  const darkModeDefault = false;
+  let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+  // Dark / light mode switch
+  window.quartoToggleColorScheme = () => {
+    // Read the current dark / light value 
+    let toAlternate = !hasAlternateSentinel();
+    toggleColorMode(toAlternate);
+    setStyleSentinel(toAlternate);
+    toggleGiscusIfUsed(toAlternate, darkModeDefault);
+  };
+  // Ensure there is a toggle, if there isn't float one in the top right
+  if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+    const a = window.document.createElement('a');
+    a.classList.add('top-right');
+    a.classList.add('quarto-color-scheme-toggle');
+    a.href = "";
+    a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+    const i = window.document.createElement("i");
+    i.classList.add('bi');
+    a.appendChild(i);
+    window.document.body.appendChild(a);
+  }
+  // Switch to dark mode if need be
+  if (hasAlternateSentinel()) {
+    toggleColorMode(true);
+  } else {
+    toggleColorMode(false);
+  }
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>
