@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>BS Degree Notes</title>
+<title>BS Degree Notes - Symbolic Testing and DART</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -19,6 +19,40 @@ ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 </style>
 
@@ -253,6 +287,12 @@ ul.task-list li input[type="checkbox"] {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="../../pages/ST/Week05.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 5</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="../../pages/ST/Week06.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Week 6</span></a>
   </div>
@@ -279,6 +319,18 @@ ul.task-list li input[type="checkbox"] {
   <div class="sidebar-item-container"> 
   <a href="../../pages/ST/Week10.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Week 10</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../pages/ST/Week11.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 11</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../pages/ST/Week12.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 12</span></a>
   </div>
 </li>
       </ul>
@@ -353,16 +405,174 @@ ul.task-list li input[type="checkbox"] {
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#symbolic-testing" id="toc-symbolic-testing" class="nav-link active" data-scroll-target="#symbolic-testing">Symbolic Testing</a></li>
+  <li><a href="#dart-directed-automated-random-testing" id="toc-dart-directed-automated-random-testing" class="nav-link" data-scroll-target="#dart-directed-automated-random-testing">DART (Directed Automated Random Testing)</a></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../pages/ST/Week01.html">Software Testing</a></li><li class="breadcrumb-item"><a href="../../pages/ST/Week07.html">Week 7</a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title">Symbolic Testing and DART</h1>
+</div>
 
 
 
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
 
 
+</header>
+
+
+<p>These notes delve into the concepts of symbolic testing and DART (Directed Automated Random Testing), providing a comprehensive understanding of these techniques and their applications in software testing.</p>
+<section id="symbolic-testing" class="level1">
+<h1>Symbolic Testing</h1>
+<p><strong>Introduction:</strong></p>
+<p>Symbolic testing is a powerful approach to software testing that analyzes programs by considering input values as symbolic variables rather than concrete data. This allows exploration of various execution paths and identification of potential issues without exhaustively testing every possible input combination.</p>
+<p><strong>Key Concepts:</strong></p>
+<ul>
+<li><strong>Symbolic Execution:</strong>
+<ul>
+<li>Analyzes a program by considering input values as symbolic variables (e.g., α1, α2) instead of concrete data (e.g., 1, 2).</li>
+<li>Tracks how symbolic values propagate through the program, representing variables as expressions of these symbols.</li>
+<li>Enables exploring different execution paths and analyzing program behavior under various input scenarios.</li>
+</ul></li>
+<li><strong>Path Condition (PC):</strong>
+<ul>
+<li>A logical formula representing constraints on symbolic input values for a specific execution path.</li>
+<li>It captures the conditions under which a particular path is taken, expressed as a conjunction of predicates.</li>
+</ul></li>
+<li><strong>Symbolic State (σ):</strong>
+<ul>
+<li>A mapping between program variables and their corresponding symbolic expressions at a given point in the execution.</li>
+<li>It reflects the current state of the program in terms of symbolic values.</li>
+</ul></li>
+</ul>
+<p><strong>Steps in Symbolic Execution:</strong></p>
+<ol type="1">
+<li><strong>Initialization:</strong>
+<ul>
+<li>Symbolic state (σ) is set to an empty map.</li>
+<li>Path condition (PC) is set to true.</li>
+</ul></li>
+<li><strong>Read Statements:</strong>
+<ul>
+<li>When encountering a read statement, a new symbolic variable is introduced and mapped to the variable being read in σ.</li>
+</ul></li>
+<li><strong>Assignment Statements:</strong>
+<ul>
+<li>For assignments like <code>v = e</code>, the symbolic expression of <code>e</code> is evaluated in the current symbolic state and the result is mapped to <code>v</code> in σ.</li>
+</ul></li>
+<li><strong>Conditional Statements:</strong>
+<ul>
+<li>For <code>if (e) then S1 else S2</code>:</li>
+<li><strong>“Then” Branch:</strong> PC is updated to <code>PC ∧ σ(e)</code> and symbolic execution continues with this updated PC and σ.</li>
+<li><strong>“Else” Branch:</strong> A new path condition PC’ is created as <code>PC ∧ ¬σ(e)</code> and symbolic execution branches out with PC’ and a copy of σ.</li>
+</ul></li>
+<li><strong>Termination:</strong>
+<ul>
+<li>Symbolic execution ends when:</li>
+<li>Reaching an exit statement.</li>
+<li>Encountering an error.</li>
+<li>PC becomes unsatisfiable (no concrete values can satisfy the constraints).</li>
+</ul></li>
+</ol>
+<p><strong>Generating Test Cases:</strong></p>
+<ul>
+<li>After exploring a path, the final PC is solved using a constraint solver to find concrete input values satisfying the constraints.</li>
+<li>These concrete values are used as test inputs to exercise the specific execution path explored during symbolic execution.</li>
+</ul>
+<p><strong>Advantages:</strong></p>
+<ul>
+<li><strong>Efficiency:</strong> A single symbolic execution can represent numerous concrete test cases, improving test coverage efficiently.</li>
+<li><strong>Thoroughness:</strong> Explores different execution paths, including corner cases, which might be missed with traditional testing methods.</li>
+<li><strong>Automation:</strong> Can be automated to generate test cases and analyze program behavior.</li>
+</ul>
+<p><strong>Disadvantages:</strong></p>
+<ul>
+<li><strong>Path Explosion:</strong> Complex programs may have a vast number of paths, making exhaustive exploration infeasible.</li>
+<li><strong>Constraint Solving Challenges:</strong> Certain path conditions may be complex or unsolvable by constraint solvers.</li>
+<li><strong>Limited Scope:</strong> May struggle with programs involving external libraries, system calls, or complex data structures.</li>
+</ul>
+<p><strong>Modern Advancements:</strong></p>
+<ul>
+<li><strong>Advanced Solvers:</strong> Modern SMT solvers can handle complex constraints, improving the effectiveness of symbolic testing.</li>
+<li><strong>Hybrid Techniques:</strong> Concolic testing combines concrete and symbolic execution to overcome limitations of pure symbolic execution.</li>
+<li><strong>Tool Support:</strong> Tools like KLEE, CUTE, and PEX facilitate symbolic execution for various programming languages.</li>
+</ul>
+</section>
+<section id="dart-directed-automated-random-testing" class="level1">
+<h1>DART (Directed Automated Random Testing)</h1>
+<p><strong>Overview:</strong></p>
+<p>DART is a concolic testing tool that automates unit testing by combining random testing with symbolic execution. It aims to achieve high code coverage by directing test case generation towards unexplored execution paths.</p>
+<p><strong>Key Features:</strong></p>
+<ul>
+<li><strong>Automatic Test Driver Generation:</strong> DART eliminates the need for manual test driver development by automatically creating a driver that interacts with the program’s interface and simulates its external environment.</li>
+<li><strong>Concolic Execution:</strong> DART performs both concrete and symbolic execution simultaneously. It starts with random inputs and uses symbolic execution to gather path constraints. These constraints are then used to generate new input values that force the program along different execution paths.</li>
+<li><strong>Directed Search:</strong> DART uses a “stack” to track the history of branch decisions made during execution. By analyzing this history and negating relevant path constraints, DART strategically generates new input values to explore previously unexplored paths.</li>
+<li><strong>Error Detection:</strong> DART can detect various errors, including program crashes, assertion violations, and non-termination.</li>
+</ul>
+<p><strong>DART Algorithm:</strong></p>
+<ol type="1">
+<li><strong>Interface Extraction:</strong> DART parses the source code to identify the program’s external interface, including external variables, functions, and input parameters.</li>
+<li><strong>Random Test Driver Generation:</strong>
+<ul>
+<li>A test driver is automatically created, which randomly initializes input values and calls the program’s functions.</li>
+<li>External functions are simulated to provide random return values.</li>
+</ul></li>
+<li><strong>Concolic Execution:</strong>
+<ul>
+<li>The program is executed on the random inputs, while simultaneously gathering path constraints symbolically.</li>
+<li>Symbolic expressions are evaluated to track how values propagate through the program.</li>
+</ul></li>
+<li><strong>Directed Search:</strong>
+<ul>
+<li>The “stack” maintains the history of branch decisions.</li>
+<li>When a path is explored, DART analyzes the stack and negates relevant predicates in the path constraint to guide the program towards a new path.</li>
+<li>A constraint solver is used to find input values that satisfy the modified path constraints, leading to new test cases.</li>
+</ul></li>
+</ol>
+<p><strong>Example:</strong> Consider the function <code>h</code> below:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode c code-with-copy"><code class="sourceCode c"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> f<span class="op">(</span><span class="dt">int</span> x<span class="op">)</span> <span class="op">{</span> <span class="cf">return</span> <span class="dv">2</span><span class="op">*</span>x<span class="op">;</span> <span class="op">}</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> h<span class="op">(</span><span class="dt">int</span> x<span class="op">,</span> <span class="dt">int</span> y<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(</span>x <span class="op">!=</span> y<span class="op">)</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="op">(</span>f<span class="op">(</span>x<span class="op">)</span> <span class="op">==</span> x<span class="op">+</span><span class="dv">10</span><span class="op">)</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>            abort<span class="op">();</span> <span class="co">/* error */</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ol type="1">
+<li><strong>Random Input:</strong> DART generates random values for <code>x</code> and <code>y</code>, say <code>x = 26</code> and <code>y = 34</code>.</li>
+<li><strong>Path Constraints:</strong> The path constraints gathered are <code>x != y</code> and <code>2*x != x+10</code>.</li>
+<li><strong>Negation and Solving:</strong> DART negates the second constraint and solves <code>x != y &amp;&amp; 2*x == x+10</code>, resulting in <code>x = 10</code> and <code>y = any value other than 10</code>.</li>
+<li><strong>New Input:</strong> The new input <code>(x = 10, y = 45)</code> forces the program to take the previously unexplored branch and reach the error state.</li>
+</ol>
+<p><strong>Benefits of DART:</strong></p>
+<ul>
+<li><strong>Automation:</strong> Reduces manual effort in test case generation and execution.</li>
+<li><strong>High Coverage:</strong> Effectively explores different paths, improving code coverage.</li>
+<li><strong>Error Detection:</strong> Can identify various types of errors during testing.</li>
+</ul>
+<p><strong>Limitations of DART:</strong></p>
+<ul>
+<li><strong>Complexity:</strong> May struggle with programs involving complex data structures, concurrency, or external dependencies.</li>
+<li><strong>Constraint Solving:</strong> Similar to symbolic testing, DART relies on constraint solvers, which can encounter limitations with complex constraints.</li>
+</ul>
+<p><strong>Overall, symbolic testing and DART offer valuable techniques for software testing, enabling efficient exploration of execution paths and enhancing test coverage. While they have limitations, ongoing research and advancements continue to improve their capabilities and applicability in various testing scenarios.</strong></p>
+
+
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
