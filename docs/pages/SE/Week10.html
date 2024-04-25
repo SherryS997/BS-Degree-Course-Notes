@@ -487,13 +487,15 @@ ul.task-list li input[type="checkbox"] {
 <section id="bluegreen-deployment" class="level2">
 <h2 class="anchored" data-anchor-id="bluegreen-deployment">Blue/Green Deployment</h2>
 <ul>
-<li><p>This is a staged deployment strategy where a new, separate production environment (green) is created alongside the existing one (blue).</p></li>
-<li><p>Once the new version is thoroughly tested and ready, traffic is switched from the blue environment to the green environment.</p></li>
-<li><p>Advantages:</p>
+<li>This is a staged deployment strategy where a new, separate production environment (green) is created alongside the existing one (blue).</li>
+<li>Once the new version is thoroughly tested and ready, traffic is switched from the blue environment to the green environment.</li>
+<li>Advantages:
 <ul>
 <li><strong>Easy Rollback:</strong> If issues arise, switching back to the blue environment is quick and straightforward, minimizing downtime.</li>
 <li><strong>Reduced Risk:</strong> Testing the new version in a separate environment minimizes the impact on users in case of problems.</li>
-<li>Disadvantages:</li>
+</ul></li>
+<li>Disadvantages:
+<ul>
 <li><strong>Increased Cost:</strong> Maintaining two identical production environments can be expensive.</li>
 <li><strong>Complexity:</strong> Managing and coordinating the switch between environments requires careful planning and execution.</li>
 </ul></li>

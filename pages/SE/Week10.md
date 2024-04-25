@@ -43,12 +43,10 @@ Choosing the right deployment strategy is crucial for minimizing downtime, manag
 
 * This is a staged deployment strategy where a new, separate production environment (green) is created alongside the existing one (blue).
 * Once the new version is thoroughly tested and ready, traffic is switched from the blue environment to the green environment.
-
-
 * Advantages:
     * **Easy Rollback:** If issues arise, switching back to the blue environment is quick and straightforward, minimizing downtime.
     * **Reduced Risk:** Testing the new version in a separate environment minimizes the impact on users in case of problems.
-    * Disadvantages:
+* Disadvantages:
     * **Increased Cost:** Maintaining two identical production environments can be expensive.
     * **Complexity:** Managing and coordinating the switch between environments requires careful planning and execution.
 
