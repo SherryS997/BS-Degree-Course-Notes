@@ -55,12 +55,10 @@ Choosing the right deployment strategy is crucial for minimizing downtime, manag
 * This strategy involves a phased rollout of the new version to a small subset of users.
 * This allows for testing the new version in a real-world setting with minimal risk.
 * Users can be selected randomly or based on specific criteria such as demographics, region, or user profile.
-
-
 * Advantages:
     * **Early Feedback:** Gaining feedback from real users helps identify and address issues before a wider rollout.
     * **Reduced Risk:** Limiting exposure to a small group minimizes the impact of potential problems.
-    * Disadvantages:
+* Disadvantages:
     * **Management Complexity:** Maintaining multiple versions concurrently and managing the rollout process can be complex.
     * **Monitoring Overhead:** Tracking the performance and user experience of different versions requires additional monitoring efforts.
 
@@ -68,11 +66,9 @@ Choosing the right deployment strategy is crucial for minimizing downtime, manag
 
 * This strategy involves keeping multiple versions of the software available simultaneously, allowing users to choose their preferred version.
 * This is useful for applications with long-term support requirements or for situations where users may be hesitant to upgrade immediately.
-
-
 * Advantages:
     * **User Choice:** Provides flexibility for users who prefer a specific version or are not ready to upgrade.
-    * Disadvantages:
+* Disadvantages:
     * **Maintenance Overhead:** Maintaining multiple versions requires additional effort and resources.
     * **Complexity:** Ensuring compatibility and managing updates for various versions can be complex.
 
@@ -86,7 +82,7 @@ Choosing the right hosting option is critical for ensuring the performance, scal
     * This involves purchasing and managing your own physical server hardware.
     * Advantages:
         * **High Performance:** Provides the highest level of performance and control over the server environment.
-        * Disadvantages:
+    * Disadvantages:
         * **High Cost:** Requires significant upfront investment in hardware and ongoing maintenance costs.
         * **Management Overhead:** Requires expertise in server administration and maintenance.
 * **Infrastructure-as-a-Service (IaaS):**
@@ -95,7 +91,7 @@ Choosing the right hosting option is critical for ensuring the performance, scal
     * Advantages:
         * **Cost-Effective:** Pay-as-you-go model reduces upfront costs and provides flexibility.
         * **Reduced Management Overhead:** IaaS providers manage the underlying infrastructure, freeing up your team to focus on application development.
-        * Disadvantages:
+    * Disadvantages:
         * **Configuration Complexity:** Requires understanding and configuring the specific IaaS platform.
         * **Shared Resources:** Performance may be impacted by other users on the same physical hardware.
 * **Platform-as-a-Service (PaaS):**
@@ -104,7 +100,7 @@ Choosing the right hosting option is critical for ensuring the performance, scal
     * Advantages:
         * **Ease of Deployment:** Simplifies the deployment process and reduces time to market.
         * **Reduced Management Overhead:** PaaS providers handle most infrastructure and platform management tasks.
-        * Disadvantages:
+    * Disadvantages:
         * **Limited Control:** Less control over the underlying infrastructure and platform configurations.
         * **Vendor Lock-in:** Switching to a different PaaS provider can be challenging.
 
