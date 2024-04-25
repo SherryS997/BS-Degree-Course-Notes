@@ -47,9 +47,9 @@ For example, consider a simple function to calculate the minimum of two values (
 
 ```python
 if (x < y):
-min = x
+    min = x
 else:
-min = y
+    min = y
 ```
 
 Randomly selecting test cases might miss specific scenarios, such as when both values are equal or when the second value is smaller. Therefore, designing test cases based on specific scenarios is essential for comprehensive testing.
@@ -110,6 +110,7 @@ Unit testing involves testing individual units or components of a software syste
 **Testing Environment:**
 
 To effectively unit test a module, a controlled environment is needed. This typically involves:
+
 * **Module under Test:** The specific unit of code being tested.
 * **Driver Module:** Simulates the environment and provides necessary data and inputs to the module under test.
 * **Stub Modules:** Replace dependent modules that may not be available or fully developed yet, providing simplified functionality to facilitate testing.
@@ -117,6 +118,7 @@ To effectively unit test a module, a controlled environment is needed. This typi
 **Python Unit Testing Tools:**
 
 Popular Python libraries for unit testing include:
+
 * `unittest`: The standard library module for unit testing in Python, providing a framework for organizing and executing test cases.
 * `pytest`: A widely-used third-party library with a more concise and flexible approach to writing and running tests.
 

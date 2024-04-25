@@ -506,9 +506,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Randomly testing software with a large number of test cases is ineffective and doesn’t guarantee the detection of all or even most errors. A deliberate approach to test case design is crucial for uncovering various types of errors efficiently.</p>
 <p>For example, consider a simple function to calculate the minimum of two values (x and y):</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (x <span class="op">&lt;</span> y):</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="bu">min</span> <span class="op">=</span> x</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    <span class="bu">min</span> <span class="op">=</span> x</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="cf">else</span>:</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="bu">min</span> <span class="op">=</span> y</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    <span class="bu">min</span> <span class="op">=</span> y</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Randomly selecting test cases might miss specific scenarios, such as when both values are equal or when the second value is smaller. Therefore, designing test cases based on specific scenarios is essential for comprehensive testing.</p>
 </section>
 <section id="blackbox-testing" class="level1">
@@ -554,9 +554,18 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li><strong>Facilitates Change:</strong> Makes it easier to modify and refactor code with confidence, as unit tests provide a safety net to catch regressions.</li>
 </ul>
 <p><strong>Testing Environment:</strong></p>
-<p>To effectively unit test a module, a controlled environment is needed. This typically involves: * <strong>Module under Test:</strong> The specific unit of code being tested. * <strong>Driver Module:</strong> Simulates the environment and provides necessary data and inputs to the module under test. * <strong>Stub Modules:</strong> Replace dependent modules that may not be available or fully developed yet, providing simplified functionality to facilitate testing.</p>
+<p>To effectively unit test a module, a controlled environment is needed. This typically involves:</p>
+<ul>
+<li><strong>Module under Test:</strong> The specific unit of code being tested.</li>
+<li><strong>Driver Module:</strong> Simulates the environment and provides necessary data and inputs to the module under test.</li>
+<li><strong>Stub Modules:</strong> Replace dependent modules that may not be available or fully developed yet, providing simplified functionality to facilitate testing.</li>
+</ul>
 <p><strong>Python Unit Testing Tools:</strong></p>
-<p>Popular Python libraries for unit testing include: * <code>unittest</code>: The standard library module for unit testing in Python, providing a framework for organizing and executing test cases. * <code>pytest</code>: A widely-used third-party library with a more concise and flexible approach to writing and running tests.</p>
+<p>Popular Python libraries for unit testing include:</p>
+<ul>
+<li><code>unittest</code>: The standard library module for unit testing in Python, providing a framework for organizing and executing test cases.</li>
+<li><code>pytest</code>: A widely-used third-party library with a more concise and flexible approach to writing and running tests.</li>
+</ul>
 </section>
 <section id="integration-testing" class="level1">
 <h1>Integration Testing</h1>
