@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>BS Degree Notes - Testing of Web Applications</title>
+<title>BS Degree Notes - Software Testing</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -19,6 +19,40 @@ ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 </style>
 
@@ -84,7 +118,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../pages/ST/Week01.html">Software Testing</a></li><li class="breadcrumb-item"><a href="../../pages/ST/Week11.html">Week 11</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../pages/SE/Week01.html">Software Engineering</a></li><li class="breadcrumb-item"><a href="../../pages/SE/Week09.html">Week 9</a></li></ol></nav>
         <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -220,13 +254,13 @@ ul.task-list li input[type="checkbox"] {
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="false">
  <span class="menu-text">Software Testing</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../pages/ST/Week01.html" class="sidebar-item-text sidebar-link">
@@ -289,7 +323,7 @@ ul.task-list li input[type="checkbox"] {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../pages/ST/Week11.html" class="sidebar-item-text sidebar-link active">
+  <a href="../../pages/ST/Week11.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Week 11</span></a>
   </div>
 </li>
@@ -303,13 +337,13 @@ ul.task-list li input[type="checkbox"] {
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="false">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true">
  <span class="menu-text">Software Engineering</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="false" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 ">  
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../pages/SE/Week01.html" class="sidebar-item-text sidebar-link">
@@ -336,7 +370,7 @@ ul.task-list li input[type="checkbox"] {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../pages/SE/Week09.html" class="sidebar-item-text sidebar-link">
+  <a href="../../pages/SE/Week09.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">Week 9</span></a>
   </div>
 </li>
@@ -393,20 +427,26 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#web-application-fundamentals" id="toc-web-application-fundamentals" class="nav-link active" data-scroll-target="#web-application-fundamentals">Web Application Fundamentals</a></li>
-  <li><a href="#testing-challenges" id="toc-testing-challenges" class="nav-link" data-scroll-target="#testing-challenges">Testing Challenges</a></li>
-  <li><a href="#testing-static-websites" id="toc-testing-static-websites" class="nav-link" data-scroll-target="#testing-static-websites">Testing Static Websites</a></li>
-  <li><a href="#testing-dynamic-web-applications" id="toc-testing-dynamic-web-applications" class="nav-link" data-scroll-target="#testing-dynamic-web-applications">Testing Dynamic Web Applications</a></li>
-  <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion">Conclusion</a></li>
+  <li><a href="#importance-of-testing" id="toc-importance-of-testing" class="nav-link active" data-scroll-target="#importance-of-testing">Importance of Testing</a></li>
+  <li><a href="#basic-activities-in-testing" id="toc-basic-activities-in-testing" class="nav-link" data-scroll-target="#basic-activities-in-testing">Basic Activities in Testing</a></li>
+  <li><a href="#test-case-and-test-suite" id="toc-test-case-and-test-suite" class="nav-link" data-scroll-target="#test-case-and-test-suite">Test Case and Test Suite</a></li>
+  <li><a href="#summary-of-testing-activities" id="toc-summary-of-testing-activities" class="nav-link" data-scroll-target="#summary-of-testing-activities">Summary of Testing Activities</a></li>
+  <li><a href="#designing-test-cases-a-necessity" id="toc-designing-test-cases-a-necessity" class="nav-link" data-scroll-target="#designing-test-cases-a-necessity">Designing Test Cases: A Necessity</a></li>
+  <li><a href="#blackbox-testing" id="toc-blackbox-testing" class="nav-link" data-scroll-target="#blackbox-testing">Blackbox Testing</a></li>
+  <li><a href="#whitebox-testing" id="toc-whitebox-testing" class="nav-link" data-scroll-target="#whitebox-testing">Whitebox Testing</a></li>
+  <li><a href="#unit-testing" id="toc-unit-testing" class="nav-link" data-scroll-target="#unit-testing">Unit Testing</a></li>
+  <li><a href="#integration-testing" id="toc-integration-testing" class="nav-link" data-scroll-target="#integration-testing">Integration Testing</a></li>
+  <li><a href="#system-testing" id="toc-system-testing" class="nav-link" data-scroll-target="#system-testing">System Testing</a></li>
+  <li><a href="#test-driven-development-tdd" id="toc-test-driven-development-tdd" class="nav-link" data-scroll-target="#test-driven-development-tdd">Test-Driven Development (TDD)</a></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../pages/ST/Week01.html">Software Testing</a></li><li class="breadcrumb-item"><a href="../../pages/ST/Week11.html">Week 11</a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../pages/SE/Week01.html">Software Engineering</a></li><li class="breadcrumb-item"><a href="../../pages/SE/Week09.html">Week 9</a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">Testing of Web Applications</h1>
+<h1 class="title">Software Testing</h1>
 </div>
 
 
@@ -423,98 +463,143 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<p>These notes explore the intricate world of web application testing, delving into various approaches, challenges, and solutions. We will cover both client-side and server-side testing, highlighting the unique aspects of each approach.</p>
-<section id="web-application-fundamentals" class="level1">
-<h1>Web Application Fundamentals</h1>
-<p>A web application is a software program accessible through a web browser, interacting with users via HTML interfaces. Unlike traditional software, web applications reside on remote servers and utilize HTTP for communication. This distributed nature presents unique challenges and necessitates specialized testing strategies.</p>
-<p><strong>Key characteristics of web applications:</strong></p>
+<p>These notes delve into the crucial aspects of software testing, covering its motivation, terminologies, and various methodologies.</p>
+<section id="importance-of-testing" class="level1">
+<h1>Importance of Testing</h1>
+<p>Software errors, even seemingly minor ones, can lead to catastrophic system failures, impacting everything from airport operations to spacecraft missions. Hence, thorough testing is indispensable for ensuring software reliability and preventing such disastrous consequences.</p>
+</section>
+<section id="basic-activities-in-testing" class="level1">
+<h1>Basic Activities in Testing</h1>
+<p>The fundamental steps involved in testing include:</p>
+<ol type="1">
+<li><strong>Providing Input:</strong> Supplying the software with relevant data for processing.</li>
+<li><strong>Checking Output:</strong> Analyzing the results generated by the software.</li>
+<li><strong>Verification:</strong> Comparing the obtained output with the expected outcome to identify discrepancies.</li>
+<li><strong>Error Localization:</strong> Pinpointing the source of the error within the code.</li>
+<li><strong>Error Identification:</strong> Determining the root cause of the error.</li>
+<li><strong>Error Correction:</strong> Fixing the identified error within the code.</li>
+<li><strong>Regression Testing:</strong> Re-testing the software to ensure the fix hasn’t introduced new issues.</li>
+</ol>
+</section>
+<section id="test-case-and-test-suite" class="level1">
+<h1>Test Case and Test Suite</h1>
+<p>A test case is a structured representation of a specific test scenario, typically expressed as a triplet:</p>
 <ul>
-<li><strong>Loosely Coupled Components:</strong> Web applications are often built using independent components that interact through messages.</li>
-<li><strong>Concurrent and Distributed:</strong> The inherent nature of the web leads to concurrency and distribution, requiring careful consideration during testing.</li>
-<li><strong>State Management:</strong> HTTP is a stateless protocol, demanding mechanisms like cookies and session objects to maintain state information.</li>
-<li><strong>Dynamic Content:</strong> Web pages can be static or dynamically generated based on user input, server state, and other factors.</li>
-<li><strong>Heterogeneous Technologies:</strong> A multitude of technologies, including JSP, ASP, Java, JavaScript, and others, contribute to the complexity of web applications.</li>
+<li><strong>I (Input):</strong> The data provided to the program during the test.</li>
+<li><strong>S (State):</strong> The program’s state when the input is introduced.</li>
+<li><strong>R (Result):</strong> The expected output from the program based on the input and state.</li>
 </ul>
-<p><strong>Deployment Methods:</strong></p>
+<p>A test suite, on the other hand, encompasses a collection of test cases designed to comprehensively evaluate different aspects of a software program.</p>
+</section>
+<section id="summary-of-testing-activities" class="level1">
+<h1>Summary of Testing Activities</h1>
+<p>The primary activities involved in software testing can be summarized as follows:</p>
+<ol type="1">
+<li><strong>Test Suite Design:</strong> The process of creating appropriate and effective test cases.</li>
+<li><strong>Test Case Execution:</strong> Running the designed test cases and analyzing the resulting outputs.</li>
+<li><strong>Error Localization:</strong> Identifying the specific location within the code where the error resides.</li>
+<li><strong>Error Correction:</strong> Fixing the identified error to rectify the software’s behavior.</li>
+</ol>
+</section>
+<section id="designing-test-cases-a-necessity" class="level1">
+<h1>Designing Test Cases: A Necessity</h1>
+<p>Randomly testing software with a large number of test cases is ineffective and doesn’t guarantee the detection of all or even most errors. A deliberate approach to test case design is crucial for uncovering various types of errors efficiently.</p>
+<p>For example, consider a simple function to calculate the minimum of two values (x and y):</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (x <span class="op">&lt;</span> y):</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="bu">min</span> <span class="op">=</span> x</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="cf">else</span>:</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="bu">min</span> <span class="op">=</span> y</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Randomly selecting test cases might miss specific scenarios, such as when both values are equal or when the second value is smaller. Therefore, designing test cases based on specific scenarios is essential for comprehensive testing.</p>
+</section>
+<section id="blackbox-testing" class="level1">
+<h1>Blackbox Testing</h1>
+<p>Blackbox testing focuses on the functional behavior of the software without delving into its internal structure or code. It treats the program as a “black box” and tests its responses to various inputs.</p>
+<p><strong>Equivalence Class Partitioning:</strong></p>
+<p>This technique involves dividing the input domain into equivalence classes, where the program is expected to behave similarly for all inputs within a class. For the minimum value example, the equivalence classes would be:</p>
 <ul>
-<li><strong>Bundled:</strong> Pre-installed on a computer.</li>
-<li><strong>Shrink-wrap:</strong> Purchased and installed by end-users.</li>
-<li><strong>Contract:</strong> Developed and installed for a specific purchaser.</li>
-<li><strong>Embedded:</strong> Integrated within hardware devices.</li>
-<li><strong>Web:</strong> Accessed through the internet via HTTP.</li>
+<li><strong>x &lt; y</strong></li>
+<li><strong>x &gt; y</strong></li>
+<li><strong>x = y</strong></li>
 </ul>
-<p><strong>Three-Tier Architecture:</strong></p>
+<p>By selecting representative test cases from each class, we can efficiently cover different input scenarios.</p>
+<p><strong>Boundary Value Analysis:</strong></p>
+<p>This technique focuses on testing values at the edges of equivalence classes, as errors often occur at these boundaries. For instance, testing the minimum value function with inputs like (0, 1) or (MAX_INT, MAX_INT-1) would cover boundary cases.</p>
+<p><strong>Example: isPrime(num) Function</strong></p>
+<p>For a function like <code>isPrime(num)</code> which determines whether a number is prime, the equivalence classes would be:</p>
 <ul>
-<li><strong>Presentation Layer (Client-Side):</strong> Responsible for user interface and interaction, typically utilizing HTML, CSS, and JavaScript.</li>
-<li><strong>Application Layer (Server-Side):</strong> Handles business logic, data access, and processing.</li>
-<li><strong>Data Storage Layer (Database):</strong> Stores and manages persistent data.</li>
+<li>Prime Numbers</li>
+<li>Non-Prime Numbers</li>
+</ul>
+<p>Boundary values to consider would be 0 and 1, as they are edge cases for primality testing.</p>
+</section>
+<section id="whitebox-testing" class="level1">
+<h1>Whitebox Testing</h1>
+<p>Whitebox testing, also known as glass-box testing, takes into account the internal structure of the code during test case design. It aims to achieve thorough coverage of different code paths and conditions.</p>
+<p><strong>Coverage-based Testing:</strong></p>
+<ul>
+<li><p><strong>Branch Coverage:</strong> Ensures that each branch (decision point) in the code is executed at least once. This typically involves designing test cases that evaluate both true and false conditions of each branch.</p></li>
+<li><p><strong>Multiple Condition Coverage:</strong> Focuses on covering all possible combinations of conditions within a compound conditional expression. For example, if a condition involves ‘AND’ and ‘OR’ operators, test cases should cover scenarios where each sub-condition is true and false.</p></li>
+<li><p><strong>Path Coverage:</strong> Aims to exercise all linearly independent paths through the code. This requires identifying all possible execution paths based on the control flow and designing test cases to cover each path at least once.</p></li>
+</ul>
+<p><strong>Cyclomatic Complexity:</strong></p>
+<p>This metric helps determine the number of linearly independent paths in a program, calculated as the number of decision points (e.g., if statements, loops) plus 1. It provides an indication of the testing effort required to achieve path coverage.</p>
+</section>
+<section id="unit-testing" class="level1">
+<h1>Unit Testing</h1>
+<p>Unit testing involves testing individual units or components of a software system in isolation. This is typically done during the development phase, with the developer writing test cases for their own code.</p>
+<p><strong>Benefits of Unit Testing:</strong></p>
+<ul>
+<li><strong>Early Error Detection:</strong> Identifies errors early in the development process, making them easier and cheaper to fix.</li>
+<li><strong>Improved Code Quality:</strong> Encourages modular design and promotes better code structure.</li>
+<li><strong>Facilitates Change:</strong> Makes it easier to modify and refactor code with confidence, as unit tests provide a safety net to catch regressions.</li>
+</ul>
+<p><strong>Testing Environment:</strong></p>
+<p>To effectively unit test a module, a controlled environment is needed. This typically involves: * <strong>Module under Test:</strong> The specific unit of code being tested. * <strong>Driver Module:</strong> Simulates the environment and provides necessary data and inputs to the module under test. * <strong>Stub Modules:</strong> Replace dependent modules that may not be available or fully developed yet, providing simplified functionality to facilitate testing.</p>
+<p><strong>Python Unit Testing Tools:</strong></p>
+<p>Popular Python libraries for unit testing include: * <code>unittest</code>: The standard library module for unit testing in Python, providing a framework for organizing and executing test cases. * <code>pytest</code>: A widely-used third-party library with a more concise and flexible approach to writing and running tests.</p>
+</section>
+<section id="integration-testing" class="level1">
+<h1>Integration Testing</h1>
+<p>Integration testing focuses on testing the interactions between different modules or components as they are integrated into a larger system. This helps identify errors that may arise from incorrect assumptions about module interfaces or data exchange.</p>
+<p><strong>Approaches to Integration Testing:</strong></p>
+<ul>
+<li><strong>Big Bang Approach:</strong> All modules are integrated at once and tested as a whole. This approach is simple but can be impractical for large systems, as isolating errors becomes difficult.</li>
+<li><strong>Bottom-up Approach:</strong> Modules at the lowest level are tested first, followed by gradual integration and testing of higher-level modules. This approach requires driver modules to simulate the environment for lower-level modules.</li>
+<li><strong>Top-down Approach:</strong> Testing begins with the top-level module and progressively integrates and tests lower-level modules. This approach requires stub modules to replace lower-level modules that are not yet developed or tested.</li>
+<li><strong>Mixed Approach (Sandwich Testing):</strong> Combines top-down and bottom-up approaches to provide a more flexible and efficient testing strategy.</li>
 </ul>
 </section>
-<section id="testing-challenges" class="level1">
-<h1>Testing Challenges</h1>
-<p>Testing web applications presents unique challenges due to their distributed nature, dynamic content, and reliance on various technologies. Some key challenges include:</p>
+<section id="system-testing" class="level1">
+<h1>System Testing</h1>
+<p>System testing evaluates the entire integrated system against its specified requirements. It ensures that all components work together as expected and meet the functional and non-functional requirements.</p>
+<p><strong>Types of System Testing:</strong></p>
 <ul>
-<li><strong>Statelessness of HTTP:</strong> Maintaining state information across multiple requests requires additional effort.</li>
-<li><strong>Loose Coupling:</strong> Testing interactions between components can be complex.</li>
-<li><strong>Dynamic Content Generation:</strong> Generating test cases for dynamically generated content can be difficult.</li>
-<li><strong>User Control over Navigation:</strong> Users can deviate from expected paths using back buttons, forward buttons, or URL manipulation.</li>
-<li><strong>Security Vulnerabilities:</strong> Web applications are susceptible to various security threats, requiring thorough security testing.</li>
+<li><strong>Alpha Testing:</strong> Conducted by an internal testing team within the development organization to identify any major issues before releasing the software to external users.</li>
+<li><strong>Beta Testing:</strong> Involves releasing the software to a limited group of external users (beta testers) to gather feedback and identify any remaining issues in a real-world environment.</li>
+<li><strong>Acceptance Testing:</strong> Performed by the customer or end-users to determine whether the software meets their needs and is acceptable for delivery.</li>
+</ul>
+<p><strong>Other System Testing Techniques:</strong></p>
+<ul>
+<li><strong>Smoke Testing:</strong> A preliminary test suite executed after building a new software version to verify basic functionalities and ensure the system is stable enough for further testing.</li>
+<li><strong>Performance Testing:</strong> Evaluates the system’s performance under various load conditions, including stress testing to assess its behavior under extreme loads. This helps identify bottlenecks and ensure the system meets performance requirements.</li>
 </ul>
 </section>
-<section id="testing-static-websites" class="level1">
-<h1>Testing Static Websites</h1>
-<p>Static websites consist of pre-written HTML files, delivered to users without server-side modifications. Testing static websites primarily focuses on:</p>
+<section id="test-driven-development-tdd" class="level1">
+<h1>Test-Driven Development (TDD)</h1>
+<p>TDD is a development methodology where tests are written before the actual code implementation. It involves a cycle of:</p>
 <ul>
-<li><strong>Link Validation:</strong> Ensuring all links are functional and point to the correct destinations.</li>
-<li><strong>Content Accuracy:</strong> Verifying content is accurate and consistent.</li>
-<li><strong>Accessibility:</strong> Ensuring the website is accessible to users with disabilities.</li>
-<li><strong>Performance:</strong> Evaluating loading times and responsiveness.</li>
+<li><strong>Red:</strong> Write a failing test that describes the desired functionality.</li>
+<li><strong>Green:</strong> Write the minimum amount of code to make the test pass.</li>
+<li><strong>Refactor:</strong> Improve the code quality without changing its functionality.</li>
 </ul>
-<p><strong>Graph Models for Static Websites:</strong></p>
+<p><strong>Benefits of TDD:</strong></p>
 <ul>
-<li>A website can be represented as a directed graph, where nodes represent web pages and edges represent hyperlinks.</li>
-<li>Testing involves traversing all edges to ensure connectivity and identify broken links.</li>
+<li><strong>Improved Code Quality:</strong> Leads to well-tested, modular, and maintainable code.</li>
+<li><strong>Reduced Development Time:</strong> Helps identify and fix errors early, reducing debugging effort.</li>
+<li><strong>Increased Confidence:</strong> Provides a safety net for making changes and refactoring code.</li>
 </ul>
-</section>
-<section id="testing-dynamic-web-applications" class="level1">
-<h1>Testing Dynamic Web Applications</h1>
-<p>Dynamic web applications generate content on-the-fly based on user input, server state, and other factors. Testing dynamic web applications requires more comprehensive strategies:</p>
-<p><strong>Client-Side Testing (Black-box):</strong></p>
-<ul>
-<li><strong>Input Validation:</strong> Checking how the application handles various input values, including invalid and unexpected inputs.</li>
-<li><strong>Functionality:</strong> Verifying the application performs its intended functions correctly.</li>
-<li><strong>Usability:</strong> Evaluating ease of use and user experience.</li>
-<li><strong>Compatibility:</strong> Ensuring compatibility across different browsers and platforms.</li>
-</ul>
-<p><strong>Bypass Testing:</strong></p>
-<ul>
-<li>A technique to bypass client-side validation and directly test server-side processing of inputs.</li>
-<li>Helps identify vulnerabilities and potential security issues.</li>
-<li>Requires modifying HTML forms to bypass built-in validation mechanisms.</li>
-</ul>
-<p><strong>User-Session Data Based Testing:</strong></p>
-<ul>
-<li>Leverages data collected from real user sessions to create test cases.</li>
-<li>Provides insights into user behavior and potential issues.</li>
-<li>Involves capturing and replaying user sessions, potentially with modifications.</li>
-</ul>
-<p><strong>Server-Side Testing (White-box):</strong></p>
-<ul>
-<li>Requires access to server-side code and focuses on internal logic and data flow.</li>
-<li><strong>Component Interaction Model (CIM):</strong> Models individual components and their interactions within the presentation layer.</li>
-<li><strong>Application Transition Graph (ATG):</strong> Represents transitions between components, including HTTP requests and data.</li>
-<li><strong>Atomic Sections:</strong> Sections of HTML code that are always delivered as a whole, forming the building blocks of CIMs.</li>
-</ul>
-<p><strong>Challenges in Server-side Testing:</strong></p>
-<ul>
-<li>Manually analyzing source code to generate CIMs and ATGs can be time-consuming.</li>
-<li>Data flow analysis for web applications is complex due to dynamic content generation.</li>
-<li>Modeling concurrency, session data, and dynamic integration remains an open research area.</li>
-</ul>
-</section>
-<section id="conclusion" class="level1">
-<h1>Conclusion</h1>
-<p>Testing web applications is a complex task due to their dynamic nature, distributed architecture, and diverse technologies involved. By employing a combination of client-side and server-side testing techniques, testers can ensure the functionality, usability, and security of web applications. Ongoing research aims to address current limitations and develop more effective testing approaches for the ever-evolving landscape of web technologies.</p>
+<p><strong>TDD is especially popular in Agile development methodologies, where its iterative and incremental approach aligns well with the Agile philosophy.</strong></p>
+<p><strong>In conclusion, software testing plays a critical role in ensuring the quality and reliability of software systems. By employing various testing methodologies and techniques, developers can identify and rectify errors, leading to robust and dependable software solutions.</strong></p>
 
 
 </section>
