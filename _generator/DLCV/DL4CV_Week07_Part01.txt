@@ -1,0 +1,2073 @@
+# DL4CV_Week07_Part01.pdf - Page 1
+
+```markdown
+# Deep Learning for Computer Vision
+
+# CNNs for Object Detection
+
+## Vineeth N Balasubramanian
+
+**Department of Computer Science and Engineering**
+**Indian Institute of Technology, Hyderabad**
+
+![IIT Hyderabad Logo](image-url)
+
+---
+
+Vineeth N B (IIT-H)
+
+### 7.1 CNNs for Detection
+
+---
+
+1 / 44
+```
+
+# DL4CV_Week07_Part01.pdf - Page 2
+
+```markdown
+# Classification vs Localization vs Detection
+
+## Classification
+
+![Classification](image1.png)
+
+- **Single object**
+- **Label:** CAT
+
+## Classification + Localization
+
+![Classification + Localization](image2.png)
+
+- **Single object**
+- **Label:** CAT
+- **Bounding Box:** Red
+
+## Object Detection
+
+![Object Detection](image3.png)
+
+- **Multiple objects**
+- **Labels:** CAT, DOG, DUCK
+- **Bounding Boxes:** Red (CAT), Green (DOG), Blue (DUCK)
+
+## Instance Segmentation
+
+![Instance Segmentation](image4.png)
+
+- **Multiple objects**
+- **Labels:** CAT, DOG, DUCK
+- **Segmented Regions:** Red (CAT), Green (DOG), Blue (DUCK)
+
+**Credit:** Mike Tamir, SIG & UC Berkeley
+
+Vineeth N B (IIT-H)
+
+§7.1 CNNs for Detection
+
+Slide 2 / 44
+```
+
+# DL4CV_Week07_Part01.pdf - Page 3
+
+```markdown
+# Detection in the Pre-Deep Learning Era: Viola-Jones Algorithm
+
+- A framework to perform object detection in real-time
+- Used predominantly for detecting frontal upright faces.
+- Consists of three main components:
+  - Weak classification using **Haar-like features** and **Integral Images**
+  - Adaboost to build strong classifier
+  - Classifier cascades
+
+![Detection Example](image_url)
+
+---
+
+**References**
+
+[^1]: Viola, Jones, Rapid Object Detection using a Boosted Cascade of Simple Features, CVPR 2001
+
+*Vineeth N B (IIT-H)*
+
+*87.1 CNNs for Detection*
+
+*3 / 44*
+```
+
+# DL4CV_Week07_Part01.pdf - Page 4
+
+```markdown
+# Haar-like Features
+
+- Rectangular features based on Haar wavelets
+- Feature value given by sum of pixels in white rectangles subtracted from sum in black rectangles, i.e.
+  \[
+  f = \Sigma(\text{pixels inside black rectangle}) - \Sigma(\text{pixels inside white rectangle})
+  \]
+- To normalize for images of all scales, features are scaled through height and width
+
+![Edge Features](data:image/png;base64,...) (a) Edge Features
+
+![Line Features](data:image/png;base64,...) (b) Line Features
+
+![Four-rectangle Features](data:image/png;base64,...) (c) Four-rectangle features
+
+_Vineeth N B (IIT-H)_
+
+_S7.1 CNNs for Detection_
+
+_4 / 44_
+```
+
+# DL4CV_Week07_Part01.pdf - Page 5
+
+```markdown
+# Haar Features: Intuition
+
+![Haar Features Visualization](image_url)
+
+Vineeth N B (IIT-H) &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  §7.1 CNNs for Detection &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 5 / 44
+
+## Haar Features: Intuition
+
+### Description
+
+Haar features are used for object detection and are based on the differences in the intensity of pixels within regions of an image. These features are designed to capture the edges and corners of objects, which are essential for identifying shapes.
+
+### Key Concepts
+
+1. **Intensity Differences**: Haar features consider the difference between the intensities of pixels in specific regions of an image.
+2. **Region Comparisons**: By comparing the sums of pixel intensities in different regions, Haar features can detect edges and corners.
+3. **Simple and Effective**: These features are simple to compute and effective for detecting various objects in images.
+
+### Examples
+
+#### Example 1
+
+- **Feature 1**: Difference between two adjacent rectangular regions.
+- **Feature 2**: Difference between two overlapping rectangular regions.
+- **Feature 3**: Difference between two larger rectangular regions.
+
+#### Example 2
+
+- **Feature 4**: Difference between four rectangular regions arranged in a 2x2 grid.
+- **Feature 5**: Difference between two horizontal rectangular regions.
+- **Feature 6**: Difference between two vertical rectangular regions.
+
+### Mathematical Representation
+
+The Haar wavelet transform is often used to represent Haar features mathematically. The Haar transform uses the following basis functions:
+
+\[
+\phi(x) = \begin{cases}
+1 & \text{if } 0 \le x < 1 \\
+-1 & \text{if } 1 \le x < 2 \\
+0 & \text{otherwise}
+\end{cases}
+\]
+
+### Applications
+
+1. **Face Detection**: Haar features were used in the Viola-Jones face detector for real-time face detection in images and videos.
+2. **Object Recognition**: These features can be used to detect various objects in images, including vehicles, pedestrians, and animals.
+3. **Feature Extraction**: Haar features serve as a fundamental component in many object detection algorithms and methodologies.
+
+### Conclusion
+
+Haar features provide a simple yet powerful approach to object detection by leveraging intensity differences in pixel regions. Their wide application and effectiveness highlight their importance in the field of computer vision and image processing.
+```
+
+# DL4CV_Week07_Part01.pdf - Page 6
+
+```markdown
+# Integral Image
+
+- Reduces computational complexity caused while adding pixel intensities for any image operation
+
+- For image \( i \), Integral image \( ii \) is given by:
+
+\[
+ii(x, y) = \sum_{x' \leq x, y' \leq y} i(x', y')
+\]
+
+| Image                                | Integral Image                         |
+|--------------------------------------|----------------------------------------|
+| ![Image](image-url)                  | ![Integral Image](integral-image-url) |
+```
+
+- **Note**: Replace `image-url` and `integral-image-url` with the actual URLs or placeholders for the images if you have them.
+
+---
+
+_Vineeth N B (IIT-H)_
+
+§7.1 CNNs for Detection
+
+_NPTEL_
+
+6 / 44
+```
+
+# DL4CV_Week07_Part01.pdf - Page 7
+
+```markdown
+# Integral Image
+
+- Reduces computational complexity caused while adding pixel intensities for any image operation
+
+- For image `i`, Integral image `ii` is given by:
+
+  \[
+  ii(x, y) = \sum_{x' \leq x, y' \leq y} i(x', y')
+  \]
+
+- Recurrent definition of `ii(x, y)`:
+
+  \[
+  s(x, y) = s(x, y-1) + i(x, y)
+  \]
+  \[
+  ii(x, y) = ii(x-1, y) + s(x, y)
+  \]
+
+  where `s(x, y)` is cumulative row sum.
+  \[
+  s(x, -1) = 0, ii(-1, y) = 0
+  \]
+
+![Image](image)
+
+![Integral Image](integral_image)
+
+*Vineeth N B (IIIT-H)*
+
+*87.1 CNNs for Detection*
+
+*6 / 44*
+```
+
+# DL4CV_Week07_Part01.pdf - Page 8
+
+```markdown
+# Integral Image
+
+![Integral Image Diagram](image_url)
+
+**Integral Image Diagram**
+
+- Sum of pixels within rectangle 1234 = D + A - (B + C)
+  - (Why?)
+
+---
+
+Vineeth N B (IIIT-H)
+
+87.1 CNNs for Detection
+
+NPTEL
+```
+
+# DL4CV_Week07_Part01.pdf - Page 9
+
+```markdown
+# Integral Image
+
+![Integral Image Diagram](image_url)
+
+- Sum of pixels within rectangle 1234 = D + A - (B + C) (Why?)
+- More formally, sum of pixels in rectangle with upper-left pixel as $(x_1, y_1)$ and bottom-right pixel as $(x_2, y_2)$ is given by:
+
+\[
+\text{Sum} = iii(x_2, y_2) + iii(x_1 - 1, y_1 - 1) - (iii(x_1 - 1, y_2) + iii(x_2, y_1 - 1))
+\]
+
+## Example Tables
+
+### First Table
+| 38 | 66 | 17 | 57 | 73 | 2 |
+| --- | --- | --- | --- | --- | --- |
+| 89 | 97 | 98 | 30 | 2 | 89 |
+| 15 | 37 | 75 | 81 | 23 | 50 |
+| 96 | 70 | 63 | 84 | 41 | 29 |
+| 93 | 84 | 89 | 46 | 28 | 26 |
+| 74 | 74 | 51 | 96 | 64 | 39 |
+
+Sum of pixels = 199
+
+### Second Table
+| 38 | 104 | 121 | 178 | 251 | 253 |
+| --- | --- | --- | --- | --- | --- |
+| 127 | 290 | 405 | 492 | 567 | 658 |
+| 142 | 342 | 532 | 700 | 700 | 939 |
+| 238 | 508 | 701 | 1013 | 1152 | 1322 |
+| 331 | 685 | 1026 | 1325 | 1492 | 1688 |
+| 405 | 833 | 1226 | 1620 | 1851 | 2086 |
+
+Sum of pixels = 1492 + 532 - 1027 - 798 = 199
+
+_Vineeth N B (IIT-H)_
+
+## 87.1 CNNs for Detection
+```
+
+# DL4CV_Week07_Part01.pdf - Page 10
+
+```markdown
+# Integral Image
+
+![Integral Image Diagram](image-url)
+
+- Sum of pixels within rectangle 1234 = D + A - (B + C)
+  (Why?)
+
+- More formally, sum of pixels in rectangle with upper-left pixel as \((x_1, y_1)\) and bottom-right pixel as \((x_2, y_2)\) is given by:
+
+\[
+\text{Sum} = iii(x_2, y_2) + iii(x_1 - 1, y_1 - 1) - (iii(x_1 - 1, y_2) + iii(x_2, y_1 - 1))
+\]
+
+![Sum of Pixels Example](image-url)
+
+**Sum of pixels = 199**
+
+![Integral Image Calculation](image-url)
+
+**Sum of pixels = 1492 + 532 - 1027 - 798 = 199**
+
+2-rectangle features now require 6 look-ups. How many lookups do 3-rectangle and 4-rectangle features need? **Homework!**
+
+*Vineeth N B (IIT-H)*
+
+## §7.1 CNNs for Detection
+
+7 / 44
+```
+
+# DL4CV_Week07_Part01.pdf - Page 11
+
+```markdown
+# Weak Classifiers
+
+- Each feature is considered as a weak classifier
+- Given feature \( f_j \), a threshold \( \theta_j \) and a parity \( p_j \) indicating the direction of the inequality sign, classifier can be defined as:
+
+  \[
+  h_j(x) = \begin{cases}
+    1 & \text{if } p_j f_j(x) < p_j \theta_j \\
+    0 & \text{otherwise}
+  \end{cases}
+  \]
+
+- Each classifier weak on its own, but combination gives strong classifiers
+
+**Do you see any problem here?**
+
+Vineeth N B (IIT-H) §7.1 CNNs for Detection 8 / 44
+```
+
+# DL4CV_Week07_Part01.pdf - Page 12
+
+```markdown
+# Weak Classifiers
+
+- Each feature is considered as a weak classifier
+- Given feature \( f_j \), a threshold \( \theta_j \) and a parity \( p_j \) indicating the direction of the inequality sign, classifier can be defined as:
+
+\[ h_j(x) = \begin{cases}
+1 & \text{if } p_j f_j(x) < p_j \theta_j \\
+0 & \text{otherwise}
+\end{cases} \]
+
+- Each classifier weak on its own, but combination gives strong classifiers
+
+**Do you see any problem here?**
+
+For a sliding window base detector of size 24 × 24, there exist over 160k features. How to identify the best ones?
+
+_Vineeth N B (IIIT-H)_
+
+§7.1 CNNs for Detection
+
+8 / 44
+```
+
+# DL4CV_Week07_Part01.pdf - Page 13
+
+```markdown
+# Classifier Training using AdaBoost
+
+**Recall:** AdaBoost learns a strong classifier as a linear combination of weak classifiers
+
+- Given example images \((x_1, y_1), \ldots, (x_n, y_n)\) where:
+  - \(y_i = 0, 1\) for negative and positive examples respectively.
+- Initialize weights \(w_{1,i} = \frac{1}{2m}, \frac{1}{2l}\) for \(y_i = 0, 1\) respectively, where \(m\) and \(l\) are the number of negatives and positives respectively.
+
+For \(t = 1, \ldots, T\):
+
+1. Normalize the weights,
+   \[
+   w_{t,i} \leftarrow \frac{w_{t,i}}{\sum_{j=1}^n w_{t,j}}
+   \]
+   so that \(w_t\) is a probability distribution.
+
+2. For each feature, \(j\), train a classifier \(h_j\) which is restricted to using a single feature. The error is evaluated with respect to \(w_t\):
+   \[
+   e_j = \sum_i w_t [h_j(x_i) \neq y_i].
+   \]
+
+3. Choose the classifier, \(h_t\), with the lowest error \(e_t\).
+
+4. Update the weights:
+   \[
+   w_{t+1,i} = w_{t,i} \beta_t^{1-e_i}
+   \]
+   where \(e_i = 0\) if example \(x_i\) is classified correctly, \(e_i = 1\) otherwise, and \(\beta_t = \frac{e_t}{1 - e_t}\).
+
+- The final strong classifier is:
+  \[
+  h(x) = \left\{ \begin{array}{ll}
+  1 & \sum_{t=1}^T \alpha_t h_t(x) \geq \frac{1}{2} \sum_{t=1}^T \alpha_t \\
+  0 & \text{otherwise}
+  \end{array} \right.
+  \]
+  where \(\alpha_t = \log \frac{1}{\beta_t}\).
+
+*Viola, Jones, Rapid Object Detection using a Boosted Cascade of Simple Features, CVPR 2001*
+  
+*Vineeth N B (IIIT-H)*
+  
+*8.7.1 CNNs for Detection*
+  
+*9 / 44*
+```
+
+# DL4CV_Week07_Part01.pdf - Page 14
+
+```markdown
+# Classifier Cascade
+
+## Intuition:
+
+- Very less number of sub-windows actually have objects (False positive rate very high)
+- But computation is equal across all sub-windows
+- Eliminate negative windows earlier thereby, reducing computation time spent on them
+
+![Classifier Cascade Diagram](image-placeholder)
+
+1. **All Sub-windows** → **T** → **T** → **T** → **Further Processing**
+2. **All Sub-windows** → **F** → **Reject Sub-window**
+3. **All Sub-windows** → **F** → **Reject Sub-window**
+4. **All Sub-windows** → **F** → **Reject Sub-window**
+
+*Vineeth N B (IIIT-H)*
+
+*§7.1 CNNs for Detection*
+
+*10 / 44*
+```
+
+# DL4CV_Week07_Part01.pdf - Page 15
+
+# Classifier Cascade: Why does it matter?
+
+- A 1 MP has ~10^6 pixels and a comparable number of candidate face locations ⇒ our ideal false positive (FP) rate has to be less than 10^-6
+
+![NPTEL Logo](data:image/png;base64,...) 
+
+**Vineeth N B (IITH)**
+
+**§7.1 CNNs for Detection**
+
+Page Number: 11 / 44
+
+# DL4CV_Week07_Part01.pdf - Page 16
+
+```markdown
+# Classifier Cascade: Why does it matter?
+
+- A 1 MP has ~10^6 pixels and a comparable number of candidate face locations ⇒ our ideal false positive (FP) rate has to be less than 10^{-6}
+
+![Image of classifier cascade](image_url)
+
+- This feature combination can yield 100% detection rate and 50% FP rate
+
+*Vineeth N B (IIT-H) §7.1 CNNs for Detection*
+
+*Page 11 of 44*
+```
+
+# DL4CV_Week07_Part01.pdf - Page 17
+
+```markdown
+# Classifier Cascade: Why does it matter?
+
+- A 1 MP has ~10^6 pixels and a comparable number of candidate face locations ⇒ our ideal false positive (FP) rate has to be less than 10^-6
+
+![Image of face detection examples](image1.png)
+
+- This feature combination can yield 100% detection rate and 50% FP rate
+- A 200-feature classifier can yield 95% detection rate and FP rate of 1 in 14084. Not enough!
+
+_Vineeth N B (IIIT-H)_
+_§7.1 CNNs for Detection_
+_11 / 44_
+```
+
+# DL4CV_Week07_Part01.pdf - Page 18
+
+```markdown
+# Classifier Cascade: Why does it matter?
+
+- A 1 MP has ~10<sup>6</sup> pixels and a comparable number of candidate face locations ⇒ our ideal false positive (FP) rate has to be less than 10<sup>-6</sup>
+  ![Image of pixels and face locations](image1.png)
+  ![Image of face detection](image2.png)
+
+- This feature combination can yield 100% detection rate and 50% FP rate
+- A 200-feature classifier can yield 95% detection rate and FP rate of 1 in 14084. Not enough!
+
+  ![Cascade diagram](image3.png)
+
+- Detection rate and FP rate of cascade are found by multiplying respective rates of individual stages
+- Detection rate of 0.9 and FP rate on the order of 10<sup>-6</sup> can be achieved by a 10-stage cascade if each stage has detection rate of 0.99 (0.99<sup>10</sup> ≈ 0.9) and FP rate of about 0.30 (0.3<sup>10</sup> ≈ 6 × 10<sup>-6</sup>)
+
+*Vineeth N B. (IIIT-H)*
+*87.1 CNNs for Detection*
+*11 / 44*
+```
+
+# DL4CV_Week07_Part01.pdf - Page 19
+
+```markdown
+# Non-Maximum Suppression (NMS)
+
+- Usually, more than one bounding box is detected for the same object
+- Use bounding box similarity measures to identify duplicate bounding boxes which can be removed
+
+![NPTEL Logo](https://example.com/logo.png)
+
+![Example Image with Bounding Boxes](https://example.com/bounding_boxes.png)
+
+*Vineeth N B (IIT-H) §7.1 CNNs for Detection 12 / 44*
+```
+
+# DL4CV_Week07_Part01.pdf - Page 20
+
+```markdown
+# Intersection over Union (IoU)
+
+## Intersection
+
+![Intersection](image-url)
+
+- **B1**: The first bounding box.
+- **B2**: The second bounding box.
+
+## Union
+
+![Union](image-url)
+
+- **B1**: The first bounding box.
+- **B2**: The second bounding box.
+
+## Intersection over Union
+
+![IoU](image-url)
+
+\[
+\text{IoU} = \frac{B_1 \cap B_2}{B_1 \cup B_2}
+\]
+
+### Credit:
+Hands-On Convolutional Neural Networks with TensorFlow, Iffat Zafar
+
+Vineeth N B (IIIT-H)
+
+### §7.1 CNNs for Detection
+
+13 / 44
+```
+
+# DL4CV_Week07_Part01.pdf - Page 21
+
+```markdown
+# Non-Maximum Suppression (NMS)
+
+- Select a random box from a bounding box proposal list
+- Compare it with rest of the boxes; if IoU > 0.5, remove box from list
+- Repeat until boxes left are exclusive
+
+![Non-Maximum Suppression Example](image_url)
+
+**Vineeth N B (IIT-H)**
+
+**8.7.1 CNNs for Detection**
+
+*Page 14 / 44*
+```
+
+# DL4CV_Week07_Part01.pdf - Page 22
+
+```markdown
+# Histograms of Oriented Gradients<sup>2</sup>
+
+![Histogram of Oriented Gradients Process](image_url)
+
+- **detection window slides over an image**
+- **at each location where the window is applied, gradients are computed**
+- **window is evenly partitioned into cells and each pixel of the cell contributes to cell gradient orientation histogram**
+- **orientation histograms for overlapping 2x2 blocks of cells are normalized and collected to form the final descriptor**
+  This is called Contrast Normalization
+
+![Final Descriptor](image_url)
+
+<sup>2</sup> Dalal and Triggs, Histograms of Oriented Gradients for Human Detection, CVPR 2005
+
+*Vineeth N B (IIT-H)*
+
+*87.1 CNNs for Detection*
+
+---
+
+*Slide 15 / 44*
+```
+
+# DL4CV_Week07_Part01.pdf - Page 23
+
+```markdown
+# Histograms of Oriented Gradients<sup>2</sup>
+
+![Histograms of Oriented Gradients](https://via.placeholder.com/150)
+
+1. **detection window slides over an image**
+
+   ![Image](https://via.placeholder.com/150)
+
+2. **at each location where the window is applied, gradients are computed**
+
+   ![Gradient Computation](https://via.placeholder.com/150)
+
+3. **window is evenly partitioned into cells, and for each cell, gradient orientations are computed and cell contributes to cell gradient orientation histogram**
+
+   ![Partitioned Window](https://via.placeholder.com/150)
+
+4. **orientation histograms for overlapping 2x2 blocks are normalized and collected to form the final descriptor**
+
+   ![Histogram Normalization](https://via.placeholder.com/150)
+
+5. **Final descriptor**
+
+   ![Final Descriptor](https://via.placeholder.com/150)
+
+6. **Classification**
+
+   ![SVM Classification](https://via.placeholder.com/150)
+
+---
+
+<sup>2</sup> Dalal and Triggs, Histograms of Oriented Gradients for Human Detection, CVPR 2005
+
+*Vineeth N B (IIT-H)*
+
+*87.1 CNN for Detection*
+
+---
+
+15 / 44
+```
+
+# DL4CV_Week07_Part01.pdf - Page 24
+
+```markdown
+# HOG: SVM Weights
+
+![HOG: SVM Weights](image_url)
+
+- **Average gradient image over training examples**: ![Image](image_url)
+- **Maximum positive and negative SVM weights respectively centred on the block**: ![Image](image_url)
+- **Test Image**: ![Image](image_url)
+- **HOG descriptor for test image**: ![Image](image_url)
+- **HOG descriptor weighted by positive and negative SVM weights respectively**: ![Image](image_url)
+
+_Vineeth N B (IIIT-H)_
+
+## 87.1 CNNs for Detection
+
+_16 / 44_
+```
+
+# DL4CV_Week07_Part01.pdf - Page 25
+
+```markdown
+# Image Pyramid
+
+To identify images of all sizes, repeat the process across multiple image scales
+
+![Image Pyramid Diagram](image_pyramid_diagram.png)
+
+- **Image pyramid**
+  - Original image
+  - Rescaled image
+  - Further reduced image
+
+- **HOG feature pyramid**
+  - Grid-based feature extraction from the original image
+  - Feature extraction from the rescaled image
+  - Feature extraction from the further reduced image
+
+- **Equation:**
+  \[
+  \text{score}(I, p) = w \cdot \phi(I, p)
+  \]
+
+*Vineeth N B (IIIT-H)*
+
+*87.1 CNNs for Detection*
+
+*17 / 44*
+```
+
+# DL4CV_Week07_Part01.pdf - Page 26
+
+```markdown
+# Object Detection using CNNs
+
+## Training Step:
+![Training Step Images](https://via.placeholder.com/150)
+
+## Testing Step:
+![Testing Step Images](https://via.placeholder.com/150)
+
+- **CNN**: Convolutional Neural Network
+- **Feature Maps**: Outputs from convolutional layers
+- **FC Network**: Fully connected network
+
+![Diagram](https://via.placeholder.com/500)
+
+- Sliding windows of multiple scales
+- **Output**: Car/No Car
+
+![Testing Output](https://via.placeholder.com/150)
+
+**Credit:** Stanford Cars dataset, Jonathan Krause
+
+*Vineeth N B (IIT-H) §7.1: CNNs for Detection*
+
+---
+
+This markdown format captures the essential information from the provided scientific slide, ensuring that the headings, images, and descriptive text are accurately and clearly represented.
+
+# DL4CV_Week07_Part01.pdf - Page 27
+
+```markdown
+# Non-Maximum Suppression using Class Scores
+
+![Bounding Box Detection Process](https://via.placeholder.com/800x400?text=Non-Maximum+Suppression+using+Class+Scores)
+
+**Vineeth N B (IIIT-H)**
+
+## 87.1 CNNs for Detection
+
+### Steps for Non-Maximum Suppression
+
+1. **List of all bounding boxes:**
+   - Initial detection phase where all possible bounding boxes are identified.
+   - Example: Bounding boxes around vehicles in an image.
+
+2. **Identify box with highest class signal (0.93 red):**
+   - Among the listed bounding boxes, the box with the highest confidence score is selected.
+   - Confidence scores are used to filter out less reliable boxes.
+   - Example: The bounding box with a class score of 0.93.
+
+3. **Eliminate the boxes with IOU > 0.5 w.r.t red box:**
+   - Intersection over Union (IOU) is calculated to determine overlapping boxes.
+   - Boxes with an IOU greater than 0.5 with the highest confidence box are discarded to avoid redundant detections.
+   - Example: Eliminating boxes that overlap significantly with the box having a score of 0.93.
+
+### Diagram Explanation
+
+- **Left Image:**
+  - Shows the initial bounding boxes identified around vehicles.
+  - Each bounding box has a different color to distinguish them.
+
+- **Middle Image:**
+  - Highlights the box with the highest confidence score (0.93).
+  - Other boxes with lower scores are still visible.
+
+- **Right Image:**
+  - Depicts the final result after applying non-maximum suppression.
+  - Only the box with the highest confidence score (0.88) remains.
+
+---
+
+*Source:* Vineeth N B (IIIT-H) & 87.1 CNNs for Detection
+
+*Slide:* 19 / 44
+```
+
+# DL4CV_Week07_Part01.pdf - Page 28
+
+```markdown
+# Object Detection using CNNs and Sliding Windows: Disadvantages
+
+![NPTEL Logo](https://via.placeholder.com/150)
+
+## Disadvantages
+
+### Vineeth N B (IIT-H)
+
+### 5.1 CNNs for Detection
+
+### Slide Number: 20 / 44
+
+---
+
+Object Detection using Convolutional Neural Networks (CNNs) and sliding windows is a popular method in computer vision, but it also has several disadvantages:
+
+1. **Computationally Intensive**
+   - The process of sliding a window over an image and applying a CNN for each window can be very computationally intensive.
+   - This makes real-time object detection challenging, especially on resource-constrained devices.
+
+2. **High Memory Usage**
+   - The memory consumption for storing and processing windowed patches can be significant, especially for high-resolution images.
+
+3. **Overlapping Windows**
+   - Using a sliding window approach can result in overlapping windows, which may lead to redundant computations and increased processing time.
+
+4. **Background Clutter**
+   - The presence of background clutter in the image can reduce the performance of the detection algorithm, as irrelevant features might be included in the sliding window.
+
+5. **Parameter Sensitivity**
+   - The choice of window size and stride can greatly affect the detection performance.
+   - Optimal parameters may vary depending on the specific dataset and object types.
+
+6. **Target Localization**
+   - Accurate localization of targets within the image can be difficult with a fixed-size sliding window, especially for objects of varying sizes.
+
+7. **Handling Occlusions**
+   - Occlusions can complicate the detection task, as parts of the target object may be obscured by other objects in the scene.
+
+8. **Scale Invariance**
+   - Achieving scale invariance is a challenge, as the sliding window approach typically does not account for objects of different sizes effectively.
+
+### Conclusion
+
+While CNNs and sliding windows have been successful in many applications, it is crucial to consider these disadvantages and explore alternative or complementary methods to improve the efficiency and accuracy of object detection systems.
+
+---
+
+```
+
+# DL4CV_Week07_Part01.pdf - Page 29
+
+```markdown
+# Object Detection using CNNs and Sliding Windows: Disadvantages
+
+- Bounding boxes may not be tightly around the object
+
+![Bounding Box Examples](image_url)
+
+  - **Loosely bound**
+  - **Tightly bound**
+
+- Evaluating a CNN network on all sliding windows is computationally intensive and time consuming
+
+*Vineeth N B (IIT-H)*
+
+*§7.1 CNNs for Detection*
+
+*20 / 44*
+```
+
+# DL4CV_Week07_Part01.pdf - Page 30
+
+```markdown
+# Object Localization using Bounding Box Regression
+
+## Vineeth N B (IIIT-H) & 7.1 CNNs for Detection
+
+### Object Localization
+
+#### Steps Involved
+
+1. **Input Image**
+   - An image of a car is fed into the system.
+   - ![Car Image](image-url)
+
+2. **Feature Extraction**
+   - The Convolutional Neural Network (CNN), specifically AlexNet/VGG, extracts feature maps from the input image.
+   - The feature maps are then passed to a Fully Connected (FC) Network.
+
+3. **Classification**
+   - The FC Network performs classification using Cross-Entropy Loss.
+   - **Output**: Class Scores
+     - These scores help in identifying the object within the image.
+
+4. **Bounding Box Regression**
+   - The bounding box regression, using L2-Loss, helps in accurately localizing the object.
+   - **Bounding Box Parameters**:
+     - \( (X, Y) \) - Center of the bounding box.
+     - \( W \) - Width of the bounding box.
+     - \( H \) - Height of the bounding box.
+   - These parameters are used to draw the bounding box around the detected object.
+
+5. **Output**
+   - The final output is an image with a bounding box around the detected car.
+   - The class score (e.g., Car 0.92) indicates the confidence level of the detection.
+
+### Diagram Explanation
+
+- **CNN AlexNet/VGG**
+  - Extracts feature maps from the input image.
+
+- **FC Network**
+  - Performs classification to generate class scores.
+
+- **Bounding Box Regression**
+  - Uses L2-Loss to refine the bounding box parameters.
+
+- **Final Output**
+  - The image displays the detected object with a bounding box and class score.
+
+### References
+
+- **Vineeth N B (IIIT-H)**
+- **& 7.1 CNNs for Detection**
+- **Slides 21 / 44**
+
+```
+
+# DL4CV_Week07_Part01.pdf - Page 31
+
+```markdown
+# OverFeat: Integrated Recognition, Localization and Detection<sup>3</sup>
+
+- **Winner of ILSVRC 2013 Localization Challenge**
+
+**Intuition**: Avoid computation time over sub-windows by applying filter directly to image
+
+![Image](image_placeholder.png)
+
+**Note**: 
+
+- The figure illustrates the application of a 3x3 filter directly to the image and two sub-windows.
+- The filter is applied to each section of the image and sub-windows to extract features.
+
+<sup>3</sup> Sermanet et al, OverFeat: Integrated Recognition, Localization and Detection using Convolutional Networks, ICLR 2014
+
+*Vineeth N B. (IIT-H)*
+
+**§7.1 CNNs for Detection**
+
+*Slide 22 / 44*
+
+```
+
+# DL4CV_Week07_Part01.pdf - Page 32
+
+```markdown
+# OverFeat: Integrated Recognition, Localization and Detection<sup>4</sup>
+
+## Input and Classifier Stages
+
+### Top Row: 14x14 Input
+- **Input Size**: 14x14
+  ![14x14 Input](image_placeholder)
+  
+- **1st Stage**:
+  - **Convolution**: 5x5
+    ![5x5 Convolution](image_placeholder)
+  - **Pooling**: 2x2
+    ![2x2 Pooling](image_placeholder)
+  - **Convolution**: 5x5
+    ![5x5 Convolution](image_placeholder)
+  - **Convolution**: 1x1
+    ![1x1 Convolution](image_placeholder)
+  - **Convolution**: 1x1
+    ![1x1 Convolution](image_placeholder)
+  
+- **Classifier**:
+  - **Convolution**: 1x1
+    ![1x1 Convolution](image_placeholder)
+  - **Output**: 2x2
+    ![2x2 Output](image_placeholder)
+
+### Bottom Row: 16x16 Input
+- **Input Size**: 16x16
+  ![16x16 Input](image_placeholder)
+  
+- **1st Stage**:
+  - **Convolution**: 5x5
+    ![5x5 Convolution](image_placeholder)
+  - **Pooling**: 2x2
+    ![2x2 Pooling](image_placeholder)
+  - **Convolution**: 5x5
+    ![5x5 Convolution](image_placeholder)
+  - **Convolution**: 1x1
+    ![1x1 Convolution](image_placeholder)
+  - **Convolution**: 1x1
+    ![1x1 Convolution](image_placeholder)
+  
+- **Classifier**:
+  - **Convolution**: 1x1
+    ![1x1 Convolution](image_placeholder)
+  - **Output**: 2x2
+    ![2x2 Output](image_placeholder)
+
+<sup>4</sup> Sermanet et al. OverFeat: Integrated Recognition, Localization and Detection using Convolutional Networks, ICLR 2014
+
+Vineeth N B (IIT-H)
+
+Section 7.1: CNNs for Detection
+
+23 / 44
+```
+
+# DL4CV_Week07_Part01.pdf - Page 33
+
+```markdown
+# OverFeat: Integrated Recognition, Localization and Detection[^5]
+
+The network used is fully convolutional, replacing fully connected layers with convolutional layers. Why?
+
+## Fully Connected
+- **Sub-window:**
+  - **CNN:** 3x3x256
+  - **Flatten:** 1x2304
+  - **FC:** 512
+
+- **Image:**
+  - **CNN:** 4x4x256
+  - **Flatten:** 2x2x2304
+  - **FC:** 2x2x512
+
+## Fully Convolutional
+- **Sub-window:**
+  - **CNN:** 3x3x256
+  - **3x3 Convolution:** 512 filters
+  - **Output:** 1x1x512
+
+- **Image:**
+  - **CNN:** 4x4x256
+  - **3x3 Convolution:** 512 filters
+  - **Output:** 2x2x512
+
+[^5]: Sermanet et al, OverFeat: Integrated Recognition, Localization and Detection using Convolutional Networks, ICLR 2014
+
+Vineeth N B (IIT-H) - §7.1 CNNs for Detection
+
+---
+
+[^5]: Sermanet et al, OverFeat: Integrated Recognition, Localization and Detection using Convolutional Networks, ICLR 2014
+```
+
+# DL4CV_Week07_Part01.pdf - Page 34
+
+```markdown
+# Contemporary Object Detection Methods
+
+## Region Proposal-based:
+
+- Two-stage detection framework
+- In the first stage, potential object regions are proposed (through methods such as Selective Search or Region Proposal Network, which we will see soon)
+- In the second stage, a classifier processes the candidate regions
+- More robust in performance but slower
+
+## Dense Sampling-based:
+
+- One-stage detection framework
+- Integrates region proposals and detection by acting on a dense sampling of possible locations
+- Simple and fast but performance not as good as Region Proposal-based methods
+
+![NPTel Logo](https://example.com/logo.png)
+
+_Image source: Example URL_
+
+_Vineeth N B (IIT-H)_
+
+_§7.1 CNNs for Detection_
+
+_Page 25/44_
+```
+
+# DL4CV_Week07_Part01.pdf - Page 35
+
+```markdown
+# R-CNN (Region-based Convolutional Neural Networks)
+
+- **Region proposal-based object detection network**
+- **Uses Selective Search as region proposal algorithm to identify potential objects**
+- **Each region is then evaluated by a CNN that performs classification and bounding box regression**
+
+![Diagram of R-CNN Process](image-url)
+
+**Stage 1**
+- **Image** undergoes **Selective Search** to generate **Region Proposals**
+
+**Stage 2**
+- **Region Proposals** are fed into a **CNN**
+  - **Classification**
+  - **Bounding-box regression**
+
+**References**
+- Girshick et al., Rich feature hierarchies for accurate object detection and semantic segmentation, CVPR 2014
+- Vimeeth N B (IIT-H)
+- 8.7.1 CNNs for Detection
+
+---
+
+**Slide Number**: 26 / 44
+```
+
+# DL4CV_Week07_Part01.pdf - Page 36
+
+```markdown
+# R-CNN: Selective Search
+
+- Uses graph-based image segmentation or mean shift method for initial set of region hypotheses
+
+- Hypotheses are hierarchically grouped/combined based on region similarity measures like color, texture, size and region-filling
+
+![Image Description](image_url)
+
+Vineeth N B (IIIT-H) &#87;1 CNNs for Detection 27 / 44
+```
+
+The extracted content from the provided scientific slide has been formatted in markdown. Special attention has been given to ensure the accuracy of scientific terminology, symbols, and formatting elements.
+
+# DL4CV_Week07_Part01.pdf - Page 37
+
+```markdown
+# R-CNN: Selective Search
+
+## Initial proposals
+![Initial proposals](image1.png)
+
+## Regions coalesce as we travel up the hierarchy
+
+![Regions coalesce as we travel up the hierarchy](image2.png)
+
+Vineeth N B (IIT-H)
+### §7.1 CNNs for Detection
+
+---
+
+Page 28 / 44
+
+```
+
+# DL4CV_Week07_Part01.pdf - Page 38
+
+```markdown
+# R-CNN
+
+## Region Proposal Stage
+### Input
+- Image
+
+### Process
+1. **Selective Search**:
+   - Generates **2000 Region Proposals**.
+
+## Object Detection Stage
+### Process
+1. **Affine Image Warping**:
+   - Warps the region proposals to a fixed size of **227x227**.
+2. **CNN**:
+   - Pre-trained using ImageNet.
+   - AlexNet/VGG networks are used.
+   - Produces **Feature Maps**.
+
+### Output of CNN
+- **Feature Maps**: Extracted features from the CNN layers.
+
+### Further Processing
+1. **FC Network**:
+   - Processes the feature maps.
+   - Outputs **Class-specific SVMs** for classification.
+   - Performs **Bounding-box regression** for localization.
+
+### Final Output
+- **Softmax**: Used for classification.
+
+---
+
+**Vineeth N B (IIT-H)**
+
+**8.7.1 CNNs for Detection**
+
+---
+
+*Page 29 / 44*
+```
+
+# DL4CV_Week07_Part01.pdf - Page 39
+
+```markdown
+# R-CNN
+
+## Region Proposal Stage
+
+- **Input Image**: Image containing objects for detection.
+- **Selective Search**: Generates 2000 region proposals from the input image.
+
+## Object Detection Stage
+
+### Affine Image Warping
+- **Region Proposals**: 2000 region proposals generated from Selective Search.
+- **Warped Proposals**: Each region proposal is warped to a size of 227x227 pixels.
+
+### CNN (Convolutional Neural Network)
+- **Architecture**: AlexNet/VGG architectures are used.
+- **Pretrained on ImageNet**: The CNN is pretrained on the ImageNet dataset.
+
+### Feature Maps
+- **Extraction**: Feature maps are extracted from the warped images using the CNN.
+
+### FC Network (Fully Connected Network)
+- **Training Stage 1**: The network is finetuned to warped images using log-loss.
+- **Output**: Two outputs are generated from the FC network:
+  - **Class-specific SVMs**: For classification.
+  - **Bounding-box Regression**: For object localization.
+
+### Final Output
+- **Softmax**: Used for final classification.
+- **Bounding Box Regression**: Refines the region proposals to accurate bounding boxes around detected objects.
+
+![Diagram](image-url)
+
+---
+
+**Vineeth N B (IIT-H)** 
+
+**87.1 CNNs for Detection**
+
+**29 / 44**
+```
+
+# DL4CV_Week07_Part01.pdf - Page 40
+
+```markdown
+# R-CNN
+
+## Region Proposal Stage
+
+![Region Proposal Stage](image-url)
+
+1. **Selective Search**
+   - Generates **2000 Region Proposals**.
+
+## Object Detection Stage
+
+![Object Detection Stage](image-url)
+
+### Workflow
+
+1. **Affine Image Warping**
+   - Converts region proposals to **227x227 warped proposals**.
+
+2. **CNN (AlexNet/VGG)**
+   - Pre-trained on **ImageNet**.
+   - Produces **Feature Maps**.
+
+3. **FC Network**
+   - **Training Stage 2**: Trains linear SVMs for each class.
+   - **Class-specific SVMs**:
+     - Softmax layer for multi-class classification.
+     - Bounding-box regression for object localization.
+
+### Detailed Steps
+
+1. **Region Proposal Generation**
+   - **Selective Search** generates **2000 Region Proposals** from the image.
+
+2. **Affine Image Warping**
+   - Each region proposal is warped to **227x227** dimensions.
+
+3. **CNN Processing**
+   - The warped proposals are processed by a **Convolutional Neural Network (CNN)** pre-trained on **ImageNet**.
+   - The CNN generates **Feature Maps** from the proposals.
+
+4. **Feature Extraction and Classification**
+   - The **FC Network** (Fully Connected Network) processes these feature maps.
+   - In the **Training Stage 2**, linear SVMs are trained for each class to improve classification accuracy.
+   - **Class-specific SVMs** are used to classify the proposals into different object classes.
+   - **Softmax** layer handles multi-class classification probabilities.
+   - **Bounding-box Regression** refines the location of detected objects.
+
+### References
+
+- **Vineeth N B (IIT-H)**
+- **§7.1 CNNs for Detection**
+
+---
+
+**Slide Information**
+
+- **Slide Number**: 29 / 44
+```
+
+# DL4CV_Week07_Part01.pdf - Page 41
+
+```markdown
+# R-CNN
+
+## Region Proposal Stage
+
+### Steps:
+
+1. **Input Image:**
+   - **Image:** A grayscale image of a person.
+   
+2. **Selective Search:**
+   - Generates 2000 region proposals from the image.
+
+### Object Detection Stage
+
+1. **Affine Image Warping:**
+   - Each region proposal is warped to a fixed size (227x227).
+
+2. **CNN (AlexNet/VGG):**
+   - The warped proposals pass through a pre-trained CNN (e.g., AlexNet, VGG).
+   - Produces feature maps from the proposals.
+
+3. **FC Network:**
+   - The feature maps are processed through a fully connected network.
+
+4. **Output Layers:**
+   - **Softmax:**
+     - Produces class-specific SVM scores.
+   - **Bounding-box Regression:**
+     - Refines the coordinates of the bounding boxes proposed by selective search using L2-Loss.
+
+### Training Stage 3:
+   - Fine-tunes the bounding box coordinates proposed by selective search using L2-Loss.
+
+### References:
+- Vineeth N B (IIT-H)
+- §7.1. CNNs for Detection
+
+---
+
+**Note:** The image placeholders used above (`![]()`) should be replaced with the actual images if OCR can capture them directly.
+```
+
+# DL4CV_Week07_Part01.pdf - Page 42
+
+```markdown
+# R-CNN: Limitations
+
+![NPTEL Logo](image_url)
+
+Vineeth N B (IIT-H)
+
+## 8.7.1 CNNs for Detection
+
+### Slide Content
+
+**Page**: 30 / 44
+
+---
+
+**R-CNN: Limitations**
+
+- **Computationally Expensive**: The region proposal and classification steps are computationally intensive.
+- **Slow Training and Testing**: Due to the sequential process, the training and testing phases are slower compared to other methods.
+- **Dependency on External Detector**: R-CNN relies on an external detector (e.g., selectiveness) to generate region proposals.
+- **Limited by Initialization**: The performance can be significantly affected by the initial parameters and settings.
+- **Scalability Issues**: The method may not scale well for large datasets or real-time applications.
+
+---
+
+These limitations highlight the need for more efficient and scalable object detection methods, paving the way for the development of improved architectures like Fast R-CNN and Faster R-CNN.
+
+![Diagram Placeholder](diagram_url)
+
+---
+
+This presentation is part of the advanced course on CNNs for detection provided by NPTEL.
+```
+
+# DL4CV_Week07_Part01.pdf - Page 43
+
+```markdown
+# R-CNN: Limitations
+
+- **Multi-stage pipeline of training**
+- **Feature extraction of region proposals requires a lot of time and space; e.g. PASCAL VOC07 dataset with 5k images requires 2.5 GPU-days and several hundred GBs**
+- **Object detection takes 47s/image at test time**
+
+_Vineeth N B (IIIT-H)_
+
+§7.1 CNNs for Detection
+
+---
+
+---
+
+![NPTEL Logo](https://example.com/nptel-logo.png)
+
+```
+
+# DL4CV_Week07_Part01.pdf - Page 44
+
+```markdown
+# Fast R-CNN<sup>7</sup>
+
+- Instead of passing each region proposal through CNN, extract their features directly from feature maps
+- Use multi-task loss to integrate classification and bounding box regression training stages (no SVMs)
+
+![Diagram](image_url_placeholder)
+
+## Stage 1
+- **Selective Search**
+  - Input: Image
+
+## Stage 2
+- **CNN**
+  - Input: Region proposals from Selective Search
+  - Output: Feature Maps
+
+- **Classification**
+  - Input: Feature Maps
+  - Output: Classification Results
+
+- **Bounding-box Regression**
+  - Input: Feature Maps
+  - Output: Bounding-box Coordinates
+
+<sup>7</sup> Girshick, Fast R-CNN, ICCV 2015
+
+Vineeth N B (IIT-H)
+
+§7.1 CNNs for Detection
+
+31 / 44
+```
+
+# DL4CV_Week07_Part01.pdf - Page 45
+
+```markdown
+# Fast R-CNN: RoI Projection
+
+## Description
+
+The image depicts the process of Region of Interest (RoI) projection in the Fast R-CNN architecture.
+
+### Steps in RoI Projection
+
+1. **Initial Image Representation**:
+   - The initial image is represented by a grid of 14x14 pixels.
+   - A rectangular region of interest (RoI) is highlighted within this grid.
+
+2. **RoI Extents**:
+   - The RoI (region of interest) is projected onto a smaller grid.
+   - The 14x14 grid is reduced to a 12x12 grid with a stride of 1.
+
+3. **Stride and Maxpooling**:
+   - The stride of 1 ensures that each pixel is considered individually.
+   - Maxpooling is applied to reduce the 12x12 grid to a 6x6 grid, maintaining key features.
+
+4. **CNN Processing**:
+   - The extracted RoI is passed through a Convolutional Neural Network (CNN) to generate feature maps.
+   - The feature maps are further processed to highlight the detected region in the image.
+
+### Image Details
+
+```plaintext
+| 14x14 Grid         | 12x12 Grid (Stride=1) | 6x6 Grid (Maxpool 2x2) |
+|--------------------|------------------------|------------------------|
+| ![Initial Grid](url) | ![Reduced Grid](url) | ![Final Grid](url) |
+```
+
+### Annotations
+
+- **14x14 Grid**: Initial representation of the image with a highlighted RoI.
+- **12x12 Grid (Stride=1)**: Intermediate representation after applying stride.
+- **6x6 Grid (Maxpool 2x2)**: Final representation after maxpooling.
+
+### Image Example
+
+![CNN Detection Example](url)
+
+### References
+
+- Vineeth N B (IITH)
+- 87.1 CNNs for Detection
+- Slide Number: 32 / 44
+```
+
+**Note**: Replace the placeholders `![Initial Grid](url)`, `![Reduced Grid](url)`, `![Final Grid](url)`, and `![CNN Detection Example](url)` with the correct URLs or file paths of the images if available.
+
+# DL4CV_Week07_Part01.pdf - Page 46
+
+```markdown
+# Fast R-CNN: RoI Pooling
+
+- RoIs can be of different scales
+- We need a scale-invariant way of pooling
+- Given an RoI of size $h \times w$, **RoI Pooling** converts this region into $H \times W$ grid of subwindows with each subwindow of size approximately equal to $h/H, w/W$
+
+![RoI Pooling Diagram](https://via.placeholder.com/150)
+
+- **8x8 RoI**
+
+  ```
+  +---+---+---+---+
+  |   |   |   |   |
+  +---+---+---+---+
+  |   |   |   |   |
+  +---+---+---+---+
+  |   |   |   |   |
+  +---+---+---+---+
+  |   |   |   |   |
+  +---+---+---+---+
+  ```
+
+- **Target 2x2**
+
+  ```
+  +---+---+
+  |   |   |
+  +---+---+
+  |   |   |
+  +---+---+
+  ```
+
+- **4x6 RoI**
+
+  ```
+  +---+---+---+---+---+---+
+  |   |   |   |   |   |   |
+  +---+---+---+---+---+---+
+  |   |   |   |   |   |   |
+  +---+---+---+---+---+---+
+  ```
+
+_Vineeth N B. (IIIT-H)_
+
+_§7.1 CNNs for Detection_
+
+_33 / 44_
+```
+
+# DL4CV_Week07_Part01.pdf - Page 47
+
+```markdown
+# Fast R-CNN: Multi-Task Loss
+
+- Let $u$ be true class, and $v$ be ground truth bounding box regression targets
+- Let $p$ be predicted class probability, and $t^u = (t_x^u, t_y^u, t_w^u, t_h^u)$ be bounding box regression offsets for true class
+- Loss for each ROI is then given by:
+
+  $$L(p, u, t^u, v) = L_{cls}(p, u) + \lambda[u \geq 1]L_{loc}(t^u, v)$$
+
+  where:
+
+  $$L_{cls}(p, u) = -\log p_u$$
+
+  and Iverson bracket indicator function $[u \geq 1] = \begin{cases}
+    1 & \text{if } u \geq 1 \\
+    0 & \text{otherwise}
+  \end{cases}$$
+
+![Graph]()
+
+_Vineeth N B (IIIT-H)_
+_§7.1 CNNs for Detection_
+_34 / 44_
+```
+
+# DL4CV_Week07_Part01.pdf - Page 48
+
+```markdown
+# Fast R-CNN: Multi-task Loss
+
+- **Localization loss** $L_{loc}$ given by:
+
+  \[
+  L_{loc}(\mathbf{t}^{u}, \mathbf{v}) = \sum_{i \in \{x, y, w, h\}} \text{smooth}_{L1}(\mathbf{t}^{u}_i - \mathbf{v}_i)
+  \]
+
+  where \[
+  \text{smooth}_{L1}(x) = \begin{cases}
+  0.5 x^2 & \text{if } |x| < 1 \\
+  |x| - 0.5 & \text{otherwise}
+  \end{cases}
+  \]
+
+- **Smooth L1 loss is less sensitive to outliers than L2 loss. Why?**
+
+![Image placeholder](image-url)
+
+*Vineeth N B. (IIIT-H)*
+
+*§7.1 CNNs for Detection*
+
+*35 / 44*
+```
+
+# DL4CV_Week07_Part01.pdf - Page 49
+
+```markdown
+# Fast R-CNN: Multi-task Loss
+
+- **Localization loss** $L_{loc}$ **given by:**
+
+  \[
+  L_{loc}(\mathbf{t}^u, \mathbf{v}) = \sum_{i \in \{x, y, w, h\}} \text{smooth}_{L1}(\mathbf{t}^u_i - \mathbf{v}_i)
+  \]
+
+  where \[
+  \text{smooth}_{L1}(x) =
+  \begin{cases}
+    0.5x^2 & \text{if } |x| < 1 \\
+    |x| - 0.5 & \text{otherwise}
+  \end{cases}
+  \]
+
+- **Smooth L1 loss** is less sensitive to outliers than L2 loss. **Why?** **Homework!**
+
+![Image Placeholder](image_url)
+
+*Vineeth N B (IIT-H) §7.1 CNNs for Detection 35 / 44*
+```
+
+# DL4CV_Week07_Part01.pdf - Page 50
+
+```markdown
+# Fast R-CNN: Summary
+
+## Region Proposal Stage
+
+- **Selective Search**: 
+  - Input image.
+  - Generate region proposals.
+
+- **CNN (AlexNet/VDCC)**:
+  - Pretrained on ImageNet.
+  - Maps region proposals onto feature maps.
+
+### Object Detection Stage
+
+- **RoI Pooling**: 
+  - Maps region proposals (RoIs) onto feature maps.
+  - Scale invariant features of RoI.
+
+- **FC Network**:
+  - Processes pooled features.
+
+  **FC Layer Outputs**:
+  - **FC Layer 1**: Passes to classification (Softmax) and bounding-box regression.
+  - **FC Layer 2**: Passes to classification (Softmax) and bounding-box regression.
+
+### Loss Functions
+
+- **Cross-entropy Loss**: Used in classification (Softmax).
+- **Smoothened L1-Loss**: Used in bounding-box regression.
+
+### Flow Diagram
+
+![Flow Diagram](diagram.png)
+
+*Vineeth N B (IIIT-H)*
+*87.1 CNNs for Detection*
+
+*Page 36 of 44*
+```
+
+# DL4CV_Week07_Part01.pdf - Page 51
+
+```markdown
+# R-CNN vs Fast R-CNN: Time Comparison
+
+## Training time (Hours)
+
+- **R-CNN**: 84 hours
+- **SPP-Net**: 25.5 hours
+- **Fast R-CNN**: 8.75 hours
+
+![Training Time Graph](https://via.placeholder.com/150)
+
+## Test time (seconds)
+
+### Including Region Proposals
+- **R-CNN**: 49 seconds
+- **SPP-Net**: 4.3 seconds
+- **Fast R-CNN**: 2.3 seconds
+
+### Excluding Region Proposals
+- **R-CNN**: 47 seconds
+- **SPP-Net**: 2.3 seconds
+- **Fast R-CNN**: 0.32 seconds
+
+![Test Time Graph](https://via.placeholder.com/150)
+
+**Region proposals are slowing down Fast R-CNN**
+
+*Credit: Fei-Fei Li, Justin Johnson, Serena Yeung, cs231n, Stanford Univ*
+
+*Vineeth N B (IIIT-H)*
+
+*§7.1 CNNs for Detection*
+
+*37 / 44*
+```
+
+# DL4CV_Week07_Part01.pdf - Page 52
+
+```markdown
+# Faster R-CNN<sup>8</sup>
+
+- **Replaces Selective Search with a Region Proposal Network (RPN)** to reduce time to compute regions
+
+![NPTEL](placeholder-image-url)
+
+<sup>8</sup> Ren et al., Faster R-CNN: Towards Real-Time Object Detection with Region Proposal Networks, NeurIPS 2015
+
+Vineeth N B (IIT-H)
+
+<sup>8</sup> I CNNs for Detection
+
+38 / 44
+```
+
+# DL4CV_Week07_Part01.pdf - Page 53
+
+```markdown
+# Faster R-CNN<sup>8</sup>
+
+- Replaces Selective Search with a **Region Proposal Network (RPN)** to reduce time to compute regions
+- Uses **anchor boxes** of different scales and aspect ratios to identify multiple objects present in the same window
+
+![RPN Network Diagram](image_url)
+
+```plaintext
+Image -> CNN -> Feature Maps -> RoI Pooling -> RPN Network -> RoIs
+                                -> Classification
+                                -> Bounding-Box Regression
+```
+
+<sup>8</sup>Ren et al, Faster R-CNN: Towards Real-Time Object Detection with Region Proposal Networks, NeurIPS 2015
+
+**Vineeth N B (IIT-H)**
+
+**8.7.1 CNNs for Detection**
+
+---
+
+*Page 38 / 44*
+```
+
+In this markdown format:
+- The section titles and headings are properly marked using `#` for the main heading.
+- The bullet points are formatted using `-`.
+- The superscript notation is added using `<sup>`.
+- The image placeholder is included for the diagram.
+- The inline code is used for the mathematical symbols and equations.
+- The source citation and page number are accurately formatted using markdown syntax.
+
+# DL4CV_Week07_Part01.pdf - Page 54
+
+```markdown
+# Faster R-CNN: Anchor Boxes
+
+![Faster R-CNN: Anchor Boxes](image-url)
+
+**Credit:** Fei-Fei Li, Justin Johnson, Serena Yeung, *cs231n*, Stanford Univ
+
+Vineeth N B (IIIT-H) §7.1 CNNs for Detection
+
+## Faster R-CNN: Anchor Boxes
+
+### Input Image (e.g. 3 x 640 x 480)
+
+![Input Image](image-url)
+
+### Image Features (e.g. 512 x 20 x 15)
+
+![Image Features](image-url)
+
+### CNN
+
+![CNN](image-url)
+
+### Conv
+
+![Conv](image-url)
+
+### Anchor is an object?
+
+- **K x 20 x 15**
+
+### Box transforms
+
+- **4K x 20 x 15**
+```
+
+**Note:**
+- Replace `"image-url"` with the actual URLs or paths to the images if you have them.
+- Ensure that the titles, headings, and other formatted text are preserved as per the original slide layout.
+- Verify the accuracy of the OCR-processed text, especially scientific terms and symbols, for correctness.
+
+# DL4CV_Week07_Part01.pdf - Page 55
+
+```markdown
+# Faster R-CNN: Region Proposal Network
+
+## Image Processing Workflow
+
+### Image Input
+- **Image**: The input image is fed into the Convolutional Neural Network (CNN) for initial processing.
+
+### Feature Extraction
+- **CNN**: The Convolutional Neural Network processes the image and extracts feature maps.
+  - **Feature Maps**: These maps represent the important features identified by the CNN.
+
+### Region Proposal Network (RPN)
+- **Feature Maps**: These feature maps are then passed into a Fully Convolutional layer within the RPN.
+  - **Fully Convolutional Layer**: This layer is used to generate region proposals.
+
+### Output of RPN
+- **Objectness Classification**: The first output is the objectness classification which determines whether an object exists within a proposed region.
+- **Bounding Box Regression**: The second output is the bounding box regression which refines the coordinates of the proposed regions, typically generating 9 anchor boxes.
+
+## Slide Information
+- **Author**: Vineeth N B (IIT-H)
+- **Section**: §7.1 CNNs for Detection
+- **Slide Number**: 40 / 44
+
+```
+
+# DL4CV_Week07_Part01.pdf - Page 56
+
+```markdown
+# Faster R-CNN: 4-step Training
+
+## Step 1: Train the RPN Network
+
+### Components
+- **Pretrained on ImageNet**
+  - **CNN AlexNet/VGG**
+    - Inputs data into:
+      - **Feature Maps**
+- **Region Proposal Network (RPN)**
+  - Takes **Feature Maps** as input
+  - Outputs:
+    - **Objects**
+    - **Bounding-box coordinates**
+
+## Input Data Processing
+
+### Initial Processing
+- **Input Image**
+  - **CNN AlexNet/VGG**
+    - Pretrained on ImageNet
+    - Produces **Feature Maps**
+
+### RoI Pooling and Feature Extraction
+- **Feature Maps** undergo RoI Pooling
+  - Extracts **Scale Invariant Features**
+- **FC Network**
+  - Receives processed features
+  - Produces output for further processing
+
+### Final Processing Steps
+- **FC Layers**
+  - Two paths:
+    - **Classification (Softmax)**
+    - **Bounding-box regression**
+
+## Diagram Elements
+- **CNN Network** (AlexNet/VGG)
+- **RoI Pooling** for feature extraction
+- **FC Network** for final processing
+- **Classification and Regression** layers
+
+## Additional Information
+- **Presenter**: Vineeth N B (IIIT-H)
+- **Course**: 87.1 CNNs for Detection
+- **Slide Number**: 41 / 44
+
+```
+
+# DL4CV_Week07_Part01.pdf - Page 57
+
+```markdown
+# Faster R-CNN: 4-step Training
+
+## Training Steps
+
+1. **Pretrained CNN**:
+   - **Network**: AlexNet/VGG
+   - **Dataset**: Pretrained on ImageNet
+   - **Output**: Feature Maps
+
+2. **Region Proposal Network (RPN)**:
+   - **Input**: Feature Maps
+   - **Output**:
+     - Objects
+     - Bounding-box coordinates
+
+3. **Object Detection (R-CNN)**:
+   - **Input**: Image with regions identified by RPN
+   - **Process**:
+     - **CNN**:
+       - **Network**: AlexNet/VGG
+       - **Dataset**: Pretrained on ImageNet
+       - **Output**: Feature Maps
+     - **Pooling**: RoI Pooling
+     - **Feature Extraction**: Extract scale-invariant features
+     - **FC Network**: Fully Connected Network
+     - **Output**: Classification (Softmax) and Bounding-box regression
+
+4. **Final Output**:
+   - Combination of classification and bounding-box coordinates
+
+---
+
+**-presented by:**
+Vineeth N B (IIIT-H)
+**Course**: 87.1 CNNs for Detection
+**Slide Number**: 41 / 44
+```
+
+This markdown format maintains the structure and scientific integrity of the original content with appropriate formatting for headings, images, and process descriptions.
+
+# DL4CV_Week07_Part01.pdf - Page 58
+
+```markdown
+# Faster R-CNN: 4-step Training
+
+## Step 3: Train RPN while freezing CNN parameters
+
+### Diagram Overview
+
+1. **Input Image**: The process begins with an input image.
+2. **CNN (AlexNet/VGG)**: The image is processed by a Convolutional Neural Network (CNN), specifically AlexNet or VGG, pretrained on ImageNet.
+3. **Feature Maps**: The CNN generates feature maps of the input image.
+4. **RoI Pooling**: Region of Interest (RoI) pooling is applied to the feature maps to extract relevant regions.
+5. **Scale Invariant Features**: The RoI pooled features are passed through a Fully Connected (FC) network to obtain scale invariant features.
+6. **Region Proposal Network (RPN)**:
+    - **Objects and Bounding-box Coordinates**: The RPN generates region proposals, identifying objects and their bounding-box coordinates.
+    - **Shared Detector Parameters**: The detector parameters are shared, and the RPN is trained while the CNN parameters are frozen.
+7. **FC Layers**:
+    - **Classification (Softmax)**: The features are passed through fully connected layers, followed by a classification layer that uses the softmax function to classify the objects.
+    - **Bounding-box Regression**: The features are also passed through another set of fully connected layers to perform bounding-box regression, refining the object coordinates.
+8. **Output**: The final output is a combination of the classification and bounding-box regression results.
+
+---
+
+Vineeth N B (IIIT-H)
+
+### Slide Reference:
+- Section: 8.7.1 CNNs for Detection
+- Slide Number: 41 / 44
+```
+
+# DL4CV_Week07_Part01.pdf - Page 59
+
+```markdown
+# Faster R-CNN: 4-step Training
+
+## Step-by-Step Training Process
+
+### Input
+- **Input Image**: An image is input into the system for object detection.
+
+### CNN Feature Extraction
+- **CNN (AlexNet/VGG)**: The image is passed through a Convolutional Neural Network (CNN) pre-trained on ImageNet. This step generates feature maps.
+
+### Region Proposal Network (RPN)
+- **RPN**: The feature maps are fed into the Region Proposal Network. This network generates region proposals, including:
+  - **Objects**: Identifies potential objects within the image.
+  - **Bounding-box coordinates**: Provides the coordinates for the bounding boxes around the detected objects.
+
+### RoI Pooling Layer
+- **RoI Pooling Layer**: After region proposals, the RoI pooling layer processes the feature maps to extract the scale-invariant features.
+
+### Fully Connected Network (FCN)
+- **FC Network**: The extracted features are fed into a fully connected (FC) network. This network has two main branches:
+  - **Classification**: This branch uses a **Softmax** layer to classify the detected objects.
+  - **Bounding-box regression**: This branch performs bounding-box regression to refine the locations of the detected objects.
+
+### Training Step
+- **Step 4**: Train the detector while freezing the CNN parameters.
+
+### Summary
+The Faster R-CNN architecture involves several key steps:
+1. Feature extraction using a pre-trained CNN.
+2. Region proposal using the RPN.
+3. RoI pooling.
+4. Feature extraction and processing through an FC network for classification and bounding-box regression.
+
+This multi-step process ensures accurate and efficient object detection in images.
+
+**Source**: Vineeth N B (IIIT-H) §7.1 CNNs for Detection
+```
+
+# DL4CV_Week07_Part01.pdf - Page 60
+
+```markdown
+# Faster R-CNN Performance
+
+## R-CNN Test-Time Speed
+
+![R-CNN Test-Time Speed Graph](image_url_placeholder)
+
+- **R-CNN**: 49
+- **SPP-Net**: 4.3
+- **Fast R-CNN**: 2.3
+- **Faster R-CNN**: 0.2
+
+*Credit: Fei-Fei Li, Justin Johnson, Serena Yeung, cs231n, Stanford Univ*
+
+Vineeth N B (IIT-H)
+
+*87.1 CNNs for Detection*
+
+---
+
+*Slide 42 / 44*
+```
+
+# DL4CV_Week07_Part01.pdf - Page 61
+
+```markdown
+# Homework
+
+## Readings
+
+- [x] Viola-Jones Object Detection Framework
+- [ ] Object Detection for Dummies (Parts 1-3)
+- [ ] Understanding Overfeat
+
+## Video Series
+
+- [ ] Evolution of Object Detection Models (Chapter 5-8)
+
+## Exercise
+
+Smooth L1 loss is less sensitive to outliers than L2 loss. Why?
+```
+
+---
+
+**Note**: The formatting and content of the markdown are based on the provided OCR text and standard markdown syntax. The section titles, bullet points, and exercise question are formatted accordingly. If specific details or sections were not fully captured by the OCR, those sections are marked with placeholders. Special care is taken to ensure scientific terms and notations are properly represented.
+
+# DL4CV_Week07_Part01.pdf - Page 62
+
+```markdown
+# References
+
+- **Paul Viola and Michael Jones.** "Rapid object detection using a boosted cascade of simple features". In: *Proceedings of the 2001 IEEE computer society conference on computer vision and pattern recognition. CVPR 2001*. Vol. 1. IEEE. 2001, pp. 1-1.
+
+- **Navneet Dalal and Bill Triggs.** "Histograms of oriented gradients for human detection". In: *2005 IEEE computer society conference on computer vision and pattern recognition (CVPR'05)*. Vol. 1. IEEE. 2005, pp. 886-893.
+
+- **Ross Girshick et al.** "Rich feature hierarchies for accurate object detection and semantic segmentation". In: *Proceedings of the IEEE conference on computer vision and pattern recognition*. 2014, pp. 580-587.
+
+- **Ross Girshick.** "Fast r-cnn". In: *Proceedings of the IEEE international conference on computer vision*. 2015, pp. 1440-1448.
+
+- **Shaoqing Ren et al.** "Faster r-cnn: Towards real-time object detection with region proposal networks". In: *Advances in neural information processing systems*. 2015, pp. 91-99.
+```
+

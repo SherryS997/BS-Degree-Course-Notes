@@ -1,0 +1,2720 @@
+# DL4CV_Week12.3 Beyond CLIP Part 1.pdf - Page 1
+
+```markdown
+# Deep Learning for Computer Vision
+
+## Beyond CLIP (Part 1)
+
+**Vineeth N Balasubramanian**
+
+Department of Computer Science and Engineering
+Indian Institute of Technology, Hyderabad
+
+![IIT Hyderabad Logo](https://www.iith.ac.in/sites/default/files/logo.png)
+
+*Vineeth N B (IIT-H)*
+
+*14.3 Beyond CLIP (Part 1)*
+
+---
+
+1 / 25
+```
+
+# DL4CV_Week12.3 Beyond CLIP Part 1.pdf - Page 2
+
+```markdown
+# Review
+
+## Question
+
+?
+```
+```
+
+# DL4CV_Week12.3 Beyond CLIP Part 1.pdf - Page 3
+
+```markdown
+# Where does CLIP fail?
+
+- **Model perspective**
+  - Encoder models are not straightforward to transfer to text generation tasks.
+
+- **Data perspective**
+  - Noisy web scraped text is suboptimal for vision-language learning.
+
+![Image](image1_url)
+*T<sub>w</sub>: "a week spent at our rented beach house in Sandbridge"*
+*T<sub>s</sub>: "an outdoor walkway on a grass covered hill"*
+
+![Image](image2_url)
+*T<sub>w</sub>: "that's what a sign says over the door"*
+
+*T<sub>s</sub>: "the car is driving past a small old building"*
+
+![Image](image3_url)
+*T<sub>w</sub>: "hand held through the glass in my front bedroom window"*
+
+*T<sub>s</sub>: "a moon against the night sky with a black background"*
+
+![Image](image4_url)
+*T<sub>w</sub>: "stunning sky over walney island, lake district, july 2009"*
+
+*T<sub>s</sub>: "an outdoor walkway on a grass covered hill"*
+
+![Image](image5_url)
+*T<sub>w</sub>: "living in my little white house"*
+
+*T<sub>s</sub>: "a tiny white flower with a bee in it"*
+
+![Image](image6_url)
+*T<sub>w</sub>: "the pink rock from below"*
+
+*T<sub>s</sub>: "some colorful trees that are on a hill in the mountains"*
+
+*T<sub>w</sub>: Text scraped from web.*
+*T<sub>s</sub>: Synthetic text.*
+
+*Vineeth N B (IIT-H)*
+*§14.3 Beyond CLIP (Part 1)*
+*3 / 25*
+```
+
+# DL4CV_Week12.3 Beyond CLIP Part 1.pdf - Page 4
+
+```markdown
+# Where does CLIP fail?
+
+- **Model perspective**
+  - Encoder models are not straightforward to transfer to text generation tasks.
+  
+- **Data perspective**
+  - Noisy web scraped text is suboptimal for vision-language learning.
+
+![Image 1](image1.png)
+*T<sub>w</sub>: "a week spent at our rented beach house in Sandbridge"*
+*T<sub>s</sub>: "an outdoor walkway on a grass covered hill"*
+
+![Image 2](image2.png)
+*T<sub>w</sub>: "that's what a sign says over the door"*
+*T<sub>s</sub>: "the car is driving past a small old building"*
+
+![Image 3](image3.png)
+*T<sub>w</sub>: "hand held through the glass in my front bedroom window"*
+*T<sub>s</sub>: "a moon against the night sky with a black background"*
+
+![Image 4](image4.png)
+*T<sub>w</sub>: "stunning sky over walney island, lake district, july 2009"*
+*T<sub>s</sub>: "an outdoor walkway on a grass covered hill"*
+
+![Image 5](image5.png)
+*T<sub>w</sub>: "living in my little white house"*
+*T<sub>s</sub>: "a tiny white flower with a bee in it"*
+
+![Image 6](image6.png)
+*T<sub>w</sub>: "the pink rock from below"*
+*T<sub>s</sub>: "some colorful trees that are on a hill in the mountains"*
+
+*T<sub>w</sub>: Text scraped from web. T<sub>s</sub>: Synthetic text.*
+
+_Vineeth N B. (IIIT-H)_
+
+§14.3 Beyond CLIP (Part 1)
+
+*Page 3 / 25*
+```
+
+# DL4CV_Week12.3 Beyond CLIP Part 1.pdf - Page 5
+
+```markdown
+# BLIP [1]: Solving the model problem
+
+![BLIP Diagram](https://example.com/blip_diagram.png)
+
+## Components
+
+### ViT Image Encoder
+- Input: Nx images
+- Processes the images to extract image representations
+
+### BERT Text Encoder
+- Input: Texts
+- Processes the texts to extract textual representations
+
+### ITC (Image-Text Cross Attention)
+- Combines outputs from the ViT Image Encoder and BERT Text Encoder
+- Ensures cross-attention between image and text features
+
+### Image Grounded Text Encoder
+- Input: Encoded text `[Encode] +`
+- Output: Encoded text with image grounding
+- Label: "a little girl holding a kitten next to a blue fence"
+
+### Image Grounded Text Decoder
+- Input: Encoded image and text `[Decode] +`
+- Output: Decoded information with combined image and text data
+
+### ITM (Image-Text Matching)
+- Combines outputs from the Image Grounded Text Encoder and Image Grounded Text Decoder
+- Ensures matching and alignment between image and text features
+
+### LM (Language Model)
+- Input: Decoded information `[Decode] +`
+- Output: Final language-based output
+
+## Section Information
+
+**Vineeth N B (IIIT-H)**
+
+**§14.3 Beyond CLIP (Part 1)**
+
+**Slide Number**: 4 / 25
+```
+
+# DL4CV_Week12.3 Beyond CLIP Part 1.pdf - Page 6
+
+```markdown
+# BLIP [^1]: Solving the model problem
+
+## ViT Image Encoder
+
+![ViT Image Encoder](image_url)
+
+- The ViT (Vision Transformer) Image Encoder is a key component in the BLIP model.
+- This encoder processes image data and extracts meaningful features.
+- The processed images are shown below, demonstrating the input to the encoder.
+
+![Processed Images](image_url)
+
+---
+
+**References**:
+- Vineeth N B (IIIT-H)
+- §14.3 Beyond CLIP (Part 1)
+```
+
+*[^1]: Note that the reference `[^1]` is included as per the original content, but additional context or the actual reference details are not provided in the image.
+
+# DL4CV_Week12.3 Beyond CLIP Part 1.pdf - Page 7
+
+```markdown
+# BLIP [1]: Solving the model problem
+
+![Diagram](image_url)
+
+- **Feed Forward**
+- **Self Attention**
+
+``` 
+Vineeth N B (IIIT-H) §14.3 Beyond CLIP (Part 1) 4 / 25
+```
+
+---
+
+## Diagram
+
+![Diagram](image_url)
+
+- **Feed Forward**
+- **Self Attention**
+
+``` 
+Vineeth N B (IIIT-H) §14.3 Beyond CLIP (Part 1) 4 / 25
+```
+
+---
+
+### Notes
+- Ensure that all scientific terms, symbols, and equations are accurately captured.
+- Use the correct markdown syntax for headings, subheadings, and paragraphs.
+- Maintain the structure and formatting of the original content.
+- Use inline code or block code for special notations or formulas.
+- Add placeholders for images that cannot be directly extracted through OCR.
+```
+
+# DL4CV_Week12.3 Beyond CLIP Part 1.pdf - Page 8
+
+```markdown
+# BLIP [1]: Solving the model problem
+
+![BLIP Diagram](https://via.placeholder.com/600x400)
+
+- **Vineeth N B (IIIT-H)**
+- **§14.3 Beyond CLIP (Part 1)**
+- Page 4 / 25
+
+## Overview of the BLIP Model
+
+### Components
+
+1. **BERT Text Encoder**
+   - Accepts textual input such as "a little girl holding a kitten next to a blue fence".
+   - Produces encoded representations of the text.
+  
+2. **Image Processing Module**
+   - Combines `Nx` feed forward and self-attention mechanisms.
+   - Processes and extracts features from images.
+  
+3. **Cross-Modal Interaction**
+   - **ITC** (Intermediate Transformation Component)
+     - Facilitates the interaction between textual and visual data.
+  
+### Workflow
+
+1. **Text Input**
+   - Text is tokenized and encoded using the BERT Text Encoder.
+   - The `[CLS]` token is used to represent the start of the text.
+  
+2. **Image Input**
+   - Image data is processed through multiple layers of feed forward and self-attention mechanisms.
+   - Produces image embeddings.
+  
+3. **Integration**
+   - The encoded text and image embeddings are combined in the ITC to form a unified representation.
+   - This combined representation is used to solve the model problem.
+
+### Example
+
+- **Text Input:** "a little girl holding a kitten next to a blue fence"
+- **Image Input:** Composite image showing a girl, a kitten, and a blue fence.
+  
+### Purpose
+
+- The BLIP model aims to integrate both textual and visual information to solve complex model problems effectively.
+```
+
+# DL4CV_Week12.3 Beyond CLIP Part 1.pdf - Page 9
+
+ it to markdown format.
+
+```markdown
+# BLIP [1]: Solving the model problem
+
+## Diagram and Processes
+
+### Left Side
+1. Images of individuals are input.
+2. The process contains:
+   - **Feed Forward**
+   - **Self Attention**
+   The process is repeated `Nx` times.
+
+### ITC
+- Interacts with the output from the previous process.
+
+### Right Side
+1. Contains:
+   - **Feed Forward**
+   - **Cross Attention**
+   - **Bi Self-Att**
+   The process is also repeated `Nx` times.
+2. Combines with `[CLS]` token and outputs the description:
+   - "a little girl holding a kitten next to a blue fence"
+
+## References
+- Vineeth N B (IIIT-H)
+- §14.3 Beyond CLIP (Part 1)
+```
+
+Ensure the markdown format is correct and all sections are appropriately represented.
+
+# DL4CV_Week12.3 Beyond CLIP Part 1.pdf - Page 10
+
+```markdown
+# BLIP [1]: Solving the model problem
+
+**Image-Text Contrastive loss (L<sub>ITC</sub>) aims to align the feature space of the visual transformer and the text transformer by encouraging positive image-text pairs to have similar representations in contrast to the negative pairs.**
+
+![Diagram of Image-Text Contrastive Loss](image_url)
+
+- **Visual Transformer:**
+  - **Self Attention:** Self-attention mechanism applied iteratively N times.
+  - **Feed Forward:** Feedforward layers applied iteratively N times.
+
+- **Text Transformer:**
+  - **Cross Attention:** Cross-attention mechanism integrating image features.
+  - **Bi Self-Attention:** Bidirectional self-attention mechanism applied iteratively N times.
+  - **Feed Forward:** Feedforward layers applied iteratively N times.
+
+**Input:**
+- Image: [![Image](image_url)](image_url)
+- Text: "a little girl holding a kitten next to a blue fence"
+
+---
+
+*Source: Vineeth N B (IIIT-H)*
+
+*Section: §14.3 Beyond CLIP (Part 1)*
+
+*Slide Number: 5 / 25*
+```
+
+# DL4CV_Week12.3 Beyond CLIP Part 1.pdf - Page 11
+
+```markdown
+# BLIP [1]: Solving the model problem
+
+## Components and Architecture
+
+### Image Grounded Text Encoder
+
+- **ITM (Image-Text Matching)**: This component is responsible for matching the encoded image and text features.
+- **ITC (Image-Text Cross-Attention)**: Facilitates the interaction between image and text data.
+
+### Encoder Structure
+
+1. **Input Image**: An image is fed into the system.
+2. **Feed Forward and Self-Attention Mechanism**:
+    - **Feed Forward**: Processes the image data.
+    - **Self Attention**: Used in multiple layers (Nx representations).
+
+### Cross-Attention Mechanism
+
+1. **Cross Attention**: Integrates information from both image and text.
+2. **Bi Self-Attention (Bidirectional Self-Attention)**: Enhances the contextual understanding of the data.
+
+### Combined Representations
+
+- **Concatenation**: Image and text features are combined using a `[CLS]` token.
+- **Text Input**: A descriptive text input (e.g., "a little girl holding a kitten next to a blue fence") is encoded and combined with image features.
+
+## Image Grounded Text Encoder Diagram
+
+```markdown
+   
+    ![Diagram](https://via.placeholder.com/150)
+
+   
+    - **ITM**: Image-Text Matching Block
+    - **ITG**: Image-Text Cross-Attention Block
+    - **Text Input**: Descriptive text input
+    - **Image Input**: Image input
+    - **CLS**: Classification token
+    - **Bi Self-Att**: Bidirectional Self-Attention
+    - **Feed Forward**: Image processing block
+    - **Self Attention**: Self-attention mechanism
+    - **Nx**: Multiple layers of processing
+    - **Encode**: Encoding the text input
+
+   
+    Vineeth N B (IIIT-H)
+    §14.3 Beyond CLIP (Part 1)
+    Page 6 / 25
+```
+
+### Notes
+- This markdown format captures the detailed architecture and process flow as described in the image.
+- Special attention is given to maintaining the integrity of the scientific terms and the structure of the model.
+```
+
+# DL4CV_Week12.3 Beyond CLIP Part 1.pdf - Page 12
+
+```markdown
+# BLIP [1]: Solving the model problem
+
+![BLIP Diagram](image_url)
+
+## Diagram Layout
+
+1. **Input Processing Section**
+    - **Images and Text Input**: Images and corresponding text descriptions are processed at this initial stage.
+    - **Feed Forward and Self Attention**: Multiple layers of feed-forward and self-attention mechanisms are applied to the input.
+    - **Combining Mechanisms**: The outputs from the feed-forward and self-attention modules are combined using addition operations.
+
+2. **ITC Module**
+    - **Feed Forward and Cross Attention**: These mechanisms are applied to process combined inputs from the initial stages.
+    - **Bi Self-Attention**: Bidirectional self-attention is used to refine the input representations further.
+    - **Output Combination**: The outputs are combined using addition operations.
+
+3. **Text Processing Section**
+    - **Text Encoding**: The text description is encoded using a specific method labeled as "Encode + [CLS]".
+    - **Cross Attention Mechanism**: This encoded text data is further processed using cross-attention mechanisms.
+    - **Feed Forward and Bi Self-Attention**: Similar to the image processing, these mechanisms refine the text representations.
+
+4. **ITM Module**
+    - **Final Output**: The final processing stage combines the results from the previous sections, resulting in the output of the BLIP model.
+
+## References
+- **Author**: Vineeth N B (IIIT-H)
+- **Section**: §14.3 Beyond CLIP (Part 1)
+- **Page Number**: 6 / 25
+```
+
+Note: Replace `image_url` with the actual URL of the image if it is available online, or provide an appropriate placeholder if the image cannot be included directly.
+
+This markdown format ensures that the extracted content maintains the structure and clarity of the original scientific diagram, including all necessary elements and references.
+
+# DL4CV_Week12.3 Beyond CLIP Part 1.pdf - Page 13
+
+```markdown
+# BLIP [1]: Solving the model problem
+
+Image-Text Matching loss (L_ITM) aims to learn image-text multimodal representation that captures the fine-grained alignment between vision and language.
+
+![Diagram](image_url)
+
+- **ITC**:
+  - **Input**: Images (e.g., images of a person holding a kitten)
+  - **Process**:
+    - **Feed Forward**: Applies feed-forward layers to the input.
+    - **Self Attention**: Applies self-attention mechanism.
+    - **Bi Self-Att**:
+      - Performs bidirectional self-attention.
+    - **Cross Attention**:
+      - Combines feed-forward, self-attention, and cross-attention mechanisms.
+  - **Output**: Features for the next stage.
+
+- **ITM**:
+  - **Input**: Text descriptions (e.g., "a little girl holding a kitten next to a blue fence")
+  - **Process**:
+    - **Feed Forward**: Applies feed-forward layers to the input.
+    - **Cross Attention**: Combines feed-forward and cross-attention mechanisms.
+    - **Bi Self-Att**:
+      - Performs bidirectional self-attention.
+  - **Output**: Features for matching with the image representation.
+
+**Note**: The exact image and text inputs may vary. The provided example showcases one specific input scenario.
+
+Vineeth N B (IIIT-H)
+§14.3 Beyond CLIP (Part 1)
+```
+
+**Note**: Replace `image_url` with the actual URL or filename of the image if available. Ensure all mathematical notations, special symbols, and multilingual content are correctly represented and formatted.
+
+# DL4CV_Week12.3 Beyond CLIP Part 1.pdf - Page 14
+
+ is critical for maintaining the accuracy of scientific notation and terminology.
+
+```markdown
+# BLIP [1]: Solving the model problem
+
+## Main Components
+
+1. **ITC (Image-Text Co-encoder)**
+    - **Feed Forward**: Processes basic linear transformations.
+    - **Self Attention**: Computes attention weights to focus on different parts of the input.
+    - **Cross Attention**: Facilitates interactions between image and text features.
+
+2. **ITM (Image-Text Matcher)**
+    - **Feed Forward**
+    - **Cross Attention**
+    - **Bi Self-Attention**: Bidirectional self-attention to capture dependencies in both directions.
+
+3. **LM (Language Model)**
+    - **Image Grounded Text Decoder**: Generates text descriptions based on the combined image-text features.
+
+## Visual Representation
+
+![Model Architecture](image-url)
+
+### Image-Text Co-encoder (ITC)
+
+```markdown
+## Main Components
+
+1. **ITC (Image-Text Co-encoder)**
+    - **Feed Forward**: Processes basic linear transformations.
+    - **Self Attention**: Computes attention weights to focus on different parts of the input.
+    - **Cross Attention**: Facilitates interactions between image and text features.
+
+2. **ITM (Image-Text Matcher)**
+    - **Feed Forward**
+    - **Cross Attention**
+    - **Bi Self-Attention**: Bidirectional self-attention to capture dependencies in both directions.
+
+3. **LM (Language Model)**
+    - **Image Grounded Text Decoder**: Generates text descriptions based on the combined image-text features.
+
+## Visual Representation
+
+![Model Architecture](image-url)
+
+### Image-Text Co-encoder (ITC)
+
+## Image-Text Matcher (ITM)
+
+## Language Model (LM) and Image Grounded Text Decoder
+
+## References
+
+- Vineeth N B (IIIT-H)
+- §14.3 Beyond CLIP (Part 1)
+```
+
+# DL4CV_Week12.3 Beyond CLIP Part 1.pdf - Page 15
+
+```markdown
+# BLIP [1]: Solving the model problem
+
+![BLIP Diagram](image-placeholder.png)
+
+Vineeth N B (IIIT-H)
+§14.3 Beyond CLIP (Part 1)
+8 / 25
+
+## Model Architecture
+
+1. **Input Image and Tokenization**:
+   - Input image is processed and tokenized.
+
+2. **Initial Token Classification (ITC)**:
+   - **Feed Forward**: Initial processing of tokens.
+   - **Self Attention**: Attention mechanism applied to the initial tokens.
+
+3. **Intermediate Token Model (ITM)**:
+   - **Feed Forward**: Further processing of tokens.
+   - **Cross Attention**: Attention mechanism involving the encoded text.
+   - **Bi Self-Attention**: Bidirectional self-attention mechanism.
+
+4. **Language Model (LM)**:
+   - **Feed Forward**: Additional processing.
+   - **Cross Attention**: Attention mechanism with the encoded text.
+   - **Causal Self-Attention**: Self-attention mechanism tailored for causal contexts.
+
+### Detailed Components
+
+#### Input Image and Tokenization
+
+- The image is processed and transformed into a sequence of tokens.
+
+#### Initial Token Classification (ITC)
+
+- **Feed Forward**: Apply linear transformations to the input tokens.
+- **Self Attention**: Apply self-attention to the tokens to capture dependencies within the token sequence.
+
+#### Intermediate Token Model (ITM)
+
+- **Feed Forward**: Further process the tokens through linear transformations.
+- **Cross Attention**: Use the encoded text to enhance the tokens' representation.
+- **Bi Self-Attention**: Apply bidirectional self-attention to capture dependencies in both directions.
+
+#### Language Model (LM)
+
+- **Feed Forward**: Apply linear transformations again.
+- **Cross Attention**: Use the encoded text to refine the token representations.
+- **Causal Self-Attention**: Apply self-attention in a causal manner, maintaining the temporal order.
+
+### Text and Decoding
+
+- The input text "a little girl holding a kitten next to a blue fence" is processed.
+- `["CLS"] +` denotes the classification token.
+- `["Encode"] +` indicates the encoding process.
+- `["Decode"] +` indicates the decoding process.
+
+![Text Processing](image-placeholder.png)
+
+### Summary
+
+This model architecture facilitates solving the model problem by integrating image and text processing with attention mechanisms to enhance the representation and understanding of the input data.
+```
+
+# DL4CV_Week12.3 Beyond CLIP Part 1.pdf - Page 16
+
+```markdown
+# BLIP [1]: Solving the model problem
+
+Language Modelling loss (L<sub>LM</sub>) aims to generate textual descriptions given an image. It optimizes a cross entropy loss which trains the model to maximize the likelihood of the text in an autoregressive manner
+
+![Diagram](image_url)
+
+- **ITC**:
+  - Feed Forward
+  - Self Attention
+  - Nx iterations
+
+- **ITM**:
+  - Feed Forward
+  - Cross Attention
+  - Bi Self-Attn
+  - Nx iterations
+
+- **LM**:
+  - Feed Forward
+  - Cross Attention
+  - Causal Self-Attn
+  - Nx iterations
+
+The image processing and text generation pipeline includes:
+
+1. **Input Image**:
+   - Example: An image of a person holding a kitten next to a blue fence.
+
+2. **ITC (Image-Text Contrastive)**:
+   - Utilizes feed forward and self-attention mechanisms to encode visual features.
+   - Uses multiple layers (Nx).
+
+3. **ITM (Image-Text Matching)**:
+   - Combines feed forward and cross-attention mechanisms.
+   - Uses bidirectional self-attention to enhance feature extraction.
+   - Processes through multiple layers (Nx).
+
+4. **LM (Language Modeling)**:
+   - Employs feed forward and cross-attention mechanisms.
+   - Utilizes causal self-attention for sequence generation.
+   - Processes through multiple layers (Nx).
+
+**Vineeth N B (IIIT-H)**
+**§14.3 Beyond CLIP (Part 1)**
+```
+
+# DL4CV_Week12.3 Beyond CLIP Part 1.pdf - Page 17
+
+```markdown
+# BLIP [1]: Solving the noisy text problem - CapFilt
+
+![Image of a dessert with chocolate cake, cream frosting, and chocolate sprinkles](image_url)
+
+## Vineeth N B (IIIT-H)
+
+**§14.3 Beyond CLIP (Part 1)**
+
+### Diagram Explanation
+
+- **Input Image**: A chocolate cake with cream frosting and chocolate sprinkles on top.
+
+- **Global Representation**: 
+  - **Icon**: Globe
+  - **Processing**: Transforming the global context into text.
+
+  - **Output 1** (Noisy Text):
+    ```
+    "blue sky bakery in sunset park"
+    ```
+    ![Red Cross Icon](red_cross_icon_url)
+    - **Filt Process**: Filtering this noisy text.
+
+  - **Output 2** (Accurate Text):
+    ```
+    "chocolate cake with cream frosting and chocolate sprinkles on top"
+    ```
+    ![Green Checkmark Icon](green_checkmark_icon_url)
+    - **Cap Process**: Capturing the accurate text.
+    - **Filt Process**: Filtering the accurate text.
+
+---
+
+10 / 25
+```
+
+# DL4CV_Week12.3 Beyond CLIP Part 1.pdf - Page 18
+
+```markdown
+# BLIP [1]: Combining both
+
+## Model Pretraining
+
+![Model Pretraining Diagram](image-url)
+
+### To model
+- Multimodal Mixture of Encoder-Decoder
+
+### To data
+- \( D = \{ (I_{w}, T_{w}) \} + \{ (I_{h}, T_{h}) \} \)
+
+### Pre-train
+- Use a combination of web and human-annotated data
+
+### Data Types
+
+- **Web Images (I_w)**: Images sourced from the web
+- **Human-annotated Images (I_h)**: Images annotated by humans
+- **Web Texts (T_w)**: Text data from the web
+- **Filtered Web Texts (T_w)**: Filtered text data from the web
+- **Synthetic Texts (T_s)**: Texts generated synthetically
+- **Filtered Synthetic Texts (T_s)**: Filtered synthetic text data
+- **Human-annotated Texts (T_h)**: Texts annotated by humans
+
+---
+
+Vineeth N B (IIT-H)
+
+§14.3 Beyond CLIP (Part 1)
+
+Page 11 / 25
+```
+
+# DL4CV_Week12.3 Beyond CLIP Part 1.pdf - Page 19
+
+```markdown
+# BLIP [1]: Combining both
+
+## Model Pretraining
+
+```markdown
+D = {(I_w, T_w)} + {(I_h, T_h)}
+
+### Pre-train
+
+- **Multimodal Mixture of Encoder-Decoder**
+
+---
+
+## Dataset Bootstrapping
+
+### Filter (Image-grounded Text Encoder)
+
+- **ITC&ITM finetune** on {(I_h, T_h)}
+
+### To model
+
+- To model
+- To data
+
+### To data
+
+- **I_w**: web images
+- **I_h**: human-annotated images
+- **T_w**: web texts
+- **T_w**: filtered web texts
+- **T_z**: synthetic texts
+- **T_z**: filtered synthetic texts
+- **T_h**: human-annotated texts
+```
+
+_Vineeth N B (IIIT-H)_
+
+## Beyond CLIP (Part 1)
+
+```markdown
+# BLIP [1]: Combining both
+
+## Model Pretraining
+
+```markdown
+D = {(I_w, T_w)} + {(I_h, T_h)}
+
+### Pre-train
+
+- **Multimodal Mixture of Encoder-Decoder**
+
+---
+
+## Dataset Bootstrapping
+
+### Filter (Image-grounded Text Encoder)
+
+- **ITC&ITM finetune** on {(I_h, T_h)}
+
+### To model
+
+- To model
+- To data
+
+### To data
+
+- **I_w**: web images
+- **I_h**: human-annotated images
+- **T_w**: web texts
+- **T_w**: filtered web texts
+- **T_z**: synthetic texts
+- **T_z**: filtered synthetic texts
+- **T_h**: human-annotated texts
+```
+
+_Vineeth N B (IIIT-H)_
+```
+
+# DL4CV_Week12.3 Beyond CLIP Part 1.pdf - Page 20
+
+:
+
+```markdown
+# BLIP [1]: Combining both
+
+## Model Pretraining
+
+```plaintext
+D = {(I_w, T_w)} + {(I_h, T_h)}
+```
+
+- **Pre-train**
+  - Multimodal Mixture of Encoder-Decoder
+
+### Dataset Bootstrapping
+
+- **Filter (Image-grounded Text Encoder)**
+  - **Filtering**
+    - To model
+    - To data
+  - **ITC&ITM finetune**
+  - **{(I_w, T_w)}**
+  - **{(I_h, T_h)}**
+
+## Categories
+
+- **I_w:** web images
+- **I_h:** human-annotated images
+- **T_w:** web texts
+- **T_h:** filtered web texts
+- **T_x:** synthetic texts
+- **T_y:** filtered synthetic texts
+- **T_z:** human-annotated texts
+
+*Vineeth N B (IIIT-H)*
+
+*§14.3 Beyond CLIP (Part 1)*
+
+*11 / 25*
+```
+
+# DL4CV_Week12.3 Beyond CLIP Part 1.pdf - Page 21
+
+```markdown
+# BLIP [1]: Combining both
+
+## Model Pretraining
+
+### Components
+
+- **Dataset D**:
+  \[
+  D = \{ (I_w, T_w) \} + \{ (I_h, T_h) \}
+  \]
+
+- **Multimodal Mixture of Encoder-Decoder**:
+  - **Pre-train** the model using the combined dataset.
+
+## Dataset Bootstrapping
+
+### Components
+
+- **Filter (Image-grounded Text Encoder)**:
+  - **Input**: \(\{ (I_h, T_h) \}\)
+  - **Function**: Finetune using ITC&ITM tasks.
+  - **Output**: Filtered data \(\{ (I_w, T_w) \}\)
+
+  **Output**: To model and data.
+
+### Captioner (Image-grounded Text Decoder)
+- **Input**: \(\{ (I_h, T_h) \}\)
+- **Function**: Finetune using language modeling (LM) tasks.
+- **Output**: Captions
+
+### Data Types
+
+- **Images**:
+  - \(I_w\): Web images
+  - \(I_h\): Human-annotated images
+
+- **Texts**:
+  - \(T_w\): Web texts
+  - \(T_w'\): Filtered web texts
+  - \(T_s\): Synthetic texts
+  - \(T_s'\): Filtered synthetic texts
+  - \(T_h\): Human-annotated texts
+
+---
+
+*Vineeth N B (IIIT-H)*
+
+*§14.3 Beyond CLIP (Part 1)*
+
+*11 / 25*
+```
+
+# DL4CV_Week12.3 Beyond CLIP Part 1.pdf - Page 22
+
+```markdown
+# BLIP [1]: Combining both
+
+## Model Pretraining
+
+```markdown
+D = {(I_w, T_w)} + {(I_h, T_h)}
+
+- Pre-train
+
+Multimodal Mixture of Encoder-Decoder
+```
+
+## Dataset Bootstrapping
+
+```markdown
+Filter (Image-grounded Text Encoder)
+
+- ITC&ITM finetune
+- { (I_h, T_h) }
+
+Filtering
+
+{ (I_w, T_w) } + { (I_w, T_s) }
+```
+
+```markdown
+(I_w, T_w)
+
+(I_h, T_h)
+
+T_w: web images
+T_h: human-annotated images
+
+T_w: web texts
+T_s: filtered web texts
+T_s: synthetic texts
+T_s: filtered synthetic texts
+T_h: human-annotated texts
+```
+
+```markdown
+(I_w, T_s)
+
+(I_w)
+
+(I_w, T_w)
+```
+
+```markdown
+Captioner (Image-grounded Text Decoder)
+
+- Captioning
+
+(I_w, T_w)
+```
+
+```markdown
+- To model
+- To data
+```
+
+## Vineeth N B (IIIT-H) §14.3 Beyond CLIP (Part 1) 11 / 25
+```
+
+# DL4CV_Week12.3 Beyond CLIP Part 1.pdf - Page 23
+
+```markdown
+# BLIP [1]: Combining both
+
+## Model Pretraining
+
+```markdown
+D = {(I_w, T_w)} + {(I_h, T_h)}
+
+- Pre-train
+
+Multimodal Mixture of Encoder-Decoder
+```
+
+## Dataset Bootstrapping
+
+### Filtering
+
+```markdown
+Filter (Image-grounded Text Encoder)
+
+- ITC&ITM finetune
+```
+
+```markdown
+{(I_w, T_w)}
+```
+
+```markdown
+{(I_h, T_h)}
+```
+
+### Captioning
+
+```markdown
+Captioner (Image-grounded Text Decoder)
+
+- LM finetune
+```
+
+```markdown
+{I_w}
+```
+
+```markdown
+{(I_w, T_w)}
+```
+
+```markdown
+{(I_h, T_h)}
+```
+
+### To model
+
+```markdown
+D = {(I_w, T_w)} + {(I_w, T_s)}
+
+- To data
+
+I_w: web images
+I_h: human-annotated images
+
+T_w: web texts
+T_s: synthetic texts
+T_s: filtered synthetic texts
+T_h: human-annotated texts
+```
+
+### Multimodal Mixture of Encoder-Decoder
+
+```markdown
+D = {(I_w, T_w)} + {(I_w, T_s)} + {(I_h, T_h)}
+```
+
+---
+
+Vineeth N B (IIIT-H)
+
+§14.3 Beyond CLIP (Part 1)
+
+11 / 25
+```
+
+# DL4CV_Week12.3 Beyond CLIP Part 1.pdf - Page 24
+
+```markdown
+# BLIP [1]: Combining both
+
+## Model Pretraining
+
+### Multimodal Mixture of Encoder-Decoder
+
+#### Pre-train
+- **Dataset (D)**:
+  \[
+  D = \{(I_w, T_w)\} + \{(I_h, T_h)\}
+  \]
+
+### Filtering (Image-grounded Text Encoder)
+
+- **ITC&ITM Finetune**:
+  \[
+  \{(I_h, T_h)\}
+  \]
+
+### Captioning (Image-grounded Text Decoder)
+
+- **LM Finetune**:
+  \[
+  \{I_w\}
+  \]
+
+### Dataset Bootstrapping
+
+#### Filtering
+
+- **Input**:
+  - \(\{(I_w, T_w)\}\)
+  - \(\{(I_h, T_h)\}\)
+
+- **Filtered Dataset**:
+  \[
+  D = \{(I_w, T_w)\} + \{(I_w, T_s)\}
+  \]
+
+#### Captioning
+- **Input**:
+  - \(\{I_w\}\)
+
+- **Output**:
+  \[
+  \{(I_w, T_s)\}
+  \]
+
+- **Final Dataset (D)**:
+  \[
+  D = \{(I_w, T_w)\} + \{(I_w, T_s)\} + \{(I_h, T_h)\}
+  \]
+
+#### Data Types
+
+- **Images**:
+  - \(I_w\): web images
+  - \(I_h\): human-annotated images
+
+- **Texts**:
+  - \(T_w\): web texts
+  - \(T_h\): human-annotated texts
+  - \(T_s\): synthetic texts
+  - \(T_r\): filtered synthetic texts
+
+### To Model
+
+- **Filtered Dataset**:
+  \[
+  \{(I_w, T_w)\} + \{(I_w, T_s)\}
+  \]
+
+### To Data
+
+- **Final Dataset**:
+  \[
+  D = \{(I_w, T_w)\} + \{(I_w, T_s)\} + \{(I_h, T_h)\}
+  \]
+
+---
+
+Vineeth N B (IIIT-H)
+
+§14.3 Beyond CLIP (Part 1)
+
+11 / 25
+```
+
+This markdown format maintains the structure and accuracy of the scientific content provided in the image.
+
+# DL4CV_Week12.3 Beyond CLIP Part 1.pdf - Page 25
+
+: 
+
+```markdown
+# BLIP [1]: Combining both
+
+## Model Pretraining
+
+### Dataset
+\[ D = \{(I_w, T_w)\} + \{(I_h, T_h)\} \]
+
+### Pre-train
+- Multimodal Mixture of Encoder-Decoder
+
+## Downstream Tasks
+- ITC&ITM finetune
+- Captioner (Image-grounded Text Decoder)
+
+## Dataset Bootstrapping
+
+### Filtering
+- Filter (Image-grounded Text Encoder)
+    - Input: \(\{(I_w, T_w)\}\)
+    - Output: \(\{(I_w, T_w)\} + \{(I_w, T_s)\}\)
+
+### Captioning
+- Captioner (Image-grounded Text Decoder)
+    - Input: \(\{I_w\}\)
+    - Output: \(\{(I_w, T_s)\}\)
+
+### Combined Dataset
+\[ D = \{(I_w, T_w)\} + \{(I_w, T_s)\} + \{(I_h, T_h)\} \]
+
+### Data Types
+- \(I_w\): web images
+- \(I_h\): human-annotated images
+- \(T_w\): web texts
+- \(T_s\): synthetic texts
+- \(T_c\): filtered synthetic texts
+- \(T_h\): human-annotated texts
+
+![Diagram](image-url)
+
+_Reference_: Vineeth N B (IIIT-H) §14.3 Beyond CLIP (Part 1) 11 / 25
+```
+
+This markdown format captures the structure, content, and formatting of the provided scientific slide while ensuring clarity and readability.
+
+# DL4CV_Week12.3 Beyond CLIP Part 1.pdf - Page 26
+
+```markdown
+# BLIP [1]: Qualitative examples
+
+![Image 1](image1.png)
+- **T_w**: "from bridge near my house"
+- **T_s**: "a flock of birds flying over a lake at sunset"
+
+![Image 2](image2.png)
+- **T_w**: "in front of a house door in Reichenfels, Austria"
+- **T_s**: "a potted plant sitting on top of a pile of rocks"
+
+![Image 3](image3.png)
+- **T_w**: "the current castle was built in 1180, replacing a 9th century wooden castle"
+- **T_s**: "a large building with a lot of windows on it"
+
+_Vineeth N B. (IIT-H)_
+
+_§14.3 Beyond CLIP (Part 1)_
+
+_12 / 25_
+```
+
+# DL4CV_Week12.3 Beyond CLIP Part 1.pdf - Page 27
+
+
+```markdown
+
+# BLIP 2 [2]: Contributions
+
+- **Employing Frozen Models**
+  - Previous approaches have typically relied on either freezing the backbone for vision or language tasks, or training the entire model end-to-end. However, this poses significant computational costs.
+  - BLIP 2, for the first time, employs frozen backbones for both vision and language tasks.
+
+- **Addressing Modality Gap**
+  - Utilizing frozen pretrained models may introduce a modality gap.
+  - BLIP 2 tackles this challenge through a dedicated pipeline.
+
+*Vineeth N B (IIIT-H)*
+
+*§14.3 Beyond CLIP (Part 1)*
+
+*13 / 25*
+```
+
+# DL4CV_Week12.3 Beyond CLIP Part 1.pdf - Page 28
+
+```markdown
+# BLIP 2 [2]: Contributions
+
+- **Employing Frozen Models**
+  - Previous approaches have typically relied on either freezing the backbone for vision or language tasks, or training the entire model end-to-end. However, this poses significant computational costs.
+  - BLIP 2, for the first time, employs frozen backbones for both vision and language tasks.
+
+- **Addressing Modality Gap**
+  - Utilizing frozen pretrained models may introduce a modality gap.
+  - BLIP 2 tackles this challenge through a dedicated pipeline.
+
+*Vineeth N B (IIIT-H)*
+
+§14.3 Beyond CLIP (Part 1)
+
+13 / 25
+```
+
+# DL4CV_Week12.3 Beyond CLIP Part 1.pdf - Page 29
+
+```markdown
+
+# BLIP 2 [2]: Overview
+
+```{width="50%" height="50%"}![BLIP 2 Overview](image-url)
+
+## Vision-and-Language Representation Learning
+
+- Detailed content about Vision-and-Language Representation Learning goes here.
+- Include any relevant mathematical formulas, equations, or special symbols using LaTeX notation. For example:
+  \[
+  f(x) = \int_{a}^{b} g(t) \, dt
+  \]
+
+## Vision-to-Language Generative Learning
+
+- Detailed content about Vision-to-Language Generative Learning goes here.
+- Include any relevant mathematical formulas, equations, or special symbols using LaTeX notation. For example:
+  \[
+  h(x) = \sum_{i=1}^{n} a_i x_i
+  \]
+
+---
+
+*Vineeth N B (IIIT-H)*
+
+*§14.3 Beyond CLIP (Part 1)*
+
+*Page 14 / 25*
+```
+
+**Note:** Replace `image-url` with the actual URL of the image if available. LaTeX notation is used for mathematical formulas and equations, which should be adjusted based on the actual content if provided.
+
+# DL4CV_Week12.3 Beyond CLIP Part 1.pdf - Page 30
+
+```markdown
+# BLIP 2 [2]: Overview
+
+## Vision-and-Language Representation Learning
+
+![Image Encoder](image_url)
+
+### Bootstrapping Pre-trained Image Models
+
+## Vision-to-Language Generative Learning
+
+![Large Language Model (LLM)](image_url)
+
+### Bootstrapping Pre-trained Large Language Models (LLMs)
+
+_Vineeth N B (IIIT-H)_
+
+§14.3 Beyond CLIP (Part 1)
+
+---
+
+_14 / 25_
+```
+
+# DL4CV_Week12.3 Beyond CLIP Part 1.pdf - Page 31
+
+```markdown
+# BLIP 2 [2]: Overview
+
+## Vision-and-Language Representation Learning
+
+![Image Encoder](https://via.placeholder.com/150)
+
+- **Image Encoder**: This component processes visual data.
+- **Q-Former**: Acts as a querying transformer.
+- **Text**: Input text data.
+- **Queries**: Used in conjunction with the Q-Former.
+- **Bootstrapping Pre-trained Image Models**: This approach leverages pre-trained models to enhance image encoding.
+
+## Vision-to-Language Generative Learning
+
+![Large Language Model (LLM)](https://via.placeholder.com/150)
+
+- **Large Language Model (LLM)**: Utilizes large language models to generate text.
+- **Bootstrapping Pre-trained Large Language Models (LLMs)**: This method uses pre-trained LLMs to improve text generation.
+
+*Vineeth N B (IIIT-H)*
+
+*§14.3 Beyond CLIP (Part 1)*
+
+*Page 14 / 25*
+```
+
+# DL4CV_Week12.3 Beyond CLIP Part 1.pdf - Page 32
+
+```markdown
+# BLIP 2 [2]: Overview
+
+## Vision-and-Language Representation Learning
+
+![Image Encoder](image1.png)
+- **Image Encoder**: Processes images to generate visual representations.
+
+![Q-Former](image2.png)
+- **Q-Former (Querying Transformer)**: Connects image representations with text queries.
+- **Text Queries**: Input text that guides the querying process.
+
+![Bootstrapping Pre-trained Image Models](image3.png)
+- **Bootstrapping Pre-trained Image Models**: Utilizes pre-trained image models for enhanced learning.
+
+## Vision-to-Language Generative Learning
+
+![Large Language Model (LLM)](image4.png)
+- **Large Language Model (LLM)**: Facilitates generative learning from vision to language.
+
+### Example Output
+
+![Sunset Image](image5.png)
+- **Prompt**: "Write a romantic message that goes along with this photo."
+
+- **Generated Text**:
+  ```
+  Love is like a sunset; it’s hard to see it coming but when it does it’s so beautiful.
+  ```
+
+![Bootstrapping Pre-trained Large Language Models (LLMs)](image6.png)
+- **Bootstrapping Pre-trained Large Language Models (LLMs)**: Enhances generative learning by leveraging pre-trained LLMs.
+
+---
+
+*Vineeth N B (IIIT-H)*
+*§14.3 Beyond CLIP (Part 1)*
+*14 / 25*
+```
+
+# DL4CV_Week12.3 Beyond CLIP Part 1.pdf - Page 33
+
+```markdown
+# BLIP 2 [2]: Overview
+
+## Vision-and-Language Representation Learning
+
+### Bootstrapping Pre-trained Image Models
+
+- **Image Encoder**
+- **Q-Former Querying Transformer**
+
+  - **Text Queries**
+  - **Text Input**
+
+## Vision-to-Language Generative Learning
+
+### Bootstrapping Pre-trained Large Language Models (LLMs)
+
+- **Large Language Model (LLM)**
+- **Example Task**: Write a romantic message that goes along with this photo.
+
+  - **Original Prompt**: Love is like a sunset, it's hard to see it coming but when it does it's so beautiful.
+
+### Visual Example
+
+![Sunset](url-to-sunset-image)
+
+---
+
+*Vineeth N B (IIIT-H) §14.3 Beyond CLIP (Part 1)*
+
+---
+
+*Page 14 / 25*
+```
+
+# DL4CV_Week12.3 Beyond CLIP Part 1.pdf - Page 34
+
+
+
+```markdown
+# BLIP 2 [2]: Representation learning
+
+## Q-Former
+
+### Input Image
+![Input Image](image_url)
+
+```plaintext
+Vineeth N B (IIT-H)
+
+§14.3 Beyond CLIP (Part 1)
+
+15 / 25
+```
+
+```
+
+# DL4CV_Week12.3 Beyond CLIP Part 1.pdf - Page 35
+
+ is not required.
+
+---
+## BLIP 2 [2]: Representation learning
+
+![Q-Former](image_url)
+
+**Input Image**
+
+![Input Image](input_image_url)
+
+- **Image Encoder**
+  - **Input:** Pixel data
+  - **Output:** Feature maps
+  - Utilizes convolutional layers to extract features.
+
+**Q-Former**
+
+- **Components:**
+  - **Learned Queries:** 
+    - Learned parameters that guide the attention mechanism.
+  - **Feed Forward:** 
+    - Applied after each attention layer to transform the output.
+  - **Cross Attention:** 
+    - Combines learned queries with the image encoder features.
+  - **Self Attention:** 
+    - Applied iteratively (N times) within the text and image blocks.
+
+**Text Input**
+
+![Input Text](input_text_url)
+
+- **Process:**
+  - **Input Text:** "a cat wearing sunglasses"
+  - **Self Attention:** Iteratively applied (N times) within the text block.
+  - **Feed Forward:** Applied after each attention layer to transform the output.
+
+**Iterative Attention Mechanism**
+
+- **自我关注机制:**
+  - **自我关注:** 嵌入图像和文本特征。
+  - **跨注意力:** 结合嵌入和特征。
+  - **前向传递:** 变换输出。
+
+**Vineeth N B (IIIT-H)**
+
+**§14.3 Beyond CLIP (Part 1)**
+
+---
+
+This markdown format ensures the structured presentation of the scientific content, maintaining clarity and readability.
+
+# DL4CV_Week12.3 Beyond CLIP Part 1.pdf - Page 36
+
+```markdown
+# BLIP 2 [2]: Representation learning
+
+![Input Image](image_url)
+
+**Input Image**
+
+![Q-Former](q_former_image_url)
+
+**Q-Former**
+
+- **Image Encoder**
+  - Processes the input image.
+
+- **Feed Forward**
+  - Applied for every other block.
+
+- **Cross Attention**
+  - Utilizes learned queries.
+
+- **Self Attention**
+  - Applied to the learned queries.
+
+**Attention Masking**
+
+- Bidirectional
+- Multimodal causal
+- Uni-modal
+
+- **Self Attention**
+  - Applied to the input text.
+
+**Input Text**
+- "a cat wearing sunglasses"
+
+**Feed Forward**
+  - Applied for every other block.
+
+**Attention Masking**
+
+- Bidirectional
+- Multimodal causal
+- Uni-modal
+
+- **Self Attention**
+  - Applied to the input text.
+
+**Input Text**
+- "a cat wearing sunglasses"
+
+**Feed Forward**
+
+Vineeth N B (IIT-H)
+
+§14.3 Beyond CLIP (Part 1)
+
+15 / 25
+```
+
+# DL4CV_Week12.3 Beyond CLIP Part 1.pdf - Page 37
+
+ accuracy is the priority.
+
+```markdown
+# BLIP 2 [2]: Representation learning
+
+## Q-Former
+
+### Input Image
+
+![Input Image](attachment:image.png)
+
+### Image Encoder
+
+### Image-Text Matching
+
+### Image-Grounded Text Generation
+
+### Feed Forward
+
+### Attention Masking
+
+- bidirectional
+- multimodal causal
+- uni-modal
+
+### Self Attention
+
+### Cross Attention
+
+### Learned Queries
+
+### Input Text
+
+**a cat wearing sunglasses**
+
+## Vineeth N B (IIIT-H)
+
+## §14.3 Beyond CLIP (Part 1)
+```
+
+# DL4CV_Week12.3 Beyond CLIP Part 1.pdf - Page 38
+
+```markdown
+# BLIP 2 [2]: Representation learning
+
+## Slide Overview
+This image outlines the process of representation learning using the BLIP 2 model. The key components include the input image, image encoder, and Q-Former. The Q-Former processes the encoded image and learned queries through various attention mechanisms and forward steps to generate meaningful representations.
+
+## Flow Diagram Explanation
+
+### Input Image
+- **Image Encoder**: The input image is first processed through an image encoder, which transforms the image into a feature-rich encoded representation.
+
+### Q-Former
+- **Learned Queries**: These are pre-learned representations that interact with the encoded image features.
+- **Attention Mechanisms**:
+  - **Self Attention**: Operates on learned queries to capture intra-query relationships.
+  - **Cross Attention**: Facilitates interaction between image features and learned queries.
+  - **Feed Forward**: Processes the attention outputs to refine the representations.
+
+### Attention Masking
+- Different types of masking are used to enhance the learning process:
+  - **Bidirectional**: Allows the model to consider both past and future context.
+  - **Multimodal Causal**: Ensures the model respects the temporal order of multimodal data.
+  - **Uni-Modal**: Focuses on single-modal data processing.
+
+### Tasks
+1. **Image-Text Matching**: Aligns visual features with textual descriptions.
+2. **Image-Text Contrastive Learning**: Enhances feature alignment through contrastive methods.
+3. **Image-Grounded Text Generation**: Generates text grounded in the visual context.
+
+### Block Repetition
+- The processes described are repeated `x N` times to refine the representations iteratively.
+
+## Figure Details
+![Figure](figure_placeholder)
+
+### Vineeth N B (IIT-H)
+- **Section**: §14.3 Beyond CLIP (Part 1)
+- **Slide Number**: 15/25
+```
+
+Ensure to replace `figure_placeholder` with the actual image content if available. This markdown format maintains the structure and content integrity, focusing on the scientific details and appropriate formatting.
+
+# DL4CV_Week12.3 Beyond CLIP Part 1.pdf - Page 39
+
+```markdown
+# BLIP 2 [2]: Representation learning - Masking strategies
+
+**Q**: query token positions; **T**: text token positions.
+
+- **masked**: ▢
+- **unmasked**: ◻
+
+---
+
+- **Bi-directional Self-Attention Mask**
+- **Multi-modal Causal Self-Attention Mask**
+- **Uni-modal Self-Attention Mask**
+
+---
+
+*Vineeth N B (IIIT-H)*
+
+*§14.3 Beyond CLIP (Part 1)*
+
+*16 / 25*
+```
+
+# DL4CV_Week12.3 Beyond CLIP Part 1.pdf - Page 40
+
+```markdown
+# BLIP 2 [2]: Representation learning - Masking strategies
+
+**Q:** query token positions; **T:** text token positions.
+
+- **Masked**: 🟩
+- **Unmasked**: ◻️
+
+```
+Q        T
+Q  ◻️   ◻️   ◻️   ◻️
+◻️   ◻️   ◻️   ◻️
+T  ◻️   ◻️   ◻️   ◻️
+```
+
+- **Bi-directional Self-Attention Mask**
+- **Multi-modal Causal Self-Attention Mask**
+- **Uni-modal Self-Attention Mask**
+
+![Image-Text Matching](image-text-matching.png)
+
+*Vineeth N B. (IIIT-H)*
+
+§14.3 Beyond CLIP (Part 1)
+
+Page 16 / 25
+```
+
+# DL4CV_Week12.3 Beyond CLIP Part 1.pdf - Page 41
+
+```markdown
+# BLIP 2 [2]: Representation learning - Masking strategies
+
+**Q:** query token positions; **T:** text token positions.
+
+- **Masked:** ![Masked](data:image/png;base64,...) 
+- **Unmasked:** ![Unmasked](data:image/png;base64,...)
+
+## Bi-directional Self-Attention Mask
+
+![Bi-directional Self-Attention Mask](data:image/png;base64,...)
+
+**Image-Text Matching**
+
+## Multi-modal Causal Self-Attention Mask
+
+![Multi-modal Causal Self-Attention Mask](data:image/png;base64,...)
+
+**Image-Grounded Text Generation**
+
+## Uni-modal Self-Attention Mask
+
+![Uni-modal Self-Attention Mask](data:image/png;base64,...)
+
+*Vineeth N B (IIIT-H)*
+
+*§14.3 Beyond CLIP (Part 1)*
+
+*16 / 25*
+```
+
+# DL4CV_Week12.3 Beyond CLIP Part 1.pdf - Page 42
+
+```markdown
+# BLIP 2 [2]: Representation learning - Masking strategies
+
+**Q:** query token positions; **T:** text token positions.
+
+- **Gray squares**: masked
+- **White squares**: unmasked
+
+## Bi-directional Self-Attention Mask
+- **Image-Text Matching**
+
+## Multi-modal Causal Self-Attention Mask
+- **Image-Grounded Text Generation**
+
+## Uni-modal Self-Attention Mask
+- **Image-Text Contrastive Learning**
+
+---
+
+_Vineeth N B (IIIT-H)_
+
+_§14.3 Beyond CLIP (Part 1)_
+
+---
+
+![Diagram](diagram.jpg)
+
+```
+
+# DL4CV_Week12.3 Beyond CLIP Part 1.pdf - Page 43
+
+```markdown
+# BLIP 2 [2]: Generative learning
+
+## Vision-and-Language Representation Learning
+
+### Bootstrapping Pre-trained Image Models
+
+- **Image Encoder**
+- **Q-Former Querying Transformer**
+  - **Text Queries**
+
+## Vision-to-Language Generative Learning
+
+### Bootstrapping Pre-trained Large Language Models (LLMs)
+
+- **Large Language Model (LLM)**
+
+### Example Task
+
+**Input Image:**
+![Sunset Image](image_url)
+
+**Task Description:**
+Write a romantic message that goes along with this photo.
+
+**Generated Message:**
+```
+Love is like a sunset, it’s hard to see it coming but when it does it’s so beautiful.
+```
+
+*Vineeth N B. (IIT-H) §14.3 Beyond CLIP (Part 1)*
+
+*Slide 17 / 25*
+```
+
+# DL4CV_Week12.3 Beyond CLIP Part 1.pdf - Page 44
+
+```markdown
+# BLIP 2 [2]: Generative learning
+
+![Image](https://via.placeholder.com/150)
+
+## Flowchart Overview
+
+### Components:
+
+1. **Input Image**:
+   - **Description**: The initial visual data fed into the system.
+   - **Visual**: ![Input Image](https://via.placeholder.com/150)
+
+2. **Image Encoder**:
+   - **Description**: Processes the input image to generate a meaningful representation.
+   - **Visual**: ![Image Encoder](https://via.placeholder.com/150)
+
+3. **Q-Former**:
+   - **Description**: Utilizes learned queries to understand and interpret the encoded image data.
+   - **Visual**: ![Q-Former](https://via.placeholder.com/150)
+
+4. **Learned Queries**:
+   - **Description**: A series of generated queries that enhance the understanding of the image.
+   - **Visual**:
+     - ![Learned Queries](https://via.placeholder.com/50)
+     - ![Learned Queries 2](https://via.placeholder.com/50)
+
+---
+
+*Vineeth N B (IIIT-H) §14.3 Beyond CLIP (Part 1)*
+
+---
+
+*Page 17 / 25*
+```
+
+# DL4CV_Week12.3 Beyond CLIP Part 1.pdf - Page 45
+
+
+
+```markdown
+# BLIP 2 [2]: Generative learning
+
+![Input Image](image-url)
+
+**Vineeth N B (IIT-H)**
+
+**§14.3 Beyond CLIP (Part 1)**
+
+---
+
+![Diagram of Process](diagram-url)
+
+## Steps:
+1. **Input Image**:
+   - An image is provided as the input.
+   - The image is divided into grid cells, each represented by a small image.
+
+2. **Image Encoder**:
+   - The input image is processed by an image encoder.
+   - The image encoder extracts relevant features from the image.
+
+3. **Q-Former**:
+   - The extracted features are then fed into a Q-Former.
+   - The Q-Former learns queries from the image features.
+   - These learned queries are represented by colored squares.
+
+4. **LLM Decoder**:
+   - The learned queries are used by the LLM Decoder.
+   - The LLM Decoder is bootstrapped from a decoder-based large language model (e.g., OPT).
+
+---
+
+**17 / 25**
+```
+
+# DL4CV_Week12.3 Beyond CLIP Part 1.pdf - Page 46
+
+ for the provided image.
+
+```markdown
+# BLIP 2 [2]: Generative learning
+
+![Image](https://via.placeholder.com/150)
+
+- **Input Image**: 
+  ![Input Image](https://via.placeholder.com/150)
+
+- **Image Encoder**
+
+- ![Image Encoder](https://via.placeholder.com/150)
+
+- **Q-Former**
+
+- **Learned Queries**
+  ![Learned Queries](https://via.placeholder.com/150)
+
+- **Fully Connected**
+
+- **LLM Decoder**
+
+- **Bootstrapping from a Decoder-based Large Language Model (e.g., OPT)**
+
+**Vineeth N B (IIT-H)**
+**§14.3 Beyond CLIP (Part 1)**
+```
+
+# DL4CV_Week12.3 Beyond CLIP Part 1.pdf - Page 47
+
+```markdown
+# BLIP 2 [2]: Generative learning
+
+![Input Image](input_image_url)
+
+**Vineeth N B (IIT-H)**
+
+## §14.3 Beyond CLIP (Part 1)
+
+## Diagram Explanation:
+
+### Components:
+- **Input Image**: The input to the system.
+- **Image Encoder**: Processes the input image to extract features.
+- **Q-Former**: Interacts with the learned queries.
+- **Fully Connected Layer**: Connects the learned queries to the LLM Decoder.
+- **LLM Decoder**: Bootstrapped from a Decoder-based Large Language Model (e.g., OPT) to generate output text.
+  
+## Process Flow:
+1. **Input Image**: The input image is processed by the Image Encoder.
+2. **Image Encoder**: Extracts features from the input image.
+3. **Q-Former**: Learns relevant queries from the image features.
+4. **Fully Connected Layer**: Connects the learned queries to the LLM Decoder.
+5. **LLM Decoder**: Generates the output text based on the learned queries.
+   
+### Output Text:
+- "a cat wearing sunglasses"
+
+### Note:
+The LLM Decoder is bootstrapped from a Decoder-based Large Language Model such as OPT.
+```
+
+# DL4CV_Week12.3 Beyond CLIP Part 1.pdf - Page 48
+
+```markdown
+# BLIP 2 [2]: Generative learning
+
+![Input Image](link-to-input-image)
+
+Vineeth N B (IIT-H) §14.3 Beyond CLIP (Part 1) 17 / 25
+
+## Workflow Overview
+
+1. **Input Image**: The process begins with an input image.
+   
+   ![Input Image](link-to-input-image)
+
+2. **Image Encoder**: The input image is processed by an image encoder.
+
+   ![Image Encoder](link-to-image-encoder)
+
+3. **Learned Queries**: The encoded image is then fed into a Q-Former, which generates learned queries.
+   
+   - Q-Former generates learned queries represented by various colored tokens.
+   - These queries are passed through a fully connected layer.
+
+   ![Learned Queries](link-to-learned-queries)
+
+4. **LLM Encoder-Decoder**: The learned queries are then encoded by an LLM (Large Language Model) encoder and decoded by an LLM decoder.
+   
+   - The LLM encoder and decoder are bootstrapped from an Encoder-Decoder-based Large Language Model (e.g., FlanT5).
+
+   ![LLM Encoder](link-to-llm-encoder)
+
+   ![LLM Decoder](link-to-llm-decoder)
+
+## Bootstrapping from an Encoder-Decoder-based Large Language Model (e.g., FlanT5)
+
+The process leverages bootstrapping from an existing Encoder-Decoder-based Large Language Model such as FlanT5.
+```
+
+Note: Placeholder links and some visual elements are marked with `link-to-` prefixes. Replace these with actual links or image sources as needed.
+
+# DL4CV_Week12.3 Beyond CLIP Part 1.pdf - Page 49
+
+```markdown
+# BLIP 2 [2]: Generative learning
+
+![Input Image](input_image.png)
+
+**Input Image**
+
+![Image Encoder](image_encoder.png)
+
+**Image Encoder**
+
+- **Q-Former**
+  ![](q-former.png)
+
+**Learned Queries**
+
+- **Fully Connected**
+
+**Prefix Text**
+
+- **LLM Encoder**
+  ![](llm_encoder.png)
+
+- **LLM Decoder**
+  ![](llm_decoder.png)
+
+**Bootstrapping from an Encoder-Decoder-based Large Language Model (e.g. FlanT5)**
+
+---
+
+_Section author: Vineeth N B (IIIT-H)_
+
+_Section title: §14.3 Beyond CLIP (Part 1)_
+
+_Page number: 17 / 25_
+```
+
+# DL4CV_Week12.3 Beyond CLIP Part 1.pdf - Page 50
+
+```markdown
+# BLIP 2 [2]: Generative learning
+
+![Input Image](./input_image.png)
+
+**Vineeth N B (IIT-H)**
+
+**§14.3 Beyond CLIP (Part 1)**
+
+17 / 25
+
+## Workflow Overview
+
+### Input Image
+- Input Image
+  ![Input Image](./input_image.png)
+
+### Image Encoder
+- The process begins with an **Image Encoder** that processes the input image.
+
+### Learned Queries
+- **Q-Former**
+  - The image features are then processed by the **Q-Former**, which learns to generate queries.
+  - These learned queries are represented as colored squares.
+
+### Fully Connected
+- The output from the **Q-Former** is passed through a **Fully Connected** layer.
+
+### LLM Encoder and Decoder
+- **LLM Encoder**
+  - The fully connected layer output is fed into the **LLM Encoder**, which uses a pre-trained Large Language Model (LLM).
+  - Bootstrapping from an **Encoder-Decoder-based Large Language Model (e.g., FlanT5)**.
+
+- **Prefix Text**
+  - The LLM Encoder processes the prefix text, e.g., "a cat".
+
+- **Suffix Text**
+  - Alongside, the **Suffix Text** provided is "wearing sunglasses".
+
+### LLM Decoder
+- The **LLM Decoder** combines the prefix and suffix text to generate the final output.
+
+---
+
+This workflow integrates learned queries from images with a generative language model to produce meaningful and contextually relevant outputs.
+```
+
+# DL4CV_Week12.3 Beyond CLIP Part 1.pdf - Page 51
+
+```markdown
+# BLIP 2 [2]: Qualitative examples
+
+## Image and Conversation Example
+
+![Image of a cat and a dog](image_url_placeholder)
+
+- **Task**: Write a conversation between the two animals.
+
+- **Conversation**:
+  - **Cat**: hey dog, can i ride on your back?
+  - **Dog**: sure, why not?
+  - **Cat**: i'm tired of walking in the snow.
+
+## Movie Example
+
+![Image from a movie](image_url_placeholder)
+
+- **Question**: What happened at the end of this movie?
+
+- **Answer**: The titanic sank.
+
+- **Question**: Did Leonardo DiCaprio's character survive?
+
+- **Answer**: No, he drowned.
+
+_Vineeth N B (IIT-H)_
+_$14.3 Beyond CLIP (Part 1)_
+_18 / 25_
+```
+
+# DL4CV_Week12.3 Beyond CLIP Part 1.pdf - Page 52
+
+```markdown
+# BLIP 2 [2]: Qualitative examples
+
+## Examples
+
+### Example 1: Inaccurate Knowledge
+
+#### Image
+![Albert Einstein](image_url)
+
+- **Prompt:** "Write a famous quote said by this person."
+
+- **Response:** "albert einstein - the world is a book, and those who do not travel read only one page."
+
+- **Annotation:**
+  - **Inaccurate knowledge:** (quote is from a different person)
+
+```markdown
+### Example 2: Incorrect Reasoning Path
+
+#### Image
+![Person Wearing Casual Clothes](image_url)
+
+- **Prompt:** "Can I wear this for my trip to Canada in December?"
+
+- **Response:** "yes, it's a nice shirt and shorts, but it's a little too casual for a trip to Canada."
+
+- **Annotation:**
+  - **Incorrect reasoning path:** (should have considered weather)
+```
+
+### References
+
+- Vineeth N B. (IIT-H)
+- §14.3 Beyond CLIP (Part 1)
+
+---
+
+_Page 18 / 25_
+```
+
+# DL4CV_Week12.3 Beyond CLIP Part 1.pdf - Page 53
+
+ should be maintained.
+
+```markdown
+# CoCa [3]: Contributions
+
+- **Unifying Paradigms**
+  - Introduces a novel approach that amalgamates single-encoder, dual-encoder, and encoder-decoder paradigms
+  - It involves training a single image-text foundation model that encompasses the functionalities of all three approaches.
+
+_Listen to the speaker:_ Vineeth N B (IIIT-H)
+
+_Section:_ §14.3 Beyond CLIP (Part 1)
+
+_Slide Number:_ 19 / 25
+```
+
+Ensure the markdown format is properly structured and formatted according to the provided instructions and markdown best practices.
+
+# DL4CV_Week12.3 Beyond CLIP Part 1.pdf - Page 54
+
+```markdown
+# CoCa [3]: Overview
+
+![CoCa Architecture Diagram](image_url)
+
+## Pretraining
+
+**Vineeth N B (IIIT-H)**
+**§14.3 Beyond CLIP (Part 1)**
+
+Page 20 / 25
+
+### CoCa Architecture Diagram
+
+- **Image Encoder**
+  - Input: Image
+  - Output: Image representation
+
+- **Unimodal Text Decoder**
+  - Input: Text
+  - Output: Text representation
+
+- **Multimodal Text Decoder**
+  - Input: Combined image and text representations
+  - Output: Captioning loss
+  - Utilizes Cross-Attention mechanism
+
+- **Contrastive Loss**
+  - Applied between the image encoder and the unimodal text decoder
+
+### Key Processes
+
+- **Cross-Attention Mechanism**: Facilitates interaction between the image and text representations.
+- **Captioning Loss**: Evaluates the quality of the text generated from image inputs.
+- **Contrastive Loss**: Enhances the alignment between the representations of images and text.
+
+### Flow of Information
+
+1. An image is fed into the image encoder, producing an image representation.
+2. Text is processed by the unimodal text decoder to generate a text representation.
+3. The multimodal text decoder uses cross-attention to integrate both the image and text representations.
+4. The captioning loss is calculated to fine-tune the text generation process.
+5. Contrastive loss is used to align the representations from the image and text encoders.
+
+### Conclusion
+
+The CoCa model integrates multiple loss functions and attention mechanisms to improve multimodal understanding and text generation from image inputs.
+```
+
+# DL4CV_Week12.3 Beyond CLIP Part 1.pdf - Page 55
+
+```markdown
+# CoCa [3]: Pre-training
+
+![Image of two dogs running in a field](image)
+
+- **image**: ![Two dogs running in a field](image)
+
+- **text**: "two dogs running in a field"
+
+- **pairs**
+
+---
+
+Vineeth N B (IIT-H) §14.3 Beyond CLIP (Part 1)
+
+---
+
+Page 21 / 25
+```
+
+# DL4CV_Week12.3 Beyond CLIP Part 1.pdf - Page 56
+
+```markdown
+# CoCa [3]: Pre-training
+
+![Image](image-url)
+
+- **Image Encoder**
+  - Input: Image
+  - Output: Encoded Image Representation
+
+- **Unimodal Text Decoder**
+  - Input: Text
+  - Output: Decoded Text Representation
+
+### Structure
+
+- **Input Pairing**
+  - Image and Text pairs are used as input.
+
+- **Process Flow**
+  - **Image**: Represented as a matrix or tensor.
+  - **Text**: Represented as a sequence of tokens.
+
+  Text example: "two dogs running in a field"
+  Tokenized text: `[s] two dogs running in a field [CLS]`
+
+- **Encoding and Decoding**
+  - Image Encoder processes the image and produces encoded representations.
+  - Unimodal Text Decoder processes the text and produces decoded representations.
+
+### Visualization
+
+```
+{
+  // Image representation
+  image
+}
+```
+
+```
+{
+  // Text representation
+  text
+}
+```
+
+### References
+
+- Vineeth N B (IIIT-H)
+- §14.3 Beyond CLIP (Part 1)
+```
+
+_Figures and tables are placeholders. Replace with actual image URLs or content when available._
+
+# DL4CV_Week12.3 Beyond CLIP Part 1.pdf - Page 57
+
+```markdown
+# CoCa [3]: Pre-training
+
+## Overview
+
+- **Attentional Pooling**:
+  - Applies to Image Encoder
+  - Outputs to Contrastive Loss
+
+- **Contrastive Loss**:
+  - Calculates based on pairs (image, text)
+  - Utilizes a unimodal text decoder with a cls-token
+
+## Equations
+
+$$
+L_{Con} = -\frac{1}{N} \sum_{i}^{N} \log \left( \frac{\exp(x_i^T y_i / \sigma)}{\sum_{j=1}^{N} \exp(x_i^T y_j / \sigma)} \right)_{image-to-text}
+$$
+
+$$
+- \sum_{i} \log \left( \frac{\exp(y_i^T x_i / \sigma)}{\sum_{j=1}^{N} \exp(y_i^T x_j / \sigma)} \right)_{text-to-image}
+$$
+
+## Components
+
+### Image Encoder
+
+- Processes image input through attentional pooling
+
+### Unimodal Text Decoder
+
+- Processes text input
+- Generates a sequence including a [cls] token
+
+## Workflow
+
+1. **Input**:
+   - **Image**: Processed through the image encoder
+   - **Text**: Processed through the unimodal text decoder
+
+2. **Processing**:
+   - Image undergoes attentional pooling
+   - Text undergoes decoding to form pairs
+
+3. **Output**:
+   - Contrastive loss is calculated comparing image and text pairs
+   - Results in the alignment between image and text representations
+
+### Example Inputs
+
+- **Image**: A picture of two dogs running in a field
+- **Text**: "two dogs running in a field"
+
+### Visualization
+
+![Image Encoder and Unimodal Text Decoder Workflow](image-url)
+
+---
+
+From:
+
+- Vineeth N B (IIIT-H)
+- §14.3 Beyond CLIP (Part 1)
+
+---
+
+Page: 21 / 25
+```
+
+# DL4CV_Week12.3 Beyond CLIP Part 1.pdf - Page 58
+
+```markdown
+# CoCa [3]: Pre-training
+
+![CoCa Pre-training Diagram](image-url)
+
+## Components
+
+### Image Encoder
+- Uses attentional pooling
+- Processes image input
+- Outputs features to Cross-Attention mechanism
+
+### Multimodal Text Decoder
+- Receives input from Cross-Attention mechanism
+- Generates captions
+- Computes **captioning loss**
+
+### Unimodal Text Decoder
+- Processes text input
+- Outputs features to contrastive loss calculation
+- Computes **contrastive loss**
+
+## Losses
+
+### Contrastive Loss
+- **Image-to-Text**
+  ```
+  L_{Con} = -\frac{1}{N} \sum_i^N \log \frac{\exp(x_i^T y_i / \sigma)}{\sum_{j=1}^N \exp(x_i^T y_j / \sigma)}
+  ```
+- **Text-to-Image**
+  ```
+  L_{Con} = -\frac{1}{N} \sum_i^N \log \frac{\exp(y_i^T x_i / \sigma)}{\sum_{j=1}^N \exp(y_i^T x_j / \sigma)}
+  ```
+
+### Captioning Loss
+- ```
+  L_{Cap} = - \sum_{t=1}^T \log P_\theta(y_t | y_{<t}, x)
+  ```
+
+## Example Workflow
+1. **Input**
+   - Image: ![example-image](image-url)
+   - Text: "two dogs running in a field"
+
+2. **Output**
+   - Captioned text: "two dogs running in a field [/s]"
+   - Pairs for training: image-text pairs
+
+## References
+- Vineeth N B (IIIT-H)
+- §14.3 Beyond CLIP (Part 1)
+
+---
+
+Page 21 / 25
+```
+Note: Replace `image-url` with the actual URL or path to the image if available. The markdown format ensures the structure and readability of the content while maintaining scientific accuracy.
+
+# DL4CV_Week12.3 Beyond CLIP Part 1.pdf - Page 59
+
+```markdown
+# CoCa [3]: Pre-training
+
+## Processes
+
+### Image Encoder
+
+- **Attentional Pooling**: Applied to extract features from the image.
+- **Cross-Attention**: Used to align image features with text.
+
+![Image Encoder](../path_to_image_encoder_image)
+
+### Multimodal Text Decoder
+
+- **Captioning Loss**: Calculated from the text generated by the multimodal text decoder.
+- **Contrastive Loss**: Calculated using the cls-token.
+
+![Multimodal Text Decoder](../path_to_multimodal_text_decoder_image)
+
+### Unimodal Text Decoder
+
+- **Contrastive Loss**: Calculated from the classification token (cls-token).
+
+![Unimodal Text Decoder](../path_to_unimodal_text_decoder_image)
+
+## Formulas
+
+### Captioning Loss
+
+\[ L_{Cap} = - \sum_{t=1}^{T} \log P_{\theta}(y_t | y_{<t}, x) \]
+
+### Contrastive Loss
+
+\[ L_{Con} = -\frac{1}{N} \sum_{i=1}^{N} \log \frac{\exp(x_i^T y_i / \sigma)}{\sum_{j=1}^{N} \exp(x_i^T y_j / \sigma)} \]
+
+\[ -\sum_{i=1}^{N} \log \frac{\exp(y_i^T x_i / \sigma)}{\sum_{j=1}^{N} \exp(y_i^T x_j / \sigma)} \]
+
+### Total Loss
+
+\[ L_{CoCa} = \lambda_{Con} \cdot L_{Con} + \lambda_{Cap} \cdot L_{Cap} \]
+
+## References
+
+- Vineeth N B (IIIT-H)
+- §14.3 Beyond CLIP (Part 1)
+
+Page: 21 / 25
+```
+
+# DL4CV_Week12.3 Beyond CLIP Part 1.pdf - Page 60
+
+```markdown
+# CoCa [3]: Finetuning
+
+![CoCa Diagram](image-url)
+
+## Pretraining
+
+### Components
+- **Image Encoder**
+- **Unimodal Text Decoder**
+- **Multimodal Text Decoder**
+
+### Processes
+- **Cross-Attention**: Between Image Encoder and Multimodal Text Decoder
+- **Contrastive Loss**: Between Image Encoder and Unimodal Text Decoder
+- **Captioning Loss**: For the Multimodal Text Decoder
+
+## Zero-shot, frozen-feature or finetuning
+
+**Vineeth N B (IIIT-H)**
+
+**§14.3 Beyond CLIP (Part 1)**
+
+22 / 25
+```
+
+# DL4CV_Week12.3 Beyond CLIP Part 1.pdf - Page 61
+
+```markdown
+# CoCa [3]: Finetuning
+
+$$
+L_{CLS} = -p(y) \log a_\theta(x)
+$$
+
+![Diagram Placeholder](image_url)
+
+- **Pretraining**
+  - **Image Encoder**
+    - Image
+  - **Unimodal Text Decoder**
+    - Text
+  - **Multimodal Text Decoder**
+    - Captioning Loss
+  - **Cross-Attention**
+    - **Contrastive Loss**
+
+- **Zero-shot, frozen-feature or finetuning**
+  - **Image Encoder**
+    - Image
+  - **Classification**
+
+**Visual Recognition (single-encoder models)**
+
+*Vineeth N B (IIIT-H)*
+
+*§14.3 Beyond CLIP (Part 1)*
+
+Page 22 / 25
+```
+
+# DL4CV_Week12.3 Beyond CLIP Part 1.pdf - Page 62
+
+```markdown
+# CoCa [3]: Finetuning
+
+![CoCa: Finetuning Diagram](https://via.placeholder.com/800x400?text=Diagram+Placeholder)
+
+## Pre-training
+
+```markdown
+1. **Image Encoder**
+   - Input: image
+
+2. **Unimodal Text Decoder**
+   - Input: text
+
+3. **Multimodal Text Decoder**
+   - Inputs: Image Encoder and Unimodal Text Decoder
+   - Output: Captioning Loss
+   - **Loss Functions**:
+     - Captioning Loss: \( \mathcal{L}_{Cls} = -p(y) \log a_\theta(x) \)
+     - Contrastive Loss
+
+## Zero-shot, frozen-feature or finetuning
+
+1. **Visual Recognition (single-encoder models)**
+   - **Image Encoder**
+     - Input: image
+   - **Classification**
+
+2. **Crossmodal Alignment (dual-encoder models)**
+   - **Image Encoder**
+     - Input: image
+   - **Unimodal Text Decoder**
+     - Input: text
+   - **Alignment**
+
+### Mathematical Notations
+
+- **Captioning Loss**: \( \mathcal{L}_{Cls} = -p(y) \log a_\theta(x) \)
+- **Contrastive Loss**: \( \mathcal{L}_{Con} \)
+
+### References
+
+- Vineeth N B (IIIT-H)
+- §14.3 Beyond CLIP (Part 1)
+- Slide: 22 / 25
+```
+
+# DL4CV_Week12.3 Beyond CLIP Part 1.pdf - Page 63
+
+```markdown
+# CoCa [3]: Finetuning
+
+## Pretraining
+
+```markdown
+- **Image Encoder**
+  - Receives **image** input.
+- **Unimodal Text Decoder**
+  - Receives **text** input.
+- **Multimodal Text Decoder**
+  - Combines **image** and **text** inputs using cross-attention.
+  - Outputs **captioning loss** and **contrastive loss**.
+  - Loss function: \( \mathcal{L}_{CLS} = -p(y) \log a_\theta(x) \).
+```
+
+## Zero-shot, frozen-feature or finetuning
+
+### Visual Recognition (single-encoder models)
+- **Image Encoder** processes images.
+- Trained for **classification**.
+
+### Crossmodal Alignment (dual-encoder models)
+- **Image Encoder** and **Unimodal Text Decoder** used.
+- **Alignment** between image and text is achieved.
+
+### Image Captioning & Multimodal Understanding (encoder-decoder models)
+- **Image Encoder** and **Unimodal Text Decoder** are used with **Multimodal Text Decoder**.
+- Focus on **image captioning** and **multimodal representation**.
+- **Contrastive loss** and **captioning loss** are utilized for training.
+
+---
+
+*Vineeth N B (IIIT-H) §14.3 Beyond CLIP (Part 1)*
+
+---
+
+![](image_url)
+
+Page: 22 / 25
+```
+
+# DL4CV_Week12.3 Beyond CLIP Part 1.pdf - Page 64
+
+```markdown
+# CoCa [3]: Qualitative examples
+
+![Image 1](image1.png) ![Image 2](image2.png) ![Image 3](image3.png) ![Image 4](image4.png) ![Image 5](image5.png)
+
+- **a hand holding a san francisco 49ers football**
+- **a row of cannons with the eiffel tower in the background**
+- **a white van with a license plate that says we love flynn**
+- **a person sitting on a wooden bridge holding an umbrella**
+- **a truck is reflected in the side mirror of a car**
+
+_Curated samples of text captions generated by CoCa with NoCaps images as input._
+
+_Vineeth N B. (IIIT-H)_
+
+_§14.3 Beyond CLIP (Part 1)_
+
+_23 / 25_
+```
+
+# DL4CV_Week12.3 Beyond CLIP Part 1.pdf - Page 65
+
+```markdown
+# Homework
+
+## Homework Readings
+
+### Homework
+
+#### Readings
+
+- [ ] [Lilian Weng, Generalized Visual Language Models](#)
+- [ ] [Hugging Face, A Dive into Vision-Language Models](#)
+
+---
+
+Vineeth N B (IIT-H) §14.3 Beyond CLIP (Part 1)
+
+---
+
+24 / 25
+```
+
+# DL4CV_Week12.3 Beyond CLIP Part 1.pdf - Page 66
+
+```markdown
+# References
+
+[1] Junnan Li et al. "BLIP: Bootstrapping Language-Image Pre-training for Unified Vision-Language Understanding and Generation". In: *International Conference on Machine Learning*. 2022.
+
+[2] Junnan Li et al. "BLIP-2: Bootstrapping Language-Image Pre-training with Frozen Image Encoders and Large Language Models". In: *International Conference on Machine Learning*. 2023.
+
+[3] Jiahuai Yu et al. "CoCa: Contrastive Captioners are Image-Text Foundation Models". In: *Trans. Mach. Learn. Res.* 2022 (2022).
+
+---
+
+Vineeth N B (IIIT-H)
+
+§14.3 Beyond CLIP (Part 1)
+
+25 / 25
+```
+

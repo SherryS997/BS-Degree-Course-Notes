@@ -1,0 +1,1511 @@
+# DL4CV_Week02_Part01.pdf - Page 1
+
+```markdown
+# Deep Learning for Computer Vision
+
+## Edge Detection
+
+### Vineeth N Balasubramanian
+
+**Department of Computer Science and Engineering**
+**Indian Institute of Technology, Hyderabad**
+
+![IIT Hyderabad Logo](iit_hyderabad_logo.png)
+
+---
+
+Vineeth N B (IIT-H)
+
+### 8.2.1 Edge Detection
+
+1. **Introduction**
+
+   Edge detection is a fundamental process in computer vision that identifies the boundaries of objects within an image. This step is crucial for various applications such as image segmentation, object recognition, and feature extraction.
+
+2. **Basic Concepts**
+
+   - **Edges**: These are the boundaries or contours of objects in an image, representing changes in intensity.
+   - **Gradient**: The gradient of an image represents the rate of change of intensity. It is an essential concept in edge detection.
+   - **Sobel Operator**: A commonly used operator for edge detection, which calculates the gradient in both the x and y directions.
+
+3. **Edge Detection Algorithms**
+
+   - **Sobel Edge Detection**: Uses two convolution masks (Sobel operators) to calculate the gradient in the x and y directions.
+     - **Sobel Operator for x-direction**:
+       ```math
+       G_x = [[-1, 0, 1], [-2, 0, 2], [-1, 0, 1]]
+       ```
+     - **Sobel Operator for y-direction**:
+       ```math
+       G_y = [[-1, -2, -1], [0, 0, 0], [1, 2, 1]]
+       ```
+
+   - **Prewitt Edge Detection**: Similar to Sobel but with slightly different convolution masks.
+     - **Prewitt Operator for x-direction**:
+       ```math
+       G_x = [[-1, 0, 1], [-1, 0, 1], [-1, 0, 1]]
+       ```
+     - **Prewitt Operator for y-direction**:
+       ```math
+       G_y = [[-1, -1, -1], [0, 0, 0], [1, 1, 1]]
+       ```
+
+   - **Canny Edge Detection**: A more sophisticated method that involves the following steps:
+     - Noise reduction using Gaussian blur.
+     - Gradient calculation using the Sobel operator.
+     - Non-maximum suppression to thin the edges.
+     - Double thresholding to detect strong and weak edges.
+     - Edge tracking by hysteresis.
+
+4. **Applications**
+
+   - **Image Segmentation**: Identifying distinct regions within an image.
+   - **Object Detection**: Recognizing the presence and location of objects.
+   - **Feature Extraction**: Extracting key features for further processing or analysis.
+
+5. **Challenges**
+
+   - **Noise**: High noise levels can interfere with accurate edge detection.
+   - **Lighting Conditions**: Variations in lighting can affect the intensity gradients.
+   - **Complexity**: Real-world images often contain complex scenes with overlapping objects.
+
+6. **Conclusion**
+
+   Edge detection is a vital step in computer vision, providing the foundation for more advanced processing and analysis of images. Various algorithms, each with its strengths and weaknesses, are used for edge detection depending on the application's requirements.
+
+---
+
+Page 1 of 36
+```
+
+# DL4CV_Week02_Part01.pdf - Page 2
+
+```markdown
+# Edge Detection
+
+![Edge Detection Diagram](image_url)
+
+- **Map image from 2D matrix of pixels to a set of curves or line segments or contours** ⇒
+  - **More compact representation than pixels**
+- **Key idea?**
+
+*Vineeth N B (IIIT-H) §2.1 Edge Detection*
+
+---
+
+### Edge Detection
+
+- **Map image from 2D matrix of pixels to a set of curves or line segments or contours** ⇒
+  - **More compact representation than pixels**
+- **Key idea?**
+
+*Vineeth N B (IIIT-H) §2.1 Edge Detection*
+
+---
+
+```
+
+# DL4CV_Week02_Part01.pdf - Page 3
+
+```markdown
+# Edge Detection
+
+![Edge Detection Visuals](image-url)
+
+- **Map image from 2D matrix of pixels to a set of curves or line segments or contours** ⇒ **More compact representation than pixels**
+- **Key idea? Look for strong gradients, and then post-process**
+
+**Source:** Shotton, K Grauman, R Urtasun
+
+Vineeth N B (IIT-H) §2.1 Edge Detection 2 / 36
+```
+
+---
+
+This markdown format captures the structure of the provided scientific text or slides, ensuring accuracy in scientific terms and proper formatting. The placeholders for images and sections are included where OCR couldn't directly capture them.
+
+# DL4CV_Week02_Part01.pdf - Page 4
+
+```markdown
+# How are Edges Caused?
+
+- **Variety of factors:**
+  - Surface color/appearance discontinuity
+  - Surface normal discontinuity
+  - Depth discontinuity
+  - Illumination discontinuity
+
+![Image](image_url)
+
+*Source: R Urtasun*
+
+*Vineeth N B (IIIT-H)*
+
+## §2.1 Edge Detection
+
+Page 3 / 36
+```
+
+Note: Replace `image_url` with the actual URL or placeholder for the image if available. This markdown format ensures the extracted content maintains the structure and formatting of the original scientific text or slides.
+
+# DL4CV_Week02_Part01.pdf - Page 5
+
+```markdown
+# Looking More Locally
+
+![Image with Local Details](image_url)
+
+**Source:** K Grauman, R Urtasun
+
+**Vineeth N B (IIT-H)**
+
+## §2.1 Edge Detection
+
+![Edge Detection Image](edge_detection_image_url)
+
+- **Yellow Box**: Indicates a region of interest for edge detection analysis.
+- **Red Box**: Highlights another specific area for detailed examination.
+- **Blue Box**: Demonstrates the edge detection outcome in this particular region.
+- **Cyan Box**: Shows another detailed result of edge detection analysis.
+
+This section highlights the importance of looking at more localized regions within an image for precise edge detection. The different colored boxes illustrate various localized areas and their corresponding results from the edge detection process.
+
+The image shows the original photograph with annotations indicating regions under analysis. Each box corresponds to a particular area for detailed inspection and edge detection, represented by different colors.
+
+---
+
+### Notes:
+- Ensure the images are correctly referenced via the `image_url` placeholders.
+- The scientific integrity and accuracy of the content are maintained.
+```
+
+# DL4CV_Week02_Part01.pdf - Page 6
+
+```markdown
+# Why are Edges Important?
+
+- Group pixels into objects or parts
+- Allow us to track important features (e.g., corners, curves, lines).
+- Cues for 3D shape
+- Guiding interactive image editing
+
+![Image of building](image1.jpg) ![Edge detected image](image2.jpg)
+
+*Source: Derek Hoiem*
+
+*Vineeth N B (IIT-H)*
+
+*82.1 Edge Detection*
+
+*Page 5 of 36*
+```
+
+# DL4CV_Week02_Part01.pdf - Page 7
+
+```markdown
+# Edges in Images as Functions
+
+- Edges look like steep cliffs
+
+![Image of Edges](image-url)
+
+*Source: N Snavely, R Urtasun*
+
+---
+
+Vineeth N B (IIIT-H) §2.1 Edge Detection 6 / 36
+```
+
+# DL4CV_Week02_Part01.pdf - Page 8
+
+```markdown
+# Derivatives and Edges
+
+- An edge is a place of rapid change in the image intensity function
+
+![Graphical representation of derivatives and edges](image-placeholder.png)
+
+![Diagram of image and intensity function](image-placeholder.png)
+
+### Image and Intensity Function
+- **Image**: 
+  ```
+  [image representation]
+  ```
+- **Intensity Function (along horizontal scanline)**:
+  ```
+  [intensity function graph]
+  ```
+- **First Derivative**:
+  ```
+  [first derivative graph]
+  ```
+- **Second Derivative**:
+  ```
+  [second derivative graph]
+  ```
+
+### Explanation
+- Edges correspond to extrema of the derivative.
+
+### Sources
+- L Lazebnik, K Grauman and [https://mipav.cit.nih.gov/](https://mipav.cit.nih.gov/)
+- Vineeth N B (IIT-H)
+- §2.1 Edge Detection
+```
+
+# DL4CV_Week02_Part01.pdf - Page 9
+
+```markdown
+# Derivatives with Convolution
+
+- For 2D function, \( f(x, y) \), the partial derivative is:
+
+  \[
+  \frac{\partial f(x, y)}{\partial x} = \lim_{\epsilon \to 0} \frac{f(x + \epsilon, y) - f(x, y)}{\epsilon}
+  \]
+
+- For discrete data, we can approximate using finite differences:
+
+  \[
+  \frac{\partial f(x, y)}{\partial x} \approx \frac{f(x + 1, y) - f(x, y)}{1}
+  \]
+
+*Image placeholder*
+
+_NPTEL_
+
+_Vineeth N B (IIT-H)_
+
+_§2.1 Edge Detection_
+
+_8 / 36_
+```
+
+# DL4CV_Week02_Part01.pdf - Page 10
+
+```markdown
+# Derivatives with Convolution
+
+- For 2D function, \( f(x, y) \), the partial derivative is:
+
+  \[
+  \frac{\partial f(x, y)}{\partial x} = \lim_{\epsilon \to 0} \frac{f(x + \epsilon, y) - f(x, y)}{\epsilon}
+  \]
+
+- For discrete data, we can approximate using finite differences:
+
+  \[
+  \frac{\partial f(x, y)}{\partial x} \approx \frac{f(x + 1, y) - f(x, y)}{1}
+  \]
+
+- To implement above as convolution, what would be the associated filter?
+
+![Diagram Placeholder](image-url)
+
+Vineeth N B (IIT-H) 
+§2.1 Edge Detection
+
+8 / 36
+```
+
+# DL4CV_Week02_Part01.pdf - Page 11
+
+```markdown
+# Derivatives with Convolution
+
+- For 2D function, \( f(x, y) \), the partial derivative is:
+
+  \[
+  \frac{\partial f(x, y)}{\partial x} = \lim_{\epsilon \to 0} \frac{f(x + \epsilon, y) - f(x, y)}{\epsilon}
+  \]
+
+- For discrete data, we can approximate using finite differences:
+
+  \[
+  \frac{\partial f(x, y)}{\partial x} \approx \frac{f(x + 1, y) - f(x, y)}{1}
+  \]
+
+- To implement above as convolution, what would be the associated filter?
+
+![Image of a function and its derivatives](https://example.com/image.jpg)
+
+![Image of a function's derivative with respect to x](https://example.com/derivative_x.jpg)
+
+![Image of a function's derivative with respect to y](https://example.com/derivative_y.jpg)
+
+**Source:** K. Grauman
+
+Vineeth N B (IIT-H)
+
+82.1 Edge Detection
+
+8 / 36
+```
+
+# DL4CV_Week02_Part01.pdf - Page 12
+
+```markdown
+# Sobel Edge Detection Filters
+
+![Albert Einstein Image](image-url)
+
+---
+
+## Source: J Hays
+
+Vineeth N B (IIT-H)
+
+### 82.1 Edge Detection
+
+---
+
+#### Sobel Edge Detection Filters
+
+The Sobel operator is often used for edge detection in image processing. It uses two 3x3 convolution masks, one for detecting horizontal edges and one for detecting vertical edges.
+
+**Sobel Operators:**
+
+1. **Horizontal Edge Detection Kernel:**
+    ```plaintext
+    1  0  -1
+    2  0  -2
+    1  0  -1
+    ```
+
+2. **Vertical Edge Detection Kernel:**
+    ```plaintext
+    -1  -2  -1
+     0    0    0
+     1    2    1
+    ```
+
+**Mathematical Representation:**
+- Horizontal Edge Detection:
+    \[
+    G_x = \left[ \begin{array}{ccc}
+    1 & 0 & -1 \\
+    2 & 0 & -2 \\
+    1 & 0 & -1 \\
+    \end{array} \right]
+    \]
+
+- Vertical Edge Detection:
+    \[
+    G_y = \left[ \begin{array}{ccc}
+    -1 & -2 & -1 \\
+    0 & 0 & 0 \\
+    1 & 2 & 1 \\
+    \end{array} \right]
+    \]
+
+**Example Application:**
+- **Original Image:**
+    ![Original Image](original-image-url)
+
+- **Vertical Edge Detection:**
+    ![Vertical Edge Detection](vertical-edge-detection-url)
+
+The vertical edge detection image highlights the absolute value of the vertical edge gradient, emphasizing the edges perpendicular to the horizontal axis.
+
+---
+
+**Note:**
+- For accurate results, the images and graphs referenced above are placeholders. Replace `original-image-url` and `vertical-edge-detection-url` with the actual image URLs where applicable.
+```
+
+# DL4CV_Week02_Part01.pdf - Page 13
+
+```markdown
+# Sobel Edge Detection Filters
+
+![Sobel Edge Detection Filter](image-url)
+
+## Source
+- **Source**: J Hays
+- **Author**: Vineeth N B (IIIT-H)
+
+## Sobel Edge Detection Filters
+
+### Original Image
+![Original Image](original-image-url)
+
+### Sobel Kernel
+```
+1  2  1
+0  0  0
+-1 -2 -1
+```
+
+### Horizontal Edge Detection
+#### Absolute Value
+![Horizontal Edge Detection](horizontal-edge-detection-url)
+```
+
+**Note**: Replace `image-url`, `original-image-url`, and `horizontal-edge-detection-url` with the actual URLs or filenames if available. The symbols and formulas are formatted inline as required for accurate presentation.
+
+# DL4CV_Week02_Part01.pdf - Page 14
+
+```markdown
+# Finite Difference Filters
+
+## Prewitt
+
+### Mx
+```markdown
+| -1 | 0 | 1 |
+|----|---|---|
+| -1 | 0 | 1 |
+| -1 | 0 | 1 |
+```
+
+### My
+```markdown
+| 1  | 1  | 1  |
+|----|----|----|
+| 0  | 0  | 0  |
+| -1 | -1 | -1 |
+```
+
+## Sobel
+
+### Mx
+```markdown
+| -1 | 0 | 1 |
+|----|---|---|
+| -2 | 0 | 2 |
+| -1 | 0 | 1 |
+```
+
+### My
+```markdown
+| 1  | 2  | 1  |
+|----|----|----|
+| 0  | 0  | 0  |
+| -1 | -2 | -1 |
+```
+
+## Roberts
+
+### Mx
+```markdown
+| 0  | 1  |
+|----|----|
+| -1 | 0  |
+```
+
+### My
+```markdown
+| 1  | 0  |
+|----|----|
+| 0  | -1 |
+```
+
+*Source: R Urtasun*
+
+*Vineeth N B (IIT-H)*
+
+*82.1 Edge Detection*
+
+*11 / 36*
+```
+
+# DL4CV_Week02_Part01.pdf - Page 15
+
+```markdown
+# Image Gradients
+
+- **The gradient of an image** ∇f = \[ \frac{\partial f}{\partial x}, \frac{\partial f}{\partial y} \]
+
+![NPTel Logo](image_url)
+
+*Vineeth N B (IIT-H)*
+
+*Section 2.1 Edge Detection*
+
+*Slide 12 / 36*
+```
+
+# DL4CV_Week02_Part01.pdf - Page 16
+
+```markdown
+# Image Gradients
+
+- The gradient of an image \(\nabla f = \left[ \frac{\partial f}{\partial x}, \frac{\partial f}{\partial y} \right]\)
+
+- The gradient points in the direction of most rapid change in intensity
+
+  ![Gradient Illustration](https://via.placeholder.com/150)
+
+  \[
+  \nabla f = \left[ \frac{\partial f}{\partial x}, 0 \right]
+  \]
+
+  ![Gradient Illustration](https://via.placeholder.com/150)
+
+  \[
+  \nabla f = \left[ 0, \frac{\partial f}{\partial y} \right]
+  \]
+
+  ![Gradient Illustration](https://via.placeholder.com/150)
+
+  \[
+  \nabla f = \left[ \frac{\partial f}{\partial x}, \frac{\partial f}{\partial y} \right]
+  \]
+
+  ![Gradient Illustration](https://via.placeholder.com/150)
+
+---
+
+Vineeth N B (IIT-H)
+
+§2.1 Edge Detection
+
+12 / 36
+```
+
+# DL4CV_Week02_Part01.pdf - Page 17
+
+```markdown
+# Image Gradients
+
+- The gradient of an image \(\nabla f = \left[ \frac{\partial f}{\partial x}, \frac{\partial f}{\partial y} \right]\)
+- The gradient points in the direction of most rapid change in intensity
+
+  ![Gradient Illustration](image-placeholder)
+
+  \(\nabla f = \left[ \frac{\partial f}{\partial x}, 0 \right] = \left[0, \frac{\partial f}{\partial y}\right]\)
+
+  \(\nabla f = \left[0, \frac{\partial f}{\partial y}\right]\)
+
+- The **gradient direction** (orientation of edge normal) is given by:
+
+  \[\theta = \tan^{-1} \left( \frac{\frac{\partial f}{\partial y}}{\frac{\partial f}{\partial x}} \right)\]
+
+*Vineeth N B (IIIT-H)*
+
+§2.1 Edge Detection
+
+NPTEL
+
+12 / 36
+```
+
+# DL4CV_Week02_Part01.pdf - Page 18
+
+# Image Gradients
+
+- **The gradient of an image** \( \nabla f = \left[ \frac{\partial f}{\partial x}, \frac{\partial f}{\partial y} \right] \)
+
+- The gradient points in the direction of most rapid change in intensity
+
+  ![Gradient Image](image-placeholder)
+
+  \[ \nabla f = \left[ \frac{\partial f}{\partial x}, 0 \right] \]
+
+  ![Gradient Image](image-placeholder)
+
+  \[ \nabla f = \left[ 0, \frac{\partial f}{\partial y} \right] \]
+
+  \[ \nabla f = \left[ \frac{\partial f}{\partial x}, \frac{\partial f}{\partial y} \right] \]
+
+- **The gradient direction** (orientation of edge normal) is given by:
+
+  \[
+  \theta = \tan^{-1} \left( \frac{\frac{\partial f}{\partial y}}{\frac{\partial f}{\partial x}} \right)
+  \]
+
+- **The edge strength** is given by the magnitude \( ||\nabla f|| = \sqrt{\left( \frac{\partial f}{\partial x} \right)^2 + \left( \frac{\partial f}{\partial y} \right)^2} \)
+
+**Source:** S Seitz, R Urtasun
+
+*Vineeth N B (IIT-H)*
+
+§2.1 Edge Detection
+
+12 / 36
+
+# DL4CV_Week02_Part01.pdf - Page 19
+
+```markdown
+# Derivative with No Noise
+
+- Consider a single row or column of the image
+- Plotting intensity as a function of position gives a signal
+
+![Input Image with No Noise](https://via.placeholder.com/150)
+
+![Intensity Function](https://via.placeholder.com/600x300)
+```
+**f(x)**
+
+![Derivative of Intensity Function](https://via.placeholder.com/600x300)
+
+**df/dx f(x)**
+
+**Where is the edge?**
+
+*Vineeth N B. (IIT-H)*
+*8.2.1 Edge Detection*
+*13 / 36*
+```
+
+# DL4CV_Week02_Part01.pdf - Page 20
+
+```markdown
+# Effect of Noise
+
+![Noisy input image](image-url)
+
+## Now, where is the edge?
+
+![f(x)](image-url)
+![df/dx f(x)](image-url)
+
+Source: S Seitz, K Grauman
+
+Vineeth N B (IIT-H) Section 8.1.1 Edge Detection Slide 14 / 36
+```
+
+### Detailed Markdown Content:
+
+```markdown
+# Effect of Noise
+
+![Noisy input image](image-url)
+
+## Now, where is the edge?
+
+![f(x)](image-url)
+
+$$
+f(x)
+$$
+
+![df/dx f(x)](image-url)
+
+$$
+\frac{d}{dx} f(x)
+$$
+
+Source: S Seitz, K Grauman
+
+Vineeth N B (IIT-H) Section 8.1.1 Edge Detection Slide 14 / 36
+```
+
+### Description:
+This markdown content accurately reflects the slide about the effect of noise on edge detection. It includes the title, an image placeholder for the noisy input image, and two plots representing the function \( f(x) \) and its derivative \( \frac{d}{dx} f(x) \). The source of the information is credited to S Seitz and K Grauman, and it is part of a lecture slide from Vineeth N B at IIT-H, specifically Section 8.1.1 on Edge Detection. The slide number is 14 out of 36.
+
+# DL4CV_Week02_Part01.pdf - Page 21
+
+```markdown
+# Effect of Noise
+
+- Smooth first, and look for peaks in \(\frac{d}{dx}(f * g)\)
+
+![Graphical Representation of Edge Detection](image_url)
+
+**Source:** S. Seitz, R. Urtasun
+
+Vineeth N B (IIT-H) §2.1 Edge Detection 15 / 36
+
+## Graphical Representation
+
+### Signal
+![Signal Graph](image_url)
+
+### Kernel
+![Kernel Graph](image_url)
+
+### Convolution
+\[ f * g2 \]
+
+![Convolution Graph](image_url)
+
+### Differentiation
+\[ \frac{d}{dx}(f * g) \]
+
+![Differentiation Graph](image_url)
+```
+
+# DL4CV_Week02_Part01.pdf - Page 22
+
+```markdown
+# Derivative theorem of Convolution
+
+- Differentiation is achieved through convolution, and convolution is associative:
+  \[
+  \frac{d}{dx} (f * g) = f * \frac{d}{dx} g = \frac{d}{dx} f * g
+  \]
+
+- This saves us an operation:
+
+  ![Graphs](image-placeholder.png)
+
+  **Source: S Seitz, R Urtasun**
+
+  **Vineeth N B (IIT-H)**
+
+  **§2.1 Edge Detection**
+
+  **16 / 36**
+```
+
+# DL4CV_Week02_Part01.pdf - Page 23
+
+```markdown
+# What about Second Derivative?
+
+- Edge by detecting zero-crossing of bottom graph
+
+![Graph Image](image-url)
+
+```math
+f
+```
+
+![Second Derivative of Gaussian](image-url)
+
+```math
+\frac{\partial^2}{\partial x^2} h
+```
+
+![Laplacian of Gaussian](image-url)
+
+```math
+\left(\frac{\partial^2}{\partial x^2} h\right) * f
+```
+
+**Source:** S. Seitz, R. Urtasun
+
+_Vineeth N B (IIT-H)_
+
+## §2.1 Edge Detection
+
+17 / 36
+```
+
+# DL4CV_Week02_Part01.pdf - Page 24
+
+```markdown
+# Derivative and Laplacian of Gaussians
+
+![Diagram of Gaussian and its derivatives](image_url)
+
+**Gaussian**
+\[ h_\sigma(x, y) = \frac{1}{2 \pi \sigma^2} \exp \left( -\frac{x^2 + y^2}{2 \sigma^2} \right) \]
+
+**Derivative of Gaussian (x)**
+\[ \frac{\partial h_\sigma}{\partial x}(u, v) \]
+
+**Laplacian of Gaussian**
+\[ \nabla^2 h_\sigma(u, v) \]
+
+with \( \nabla^2 \) the Laplacian operator
+
+\[ \nabla^2 f = \frac{\partial^2 f}{\partial x^2} + \frac{\partial^2 f}{\partial y^2} \]
+
+## Which one finds horizontal/vertical edges?
+
+![X-direction plot](image_url)
+![Y-direction plot](image_url)
+
+![Edge detection result 1](image_url)
+![Edge detection result 2](image_url)
+
+*Source: S. Seitz, R. Urtasun*
+
+_Vineeth N B (IIT-H)_
+
+§2.1 Edge Detection
+
+---
+
+_18 / 36_
+```
+
+Note: Placeholder image URLs are used where actual images could not be captured by OCR. Adjust the URLs as needed based on the actual images from the original source.
+
+# DL4CV_Week02_Part01.pdf - Page 25
+
+```markdown
+# Compute of Gradients
+
+![Compute of Gradients](attachment:compute_of_gradients.png)
+
+![Image](attachment:image.png)
+
+- **X-Derivative of Gaussian**
+
+  ![X-Derivative of Gaussian](attachment:x_derivative_of_gaussian.png)
+
+- **Y-Derivative of Gaussian**
+
+  ![Y-Derivative of Gaussian](attachment:y_derivative_of_gaussian.png)
+
+- **Gradient Magnitude**
+
+  ![Gradient Magnitude](attachment:gradient_magnitude.png)
+
+**Source:** S Seitz, R Urtasun
+
+Vineeth N B (IIT-H)
+
+### 8.2.1 Edge Detection
+
+Page 19 / 36
+```
+
+# DL4CV_Week02_Part01.pdf - Page 26
+
+```markdown
+# Properties of an Edge Detector
+
+![Edge Detection Example](image-url)
+
+- Properties of an Edge Detector:
+
+  - **Edge Definition**:
+    - An edge is a boundary between two regions with significantly different intensity values.
+    - In an image, edges are where there is a significant change in pixel intensity.
+
+- **Vineeth N B (IIT-H)**:
+  - Slide: §2.1 Edge Detection
+
+- **Diagram**:
+  ![Diagram](diagram-url)
+  - There is an image showing a scene with a person and an arrow pointing to a specific area labeled as "where is the edge?".
+
+- **Edge Detection Process**:
+  - Edge detection is the process of identifying the boundaries of objects within an image.
+  - Methods include:
+    - **Sobel Operator**: Detects edges by calculating the gradient of the image intensity.
+    - **Canny Edge Detector**: A multi-stage algorithm to detect a wide range of edges in images.
+    - **Laplacian Operator**: Detects edges by using the second derivatives to find the zeros of the gradient.
+
+- **NPTEL Logo**:
+  ![NPTEL Logo](logo-url)
+
+- **Equation (Example)**:
+  ```math
+  G(x, y) = I(x+1, y+1) - I(x-1, y-1)
+  ```
+  - This is a simple example of a gradient computation used in edge detection.
+
+- **Footer**:
+  - **Vineeth N B (IIT-H)**
+  - **Slide Number**: 20 / 36
+  - **Course**: §2.1 Edge Detection
+  - **Provider**: NPTEL
+```
+
+# DL4CV_Week02_Part01.pdf - Page 27
+
+```markdown
+# Properties of an Edge Detector
+
+- **Criteria for a good edge detector?**
+
+![NPTEL Logo](https://via.placeholder.com/150)
+
+*Vineeth N B (IIT-H)*
+
+*8.2.1 Edge Detection*
+
+---
+
+**Slide 21 / 36**
+```
+
+# DL4CV_Week02_Part01.pdf - Page 28
+
+```markdown
+# Properties of an Edge Detector
+
+![Graphic of edge detection concept](image-url)
+
+## Criteria for a good edge detector?
+
+- **Good detection**: find all real edges, ignoring noise or other artifacts
+
+- **Good localization**: detect edges as close as possible to true edges
+
+- **Single response**: return one point only for each true edge point
+
+## Issues with Edge Detection
+
+- **Poor robustness to noise**: shown with blue squares
+
+- **Poor localization**: shown with green squares
+
+- **Too many responses**: shown with black squares
+
+### Source:
+K. Grauman
+Vineeth N B (IIT-H)
+§2.1 Edge Detection
+NPTEL
+21 / 36
+```
+
+# DL4CV_Week02_Part01.pdf - Page 29
+
+```markdown
+# Non-Maxima Suppression
+
+![Non-Maxima Suppression Diagram](image_url)
+
+**Where is the edge?**
+
+![Close-up of Image](image_url)
+
+```math
+\begin{aligned}
+\text{Check if pixel is local maximum along gradient direction:} \\
+\text{Could require checking interpolated pixels } p \text{ and } r
+\end{aligned}
+```
+
+![Gradient and Pixel Diagram](image_url)
+
+```math
+\begin{aligned}
+  \text{Gradient} & \\
+  p & \\
+  q & \\
+  r & \\
+\end{aligned}
+```
+
+*Source: N Snavely, R Urtasun*
+
+*Vineeth N B (IIT-H)*
+
+*82.1 Edge Detection*
+
+*22 / 36*
+```
+
+# DL4CV_Week02_Part01.pdf - Page 30
+
+```markdown
+# Non-Maxima Suppression
+
+![Before and after non-maxima suppression](image_url)
+
+**Before and after non-maxima suppression**
+
+*Source: Derek Hoiem*
+
+Vineeth N B (IIIT-H)
+
+### 8.2.1 Edge Detection
+
+23 / 36
+```
+
+# DL4CV_Week02_Part01.pdf - Page 31
+
+```markdown
+# Hysteresis Thresholding
+
+- Check for well-connected edges. How?
+
+![NPTEL Logo](image_url)
+
+---
+
+Vineeth N B (IIT-H)
+
+8.2.1 Edge Detection
+
+Page 24 / 36
+```
+
+
+# DL4CV_Week02_Part01.pdf - Page 32
+
+```markdown
+# Hysteresis Thresholding
+
+- **Check for well-connected edges. How?**
+  - Use **hysteresis**: use a **high** threshold to start edge curves and a **low** threshold to continue them.
+
+- **How does it work?**
+  - If gradient at pixel > 'High' ==> 'edge pixel'
+  - If gradient at pixel < 'Low' ==> 'non-edge pixel'
+  - If gradient at pixel > 'Low' and < 'High' ==> 'edge pixel' iff it is connected to an 'edge pixel' directly or via pixels between 'Low' and 'High'
+
+![Hysteresis Thresholding Diagram](image_url)
+
+![Hysteresis Thresholding Result](image_url)
+
+**Source:** S Seitz, R Urtasun
+
+Vineeth N B (IIT-H)
+
+§2.1 Edge Detection
+
+24 / 36
+```
+
+*Note: Placeholders for images with `image_url` need to be replaced with actual image URLs or paths if available.*
+
+# DL4CV_Week02_Part01.pdf - Page 33
+
+```markdown
+# Canny Edge Detector
+
+- Probably the most widely used edge detector in computer vision (Canny 1986)
+
+## Algorithm:
+
+1. Filter image with derivative of Gaussian
+2. Find magnitude and orientation of gradient
+3. Non-maximum suppression
+4. Linking and thresholding (hysteresis):
+   - Define two thresholds: low and high
+   - Use the high threshold to start edge curves and the low threshold to continue them
+
+![Canny Edge Detection Diagram](image_url)
+
+*Source: D. Lowe, L. Fei-Fei, R Urtasun*
+
+*Vineeth N B (IIIT-H)*
+
+*§2.1 Edge Detection*
+
+*25 / 36*
+```
+
+# DL4CV_Week02_Part01.pdf - Page 34
+
+```markdown
+# Canny Edge Pipeline and Examples
+
+## Pipeline Stages
+
+1. **Original**
+   ![Original Image](image-url)
+
+2. **Smoothed**
+   ![Smoothed Image](image-url)
+
+3. **Gradient Magnitudes**
+   ![Gradient Magnitudes](image-url)
+
+4. **Edges after Non-Maximum Suppression**
+   ![Edges After Non-Maximum Suppression](image-url)
+
+5. **Double Thresholding**
+   ![Double Thresholding](image-url)
+
+6. **Edge Tracking by Hysteresis**
+   ![Edge Tracking by Hysteresis](image-url)
+
+7. **Final Output**
+   ![Final Output](image-url)
+
+## Examples
+
+### Example 1
+- **Original Image**
+  ![Original Image](image-url)
+
+- **Final Output**
+  ![Final Output](image-url)
+
+### Example 2
+- **Original Image**
+  ![Original Image](image-url)
+
+- **Final Output**
+  ![Final Output](image-url)
+
+### Example 3
+- **Original Image**
+  ![Original Image](image-url)
+
+- **Final Output**
+  ![Final Output](image-url)
+
+## Source
+- **Authors**: Prem Kalra, R Urtasun, S Fidler
+- **Institution**: Vineeth N B (IIIT-H)
+- **Section**: §2.1 Edge Detection
+
+```
+
+# DL4CV_Week02_Part01.pdf - Page 35
+
+```markdown
+# Effect of σ in Canny Edge Detector
+
+- The choice of σ (Gaussian kernel spread/size) depends on desired behavior
+  - large σ detects large-scale edges
+  - small σ detects fine edges
+
+![Original Image](image_url)
+![Canny with σ = 1](image_url)
+![Canny with σ = 2](image_url)
+
+**Source:** S. Seitz, R. Urtasun
+
+*Vineeth N B (IIT-H) 
+§2.1 Edge Detection*
+
+---
+
+**Summary:**
+
+The Canny Edge Detector's effectiveness in identifying edges is influenced by the Gaussian kernel's spread (σ). 
+
+- A larger σ value is suitable for detecting larger edges.
+- Conversely, a smaller σ value is used for detecting finer edges.
+
+The images provided illustrate the impact of varying σ values in the Canny Edge Detection algorithm.
+
+**Figures:**
+1. **Original Image:** The input image before applying the Canny Edge Detection.
+2. **Canny with σ = 1:** The edges detected using a Gaussian kernel spread of 1.
+3. **Canny with σ = 2:** The edges detected using a Gaussian kernel spread of 2.
+
+The choice of σ is crucial for accurate edge detection based on the desired level of detail.
+```
+
+# DL4CV_Week02_Part01.pdf - Page 36
+
+```markdown
+# More Recent Methods in Edge Detection
+
+## Learning to Detect Natural Image Boundaries Using Local Brightness, Color, and Texture Cues (Martin et al, 2004)
+
+![Original Image](image_url)
+
+- **Texture**
+    ![Texture](image_url)
+
+- **Brightness**
+    ![Brightness](image_url)
+
+- **Color**
+    ![Color](image_url)
+
+### pB Boundary Detector
+
+#### Non-Boundaries
+- ![Non-Boundary 1](image_url)
+- ![Non-Boundary 2](image_url)
+- ![Non-Boundary 3](image_url)
+- ![Non-Boundary 4](image_url)
+
+#### Boundaries
+- ![Boundary 1](image_url)
+- ![Boundary 2](image_url)
+- ![Boundary 3](image_url)
+- ![Boundary 4](image_url)
+
+### Boundary Processing
+![Boundary Processing](image_url)
+
+### Region Processing
+![Region Processing](image_url)
+
+### Probability
+![Probability](image_url)
+
+**Boundary Processing and Region Processing Interaction**
+
+![Interaction](image_url)
+
+**Source: Derek Hoiem**
+**Vineeth N B (IIT-H)**
+**§2.1 Edge Detection**
+```
+
+# DL4CV_Week02_Part01.pdf - Page 37
+
+```markdown
+# More Recent Methods in Edge Detection
+
+## Learning to Detect Natural Image Boundaries Using Local Brightness, Color, and Texture Cues (Martin et al, 2004)
+
+![Image](image-url)
+
+| Image | Brightness | Color | Texture | Combined | Human |
+|-------|------------|-------|---------|----------|-------|
+| ![Image 1](image-url-1) | ![Brightness 1](brightness-url-1) | ![Color 1](color-url-1) | ![Texture 1](texture-url-1) | ![Combined 1](combined-url-1) | ![Human 1](human-url-1) |
+| ![Image 2](image-url-2) | ![Brightness 2](brightness-url-2) | ![Color 2](color-url-2) | ![Texture 2](texture-url-2) | ![Combined 2](combined-url-2) | ![Human 2](human-url-2) |
+| ![Image 3](image-url-3) | ![Brightness 3](brightness-url-3) | ![Color 3](color-url-3) | ![Texture 3](texture-url-3) | ![Combined 3](combined-url-3) | ![Human 3](human-url-3) |
+| ![Image 4](image-url-4) | ![Brightness 4](brightness-url-4) | ![Color 4](color-url-4) | ![Texture 4](texture-url-4) | ![Combined 4](combined-url-4) | ![Human 4](human-url-4) |
+| ![Image 5](image-url-5) | ![Brightness 5](brightness-url-5) | ![Color 5](color-url-5) | ![Texture 5](texture-url-5) | ![Combined 5](combined-url-5) | ![Human 5](human-url-5) |
+| ![Image 6](image-url-6) | ![Brightness 6](brightness-url-6) | ![Color 6](color-url-6) | ![Texture 6](texture-url-6) | ![Combined 6](combined-url-6) | ![Human 6](human-url-6) |
+| ![Image 7](image-url-7) | ![Brightness 7](brightness-url-7) | ![Color 7](color-url-7) | ![Texture 7](texture-url-7) | ![Combined 7](combined-url-7) | ![Human 7](human-url-7) |
+| ![Image 8](image-url-8) | ![Brightness 8](brightness-url-8) | ![Color 8](color-url-8) | ![Texture 8](texture-url-8) | ![Combined 8](combined-url-8) | ![Human 8](human-url-8) |
+
+*Vineeth N B (IIIT-H)*
+
+*82.1 Edge Detection*
+
+*Page 29 / 36*
+```
+
+# DL4CV_Week02_Part01.pdf - Page 38
+
+```markdown
+# More Recent Methods in Edge Detection
+
+## Structured Forests for Fast Edge Detection (Dollár et al, 2013)
+
+- **Goal:** quickly predict whether each pixel is an edge
+
+  ![Image](image_url)
+
+  - **Insights**
+    - Predictions can be learned from training data
+    - Predictions for nearby pixels should not be independent
+
+  - **Solution**
+    - Train structured random forests to split data into patches with similar boundaries based on features
+    - Predict boundaries at patch level, rather than pixel level, and aggregate (average votes)
+
+**Source:** Derek Hoiem
+
+*Vineeth N B (IIT-H)*
+
+§2.1 Edge Detection
+
+---
+
+### Slide Information
+- Page Number: 30 / 36
+```
+
+**Note:** The `image_url` placeholder should be replaced with the actual URL or path to the image if available.
+
+# DL4CV_Week02_Part01.pdf - Page 39
+
+```markdown
+# More Recent Methods in Edge Detection
+
+## Structured Forests for Fast Edge Detection (Dollár et al, 2013)
+
+- **Algorithm**
+  1. Extract overlapping 32×32 patches at three scales
+  2. Features are pixel values and pairwise differences in feature maps (LUV color, gradient magnitude, oriented gradient)
+  3. Predict \( T \) boundary maps in the central 16×16 region using \( T \) trained decision trees
+  4. Average predictions for each pixel across all patches
+
+*Source: Derek Hoiem*
+
+![Graphic Example](image_url)
+
+---
+
+_Vineeth N B. (IIIT-H)_
+
+_§2.1 Edge Detection_
+
+_31 / 36_
+```
+
+# DL4CV_Week02_Part01.pdf - Page 40
+
+```markdown
+# More Recent Methods in Edge Detection
+
+## Crisp Boundary Detection using Pointwise Mutual Information (Isola et al, 2014)
+
+- Pixel combinations that are unlikely to be together are edges
+
+![Original Image with Edge Detection](image-url)
+
+![Log P(A,B)](image-url)
+
+![PMI(A,B)](image-url)
+
+\[
+PMI_p(A, B) = \log \frac{P(A, B)^p}{P(A)P(B)}
+\]
+
+### Algorithm Pipeline:
+
+1. **Sample color pairs**
+    - Sample from image
+    - Sample colors in pairs
+
+2. **Estimate density**
+    - PMI(A, B)
+
+![Density Estimate](image-url)
+
+3. **Measure affinity**
+    - Various color pairs and measures
+
+![Affinity Measurement](image-url)
+
+4. **Cluster**
+    - Final clustered result
+
+![Clustered Image](image-url)
+
+---
+
+**Source: Derek Hoiem**
+
+**Vineeth N B (IIT-H)**
+
+**8.2.1 Edge Detection**
+
+---
+
+Page 32 / 36
+```
+
+# DL4CV_Week02_Part01.pdf - Page 41
+
+```markdown
+# More Recent Methods in Edge Detection
+
+## Crisp Boundary Detection using Pointwise Mutual Information (Isola et al, 2014)
+
+![Input Image](image1.png) ![](image2.png) ![](image3.png) ![](image4.png) ![](image5.png)
+
+### Input Image | gPb | SE | Our method | Human labelers
+
+![Input Image](image1.png)
+![Input Image](image2.png)
+![Input Image](image3.png)
+![Input Image](image4.png)
+![Input Image](image5.png)
+
+### Algorithm | ODS | OIS | AP
+
+- Canny [14] | 0.60 | 0.63 | 0.58
+- Mean Shift [36] | 0.64 | 0.68 | 0.56
+- NCuts [37] | 0.64 | 0.68 | 0.45
+- Felz-Hutt [38] | 0.61 | 0.64 | 0.56
+- gPb [1] | 0.71 | 0.74 | 0.65
+- gPb-owt-ucm [1] | 0.73 | 0.76 | 0.73
+- SCG [9] | 0.74 | 0.76 | 0.77
+- Sketch Tokens [7] | 0.73 | 0.75 | 0.78
+- SE [8] | 0.74 | 0.76 | 0.78
+
+- Our method - SS, color only | 0.72 | 0.75 | 0.77
+- Our method - SS | 0.73 | 0.76 | 0.79
+- Our method - MS | 0.74 | 0.77 | 0.78
+
+Evaluation on BSDS500
+
+**Source:** Derek Hoiem
+
+Vineeth N B (IIT-H)
+
+§2.1 Edge Detection
+
+```
+
+# DL4CV_Week02_Part01.pdf - Page 42
+
+```markdown
+# More Recent Methods in Edge Detection
+
+## Holistically Nested Edge Detection (Xie et al, 2015)
+
+![Holistically Nested Edge Detection](image_url)
+
+### Input Image X
+
+**Receptive Field Size**
+- 5
+- 14
+- 40
+- 92
+- 196
+
+**Side-output layers:**
+1. Side-output 1
+2. Side-output 2
+3. Side-output 3
+4. Side-output 4
+5. Side-output 5
+
+### Weighted-fusion layer & Side-output layer Error Propagation Path
+
+### Output Y
+
+**Ground truth**
+
+### Source: Derek Hoiem
+
+**Vineeth N B (IIT-H)**
+
+### Performance Table
+
+| Method                   | ODS | OIS | AP | FPS |
+|--------------------------|-----|-----|----|-----|
+| Human                   | .80 | .80 | -  | -   |
+| Canny                   | .500| .540| .558| 15  |
+| Felz-Hen ( \cite{felz2005fast}) | .510 | .540 | .566 | 10  |
+| Holistically-Nested Edge \cite{xie2015holistically} | .740 | .740 | .797 | 1/30 |
+| gPb-owt-ucm \cite{arbelaez2011contour} | .726 | .757 | .696 | 1/240 |
+| Sketch Tokens \cite{masci2015fast} | .727 | .746 | .580 | 1   |
+| SCG \cite{ren2016scg} | .739 | .758 | .773 | 1/280|
+| SE-Var \cite{xia2017edge} | .746 | .767 | .803 | 2.5 |
+| OEF \cite{ 반대2015object} | .749 | .772 | .817 | -   |
+| DeepEdge \cite{xie2015deepedge} | .755 | .779 | .838 | 1/5 |
+| DPN \cite{liu2018dynamic} | .763 | .789 | .859 | 1/6 |
+| DeepEdge \cite{xie2015deepedge} | .753 | .772 | .807 | 1/[10^4] |
+| CSENN \cite{liu2017convolutional} | .756 | .775 | .798 | -   |
+| DeepLabv2 \cite{chen2016deeplab} | .756 | .773 | .797 | 1/30 |
+| **HED (ours)**          | **.782** | **.804** | **.833** | **2.5; 1/1.2** |
+```
+
+Note: Replace `image_url` with the actual URL or placeholder for the image. Ensure all methods and references in the table are correctly cited per the scientific standards.
+
+# DL4CV_Week02_Part01.pdf - Page 43
+
+```markdown
+# Homework
+
+## Homework Readings
+
+### Homework
+
+#### Readings
+- [x] Chapter 2, Szeliski, *Computer Vision: Algorithms and Applications*
+
+#### Questions
+- [ ] How do you go from Canny edges to straight lines? (Answer in next lecture)
+
+---
+
+**Source**: Derek Hoiem
+
+*Vineeth N B (IIIT-H)*
+
+## §2.1 Edge Detection
+
+![]()
+
+35 / 36
+```
+
+# DL4CV_Week02_Part01.pdf - Page 44
+
+```markdown
+# References
+
+- John F. Canny. **"A Computational Approach to Edge Detection"**. In: *IEEE Transactions on Pattern Analysis and Machine Intelligence* PAMI-8 (1986), pp. 679–698.
+
+- David Martin, Charless Fowlkes, and Jitendra Malik. **"Learning to Detect Natural Image Boundaries Using Local Brightness, Color, and Texture Cues"**. In: *IEEE Transactions on Pattern Analysis and Machine Intelligence* 26 (June 2004), pp. 530–49.
+
+- Richard Szeliski. *Computer Vision: Algorithms and Applications*. Texts in Computer Science. London: Springer-Verlag, 2011.
+
+- Piotr Dollár and Lawrence Zitnick. **"Structured Forests for Fast Edge Detection"**. In: *Proceedings of the International Conference on Computer Vision*. IEEE, Dec. 2013.
+
+- Phillip Isola et al. **"Crisp Boundary Detection Using Pointwise Mutual Information"**. In: *Proceedings of the European Conference on Computer Vision*. 2014.
+
+- Saining Xie and Zhuowen Tu. **"Holistically-Nested Edge Detection"**. In: *International Journal of Computer Vision* 125 (2015), pp. 3–18.
+```
+

@@ -1,0 +1,1650 @@
+# DL4CV_Week07_Part02.pdf - Page 1
+
+```markdown
+# Deep Learning for Computer Vision
+
+## CNNs for Object Detection - II
+
+### Vineeth N Balasubramanian
+
+**Department of Computer Science and Engineering**
+
+**Indian Institute of Technology, Hyderabad**
+
+---
+
+Vineeth N B (IIT-H) &7.2 CNNs for Detection - II &1 / 33
+
+---
+
+![IIT Hyderabad Logo](image_url)
+
+```
+
+# DL4CV_Week07_Part02.pdf - Page 2
+
+```markdown
+# Exercise: Smooth L1 Loss
+
+**Why is Smooth L1 loss less sensitive to outliers than L2 loss?**
+
+If the deviation of predicted output from ground truth is very high, squaring the difference explodes the gradient. This can happen in L2 loss for outliers, and is mitigated in the Smooth L1 loss.
+
+*Vineeth N B (IIT-H)*
+*§7.2 CNNs for Detection - II*
+*2 / 33*
+```
+
+# DL4CV_Week07_Part02.pdf - Page 3
+
+```markdown
+# Recall: Contemporary Object Detection Methods
+
+## Region Proposal-based:
+
+- Two-stage detection framework
+- In the first stage, potential object regions are proposed (through methods such as Selective Search or Region Proposal Network, which we will see soon)
+- In the second stage, a classifier processes the candidate regions
+- More robust in performance but slower
+
+## Dense Sampling-based:
+
+- One-stage detection framework
+- Integrates region proposals and detection by acting on a dense sampling of possible locations
+- Simple and fast but performance not as good as Region Proposal-based methods
+```
+
+# DL4CV_Week07_Part02.pdf - Page 4
+
+```markdown
+# You Only Look Once (YOLO): v1
+
+- Single-stage detector based on Overfeat
+- Speed with good performance the main aim
+
+![Image of YOLO Process](image_url)
+
+1. Resize image.
+2. Run convolutional network.
+3. Non-max suppression.
+
+![Before and After YOLO](image_url)
+
+---
+
+Redmon et al, *You Only Look Once: Unified, Real-Time Object Detection*, CVPR 2016
+
+Vineeth N B (IIT-H)
+
+§7.2 CNNs for Detection - II
+
+---
+
+Page 4 / 33
+```
+
+# DL4CV_Week07_Part02.pdf - Page 5
+
+```markdown
+# YOLO v1: Unified Detection
+
+![YOLO v1 Illustration](image_url)
+
+- **Vineeth N B (IIIT-H)**
+- **§7.2 CNNs for Detection - II**
+
+## YOLO v1: Unified Detection
+
+### Steps in YOLO v1
+
+1. **S × S Grid on Input**
+   - Input image is divided into an S × S grid.
+   - Each grid cell is responsible for detecting objects within its bounding box.
+
+   ![Input Grid](image_url)
+
+2. **Bounding Boxes + Confidence**
+   - Each cell predicts bounding boxes and confidence levels for the presence of objects.
+   - Bounding boxes are defined by coordinates and dimensions.
+   - Confidence levels indicate the likelihood that an object is present.
+
+   ![Bounding Boxes](image_url)
+
+3. **Class Probability Map**
+   - Each cell produces a class probability map.
+   - This map indicates the likelihood that a particular class of object is present within the bounding box.
+
+   ![Class Probability Map](image_url)
+
+4. **Final Detections**
+   - The final detection results are obtained by combining bounding boxes and class probabilities.
+   - Non-maximum suppression (NMS) is applied to eliminate redundant detections.
+
+   ![Final Detections](image_url)
+
+### Key Concepts
+
+- **Unified Detection**: YOLO v1 provides a single-stage detection method that is faster than traditional two-stage detectors.
+- **Real-Time Performance**: The model aims to achieve real-time object detection by processing the entire image in one pass.
+- **Bounding Boxes + Confidence**: Each grid cell outputs bounding boxes and confidence scores, enabling fast and efficient detection.
+- **Class Probability Map**: The class probability map helps in identifying the specific class of the detected objects.
+- **Non-Maximum Suppression (NMS)**: Applied to refine the final detections and remove overlapping bounding boxes.
+
+### Applications
+
+- **Real-Time Applications**: Suitable for real-time systems such as surveillance, autonomous vehicles, and robotic vision.
+- **Efficiency**: Provides a balance between accuracy and speed, making it ideal for applications where real-time processing is critical.
+- **Flexibility**: Can be adapted for various object detection tasks with different datasets.
+
+```
+
+# DL4CV_Week07_Part02.pdf - Page 6
+
+```markdown
+# YOLO v1: Unified Detection
+
+![YOLO v1 Unified Detection Diagram](diagram.png)
+
+**Divides image into S x S grid.**
+
+![S x 5 grid on input](input_grid.png)
+
+**Each grid cell responsible for the object with coinciding center.**
+
+**Bounding boxes + confidence**
+
+![Class probability map](class_probability_map.png)
+
+**Final detections**
+
+![Final detections](final_detections.png)
+
+*Vineeth N B (IIIT-H)*
+
+*§7.2 CNNs for Detection - II*
+
+*6 / 33*
+```
+
+# DL4CV_Week07_Part02.pdf - Page 7
+
+```markdown
+# YOLO v1: Unified Detection
+
+## Summary of YOLO v1 Process
+
+### Key Concepts
+
+- **YOLO v1**: Stands for You Only Look Once, version 1, a real-time object detection system.
+- **Unified Detection**: The system detects objects in one evaluation, making it faster than other methods at the time.
+
+### Process Overview
+
+1. **Input Image Grid**:
+   - The input image is divided into an S x S grid.
+   - Each grid cell is responsible for predicting multiple bounding boxes and associated confidence scores.
+
+2. **Bounding Boxes and Confidence**:
+   - Each grid cell predicts B bounding boxes and assigns confidence scores.
+   - These predictions are shown in the middle image with a grid overlay.
+
+3. **Class Probability Map**:
+   - The system generates a class probability map which helps in identifying the class of each detected object.
+   - The map is color-coded to represent different classes.
+
+4. **Final Detections**:
+   - The system outputs the final detections, shown as bounding boxes around objects in the image with class labels and confidence scores.
+
+### Visual Representation
+
+#### S x S Grid on Input
+![Input Grid](path_to_image)
+
+#### Bounding Boxes + Confidence
+![Bounding Boxes](path_to_image)
+
+#### Class Probability Map
+![Class Probability Map](path_to_image)
+
+#### Final Detections
+![Final Detections](path_to_image)
+
+### Attribution
+
+- **Author**: Vineeth N B (IIT-H)
+- **Course**: CNNs for Detection - II
+- **Slide Number**: 7 / 33
+
+---
+
+This detailed markdown format ensures the scientific integrity of the content, accurately representing the key concepts and visuals described in the original scientific text or slides.
+```
+
+# DL4CV_Week07_Part02.pdf - Page 8
+
+```markdown
+# YOLO v1: Unified Detection
+
+![YOLO v1 Diagram](image-url)
+
+**Vineeth N B (IIT-H)**
+
+## Slide 8/33
+
+### YOLO v1: Unified Detection
+
+#### Input and Grid
+- **S x S grid on input**: The input image is divided into a grid of `S x S` cells.
+- **Bounding boxes + confidence**: Each grid cell predicts bounding boxes and associated confidence scores.
+- **Class probability map**: 
+
+  Each grid cell also predicts class probabilities:
+  \[
+  \text{Pr}(\text{Class}|\text{Object})
+  \]
+
+#### Final Detections
+- **Predictions can be encoded as**: 
+  \[
+  S \times S \times (B \times 5 + C)
+  \]
+  where:
+  - \( S \) is the number of grid cells.
+  - \( B \) is the number of bounding boxes.
+  - \( C \) is the number of classes.
+
+**Visualization**: 
+
+- **Left Image**: Displays the `S x S` grid on the input image.
+- **Middle Image**: Highlights bounding boxes and class probabilities.
+- **Right Image**: Shows the final detections with bounding boxes around objects.
+
+---
+
+### Slide 8/33
+
+#### Section: 7.2 CNNs for Detection - II
+
+- **Introduction to YOLO (You Only Look Once)**:
+  - YOLO divides the image into a grid of `S x S` cells.
+  - Each cell predicts bounding boxes and class probabilities.
+
+- **Bounding Box Predictions**:
+  - Each cell predicts `B` bounding boxes with 5 parameters: \((x, y, w, h, confidence)\).
+
+- **Class Probabilities**:
+  - Each cell also predicts the conditional class probabilities for the objects within the bounding box.
+
+- **Final Representation**:
+  - The predictions are encoded in a tensor of size `S x S x (B * 5 + C)`.
+
+---
+
+This markdown format retains the structure and scientific content of the original slide, ensuring accurate representation of the technical information presented.
+```
+
+# DL4CV_Week07_Part02.pdf - Page 9
+
+```markdown
+# YOLO v1: Bounding Boxes and Confidence Scores
+
+## Bounding Boxes:
+
+- Each bounding box gives 4 coordinates \(x, y, w, h\)
+  - \((x, y)\) = Coordinates representing center of the object relative to the grid cell
+  - \((w, h)\) = Width and height of the object relative to the whole image
+
+![NPTEL Logo](https://via.placeholder.com/150)
+
+Vineeth N B (IIT-H) §7.2 CNNs for Detection - II 9 / 33
+```
+
+# DL4CV_Week07_Part02.pdf - Page 10
+
+```markdown
+# YOLO v1: Bounding Boxes and Confidence Scores
+
+## Bounding Boxes:
+
+- Each bounding box gives 4 coordinates \( x, y, w, h \)
+  - \( (x, y) \) = Coordinates representing center of the object relative to the grid cell
+  - \( (w, h) \) = Width and height of the object relative to the whole image
+
+## Confidence Score:
+
+- Reflects how confident the model is that the box contains an object and also how accurate it thinks the box is
+  - Formally,
+
+    \[
+    \text{Confidence} = Pr(\text{Object}) \times IOU_{\text{truth}}^{\text{pred}}
+    \]
+
+![Image](image_placeholder.png)
+
+**Vineeth N B (IIIT-H)**
+
+**§7.2 CNNs for Detection - II**
+
+**9 / 33**
+```
+
+# DL4CV_Week07_Part02.pdf - Page 11
+
+```markdown
+# YOLO v1: Conditional Class Probabilities
+
+- Regardless of number of boxes $B$, we only predict one set of class probabilities per grid cell
+- At test time, class-specific confidence scores for each box are given by:
+
+  $$Pr(Class_i | Object) \times Pr(Object) \times IOU_{truth}^{jtruth_{pred}} = Pr(Class_i) \times IOU_{truth}^{jtruth_{pred}}$$
+
+![NPTEL](image_placeholder)
+
+Vineeth N B (IIT-H)
+
+§7.2 CNNs for Detection - II
+
+10 / 33
+```
+
+# DL4CV_Week07_Part02.pdf - Page 12
+
+```markdown
+# YOLO v1: Loss Function
+
+Loss function used to train YOLO v1 given by:
+
+$$
+\lambda_{\text{coord}} \sum_{i=0}^{S^2} \sum_{j=0}^{B} \mathbb{1}_{ij}^{\text{obj}} \left[(x_i - \hat{x}_i)^2 + (y_i - \hat{y}_i)^2\right]
+$$
+
+$$
++ \lambda_{\text{coord}} \sum_{i=0}^{S^2} \sum_{j=0}^{B} \mathbb{1}_{ij}^{\text{obj}} \left[( \sqrt{w_i} - \sqrt{\hat{w}_i})^2 + ( \sqrt{h_i} - \sqrt{\hat{h}_i})^2\right]
+$$
+
+$$
++ \lambda_{\text{noobj}} \sum_{i=0}^{S^2} \sum_{j=0}^{B} \mathbb{1}_{ij}^{\text{noobj}} (C_i - \hat{C}_i)^2
+$$
+
+$$
++ \sum_{i=0}^{S^2} \sum_{j=0}^{B} \mathbb{1}_{ij}^{\text{obj}} \sum_{c \in \text{classes}} (p_i(c) - \hat{p}_i(c))^2
+$$
+
+where:
+
+- $\mathbb{1}_{ij}^{\text{obj}}$ denotes if object appears in cell $i$
+- $\mathbb{1}_{ij}^{\text{obj}}$ denotes that $j^{\text{th}}$ bounding box predictor in cell $i$ is 'responsible' for that prediction
+
+![Diagram](image-url)
+
+Vineeth N B (IIIT-H)
+
+§7.2 CNNs for Detection - II
+
+11 / 33
+```
+
+# DL4CV_Week07_Part02.pdf - Page 13
+
+```markdown
+# YOLO v1: Limitations
+
+![NPTEL Logo](placeholder_for_nptel_logo)
+
+Vineeth N B (IIT-H) §7.2 CNNs for Detection - II
+
+## Content
+
+### YOLO v1: Limitations
+
+1. **Reduced Performance with Small Objects**
+   - YOLO v1's performance drops significantly for smaller objects.
+   - Smaller objects are often detected inaccurately or missed entirely.
+
+2. **Poor Localization Accuracy**
+   - YOLO v1 tends to have poor localization accuracy compared to region-based methods.
+   - The bounding boxes predicted by YOLO v1 are often not precise.
+
+3. **Class Imbalance Handling**
+   - YOLO v1 struggles with class imbalances.
+   - Objects of less frequent classes may be harder to detect.
+
+4. **Lack of Contextual Understanding**
+   - YOLO v1 does not capture context well.
+   - It fails to utilize context information that could improve detection.
+
+5. **Complex Backgrounds**
+   - Performance degrades in complex background settings.
+   - YOLO v1 performs better in simpler backgrounds.
+
+6. **Inconsistent Detection Results**
+   - The consistency of detection results is not high.
+   - Results may vary significantly across similar inputs.
+
+### Notes
+
+- **Reduced Performance with Small Objects**: Smaller objects often get overlooked or misclassified.
+- **Poor Localization Accuracy**: Bounding boxes are often off-center or improperly sized.
+- **Class Imbalance Handling**: Rare classes may be missed frequently.
+- **Lack of Contextual Understanding**: YOLO v1 does not leverage contextual information effectively.
+- **Complex Backgrounds**: Performance drops in intricate background scenarios.
+- **Inconsistent Detection Results**: Similar inputs may yield variable detection results.
+
+### Visual Representation
+
+(Include any diagrams or images that visually represent the limitations here)
+
+---
+
+#### Footnote
+
+Vineeth N B (IIT-H) §7.2 CNNs for Detection - II
+
+```
+
+# DL4CV_Week07_Part02.pdf - Page 14
+
+```markdown
+# YOLO v1: Limitations
+
+- Detects only a small number of objects
+- Cannot detect objects that are small or close due to strong spatial constraints
+- High localization error
+- Relatively low recall
+
+![NPTEL Logo](image_placeholder.png)
+
+Vineeth N B (IIT-H) §7.2 CNNs for Detection - II
+
+---
+
+Page 12 / 33
+```
+
+# DL4CV_Week07_Part02.pdf - Page 15
+
+```markdown
+# YOLO v2: Anchor Boxes
+
+![YOLO v2 Diagram](image_url)
+
+**Vineeth N B (IIIT-H) §7.2 CNNs for Detection - II**
+
+## Anchor Boxes
+
+### Diagram Elements
+
+- **\( c_x \)**: Width of the cell
+- **\( c_y \)**: Height of the cell
+- **\( p_x \)**: Center of the box along the x-axis
+- **\( p_y \)**: Center of the box along the y-axis
+- **\( b_x \)**: Sizes of the bounding box coordinates
+- **\( b_y \)**: Sizes of the bounding box coordinates
+
+### Formulas
+
+1. **Bounding Box Coordinates**:
+   \[
+   b_x = \sigma(t_x) + c_x \quad \text{and} \quad b_y = \sigma(t_y) + c_y
+   \]
+   \[
+   b_w = p_w e^{t_w} \quad \text{and} \quad b_h = p_h e^{t_h}
+   \]
+
+### Diagrams
+
+The diagram shows the following:
+
+- **Grid cells**: Represented by solid black lines
+- **Anchor boxes**: Represented by dashed lines
+- **Predicted bounding box**: Represented by solid blue lines
+- **Offsets**: \(\sigma(t_x)\) and \(\sigma(t_y)\) indicate the offsets in the x and y directions
+- **Dimensions**: \(\sigma(t_w)\) and \(\sigma(t_h)\) indicate the width and height scaling factors
+
+### Equations
+
+The bounding box offsets and dimensions are calculated as follows:
+
+- **Offsets**:
+  \[
+  b_x = \sigma(t_x) + c_x
+  \]
+  \[
+  b_y = \sigma(t_y) + c_y
+  \]
+
+- **Dimensions**:
+  \[
+  b_w = p_w e^{t_w}
+  \]
+  \[
+  b_h = p_h e^{t_h}
+  \]
+
+These parameters help in determining the position and size of the bounding boxes within the grid cells.
+```
+
+# DL4CV_Week07_Part02.pdf - Page 16
+
+```markdown
+# YOLO v2: Anchor Boxes
+
+![YOLO v2 Diagram](data:image/png;base64,...) 
+
+- **Predicts 5 coordinates per anchor box:**
+  - \( t_x, t_y, t_h, t_w, t_o \)
+
+## Diagram Explanation
+
+- \( c_x \): Center coordinate in the x-axis.
+- \( c_y \): Center coordinate in the y-axis.
+- \( c_w \): Width of the anchor box.
+- \( c_h \): Height of the anchor box.
+
+- \( p_x \): Predicted center coordinate in the x-axis.
+- \( p_y \): Predicted center coordinate in the y-axis.
+- \( p_w \): Predicted width of the anchor box.
+- \( p_h \): Predicted height of the anchor box.
+
+- \( b_x \): Bound box center coordinate in the x-axis.
+- \( b_y \): Bound box center coordinate in the y-axis.
+- \( b_w \): Bound box width.
+- \( b_h \): Bound box height.
+
+## Equations
+
+- \( \sigma(t_x) \): Predicted values for coordinates.
+- \( \sigma(t_y) \): Predicted values for coordinates.
+- \( \sigma(t_w) \): Predicted values for width.
+- \( \sigma(t_h) \): Predicted values for height.
+
+### Prediction Calculations
+
+- \( b_x = \sigma(t_x) + c_x \)
+- \( b_y = \sigma(t_y) + c_y \)
+- \( b_w = \sigma(t_w) + c_w \)
+- \( b_h = \sigma(t_h) + c_h \)
+- \( b_x = p_x \cdot e^x \)
+- \( b_y = p_y \cdot e^y \)
+- \( b_w = p_w \cdot e^w \)
+- \( b_h = p_h \cdot e^h \)
+
+## References
+
+- Vineeth N B. (IIIT-H)
+- §7.2 CNNs for Detection - II
+- Slide 13 of 33
+```
+
+# DL4CV_Week07_Part02.pdf - Page 17
+
+```markdown
+# YOLO v2: Anchor Boxes
+
+![YOLO v2 Diagram](image-url)
+
+- Predicts 5 coordinates per anchor box:
+  - \( t_x, t_y, t_h, t_w, t_o \)
+
+- If cell is offset from top left corner of image by \((c_x, c_y)\) and bounding box has width and height \(p_w, p_h\), then predictions correspond to:
+
+  \[
+  \begin{aligned}
+  b_x & = \sigma(t_x) + c_x \\
+  b_y & = \sigma(t_y) + c_y \\
+  b_w & = p_w e^{t_w} \\
+  b_h & = p_h e^{t_h} \\
+  Pr(\text{object}) \times IOU(b, \text{object}) & = \sigma(t_o)
+  \end{aligned}
+  \]
+
+Vineeth N B (IIIT-H) §7.2 CNNs for Detection - II 13 / 33
+```
+
+# DL4CV_Week07_Part02.pdf - Page 18
+
+```markdown
+# Single Shot MultiBox Detector (SSD)^2
+
+![SSD Diagram](image-url)
+
+**SSD**
+
+**Image**
+
+- 300 × 300
+
+**VGG-16**
+
+- Through Conv5_3 layer
+    - 300 × 300
+    - Conv4_3
+        - 38 × 38
+    - Conv5
+        - 19 × 19
+    - Conv6 (FC6)
+        - 19 × 19
+    - Conv7 (FC7)
+        - 19 × 19
+
+**VGG-16 Base Network**
+
+- Conv: 3 × 3 × 1024
+    - 10 × 10
+- Conv: 1 × 1 × 1024
+    - 10 × 10
+- Conv: 3 × 3 × 512 + 2
+    - 5 × 5
+- Conv: 1 × 1 × 256
+    - 5 × 5
+- Conv: 3 × 3 × 256 + 2
+    - 3 × 3
+- Conv: 1 × 1 × 128
+    - 3 × 3
+- Conv: 3 × 3 × 128 + 1
+    - 1 × 1
+
+**Extra Feature Layers**
+
+- Classifier: Conv: 3 × 3 × (Classes + 4)
+    - 19 × 19
+- Classifier: Conv: 3 × 3 × (Classes + 4)
+    - 10 × 10
+- Classifier: Conv: 3 × 3 × (Classes + 4)
+    - 5 × 5
+- Classifier: Conv: 3 × 3 × (Classes + 4)
+    - 3 × 3
+
+**Output**
+
+- Detections 8732 per Class
+    - Non-Maximum Suppression
+    - 74.3 mAP
+    - 59 FPS
+
+---
+
+**References**
+- Liu et al., SSD: Single Shot MultiBox Detector, ECCV 2016
+- Vineeth N B (IIIT-H)
+- §7.2 CNNs for Detection - II
+```
+
+# DL4CV_Week07_Part02.pdf - Page 19
+
+```markdown
+# SSD: Model
+
+## Multi-scale Feature maps for Detection
+
+![Image Description](image_url)
+
+- **Input:**
+  - **SSD:**
+    - Input: 300 x 300 image
+
+- **VGG-16 through Conv5_3 layer:**
+  - Convolutional layers:
+    - Conv4_3: 38 x 38 x 512
+    - Conv5_3: 19 x 19 x 512
+
+- **Classifier and Extra Feature Layers:**
+  - Classifier 1:
+    - Conv: 3 x 3 x 4 x (Classes+4)
+  - Classifier 2:
+    - Conv: 3 x 3 x 6 x (Classes+4)
+  - Additional Convolutional layers:
+    - Conv6: 10 x 10 x 1024
+    - Conv7: 10 x 10 x 1024
+    - Conv8_1: 5 x 5 x 512
+    - Conv8_2: 5 x 5 x 256
+    - Conv9_1: 3 x 3 x 256
+    - Conv9_2: 3 x 3 x 128
+    - Conv10_1: 1 x 1 x 128
+    - Conv10_2: 1 x 1 x 128
+    - Conv11_1: 1 x 1 x 128
+    - Conv11_2: 1 x 1 x 256
+    - Conv12_1: 1 x 1 x 256
+    - Conv12_2: 1 x 1 x 128
+
+- **Detections:**
+  - Detections: 8732
+  - **Non-Maximum Suppression:**
+    - 74.3 mAP
+    - 59 FPS
+
+### Notes:
+- **Feature maps size decreases.**
+- **Scale of detected objects increases.**
+
+---
+_Vineeth N B (IIT-H)_
+
+*§7.2 CNNs for Detection - II*
+
+Page 15 / 33
+```
+
+# DL4CV_Week07_Part02.pdf - Page 20
+
+```markdown
+# SSD: Model
+
+## Exclusive convolutional predictors for each feature map
+
+![SSD Model](image_url)
+
+### SSD Model Architecture
+
+**VGG-16 through Conv5_3 layer**
+
+- **Input:** Image (300x300x3)
+- **Output:** Feature maps at different layers (e.g., Conv4_3, Conv7, Conv9_2, etc.)
+
+**Extra Feature Layers**
+
+- These layers are designed to extract additional features with different convolution filters.
+- Each feature layer uses classifiers with convolution filters (e.g., `Classifier: Conv: 3x3x(4x(Classses+4))`)
+
+**Non-Maximum Suppression**
+
+- **Output:** Detections of 74.3mAP at 59FPS.
+
+### Feature Layer Description
+
+A feature layer of size $m \times n$ with $c$ channels gives $m \times n$ locations (grid cells); bounding box offsets output values relative to grid cell location (like in Faster R-CNN).
+
+**References:**
+
+- Vineeth N B (IIIT-H)
+- "7.2 CNNs for Detection" - II
+
+---
+
+_Sections and content extracted from the provided scientific slide._ 
+
+```
+
+# DL4CV_Week07_Part02.pdf - Page 21
+
+```markdown
+# SSD: Anchor Boxes and Aspect Ratios
+
+![Image with GT boxes](image-with-gt-boxes.png)
+
+![8 x 8 feature map](8x8-feature-map.png)
+
+![4 x 4 feature map](4x4-feature-map.png)
+
+## SSD: Anchor Boxes and Aspect Ratios
+
+1. **Image with GT boxes**
+   - Shows an image with ground truth (GT) boxes.
+
+2. **8 x 8 feature map**
+   - Represents an 8 x 8 feature map.
+
+3. **4 x 4 feature map**
+   - Represents a 4 x 4 feature map.
+
+### Details:
+
+- For each of \( k \) default boxes with different aspect ratios, SSD predicts \( c \) class-specific scores and 4 anchor box offsets.
+- For an \( m \times n \) feature map, there are \( (c + 4)knm \) outputs.
+
+---
+
+**Vineeth N B (IIIT-H)**
+
+**§7.2 CNNs for Detection - II**
+
+**17 / 33**
+```
+
+# DL4CV_Week07_Part02.pdf - Page 22
+
+```markdown
+# SSD: Loss Function
+
+Weighted sum of localization loss (loc) and confidence loss (conf):
+
+\[ L(x, c, l, g) = \frac{1}{N} (L_{conf}(x, c) + \alpha L_{loc}(x, l, g)) \]
+
+where:
+
+- \( x_{ij}^{p} \) is \(\{1,0\}\) if \(i^{th}\) default box matches \(j^{th}\) ground truth box of category \(p\)
+- \( c \) = class probabilities
+- \( l, g \) = predicted and ground truth box parameters
+
+*Vineeth N B. (IIIT-H) §7.2 CNNs for Detection - II*
+
+*Page 18 / 33*
+```
+
+# DL4CV_Week07_Part02.pdf - Page 23
+
+```markdown
+# SSD: Loss Function
+
+- **Localization loss** \(L_{loc}\) **given by:**
+
+\[ L_{loc}(x, l, g) = \sum_{i \in Pos} \sum_{m \in \{cx, cy, w, h\}} x_{ij}^{m} \cdot \text{smooth}_{L1}(l_{i}^{m} - g_{j}^{m}) \]
+
+\[ \hat{g}_{j}^{cx} = \frac{(g_{j}^{cx} - d_{i}^{cx})}{d_{i}^{w}}, \quad \hat{g}_{j}^{cy} = \frac{(g_{j}^{cy} - d_{i}^{cy})}{d_{i}^{h}} \]
+
+\[ g_{j}^{w} = \log \left( \frac{g_{j}^{w}}{d_{i}^{w}} \right), \quad g_{j}^{h} = \log \left( \frac{g_{j}^{h}}{d_{i}^{h}} \right) \]
+
+**Regress offsets for center** \((cx, cy)\) **of anchor box** \((d)\) **and its width** \((w)\) **and height** \((h)\)
+
+*Vineeth N B (IIIT-H) §7.2 CNNs for Detection - II*
+
+*Page 19 / 33*
+```
+
+# DL4CV_Week07_Part02.pdf - Page 24
+
+```markdown
+# SSD: Loss Function
+
+- **Localization loss** \(L_{loc}\) given by:
+
+  \[
+  L_{loc}(x, l, g) = \sum_{i \in Pos} \sum_{m \in \{cx, cy, w, h\}} x_{ij}^{m} \text{smooth}_{L1}(l_{i}^{m} - \hat{g}_{j}^{m})
+  \]
+
+  where
+
+  \[
+  \hat{g}_{j}^{cx} = \frac{(g_{j}^{cx} - d_{i}^{cx})}{d_{i}^{w}}, \quad \hat{g}_{j}^{cy} = \frac{(g_{j}^{cy} - d_{i}^{cy})}{d_{i}^{h}}
+  \]
+
+  \[
+  \hat{g}_{j}^{w} = \log\left(\frac{g_{j}^{w}}{d_{i}^{w}}\right), \quad \hat{g}_{j}^{h} = \log\left(\frac{g_{j}^{h}}{d_{i}^{h}}\right)
+  \]
+
+  Regress offsets for center \((cx, cy)\) of anchor box \((d)\) and its width \((w)\) and height \((h)\).
+
+- **Confidence loss** \(\bar{L}_{conf}\) is softmax loss of class confidences (probabilities):
+
+  \[
+  L_{conf}(x, c) = -\sum_{i \in Pos} x_{ij}^{p} \log(\hat{c}_{i}^{p}) - \sum_{i \in Neg} \log(\hat{c}_{i}^{0})
+  \]
+
+  where
+
+  \[
+  \hat{c}_{i}^{p} = \frac{\exp(c_{i}^{p})}{\sum_{p} \exp(c_{i}^{p})}
+  \]
+
+  Vineeth N B. (IIIT-H)
+
+  §7.2 CNNs for Detection - II
+
+  19 / 33
+```
+
+This markdown format ensures the scientific integrity of the content, with properly formatted mathematical formulas and clear sectioning.
+
+# DL4CV_Week07_Part02.pdf - Page 25
+
+```markdown
+# SSD: Practical Implementation
+
+## Hard Negative Mining:
+
+- Similar to Faster R-CNN, most anchor boxes are negative
+- To counter it, select negative examples that have highest confidence loss such that ratio between negatives and positives is ~ 3 : 1
+
+![NPTEL Logo](image_url)
+
+Vineeth N B (IIT-H) §7.2 CNNs for Detection - II
+
+Page 20 / 33
+```
+
+# DL4CV_Week07_Part02.pdf - Page 26
+
+```markdown
+# SSD: Practical Implementation
+
+## Hard Negative Mining:
+
+- Similar to Faster R-CNN, most anchor boxes are negative
+- To counter it, select negative examples that have highest confidence loss such that ratio between negatives and positives is ≈ 3 : 1
+
+## Data Augmentation: Training samples are obtained as below:
+
+- Use original image
+- Randomly sample a patch, such that minimum IoU with objects is in {0.1, 0.3, 0.5, 0.7, 0.9}
+
+![Figure Placeholder](image_url)
+
+*Vineeth N B. (IIIT-H) §7.2 CNNs for Detection - II*
+
+*Page 20 / 33*
+```
+
+# DL4CV_Week07_Part02.pdf - Page 27
+
+```markdown
+# SSD: Performance
+
+| Method                   | mAP  | FPS | batch size | # Boxes | Input resolution     |
+|--------------------------|------|-----|------------|---------|---------------------|
+| Faster R-CNN (VGG16)     | 73.2 | 7   | 1          | ~ 6000  | ~ 1000 x 600        |
+| Fast YOLO                | 52.7 | 155 | 1          | 98     | 448 x 448           |
+| YOLO (VGG16)             | 66.4 | 21  | 1          | 98     | 448 x 448           |
+| SSD300                   | 74.3 | 46  | 1          | 8732   | 300 x 300           |
+| SSD512                   | 76.8 | 19  | 1          | 24564  | 512 x 512           |
+| SSD300                   | 74.3 | 59  | 8          | 8732   | 300 x 300           |
+| SSD512                   | 76.8 | 22  | 8          | 24564  | 512 x 512           |
+
+*Vineeth N B. (IIIT-H)*
+*§7.2 CNNs for Detection - II*
+```
+
+# DL4CV_Week07_Part02.pdf - Page 28
+
+```markdown
+# Feature Pyramid Network (FPN)<sup>3</sup>
+
+- Feature maps from initial layers (which are high resolution) cannot be used for detection
+- FPN provides a top-down pathway to construct higher resolution layers from a semantically rich layer
+
+![FPN Diagram](image_url)
+
+<sup>3</sup> Lin et al., Feature Pyramid Networks for Object Detection, CVPR 2017
+
+Vineeth N B (IIT-H) 
+
+## Section Notes
+
+- **High resolution** refers to the initial layers of the network which contain detailed but less abstract features.
+- **Semantically rich layer** refers to layers in the network which contain more abstract and meaningful features for object detection.
+- **Detection** refers to the process of identifying objects within the image.
+
+## Image Description
+
+- The diagram illustrates the feature pyramid network (FPN) structure.
+- The bottom layer represents the original input image.
+- The middle layers represent intermediate feature maps.
+- The top layer represents the highest level of abstraction with rich features for detection.
+- The arrows indicate the flow of data from lower resolution, less semantically rich layers to higher resolution, semantically rich layers.
+- Text annotations indicate:
+  - "Has rich features for detection" at the top layer.
+  - "Features not semantically strong for detection" at the lower layer.
+```
+
+# DL4CV_Week07_Part02.pdf - Page 29
+
+```markdown
+# Feature Pyramid Network
+
+## Overview
+
+1. **Featurized image pyramid**
+2. **Single feature map**
+3. **Pyramidal feature hierarchy**
+4. **Feature Pyramid Network**
+
+### (a) Featurized image pyramid
+- Multiple images at different scales are used to create a pyramid of features.
+- Each level of the pyramid captures different levels of detail.
+
+### (b) Single feature map
+- A single feature map is used to capture features at different scales.
+- This map is created by processing the image through a feature extractor.
+
+### (c) Pyramidal feature hierarchy
+- A hierarchical structure is used to capture different levels of detail in the image.
+- Different levels of the hierarchy correspond to different scales of the feature map.
+
+### (d) Feature Pyramid Network
+- Combines the ideas of featurized image pyramid and pyramidal feature hierarchy.
+- Creates high-resolution, semantically stronger features by combining multiple levels of the feature hierarchy.
+- Each level of the hierarchy contributes to the final prediction.
+
+---
+
+**Reference**: Vineeth N B. (IIT-H) §7.2 CNNs for Detection - II
+
+```
+
+# DL4CV_Week07_Part02.pdf - Page 30
+
+```markdown
+# Feature Pyramid Network: Methodology
+
+![Feature Pyramid Network Diagram](image_url)
+
+**Vineeth N B (IIIT-H)**
+**§7.2 CNNs for Detection - II**
+**24 / 33**
+
+## Methodology
+
+The Feature Pyramid Network (FPN) method involves several key steps and components as depicted in the diagram.
+
+### Key Components
+
+1. **ResNet Architecture**
+   - **Maxpool Subsampling**: 
+     - The image is first processed through the ResNet architecture. 
+     - Maxpool subsampling is applied to reduce the spatial dimensions by a factor of 2.
+   - **Convolutional Layers**:
+     - The layers include:
+       - `conv1 (C1) stride 2`
+       - `conv2 (C2) stride 4`
+       - `conv3 (C3) stride 8`
+       - `conv4 (C4) stride 16`
+       - `conv5 (C5) stride 32`
+     - Each layer consists of 1x1 convolutions which give a 256-dimensional output.
+
+2. **Upsampling Process**
+   - Upsampling is performed to increase the spatial resolution of the feature maps.
+   - This involves:
+     - Applying 1x1 convolutions to the feature maps from different stages of the ResNet.
+     - Intermediate feature maps are labeled as M2, M3, M4, and M5.
+   - The upsampled feature maps are then labeled as P2, P3, P4, and P5.
+
+### Additional Details
+
+- **Bottom-up Path**:
+  - The image is passed through several convolutional layers, each reducing the spatial dimensions.
+  - Stride values indicate the reduction factor at each stage.
+
+- **Top-down Path**:
+  - Upsampling is performed to generate feature maps at different scales.
+  - Each stage involves:
+    - Applying a 1x1 convolution.
+    - Combining the upsampled feature maps with corresponding feature maps from the bottom-up path.
+
+### Notes
+
+- All convolutional feature maps are treated with a 1x1 convolution with 256 channels.
+
+This methodology facilitates the generation of multi-scale feature maps, which are essential for various tasks such as object detection and instance segmentation.
+```
+
+# DL4CV_Week07_Part02.pdf - Page 31
+
+```markdown
+# Feature Pyramid Network: Methodology
+
+![Feature Pyramid Network Diagram](image_url)
+
+- **All convolutional feature maps are treated with a \(1 \times 1\) convolution with 256 channels**
+- **M5 is upsampled by a factor of 2 (Maxpool at \( \frac{1}{2} \times \frac{1}{2} \))**
+
+## Diagram Explanation
+
+- **Bottom-Up Path:**
+  - `conv1 (C1)`: stride 2
+  - `conv2 (C2)`: stride 4
+  - `conv3 (C3)`: stride 8
+  - `conv4 (C4)`: stride 16
+  - `conv5 (C5)`: stride 32
+
+- **Top-Down Path:**
+  - **Maxpool Subsampling**
+  - **Upsampling**
+  - **1x1 Convolution gives 256-d output**
+
+### ResNet
+
+- **ResNet Architecture:**
+  - Convolutional layers with different strides
+  - Maxpooling and Upsampling processes leading to multiple feature maps (M2, M3, M4, M5)
+
+### Image Processing
+
+- **Image Input**: Start of the processing pipeline
+- **Maxpool Subsampling**: Reduces the spatial dimensions
+- **Upsampling**: Increases the spatial dimensions of specific feature maps
+- **1x1 Convolution**: Ensures that each feature map has 256 channels
+
+---
+
+Vineeth N B (IIT-H)
+
+## Section Reference: §7.2 CNNs for Detection - II
+
+Page Number: 24 / 33
+```
+
+# DL4CV_Week07_Part02.pdf - Page 32
+
+```markdown
+# Feature Pyramid Network: Methodology
+
+![Feature Pyramid Network Diagram](attachment:image.png)
+
+- **All convolutional feature maps are treated with a 1 × 1 convolution with 256 channels**
+
+- **M5 is upsampled by a factor of 2 (Maxpool at 1/2 × 1/2)**
+
+- **M5 and C4 signals are element-wise added to give M4; similarly followed in the downward direction**
+
+## ResNet
+- **Maxpool Subsampling**
+
+### Convolutional Layers
+
+1. **conv1 (C1)**
+   - Stride 1, 2
+
+2. **conv2 (C2)**
+   - Stride 4
+
+3. **conv3 (C3)**
+   - Stride 8
+
+4. **conv4 (C4)**
+   - Stride 16
+
+5. **conv5 (C5)**
+   - Stride 32
+
+### Upsampling and Element-wise Addition
+
+- **M5 upsampled by a factor of 2 (Maxpool at 1/2 × 1/2)**
+
+- **M5 and C4 signals element-wise added to give M4**
+
+- **Similar process followed in the downward direction**
+
+## Structural Summary
+1. **Bottom-up Pathway**
+   - Image input
+   - Maxpool Subsampling across convolutional layers (C1 to C5)
+
+2. **Top-down Pathway**
+   - Convolutional Feature Maps treated with 1 × 1 convolution
+   - Upsampling by a factor of 2 (Maxpool at 1/2 × 1/2)
+   - Element-wise addition of signals (M5 and C4) to generate M4
+
+## Notes
+- **1 × 1 Convolution** provides an output with 256 channels.
+- **Maxpool Subsampling** is used for downsampling.
+- **Element-wise addition** is utilized for fusing multi-scale features.
+
+Vineeth N B (IIT-H) 
+§7.2 CNNs for Detection - II
+```
+
+# DL4CV_Week07_Part02.pdf - Page 33
+
+# Feature Pyramid Network: Methodology
+
+## Diagram Description
+
+![Feature Pyramid Network Diagram](image_url)
+
+The Feature Pyramid Network (FPN) is illustrated with the following key components and processes:
+
+1. **ResNet**: 
+   - The network starts with an input image processed through a series of convolutional layers labeled as `conv1` to `conv5`, each with specified strides.
+   - The layers are organized from `conv1 (stride 2)` to `conv5 (stride 32)`.
+
+2. **Maxpool Subsampling**:
+   - Maxpooling is applied at different stages of the network to reduce the spatial dimensions of the feature maps.
+
+3. **Top-Down Path**:
+   - The network includes a top-down pathway that upsamples feature maps.
+   - M5 is upsampled by a factor of 2 using Maxpool at `1/2 x 1/2`.
+
+4. **Element-wise Addition**:
+   - M5 and C4 signals are element-wise added to produce M4, followed similarly in the downward direction.
+
+5. **Convolution Operations**:
+   - All convolutional feature maps are treated with a `1 x 1` convolution that gives a 256-dimensional output.
+   - A `3 x 3` convolution is used to reduce the aliasing effect of the feature maps.
+
+### Key Points:
+- **Convolution Feature Maps**:
+  - All convolutional feature maps are treated with a `1 x 1` convolution with 256 channels.
+- **Upsampling**:
+  - M5 is upsampled by a factor of 2 (Maxpool at `1/2 x 1/2`).
+- **Element-wise Addition**:
+  - M5 and C4 signals are element-wise added to give M4; this process is repeated in the downward direction.
+- **Convolution for Reducing Aliasing**:
+  - A `3 x 3` convolution is used to reduce the aliasing effect of the intermediate feature maps.
+
+### References:
+- Vineeth N B (IIT-H)
+- §7.2 CNNs for Detection - II
+
+Page Number: 24 / 33
+
+---
+
+This markdown format captures the detailed information from the provided scientific slide, ensuring accuracy and maintaining the structure and formatting required for scientific documentation.
+
+# DL4CV_Week07_Part02.pdf - Page 34
+
+```markdown
+# Feature Pyramid Network: Methodology
+
+![Feature Pyramid Network Diagram](image-url)
+
+- **All convolutional feature maps are treated with a 1 × 1 convolution with 256 channels**
+
+- **M5 is upsampled by a factor of 2 (Maxpool at 1/2 × 1/2)**
+
+   ![Maxpool Subsampling](image-url)
+
+- **M5 and C4 signals are element-wise added to give M4; similarly followed in the downward direction**
+
+   ![Upsampling](image-url)
+
+- **3 × 3 convolution is used to reduce aliasing effect of Ms**
+
+- **Finally, Ps are individually fed into exclusive object detectors**
+
+**Credit**: *Jonathan Hui, Medium.com*
+
+*Vineeth N B (IIIT-H)*
+
+§7.2 CNNs for Detection - II
+
+24 / 33
+```
+
+# DL4CV_Week07_Part02.pdf - Page 35
+
+```markdown
+# RetinaNet<sup>4</sup>
+
+**Intuition:** Two-stage detectors are more accurate than one-stage detectors due to lesser class imbalance between background (negative) and object-containing (positive) proposals
+
+## Two-stage Detectors
+
+![Two-stage Detectors](image_url)
+
+- **Selective Search/Region Proposal Network**
+  - Produces 1-2k regions
+  - Lesser background to objects ratio
+
+![Image](image_url)
+
+## One-stage Detectors
+
+![One-stage Detectors](image_url)
+
+- **Dense sampling based Sliding Window**
+  - Produces 100k regions
+  - Very high background to objects ratio
+
+## References
+
+<sup>4</sup> Lin et al. Focal Loss for Dense Object Detection, ICCV 2017
+
+Vineeth N B (IIIT-H)
+
+§7.2 CNNs for Detection - II
+
+---
+
+### Page 25 / 33
+```
+
+# DL4CV_Week07_Part02.pdf - Page 36
+
+```markdown
+# Class Imbalance in Object Detection: The Problems
+
+![Class Imbalance Image](image-url-here)
+
+**Vineeth N B (IIT-H)**
+
+## Slide Content
+
+### Problems with Class Imbalance in Object Detection
+
+**Title:**
+
+- **Class Imbalance in Object Detection: The Problems**
+
+**Content:**
+
+- **Image Description:**
+  - The image depicts a scene with a horse and a person.
+  - The image has annotations highlighting different objects.
+
+- **Annotations and Explanations:**
+  - **Red Annotations:**
+    - Labeled as "Many negative examples, no useful signal."
+  - **Green Annotations:**
+    - Labeled as "Few positive examples, rich information."
+
+- **Key Points:**
+  - **Negative Examples:**
+    - Many negative examples do not provide useful signals.
+  - **Positive Examples:**
+    - Few positive examples are rich in information, which is crucial for accurate detection.
+
+**Footer Information:**
+
+- **Presented by:** Vineeth N B (IIT-H)
+- **Course/Section:** §7.2 CNNs for Detection - II
+- **Slide Number:** 26 / 33
+- **Institute Logo:** NPTEL
+```
+
+# DL4CV_Week07_Part02.pdf - Page 37
+
+```markdown
+# Class Imbalance in Object Detection: The Problems
+
+![Image of Object Detection](https://via.placeholder.com/150)
+
+- **Many negative examples, no useful signal**
+  - **Red box** around object with no useful signal
+  
+- **Few positive examples, rich information**
+  - **Green box** around object with rich information
+
+> **Training is inefficient as easy negatives contribute no useful signal**
+
+_By Vineeth N B (IIIT-H)_
+
+### Slide Details
+- **Slide Number**: 26 / 33
+- **Section**: §7.2 CNNs for Detection - II
+```
+
+# DL4CV_Week07_Part02.pdf - Page 38
+
+```markdown
+# Class Imbalance in Object Detection: The Problems
+
+![Image of object detection](image_url)
+
+- Many negative examples, no useful signal
+- Few positive examples, rich information
+
+- Training is inefficient as easy negatives contribute no useful signal
+- Loss due to easy negatives overwhelms loss due to positives and thereby, training process can lead to degenerate models; hard negative training alleviates it to some extent
+
+*Credit: Sik-Ho Tsang, TowardsDataScience.com*
+
+*Vineeth N B (IIT-H)*
+
+*§7.2 CNNs for Detection - II*
+
+*26 / 33*
+```
+
+# DL4CV_Week07_Part02.pdf - Page 39
+
+```markdown
+# CE Loss is Bad<sup>5</sup>
+
+![Loss Graph](https://via.placeholder.com/150) ![Diagram](https://via.placeholder.com/150)
+
+- **CE Loss for binary classification is typically implemented as:**
+  ```math
+  CE(p, y) = \begin{cases}
+  -\log(p) & \text{if } y = 1 \\
+  -\log(1 - p) & \text{otherwise}
+  \end{cases}
+  ```
+
+- **Can be rewritten as**
+  ```math
+  CE(p, y) = CE(p) = -\log(pp)
+  ```
+
+![ well-classified examples](https://via.placeholder.com/150)
+
+## Equations
+
+- Cross-Entropy (CE) loss:
+  ```math
+  CE(p_h) = -\log(p_h)
+  ```
+
+- Focal Loss (FL) with parameter \(\gamma\):
+  ```math
+  FL(p_h) = -(1 - p_h)^\gamma \log(p_h)
+  ```
+
+## References
+
+<sup>5</sup> Lin et al., Focal Loss for Dense Object Detection, ICCV 2017
+
+Vineeth N B (IIT-H)
+
+§7.2 CNNs for Detection - II
+
+---
+
+*Page 27 / 33*
+```
+
+# DL4CV_Week07_Part02.pdf - Page 40
+
+```markdown
+# CE Loss is Bad
+
+![Graph depicting CE Loss and Focal Loss](image_url)
+
+- **CE(p) = -log(p)**
+- **FL(p) = -(1 - p)^γ * log(p)**
+
+```math
+CE(p, y) = \begin{cases}
+-\log(p) & \text{if } y = 1 \\
+-\log(1 - p) & \text{otherwise}
+\end{cases}
+```
+
+- Can be rewritten as
+  - \( CE(p, y) = CE(p) = -\log(p) \)
+
+- Can be observed in graph \(\gamma = 0\) curve)
+  - that easily classifiable examples \(p >> 0.5)\) incur loss of non-trivial magnitude
+
+Source: Lin et al. Focal Loss for Dense Object Detection, ICCV 2017
+Vineeth N B (IIT-H)
+§7.2 CNNs for Detection - II
+
+---
+
+27 / 33
+```
+
+# DL4CV_Week07_Part02.pdf - Page 41
+
+```markdown
+# RetinaNet: Balanced Cross Entropy and Focal Loss
+
+## Balanced Cross Entropy:
+
+- Introduces a weighting factor \(\alpha \in [0,1]\) which can be inverse class frequency or a hyperparameter
+- \(\alpha\)-balanced CE loss is given by:
+  \[
+  CE(p_t) = -\alpha \log(p_t)
+  \]
+
+![Graph](https://via.placeholder.com/600x300)
+
+- **CE(\(p_t\))**: \(- \log(p_t)\)
+- **FL(\(p_t\))**: \(-(1 - p_t)^\gamma \log(p_t)\)
+
+### Loss Curves for Different \(\gamma\) values:
+- \(\gamma = 0\)
+- \(\gamma = 0.5\)
+- \(\gamma = 1\)
+- \(\gamma = 2\)
+- \(\gamma = 5\)
+
+![Loss Curve](https://via.placeholder.com/600x300)
+
+- **well-classified examples**
+
+*Vineeth N B (IIIT-H) §7.2 CNNs for Detection - II*
+
+*Slide 28 / 33*
+```
+
+# DL4CV_Week07_Part02.pdf - Page 42
+
+```markdown
+# RetinaNet: Balanced Cross Entropy and Focal Loss
+
+## Balanced Cross Entropy:
+
+- Introduces a weighting factor $\alpha \in [0, 1]$ which can be inverse class frequency or a hyperparameter.
+- $\alpha$-balanced CE loss is given by:
+
+  $$CE(p_t) = -\alpha \log(p_t)$$
+
+## Focal Loss:
+
+- Adds a modulating factor $(1 - p_t)^\gamma$ to CE loss, with tunable focusing parameter $\gamma \geq 0$.
+
+  - Focal loss is given by:
+
+    $$FL(p_t) = -(1 - p_t)^\gamma \log(p_t)$$
+
+![Graph of Loss vs Probability of Ground Truth Class](image_url)
+
+- Well-classified examples
+
+**Vineeth N B (IIT-H)**
+
+**§7.2 CNNs for Detection - II**
+
+**28 / 33**
+```
+
+# DL4CV_Week07_Part02.pdf - Page 43
+
+```markdown
+# RetinaNet: Architecture
+
+## FPN + Focal Loss
+
+### Overview
+
+- **ResNet**: The base network used in RetinaNet.
+- **Feature Pyramid Network (FPN)**: Enhances feature maps at different scales.
+- **Class + Box Subnets**: Combines class and bounding box prediction.
+
+### Details
+
+1. **ResNet**: 
+   - Utilized as the backbone for feature extraction.
+   
+2. **Feature Pyramid Net (FPN)**:
+   - Constructed on top of the ResNet to generate multi-scale feature maps.
+   - Combines feature maps from different layers to improve object detection at various scales.
+
+3. **Class + Box Subnets**:
+   - **Class Subnet (Top)**: Handles the classification task, predicting the class of objects.
+   - **Box Subnet (Bottom)**: Predicts the bounding box coordinates for the detected objects.
+
+### Detailed Architectures
+
+#### Class Subnet (Top)
+- **WxH x256 x4**
+  - Width x Height feature maps with 256 channels each, processed through 4 layers.
+
+#### Box Subnet (Bottom)
+- **WxH x256 x4**
+  - Width x Height feature maps with 256 channels each, processed through 4 layers.
+
+### Visual Representation
+
+![Feature Pyramid Net](image_placeholder_url)
+
+### Reference
+- **Vineeth N B (IIT-H)**
+- **§7.2 CNNs for Detection - II**
+- **Slide Number**: 29 / 33
+```
+
+### Notes:
+- **Image Placeholder**: Replace `image_placeholder_url` with the actual URL or filename of the image if available.
+- **Accurately Identify Content**: Ensure that all scientific terms and symbols are correctly represented.
+- **Environment-Specific Terms**: Adjust the content based on specific environment or context if necessary.
+
+# DL4CV_Week07_Part02.pdf - Page 44
+
+```markdown
+# Detector
+
+- **Framework developed by Facebook AI Research (FAIR) to implement state-of-the-art object detection algorithms**
+
+  ![Detector Logo](image_url)
+
+- **Highly flexible providing support across various algorithms and backbone networks**
+
+- **See [Detectron](https://github.com/facebookresearch/detectron2) and [Detectron2](https://github.com/facebookresearch/detectron2) for details**
+
+---
+
+_Vineeth N B (IIT-H)_
+
+_§7.2 CNNs for Detection - II_
+
+_Page 30 / 33_
+```
+
+# DL4CV_Week07_Part02.pdf - Page 45
+
+```markdown
+# Homework
+
+## Readings
+
+- [Object Detection for Dummies, Part 4](#)
+- [YOLO Family: All you want to know](#)
+- [Understanding SSD](#)
+- [Understanding FPN](#)
+- [Understanding RetinaNet](#)
+
+---
+
+Vineeth N B (IIT-H) &7.2 CNNs for Detection - II
+
+NPTEL
+
+---
+
+Page 31 / 33
+```
+
+# DL4CV_Week07_Part02.pdf - Page 46
+
+```markdown
+# Homework
+
+## Exercises
+
+- **YOLO9000 and YOLOv3 were follow-ups of YOLOv2. What was different in these extensions? Find out! (Hint: see the YOLO Family: All you want to know link)**
+
+- **Given two bounding boxes in an image: an upper-left box which is 2 × 2, and a lower-right box which is 2 × 3 and an overlapping region of 1 × 1, what is the IoU between the two boxes?**
+
+- **Consider using YOLO object detector on a 19 × 19 grid, on a detection problem with 20 classes, and with 5 anchor boxes. During training, for each image, you will need to construct an output volume \( y \) as the target value for the neural network; this corresponds to the last layer of the neural network. (\( y \) may include background). What is the dimension of this output volume?**
+
+_Vineeth N B. (IIIT-H)_
+
+_§7.2 CNNs for Detection - II_
+
+_32 / 33_
+```
+
+# DL4CV_Week07_Part02.pdf - Page 47
+
+```markdown
+# References
+
+- Wei Liu et al. **"Ssd: Single shot multibox detector"**. In: *European conference on computer vision*. Springer. 2016, pp. 21–37.
+- Joseph Redmon et al. **"You only look once: Unified, real-time object detection"**. In: *Proceedings of the IEEE conference on computer vision and pattern recognition*. 2016, pp. 779–788.
+- Tsung-Yi Lin et al. **"Feature pyramid networks for object detection"**. In: *Proceedings of the IEEE conference on computer vision and pattern recognition*. 2017, pp. 2117–2125.
+- Tsung-Yi Lin et al. **"Focal loss for dense object detection"**. In: *Proceedings of the IEEE international conference on computer vision*. 2017, pp. 2980–2988.
+- Joseph Redmon and Ali Farhadi. **"YOLO9000: better, faster, stronger"**. In: *Proceedings of the IEEE conference on computer vision and pattern recognition*. 2017, pp. 7263–7271.
+```
+

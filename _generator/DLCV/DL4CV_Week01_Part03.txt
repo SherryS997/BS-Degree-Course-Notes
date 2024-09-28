@@ -1,0 +1,1204 @@
+# DL4CV_Week01_Part03.pdf - Page 1
+
+```markdown
+# Deep Learning for Computer Vision
+
+## Image Formation
+
+### Vineeth N Balasubramanian
+
+**Department of Computer Science and Engineering**
+**Indian Institute of Technology, Hyderabad**
+
+![IIT Hyderabad Logo](image-url)
+
+---
+
+Vineeth N B (IIT-H)
+
+§1.3 Image Formation
+
+---
+
+1 / 18
+```
+
+# DL4CV_Week01_Part03.pdf - Page 2
+
+```markdown
+# Image Formation: An Overview<sup>1</sup>
+
+![Image Formation Diagram](image.png)
+
+- **Credit:** Szeliski, *Computer Vision: Algorithms and Applications*, 2010
+- **Vineeth N B (IIT-H)** §1.3 Image Formation
+
+## Factors
+
+- Light source strength and direction
+- Surface geometry, material and nearby surfaces
+- Sensor capture properties
+- Image representation and colour
+
+<sup>1</sup>Credit: Szeliski, *Computer Vision: Algorithms and Applications*, 2010
+
+---
+
+**Image Formation Diagram:**
+![Image Formation Diagram](image.png)
+
+- **light source**
+- **surface**
+- **image plane**
+- **sensor plane**
+- **optics**
+
+**Variables:**
+- **n**: normal vector
+- **s**: sensor ray direction vector
+```
+
+# DL4CV_Week01_Part03.pdf - Page 3
+
+```markdown
+# Image Formation: An Overview
+
+![Image](image_not_found.png)
+
+- **Factors**
+  - Light source strength and direction
+  - Surface geometry, material and nearby surfaces
+  - Sensor capture properties
+  - Image representation and color
+
+![Diagram](image_not_found.png)
+
+```math
+\overrightarrow{n}
+```
+
+```math
+\overrightarrow{s}
+```
+
+```math
+\text{image plane}
+```
+
+```math
+\text{sensor plane}
+```
+
+```math
+\text{optics}
+```
+
+```math
+\text{surface}
+```
+
+```math
+\text{light source}
+```
+
+## Diagram Explanation
+
+The image formation process depicted in the diagram considers several key factors:
+
+- **Light source strength and direction**: This determines the initial path and intensity of light rays.
+- **Surface geometry, material and nearby surfaces**: These factors influence how light interacts with an object, including reflection and scattering.
+- **Sensor capture properties**: Characteristics of the sensor, such as resolution and sensitivity, affect how light is captured and converted into an image.
+- **Image representation and color**: The final output of the image, including its visual properties, is determined by the combined effects of the above factors.
+
+### References
+
+- Credit: Szeliski, *Computer Vision: Algorithms and Applications*, 2010
+- Vimeeth N B (IIT-H)
+
+---
+
+*Page 2 / 18*
+
+*Section 1.3 Image Formation*
+```
+
+# DL4CV_Week01_Part03.pdf - Page 4
+
+```markdown
+# Related Topics
+
+## Geometry
+**2D Transformations, 3D Transformations, Camera Calibration, Distortion**
+
+## Photometry
+**Lighting, Reflectance and Shading, Optics**
+
+## Colour
+**Physics of Colour, Human Colour, Colour Representation**
+
+## Sensor
+**Human Perception, Camera Design, Sampling and Aliasing, Compression**
+
+*Vineeth N B. (IIIT-H) §1.3 Image Formation 3 / 18*
+```
+
+# DL4CV_Week01_Part03.pdf - Page 5
+
+```markdown
+# Related Topics
+
+## Geometry
+2D Transformations, 3D Transformations, Camera Calibration, Distortion
+
+## Photometry
+Lighting, Reflectance and Shading, Optics
+
+## Colour
+Physics of Colour, Human Colour, Colour Representation
+
+## Sensor
+Human Perception, Camera Design, Sampling and Aliasing, Compression
+
+*We will cover a few relevant topics from these.*
+
+For a detailed understanding, read Chapters 1-5 of the book, *Computer Vision: A Modern Approach* by Forsyth and Ponce.
+
+*Vineeth N B (IIT-H) §1.3 Image Formation 3/18*
+```
+
+# DL4CV_Week01_Part03.pdf - Page 6
+
+```markdown
+# Models of Reflection
+
+## When light hits a surface:
+
+- Some light is **absorbed** (1 - ρ, ρ ≡ albedo);
+  - More absorbed for low albedos
+
+- Some light is reflected diffusively, independent of viewing direction
+  - E.g.: Brick, cloth, rough wood
+  - Lambert's cosine law: Amount of reflected light proportional to cos(θ)
+
+- Some light is reflected specularly, depends on viewing direction
+  - E.g.: Mirror
+
+![Light Reflection Models](image-url)
+
+### Diagrams
+
+#### Absorption
+- Light source
+- Absorption (1 - ρ)
+  ```
+  light source
+  |
+  absorption (1 - ρ)
+  ```
+
+#### Diffuse Reflection
+- Light source
+- Diffuse reflection (ρ)
+  ```
+  light source
+  |
+  diffuse reflection (ρ)
+  ```
+
+#### Specular Reflection
+- Light source
+- Specular reflection
+  ```
+  light source
+  |
+  specular reflection
+  ```
+
+### Credit
+- Derek Høiem, UIUC
+
+### Presented by
+- Vineeth N B (IITH)
+
+### Section
+- §1.3 Image Formation
+
+### Date
+- 4 / 18
+```
+
+*Note: Replace `image-url` with the actual URL or filename of the image if available.*
+
+# DL4CV_Week01_Part03.pdf - Page 7
+
+# Models of Reflection
+
+## When light hits a surface:
+
+- Some light is **absorbed** (1 - ρ, ρ = albedo);
+  - More absorbed for low albedos
+- Some light is **reflected diffusively**, independent of viewing direction
+  - E.g.: Brick, cloth, rough wood
+  - **Lambert's cosine law**: Amount of reflected light proportional to cos(θ)
+- Some light is reflected specularly, depends on viewing direction
+  - E.g.: Mirror
+
+![Diagram](image_url_here)
+
+```markdown
+### Credit: Derek Hoiem, UIUC
+```
+
+```markdown
+### Vineeth N B (IIIT-H)
+```
+
+```markdown
+### §1.3 Image Formation
+```
+
+## Diagram Explanation:
+
+### Absorption
+
+- **Light source**
+- **Absorption** (1 - ρ)
+- Surface shown absorbing light
+
+### Diffuse Reflection
+
+- **Light source**
+- **Diffuse reflection** (ρ)
+- Surface reflecting light in multiple directions
+
+### Specular Reflection
+
+- **Light source**
+- **Specular reflection** (ρ)
+- Shows reflection angle relationships θ_i, θ_r with respect to surface normal n
+
+```math
+θ_i = θ_r
+```
+
+```markdown
+### 4 / 18
+```
+
+# DL4CV_Week01_Part03.pdf - Page 8
+
+```markdown
+# Models of Reflection
+
+## When light hits a surface:
+
+- Some light is **absorbed** (1 - ρ, ρ ≡ albedo);
+  - More absorbed for low albedos
+
+- Some light is **reflected diffusively**, independent of viewing direction
+  - E.g.: Brick, cloth, rough wood
+  - **Lambert's cosine law**: Amount of reflected light proportional to cos(θ)
+
+- Some light is **reflected specularly**, depends on viewing direction
+  - E.g.: Mirror
+
+![Models of Reflection](image_url)
+
+**Absorption**
+
+- light source
+- absorption (1 - ρ)
+  - ![Absorption](image_url)
+
+**Diffuse Reflection**
+
+- light source
+- diffuse reflection ρ
+  - ρ
+  - ![Diffuse Reflection](image_url)
+
+**Specular Reflection**
+
+- light source
+- specular reflection ρ
+  - θ
+  - ![Specular Reflection](image_url)
+
+**Credit:** Derek Hoiem, UIUC
+
+Vineeth N B (IIT-H) §1.3 Image Formation
+
+```
+
+# DL4CV_Week01_Part03.pdf - Page 9
+
+```markdown
+# Models of Reflection
+
+- Most surfaces have both **specular** and **diffuse** components
+- Intensity depends on **illumination angle** because less light comes in at oblique angles
+- **Other possible effects**:
+  - **Transparency**
+  - **Refraction**
+  - **Subsurface scattering**
+  - **Fluorescence, phosphorescence**
+
+- **BRDF - Bidirectional Reflectance Distribution Function**: Model of local reflection that tells how bright a surface appears when viewed from one direction when light falls on it from another
+
+*Credit: Derek Hoiem, UIUC*
+
+![Diagram](image_placeholder)
+
+(Vineeth N B (IIIT-H))
+
+§1.3 Image Formation
+
+5 / 18
+```
+
+# DL4CV_Week01_Part03.pdf - Page 10
+
+```markdown
+# Colour
+
+## Light is composed of a spectrum of wavelengths
+
+![Visible Spectrum](https://example.com/visible_spectrum.png)
+
+### The visible spectrum for humans (light)
+
+The visible spectrum for humans is a part of the electromagnetic spectrum that is detectable to the human eye. It ranges from approximately 400 nm (violet) to 700 nm (red).
+
+**Visible Spectrum Range:**
+- Violet: 400 nm
+- Indigo: 450 nm
+- Blue: 475 nm
+- Green: 525 nm
+- Yellow: 575 nm
+- Orange: 600 nm
+- Red: 700 nm
+
+### Coloured light arriving at sensor involves:
+
+1. **Colour of light source**
+2. **Colour of surface**
+
+### Electromagnetic Spectrum
+
+The electromagnetic spectrum is the range of frequencies (or wavelengths) of electromagnetic radiation and their respective wavelengths in the metric system:
+
+| Frequency  | Wavelength  | Range                  | Electromagnetic Wave Type          |
+|------------|-------------|------------------------|-------------------------------------|
+| **10^24**  | **1 fm**    | Source/ Cosmic radiation | Gamma rays, X-rays                |
+| **10^22**  | **1 pm**    | Cosmic radiation       | Soft X-rays                        |
+| **10^20**  | **1 nm**    | Gamma radiation        | Hard X-rays                        |
+| **10^19**  | **10 pm**   | Gamma radiation        | Soft X-rays                        |
+| **10^18**  | **10 pm**   | Soft X-rays            | Soft X-rays                        |
+| **10^17**  | **10 nm**   | UV radiation           | UV radiation                       |
+| **10^16**  | **1 µm**    | UV radiation           | UV radiation                       |
+| **10^15**  | **1 µm**    | UV radiation           | UV radiation                       |
+| **10^14**  | **1 µm**    | UV/V radiation         | UV/V radiation                     |
+| **10^14**  | **400 nm**  | Visible light (Violet) | Visible light                      |
+| **10^14**  | **450 nm**  | Visible light (Indigo) | Visible light                      |
+| **10^14**  | **475 nm**  | Visible light (Blue)   | Visible light                      |
+| **10^14**  | **525 nm**  | Visible light (Green)  | Visible light                      |
+| **10^14**  | **575 nm**  | Visible light (Yellow) | Visible light                      |
+| **10^14**  | **600 nm**  | Visible light (Orange) | Visible light                      |
+| **10^14**  | **700 nm**  | Visible light (Red)    | Visible light                      |
+| **10^14**  | **750 nm**  | Near infrared           | Near infrared                       |
+| **10^14**  | **1000 nm** | Infrared               | Infrared                           |
+| **10^13**  | **1 µm**    | Infrared               | Infrared                           |
+| **10^12**  | **10 µm**   | Infrared               | Infrared                           |
+| **10^11**  | **100 µm**  | Infrared               | Infrared                           |
+| **10^10**  | **1 mm**    | Infrared               | Infrared                           |
+| **10^9**   | **1 cm**    | Microwaves              | Microwaves                          |
+| **10^8**   | **10 cm**   | Microwaves              | Microwaves                          |
+| **10^7**   | **1 m**     | Microwaves              | Microwaves                          |
+| **10^6**   | **10 m**    | Microwaves              | Microwaves                          |
+| **10^5**   | **100 m**   | Microwaves              | Microwaves                          |
+| **10^4**   | **1 km**    | Microwaves              | Microwaves                          |
+| **10^3**   | **10 km**   | Microwaves              | Microwaves                          |
+| **10^2**   | **100 km**  | Radio waves             | Radio waves                         |
+| **10^1**   | **1000 km** | Radio waves             | Radio waves                         |
+| **10^0**   | **10000 km**| Radio waves             | Radio waves                         |
+| **10^-1**  | **100000 km**| Radio waves             | Radio waves                         |
+
+### Credit: Electromagnetic spectrum by Horst Frank, Jailbird and Phrood. Under CC 3.0 License
+
+*Vineeth N B (IIT-H) §1.3 Image Formation*
+```
+
+# DL4CV_Week01_Part03.pdf - Page 11
+
+```markdown
+# Bayer Grid/Filter
+
+- Bayer arrangement of color filters on a camera sensor
+- Filter pattern is 50% green, 25% red and 25% blue
+- To obtain full-colour image, demosaicing algorithms used - surrounding pixels used to estimate values for a particular pixel.
+
+![Bayer Filter Diagram](https://example.com/bayer_filter_diagram.png)
+
+![Incoming Light and Filter Layer Diagram](https://example.com/incoming_light_diagram.png)
+
+Credit: [https://en.wikipedia.org/wiki/Bayer_filter](https://en.wikipedia.org/wiki/Bayer_filter)
+
+Vineeth N B (IIT-H)
+
+§1.3 Image Formation
+
+![NPTE Logo](https://example.com/npte_logo.png)
+
+7 / 18
+```
+
+**Note:** The actual diagrams and images were placeholders. Replace `https://example.com/bayer_filter_diagram.png` and `https://example.com/incoming_light_diagram.png` with the actual URLs or local paths to the images.
+
+# DL4CV_Week01_Part03.pdf - Page 12
+
+```markdown
+# Question
+
+## On Colour
+
+### If visible light spectrum is VIBGYOR, why RGB colour representation?
+
+![NPTEL Logo](https://example.com/logo)
+
+*Vineeth N B (IIT-H)*
+
+*§1.3 Image Formation*
+
+*8 / 18*
+```
+
+# DL4CV_Week01_Part03.pdf - Page 13
+
+```markdown
+# Image Sensing Pipeline
+
+![Image Sensing Pipeline](image_url)
+
+## Components and Flow
+
+### Camera Body
+1. **Camera Irradiance**
+   - **Optics**: Directs and focuses light.
+   - **Aperture**: Controls light intensity.
+   - **Shutter**: Controls exposure duration.
+
+### Sensor Chip
+1. **Sensor (CCD/CMOS)**: Captures light and converts it to an electrical signal.
+2. **Gain (ISO)**: Amplifies the signal.
+3. **A/D**: Converts the analog signal to a digital format.
+   - **RAW Output**: Unprocessed digital data.
+
+### Digital Signal Processing (DSP)
+1. **Demosaic**: Interpolates missing color information from the sensor.
+   - **(Sharpen)**: Enhances image sharpness.
+2. **White Balance**: Adjusts color to match the scene.
+3. **Gamma/curve**: Adjusts brightness and contrast.
+4. **Compress**: Converts the image to a JPEG format.
+   - **JPEG Output**: Compressed image file.
+
+## Credit
+- **Szeliski, Computer Vision: Algorithms and Applications, 2010**
+- **Vineeth N B (IIT-H)**
+- **§1.3 Image Formation**
+
+---
+
+*Date*: 9 / 18
+```
+
+# DL4CV_Week01_Part03.pdf - Page 14
+
+```markdown
+# Digital Image Sensing
+
+## CCD vs CMOS: What's the difference?
+
+![Image of NPTEL logo](image_url_placeholder)
+
+---
+
+Vineeth N B (IIT-H)
+
+S1.3 Image Formation
+
+---
+
+### CCD vs CMOS: What's the difference?
+
+CCD (Charge-Coupled Device) and CMOS (Complementary Metal-Oxide-Semiconductor) are two types of image sensors used in digital cameras and other imaging devices. Here are the key differences between them:
+
+#### CCD (Charge-Coupled Device)
+
+- **Operation**: Uses a series of capacitors to transfer data.
+- **Signal-to-Noise Ratio**: Generally provides a higher signal-to-noise ratio.
+- **Power Consumption**: Typically higher power consumption.
+- **Cost**: More expensive to manufacture.
+- **Applications**: Often used in high-end professional cameras.
+
+#### CMOS (Complementary Metal-Oxide-Semiconductor)
+
+- **Operation**: Uses active pixel sensors where each pixel has its own transistor.
+- **Signal-to-Noise Ratio**: Lower signal-to-noise ratio compared to CCD, but improving.
+- **Power Consumption**: Lower power consumption, more efficient.
+- **Cost**: Less expensive to manufacture.
+- **Applications**: Widely used in consumer electronics and mobile devices.
+
+#### Comparison Summary
+
+- **Quality**: CCD generally provides better image quality.
+- **Cost**: CMOS is cheaper to produce.
+- **Power**: CMOS consumes less power.
+- **Flexibility**: CMOS offers more flexibility in design and integration.
+
+These differences have led to the use of each technology in different types of devices, depending on the specific needs and constraints of the application.
+
+---
+
+Date: 10 / 18
+```
+
+# DL4CV_Week01_Part03.pdf - Page 15
+
+```markdown
+# Digital Image Sensing
+
+## CCD vs CMOS: What's the difference?
+
+![CCD vs CMOS Diagram](image-url)
+
+### CCD
+
+- Move photogenerated charge from pixel to pixel, and convert it to voltage at output node
+- An analog-to-digital converter (ADC) then turns each pixel's value into a digital value
+
+*Photo Credit: Litwiller, CMOS vs. CCD: Maturing Technologies, Maturing Markets, 2005*
+
+*Vineeth N B (IIT-H)*
+
+*§1.3 Image Formation*
+
+*10 / 18*
+```
+
+# DL4CV_Week01_Part03.pdf - Page 16
+
+```markdown
+# Digital Image Sensing
+
+## CCD vs CMOS: What’s the difference?
+
+![CCD and CMOS Diagram](image_url)
+
+### CMOS
+
+- **CMOS** convert charge to voltage inside each element
+- Uses several transistors at each pixel to amplify and move the charge using more traditional wires
+- **CMOS** signal is digital, so it needs no ADC
+
+**Vineeth N B. (IIT-H)**
+
+§1.3 Image Formation
+
+*Date: 11 / 18*
+```
+
+# DL4CV_Week01_Part03.pdf - Page 17
+
+# Digital Image Sensor Properties
+
+## Shutter speed:
+
+- **Definition**: Controls the amount of light reaching the sensor (also called exposure time)
+
+## Sampling pitch:
+
+- **Definition**: Physical spacing between adjacent sensor cells on the imaging chip
+
+## Fill factor:
+
+- **Definition**: Active sensing area size as a fraction of the theoretically available sensing area (product of horizontal and vertical sampling pitches)
+
+## Chip size:
+
+- **Definition**: Size/area of the chip
+
+## Analog gain:
+
+- **Definition**: Amplification of the sensed signal using automatic gain control (AGC) logic (controlled using ISO setting on cameras)
+
+## Sensor noise:
+
+- **Definition**: Noise from various sources in the sensing process
+
+## Resolution:
+
+- **Definition**: How many bits for each pixel, decided by analog-to-digital conversion module
+
+## Post-processing:
+
+- **Definition**: Digital image enhancement methods often used before compression and storage of captured image
+
+*Vineeth N B (IIT-H)*
+
+*§1.3 Image Formation*
+
+*12 / 18*
+
+# DL4CV_Week01_Part03.pdf - Page 18
+
+# Digital Image Sensor Properties
+
+## Shutter speed:
+
+- **Description**: Controls the amount of light reaching the sensor (also called exposure time)
+
+## Sampling pitch:
+
+- **Description**: Physical spacing between adjacent sensor cells on the imaging chip
+
+## Fill factor:
+
+- **Description**: Active sensing area size as a fraction of the theoretically available sensing area (product of horizontal and vertical sampling pitches)
+
+## Chip size:
+
+- **Description**: Size/area of the chip
+
+## Analog gain:
+
+- **Description**: Amplification of the sensed signal using automatic gain control (AGC) logic (controlled using ISO setting on cameras)
+
+## Sensor noise:
+
+- **Description**: Noise from various sources in the sensing process
+
+## Resolution:
+
+- **Description**: How many bits for each pixel, decided by analog-to-digital conversion module
+
+## Post-processing:
+
+- **Description**: Digital image enhancement methods often used before compression and storage of captured image
+
+---
+
+Vineeth N B (IIT-H)
+
+§1.3 Image Formation
+
+12 / 18
+
+# DL4CV_Week01_Part03.pdf - Page 19
+
+```markdown
+# Digital Image Sensor Properties
+
+## Properties and Descriptions
+
+- **Shutter speed:**
+  - **Description:** Controls the amount of light reaching the sensor (also called exposure time)
+
+- **Sampling pitch:**
+  - **Description:** Physical spacing between adjacent sensor cells on the imaging chip
+
+- **Fill factor:**
+  - **Description:** Active sensing area size as a fraction of the theoretically available sensing area (product of horizontal and vertical sampling pitches)
+
+  ## Additional Properties
+
+  - **Chip size:**
+    - **Description:** Size/area of the chip
+
+  - **Analog gain:**
+    - **Description:** Amplification of the sensed signal using automatic gain control (AGC) logic (controlled using ISO setting on cameras)
+
+  - **Sensor noise:**
+    - **Description:** Noise from various sources in the sensing process
+
+  - **Resolution:**
+    - **Description:** How many bits for each pixel, decided by analog-to-digital conversion module
+
+  - **Post-processing:**
+    - **Description:** Digital image enhancement methods often used before compression and storage of captured image
+
+_Vineeth N B. (IIIT-H)_
+
+_§1.3 Image Formation_
+
+_12 / 18_
+```
+
+# DL4CV_Week01_Part03.pdf - Page 20
+
+```markdown
+# Digital Image Sensor Properties
+
+## Properties
+
+- **Shutter speed:**
+  - Controls the amount of light reaching the sensor (also called exposure time)
+
+- **Sampling pitch:**
+  - Physical spacing between adjacent sensor cells on the imaging chip
+
+- **Fill factor:**
+  - Active sensing area size as a fraction of the theoretically available sensing area (product of horizontal and vertical sampling pitches)
+
+- **Chip size:**
+  - Size/area of the chip
+
+## Additional Properties
+
+- **Analog gain:**
+  - Amplification of the sensed signal using automatic gain control (AGC) logic (controlled using ISO setting on cameras)
+
+- **Sensor noise:**
+  - Noise from various sources in the sensing process
+
+- **Resolution:**
+  - How many bits for each pixel, decided by analog-to-digital conversion module
+
+- **Post-processing:**
+  - Digital image enhancement methods often used before compression and storage of captured image
+
+---
+
+*Vineeth N B. (IIIT-H) §1.3 Image Formation*
+
+*12 / 18*
+```
+
+# DL4CV_Week01_Part03.pdf - Page 21
+
+```markdown
+# Digital Image Sensor Properties
+
+- **Shutter speed**: Controls the amount of light reaching the sensor (also called exposure time)
+- **Sampling pitch**: Physical spacing between adjacent sensor cells on the imaging chip
+- **Fill factor**: Active sensing area size as a fraction of the theoretically available sensing area (product of horizontal and vertical sampling pitches)
+- **Chip size**: Size/area of the chip
+- **Analog gain**: Amplification of the sensed signal using automatic gain control (AGC) logic (controlled using ISO setting on cameras)
+
+- **Sensor noise**: Noise from various sources in the sensing process
+- **Resolution**: How many bits for each pixel, decided by analog-to-digital conversion module
+
+- **Post-processing**: Digital image enhancement methods often used before compression and storage of captured image
+
+![Image](https://via.placeholder.com/150)
+
+*Vineeth N B (IIT-H)*
+
+*§1.3 Image Formation*
+
+*12 / 18*
+```
+
+# DL4CV_Week01_Part03.pdf - Page 22
+
+```markdown
+# Digital Image Sensor Properties
+
+## Properties
+
+- **Shutter speed:**
+  - Controls the amount of light reaching the sensor (also called exposure time)
+
+- **Sampling pitch:**
+  - Physical spacing between adjacent sensor cells on the imaging chip
+
+- **Fill factor:**
+  - Active sensing area size as a fraction of the theoretically available sensing area (product of horizontal and vertical sampling pitches)
+
+- **Chip size:**
+  - Size/area of the chip
+
+- **Analog gain:**
+  - Amplification of the sensed signal using automatic gain control (AGC) logic (controlled using ISO setting on cameras)
+
+- **Sensor noise:**
+  - Noise from various sources in the sensing process
+
+- **Resolution:**
+  - How many bits for each pixel, decided by analog-to-digital conversion module
+
+- **Post-processing:**
+  - Digital image enhancement methods often used before compression and storage of captured image
+
+---
+
+*Vineeth N B. (IITH) §1.3 Image Formation 12 / 18*
+```
+
+# DL4CV_Week01_Part03.pdf - Page 23
+
+# Digital Image Sensor Properties
+
+## Shutter speed:
+Controls the amount of light reaching the sensor (also called **exposure time**)
+
+## Sampling pitch:
+Physical spacing between adjacent sensor cells on the imaging chip
+
+## Fill factor:
+Active sensing area size as a fraction of the theoretically available sensing area (product of horizontal and vertical sampling pitches)
+
+## Chip size:
+Size/area of the chip
+
+## Analog gain:
+Amplification of the sensed signal using automatic gain control (AGC) logic (controlled using **ISO setting** on cameras)
+
+## Sensor noise:
+Noise from various sources in the sensing process
+
+## Resolution:
+How many bits for each pixel, decided by analog-to-digital conversion module
+
+## Post-processing:
+Digital image enhancement methods often used before compression and storage of captured image
+
+---
+
+Vineeth N B (IIIT-H)
+
+§1.3 Image Formation
+
+12 / 18
+
+# DL4CV_Week01_Part03.pdf - Page 24
+
+```markdown
+# Digital Image Sensor Properties
+
+## Shutter speed:
+- **Controls the amount of light reaching the sensor (also called exposure time)**
+
+## Sampling pitch:
+- Physical spacing between adjacent sensor cells on the imaging chip
+
+## Fill factor:
+- Active sensing area size as a fraction of the theoretically available sensing area (product of horizontal and vertical sampling pitches)
+
+## Chip size:
+- Size/area of the chip
+
+## Analog gain:
+- Amplification of the sensed signal using automatic gain control (AGC) logic (controlled using ISO setting on cameras)
+
+## Sensor noise:
+- Noise from various sources in the sensing process
+
+## Resolution:
+- How many bits for each pixel, decided by analog-to-digital conversion module
+
+## Post-processing:
+- Digital image enhancement methods often used before compression and storage of captured image
+
+*Vineeth N B. (IIIT-H)*
+
+*§1.3 Image Formation*
+
+*12 / 18*
+```
+
+# DL4CV_Week01_Part03.pdf - Page 25
+
+```markdown
+# Popular Question: "With smartphones, do you need DSLR cameras?"
+
+![NPTEL Logo](image_url)
+
+---
+
+**Source:** VSBytes.com
+
+**Vineeth N B (IIT-H)**
+
+**§1.3 Image Formation**
+
+---
+
+13 / 18
+```
+
+# DL4CV_Week01_Part03.pdf - Page 26
+
+# Popular Question: "With smartphones, do you need DSLR cameras?"
+
+- **DSLR - Digital Single Lens Reflex camera**: Uses a mirror mechanism to reflect light from lens to a viewfinder, or let light fully pass onto image sensor by moving the mirror out of the way
+
+  ![DSLR camera and smartphone](http://www.pixelrajeev.com/path/to/image)
+
+- Essentially a comparison between mirror and mirrorless cameras
+
+- **Pros of mirrorless cameras**:
+  - Accessibility
+  - Portability
+  - Low cost
+
+- **Pros of DSLRs**:
+  - Picture quality
+  - Versatility and functionality
+  - Physical shutter
+  - Variable focal length/aperture
+
+**Source**: [VSBytes.com](http://VSBytes.com)
+
+**Credit**: [http://www.pixelrajeev.com/](http://www.pixelrajeev.com/)
+
+**Presenter**: Vineeth N B (IIIT-H)
+
+**Section**: §1.3 Image Formation
+
+**Date**: 13 / 18
+
+# DL4CV_Week01_Part03.pdf - Page 27
+
+```markdown
+# Sampling and Aliasing
+
+![Sampling and Aliasing](https://example.com/sampling_aliasing.png)
+
+**Shannon's Sampling Theorem:** \( f_s \geq 2 f_{max} \), where \( f_s \) is sampling rate, and \( f_{max} \) is maximum frequency in signal, also called Nyquist frequency
+
+- Frequencies above Nyquist frequency or when Shannon's sampling rate is not met ⇒ **aliasing** happens
+
+**Credit:** Wikimedia Commons
+
+Vineeth N B (IIT-H)
+
+§1.3 Image Formation
+
+NPTEL
+
+14 / 18
+```
+
+# DL4CV_Week01_Part03.pdf - Page 28
+
+```markdown
+# Sampling and Aliasing
+
+![Sampling and Aliasing Diagram](image_url)
+
+**Shannon's Sampling Theorem:** \( f_s \geq 2f_{max} \), where \( f_s \) is sampling rate, and \( f_{max} \) is maximum frequency in signal, also called **Nyquist frequency**.
+
+- Frequencies above Nyquist frequency or when Shannon's sampling rate is not met \(\implies\) **aliasing** happens
+- Why is aliasing bad?
+
+**Credit:** Wikimedia Commons
+
+_Vineeth N B (IIT-H)_
+
+## §1.3 Image Formation
+
+![Image Formation Diagram](image_url)
+```
+
+# DL4CV_Week01_Part03.pdf - Page 29
+
+```markdown
+# Sampling and Aliasing
+
+![Sampling and Aliasing Image](https://example.com/image)
+
+**Credit:** Wikimedia Commons
+
+## Shannon's Sampling Theorem
+
+$$f_s \geq 2f_{max},$$
+
+where $f_s$ is sampling rate, and $f_{max}$ is maximum frequency in signal, also called **Nyquist frequency**.
+
+- Frequencies above Nyquist frequency or when Shannon's sampling rate is not met ⇒ **aliasing** happens
+- **Why is aliasing bad?**
+  - Creates issues while **downsampling** and **upsampling** an image
+- More coming in later lectures
+  
+## Images
+
+![Sample Image 1](https://example.com/image1)
+![Sample Image 2](https://example.com/image2)
+
+## References
+
+- Vineeth N B (IIT-H)
+- §1.3 Image Formation
+- 14 / 18
+
+```
+
+# DL4CV_Week01_Part03.pdf - Page 30
+
+```markdown
+# Colour Space Representations
+
+- Popular colour spaces: RGB, CMYK
+- Additive colours: R, G, B
+- Subtractive colours: C, M, Y
+- Other colour spaces: XYZ, YUV, Lab, YCbCr, HSV
+- Standards established by Commission Internationale d'Éclairage (CIE)
+- Understanding of colour spaces important in printing industry
+
+For more information:
+
+- [Tutorialspoint - Introduction to Color Spaces](https://www.tutorialspoint.com/dip/introduction_to_color_spaces.htm)
+- [Szeliski - Computer Vision: Algorithms and Applications, 2010](https://clechanow.ski/color-spaces/)
+
+![Colour Spaces](image.placeholder)
+
+Vineeth N B (IIIT-H) §1.3 Image Formation
+
+---
+
+Credit: Szeliski, Computer Vision: Algorithms and Applications, 2010
+```
+
+# DL4CV_Week01_Part03.pdf - Page 31
+
+```markdown
+# Image Compression
+
+- **Last stage in a camera’s processing pipeline**
+- Convert signal into YCbCr (or variant), compress luminance with higher fidelity than chrominance
+- Videos also use block-level motion compensation
+- **Most common compression technique**: Discrete Cosine Transform (DCT), used in MPEG and JPEG
+- DCT, a variant of Discrete Fourier Transform - a reasonable approximation of eigendecomposition of image patches
+- Compression quality measured using Peak Signal-to-Noise Ratio (PSNR):
+  \[
+  \text{PSNR} = 10 \log_{10} \left( \frac{I_{\text{max}}^2}{\text{MSE}} \right)
+  \]
+  where \(\text{MSE} = \frac{1}{n} \sum_{x} \left[ I(x) - \hat{I}(x) \right]^2\)
+  where \(\hat{I}\) is compressed version of \(I\)
+  
+*Vineeth N B. (IIIT-H) §1.3 Image Formation 16 / 18*
+```
+
+# DL4CV_Week01_Part03.pdf - Page 32
+
+```markdown
+# Image Compression
+
+- Last stage in a camera’s processing pipeline
+
+- Convert signal into YCbCr (or variant), compress luminance with higher fidelity than chrominance
+
+- Most common compression technique:
+  **Discrete Cosine Transform (DCT)**, used in MPEG and JPEG
+
+- DCT, a variant of Discrete Fourier Transform - a reasonable approximation of eigendecomposition of image patches
+
+![Image of Diagrams or Graphs](image_url)
+
+- Videos also use block-level motion compensation
+
+- Compression quality measured using Peak Signal-to-Noise Ratio (PSNR):
+
+  \[
+  PSNR = 10 \log_{10} \left( \frac{I_{max}^2}{MSE} \right)
+  \]
+
+  where \(MSE = \frac{1}{n} \sum_{i=1}^{n} \left[ I(x) - \hat{I}(x) \right]^2\)
+
+  where \(\hat{I}\) is compressed version of \(I\)
+
+*Vineeth N B. (IIIT-H)*
+
+§1.3 Image Formation
+
+16 / 18
+```
+
+# DL4CV_Week01_Part03.pdf - Page 33
+
+```markdown
+# Image Compression
+
+- **Last stage in a camera’s processing pipeline**
+- Convert signal into YCbCr (or variant), compress luminance with higher fidelity than chrominance
+- **Most common compression technique**: **Discrete Cosine Transform (DCT)**, used in MPEG and JPEG
+  - DCT, a variant of Discrete Fourier Transform - a reasonable approximation of eigendecomposition of image patches
+- Videos also use block-level motion compensation
+
+**Compression quality measured using Peak Signal-to-Noise Ratio (PSNR)**:
+\[ \text{PSNR} = 10 \log_{10} \frac{I_{\text{max}}^2}{\text{MSE}} \]
+where \( \text{MSE} = \frac{1}{n} \sum_{i=1}^{n} \left[ I(x) - \hat{I}(x) \right]^2 \)
+where \( \hat{I} \) is compressed version of \( I \)
+
+_Vineeth N B (IITH)_
+
+§1.3 Image Formation
+
+16 / 18
+```
+
+# DL4CV_Week01_Part03.pdf - Page 34
+
+```markdown
+# Image Compression
+
+- Last stage in a camera’s processing pipeline
+- Convert signal into YCbCr (or variant), compress luminance with higher fidelity than chrominance
+- Videos also use block-level motion compensation
+- Most common compression technique: **Discrete Cosine Transform (DCT)** used in MPEG and JPEG
+  - DCT, a variant of Discrete Fourier Transform - a reasonable approximation of eigendecomposition of image patches
+- Compression quality measured using **Peak Signal-to-Noise Ratio (PSNR)**:
+
+  \[
+  \text{PSNR} = 10 \log_{10} \frac{I_{\text{max}}^2}{\text{MSE}}
+  \]
+
+  where \(\text{MSE} = \frac{1}{n} \sum_{x} \left[I(x) - \hat{I}(x)\right]^2\)
+
+  where \(\hat{I}\) is compressed version of \(I\)
+
+Vineeth N B. (IIIT-H) §1.3 Image Formation 16 / 18
+```
+
+# DL4CV_Week01_Part03.pdf - Page 35
+
+```markdown
+# Homework
+
+## Readings
+
+- **Chapter 2, Szeliski, [Computer Vision: Algorithms and Applications](https://example.com)** 
+- Other links provided on respective slides
+- **(Optional, if you want to know about geometric formation of images) Chapters 1-5, Forsyth and Ponce, [Computer Vision: A Modern Approach](https://example.com)**
+
+![NPTEL Logo](https://example.com/logo.png)
+
+*Vineeth N B (IIIT-H)*
+
+*§1.3 Image Formation*
+
+*17 / 18*
+```
+
+# DL4CV_Week01_Part03.pdf - Page 36
+
+```markdown
+# References
+
+- **Dave Litwiller**. "CMOS vs. CCD: Maturing Technologies, Maturing Markets-The factors determining which type of imager delivers better cost performance are becoming more refined." In: *Photonics Spectra* 39.8 (2005), pp. 54–61.
+
+- **Richard Szeliski**. *Computer Vision: Algorithms and Applications*. Texts in Computer Science. London: Springer-Verlag, 2011.
+
+- **David Forsyth** and **Jean Ponce**. *Computer Vision: A Modern Approach*. 2 edition. Boston: Pearson Education India, 2015.
+
+- **VSBytes Team**. *DSLR Cameras vs Smartphone - Which of the two cameras is better?* May 2019. URL: [https://vsbytes.com/dslr-vs-smartphone-camera/](https://vsbytes.com/dslr-vs-smartphone-camera/) (Visited on 04/14/2020).
+
+![NPTel](https://example.com/logo.png)
+
+*Vineeth N B (IIT-H)*
+
+*§1.3 Image Formation*
+
+*18 / 18*
+```
+

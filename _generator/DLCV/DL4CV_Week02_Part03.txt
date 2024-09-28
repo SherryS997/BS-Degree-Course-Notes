@@ -1,0 +1,1611 @@
+# DL4CV_Week02_Part03.pdf - Page 1
+
+```markdown
+# Deep Learning for Computer Vision
+
+## Scale Space, Image Pyramids and Filter Banks
+
+### Vineeth N Balasubramanian
+
+Department of Computer Science and Engineering
+Indian Institute of Technology, Hyderabad
+
+![IIT Hyderabad Logo](https://example.com/logo.png)
+
+---
+
+Vineeth N B (IIT-H)
+
+### §2.3 Scale Space, Image Pyramids, Filter Banks
+
+---
+
+```
+
+# DL4CV_Week02_Part03.pdf - Page 2
+
+```markdown
+# Review
+
+![NPTEL Logo](image-url)
+
+Vineeth N B (IIT-H)
+
+## §2.3 Scale Space, Image Pyramids, Filter Banks
+
+### Slide Content
+
+**Slide 1:**
+- **Main Title**: Review
+- **Image**: Snow-capped mountains in two panels
+- **Logo**: NPTEL with a stylized flower surrounding it
+
+### Details
+
+- **Slide Layout**: 
+  - Top-left: "Review" in bold red text.
+  - Main content area:
+    - Two images of snow-capped mountains on the left.
+    - NPTEL logo on the right.
+  - Bottom-left: Author's name "Vineeth N B (IIT-H)".
+  - Bottom-center: Section title "§2.3 Scale Space, Image Pyramids, Filter Banks".
+  - Bottom-right: Page number "2 / 17".
+
+```
+
+# DL4CV_Week02_Part03.pdf - Page 3
+
+:
+
+```markdown
+# Review
+
+![NPTEL Logo](image_url)
+
+Vineeth N B (IIT-H)
+
+## §2.3 Scale Space, Image Pyramids, Filter Banks
+
+---
+
+(Note: OCR did not capture any further content from the image. Please provide a clearer image or additional context for detailed extraction.)
+```
+
+If there are specific sections, headings, or content that can be identified from the image, please provide them so that they can be accurately represented in the markdown format.
+
+# DL4CV_Week02_Part03.pdf - Page 4
+
+```markdown
+# Review
+
+![Image](image-url)
+
+## Regions and Changes
+
+### "Flat" Region
+- **Description**: No change in all directions.
+- **Diagram**: ![Diagram](diagram-url)
+- **Characteristics**:
+  - \(\lambda_1\) and \(\lambda_2\) are small.
+
+### "Edge" Region
+- **Description**: No change along the edge direction.
+- **Diagram**: ![Diagram](diagram-url)
+- **Characteristics**:
+  - \(\lambda_1 >> \lambda_2\)
+  - \(\lambda_2 >> \lambda_1\)
+
+### "Corner" Region
+- **Description**: Significant change in all directions.
+- **Diagram**: ![Diagram](diagram-url)
+- **Characteristics**:
+  - \(\lambda_1\) and \(\lambda_2\) are large.
+  - \(\lambda_1 \sim \lambda_2\)
+
+---
+
+Vineeth N B (IIT-H) §2.3 Scale Space, Image Pyramids, Filter Banks
+
+Page 2 / 17
+```
+
+# DL4CV_Week02_Part03.pdf - Page 5
+
+```markdown
+# Review
+
+![Top Image](image_url)
+
+## Vineeth N B (IIT-H)
+
+### §2.3 Scale Space, Image Pyramids, Filter Banks
+
+### "flat" region:
+- **no change in all directions**
+
+### "edge":
+- **no change along the edge direction**
+
+### "corner":
+- **significant change in all directions**
+
+### Graphical Representations:
+- ![Flat Region Graph](image_url)
+- ![Edge Region Graph](image_url)
+- ![Corner Region Graph](image_url)
+
+### Mathematical Representations:
+- **Flat Region**
+  - $\lambda_1$ and $\lambda_2$ are small.
+
+- **Edge**
+  - $\lambda_1 >> \lambda_2$
+  - $\lambda_2 >> \lambda_1$
+
+- **Corner**
+  - $\lambda_1$ and $\lambda_2$ are large.
+  - $\lambda_1 \sim \lambda_2$
+
+### Image Examples:
+- ![Flat Region Image](image_url)
+- ![Edge Region Image](image_url)
+- ![Corner Region Image](image_url)
+
+### Process Flow:
+![Process Flow Diagram](image_url)
+```
+
+**Note:**
+- Replace placeholders like `image_url` with the actual image URLs from the OCR output.
+- Ensure that all special characters and symbols are accurately represented.
+- Validate the mathematical notation for correctness in a scientific context.
+
+# DL4CV_Week02_Part03.pdf - Page 6
+
+```markdown
+# Review
+
+![Image](image_url)
+
+## Region Types
+
+### "Flat" Region:
+- No change in all directions
+
+![Flat Region Diagram](image_url)
+- λ₁ and λ₂ are small
+
+### "Edge" Region:
+- No change along the edge direction
+
+![Edge Region Diagram](image_url)
+- λ₁ >> λ₂
+- λ₂ >> λ₁
+
+### "Corner" Region:
+- Significant change in all directions
+
+![Corner Region Diagram](image_url)
+- λ₁ and λ₂ are large
+- λ₁ >> λ₂
+- λ₂ >> λ₁
+
+## Image Processing Flow
+
+1. ![Initial Image](image_url)
+2. ![Intermediate Image](image_url)
+3. ![Final Image](image_url)
+
+## Vineeth N B (IIIT-H) 
+### §2.3 Scale Space, Image Pyramids, Filter Banks
+```
+
+# DL4CV_Week02_Part03.pdf - Page 7
+
+```markdown
+# Review
+
+![Review Image](image_url)
+
+## Vineeth N B (IIIT-H)
+
+### §2.3 Scale Space, Image Pyramids, Filter Banks
+
+### Flat Region:
+- **Graph**: ![Graph Flat Region](image_url)
+- **Description**: No change in all directions
+
+### Edge Region:
+- **Graph**: ![Graph Edge Region](image_url)
+- **Description**: No change along the edge direction
+
+### Corner Region:
+- **Graph**: ![Graph Corner Region](image_url)
+- **Description**: Significant change in all directions
+
+![Diagram](image_url)
+
+### Flat Region:
+- **Eigenvalues**: \(\lambda_1\) and \(\lambda_2\) are small.
+
+### Edge Region:
+- **Eigenvalues**: \(\lambda_1 >> \lambda_2\) and \(\lambda_2 >> \lambda_1\)
+
+### Corner Region:
+- **Eigenvalues**: \(\lambda_1\) and \(\lambda_2\) are large.
+- **Relation**: \(\lambda_1 \approx \lambda_2\)
+
+---
+
+**Note**: The diagrams and graphs should ideally be replaced by actual images from the OCR process.
+```
+
+# DL4CV_Week02_Part03.pdf - Page 8
+
+```markdown
+# Scale-Invariant Interest Point Detection
+
+- **How can we independently select interest points in each image, such that detections are repeatable across different scales?**
+
+![NPTEL Logo](image_placeholder_url)
+
+Vineeth N B (IIT-H) §2.3 Scale Space, Image Pyramids, Filter Banks
+
+---
+
+*Page 3 / 17*
+```
+
+Note: The `image_placeholder_url` is used as a placeholder for the actual image URL which cannot be captured by the OCR process. Make sure to replace it with the actual image URL if available.
+
+# DL4CV_Week02_Part03.pdf - Page 9
+
+```markdown
+# Scale-Invariant Interest Point Detection
+
+- How can we independently select interest points in each image, such that detections are repeatable across different scales?
+- Extract features at a variety of scales, e.g., by using multiple resolutions in a pyramid, and then matching features at the same level.
+
+![NPTEL Logo](image-url)
+
+*Vineeth N B (IIT-H) §2.3 Scale Space, Image Pyramids, Filter Banks*
+
+*3 / 17*
+```
+
+# DL4CV_Week02_Part03.pdf - Page 10
+
+```markdown
+# Scale-Invariant Interest Point Detection
+
+- **How can we independently select interest points in each image, such that detections are repeatable across different scales?**
+  - Extract features at a variety of scales, e.g., by using multiple resolutions in a pyramid, and then matching features at the same level.
+  - **When does this work?**
+
+![NPTEL Logo](image-placeholder.png)
+
+*Vineeth N B (IIT-H) §2.3 Scale Space, Image Pyramids, Filter Banks 3 / 17*
+```
+
+**Note:** The `image-placeholder.png` is used to denote where the actual image from the slide should be placed. Replace it with the actual image path if available.
+
+# DL4CV_Week02_Part03.pdf - Page 11
+
+```markdown
+# Scale-Invariant Interest Point Detection
+
+- **How can we independently select interest points in each image, such that detections are repeatable across different scales?**
+- Extract features at a variety of scales, e.g., by using multiple resolutions in a pyramid, and then matching features at the same level.
+- **When does this work?**
+- More efficient to extract features stable in both location and scale.
+
+![NPTEL](image_placeholder.png)
+
+*Vineeth N B (IIT-H)*
+*§2.3 Scale Space, Image Pyramids, Filter Banks*
+*3 / 17*
+```
+
+# DL4CV_Week02_Part03.pdf - Page 12
+
+```markdown
+# Scale-Invariant Interest Point Detection
+
+- How can we independently select interest points in each image, such that detections are repeatable across different scales?
+- Extract features at a variety of scales, e.g., by using multiple resolutions in a pyramid, and then matching features at the same level.
+- When does this work?
+  - More efficient to extract features stable in both location and scale.
+  - Find scale that gives local maxima of a function \( f \) in both position and scale.
+
+![Example Image](example_image.png)
+
+```math
+f(I_{h, \sigma}(x, \sigma)) = f(I_{h', \sigma'}(x', \sigma'))
+```
+
+*Vineeth N B (IIT-H) §2.3 Scale Space, Image Pyramids, Filter Banks*
+
+---
+
+*Page 3 of 17*
+```
+
+# DL4CV_Week02_Part03.pdf - Page 13
+
+```markdown
+# Automatic Scale Selection
+
+## Function responses for increasing scale (scale signature).
+
+![Graph](image-placeholder.png)
+
+**Credit:** R. Urtasun
+
+Vineeth N B (IIT-H)
+
+### 2.3 Scale Space, Image Pyramids, Filter Banks
+
+---
+
+Page 4 / 17
+```
+
+Note:
+- `[image-placeholder.png]` is a placeholder for the image that could not be captured directly via OCR. Replace it with the actual path or URL to the image if available.
+- Ensure you replace placeholders and verify the correctness of scientific terms, symbols, and formulas as per the provided content.
+
+# DL4CV_Week02_Part03.pdf - Page 15
+
+```markdown
+# Automatic Scale Selection
+
+## Function responses for increasing scale (scale signature).
+
+![Graph](image_url)
+
+**Credit:** R Urtasun
+
+*Vineeth N B (IIT-H)*
+
+§2.3 Scale Space, Image Pyramids, Filter Banks
+
+---
+
+4 / 17
+```
+
+# DL4CV_Week02_Part03.pdf - Page 16
+
+```markdown
+# Automatic Scale Selection
+
+## Function responses for increasing scale (scale signature).
+
+![Graphical Representation](image_url)
+
+*Credit: R Urtasun*
+
+*Vineeth N B (IIIT-H)*
+
+### §2.3 Scale Space, Image Pyramids, Filter Banks
+
+---
+
+*Page 4 of 17*
+```
+
+Note: Replace `image_url` with the actual URL or path to the image if available.
+
+This markdown format ensures that the structure and content of the provided scientific text or slides are accurately represented while maintaining proper formatting and scientific integrity.
+
+# DL4CV_Week02_Part03.pdf - Page 17
+
+```markdown
+# Automatic Scale Selection
+
+## Function responses for increasing scale (scale signature).
+
+![Graph and Image](image_url)
+
+**Credit:** R Urtasun
+
+Vineeth N B (IIT-H)
+
+§2.3 Scale Space, Image Pyramids, Filter Banks
+
+---
+
+4 / 17
+```
+
+# DL4CV_Week02_Part03.pdf - Page 18
+
+```markdown
+# Automatic Scale Selection
+
+Function responses for increasing scale (scale signature).
+
+![Graph Response](image-placeholder)
+
+*Credit: R Urtasun*
+
+Vineeth N B (IIIT-H)
+
+§2.3 Scale Space, Image Pyramids, Filter Banks
+
+---
+
+**Additional Notes:**
+
+- Ensure that all figures and equations are clearly represented.
+- Verify that symbols and mathematical notations are accurate.
+- If any OCR issues arise with images or specific symbols, use descriptive placeholders.
+- Keep the structure and formatting consistent with scientific presentation standards.
+
+4 / 17
+```
+
+# DL4CV_Week02_Part03.pdf - Page 19
+
+```markdown
+# Automatic Scale Selection
+
+## Function responses for increasing scale (scale signature).
+
+![Image of function responses for increasing scale](image_url)
+
+**Credit:** R Urtasun
+
+Vineeth N B (IIT-H)
+
+§2.3 Scale Space, Image Pyramids, Filter Banks
+
+---
+
+1. **Function responses for increasing scale (scale signature):**
+
+    - ![Left Image](left_image_url)
+    - ![Right Image](right_image_url)
+
+2. **Graphs of Function Responses:**
+
+    - **Left Graph:**
+        ```math
+        f(U_{k, \alpha}(x, \sigma))
+        ```
+
+        ![Left Graph](left_graph_url)
+
+    - **Right Graph:**
+        ```math
+        f(U_{k, \alpha}(x, \sigma))
+        ```
+
+        ![Right Graph](right_graph_url)
+```
+
+# DL4CV_Week02_Part03.pdf - Page 20
+
+```markdown
+# Automatic Scale Selection
+
+## Function responses for increasing scale (scale signature).
+
+![Function responses for increasing scale](image-url)
+
+**Credit:** R Urtasun
+
+*Vineeth N B (IIT-H)*
+
+---
+
+### §2.3 Scale Space, Image Pyramids, Filter Banks
+
+---
+
+4 / 17
+```
+
+# DL4CV_Week02_Part03.pdf - Page 21
+
+```markdown
+# Automatic Scale Selection
+
+## Function responses for increasing scale (scale signature).
+
+![Graph and Image Example](image_url)
+
+*Credit: R Urtasun*
+
+Vineeth N B (IIT-H) §2.3 Scale Space, Image Pyramids, Filter Banks
+
+---
+
+### Slide Content
+
+- **Title:** Automatic Scale Selection
+- **Subtitle:** Function responses for increasing scale (scale signature).
+
+#### Visual Example
+![Visual Example](image_url)
+
+#### Graphical Representations
+
+1. **Left Graph:**
+   ```math
+   f(U_{h_x}(x, \sigma))
+   ```
+
+2. **Right Graph:**
+   ```math
+   f(U_{h_x}(x', \sigma))
+   ```
+
+---
+
+*Section: §2.3 Scale Space, Image Pyramids, Filter Banks*
+
+*Credit: R Urtasun*
+
+*Presenter: Vineeth N B (IIT-H)*
+```
+
+# DL4CV_Week02_Part03.pdf - Page 22
+
+```markdown
+# Automatic Scale Selection
+
+## Function responses for increasing scale (scale signature).
+
+![Scale Signature](image-url)
+
+*Credit: R Urtasun*
+
+*Vineeth N B (IIIT-H)*
+
+*§2.3 Scale Space, Image Pyramids, Filter Banks*
+
+---
+
+![Image Section](image-url)
+
+![Graph Section](graph-url)
+
+\(\displaystyle \int U_k(x, \sigma) dx\)
+
+\(\displaystyle \int U_{k+1}(x, \sigma) dx\)
+
+---
+
+**Footnote:**
+- The text "Credit: R Urtasun" is positioned at the bottom left of the image.
+- The text "Vineeth N B (IIIT-H)" is placed at the bottom center of the image.
+- The text "§2.3 Scale Space, Image Pyramids, Filter Banks" is located at the bottom right of the image.
+```
+
+# DL4CV_Week02_Part03.pdf - Page 23
+
+```markdown
+# Automatic Scale Selection
+
+## Function responses for increasing scale (scale signature).
+
+![Function Responses](image_url)
+
+**Credit: R Urtasun**
+
+Vineeth N B (IIT-H)
+
+### §2.3 Scale Space, Image Pyramids, Filter Banks
+
+---
+
+4 / 17
+```
+
+In the above markdown format:
+
+- The main heading is `Automatic Scale Selection`.
+- The subheading is `Function responses for increasing scale (scale signature)`.
+- An image placeholder `![Function Responses](image_url)` is used where an actual image or graph would be included.
+- The credit is provided as `R Urtasun`.
+- Additional context or another heading section is identified as `§2.3 Scale Space, Image Pyramids, Filter Banks`.
+- The page number is indicated at the bottom right, `4 / 17`.
+
+# DL4CV_Week02_Part03.pdf - Page 24
+
+```markdown
+# Automatic Scale Selection
+
+## Function responses for increasing scale (scale signature)
+
+![Graph and Images](image_url)
+
+_Credit: R Urtasun_
+
+_Vineeth N B (IITH)_
+
+### §2.3 Scale Space, Image Pyramids, Filter Banks
+
+```math
+f(U_{k_4}(\omega \sigma))
+```
+
+```math
+f(U_{k_4}(\omega \sigma'))
+```
+
+```math
+- \text{value}
+```
+
+```markdown
+1. **First Image:**
+   - Description: ...
+   - Graph: ...
+
+2. **Second Image:**
+   - Description: ...
+   - Graph: ...
+
+3. **Third Image:**
+   - Description: ...
+   - Graph: ...
+```
+
+```math
+\text{Value Description}
+```
+
+```math
+\text{Value Description}
+```
+
+4 / 17
+```
+
+# DL4CV_Week02_Part03.pdf - Page 25
+
+```markdown
+# Automatic Scale Selection
+
+## Function responses for increasing scale (scale signature).
+
+![Scale Signature](image1.png)
+
+Is there a better way to do this?
+
+![Alternative Method](image2.png)
+
+![Graph 1](graph1.png)
+
+![Graph 2](graph2.png)
+
+\\[ f(U_k, (x, \\sigma)) \\]
+
+\\[ f(U_{k+1}, (x, \\sigma)) \\]
+
+*Vineeth N B (IIT-H)*
+
+*§2.3 Scale Space, Image Pyramids, Filter Banks*
+
+*4 / 17*
+```
+
+# DL4CV_Week02_Part03.pdf - Page 26
+
+```markdown
+# Automatic Scale Selection: Implementation
+
+Instead of computing \( f \) for larger and larger windows, we can implement using a fixed window size with a Gaussian pyramid.
+
+![Gaussian Pyramid](image_url)
+
+Sometimes need to create in-between levels, e.g., a 3/4 size image.
+
+**Credit:** R Urtasun
+
+*Vineeth N B (IIT-H)*
+
+**Section:** §2.3 Scale Space, Image Pyramids, Filter Banks
+
+**Date:** 5 / 17
+```
+
+# DL4CV_Week02_Part03.pdf - Page 27
+
+```markdown
+# Gaussian and Laplacian Pyramid
+
+## Image = G1
+
+![Gaussian Pyramid Diagram](image-url)
+
+(Smooth, then Downsample)
+
+- **Gaussian Pyramid Process**:
+  - **Downsample** (Smooth(G1))
+  - **Downsample** (Smooth(G2))
+  - **Downsample** (Smooth(G3)) ...
+  - **Downsample** (Smooth(GN)) = LN
+
+- **Laplacian Pyramid Process**:
+  - **G1 – Smooth(Upsample(G2))**
+  - **G2 – Smooth(Upsample(G3))**
+  - **G3 – Smooth(Upsample(G4))**
+  - **...**
+  - **GN – Smooth(Upsample(GN))**
+
+### Image Levels (L1, L2, L3, ...)
+
+- **L1**
+- **L2**
+- **L3**
+- **...**
+- **LN**
+
+### Equations
+
+- **Gaussian Pyramid**:
+  ```math
+  G_i = Downsample(Smooth(G_{i-1}))
+  ```
+
+- **Laplacian Pyramid**:
+  ```math
+  L_i = G_i - Smooth(Upsample(G_{i+1}))
+  ```
+
+### Credit
+- **Credit: Derek Hoiem**
+
+### References
+- **Vineeth N B (IIIT-H)**
+- **§2.3 Scale Space, Image Pyramids, Filter Banks**
+
+---
+
+Page 6 / 17
+```
+
+# DL4CV_Week02_Part03.pdf - Page 28
+
+```markdown
+# Image Pyramids: Uses
+
+- **Compression**
+
+![Diagram](image_url_if_available)
+
+Vineeth N B (IIT-H) §2.3 Scale Space, Image Pyramids, Filter Banks
+
+Date: 7 / 17
+```
+
+# DL4CV_Week02_Part03.pdf - Page 29
+
+```markdown
+# Image Pyramids: Uses
+
+- Compression
+- Object detection
+
+![NPTEL Logo](image-url)
+
+*Vineeth N B (IIT-H)*
+
+§2.3 Scale Space, Image Pyramids, Filter Banks
+
+Date: 7 / 17
+```
+
+# DL4CV_Week02_Part03.pdf - Page 30
+
+```markdown
+# Image Pyramids: Uses
+
+- **Compression**
+- **Object detection**
+- **Scale search**
+
+![NPTEL Logo](image_url)
+
+Vineeth N B (IIT-H) §2.3 Scale Space, Image Pyramids, Filter Banks
+
+---
+
+Date: 7 / 17
+```
+
+# DL4CV_Week02_Part03.pdf - Page 31
+
+```markdown
+# Image Pyramids: Uses
+
+- **Compression**
+- **Object detection**
+  - Scale search
+  - Features
+
+![NPTEL Logo](image_url)
+
+Vineeth N B (IIT-H)
+
+§2.3 Scale Space, Image Pyramids, Filter Banks
+
+7 / 17
+```
+
+# DL4CV_Week02_Part03.pdf - Page 32
+
+```markdown
+# Image Pyramids: Uses
+
+- **Compression**
+- **Object detection**
+  - Scale search
+  - Features
+- Detecting stable interest points
+
+![NPTEL Logo](image_url)
+
+Vineeth N B (IIT-H) §2.3 Scale Space, Image Pyramids, Filter Banks 7 / 17
+```
+
+# DL4CV_Week02_Part03.pdf - Page 33
+
+```markdown
+# Image Pyramids: Uses
+
+- **Compression**
+- **Object detection**
+  - Scale search
+  - Features
+- **Detecting stable interest points**
+- **Registration**
+
+![NPTEL Logo](image_url)
+
+*Vineeth N B (IIIT-H)*
+
+*§2.3 Scale Space, Image Pyramids, Filter Banks*
+
+*7 / 17*
+```
+
+# DL4CV_Week02_Part03.pdf - Page 34
+
+```markdown
+# Image Pyramids: Uses
+
+- **Compression**
+- **Object detection**
+  - Scale search
+  - Features
+- **Detecting stable interest points**
+- **Registration**
+  - Coarse-to-fine Image Registration
+
+*Vineeth N B (IIIT-H) §2.3 Scale Space, Image Pyramids, Filter Banks*
+
+![Diagram](diagram_placeholder.png)
+
+7 / 17
+```
+
+# DL4CV_Week02_Part03.pdf - Page 35
+
+```markdown
+# Image Pyramids: Uses
+
+- Compression
+- Object detection
+  - Scale search
+  - Features
+- Detecting stable interest points
+- Registration
+  - Coarse-to-fine Image Registration
+
+![Diagram](image-diagram.png)
+
+*Coarse-to-fine Image Registration:*
+
+![Pyramid Diagram](pyramid-diagram.png)
+
+Vineeth N B (IIT-H) §2.3 Scale Space, Image Pyramids, Filter Banks
+
+---
+
+7 / 17
+```
+
+# DL4CV_Week02_Part03.pdf - Page 36
+
+```markdown
+# Image Pyramids: Uses
+
+- **Compression**
+- **Object detection**
+  - Scale search
+  - Features
+- Detecting stable interest points
+- **Registration**
+  - Coarse-to-fine Image Registration
+
+![Coarse-to-fine Image Registration](Attachment_A_Std_Image)
+
+Compute Gaussian pyramid.
+
+*Vineeth N B (IIIT-H)*
+
+§2.3 Scale Space, Image Pyramids, Filter Banks
+
+7 / 17
+```
+
+# DL4CV_Week02_Part03.pdf - Page 37
+
+```markdown
+# Image Pyramids: Uses
+
+- Compression
+- Object detection
+  - Scale search
+  - Features
+  - Detecting stable interest points
+- Registration
+  - Coarse-to-fine Image Registration
+
+![Pyramid Image](image_pyramid.png)
+
+**Coarse-to-fine Image Registration:**
+
+- Compute Gaussian pyramid.
+- Align with coarse pyramid.
+
+*Vineeth N B (IIT-H)*
+
+§2.3 Scale Space, Image Pyramids, Filter Banks
+
+7 / 17
+```
+
+# DL4CV_Week02_Part03.pdf - Page 38
+
+```markdown
+# Image Pyramids: Uses
+
+- **Compression**
+- **Object detection**
+  - Scale search
+  - Features
+- **Detecting stable interest points**
+- **Registration**
+  - Coarse-to-fine Image Registration
+
+### Coarse-to-fine Image Registration:
+
+- Compute Gaussian pyramid.
+- Align with coarse pyramid.
+- Successively align with finer pyramids.
+
+![Pyramid Diagram](image_url)
+
+*Vineeth N B (IIT-H)*
+
+§2.3 Scale Space, Image Pyramids, Filter Banks
+
+*Page 7 / 17*
+```
+
+# DL4CV_Week02_Part03.pdf - Page 39
+
+```markdown
+# Image Pyramids: Uses
+
+- Compression
+- Object detection
+  - Scale search
+  - Features
+  - Detecting stable interest points
+- Registration
+  - Coarse-to-fine Image Registration
+
+![Image Pyramid Diagram](image_pyramid_diagram.png)
+
+## Coarse-to-fine Image Registration:
+
+- Compute Gaussian pyramid.
+- Align with coarse pyramid.
+- Successively align with finer pyramids.
+- Search smaller range.
+
+*Credit: Derek Hoiem*
+
+_Vineeth N B (IIT-H)_
+
+§2.3 Scale Space, Image Pyramids, Filter Banks
+
+---
+
+Date: 7 / 17
+```
+
+Note: The placeholder `image_pyramid_diagram.png` is used for the image that would be included in the markdown file. Replace it with the actual image path or URL when available.
+
+# DL4CV_Week02_Part03.pdf - Page 40
+
+```markdown
+# Texture in Images
+
+## Textures:
+
+- Regular or stochastic patterns caused by bumps, grooves and/or markings.
+
+![NPTEL Logo](https://example.com/nptel_logo.png)
+
+Vineeth N B (IIT-H) §2.3 Scale Space, Image Pyramids, Filter Banks 8 / 17
+```
+
+# DL4CV_Week02_Part03.pdf - Page 41
+
+```markdown
+# Texture in Images
+
+## Textures:
+
+- Regular or stochastic patterns caused by bumps, grooves and/or markings.
+- Gives us information about spatial arrangement of colors or intensities in an image.
+
+![Different Materials](image-url)
+
+![Different Orientation](image-url)
+
+![Different Scales](image-url)
+
+**Credit:** Derek Hoiem
+
+*Vineeth N B (IIIT-H)*
+
+*§2.3 Scale Space, Image Pyramids, Filter Banks*
+
+*8 / 17*
+```
+
+# DL4CV_Week02_Part03.pdf - Page 42
+
+```markdown
+# Texture in Images
+
+Conveys more information that can be exploited to match regions of interest in images.
+
+**Histogram conveys 50% white pixels and 50% black pixels**
+
+![Checkered Pattern Image](image_url)
+
+![Block Pattern Image](image_url)
+
+![Striped Pattern Image](image_url)
+
+(Block Pattern) | (Checkerboard Pattern) | (Striped Pattern)
+--------------- | ----------------------- | ----------------
+![Block Pattern Image](image_url) | ![Checkerboard Pattern Image](image_url) | ![Striped Pattern Image](image_url)
+
+**Drastically different textures**
+
+**Credit:** Linda G Shapiro
+
+_Vineeth N B (IIT-H)_
+
+§2.3 Scale Space, Image Pyramids, Filter Banks
+
+*Page 9 / 17*
+```
+
+# DL4CV_Week02_Part03.pdf - Page 43
+
+```markdown
+# Texture in Images
+
+Conveys more information that can be exploited to match regions of interest in images.
+
+![Histogram](https://via.placeholder.com/150)
+
+**How to represent textures?**
+
+- **Block Pattern**
+- **Checkerboard Pattern**
+- **Striped Pattern**
+
+![Textures Illustration](https://via.placeholder.com/300)
+
+**Drastically different textures**
+
+---
+
+*Vineeth N B (IITH)*
+
+*§2.3 Scale Space, Image Pyramids, Filter Banks*
+
+---
+
+*9 / 17*
+```
+
+# DL4CV_Week02_Part03.pdf - Page 44
+
+```markdown
+# Texture in Images
+
+Conveys more information that can be exploited to match regions of interest in images.
+
+![Histogram](image_url)
+
+**Histogram** conveys 50% white pixels and 50% black pixels.
+
+---
+
+### How to represent textures?
+
+- Compute responses of blobs and edges at various orientations and scales.
+
+---
+
+#### (Block Pattern)
+
+![Block Pattern](image_url)
+
+#### (Checkerboard Pattern)
+
+![Checkerboard Pattern](image_url)
+
+#### (Striped Pattern)
+
+![Striped Pattern](image_url)
+
+---
+
+**Drastically different textures**
+
+---
+
+*Vineeth N B (IIIT-H)*
+
+---
+
+§2.3 Scale Space, Image Pyramids, Filter Banks
+
+---
+
+9 / 17
+```
+
+# DL4CV_Week02_Part03.pdf - Page 45
+
+```markdown
+# Texture in Images
+
+Conveys more information that can be exploited to match regions of interest in images.
+
+![Histogram Conveying Image](https://via.placeholder.com/150)
+
+**How to represent textures?**
+
+- Compute responses of blobs and edges at various orientations and scales.
+- Ways to process:
+  - Block Pattern
+  - Checkerboard Pattern
+  - Striped Pattern
+
+![Different Textures](https://via.placeholder.com/400)
+
+**Drastically different textures**
+
+*Vineeth N B (IIT-H)*
+*§2.3 Scale Space, Image Pyramids, Filter Banks*
+*9 / 17*
+```
+
+# DL4CV_Week02_Part03.pdf - Page 46
+
+```markdown
+# Texture in Images
+
+Conveys more information that can be exploited to match regions of interest in images.
+
+![Histogram](url-to-histogram-image)
+
+**Histogram** conveys 50% white pixels and 50% black pixels.
+
+## How to represent textures?
+
+- Compute responses of blobs and edges at various orientations and scales.
+- Ways to process:
+  - Record simple statistics (e.g., mean, std.) of absolute filter responses.
+
+![Textures](url-to-texture-image)
+
+- (Block Pattern)
+- (Checkerboard Pattern)
+- (Striped Pattern)
+
+**Drastically different textures**
+
+_Vineeth N B (IIT-H)_
+
+§2.3 Scale Space, Image Pyramids, Filter Banks
+
+9 / 17
+```
+
+# DL4CV_Week02_Part03.pdf - Page 47
+
+```markdown
+# Texture in Images
+
+Conveys more information that can be exploited to match regions of interest in images.
+
+Histogram conveys 50% white pixels and 50% black pixels
+
+![Histogram](image_url_here)
+
+## How to represent textures?
+
+- Compute responses of blobs and edges at various orientations and scales.
+- Ways to process:
+  - Record simple statistics (e.g., mean, std.) of absolute filter responses.
+  - Take vectors of filter responses at each pixel and cluster them.
+
+![Block Pattern](block_pattern_url_here) ![Checkerboard Pattern](checkerboard_pattern_url_here) ![Striped Pattern](striped_pattern_url_here)
+
+### Drastically different textures
+
+Vineeth N B (IIIT-H)
+
+§2.3 Scale Space, Image Pyramids, Filter Banks
+
+9 / 17
+```
+
+# DL4CV_Week02_Part03.pdf - Page 48
+
+```markdown
+# Filter Banks
+
+- An array of bandpass filters that separates the input signal into multiple components, each one carrying a single frequency sub-band of the original signal.
+
+![NPTEL Logo](image_url)
+
+*Vineeth N B (IIT-H) §2.3 Scale Space, Image Pyramids, Filter Banks*
+
+10 / 17
+```
+
+# DL4CV_Week02_Part03.pdf - Page 49
+
+```markdown
+# Filter Banks
+
+- **An array of bandpass filters that separates the input signal into multiple components, each one carrying a single frequency sub-band of the original signal.**
+- **Process image with each filter and keep responses (or squared/abs responses).**
+
+![Filter Banks Visualization](attachment:filter_banks.png)
+
+*Credit: Derek Hoiem*
+
+Vineeth N B (IIT-H)
+
+§2.3 Scale Space, Image Pyramids, Filter Banks
+
+---
+
+*Presentation Slide Content*
+
+- **Filter Banks**: 
+  - An array of bandpass filters that separates the input signal into multiple components, each one carrying a single frequency sub-band of the original signal.
+  - Process image with each filter and keep responses (or squared/abs responses).
+
+*Visualization of Filter Banks*
+
+![Filter Banks](attachment:filter_banks.png)
+
+*Credit: Derek Hoiem*
+
+Vineeth N B (IIT-H)
+
+§2.3 Scale Space, Image Pyramids, Filter Banks
+
+---
+
+*Slide Details*
+
+- Slide Number: 10 / 17
+```
+
+# DL4CV_Week02_Part03.pdf - Page 51
+
+```markdown
+# Gabor Filters
+
+- Special classes of bandpass filters (i.e., they allow a certain 'band' of frequencies and reject the others).
+- A Gabor filter can be viewed as a sinusoidal signal of particular frequency and orientation, modulated by a Gaussian wave.
+
+![A 2-D Gaussian](image-url)
+
+- A sinusoid oriented 30° with x-axis
+- A corresponding 2-D Gabor Filter
+
+A 2-D Gabor filter obtained by modulating the sine wave with a Gaussian
+
+*Vineeth N B (IIT-H) §2.3 Scale Space, Image Pyramids, Filter Banks*
+
+11 / 17
+```
+
+# DL4CV_Week02_Part03.pdf - Page 52
+
+```markdown
+# 2-D Gabor Filter
+
+![Gabor Filter Diagram](https://via.placeholder.com/150)
+
+\[
+g(x, y; \lambda, \theta, \psi, \sigma, \gamma) = e^{-\left(\frac{x'^2 + y'^2}{2\sigma^2}\right)} e^{i\left(2\pi \frac{x'}{\lambda} + \psi\right)}
+\]
+
+where:
+
+- \( x' = x \cos \theta + y \sin \theta \)
+- \( y' = -x \sin \theta + y \cos \theta \)
+- \(\theta\) – Orientation of the normal to the parallel stripes of Gabor function.
+
+*Vineeth N B (IIIT-H)*
+
+## §2.3 Scale Space, Image Pyramids, Filter Banks
+
+*Page 12 / 17*
+```
+
+# DL4CV_Week02_Part03.pdf - Page 53
+
+# 2-D Gabor Filter
+
+```markdown
+![Gabor Filter Diagram](image-url)
+
+\[ g(x, y; \lambda, \theta, \psi, \sigma, \gamma) = e^{-(x^2 + \gamma^2 y^2) \frac{1}{2\sigma^2}} e^{i (2 \pi \frac{x' + y'}{\lambda})} \]
+
+where:
+
+- \( x' = x \cos \theta + y \sin \theta \)
+- \( y' = -x \sin \theta + y \cos \theta \)
+- \( \theta \) – Orientation of the normal to the parallel stripes of Gabor function.
+- \( \lambda \) – Wavelength of the sinusoidal component.
+```
+
+**Vineeth N B (IIT-H)**
+
+**§2.3 Scale Space, Image Pyramids, Filter Banks**
+
+**NPTEL**
+
+12 / 17
+
+# DL4CV_Week02_Part03.pdf - Page 54
+
+```markdown
+# 2-D Gabor Filter
+
+![Gabor Filter Visualization](image-url)
+
+\[ g(x, y; \lambda, \theta, \psi, \sigma, \gamma) = e^{-\left(\frac{x'^2 + y'^2}{2 \sigma^2}\right)} e^{i \left(2 \pi \frac{x'}{\lambda} + \psi\right)} \]
+
+where:
+
+- \( x' = x \cos \theta + y \sin \theta \)
+- \( y' = -x \sin \theta + y \cos \theta \)
+- \( \theta \) – Orientation of the normal to the parallel stripes of Gabor function.
+- \( \lambda \) – Wavelength of the sinusoidal component.
+- \( \psi \) – Phase offset of the sinusoidal function.
+
+Vineeth N B (IIT-H) §2.3 Scale Space, Image Pyramids, Filter Banks NPTEL 12 / 17
+```
+
+# DL4CV_Week02_Part03.pdf - Page 55
+
+```markdown
+# 2-D Gabor Filter
+
+![Gabor Filter Diagram](image_url)
+
+\[ g(x, y; \lambda, \theta, \psi, \sigma, \gamma) = e^{-\left(\frac{x'^2 + y'^2}{2\sigma^2}\right)} e^{i\left(2\pi\frac{x'}{\lambda} + \psi\right)} \]
+
+where:
+
+- \( x' = x \cos \theta + y \sin \theta \)
+- \( y' = -x \sin \theta + y \cos \theta \)
+- \(\theta\) - Orientation of the normal to the parallel stripes of Gabor function.
+- \(\lambda\) - Wavelength of the sinusoidal component.
+- \(\psi\) - Phase offset of the sinusoidal function.
+- \(\sigma\) - Standard deviation of the Gaussian envelope.
+
+Vineeth N B (IIIT-H) §2.3 Scale Space, Image Pyramids, Filter Banks 12 / 17
+```
+
+# DL4CV_Week02_Part03.pdf - Page 58
+
+```markdown
+# Gabor Filter Banks
+
+![Gabor Filter Banks](image-placeholder.jpg)
+
+Input Image of a Circle
+
+A bank of 16 Gabor filters
+
+Output Image of the circle after passed through individual Gabor filters
+
+---
+
+Vineeth N B (IIT-H)
+
+§2.3 Scale Space, Image Pyramids, Filter Banks
+
+14 / 17
+```
+
+# DL4CV_Week02_Part03.pdf - Page 59
+
+```markdown
+# Steerable Filter Banks
+
+**Steerable Filters** are a class of oriented filters that can be expressed as a linear combination of a set of basis filters.
+
+![Image](https://via.placeholder.com/150)
+
+**Vineeth N B (IIT-H)**
+
+## §2.3 Scale Space, Image Pyramids, Filter Banks
+
+15 / 17
+```
+
+---
+
+### Notes:
+
+1. **Section Titles and Subheadings**: 
+   - The main title is formatted with `#`.
+   - Subsections are formatted with `##`.
+
+2. **Paragraphs and Text**:
+   - The main body text is formatted as paragraphs.
+   - Important words are in **bold** and *italicized* as required.
+
+3. **Image Syntax**:
+   - Placeholder image syntax `![Image](https://via.placeholder.com/150)` is used to represent the image where the OCR couldn't capture it directly.
+
+4. **Footnotes**:
+   - Footnotes are represented inline with the main text.
+
+5. **Science and Math**:
+   - Ensure scientific terms and syntax are correctly captured and formatted.
+
+By converting this way, the document maintains its scientific integrity and readability.
+
+# DL4CV_Week02_Part03.pdf - Page 60
+
+```markdown
+# Steerable Filter Banks
+
+Steerable Filters are a class of oriented filters that can be expressed as a linear combination of a set of basis filters.
+
+- For an isotropic Gaussian filter, \( G(x, y) = e^{-(x^2 + y^2)} \),
+
+\[ G_1^{\theta^\circ} = G_1^{0^\circ} \cos(\theta) + G_1^{90^\circ} \sin(\theta) \]
+
+![NPTEL Logo](https://example.com/logo.png)
+
+*Vineeth N B (IIT-H) §2.3 Scale Space, Image Pyramids, Filter Banks 15 / 17*
+```
+
+# DL4CV_Week02_Part03.pdf - Page 61
+
+```markdown
+# Steerable Filter Banks
+
+**Steerable Filters** are a class of oriented filters that can be expressed as a linear combination of a set of basis filters.
+
+- For an isotropic Gaussian filter, \( G(x, y) = e^{-(x^2 + y^2)} \),
+
+  \[
+  G^{0^\circ}_1 = G^{0^\circ}_1 \cos(\theta) + G^{90^\circ}_1 \sin(\theta)
+  \]
+
+  where \( G^{0^\circ}_1 \) is the first derivative of \( G \) at angle \( \theta \).
+
+Vineeth N B (IIT-H) §2.3 Scale Space, Image Pyramids, Filter Banks
+15 / 17
+
+![Original Image](image-url)
+
+- **Original**
+
+![Y-axis Image](image-url)
+
+- **Y-axis**
+
+![15° Image](image-url)
+
+- **15°**
+
+![X-axis Image](image-url)
+
+- **X-axis**
+
+![30° Image](image-url)
+
+- **30°**
+
+![60° Image](image-url)
+
+- **60°**
+```
+
+# DL4CV_Week02_Part03.pdf - Page 62
+
+```markdown
+# Steerable Filter Banks
+
+![Filter Banks Diagram](image-url)
+
+Vineeth N B (IIT-H) §2.3 Scale Space, Image Pyramids, Filter Banks 16 / 17
+
+## Low Pass Filter L0
+- Magnitude plotted against \( F_x \) and \( F_y \)
+- Displays a peak in the center decreasing towards the edges
+
+## High Pass Filter H0
+- Magnitude plotted against \( F_x \) and \( F_y \)
+- Shows a dip in the center with higher values towards the edges
+
+## Band Pass Filter B0
+- Magnitude plotted against \( F_x \) and \( F_y \)
+- Features two peaks off-center, forming a band pass characteristic
+
+## Band Pass Filter B1
+- Magnitude plotted against \( F_x \) and \( F_y \)
+- Displays two peaks slightly offset from center, indicating another band pass filter
+
+## Band Pass Filter B2
+- Magnitude plotted against \( F_x \) and \( F_y \)
+- Shows another band pass response with peaks further from the center
+
+## Low Pass Filter L1
+- Magnitude plotted against \( F_x \) and \( F_y \)
+- Presents a low pass characteristic with a peak at the center
+
+```
+
+# DL4CV_Week02_Part03.pdf - Page 63
+
+```markdown
+# Homework
+
+## Readings
+
+- **Chapter 2, Szeliski, *Computer Vision: Algorithms and Applications***
+
+## Questions
+
+- Why is camouflage attire effective? How?
+- How is texture different from noise?
+- Will scale-invariant filters be effective in matching pictures containing Matryoshka (or Russian nesting) dolls?
+
+![Matryoshka Dolls](https://via.placeholder.com/150)
+
+*Vineeth N B (IIT-H) §2.3 Scale Space, Image Pyramids, Filter Banks*
+
+Page 17 / 17
+```
+

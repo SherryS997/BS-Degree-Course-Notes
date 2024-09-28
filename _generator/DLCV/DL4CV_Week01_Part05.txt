@@ -1,0 +1,1634 @@
+# DL4CV_Week01_Part05.pdf - Page 1
+
+```markdown
+# Deep Learning for Computer Vision
+
+# Linear Filtering, Correlation and Convolution
+
+**Vineeth N Balasubramanian**
+
+Department of Computer Science and Engineering
+Indian Institute of Technology, Hyderabad
+
+![IIT Hyderabad Logo](image_url)
+
+Vineeth N B (IIT-H) 
+## 1.5 Image Filtering 
+
+---
+
+**Deep Learning for Computer Vision**
+
+# Linear Filtering, Correlation and Convolution
+
+**Vineeth N Balasubramanian**
+
+Department of Computer Science and Engineering
+Indian Institute of Technology, Hyderabad
+
+![IIT Hyderabad Logo](image_url)
+
+---
+
+### Image Filtering
+
+#### Introduction
+
+- **Image Processing**: Techniques used to modify or enhance images.
+- **Filtering**: Process of improving image quality.
+
+#### Linear Filtering
+
+- **Linear Filter**: A filter whose output is a linear combination of the input image's pixel values.
+- **Convolution**: Operation used in linear filtering.
+
+#### Convolution
+
+- **Definition**:
+  \[
+  (f * g)(x, y) = \sum_{m=-M}^{M} \sum_{n=-N}^{N} f(m, n) g(x - m, y - n)
+  \]
+  where \( f \) is the input image and \( g \) is the filter.
+
+#### Correlation
+
+- **Definition**:
+  \[
+  (f \otimes g)(x, y) = \sum_{m=-M}^{M} \sum_{n=-N}^{N} f(x + m, y + n) g(-m, -n)
+  \]
+
+#### Properties
+
+- **Commutative Property**:
+  \[
+  f * g = g * f
+  \]
+
+- **Associative Property**:
+  \[
+  (f * g) * h = f * (g * h)
+  \]
+
+- **Distributive Property**:
+  \[
+  f * (g + h) = f * g + f * h
+  \]
+
+#### Applications
+
+- **Noise Reduction**: Using low-pass filters.
+- **Edge Detection**: Using high-pass filters.
+
+---
+
+**References**:
+
+- [Image Processing Techniques](link_to_image_processing_techniques)
+- [Filter Design for Image Processing](link_to_filter_design_for_image_processing)
+```
+
+# DL4CV_Week01_Part05.pdf - Page 2
+
+```markdown
+# Review
+
+- **Different types of image processing operations:**
+  - point
+  - local
+  - global
+
+![NPTEL Logo](https://via.placeholder.com/150 "NPTEL Logo")
+
+Vineeth N B (IIT-H) & 1.5 Image Filtering
+
+---
+
+_Note: Image placeholder used for the logo as direct OCR extraction was not possible._
+```
+
+# DL4CV_Week01_Part05.pdf - Page 3
+
+```markdown
+# Review
+
+- Different types of image processing operations:
+  - point
+  - local
+  - global
+
+- **Question**: How do you perform histogram equalization?
+
+![NPTEL Logo](image_url)
+
+Vineeth N B (IIT-H) §1.5 Image Filtering 2 / 25
+```
+
+# DL4CV_Week01_Part05.pdf - Page 4
+
+```markdown
+# Review
+
+- Different types of image processing operations:
+  - point
+  - local
+  - global
+
+- **Question**: How do you perform histogram equalization?
+
+- Let $I$ be the image with $M \times N$ pixels in total;
+  - $I_{MAX}$ be the maximum image intensity value (255);
+  - $h(I)$ be the image histogram
+
+![NPTEL Logo](https://example.com/nptel_logo.png)
+
+Vineeth N B (IIT-H) §1.5 Image Filtering 2 / 25
+```
+
+# DL4CV_Week01_Part05.pdf - Page 5
+
+```markdown
+# Review
+
+- Different types of image processing operations:
+  - point, local and global
+
+- **Question:** How do you perform histogram equalization?
+
+- Let \( I \) be the image with \( M \times N \) pixels in total;
+  - \( I_{MAX} \) be the maximum image intensity value (255);
+  - \( h(I) \) be the image histogram
+
+- Integrate \( h(I) \) to obtain the cumulative distribution \( c(I) \), whose each value
+  \[
+  c_k = \frac{1}{M \times N} \sum_{l=1}^{k} h(l)
+  \]
+```
+
+# DL4CV_Week01_Part05.pdf - Page 6
+
+```markdown
+# Review
+
+- Different types of image processing operations:
+  - point, local and global
+
+- **Question:** How do you perform histogram equalization?
+
+- Let $I$ be the image with $M \times N$ pixels in total;
+  - $I_{MAX}$ be the maximum image intensity value (255);
+  - $h(I)$ be the image histogram
+
+- Integrate $h(I)$ to obtain the cumulative distribution $c(I)$, whose each value
+  \[
+  c_k = \frac{1}{M \times N} \sum_{l=1}^{k} h(l)
+  \]
+
+- The transformed image $\hat{I}(i,j) = I_{MAX} \times c_{p_{ij}}$
+
+- **E.g.:** in figure, value 90 will be mapped to $I_{MAX} \times 0.29$ (rounded off)
+
+![Graph of Cumulative Proportion vs. Gray Level Intensity](image_url)
+
+*Image Source: Simon Prince, Computer Vision: Models, Learning, and Inference, Cambridge University Press*
+
+*Vineeth N B (IIIT-H)*
+
+*§1.5 Image Filtering*
+
+*2 / 25*
+```
+
+# DL4CV_Week01_Part05.pdf - Page 7
+
+```markdown
+# Image Filters: Linear Filter
+
+- **Image Filter**: Modify image pixels based on some function of a local neighbourhood of each pixel
+
+![Diagram](image-placeholder.png)
+
+|  |  |  |
+| --- | --- | --- |
+| 10 | 5 | 3 |
+| 4 | 5 | 1 |
+| 1 | 1 | 6 |
+
+Some function →
+
+|  |  |
+| --- | --- |
+| 4 | 4 |
+
+**What's the function?**
+
+*Vineeth N B (IIT-H) §1.5 Image Filtering 3 / 25*
+```
+
+# DL4CV_Week01_Part05.pdf - Page 8
+
+```markdown
+# Image Filters: Linear Filter
+
+- **Image Filter**: Modify image pixels based on some function of a local neighbourhood of each pixel.
+- **Linear Filter**: Replace each pixel by linear combination (a weighted sum) of neighbours.
+- **Linear combination** called **kernel, mask** or **filter**.
+
+![Image Filters Diagram](image-placeholder)
+
+## What’s the function?
+
+| 10 | 5 | 3 |
+|----|----|----|
+| 4  | 5  | 1  |
+| 1  | 1  | 6  |
+
+![Local Image Data](image-placeholder)
+
+| 10 | 5 | 3 |
+|----|----|----|
+| 4  | 5  | 1  |
+| 1  | 1  | 6  |
+
+![Kernel](image-placeholder)
+
+| 0  | 0  | 0  |
+|----|----|----|
+| 0  | 0.5| 0  |
+| 0  | 1  | 0.5|
+
+![Modified Image Data](image-placeholder)
+
+| 6.5 |
+
+---
+
+Vineeth N B (IIIT-H) §1.5 Image Filtering 3 / 25
+```
+
+# DL4CV_Week01_Part05.pdf - Page 9
+
+```markdown
+# Linear Filter: Cross-Correlation
+
+Given a kernel of size $(2k+1) \times (2k+1)$:
+
+- **Correlation** defined as:
+
+\[ G(i, j) = \frac{1}{(2k+1)^2} \sum_{u=-k}^{k} \sum_{v=-k}^{k} I(i+u, j+v) \]
+
+  - **Uniform weight** to each pixel
+  - **Loop** over pixels in considered neighbourhood around \(I(i, j)\)
+
+![NPTEL](https://example.com/nptel_logo.png)
+
+Vineeth N B (IIT-H) §1.5 Image Filtering 4 / 25
+```
+
+# DL4CV_Week01_Part05.pdf - Page 10
+
+```markdown
+# Linear Filter: Cross-Correlation
+
+Given a kernel of size (2k + 1) × (2k + 1):
+
+- **Correlation** defined as:
+
+  \[
+  G(i, j) = \frac{1}{(2k + 1)^2} \sum_{u = -k}^{k} \sum_{v = -k}^{k} I(i + u, j + v)
+  \]
+
+  - Uniform weight to each pixel
+  - Loop over pixels in considered neighbourhood around \(I(i, j)\)
+
+- **Cross-correlation** defined as:
+
+  \[
+  G(i, j) = \sum_{u = -k}^{k} \sum_{v = -k}^{k} H(u, v) I(i + u, j + v)
+  \]
+
+  - Non-uniform weights
+
+*Vineeth N B (IIT-H) §1.5 Image Filtering*
+```
+
+Note: The diagrams and images referenced in the OCR process are not included in the markdown output because they cannot be captured directly through text.
+
+# DL4CV_Week01_Part05.pdf - Page 11
+
+```markdown
+# Linear Filter: Cross-Correlation
+
+Given a kernel of size $(2k + 1) \times (2k + 1)$:
+
+- **Correlation** defined as:
+
+  \[
+  G(i, j) = \frac{1}{(2k + 1)^2} \sum_{u=-k}^{k} \sum_{v=-k}^{k} I(i + u, j + v)
+  \]
+
+  - **Uniform weight** to each pixel
+  - Loop over pixels in considered neighbourhood around $I(i, j)$
+
+  - Cross-correlation denoted by $G = H \otimes I$
+  - Can be viewed as "dot product" between local neighbourhood and kernel for each pixel
+  - Entries of kernel or mask $H(u, v)$ called filter co-efficients
+
+- **Cross-correlation** defined as:
+
+  \[
+  G(i, j) = \sum_{u=-k}^{k} \sum_{v=-k}^{k} H(u, v) I(i + u, j + v)
+  \]
+
+  - **Non-uniform weights**
+
+![Vineeth N B. (IIIT-H)](https://via.placeholder.com/150 "Vineeth N B. (IIIT-H)")
+
+§1.5 Image Filtering
+
+![JUTEL](https://via.placeholder.com/150 "JUTEL")
+```
+
+Note: Placeholder images (`https://via.placeholder.com/150`) are used where actual images can't be captured directly through OCR. Adjust the URLs accordingly if you have the actual images.
+
+# DL4CV_Week01_Part05.pdf - Page 12
+
+```markdown
+# Moving Average: Linear Filter
+
+**What values belong in the kernel H for the moving average example we saw earlier?**
+
+$$
+I(i,j) \quad \otimes \quad H(u,v) \quad = \quad G(i,j)
+$$
+
+![Diagram of Image Filtering Process](image_url)
+
+**Credit: K Grauman, Univ of Texas Austin**
+
+Vineeth N B (IIT-H) §1.5 Image Filtering 5 / 25
+
+## Image on the Left
+
+| 0  | 0  | 0  | 0  | 0  | 0  | 0  | 0  | 0  | 0  | 0  |
+|----|----|----|----|----|----|----|----|----|----|----|
+| 0  | 0  | 0  | 0  | 0  | 0  | 0  | 0  | 0  | 0  | 0  |
+| 0  | 0  | 0  | 90 | 90 | 90 | 90 | 90 | 0  | 0  | 0  |
+| 0  | 0  | 0  | 90 | 90 | 90 | 90 | 90 | 0  | 0  | 0  |
+| 0  | 0  | 0  | 90 | 90 | 90 | 90 | 90 | 0  | 0  | 0  |
+| 0  | 0  | 0  | 90 | 90 | 90 | 90 | 90 | 0  | 0  | 0  |
+| 0  | 0  | 0  | 90 | 90 | 90 | 90 | 90 | 0  | 0  | 0  |
+| 0  | 0  | 0  | 90 | 90 | 90 | 90 | 90 | 0  | 0  | 0  |
+| 0  | 0  | 0  | 90 | 90 | 90 | 90 | 90 | 0  | 0  | 0  |
+| 0  | 0  | 0  | 90 | 90 | 90 | 90 | 90 | 0  | 0  | 0  |
+| 0  | 0  | 0  | 90 | 90 | 90 | 90 | 90 | 0  | 0  | 0  |
+| 0  | 0  | 0  | 90 | 90 | 90 | 90 | 90 | 0  | 0  | 0  |
+
+## Middle Diagram
+
+![Kernel Diagram](image_url)
+
+## Image on the Right
+
+| 0  | 10 | 20 | 30 | 30 |
+|----|----|----|----|----|
+| 0  | 10 | 20 | 30 | 30 |
+| 0  | 10 | 20 | 30 | 30 |
+| 0  | 10 | 20 | 30 | 30 |
+| 0  | 10 | 20 | 30 | 30 |
+| 0  | 10 | 20 | 30 | 30 |
+| 0  | 10 | 20 | 30 | 30 |
+| 0  | 10 | 20 | 30 | 30 |
+| 0  | 10 | 20 | 30 | 30 |
+| 0  | 10 | 20 | 30 | 30 |
+| 0  | 10 | 20 | 30 | 30 |
+```
+
+# DL4CV_Week01_Part05.pdf - Page 13
+
+# Moving Average: Linear Filter
+
+**What values belong in the kernel \( H \) for the moving average example we saw earlier?**
+
+\[ I(i, j) \quad \otimes \quad H(u, v) \quad = \quad G(i, j) \]
+
+## Diagrams and Equations
+
+```markdown
+![Kernel Operation](data:image/png;base64,...) 
+```
+
+### Input Image \( I(i, j) \)
+
+```
+| 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 |
+|---|---|---|---|---|---|---|---|---|
+| 0 | 0 | 0 | 90| 90| 90| 90| 0 | 0 |
+| 0 | 0 | 90| 90| 90| 90| 90| 0 | 0 |
+| 0 | 90| 90| 90| 90| 90| 90| 0 | 0 |
+| 0 | 90| 90| 90| 90| 90| 90| 0 | 0 |
+| 0 | 90| 90| 90| 90| 90| 90| 0 | 0 |
+| 0 | 90| 90| 90| 90| 90| 90| 0 | 0 |
+| 0 | 90| 90| 90| 90| 90| 90| 0 | 0 |
+| 0 | 0 | 90| 90| 90| 90| 90| 0 | 0 |
+| 0 | 0 | 0 | 90| 90| 90| 90| 0 | 0 |
+```
+
+### Kernel \( H(u, v) \)
+
+```
+|   |   |   |
+|---|---|---|
+| 1 | 1 | 1 |
+|   |   |   |
+```
+
+### Output Image \( G(i, j) \)
+
+```
+| 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 |
+|---|---|---|---|---|---|---|---|---|
+| 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 |
+| 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 |
+| 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 |
+| 0 | 0 | 0 | 30| 30| 30| 0 | 0 | 0 |
+| 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 |
+| 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 |
+| 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 |
+| 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 |
+```
+
+### Note
+
+- This operation is scaled by \( \frac{1}{9} \).
+
+**Credit:** K. Grauman, Univ of Texas Austin
+
+**Vineeth N B. (IIIT-H)**
+
+**§1.5 Image Filtering**
+
+# DL4CV_Week01_Part05.pdf - Page 14
+
+```markdown
+# Moving Average Filter: Example
+
+## Effect of moving average filter (also known as box filter):
+
+**Credit:** K Grauman, Univ of Texas Austin
+
+![Original Image](image1_url)
+
+![Filtered Image](image2_url)
+
+_Vineeth N B. (IIT-H)_
+
+### 1.5 Image Filtering
+
+---
+
+Page 7 / 25
+```
+
+### Explanation:
+
+1. **Section Titles and Headings**:
+   - `# Moving Average Filter: Example` is formatted as a top-level heading.
+   - `## Effect of moving average filter (also known as box filter):` is formatted as a subheading.
+
+2. **Bold and Italicized Text**:
+   - **Credit:** and *K Grauman, Univ of Texas Austin* are formatted using bold and italics, respectively.
+
+3. **Images**:
+   - Placeholders `![Original Image](image1_url)` and `![Filtered Image](image2_url)` are used for images that cannot be directly captured by OCR.
+
+4. **Code Blocks**:
+   - Entire text is formatted as a code block for clarity.
+
+5. **Symbols**:
+   - Symbols and mathematical notations are retained as is.
+
+6. **Pagination**:
+   - Page number and total are retained from the original layout.
+
+This markdown format maintains the scientific integrity and structure of the original content.
+
+# DL4CV_Week01_Part05.pdf - Page 15
+
+```markdown
+# Gaussian Average Filter
+
+## What if we want nearest neighbouring pixels to have the most influence on the output?
+
+$$
+I(i,j)
+$$
+
+![Image](image_placeholder.png)
+
+$$
+H(u,v)
+$$
+
+$$
+\begin{array}{|c|c|c|c|c|c|c|c|c|c|}
+\hline
+0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\
+\hline
+0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\
+\hline
+0 & 0 & 0 & 90 & 90 & 90 & 90 & 90 & 0 & 0 \\
+\hline
+0 & 0 & 90 & 90 & 90 & 90 & 90 & 90 & 0 & 0 \\
+\hline
+0 & 90 & 90 & 90 & 90 & 90 & 90 & 90 & 0 & 0 \\
+\hline
+0 & 90 & 90 & 90 & 90 & 90 & 90 & 90 & 0 & 0 \\
+\hline
+0 & 0 & 90 & 90 & 90 & 90 & 90 & 90 & 0 & 0 \\
+\hline
+0 & 0 & 0 & 90 & 90 & 90 & 90 & 90 & 0 & 0 \\
+\hline
+0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\
+\hline
+0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\
+\hline
+\end{array}
+$$
+
+![Gaussian Average Filter Image](image_placeholder.png)
+
+\* Credit: K Grauman, Univ of Texas Austin
+
+Vineeth N B (IIIT-H)
+
+\* 1.5 Image Filtering
+```
+
+# DL4CV_Week01_Part05.pdf - Page 16
+
+```markdown
+# Gaussian Average Filter
+
+What if we want nearest neighbouring pixels to have the most influence on the output?
+
+## Image Kernel and Gaussian Function Approximation
+
+\[ I(i, j) \]
+
+```markdown
+| 0  | 0  | 0  | 0  | 0  | 0  | 0  | 0  | 0  |
+|----|----|----|----|----|----|----|----|----|
+| 0  | 0  | 0  | 90 | 90 | 90 | 90 | 0  | 0  |
+| 0  | 0  | 90 | 90 | 90 | 90 | 90 | 0  | 0  |
+| 0  | 90 | 90 | 90 | 90 | 90 | 90 | 0  | 0  |
+| 0  | 90 | 90 | 90 | 90 | 90 | 90 | 0  | 0  |
+| 0  | 90 | 90 | 90 | 90 | 90 | 90 | 0  | 0  |
+| 0  | 90 | 90 | 90 | 90 | 90 | 90 | 0  | 0  |
+| 0  | 0  | 90 | 90 | 90 | 90 | 90 | 0  | 0  |
+| 0  | 0  | 0  | 90 | 90 | 90 | 0  | 0  | 0  |
+```
+
+This kernel is an approximation of a 2D Gaussian function:
+
+\[ h(u, v) = \frac{1}{2\pi \sigma^2} \exp - \frac{u^2 + v^2}{2\sigma^2} \]
+
+```markdown
+| 1/16 | 1  | 2  | 1  |
+|------|----|----|----|
+| 1    | 2  | 4  | 2  |
+| 2    | 4  | 4  | 2  |
+| 1    | 2  | 1  |
+```
+
+![Gaussian Function](image_url)
+
+*Credit: K Grauman, Univ of Texas Austin*
+
+*Vineeth N B (IIT-H)*
+
+*§1.5 Image Filtering*
+```
+
+# DL4CV_Week01_Part05.pdf - Page 17
+
+```markdown
+# Averaging Filters: A Comparison
+
+![Comparison of Averaging Filters](image-url)
+
+**Credit:** K Grauman, Univ of Texas Austin
+
+Vineeth N B (IIIT-H)
+
+## Section 1.5: Image Filtering
+
+### Box filter
+- **Description**: A box filter averages the pixel values within a rectangular region.
+- **Visualization**:
+  ![Box Filter Visualization](image-url)
+
+### Gaussian filter
+- **Description**: A Gaussian filter uses a Gaussian function to average pixel values, giving more weight to the central pixels.
+- **Visualization**:
+  ![Gaussian Filter Visualization](image-url)
+
+### Comparison
+- **Box Filter**: Often used for simple averaging, leading to uniform blurring.
+- **Gaussian Filter**: Provides a smoother result by weighting central pixels more heavily.
+
+**Note**: The visualizations showcase the results of applying both filters to the same input image, highlighting differences in smoothing effects.
+```
+
+# DL4CV_Week01_Part05.pdf - Page 18
+
+```markdown
+# Other Filters: The Edge Filter
+
+**What should \( H \) look like to find the edges in a given image?**
+
+## Notation Overview
+
+- \( I(i, j) \): Input image at pixel coordinates \( (i, j) \)
+- \( H(u, v) \): Filter kernel at coordinates \( (u, v) \)
+- \( G(i, j) \): Output after applying the filter at pixel coordinates \( (i, j) \)
+- \( |G(i, j)| \): Absolute value of \( G(i, j) \)
+
+## Edge Detection with Filters
+
+### \( H(u, v) \) for Vertical Edges?
+
+![Vertical Edges Filter Result](image-placeholder-for-vertical-edges.png)
+
+**Image:** The input image.
+**Filter:** \( H(u, v) \) for detecting vertical edges.
+**Output:** \( G(i, j) \) after applying the filter.
+**Result:** \( |G(i, j)| \) highlighting vertical edges.
+
+### \( H(u, v) \) for Horizontal Edges?
+
+![Horizontal Edges Filter Result](image-placeholder-for-horizontal-edges.png)
+
+**Image:** The input image.
+**Filter:** \( H(u, v) \) for detecting horizontal edges.
+**Output:** \( G(i, j) \) after applying the filter.
+**Result:** \( |G(i, j)| \) highlighting horizontal edges.
+
+**Credit:** *KiwiWorker*
+
+**Author:** Vineeth N B (IIIT-H)
+
+**Topic:** §1.5 Image Filtering
+
+**Slide Number:** 11 / 25
+```
+
+# DL4CV_Week01_Part05.pdf - Page 19
+
+```markdown
+# Other Filters: The Edge Filter
+
+## What should H look like to find the edges in a given image?
+
+![Diagram](image-placeholder)
+
+### Elements
+
+- **I(i, j)**: Original image matrix
+- **H(u, v)**: Filter matrix
+- **G(i, j)**: Resultant image matrix after applying the filter
+- **|G(i, j)|**: Absolute value of the resultant image matrix
+
+### Example Filters
+
+#### Horizontal Edge Detection Filter
+
+**Filter Matrix:**
+```
+| 1/9  -1  0  1 |
+| 1/9  -1  0  1 |
+| 1/9  -1  0  1 |
+```
+
+**Original Image:**
+![Original Image](image-placeholder)
+
+**Resultant Image:**
+![Resultant Image](image-placeholder)
+
+**Absolute Value Image:**
+![Absolute Value Image](image-placeholder)
+
+#### Vertical Edge Detection Filter
+
+**Filter Matrix:**
+```
+| 1  1  1 |
+| 0  0  0 |
+| -1 -1 -1 |
+```
+
+**Original Image:**
+![Original Image](image-placeholder)
+
+**Resultant Image:**
+![Resultant Image](image-placeholder)
+
+**Absolute Value Image:**
+![Absolute Value Image](image-placeholder)
+
+### Credit
+
+*KiwiWorker*
+
+*Vineeth N B (IIT-H)*
+
+*§1.5 Image Filtering*
+
+*Page 12 / 25*
+```
+
+Note: The placeholders `image-placeholder` should be replaced with actual image paths if available.
+
+# DL4CV_Week01_Part05.pdf - Page 20
+
+```markdown
+# Beyond Correlation
+
+## What is the result of filtering the impulse signal (image) I with the arbitrary kernel H?
+
+![Image I](image_url)
+
+\[ I(i, j) \]
+
+![Kernel H](kernel_url)
+
+\[ H(u, v) \]
+
+![Result G](result_url)
+
+\[ G(i, j) \]
+
+---
+
+Vineeth N B (IIIT-H)
+
+### 1.5 Image Filtering
+
+13 / 25
+```
+
+# DL4CV_Week01_Part05.pdf - Page 21
+
+ accuracy is crucial.
+
+```markdown
+# Beyond Correlation
+
+### What is the result of filtering the impulse signal (image) F with the arbitrary kernel H?
+
+![Impulse Signal](image-url)
+
+#### I(i, j)
+
+```latex
+I(i, j) = \begin{cases}
+    1 & \text{if } i = 1, j = 1 \\
+    0 & \text{otherwise}
+\end{cases}
+```
+
+#### H(u, v)
+
+```latex
+H(u, v) = \begin{bmatrix}
+    a & b & c \\
+    d & e & f \\
+    g & h & i
+\end{bmatrix}
+```
+
+#### G(i, j)
+
+```latex
+G(i, j) = \begin{cases}
+    \frac{1}{9} & \text{if } i = 1, j = 1 \\
+    0 & \text{otherwise}
+\end{cases}
+```
+
+```latex
+G(i, j) = \sum_{u=-1}^{1} \sum_{v=-1}^{1} H(u, v) \cdot I(i-u, j-v)
+```
+
+#### Visual Representation
+
+- **Impulse Signal (I(i, j))**: ![Impulse Signal](image-url)
+
+- **Kernel (H(u, v))**: ![Kernel](image-url)
+
+- **Resulting Image (G(i, j))**: ![Resulting Image](image-url)
+
+#### Vineeth N B (IIIT-H)
+
+#### §1.5 Image Filtering
+
+---
+
+*Page 14 / 25*
+```
+
+# DL4CV_Week01_Part05.pdf - Page 22
+
+```markdown
+# Introducing Convolution
+
+Given a kernel of size $(2k + 1) \times (2k + 1)$:
+
+- **Convolution** defined as:
+
+  \[
+  G(i, j) = \sum_{u=-k}^{k} \sum_{v=-k}^{k} H(u, v)I(i - u, j - v)
+  \]
+
+![NPTEL](https://example.com/image.png)
+
+Vineeth N B. (IIT-H) §1.5 Image Filtering
+
+15 / 25
+```
+
+# DL4CV_Week01_Part05.pdf - Page 23
+
+```markdown
+# Introducing Convolution
+
+Given a kernel of size $(2k + 1) \times (2k + 1)$:
+
+- **Convolution** defined as:
+
+  \[
+  G(i, j) = \sum_{u=-k}^{k} \sum_{v=-k}^{k} H(u, v) I(i - u, j - v)
+  \]
+
+- Equivalent to flip the filter in both directions (bottom to top, right to left) and apply cross-correlation
+
+- Denoted by \( G = H \ast I \)
+
+---
+
+Vineeth N B (IIIT-H) 
+
+§1.5 Image Filtering
+
+15 / 25
+```
+
+Note:
+
+- Formulas are represented using LaTeX syntax within Markdown code blocks.
+- Section titles, headings, and subheadings are formatted using `#` for the primary heading and `-` for bullet points.
+- The extracted text from the scientific content is accurately maintained with appropriate markdown formatting.
+
+# DL4CV_Week01_Part05.pdf - Page 24
+
+```markdown
+# Introducing Convolution
+
+Given a kernel of size $(2k + 1) \times (2k + 1)$:
+
+- **Convolution** defined as:
+
+    \[
+    G(i, j) = \sum_{u=-k}^{k} \sum_{v=-k}^{k} H(u, v) I(i - u, j - v)
+    \]
+
+  - Equivalent to flip the filter in both directions (bottom to top, right to left) and apply cross-correlation
+
+  - Denoted by \( G = H \ast I \)
+
+![Convolution Process](image_placeholder)
+
+### Example
+
+- Input Image \( I(i, j) \)
+
+  ![Input Image](image_placeholder)
+
+- Filter \( H(u, v) \)
+
+  ![Filter](image_placeholder)
+
+- Cross-Correlation \( G(i, j) \)
+
+  \[
+  G(i, j) = \sum_{u=-k}^{k} \sum_{v=-k}^{k} H(u, v) I(i - u, j - v)
+  \]
+
+  ![Output Image](image_placeholder)
+
+### Image Analysis
+
+- Input image data:
+  - \( a | b | c \)
+  - \( d | e | f \)
+  - \( g | h | i \)
+
+- Filter data:
+  - \( a | b | c \)
+  - \( d | e | f \)
+  - \( g | h | i \)
+
+- Cross-correlation result:
+  - \( a | b | c \)
+  - \( d | e | f \)
+  - \( g | h | i \)
+
+---
+
+_Vineeth N B (IIT-H)_
+
+_§1.5 Image Filtering_
+
+_Page 15 / 25_
+```
+
+# DL4CV_Week01_Part05.pdf - Page 25
+
+```markdown
+# Recall: Early History
+
+## Timeline
+
+- **1959**
+- **1963**
+- **1966**
+- **1971-73**
+- **1979-82**
+
+### Key Events
+
+- **1959**
+  - David Hubel and Torsten Wiesel publish their work **"Receptive fields of single neurons in the cat’s striate cortex"**
+    - Placed electrodes into primary visual cortex area of an anesthetized cat’s brain
+    - Showed that simple and complex neurons exist, and that visual processing starts with simple structures such as oriented edges
+
+![Diagram of experimental setup](image-url)
+
+**Diagram Description:** 
+- **Electrical signal from brain** to the **Recording electrode**
+- **Visual area of brain** where the electrode is placed
+- **Stimulus** provided to the cat
+
+### References
+
+- Vineeth N B (IIT-H)
+- §1.5 Image Filtering
+
+---
+
+Page 16 / 25
+```
+
+Note: The placeholder for the image URL should be replaced with the actual URL or path to the image if available. This markdown format ensures the scientific integrity and proper formatting of the content.
+
+# DL4CV_Week01_Part05.pdf - Page 26
+
+```markdown
+# Linear Summation in the Visual Cortex
+
+![Graph and Data Representation](image_url_here)
+
+**Simple cells perform linear spatial summation over their receptive fields**
+
+1. Movshon, Thompson and Tolhurst, Spatial Summation in the Receptive Fields of Simple Cells in the Cat’s Striate Cortex, JP 1978
+
+**Vineeth N B (IIT-H)**
+
+**§1.5 Image Filtering**
+
+---
+
+## Normalized Response Amplitude
+
+### Graph A
+- **X-axis**: Bar position (deg)
+- **Y-axis**: Normalized response amplitude
+
+### Graph B
+- **X-axis**: Bar position (deg)
+- **Y-axis**: Normalized response amplitude
+  - Inset graph: Data plotted on a logarithmic scale
+    - **X-axis**: Position (deg)
+    - **Y-axis**: 100
+
+### Graph C
+- **X-axis**: Bar position (deg)
+- **Y-axis**: Normalized response amplitude
+
+### Graph D
+- **X-axis**: Bar position (deg)
+- **Y-axis**: Normalized response amplitude
+  - Inset graph: Data plotted on a logarithmic scale
+    - **X-axis**: Position (deg)
+    - **Y-axis**: 100
+
+```
+
+# DL4CV_Week01_Part05.pdf - Page 27
+
+```markdown
+# Linear Shift-Invariant Operators
+
+- Both correlation and convolution are **Linear Shift-Invariant** operators, which obey:
+
+  - **Linearity** (or **Superposition principle**):
+
+    \[
+    I \circ (h_0 + h_1) = I \circ h_0 + I \circ h_1
+    \]
+
+  - **Shift-Invariance**: shifting (or translating) a signal commutes with applying the operator
+
+    \[
+    g(i, j) = h(i + k, j + l) \iff (f \circ g)(i, j) = (f \circ h)(i + k, j + l)
+    \]
+
+    Equivalent to saying that the effect of the operator is the same everywhere. Why do we need this in computer vision?
+
+![NPTEL](https://example.com/nptel_logo.png)
+
+*Source: Raquel Urtasun, Univ of Toronto*
+
+---
+
+Vineeth N B (IIT-H)
+
+§1.5 Image Filtering
+
+18 / 25
+```
+
+# DL4CV_Week01_Part05.pdf - Page 28
+
+# Linear Shift-Invariant Operators
+
+- Both correlation and convolution are **Linear Shift-Invariant** operators, which obey:
+
+  - **Linearity (or Superposition principle):**
+    \[
+    I \circ (h_0 + h_1) = I \circ h_0 + I \circ h_1
+    \]
+
+  - **Shift-Invariance:** shifting (or translating) a signal commutes with applying the operator
+    \[
+    g(i, j) = h(i+k, j+l) \implies (f \circ g)(i, j) = (f \circ h)(i+k, j+l)
+    \]
+
+    Equivalent to saying that the effect of the operator is the same everywhere. Why do we need this in computer vision?
+
+*Source: Raquel Urtasun, Univ of Toronto*
+
+_Vineeth N B. (IIIT-H)_
+
+§1.5 Image Filtering
+
+18 / 25
+
+# DL4CV_Week01_Part05.pdf - Page 29
+
+```markdown
+# Properties of Convolution
+
+- **Commutative**: \(a * b = b * a\)
+  - Conceptually no difference between filter and signal
+
+- **Associative**: \(a * (b * c) = (a * b) * c\)
+  - We often apply filters one after the other: \(((a * b1) * b2) * b3\)
+  - This is equivalent to applying one cumulative filter: \(a * (b1 * b2 * b3)\)
+
+- **Distributive over addition**: \(a * (b + c) = (a * b) + (a * c)\)
+  - We can combine the responses of a signal over two or more filters by combining the filters
+
+- **Scalars factor out**: \(k a * b = a * k b = (a * b)\)
+  - Here, \(k\) is a scalar
+
+- **Identity**: Unit impulse \(e = [0, 0, 0, 1, 0, 0, 0, \ldots]\), \(a * e = a\)
+
+![Image](image-url)
+
+Vineeth N B (IIIT-H) 
+
+§1.5 Image Filtering
+
+19 / 25
+```
+
+# DL4CV_Week01_Part05.pdf - Page 30
+
+```markdown
+# Properties of Convolution
+
+- **Commutative**: $a * b = b * a$
+  - Conceptually no difference between filter and signal
+
+- **Associative**: $a * (b * c) = (a * b) * c$
+  - We often apply filters one after the other: $((a * b1) * b2) * b3$
+  - This is equivalent to applying one cumulative filter: $a * (b1 * b2 * b3)$
+
+- **Distributive over addition**: $a * (b + c) = (a * b) + (a * c)$
+  - We can combine the responses of a signal over two or more filters by combining the filters
+
+- **Scalars factor out**: $k a * b = a * k b = (a * b)$
+  - Identity: Unit impulse $e = [\dots, 0, 0, 1, 0, 0, \dots], a * e = a$
+
+![Diagram](image_placeholder.png)
+
+_Image Filtering_
+
+_Vineeth N B (IIIT-H)_
+
+_§1.5 Image Filtering_
+
+_19 / 25_
+```
+
+# DL4CV_Week01_Part05.pdf - Page 31
+
+```markdown
+# Properties of Convolution
+
+- **Commutative**: \(a * b = b * a\)
+  - Conceptually no difference between filter and signal
+
+- **Associative**: \(a * (b * c) = (a * b) * c\)
+  - We often apply filters one after the other: \((((a * b1) * b2) * b3)\)
+  - This is equivalent to applying one cumulative filter: \(a * (b1 * b2 * b3)\)
+
+- **Distributive over addition**: \(a * (b + c) = (a * b) + (a * c)\)
+  - We can combine the responses of a signal over two or more filters by combining the filters
+
+- Scalars factor out: \(k a * b = a * k b = (a * b)\)
+
+- **Identity**: Unit impulse \(e = [,,,0,0,0,1,0,0,0,...]\), \(a * e = a\)
+
+![Image](image_url)
+
+Vineeth N B (IIT-H)
+
+§1.5 Image Filtering
+
+19 / 25
+```
+
+# DL4CV_Week01_Part05.pdf - Page 32
+
+# Properties of Convolution
+
+- **Commutative**: \( a * b = b * a \)
+  - Conceptually no difference between filter and signal
+
+- **Associative**: \( a * (b * c) = (a * b) * c \)
+  - We often apply filters one after the other: \((((a * b1) * b2) * b3) \)
+  - This is equivalent to applying one cumulative filter: \( a * (b1 * b2 * b3) \)
+
+- **Distributive over addition**: \( a * (b + c) = (a * b) + (a * c) \)
+  - We can combine the responses of a signal over two or more filters by combining the filters
+
+- **Scalars factor out**: \( k a * b = a * k b = k (a * b) \)
+
+- **Identity**: Unit impulse \( e = [...,0,0,1,0,0,...] \), \( a * e = a \)
+
+![Diagram](image_placeholder)
+
+*Vineeth N B (IIIT-H) §1.5 Image Filtering 19 / 25*
+
+# DL4CV_Week01_Part05.pdf - Page 33
+
+```markdown
+# Separability
+
+- Convolution operator requires \(k^2\) operations per pixel, where \(k\) is the width (and height) of a convolution kernel.
+- Can be costly. How can we reduce cost?
+
+![NPTEL Logo](image-url)
+
+Vineeth N B (IIT-H) §1.5 Image Filtering 20 / 25
+```
+
+# DL4CV_Week01_Part05.pdf - Page 34
+
+```markdown
+# Separability
+
+- Convolution operator requires $k^2$ operations per pixel, where $k$ is the width (and height) of a convolution kernel.
+- Can be costly. How can we reduce cost?
+- For certain filters, can be sped up by performing a 1D horizontal convolution followed by a 1D vertical convolution, requiring $2k$ operations $\implies$ convolution kernel is **separable**.
+
+  \[
+  K = v h^T
+  \]
+
+  where $v, h$ are 1D kernels, and $K$ is the 2D kernel
+
+_NPTEL_
+
+_Vineeth N B (IIT-H)_
+
+_§1.5 Image Filtering_
+
+_20 / 25_
+```
+
+# DL4CV_Week01_Part05.pdf - Page 35
+
+```markdown
+# Separability
+
+- Convolution operator requires \(k^2\) operations per pixel, where \(k\) is the width (and height) of a convolution kernel.
+- Can be costly. How can we reduce cost?
+- For certain filters, can be sped up by performing a 1D horizontal convolution followed by a 1D vertical convolution, requiring \(2k\) operations \(\implies\) convolution kernel is **separable**.
+
+\[ K = v h^T \]
+where \(v\), \(h\) are 1D kernels, and \(K\) is the 2D kernel
+
+### Example 1:
+
+\[
+\begin{array}{ccc}
+1 & 2 & 1 \\
+\frac{1}{16} & 2 & 4 & 2 \\
+1 & 2 & 1
+\end{array}
+\]
+
+*Vineeth N B. (IIT-H)*
+*§1.5 Image Filtering*
+*20 / 25*
+```
+
+# DL4CV_Week01_Part05.pdf - Page 36
+
+```markdown
+# Separability
+
+- Convolution operator requires $k^2$ operations per pixel, where $k$ is the width (and height) of a convolution kernel.
+- Can be costly. How can we reduce cost?
+- For certain filters, can be sped up by performing a 1D horizontal convolution followed by a 1D vertical convolution, requiring $2k$ operations $\implies$ convolution kernel is **separable**.
+
+  $$ K = v h^T $$
+  where $v, h$ are 1D kernels, and $K$ is the 2D kernel
+
+**Example 1:**
+
+$$
+\frac{1}{16} \begin{bmatrix}
+1 & 2 & 1 \\
+2 & 4 & 2 \\
+1 & 2 & 1 
+\end{bmatrix}
+\implies v = h = \frac{1}{4} \begin{bmatrix}
+1 \\
+2 \\
+1 
+\end{bmatrix}
+```
+
+![NPTEL](https://example.com/nptel.png)
+
+Vineeth N B. (IIIT-H)
+
+§1.5 Image Filtering
+
+20 / 25
+```
+
+# DL4CV_Week01_Part05.pdf - Page 37
+
+```markdown
+# Separability
+
+- Convolution operator requires $k^2$ operations per pixel, where $k$ is the width (and height) of a convolution kernel.
+- Can be costly. How can we reduce cost?
+- For certain filters, can be sped up by performing a 1D horizontal convolution followed by a 1D vertical convolution, requiring $2k$ operations $\implies$ convolution kernel is **separable**.
+
+  \[
+  K = v h^T
+  \]
+
+  where $v, h$ are 1D kernels, and $K$ is the 2D kernel.
+
+  ## Example 1:
+
+  \[
+  \frac{1}{16} \begin{bmatrix}
+  1 & 2 & 1 \\
+  2 & 4 & 2 \\
+  1 & 2 & 1
+  \end{bmatrix} \implies v = h = \frac{1}{4} \begin{bmatrix}
+  1 \\
+  2 \\
+  1
+  \end{bmatrix}
+  \]
+
+  ## Example 2:
+
+  \[
+  \frac{1}{8} \begin{bmatrix}
+  -1 & 0 & 1 \\
+  -2 & 0 & 2 \\
+  -1 & 0 & 1
+  \end{bmatrix}
+  \]
+
+  ![](https://via.placeholder.com/150) 
+
+  *Vineeth N B. (IIIT-H)*
+ 
+  *§1.5 Image Filtering*
+  
+  *Page 20 / 25*
+```
+
+# DL4CV_Week01_Part05.pdf - Page 38
+
+```markdown
+# Separability
+
+- Convolution operator requires $k^2$ operations per pixel, where $k$ is the width (and height) of a convolution kernel.
+- Can be costly. How can we reduce cost?
+- For certain filters, can be sped up by performing a 1D horizontal convolution followed by a 1D vertical convolution, requiring $2k$ operations $\implies$ convolution kernel is **separable**.
+
+  $$K = vh^T$$
+
+  where $v$, $h$ are 1D kernels, and $K$ is the 2D kernel
+
+  Example 1:
+
+  $$\frac{1}{16}\begin{bmatrix}
+  1 & 2 & 1 \\
+  2 & 4 & 2 \\
+  1 & 2 & 1
+  \end{bmatrix} \implies v = h = \frac{1}{4}\begin{bmatrix}
+  1 \\
+  2 \\
+  1
+  \end{bmatrix}$$
+
+  Example 2:
+
+  $$\frac{1}{8}\begin{bmatrix}
+  -1 & 0 & 1 \\
+  -2 & 0 & 2 \\
+  -1 & 0 & 1
+  \end{bmatrix} \implies v = \frac{1}{4}\begin{bmatrix}
+  -1 \\
+  -2 \\
+  -1
+  \end{bmatrix} \& h = \frac{1}{2}\begin{bmatrix}
+  1 \\
+  0 \\
+  1
+  \end{bmatrix}$$
+
+![Image of a diagram](image_url)
+
+Vineeth N B (IIIT-H)
+
+§1.5 Image Filtering
+
+20 / 25
+```
+
+
+# DL4CV_Week01_Part05.pdf - Page 39
+
+```markdown
+# Separable Convolution
+
+## How can we tell if a given kernel $K$ is separable?
+
+![Diagram](image.png)
+
+Vineeth N B. (IIT-H)
+
+<!-- Placeholder for the image, replace with an actual image URL if available -->
+
+Section: 1.5 Image Filtering
+
+Slide: 21 / 25
+```
+
+# DL4CV_Week01_Part05.pdf - Page 40
+
+```markdown
+# Separable Convolution
+
+## How can we tell if a given kernel \( K \) is separable?
+
+- Visual inspection
+
+![NPTEL Logo](https://example.com/logo.png)
+
+Vineeth N B (IIT-H)
+
+### 1.5 Image Filtering
+
+---
+
+Page 21 / 25
+```
+
+# DL4CV_Week01_Part05.pdf - Page 41
+
+```markdown
+# Separable Convolution
+
+### How can we tell if a given kernel \( K \) is separable?
+
+- **Visual inspection**
+- **Analytically**, look at the Singular Value Decomposition (SVD), and if only one singular value is non-zero, then it is separable.
+
+\[ K = U \Sigma V^T = \sum_i \sigma_i u_i v_i^T \]
+
+where \( \Sigma = \text{diag}(\sigma_i) \)
+
+\[ \sqrt{\sigma_1} u_1 \text{ and } \sqrt{\sigma_1} v_1 \text{ are the vertical and horizontal kernels} \]
+
+*Source: Raquel Urtasun, Univ of Toronto*
+
+*Vineeth N B (IIT-H) §1.5 Image Filtering*
+
+![Graphical Representation](image_placeholder.png)
+```
+
+# DL4CV_Week01_Part05.pdf - Page 42
+
+```markdown
+# Practical Issues
+
+## Ideal size for the filter?
+
+![Filter Diagram](image-url)
+
+NPTEL
+
+Vineeth N B (IIT-H)
+
+### 1.5 Image Filtering
+
+Page 22 / 25
+```
+
+# DL4CV_Week01_Part05.pdf - Page 43
+
+```markdown
+# Practical Issues
+
+## Ideal size for the filter?
+
+The bigger the mask:
+
+- more neighbours contribute
+- smaller noise variance of output
+- bigger noise spread
+- more blurring
+- more expensive to compute
+
+![NPTEL](https://i.imgur.com/5JkWmU4.png)
+
+Vineeth N B (IIT-H)
+§1.5 Image Filtering
+22 / 25
+```
+
+# DL4CV_Week01_Part05.pdf - Page 44
+
+```markdown
+# Practical Issues
+
+**Ideal size for the filter?**
+
+The bigger the mask:
+
+- more neighbours contribute
+- smaller noise variance of output
+- bigger noise spread
+- more blurring
+- more expensive to compute
+
+**What about the boundaries? Do we lose information?**
+
+![NFIEL](image-placeholder.png)
+
+*Vineeth N B (IIIT-H)*
+
+*§1.5 Image Filtering*
+
+*22 / 25*
+```
+
+# DL4CV_Week01_Part05.pdf - Page 45
+
+```markdown
+# Practical Issues
+
+## Ideal size for the filter?
+
+The bigger the mask:
+
+- more neighbours contribute
+- smaller noise variance of output
+- bigger noise spread
+- more blurring
+- more expensive to compute
+
+![Filter Diagram](image_url)
+
+## What about the boundaries? Do we lose information?
+
+- Without padding, we lose out on information at the boundaries.
+- We can use a variety of strategies such as zero padding, wrapping around, copy the edge
+
+*Vineeth N B (IIT-H)*
+
+*§1.5 Image Filtering*
+
+*22 / 25*
+```
+
+# DL4CV_Week01_Part05.pdf - Page 46
+
+```markdown
+# Practical Issues
+
+## Different padding strategies:
+
+- **zero**
+  ![Zero Padding](image-url)
+
+- **wrap**
+  ![Wrap Padding](image-url)
+
+- **clamp**
+  ![Clamp Padding](image-url)
+
+- **mirror**
+  ![Mirror Padding](image-url)
+
+- **blurred zero**
+  ![Blurred Zero Padding](image-url)
+
+- **normalized zero**
+  ![Normalized Zero Padding](image-url)
+
+- **blurred clamp**
+  ![Blurred Clamp Padding](image-url)
+
+- **blurred mirror**
+  ![Blurred Mirror Padding](image-url)
+
+*Vineeth N B (IIIT-H)*
+
+*§1.5 Image Filtering*
+
+*23 / 25*
+```
+
+# DL4CV_Week01_Part05.pdf - Page 47
+
+```markdown
+# Questions to Think About
+
+- Do we then need (cross)-correlation at all?
+- Are all filters always linear?
+
+![NPTEL Logo](image-placeholder.png)
+
+Vineeth N B (IIT-H)
+
+Section 1.5: Image Filtering
+
+Page 24 / 25
+```
+
+# DL4CV_Week01_Part05.pdf - Page 48
+
+```markdown
+# Homework
+
+## Readings
+
+- **Chapter 3 (§3.1-3.3)**, Szeliski, *Computer Vision: Algorithms and Applications*, 2010 draft
+
+- **Chapter 7 (§7.1-7.2)**, Forsyth and Ponce, *Computer Vision: A Modern Approach*, 2003 edition
+
+![NPTEL](attachment:image.png)
+
+*Vineeth N B (IITH)*
+
+**§1.5 Image Filtering**
+
+*Page 25 / 25*
+```
+

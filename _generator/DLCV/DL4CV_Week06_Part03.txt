@@ -1,0 +1,1254 @@
+# DL4CV_Week06_Part03.pdf - Page 1
+
+```markdown
+# Deep Learning for Computer Vision
+
+## Explaining CNNs: Class Attribution Map Methods
+
+**Vineeth N Balasubramanian**
+
+Department of Computer Science and Engineering
+Indian Institute of Technology, Hyderabad
+
+---
+
+**Vineeth N B (IIT-H)**
+
+### 36.3 Class Attribution Map Methods
+
+---
+
+**Page 1 / 23**
+
+---
+
+**Deep Learning for Computer Vision**
+
+**Explaining CNNs: Class Attribution Map Methods**
+
+**Vineeth N Balasubramanian**
+
+**Department of Computer Science and Engineering**
+
+**Indian Institute of Technology, Hyderabad**
+
+![IIT Hyderabad Logo](https://example.com/logo.png)
+
+---
+
+**Page 1 / 23**
+```
+
+# DL4CV_Week06_Part03.pdf - Page 2
+
+```markdown
+# Going Beyond Optimization-to-Image Methods
+
+![Visualization](https://via.placeholder.com/150) Visualize the data gradient. (Note that the data has 3 channels)
+
+\[ M_{ij} = \max_c \left| w_h(i,j,c) \right| \]
+
+1. Feed in zeros.
+2. Forward the image through the network.
+3. Set the gradient of the score vector to be \([0,0, \ldots, 0]\) and backprop to image.
+
+\[ \arg \max_I \left[ S_c(I) - \lambda \| I \|^2 \right] \]
+
+4. Do a small image update.
+5. Go back to 2.
+
+![Zero Image](https://via.placeholder.com/150) Find images that maximize some class score.
+
+Vineeth N B (IIIT-H) §6.3 Class Attribution Map Methods 2 / 23
+```
+
+# DL4CV_Week06_Part03.pdf - Page 3
+
+```markdown
+# Going Beyond Optimization-to-Image Methods
+
+![Image](image1.png) ![Data Gradient](image2.png)
+
+## Visualize the data gradient. (Note that the data has 3 channels)
+\[ M_{ij} = \max_c \left| w_h(i,j,c) \right| \]
+
+1) Feed in zeros.
+
+## Question
+Can we know what a network was looking at, while predicting a class?
+
+![Zero Image](image3.png)
+
+1. Feed in zeros.
+2. Find images that maximize some class score.
+
+\[ \text{score vector to be } [0,0,...,1,...,0] \text{ and backprop to image.} \]
+\[ \arg \max_I \left[ S_c(I) - \lambda \|I\|_2^2 \right] \]
+\[ \text{[Score for class c (before softmax)]} \]
+
+3. Do a small image update.
+
+4. Go back to 2.
+
+![Updated Image](image4.png)
+
+## Vineeth N B (IIT-H)
+
+### 56.3 Class Attribution Map Methods
+
+2 / 23
+```
+
+# DL4CV_Week06_Part03.pdf - Page 4
+
+```markdown
+# Class Activation Maps (CAM)^{1}
+
+![Class Activation Maps (CAM)](image_url)
+
+**Class Activation Mapping**
+
+![CAM Steps](image_url)
+
+- **Input Image**: A person with a dog.
+- **Convolutional Layers (CONV)**: Series of convolutional layers processing the image.
+- **Global Average Pooling (GAP)**: Aggregation of feature maps.
+- **Class Activation Mapping**: Combines weighted activation maps.
+- **Output**: Class Activation Map highlighting the "Australian terrier".
+
+### Class Activation Mapping
+
+$$
+w_1 \bullet + w_2 \bullet + \ldots + w_n \bullet = \text{Class Activation Map (Australian terrier)}
+$$
+
+#### Detailed Breakdown
+1. **Input Image**: An image of a person with a dog.
+2. **Convolutional Layers (CONV)**: Multiple convolutional layers extract features from the input image.
+3. **Global Average Pooling (GAP)**: The feature maps are aggregated using global average pooling.
+4. **Weighting**: Each class-specific activation map is weighted (w1, w2, ..., wn).
+5. **Summation**: The weighted activation maps are summed to produce the final Class Activation Map.
+6. **Result**: The Class Activation Map highlights the relevant regions in the image that correspond to the class "Australian terrier".
+
+#### References
+- Zhou et al, Learning Deep Features for Discriminative Localization, CVPR 2016
+- Vineeth N B (IIT-H)
+- §6.3 Class Attribution Map Methods
+
+---
+
+1 Zhou et al, Learning Deep Features for Discriminative Localization, CVPR 2016
+Vineeth N B (IIT-H)
+§6.3 Class Attribution Map Methods
+```
+
+# DL4CV_Week06_Part03.pdf - Page 5
+
+```markdown
+# CAM: Examples
+
+![CAM Examples](image-url)
+
+Discriminative image regions used for classification of "Briard" and "Barbells" classes. In the first set, the model is using the dog's face to make the decision and in the second set, it is using the weight plates.
+
+*Vineeth N B (IIT-H) §6.3 Class Attribution Map Methods*
+
+---
+
+### CAM: Examples
+
+#### Discriminative Image Regions
+
+- **First Set (Briard)**
+  - The model uses the dog's face to make the decision.
+  - Classification confidence values:
+    - Image 1: **briard 0.983**
+    - Image 2: **briard 0.422**
+    - Image 3: **briard 0.997**
+
+- **Second Set (Barbells)**
+  - The model uses the weight plates to make the decision.
+  - Classification confidence values:
+    - Image 1: **barbell 0.761**
+    - Image 2: **barbell 0.447**
+    - Image 3: **barbell 0.999**
+
+---
+
+*Vineeth N B (IIT-H) §6.3 Class Attribution Map Methods*
+
+```
+
+# DL4CV_Week06_Part03.pdf - Page 6
+
+```markdown
+# CAM: Examples
+
+![CAM Examples](https://via.placeholder.com/150)
+
+- **Image:** dome
+- **Top 5 Predicted Classes and Corresponding CAMs:**
+  - palace: 0.459
+    ![CAM Palace](https://via.placeholder.com/150)
+  - dome: 0.195
+    ![CAM Dome](https://via.placeholder.com/150)
+  - church: 0.146
+    ![CAM Church](https://via.placeholder.com/150)
+  - altar: 0.091
+    ![CAM Altar](https://via.placeholder.com/150)
+  - monastery: 0.051
+    ![CAM Monastery](https://via.placeholder.com/150)
+
+**Note:** Notice how the same activation maps produce different CAMs based on weights connecting features to individual classes.
+
+*Vineeth N B (IIIT-H)*
+
+*36.3 Class Attribution Map Methods*
+
+---
+
+**Slide Number:** 5 / 23
+```
+
+# DL4CV_Week06_Part03.pdf - Page 7
+
+```markdown
+# CAM: Intuition
+
+Convolutional units behave as object localizers even without supervision over objects' location; this capability is lost if fully connected layers are used for classification
+
+## Receptive fields of convolutional units and their maximally activating image patch examples
+
+### Places-CNN
+
+| Pool1        | Pool2        | Conv4        | Pool5        |
+|--------------|--------------|--------------|--------------|
+| ![](image1) | ![](image2) | ![](image3) | ![](image4) |
+
+### ImageNet-CNN
+
+| Pool1        | Pool2        | Conv4        | Pool5        |
+|--------------|--------------|--------------|--------------|
+| ![](image5) | ![](image6) | ![](image7) | ![](image8) |
+
+### References
+
+- [2] Zhou et al. Object Detectors emerge in Deep Scene CNNs, ICLR 2015
+- Vinceeth N B (IIT-H)
+- §6.3 Class Attribution Map Methods
+
+```
+
+# DL4CV_Week06_Part03.pdf - Page 8
+
+```markdown
+# CAM: Comparison
+
+![CAM Comparison](image-url)
+
+## French horn
+
+- ![Image of French horn](image-url)
+- French horn 0.775
+  ![Heatmap for French horn with GoogleNet-GAP](image-url)
+- French horn 0.934
+  ![Heatmap for French horn with VGG-GAP](image-url)
+- French horn 0.060
+  ![Heatmap for French horn with AlexNet-GAP](image-url)
+- French horn 0.966
+  ![Heatmap for French horn with GoogLeNet](image-url)
+- drum 0.334
+  ![Heatmap for drum](image-url)
+- French horn 0.326
+  ![Heatmap for French horn](image-url)
+- French horn 0.966
+  ![Heatmap for French horn](image-url)
+
+## agamic
+
+- ![Image of agamic](image-url)
+- agamic 0.664
+  ![Heatmap for agamic with GoogleNet-GAP](image-url)
+- agamic 0.911
+  ![Heatmap for agamic with VGG-GAP](image-url)
+- agamic 0.725
+  ![Heatmap for agamic with AlexNet-GAP](image-url)
+- agamic 0.840
+  ![Heatmap for agamic with GoogLeNet](image-url)
+- agamic 0.971
+  ![Heatmap for agamic](image-url)
+- agamic 0.636
+  ![Heatmap for agamic](image-url)
+- agamic 0.840
+  ![Heatmap for agamic](image-url)
+
+*Vineeth N B. (IIIT-H)*
+
+* Section 6.3: Class Attribution Map Methods*
+
+*Page 7 of 23*
+```
+
+# DL4CV_Week06_Part03.pdf - Page 9
+
+```markdown
+# CAM: Pros and Cons
+
+![NPTEL Logo](https://example.com/logo.png)
+
+## Vineeth N B (IIT-H)
+
+### 86.3 Class Attribution Map Methods
+
+---
+
+This section delves into the pros and cons of Class Attribution Map (CAM) methods.
+
+### Pros
+
+- **Improved Interpretability**: CAM methods provide insights into which regions of an image are most influential for a particular classification decision. This can be particularly useful for understanding the internal workings of neural networks.
+- **Visualization**: The ability to visualize important regions helps in debugging and verifying the correctness of the model.
+- **Model Validation**: By highlighting relevant regions, CAM methods can aid in validating the model's performance, especially in cases where overfitting or underfitting might be suspected.
+
+### Cons
+
+- **Complexity**: Implementing CAM methods can be complex, requiring a good understanding of both the architecture of the neural network and the specifics of the CAM technique.
+- **Computational Cost**: The computation of CAMs can be computationally expensive, especially for high-resolution images and complex models.
+- **Robustness**: CAM methods may not always identify the correct regions, especially in cases where the model is biased or the dataset is noisy.
+
+### Examples of CAM Methods
+
+#### Grad-CAM
+
+Grad-CAM (Gradient-weighted Class Activation Mapping) is one of the most widely used CAM methods. It combines gradients of the target class with the feature maps to produce a heatmap highlighting important regions.
+
+```markdown
+# Grad-CAM Example
+
+1. Compute the gradient of the target class score with respect to the feature maps.
+2. Global average pooling of the gradients.
+3. Weight the feature maps using the gradients.
+4. Generate the heatmap by applying a ReLU function to the weighted feature maps.
+```
+
+#### Guided Grad-CAM
+
+Guided Grad-CAM combines the benefits of Grad-CAM and guided backpropagation to provide more fine-grained localization.
+
+```markdown
+# Guided Grad-CAM Example
+
+1. Apply Grad-CAM to get the class activation map.
+2. Use guided backpropagation to refine the localization.
+3. Combine the results to get a more accurate region highlighting.
+```
+
+### Conclusion
+
+CAM methods offer significant advantages in terms of interpretability and visualization. However, they come with challenges related to complexity, computational cost, and robustness. Understanding these trade-offs is crucial for effectively using CAM methods in machine learning and computer vision applications.
+
+---
+
+*Date: 8 / 23*
+
+```
+
+# DL4CV_Week06_Part03.pdf - Page 10
+
+```markdown
+# CAM: Pros and Cons
+
+## Advantages
+
+- Is class discriminative (can localize objects without positional supervision).
+- Doesn't require a backward pass unlike guided backprop or deconvolution
+
+![NPTEL Logo](https://example.com/logo.png)
+
+*Vineeth N B (IIT-H) 
+#6.3 Class Attribution Map Methods*
+
+*Page 8 of 23*
+```
+
+# DL4CV_Week06_Part03.pdf - Page 11
+
+```markdown
+# CAM: Pros and Cons
+
+## Advantages
+- Is class discriminative (can localize objects without positional supervision).
+- Doesn't require a backward pass unlike guided backprop or deconvolution.
+
+## Disadvantages
+- Constraint on architecture is restrictive; may not be useful to explain complex tasks like image captioning or visual question answering (VQA).
+- Model may trade off accuracy for interpretability.
+- Need for retraining to explain trained models.
+
+*Vineeth N B (IIIT-H)*
+
+*§6.3 Class Attribution Map Methods*
+
+*8 / 23*
+```
+
+# DL4CV_Week06_Part03.pdf - Page 12
+
+```markdown
+# Gradient-weighted CAM (Grad-CAM)<sup>3</sup>
+
+![Grad-CAM Diagram](image-url)
+
+## Image Classification
+
+- Gradients
+- Activations
+- Guided Backpropagation
+- Rectified Conv Feature Maps
+- Fully Connected (FC) Layers
+
+## Image Captioning
+
+- Gradients
+- Activations
+- Guided Backpropagation
+- Rectified Conv Feature Maps
+- Any Task-specific Network
+- RNN/LSTM
+
+## Visual Question Answering
+
+- Gradients
+- Activations
+- Guided Backpropagation
+- Rectified Conv Feature Maps
+- Backprop till conv
+- RNN/LSTM
+- FC Layer
+
+## Inputs
+
+- **Guided Backprop**: Guided Backpropagation
+- **Guided Grad-CAM**: Guided Grad-CAM
+- **Input Image**: Image of a cat lying on the ground
+- **Grad-CAM**: Grad-CAM visualization
+
+## References
+
+<sup>3</sup> Selvaraju et al., Grad-CAM: Visual Explanations from Deep Networks via Gradient-based Localization, ICCV 2017
+
+Vineeth N B (IIT-H)
+
+§6.3 Class Attribution Map Methods
+```
+
+# DL4CV_Week06_Part03.pdf - Page 13
+
+```markdown
+# Grad-CAM: Generalization of CAM
+
+- From CAM, we have:
+
+  \[
+  Y^c = \sum_k w_k^c \underbrace{\frac{1}{Z} \sum_i \sum_j A_{ij}^k}_{\text{global average pooling}}
+  \]
+
+  where \( A_{ij}^k \) is the pixel at \((i, j)\) location of \( k \)th feature map
+
+  ![Image](image_url)
+
+  *Vineeth N B (IIT-H)  §6.3 Class Attribution Map Methods*
+
+  *Page 10 / 23*
+```
+
+Ensure to replace `"image_url"` with the actual URL or placeholder if necessary. This format preserves the original structure and ensures the scientific content is accurately represented.
+
+# DL4CV_Week06_Part03.pdf - Page 14
+
+```markdown
+# Grad-CAM: Generalization of CAM
+
+- From CAM, we have:
+
+  \[
+  Y^c = \sum_k w_k^c \underbrace{\frac{1}{Z} \sum_i \sum_j A_{ij}^k}_{global \ average \ pooling}
+  \]
+
+  where \( A_{ij}^k \) is the pixel at \((i, j)\) location of \(k\)-th feature map
+
+- Let \( F^k = \frac{1}{Z} \sum_i \sum_j A_{ij}^k \)
+```
+
+---
+
+This markdown format captures the provided scientific text while maintaining accuracy and proper formatting for mathematical expressions and symbols.
+
+# DL4CV_Week06_Part03.pdf - Page 15
+
+# Grad-CAM: Generalization of CAM
+
+- From CAM, we have:
+
+  \[
+  Y^c = \sum_k w_k^c \underbrace{\frac{1}{Z} \sum_i \sum_j A_{ij}^k}_{\text{global average pooling}} 
+  \]
+
+  where \( A_{ij}^k \) is the pixel at \((i, j)\) location of \( k \)th feature map
+
+- Let \( F^k = \frac{1}{Z} \sum_i \sum_j A_{ij}^k \); then,
+
+  \[
+  Y^c = \sum_k w_k^c F^k
+  \]
+
+![NPTEL Logo](https://example.com/logo.png) 
+
+_Vineeth N B (IIT-H)_
+
+_§6.3. Class Attribution Map Methods_
+
+_10 / 23_
+
+# DL4CV_Week06_Part03.pdf - Page 16
+
+```markdown
+# Grad-CAM: Generalization of CAM
+
+- From CAM, we have:
+
+$$
+Y^c = \sum_k w_k^c \underbrace{\frac{1}{Z} \sum_i \sum_j}_{ \text{global average pooling}} A_{ij}^{k}
+$$
+
+where $A_{ij}^{k}$ is the pixel at $(i,j)$ location of $k^{th}$ feature map
+
+- Let $F^k = \frac{1}{Z} \sum_i \sum_j A_{ij}^{k}$; then,
+$$Y^c = \sum_k w_k^c F^k$$
+we then have:
+
+$$
+\frac{\partial Y^c}{\partial F^k} = \frac{\partial Y^c}{\partial A_{ij}^k} \cdot \frac{\partial F^k}{\partial A_{ij}^k}
+$$
+
+![NPTEL](https://example.com/nptel-logo.png)
+
+Vineeth N B (IIT-H) §6.3 Class Attribution Map Methods
+```
+
+
+# DL4CV_Week06_Part03.pdf - Page 17
+
+```markdown
+# Grad-CAM: Generalization of CAM
+
+- From CAM, we have:
+
+  \[
+  Y^c = \sum_k w_k^c \underbrace{\frac{1}{Z} \sum_i \sum_j}_{global \ average \ pooling} A_{ij}^k
+  \]
+
+  where \( A_{ij}^k \) is the pixel at \((i, j)\) location of \( k \)th feature map
+
+- Let \( F^k = \frac{1}{Z} \sum_i \sum_j A_{ij}^k \); then, \( Y^c = \sum_k w_k^c F^k \), we then have:
+
+  \[
+  \frac{\partial Y^c}{\partial F^k} = \frac{\partial Y^c}{\partial A_{ij}^k} \cdot Z
+  \]
+
+  \[
+  \frac{\partial Y^c}{\partial A_{ij}^k} = w_k^c
+  \]
+
+  *Note: NPTEL*
+
+### Vineeth N B (IIT-H) 
+
+### 36.3 Class Attribution Map Methods
+
+10 / 23
+```
+
+# DL4CV_Week06_Part03.pdf - Page 18
+
+```markdown
+# Grad-CAM: Generalization of CAM
+
+- From CAM, we have:
+
+\[ Y^c = \sum_k w_k^c \underbrace{\frac{1}{Z} \sum_i \sum_j}_{\text{global average pooling}} A_{ij}^k \]
+
+where \( A_{ij}^k \) is the pixel at \((i, j)\) location of \( k \)-th feature map.
+
+- Let \( F^c = \frac{1}{Z} \sum_i \sum_j A_{ij}^k \); then, \( Y^c = \sum_k w_k^c F^c \), we then have:
+
+\[ \frac{\partial Y^c}{\partial F^c} = \frac{\partial Y^c}{\partial A_{ij}^k} \]
+
+\[ \frac{\partial Y^c}{\partial A_{ij}^k} = \frac{\partial Y^c}{\partial A_{ij}^k} \cdot Z \]
+
+\[ \sum_i \sum_j u_k^c = \sum_i \sum_j \frac{\partial Y^c}{\partial A_{ij}^k} \cdot Z \]
+
+![NPTEL Logo](image_url)
+
+*Vineeth N B (IIT-H)*
+
+*§6.3 Class Attribution Map Methods*
+
+*10 / 23*
+```
+
+Note: Replace `image_url` with the actual URL or placeholder for the image if it was captured in the OCR process.
+
+# DL4CV_Week06_Part03.pdf - Page 19
+
+```markdown
+# Grad-CAM: Generalization of CAM
+
+- From CAM, we have:
+
+\[ Y^c = \sum_k w_k^c \cdot \frac{1}{Z} \sum_i \sum_j A_{ij}^k \]
+
+where \( A_{ij}^k \) is the pixel at \((i, j)\) location of \(k\)th feature map
+
+Let \( F^k = \frac{1}{Z} \sum_i \sum_j A_{ij}^k \); then,
+
+\[ Y^c = \sum_k w_k^c \cdot F^k \]
+
+we then have:
+
+\[ \frac{\partial Y^c}{\partial F^k} = \frac{\partial Y^c}{\partial A_{ij}^k} \cdot \frac{\partial A_{ij}^k}{\partial F^k} \]
+
+![Global Average Pooling](image_placeholder.png)
+
+\[ \frac{\partial Y^c}{\partial F^k} = w_k^c = \frac{\partial Y^c}{\partial A_{ij}^k} \cdot Z \]
+
+\[ \sum_i \sum_j w_k^c = \sum_i \sum_j \frac{\partial Y^c}{\partial A_{ij}^k} \cdot Z \]
+
+\[ Z w_k^c = Z \sum_i \sum_j \frac{\partial Y^c}{\partial A_{ij}^k} \]
+
+*Vineeth N B (IIT-H)*
+
+*§6.3 Class Attribution Map Methods*
+
+*10 / 23*
+```
+
+# DL4CV_Week06_Part03.pdf - Page 20
+
+```markdown
+# Grad-CAM: Generalization of CAM
+
+- From CAM, we have:
+
+  \[
+  Y^c = \sum_k w_k^c \cdot \frac{1}{Z} \sum_i \sum_j A_{ij}^k
+  \]
+
+  ** global average pooling **
+
+  ** class feature weights **
+
+  ** feature map **
+
+  where \( A_{ij}^k \) is the pixel at \((i, j)\) location of \(k\)th feature map
+
+- Let \( F^K = \frac{1}{Z} \sum_i \sum_j A_{ij}^k \); then,
+  \[
+  Y^c = \sum_k w_k^c \cdot F^K,
+  \]
+  we then have:
+
+  \[
+  \frac{\partial Y^c}{\partial F^K} = \frac{\partial Y^c}{\partial A_{ij}^k}
+  \]
+
+  \[
+  \frac{\partial Y^c}{\partial A_{ij}^k} = w_k^c = \frac{\partial Y^c}{\partial A_{ij}^k} \cdot Z
+  \]
+
+  \[
+  \sum_i \sum_j w_k^c = \sum_i \sum_j \frac{\partial Y^c}{\partial A_{ij}^k} \cdot Z
+  \]
+
+  \[
+  Z w_k^c = Z \sum_i \sum_j \frac{\partial Y^c}{\partial A_{ij}^k}
+  \]
+
+  \[
+  w_k^c = \sum_i \sum_j \frac{\partial Y^c}{\partial A_{ij}^k}
+  \]
+
+![NPTEL](https://example.com/nptel-logo.png)
+
+Vineeth N B (IIT-H) §6.3 Class Attribution Map Methods 10 / 23
+```
+
+# DL4CV_Week06_Part03.pdf - Page 21
+
+```markdown
+# Grad-CAM: Generalization of CAM
+
+- From CAM, we have:
+
+  $$
+  Y^c = \sum_k w_k^c \frac{1}{Z} \sum_i \sum_j A_{ij}^k
+  $$
+
+  where \(A_{ij}^k\) is the pixel at \((i, j)\) location of \(k\)th feature map
+
+- Let \(F^k = \frac{1}{Z} \sum_i \sum_j A_{ij}^k\); then, \(Y^c = \sum_k w_k^c F^k\), we then have:
+
+  $$
+  \frac{\partial Y^c}{\partial F^k} = \frac{\partial Y^c}{\partial A_{ij}^k} \cdot \frac{\partial A_{ij}^k}{\partial F^k}
+  $$
+
+  \[
+  \frac{\partial Y^c}{\partial A_{ij}^k} = w_k^c = \frac{\partial Y^c}{\partial A_{ij}^k} \cdot Z
+  \]
+
+  \[
+  \sum_i \sum_j w_k^c = \sum_i \sum_j \frac{\partial Y^c}{\partial A_{ij}^k} \cdot Z
+  \]
+
+  \[
+  Z w_k^c = Z \sum_i \sum_j \frac{\partial Y^c}{\partial A_{ij}^k}
+  \]
+
+  \[
+  w_k^c = \sum_i \sum_j \frac{\partial Y^c}{\partial A_{ij}^k}
+  \]
+
+  **Class-feature weights are gradients themselves. No retraining required!**
+
+*Vineeth N B (IIT-H)*
+*§6.3 Class Attribution Map Methods*
+*10 / 23*
+```
+
+# DL4CV_Week06_Part03.pdf - Page 22
+
+```markdown
+# Grad-CAM: Methodology
+
+- **Uses gradients flowing from output class into activation maps of last convolutional layer as neuron importance weights \( w_k^c \).**
+
+  \[
+  w_k^c = \frac{1}{Z} \sum_i \sum_j \frac{\partial Y^c}{\partial A_{ij}^k}
+  \]
+
+  where \( w_k^c \) = weight of \( k^{th} \) activation map w.r.t class c
+
+  \[
+  A^k = k^{th} \text{ activation map}
+  \]
+
+- **Similar to CAM, localization map \( L_{Grad-CAM}^c \) is given by:**
+
+  \[
+  L_{Grad-CAM}^c = ReLU \left( \sum_k w_k^c A^k \right)
+  \]
+
+*Vineeth N B (IIT-H) §6.3 Class Attribution Map Methods 11 / 23*
+```
+
+# DL4CV_Week06_Part03.pdf - Page 23
+
+```markdown
+# Grad-CAM: Example
+
+![Grad-CAM Example](image_url)
+
+- **Original Image**
+
+  ![Original Image](image_url)
+
+- **Grad-CAM 'Cat'**
+
+  ![Grad-CAM 'Cat'](image_url)
+
+- **ResNet Grad-CAM 'Cat'**
+
+  ![ResNet Grad-CAM 'Cat'](image_url)
+
+- **Grad-CAM 'Dog'**
+
+  ![Grad-CAM 'Dog'](image_url)
+
+- **ResNet Grad-CAM 'Dog'**
+
+  ![ResNet Grad-CAM 'Dog'](image_url)
+
+**Grad-CAM: Key Points**
+
+- Grad-CAM maps are class-discriminative
+- However, it is unclear from this heat-map why the network predicts this particular instance as 'tiger cat'
+- Can we do something about this?
+
+*Vineeth N B (IIIT-H) 86.3 Class Attribution Map Methods 12 / 23*
+```
+
+# DL4CV_Week06_Part03.pdf - Page 24
+
+```markdown
+# Guided Grad-CAM
+
+![Guided Grad-CAM](image_url)
+
+**Vineeth N B (IIIT-H)**
+
+## 36.3 Class Attribution Map Methods
+
+### Guided Grad-CAM
+
+**Original Image**
+
+![Original Image](image_url)
+
+**Guided Backprop (fine-grained details)**
+
+### Grad-CAM (Class discriminative)
+
+![Grad-CAM](image_url)
+
+- **Dog**
+  - Focuses on the region around the dog's head and body.
+
+### Guided Grad-CAM (Fine-grained + Class discriminative)
+
+![Guided Grad-CAM](image_url)
+
+- **Tiger Cat**
+  - Combines fine-grained details with class discriminative information.
+
+**Notes:**
+- **Guided Backpropagation** helps in highlighting fine-grained details in the image.
+- **Grad-CAM** provides class discriminative regions.
+- **Guided Grad-CAM** merges both methods to offer a detailed visual explanation of the class predictions.
+
+---
+
+**Slide 13 / 23**
+```
+
+This markdown format ensures that the structure and content of the original scientific slide are accurately represented while maintaining the scientific integrity and formatting.
+
+# DL4CV_Week06_Part03.pdf - Page 25
+
+```markdown
+# Grad-CAM: Counterfactual Explanations
+
+- Negating the value of gradients used for calculation of importance weights \( w_k^c \) causes localization maps to show image patches that adversarially affect classification output
+
+\[ w_k^c = \frac{1}{Z} \sum_i \sum_j \frac{\partial Y^c}{\partial A_{k_{ij}}} \]
+
+- Removing/suppressing features occurring in such patches can improve model confidence
+
+![Original Image](image-url)
+
+![Grad-CAM for Cat](image-url)
+
+![Grad-CAM negative explanation for Cat](image-url)
+
+![Original Image](image-url)
+
+![Grad-CAM for Dog](image-url)
+
+![Grad-CAM negative explanation for Dog](image-url)
+
+Vineeth N B (IIT-H) §6.3 Class Attribution Map Methods 14 / 23
+```
+
+# DL4CV_Week06_Part03.pdf - Page 26
+
+```markdown
+# Grad-CAM: Limitations<sup>4</sup>
+
+- Inability to identify multiple instances of objects
+- Unsatisfactory localization performance, especially under occlusion
+
+## Original Image | Guided Grad-CAM | Grad-CAM
+
+![Original Image](image1.png)
+
+![Guided Grad-CAM](image2.png)
+
+![Grad-CAM](image3.png)
+
+![Original Image](image4.png)
+
+![Guided Grad-CAM](image5.png)
+
+![Grad-CAM](image6.png)
+
+<sup>4</sup>Chattopadhay et al., Grad-CAM++: Improved Visual Explanations for Deep Convolutional Networks, WACV 2018
+
+Vineeth N B (IIT-H)
+
+§6.3 Class Attribution Map Methods
+
+15 / 23
+```
+
+# DL4CV_Week06_Part03.pdf - Page 27
+
+```markdown
+# Grad-CAM++: Motivation
+
+- **Grad-CAM** considers all pixel gradients equally when computing importance weights of activation maps
+
+$$
+w_k^c = \frac{1}{Z} \sum_i \sum_j \frac{\partial Y^c}{\partial A_{ij}^k}
+$$
+
+![NPTEL Logo](https://example.com/nptel_logo.png)
+
+---
+
+Vineeth N B (IIT-H) &nbsp;&nbsp; 36.3 Class Attribution Map Methods &nbsp;&nbsp; 16 / 23
+```
+
+# DL4CV_Week06_Part03.pdf - Page 28
+
+```markdown
+# Grad-CAM++: Motivation
+
+- **Grad-CAM** considers all pixel gradients equally when computing importance weights of activation maps
+
+  \[
+  w_k^c = \frac{1}{Z} \sum_i \sum_j \frac{\partial Y^c}{\partial A_{ij}^k}
+  \]
+
+- This can suppress activation maps with comparatively lesser spatial footprint
+
+![NPTEL Logo](image_url)
+
+Vineeth N B (IIT-H) §6.3 Class Attribution Map Methods 16 / 23
+```
+
+# DL4CV_Week06_Part03.pdf - Page 29
+
+```markdown
+# Grad-CAM++: Motivation
+
+- Grad-CAM considers all pixel gradients equally when computing importance weights of activation maps
+
+  \[
+  w_k^c = \frac{1}{Z} \sum_i \sum_j \frac{\partial Y^c}{\partial A_{ij}^k}
+  \]
+
+- This can suppress activation maps with comparatively lesser spatial footprint
+- Since instances of objects in an image tend to have different shapes and orientations, some of them can fade away
+
+![NPTEL](https://via.placeholder.com/150)
+
+Vineeth N B (IIT-H) §6.3 Class Attribution Map Methods
+
+16 / 23
+```
+
+# DL4CV_Week06_Part03.pdf - Page 30
+
+```markdown
+# Grad-CAM++: Motivation
+
+- Grad-CAM considers all pixel gradients equally when computing importance weights of activation maps.
+
+  \[
+  w_k^c = \frac{1}{Z} \sum_i \sum_j \frac{\partial Y^c}{\partial A_{ij}^k}
+  \]
+
+- This can suppress activation maps with comparatively lesser spatial footprint.
+- Since instances of objects in an image tend to have different shapes and orientations, some of them can fade away.
+- This can be corrected by using weighted average of pixel-wise gradients.
+
+  \[
+  w_k^c = \sum_i \sum_j \alpha_{ij}^{kc} \cdot ReLU \left( \frac{\partial Y^c}{\partial A_{ij}^k} \right)
+  \]
+
+  Focus on positive gradients.
+
+  Where \(\alpha\) is the pixel-wise weight. How to find \(\alpha\)?
+
+Vineeth N B (IIIT-H)  §6.3 Class Attribution Map Methods  16 / 23
+```
+
+# DL4CV_Week06_Part03.pdf - Page 31
+
+```markdown
+# Grad-CAM++: Intuition
+
+## Input Image (I)
+
+**Dark regions indicate presence of object**
+
+![Input Image](place_holder_for_image)
+
+## Convolutional Layers (CONV)
+
+```
+[ Input Image (I) ] -> [ CONV ] -> [ CONV ] -> [ CONV ] -> [ CONV ]
+```
+
+## Feature Maps (A^i)
+
+- Dark regions indicate detection of abstract visual features
+
+![Feature Maps](place_holder_for_image)
+
+## Saliency Maps
+
+### Grad-CAM
+
+![Grad-CAM Saliency Map](place_holder_for_image)
+
+### Grad-CAM++
+
+![Grad-CAM++ Saliency Map](place_holder_for_image)
+
+**Vineeth N B (IIT-H)**
+
+**36.3 Class Attribution Map Methods**
+
+**17 / 23**
+```
+
+# DL4CV_Week06_Part03.pdf - Page 32
+
+```markdown
+# Grad-CAM++: Methodology
+
+- For a particular class `c` and activation map `k`, the pixel-wise weight \(\alpha_{ij}^{kc}\) at pixel position \((i, j)\) can be calculated as:
+
+\[
+\alpha_{ij}^{kc} = \frac{\partial^2 Y^c}{\left(\partial A_{ij}^k\right)^2} + 2 \cdot \frac{\partial^2 Y^c}{\left(\partial A_{ij}^k\right)^2} + \sum_a \sum_b A_{ab}^k \left\{ \frac{\partial^3 Y^c}{\left(\partial A_{ij}^k\right)^3} \right\}
+\]
+
+**NOTE:** Both `a,b` and `i,j` are iterators on the same activation map. They are only used to avoid confusion. **How? Homework!**
+
+![NPTEL Logo](image_url)
+
+---
+
+*Section 3.1 to 3.4, Grad-CAM++: Improved Visual Explanations for Deep Convolutional Networks*
+
+*Vineeth N B (IIT-H)*
+
+*§6.3 Class Attribution Map Methods*
+
+*18 / 23*
+```
+
+# DL4CV_Week06_Part03.pdf - Page 33
+
+```markdown
+# Grad-CAM++: Methodology
+
+- For a particular class \( c \) and activation map \( k \), the pixel-wise weight \( \alpha_{ij}^{kc} \) at pixel position \((i, j)\) can be calculated as:
+
+  \[
+  \alpha_{ij}^{kc} = \frac{\partial^2 Y^c}{(\partial A_{ij}^k)^2} + \sum_a \sum_b A_{ab}^k \left\{ \frac{\partial^3 Y^c}{(\partial A_{ij}^k)^3} \right\}
+  \]
+
+  **NOTE:** Both \(a, b\) and \(i, j\) are iterators on the same activation map. They are only used to avoid confusion. **Homework!**
+
+- Final localization map \( L_{Grad-CAM++] \) (similar to that of GradCAM):
+
+  \[
+  L_{Grad-CAM++] = ReLU \left( \sum_k w_k^c A^k \right)
+  \]
+
+  where \( w_k^c = \sum_i \sum_j \alpha_{ij}^{kc} ReLU \left( \frac{\partial Y^c}{\partial A_{ij}^k} \right) \)
+
+---
+
+*Section 3.1 to 3.4, Grad-CAM++: Improved Visual Explanations for Deep Convolutional Networks*
+*Vineeth N B (IIT-H)*
+*§6.3 Class Attribution Map Methods*
+*18 / 23*
+```
+
+# DL4CV_Week06_Part03.pdf - Page 34
+
+```markdown
+# Grad-CAM++: Example
+
+## Vineeth N B (IIT-H)
+
+## 36.3 Class Attribution Map Methods
+
+### Original Image | Guided Grad-CAM | Guided Grad-CAM++ | Grad-CAM | Grad-CAM++
+
+| Original Image | Guided Grad-CAM | Guided Grad-CAM++ | Grad-CAM | Grad-CAM++ |
+|----------------|-----------------|-------------------|----------|------------|
+| ![Original Image 1](./path/to/image1.jpg) | ![Guided Grad-CAM 1](./path/to/image2.jpg) | ![Guided Grad-CAM++ 1](./path/to/image3.jpg) | ![Grad-CAM 1](./path/to/image4.jpg) | ![Grad-CAM++ 1](./path/to/image5.jpg) |
+| ![Original Image 2](./path/to/image6.jpg) | ![Guided Grad-CAM 2](./path/to/image7.jpg) | ![Guided Grad-CAM++ 2](./path/to/image8.jpg) | ![Grad-CAM 2](./path/to/image9.jpg) | ![Grad-CAM++ 2](./path/to/image10.jpg) |
+| ![Original Image 3](./path/to/image11.jpg) | ![Guided Grad-CAM 3](./path/to/image12.jpg) | ![Guided Grad-CAM++ 3](./path/to/image13.jpg) | ![Grad-CAM 3](./path/to/image14.jpg) | ![Grad-CAM++ 3](./path/to/image15.jpg) |
+| ![Original Image 4](./path/to/image16.jpg) | ![Guided Grad-CAM 4](./path/to/image17.jpg) | ![Guided Grad-CAM++ 4](./path/to/image18.jpg) | ![Grad-CAM 4](./path/to/image19.jpg) | ![Grad-CAM++ 4](./path/to/image20.jpg) |
+
+```math
+$$
+
+### Detailed Descriptions
+
+- **Original Image**: The original images used in the experiments are displayed here.
+- **Guided Grad-CAM**: This column shows the result of applying Guided Grad-CAM to the original images.
+- **Guided Grad-CAM++**: This column showcases the output from Guided Grad-CAM++, an enhanced version of the Guided Grad-CAM method.
+- **Grad-CAM**: The Grad-CAM results provide a visual explanation of the model's decision-making process.
+- **Grad-CAM++**: Grad-CAM++ offers a more refined and accurate attribution map compared to the standard Grad-CAM.
+
+### Notes
+
+- The methods shown here are part of a broader study aimed at improving class attribution in deep learning models.
+- Each method has its specific strengths and limitations, as discussed in the respective sections of the paper.
+- For further details, refer to the original paper by Vineeth N B from IIT-H.
+
+```math
+$$
+```
+
+---
+
+*Page 19 / 23*
+```
+
+# DL4CV_Week06_Part03.pdf - Page 35
+
+```markdown
+# Grad-CAM++: Examples for Class Localization
+
+## Examples for Class Localization
+
+### Columns
+1. **Original Image**
+2. **E^2 Grad-CAM**
+3. **E^2 Grad-CAM++**
+
+### Rows
+
+#### Row 1: Here
+- **Original Image:** ![Here](path/to/first/image)
+- **E^2 Grad-CAM:** ![E^2 Grad-CAM Here](path/to/first/data)
+- **E^2 Grad-CAM++:** ![E^2 Grad-CAM++ Here](path/to/second/data)
+
+#### Row 2: American Lobster
+- **Original Image:** ![American Lobster](path/to/second/image)
+- **E^2 Grad-CAM:** ![E^2 Grad-CAM American Lobster](path/to/second/data)
+- **E^2 Grad-CAM++:** ![E^2 Grad-CAM++ American Lobster](path/to/third/data)
+
+#### Row 3: Grey Whale
+- **Original Image:** ![Grey Whale](path/to/third/image)
+- **E^2 Grad-CAM:** ![E^2 Grad-CAM Grey Whale](path/to/third/data)
+- **E^2 Grad-CAM++:** ![E^2 Grad-CAM++ Grey Whale](path/to/fourth/data)
+
+#### Row 4: Kite
+- **Original Image:** ![Kite](path/to/fourth/image)
+- **E^2 Grad-CAM:** ![E^2 Grad-CAM Kite](path/to/fourth/data)
+- **E^2 Grad-CAM++:** ![E^2 Grad-CAM++ Kite](path/to/fifth/data)
+
+#### Row 5: Go-Kart
+- **Original Image:** ![Go-Kart](path/to/fifth/image)
+- **E^2 Grad-CAM:** ![E^2 Grad-CAM Go-Kart](path/to/fifth/data)
+- **E^2 Grad-CAM++:** ![E^2 Grad-CAM++ Go-Kart](path/to/sixth/data)
+
+#### Row 6: Necklace
+- **Original Image:** ![Necklace](path/to/sixth/image)
+- **E^2 Grad-CAM:** ![E^2 Grad-CAM Necklace](path/to/sixth/data)
+- **E^2 Grad-CAM++:** ![E^2 Grad-CAM++ Necklace](path/to/seventh/data)
+
+#### Row 7: Elephant
+- **Original Image:** ![Elephant](path/to/seventh/image)
+- **E^2 Grad-CAM:** ![E^2 Grad-CAM Elephant](path/to/seventh/data)
+- **E^2 Grad-CAM++:** ![E^2 Grad-CAM++ Elephant](path/to/eighth/data)
+
+### Note
+- **Vineeth N B (IIIT-H)**
+- **36.3 Class Attribution Map Methods**
+```
+
+# DL4CV_Week06_Part03.pdf - Page 36
+
+```markdown
+# Grad-CAM++: Examples for Multiple Occurrences
+
+## Table Lamp
+- **Original Image**: ![Table Lamp](image-url)
+- **E^ Grad-CAM**: ![E^ Grad-CAM Table Lamp](image-url)
+- **E^ Grad-CAM++**: ![E^ Grad-CAM++ Table Lamp](image-url)
+
+## Magpie
+- **Original Image**: ![Magpie](image-url)
+- **E^ Grad-CAM**: ![E^ Grad-CAM Magpie](image-url)
+- **E^ Grad-CAM++**: ![E^ Grad-CAM++ Magpie](image-url)
+
+## French Loaf
+- **Original Image**: ![French Loaf](image-url)
+- **E^ Grad-CAM**: ![E^ Grad-CAM French Loaf](image-url)
+- **E^ Grad-CAM++**: ![E^ Grad-CAM++ French Loaf](image-url)
+
+## Water Buffalo
+- **Original Image**: ![Water Buffalo](image-url)
+- **E^ Grad-CAM**: ![E^ Grad-CAM Water Buffalo](image-url)
+- **E^ Grad-CAM++**: ![E^ Grad-CAM++ Water Buffalo](image-url)
+
+## Kite
+- **Original Image**: ![Kite](image-url)
+- **E^ Grad-CAM**: ![E^ Grad-CAM Kite](image-url)
+- **E^ Grad-CAM++**: ![E^ Grad-CAM++ Kite](image-url)
+
+## Border Collie
+- **Original Image**: ![Border Collie](image-url)
+- **E^ Grad-CAM**: ![E^ Grad-CAM Border Collie](image-url)
+- **E^ Grad-CAM++**: ![E^ Grad-CAM++ Border Collie](image-url)
+
+## Greenhouse
+- **Original Image**: ![Greenhouse](image-url)
+- **E^ Grad-CAM**: ![E^ Grad-CAM Greenhouse](image-url)
+- **E^ Grad-CAM++**: ![E^ Grad-CAM++ Greenhouse](image-url)
+
+## Tiger Beetle
+- **Original Image**: ![Tiger Beetle](image-url)
+- **E^ Grad-CAM**: ![E^ Grad-CAM Tiger Beetle](image-url)
+- **E^ Grad-CAM++**: ![E^ Grad-CAM++ Tiger Beetle](image-url)
+
+*Vineeth N B (IIIT-H)*
+
+*56.3 Class Attribution Map Methods*
+
+*21 / 23*
+```
+
+# DL4CV_Week06_Part03.pdf - Page 37
+
+```markdown
+# Homework
+
+## Readings
+
+- Zhou et al, [Learning Deep Features for Discriminative Localization](https://cvpr2016.thecvf.com/), CVPR 2016
+- Selvaraju et al, [Grad-CAM: Visual Explanations from Deep Networks via Gradient-based Localization](https://openaccess.thecvf.com/content_ICCV_2017/papers/Selvaraju_Grad-CAM_Visual_Explanations_ICCV_2017_paper.pdf), ICCV 2017
+- Chattopadhyay et al, [Grad-CAM++: Improved Visual Explanations for Deep Convolutional Networks](https://arxiv.org/abs/1810.01922), WACV 2018
+
+*Vineeth N B (IIT-H) 36.3 Class Attribution Map Methods*
+
+*Page 22 / 23*
+```
+
+# DL4CV_Week06_Part03.pdf - Page 38
+
+```markdown
+# References
+
+- Min Lin, Qiang Chen, and Shuicheng Yan. "Network in network". In: *arXiv preprint arXiv:1312.4400* (2013).
+- Bolei Zhou et al. "Object detectors emerge in deep scene cnns". In: *arXiv preprint arXiv:1412.6856* (2014).
+- Christian Szegedy et al. "Going deeper with convolutions". In: *Proceedings of the IEEE conference on computer vision and pattern recognition*. 2015, pp. 1–9.
+- Bolei Zhou et al. "Learning deep features for discriminative localization". In: *Proceedings of the IEEE conference on computer vision and pattern recognition*. 2016, pp. 2921–2929.
+- Ramprasaath R Selvaraju et al. "Grad-cam: Visual explanations from deep networks via gradient-based localization". In: *Proceedings of the IEEE international conference on computer vision*. 2017, pp. 618–626.
+- Aditya Chattopadhay et al. "Grad-cam++: Generalized gradient-based visual explanations for deep convolutional networks". In: *2018 IEEE Winter Conference on Applications of Computer Vision (WACV)*. IEEE. 2018, pp. 839–847.
+
+![Vineeth N B (IIT-H)](https://example.com/image.jpg)
+
+### 66.3 Class Attribution Map Methods
+
+Page Number: 23 / 23
+```
+

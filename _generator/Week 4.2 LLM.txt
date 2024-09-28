@@ -1,0 +1,1444 @@
+# Week 4.2 LLM.pdf - Page 1
+
+```markdown
+# Introduction to Large Language Models
+
+## Lecture 3: Bidirectional Encoder Representations from Transformers
+
+**Mitesh M. Khapra**
+
+![IIT Madras Logo](https://example.com/iiitmadraslogo.png)
+
+**AI4Bharat, Department of Computer Science and Engineering, IIT Madras**
+```
+
+# Week 4.2 LLM.pdf - Page 2
+
+```markdown
+# In the previous lecture, we used the decoder of the transformer to build a language model
+
+## Using only the encoder of the transformer (encoder only models)
+- **P(<mask>)**
+- **x1, x2, ..., xT**
+
+```plaintext
+Add&Norm
+  Feed forward NN
+  Add&Norm
+  Multi-Head Attention
+```
+
+## Using only the decoder of the transformer (decoder only models)
+- **P(xi)**
+
+```plaintext
+Add&Norm
+  Feed forward NN
+  Add&Norm
+  Multi-Head masked Attention
+  x1, x2, ..., xi-1
+```
+
+## Using both the encoder and decoder of the transformer (encoder decoder models)
+- **P(<mask>)**
+- **P(<mask>)**
+- **P(<mask>)**
+- **"<go>"**
+
+```plaintext
+Add&Norm
+  Feed forward NN
+  Add&Norm
+  Multi-Head cross Attention
+  Add&Norm
+  Multi-Head masked Attention
+  Add&Norm
+```
+
+```plaintext
+Add&Norm
+  Feed forward NN
+  Add&Norm
+  Multi-Head Attention
+  Add&Norm
+  Multi-Head masked Attention
+  Add&Norm
+```
+```
+
+# Week 4.2 LLM.pdf - Page 3
+
+```markdown
+# In this lecture, we will see how to use the encoder of the transformer to build a language model
+
+## Using only the encoder of the transformer (encoder only models)
+
+1. **Input**:
+   - \( x_1, \text{<mask>}, \ldots, x_T \)
+
+2. **Process**:
+   - **Multi-Head Attention**
+   - **Add&Norm**
+   - **Feed forward NN**
+   - **Add&Norm**
+
+3. **Output**:
+   - \( P(\text{<mask>}) \)
+
+## Using only the decoder of the transformer (decoder only models)
+
+1. **Input**:
+   - \( x_1, x_2, \ldots, x_{T-1} \)
+
+2. **Process**:
+   - **Multi-Head Masked Attention**
+   - **Add&Norm**
+   - **Feed forward NN**
+   - **Add&Norm**
+
+3. **Output**:
+   - \( P(x_T) \)
+
+## Using both the encoder and decoder of the transformer (encoder decoder models)
+
+1. **First Encoder Block**:
+   - **Multi-Head Attention**
+   - **Add&Norm**
+   - **Feed forward NN**
+   - **Add&Norm**
+
+2. **Second Encoder Block**:
+   - **Multi-Head Attention**
+   - **Add&Norm**
+   - **Feed forward NN**
+   - **Add&Norm**
+
+3. **First Decoder Block**:
+   - **Multi-Head Masked Attention**
+   - **Add&Norm**
+   - **Multi-Head Cross Attention**
+   - **Add&Norm**
+   - **Feed forward NN**
+   - **Add&Norm**
+
+4. **Second Decoder Block**:
+   - **Multi-Head Masked Attention**
+   - **Add&Norm**
+   - **Multi-Head Cross Attention**
+   - **Add&Norm**
+   - **Feed forward NN**
+   - **Add&Norm**
+
+5. **Output**:
+   - \( P(\text{<go>}) \)
+
+### Components
+
+- **Add&Norm**: Addition and normalization layers
+- **Feed forward NN**: Feed forward neural network layers
+- **Multi-Head Attention**: Attention mechanism allowing the model to focus on different parts of the sequence
+- **Multi-Head Masked Attention**: Masked version of attention to prevent the model from looking ahead
+- **Multi-Head Cross Attention**: Attention mechanism that allows the decoder to attend to the encoder's output
+
+### Key Equations
+
+- **Input to Output Probability**:
+  - \( P(\text{<mask>}) \)
+  - \( P(x_T) \)
+  - \( P(\text{<go>}) \)
+
+These models are built to handle various tasks in natural language processing by efficiently encoding and decoding sequences.
+```
+
+# Week 4.2 LLM.pdf - Page 4
+
+```markdown
+# In GPT, the representation for a language is learned in an unidirectional (left-to-right) way.
+
+**play**
+**watch**
+**go**
+**read**
+
+*i like to ?*
+
+This is a natural fit for tasks like text generation
+
+## How about tasks like Named Entity Recognition (NER)...
+
+...and fill in the blanks
+
+![Company](https://example.com/image1.png)
+
+*Nothing has shipped its new OS to Nothing Phone 2*
+
+*i ____ to read a ____ [eos]*
+
+```
+![Diagram](https://example.com/image2.png)
+```
+
+- Add & Norm
+- Feed forward NN
+- Add & Norm
+- Multi-Head masked Attention
+```
+```
+
+# Week 4.2 LLM.pdf - Page 5
+
+```markdown
+# Module 3.1: Masked Language Modelling
+
+**Mitesh M. Khapra**
+
+![IIT Madras Logo](https://example.com/logo-iit-madras.png)[^1]
+
+**Aligarh, Department of Computer Science and Engineering, IIT Madras**
+
+---
+
+## Introduction
+
+In this module, we will delve into the concept of Masked Language Modelling (MLM), a crucial technique used in natural language processing (NLP) to enhance language models.
+
+### What is Masked Language Modelling?
+
+Masked Language Modelling is a self-supervised learning technique where some of the tokens in the input text are masked and the model is trained to predict these masked tokens. This helps the model to understand the context and relationships between words in the text.
+
+### Steps in Masked Language Modelling
+
+1. **Masking Tokens**: Randomly select tokens from the input sentence and replace them with a mask token.
+2. **Input to Model**: The masked sentence is fed into the language model.
+3. **Prediction**: The model predicts the masked tokens based on the context provided by the surrounding words.
+4. **Loss Calculation**: The prediction is compared with the actual tokens, and the loss is computed.
+5. **Optimization**: The model parameters are updated to minimize the loss, improving its ability to predict masked tokens accurately.
+
+### Applications of Masked Language Modelling
+
+- **Pre-training Language Models**: MLM is widely used to pre-train language models, which can then be fine-tuned for various NLP tasks such as translation, question answering, and text classification.
+- **Improving Contextual Understanding**: By predicting masked tokens, the model learns to understand the context and relationships between words, making it more effective in understanding and generating human-like text.
+
+### Example of Masked Language Modelling
+
+Consider the sentence: "The cat sat on the mat."
+
+1. **Original Sentence**: "The cat sat on the mat."
+2. **Masking Tokens**: "The [MASK] sat on the [MASK]."
+3. **Model Prediction**: "The **cat** sat on the **mat**."
+
+The model correctly predicts the masked tokens based on the context.
+
+### Conclusion
+
+Masked Language Modelling is a powerful technique that enables language models to understand and generate contextually relevant text. By predicting masked tokens, models can learn the intricacies of language, improving their performance on a wide range of NLP tasks.
+
+---
+
+[^1]: Placeholder for the actual logo image.
+```
+
+**Note:** Replace `https://example.com/logo-iit-madras.png` with the actual URL of the IIT Madras logo if available.
+
+# Week 4.2 LLM.pdf - Page 6
+
+```markdown
+# Masked Language Modelling (MLM)
+
+We need to look at both directions (surrounding words) to predict the masked words
+
+```
+i ___  to  read  a  ___  [eos]
+```
+<-- --> 
+
+* Predict the masked words using the context words in both directions (like CBOW)
+
+This is called Masked Language Modelling (MLM)
+
+We cannot use decoder component of the transformer as it is inherently unidirectional
+```
+
+# Week 4.2 LLM.pdf - Page 7
+
+```markdown
+# Encoder Part of the Transformer
+
+![Transformer Diagram](image_url)
+
+```
+![Transformer Diagram](image_url)
+
+## We can use the encoder part of the transformer
+
+Now, the problem is cast as
+
+$$
+P(y_i | x_1, x_i = [mask], \ldots, x_T) = ?
+$$
+
+It is assumed that the predicted tokens are independent of each other
+
+We need to find out ways to mask the words in the input text.
+```
+
+# Week 4.2 LLM.pdf - Page 8
+
+```markdown
+# Let's see
+
+![Self-Attention](image_url)
+
+```
+1 0 0 0 0 1 0 1 1 0 1 0 1 1 0 1 1 1
+
+```
+I enjoyed the movie transformers
+
+We know that each word attends to every other word in the sequence of words in the self attention layer
+```
+
+# Week 4.2 LLM.pdf - Page 9
+
+```markdown
+# Masked Language Modelling (MLM)
+
+![Masked Language Modelling (MLM)](image_link_here)
+
+## Self-Attention
+
+```
+1 0 0 0 0 1 0 1 1 0 1 0 1 1 1 1
+[mask] enjoyed the [mask] transformers
+```
+
+- **We know that each word attends to every other word in the sequence of words in the self-attention layer.**
+
+### Objective
+
+- **Can we MASK the attention weights of the words to be masked as in CLM?**
+
+### Task
+
+- **Our objective is to mask a few words randomly and predict the masked words.**
+```
+
+# Week 4.2 LLM.pdf - Page 10
+
+```markdown
+# Masked Language Model (MLM) Explanation
+
+## Mask Representation
+
+```plaintext
+Mask = [
+  -∞ 0 0 -∞ 0
+  -∞ 0 0 -∞ 0
+  -∞ 0 0 -∞ 0
+  -∞ 0 0 -∞ 0
+  -∞ 0 0 -∞ 0
+]
+```
+
+## Explanation
+
+### Why Use Masks?
+
+Because we want the model to learn (attend to) what the blanks are.
+
+We can think of the **(mask)** token as noise that corrupts the original input text.
+
+Then the model is tasked to recover the original token.
+
+This is similar to denoising objective of Auto Encoders.
+
+For this reason, MLM is also called as pre-training denoising objective.
+
+## Masked Language Model (MLM) Process
+
+![MLM Process](image_url)
+
+### Steps:
+
+1. **MatMul: Q^T K**
+   - Perform matrix multiplication between \( Q \) and \( K \) transposed.
+
+2. **Scale: 1 / sqrt(d_k)**
+   - Apply scaling factor \( \frac{1}{\sqrt{d_k}} \).
+
+3. **Mask**
+   - Apply the mask to the scaled matrix multiplication result.
+
+4. **Softmax**
+   - Apply softmax to the masked result.
+
+5. **MatMul**
+   - Perform matrix multiplication with the resulting vector \( V \).
+
+This process helps the model to focus on understanding the context and relationships between words in the presence of masked tokens, enhancing its ability to learn meaningful representations.
+```
+
+# Week 4.2 LLM.pdf - Page 11
+
+```markdown
+# Using Special Tokens
+
+## Self-Attention
+
+![Self-Attention Diagram](image_url)
+
+### Key Components:
+- **k_i**: Key vectors
+- **v_i**: Value vectors
+- **q_i**: Query vectors
+- **[mask]**: Mask token
+- **W_t**: Transformer weights
+
+### Example:
+- **k_1**: [0.3, 0.2]
+- **v_1**: [0.1, 0.5]
+- **q_1**: [-0.1, 0.25]
+
+- **k_5**: [0.01, 0.89]
+- **v_5**: [0, 0.4]
+- **q_5**: [0.02, 0.7]
+
+### Process:
+1. **Mask Token**: Use [mask] token for the words to be masked.
+2. **Special Token**: Add [mask] as a special token in the vocabulary and get an embedding for it.
+3. **Transformers**: Apply transformer weights (W_t).
+
+A simple approach is to use **[mask]** token for the words to be masked.
+
+Add **[mask]** as a special token in the vocabulary and get an embedding for it.
+```
+
+# Week 4.2 LLM.pdf - Page 12
+
+```markdown
+# Masked Language Model Loss Functions
+
+## Loss Formulation
+
+The overall loss function for a masked language model is given by:
+
+\[
+\mathcal{L} = \frac{1}{|\mathcal{M}|} \sum_{\hat{y_i} \in \mathcal{M}} -\log(\hat{y_i})
+\]
+
+This combines individual losses for masked predictions.
+
+### Individual Losses
+
+The individual losses for specific masked tokens are given by:
+
+\[
+\mathcal{L}_1 = -\log(\hat{y_1})
+\]
+
+\[
+\mathcal{L}_2 = -\log(\hat{y_4})
+\]
+
+## Model Architecture
+
+### Components
+
+1. **Self-Attention**
+2. **Feed Forward Network**
+
+### Input Sequence
+
+- Words are input to the model with some words masked (indicated by `[mask]`).
+- The model processes the input through the self-attention mechanism and then the feed-forward network.
+
+![Model Architecture Diagram](input_image.png) 
+
+## Masking Strategy
+
+### Masking Percentage
+
+- **Typical Masking**: 15% of words in the input sequence are masked.
+- **High Masking**: A very high masking percentage can result in a severe loss of context information, impeding the model's ability to learn good representations.
+- **Low Masking**: Very little masking takes a long time for convergence as the gradient values are relatively small, making training inefficient.
+
+### Trade-offs
+
+The balance between masking percentage, model size, masking scheme, and optimization algorithm can be adjusted based on the specific requirements and constraints of the model. For more details, refer to the paper "Should you mask 15% in MLM?" to know more about optimizing these parameters.
+
+```
+
+# Week 4.2 LLM.pdf - Page 13
+
+```markdown
+# BERT
+
+## A multi-layer bidirectional transformer encoder architecture.
+
+### BERT Base Model
+- Contains 12 layers with 12 attention heads per layer.
+
+### Loss Function
+\[
+\mathcal{L} = -\log(\hat{y}_i)
+\]
+
+\[
+\mathcal{L}_1 = -\log(\hat{y}_1)
+\]
+
+\[
+\mathcal{L}_2 = -\log(\hat{y}_4)
+\]
+
+\[
+\mathcal{L} = \frac{1}{|M|} \sum_{y_i \in \mathcal{M}} -\log(\hat{y}_i)
+\]
+
+### Encoder Layer
+- Attention
+- FFN (Feed Forward Network)
+- Normalization
+- Residual connection
+
+### Masked Word Sampling
+- The masked words (15%) in an input sequence are sampled uniformly.
+- Of these:
+  - 80% are replaced with **[mask]** token.
+  - 10% are replaced with random words.
+  - 10% are retained as is. (Why?)
+
+### Special [mask] Token
+- The special mask token won't be a part of the dataset while adapting for downstream tasks.
+
+### Pre-training Objective of MLM
+- Is pre-training objective of MLM sufficient for downstream tasks like Question-Answering where interaction between sentences is important?
+```
+
+```markdown
+## BERT
+
+### A multi-layer bidirectional transformer encoder architecture.
+
+### BERT Base Model
+- Contains 12 layers with 12 attention heads per layer.
+
+### Loss Function
+\[
+\mathcal{L} = -\log(\hat{y}_i)
+\]
+
+\[
+\mathcal{L}_1 = -\log(\hat{y}_1)
+\]
+
+\[
+\mathcal{L}_2 = -\log(\hat{y}_4)
+\]
+
+\[
+\mathcal{L} = \frac{1}{|M|} \sum_{y_i \in \mathcal{M}} -\log(\hat{y}_i)
+\]
+
+### Encoder Layer
+- Attention
+- FFN (Feed Forward Network)
+- Normalization
+- Residual connection
+
+### Masked Word Sampling
+- The masked words (15%) in an input sequence are sampled uniformly.
+  - 80% are replaced with **[mask]** token.
+  - 10% are replaced with random words.
+  - 10% are retained as is. (Why?)
+
+### Special [mask] Token
+- The special mask token won't be a part of the dataset while adapting for downstream tasks.
+
+### Pre-training Objective of MLM
+- Is pre-training objective of MLM sufficient for downstream tasks like Question-Answering where interaction between sentences is important?
+```
+
+# Week 4.2 LLM.pdf - Page 14
+
+```markdown
+# Next Sentence Prediction (NSP)
+
+Now, let's extend the input with a pair of sentences {A, B} and the label that indicates whether the sentence B naturally follows sentence A.
+
+$$
+\mathcal{L} = -log(\hat{y})
+$$
+
+**Input:**
+- Sentence: A
+- Sentence: B
+- Label: IsNext
+
+![Feed Forward Network](image_url)
+
+```
+    [CLS] enjoyed the movie transformers [SEP] The visuals were amazing
+                         Sent : A
+                                  Sent : B
+```
+
+### Feed Forward Network
+
+- **Input:** Sentence A
+- **Input:** Sentence B
+- **Label:** IsNext
+
+![Self-Attention](image_url)
+
+```
+    [CLS] enjoyed the movie transformers [SEP] The visuals were amazing
+                         Sent : A
+                                  Sent : B
+```
+
+## Self-Attention
+```
+    [CLS] enjoyed the movie transformers [SEP] The visuals were amazing
+                         Sent : A
+                                  Sent : B
+```
+```
+
+# Week 4.2 LLM.pdf - Page 15
+
+```markdown
+# Next Sentence Prediction (NSP)
+
+Two sentences are separated with a special token **[SEP]**
+
+$$ \mathcal{L} = -log(\hat{y}) $$
+
+The hidden representation corresponding to the [CLS] token is used for final classification (prediction)
+
+![Diagram of Feed Forward Network and Self-Attention](image-url)
+
+- **Feed Forward Network**
+- **Self-Attention**
+
+$$ W_v $$
+
+## Sentence A
+- [CLS]
+- I
+- enjoyed
+- the
+- movie
+- transformers
+- [SEP]
+
+## Sentence B
+- The
+- visuals
+- were
+- amazing
+```
+
+# Week 4.2 LLM.pdf - Page 16
+
+```markdown
+# Next Sentence Prediction (NSP)
+
+In 50% of the instances, the sentence B is the natural next sentence that follows sentence A.
+
+In 50% of the instances, the sentence B is a random sentence from the corpus labelled as NotNext.
+
+Pretraining with NSP objective improves the performance of QA and similar tasks significantly
+
+$$\mathcal{L} = -log(\hat{y})$$
+
+```
+![Feed Forward Network](image-url)
+
+- Sentence A: [CLS] I enjoyed the movie transformers [SEP]
+- Sentence B: The visuals were amazing
+
+To distinguish the belongingness of the token to sentence A or B, a separate learnable segment embedding is used in addition to token and positional embeddings.
+```
+
+# Week 4.2 LLM.pdf - Page 17
+
+```markdown
+# Diagram Representation of a Neural Network Architecture
+
+```text
+L = -log(ŷ)
+```
+
+## Feed Forward Network
+
+```text
+  Feed Forward Network
+  Self-Attention
+```
+
+### Input Representation
+
+```text
+Token Embeddings
+  + 
+Segment Embeddings
+  + 
+Position Embeddings
+```
+
+### Input Sequence
+
+```text
+[CLS]   I    enjoyed   the    movie    transformers    [SEP]   The    visuals   were   amazing
+  E_T    E_T    E_T    E_T    E_T    E_T    E_T    E_T    E_T    E_T    E_T    E_T
+  + 
+  E_A    E_A    E_A    E_A    E_A    E_A    E_A    E_A    E_A    E_A    E_B    E_B
+  + 
+  E_P    E_P    E_P    E_P    E_P    E_P    E_P    E_P    E_P    E_P    E_P    E_P
+```
+
+```text
+Token Embeddings
+- E_T: Token embeddings for tokens
+- E_A: Segment embeddings for segments
+- E_P: Position embeddings for positions
+```
+
+### Architecture Layers
+
+```text
+Self-Attention
+  Feed Forward Network
+```
+
+### Loss Function
+
+```text
+L = -log(ŷ)
+```
+
+### Explanation
+
+1. **Input Sequence**: The input sequence is tokenized, and each token is represented by a combination of token embeddings, segment embeddings, and position embeddings.
+2. **Self-Attention**: The self-attention mechanism processes the input sequence to understand the relationships between tokens.
+3. **Feed Forward Network**: The feed forward network processes the sequence further.
+4. **Loss Function**: The loss function `L = -log(ŷ)` measures the performance of the model.
+
+### Visualization Components
+
+- **Token Embeddings**: Represented in purple.
+- **Segment Embeddings**: Represented in orange.
+- **Position Embeddings**: Represented in green.
+- **Self-Attention and Feed Forward Network**: Highlighted layers in the architecture.
+```
+
+# Week 4.2 LLM.pdf - Page 18
+
+```markdown
+# Diagram and Scientific Text Description
+
+## Overview
+
+This diagram illustrates a multi-layered neural network architecture with attention mechanisms, used for processing and predicting sequence data. The various components and their interactions are detailed below.
+
+## Components
+
+### Input Sequence
+
+- **Input Tokens**: The input tokens are elements of the input sequence, such as `[CLS]`, `[mask]`, `enjoyed`, `the`, `[mask]`, `transformers`, `[SEP]`, `The`, `[mask]`, `were`, `amazing`.
+
+### Encoder Layers
+
+- The input sequence is passed through multiple **Encoder Layers**, each consisting of several sub-layers, typically including multi-head attention and feed-forward networks.
+
+### Attention Mechanism
+
+- **Attention Weights**: All elements of the input sequence are associated with attention weights \( W_v \) that help in focusing on specific parts of the input sequence.
+- **Weight Multiplication**: The attention weights are multiplied by the input tokens to generate attention-weighted representations.
+
+### Loss Functions
+
+- **Loss Calculations**: The network uses different loss functions to measure the discrepancy between the predicted and actual outputs:
+  - \(\mathcal{L}_{cls} = \log(\hat{y})\): Classification loss.
+  - \(\mathcal{L}_1 = \log(\hat{y}_1)\): Loss for the first token.
+  - \(\mathcal{L}_2 = -\log(y_4)\): Negative log-loss for the fourth token.
+  - \(\mathcal{L}_3 = \log(\hat{y}_8)\): Loss for the eighth token.
+  - \(\mathcal{L}_{cls} = \log(\hat{y}_i)\): Another classification loss.
+
+### Objective Function
+
+- **Objective Minimization**: The overall objective function to be minimized is given by:
+  \[
+  \mathcal{L} = \frac{1}{|M|} \sum_{y_i \in M} - \log(\hat{y}_i) - \mathcal{L}_{cls}
+  \]
+
+## Diagram Breakdown
+
+### Input Sequence
+
+The tokens of the input sequence are represented at the bottom-most layer, with special tokens like `[CLS]`, `[mask]`, and `[SEP]` included to facilitate processing.
+
+### Encoder Layers
+
+Four encoder layers are depicted, each illustrating the processing stages of the input tokens.
+
+### Attention Mechanism
+
+Above each encoder layer, attention weights \( W_v \) are applied to the input tokens. This is depicted by small blocks interacting with the input tokens.
+
+### Loss Calculations
+
+Losses are calculated for specific tokens and combined to form the final objective function. These are shown at the top of their respective tokens.
+
+### Summary
+
+The entire process is aimed at minimizing the objective function using backpropagation and gradient descent, ensuring the network learns to predict the correct output sequences.
+
+```
+
+# Week 4.2 LLM.pdf - Page 19
+
+```markdown
+# Pre-training Dataset:
+
+## Datasets:
+- **BookCorpus**
+  - 800M words
+- **Wikipedia**
+  - 2500M words
+
+### Details:
+- Vocabulary size: 30,000
+- Context length: ≤ 512 tokens
+
+![Book](https://example.com/book.png)
+
+## Bi-directional Transformer Encoder
+
+### Loss Function:
+$$\mathcal{L} = \frac{1}{| \mathcal{M} |} \sum_{y_i \in \mathcal{M}} - \log(\hat{y}_i) + \mathcal{L}_{cls}$$
+
+### Components:
+- **$\mathcal{L}_{cls}$**: $- \log(\hat{y})$
+
+```plaintext
+                [CLS]
+                    |
+                    v
+       Bi-directional Transformer Encoder
+                    |
+                    v
+              [SEP]
+                    |
+                    v
+        Masked Sentence A
+                    |
+                    v
+              [SEP]
+                    |
+                    v
+        Masked Sentence B
+                    |
+                    v
+              [PAD]
+                    |
+                    v
+                context length {Γ}
+```
+
+### Context Length:
+- Context length is denoted by Γ.
+
+```plaintext
+                [CLS]
+                    |
+                    v
+       Bi-directional Transformer Encoder
+                    |
+                    v
+              [SEP]
+                    |
+                    v
+        Masked Sentence A
+                    |
+                    v
+              [SEP]
+                    |
+                    v
+        Masked Sentence B
+                    |
+                    v
+              [PAD]
+                    |
+                    v
+                context length {Γ}
+```
+
+```plaintext
+                [CLS]
+                    |
+                    v
+       Bi-directional Transformer Encoder
+                    |
+                    v
+              [SEP]
+                    |
+                    v
+        Masked Sentence A
+                    |
+                    v
+              [SEP]
+                    |
+                    v
+        Masked Sentence B
+                    |
+                    v
+              [PAD]
+                    |
+                    v
+                context length {Γ}
+```
+
+```math
+\mathcal{L} = \frac{1}{| \mathcal{M} |} \sum_{y_i \in \mathcal{M}} - \log(\hat{y}_i) + \mathcal{L}_{cls}
+```
+
+```math
+\mathcal{L}_{cls} = - \log(\hat{y})
+```
+```
+
+# Week 4.2 LLM.pdf - Page 20
+
+```markdown
+# Pre-training
+
+## Dataset:
+
+- **BookCorpus**
+  - 800M words
+- **Wikipedia**
+  - 2500M words
+
+- Vocabulary size: 30,000
+- Context length: ≤ 512 tokens
+
+## Model Architecture:
+
+- Number of layers: 12 (base)/24 (large)
+- Hidden size: 768/1024
+
+![Pre-training Architecture Diagram](image_url)
+
+$$
+\mathcal{L} = \frac{1}{|\mathcal{M}|} \sum_{y_i \in \mathcal{M}} - \log(\hat{y}_i) + \mathcal{L}_{cls}
+$$
+
+$$
+\mathcal{L}_{cls} = -\log(\hat{y}_j)
+$$
+
+```
+```
+
+# Week 4.2 LLM.pdf - Page 21
+
+```markdown
+# Pre-training
+
+## Dataset:
+
+- **BookCorpus**
+  - **800M words**
+- **Wikipedia**
+  - **2500M words**
+
+- Vocabulary size: **30,000**
+- Context length: **<=512 tokens**
+
+## Model Architecture:
+
+- Number of layers: **12 (base)/24 (large)**
+- Hidden size: **768/1024**
+- Number of Attention heads: **12/16**
+- Intermediate size: **4H = 3072/4096**
+
+## Loss Function:
+
+```math
+\mathcal{L} = \frac{1}{|\mathcal{M}|} \sum_{y_i \in \mathcal{M}} -\log(\hat{y}_i) + \mathcal{L}_{cls}
+```
+
+```math
+\mathcal{L}_{cls} = -\log(\hat{y})
+```
+
+## Diagram:
+
+![Model Architecture](image_placeholder.png)
+
+**Encoder Layer-1**
+
+- **Input**: `[CLS]`, Masked Sentence A, `[SEP]`, Masked Sentence B, `[PAD]`
+- **Output**: **h ∈ ℝ^708**
+
+**Intermediate Layer**
+
+- **Output**: **WQ** and **WK**
+
+**Encoder Layer-12**
+
+- **Intermediate size**: **3072**
+- **Output**: **h ∈ ℝ^768**
+
+**Final Layer**
+
+- **Output**: **Wv**
+
+```math
+\mathcal{L}_{cls} = -\log(\hat{y})
+```
+
+**Legend:**
+
+- **CLS**: Classification token
+- **SEP**: Separator token
+- **PAD**: Padding token
+```
+
+This markdown format ensures that the extracted content is structured, formatted, and visually represented with proper attention to scientific detail.
+
+# Week 4.2 LLM.pdf - Page 22
+
+```markdown
+# Parameter Calculation
+
+## Embedding Layer
+
+### Token Embeddings
+- **Dimensions**: 30000 x 768
+- **Approximate Size**: 23M
+
+### Segment Embeddings
+- **Dimensions**: 2 x 768
+- **Approximate Size**: 1536
+
+### Position Embeddings
+- **Dimensions**: 512 x 768
+- **Approximate Size**: 0.4M
+
+### Total
+- **Approximate Size**: 23.4M
+
+![Diagram of Embedding Layer and Birectional Transformer Encoders](data:image/png;base64,...) 
+
+## Diagram Description
+
+- **Embedding Layer Components**:
+  - **Token Embeddings** (30000 x 768)
+  - **Segment Embeddings** (2 x 768)
+  - **Position Embeddings** (512 x 768)
+
+### Birectional Transformer Encoders
+
+#### Inputs:
+- **[CLS]**
+- **Masked Sentence A**
+- **[SEP]**
+- **Masked Sentence B**
+- **[PAD]**
+
+#### Embeddings Added:
+- **Token Embeddings** \( E_T \)
+- **Segment Embeddings** \( E_S \)
+- **Position Embeddings** \( E_P \)
+
+### Weights:
+- \( W_e \)
+- \( W_v \)
+- \( W_r \)
+
+The diagram visually represents how the embedding layer and biirectional transformer encoders interact to process input data.
+```
+
+# Week 4.2 LLM.pdf - Page 23
+
+```markdown
+# Parameter Calculation
+
+## For a Single Layer
+
+### Self-Attention (Ignoring bias)
+
+**Weights:**
+- $W_K$, $W_Q$, $W_V$, $A$
+
+**Dimensional Calculations:**
+- $(768 \times 64 \times 3) \times 12 = 1.7M$
+- $(768 \times 768) = 0.6M$
+
+### FFN (Feed-Forward Network)
+
+**Calculations:**
+- $768 \times 3072 \mid 3072 \times 768 \mid (3072 + 768) = 4.7M$
+- **Total:** $\approx 7M$
+
+### For 12 layers
+
+**Parameters:**
+- $\approx 84M$
+
+## Bidirectional Transformer Encoder Diagram
+
+**Inputs:**
+- [CLS]
+- Masked Sentence A
+- [SEP]
+- Masked Sentence B
+- [PAD]
+
+**Total number of Parameters:**
+- $23.4 + 84 = 107.4M$ (110M in Paper)
+
+*Actual vocabulary size 30522, parameters for layer normalization are excluded*
+```
+
+# Week 4.2 LLM.pdf - Page 24
+
+```markdown
+# Module 3.2: Adapting to Downstream tasks
+
+**Mitesh M. Khapra**
+
+---
+
+**Al4Bharat, Department of Computer Science and Engineering, IIIT Madras**
+
+---
+```
+
+# Week 4.2 LLM.pdf - Page 25
+
+```markdown
+# Two Approaches
+
+## Two Approaches
+
+- **BERT as feature extractor**
+- **Fine-tuning BERT**
+```
+
+In this markdown format, the sections and subsections are accurately represented using the appropriate markdown syntax. The content is structured clearly, with bullet points listing the two approaches. This ensures readability and clarity for the user.
+
+# Week 4.2 LLM.pdf - Page 26
+
+```markdown
+# Classification: Feature Based
+
+$$
+\hat{y} \in \{0, 1\}
+$$
+
+- **Logistic Regression (Naive Bayes, NN, etc.)**
+
+  ```
+  Bi-directional Transformer Encoders
+  ```
+
+  - `[CLS]`
+  - Sentence A
+  - `[SEP]`
+  - Sentence B
+  - `[PAD]`
+
+**Note:**
+- Take a sentence of length less than 512 and feed it as an input to BERT (with appropriate padding if required).
+
+---
+
+Take the final hidden representation (output of the last encoder) as a feature vector for the entire sentence.
+- This representation is superior to merely concatenating representations (say from word2vec) of individual words.
+```
+
+# Week 4.2 LLM.pdf - Page 27
+
+```markdown
+# Classification: Feature Based
+
+$$
+\hat{y} \in \{0,1\}
+$$
+
+- **Take a sentence of length less than 512** and feed it as an input to BERT (with appropriate padding if required)
+- **Take the final hidden representation** (output of the last encoder) as a feature vector for the entire sentence. 
+  - This representation is superior to merely concatenating representations (say from word2vec) of individual words.
+- Finally, we can use any ML model (called head) like Logistic regression, Naive Bayes or Neural Networks for classification.
+
+**All the parameters of BERT are frozen** and only the classification head is trained from scratch.
+
+![BERT Architecture](https://via.placeholder.com/600x300?text=BERT+Architecture)
+
+- **CLS**: Classification token
+- **SEP**: Separator token
+- **PAD**: Padding token
+- **Final Transformer Encoders**: Processed sentences (A and B) are fed into the final transformer encoders.
+```
+
+# Week 4.2 LLM.pdf - Page 28
+
+```markdown
+# Classification: Fine-Tuning
+
+$$\hat{y} \in \{0, 1\}$$
+
+- **Logistic Regression Naive Bayes . . .**
+
+## Bidirectional Transformer Encoders
+
+![BERT Input Diagram](data:image/png;base64,...) 
+
+- **Take a sentence of length less than 512 and feed it as an input to BERT (with appropriate padding, if required)**
+
+### Classification Head Instructions
+
+- **Add a classification head [again it could be any suitable ML model]**
+
+- **Initialize the parameters of the classification head randomly.**
+
+- **Now, train the entire model including the parameters of the pre-trained BERT for the new dataset.**
+
+- **Note, however, that we do not mask words in the input sequence [the reason why we replaced 10% of masked words by random words during pre-training]**
+
+- **It is observed that the model used in the classification head converges quickly with a less number of labelled training samples than the feature-based approach**
+```
+
+# Week 4.2 LLM.pdf - Page 29
+
+```markdown
+# Extractive Question-Answering
+
+## Data Sources
+
+- **BookCorpus**
+  - 800M words
+  - ![BookCorpus](image-placeholder-url)
+
+- **Wikipedia**
+  - 2500M words
+  - ![Wikipedia](image-placeholder-url)
+
+  **Note**: Both sources provide unlabeled data.
+
+## Pretraining
+
+### Model Architecture
+
+1. **Bidirectional Transformer Encoder**
+   - This forms the core of the pretraining model.
+   - Inputs include:
+     - `[CLS]` token
+     - Masked Sentence A
+     - `[SEP]` token
+     - Masked Sentence B
+     - `[PAD]` token (padding)
+
+2. **Weights**
+   - \( W_e \): Embedding weight matrix
+   - \( W_a \): Attention weight matrix
+   - \( W_f \): Final output weight matrix
+
+3. **Process Flow**
+   - Inputs are fed into the Bidirectional Transformer Encoder.
+   - The encoder processes the input tokens.
+   - Outputs are generated through the weight matrices \( W_e \), \( W_a \), and \( W_f \).
+
+### Inputs and Outputs
+- **Inputs**:
+  - `[CLS]`: Classification token.
+  - Masked Sentence A: sentence A with masked tokens.
+  - `[SEP]`: Separator token.
+  - Masked Sentence B: sentence B with masked tokens.
+  - `[PAD]`: Padding token (used to handle variable-length sequences).
+
+- **Outputs**:
+  - These are derived through various weight matrices applied to the processed input tokens.
+
+### Visual Representation
+![Pretraining Process](image-placeholder-url)
+
+### Summary
+The pretraining phase involves using unlabeled data from BookCorpus and Wikipedia to train a Bidirectional Transformer Encoder. Masking certain tokens and using special tokens like `[CLS]`, `[SEP]`, and `[PAD]` are essential for the pretraining process, which helps in learning meaningful representations of the input text.
+```
+
+# Week 4.2 LLM.pdf - Page 30
+
+```markdown
+# Extractive Question-Answering
+
+## Question
+**Question:** What is the unique about the mission?
+
+## Paragraph
+**Paragraph:** What sets this mission apart is the pivotal role of artificial intelligence (AI) in guiding the spacecraft during its critical descent to the moon's surface.
+
+## Answer
+**Answer:** role of artificial intelligence (AI) in guiding the spacecraft
+**Starting token:** 9
+
+*Labelled Data*
+
+# Fine-Tuning
+
+![Bi-directional Transformer Encoder](data:image/png;base64,...) 
+
+We need to make use of these final representations {h1, h2, ..., h25} to find the start and end tokens.
+```
+
+# Week 4.2 LLM.pdf - Page 31
+
+```markdown
+# Extractive Question-Answering
+
+Let $S$ denotes a start vector of size of $h_i$
+
+the probability that $i-th$ word in the paragraph being the start token is
+
+\[
+s_i = \frac{\exp(S \cdot h_i)}{\sum_{j=1}^{25} \exp(S \cdot h_j)}
+\]
+
+Let $E$ denotes an end vector of size of $h_i$
+
+the probability that $i-th$ word in the paragraph being the end token is
+
+\[
+e_i = \frac{\exp(E \cdot h_i)}{\sum_{j=1}^{25} \exp(E \cdot h_j)}
+\]
+
+Both $S$ and $E$ are learnable parameters
+
+# Fine-Tuning
+
+![Bidirectional Transformer Encoder](image.png)
+
+We need to make use of these final representations $\{h_1, h_2, \ldots, h_{25}\}$ to find the start and end tokens.
+```
+
+# Week 4.2 LLM.pdf - Page 32
+
+```markdown
+# Probability distribution for start token
+
+![Probability Distribution Graph](https://example.com/probability_graph.png)
+
+**s1** | **s2** | **s3** | **s4** | **s5** | **s6** | **s7** | **s8** | **s9** | **s10** | **s11** | **s12** | **s13** | **s14** | **s15** | **...** | **...** | **...** | **s25**
+
+```
+s1  - 
+s2  - 
+s3  - 
+s4  - 
+s5  - 
+s6  - 
+s7  -
+s8  - 
+s9  - Highest probability
+s10 -
+s11 -
+s12 -
+s13 -
+s14 - Second highest probability
+s15 -
+...
+...
+...
+s25 -
+
+**Formula:**
+\[ s_i = \frac{\exp(S \cdot h_i)}{\sum_{j=1}^{25} \exp(S \cdot h_j)} \]
+
+**Text:**
+What sets this mission apart is the pivotal role of artificial intelligence (AI) in guiding the spacecraft during its critical descent to the moon’s surface.
+```
+
+# Week 4.2 LLM.pdf - Page 33
+
+```markdown
+# Probability distribution for end token
+
+$$e_i = \frac{exp(E \cdot h_i)}{\sum_{j=1}^{25} exp(E \cdot h_j)}$$
+
+![Probability Distribution Graph](image-url)
+
+- **e1**
+- **e9**
+- **e17**
+- **e25**
+
+*What sets this mission apart is the pivotal role of artificial intelligence (AI) in guiding the spacecraft during its critical descent to the moon's surface.* 
+```
+
+# Week 4.2 LLM.pdf - Page 34
+
+```markdown
+# Scientific Text or Slides in Markdown Format
+
+## Diagram Description
+
+- **Image Placeholder**: ![Diagram](image_url)
+
+## Equation and Symbols
+
+- **Mathematical Inequality**: \( j \geq i \)
+- **Variables**: 
+  - \( s_9 \): Yellow column labeled with 9
+  - \( e_{17} \): Red column labeled with 17
+- **Span**: Span between \( s_9 \) and \( e_{17} \)
+- **Indices**:
+  - \( i = 9 \)
+  - \( j = 17 \)
+
+## Text Description
+
+**Role of Artificial Intelligence (AI)**
+
+*What sets this mission apart is the pivotal role of artificial intelligence (AI) in guiding the spacecraft during its critical descent to the moon's surface.*
+
+## Additional Notes
+
+- **Role of Artificial Intelligence (AI)**: Highlighted in orange color
+```
+
+# Week 4.2 LLM.pdf - Page 35
+
+```markdown
+# Extracted Content from Scientific Text/Slides
+
+It is possible that the end token index might be lesser than the start token index. In that case, return an empty string.
+
+## Example Illustration
+
+- Tokens: `e_7`, `s_9`
+- Indices: `j = 7`, `i = 9`
+
+### Conditions
+
+- **Condition 1**: If the end token index `j` is less than the start token index `i` (`j < i`)
+
+  - **Action**: Return an empty string (implies that the answer is not in the paragraph)
+
+### Explanation
+
+The example shows that the token `e_7` is at index 7 and the token `s_9` is at index 9. Given that `j < i`, the condition is satisfied.
+
+```plaintext
+j = 7
+i = 9
+```
+
+### Additional Note
+
+What sets this mission apart is the pivotal role of artificial intelligence (AI) in guiding the spacecraft during its critical descent to the moon’s surface.
+```
+

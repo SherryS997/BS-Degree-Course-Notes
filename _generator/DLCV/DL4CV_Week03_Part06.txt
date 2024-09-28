@@ -1,0 +1,195 @@
+# DL4CV_Week03_Part06.pdf - Page 1
+
+```markdown
+# Deep Learning for Computer Vision
+
+## Transitioning From Traditional Vision to Deep Learning
+
+**Vineeth N Balasubramanian**
+
+Department of Computer Science and Engineering
+Indian Institute of Technology, Hyderabad
+
+![IIT Hyderabad Logo](image_url)
+
+---
+
+Vineeth N B (IIT-H) §3.6 From Traditional Vision to Deep Learning
+
+---
+
+### Introduction
+
+- Traditional computer vision techniques rely on handcrafted features and algorithms.
+- Deep Learning (DL) has revolutionized the field by leveraging large datasets and neural networks.
+
+### Traditional Vision Techniques
+
+- **Feature Extraction**: Techniques such as SIFT, SURF, and HOG.
+- **Classifiers**: Support Vector Machines (SVM), Random Forests, etc.
+- **Limitations**: Requires extensive domain knowledge, less adaptable to new data.
+
+### Deep Learning in Vision
+
+- **Convolutional Neural Networks (CNNs)**: Specialized neural networks designed for image data.
+- **Architectures**: AlexNet, VGG, ResNet, Inception, etc.
+- **Applications**: Object detection, image segmentation, facial recognition.
+
+### Transition Challenges
+
+- **Data**: Requirements for large labeled datasets.
+- **Computational Power**: High computational and memory demands.
+- **Model Complexity**: Designing and training complex models.
+
+### Key Advantages
+
+- **Automated Feature Learning**: No need for handcrafted features.
+- **Scalability**: Can be scaled to large datasets and complex tasks.
+- **Generalization**: Better generalization to new and unseen data.
+
+### Practical Examples
+
+- **ImageNet Challenge**: Significant improvements in classification accuracy.
+- **Autonomous Vehicles**: Enhancements in object detection and tracking.
+- **Medical Imaging**: Improved diagnostics using DL models.
+
+### Future Directions
+
+- **Edge Computing**: Developing models for deployment on edge devices.
+- **Interpretability**: Enhancing interpretability of DL models.
+- **Hybrid Approaches**: Combining traditional methods with DL for better performance.
+
+### Conclusion
+
+- **Transition**: From rule-based systems to data-driven models.
+- **Integration**: DL as a powerful tool in the computer vision toolkit.
+
+```
+
+# DL4CV_Week03_Part06.pdf - Page 2
+
+```markdown
+# Summarizing Topics So Far
+
+## Fundamental Operations
+
+- **Convolution** is a unique operation
+  - linear, shift-invariant
+  - Useful properties: Commutative, Associative, Distributive (over addition)
+
+- Forms basis of image operations and even modern-day neural networks working on images
+
+*Vineeth N B (IIT-H) §3.6 From Traditional Vision to Deep Learning*
+
+---
+
+2 / 4
+```
+
+# DL4CV_Week03_Part06.pdf - Page 3
+
+```markdown
+# Summarizing Topics So Far
+
+## Fundamental Operations
+
+- **Convolution** is a unique operation
+  - Linear, shift-invariant
+  - Useful properties: Commutative, Associative, Distributive (over addition)
+- Forms basis of image operations and even modern-day neural networks working on images
+
+## Common Pipeline in Traditional Vision Tasks
+
+- Extract corners or patches in images
+  - Extract descriptors
+- Use banks of filters, such as Steerable filters or Gabor filters
+- Use descriptors for tasks such as retrieval, matching or classification
+
+_Vineeth N B (IIT-H) §3.6 From Traditional Vision to Deep Learning_
+
+![Diagram Placeholder](diagram-url.png)
+```
+
+Note: Replace `diagram-url.png` with the appropriate URL or placeholder if the OCR cannot capture the image directly.
+
+# DL4CV_Week03_Part06.pdf - Page 4
+
+```markdown
+# Traditional Vision: High-level Abstractions
+
+## Image-Level Understanding
+
+- Going from low-level image understanding to aggregation of descriptors
+- Banks of filters capture responses at different scales and orientations
+- Histograms can be viewed as "encoding" and "pooling"
+- Similarities to the human visual system
+
+*Vineeth N B (IIT-H)*
+
+§3.6 From Traditional Vision to Deep Learning
+
+![]()
+
+3 / 4
+```
+
+# DL4CV_Week03_Part06.pdf - Page 5
+
+```markdown
+# Traditional Vision: High-level Abstractions
+
+## Image-Level Understanding
+
+- Going from low-level image understanding to aggregation of descriptors
+- Banks of filters capture responses at different scales and orientations
+- Histograms can be viewed as "encoding" and "pooling"
+- Similarities to the human visual system
+
+## Local Features/Understanding
+
+- Not all spatial regions important, depends on task (stereopsis, motion estimation, instance recognition compared to class recognition)
+  - Encoding makes features sparse
+    - Many words in BoW have zero count
+  - Operators that detect local features can be viewed as "convolution" followed by some kind of "competition"
+
+*Vineeth N B (IIIT-H) §3.6 From Traditional Vision to Deep Learning*
+
+*Slide 3 / 4*
+```
+
+# DL4CV_Week03_Part06.pdf - Page 6
+
+```markdown
+# Traditional Vision: High-level Abstractions
+
+## Representing Images/Regions as Descriptors
+
+- Learn descriptors/representations such that dot product is good enough for matching
+- Some invariance to geometric transformations, designed or learned in certain cases
+
+*Vineeth N B (IIT-H) §3.6 From Traditional Vision to Deep Learning*
+
+![NPTEL](https://example.com/nptel-logo.png)
+```
+
+# DL4CV_Week03_Part06.pdf - Page 7
+
+```markdown
+# Traditional Vision: High-level Abstractions
+
+## Representing Images/Regions as Descriptors
+
+- Learn descriptors/representations such that dot product is good enough for matching
+- Some invariance to geometric transformations, designed or learned in certain cases
+
+# Moving on to Deep Learning...
+
+Although not by design, Deep Learning seems to build on some of the above principles, but in a learnable manner...we will see soon
+
+*Vineeth N B (IIT-H) §3.6 From Traditional Vision to Deep Learning*
+
+![]()
+```
+
+Note: The image placeholder `![]()` is used since the OCR process cannot directly capture images. Replace it with the actual image URL if available.
+

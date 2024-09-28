@@ -1,0 +1,994 @@
+# DL4CV_Week10_Part03.pdf - Page 1
+
+ cannot extract content from the image directly. Please provide the text content separately so I can format it properly in markdown.
+
+# DL4CV_Week10_Part03.pdf - Page 2
+
+```markdown
+# Recall: Autoencoders
+
+![Autoencoder Diagram](image_url)
+
+**Input**
+
+- Autoencoders can reconstruct data, and can learn features to initialize a supervised model.
+- Can we generate images from an autoencoder?
+
+**Credit**: Arden Dertat, TowardsDataScience
+
+Vineeth N B (IIT-H)
+
+## Encoder
+
+- The encoder compresses the input data into a latent space representation called the code.
+
+## Decoder
+
+- The decoder reconstructs the input data from the code.
+
+## Diagram Explanation
+
+- The input data is represented by blocks on the left side.
+- The encoder processes this data and compresses it into a smaller representation, shown as a central block labeled "Code."
+- The decoder then processes the code to reconstruct the output data, which is similar to the input data but may contain some variations.
+- The dashed arrows indicate the flow of data from input to code to output.
+
+# Output
+
+- The output data is represented by blocks on the right side.
+
+## Notes
+
+- This image illustrates the basic architecture of an autoencoder.
+- The encoder-decoder structure allows autoencoders to learn useful features from the data.
+- Autoencoders can be used for unsupervised learning tasks, such as data compression and anomaly detection.
+- They can also be used to pre-train models for supervised learning tasks by leveraging the learned features.
+
+## References
+
+- TowardsDataScience, Arden Dertat
+- Vineeth N B, IIT-H
+- Section 10.3 VAEs
+```
+
+* Note: Replace `image_url` with the actual URL or filename of the image if available.
+
+# DL4CV_Week10_Part03.pdf - Page 3
+
+```markdown
+# Variational Autoencoders
+
+- Introduced around the same time by two groups of researchers:
+  - Kingma and Welling, **Auto-Encoding Variational Bayes**, ICLR 2014
+  - Rezende, Mohamed and Wiestra, **Stochastic Backpropagation and Variational Inference in Deep Latent Gaussian Models**, ICML 2014
+
+![Neural Network Diagram](image_url)
+
+**Credit**: Aaron Courville, *Deep Learning Summer School*, 2015
+
+*Vineeth N B (IIT-H)*
+
+*$10.3 VAE$*
+
+*3 / 20*
+```
+
+# DL4CV_Week10_Part03.pdf - Page 4
+
+```markdown
+# Variational Autoencoders
+
+- **Latent Variable Model:** Learn a mapping from some latent variable \( z \) to a possibly complex distribution on \( x \)
+
+  \[
+  p(x) = \int p(x, z) dz \quad \text{where} \quad p(x, z) = p(x|z)p(z)
+  \]
+
+  \[
+  p(z) = \text{something simple}; \quad p(x|z) = q(z)
+  \]
+
+- Can we learn to decouple the true explanatory factors (latent variables) underlying the data distribution (e.g. identity and expression in face images)? How?
+
+![Diagram](image_url)
+
+*Credit: Aaron Courville, Deep Learning Summer School, 2015*
+
+*Vineeth N B (IIT-H)*
+
+*§10.3 VAEs*
+```
+
+# DL4CV_Week10_Part03.pdf - Page 5
+
+ the provided image is a slide titled "Variational Autoencoders". The slide explains that variational autoencoders use neural networks to learn a latent variable model. The formula presented shows how the probability distribution p(x) can be integrated with respect to a latent variable z, where the joint probability p(x,z) is factored into p(x|z) and p(z). The probability p(z) is described as something simple, and p(x|z) is represented as g(z). The slide includes a diagram illustrating the relationship between the latent variable z and the observed variable x. The credit for the slide goes to Aaron Courville from the Deep Learning Summer School, 2015. The slide is part of a presentation by Vineeth N B from IIT-H.
+
+```markdown
+# Variational Autoencoders
+
+- Leverage neural networks to learn a latent variable model!
+
+  \[
+  p(x) = \int p(x, z) dz \quad \text{where} \quad p(x, z) = p(x|z)p(z)
+  \]
+
+  \[
+  p(z) = \text{something simple}; \quad p(x|z) = g(z)
+  \]
+
+![Variational Autoencoders Diagram](image-url)
+
+**Credit:** Aaron Courville, Deep Learning Summer School, 2015
+
+Vineeth N B (IIT-H) 
+```
+
+# DL4CV_Week10_Part03.pdf - Page 6
+
+ and ensure the scientific integrity of the content.
+
+```markdown
+# Variational Autoencoders
+
+- Leverage neural networks to learn a latent variable model!
+  \[
+  p(x) = \int p(x, z) dz \quad \text{where} \quad p(x, z) = p(x|z)p(z)
+  \]
+  \[
+  p(z) = \text{something simple}; \quad p(x|z) = q(z)
+  \]
+
+- Where does \(z\) come from? Computing the posterior \(p(z|x)\) is intractable, and we need it to train the directed model
+
+![Diagram](image-url)
+
+**Credit**: Aaron Courville, Deep Learning Summer School, 2015
+
+*Vineeth N B (IIT-H)*
+```
+```
+
+# DL4CV_Week10_Part03.pdf - Page 7
+
+ is preserved.
+
+---
+
+# Variational Autoencoders
+
+## A Bayesian spin on an autoencoder!
+
+Assume our data $\{x^{(i)}\}_{i=1}^{N}$ is generated like this:
+
+- **Sample from true prior**:
+  \[
+  p_{\theta^*}(z)
+  \]
+
+- **Sample from true conditional**:
+  \[
+  p_{\theta^*}(x \mid z^{(i)})
+  \]
+
+![Diagram](https://via.placeholder.com/150)
+
+**Credit**: Fei-Fei Li, Andrej Karpathy and Justin Johnson, CS231n, Stanford Univ
+
+**Vineeth N B (IIIT-H)**
+
+**§10.3 VAEs**
+
+---
+
+*Kingma and Welling, “Auto-Encoding Variational Bayes”, ICLR 2014*
+
+# DL4CV_Week10_Part03.pdf - Page 8
+
+
+
+```markdown
+# Variational Autoencoders
+
+## A Bayesian spin on an autoencoder!
+
+### Assume our data $\{x^{(i)}\}_{i=1}^{N}$ is generated like this:
+
+- **Intuition**: $x$ is an image, $z$ gives class, orientation, attributes, etc
+
+### Sample from true prior
+$$
+p_{\theta^*} (z)
+$$
+
+### Sample from true conditional
+$$
+p_{\theta^*} (x \mid z^{(i)})
+$$
+
+![Diagram](image-url)
+
+*Kingma and Welling, "Auto-Encoding Variational Bayes", ICLR 2014*
+
+**Credit**: Fei-Fei Li, Andrej Karpathy and Justin Johnson, CS231n, Stanford Univ
+
+*Vineeth N B (IIT-H) §10.3 VAEs*
+```
+
+# DL4CV_Week10_Part03.pdf - Page 9
+
+
+
+```markdown
+# Variational Autoencoders
+
+## A Bayesian spin on an autoencoder!
+
+Assume our data $\{ x^{(i)} \}_{i=1}^N$ is generated like this:
+
+- **Sample from true prior** $p_{\theta^*}(z)$
+
+  ![Diagram](https://via.placeholder.com/150)
+
+  Sample from **true conditional** $p_{\theta^*}(x \mid z^{(i)})$
+
+- **Intuition**: $x$ is an image, $z$ gives class, orientation, attributes, etc
+
+- **Problem**: Estimate $\theta$ without access to latent states $z^{(i)}$
+
+**Kingma and Welling, "Auto-Encoding Variational Bayes", ICLR 2014**
+
+**Credit**: Fei-Fei Li, Andrej Karpathy and Justin Johnson, CS231n, Stanford Univ
+
+*Vineeth N B (IIT-H)*
+
+*§10.3 VAEs*
+```
+
+# DL4CV_Week10_Part03.pdf - Page 10
+
+```markdown
+# Variational Autoencoders
+
+## Diagram and Description
+
+- **Mean and (diagonal) covariance of** \( p_\theta(x | z) \)
+  - ![Diagram Placeholder](https://via.placeholder.com/150)
+
+- **Latent state** \( z \)
+  - ![Latent State Placeholder](https://via.placeholder.com/150)
+
+- **Decoder network with parameters** \( \theta \)
+  - ![Decoder Network Placeholder](https://via.placeholder.com/150)
+
+- **Fully-connected or upconvolutional**
+  - ![Fully-connected or Upconvolutional Placeholder](https://via.placeholder.com/150)
+
+### Prior
+Assume \( p_\theta(z) \) is a unit Gaussian
+
+## Credit
+- **Fei-Fei Li, Andrej Karpathy and Justin Johnson, CS231n, Stanford Univ**
+
+## Additional Information
+- **Vineeth N B (IIT-H)**
+- **Section: §10.3 VAEs**
+```
+
+# DL4CV_Week10_Part03.pdf - Page 11
+
+```markdown
+# Variational Autoencoders
+
+## Diagram and Assumptions
+
+### Diagram
+
+- **Latent state**: `z`
+- **Mean and (diagonal) covariance of `p_θ(x | z)`**:
+  - Mean: `μ^x`
+  - Diagonal covariance: `Σ^x`
+- **Decoder network with parameters `θ`**:
+  - Outputs mean `μ^x` and covariance `Σ^x`
+  - Fully-connected or upconvolutional
+
+### Assumptions
+
+- **Prior**: Assume `p_θ(z)` is a unit Gaussian
+- **Conditional**: Assume `p_θ(x | z)` is a diagonal Gaussian, predict mean and variance with neural network
+
+## Credit
+
+- **Author(s)**: Fei-Fei Li, Andrej Karpathy and Justin Johnson, CS231n, Stanford Univ
+- **Source**: Vineeth N B (IIIT-H)
+- **Course**: §10.3 VAEs
+```
+
+Note: The content assumes that the scientific notation, symbols, and diagrams are accurately represented in the provided image. If there are any missing details or inaccuracies in the OCR process, further adjustments may be necessary.
+
+# DL4CV_Week10_Part03.pdf - Page 12
+
+```markdown
+# Variational Autoencoders
+
+## By Bayes Rule the posterior is:
+
+\[ p_{\theta}(z \mid x) = \frac{p_{\theta}(x \mid z) p_{\theta}(z)}{p_{\theta}(x)} \]
+
+- **Use decoder network** 😃
+- **Gaussian** 😃
+- **Intractible integral** 😒
+
+### Mean and (diagonal) covariance of \( q_{\phi}(z \mid x) \)
+
+\[ \mu_z \]
+\[ \Sigma_z \]
+
+**Encoder network with parameters \( \phi \)**
+
+**Data point**
+
+Credit: Fei-Fei Li, Andrej Karpathy and Justin Johnson, CS231n, Stanford Univ
+
+Vineeth N B (IIT-H) §10.3 VAEs
+```
+
+# DL4CV_Week10_Part03.pdf - Page 13
+
+
+
+```markdown
+# Variational Autoencoders
+
+## By Bayes Rule the posterior is:
+
+$$ p_\theta(z \mid x) = \frac{p_\theta(x \mid z) p_\theta(z)}{p_\theta(x)} $$
+
+- **Use decoder network**
+- **Gaussian**
+- **Intractable integral**
+
+### NPTFE
+Approximate posterior with encoder network \( q_\phi(z \mid x) \)
+
+### Mean and (diagonal) covariance of \( q_\phi(z \mid x) \)
+
+```math
+\mu^z
+\Sigma^z
+```
+
+### Fully-connected or convolutional
+
+- **Encoder network with parameters \( \phi \)**
+
+![Diagram Placeholder](image-placeholder.png)
+
+## Diagram (Data point)
+
+### Credit:
+- Fei-Fei Li, Andrej Karpathy and Justin Johnson, CS231n, Stanford Univ
+
+### Slide Information
+
+- **Vineeth N B (IIIT-H)**
+- **§10.3 VAEs**
+- Slide Number: 8/20
+```
+
+**Note:** The placeholder image `![Diagram Placeholder](image-placeholder.png)` is included because OCR cannot directly capture diagrams or images. Replace it with the appropriate image URL if available.
+
+# DL4CV_Week10_Part03.pdf - Page 14
+
+# Variational Autoencoders
+
+## Diagram Components
+
+### Reconstructed
+- **xx**
+  - Sampled from \( p_\theta(x \mid z) \)
+
+### Decoder Network
+- **μ^x**
+  - Mean of \( p_\theta(x \mid z) \)
+- **Σ^x**
+  - (Diagonal) Covariance of \( p_\theta(x \mid z) \)
+
+### z
+- Sampled from \( q_\phi(z \mid x) \)
+
+### Encoder Network
+- **μ^z**
+  - Mean of \( q_\phi(z \mid x) \)
+- **Σ^z**
+  - (Diagonal) Covariance of \( q_\phi(z \mid x) \)
+
+### Data Point
+- **x**
+
+## Credit
+- Fei-Fei Li, Andrej Karpathy, and Justin Johnson, CS231n, Stanford Univ
+
+---
+
+*Vineeth N B (IIIT-H)*
+
+*§10.3 VAEs*
+
+# DL4CV_Week10_Part03.pdf - Page 15
+
+```markdown
+# Variational Autoencoders
+
+## Diagram Overview
+
+### Data Flow
+
+1. **Data point (x)**
+   - Input to the Encoder network
+
+2. **Encoder network**
+   - Outputs the latent variable **z** 
+   - Calculates mean (\(\mu^z\)) and (diagonal) covariance (\(\Sigma^z\)) of \(q_{\phi}(z | x)\)
+   - **Mean and (diagonal) covariance of \(q_{\phi}(z | x)\) (should be close to prior \(p_{\theta}(z)\))**
+
+3. **Sample from \(q_{\phi}(z | x)\)**
+   - Generates **z** from the encoded distribution \(q_{\phi}(z | x)\)
+
+4. **Decoder network**
+   - Takes **z** as input
+   - Outputs reconstructed **xx**
+   - Calculates mean (\(\mu^x\)) and (diagonal) covariance (\(\Sigma^x\)) of \(p_{\theta}(x | z)\)
+   - **Mean and (diagonal) covariance of \(p_{\theta}(x | z)\) (should be close to data x)**
+
+5. **Sample from \(p_{\theta}(x | z)\)**
+   - Generates **xx** from the decoded distribution \(p_{\theta}(x | z)\)
+
+### Training Process
+- **Training like a normal autoencoder:**
+  - Reconstruction loss at the end
+  - Regularization toward prior in the middle
+
+### Key Information
+- **Reconstructed:** **xx**
+- **Decoder network:** Mean and (diagonal) covariance of \(p_{\theta}(x | z)\)
+- **Encoder network:** Mean and (diagonal) covariance of \(q_{\phi}(z | x)\)
+
+### Additional Notes
+- The covariance matrices (\(\Sigma\)) should be diagonal.
+- The distributions \(q_{\phi}(z | x)\) and \(p_{\theta}(x | z)\) should be close to the data and prior distributions, respectively.
+
+## Credit
+- Fei-Fei Li, Andrej Karpathy and Justin Johnson, CS231n, Stanford Univ
+- Vineeth N B (IIIT-H)
+- Section: §10.3 VAEs
+
+```
+
+# DL4CV_Week10_Part03.pdf - Page 16
+
+: 
+
+```markdown
+# Variational Autoencoder: The Math
+
+$$
+\theta^* = \arg \max_\theta \prod_{i=1}^N p_\theta(x^{(i)})
+$$
+
+*Maximize likelihood of dataset* {x^{(i)}} _{i=1}^N
+
+![NPTEL Logo](image_url)
+
+*Credit: Fei-Fei Li, Andrej Karpathy and Justin Johnson, CS231n, Stanford Univ*
+
+*Vineeth N B (IIIT-H)*
+
+Section 10.3 VAEs
+```
+
+# DL4CV_Week10_Part03.pdf - Page 17
+
+
+
+```markdown
+# Variational Autoencoder: The Math
+
+```math
+\theta^* = \arg \max_\theta \prod_{i=1}^N p_\theta(x^{(i)})
+```
+- Maximize likelihood of dataset $\{x^{(i)}\}_{i=1}^N$
+
+```math
+= \arg \max_\theta \sum_{i=1}^N \log p_\theta(x^{(i)})
+```
+- Maximize log-likelihood instead because sums are nicer
+
+![NPTEL Logo](image_url)
+
+*Credit: Fei-Fei Li, Andrej Karpathy and Justin Johnson, CS231n, Stanford Univ*
+
+*Vineeth N B (IIIT-H)*
+
+*§10.3 VAEs*
+```
+
+# DL4CV_Week10_Part03.pdf - Page 18
+
+: 
+
+```markdown
+# Variational Autoencoder: The Math
+
+\[ \theta^* = \arg \max_\theta \prod_{i=1}^{N} p_\theta(x^{(i)}) \]
+
+**Maximize likelihood of dataset** \(\left\{x^{(i)}\right\}_{i=1}^{N}\)
+
+\[ = \arg \max_\theta \sum_{i=1}^{N} \log p_\theta(x^{(i)}) \]
+
+**Maximize log-likelihood instead because sums are nicer**
+
+\[ p_\theta(x^{(i)}) = \int p_\theta(x^{(i)}, z) dz \]
+
+**Marginalize joint distribution**
+
+*Credit: Fei-Fei Li, Andrej Karpathy and Justin Johnson, CS231n, Stanford Univ*
+
+*Vineeth N B (IIIT-H)*
+
+*§10.3 VAEs*
+```
+
+# DL4CV_Week10_Part03.pdf - Page 19
+
+```markdown
+# Variational Autoencoder: The Math
+
+$$
+\theta^* = \arg \max_{\theta} \prod_{i=1}^{N} p_{\theta}(x^{(i)})
+$$
+
+- **Maximize likelihood of dataset** $\{x^{(i)}\}_{i=1}^{N}$.
+
+$$
+= \arg \max_{\theta} \sum_{i=1}^{N} \log p_{\theta}(x^{(i)})
+$$
+
+- **Maximize log-likelihood instead because sums are nicer**.
+
+$$
+p_{\theta}(x^{(i)}) = \int p_{\theta}(x^{(i)}, z) dz
+$$
+
+- **Marginalize joint distribution**.
+
+$$
+= \int p_{\theta}(x^{(i)} | z) p_{\theta}(z) dz
+$$
+
+- **Intractible integral**.
+
+![Diagram](image_url_placeholder)
+
+**Credit**: Fei-Fei Li, Andrej Karpathy and Justin Johnson, CS231n, Stanford Univ
+
+*Vineeth N B (IIIT-H)*
+
+*§10.3 VAEs*
+```
+
+# DL4CV_Week10_Part03.pdf - Page 20
+
+```markdown
+# Variational Autoencoder: The Math
+
+$$
+\log p_{\theta}(x^{(i)}) = \mathbb{E}_{z \sim q_{\phi}(z \mid x^{(i)})} \left[ \log p_{\theta}(x^{(i)}) \right]
+$$
+
+where $(p_{\theta}(x^{(i)}))$ does not depend on $z$.
+
+$$
+\log p_{\theta}(x^{(i)}) = \mathbb{E}_{z} \left[ \log \frac{p_{\theta}(x^{(i)} \mid z) p_{\theta}(z)}{p_{\theta}(z \mid x^{(i)})} \right] \quad (\text{Bayes' Rule})
+$$
+
+$$
+\log p_{\theta}(x^{(i)}) = \mathbb{E}_{z} \left[ \log \frac{p_{\theta}(x^{(i)} \mid z) p_{\theta}(z) q_{\phi}(z \mid x^{(i)})}{p_{\theta}(z \mid x^{(i)}) q_{\phi}(z \mid x^{(i)})} \right] \quad (\text{Multiply by constant})
+$$
+
+![NPTEL Logo](image_url)
+
+**Credit**: Fei-Fei Li, Andrej Karpathy, and Justin Johnson, CS231n, Stanford Univ
+
+Vineeth N B (IIT-H)
+
+§10.3 VAEs
+
+![Slide Number](image_url)
+```
+
+# DL4CV_Week10_Part03.pdf - Page 21
+
+ yield "correctly formatted markdown"
+
+```markdown
+# Variational Autoencoder: The Math
+
+$$\log p_{\theta}(x^{(i)}) = \mathbb{E}_{z \sim q_{\phi}(z|x^{(i)})} \left[ \log p_{\theta}(x^{(i)}) \right]$$
+
+$$p_{\theta}(x^{(i)}) \text{ Does not depend on } z$$
+
+$$= \mathbb{E}_{z} \left[ \log \frac{p_{\theta}(x^{(i)}) p_{\theta}(z)}{p_{\theta}(z | x^{(i)})} \right]$$ **(Bayes' Rule)**
+
+$$= \mathbb{E}_{z} \left[ \log \frac{p_{\theta}(x^{(i)} | z) p_{\theta}(z)}{p_{\theta}(z | x^{(i)})} \frac{q_{\phi}(z | x^{(i)})}{q_{\phi}(z | x^{(i)})} \right]$$ **(Multiply by constant)**
+
+$$= \mathbb{E}_{z} \left[ \log p_{\theta}(x^{(i)} | z) \right] - \mathbb{E}_{z} \left[ \log \frac{q_{\phi}(z | x^{(i)})}{p_{\theta}(z)} \right] + \mathbb{E}_{z} \left[ \log \frac{q_{\phi}(z | x^{(i)})}{p_{\theta}(z | x^{(i)})} \right]$$ **(Logarithms)**
+
+$$= \mathbb{E}_{z} \left[ \log p_{\theta}(x^{(i)} | z) \right] - D_{KL}(q_{\phi}(z | x^{(i)}) || p_{\theta}(z)) + D_{KL}(q_{\phi}(z | x^{(i)}) || p_{\theta}(z | x^{(i)}))$$ 
+
+$$\underbrace{\mathbb{E}_{z} \left[ \log p_{\theta}(x^{(i)} | z) \right]}_{L(x^{(i)}, \theta, \phi)} - \text{Elbow}$$
+
+$$\geq 0$$
+
+*Credit: Fei-Fei Li, Andrej Karpathy and Justin Johnson, CS231n, Stanford Univ*
+
+*Vineeth N B (IIT-H)*
+
+*§10.3 VAEs*
+
+*11 / 20*
+```
+
+# DL4CV_Week10_Part03.pdf - Page 22
+
+ notations and technical terms accurately.
+
+```markdown
+# Variational Autoencoder: The Math
+
+$$
+\log p_\theta(x^{(i)}) = \mathbb{E}_{z \sim q_\phi(z | x^{(i)})} \left[ \log p_\theta(x^{(i)}) \right]
+$$
+$$(p_\theta(x^{(i)})) \text{ Does not depend on } z$$
+
+$$
+\begin{align*}
+&= \mathbb{E}_z \left[ \log \frac{p_\theta(x^{(i)} | z) p_\theta(z)}{p_\theta(z | x^{(i)})} \right] \quad \text{(Bayes' Rule)} \\
+&= \mathbb{E}_z \left[ \log \frac{p_\theta(x^{(i)} | z) p_\theta(z)}{p_\theta(z | x^{(i)})} \frac{q_\phi(z | x^{(i)})}{q_\phi(z | x^{(i)})} \right] \quad \text{(Multiply by constant)} \\
+&= \mathbb{E}_z \left[ \log p_\theta(x^{(i)} | z) \right] - \mathbb{E}_z \left[ \log \frac{q_\phi(z | x^{(i)})}{p_\theta(z)} \right] + \mathbb{E}_z \left[ \log \frac{q_\phi(z | x^{(i)})}{p_\theta(z | x^{(i)})} \right] \quad \text{(Logarithms)} \\
+&= \mathbb{E}_z \left[ \log p_\theta(x^{(i)} | z) \right] - D_{KL}(q_\phi(z | x^{(i)}) || p_\theta(z)) + D_{KL}(q_\phi(z | x^{(i)}) || p_\theta(z | x^{(i)})) \\
+&\quad \quad \quad \geq 0
+\end{align*}
+$$
+
+$$\log p_\theta(x^{(i)}) \geq \mathcal{L}(x^{(i)}, \theta, \phi)$$
+
+Variational lower bound (elbow)
+
+Training: Maximize lower bound
+
+**Credit**: Fei-Fei Li, Andrej Karpathy and Justin Johnson, CS231n, Stanford Univ
+
+Vineeth N B (IIT-H)
+
+§10.3 VAEs
+
+$$
+\theta^*, \phi^* = \arg \max_{\theta, \phi} \sum_{i=1}^N \mathcal{L}(x^{(i)}, \theta, \phi)
+$$
+```
+
+# DL4CV_Week10_Part03.pdf - Page 23
+
+```markdown
+# Variational Autoencoder: Inference
+
+- Introduce an inference model \(q_{\phi}(z|x)\) that learns to approximate the intractable posterior \(p_{\theta}(z|x)\) by optimizing the variational lower bound:
+
+  \[
+  \mathcal{L}(\theta, \phi, x) = -D_{KL}(q_{\phi}(z|x) || p_{\theta}(z)) + \mathbb{E}_{q_{\phi}(z|x)}[\log p_{\theta}(x|z)]
+  \]
+
+- We parametrize \(q_{\phi}(z|x)\) with another neural network:
+
+  ![Neural Network Diagram](image-url)
+
+  \(q_{\phi}(z | x) = q(z; f(x; \phi))\)
+
+  \(p_{\theta}(x | z) = p(x; g(z, \theta))\)
+
+  \(z\):
+
+  \(x\):
+
+  \(f(x)\):
+
+  \(g(z)\):
+
+  _Credit: Aaron Courville, Deep Learning Summer School, 2015_
+
+  _Vineeth N B (IIT-H)_
+
+  _§10.3 VAEs_
+
+  _12 / 20_
+```
+
+# DL4CV_Week10_Part03.pdf - Page 24
+
+```markdown
+# Variational Autoencoder: How to train?
+
+![Variational Autoencoder Diagram](image-url)
+
+$$
+\mathcal{L}_{VAE} = \mathbb{E}_{q_\phi(z|x)} \left[ \log \frac{p_\theta(z, x)}{q_\phi(z|x)} \right]
+$$
+
+$$
+= -D_{KL}(q_\phi(z|x) || p_\theta(z)) + \mathbb{E}_{q_\phi(z|x)} [\log p_\theta(x|z)]
+$$
+
+- $z \sim q_\phi(z|x)$: need to differentiate through the sampling process; how to update $\phi$?
+  (encoder is probabilistic)
+
+_Vineeth N B (IIT-H)_
+
+_§10.3 VAEs_
+
+_13 / 20_
+```
+
+# DL4CV_Week10_Part03.pdf - Page 25
+
+
+
+```markdown
+# Variational Autoencoder: How to train?
+
+$$
+\mathcal{L}_{VAE} = \mathbb{E}_{q_{\phi}(z|x)} \left[ \log \frac{p_{\theta}(z, x)}{q_{\phi}(z|x)} \right]
+$$
+
+$$
+= -D_{KL}(q_{\phi}(z|x) || p_{\theta}(z)) + \mathbb{E}_{q_{\phi}(z|x)} [\log p_{\theta}(x|z)]
+$$
+
+- $z \sim q_{\phi}(z|x)$: need to differentiate through the sampling process; how to update $\phi$? (encoder is probabilistic)
+- **Solution**: Make the randomness independent of encoder output, thus making the encoder deterministic; how?
+
+*Vineeth N B (IIIT-H) §10.3 VAEs 13 / 20*
+
+```
+
+This markdown format ensures the text and equations are clearly formatted and readable.
+
+# DL4CV_Week10_Part03.pdf - Page 26
+
+```markdown
+# Reparametrization Trick
+
+- Let's consider \( z \) to be real and \( q_{\phi}(z|x) = \mathcal{N}(z; u_z(x), \sigma_z(x)) \)
+- Parametrize \( z \) as \( z = \mu_z(\tilde{z}) + \sigma_z(x) \epsilon_z \) where \( \epsilon_z \sim \mathcal{N}(0,1) \)
+
+![Reparametrization Trick Diagram](image_url)
+
+\[
+\begin{aligned}
+    &\mu_z(x) & \sigma_z(x) \\
+    &z: & 
+    \begin{array}{cccc}
+        & & & \\
+        & \bullet & \bullet & \\
+        & & & \\
+    \end{array} \\
+    &f(z): & 
+    \begin{array}{cccc}
+        & \bullet & \bullet & \bullet & \bullet \\
+        & & & & \\
+        & & & & \\
+    \end{array} \\
+    &x: & 
+    \begin{array}{cccc}
+        & \bullet & \bullet & \bullet & \bullet & \bullet & \bullet & \bullet \\
+        & & & & & & & \\
+    \end{array} \\
+    &g(z): & 
+    \begin{array}{cccc}
+        & \bullet & \bullet & \bullet & \bullet \\
+        & & & & \\
+    \end{array} \\
+    &\mu_x(z): & \{\bullet, \bullet, \bullet, \ldots\} \\
+    &\sigma_x(z): & \{\bullet, \bullet, \bullet, \ldots\}
+\end{aligned}
+\]
+
+*Credit: Aaron Courville, Deep Learning Summer School, 2015*
+
+*Vineeth N B (IIIT-H)*
+
+*§10.3 VAEs*
+```
+
+# DL4CV_Week10_Part03.pdf - Page 27
+
+ extracted text
+```markdown
+# Training with Backpropagation
+
+With the **reparametrization trick**, we can simultaneously train both the generative model
+
+$$ p_\theta(x|z) $$
+
+and the inference model
+
+$$ q_\phi(z|x) $$
+
+using backpropagation
+
+**Objective function**: 
+
+$$ \mathcal{L}(\theta, \phi, x) = - D_{KL}\left(q_\phi(z|x) || p_\theta(z) \right) + \mathbb{E}_{q_\phi(z|x)}[\log p_\theta(x|z)] $$
+
+![Forward propagation and Backward propagation](image-url)
+
+**Credit**: Aaron Courville, Deep Learning Summer School, 2015
+
+Vineeth N B (IIT-H) §10.3 VAEs 15 / 20
+```
+
+# DL4CV_Week10_Part03.pdf - Page 28
+
+
+
+```markdown
+# VAE: Summary
+
+## Traditional Autoencoders
+- Learned by reconstructing input
+- Used to learn features, initialize supervised models (not much anymore though)
+
+## Variational Autoencoders
+- Bayesian learning meets deep learning
+- Sample from model to generate images
+
+![Diagram Placeholder](image_url_placeholder)
+
+Vineeth N B (IIT-H) §10.3 VAEs 16 / 20
+```
+
+# DL4CV_Week10_Part03.pdf - Page 29
+
+:
+
+```markdown
+# VAE: What can they do?
+
+## MNIST:
+![MNIST](image-placeholders/01.png)
+
+## Frey Face dataset:
+![Frey Face dataset](image-placeholders/02.png)
+
+**Credit**: Aaron Courville, Deep Learning Summer School, 2015
+
+*Vineeth N B (IIIT-H)*
+
+## Slide Content:
+
+### VAE: What can they do?
+
+#### MNIST:
+- The image shows a grid of digits varying along two axes labeled `z1` and `z2`.
+- The `z1` axis ranges from approximately -2 to 2.
+- The `z2` axis similarly ranges from approximately -2 to 2.
+- Digits change smoothly across the grid, indicating that the VAE can generate similar but varied digits by manipulating these latent variables.
+
+#### Frey Face dataset:
+- Another grid image, this time showing face images varying along two axes labeled `Expression` and `Pose`.
+- The `Expression` axis ranges from 0 to 2.
+- The `Pose` axis also ranges from 0 to 2.
+- Faces change smoothly across the grid, indicating that the VAE can generate similar but varied face images by manipulating these latent variables.
+
+### Credit:
+Aaron Courville, Deep Learning Summer School, 2015
+
+*Vineeth N B (IIIT-H)*
+
+### Section Footer:
+
+![TEL Logo](image-placeholders/03.png)
+
+*Section 17 of 20*
+```
+
+This markdown output provides a detailed and accurate representation of the provided scientific slide, maintaining the formatting, and ensuring the scientific integrity of the content.
+
+# DL4CV_Week10_Part03.pdf - Page 30
+
+```markdown
+# Applications of VAEs
+
+- **Image and video generation**
+- **Superresolution**
+- **Forecasting from static images**
+- **Image inpainting**
+- **many more...**
+
+![ applications of VAEs images](image_url)
+
+*Credit: Dahl et al, Pixel Recursive Super Resolution, ICCV 2017*
+
+_Vineeth N B (IIIT-H)_
+
+![NPTEL logo](image_url)
+
+## 18 / 20
+
+---
+
+### Image and video generation
+- **Trajectories in Image**
+  ![Trajectories in Image](image_url)
+  ![Trajectories in Space-Time](image_url)
+
+### Superresolution
+- **8 × 8 input**
+- **128 × 128 samples**
+- **ground truth**
+
+![Superresolution images](image_url)
+```
+
+# DL4CV_Week10_Part03.pdf - Page 31
+
+:
+
+```markdown
+# A Few Variants and Extensions
+
+- **Semi-Supervised VAEs**
+  - Kingma et al, Semi-Supervised Learning with Deep Generative Models, NeurIPS 2014
+
+- **Conditional VAE**
+  - Sohn et al, Learning Structured Output Representation using Deep Conditional Generative Models, NeurIPS 2015
+
+- **Importance-Weighted VAE**
+  - Burda et al, Importance Weighted Autoencoders, ICLR 2016
+
+- **Denoising VAE**
+  - Jiwoong et al, Denoising Criterion for Variational Auto-encoding Framework, AAAI 2017
+
+- **Inverse Graphics Network**
+  - Kulkarni et al, Deep Convolutional Inverse Graphics Network, NeurIPS 2015
+
+- **Adversarial Autoencoders**
+  - Makhzani et al, Adversarial Autoencoders, ICLR 2016
+
+*Vineeth N B (IIIT-H) §10.3 VAEs*
+
+*19 / 20*
+```
+
+# DL4CV_Week10_Part03.pdf - Page 32
+
+```markdown
+# Homework
+
+## Readings
+
+- Carl Doersch, [Tutorial on Variational Autoencoder](https://arxiv.org/abs/1606.05909), *arXiv 2016*
+- VAE example in PyTorch
+- Kingma and Welling, [Auto-Encoding Variational Bayes](https://arxiv.org/abs/1312.6114), *ICLR 2014*
+
+## Question
+
+- Why does the encoder of a VAE map to a vector of means and a vector of standard deviations? Why does it not instead map to a vector of means and a covariance matrix?
+- What about the decoder? If we assume a Mean Squared Error for the reconstruction loss, what is the covariance of the \( p(x|z) \) Gaussian distribution?
+
+*Vineeth N B (IIIT-H)*
+
+*Section: 10.3 VAEs*
+
+*Date: 20 / 20*
+```
+

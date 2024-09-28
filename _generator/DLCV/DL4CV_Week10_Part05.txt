@@ -1,0 +1,10311 @@
+# DL4CV_Week10_Part05.pdf - Page 1
+
+```markdown
+# Deep Learning for Computer Vision
+
+# Beyond VAEs and GANs: Other Methods for Deep Generative Models
+
+**Vineeth N Balasubramanian**
+
+Department of Computer Science and Engineering
+Indian Institute of Technology, Hyderabad
+
+---
+
+**Vineeth N B (IIT-H)**
+
+## §10.5 Other Generative Methods
+
+1 / 24
+```
+
+# DL4CV_Week10_Part05.pdf - Page 2
+
+```markdown
+# Flow-based Models
+
+- Both GANs and VAEs do not explicitly learn probability density function of real data \( p(x) \)
+
+## GANs
+
+![GAN Diagram](image-url)
+
+- **Generator(G)** generates \( G(x) \)
+- **Discriminator(D)** determines if the output is **REAL** or **FAKE**
+- **No density Estimation**
+
+## VAEs
+
+![VAE Diagram](image-url)
+
+- **Encoder** maps \( x \) to \( z \)
+- **Decoder** maps \( z \) back to \( \hat{x} \)
+- **Approximate Density estimation by optimizing ELBO**
+
+---
+
+*Vineeth N B (IIT-H) §10.5 Other Generative Methods*
+
+---
+
+*Page 2 / 24*
+```
+
+# DL4CV_Week10_Part05.pdf - Page 3
+
+ the extracted content into a detailed markdown format.
+
+```markdown
+# Flow-based Models
+
+- Both GANs and VAEs do not explicitly learn probability density function of real data $p(x)$
+
+- $p(x)$ may be useful for downstream tasks like filling incomplete data, sampling data and also identifying bias in data distributions
+
+## GANs
+
+![GAN Diagram](image_url)
+
+- Generator(G)
+- Discriminator(D)
+- No density Estimation
+
+## VAEs
+
+![VAE Diagram](image_url)
+
+- Encoder
+- Decoder
+- Approximate Density estimation by optimizing ELBO
+
+_NPTEL_
+
+Vineeth N B (IIT-H)
+
+§10.5 Other Generative Methods
+
+2 / 24
+```
+
+Note: For OCR operations where images are not directly convertible, use `image_url` as a placeholder, and manually verify or replace it with correct URLs or image files later.
+
+# DL4CV_Week10_Part05.pdf - Page 4
+
+```markdown
+# Flow-based Models
+
+- **Both GANs and VAEs do not explicitly learn probability density function of real data \( p(x) \)**
+
+- \( p(x) \) may be useful for downstream tasks like filling incomplete data, sampling data and also identifying bias in data distributions
+
+- **Flow-based models explicitly learn \( p(x) \) by optimizing the log likelihood**
+
+  - **Normalizing flows**
+  - **Autoregressive flows**
+
+![GANS Workflow](image_url_for_GANS_workflow)
+
+- GANS
+  - Generator (G)
+  - Discriminator (D)
+  - **No density Estimation**
+
+![VAEs Workflow](image_url_for_VAEs_workflow)
+
+- VAEs
+  - Encoder
+  - Decoder
+  - **Appximate Density estimation by optimizing ELBO**
+
+_Vineeth N B (IIIT-H)_
+§10.5 Other Generative Methods
+```
+
+# DL4CV_Week10_Part05.pdf - Page 5
+
+```markdown
+# Recall: Generative Models – how to learn?
+
+**Aim:** To minimize some notion of distance between \( p_D(x) \) and \( p_M(x) \); how?
+
+- Given a dataset \( X = x_1, x_2, x_3, \ldots, x_N \) from an underlying distribution \( p_D(x) \)
+- Consider an approximating distribution \( p_M(x) \) coming from a family of distributions \( M \), i.e. we need to find the best distribution in \( M \), parametrized by \( \theta \), which minimizes distance between \( p_M \) and \( p_D \), i.e.:
+
+  \[
+  \theta^* = \arg \min_{\theta \in M} \text{dist}(p_{\theta}, p_D)
+  \]
+
+- If KL-divergence is the distance function, the above problem becomes one of maximum likelihood estimation!
+
+  \[
+  \theta^* = \arg \min_{\theta \in M} \mathbb{E}_{x \sim p_D} \left[ -\log p_{\theta}(x) \right]
+  \]
+
+_Vineeth N B (IIT-H) §10.5 Other Generative Methods 3 / 24_
+```
+
+# DL4CV_Week10_Part05.pdf - Page 6
+
+# Flow-based Models
+
+## GAN: minimax the classification error loss
+
+```markdown
+- **Discriminator**: D(x)
+- **Generator**: G(z)
+- **Symbol**: 0/1
+
+- Input: x
+- Output: x'
+```
+
+## VAE: maximize ELBO
+
+```markdown
+- **Encoder**: q_φ(z|x)
+- **Decoder**: p_θ(x|z)
+- Input: x
+- Output: x'
+```
+
+## Flow-based generative models: minimize the negative log-likelihood
+
+```markdown
+- **Flow**: f(x)
+- **Inverse**: f^{-1}(z)
+- Input: x
+- Output: x'
+```
+
+**Credit**: Lilian Weng
+
+**Vineeth N B** (IIT-H)
+
+§10.5 Other Generative Methods
+
+4 / 24
+
+![Diagram Placeholder](image-url)
+
+```markdown
+- **Diagram**: Visual representation of flow-based models, GAN, and VAE.
+```
+
+# DL4CV_Week10_Part05.pdf - Page 7
+
+Output:
+
+# Normalizing Flows
+
+- Identifies a transformation \( f : Z \rightarrow X \) where \( f \) is a series of **differentiable bijective functions** \( (f_1, f_2, ..., f_K) \).
+
+  \[
+  x = f(z) = f_K \circ f_{K-1} \circ ... \circ f_2 \circ f_1(z) \text{ and}
+  \]
+
+  \[
+  z = f^{-1}(x) = f_1^{-1} \circ ... \circ f_{K-1}^{-1} (x)
+  \]
+
+## Normalizing flow Transformation \( f \)
+
+### Latent Variable (Usually Gaussian) \( Z \)
+
+```markdown
+z →
+  | f_1 | → z_1 →
+  | f_2 | → z_2 →
+  ... →
+  | f_{K-1} | → z_{K-1} →
+  | f_K | → x
+```
+
+### True data distribution \( p(x) \)
+```
+
+This markdown content should accurately represent the scientific text or slides provided, while maintaining the structure and readability of the original content.
+
+# DL4CV_Week10_Part05.pdf - Page 8
+
+```markdown
+# Normalizing Flows
+
+- For any invertible function \( f : Z \rightarrow X \), using **change of variables** for probability density functions:
+
+  \[
+  p_X(x) = p_Z(z) \left| \det \left( \frac{\partial f^{-1}(x)}{\partial x} \right) \right| \quad \text{Why?}
+  \]
+
+![NPTEl](https://example.com/nptel_logo.png)
+
+*Vineeth N B (IIT-H) §10.5 Other Generative Methods*
+
+*Page 6 / 24*
+```
+
+# DL4CV_Week10_Part05.pdf - Page 9
+
+```markdown
+# Normalizing Flows
+
+- For any invertible function \( f : Z \rightarrow X \), using **change of variables** for probability density functions:
+  \[
+  p_X(x) = p_Z(z) \left| \det \left( \frac{\partial f^{-1}(x)}{\partial x} \right) \right|
+  \]
+  **Why?**
+
+- If \( z \sim \pi(z) \) is a random variable and \( x = f(z) \) such that \( f \) is invertible (i.e. \( z = f^{-1}(x) \));
+  then:
+  \[
+  \int p(x) dx = \int \pi(z) dz = 1 ; \text{ Definition of probability distribution}
+  \]
+  \[
+  p(x) = \pi(z) \left| \frac{dz}{dx} \right| = \pi(f^{-1}(x)) \left| \frac{df^{-1}}{dx} \right| = \pi(f^{-1}(x)) |(f^{-1})'(x)|
+  \]
+
+---
+
+Vineeth N B. (IIT-H) §10.5 Other Generative Methods
+
+6 / 24
+```
+
+This markdown format preserves the structure, mathematical notation, and scientific terminology accurately from the provided text or slides.
+
+# DL4CV_Week10_Part05.pdf - Page 10
+
+```markdown
+# Normalizing Flows
+
+- For any invertible function \( f : Z \rightarrow X \), using **change of variables** for probability density functions:
+
+  \[
+  p_X(x) = p_Z(z) \left| \det \left( \frac{\partial f^{-1}(x)}{\partial x} \right) \right|
+  \]
+
+  **Why?**
+
+- If \( z \sim \pi(z) \) is a random variable and \( x = f(z) \) such that \( f \) is invertible (i.e. \( z = f^{-1}(x) \)); then:
+
+  \[
+  \int p(x) dx = \int \pi(z) dz = 1 \quad \text{; Definition of probability distribution}
+  \]
+
+  \[
+  p(x) = \pi(z) \left| \frac{dz}{dx} \right| = \pi(f^{-1}(x)) \left| \frac{df^{-1}}{dx} \right| = \pi(f^{-1}(x)) |(f^{-1})'(x)|
+  \]
+
+- In multiple variables: \( z \sim \pi(z) \), \( x = f(z) \), \( z = f^{-1}(x) \)
+
+  \[
+  p(x) = \pi(z) \left| \det \frac{dz}{dx} \right| = \pi(f^{-1}(x)) \left| \det \frac{df^{-1}}{dx} \right|
+  \]
+
+  *Credit: Lilian Weng*
+
+  *Vineeth N B (IIT-H) §10.5 Other Generative Methods 6 / 24*
+```
+
+In this markdown format:
+- Section titles and headings are denoted using `#`.
+- Bullet points (`-`) are used for listing items.
+- Formulas and equations are enclosed in `$$` for inline equations and `math` for block equations.
+- Special formatting for bold and italic text is preserved.
+- The image or placeholder for the image is noted, but not included in the OCR text.
+- The credit and slide information is included at the bottom.
+
+# DL4CV_Week10_Part05.pdf - Page 11
+
+```markdown
+# Normalizing Flows
+
+- For any invertible function \( f : Z \rightarrow X \), using **change of variables** for probability density functions:
+
+  \[
+  p_X(x) = p_Z(z) \left| \det \left( \frac{\partial f^{-1}(x)}{\partial x} \right) \right|
+  \]
+
+- Expanding this to a composite function and applying \(\log\) on both sides, we get the likelihood objective:
+
+  \[
+  \log p_X(x) = \log p_Z(z) + \sum_{i=1}^{K} \log \left| \det \left( \frac{\partial f_i^{-1}}{\partial z_i} \right) \right|
+  \]
+
+![Vineeth N B (IIT-H)](https://example.com/logo.png) §10.5 Other Generative Methods
+
+Vineeth N B (IIT-H) §10.5 Other Generative Methods
+
+7 / 24
+```
+
+# DL4CV_Week10_Part05.pdf - Page 12
+
+```markdown
+# Normalizing Flows
+
+- For any invertible function \( f : Z \rightarrow X \), using **change of variables** for probability density functions:
+
+  \[
+  p_X(x) = p_Z(z) \left| \det \left( \frac{\partial f^{-1}(x)}{\partial x} \right) \right|
+  \]
+
+- Expanding this to a composite function and applying \(\log\) on both sides, we get the likelihood objective:
+
+  \[
+  \log p_X(x) = \log p_Z(z) + \sum_{i=1}^{K} \log \left| \det \left( \frac{\partial f^{-1}_i}{\partial z_i} \right) \right|
+  \]
+
+## Intuition:
+
+- Transformation \( f \) moulds the density \( p_Z(z) \) into \( p_X(x) \)
+- \(\left| \det \left( \frac{\partial f^{-1}_i}{\partial z_i} \right) \right|\) quantifies the relative change of volume of a small neighborhood \( dz \) around \( z \)
+
+*Vineeth N B (IIT-H) §10.5 Other Generative Methods 7 / 24*
+```
+
+# DL4CV_Week10_Part05.pdf - Page 13
+
+```markdown
+# Normalizing Flows: Illustration
+
+![Normalizing Flows Illustration](image_url)
+
+**Credit:** Lilian Weng
+
+---
+
+**Section: Vineeth N B (IIT-H)**
+
+**Subsection: §10.5 Other Generative Methods**
+
+- **Visual Representation**:
+  - **Initial step**:
+    - \( z_0 \sim p_0(z_0) \)
+    - Graphically represented by a single peak on the x-axis.
+
+  - **Intermediate steps**:
+    - \( z_{i-1} \sim p_{i-1}(z_{i-1}) \)
+    - \( z_i \sim p_i(z_i) \)
+    - Each step shows a gradual transformation of the distribution from a single peak to multiple peaks.
+
+  - **Final step**:
+    - \( z_K \sim p_K(z_K) \)
+    - Ends with the target distribution \( x \) represented by multiple peaks.
+
+**Formula Representation**:
+1. **z0**:
+    ```math
+    z_0 \sim p_0(z_0)
+    ```
+
+2. **zi**:
+    ```math
+    z_i \sim p_i(z_i) \quad \text{for intermediate steps}
+    ```
+
+3. **zK**:
+    ```math
+    z_K \sim p_K(z_K)
+    ```
+
+---
+
+*Graphical elements*:
+- The flow is illustrated with arrows showing the transformation from one distribution to another.
+- Each step involves a function:
+  - \( f_1(z_0) \)
+  - \( f_i(z_{i-1}) \)
+  - \( f_{i+1}(z_i) \)
+
+---
+
+**Page Information**: 8 / 24
+```
+
+# DL4CV_Week10_Part05.pdf - Page 14
+
+```markdown
+# Normalizing Flows
+
+## Why bijective function?
+
+- **Such a bijective function is called a diffeomorphism**
+- **Differomorphic functions are composable**: given two such transformations \( f_1 \) and \( f_2 \), their composition is also invertible and differentiable
+- **Complex transformations can be modeled by composing multiple instances of simpler transformations**
+
+![NPTEL](https://via.placeholder.com/150)
+
+*Vineeth N B (IIT-H) §10.5 Other Generative Methods*
+
+*Page 9 / 24*
+```
+
+# DL4CV_Week10_Part05.pdf - Page 15
+
+```markdown
+# Normalizing Flows
+
+## Why bijective function?
+
+- Such a bijective function is called a **diffeomorphism**
+- Differomorphic functions are **composable**: given two such transformations \(f_1\) and \(f_2\), their composition is also invertible and differentiable
+- Complex transformations can be modeled by composing multiple instances of simpler transformations
+
+## Prerequisites for normalizing flows
+
+- Transformation function \(f\) should be differentiable (neural networks are)
+- Function should be easily invertible
+- Determinant of Jacobian should be easy to compute
+
+*Vineeth N B (IITH) §10.5 Other Generative Methods 9 / 24*
+```
+
+# DL4CV_Week10_Part05.pdf - Page 16
+
+```markdown
+# NICE (Non-linear Independent Components Estimation)[^1]
+
+## What transformation to use?
+
+![Transformation Diagram](image_url)
+
+```markdown
+- **x1 (x1:d)**
+- **x2 (x2+d:d)**
+
+```
+ 
+ 
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+[^1 
+^Dinh et al., NICE: Non-linear Independent Components Estimation, ICLRW 2015
+^Vineeth N B (IIT-H)
+^10.5 Other Generative Methods
+```
+
+# DL4CV_Week10_Part05.pdf - Page 17
+
+```markdown
+# NICE (Non-linear Independent Components Estimation)[^1]
+
+## What transformation to use?
+
+- **Coupling layer operation**:
+  - Reversible coupling layers:
+    ```markdown
+    x_1 (x_1: d)
+    x_2 (x_d+1: d)
+    ```
+
+    ![Coupling Layer Diagram](image-url)
+
+    ```math
+    y_1 = x_1
+    y_2 = g(x_2; m(x_1))
+    ```
+
+[^1]: Dinh et al., NICE: Non-linear Independent Components Estimation, ICLRW 2015
+
+Vineeth N B (IIIT-H)
+
+§10.5 Other Generative Methods
+
+10 / 24
+```
+
+# DL4CV_Week10_Part05.pdf - Page 18
+
+```markdown
+# NICE (Non-linear Independent Components Estimation)¹
+
+## What transformation to use?
+
+- **Coupling layer operation**:
+  - \( y_1 = x_1 \)
+  - \( y_2 = g(x_2; m(x_1)) \)
+
+![NPTEL Logo](image_url_placeholder)
+
+- Jacobian is a lower-triangular matrix (why?); Determinant is product of diagonal elements
+
+  \[
+  \frac{\partial y}{\partial x} = \begin{bmatrix}
+  I_d & 0 \\
+  \frac{\partial y_2}{\partial x_1} & \frac{\partial y_2}{\partial x_2}
+  \end{bmatrix}
+  \]
+
+### Diagram
+```
+x_1 (x_1:d)   x_2 (x_d+1:d)
+   |            |
+   | m          |
+   v            v
+y_1 =            y_2
+```
+
+---
+
+¹ Dinh et al., NICE: Non-linear Independent Components Estimation, ICLRW 2015
+
+Vineeth N B (IIT-H)
+
+§10.5 Other Generative Methods
+
+---
+
+10 / 24
+```
+
+# DL4CV_Week10_Part05.pdf - Page 19
+
+```markdown
+# NICE (Non-linear Independent Components Estimation)
+
+## What transformation to use?
+
+- **Coupling layer operation:**
+  - \( y_1 = x_1 \)
+  - \( y_2 = g(x_2; m(x_1)) \)
+
+- **Jacobian is a lower-triangular matrix (why?); Determinant is product of diagonal elements**
+  \[
+  \frac{\partial y}{\partial x} = \begin{bmatrix}
+  I_d & 0 \\
+  \frac{\partial y_2}{\partial x_1} & \frac{\partial y_2}{\partial x_2}
+  \end{bmatrix}
+  \]
+
+- **Inverse mappings are:**
+  - \( x_1 = y_1 \)
+  - \( x_2 = g^{-1}(y_2; m(y_1)) \)
+
+\*[Dinh et al., NICE: Non-linear Independent Components Estimation, ICLRW 2015](#)*
+
+Vineeth N B (IIT-H)
+
+\*10.5 Other Generative Methods\*
+
+10 / 24
+```
+
+# DL4CV_Week10_Part05.pdf - Page 20
+
+```markdown
+# NICE (Non-linear Independent Components Estimation)
+
+## REVERSIBLE COUPLING LAYERS
+
+![Reversible Coupling Layers Diagram](image_url)
+
+```markdown
+- **x1**: (x1:d)
+- **x2**: (x_d+1:D)
+
+If all data is to be incorporated, flip inputs after each layer
+
+### Elements
+- **m**: (Transformation matrix)
+- **g**: (Non-linear function)
+- **=**: (Equality constraint)
+- **y1**: Output 1
+- **y2**: Output 2
+```
+
+### References
+- Vineeth N B (IIT-H)
+- §10.5 Other Generative Methods
+
+---
+
+NPTEL
+```
+
+# DL4CV_Week10_Part05.pdf - Page 21
+
+```markdown
+# NICE: Additive Coupling Layer
+
+- **Additive coupling layer operations**:
+
+    \[ y_1 = x_1 \]
+    \[ y_2 = x_2 + m(x_1) \]
+
+- **Inverse operation is**:
+
+    \[ x_1 = y_1 \]
+    \[ x_2 = y_2 - m(y_1) \]
+
+- **Jacobian determinant is always 1, hence, volume-preserving (Why?)** 
+
+![Diagram](image_url)
+
+**Vineeth N B (IIIT-H)**
+
+**§10.5 Other Generative Methods**
+
+12 / 24
+```
+
+# DL4CV_Week10_Part05.pdf - Page 22
+
+```markdown
+# NICE: Additive Coupling Layer
+
+## Additive Coupling Layers
+
+![Additive Coupling Layers Diagram](image-url)
+
+- **Additive coupling layer operations:**
+  - \( y_1 = x_1 \)
+  - \( y_2 = x_2 + m(x_1) \)
+
+- **Inverse operation is:**
+  - \( x_1 = y_1 \)
+  - \( x_2 = y_2 - m(y_1) \)
+
+- **Jacobian determinant is always 1, hence, volume-preserving**
+  - **(Why?) Transformed distribution \( p_X \) will have same “volume” compared to original one \( p_Z \)**
+
+- **Log-likelihood now translates to:**
+  \[
+  \log p_X(x) = \log p_Y(y)
+  \]
+
+_Vineeth N B. (IIT-H) §10.5 Other Generative Methods 12 / 24_
+```
+
+# DL4CV_Week10_Part05.pdf - Page 23
+
+```markdown
+# Real NVP (Real-valued Non Volume Preserving)<sup>2</sup>
+
+- **Affine Coupling operations:**
+
+  \[
+  y_1 = x_1
+  \]
+
+  \[
+  y_2 = x_2 \odot \exp(s(x_1)) + t(x_1)
+  \]
+
+- **Jacobian of the transformation is:**
+
+  \[
+  \frac{\partial y}{\partial x} = \begin{bmatrix}
+  I_d & 0 \\
+  \frac{\partial y_2}{\partial x_1} & \text{diag}(\exp(s(x_1)))
+  \end{bmatrix}
+  \]
+
+  Since Jacobian not always 1, affine coupling is not volume preserving which is the case for real-time data.
+
+- **Inverse operation:**
+
+  \[
+  x_1 = y_1
+  \]
+
+  \[
+  x_2 = (y_2 - t(y_1)) \odot \exp(-s(y_1))
+  \]
+
+<sup>2</sup>Dinh et al., Density estimation using Real NVP, ICLR 2017
+
+Vineeth N B (IIT-H)
+
+§10.5 Other Generative Methods
+
+13 / 24
+```
+
+# DL4CV_Week10_Part05.pdf - Page 24
+
+:
+
+```markdown
+# Real NVP: Affine Coupling
+
+## (a) Forward propagation
+
+### Diagram
+
+```markdown
+x1
+└──┐
+   └── s
+       └── x
+           └── x2
+           └── +
+                └── y2
+
+y1
+└── t
+   └── =
+```
+
+## (b) Inverse propagation
+
+### Diagram
+
+```markdown
+x1
+└── s
+   └── t
+       └── =
+            └── x
+                └── -
+                     └── y2
+                     └── +
+                          └── x2
+
+y1
+```
+
+*Vineeth N B (IITH) §10.5 Other Generative Methods 14 / 24*
+```
+
+# DL4CV_Week10_Part05.pdf - Page 25
+
+
+
+```markdown
+# Autoregressive Flows
+
+- Decompose the task of learning the joint distribution into learning a series of conditional probabilities
+
+  \[
+  p_X(\boldsymbol{x}) = p(x_1, x_2, \ldots, x_n) = p(x_1) \cdot p(x_2 \mid x_1) \cdot p(x_3 \mid x_2, x_1) \cdot \ldots \cdot p(x_n \mid x_1, x_2, \ldots, x_{n-1})
+  \]
+
+- While calculating a conditional probability (at level \(i\)), model can only see inputs occurring prior to it \((1, 2, \ldots, i-1)\)
+
+  ![Autoregressive Flow Diagram](image-placeholder.png)
+
+  ```
+  x_1 \quad x_2 \quad x_3 \quad \ldots \quad x_i \quad \ldots \quad x_n
+  ```
+
+  ```
+  Network_1 \quad p(x_1)
+  Network_2 \quad p(x_2 \mid x_1)
+  Network_3 \quad p(x_3 \mid x_1, x_2)
+  \ldots
+  Network_i \quad p(x_i \mid x_1, x_2, \ldots, x_{i-1})
+  \ldots
+  Network_n \quad p(x_n \mid x_1, x_2, \ldots, x_{n-1})
+  ```
+
+*Vineeth N B (IIIT-H) §10.5 Other Generative Methods 15 / 24*
+```
+
+# DL4CV_Week10_Part05.pdf - Page 26
+
+# Autoregressive Flows
+
+- Decompose the task of learning the joint distribution into learning a series of conditional probabilities
+
+\[ p_X(x) = p(x_1, x_2, ..., x_n) = p(x_1) \cdot p(x_2 | x_1) \cdot p(x_3 | x_2, x_1) \cdot ... \cdot p(x_n | x_1, x_2, ..., x_{n-1}) \]
+
+- While calculating a conditional probability (at level \(i\)), model can only see inputs occurring prior to it (\(1, 2, ..., i - 1\))
+
+![Diagram](https://via.placeholder.com/800x400)
+
+- Network_1
+  - Inputs: \(x_1\)
+  - Outputs: \(p(x_1)\)
+
+- Network_2
+  - Inputs: \(x_1, x_2\)
+  - Outputs: \(p(x_2 | x_1)\)
+
+- Network_3
+  - Inputs: \(x_1, x_2, x_3\)
+  - Outputs: \(p(x_3 | x_1, x_2)\)
+
+- ...
+  - Inputs: \(x_1, x_2, ..., x_i\)
+  - Outputs: \(p(x_i | x_1, x_2, ..., x_{i-1})\)
+
+- Network_i
+  - Inputs: \(x_1, x_2, ..., x_i\)
+  - Outputs: \(p(x_i | x_1, x_2, ..., x_{i-1})\)
+
+- ...
+  - Inputs: \(x_1, x_2, ..., x_n\)
+  - Outputs: \(p(x_n | x_1, x_2, ..., x_{n-1})\)
+
+*Vineeth N B (IIIT-H) §10.5 Other Generative Methods 15 / 24*
+
+# DL4CV_Week10_Part05.pdf - Page 27
+
+ the extracted content into a detailed markdown format.
+
+```markdown
+# Autoregressive Flows
+
+- Decompose the task of learning the joint distribution into learning a series of conditional probabilities
+
+  \[
+  p_X(\mathbf{x}) = p(x_1, x_2, \ldots, x_n) = p(x_1) \cdot p(x_2 | x_1) \cdot p(x_3 | x_2, x_1) \cdots p(x_n | x_1, x_2, \ldots, x_{n-1})
+  \]
+
+- While calculating a conditional probability (at level \(i\)), model can only see inputs occurring prior to it (\(1, 2, \ldots, i - 1\))
+
+  ![Diagram of Autoregressive Flow](image-url)
+
+  ```
+  | Network     | p(x)         | p(x2|x1)     | p(x3|x1,x2)    | p(xi|x1,x2,...,xi-1) | p(xn|x1,x2,...,xn-1) |
+  |-------------|--------------|-------------|---------------|----------------------|----------------------|
+  | Network_1   | p(x_1)       |             |               |                      |                      |
+  | Network_2   |              | p(x_2|x_1)   |               |                      |                      |
+  | Network_3   |              |             | p(x_3|x_1,x_2)  |                     |                      |
+  | ...         |              |             |               | ...                  |                      |
+  | Network_i   |              |             |               | p(x_i|x_1,x_2,...,x_i-1) |                     |
+  | ...         |              |             |               |                      |                      |
+  | Network_n   |              |             |               |                      | p(x_n|x_1,x_2,...,x_n-1) |
+
+  ```
+  ```
+  x_1   x_2   x_3   ...   xi   ...   xn
+  ```
+
+*Vineeth N B (IIT-H) §10.5 Other Generative Methods*
+
+*Page 15 / 24*
+```
+
+# DL4CV_Week10_Part05.pdf - Page 28
+
+```markdown
+# Autoregressive Flows
+
+- Decompose the task of learning the joint distribution into learning a series of conditional probabilities
+
+\[ p_X(x) = p(x_1, x_2, \ldots, x_n) = p(x_1) \cdot p(x_2 | x_1) \cdot p(x_3 | x_2, x_1) \cdots p(x_n | x_1, x_2, \ldots, x_{n-1}) \]
+
+- While calculating a conditional probability (at level \(i\)), model can only see inputs occurring prior to it \((1, 2, \ldots, i-1)\)
+
+![Diagram of Autoregressive Flows](image-url)
+
+```math
+\begin{aligned}
+    &\text{Network}_1 \rightarrow p(x_1) \\
+    &\text{Network}_2 \rightarrow p(x_2 | x_1) \\
+    &\text{Network}_3 \rightarrow p(x_3 | x_1, x_2) \\
+    &\cdots \\
+    &\text{Network}_i \rightarrow p(x_i | x_1, x_2, \ldots, x_{i-1}) \\
+    &\cdots \\
+    &\text{Network}_n \rightarrow p(x_n | x_1, x_2, \ldots, x_{n-1})
+\end{aligned}
+```
+
+*Vineeth N B (IIT-H) §10.5 Other Generative Methods 15 / 24*
+```
+
+# DL4CV_Week10_Part05.pdf - Page 29
+
+```markdown
+# Autoregressive Flows
+
+- Decompose the task of learning the joint distribution into learning a series of conditional probabilities
+
+  \[
+  p_X(\boldsymbol{x}) = p(x_1, x_2, \ldots, x_n) = p(x_1) \cdot p(x_2 | x_1) \cdot p(x_3 | x_2, x_1) \cdots p(x_n | x_1, x_2, \ldots, x_{n-1})
+  \]
+
+- While calculating a conditional probability (at level \(i\)), model can only see inputs occurring prior to it \((1, 2, \ldots, i-1)\)
+
+![Autoregressive Flow Diagram](https://via.placeholder.com/800x400?text=Autoregressive+Flow+Diagram)
+
+_Image Source: Vineeth N B (IIIT-H)_
+
+## Section 10.5 Other Generative Methods
+
+Page: 15 / 24
+```
+
+This markdown format ensures that the content is organized with proper headings, lists, and equations formatted for readability and scientific accuracy. Replace the placeholder for the diagram with the actual image if available.
+
+# DL4CV_Week10_Part05.pdf - Page 30
+
+: 
+
+```markdown
+# Autoregressive Flows
+
+- Decompose the task of learning the joint distribution into learning a series of conditional probabilities
+
+  \[
+  p_X(x) = p(x_1, x_2, \ldots, x_n) = p(x_1) \cdot p(x_2 | x_1) \cdot p(x_3 | x_2, x_1) \cdots p(x_n | x_1, x_2, \ldots, x_{n-1})
+  \]
+
+- While calculating a conditional probability (at level \(i\)), model can only see inputs occurring prior to it (\(1, 2, \ldots, i - 1\))
+
+  ![Diagram of Autoregressive Flows](image_url)
+
+- Can be considered as a special case of Normalizing Flows where each intermediate transformation masks relevant inputs
+
+_Vineeth N B (IIIT-H)_
+
+§10.5 Other Generative Methods
+
+15 / 24
+```
+
+_Note: Adjust `image_url` to the actual URL or path to the image if available._
+
+# DL4CV_Week10_Part05.pdf - Page 31
+
+```markdown
+# Autoregressive Models: NADE (Neural Autoregressive Distribution Estimation)<sup>3</sup>
+
+![NADE Diagram](https://via.placeholder.com/150)
+
+\[
+\begin{aligned}
+    &p(x_1) &p(x_2 | x_1) &p(x_3 | x_1, x_2) &... &p(x_n | x_1, x_2, ..., x_{n-1})
+\end{aligned}
+\]
+
+\[
+\begin{aligned}
+    &x_1 &x_2 &x_3 &... &x_n
+\end{aligned}
+\]
+
+<sup>3</sup> Larochelle and Murray, *The Neural Autoregressive Distribution Estimator*, ICML 2011; Uria et al., *Neural Autoregressive Distribution Estimation*, JMLR 2016
+
+Vineeth N B (IIT-H) §10.5 Other Generative Methods
+
+---
+
+16 / 24
+```
+
+# DL4CV_Week10_Part05.pdf - Page 32
+
+```markdown
+# Autoregressive Models: NADE (Neural Autoregressive Distribution Estimation)[^3]
+
+![NADE Diagram](image_url)
+
+- **Hidden representations over masked inputs (h<sub>n</sub>) depend on x<sub>n</sub>**
+  - Shared Network
+    - Inputs: x<sub>1</sub>, x<sub>2</sub>, x<sub>3</sub>, ..., x<sub>n</sub>
+  - Outputs: p(x<sub>1</sub>), p(x<sub>2</sub> | x<sub>1</sub>), p(x<sub>3</sub> | x<sub>1</sub>, x<sub>2</sub>), ..., p(x<sub>n</sub> | x<sub>1</sub>, ..., x<sub>n-1</sub>)
+
+[^3]: Larochelle and Murray, *The Neural Autoregressive Distribution Estimator*, ICML 2011; Uria et al. *Neural Autoregressive Distribution Estimation*, JMLR 2016
+
+*Vineeth N B (IIT-H) §10.5 Other Generative Methods*
+
+---
+
+**Note:**
+- Replace `image_url` with the URL or path to the actual image of the NADE diagram if available.
+```
+
+This markdown format ensures the proper representation of the scientific content, maintaining accuracy and appropriate formatting for readability.
+
+# DL4CV_Week10_Part05.pdf - Page 33
+
+```markdown
+# Autoregressive Models: NADE (Neural Autoregressive Distribution Estimation)
+
+![NADE Diagram](image_url)
+
+**p(x₁)**
+**p(x₂ | x₁)**
+**p(x₃ | x₂)**
+...
+**p(xᵢ | xᵢ₋₁)**
+...
+**p(xₙ | x₌₋₁)**
+
+**h₁**
+**h₂**
+**h₃**
+...
+**hₙ**
+*Hidden representations over masked inputs (hₙ depends on x₌₋₁)*
+
+**Shared Network**
+
+**x₁**
+**x₂**
+**x₃**
+...
+**xₙ**
+
+*Larochelle and Murray, The Neural Autoregressive Distribution Estimator, ICML 2011; Uria et al, Neural Autoregressive Distribution Estimation, JMLR 2016*
+
+Vineeth N B (IIT-H) §10.5 Other Generative Methods
+
+---
+
+Note: Replace `image_url` with the actual URL or file path of the image if available.
+```
+
+# DL4CV_Week10_Part05.pdf - Page 34
+
+ is a placeholder for image if it can't be captured.
+
+```
+# Autoregressive Models: NADE (Neural Autoregressive Distribution Estimation)
+
+![NADE Diagram](image-placeholder.png)
+
+## Diagram Explanation
+- **p(x1), p(x2|x1), p(x3|x2), ..., p(xn|xn-1)**: Represent the probability distribution of each variable in the sequence.
+- **h1, h2, h3, ..., hn**: Hidden representations derived from the shared network.
+- **Shared Network**: Processes the input variables to generate hidden representations.
+- **x1, x2, x3, ..., xn**: Input variables fed into the shared network.
+
+Note: Hidden representations over masked inputs (hn) depend on x<sub>en</sub>.
+
+## References
+- Larochelle and Murray, The Neural Autoregressive Distribution Estimator, ICML 2011;
+- Uria et al., Neural Autoregressive Distribution Estimation, JMLR 2016
+
+**Vineeth N B (IIT-H)**
+
+**§10.5 Other Generative Methods**
+
+**16 / 24**
+```
+
+# DL4CV_Week10_Part05.pdf - Page 35
+
+ accurately, especially for complex scientific terms or equations.
+
+```markdown
+# Autoregressive Models: NADE (Neural Autoregressive Distribution Estimation)
+
+![NADE Diagram](image_url)
+
+## Hidden representations over masked inputs(h_n depends on x_en)
+
+### Larochelle and Murray, The Neural Autoregressive Distribution Estimator, ICML 2011; Uria et al, Neural Autoregressive Distribution Estimation, JMLR 2016
+
+**Vineeth N B (IIT-H)**
+
+**§10.5 Other Generative Methods**
+
+16 / 24
+```
+
+# DL4CV_Week10_Part05.pdf - Page 36
+
+```markdown
+# Autoregressive Models: NADE (Neural Autoregressive Distribution Estimation)³
+
+![Diagram of NADE](image-url)
+
+## Diagram Overview
+
+- **Input Data**: \( x_1, x_2, x_3, \ldots, x_n \)
+- **Shared Network**: Processes the input data to generate intermediate hidden states \( h_1, h_2, h_3, \ldots, h_n \).
+- **Output Specific Networks**: Each network \( Network_1, Network_2, \ldots, Network_n \) uses the corresponding hidden state \( h_i \) to estimate the conditional probability \( p(x_i | x_{i-1}) \).
+
+## References
+
+³ Larochelle and Murray, *The Neural Autoregressive Distribution Estimator*, ICML 2011; Uria et al., *Neural Autoregressive Distribution Estimation*, JMLR 2016
+
+*Vineeth N B (IIT-H) §10.5 Other Generative Methods*
+
+---
+
+### Sections and Content
+
+- The **Shared Network** is responsible for creating a hidden state for each input variable, which is then used by the output specific networks.
+- Each **Output Specific Network** takes the hidden state \( h_i \) and computes the conditional probability distribution \( p(x_i | x_{i-1}) \).
+- This structure allows NADE to model the joint probability distribution \( p(x_1, x_2, \ldots, x_n) \) as a product of conditional probabilities.
+
+### Mathematical Formulation
+
+The overall joint probability distribution can be expressed as:
+
+\[ p(x_1, x_2, \ldots, x_n) = \prod_{i=1}^{n} p(x_i | x_{i-1}) \]
+
+Each conditional probability \( p(x_i | x_{i-1}) \) is estimated using a neural network that takes the hidden state \( h_i \) as input.
+
+### Applications
+
+- NADE has applications in various domains such as modeling sequences, time-series data, and other structured data.
+- The flexibility and efficiency of NADE make it a powerful tool for generative modeling.
+
+### References
+
+- Larochelle, H., & Murray, I. (2011). The Neural Autoregressive Distribution Estimator. In *International Conference on Machine Learning (ICML)*.
+- Uria, A.,aine, T., Mnih, V., & Graves, A. (2016). Neural Autoregressive Distribution Estimation. In *Journal of Machine Learning Research (JMLR)*.
+
+---
+
+This markdown format ensures that all relevant scientific content and formatting are preserved and accurately represented.
+```
+
+# DL4CV_Week10_Part05.pdf - Page 37
+
+```markdown
+# NADE: Sample Generation
+
+![NADE Diagram](image-url)
+
+**Vineeth N B (IIIT-H)**
+
+## §10.5 Other Generative Methods
+
+### NADE: Sample Generation
+
+This section discusses the NADE (Neural Autoregressive Distribution Estimator) model for sample generation.
+
+- **Network Structure**: The NADE model uses a series of networks (`Network_1`, `Network_2`, `Network_3`, ..., `Network_n`) to predict the distribution `p(x_i)` for each variable `x_i`.
+
+- **Shared Network**: There is a shared network at the base that generates intermediate representations `h_1`, `h_2`, `h_3`, ..., `h_n`.
+
+- **Sequential Prediction**: Each network takes the intermediate representation and the previous predictions to estimate the distribution for the next variable.
+
+### Diagram Explanation
+
+- **Networks**: 
+  - `Network_1` generates `p(x_1)`.
+  - `Network_2` generates `p(x_2 | x_1)`.
+  - `Network_3` generates `p(x_3 | x_1, x_2)`, and so on.
+  - `Network_n` generates `p(x_n | x_1, x_2, ..., x_{n-1})`.
+
+- **Intermediate Representations**: 
+  - The shared network generates hidden representations `h_1`, `h_2`, `h_3`, ..., `h_n`.
+  - Each hidden representation is used by subsequent networks to refine the prediction.
+
+### Detailed Workflow
+
+1. **Initialization**:
+   - Start with a shared network that processes the input and generates the first hidden representation `h_1`.
+
+2. **Sequential Generation**:
+   - Each network uses the hidden representation from the shared network and the previous predictions to compute the distribution for the next variable.
+   - This process continues until all variables are generated.
+
+3. **Final Output**:
+   - The final output is a sequence of variables `x_1`, `x_2`, `x_3`, ..., `x_n` generated using the NADE model.
+
+### Mathematical Background
+
+The NADE model leverages the chain rule of probability to decompose the joint distribution into a product of conditional probabilities:
+
+\[ p(x_1, x_2, ..., x_n) = p(x_1) \prod_{i=2}^{n} p(x_i | x_1, x_2, ..., x_{i-1}) \]
+
+where each conditional probability \( p(x_i | x_1, x_2, ..., x_{i-1}) \) is estimated by the respective network.
+
+### Conclusion
+
+The NADE model provides a flexible framework for generating samples from complex distributions by sequentially refining predictions using shared network representations and conditional probabilities.
+```
+
+# DL4CV_Week10_Part05.pdf - Page 38
+
+```markdown
+# NADE: Sample Generation
+
+## Vineeth N B (IIT-H) §10.5 Other Generative Methods 17 / 24
+
+![NADE: Sample Generation](image.jpg)
+
+- **Network1**
+  - **Input**: \( h_1 \)
+  - **Output**: \( P(x_1) \)
+
+- **Network2**
+  - **Input**: \( h_2 \) (derived from the shared network)
+  - **Output**: \( P(x_2 | x_1) \)
+
+- **Network3**
+  - **Input**: \( h_3 \) (also derived from the shared network)
+  - **Output**: \( P(x_3 | x_1, x_2) \)
+
+- **...**
+  - **Continuation of network sequence**
+  
+- **Networkn**
+  - **Input**: \( h_n \) (last from the shared network)
+  - **Output**: \( P(x_n | x_1, x_2, ..., x_{n-1}) \)
+
+**Shared Network**:
+- **Input**: Equivalent to \( z \) in Sample Generation
+- **Output**: Intermediate representations \( h_1, h_2, h_3, ..., h_n \)
+
+**Note**:
+- \( h_1 \) is equivalent to \( z \) in Sample Generation.
+```
+
+# DL4CV_Week10_Part05.pdf - Page 39
+
+```markdown
+# NADE: Sample Generation
+
+![NADE Diagram](image-url)
+
+**Sample \(x_1\) from \(p(x_1)\)**
+
+- **Network\(_1\)**:
+  - Input: \(x_1\)
+  - Output: \(p(x_1)\)
+
+- **Network\(_2\)**:
+  - Input: \(x_2\)
+  - Output: \(p(x_2|x_1)\)
+
+- **Network\(_3\)**:
+  - Input: \(x_3\)
+  - Output: \(p(x_3|x_1, x_2)\)
+
+- **...**
+
+- **Network\(_n\)**:
+  - Input: \(x_n\)
+  - Output: \(p(x_n|x_1, ..., x_{n-1})\)
+
+**Shared Network**:
+
+- Inputs: \(h_1, h_2, ..., h_n\)
+
+- Each network shares the hidden outputs from the shared network:
+  - \(h_1\) to Network\(_1\)
+  - \(h_2\) to Network\(_2\)
+  - \(h_3\) to Network\(_3\)
+  - ...
+  - \(h_n\) to Network\(_n\)
+
+**Vineeth N B (IIT-H)**
+
+**§10.5 Other Generative Methods**
+
+**17 / 24**
+```
+
+# DL4CV_Week10_Part05.pdf - Page 40
+
+```markdown
+# NADE: Sample Generation
+
+![NADE Diagram](image-url)
+
+## Hidden representations over masked inputs (h_n depends on x_<n>)
+
+### Shared Network
+
+- **Inputs:**
+  - \( x_1 \)
+  - \( x_2 \)
+  - \( x_3 \)
+  - ...
+  - \( x_n \)
+
+- **Outputs:**
+  - \( h_1 \)
+  - \( h_2 \)
+  - \( h_3 \)
+  - ...
+  - \( h_n \)
+
+### Probabilities
+
+- \( p(x_1) \)
+- \( p(x_2 | x_<2>) \)
+- \( p(x_3 | x_<3>) \)
+- ...
+- \( p(x_n | x_<n>) \)
+
+---
+
+**Source:** Vineeth N B (IIT-H)
+
+**Section:** §10.5 Other Generative Methods
+
+**Slide Number:** 17 / 24
+```
+
+# DL4CV_Week10_Part05.pdf - Page 41
+
+```markdown
+# NADE: Sample Generation
+
+![NADE Diagram](image-url)
+
+**Vineeth N B (IIT-H)**
+
+## §10.5 Other Generative Methods
+
+### NADE: Sample Generation
+
+- **Hidden representations over masked inputs (h_n depends on x_<n>)**
+
+  ![Diagram](image-url)
+
+  - **Shared Network**
+
+  Inputs:
+  - **x1**
+  - **x2**
+  - **x3**
+  - **...**
+  - **xn**
+
+  Outputs:
+  - **h1**
+  - **h2**
+  - **h3**
+  - **...**
+  - **hn**
+
+**Probabilities:**
+- **p(x1)**
+- **p(x2 | x<2)**
+- **p(x3 | x<3)**
+- **...**
+- **p(xn | x<n)**
+
+The diagram illustrates the process of generating samples using the NADE (Neural Autoregressive Distribution Estimator) method. The input variables (x1, x2, x3, ..., xn) are processed through a shared network to produce hidden representations (h1, h2, h3, ..., hn). These hidden representations depend on the masked inputs up to the current index (x<n).
+
+```math
+p(x) = p(x_1) \prod_{i=2}^{n} p(x_i | x_{<i})
+```
+
+This approach allows NADE to model the joint probability of the input variables by breaking it down into a product of conditional probabilities.
+```
+
+# DL4CV_Week10_Part05.pdf - Page 42
+
+# NADE: Sample Generation
+
+## Diagram
+
+Below is a detailed description of the provided diagram in markdown format:
+
+### Title
+**NADE: Sample Generation**
+
+### Subtitle
+- **Vineeth N B (IIT-H)**
+- **§10.5 Other Generative Methods**
+- **17 / 24**
+
+### Diagram Description
+The diagram illustrates the architecture of the NADE (Neural Autoregressive Distribution Estimator) model used for sample generation.
+
+1. **Inputs (x1, x2, x3, ...)**:
+   - The input data points are denoted as \( x_1, x_2, x_3, \ldots \).
+
+2. **Shared Network**:
+   - All input data points are first processed through a shared network.
+   - This shared network generates a shared representation \( h_1, h_2, h_3, \ldots, h_n \) for the subsequent networks.
+
+3. **Individual Networks**:
+   - Each input data point \( x_i \) is processed through its respective network \( \text{Network}_i \).
+   - The networks generate the conditional probabilities \( p(x_1), p(x_2|x_1), p(x_3|x_2, x_1), \ldots, p(x_n|x_{n-1}) \).
+
+4. **Outputs**:
+   - The outputs of each network represent the conditional probabilities of the input data points given previous inputs.
+   - The final output is \( p(x_n|x_{n-1}) \).
+
+### Annotations
+- The shared network is highlighted with a red border.
+- The individual networks are connected to their respective input data points and outputs.
+
+### Flow
+1. Input data points \( x_1, x_2, x_3, \ldots \) are fed into the shared network.
+2. The shared network processes the input data and generates intermediate representations \( h_1, h_2, h_3, \ldots, h_n \).
+3. Each intermediate representation \( h_i \) is then processed by its respective individual network \( \text{Network}_i \).
+4. The individual networks output the conditional probabilities \( p(x_1), p(x_2|x_1), p(x_3|x_2, x_1), \ldots, p(x_n|x_{n-1}) \).
+
+### Diagram Representation
+```markdown
+# NADE: Sample Generation
+
+## Diagram
+
+Below is a detailed description of the provided diagram in markdown format:
+
+### Title
+**NADE: Sample Generation**
+
+### Subtitle
+- **Vineeth N B (IIT-H)**
+- **§10.5 Other Generative Methods**
+- **17 / 24**
+
+### Diagram Description
+The diagram illustrates the architecture of the NADE (Neural Autoregressive Distribution Estimator) model used for sample generation.
+
+1. **Inputs (x1, x2, x3, ...)**:
+   - The input data points are denoted as \( x_1, x_2, x_3, \ldots \).
+
+2. **Shared Network**:
+   - All input data points are first processed through a shared network.
+   - This shared network generates a shared representation \( h_1, h_2, h_3, \ldots, h_n \) for the subsequent networks.
+
+3. **Individual Networks**:
+   - Each input data point \( x_i \) is processed through its respective network \( \text{Network}_i \).
+   - The networks generate the conditional probabilities \( p(x_1), p(x_2|x_1), p(x_3|x_2, x_1), \ldots, p(x_n|x_{n-1}) \).
+
+4. **Outputs**:
+   - The outputs of each network represent the conditional probabilities of the input data points given previous inputs.
+   - The final output is \( p(x_n|x_{n-1}) \).
+
+### Annotations
+- The shared network is highlighted with a red border.
+- The individual networks are connected to their respective input data points and outputs.
+
+### Flow
+1. Input data points \( x_1, x_2, x_3, \ldots \) are fed into the shared network.
+2. The shared network processes the input data and generates intermediate representations \( h_1, h_2, h_3, \ldots, h_n \).
+3. Each intermediate representation \( h_i \) is then processed by its respective individual network \( \text{Network}_i \).
+4. The individual networks output the conditional probabilities \( p(x_1), p(x_2|x_1), p(x_3|x_2, x_1), \ldots, p(x_n|x_{n-1}) \).
+```
+
+This markdown representation ensures that the scientific integrity and details of the diagram are preserved accurately.
+
+# DL4CV_Week10_Part05.pdf - Page 43
+
+```markdown
+# NADE: Sample Generation
+
+## Vineeth N B (IIT-H) §10.5 Other Generative Methods
+
+### Sample Generation
+
+![Sample Generation Diagram](image-placeholder.png)
+
+- **Network Components**:
+  - **Shared Network**: A network component that processes input variables \( x_1, x_2, \ldots, x_n \) and generates hidden states \( h_1, h_2, \ldots, h_n \).
+  - **Individual Networks**:
+    - **Network 1**: Outputs \( p(x_1) \).
+    - **Network 2**: Outputs \( p(x_2 | x_1) \).
+    - **Network 3**: Outputs \( p(x_3 | x_1, x_2) \).
+    - **...**: This continues for subsequent networks.
+    - **Network n**: Outputs \( p(x_n | x_1, x_2, \ldots, x_{n-1}) \).
+
+- **Process Flow**:
+  - Inputs \( x_1, x_2, \ldots, x_n \) are fed into the **Shared Network**.
+  - The **Shared Network** generates hidden states \( h_1, h_2, \ldots, h_n \).
+  - Each individual **Network** then uses these hidden states to generate conditional probabilities \( p(x_i | \text{past states}) \).
+  - This process is repeated until the data sample is complete.
+
+- **Repeat Process**:
+  - The entire generation process is repeated until the data sample is fully generated.
+
+### Diagrams and Flow
+- The **Shared Network** is centrally located and feeds into multiple individual networks.
+- The **Individual Networks** are connected to the **Shared Network** through hidden states.
+- Arrows indicate the flow of data, starting from the input variables, through the hidden states, and finally to the output probabilities.
+
+### Notes
+- **Shared Network** is crucial for ensuring that the hidden states capture the dependencies among the input variables.
+- Each **Network** uses the hidden states as context to generate the next variable conditioned on the past.
+
+### References
+- Vineeth N B (IIT-H)
+- §10.5 Other Generative Methods
+
+Page 17 / 24
+```
+
+# DL4CV_Week10_Part05.pdf - Page 44
+
+ this markdown file can be rendered correctly in markdown renderers or platforms like GitHub, GitLab, or similar.
+
+```markdown
+# Autoregressive Models: MADE (Masked Autoencoder for Distribution Estimation)4
+
+![Image Description](image_url)
+
+**Vineeth N B (IIT-H)**
+
+## §10.5 Other Generative Methods
+
+### Autoregressive Models: MADE (Masked Autoencoder for Distribution Estimation)4
+
+**MADE (Masked Autoencoder for Distribution Estimation)** is a type of autoregressive model designed to estimate probability distributions effectively. The model utilizes a masked autoencoder architecture to ensure that each variable is conditioned only on its past variables, avoiding leakage of information from the future to the past.
+
+#### Autoencoder
+
+The autoencoder in MADE maps the input vector **x** to its probability distribution **p<sub>x</sub>(x)**. The process involves encoding the input through a series of layers and then decoding it while applying a mask to ensure the conditional independence of each variable.
+
+- **Input Layer**: The input vector **x** is represented as **x** = [x<sub>1</sub>, x<sub>2</sub>, x<sub>3</sub>, x<sub>4</sub>].
+- **Intermediate Layers**: The input passes through several hidden layers where each layer is connected to the previous layer.
+- **Output Layer**: The final layer produces the probability distribution **p<sub>x</sub>(x)**.
+
+#### Masks
+
+Masks are applied to ensure that each output variable is conditioned only on its past variables. This is crucial for maintaining the autoregressive property and preventing information leakage.
+
+- **Mask Application**: The mask ensures that each output **p<sub>x</sub>(x<sub>i</sub>)** depends only on the past variables **x<sub>1</sub>, x<sub>2</sub>, ..., x<sub>i-1</sub>**.
+
+### Diagram
+
+![Diagram](diagram_url)
+
+In the diagram:
+- **Input Layer**: Nodes representing the input variables **x<sub>1</sub>, x<sub>2</sub>, x<sub>3</sub>, x<sub>4</sub>**.
+- **Intermediate Layers**: Multiple hidden layers with connections indicating the flow of information.
+- **Output Layer**: Nodes representing the probability distributions **p<sub>x</sub>(x<sub>i</sub>)**.
+
+```markdown
+- **p(x<sub>1</sub>)**
+- **p(x<sub>2</sub> | x<sub>1</sub>)**
+- **p(x<sub>3</sub> | x<sub>1</sub>, x<sub>2</sub>)**
+- **p(x<sub>4</sub> | x<sub>1</sub>, x<sub>2</sub>, x<sub>3</sub>)**
+
+### Summary
+
+MADE is a powerful method for estimating distributions by leveraging an autoregressive model with a masked autoencoder. The use of masks ensures conditional independence and effective distribution estimation.
+
+```
+
+# DL4CV_Week10_Part05.pdf - Page 45
+
+```markdown
+# Autoregressive Models: MADE (Masked Autoencoder for Distribution Estimation)
+
+![Autoregressive Models: MADE (Masked Autoencoder for Distribution Estimation)](image_url)
+
+**Vineeth N B (IIIT-H)**
+
+## §10.5 Other Generative Methods
+
+### Autoregressive Models: MADE (Masked Autoencoder for Distribution Estimation)
+
+**Autoregressive Models** involve predicting one element of a sequence conditioned on the other elements in the sequence. One specific method within this category is the **Masked Autoencoder for Distribution Estimation (MADE)**.
+
+### Masked Autoencoder for Distribution Estimation (MADE)
+
+#### Overview
+
+The MADE model uses an **autoencoder** architecture to learn the distribution of input data by agreeing on an ordering for both the input \( X \) and the output distribution \( p_X(x) \).
+
+#### Diagram Explanation
+
+1. **Input Layer:**
+
+   - The input consists of variables \( X_1, X_2, X_3, X_4 \).
+
+2. **Autoencoder Architecture:**
+
+   - The autoencoder maps the input \( X \) to the distribution \( p_X(x) \).
+   - The diagram displays a series of interconnected layers, with specific nodes in the layers masked (not shown in the diagram).
+
+3. **Output Layer:**
+
+   - The output layer consists of nodes that correspond to the input variables \( X_1, X_2, X_3, X_4 \).
+   - The model agrees on an ordering for both \( X \) and \( p_X(x) \).
+
+#### Formulae and Notation
+
+- The autoencoder uses a mapping \( X \rightarrow p_X(x) \).
+- The diagram illustrates the flow of information through the autoencoder, emphasizing the importance of agreeing on an ordering for both the input and the output distribution.
+
+#### Conclusion
+
+The MADE model is a powerful tool in the field of generative models, leveraging the structure of autoencoders to estimate distributions accurately.
+
+---
+
+18 / 24
+```
+
+# DL4CV_Week10_Part05.pdf - Page 46
+
+# Autoregressive Models: MADE (Masked Autoencoder for Distribution Estimation)
+
+```markdown
+## slide content:
+### OCR Extraction:
+
+**Title:**
+- Autoregressive Models: MADE (Masked Autoencoder for Distribution Estimation)
+
+**Diagram:**
+- Depicts a neural network architecture for an autoencoder.
+- Contains multiple layers with interconnected nodes.
+- Nodes in each layer have a number assigned to them (e.g., 1, 2, 3).
+- Notation for the autoencoder:
+  - \( p(x) \)
+  - \( p(x_{0:K-1}) \)
+  - \( p(x_{1:K-1} | x_0) \)
+  - \( p(x_{2:K-1} | x_0, x_1) \)
+  - \( p(x_{3:K-1} | x_0, x_1, x_2) \)
+
+**Annotations:**
+- A number \( n \) is assigned to each node in each hidden layer.
+- The nodes are interconnected showing dependencies.
+
+**Additional Information:**
+- Presents an example of a generative model used in machine learning.
+- Additional notes on the bottom:
+  - Presenter: Vineeth N B (IIIT-H)
+  - Section: §10.5 Other Generative Methods
+  - Slide Number: 18/24
+
+```
+
+# DL4CV_Week10_Part05.pdf - Page 47
+
+```markdown
+# Autoregressive Models: MADE (Masked Autoencoder for Distribution Estimation)
+
+![MADE Diagram](image-url)
+
+## Vineeth N B (IIT-H)
+
+### §10.5 Other Generative Methods
+
+**Autoregressive Models: MADE (Masked Autoencoder for Distribution Estimation)**
+
+The Masked Autoencoder for Distribution Estimation (MADE) is an autoregressive model designed for estimating the distribution of data. The main idea behind MADE is to use a masked autoencoder to generate samples from the desired distribution by learning dependencies between different parts of the data.
+
+#### Diagram Explanation
+
+The diagram illustrates the architecture of the MADE model, with the following key components:
+
+1. **Inputs (\(x_1, x_2, x_3, x_4\))**: The input data to the autoencoder.
+2. **Layers**: The model consists of multiple hidden layers.
+3. **Connections**: The connections between nodes in adjacent layers are masked such that each node in a given layer depends only on a subset of the nodes in the previous layer.
+
+**Red Arrows**: Indicate the retained weights that connect node number \(i\) to \(j\) such that \(i \leq j\) for all hidden layers.
+
+**Outputs (\(p(x_1), p(x_2|x_1), p(x_3|x_1, x_2), p(x_4|x_1, x_2, x_3)\))**: The probabilities of the output data conditioned on the previous variables.
+
+#### Autoencoder
+
+The autoencoder maps the input \(X\) to \(p_X(x)\).
+
+---
+
+**Note**: Image URL is a placeholder for the actual image that should be captured from the OCR process.
+
+```
+
+# DL4CV_Week10_Part05.pdf - Page 48
+
+```markdown
+# Autoregressive Models: MADE (Masked Autoencoder for Distribution Estimation)
+
+![Autoencoder Diagram](image_url)
+
+## Diagram Explanation
+
+- **Autoencoder Structure**: The diagram depicts an autoencoder network which includes multiple layers of nodes.
+- **Nodes**: Each node is numbered, representing different layers in the neural network.
+- **Connections**: Arrows indicate the flow of connections between nodes. 
+  - **Red Arrows**: These highlight a specific subset of connections maintained for autoregressive modeling.
+  - **Gray Arrows**: Represent connections that are not used.
+- **Masking Rule**: 
+  - Retain weights that connect node number `i` to node `j` such that `[i <= j]` for all hidden layers.
+  - This ensures the autoregressive property where nodes in the same layer or subsequent layers are connected.
+
+## Equation Representation
+
+- The autoencoder maps `X -> p_X(x)`.
+
+## References
+
+- **Presenter**: Vineeth N B (IIT-H)
+- **Section**: §10.5 Other Generative Methods
+- **Slide Number**: 18 / 24
+```
+
+# DL4CV_Week10_Part05.pdf - Page 49
+
+```markdown
+# Autoregressive Models: MADE (Masked Autoencoder for Distribution Estimation)<sup>4</sup>
+
+![Autoencoder Diagram](image-placeholder)
+
+**Vineeth N B (IIT-H)**
+
+## §10.5 Other Generative Methods
+
+### Autoregressive Models: MADE (Masked Autoencoder for Distribution Estimation)<sup>4</sup>
+
+The Masked Autoencoder for Distribution Estimation (MADE) is a type of autoencoder designed to estimate probability distributions autoregressively. This model uses a mask to ensure that each output depends only on the previous outputs, which helps in capturing the dependencies in the data.
+
+#### Diagram Overview
+
+- **Input Layer (x<sub>1</sub>, x<sub>2</sub>, x<sub>3</sub>, x<sub>4</sub>)**:
+  - Represents the input variables.
+
+- **Hidden Layers**:
+  - Multiple hidden layers where each node's output depends on the previous nodes' outputs.
+  - Connection weights are denoted by numbers in circles.
+
+- **Output Layer (p(x<sub>1</sub>|x<sub>2</sub>, x<sub>3</sub>), p(x<sub>1</sub>, x<sub>2</sub>|x<sub>3</sub>, x<sub>4</sub>), p(x<sub>1</sub>, x<sub>2</sub>, x<sub>3</sub>|x<sub>4</sub>))**:
+  - Outputs the conditional probabilities of the inputs.
+
+#### Retention of Weights
+
+- **Retain weights that connect node i to output p(x<sub>i</sub>|x<sub>j</sub>) such that i < j**:
+  - Ensures autoregressive property by masking irrelevant connections.
+
+- **Retain weights that connect node number i to j such that i ≤ j for all hidden layers**:
+  - Maintains the flow of information through the network.
+
+#### Functionality
+
+- **Autoencoder**:
+  - Maps **X** to **p<sub>X</sub>(x)**.
+
+#### Diagram Details
+
+- **Nodes and Connections**:
+  - Nodes are numbered and connected based on the autoregressive nature.
+  - Red connections indicate the masked connections that are retained.
+
+---
+
+**References**:
+- Vineeth N B (IIT-H)
+- §10.5 Other Generative Methods
+- Page 18/24
+```
+
+# DL4CV_Week10_Part05.pdf - Page 50
+
+```markdown
+# Autoregressive Models: MADE (Masked Autoencoder for Distribution Estimation)
+
+## Key Concepts
+
+### Masked Autoencoder for Distribution Estimation (MADE)
+
+**Image:** ![Autoencoder Diagram](https://via.placeholder.com/500)
+
+**Description:**
+- The image illustrates the architecture of a Masked Autoencoder for Distribution Estimation (MADE).
+- The MADE model uses an autoencoder to estimate the probability distribution of input data.
+
+### Weight Retention Strategy
+
+**Red Lines:**
+- Retain weights that connect node `i` to output `p(x_j|x_<j)` such that `i != j`.
+
+**Black Lines:**
+- Retain weights that connect node number `i` to `j` such that `i <= j` for all hidden layers.
+
+### Autoencoder Function
+
+**Function:**
+- Maps `X` to `p_X(x)`
+
+**Visualization:**
+- The diagram shows the flow of information through the autoencoder, illustrating how different nodes interact and contribute to the output.
+
+## Reference
+
+**Author:**
+- Vineeth N B (IIT-H)
+
+**Section:**
+- §10.5 Other Generative Methods
+
+**Page Number:**
+- 18/24
+```
+
+This markdown format ensures the scientific integrity and proper formatting of the content extracted from the provided image.
+
+# DL4CV_Week10_Part05.pdf - Page 51
+
+```markdown
+# Autoregressive Models: MADE (Masked Autoencoder for Distribution Estimation)
+
+![MADE Diagram](image_placeholder)
+
+**Section Title**: Autoregressive Models: MADE (Masked Autoencoder for Distribution Estimation)
+
+**Vineeth N B (IIT-H)**
+
+**§10.5 Other Generative Methods**
+
+**Slide Number**: 18 / 24
+
+## Key Components
+
+- **Autoencoder**: Maps **X** → **p_X(x)**
+
+### Diagram Explanation
+
+- The diagram shows an autoencoder structure.
+- Inputs: \( x_1, x_2, x_3, x_4 \)
+- Outputs: \( p(x_1 | x_2, x_3, x_4), p(x_2 | x_1, x_3, x_4), p(x_3 | x_1, x_2, x_4), p(x_4 | x_1, x_2, x_3) \)
+
+### Dependencies
+
+- The subnetwork ensures that \( p(x_i | x_<i) \) depends only on inputs \( x_<i \).
+
+### Visual Representation
+
+- Circles with numbers represent different states or nodes in the network.
+- Arrows indicate the flow of information or dependencies between nodes.
+
+### Mathematical Notations
+
+- **p_X(x)**: Probability distribution function for **X**.
+- **p(x_i | x_<i)**: Conditional probability of \( x_i \) given previous inputs \( x_<i \).
+
+### Structure
+
+1. **Input Layer**: \( x_1, x_2, x_3, x_4 \)
+2. **Hidden Layers**: Multiple hidden layers with interconnected nodes.
+3. **Output Layer**: Probability outputs for each variable.
+
+### Annotations
+
+- Ensures that the subnetwork depends only on the inputs \( x_<i \).
+  
+This method is part of the broader study of generative models, focusing on autoregressive models to estimate probability distributions effectively.
+```
+
+# DL4CV_Week10_Part05.pdf - Page 52
+
+```markdown
+# Autoregressive Models: MADE (Masked Autoencoder for Distribution Estimation)
+
+![Diagram of MADE](image-url)
+
+## Diagram Explanation
+
+- **Title**: Autoregressive Models: MADE (Masked Autoencoder for Distribution Estimation)
+- **Subtitle**: Vineeth N B (IIIT-H) §10.5 Other Generative Methods
+
+### Autoencoder
+The diagram represents an autoencoder model that maps input \( X \) to a probability distribution \( p_X(x) \).
+
+### Nodes and Connections
+- **Nodes**: The circles are labeled with numbers representing different states or variables.
+  - Inputs: \( x_1, x_2, x_3, x_4 \)
+- **Connections**: 
+  - Green arrows indicate the direction of dependency.
+  - The connections ensure that the subnetwork \( p(x_i | x_<i) \) depends only on inputs \( x_<i \).
+
+### Example Pathways
+- **From \( x_1 \) to \( x_2 \)**:
+  - \( x_1 \) connects to node 1, which then connects to node 2, and finally to \( x_2 \).
+- **From \( x_2 \) to \( x_3 \)**:
+  - \( x_2 \) connects to node 3, which then connects to node 1, and finally to \( x_3 \).
+- **From \( x_3 \) to \( x_4 \)**:
+  - \( x_3 \) connects to node 2, which then connects to node 3 and finally to \( x_4 \).
+
+### Summary
+The diagram illustrates the autoregressive nature of the Masked Autoencoder for Distribution Estimation (MADE). It shows how each output variable depends only on its causal predecessors, ensuring that the model can infer dependencies correctly without leaking information.
+
+**Note**: The content is extracted from a section titled "Other Generative Methods" within a broader presentation.
+
+```
+
+# DL4CV_Week10_Part05.pdf - Page 53
+
+```markdown
+# Autoregressive Models: MADE (Masked Autoencoder for Distribution Estimation)[^4]
+
+![MADE Diagram](image_url_here)
+
+Vineeth N B (IIT-H) §10.5 Other Generative Methods 18 / 24
+
+## MADE (Masked Autoencoder for Distribution Estimation)
+
+![Diagram](image_url_here)
+
+### Overview
+- **Autoencoder**: Maps \( X \) to \( p_X(x) \).
+- **Subnetwork Dependencies**: Ensures that \( p(x_i \mid x_{<i}) \) subnetwork depends only on inputs \( x_{<i} \).
+
+### Diagram Components
+- **Nodes**: Represent variables \( x_1, x_2, x_3, x_4 \).
+- **Connections**: 
+  - Red arrows indicate dependencies.
+  - Black arrows indicate the flow of information.
+
+### Key Concepts
+- **Masking**: Ensures that each subnetwork for \( p(x_i \mid x_{<i}) \) only depends on the correct inputs \( x_{<i} \).
+
+### Mathematical Notation
+- \( p(x_i \mid x_{<i}) \): Conditional probability of \( x_i \) given previous inputs \( x_{<i} \).
+- \( p_X(x) \): Distribution of \( X \).
+
+### Example
+- Nodes: \( x_1, x_2, x_3, x_4 \)
+- Dependencies illustrated with arrows from \( x_1, x_2, x_3 \) to \( x_4 \).
+
+```markdown
+[^4]: Reference for the section.
+```
+
+# DL4CV_Week10_Part05.pdf - Page 54
+
+ is not acceptable for this task.
+
+```markdown
+# Autoregressive Models: MADE (Masked Autoencoder for Distribution Estimation)
+
+## Diagram:
+
+![Diagram](image_url)
+
+- **Left Network**: MADE (Masked Autoencoder for Distribution Estimation)
+  - **Nodes**: 
+    - Input nodes: \( x_1, x_2, x_3, x_4 \)
+    - Hidden layers with connections labeled (1, 2, 3, 4)
+    - Output nodes correspond to distributions \( p(x_1), p(x_2 \mid x_1), p(x_3 \mid x_1, x_2), p(x_4 \mid x_1, x_2, x_3) \)
+
+- **Right Network**: Autoencoder
+  - **Nodes**: 
+    - Input nodes: \( x_1, x_2, x_3, x_4 \)
+    - Hidden layers with connections labeled (1, 2, 3, 4)
+    - Output nodes correspond to distributions \( p(x_1), p(x_2 \mid x_1), p(x_3 \mid x_1, x_2), p(x_4 \mid x_1, x_2, x_3) \)
+
+- **Masking**: 
+  - Mask applied to certain connections to achieve conditional independence between outputs.
+
+```
+
+# DL4CV_Week10_Part05.pdf - Page 55
+
+```markdown
+# Autoregressive Models: Pixel CNNs<sup>5</sup>
+
+![Training Schema](image_url)
+
+- **Training**: 
+  - Input Image (NXNX3)
+  - CNN (Shape retaining, No Pooling)
+  - Output: Pixel-wise Softmax Distribution (NXNX256)
+
+<sup>5</sup>van der Oord et al., Conditional Image Generation with PixelCNN Decoders, NeurIPS 2016
+
+Vineeth N B (IIT-H)
+
+§10.5 Other Generative Methods
+
+---
+
+## References
+
+- van der Oord et al., Conditional Image Generation with PixelCNN Decoders, NeurIPS 2016
+
+---
+
+- ![Scientific Figure](image_url)
+- **Figure Caption**: Training process of the PixelCNN model demonstrating the transformation from an input image of dimensions NXNX3 to a pixel-wise softmax distribution of dimensions NXNX256.
+```
+
+# DL4CV_Week10_Part05.pdf - Page 56
+
+```markdown
+# Autoregressive Models: Pixel CNNs<sup>5</sup>
+
+## Training
+
+![Training Process Diagram](image-url)
+
+**Input:**
+- **NXNX3** (Image of a flower)
+
+**Pixel Masking Filter:**
+```
+1 1 1 1 1
+1 1 1 1 1
+1 1 0 0 0
+0 0 0 0 0
+0 0 0 0 0
+```
+
+**CNN:**
+- Shape retaining (No Pooling)
+
+**Output:**
+- **Pixel-wise Softmax Distribution**
+- **NXNX256** (Feature representation)
+
+<sup>5</sup> van der Oord et al., Conditional Image Generation with PixelCNN Decoders, NeurIPS 2016
+
+**Author:**
+- Vineeth N B (IIT-H)
+
+**Section:**
+- §10.5 Other Generative Methods
+
+---
+
+Page 19 / 24
+```
+
+# DL4CV_Week10_Part05.pdf - Page 57
+
+```markdown
+# Autoregressive Models: Pixel CNNs<sup>5</sup>
+
+![Training Process Diagram](image_url)
+
+- **Input Image**: 
+  - NXNX3
+
+- **Pixel Masking Filter**:
+  - ![Masking Filter Matrix](masking_filter_url)
+  - Shape retaining (No Pooling)
+
+- **CNN**:
+  - Processes the masked image
+  - Outputs a Pixel-wise Softmax Distribution
+  - Output Image Shape: NXNX256
+
+**Very fast to compute**
+
+<sup>5</sup> van der Oord et al., Conditional Image Generation with PixelCNN Decoders, NeurIPS 2016
+
+**Vineeth N B (IIT-H)**
+
+**§10.5 Other Generative Methods**
+
+---
+
+19 / 24
+```
+
+# DL4CV_Week10_Part05.pdf - Page 58
+
+```markdown
+# Autoregressive Models: Pixel CNNs<sup>5</sup>
+
+![Training Process Diagram](url-to-image)
+
+## Training
+
+![Input Image](url-to-image)
+- **NXNX3**: Input image.
+
+![Pixel Masking Filter](url-to-image)
+- **Pixel Masking Filter**: Binary filter used for processing the input image.
+
+![CNN](url-to-image)
+- **CNN**: Convolutional Neural Network applied to the masked image.
+  - **Shape retaining (No Pooling)**: The CNN processes the image without pooling to retain the shape.
+
+![Pixel-wise Softmax Distribution](url-to-image)
+- **Pixel-wise Softmax Distribution**: Output from the CNN for each pixel.
+
+![PixelCNN](url-to-image)
+- **PixelCNN**: Autoregressive model diagram representing the dependencies between pixels.
+
+## Key Points
+
+- **Very fast to compute**: PixelCNNs are computationally efficient.
+- **Does not make full use of context (local context)**: The model primarily utilizes local context rather than global context.
+
+<sup>5</sup> van der Oord et al., Conditional Image Generation with PixelCNN Decoders, NeurIPS 2016
+
+**Vineeth N B (IIT-H)**
+
+**§10.5 Other Generative Methods**
+
+---
+
+Page 19 of 24
+```
+
+This markdown format captures the structure and content of the scientific slide with attention to details like section titles, diagrams, and key points.
+
+# DL4CV_Week10_Part05.pdf - Page 59
+
+```markdown
+# Autoregressive Models: PixelRNN<sup>6</sup>
+
+- Autoregressive model where images are generated pixel by pixel; each pixel depends on previous pixels based on a directed graph
+
+$$
+p(x) = \prod_{i=1}^{n^2} p(x_i | x_1, x_2, \ldots, x_{i-1})
+$$
+
+![NPTEL Logo](https://example.com/nptel_logo)
+
+![Pixel Dependency Graph](https://example.com/pixel_graph)
+
+<sup>6</sup> van der Oord et al., Pixel Recurrent Neural Networks, ICML 2016
+
+Vineeth N B (IIT-H) §10.5 Other Generative Methods
+
+---
+
+### References
+- van der Oord et al. (2016). Pixel Recurrent Neural Networks. ICML 2016.
+- Vineeth N B. Other Generative Methods. §10.5.
+```
+
+# DL4CV_Week10_Part05.pdf - Page 60
+
+
+
+```markdown
+# Autoregressive Models: PixelRNN<sup>6</sup>
+
+- Autoregressive model where images are generated pixel by pixel; each pixel depends on previous pixels based on a directed graph
+
+  \[
+  p(x) = \prod_{i=1}^{n^2} p(x_i | x_1, x_2, \cdots, x_{i-1})
+  \]
+
+- Dependencies between pixels are modeled using Long Short Term Memory Networks (LSTMs)
+
+![Directed Graph](image-url)
+
+<sup>6</sup> van der Oord et al., Pixel Recurrent Neural Networks, ICML 2016
+
+Vineeth N B (IIT-H) §10.5 Other Generative Methods 20 / 24
+```
+
+# DL4CV_Week10_Part05.pdf - Page 61
+
+```markdown
+# Autoregressive Models: PixelRNN<sup>6</sup>
+
+- Autoregressive model where images are generated pixel by pixel; each pixel depends on previous pixels based on a directed graph
+
+  \[
+  p(x) = \prod_{i=1}^{n^2} p(x_i | x_1, x_2, \ldots, x_{i-1})
+  \]
+
+- Dependencies between pixels are modeled using Long Short Term Memory Networks (LSTMs)
+
+- Trained to maximize likelihood using gradient descent
+
+---
+
+<sup>6</sup> van der Oord et al., Pixel Recurrent Neural Networks, ICML 2016
+
+Vineeth N B (IIT-H) §10.5 Other Generative Methods 20 / 24
+
+![Diagram](image-url)
+
+```
+
+# DL4CV_Week10_Part05.pdf - Page 62
+
+```markdown
+# Autoregressive Models: PixelRNN<sup>6</sup>
+
+- **Autoregressive model** where images are generated pixel by pixel; each pixel depends on previous pixels based on a directed graph
+
+  \[
+  p(x) = \prod_{i=1}^{n^2} p(x_i | x_1, x_2, \ldots, x_{i-1})
+  \]
+
+- Dependencies between pixels are modeled using **Long Short Term Memory Networks (LSTMs)**
+- Trained to maximize likelihood using **gradient descent**
+- **Advantage**: Likelihood is tractable
+
+---
+
+<sup>6</sup> van der Oord et al., Pixel Recurrent Neural Networks, ICML 2016
+
+Vineeth N B (IIT-H) §10.5 Other Generative Methods
+
+20 / 24
+```
+
+# DL4CV_Week10_Part05.pdf - Page 63
+
+```markdown
+# Autoregressive Models: PixelRNN<sup>6</sup>
+
+- **Autoregressive model** where images are generated **pixel by pixel**; each pixel depends on previous pixels based on a directed graph
+  \[
+  p(x) = \prod_{i=1}^{n^2} p(x_i | x_1, x_2, \ldots, x_{i-1})
+  \]
+  ![]()
+
+- Dependencies between pixels are modeled using **Long Short Term Memory Networks (LSTMs)**
+- Trained to maximize likelihood using **gradient descent**
+- **Advantage**: Likelihood is **tractable**
+- **Limitation**: Image generation is slow (**pixel by pixel**)
+
+<sup>6</sup> van der Oord et al., Pixel Recurrent Neural Networks, ICML 2016
+
+Vineeth N B (III-T-H) §10.5 Other Generative Methods
+
+---
+
+*Reference: [Vineeth N B (III-T-H) §10.5 Other Generative Methods](https://example.com)*
+
+```
+
+# DL4CV_Week10_Part05.pdf - Page 64
+
+```markdown
+# Autoregressive Models: PixelRNN<sup>6</sup>
+
+- **Autoregressive model** where images are generated pixel by pixel; each pixel depends on previous pixels based on a directed graph
+
+  \[
+  p(x) = \prod_{i=1}^{n^2} p(x_i \mid x_1, x_2, \ldots, x_{i-1})
+  \]
+
+- Dependencies between pixels are modeled using **Long Short Term Memory Networks (LSTMs)**
+- Trained to maximize likelihood using **gradient descent**
+- **Advantage**: Likelihood is tractable
+- **Limitation**: Image generation is slow (pixel by pixel)
+- **Example** of a fully visible model
+
+<sup>6</sup>van der Oord et al., Pixel Recurrent Neural Networks, ICML 2016
+
+Vineeth N B (IIT-H)
+
+§10.5 Other Generative Methods
+
+---
+
+![Directed Graph](data:image/png;base64,...) 
+
+![LSTM Diagram](data:image/png;base64,...)
+
+```math
+p(x) = \prod_{i=1}^{n^2} p(x_i \mid x_1, x_2, \ldots, x_{i-1})
+```
+
+---
+
+**References**:
+
+- van der Oord et al. Pixel Recurrent Neural Networks, ICML 2016
+```
+
+# DL4CV_Week10_Part05.pdf - Page 65
+
+
+
+```markdown
+# Pixel RNN: Row LSTM
+
+![Training Process](image_url)
+
+## Training
+
+- **Generates an entire row at a time**
+
+### Spatial LSTM
+- Generates an entire row at a time
+
+![NPTEL Logo](nptel_logo_url)
+
+**Vineeth N B (IIT-H)**
+
+### §10.5 Other Generative Methods
+
+---
+
+21 / 24
+```
+
+
+# DL4CV_Week10_Part05.pdf - Page 66
+
+```markdown
+# Pixel RNN: Row LSTM
+
+![Diagram](image_url)
+
+## Training
+
+- **Spatial LSTM**: Generates an entire row at a time
+
+![NPTEL](image_url)
+
+---
+
+Vineeth N B (IIT-H) §10.5 Other Generative Methods
+
+21 / 24
+```
+
+In this markdown format:
+
+- The main title "Pixel RNN: Row LSTM" is an H1 heading.
+- The "Training" section is an H2 heading.
+- Bullets under "Training" describe the functionality of the Spatial LSTM.
+- Placeholders (`![Diagram](image_url)` and `![NPTEL](image_url)`) are used for images that could not be directly captured by OCR.
+- The footer information is included with section references and page numbers.
+
+This format ensures clarity and proper organization of the content from the scientific slide.
+
+# DL4CV_Week10_Part05.pdf - Page 67
+
+```markdown
+# Pixel RNN: Row LSTM
+
+## Training
+
+![Training Diagram](image_url)
+
+- **Spatial LSTM**
+- **Row LSTM**
+
+### Training Diagram
+- **Spatial LSTM**: Represented by a square box on the left.
+
+![Training Diagram](image_url)
+
+- **Row LSTM**: Depicted by a grid of red cells and white cells indicating the training process.
+
+**Image Key:**
+- **Red cells**: Indicate trained regions.
+- **White cells**: Indicate untrained regions.
+- **Row 't'**: Indicates the current row being processed.
+
+---
+
+*Vineeth N B (IIT-H)*
+
+*§10.5 Other Generative Methods*
+
+_NPTEL_
+
+---
+
+21 / 24
+```
+
+# DL4CV_Week10_Part05.pdf - Page 68
+
+# Pixel RNN: Row LSTM
+
+## Training
+
+![Training Diagram](image_url_here)
+
+**Spatial LSTM**
+
+### Hidden states (h_i) and cell states (c_i) given by:
+
+$$
+\begin{align*}
+[o_i, f_i, i_i, g_i] &= \sigma(K^{ss} \otimes h_{i-1} + K^{is} \otimes x_i)\\
+c_i &= f_i \otimes c_{i-1} + i_i \otimes g_i\\
+h_i &= o_i \otimes \tanh(c_i)
+\end{align*}
+$$
+
+*Vineeth N B (IIIT-H)*
+
+*§10.5 Other Generative Methods*
+
+*21 / 24*
+
+# DL4CV_Week10_Part05.pdf - Page 69
+
+```markdown
+# Pixel RNN: Row LSTM
+
+![Training Diagram](https://via.placeholder.com/500)
+
+## Training
+
+- **Spatial LSTM** combined with a row LSTM approach.
+
+### Hidden states (h_i) and cell states (c_i) given by:
+
+```math
+[o_i, f_i, i_i, g_i] = \sigma(K^{ss} \otimes h_{i-1} + K^{is} \otimes x_i)
+```
+
+```math
+c_i = f_i \otimes c_{i-1} + i_i \otimes g_i
+```
+
+```math
+h_i = o_i \otimes \tanh(c_i)
+```
+
+*Vineeth N B. (IIIT-H) §10.5 Other Generative Methods*
+
+*Page 21 / 24*
+```
+
+# DL4CV_Week10_Part05.pdf - Page 70
+
+# Pixel RNN: Row LSTM
+
+## Training
+
+![Training Diagram](training-diagram.png)
+
+### Hidden states (h_i) and cell states (c_i) given by:
+
+\[
+[o_i, f_i, i_i, g_i] = \sigma (K^{ss} \otimes h_{i-1} + K^{is} \otimes x_i)
+\]
+
+\[
+c_i = f_i \otimes c_{i-1} + i_i \otimes g_i
+\]
+
+\[
+h_i = o_i \otimes tanh(c_i)
+\]
+
+## Row LSTM
+
+![Row LSTM Diagram](row-lstm-diagram.png)
+
+### Triangular context
+
+---
+
+**Vineeth N B (IIIT-H)**
+
+**§10.5 Other Generative Methods**
+
+**21 / 24**
+
+# DL4CV_Week10_Part05.pdf - Page 71
+
+```markdown
+# Pixel RNN: Row LSTM
+
+## Training
+
+![Training Diagram](training-diagram.png)
+
+### Hidden states (h_i) and cell states (c_i) given by:
+
+\[
+o_i, f_i, i_i, g_i = \sigma(K^{ss} \otimes h_{i-1} + K^{is} \otimes x_i)
+\]
+
+\[
+c_i = f_i \otimes c_{i-1} + i_i \otimes g_i
+\]
+
+\[
+h_i = o_i \otimes \tanh(c_i)
+\]
+
+### Row LSTM
+- **Triangular context**
+- **Slower than PixelCNNs**
+
+![Row LSTM Diagram](row-lstm-diagram.png)
+
+*Vineeth N B (IIIT-H)*
+
+*§10.5 Other Generative Methods*
+
+*21 / 24*
+```
+
+# DL4CV_Week10_Part05.pdf - Page 72
+
+```markdown
+# Pixel RNNs: Diagonal BiLSTM
+
+## Training
+
+![Training Image](image_url)
+
+- **Fills the image diagonal-wise**
+
+Vineeth N B (IIT-H) §10.5 Other Generative Methods
+
+---
+
+### Slide Details
+
+Slide Number: 22 / 24
+```
+
+### Notes
+
+1. **Image URL Placeholder**: The placeholder `image_url` should be replaced with the actual URL or path to the training image if available.
+2. **Section Titles**: The main section title "Pixel RNNs: Diagonal BiLSTM" is formatted using the `#` syntax for an H1 heading.
+3. **Bullet Points**: The text "Fills the image diagonal-wise" is formatted as a bullet point.
+4. **Footer**: The footer information is retained, including the slide number and section reference.
+
+This markdown format ensures that the content is organized and clearly structured while maintaining the scientific integrity of the information presented.
+
+# DL4CV_Week10_Part05.pdf - Page 73
+
+```markdown
+# Pixel RNNs: Diagonal BiLSTM
+
+## Training
+
+![Training Image](image_url)
+
+- **Fills the image diagonal-wise**
+
+---
+
+Vineeth N B (IIIT-H) §10.5 Other Generative Methods
+
+---
+
+Page 22 / 24
+
+---
+
+The image above represents the process of filling an image diagonally during the training phase for Pixel RNNs using a Diagonal BiLSTM.
+
+### Training Process
+- **Matrix Representation**: The image is represented in a grid format.
+- **Diagonal Filling**: The model fills the image diagonally from the top-left corner to the bottom-right corner.
+
+---
+
+The training process is visually depicted with an image that shows how the model fills the image diagonally. The text "Fills the image diagonal-wise" explains the method of filling the image.
+
+---
+
+This markdown outline ensures that the extracted content from the provided scientific text or slides maintains its integrity and is accurately represented.
+```
+
+# DL4CV_Week10_Part05.pdf - Page 74
+
+```markdown
+# Pixel RNNs: Diagonal BiLSTM
+
+## Training
+
+![Training Diagram](training_diagram.png)
+
+- **Fills the image diagonal-wise**
+
+Vineeth N B (IIIT-H)
+
+## §10.5 Other Generative Methods
+
+NPTEL
+
+---
+
+Slide 22 / 24
+```
+
+# DL4CV_Week10_Part05.pdf - Page 75
+
+```markdown
+# Pixel RNNs: Diagonal BiLSTM
+
+## Training
+
+![Training Illustration](image_placeholder.png)
+
+- **Vineeth N B (IIIT-H)**
+- **§10.5 Other Generative Methods**
+
+### Diagram
+
+```markdown
+| 1 |   |   |   |
+|---|---|---|---|
+|   | 1 |   |   |
+|   |   |   |   |
+
+row 'r'
+```
+
+---
+
+NPTel
+```
+
+# DL4CV_Week10_Part05.pdf - Page 76
+
+```markdown
+# Pixel RNNs: Diagonal BiLSTM
+
+## Training
+
+![Training Diagram](image_url_placeholder)
+
+Vineeth N B (IIT-H) §10.5 Other Generative Methods
+
+---
+
+**Slide Information:**
+
+- **Title:** Pixel RNNs: Diagonal BiLSTM
+- **Slide Number:** 22 / 24
+
+### Training
+
+![Training Diagram](image_url_placeholder)
+
+- **Description:** The diagram illustrates the training process of Pixel RNNs using a Diagonal Bidirectional LSTM (BiLSTM). 
+
+- **Components:**
+  - **K<sup>ss</sup> (Blue):** Represents the upper diagonal kernel for the self-attention mechanism.
+  - **K<sup>ts</sup> (Green):** Represents the transition kernel in the training process.
+
+---
+
+### References
+
+- **Name:** Vineeth N B
+- **Institution:** IIT-H
+- **Section:** §10.5 Other Generative Methods
+```
+
+# DL4CV_Week10_Part05.pdf - Page 77
+
+```markdown
+# Pixel RNNs: Diagonal BiLSTM
+
+## Training
+
+![Training Diagram](image_url)
+
+- Repeat for the other diagonal
+
+![NPTEL Logo](image_url)
+
+Vineeth N B (IIT-H) §10.5 Other Generative Methods
+
+22 / 24
+```
+
+# DL4CV_Week10_Part05.pdf - Page 78
+
+```markdown
+# Pixel RNNs: Diagonal BiLSTM
+
+![Training Diagram](image_url)
+
+## Training
+
+![Training Diagram](image_url)
+
+- **Vineeth N B (IIT-H)**
+
+## §10.5 Other Generative Methods
+
+### Slide Content
+
+- **Training**
+
+  ![Training Diagram](image_url)
+
+  - **K^SS**
+
+- **NPTEL**
+
+### Other Generative Methods
+
+#### Slide Details
+
+- **Vineeth N B (IIT-H)**
+
+- **§10.5 Other Generative Methods**
+
+#### Additional Notes
+
+- **Training Diagram**: Include visual representation of the training process highlighting areas of interest.
+- **K^SS**: Specific parameter or notation used in the training process.
+- **NPTEL**: Possibly the organization or institute associated with the content.
+```
+
+# DL4CV_Week10_Part05.pdf - Page 79
+
+```markdown
+# Pixel RNNs: Diagonal BiLSTM
+
+![Diagonal BiLSTM](https://via.placeholder.com/150)
+
+**Vineeth N B (IIT-H)**
+
+## §10.5 Other Generative Methods
+
+### Training
+
+![Training Process](https://via.placeholder.com/150)
+
+In the training process of Pixel RNNs using Diagonal BiLSTM:
+
+- The grid represents the pixels being processed.
+- The pixels marked in **red** are the ones being used for the current step of training.
+- The pixel marked with an **X** inside a blue box is identified as a pixel that **shouldn't be used** in the training process.
+
+### Visualization
+
+![Visualization](https://via.placeholder.com/150)
+
+During visualization and analysis:
+
+- The visualization process involves understanding how pixels interact and contribute to the overall output.
+- Diagonal BiLSTM helps in processing pixel data in a more structured and efficient manner compared to traditional methods.
+  
+For more details, refer to the sections on **other generative methods** in the context of neural networks and pixel RNNs.
+
+22 / 24
+```
+
+# DL4CV_Week10_Part05.pdf - Page 80
+
+
+
+```markdown
+# Pixel RNNs: Diagonal BiLSTM
+
+## Training
+
+![Training Diagram](image-url)
+
+Shift the Conv window up
+
+---
+
+Vineeth N B. (IIT-H) §10.5 Other Generative Methods
+
+---
+
+**Slide 22 / 24**
+```
+
+(Note: Replace `image-url` with the actual URL or path of the image if available.)
+
+---
+
+This markdown format preserves the structure and content integrity of the original scientific presentation, ensuring accurate representation of scientific terminology, symbols, and layout.
+
+# DL4CV_Week10_Part05.pdf - Page 81
+
+ the OCR output:
+
+```markdown
+# Pixel RNNs: Diagonal BiLSTM
+
+![Diagonal BiLSTM](https://via.placeholder.com/150)
+
+## Training
+
+### Process
+
+1. **Initial Step**: 
+   - Start with a grid (left side of the image).
+   - Identify a small blue outlined region within the grid.
+
+2. **Combine Step**:
+   - The small blue outlined region is combined with neighboring grid cells.
+   - This combination is represented by a red overlay on the grid (right side of the image).
+
+### Visualization
+
+- Before and after images depict the transformation:
+  - **Before**: Initial training grid.
+  - **After**: Grid after combining regions.
+
+### Additional Information
+
+- Presented by: Vineeth N B (IIIT-H)
+- Section: §10.5 Other Generative Methods
+- Slide Number: 22 / 24
+
+### Diagram Description
+
+- **Left Image**: Training grid with a blue outlined region.
+- **Right Image**: Result of combining the outlined region with surrounding cells, shown in red.
+
+```
+
+Note: The placeholder image link `https://via.placeholder.com/150` is used as a substitute for the actual image link, which could not be extracted from the provided content. Replace it with the actual image link if available.
+
+# DL4CV_Week10_Part05.pdf - Page 82
+
+```markdown
+# Pixel RNNs: Diagonal BiLSTM
+
+## Training
+
+![Training Diagram](image_url)
+
+- **Uses the full context**
+
+### Combination Process
+
+![Combination Process](image_url)
+
+## Diagonal BiLSTM
+
+![Diagonal BiLSTM Diagram](image_url)
+
+**Vineeth N B (IIT-H)**
+
+**§10.5 Other Generative Methods**
+
+22 / 24
+```
+
+# DL4CV_Week10_Part05.pdf - Page 83
+
+```markdown
+# Pixel RNNs: Diagonal BiLSTM
+
+![Diagram Placeholder](image_url)
+
+**Training Process:**
+
+1. **Left Image:**
+   - Matrix representation of data.
+   - Specific cell highlighted in blue.
+   - The surrounding context is marked in red.
+
+2. **Middle Image:**
+   - Result of combining the highlighted cell with its surrounding context.
+   - The combination process is crucial for effective context understanding.
+
+3. **Right Image:**
+   - Visualization of Diagonal Bidirectional LSTM (BiLSTM).
+   - Shows how the context is processed bidirectionally.
+
+**Key Points:**
+
+- Uses the full context.
+- Slower than Pixel CNNs.
+
+**Diagonal BiLSTM:**
+
+- A specific type of LSTM that processes data in a diagonal manner.
+- Enhances context utilization by incorporating both forward and backward propagation.
+
+**References:**
+
+- Vineeth N B (IIT-H)
+- §10.5 Other Generative Methods
+- Slide 22 / 24
+```
+
+# DL4CV_Week10_Part05.pdf - Page 84
+
+```markdown
+# Homework
+
+## Readings
+
+- **Flow-based Deep Generative Models**, Lilian Weng
+
+- **Normalizing Flows:**
+  - Nonlinear Independent Components Estimation
+  - Real-valued Non Volume Preserving Transformations(Real NVP)
+
+- **Autoregressive models:**
+  - Neural Autoregressive Distribution Estimation
+  - Masked Autoencoder for Distribution Estimation
+  - Pixel RNNs
+
+*Image placeholder for visual elements*
+
+_Vineeth N B (IIT-H)_
+
+**Section 10.5 Other Generative Methods**
+
+*Page 23 / 24*
+```
+
+# DL4CV_Week10_Part05.pdf - Page 85
+
+```markdown
+# References
+
+## References
+
+- Laurent Dinh, David Krueger, and Yoshua Bengio. "Nice: Non-linear independent components estimation". In: *arXiv preprint arXiv:1410.8516* (2014).
+- Mathieu Germain et al. "Made: Masked autoencoder for distribution estimation". In: *International Conference on Machine Learning*. 2015, pp. 881–889.
+- Laurent Dinh, Jascha Sohl-Dickstein, and Samy Bengio. "Density estimation using real nvp". In: *arXiv preprint arXiv:1605.08803* (2016).
+- Aaron van den Oord, Nal Kalchbrenner, and Koray Kavukcuoglu. "Pixel recurrent neural networks". In: *arXiv preprint arXiv:1601.06759* (2016).
+- Benigno Uria et al. "Neural autoregressive distribution estimation". In: *The Journal of Machine Learning Research* 17.1 (2016), pp. 7184–7220.
+- Phillip Isola et al. "Image-to-image translation with conditional adversarial networks". In: *Proceedings of the IEEE conference on computer vision and pattern recognition*. 2017, pp. 1125–1134.
+- Lilian Weng. *Flow-based Deep Generative Models*. 2018. URL: [https://lilianweng.github.io/lil-log/2018/10/13/flow-based-deep-generative-models.html](https://lilianweng.github.io/lil-log/2018/10/13/flow-based-deep-generative-models.html).
+
+![Vineeth N B (IIT-H)](https://via.placeholder.com/150) §10.5 Other Generative Methods
+
+Page 24 of 24
+```
+

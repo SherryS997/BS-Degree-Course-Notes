@@ -1,0 +1,1209 @@
+# Week 2 LLM.pdf - Page 1
+
+```markdown
+# Decoder
+
+## What will be the output dimension?
+
+### Encoder
+
+```markdown
+- $e_j$
+
+- $h_j$
+
+- Text input: `I enjoyed the movie transformers`
+
+- Size: $T \times 512$
+```
+
+### Decoder
+
+```markdown
+- Output size: `1 \times 37000`
+
+- Encoded input: `e_j`
+
+- Text output: `Naan transformar padaththal rasthen`
+
+- Size: $T \times 512$
+```
+
+*Mitlesh Khapra*
+
+*Page 49*
+```
+
+# Week 2 LLM.pdf - Page 2
+
+```markdown
+# Decoder Stack
+
+The decoder is a stack of \( N = 6 \) layers. However, each layer is composed of three sublayers.
+
+## Layer Structure
+
+Each layer in the decoder stack is composed of the following sublayers:
+
+1. **Masked Multi-Head (Self) Attention**
+2. **Multi-Head (Cross) Attention**
+3. **Feed Forward Network**
+
+### Example Layer Composition
+
+#### Layer-1
+- **Masked Multi-Head (Self) Attention**
+- **Multi-Head (Cross) Attention**
+- **Feed Forward Network**
+
+#### Layer-2
+- **Masked Multi-Head (Self) Attention**
+- **Multi-Head (Cross) Attention**
+- **Feed Forward Network**
+
+#### Layer-6
+- **Masked Multi-Head (Self) Attention**
+- **Multi-Head (Cross) Attention**
+- **Feed Forward Network**
+
+## Input Example
+
+### Input Tokens
+
+- Mitesh Khapraaa
+- transformar
+- padathchai
+- rasithen
+
+![Decoder Stack Diagram](data:image/png;base64,...) 
+```
+
+# Week 2 LLM.pdf - Page 3
+
+```markdown
+# Teacher Forcing
+
+Why the target sentence is being fed as one of the inputs to the decoder?
+
+Usually, we use only the decoder’s previous prediction as input to make the next prediction in the sequence.
+
+However, the drawback of this approach is that if the first prediction goes wrong then there is a high chance the rest of the predictions will go wrong (because of conditional probability). This will lead to an accumulation of errors. Of course, the algorithm has to fix this as training progresses. But, it takes a long time to train the model.
+
+The other approach is to use so-called "Teacher Forcing" algorithm. Let's say the target language is English.
+
+![Teacher Forcing Diagram](data:image/png;base64,...) 
+
+- **D**: Decoder
+- **Ground Truth**: Target Sentence
+
+```markdown
+- Enjoyed the sunshine last night
+- Enjoyed the film transform
+``` 
+
+```math
+D \rightarrow \text{enjoyed}
+D \rightarrow \text{the sunshine}
+D \rightarrow \text{last night}
+D \rightarrow \text{enjoyed}
+D \rightarrow \text{the film}
+D \rightarrow \text{transforme}
+```
+
+- **Initial Input**: I
+- **Target Sentence**: Enjoyed the sunshine last night
+- **Predictions**:  
+  - D1: enjoyed
+  - D2: the sunshine
+  - D3: last night
+  - D4: enjoyed
+  - D5: the film
+  - D6: transforme
+```
+
+# Week 2 LLM.pdf - Page 4
+
+```markdown
+# Masked (Self) Attention
+
+## Components
+
+1. **MatMul**
+2. **Softmax**
+3. **Scale: \(\frac{1}{\sqrt{d_k}}\)**
+4. **MatMul: \(Q^T K\)**
+
+## Inputs
+
+- \(Q\)
+- \(K\)
+- \(V\)
+
+![Diagram](image_url)
+
+## Explanation
+
+Recall that in self-attention we computed the query, key, and value vectors \(q\), \(k\), and \(v\) by multiplying the word embeddings \(h_1, h_2, \ldots, h_T\) with the transformation matrices \(W_Q, W_K, W_V\) respectively.
+
+The same is repeated in the decoder layers. This time the \(h_1, h_2, \ldots, h_T\) are the word embeddings of target sentence. But,
+
+With one important difference.
+```
+
+# Week 2 LLM.pdf - Page 5
+
+```markdown
+# OCR Extracted Content
+
+## Diagram Explanation
+
+![Diagram](diagram_image_placeholder.png)
+
+Recall that in self-attention we computed the query, key, and value vectors \( q, k \) & \( v \) by multiplying the word embeddings \( h_1, h_2, \ldots, h_T \) with the transformation matrices \( W_Q, W_K, W_V \) respectively.
+
+The same is repeated in the decoder layers. This time the \( h_1, h_2, \ldots, h_T \) are the word embeddings of target sentence. But,
+
+With one important difference. Masking to implement the teacher-forcing approach during training.
+
+Of course, we can't use teacher forcing during inference. Instead, the decoder acts as an auto-regressor.
+
+Note: Encoder block also uses masking in attention sublayer in practice to mask the padded tokens in sequences having length \( T \)
+
+## Diagram Components
+
+1. **MatMul: \( Q^T K \)**
+   - Matrix multiplication of query and key vectors.
+
+2. **Scale: \( \frac{1}{\sqrt{d_k}} \)**
+   - Scaling factor to stabilize gradients.
+
+3. **Mask**
+   - Mask to implement teacher-forcing during training.
+
+4. **Softmax**
+   - Softmax function to obtain attention weights.
+
+5. **MatMul**
+   - Matrix multiplication to compute the weighted sum of value vectors.
+
+```
+
+# Week 2 LLM.pdf - Page 6
+
+```markdown
+# Masked Multi-Head Self Attention
+
+## How do we create the mask? Where should we incorporate it? At the input or output or somewhere in between?
+
+### Equations
+\[ Q_1 = W_{Q_1} H \]
+\[ K_1 = W_{K_1} H \]
+\[ V_1 = W_{V_1} H \]
+
+\[ Q_1^T K_1 = A \]
+
+### Masking Mechanism
+
+Assign zero weights \(\alpha_{ij} = 0\) for the value vectors \(v_j\) to be masked in a sequence.
+
+Let us denote the mask matrix by \(M\), then
+
+\[ Z = \text{softmax}(A + M) V^T \]
+
+### Diagram
+
+![Masked Multi-Head (Self) Attention](image_url)
+
+- <GO>
+- Naan
+- transformers
+- padathai
+- rosiththen
+
+### Example
+
+```markdown
+Masked Multi-Head (Self) Attention
+```
+
+```markdown
+Masked Multi-Head (Self) Attention
+```
+
+```markdown
+Masked Multi-Head (Self) Attention
+```
+```
+```
+
+# Week 2 LLM.pdf - Page 7
+
+```markdown
+# Masking in Matrix Representation
+
+Masking is done by inserting negative infinite at the respective positions.
+
+## Matrix Representation
+
+```markdown
+T = [
+    [q1•k1, -∞, -∞, -∞, -∞],
+    [q2•k1, q2•k2, -∞, -∞, -∞],
+    [q3•k1, q3•k2, q3•k3, -∞, -∞],
+    [q4•k1, q4•k2, q4•k3, q4•k4, -∞],
+    [q5•k1, q5•k2, q5•k3, q5•k4, q5•k5]
+]
+```
+
+## Triangular Matrix Form
+
+This actually forms an triangular matrix with one half all zeros and the other half all negative infinity.
+
+```markdown
+M = [
+    [0, -∞, -∞, -∞, -∞],
+    [0, 0, -∞, -∞, -∞],
+    [0, 0, 0, -∞, -∞],
+    [0, 0, 0, 0, -∞],
+    [0, 0, 0, 0, 0]
+]
+```
+
+*Mitresh Khapra*
+
+---
+
+Page 55
+```
+
+# Week 2 LLM.pdf - Page 8
+
+```markdown
+# Multi-Head Cross Attention
+
+## Multi-Head Cross Attention
+
+Now we have the vectors $\{s_1, s_2, \ldots, s_T\}$ coming from the self-attention layer of decoder.
+
+We have also a set of vector $\{e_1, e_2, \ldots, e_T\}$ coming from top layer of encoder stack that is shared with all layers of decoder stack.
+
+Again, we need to create query, key and value vectors by applying the linear transformation matrices $W_{Q_2}, W_{K_2}, \text{ \& } W_{V_2}$ on these vectors $s_i$ and $e_j$.
+
+Therefore, it is called Encoder-Decoder attention or cross attention.
+
+We construct query vectors using vectors from self-attention layer $S$ and key, value vectors using vectors from the encoder $E$
+
+$$Q_2 = W_{Q_2} S \quad K_2 = W_{K_2} E \quad V_2 = W_{V_2} E$$
+
+$$Z = \text{softmax}(Q_2^T K_2)V_2^T$$
+
+We compute the multi-head attention using $Q_2, K_2, V_2$ and concatenate the resulting vectors.
+
+Finally, we pass the concatenated vectors through the feed-forward neural network to obtain the output vectors $O$
+
+*Source: Mitesh Khapra*
+```
+
+# Week 2 LLM.pdf - Page 9
+
+```markdown
+# First decoder layer
+
+Mitesh Khapro
+
+![First decoder layer diagram](image_url)
+
+## Components
+
+### Feed Forward Network
+- Positioned at the top of the decoder layer.
+- Outputs are indicated with upward arrows.
+
+### Multi-Head (Cross) Attention
+- Located below the Feed Forward Network.
+- Receives input from the Feed Forward Network.
+- Provided with an additional input `e`.
+
+### Masked Multi-Head (Self) Attention
+- Found at the bottom of the decoder layer.
+- Inputs include tokens: `<Go>`, `Naan`, `transfarma`, `padathai`, `fastthai`, `r`.
+
+## Workflow
+1. **Input Tokens**: Sequenced tokens are fed into the Masked Multi-Head (Self) Attention mechanism.
+2. **Self Attention**: Masked Multi-Head (Self) Attention processes the tokens.
+3. **Cross Attention**: The output from Self Attention is passed to the Multi-Head (Cross) Attention mechanism, which also receives an external input `e`.
+4. **Feed Forward Network**: The result from Cross Attention is then processed by the Feed Forward Network.
+5. **Output**: Final outputs are generated from the Feed Forward Network.
+
+```
+
+# Week 2 LLM.pdf - Page 10
+
+```markdown
+# Number of Parameters:
+
+## About 1 million parameters from Masked-Multi Head Attention layer
+
+## About 1 million parameters from Multi Head Cross Attention layer
+
+### Feed Forward Network (FFN) Calculation:
+\[
+FFN = 2 \times (512 \times 2048) + 2048 + 512
+\]
+\[
+= 2 \times 10^6
+\]
+
+## About 2 million parameters from FFN layer
+
+## About 4 million parameters per decoder layer
+
+```
+
+# Week 2 LLM.pdf - Page 11
+
+```markdown
+# Decoder Output
+
+The output from the top most decoder layer is linearly transformed by the matrix \( W_D \) of size \( 512 \times |V| \) where \( |V| \) is the size of the vocabulary.
+
+The probability distribution for the predicted words is obtained by applying softmax function.
+
+This alone contributes about 19 million parameters of the total 65 million parameters of the architecture.
+
+![Diagram](image_url)
+
+- **Feed Forward Network**
+  - \( W_{K_2} \rightarrow K_2 \)
+  - \( W_{V_2} \rightarrow V_2 \)
+  - \( W_{Q_2} \rightarrow Q_2 \)
+  - \( f(Q_2, K_2, V_2; W_{O_2}) \)
+
+- \( s_{1:T} \)
+
+- \( f(Q_1, K_1, V_1; Mask; W_{O_1}) \)
+
+- \( \{Q_1, K_1, V_1\} \)
+  - \( f(W_{Q_1}, W_{K_1}, W_{V_1}, h_{1:T}) \)
+
+- **Softmax**
+
+- **Linear \( W_D \)**
+```
+
+# Week 2 LLM.pdf - Page 12
+
+```markdown
+# Module 16.3: Positional Encoding
+
+**Mitesh M. Khapra**
+
+![IIT Madras Logo](https://example.com/logo.png)
+
+Aj4Bharat, Department of Computer Science and Engineering, IIT Madras
+
+---
+
+Mitesh Khapra
+```
+
+This markdown format preserves the structure and content of the original image, including the title, author, and institutional affiliation. Placeholder for the image link ensures the format remains consistent even if the OCR cannot extract the logo directly.
+
+# Week 2 LLM.pdf - Page 13
+
+```markdown
+# Positional Encoding
+
+The position of words in a sentence was encoded in the hidden states of RNN based sequence to sequence models.
+
+However, in transformers, no such information is available to either encoder or decoder. Moreover, the output from self-attention is permutation-invariant.
+
+So, it is necessary to encode the positional information.
+
+How do we embed positional information in the word embedding \( h_j \) (of size 512)?
+
+## Positional Encoding
+
+The position of words in a sentence was encoded in the hidden states of RNN based sequence to sequence models.
+
+However, in transformers, no such information is available to either encoder or decoder. Moreover, the output from self-attention is permutation-invariant.
+
+So, it is necessary to encode the positional information.
+
+How do we embed positional information in the word embedding \( h_j \) (of size 512)?
+
+### Positional Encoding
+
+The position of words in a sentence was encoded in the hidden states of RNN based sequence to sequence models.
+
+However, in transformers, no such information is available to either encoder or decoder. Moreover, the output from self-attention is permutation-invariant.
+
+So, it is necessary to encode the positional information.
+
+How do we embed positional information in the word embedding \( h_j \) (of size 512)?
+
+### Positional Encoding
+
+The position of words in a sentence was encoded in the hidden states of RNN based sequence to sequence models.
+
+However, in transformers, no such information is available to either encoder or decoder. Moreover, the output from self-attention is permutation-invariant.
+
+So, it is necessary to encode the positional information.
+
+How do we embed positional information in the word embedding \( h_j \) (of size 512)?
+
+**position, \( j \rightarrow \)**
+
+| dimension \( i \) | \( h'_0 \in \mathbb{R}^{512} \) | \( h'_1 \in \mathbb{R}^{512} \) |
+|-------------------|----------------------------------|------------------------------|
+| \( i = 0 \)       | ![](image1.png)                | ![](image2.png)             |
+| \( i = 1 \)       | ![](image3.png)                | ![](image4.png)             |
+| \( i = 2 \)       | ![](image5.png)                | ![](image6.png)             |
+| \( \vdots \)      | ![](image7.png)                | ![](image8.png)             |
+| \( i = 509 \)     | ![](image9.png)                | ![](image10.png)            |
+| \( i = 510 \)     | ![](image11.png)               | ![](image12.png)            |
+| \( i = 511 \)     | ![](image13.png)               | ![](image14.png)            |
+
+**I**
+
+**Enjoyed**
+```
+
+# Week 2 LLM.pdf - Page 14
+
+```markdown
+# Positional Encoding
+
+## How do we fill the elements of the positional vector \( p_0 \)?
+
+- **Could it be a constant vector (i.e., all elements are of constant (position) value \( j \) for \( p_j \)?**
+
+- **Can we use one hot encoding for the position \( j \), \( j = 0,1, \ldots, T \)?**
+
+- **or learn embedding for all possible positions?**
+
+- **Not suitable if the sentence length is dynamic.**
+
+---
+
+![Diagram](image_url)
+
+---
+
+```math
+i = 0 \quad \cdots \quad i = 511
+```
+
+```math
+h_0 \in \mathbb{R}^{512}
+```
+
+```math
+\oplus
+```
+
+```math
+h_0 \in \mathbb{R}^{512}
+```
+
+```math
+\begin{array}{c}
+i = 0 \\
+i = 1 \\
+i = 2 \\
+\vdots \\
+i = 509 \\
+i = 510 \\
+i = 511
+\end{array}
+```
+
+---
+
+Mitesh Khapra
+
+---
+
+```math
+p_0
+```
+
+```markdown
+- **Positional Encoding**
+
+  ## How do we fill the elements of the positional vector \( p_0 \)?
+
+  - **Could it be a constant vector (i.e., all elements are of constant (position) value \( j \) for \( p_j \)?**
+
+  - **Can we use one hot encoding for the position \( j \), \( j = 0,1, \ldots, T \)?**
+
+  - **or learn embedding for all possible positions?**
+
+  - **Not suitable if the sentence length is dynamic.**
+
+---
+
+![Diagram](image_url)
+
+---
+
+```math
+i = 0 \quad \cdots \quad i = 511
+```
+
+```math
+h_0 \in \mathbb{R}^{512}
+```
+
+```math
+\oplus
+```
+
+```math
+h_0 \in \mathbb{R}^{512}
+```
+
+```math
+\begin{array}{c}
+i = 0 \\
+i = 1 \\
+i = 2 \\
+\vdots \\
+i = 509 \\
+i = 510 \\
+i = 511
+\end{array}
+```
+
+---
+
+Mitesh Khapra
+
+---
+
+```math
+p_0
+```
+```
+
+# Week 2 LLM.pdf - Page 15
+
+```markdown
+# Sinusoidal encoding function
+
+**Hypothesis:** Embed a unique pattern of features for each position \( j \) and the model will learn to attend by the relative position.
+
+### How do we generate the features?
+
+\[ PE_{(j, i)} = \begin{cases}
+\sin \left( \frac{j}{10000^{\frac{2i}{d_{model}}}} \right) & \text{if } i \text{ is even} \\
+\cos \left( \frac{j}{10000^{\frac{2i-1}{d_{model}}}} \right) & \text{if } i \text{ is odd}
+\end{cases}
+\]
+
+where \( d_{model} = 512 \)
+
+For the fixed position \( j \), the value for \( i \) is sampled from \( \sin() \) if \( i \) is even or \( \cos() \) if \( i \) is odd
+
+### Let's evaluate the function \( PE_{(j, i)} \) for \( j = 0, 1, \ldots, 8 \) and \( i = 0, 1, \ldots, 63 \)
+
+Then, we can visualize this matrix as a heat map.
+
+*Mitesh Khadse*
+
+*Page 63*
+```
+
+# Week 2 LLM.pdf - Page 16
+
+```markdown
+# Scientific Content Extraction
+
+## Visual Representation
+
+![Graphical Representation](image-url)
+
+### Axes
+- **i**: Represents the horizontal axis.
+- **j**: Represents the vertical axis.
+
+### Color Bar
+- Color scale ranging from -1.0 (dark purple) to 1.0 (yellow).
+
+### Mathematical Formulas
+
+\[ P E_{(j,i)} = \begin{cases}
+\sin \left( \frac{j=0}{10000^{(2j)} d_{\text{model}}} \right) & i = 0, 1, \ldots, 255 \\
+\cos \left( \frac{j=0}{10000^{(2j)} d_{\text{model}}} \right) & i = 0, 1, \ldots, 255
+\end{cases}
+\]
+
+### Vector Representation
+
+\[ p_0 = \begin{bmatrix}
+0 \\
+1 \\
+0 \\
+\vdots \\
+0 \\
+1
+\end{bmatrix}
+\]
+
+### Description
+This alternating 0's and 1's will be added to the first word (embedding) of all sentences (sequences).
+
+### Credit
+Mitesh Khapro
+```
+
+_This markdown format ensures that the scientific content is accurately represented, maintaining the integrity of the formulas, symbols, and structural elements._
+
+# Week 2 LLM.pdf - Page 17
+
+```markdown
+# Scientific Text
+
+## Diagram and Formulae
+
+![Diagram](image_url)
+
+### Variables
+- \( i \)
+- \( j \)
+- \( PE_{(j,i)} \)
+- \( p_0 \)
+
+### Image Description
+The image depicts a heat map and associated mathematical formulas. The heat map ranges from -0.5 to 1.0, indicating some measure of correlation or similarity between indices \(i\) and \(j\).
+
+### Mathematical Formulas
+
+#### \( PE_{(j,i)} \)
+\[ PE_{(j,i)} = \begin{cases}
+\sin \left( \frac{j=0}{10000^{|2j|/d_{\text{model}}}} \right) & \text{for } i = 0, 1, \ldots, 255 \\
+\cos \left( \frac{j=0}{10000^{|2j|/d_{\text{model}}}} \right) & \text{for } i = 0, 1, \ldots, 255 
+\end{cases}
+\]
+
+### Additional Notes
+\[ p_0 = \begin{bmatrix}
+0 \\
+1 \\
+0 \\
+\vdots \\
+0 \\
+1
+\end{bmatrix}
+\]
+
+### Description
+This alternating 0's and 1's will be added to the first word (embedding) of all sentences.
+
+### Author
+Mitlesh Khapra
+```
+
+# Week 2 LLM.pdf - Page 18
+
+```markdown
+# Let's ask some interesting questions
+
+## Distance matrix
+
+|         | I      | Enjoyed   | the  | film  | transformer |
+|---------|--------|-----------|------|-------|-------------|
+| **I**   | 0      | 1         | 2    | 3     | 4           |
+| **Enjoyed** | 1      | 0         | 1    | 2     | 3           |
+| **the**  | 2      | 1         | 0    | 1     | 2           |
+| **film** | 3      | 2         | 1    | 0     | 1           |
+| **transformer** | 4      | 3         | 2    | 1     | 0           |
+
+The interesting observation is that the distance increases on the left and right of O (in all the rows) and is symmetric at the center position of the sentence.
+
+*Mitesh Khapra*
+
+---
+
+Page 66
+```
+
+# Week 2 LLM.pdf - Page 19
+
+```markdown
+# Does the PE function satisfy this property?
+
+Let's verify it graphically..
+
+![Graph](image_url)
+
+**Does one-hot encoding satisfy this property?**
+
+**No.**
+
+The Euclidean distance between any two vectors (independent of their position) is always \(\sqrt{2}\).
+
+*Mitresh Khapra*
+
+*Page 67*
+```
+
+# Week 2 LLM.pdf - Page 20
+
+```markdown
+# Module 16.4: Training the Transformer
+
+**Mitesh M. Khapra**
+
+![IIT Madras Logo](https://www.iitm.ac.in/images/logo.png)
+
+**Aj4Bharat, Department of Computer Science and Engineering, IIT Madras**
+
+Mitesh Khapra
+
+---
+
+### Module 16.4: Training the Transformer
+
+#### Overview
+This module focuses on the training process of transformer models, a fundamental aspect in contemporary machine learning and natural language processing. Transformers have revolutionized the field by enabling efficient parallelization and handling of sequential data.
+
+#### Objectives
+- Understand the architecture of transformers.
+- Learn the training procedure for transformers.
+- Gain insights into optimization techniques used during training.
+- Explore real-world applications and performance metrics.
+
+#### Key Concepts
+1. **Transformer Architecture**
+   - Self-Attention Mechanism
+   - Multi-Head Attention
+   - Position Encoding
+   - Feed-Forward Neural Networks
+   - Encoder and Decoder Structure
+
+2. **Training Procedure**
+   - Data Preparation
+   - Loss Function
+   - Optimization Algorithms
+     - Gradient Descent
+     - Adam Optimizer
+   - Training Loop
+     - Forward Pass
+     - Backward Pass
+     - Gradient Update
+
+3. **Optimization Techniques**
+   - Learning Rate Scheduling
+   - Regularization Techniques
+   - Batch Normalization
+   - Dropout
+
+4. **Performance Metrics**
+   - Accuracy
+   - Precision, Recall, F1-Score
+   - BLEU Score (for NLP tasks)
+   - Perplexity
+
+#### Example Code for Training a Transformer
+```python
+import torch
+import torch.nn as nn
+from torch.optim import Adam
+
+# Define the model
+class TransformerModel(nn.Module):
+    def __init__(self):
+        super(TransformerModel, self).__init__()
+        # Initialize the transformer layers here
+
+    def forward(self, x):
+        # Define the forward pass
+        return x
+
+# Initialize model, loss function, and optimizer
+model = TransformerModel()
+criterion = nn.CrossEntropyLoss()
+optimizer = Adam(model.parameters(), lr=0.001)
+
+# Training loop
+for epoch in range(num_epochs):
+    for inputs, labels in dataloader:
+        # Forward pass
+        outputs = model(inputs)
+        loss = criterion(outputs, labels)
+
+        # Backward pass and optimization
+        optimizer.zero_grad()
+        loss.backward()
+        optimizer.step()
+```
+
+#### Applications
+- Natural Language Processing (NLP)
+  - Machine Translation
+  - Text Summarization
+  - Sentiment Analysis
+- Computer Vision
+  - Image Classification
+  - Object Detection
+
+#### Conclusion
+Training transformer models involves a deep understanding of the underlying architecture and optimization techniques. This module provides a comprehensive guide to training transformers effectively and applying them to various real-world tasks.
+
+---
+
+**References**
+- Vaswani, A., Shazeer, N., Parmar, N., Uszkoreit, J., Jones, L., Gomez, A. N., Kaiser, Ł., & Polosukhin, I. (2017). [Attention is All You Need](https://arxiv.org/abs/1706.03762).
+- Bahdanau, D., & Graves, A. (2016). [Neural Machine Translation by Jointly Learning to Align and Translate](https://arxiv.org/abs/1409.0473).
+
+---
+
+**Contact Information**
+
+Mitesh M. Khapra
+Aj4Bharat, Department of Computer Science and Engineering
+IIT Madras
+Email: mitesh.khapra@iitm.ac.in
+```
+
+# Week 2 LLM.pdf - Page 21
+
+```markdown
+# Transformer Architecture
+
+For a through comparison, we may think of the transformer architecture is composed of attention layers and hidden layers.
+
+Then there is one attention layer and two hidden layers in encoder layer
+
+![Attention Layers and Hidden Layers](image_url)
+
+- **Attention Layer**: The first component in the encoder layer is the attention layer, which processes the input using the weight matrix \( W_{atten} \).
+
+- **Hidden Layers**: Following the attention layer, there are two hidden layers represented by the weight matrices \( W_1 \) and \( W_2 \).
+
+- **Output Layer**: After the attention and hidden layers, the output layer consists of a linear transformation followed by a softmax function to produce the final output.
+
+---
+
+Mitesh Khapro
+
+---
+
+```
+
+# Week 2 LLM.pdf - Page 22
+
+```markdown
+# Transformer Architecture
+
+For a **trough** comparison, we may think of the transformer architecture is composed of attention layers and hidden layers.
+
+Then there is one attention layer and two hidden layers in encoder layer and 2 attention layers and 2 hidden layers in decoder layer. Then, the network is deep with 42 layers.
+
+## Network Diagram
+
+![Network Diagram](image_url_placeholder)
+
+## Ensure Gradient Flow
+
+### Residual Connections
+
+How do we ensure the gradient flow across the network?
+
+### Normalization
+
+How do we speed up the training process?
+
+## Mathematical Notations
+
+### Attention Layer
+
+The attention layer is represented as:
+
+\[ W_{\text{atten}} \]
+
+### Linear and Softmax
+
+The output layer consists of a linear transformation followed by a softmax function:
+
+\[ \text{Linear} + \text{Softmax} \]
+
+## References
+
+Mitesh Khapro
+
+Page 70
+```
+
+# Week 2 LLM.pdf - Page 23
+
+```markdown
+# Batch Normalization
+
+## \(i^{th}\) layer
+
+Let \(x_i^j\) denotes the activation of \(i^{th}\) neuron for \(j^{th}\) training sample.
+
+Let us associate an accumulator with \(i^{th}\) layer that stores the activations of batch inputs.
+
+### Accumulator
+
+```
+Accumulator
+----------------
+| x_1^m   x_2^m   x_3^m   ...   x_5^m   |
+| x_1^2   x_2^2   x_3^2   ...   x_5^2   |
+| x_1^1   x_2^1   x_3^1   ...   x_5^1   |
+----------------
+```
+
+Accumulated activations for \(m\) training samples
+
+We have three variables \(l\), \(i\), \(j\) involved in the statistics computation. Let’s visualize these as three axes that form a cube.
+
+![Cube Representation](image_url)
+
+### Formulas
+
+\[
+\mu_{i} = \frac{1}{m} \sum_{j=1}^{m} x_{j}^{i}
+\]
+
+\[
+\sigma_{i}^{2} = \frac{1}{m} \sum_{j=1}^{m} (x_{j}^{i} - \mu_{i})^{2}
+\]
+
+\[
+\hat{x}_{i} = \frac{x_{i} - \mu_{i}}{\sqrt{\sigma_{i}^{2} + \epsilon}}
+\]
+
+\[
+\hat{y}_{i} = \gamma \hat{x}_{i} + \beta
+\]
+
+*Source: Mitesh Khapro*
+
+*Page Number: 71*
+```
+
+# Week 2 LLM.pdf - Page 24
+
+```markdown
+# Batch Normalization
+
+## at $i^{th}$ layer
+
+Let $x_i^j$ denotes the activation of $i^{th}$ neuron for $j^{th}$ training sample.
+
+Let us associate an accumulator with $i^{th}$ layer that stores the activations of batch inputs.
+
+### Accumulator
+
+```markdown
+|                 | x_1^1 | x_1^2 | x_1^3 | x_1^4 | \cdots | x_1^m |
+|-----------------|-------|-------|-------|-------|--------|-------|
+| x_2^1          | x_2^2 | x_2^3 | x_2^4 | x_2^5 | \cdots | x_2^m |
+| x_2^2          | x_2^3 | x_2^4 | x_2^5 | x_2^6 | \cdots | x_2^m |
+| \vdots         |       |       |       |       |        |       |
+| x_3^m          | x_3^m | x_3^m | x_3^m | x_3^m | \cdots | x_3^m |
+| \vdots         |       |       |       |       |        |       |
+| x_4^m          | x_4^m | x_4^m | x_4^m | x_4^m | \cdots | x_4^m |
+| x_5^m          | x_5^m | x_5^m | x_5^m | x_5^m | \cdots | x_5^m |
+```
+
+**Accumulated activations for `m` training samples**
+
+We have three variables $l, i, j$ involved in the statistics computation. Let's visualize these as three axes that form a cube.
+
+```markdown
+![Cube](image_placeholder)
+```
+
+$$ \mu_{i-3} = \frac{1}{m} \sum_{j=1}^{m} x_i^j $$
+
+$$ \sigma_{i-2}^2 = \frac{1}{m} \sum_{j=1}^{m} \left(x_i^j - \mu_i\right)^2 $$
+
+$$ \hat{x}_i = \frac{x_i - \mu_i}{\sqrt{\sigma_i^2 + \epsilon}} $$
+
+$$ \hat{y}_i = \gamma \hat{x}_i + \beta $$
+
+**Source**: Mitsesh Khapra
+
+```
+
+# Week 2 LLM.pdf - Page 25
+
+```markdown
+# Can we apply batch normalization to transformers?
+
+Of course, yes. However, there are some limitations to BN.
+
+The accuracy of estimation of mean and variance depends on the size of \( m \). So using a smaller size of \( m \) results in high error.
+
+Because of this, we can't use a batch size of 1 at all (i.e., it won't make any difference, \(\mu_i = x_i, \sigma_i = 0\)).
+
+Other than this limitation, it was also empirically found that the naive use of BN leads to performance degradation in NLP tasks [source].
+
+There was also a systematic study that validated the statement and proposed a new normalization technique (by modifying BN) called powerNorm.
+
+Fortunately, we have another simple normalization technique called Layer Normalization that works well.
+```
+
+# Week 2 LLM.pdf - Page 26
+
+```markdown
+# Layer Normalization at l<sup>th</sup> layer
+
+The computation is simple. Take the average across outputs of hidden units in the layer. Therefore, the normalization is independent of number of samples in a batch.
+
+This allows us to work with a batch size of 1 (if needed as in the case of RNN)
+
+![Layer Normalization Diagram]()
+
+- **Diagram**: A diagram of a cube representing the layer normalization process.
+
+## Formulas
+
+### Mean (μ<sub>l</sub>)
+```math
+\mu_l = \frac{1}{H} \sum_{i=1}^{H} x_i
+```
+
+### Variance (σ<sub>l</sub>)
+```math
+\sigma_l = \sqrt{\frac{1}{H} \sum_{i=1}^{H} (x_i - \mu_l)^2}
+```
+
+### Normalized Output (x̂<sub>i</sub>)
+```math
+\hat{x_i} = \frac{x_i - \mu_l}{\sqrt{\sigma_l^2 + \epsilon}}
+```
+
+### Scaled and Shifted Output (ŷ<sub>i</sub>)
+```math
+\hat{y_i} = \gamma \hat{x_i} + \beta
+```
+
+*Source: Mitesh Khapro*
+```
+
+# Week 2 LLM.pdf - Page 27
+
+```markdown
+# The complete Layer
+
+## Encoder
+
+- **Feed Forward Network**
+  - **Description**: ...
+  - **Formula**: ...
+
+- **Multi-Head Attention**
+  - **Description**: ...
+  - **Formula**: ...
+
+```
+
+# Week 2 LLM.pdf - Page 28
+
+```markdown
+# The complete Layer
+
+## Encoder
+
+![Encoder Diagram](image_url)
+
+- **Add & Layer Norm**
+  - Add residual connection and layer norm block after every Multi-Head attention, feed-forward network, cross attention blocks
+
+- **Feed Forward Network**
+
+- **Add & Layer Norm**
+
+- **Multi-Head Attention**
+
+**Source:** Mitesh Khapro
+
+Page 76
+```
+
+# Week 2 LLM.pdf - Page 29
+
+```markdown
+# The Transformer Architecture
+
+The input embedding for words in a sequence is learned while training the model. (No pretrained embedding models like Word2Vec was used).
+
+This amounts to an additional set of weights in the model.
+
+The positional information is encoded and added with input embedding (this function can also be parameterized).
+
+The output from the top encoder layer is fed as input to all the decoder layers to compute multi-head cross attention.
+
+- **Multi-Head Attention**
+  - Key (K)
+  - Value (V)
+  - Query (Q)
+
+## Output Probabilities
+
+- **Softmax**
+
+## Layers
+
+### Encoder Layer
+1. **Input Embedding**
+   - Positional Encoding
+
+2. **Add & Norm**
+
+3. **Multi-Head Attention**
+   - Key (K)
+   - Value (V)
+   - Query (Q)
+
+4. **Feed Forward**
+
+5. **Add & Norm**
+
+### Decoder Layer
+1. **Output Embedding**
+   - Positional Encoding
+
+2. **Masked Multi-Head Attention**
+
+3. **Add & Norm**
+
+4. **Multi-Head Attention**
+
+5. **Feed Forward**
+
+6. **Add & Norm**
+
+### Processes
+
+1. **Add & Norm**
+   - Addition and normalization operations
+
+2. **Feed Forward**
+   - Two-layer neural network with a ReLU activation in between
+
+3. **Positional Encoding**
+   - Adds information about the position of words in the sequence
+
+4. **Multi-Head Attention**
+   - Attention mechanism with multiple attention heads
+
+5. **Masked Multi-Head Attention**
+   - Attention mechanism that masks future tokens to prevent leakage of information
+
+6. **Softmax**
+   - Converts logits to probabilities
+
+7. **LuCUS**
+   - Layer used in the decoder (likely refers to a specific layer type or transformation)
+
+**Note**: The exact meaning and representation of "LuCUS" should be verified as it may refer to a specific component or operation in the Transformer architecture.
+```
+

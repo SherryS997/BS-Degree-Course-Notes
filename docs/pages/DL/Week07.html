@@ -1,0 +1,1427 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.4.553">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>BS Degree Notes - Topics in Deep Learning</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="https://lalten.github.io/lmweb/style/latinmodern-roman.css">
+<link rel="stylesheet" href="https://lalten.github.io/lmweb/style/latinmodern-sans.css">
+<link rel="stylesheet" href="https://lalten.github.io/lmweb/style/latinmodern-mono.css">
+</head>
+
+<body class="nav-sidebar docked">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">
+      BS Degree Notes
+      </li></ol></nav>
+        <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="../../">BS Degree Notes</a> 
+        <div class="sidebar-tools-main">
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Home</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="false">
+ <span class="menu-text">Deep Learning</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../pages/DL/Week01_1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 1.1</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../pages/DL/Week01_2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 1.2</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../pages/DL/Week02.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 2</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../pages/DL/Week03.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 3</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../pages/DL/Week04.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 4</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../pages/DL/Week05.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 5</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../pages/DL/Week06.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 6</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="false">
+ <span class="menu-text">AI: Search Methods</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../pages/AI/Week01.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 1</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../pages/AI/Week02.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 2</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../pages/AI/Week03.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 3</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../pages/AI/Week04.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 4</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../pages/AI/Week05.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 5</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../pages/AI/Week06.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 6</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="false">
+ <span class="menu-text">Software Testing</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../pages/ST/Week01.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 1</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../pages/ST/Week02.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 2</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../pages/ST/Week03.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 3</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../pages/ST/Week04.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 4</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../pages/ST/Week05.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 5</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../pages/ST/Week06.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 6</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../pages/ST/Week07.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 7</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../pages/ST/Week08.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 8</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../pages/ST/Week09.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 9</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../pages/ST/Week10.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 10</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../pages/ST/Week11.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 11</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../pages/ST/Week12.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 12</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="false">
+ <span class="menu-text">Software Engineering</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../pages/SE/Week01.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 1</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../pages/SE/Week02.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 2</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../pages/SE/Week03.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 3</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../pages/SE/Week04.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 4</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../pages/SE/Week09.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 9</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../pages/SE/Week10.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 10</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../pages/SE/Week11.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 11</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="false">
+ <span class="menu-text">Reinforcement Learning</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../pages/RL/Week01_1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 1.1</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../pages/RL/Week01_2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 1.2</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../pages/RL/Week02.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 2</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#unsupervised-pre-training" id="toc-unsupervised-pre-training" class="nav-link active" data-scroll-target="#unsupervised-pre-training">Unsupervised Pre-training</a>
+  <ul class="collapse">
+  <li><a href="#the-challenge-of-training-deep-neural-networks" id="toc-the-challenge-of-training-deep-neural-networks" class="nav-link" data-scroll-target="#the-challenge-of-training-deep-neural-networks">The Challenge of Training Deep Neural Networks</a></li>
+  <li><a href="#unsupervised-pre-training-a-solution-to-the-problem" id="toc-unsupervised-pre-training-a-solution-to-the-problem" class="nav-link" data-scroll-target="#unsupervised-pre-training-a-solution-to-the-problem">Unsupervised Pre-training: A Solution to the Problem</a>
+  <ul class="collapse">
+  <li><a href="#autoencoders" id="toc-autoencoders" class="nav-link" data-scroll-target="#autoencoders">Autoencoders</a></li>
+  <li><a href="#unsupervised-pre-training-of-autoencoders" id="toc-unsupervised-pre-training-of-autoencoders" class="nav-link" data-scroll-target="#unsupervised-pre-training-of-autoencoders">Unsupervised Pre-training of Autoencoders</a></li>
+  <li><a href="#abstract-representation" id="toc-abstract-representation" class="nav-link" data-scroll-target="#abstract-representation">Abstract Representation</a></li>
+  <li><a href="#supervised-fine-tuning" id="toc-supervised-fine-tuning" class="nav-link" data-scroll-target="#supervised-fine-tuning">Supervised Fine-Tuning</a></li>
+  </ul></li>
+  <li><a href="#why-unsupervised-pre-training-works" id="toc-why-unsupervised-pre-training-works" class="nav-link" data-scroll-target="#why-unsupervised-pre-training-works">Why Unsupervised Pre-training Works</a>
+  <ul class="collapse">
+  <li><a href="#better-optimization" id="toc-better-optimization" class="nav-link" data-scroll-target="#better-optimization">Better Optimization</a></li>
+  <li><a href="#better-regularization" id="toc-better-regularization" class="nav-link" data-scroll-target="#better-regularization">Better Regularization</a></li>
+  </ul></li>
+  <li><a href="#impact-of-unsupervised-pre-training" id="toc-impact-of-unsupervised-pre-training" class="nav-link" data-scroll-target="#impact-of-unsupervised-pre-training">Impact of Unsupervised Pre-training</a>
+  <ul class="collapse">
+  <li><a href="#optimization-algorithms" id="toc-optimization-algorithms" class="nav-link" data-scroll-target="#optimization-algorithms">Optimization Algorithms</a></li>
+  <li><a href="#regularization-techniques" id="toc-regularization-techniques" class="nav-link" data-scroll-target="#regularization-techniques">Regularization Techniques</a></li>
+  </ul></li>
+  </ul></li>
+  <li><a href="#optimization-in-deep-neural-networks" id="toc-optimization-in-deep-neural-networks" class="nav-link" data-scroll-target="#optimization-in-deep-neural-networks">Optimization in Deep Neural Networks</a>
+  <ul class="collapse">
+  <li><a href="#the-optimization-problem" id="toc-the-optimization-problem" class="nav-link" data-scroll-target="#the-optimization-problem">The Optimization Problem</a></li>
+  <li><a href="#error-surface-of-deep-neural-networks" id="toc-error-surface-of-deep-neural-networks" class="nav-link" data-scroll-target="#error-surface-of-deep-neural-networks">Error Surface of Deep Neural Networks</a></li>
+  <li><a href="#universal-approximation-theorem" id="toc-universal-approximation-theorem" class="nav-link" data-scroll-target="#universal-approximation-theorem">Universal Approximation Theorem</a></li>
+  <li><a href="#capacity-of-deep-neural-networks" id="toc-capacity-of-deep-neural-networks" class="nav-link" data-scroll-target="#capacity-of-deep-neural-networks">Capacity of Deep Neural Networks</a></li>
+  <li><a href="#pre-training-and-optimization" id="toc-pre-training-and-optimization" class="nav-link" data-scroll-target="#pre-training-and-optimization">Pre-training and Optimization</a></li>
+  <li><a href="#regularization-and-pre-training" id="toc-regularization-and-pre-training" class="nav-link" data-scroll-target="#regularization-and-pre-training">Regularization and Pre-training</a></li>
+  <li><a href="#robustness-to-random-initializations" id="toc-robustness-to-random-initializations" class="nav-link" data-scroll-target="#robustness-to-random-initializations">Robustness to Random Initializations</a></li>
+  <li><a href="#importance-of-initialization-optimization-and-regularization" id="toc-importance-of-initialization-optimization-and-regularization" class="nav-link" data-scroll-target="#importance-of-initialization-optimization-and-regularization">Importance of Initialization, Optimization, and Regularization</a></li>
+  </ul></li>
+  <li><a href="#activation-functions" id="toc-activation-functions" class="nav-link" data-scroll-target="#activation-functions">Activation Functions</a>
+  <ul class="collapse">
+  <li><a href="#sigmoid-function" id="toc-sigmoid-function" class="nav-link" data-scroll-target="#sigmoid-function">Sigmoid Function</a></li>
+  <li><a href="#tanh-function" id="toc-tanh-function" class="nav-link" data-scroll-target="#tanh-function">Tanh Function</a></li>
+  <li><a href="#rectified-linear-unit-relu-function" id="toc-rectified-linear-unit-relu-function" class="nav-link" data-scroll-target="#rectified-linear-unit-relu-function">Rectified Linear Unit (ReLU) Function</a></li>
+  <li><a href="#leaky-relu-function" id="toc-leaky-relu-function" class="nav-link" data-scroll-target="#leaky-relu-function">Leaky ReLU Function</a></li>
+  <li><a href="#exponential-linear-unit-elu-function" id="toc-exponential-linear-unit-elu-function" class="nav-link" data-scroll-target="#exponential-linear-unit-elu-function">Exponential Linear Unit (ELU) Function</a></li>
+  <li><a href="#softmax-activation-function" id="toc-softmax-activation-function" class="nav-link" data-scroll-target="#softmax-activation-function">Softmax Activation Function</a></li>
+  <li><a href="#gelu-activation-function" id="toc-gelu-activation-function" class="nav-link" data-scroll-target="#gelu-activation-function">Gelu Activation Function</a></li>
+  <li><a href="#swish-activation-function" id="toc-swish-activation-function" class="nav-link" data-scroll-target="#swish-activation-function">Swish Activation Function</a></li>
+  <li><a href="#silu-activation-function" id="toc-silu-activation-function" class="nav-link" data-scroll-target="#silu-activation-function">Silu Activation Function</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Topics in Deep Learning</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="unsupervised-pre-training" class="level1">
+<h1>Unsupervised Pre-training</h1>
+<section id="the-challenge-of-training-deep-neural-networks" class="level2">
+<h2 class="anchored" data-anchor-id="the-challenge-of-training-deep-neural-networks">The Challenge of Training Deep Neural Networks</h2>
+<p>Training deep neural networks has been a long-standing challenge in machine learning. The main issue lies in the optimization of the network’s weights, which is a complex and non-convex problem. Before 2006, training deep neural networks was difficult due to the vanishing gradient problem, where the gradients used to update the weights become smaller as they propagate through the network, making it hard to optimize the weights.</p>
+</section>
+<section id="unsupervised-pre-training-a-solution-to-the-problem" class="level2">
+<h2 class="anchored" data-anchor-id="unsupervised-pre-training-a-solution-to-the-problem">Unsupervised Pre-training: A Solution to the Problem</h2>
+<p>In 2006, a seminal work introduced the concept of unsupervised pre-training, which allows for the training of deep neural networks. The idea is to train one layer at a time, using an unsupervised objective function. This is done by reconstructing the input from the hidden layer, rather than predicting the output.</p>
+<section id="autoencoders" class="level3">
+<h3 class="anchored" data-anchor-id="autoencoders">Autoencoders</h3>
+<p>An autoencoder is a neural network that tries to reconstruct its input. It consists of an encoder that maps the input to a hidden representation, and a decoder that maps the hidden representation back to the input. The objective function is to minimize the difference between the input and the reconstructed input.</p>
+<p>Let’s denote the input vector as <span class="math inline">\(\mathbf{x}\)</span>, the hidden representation as <span class="math inline">\(\mathbf{h}\)</span>, and the reconstructed input as <span class="math inline">\(\hat{\mathbf{x}}\)</span>. The autoencoder can be represented as:</p>
+<p><span class="math display">\[
+\mathbf{h} = \mathbf{g}^{(1)}(\mathbf{W}^{(1)} \mathbf{x} + \mathbf{b}^{(1)})
+\]</span></p>
+<p><span class="math display">\[
+\hat{\mathbf{x}} = \mathbf{g}^{(2)}(\mathbf{W}^{(2)} \mathbf{h} + \mathbf{b}^{(2)})
+\]</span></p>
+<p>The objective function is to minimize the reconstruction error, which is typically measured using the mean squared error (MSE) or cross-entropy loss:</p>
+<p><span class="math display">\[
+\mathcal{L}(\theta) = \frac{1}{2} \left\lVert \mathbf{x} - \hat{\mathbf{x}} \right\rVert^2
+\]</span></p>
+</section>
+<section id="unsupervised-pre-training-of-autoencoders" class="level3">
+<h3 class="anchored" data-anchor-id="unsupervised-pre-training-of-autoencoders">Unsupervised Pre-training of Autoencoders</h3>
+<p>In unsupervised pre-training, the autoencoder is trained to reconstruct the input from the hidden layer. This is done by minimizing the reconstruction error using the objective function above. The hidden layer is trained to capture the important features of the input, and the decoder is trained to reconstruct the input from these features.</p>
+<p>The unsupervised pre-training process is done in a greedy layer-wise manner. Each layer is trained independently, using the output of the previous layer as the input. This process is repeated until all layers are trained.</p>
+<p>Let’s denote the input to the <span class="math inline">\(i\)</span>-th layer as <span class="math inline">\(\mathbf{x}^{(i-1)}\)</span>, the hidden representation as <span class="math inline">\(\mathbf{h}^{(i)}\)</span>, and the reconstructed input as <span class="math inline">\(\hat{\mathbf{x}}^{(i-1)}\)</span>. The <span class="math inline">\(i\)</span>-th layer can be represented as:</p>
+<p><span class="math display">\[
+\mathbf{h}^{(i)} = \mathbf{g}^{(i)}(\mathbf{W}^{(i)} \mathbf{x}^{(i-1)} + \mathbf{b}^{(i)})
+\]</span></p>
+<p><span class="math display">\[
+\hat{\mathbf{x}}^{(i-1)} = \mathbf{g}^{(i+1)}(\mathbf{W}^{(i+1)} \mathbf{h}^{(i)} + \mathbf{b}^{(i+1)})
+\]</span></p>
+<p>The objective function for the <span class="math inline">\(i\)</span>-th layer is to minimize the reconstruction error:</p>
+<p><span class="math display">\[
+\mathcal{L}(\theta^{(i)}) = \frac{1}{2} \left\lVert \mathbf{x}^{(i-1)} - \hat{\mathbf{x}}^{(i-1)} \right\rVert^2
+\]</span></p>
+</section>
+<section id="abstract-representation" class="level3">
+<h3 class="anchored" data-anchor-id="abstract-representation">Abstract Representation</h3>
+<p>Each layer in the network captures an abstract representation of the input. The first layer captures the most important features of the input, and each subsequent layer captures a more abstract representation of the previous layer.</p>
+</section>
+<section id="supervised-fine-tuning" class="level3">
+<h3 class="anchored" data-anchor-id="supervised-fine-tuning">Supervised Fine-Tuning</h3>
+<p>Once all layers are trained using unsupervised pre-training, the network is fine-tuned using a supervised objective function. The weights learned during unsupervised pre-training are used as the initialization for the supervised fine-tuning.</p>
+<p>Let’s denote the output vector as <span class="math inline">\(\mathbf{y}\)</span>, and the network’s output as <span class="math inline">\(\hat{\mathbf{y}}\)</span>. The supervised objective function is to minimize the difference between the output and the predicted output:</p>
+<p><span class="math display">\[
+\mathcal{L}(\theta) = \frac{1}{2} \left\lVert \mathbf{y} - \hat{\mathbf{y}} \right\rVert^2
+\]</span></p>
+</section>
+</section>
+<section id="why-unsupervised-pre-training-works" class="level2">
+<h2 class="anchored" data-anchor-id="why-unsupervised-pre-training-works">Why Unsupervised Pre-training Works</h2>
+<p>There are two possible reasons why unsupervised pre-training works: better optimization and better regularization.</p>
+<section id="better-optimization" class="level3">
+<h3 class="anchored" data-anchor-id="better-optimization">Better Optimization</h3>
+<p>Unsupervised pre-training can lead to better optimization of the network’s weights. By training each layer independently, the network is able to converge to a better minimum of the loss function.</p>
+</section>
+<section id="better-regularization" class="level3">
+<h3 class="anchored" data-anchor-id="better-regularization">Better Regularization</h3>
+<p>Unsupervised pre-training can also lead to better regularization of the network. By capturing the important features of the input, the network is able to generalize better to unseen data.</p>
+</section>
+</section>
+<section id="impact-of-unsupervised-pre-training" class="level2">
+<h2 class="anchored" data-anchor-id="impact-of-unsupervised-pre-training">Impact of Unsupervised Pre-training</h2>
+<p>The work on unsupervised pre-training led to a series of advances in deep learning, including better optimization algorithms, regularization techniques, and initialization methods. It also sparked interest in designing better methods for optimization and regularization.</p>
+<section id="optimization-algorithms" class="level3">
+<h3 class="anchored" data-anchor-id="optimization-algorithms">Optimization Algorithms</h3>
+<p>One of the most popular optimization algorithms is Adam, which is an adaptive learning rate method. Adam adapts the learning rate for each parameter based on the magnitude of the gradient.</p>
+<p>Let’s denote the velocity at iteration <span class="math inline">\(t\)</span> as <span class="math inline">\(\mathbf{u}_t\)</span>, the accumulated history of squared gradients at iteration <span class="math inline">\(t\)</span> as <span class="math inline">\(v_t\)</span>, and the hyperparameter controlling the exponential decay rate as <span class="math inline">\(\beta\)</span>. The update rule for Adam is:</p>
+<p><span class="math display">\[
+\mathbf{u}_t = \beta \mathbf{u}_{t-1} + (1 - \beta) \nabla \mathcal{L}_t
+\]</span></p>
+<p><span class="math display">\[
+v_t = \beta v_{t-1} + (1 - \beta) \nabla \mathcal{L}_t^2
+\]</span></p>
+<p><span class="math display">\[
+\theta_t = \theta_{t-1} - \eta \frac{\mathbf{u}_t}{\sqrt{v_t} + \epsilon}
+\]</span></p>
+</section>
+<section id="regularization-techniques" class="level3">
+<h3 class="anchored" data-anchor-id="regularization-techniques">Regularization Techniques</h3>
+<p>One of the most popular regularization techniques is dropout, which randomly drops out neurons during training. Dropout prevents the network from overfitting by making it difficult for the network to rely on any single neuron.</p>
+<p>Let’s denote the dropout rate as <span class="math inline">\(p\)</span>, and the binary mask as <span class="math inline">\(\mathbf{m}\)</span>. The output of the <span class="math inline">\(i\)</span>-th layer with dropout is:</p>
+<p><span class="math display">\[
+\mathbf{h}^{(i)} = \mathbf{g}^{(i)}(\mathbf{W}^{(i)} \mathbf{x}^{(i-1)} + \mathbf{b}^{(i)}) \odot \mathbf{m}
+\]</span></p>
+<p>where <span class="math inline">\(\odot\)</span> denotes element-wise multiplication.</p>
+</section>
+</section>
+</section>
+<section id="optimization-in-deep-neural-networks" class="level1">
+<h1>Optimization in Deep Neural Networks</h1>
+<section id="the-optimization-problem" class="level3">
+<h3 class="anchored" data-anchor-id="the-optimization-problem">The Optimization Problem</h3>
+<p>The optimization problem in deep neural networks involves minimizing the loss function, typically measured by the mean squared error (MSE), between the network’s predictions and the true outputs. Given an input vector <span class="math inline">\(\mathbf{x}\)</span>, the network’s output is represented by <span class="math inline">\(\hat{\mathbf{y}} = \mathbf{f}(\mathbf{x}; \theta)\)</span>, where <span class="math inline">\(\theta\)</span> denotes the model parameters. The loss function is defined as:</p>
+<p><span class="math display">\[\mathcal{L}(\theta) = \frac{1}{2} \sum_{i=1}^N (\hat{y}_i - y_i)^2\]</span></p>
+<p>where <span class="math inline">\(N\)</span> is the total number of training samples, and <span class="math inline">\(y_i\)</span> is the true output for the <span class="math inline">\(i\)</span>-th sample.</p>
+</section>
+<section id="error-surface-of-deep-neural-networks" class="level3">
+<h3 class="anchored" data-anchor-id="error-surface-of-deep-neural-networks">Error Surface of Deep Neural Networks</h3>
+<p>The error surface of a deep neural network is highly non-convex, with many local minima, plateaus, and valleys. This makes it challenging to optimize the loss function using traditional optimization methods. The error surface can be visualized as a complex landscape with multiple minima, where the goal is to find the global minimum.</p>
+</section>
+<section id="universal-approximation-theorem" class="level3">
+<h3 class="anchored" data-anchor-id="universal-approximation-theorem">Universal Approximation Theorem</h3>
+<p>The universal approximation theorem states that a sufficiently large neural network can approximate any continuous function to an arbitrary degree of precision. This implies that, in theory, it is possible to drive the training error to zero by increasing the capacity of the network. However, this comes at a cost, as larger networks require more time and resources to train.</p>
+</section>
+<section id="capacity-of-deep-neural-networks" class="level3">
+<h3 class="anchored" data-anchor-id="capacity-of-deep-neural-networks">Capacity of Deep Neural Networks</h3>
+<p>The capacity of a deep neural network refers to its ability to fit the training data. Increasing the capacity of a neural network by adding more neurons or layers can lead to better optimization. However, this also increases the risk of overfitting, where the network becomes too specialized to the training data and fails to generalize well to new, unseen data.</p>
+</section>
+<section id="pre-training-and-optimization" class="level3">
+<h3 class="anchored" data-anchor-id="pre-training-and-optimization">Pre-training and Optimization</h3>
+<p>Pre-training involves training a neural network on an unsupervised objective, such as reconstructing the input data, before fine-tuning it on the supervised objective. Some researchers argue that pre-training helps with optimization by allowing the network to find better local minima. However, others argue that pre-training is not necessary for optimization, and that a large enough neural network can achieve good optimization without pre-training.</p>
+<p>Experiments have shown that pre-training can lead to better optimization, but this may be due to the increased capacity of the network rather than the pre-training itself. By increasing the capacity of the network, pre-training can provide a better initialization for the supervised objective, leading to faster convergence and better optimization.</p>
+</section>
+<section id="regularization-and-pre-training" class="level3">
+<h3 class="anchored" data-anchor-id="regularization-and-pre-training">Regularization and Pre-training</h3>
+<p>Pre-training can also be seen as a form of regularization, as it constrains the weights to lie in certain regions of the parameter space. This is similar to L2 regularization, which constrains the weights to lie within a certain circle, and early stopping, which prevents the weights from growing too large. By constraining the weights, pre-training can lead to better generalization and optimization.</p>
+</section>
+<section id="robustness-to-random-initializations" class="level3">
+<h3 class="anchored" data-anchor-id="robustness-to-random-initializations">Robustness to Random Initializations</h3>
+<p>Experiments have shown that pre-training can make deep neural networks more robust to random initializations. This means that the network is less sensitive to the initial weights and can achieve good optimization even with different initializations. This has led to research into better initialization methods, as well as better optimization and regularization methods.</p>
+</section>
+<section id="importance-of-initialization-optimization-and-regularization" class="level3">
+<h3 class="anchored" data-anchor-id="importance-of-initialization-optimization-and-regularization">Importance of Initialization, Optimization, and Regularization</h3>
+<p>The research into pre-training has highlighted the importance of initialization, optimization, and regularization in deep neural networks. By focusing on these areas, researchers have been able to develop better methods for training deep neural networks, including better optimization algorithms, regularization methods, and weight initialization strategies.</p>
+<p>Some of the popular optimization algorithms used in deep learning include:</p>
+<ul>
+<li><strong>Stochastic Gradient Descent (SGD)</strong>: SGD is a simple and widely used optimization algorithm that updates the model parameters in the direction of the negative gradient of the loss function.</li>
+</ul>
+<p><span class="math display">\[\theta_t = \theta_{t-1} - \eta \nabla \mathcal{L}_t\]</span></p>
+<ul>
+<li><strong>Momentum</strong>: Momentum is an extension of SGD that incorporates a momentum term to help escape local minima.</li>
+</ul>
+<p><span class="math display">\[\mathbf{u}_t = \beta \mathbf{u}_{t-1} + \eta \nabla \mathcal{L}_t\]</span></p>
+<p><span class="math display">\[\theta_t = \theta_{t-1} - \mathbf{u}_t\]</span></p>
+<ul>
+<li><strong>Adagrad</strong>: Adagrad is an optimization algorithm that adapts the learning rate for each parameter based on the gradient norm.</li>
+</ul>
+<p><span class="math display">\[v_t = \beta v_{t-1} + (1 - \beta) \nabla \mathcal{L}_t^2\]</span></p>
+<p><span class="math display">\[\theta_t = \theta_{t-1} - \frac{\eta}{\sqrt{v_t + \epsilon}} \nabla \mathcal{L}_t\]</span></p>
+<ul>
+<li><strong>Adam</strong>: Adam is a popular optimization algorithm that combines the benefits of momentum and Adagrad.</li>
+</ul>
+<p><span class="math display">\[m_t = \beta_1 m_{t-1} + (1 - \beta_1) \nabla \mathcal{L}_t\]</span></p>
+<p><span class="math display">\[v_t = \beta_2 v_{t-1} + (1 - \beta_2) \nabla \mathcal{L}_t^2\]</span></p>
+<p><span class="math display">\[\theta_t = \theta_{t-1} - \frac{\eta}{\sqrt{v_t + \epsilon}} m_t\]</span></p>
+<p>These optimization algorithms, along with regularization methods and weight initialization strategies, have been crucial in the development of deep learning models that can achieve state-of-the-art performance on a wide range of tasks.</p>
+</section>
+</section>
+<section id="activation-functions" class="level1">
+<h1>Activation Functions</h1>
+<section id="sigmoid-function" class="level3">
+<h3 class="anchored" data-anchor-id="sigmoid-function">Sigmoid Function</h3>
+<p>The sigmoid function, denoted by <span class="math inline">\(\sigma(x)\)</span>, is a widely used activation function in neural networks. It is defined as:</p>
+<p><span class="math display">\[\sigma(x) = \frac{1}{1 + e^{-x}}\]</span></p>
+<p>where <span class="math inline">\(e\)</span> is the base of the natural logarithm. The sigmoid function maps the input <span class="math inline">\(x\)</span> to a value between 0 and 1.</p>
+<p><strong>Properties of Sigmoid Function</strong></p>
+<ul>
+<li>The sigmoid function is continuous and differentiable.</li>
+<li>The sigmoid function is monotonically increasing, meaning that as the input <span class="math inline">\(x\)</span> increases, the output <span class="math inline">\(\sigma(x)\)</span> also increases.</li>
+<li>The sigmoid function has an S-shaped curve, which allows it to model complex relationships between inputs and outputs.</li>
+</ul>
+<p><strong>Derivative of Sigmoid Function</strong></p>
+<p>The derivative of the sigmoid function is given by:</p>
+<p><span class="math display">\[\sigma'(x) = \sigma(x) (1 - \sigma(x))\]</span></p>
+<p>The derivative of the sigmoid function is used in backpropagation to compute the gradients of the loss function with respect to the model parameters.</p>
+<p><strong>Limitations of Sigmoid Function</strong></p>
+<ul>
+<li>The sigmoid function has a limited range of outputs, which can lead to vanishing gradients during backpropagation.</li>
+<li>The sigmoid function is not zero-centered, which can cause the gradients to have different magnitudes for different inputs.</li>
+<li>The sigmoid function is computationally expensive, as it involves the computation of the exponential function.</li>
+</ul>
+</section>
+<section id="tanh-function" class="level3">
+<h3 class="anchored" data-anchor-id="tanh-function">Tanh Function</h3>
+<p>The tanh function, denoted by <span class="math inline">\(\tanh(x)\)</span>, is another widely used activation function in neural networks. It is defined as:</p>
+<p><span class="math display">\[\tanh(x) = \frac{e^x - e^{-x}}{e^x + e^{-x}}\]</span></p>
+<p>The tanh function maps the input <span class="math inline">\(x\)</span> to a value between -1 and 1.</p>
+<p><strong>Properties of Tanh Function</strong></p>
+<ul>
+<li>The tanh function is continuous and differentiable.</li>
+<li>The tanh function is monotonically increasing, meaning that as the input <span class="math inline">\(x\)</span> increases, the output <span class="math inline">\(\tanh(x)\)</span> also increases.</li>
+<li>The tanh function has an S-shaped curve, which allows it to model complex relationships between inputs and outputs.</li>
+</ul>
+<p><strong>Derivative of Tanh Function</strong></p>
+<p>The derivative of the tanh function is given by:</p>
+<p><span class="math display">\[\tanh'(x) = 1 - \tanh^2(x)\]</span></p>
+<p>The derivative of the tanh function is used in backpropagation to compute the gradients of the loss function with respect to the model parameters.</p>
+<p><strong>Limitations of Tanh Function</strong></p>
+<ul>
+<li>The tanh function has a limited range of outputs, which can lead to vanishing gradients during backpropagation.</li>
+<li>The tanh function is computationally expensive, as it involves the computation of the exponential function.</li>
+</ul>
+</section>
+<section id="rectified-linear-unit-relu-function" class="level3">
+<h3 class="anchored" data-anchor-id="rectified-linear-unit-relu-function">Rectified Linear Unit (ReLU) Function</h3>
+<p>The ReLU function, denoted by <span class="math inline">\(\text{ReLU}(x)\)</span>, is a widely used activation function in neural networks. It is defined as:</p>
+<p><span class="math display">\[\text{ReLU}(x) = \max(0, x)\]</span></p>
+<p>The ReLU function maps the input <span class="math inline">\(x\)</span> to a value between 0 and <span class="math inline">\(x\)</span>.</p>
+<p><strong>Properties of ReLU Function</strong></p>
+<ul>
+<li>The ReLU function is continuous but not differentiable at <span class="math inline">\(x=0\)</span>.</li>
+<li>The ReLU function is monotonically increasing, meaning that as the input <span class="math inline">\(x\)</span> increases, the output <span class="math inline">\(\text{ReLU}(x)\)</span> also increases.</li>
+<li>The ReLU function is computationally efficient, as it only involves a simple thresholding operation.</li>
+</ul>
+<p><strong>Derivative of ReLU Function</strong></p>
+<p>The derivative of the ReLU function is given by:</p>
+<p><span class="math display">\[\text{ReLU}'(x) = \begin{cases}
+0 &amp; \text{if } x &lt; 0 \\
+1 &amp; \text{if } x \geq 0
+\end{cases}\]</span></p>
+<p>The derivative of the ReLU function is used in backpropagation to compute the gradients of the loss function with respect to the model parameters.</p>
+<p><strong>Limitations of ReLU Function</strong></p>
+<ul>
+<li>The ReLU function can cause neurons to die, meaning that the output of the neuron becomes zero and remains zero during training.</li>
+<li>The ReLU function is not zero-centered, which can cause the gradients to have different magnitudes for different inputs.</li>
+</ul>
+</section>
+<section id="leaky-relu-function" class="level3">
+<h3 class="anchored" data-anchor-id="leaky-relu-function">Leaky ReLU Function</h3>
+<p>The Leaky ReLU function, denoted by <span class="math inline">\(\text{LeakyReLU}(x)\)</span>, is a variant of the ReLU function that allows a small fraction of the input to pass through even when the input is negative. It is defined as:</p>
+<p><span class="math display">\[\text{LeakyReLU}(x) = \max(\alpha x, x)\]</span></p>
+<p>where <span class="math inline">\(\alpha\)</span> is a small constant, typically set to 0.1.</p>
+<p><strong>Properties of Leaky ReLU Function</strong></p>
+<ul>
+<li>The Leaky ReLU function is continuous and differentiable.</li>
+<li>The Leaky ReLU function is monotonically increasing, meaning that as the input <span class="math inline">\(x\)</span> increases, the output <span class="math inline">\(\text{LeakyReLU}(x)\)</span> also increases.</li>
+<li>The Leaky ReLU function is computationally efficient, as it only involves a simple thresholding operation.</li>
+</ul>
+<p><strong>Derivative of Leaky ReLU Function</strong></p>
+<p>The derivative of the Leaky ReLU function is given by:</p>
+<p><span class="math display">\[\text{LeakyReLU}'(x) = \begin{cases}
+\alpha &amp; \text{if } x &lt; 0 \\
+1 &amp; \text{if } x \geq 0
+\end{cases}\]</span></p>
+<p>The derivative of the Leaky ReLU function is used in backpropagation to compute the gradients of the loss function with respect to the model parameters.</p>
+<p><strong>Parametric ReLU Function</strong></p>
+<p>The Parametric ReLU function, denoted by <span class="math inline">\(\text{PrELU}(x)\)</span>, is a variant of the ReLU function that allows the slope of the negative region to be learned during training. It is defined as:</p>
+<p><span class="math display">\[\text{PrELU}(x) = \max(\alpha x, x)\]</span></p>
+<p>where <span class="math inline">\(\alpha\)</span> is a learnable parameter.</p>
+<p><strong>Properties of Parametric ReLU Function</strong></p>
+<ul>
+<li>The Parametric ReLU function is continuous and differentiable.</li>
+<li>The Parametric ReLU function is monotonically increasing, meaning that as the input <span class="math inline">\(x\)</span> increases, the output <span class="math inline">\(\text{PrELU}(x)\)</span> also increases.</li>
+<li>The Parametric ReLU function is computationally efficient, as it only involves a simple thresholding operation.</li>
+</ul>
+<p><strong>Derivative of Parametric ReLU Function</strong></p>
+<p>The derivative of the Parametric ReLU function is given by:</p>
+<p><span class="math display">\[\text{PrELU}'(x) = \begin{cases}
+\alpha &amp; \text{if } x &lt; 0 \\
+1 &amp; \text{if } x \geq 0
+\end{cases}\]</span></p>
+<p>The derivative of the Parametric ReLU function is used in backpropagation to compute the gradients of the loss function with respect to the model parameters.</p>
+</section>
+<section id="exponential-linear-unit-elu-function" class="level3">
+<h3 class="anchored" data-anchor-id="exponential-linear-unit-elu-function">Exponential Linear Unit (ELU) Function</h3>
+<p>The ELU function, denoted by <span class="math inline">\(\text{ELU}(x)\)</span>, is a variant of the ReLU function that allows the output to be negative. It is defined as:</p>
+<p><span class="math display">\[\text{ELU}(x) = \begin{cases}
+x &amp; \text{if } x \geq 0 \\
+\alpha (e^x - 1) &amp; \text{if } x &lt; 0
+\end{cases}\]</span></p>
+<p>where <span class="math inline">\(\alpha\)</span> is a small constant, typically set to 1.</p>
+<p><strong>Properties of ELU Function</strong></p>
+<ul>
+<li>The ELU function is continuous and differentiable.</li>
+<li>The ELU function is monotonically increasing, meaning that as the input <span class="math inline">\(x\)</span> increases, the output <span class="math inline">\(\text{ELU}(x)\)</span> also increases.</li>
+<li>The ELU function is computationally efficient, as it only involves a simple thresholding operation.</li>
+</ul>
+<p><strong>Derivative of ELU Function</strong></p>
+<p>The derivative of the ELU function is given by:</p>
+<p><span class="math display">\[\text{ELU}'(x) = \begin{cases}
+1 &amp; \text{if } x \geq 0 \\
+\alpha e^x &amp; \text{if } x &lt; 0
+\end{cases}\]</span></p>
+<p>The derivative of the ELU function is used in backpropagation to compute the gradients of the loss function with respect to the model parameters.</p>
+</section>
+<section id="softmax-activation-function" class="level3">
+<h3 class="anchored" data-anchor-id="softmax-activation-function">Softmax Activation Function</h3>
+<p>The Softmax activation function, denoted by <span class="math inline">\(\sigma(x)\)</span>, is typically used as the output layer activation function in classification problems. It is defined as:</p>
+<p><span class="math display">\[\sigma(x) = \frac{e^{x_i}}{\sum_{j=1}^K e^{x_j}}\]</span></p>
+<p>where <span class="math inline">\(x_i\)</span> is the <span class="math inline">\(i^{th}\)</span> element of the input vector, and <span class="math inline">\(K\)</span> is the number of classes.</p>
+<p><strong>Properties of Softmax Activation Function</strong></p>
+<ul>
+<li>The Softmax activation function is continuous and differentiable.</li>
+<li>The Softmax activation function is monotonically increasing, meaning that as the input increases, the output also increases.</li>
+<li>The Softmax activation function is a probability distribution, meaning that the output values sum up to 1.</li>
+</ul>
+<p><strong>Derivative of Softmax Activation Function</strong></p>
+<p>The derivative of the Softmax activation function is given by:</p>
+<p><span class="math display">\[\sigma'(x) = \sigma(x) \cdot (1 - \sigma(x))\]</span></p>
+<p>The derivative of the Softmax activation function is used in backpropagation to compute the gradients of the loss function with respect to the model parameters.</p>
+<p><strong>Advantages of Softmax Activation Function</strong></p>
+<ul>
+<li>The Softmax activation function is suitable for classification problems, as it outputs a probability distribution over the classes.</li>
+<li>The Softmax activation function is differentiable, making it easy to optimize using gradient-based methods.</li>
+<li>The Softmax activation function is widely used and well-established in the deep learning community.</li>
+</ul>
+</section>
+<section id="gelu-activation-function" class="level3">
+<h3 class="anchored" data-anchor-id="gelu-activation-function">Gelu Activation Function</h3>
+<p>The Gelu activation function, also known as the Gaussian Error Linear Unit, is a recently introduced activation function that has been shown to be more effective than ReLU and its variants. It is defined as:</p>
+<p><span class="math display">\[f(x) = x \cdot \Phi(x)\]</span></p>
+<p>where <span class="math inline">\(\Phi(x)\)</span> is the cumulative distribution function of the standard normal distribution.</p>
+<p><strong>Properties of Gelu Activation Function</strong></p>
+<ul>
+<li>The Gelu activation function is continuous and differentiable.</li>
+<li>The Gelu activation function is non-monotonic, meaning that it can have multiple local maxima and minima.</li>
+<li>The Gelu activation function is self-gated, meaning that it can adaptively adjust the amount of input to pass through based on the input value.</li>
+</ul>
+<p><strong>Derivative of Gelu Activation Function</strong></p>
+<p>The derivative of the Gelu activation function is given by:</p>
+<p><span class="math display">\[f'(x) = \Phi(x) + x \cdot \phi(x)\]</span></p>
+<p>where <span class="math inline">\(\phi(x)\)</span> is the probability density function of the standard normal distribution.</p>
+<p><strong>Advantages of Gelu Activation Function</strong></p>
+<ul>
+<li>The Gelu activation function has been shown to be more effective than ReLU and its variants in various deep learning tasks.</li>
+<li>The Gelu activation function is more robust to outliers and noisy data.</li>
+<li>The Gelu activation function can adaptively adjust the amount of input to pass through based on the input value.</li>
+</ul>
+</section>
+<section id="swish-activation-function" class="level3">
+<h3 class="anchored" data-anchor-id="swish-activation-function">Swish Activation Function</h3>
+<p>The Swish activation function is a recently introduced activation function that is a generalization of the Gelu activation function. It is defined as:</p>
+<p><span class="math display">\[f(x) = x \cdot \sigma(\beta x)\]</span></p>
+<p>where <span class="math inline">\(\sigma(x)\)</span> is the sigmoid function and <span class="math inline">\(\beta\)</span> is a learnable parameter.</p>
+<p><strong>Properties of Swish Activation Function</strong></p>
+<ul>
+<li>The Swish activation function is continuous and differentiable.</li>
+<li>The Swish activation function is non-monotonic, meaning that it can have multiple local maxima and minima.</li>
+<li>The Swish activation function is self-gated, meaning that it can adaptively adjust the amount of input to pass through based on the input value.</li>
+</ul>
+<p><strong>Derivative of Swish Activation Function</strong></p>
+<p>The derivative of the Swish activation function is given by:</p>
+<p><span class="math display">\[f'(x) = \sigma(\beta x) + x \cdot \beta \cdot \sigma'(\beta x)\]</span></p>
+<p>where <span class="math inline">\(\sigma'(x)\)</span> is the derivative of the sigmoid function.</p>
+<p><strong>Advantages of Swish Activation Function</strong></p>
+<ul>
+<li>The Swish activation function has been shown to be more effective than ReLU and its variants in various deep learning tasks.</li>
+<li>The Swish activation function is more robust to outliers and noisy data.</li>
+<li>The Swish activation function can adaptively adjust the amount of input to pass through based on the input value.</li>
+</ul>
+</section>
+<section id="silu-activation-function" class="level3">
+<h3 class="anchored" data-anchor-id="silu-activation-function">Silu Activation Function</h3>
+<p>The Silu activation function, also known as the Sigmoid Weighted Linear Unit, is a recently introduced activation function that is a specialization of the Swish activation function. It is defined as:</p>
+<p><span class="math display">\[f(x) = x \cdot \sigma(x)\]</span></p>
+<p>where <span class="math inline">\(\sigma(x)\)</span> is the sigmoid function.</p>
+<p><strong>Properties of Silu Activation Function</strong></p>
+<ul>
+<li>The Silu activation function is continuous and differentiable.</li>
+<li>The Silu activation function is non-monotonic, meaning that it can have multiple local maxima and minima.</li>
+<li>The Silu activation function is self-gated, meaning that it can adaptively adjust the amount of input to pass through based on the input value.</li>
+</ul>
+<p><strong>Derivative of Silu Activation Function</strong></p>
+<p>The derivative of the Silu activation function is given by:</p>
+<p><span class="math display">\[f'(x) = \sigma(x) + x \cdot \sigma'(x)\]</span></p>
+<p>where <span class="math inline">\(\sigma'(x)\)</span> is the derivative of the sigmoid function.</p>
+<p><strong>Advantages of Silu Activation Function</strong></p>
+<ul>
+<li>The Silu activation function has been shown to be more effective than ReLU and its variants in various deep learning tasks.</li>
+<li>The Silu activation function is more robust to outliers and noisy data.</li>
+<li>The Silu activation function can adaptively adjust the amount of input to pass through based on the input value.</li>
+</ul>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const disableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'prefetch';
+    }
+  }
+  const enableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'stylesheet';
+    }
+  }
+  const manageTransitions = (selector, allowTransitions) => {
+    const els = window.document.querySelectorAll(selector);
+    for (let i=0; i < els.length; i++) {
+      const el = els[i];
+      if (allowTransitions) {
+        el.classList.remove('notransition');
+      } else {
+        el.classList.add('notransition');
+      }
+    }
+  }
+  const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+    const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+    const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+    let newTheme = '';
+    if(darkModeDefault) {
+      newTheme = isAlternate ? baseTheme : alternateTheme;
+    } else {
+      newTheme = isAlternate ? alternateTheme : baseTheme;
+    }
+    const changeGiscusTheme = () => {
+      // From: https://github.com/giscus/giscus/issues/336
+      const sendMessage = (message) => {
+        const iframe = document.querySelector('iframe.giscus-frame');
+        if (!iframe) return;
+        iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+      }
+      sendMessage({
+        setConfig: {
+          theme: newTheme
+        }
+      });
+    }
+    const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+    if (isGiscussLoaded) {
+      changeGiscusTheme();
+    }
+  }
+  const toggleColorMode = (alternate) => {
+    // Switch the stylesheets
+    const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+    manageTransitions('#quarto-margin-sidebar .nav-link', false);
+    if (alternate) {
+      enableStylesheet(alternateStylesheets);
+      for (const sheetNode of alternateStylesheets) {
+        if (sheetNode.id === "quarto-bootstrap") {
+          toggleBodyColorMode(sheetNode);
+        }
+      }
+    } else {
+      disableStylesheet(alternateStylesheets);
+      toggleBodyColorPrimary();
+    }
+    manageTransitions('#quarto-margin-sidebar .nav-link', true);
+    // Switch the toggles
+    const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+    for (let i=0; i < toggles.length; i++) {
+      const toggle = toggles[i];
+      if (toggle) {
+        if (alternate) {
+          toggle.classList.add("alternate");     
+        } else {
+          toggle.classList.remove("alternate");
+        }
+      }
+    }
+    // Hack to workaround the fact that safari doesn't
+    // properly recolor the scrollbar when toggling (#1455)
+    if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+      manageTransitions("body", false);
+      window.scrollTo(0, 1);
+      setTimeout(() => {
+        window.scrollTo(0, 0);
+        manageTransitions("body", true);
+      }, 40);  
+    }
+  }
+  const isFileUrl = () => { 
+    return window.location.protocol === 'file:';
+  }
+  const hasAlternateSentinel = () => {  
+    let styleSentinel = getColorSchemeSentinel();
+    if (styleSentinel !== null) {
+      return styleSentinel === "alternate";
+    } else {
+      return false;
+    }
+  }
+  const setStyleSentinel = (alternate) => {
+    const value = alternate ? "alternate" : "default";
+    if (!isFileUrl()) {
+      window.localStorage.setItem("quarto-color-scheme", value);
+    } else {
+      localAlternateSentinel = value;
+    }
+  }
+  const getColorSchemeSentinel = () => {
+    if (!isFileUrl()) {
+      const storageValue = window.localStorage.getItem("quarto-color-scheme");
+      return storageValue != null ? storageValue : localAlternateSentinel;
+    } else {
+      return localAlternateSentinel;
+    }
+  }
+  const darkModeDefault = false;
+  let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+  // Dark / light mode switch
+  window.quartoToggleColorScheme = () => {
+    // Read the current dark / light value 
+    let toAlternate = !hasAlternateSentinel();
+    toggleColorMode(toAlternate);
+    setStyleSentinel(toAlternate);
+    toggleGiscusIfUsed(toAlternate, darkModeDefault);
+  };
+  // Ensure there is a toggle, if there isn't float one in the top right
+  if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+    const a = window.document.createElement('a');
+    a.classList.add('top-right');
+    a.classList.add('quarto-color-scheme-toggle');
+    a.href = "";
+    a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+    const i = window.document.createElement("i");
+    i.classList.add('bi');
+    a.appendChild(i);
+    window.document.body.appendChild(a);
+  }
+  // Switch to dark mode if need be
+  if (hasAlternateSentinel()) {
+    toggleColorMode(true);
+  } else {
+    toggleColorMode(false);
+  }
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

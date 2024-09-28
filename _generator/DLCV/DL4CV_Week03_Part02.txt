@@ -1,0 +1,856 @@
+# DL4CV_Week03_Part02.pdf - Page 1
+
+```markdown
+# Deep Learning for Computer Vision
+
+# Hough Transform
+
+**Vineeth N Balasubramanian**
+
+Department of Computer Science and Engineering
+Indian Institute of Technology, Hyderabad
+
+![IIT Hyderabad Logo](image_placeholder)
+
+---
+
+Vineeth N B (IIT-H)
+
+§3.2 Hough Transform
+
+1 / 18
+```
+
+In the provided markdown output:
+1. The title "Deep Learning for Computer Vision" is formatted as a level-1 heading (`#`).
+2. The section "Hough Transform" is formatted as a level-1 heading (`#`).
+3. The author's name **Vineeth N Balasubramanian** is made bold.
+4. The affiliation is formatted as a paragraph.
+5. A placeholder for the logo image is included as `![IIT Hyderabad Logo](image_placeholder)`.
+6. Additional information about the section and page numbering is formatted as a paragraph.
+
+# DL4CV_Week03_Part02.pdf - Page 2
+
+```markdown
+# Acknowledgements
+
+- Most of this lecture’s slides are based on lectures of **Deep Learning for Vision** course taught by Prof Yannis Avrithis at Inria Rennes-Bretagne Atlantique, as well as the **Computer Vision** course taught by Prof Mubarak Shah/Alper Yilmaz at the University of Central Florida
+
+Vineeth N B (IIT-H) §3.2 Hough Transform
+
+---
+
+2 / 18
+```
+
+# DL4CV_Week03_Part02.pdf - Page 3
+
+```markdown
+# Line Fitting
+
+- We have already seen a couple of line fitting algorithms: **Least squares fit** and **RANSAC**
+- How do they perform when multiple lines are present?
+
+![Example line configuration in an image.](image-placeholder)
+
+**Figure 1:** Example line configuration in an image.
+
+---
+
+**Vineeth N B (IITH)**
+
+**Section 3.2 Hough Transform**
+
+**Slide 3 / 18**
+```
+
+# DL4CV_Week03_Part02.pdf - Page 4
+
+```markdown
+# Line Fitting: Hough Transform
+
+- Hough, *Method and means for recognizing complex patterns*, U.S. Patent No. 3,069,654, Dec 1962
+
+## Line equation in Cartesian coordinates is:
+
+- \( y = mx + c \) 
+  - \( m \) is slope,
+  - \( c \) is \( y \)-intercept
+
+## Rearranging it slightly, we get:
+
+- \( c = (-x)m + y \)
+  - which for a specific point \((x_i, y_i)\) becomes \( c = (-x_i)m + y_i \)
+
+## This can be thought of as the equation of line in parameter space; i.e in the \((m, c)\) coordinate system with slope \(-x_i\) and \(c\)-intercept \(y\)
+
+## Each point in parameter space is a model
+
+*Source: Alper Yilmaz, Mubarak Shah, Fall 2011 UCF*
+
+*Vineeth N B. (IIT-H)*
+
+## Slide 3.2 Hough Transform
+
+```
+
+# DL4CV_Week03_Part02.pdf - Page 5
+
+```markdown
+# Line Fitting: Hough Transform
+
+- N samples needed to fit a model (2 points to fit a line)
+
+- But even one sample brings some information
+
+- In the space of all possible models, vote for ones that satisfy a given sample
+
+- Collect votes for all samples, and seek for consensus
+
+![Image](image_url_placeholder)
+
+*Source: Yannis Avrithis, Deep Learning for Vision, Spring 2019 SIF*
+
+*Vineeth N B (IIT-H) §3.2 Hough Transform*
+```
+
+# DL4CV_Week03_Part02.pdf - Page 6
+
+```markdown
+# Hough Transform: Polar Parametrization
+
+- The Cartesian formulation is problematic for vertical lines. Why?
+
+![NPTEL Logo](image-url)
+
+*Vineeth N B (IIT-H)*
+
+## 3.2 Hough Transform
+
+*Page 6 of 18*
+```
+
+In the markdown format above:
+
+1. The title "Hough Transform: Polar Parametrization" is formatted with the `#` symbol.
+2. The bullet point containing the question is formatted with `-`.
+3. The image placeholder `![NPTEL Logo](image-url)` is used for the image that OCR could not capture directly.
+4. The authorship and page reference are maintained as plain text.
+5. The section title "3.2 Hough Transform" is formatted with `##`.
+
+This ensures the extracted content is organized and accurately formatted in markdown.
+
+# DL4CV_Week03_Part02.pdf - Page 7
+
+```markdown
+# Hough Transform: Polar Parametrization
+
+- **The Cartesian formulation is problematic for vertical lines. Why?**
+
+  - The slope is unbounded for vertical lines.
+
+- **Consider a polar parametrization of the line:**
+
+  - $\rho = x \cos \theta + y \sin \theta$
+
+  - $\rho$ is distance of line from origin and $\theta$ is angle made by normal to $x$-axis
+
+  - For given line, $\rho \geq 0$ and $0 \leq \theta \leq 360^\circ$ are bounded
+
+![Figure 2: The $\rho, \theta$ parametrization.](image_url)
+
+**Source:** Alper Yilmaz, Mubarak Shah, Fall 2011 UCF
+
+_Vineeth N B (IIIT-H)_
+
+§3.2 Hough Transform
+
+6 / 18
+```
+
+# DL4CV_Week03_Part02.pdf - Page 8
+
+```markdown
+# Hough Transform: Polar Parametrization
+
+- **A point** $(x_i, y_i)$ 'votes' for many points in parameter space $\rightarrow$ **Hough Voting**
+- **Each line through a point** $(x_1, y_1)$ is a vote for a point in parameter space which satisfies
+  \[
+  \rho = x_1 \cos \theta + y_1 \sin \theta
+  \]
+
+![Voting in Parameter Space](image-url)
+
+**Source:** Yannis Avrithis, *Deep Learning for Vision, Spring 2019 SIF*
+
+*Vineeth N B (IIT-H)*
+
+## 3.2 Hough Transform
+```
+
+Note: Replace `image-url` with the actual URL or placeholder for the image if it's available. Ensure to format the formula using LaTeX within triple backticks for proper rendering.
+
+# DL4CV_Week03_Part02.pdf - Page 9
+
+```markdown
+# Hough Transform: Polar Parametrization
+
+- A point \((x_i, y_i)\) 'votes' for many points in parameter space → **Hough Voting**
+- Each line through a point \((x_1, y_1)\) is a vote for a point in parameter space which satisfies
+  \[
+  \rho = x_1 \cos \theta + y_1 \sin \theta
+  \]
+
+![voting in parameter space](image-url)
+
+*Source: Yannis Avrithis, Deep Learning for Vision, Spring 2019 SIF*
+
+*Vineeth N B (IIT-H) §3.2 Hough Transform*
+```
+
+# DL4CV_Week03_Part02.pdf - Page 10
+
+```markdown
+# Hough Transform: Polar Parametrization
+
+- **A point** \((x_i, y_i)\) **'votes'** for many points in parameter space → **Hough Voting**
+- **Each line** through a point \((x_1, y_1)\) is a vote for a point in parameter space which satisfies
+  \[
+  \rho = x_1 \cos \theta + y_1 \sin \theta
+  \]
+
+![voting in parameter space](image_placeholder)
+
+*Source: Yannis Avrithis, Deep Learning for Vision, Spring 2019 SIF*
+
+*Vineeth N B (IIT-H) §3.2 Hough Transform*
+```
+
+# DL4CV_Week03_Part02.pdf - Page 11
+
+```markdown
+# Hough Transform: Polar Parametrization
+
+- A point $(x_i, y_i)$ 'votes' for many points in parameter space $\rightarrow$ **Hough Voting**
+- Each line through a point $(x_1, y_1)$ is a vote for a point in parameter space which satisfies
+  \[
+  \rho = x_1 \cos \theta + y_1 \sin \theta
+  \]
+
+![Voting in Parameter Space](image_url)
+
+*Source: Yannis Avrithis, Deep Learning for Vision, Spring 2019 SIF*
+
+*Vineeth N B (IIIT-H)*
+
+*§3.2 Hough Transform*
+
+*Page 7 / 18*
+```
+
+# DL4CV_Week03_Part02.pdf - Page 12
+
+```markdown
+# Hough Transform: Polar Parametrization
+
+- A point $(x_i, y_i)$ 'votes' for many points in parameter space → **Hough Voting**
+- Each line through a point $(x_1, y_1)$ is a vote for a point in parameter space which satisfies
+  $$\rho = x_1 \cos \theta + y_1 \sin \theta$$
+
+  ![voting in parameter space](image_url)
+
+  _Source: Yannis Avrithis, Deep Learning for Vision, Spring 2019 SIF_
+
+  Vineeth N B (IIIT-H)
+
+  §3.2 Hough Transform
+
+  7 / 18
+```
+
+# DL4CV_Week03_Part02.pdf - Page 13
+
+```markdown
+# Hough Transform: Polar Parametrization
+
+- Each line through a point \((x_2, y_2)\) is a vote for a point in parameter space which satisfies
+  \[
+  \rho = x_2 \cos \theta + y_2 \sin \theta
+  \]
+
+![Voting in parameter space](image-placeholder)
+
+Source: Yannis Avrithis, *Deep Learning for Vision, Spring 2019 SIF*
+
+Vineeth N B (IIT-H)
+
+## 3.2 Hough Transform
+
+```
+
+# DL4CV_Week03_Part02.pdf - Page 14
+
+```markdown
+# Hough Transform: Polar Parametrization
+
+- Each line through a point \((x_2, y_2)\) is a vote for a point in parameter space which satisfies
+  \[
+  \rho = x_2 \cos \theta + y_2 \sin \theta
+  \]
+
+![Graph](image_url)
+
+![Diagram](diagram_url)
+
+*voting in parameter space*
+
+![Source](source_url)
+
+*Source: Yannis Avrithis, Deep Learning for Vision, Spring 2019 SIF*
+
+*Vineeth N B (IIT-H)*
+
+## 8.2 Hough Transform
+```
+
+# DL4CV_Week03_Part02.pdf - Page 15
+
+```markdown
+# Hough Transform: Polar Parametrization
+
+- Each line through a point \((x_2, y_2)\) is a vote for a point in parameter space which satisfies
+  \[
+  \rho = x_2 \cos \theta + y_2 \sin \theta
+  \]
+
+![Voting in parameter space](image_url_here)
+
+*Source: Yannis Avrithis, Deep Learning for Vision, Spring 2019 SIF*
+
+*Vineeth N B (IIT-H)*
+
+## §3.2 Hough Transform
+```
+
+# DL4CV_Week03_Part02.pdf - Page 16
+
+```markdown
+# Hough Transform: Polar Parametrization
+
+- Each line through a point \((x_2, y_2)\) is a vote for a point in parameter space which satisfies
+  \[
+  \rho = x_2 \cos \theta + y_2 \sin \theta
+  \]
+
+![Voting in Parameter Space](image_url)
+
+*Source: Yannis Avrithis, Deep Learning for Vision, Spring 2019 SIF*
+
+*Vineeth N B (IIT-H)*
+
+## §3.2 Hough Transform
+
+### Diagram Description
+- The image shows a graphical representation where lines passing through points \((x_1, y_1)\) and \((x_2, y_2)\) are used to vote in parameter space.
+- The parameter space is defined by \(\rho\) and \(\theta\), where \(\rho\) is the distance from the origin to the line and \(\theta\) is the angle the line makes with the x-axis.
+- The equation \(\rho = x_2 \cos \theta + y_2 \sin \theta\) is used to map lines in image space to points in parameter space.
+- The diagram illustrates how different lines in image space correspond to different points in parameter space.
+
+### Visual Elements
+- The image contains a grid with two curves representing lines in the parameter space.
+- There is an overlayed circular region with radial lines, indicating the parameter space.
+- Two points \(x_1\) and \(x_2\) with corresponding lines are shown, indicating the voting process in parameter space.
+
+### Mathematical Representation
+- The formula \(\rho = x_2 \cos \theta + y_2 \sin \theta\) is used to convert Cartesian coordinates \((x_2, y_2)\) to polar coordinates \((\rho, \theta)\).
+- This transformation helps in detecting lines by accumulating votes in the parameter space.
+
+### Key Concepts
+- **Hough Transform**: A technique used for detecting lines or edges in images by transforming the problem into a voting mechanism in a parameter space.
+- **Parameter Space**: A space defined by \(\rho\) and \(\theta\) where each line in the image contributes a vote.
+- **Voting Process**: Each point \((x_2, y_2)\) generates a line in the parameter space, effectively casting a vote for the corresponding \((\rho, \theta)\) pair.
+
+### Applications
+- Line detection in image processing.
+- Edge detection and feature extraction.
+- Used in computer vision for object detection and recognition.
+```
+
+# DL4CV_Week03_Part02.pdf - Page 17
+
+```markdown
+# Hough Transform: Polar Parametrization
+
+- Each line through a point \((x_2, y_2)\) is a vote for a point in parameter space which satisfies
+  \[
+  \rho = x_2 \cos \theta + y_2 \sin \theta
+  \]
+
+![Voting in parameter space](image-url-here)
+
+![Graph](graph-url-here)
+
+*Source: Yannis Avrithis, Deep Learning for Vision, Spring 2019 SIF*
+
+*Vineeth N B (IIT-H)*
+
+*Section 3.2 Hough Transform*
+
+*Date: 8 / 18*
+```
+
+# DL4CV_Week03_Part02.pdf - Page 18
+
+```markdown
+# Hough Voting
+
+```plaintext
+1: procedure Hough Voting(X, Θ)
+2: X: data Θ: quantized parameter θ_min, ..., θ_max
+3: A: accumulator array, initially zero
+4: for (x, y) ∈ X do
+5: for θ ∈ Θ do
+6:     ρ = x cos θ + y sin θ
+7:     ∀ for each set of model parameters consistent with a sample, increment A
+8:     A[θ, ρ] = A[θ, ρ] + 1
+9: end for
+10: end for
+11: Non-maximum Suppression: detect local maxima in A
+12: end procedure
+```
+
+Source: Yannis Avrithis, Deep Learning for Vision, Spring 2019 SIF
+
+Vineeth N B (IIT-H)
+
+## §3.2 Hough Transform
+```
+
+This markdown format maintains the structure, formatting, and scientific integrity of the original content, including the use of code blocks for the procedure and inline code for the mathematical formula.
+
+# DL4CV_Week03_Part02.pdf - Page 19
+
+```markdown
+# Line Detection
+
+![Points](data:image/png;base64,...) 
+
+**Source:** Yannis Avrithis, *Deep Learning for Vision*, Spring 2019 SIF
+
+---
+
+Vineeth N B (IIT-H) 
+
+## 3.2 Hough Transform
+
+---
+
+Date: 10 / 18
+```
+
+Note: The image placeholder `![Points](data:image/png;base64,...)` is used as a placeholder since the actual image content cannot be captured from the provided text. Replace it with the actual image URL if needed.
+
+# DL4CV_Week03_Part02.pdf - Page 20
+
+```markdown
+# Line Detection
+
+![Line Detection Diagram](data:image/png;base64,...) 
+
+- **points**
+- **accumulator**
+
+**Source:** Yannis Avrithis, *Deep Learning for Vision*, Spring 2019 SIF
+
+---
+
+Vineeth N B (IIT-H) 
+
+## §3.2 Hough Transform
+
+---
+
+10 / 18
+```
+
+# DL4CV_Week03_Part02.pdf - Page 21
+
+```markdown
+# Line Detection
+
+![Points](image1.png) ![Accumulator](image2.png) ![Local Maxima](image3.png)
+
+**Source:** Yannis Avrithis, *Deep Learning for Vision*, Spring 2019 SIF
+
+---
+
+Vineeth N B (IIIT-H)
+
+## 3.2 Hough Transform
+
+---
+
+**Diagrams and Process Illustrations:**
+
+- **Points:** Illustrates the initial point cloud data.
+- **Accumulator:** Shows the intermediate result of the accumulation process.
+- **Local Maxima:** Highlights the detected local maxima points.
+
+---
+
+### Points
+```image
+![Points](image1.png)
+```
+
+### Accumulator
+```image
+![Accumulator](image2.png)
+```
+
+### Local Maxima
+```image
+![Local Maxima](image3.png)
+```
+
+### Notes:
+- This section explains the process of line detection using the Hough Transform method.
+- The process involves converting the image into a point cloud and then using an accumulator to detect lines.
+- The local maxima points indicate significant detections within the accumulator.
+
+---
+
+**Date:** 10 / 18
+```
+
+# DL4CV_Week03_Part02.pdf - Page 22
+
+```markdown
+# Line Detection
+
+![Line Detection Diagram](image_url)
+
+- **points**: Visual representation of data points used in line detection.
+- **accumulator**: Shows the accumulation of data to detect lines.
+- **labels**: Representation of labeled lines detected.
+- **local maxima**: Highlighting of local maxima points in the detected lines.
+
+Source: Yiannis Avrithis, *Deep Learning for Vision*, Spring 2019 SIF
+
+Vineeth N B (IIT-H)
+
+```math
+§3.2 Hough Transform
+```
+
+10 / 18
+```
+
+# DL4CV_Week03_Part02.pdf - Page 23
+
+```markdown
+# Hough Transform: Finding Circles
+
+- **Circle fitting similar to line fitting**
+  - \((x - x_0)^2 + (y - y_0)^2 - r^2 = 0\)
+
+- **What are the dimensions of accumulator \(A\) for circle fitting?**
+
+![NPTEL](image_url)
+
+*Vineeth N B (IIIT-H)*
+
+*§3.2 Hough Transform*
+
+*11 / 18*
+```
+
+# DL4CV_Week03_Part02.pdf - Page 24
+
+```markdown
+# Hough Transform: Finding Circles
+
+- Circle fitting similar to line fitting
+  - $(x - x_0)^2 + (y - y_0)^2 - r^2 = 0$
+
+- What are the dimensions of accumulator A for circle fitting?
+  - 3D accumulator with dimensions $x_0$, $y_0$, $r$
+
+- Fix one of the parameters (generally radius is fixed) and loop for the rest
+- Increment accumulator A
+- Find local maxima in A
+
+![Image of Circle Detection](image-url)
+
+*Source: Alper Yilmaz, Mubarak Shah, Fall 2011 UCF*
+
+*Source: Ioannis Gkioulekas, 16-385 Computer Vision, Spring 2020, CMU*
+
+*Vineeth N B (IIIT-H)*
+
+*3.2 Hough Transform*
+
+*11 / 18*
+```
+
+# DL4CV_Week03_Part02.pdf - Page 25
+
+# Generalized Hough Transform
+
+- Used for shapes with no analytical expression
+
+- Involves a training phase where R-table is computed
+
+- Given object of interest, compute R-table as follows:
+
+  - Compute centroid \((x_c, y_c)\).
+  - For each edge point \((x_i, y_i)\), compute distance to centroid \(r_i\) and find edge orientation \(\phi_i\).
+  - Construct a table of angles and \(r\)-values
+
+| \(\phi_1\) | r1, r2, r3 ... |
+| --- | --- |
+| \(\phi_2\) | r14, r21, r23 ... |
+| \(\phi_3\) | r41, r42, r33 ... |
+| \(\phi_4\) | r10, r12, r13 ... |
+
+![Graphical Representation of Generalized Hough Transform](https://via.placeholder.com/150)
+
+**Source:** Alper Yilmaz, Mubarak Shah, Fall 2011 UCF 
+
+_Vineeth N B (IIIT-H)_
+
+## 3.2 Hough Transform
+
+```markdown
+### Generalized Hough Transform
+
+- Used for shapes with no analytical expression
+
+- Involves a training phase where R-table is computed
+
+- Given object of interest, compute R-table as follows:
+
+  - Compute centroid \((x_c, y_c)\).
+  - For each edge point \((x_i, y_i)\), compute distance to centroid \(r_i\) and find edge orientation \(\phi_i\).
+  - Construct a table of angles and \(r\)-values
+
+| \(\phi_1\) | r1, r2, r3 ... |
+| --- | --- |
+| \(\phi_2\) | r14, r21, r23 ... |
+| \(\phi_3\) | r41, r42, r33 ... |
+| \(\phi_4\) | r10, r12, r13 ... |
+
+![Graphical Representation of Generalized Hough Transform](https://via.placeholder.com/150)
+
+**Source:** Alper Yilmaz, Mubarak Shah, Fall 2011 UCF 
+
+_Vineeth N B (IIIT-H)_
+
+```
+
+# DL4CV_Week03_Part02.pdf - Page 26
+
+```markdown
+# Generalized Hough Transform
+
+```text
+1: procedure GENERALIZED Hough TRANSFORM(X, R, A[xc, yc])
+2:   X: data  R: R-table  A[xc, yc]: Accumulator array with quantization xcmin . . . , xcmax
+and ycmin . . . , ycmax
+3:   A: accumulator array, initially zero
+4:   for (x, y) ∈ X do
+5:     for each (ri, φi) ∈ R do
+6:       xc = x + ri cos φi
+7:       yc = y + ri sin φi
+8:       A[xc, yc] = A[xc, yc] + 1
+9:     end for
+10:   end for
+11:   Non-maximum Suppression: detect local maxima in A
+12: end procedure
+```
+
+*Vineeth N B (IIT-H)*
+
+*§3.2 Hough Transform*
+
+*13 / 18*
+```
+
+```
+
+# DL4CV_Week03_Part02.pdf - Page 27
+
+```markdown
+# Generalized Hough Transform: Example
+
+- **Build model**: Record coordinates relative to reference point
+- **Test phase**: Each point votes for all possible coordinates of reference point
+
+![Model image](image-url)
+
+![Test image](image-url)
+
+*Vineeth N B (IIT-H)*
+
+*§3.2 Hough Transform*
+
+*14 / 18*
+```
+
+# DL4CV_Week03_Part02.pdf - Page 28
+
+```markdown
+# Generalized Hough Transform: Example
+
+- **Build model**: Record coordinates relative to reference point
+- **Test phase**: Each point votes for all possible coordinates of reference point
+
+![Model Image](image-url)
+
+## Model image
+
+![Test Image](image-url)
+
+## Test image
+
+*Vineeth N B (IIT-H) §3.2 Hough Transform*
+
+```
+
+# DL4CV_Week03_Part02.pdf - Page 29
+
+```markdown
+# Generalized Hough Transform: Example
+
+## Model image
+
+![Model Image](image-url)
+
+## Test image
+
+![Test Image](image-url)
+
+Vineeth N B (IIT-H)
+
+## §3.2 Hough Transform
+
+NPTEL
+
+Page 15 / 18
+```
+
+Note: The placeholders `image-url` are used for the images that can't be captured directly through OCR. Replace these placeholders with actual image paths or URLs if available.
+
+# DL4CV_Week03_Part02.pdf - Page 30
+
+```markdown
+# Generalized Hough Transform: Example
+
+## Model image points
+![Model Image Points](image1.png)
+
+## Test image points
+![Test Image Points](image2.png)
+
+## Accumulator
+![Accumulator](image3.png)
+
+## Local Maxima
+![Local Maxima](image4.png)
+
+*Vineeth N B (IIIT-H)*
+
+*Section 3.2 Hough Transform*
+
+_NPTEL_
+
+*Slide 15 / 18*
+```
+
+# DL4CV_Week03_Part02.pdf - Page 31
+
+# Generalized Hough Transform: Example
+
+## Model Image Points
+![Model Image Points](image_url_placeholder)
+
+## Test Image with Location
+![Test Image with Location](image_url_placeholder)
+
+## Accumulator
+![Accumulator](image_url_placeholder)
+
+## Local Maxima
+![Local Maxima](image_url_placeholder)
+
+---
+
+Vineeth N B (IIT-H) §3.2 Hough Transform
+
+NPTEL
+
+---
+
+Page 15 / 18
+
+# DL4CV_Week03_Part02.pdf - Page 32
+
+```markdown
+# Hough Transform
+
+- Can be used for detection of:
+  - shapes
+  - objects, including multiple instances
+
+- Advantages
+  - Deals with occlusion well
+  - Robust to noise
+
+- Disadvantages
+  - Can be computationally expensive
+  - Setting parameters is not easy
+
+*Source: Ioannis Gkioulekas, 16-385 Computer Vision, Spring 2020, CMU*
+
+*Vineeth N B (IIIT-H)*
+
+## 3.2 Hough Transform
+
+![Hough Transform Diagram](image_placeholder.png)
+```
+
+# DL4CV_Week03_Part02.pdf - Page 33
+
+```markdown
+# Homework
+
+## Readings
+
+### Readings
+
+- [ ] Chapter 4.3, Szeliski, *Computer Vision: Algorithms and Applications*
+
+## Questions
+
+### Questions
+
+- How would you use Hough transform to detect ellipses, squares and rectangles?
+
+- Your friend working in a diagnostics startup asks you how to use Hough transform to automatically count Red Blood Cells in a blood sample. What would you advise your friend?
+
+---
+
+**Vineeth N B (IIIT-H) §3.2 Hough Transform**
+
+```
+
+# DL4CV_Week03_Part02.pdf - Page 34
+
+```markdown
+# References
+
+- Richard O. Duda and Peter E. Hart. **"Use of the Hough Transformation to Detect Lines and Curves in Pictures"**. In: *Commun. ACM* 15.1 (Jan. 1972), 11–15.
+- John Illingworth and Josef Kittler. **"A survey of the Hough transform"**. In: *Computer vision, graphics, and image processing* 44.1 (1988), pp. 87–116.
+- Richard Szeliski. *Computer Vision: Algorithms and Applications*. Texts in Computer Science. London: Springer-Verlag, 2011.
+```
+

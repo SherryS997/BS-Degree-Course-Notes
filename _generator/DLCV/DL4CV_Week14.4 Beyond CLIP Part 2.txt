@@ -1,0 +1,1019 @@
+# DL4CV_Week12.4 Beyond CLIP Part 2.pdf - Page 1
+
+```markdown
+# Deep Learning for Computer Vision
+
+## Beyond CLIP (Part 2)
+
+**Vineeth N Balasubramanian**
+
+Department of Computer Science and Engineering
+Indian Institute of Technology, Hyderabad
+
+![IIT Hyderabad Logo](https://www.iith.ac.in/sites/default/files/logo.png)
+
+---
+
+Vineeth N B (IIT-H) §14.4 Beyond CLIP (Part 2) 1 / 16
+```
+
+This markdown format retains the original structure and formatting, accurately capturing the headings, subheadings, and any special symbols or logos.
+
+# DL4CV_Week12.4 Beyond CLIP Part 2.pdf - Page 2
+
+```markdown
+# Review
+
+## Question
+
+? 
+
+*Vineeth N B (IIT-H)*
+
+*§14.4 Beyond CLIP (Part 2)*
+
+*2 / 16*
+```
+
+# DL4CV_Week12.4 Beyond CLIP Part 2.pdf - Page 3
+
+```markdown
+# PaLI: Contributions
+
+- Unlike other approaches that merely fine-tune on distinct downstream tasks, often pre-training on just one task.
+- PaLI engages in pre-training across a blend of tasks.
+- It avoids making task-specific architectural adjustments.
+
+*Vineeth N B (IIT-H) §14.4 Beyond CLIP (Part 2) 3 / 16*
+```
+
+# DL4CV_Week12.4 Beyond CLIP Part 2.pdf - Page 4
+
+```markdown
+# PaLI: Methodology
+
+![Diagram of PaLI Methodology](image_url)
+
+Vineeth N B (IIT-H)
+
+§14.4 Beyond CLIP (Part 2)
+
+## Diagram Explanation
+
+### Components
+
+- **Input**:
+  - **Question**: "Answer in EN: What type of flowers are in the buckets?"
+  - **Image**: A picture of sunflowers in buckets
+
+- **PaLI**:
+  - **ViT (Vision Transformer)**: Processes the image input.
+  - **Transformer Encoder**: Encodes the visual features.
+  - **Transformer Decoder**: Generates the textual output.
+
+- **Output**:
+  - **Answer**: "Sunflowers"
+
+## Notes
+
+- The diagram illustrates the workflow of the PaLI system, which integrates a Vision Transformer (ViT) with a Transformer Encoder and Decoder to process and interpret visual and textual data.
+- The example provided showcases the system's ability to answer questions about images in English.
+
+---
+
+Page 4 of 16
+```
+
+# DL4CV_Week12.4 Beyond CLIP Part 2.pdf - Page 5
+
+```markdown
+# PaLI: Mixture of tasks
+
+△ The models are first initialized with off-the-shelf pre-trained uni-modal weights. Then ViT is frozen and only the language model is updated.
+
+- Span corruption on text-only data
+- Split-captioning (SplitCap) on WebLI alt-text data
+- Captioning (Cap) on CC3M-35L on native and translated alt-text data
+- OCR on WebLI OCR-text data
+- English and Cross-Lingual VQA
+- English and Cross-Lingual visual question generation (VQG)
+- English-only Object-Aware (OA) VQA
+- Object detection
+
+|                | Text-only | WebLI alt-text | OCR | CC3M-35L | VQA | VQG | OA | Detection | Total |
+|----------------|-----------|----------------|-----|----------|-----|-----|----|------------|-------|
+| Amount (M)     | 100       | 1000           | 100 | 100      | 100 | 100 | 50 | 16         | 1566  |
+
+Mixing ratio of each task for pretraining
+
+*Vineeth N B (IIT-H)*
+
+*§14.4 Beyond CLIP (Part 2)*
+
+*5 / 16*
+```
+
+# DL4CV_Week12.4 Beyond CLIP Part 2.pdf - Page 6
+
+```markdown
+# PaLI: Qualitative examples
+
+## Multi-lingual Image Captioning
+
+![Helicopter](image1_url)
+
+**Input:** Generate the alt_text in EN
+
+**Output:** Two helicopters are flying in the sky and one has a yellow stripe on the tail
+
+---
+
+![Tree](image2_url)
+
+**Input:** Generate the alt_text in FR
+
+**Output:** Un arbre debout dans un champ avec un ciel violet
+
+(A tree standing in a field with a purple sky)
+
+---
+
+## Scene Text Understanding
+
+![Radio](image3_url)
+
+**Input:** Answer in EN: what time is it according to this radio
+
+**Output:** 12:04
+
+---
+
+## VQA
+
+![Watch](image4_url)
+
+**Input:** Answer in EN: what is the brand of this watch
+
+**Output:** seiko
+
+---
+
+_Vineeth N B (IIT-H)_
+
+_§14.4 Beyond CLIP (Part 2)_
+
+_6 / 16_
+```
+
+# DL4CV_Week12.4 Beyond CLIP Part 2.pdf - Page 7
+
+```markdown
+# Flamingo: Contributions
+
+- Capable of executing diverse multimodal tasks with minimal input/output examples, including captioning, visual dialogue, and visual question-answering.
+
+- Effectively processes interleaved visual and text data to generate text in an open-ended fashion.
+
+*Vineeth N B (IIT-H) §14.4 Beyond CLIP (Part 2)*
+
+*Page 7 / 16*
+```
+
+# DL4CV_Week12.4 Beyond CLIP Part 2.pdf - Page 8
+
+```markdown
+# Flamingo: Methodology
+
+## Pretrained and frozen
+
+## Trained from scratch
+
+### Vision Encoder
+![Vision Encoder](vision_encoder.png)
+
+### Vision Encoder
+![Vision Encoder](vision_encoder.png)
+
+- **Interleaved visual/text data**
+
+  ![Interleaved visual/text data](interleaved_data.png)
+
+  **This is a very cute dog.**
+
+  ![Interleaved visual/text data](interleaved_data.png)
+
+  **This is**
+
+---
+
+_Reference_: Vineeth N B (IIT-H) §14.4 Beyond CLIP (Part 2)
+
+_Slide Number_: 8 / 16
+```
+
+# DL4CV_Week12.4 Beyond CLIP Part 2.pdf - Page 9
+
+
+
+```markdown
+# Flamingo: Methodology
+
+## Components
+
+- **Vision Encoder** (Pre-trained and frozen)
+  - Vision Encoder (using images of dogs)
+    - ![Dog Image 1](image1.png)
+    - ![Dog Image 2](image2.png)
+
+- **Trained from scratch**
+  - Processed text
+    ```
+    <image> This is a very cute dog. <image> This is
+    ```
+  - Interleaved visual/text data
+    - ![Interleaved Data 1](interleaved1.png)
+    - ![Interleaved Data 2](interleaved2.png)
+
+## References
+
+- Vineeth N B (IIT-H)
+- §14.4 Beyond CLIP (Part 2)
+- Slide number 8/16
+```
+
+Note: Placeholder image names (e.g., `image1.png`, `image2.png`, etc.) are used where actual images need to be captured from the OCR process. Replace these placeholders with actual image names if available.
+
+# DL4CV_Week12.4 Beyond CLIP Part 2.pdf - Page 10
+
+```markdown
+# Flamingo: Methodology
+
+## Overview
+
+### Preprocessing
+
+- **Pretrained and frozen**: 
+  - Vision Encoder
+  - Perceiver Resampler
+
+- **Trained from scratch**:
+  - Perceiver Resampler
+  - GATED XATTN-DENSE
+
+### Architecture
+
+- **Vision Encoders**: 
+  - Processes visual input images.
+
+- **Perceiver Resamplers**: 
+  - Processes encoded visual data.
+
+- **Interleaved Visual/Text Data**: 
+  - Combines visual and textual data for processing.
+
+### Processing Pipeline
+
+1. **Input Visual/Text Data**: 
+   - Images: Dog, Cat
+   - Text: This is a very cute dog.
+
+2. **Vision Encoders**:
+   - Encode the visual data from images.
+
+3. **Perceiver Resamplers**:
+   - Process the encoded visual data.
+
+4. **GATED XATTN-DENSE**:
+   - Process the data further.
+
+5. **LM Blocks**:
+   - Language Model Blocks, frozen.
+
+6. **Output**:
+   - Processed text: `a very serious cat.`
+
+### Visual/Text Data Flow
+
+- **Input Data**:
+  - Image: This is a very cute dog.
+  - Text: This is a very cute dog.
+
+- **Processed Text**:
+  - <image> This is a very cute dog. <image> This is
+
+- **Output**:
+  - Text: `a very serious cat.`
+
+## References
+
+- Vineeth N B (IIT-H)
+- §14.4 Beyond CLIP (Part 2)
+
+_Figure 8 / 16_
+```
+
+# DL4CV_Week12.4 Beyond CLIP Part 2.pdf - Page 11
+
+```markdown
+# Flamingo: Methodology
+
+## Components
+
+### Vision Encoders
+- **Pretrained and frozen**: Vision Encoder blocks are pretrained and frozen.
+- **Trained from scratch**: Vision Encoder blocks are trained from scratch.
+
+### Perceiver Resamplers
+- Each Perceiver Resampler receives input from a Vision Encoder.
+- There are two Perceiver Resamplers in the architecture.
+
+### Language Model
+- **LM block**: Language Model (LM) blocks are pretrained and frozen.
+- **GATED XATTN-DENSE**: GATED XATTN-DENSE blocks are trained from scratch.
+
+### Data Processing
+- **Input Data**: Visual and textual data are interleaved.
+- **Processed Text**: Text data includes `<image>` tags to denote image placements, e.g., `<image> This is a very cute dog. <image> This is`.
+- **Interleaved Visual/Text Data**: Visual and textual data are combined in sequence.
+
+### Output
+- Final output is text, e.g., "a very serious cat."
+
+## Structure
+1. Vision Encoders process visual data.
+2. Vision Encoder outputs are fed into Perceiver Resamplers.
+3. Perceiver Resamplers process and output data to Language Models.
+4. Language Models generate the final output text.
+
+## Visual Representation
+![Visual Representation](image_url_placeholder)
+
+## Presentation Information
+- **Author**: Vineeth N B (IIT-H)
+- **Section**: §14.4 Beyond CLIP (Part 2)
+- **Slide Number**: 8 / 16
+```
+
+# DL4CV_Week12.4 Beyond CLIP Part 2.pdf - Page 12
+
+```markdown
+# Flamingo: Methodology
+
+![Diagram of Flamingo Methodology](image_url)
+
+- **Title**: Flamingo: Methodology
+- **Slide 8 of 16**
+- **Vineeth N B (IIT-H)**
+- **§14.4 Beyond CLIP (Part 2)**
+
+## Diagram Description
+
+The following components are detailed in the methodology diagram:
+
+1. **Gated XAttn-Dense**:
+   - Represented in a purple box.
+   - Input indicated by a purple `X`.
+
+2. **LM Layer**:
+   - Represented in a blue box.
+   - Output symbolized by a blue snowflake.
+
+### Flow Diagram
+- **Input to Gated XAttn-Dense**:
+  - Marked with a purple `X` on the left.
+- **Flow from Gated XAttn-Dense to LM Layer**:
+  - Indicated by a dotted arrow pointing up.
+- **Flow from LM Layer**:
+  - Indicated by a solid arrow pointing up towards the right.
+
+### Annotations
+- **Y**:
+  - Placed below the entire structure, possibly indicating an output or result.
+  
+This diagram illustrates the interaction between the Gated XAttn-Dense and the LM Layer within the Flamingo methodology.
+```
+
+# DL4CV_Week12.4 Beyond CLIP Part 2.pdf - Page 13
+
+```markdown
+# Flamingo: Methodology
+
+## LM Layer
+
+### Vision Input
+- Vision input is processed through a series of layers within the LM layer.
+
+### Language Input
+- Language input is processed through multiple attention mechanisms within the LM layer.
+
+### Detailed Steps
+
+#### Gated Xattn-Dense
+```python
+def gated_xattn_dense(
+    y,  # Input language features
+    x,  # Input visual features
+    alpha_xattn,  # Xattn gating parameter - init at 0
+    alpha_dense,  # FFW gating parameter - init at 0
+):
+    """Applies a GATED XATTN-DENSE layer."""
+
+    # 1. Gated Cross Attention
+    y = y + tanh(alpha_xattn) * attention(q=y, kv=x)
+
+    # 2. Gated Feed Forward (dense) Layer
+    y = y + tanh(alpha_dense) * ffw(y)
+
+    # 3. Regular self-attention + FFW on language
+    y = y + frozen_attention(q=y, kv=y)
+    y = y + frozen_ffw(y)
+
+    return y  # Output visually informed language features
+```
+
+### Cross Attention
+- This involves attention mechanisms between vision and language inputs.
+
+### Self Attention
+- Self-attention mechanisms are applied to the language features.
+
+### FFW
+- Feed-forward network layers are included in the processing.
+
+### Diagram
+![]()
+
+---
+
+**Vineeth N B (IIT-H)**
+
+**§14.4 Beyond CLIP (Part 2)**
+
+**8 / 16**
+```
+
+# DL4CV_Week12.4 Beyond CLIP Part 2.pdf - Page 14
+
+```markdown
+# Flamingo: Objective
+
+Flamingo models the likelihood of text \( y \) conditioned on interleaved images and videos \( x \) as follows:
+
+\[ p(y|x) = \prod_{l=1}^{L} p(y_l|y_{<l}, x_{<l}) \]
+
+where \( y_l \) is the \( l \)-th language token of the input text, \( y_{<l} \) is the set of preceding tokens, \( x_{<l} \) is the set of images/videos preceding token \( y_l \) in the interleaved sequence and \( p \) is parametrized by a Flamingo model.
+
+*Vineeth N B (IIT-H) §14.4 Beyond CLIP (Part 2) 9 / 16*
+```
+
+# DL4CV_Week12.4 Beyond CLIP Part 2.pdf - Page 15
+
+```markdown
+# Flamingo: Qualitative examples
+
+## Input Prompt
+
+| Image | Text |
+|-------|------|
+| ![Image 1](image1.png) | This is a chinchilla. They are mainly found in Chile. |
+| ![Image 2](image2.png) | This is a shiba. They are very popular in Japan. |
+| ![Image 3](image3.png) | This is a flamingo. They are found in the Caribbean and South America. |
+| ![Image 4](image4.png) | What is the title of this painting? Answer: The Starry Night. Forcado. |
+| ![Image 5](image5.png) | Where is this painting located? Answer: Louvre Museum, Paris. |
+| ![Image 6](image6.png) | What is the name of the city where this was painted? Answer: Athens. |
+| ![Image 7](image7.png) | ![Image 8](image8.png) | Output: "Underground" |
+| ![Image 9](image9.png) | ![Image 10](image10.png) | Output: "Congress" |
+| ![Image 11](image11.png) | ![Image 12](image12.png) | Output: "Soulomes" |
+| ![Image 13](image13.png) | ![Image 14](image14.png) | Output: "3x4x5" |
+| ![Image 15](image15.png) | ![Image 16](image16.png) | Output: "2x3x5" |
+
+## Completion
+
+| Text |
+|------|
+| a flamingo. They are found in the Caribbean and South America. |
+| Arles. |
+| "Soulomes" |
+| 3x4x5 |
+
+---
+
+Vineeth N B (IITH) §14.4 Beyond CLIP (Part 2) 10 / 16
+```
+
+# DL4CV_Week12.4 Beyond CLIP Part 2.pdf - Page 16
+
+```markdown
+# Flamingo: Qualitative examples
+
+## Commonality and Differences in Images
+
+### Commonality
+
+- ![Flamingo Image 1](image1_url)
+- ![Flamingo Image 2](image2_url)
+- ![Flamingo Image 3](image3_url)
+
+**Question:** What is the common thing about these three images?
+
+**Answer:**
+- They are all flamingos.
+
+**Question:** What is the difference between these three images?
+
+**Answer:**
+- The first one is a cartoon, the second one is a real flamingo, and the third one is a 3D model of a flamingo.
+
+## Descriptive Analysis of an Apple Image
+
+### Image Description
+
+![Apple with Sticker](apple_with_sticker_url)
+
+**Question:** This is an apple with a sticker on it. What does the sticker say?
+
+**Answer:**
+- The sticker says "iPod".
+
+**Question:** Where is the photo taken?
+
+**Answer:**
+- It looks like it's taken in a backyard.
+
+**Question:** Do you think it is printed or handwritten?
+
+**Answer:**
+- It looks like it's handwritten.
+
+**Question:** What color is the sticker?
+
+**Answer:**
+- It's white.
+
+---
+
+**Source:** Vineeth N B (IIT-H) §14.4 Beyond CLIP (Part 2) 10 / 16
+```
+
+# DL4CV_Week12.4 Beyond CLIP Part 2.pdf - Page 17
+
+```markdown
+# FLAVA: Contributions
+
+- A fundamental model for aligning language and vision, addressing both modalities individually and in combination.
+
+- Achieves robust representations by jointly pretraining on unimodal and multimodal data, incorporating alignment and fusion objectives across modalities.
+
+*Vineeth N B (IIT-H)*
+
+*§14.4 Beyond CLIP (Part 2)*
+
+*11 / 16*
+```
+
+# DL4CV_Week12.4 Beyond CLIP Part 2.pdf - Page 18
+
+```markdown
+# FLAVA: Overview
+
+![Diagram](image_url)
+
+- multimodal and unimodal pretraining data
+  - **image-text pairs**
+  - **unpaired images**
+  - **unpaired text**
+
+*Vineeth N B (IIT-H)*
+
+*§14.4 Beyond CLIP (Part 2)*
+
+*12 / 16*
+```
+
+# DL4CV_Week12.4 Beyond CLIP Part 2.pdf - Page 19
+
+```markdown
+# FLAVA: Overview
+
+![FLAVA Diagram](image-url)
+
+- **Multimodal and unimodal pretraining data**
+  - **Image-text pairs**
+  - **Unpaired images**
+  - **Unpaired text**
+
+  ![FLAVA for multi-domain joint pretraining](image-url)
+
+  - **FLAVA for multi-domain joint pretraining**
+    - Global contrastive
+    - MMM
+    - MIM
+    - MLM
+    - ...
+
+**Vineeth N B (IIT-H)**
+**§14.4 Beyond CLIP (Part 2)**
+**12 / 16**
+```
+
+# DL4CV_Week12.4 Beyond CLIP Part 2.pdf - Page 20
+
+
+
+```markdown
+# FLAVA: Overview
+
+![Diagram of FLAVA Overview](imageurl)
+
+- **multimodal and unimodal pretraining data**
+  - *image-text pairs*
+  - *unpaired images*
+  - *unpaired text*
+
+- **FLAVA for multi-domain joint pretraining**
+  - (global contrastive, MMM, MIM, MLM, ...)
+
+- **Visual Recognition**
+  - (e.g. ImageNet)
+
+- **Language Understanding**
+  - (e.g. GLUE)
+
+- **Multimodal Reasoning**
+  - (e.g. VQA)
+
+*Vineeth N B (IIT-H) §14.4 Beyond CLIP (Part 2)*
+
+*Page 12 / 16*
+```
+
+# DL4CV_Week12.4 Beyond CLIP Part 2.pdf - Page 21
+
+```markdown
+# FLAVA: Methodology
+
+![input image](image_placeholder)
+
+This cat was wonderful! He was making his daily cleaning on an ancient grave as to say "I am the boss here!"
+
+![input text](text_placeholder)
+
+Vineeth N B (IIT-H)
+
+§14.4 Beyond CLIP (Part 2)
+
+13 / 16
+```
+
+# DL4CV_Week12.4 Beyond CLIP Part 2.pdf - Page 22
+
+```markdown
+# FLAVA: Methodology
+
+![Input Image](image_url)
+
+- **Input Image**: The input image is processed through a series of steps.
+  - **Head**: Initial processing of the image.
+  - **(CLS)N**: CLIP-based neural network processing.
+  - **Patch N**: Generation of patches from the image.
+  - **Patch P**: Further processing of these patches.
+
+![Text Encoder](text_encoder_url)
+
+- **Input Text**: The input text is processed through a text encoder.
+  - **Text**: Initial text input.
+  - **Token**: Tokenization of the text.
+  - **Embed**: Embedding of the tokens.
+  - **Enc**: Final encoding of the processed text.
+
+**Vineeth N B (IIT-H)**
+
+**§14.4 Beyond CLIP (Part 2)**
+
+**13 / 16**
+```
+
+# DL4CV_Week12.4 Beyond CLIP Part 2.pdf - Page 23
+
+```markdown
+# FLAVA: Methodology
+
+![Methodology Diagram](image_url)
+
+## Vineeth N B (IIT-H)
+
+### §14.4 Beyond CLIP (Part 2)
+
+- **Vision Task Heads:**
+  - ImageNet
+  - Vision task heads: ImageNet, etc.
+
+- **Image Encoder:**
+  - Input Image: Image of a cat
+  - Heads: CLIP, patch1, patchP, etc.
+  - The image encoder processes the input image and passes it through several heads including CLIP, patch1, and patchP.
+
+- **NLP Task Heads:**
+  - MIND
+  - NLP task heads: MIND, etc.
+
+- **Text Encoder:**
+  - Input Text: "This cat was wonderful. He was making his daily cleaning on an ancient grave as to say 'I am the boss here'."
+  - Heads: CLIP, patch1, patchP, etc.
+  - The text encoder processes the input text and passes it through several heads including CLIP, patch1, and patchP.
+
+Each encoder is linked to specific task heads via LMM (presumably a learning module or model).
+
+**Note:** The exact nature of the heads (CLIP, patch1, patchP) and how they are processed isn't detailed, but they are used in both vision and text encoding processes.
+
+---
+
+```
+
+# DL4CV_Week12.4 Beyond CLIP Part 2.pdf - Page 24
+
+```markdown
+# FLAVA: Methodology
+
+![FLAVA Methodology diagram](image_url)
+
+**Vineeth N B (IIT-H)**
+
+**§14.4 Beyond CLIP (Part 2)**
+
+**13 / 16**
+
+- **Input Image**
+  - **Image Encoder**
+    - **Head**
+    - **CLS token**
+    - **Patch**
+    - **Patch Projection (Patch P)**
+
+- **ImageNet**
+  - **Vision Task Heads**
+    - **ImageNet**
+
+- **Text Input**
+  - **Text Encoder**
+    - **CLS token**
+    - **Patch**
+    - **Patch Projection (Patch P)**
+
+- **Input Text**
+  - Text: "This cat was wonderful. He was making his daily cleaning on an ancient grave as if to say 'I am the boss here!'"
+
+- **NLP Task Heads**
+  - **MIND**
+
+- **Multimodal Encoder**
+  - **CLS token**
+  - **Patch**
+  - **Patch Projection (Patch P)**
+  - **LM (Language Model)**
+
+### Connections
+- **L_MM** (Language Model for Multimodal)
+  - Connects Image Encoder to Multimodal Encoder
+  - Connects Text Encoder to Multimodal Encoder
+  - Connects Vision Task Heads to Multimodal Encoder
+  - Connects NLP Task Heads to Multimodal Encoder
+
+### Process Flow
+1. **Image Encoder**: Processes the input image into a set of tokens representing patches.
+2. **Text Encoder**: Processes the input text into a set of tokens representing patches.
+3. **Multimodal Encoder**: Integrates the information from both image and text encoders.
+4. **Vision and NLP Task Heads**: Perform specific tasks using the integrated representation from the multimodal encoder.
+
+```
+
+# DL4CV_Week12.4 Beyond CLIP Part 2.pdf - Page 25
+
+```markdown
+# FLAVA: Methodology
+
+## Vineeth N B (IIT-H) §14.4 Beyond CLIP (Part 2)
+
+### Image Encoder
+- **Input Image**: Image of a cat.
+  - **Components**:
+    - **h_enc**: Encoder head.
+    - **CLS N**: Classifier Network.
+    - **Patch N**: Patch Network.
+    - **Patch P**: Positional Embedding.
+
+### Vision Task Heads
+- **Tasks**:
+  - ImageNet.
+  - Other Vision Tasks.
+
+### Multimodal Encoder
+- **Components**:
+  - Multiple layers (h_enc1, h_enc2, ..., h_encN).
+  - Combines image and text encodings.
+
+### Text Encoder
+- **Input Text**: "This cat was wonderful. He was making his daily cleaning on an uneven grave as to say 'I am the boss here'."
+  - **Components**:
+    - **CLS N**: Classifier Network.
+    - **Patch N**: Patch Network.
+    - **Patch P**: Positional Embedding.
+
+### NLP Task Heads
+- **Tasks**:
+  - MNDI.
+  - Other NLP Tasks.
+
+### Loss Functions
+- **L_MM**: Loss for multimodal tasks.
+- **L_MM1, L_MM2**: Specific losses for multimodal tasks.
+- **L_TT**: Loss for text tasks.
+
+### Visual Representation
+- **Multimodal Task Heads**: Handles various tasks such as VQA, Natural Mimics.
+- **Connections**:
+  - Image encoder to multimodal encoder.
+  - Text encoder to multimodal encoder.
+
+### Overall Process
+1. **Input Image and Text**: Encoded via respective encoders.
+2. **Multimodal Encoding**: Combines image and text encodings.
+3. **Task-Specific Heads**: Perform specific tasks (vision and NLP).
+4. **Loss Functions**: Calculate and optimize task-specific losses.
+
+### Diagram
+![Diagram](image_url)
+
+Page 13 / 16
+```
+
+# DL4CV_Week12.4 Beyond CLIP Part 2.pdf - Page 26
+
+```markdown
+# FLAVA: Pretraining objectives
+
+- **Unimodal objectives**
+
+  - **Masked image modelling (MIM)**: Masks a set of image patches and reconstructs them from other image patches.
+
+  - **Masked language modeling (MLM)**: A fraction (15%) of the text tokens are masked in the input, and reconstructed from the other tokens.
+
+- **Multimodal objectives**
+
+  - **Global contrastive (GC) loss**: Maximizes the cosine similarities between matched image and text pairs and minimizes those for the unmatched pairs.
+
+  - **Masked multimodal modelling (M4)**: Masks both the image patches and the text tokens and jointly works on both modalities.
+
+  - **Image-text matching (ITM)**: A classifier is used to decide if an input image and text match each other.
+
+- **Weights are initialized with unimodal pretraining objectives. Then unimodal and multimodal objectives are further trained in a round-robin fashion.**
+
+_Vineeth N B (IIIT-H)_
+
+§14.4 Beyond CLIP (Part 2)
+
+_14 / 16_
+```
+
+# DL4CV_Week12.4 Beyond CLIP Part 2.pdf - Page 27
+
+```markdown
+# FLAVA: Pretraining objectives
+
+- **Unimodal objectives**
+  - **Masked image modelling (MIM)**: Masks a set of image patches and reconstructs them from other image patches.
+  - **Masked language modelling (MLM)**: A fraction (15%) of the text tokens are masked in the input, and reconstructed from the other tokens.
+
+- **Multimodal objectives**
+  - **Global contrastive (GC) loss**: Maximizes the cosine similarities between matched image and text pairs and minimizes those for the unmatched pairs.
+  - **Masked multimodal modelling (M^3)**: Masks both the image patches and the text tokens and jointly works on both modalities.
+  - **Image-text matching (ITM)**: A classifier is used to decide if an input image and text match each other.
+
+- Weights are initialized with unimodal pretraining objectives. Then unimodal and multimodal objectives are further trained in a round-robin fashion.
+
+*Vineeth N B (IIIT-H) §14.4 Beyond CLIP (Part 2)*
+```
+
+# DL4CV_Week12.4 Beyond CLIP Part 2.pdf - Page 28
+
+```markdown
+# FLAVA: Pretraining objectives
+
+- **Unimodal objectives**
+  - **Masked image modeling (MIM)**: Masks a set of image patches and reconstructs them from other image patches.
+  - **Masked language modeling (MLM)**: A fraction (15%) of the text tokens are masked in the input, and reconstructed from the other tokens.
+
+- **Multimodal objectives**
+  - **Global contrastive (GC) loss**: Maximizes the cosine similarities between matched image and text pairs and minimizes those for the unmatched pairs.
+  - **Masked multimodal modelling (MIM)**: Masks both the image patches and the text tokens and jointly works on both modalities.
+  - **Image-text matching (ITM)**: A classifier is used to decide if an input image and text match each other.
+
+- Weights are initialized with unimodal pretraining objectives. Then unimodal and multimodal objectives are further trained in a round-robin fashion.
+
+*Vineeth N B (IIIT-H)*
+
+*§14.4 Beyond CLIP (Part 2)*
+
+*14 / 16*
+```
+
+# DL4CV_Week12.4 Beyond CLIP Part 2.pdf - Page 29
+
+```markdown
+# FLAVA: Pretraining objectives
+
+- **Unimodal objectives**
+  - **Masked image modelling (MIM)**: Masks a set of image patches and reconstructs them from other image patches.
+  - **Masked language modelling (MLM)**: A fraction (15%) of the text tokens are masked in the input, and reconstructed from the other tokens.
+
+- **Multimodal objectives**
+  - **Global contrastive (GC) loss**: Maximizes the cosine similarities between matched image and text pairs and minimizes those for the unmatched pairs.
+  - **Masked multimodal modelling (MMM)**: Masks both the image patches and the text tokens and jointly works on both modalities.
+  - **Image-text matching (ITM)**: A classifier is used to decide if an input image and text match each other.
+
+- Weights are initialized with unimodal pretraining objectives. Then unimodal and multimodal objectives are further trained in a round-robin fashion.
+
+_Vineeth N B (IIIT-H)_
+
+_S14.4 Beyond CLIP (Part 2)_
+
+_14 / 16_
+```
+
+# DL4CV_Week12.4 Beyond CLIP Part 2.pdf - Page 30
+
+```markdown
+# FLAVA: Pretraining objectives
+
+- **Unimodal objectives**
+  - **Masked image modelling (MIM)**: Masks a set of image patches and reconstructs them from other image patches.
+  - **Masked language modelling (MLM)**: A fraction (15%) of the text tokens are masked in the input, and reconstructed from the other tokens.
+
+- **Multimodal objectives**
+  - **Global contrastive (GC) loss**: Maximizes the cosine similarities between matched image and text pairs and minimizes those for the unmatched pairs.
+  - **Masked multimodal modelling (MMM)**: Masks both the image patches and the text tokens and jointly works on both modalities.
+  - **Image-text matching (ITM)**: A classifier is used to decide if an input image and text match each other.
+
+- Weights are initialized with unimodal pretraining objectives. Then unimodal and multimodal objectives are further trained in a round-robin fashion.
+
+*Vineeth N B (IIT-H) §14.4 Beyond CLIP (Part 2)*
+
+*Page 14 / 16*
+```
+
+# DL4CV_Week12.4 Beyond CLIP Part 2.pdf - Page 31
+
+```markdown
+# FLAVA: Pretraining objectives
+
+- **Unimodal objectives**
+
+  - **Masked image modelling (MIM)**: Masks a set of image patches and reconstructs them from other image patches.
+  - **Masked language modelling (MLM)**: A fraction (15%) of the text tokens are masked in the input, and reconstructed from the other tokens.
+
+- **Multimodal objectives**
+
+  - **Global contrastive (GC) loss**: Maximizes the cosine similarities between matched image and text pairs and minimizes those for the unmatched pairs.
+  - **Masked multimodal modelling (MMM)**: Masks both the image patches and the text tokens and jointly works on both modalities.
+  - **Image-text matching (ITM)**: A classifier is used to decide if an input image and text match each other.
+
+- Weights are initialized with unimodal pretraining objectives. Then unimodal and multimodal objectives are further trained in a round-robin fashion.
+
+*Vineeth N B (IIIT-H) §14.4 Beyond CLIP (Part 2) 14 / 16*
+```
+
+# DL4CV_Week12.4 Beyond CLIP Part 2.pdf - Page 32
+
+```markdown
+# Homework
+
+## Readings
+
+- [Lilian Weng, Generalized Visual Language Models](#)
+- [Hugging Face, A Dive into Vision-Language Models](#)
+
+---
+
+Vineeth N B (IIT-H) §14.4 Beyond CLIP (Part 2) 15 / 16
+```
+
+# DL4CV_Week12.4 Beyond CLIP Part 2.pdf - Page 33
+
+```markdown
+# References
+
+## References
+
+[1] Richard Szeliski. *Computer Vision: Algorithms and Applications*. Texts in Computer Science. London: Springer-Verlag, 2011.
+
+[2] David Forsyth and Jean Ponce. *Computer Vision: A Modern Approach*. 2 edition. Boston: Pearson Education India, 2015.
+
+[3] Dave Litwiller. "CMOS vs. CCD: Maturing Technologies, Maturing Markets-The factors determining which type of imager delivers better cost performance are becoming more refined." In: *Photonics Spectra* 39.8 (2005). pp. 54–61.
+
+[4] VSBytes Team. *DSLR Cameras vs Smartphone - Which of the two cameras is better?*. May 2019. URL: [https://vsbytes.com/dslr-vs-smartphone-camera/](https://vsbytes.com/dslr-vs-smartphone-camera/ visited on 04/14/2020).
+
+---
+
+Vineeth N B (IIT-H) §14.4 Beyond CLIP (Part 2) 16 / 16
+```
+

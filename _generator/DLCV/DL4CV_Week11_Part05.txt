@@ -1,0 +1,1521 @@
+# DL4CV_Week11_Part05.pdf - Page 1
+
+.
+
+```markdown
+# Deep Learning for Computer Vision
+
+# Deep Generative Models: Video Applications
+
+**Vineeth N Balasubramanian**
+
+Department of Computer Science and Engineering
+Indian Institute of Technology, Hyderabad
+
+![IIT Hyderabad Logo](https://example.com/iith-logo.png)
+
+*Vineeth N B (IIT-H) §11.5 Applications to Video Understanding*
+
+---
+
+## Slide 1: Introduction
+
+- **Deep Generative Models**: 
+  - Techniques for generating data similar to the input data.
+  - Used in video applications for tasks such as video prediction, video inpainting, etc.
+
+## Slide 2: Video Prediction
+
+- **Video Prediction**:
+  - Generating future frames of a video given the past frames.
+  - Applications in autonomous driving, robotics, etc.
+
+```markdown
+**Formulas**:
+- Let \( x_t \) be the frame at time \( t \).
+- The goal is to predict \( \hat{x}_{t+1} \) given \( x_t \).
+
+## Slide 3: Video Inpainting
+
+- **Video Inpainting**:
+  - Filling in missing or corrupted parts of a video.
+  - Applications in restoration of old videos, removing unwanted objects, etc.
+
+```markdown
+**Formulas**:
+- Let \( \hat{X} \) be the incomplete video.
+- The goal is to generate the complete video \( X \).
+
+## Slide 4: Deep Generative Models
+
+- **Types of Deep Generative Models**:
+  - **Variational Autoencoders (VAEs)**:
+    - Encoder-decoder architecture for learning latent representations.
+    - Used for generating new data points.
+
+  - **Generative Adversarial Networks (GANs)**:
+    - Two networks (Generator and Discriminator) in competition.
+    - Used for high-quality image and video generation.
+
+```markdown
+**Formulas**:
+- **VAE**:
+  - \( \mathcal{L}_{VAE} = \mathcal{L}_{reconstruction} + \mathcal{L}_{KL} \)
+
+- **GAN**:
+  - \( \mathcal{L}_{GAN} = \log D(x) + \log (1 - D(G(z))) \)
+
+## Slide 5: Applications
+
+- **Autonomous Driving**:
+  - Predicting future frames for navigation and obstacle avoidance.
+
+- **Robotics**:
+  - Generating training data for robotic trajectories.
+
+- **Movie Industry**:
+  - Creating new scenes, restoring old movies.
+
+## Slide 6: Conclusion
+
+- **Summary**:
+  - Deep Generative Models provide powerful tools for video applications.
+  - Future work involves improving model performance and reducing computational costs.
+
+```markdown
+**Figures and Diagrams**:
+- Placeholder for images or graphs related to video prediction and inpainting.
+  ![Figure 1](https://example.com/video-prediction.png)
+  ![Figure 2](https://example.com/video-inpainting.png)
+
+## Slide 7: References
+
+- Vineeth N Balasubramanian. "Applications to Video Understanding." IIT-H, Hyderabad.
+- Additional references and citations can be added here.
+
+```
+
+# DL4CV_Week11_Part05.pdf - Page 2
+
+
+
+```markdown
+
+# Generating Videos with Scene Dynamics<sup>1</sup>
+
+## Can we use GANs to generate videos?
+
+![NPTEL Logo](https://example.com/logo.png)
+
+<sup>1</sup>Vondrick et al., *Generating Videos with Scene Dynamics*, NeurIPS 2016
+
+Vineeth N B (IIT-H)
+
+§11.5 Applications to Video Understanding
+
+---
+
+_Figure 2 / 20_
+
+```
+
+# DL4CV_Week11_Part05.pdf - Page 3
+
+ accurately extracted text. 
+
+---
+
+```markdown
+# Generating Videos with Scene Dynamics
+
+## Can we use GANs to generate videos?
+
+### Recall GAN objective (w.r.t corresponding G and D parameters):
+
+$$
+\min \max_{w_G} \max_{w_D} \mathbb{E}_{x \sim p_{data}(x)} [\log D(x; w_D)] + \mathbb{E}_{z \sim p_z(z)} [\log(1 - D(G(z; w_G); w_D))]
+$$
+
+G and D can take on any form appropriate for a task as long as they are differentiable w.r.t. parameters \(w_G\) and \(w_D\).
+
+---
+
+<center>
+![NPTEL](https://via.placeholder.com/150)
+</center>
+
+---
+
+#### Reference
+- Vondrick et al., *Generating Videos with Scene Dynamics*, NeurIPS 2016
+- Vineeth N B (IIT-H)
+- §11.5 Applications to Video Understanding
+```
+
+# DL4CV_Week11_Part05.pdf - Page 4
+
+ the original content in a detailed markdown format.
+
+```markdown
+# Generating Videos with Scene Dynamics[^1]
+
+## Can we use GANs to generate videos?
+
+Recall GAN objective (w.r.t corresponding G and D parameters):
+
+```math
+\min_{w_G} \max_{w_D} \mathbb{E}_{x \sim p_n(x)}[\log D(x; w_D)] + \mathbb{E}_{z \sim p_z(z)}[\log(1 - D(G(z; w_G); w_D))]
+```
+
+G and D can take on any form appropriate for a task as long as they are differentiable w.r.t. parameters $w_G$ and $w_D$
+
+Consider the output of $G$ to be:
+
+```math
+G(z) = m(z) \odot f(z) + (1 - m(z)) \odot b(z)
+```
+
+where $f$ is **Foreground**, $b$ is **Background**, and $m$ is a **Mask** which indicates whether to use foreground or background for a pixel
+
+[^1]: Vondrick et al., Generating Videos with Scene Dynamics, NeurIPS 2016
+```
+
+[Vineeth N B (III-T-H), §11.5 Applications to Video Understanding](Vineeth%20N%20B%20(III-T-H)%20%2511.5%20Applications%20to%20Video%20Understanding)
+
+# DL4CV_Week11_Part05.pdf - Page 5
+
+ and format the output following markdown syntax rules.
+
+```markdown
+# Generating Videos with Scene Dynamics: Generator<sup>2</sup>
+
+![Noise 100 dB](image_url)
+
+$$
+m \odot f + (1-m) \odot b
+$$
+
+![NPTEL Logo](logo_url)
+
+**Vineeth N B (IIT-H)**
+
+**§11.5 Applications to Video Understanding**
+
+---
+
+Page 3 / 20
+```
+
+**Note**: Replace `image_url` with the actual URL or placeholder for the image of the logo and noise diagram if applicable. If the OCR can't capture images directly, use a placeholder text or comment in the markdown.
+
+# DL4CV_Week11_Part05.pdf - Page 6
+
+ the content of the image provided.
+
+```markdown
+# Generating Videos with Scene Dynamics: Generator<sup>2</sup>
+
+![Diagram of Scene Dynamics](https://via.placeholder.com/150)
+
+```math
+m \odot f + (1 - m) \odot b
+```
+
+- **Noise:** 
+  - 100 dB
+
+---
+
+Vineeth N B (IIT-H)
+
+### §11.5 Applications to Video Understanding
+
+3 / 20
+```
+
+# DL4CV_Week11_Part05.pdf - Page 7
+
+```markdown
+# Generating Videos with Scene Dynamics: Generator<sup>2</sup>
+
+![Generator Diagram](imageplaceholder.png)
+
+**Vineeth N B (IIIT-H)**
+**§11.5 Applications to Video Understanding**
+
+---
+
+### Noise and Foreground Stream
+
+- **Noise**: 100 dim
+- **Foreground Stream**: 3D convolutions with different kernel sizes (3x3x3, 7x7x7, 9x9x9, 15x15x15)
+  - **Shift 3D (3x3x3)**
+  - **Shift 3D (7x7x7)**
+  - **Shift 3D (9x9x9)**
+  - **Shift 3D (15x15x15)**
+
+### Formula
+
+```math
+m \odot f + (1 - m) \odot b
+```
+
+---
+
+```math
+m \odot f + (1 - m) \odot b
+```
+
+---
+
+![NPTEL Logo](imageplaceholder.png)
+```
+
+# DL4CV_Week11_Part05.pdf - Page 8
+
+```markdown
+# Generating Videos with Scene Dynamics: Generator<sup>2</sup>
+
+![Diagram of Generating Videos with Scene Dynamics]( https://example.com/diagram.png)
+
+- **Foreground Stream**
+
+    ```
+    3D Convolutions
+    ```
+    ![3D Convolution Diagram](https://example.com/3d-convolution.png)
+
+    - **Noise**
+        ```
+        100 dim
+        ```
+    - **Foreground Stream (Steps)**
+        ```
+        Conv2D (512)
+        ReLU
+        Conv2D (256)
+        ReLU
+        Conv3D (256)
+        ReLU
+        ```
+    - **Foreground**
+        ```
+        Tanh
+        ```
+
+    - **Mask**
+        ```
+        Sigmoid
+        ```
+    - **Equation**
+        ```
+        m \\circ f + (1 - m) \\circ b
+        ```
+
+**Vineeth N B (IIIT-H)**
+**\&11.5 Applications to Video Understanding**
+
+```
+
+# DL4CV_Week11_Part05.pdf - Page 9
+
+```markdown
+# Generating Videos with Scene Dynamics: Generator<sup>2</sup>
+
+![Diagram](https://via.placeholder.com/1200x600)
+
+Vineeth N B (IIT-H) §11.5 Applications to Video Understanding
+
+## Foreground Stream
+
+- **3D Convolutions**
+
+```markdown
+| Layer          | Configuration  |
+|----------------|-----------------|
+| Seed (3D)      | 100 dim         |
+| Conv3D (3x3x3)  | 16x16x16        |
+| Tanh           |                 |
+| Conv3D (3x3x3)  | 32x32x32        |
+| Tanh           |                 |
+| Conv3D (3x3x3)  | 64x64x64        |
+| Tanh           |                 |
+```
+
+## Mask
+
+- **Sigmoid Activation**
+
+## Background Stream
+
+- **2D Convolutions**
+
+```markdown
+| Layer        | Configuration  |
+|--------------|-----------------|
+| Seed (2D)    | 100 dim         |
+| Conv2D (3x3)  | 16x16           |
+| Tanh         |                 |
+| Conv2D (3x3)  | 32x32           |
+| Tanh         |                 |
+| Conv2D (3x3)  | 64x64           |
+| Tanh         |                 |
+```
+
+## Replicate over Time
+
+## Foreground
+
+```markdown
+m ∘ f + (1 - m) ∘ b
+```
+
+- **Tanh Activation**
+
+## Background
+
+- **Tanh Activation**
+
+**Note:** The diagram and other visual elements should be referenced accordingly.
+
+This ensures the structured representation of the scientific content, maintaining the integrity of formulas, equations, and visual elements.
+```
+
+# DL4CV_Week11_Part05.pdf - Page 10
+
+```markdown
+# Generating Videos with Scene Dynamics: Generator²
+
+## Captures the moving features
+
+### Foreground Stream
+- **3D Convolutions**
+  - `Conv3D (32, 128)`
+  - `Batch Norm`
+  - `Leaky ReLU`
+  - `Conv3D (64, 128)`
+  - `Batch Norm`
+  - `Leaky ReLU`
+  - `Conv3D (128, 256)`
+  - `Batch Norm`
+  - `Leaky ReLU`
+
+- **Foreground Tanh**
+
+## Combination of Foreground and Background
+
+\[ m \odot f + (1 - m) \odot b \]
+
+## Captures the static features
+
+### Background Stream
+- **2D Convolutions**
+  - `Conv2D (32, 128)`
+  - `Batch Norm`
+  - `Leaky ReLU`
+  - `Conv2D (64, 128)`
+  - `Batch Norm`
+  - `Leaky ReLU`
+  - `Conv2D (128, 256)`
+  - `Batch Norm`
+  - `Leaky ReLU`
+
+- **Mask Sigmoid**
+
+- **Background Tanh**
+
+## Replicate over Time
+
+![Replicate over Time](image-url)
+
+---
+
+*Vineeth N B (IIIT-H)*
+
+§11.5 Applications to Video Understanding
+
+*Page 3 / 20*
+```
+
+# DL4CV_Week11_Part05.pdf - Page 11
+
+ parsing errors should be avoided or corrected.
+
+```markdown
+# Generating Videos with Scene Dynamics: Generator<sup>2</sup>
+
+## Captures the moving features
+
+![Foreground Stream](image_url)
+
+- Foreground Stream
+  - 3D convolutions
+  - Sequential layers
+    - **Conv3D (32, 3x3x3)**
+    - **Conv3D (64, 3x3x3)**
+    - **Conv3D (128, 3x3x3)**
+    - **Conv3D (256, 3x3x3)**
+  - Gated activation functions
+  - Foreground Tanh
+
+## Captures the static features
+
+![Background Stream](image_url)
+
+- Background Stream
+  - 2D convolutions
+  - Sequential layers
+    - **Conv2D (32, 3x3)**
+    - **Conv2D (64, 3x3)**
+    - **Conv2D (128, 3x3)**
+    - **Conv2D (256, 3x3)**
+    - **Conv2D (512, 3x3)**
+  - Mask Sigmoid
+
+### Combining Streams
+
+- **Noise (100 dim)**
+
+- **Foreground** and **Background** streams are combined using a weighted sum formula:
+
+  ```math
+  m \circ f + (1 - m) \circ b
+  ```
+
+  - **m** represents the mask from the foreground stream.
+  - **f** represents the output from the foreground stream.
+  - **b** represents the output from the background stream.
+
+### Replicate over Time
+
+- The background stream output is replicated over time to maintain consistency.
+
+### Visualization
+
+![Visualization](image_url)
+
+- The visual output shows the combined effect of foreground and background streams, illustrating dynamic scene generation.
+
+---
+
+*Vineeth N B (IIIT-H)*
+
+*§11.5 Applications to Video Understanding*
+
+*3 / 20*
+```
+
+# DL4CV_Week11_Part05.pdf - Page 12
+
+```markdown
+# Generating Videos with Scene Dynamics: Generator<sup>2</sup>
+
+## Captures the moving features
+
+### Foreground Stream
+- **3D Convolutions**
+  - **SEGA2D (32)**
+  - **Conv2d (32)**
+  - **ReLU Sigmoid**
+  - **Conv2d (32)**
+  - **SEGA2D (32)**
+  - **Tanh**
+  - **Foreground Tanh**
+
+### Noise
+- **100 dim**
+
+### Background Stream
+- **2D Convolutions**
+  - **SEGA2D (32)**
+  - **Conv2d (32)**
+  - **ReLU Sigmoid**
+  - **Conv2d (32)**
+  - **SEGA2D (32)**
+  - **Tanh**
+  - **Background Tanh**
+
+### Generated Video
+- **Space-Time Cuboid**
+- **SEGA2D (19)**
+
+## Captures the static features
+
+### Mask
+- **Sigmoid**
+- **Replicate over Time**
+
+### Equation
+```math
+m \odot f + (1 - m) \odot b
+```
+
+**Vineeth N B (IIIT-H)**
+**§11.5 Applications to Video Understanding**
+
+3 / 20
+```
+
+# DL4CV_Week11_Part05.pdf - Page 13
+
+ the content of the image to markdown format.
+
+# Generating Videos with Scene Dynamics: Discriminator
+
+## Generated Video (Space-Time Cuboid)
+
+```markdown
+## Generating Videos with Scene Dynamics: Discriminator
+
+### Generated Video (Space-Time Cuboid)
+
+![Generated Video (Space-Time Cuboid)](https://via.placeholder.com/150)
+
+### Binary Classifier (real or fake)
+
+- Binary Classifier
+    - Real or fake
+
+---
+
+**Vineeth N B** (IIIT-H)
+
+**S11.5 Applications to Video Understanding**
+
+---
+
+4 / 20
+```
+
+This markdown format accurately captures the provided scientific slide content, maintaining proper formatting, symbols, and structure.
+
+# DL4CV_Week11_Part05.pdf - Page 14
+
+```markdown
+# Generating Videos with Scene Dynamics: Results
+
+## Components
+- **Background**
+- **Foreground**
+- **Mask**
+- **Generation**
+
+### Example 1
+![Background Image](image1.png)
+
+![Foreground Image](image2.png)
+
+![Mask Image](image3.png)
+
+![Generated Video Frame](image4.png)
+
+### Example 2
+![Background Image](image5.png)
+![Foreground Image](image6.png)
+![Mask Image](image7.png)
+
+![Generated Video Frame 1](image8.png)
+![Generated Video Frame 2](image9.png)
+![Generated Video Frame 3](image10.png)
+
+**Note**: For more examples, see [http://www.cs.columbia.edu/~vondrick/tinyvideo/](http://www.cs.columbia.edu/~vondrick/tinyvideo/)
+
+**Source**: Vondrick et al., *Generating Videos with Scene Dynamics*, NeurIPS 2016
+
+**Author**: Vineeth N B (IITH)
+
+**Section**: §11.5 Applications to Video Understanding
+
+---
+
+*5 / 20*
+```
+
+# DL4CV_Week11_Part05.pdf - Page 15
+
+:
+
+```markdown
+# The Pose Knows: Video Forecasting by Generating Pose Futures[^4]
+
+- **GANs and VAEs in video forecasting generate video directly in pixel space** ⇒ **model all the structure and scene dynamics at once**
+
+![NPTEL Logo](https://example.com/logo.png)
+
+[^4]: Walker et al., *The Pose Knows: Video Forecasting by Generating Pose Futures*, ICCV 2017
+
+Vineeth N B (IIT-H)
+
+§11.5 Applications to Video Understanding
+
+---
+
+6 / 20
+```
+
+# DL4CV_Week11_Part05.pdf - Page 16
+
+ the following content:
+
+### Slide 6/20
+
+**The Pose Knows: Video Forecasting by Generating Pose Futures<sup>4</sup>**
+
+- GANs and VAEs in video forecasting generate video directly in pixel space ⇒ model all the structure and scene dynamics at once
+- In unconstrained settings, often generate uninterpretable results
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<script type="text/javascript">
+MathJax.Hub.Config({
+    TeX: {
+        extensions: ["mhchem.js", "color.js", "mathdots.js"],
+        equationNames: {amssymb: "ams", amsfonts: "ams", amsthm: "ams", amsmath: "ams", amscd: "ams", amsbsy: "ams", amsfonts: "ams", amsmath: "ams", amsthm: "ams", amsopn: "ams", amssymb: "ams", mathrsfs: "ams", latexsym: "ams", mathtools: "ams"}
+    }
+});
+</script>
+
+---
+
+<sup>4</sup> Walker et al., *The Pose Knows: Video Forecasting by Generating Pose Futures*, ICCV 2017
+
+*Vineeth N B (IIT-H)*
+
+§11.5 Applications to Video Understanding
+
+---
+
+### Markdown Representation
+
+```markdown
+# Slide 6/20
+
+## The Pose Knows: Video Forecasting by Generating Pose Futures<sup>4</sup>
+
+- GANs and VAEs in video forecasting generate video directly in pixel space ⇒ model all the structure and scene dynamics at once
+- In unconstrained settings, often generate uninterpretable results
+
+<sup>4</sup> Walker et al., *The Pose Knows: Video Forecasting by Generating Pose Futures*, ICCV 2017
+
+*Vineeth N B (IIT-H)*
+
+§11.5 Applications to Video Understanding
+```
+
+Ensure that all the special characters, symbols, and references are accurately represented in the markdown format.
+```
+
+# DL4CV_Week11_Part05.pdf - Page 17
+
+```markdown
+# The Pose Knows: Video Forecasting by Generating Pose Futures<sup>4</sup>
+
+- **GANs and VAEs in video forecasting generate video directly in pixel space** ⇒ **model all the structure and scene dynamics at once**
+- **In unconstrained settings, often generate uninterpretable results**
+
+## Solution
+
+- **Forecasting needs to be done first at a higher level of abstraction (pose)**
+
+<sup>4</sup> Walker et al., *The Pose Knows: Video Forecasting by Generating Pose Futures*, ICCV 2017
+
+*Vineeth N B (IIT-H)*
+
+*§11.5 Applications to Video Understanding*
+
+*6 / 20*
+```
+
+# DL4CV_Week11_Part05.pdf - Page 18
+
+```markdown
+# The Pose Knows: Video Forecasting by Generating Pose Futures<sup>4</sup>
+
+- **GANs and VAEs in video forecasting generate video directly in pixel space** ⇒ **model all the structure and scene dynamics at once**
+- In unconstrained settings, often generate uninterpretable results
+
+## Solution
+
+- **Forecasting needs to be done first at a higher level of abstraction (pose)**
+- Exploit human pose detectors as (free) source of supervision, and break video forecasting problem into two steps:
+
+<sup>4</sup>Walker et al., *The Pose Knows: Video Forecasting by Generating Pose Futures*, ICCV 2017
+
+*Vineeth N B (IIT-H)*
+
+*§11.5 Applications to Video Understanding*
+
+---
+
+*Image placeholder*
+
+---
+
+6 / 20
+```
+
+# DL4CV_Week11_Part05.pdf - Page 19
+
+
+
+```markdown
+# The Pose Knows: Video Forecasting by Generating Pose Futures
+
+- GANs and VAEs in video forecasting generate video directly in pixel space ⇒ model all the structure and scene dynamics at once
+- In unconstrained settings, often generate uninterpretable results
+
+## Solution
+
+- Forecasting needs to be done first at a higher level of abstraction (pose)
+- Exploit human pose detectors as (free) source of supervision, and break video forecasting problem into two steps:
+  - Use a VAE to model the possible movements of human in pose space
+  - Use generated future poses as conditional information to a GAN to predict future frames in pixel space
+
+*Walker et al, The Pose Knows: Video Forecasting by Generating Pose Futures, ICCV 2017*
+```
+
+Ensure the markdown output is formatted accurately and maintains the scientific integrity of the content.
+
+# DL4CV_Week11_Part05.pdf - Page 20
+
+```markdown
+# Pose Prediction: Encoder-Decoder Model[^5]
+
+![Pose Prediction Diagram](image_url)
+
+## Diagram Overview
+- **AlexNet**: Extracts image features from \( X_t \)
+- **Past Encoder**: Reads in image features from \( X_t \), corresponding past poses \( P_{1:t} \) and their corresponding velocities \( Y_{1:t} \)
+- **Past Decoder**: Utilizes the encoded information to predict future poses and velocities
+
+## Detailed Steps
+
+1. **Input Image Features**: 
+   - The input image \( X_t \) is processed through AlexNet to extract features.
+   
+2. **Reading Image Features**:
+   - The Past Encoder reads the image features from \( X_t \), along with the past poses \( P_{1:t} \) and their corresponding velocities \( Y_{1:t} \).
+   
+3. **Encoding Process**:
+   - The encoder generates hidden states \( H_1, H_2, \ldots, H_t \) which capture the spatial and temporal information of the past poses and velocities.
+   
+4. **Decoding Process**:
+   - The Past Decoder uses the hidden states \( H_t \) to predict future poses and velocities \( Y_t, Y_{t-1}, \ldots, Y_1 \).
+
+## References
+- Walker et al., "The Pose Knows: Video Forecasting by Generating Pose Futures," ICCV 2017.
+- Vineeth N B (IIT-H)
+
+[^5]: Walker et al., _The Pose Knows: Video Forecasting by Generating Pose Futures_, ICCV 2017
+```
+
+# DL4CV_Week11_Part05.pdf - Page 21
+
+
+
+```markdown
+# Pose Prediction: Encoder-Decoder Model[^5]
+
+![Pose Prediction Diagram](image_url)
+
+- **AlexNet**: Reads in image features from $X_{t}$, corresponding past poses $P_{1..t}$ and their corresponding velocities $Y_{1..t}$
+
+  ```
+  ![AlexNet](alexnet_image_url)
+  ```
+
+  ![Pose Diagram](pose_diagram_image_url)
+
+- **Past Encoder**: Reads in image features from $X_{t}$, corresponding past poses $P_{1..t}$ and their corresponding velocities $Y_{1..t}$
+
+- **Past Decoder**: Replays pose velocities $Y_{1..t}$ in reverse order
+
+  ```
+  ![Past Decoder](past_decoder_image_url)
+  ```
+
+[^5]: Walker et al., *The Pose Knows: Video Forecasting by Generating Pose Futures*, ICCV 2017
+
+Vineeth N B (IIIT-H)
+
+§11.5 Applications to Video Understanding
+```
+
+Note: Placeholders for images (`image_url`, `alexnet_image_url`, `pose_diagram_image_url`, `past_decoder_image_url`) should be replaced with actual URLs or paths if available.
+
+# DL4CV_Week11_Part05.pdf - Page 22
+
+```markdown
+# Pose Prediction: Encoder-Decoder Model
+
+![Pose Prediction Diagram](image_url)
+
+- **AlexNet**:
+  - Extracts image features from input image \( X_t \).
+
+- **Past Encoder**:
+  - Reads in image features from \( X_t \).
+  - Corresponding past poses \( P_{1..t} \) and their corresponding velocities \( Y_{1..t} \).
+  - Generates hidden states \( H_1, H_2, \ldots, H_t \).
+
+- **Past Decoder**:
+  - Replays pose velocities \( Y_{1..t} \) in reverse order.
+  - Uses these hidden states \( H_1, H_2, \ldots, H_t \) for inference.
+
+## References
+- Walker et al., *The Pose Knows: Video Forecasting by Generating Pose Futures*, ICCV 2017
+- Vineeth N B (IIT-H)
+
+```
+
+# DL4CV_Week11_Part05.pdf - Page 23
+
+ tags are used to indicate special attention should be given to these elements.
+
+```markdown
+# Pose Prediction: Encoder-Decoder Model<sup>6</sup>
+
+![Encoder-Decoder Model Diagram](image_url_if_ocr_can_capture_directly)
+
+## Diagram Description
+
+- **Inputs**: Past `H_t`, future pose information
+  - `Y_t+1...T`, `P_t+1...T`
+- **Output**: Approximate posterior `Q`
+
+**Testing**:
+- `Z ~ N(0, 1)`
+
+**Training**:
+- `Z ~ Q(z | Y_t:T, P_t:T, H_t)`
+
+### Model Components
+
+- **Future Encoder**
+  - Encodes the future pose information.
+- **Future Decoder**
+  - Decodes the encoded information to predict future poses.
+
+### Visual Representation
+
+- Green circles represent the encoder nodes.
+- Red triangles represent decoder nodes.
+- Arrows indicate the flow of information between nodes.
+
+## References
+
+6. Walker et al, *The Pose Knows: Video Forecasting by Generating Pose Futures, ICCV 2017*
+   - Vineeth N B, IIIT-H
+
+**Section**: §11.5 Applications to Video Understanding
+
+---
+
+![Page Number](image_url_if_ocr_can_capture_directly)
+
+Page 8 / 20
+```
+
+To ensure you get the best results, you may need to manually refine the OCR outputs and verify the accuracy of the extracted content.
+
+# DL4CV_Week11_Part05.pdf - Page 24
+
+```markdown
+# Pose Prediction: Encoder-Decoder Model[^6]
+
+![Pose Prediction Diagram](image_url)
+
+- **Samples** \( z \) from \( Q \) to reconstruct pose motions \( Y_{t+1 \ldots T} \) given past \( H_t \) and poses 
+
+  - \( t+1 \ldots T \)
+
+## Inputs:
+- Past \( H_t \)
+- Future pose information
+  - \( Y_{t+1 \ldots T}, P_{t+1 \ldots T} \)
+
+## Output:
+- Approximate posterior \( Q \)
+
+### Testing
+- \( z \sim N(0, 1) \)
+
+### Training
+- \( z \sim Q(z \mid Y_{t+1 \ldots T}, P_{t+1 \ldots T}, H_t) \)
+
+### Future Decoder
+  - \( y_{t + 1} \)
+  - \( y_{t + 2} \)
+  - \( y_{T} \)
+  - \( H_t \)
+
+  - \( x_{t+1} \)
+  - \( x_{t+2} \)
+  - \( x_T \)
+
+  - \( P_{t + 1} \)
+  - \( P_{t + 2} \)
+  - \( P_T \)
+
+### Future Encoder
+  - Future Encoder
+  - \( H_t \)
+
+[^6]: Walker et al., The Pose Knows: Video Forecasting by Generating Pose Futures, ICCV 2017
+      Vineeth N B (IIIT-H)
+
+*ICCV 2017 Applications to Video Understanding*
+
+*8 / 20*
+```
+
+# DL4CV_Week11_Part05.pdf - Page 25
+
+ correctly capturing any scientific notations, symbols, and formulas.
+
+```markdown
+# Pose Prediction: Encoder-Decoder Model
+
+![Pose Prediction: Encoder-Decoder Model](image_url)
+
+- **Samples** \( z \) from \( Q \) to reconstruct pose motions \( Y_{t+1...T} \) given past \( H_t \) and poses \( t+1...T \)
+
+    - \( H_t \)
+    - Future Decoder
+    - \( P_{t+1} \), \( Z_{t+1} \)
+    - \( Y_{t+2} \)
+    - \( P_{t+2} \), \( Z_{t+2} \)
+    - \( Y_{t+T} \)
+    - \( P_{t+T} \), \( Z_{t+T} \)
+
+- **Inputs**: Past \( H_t \), future pose information \( Y_{t+1...T} \), \( P_{t+1...T} \)
+- **Output**: Approximate posterior \( Q \)
+
+  - **Training**:
+    - **Inference** (highlighted in yellow)
+    - **Future Encoder**
+
+  - **Testing**:
+    - \( z \sim N(0,1) \)
+
+### References
+- Walker et al, The Pose Knows: Video Forecasting by Generating Pose Futures, ICCV 2017
+- Vineeth N B (IIIT-H)
+- §11.5 Applications to Video Understanding
+
+```
+
+# DL4CV_Week11_Part05.pdf - Page 26
+
+:
+
+# Video Generation
+
+$$
+L_G = \sum_{i=M/2+1}^{M} l(D(G(I, S_T)), l_r) + \alpha || G(I, S_T) - V||_1
+$$
+
+```markdown
+- **V**: Ground Truth Video
+- **M**: Batch size
+- **I**: Input
+- **S_T**: Pose skeleton
+- **l_r**: Real label (1)
+- **l_f**: Fake label (0)
+- **L**: Binary cross-entropy loss
+```
+
+![Video Generation Diagram](image-url)
+
+$$
+L_D = \sum_{i=1}^{M/2} l(D(V_i), l_r) + \sum_{i=M/2+1}^{M} l(D(G(I, S_T)), l_f)
+$$
+
+**Walker et al., The Pose Knows: Video Forecasting by Generating Pose Futures, ICCV 2017**
+
+Vimeeth N B (IIIT-H)
+
+§11.5 Applications to Video Understanding
+
+Page 9/20
+```
+
+# DL4CV_Week11_Part05.pdf - Page 27
+
+ accuracy, and formatting are preserved.
+
+```markdown
+# The Pose Knows: Video Forecasting by Generating Pose Futures
+
+## Pose-VAE
+
+### Past Encoder
+- **Model**: AckNet
+- **Input**: \( X_t \)
+- **Process**:
+  - Encodes past poses into latent space.
+  - Produces intermediate representations \( P_1, P_2, ..., P_t \).
+  - Generates future pose predictions \( Y_1, Y_2, ..., Y_T \).
+
+### Future Decoder
+- **Process**:
+  - Takes latent representations from the past encoder.
+  - Decodes these representations into future poses.
+  - Produces future poses \( Y_{t+1}, Y_{t+2}, ..., Y_T \) based on past information.
+
+## Pose-GAN
+
+### Video Generator
+- **Input**: Future pose sequences \( Y_{t+1}, Y_{t+2}, ..., Y_T \)
+- **Process**:
+  - Generates video frames based on predicted poses.
+  - Outputs the final video sequence.
+
+## References
+- **Walker et al., The Pose Knows: Video Forecasting by Generating Pose Futures, ICCV 2017**
+- **Vineeth N B (IIT-H)**
+
+![Pose-VAE Diagram](image_link_here)
+![Pose-GAN Diagram](image_link_here)
+```
+
+# DL4CV_Week11_Part05.pdf - Page 28
+
+ is not required.
+
+---
+
+# Results
+
+![Results Image](image_url)
+
+---
+
+## References
+
+9. Walker et al., *The Pose Knows: Video Forecasting by Generating Pose Futures*, ICCV 2017
+
+Vineeth N B (IITH)
+
+§11.5 Applications to Video Understanding
+
+---
+
+ content extracted from:
+
+![Results Image](image_url)
+
+# DL4CV_Week11_Part05.pdf - Page 29
+
+
+
+```markdown
+# Everybody Dance Now<sup>10</sup>
+
+## Objective
+
+Given a professional's dancing video and an amateur's dancing video, can we generate a video of an amateur dancing professionally?
+
+---
+
+<sup>10</sup> Chan et al. Everybody Dance Now, ICCV 2019
+
+Vineeth N B (IIT-H) §11.5 Applications to Video Understanding
+
+NPTEL
+
+```
+
+# DL4CV_Week11_Part05.pdf - Page 30
+
+ is not required.
+
+```
+# Everybody Dance Now
+
+## Objective
+
+Given a professional's dancing video and an amateur’s dancing video, can we generate a video of an amateur dancing professionally?
+
+![Everybody Dance Now](https://via.placeholder.com/150)
+
+### Process Flow
+
+1. **Input Videos**
+   - \( y_t, y_{t+1} \): Frames from the professional’s dancing video.
+   - \( x_t, x_{t+1} \): Frames from the amateur’s dancing video.
+
+2. **Open-Pose Detection**
+   - \( P \): Open-Pose detection is applied to extract key poses from the dancing sequences.
+
+3. **Generator Network**
+   - \( G \): The generator network processes the poses and generates new frames \( G(x_t), G(x_{t+1}) \) that mimic professional dancing while maintaining the amateur's movements.
+
+### Diagram
+
+![Generator Flow](https://via.placeholder.com/800)
+
+### References
+
+10. Chan et al. Everybody Dance Now, ICCV 2019
+
+Vineeth N B (IIT-H)
+
+## §11.5 Applications to Video Understanding
+
+---
+
+Page 12 / 20
+```
+
+# DL4CV_Week11_Part05.pdf - Page 31
+
+
+
+```markdown
+# Everybody Dance Now: Discriminator<sup>11</sup>
+
+![Everybody Dance Now Discriminator](example.png)
+
+**Enforcing temporal coherence between adjacent frames:**
+
+$$L_\text{smooth}(G, D) = \mathbb{E}_{(x, y)} [\log D(x_t, x_{t+1}, y_t, y_{t+1})] + \mathbb{E}_{x} [\log(1 - D(x_t, x_{t+1}, G(x_t), G(x_{t+1}))]$$
+
+<sup>11</sup> Chan et al., Everybody Dance Now, ICCV 2019
+
+Vineeth N B (IIIT-H)
+
+§11.5 Applications to Video Understanding
+
+---
+
+## Temporally Incoherent
+
+![Incoherent Image](example.png)
+
+## Temporally Coherent
+
+![Coherent Image](example.png)
+
+## Diagram
+![Diagram](example.png)
+
+```
+
+# DL4CV_Week11_Part05.pdf - Page 32
+
+```markdown
+# Everybody Dance Now: Inference<sup>12</sup>
+
+## Different people may have different limb proportion \(\implies\) normalization layer in between
+
+```markdown
+![Diagram](https://via.placeholder.com/150)  # Placeholder for the actual image
+
+1. **Input Sequence**: \(y_1, ..., y_T\)
+   - Series of frames from a dance performance.
+
+2. **Processing Layer \(P\)**: 
+   - Transforms the input sequence into an intermediate representation.
+   - Output: \(x_1, ..., x_T\)
+
+3. **Normalization Layer \(Norm\)**:
+   - Adjusts the intermediate representation to account for differences in limb proportions.
+   - Output: \(x_1, ..., x_T'\)
+
+4. **Generator Layer \(G\)**:
+   - Generates the final output frames.
+   - Output: \(G(x_1), ..., G(x_T)\)
+     - Series of generated frames from the processed input.
+
+**References:**
+- Chan et al., Everybody Dance Now, ICCV 2019
+- Vineeth N B, IIT-H
+
+**Section**: §11.5 Applications to Video Understanding
+
+*Page Number*: 14 / 20
+```
+
+**Note**: The placeholder for the image should be replaced with the actual image or diagram if available. The OCR process didn't capture the image directly, so a placeholder is used. Ensure to handle special symbols and mathematical notations accurately, as represented in the provided OCR text.
+
+# DL4CV_Week11_Part05.pdf - Page 33
+
+:
+
+```markdown
+# Everybody Dance Now: Refining Generated Face<sup>13</sup>
+
+![Image of the process](image_url)
+
+The process of refining generated faces involves several key steps and components:
+
+1. **Initial Input (`x`)**:
+   - Start with an initial input image or skeletal representation of a person.
+
+2. **Feature Extraction (`x_F`)**:
+   - Extract key features (e.g., facial features) from the initial input.
+   - This is visualised in the diagram as a skeletal representation.
+
+3. **Generative Model (`G`)**:
+   - Apply a generative model to create an initial face image from the extracted features.
+
+4. **Refinement Network (`G_f`)**:
+   - Utilize a refinement network to enhance the generated face by adding details and corrections.
+   - The refinement network takes the initial face and feature data to produce a refined face image.
+
+5. **Combination (`r`)**:
+   - Combine the refined face with additional generated data to produce a final output.
+   - This is represented as `G(x)_F := r + G(x_F)` in the diagram.
+
+6. **Objective Function**:
+   - The refinement process is guided by an objective function `L_face(G_f, D_f)` which combines two components:
+     - `E_{(x_F, y_F)} [log D_f(x_F, y_F)]`: Encourages correct classification of paired features and faces.
+     - `E_{x_F} [log (1 - D_f(x_F, G(x)_F + r))]`: Ensures that incorrectly classified pairs are penalized.
+
+```math
+L_{face}(G_f, D_f) = E_{(x_F, y_F)} [log D_f(x_F, y_F)] + E_{x_F} [log (1 - D_f(x_F, G(x)_F + r))]
+```
+
+**References**:
+- Vineeth N B (IIIT-H)
+- §11.5 Applications to Video Understanding
+
+**Note**: The image and content are attributed to the presentation slide from §11.5 Applications to Video Understanding.
+```
+
+# DL4CV_Week11_Part05.pdf - Page 34
+
+```markdown
+# Everybody Dance Now: Overview
+
+## Stage 1
+
+$$
+\min_{G}\left((\max_{D_1 \dots k_i} \sum \mathcal{L}_{\text{smooth}}(G, D_k)) + \lambda_{FM} \sum_{k_i} \mathcal{L}_{FM}(G, D_k)
++ \lambda_P(\mathcal{L}_P(G(x_{t-1}), y_{t-1}) + \mathcal{L}_P(G(x_t), y_t))\right)
+$$
+
+![NPTEL Logo](example-logo.png)
+
+*Vineeth N B (IIIT-H)*
+*11.5 Applications to Video Understanding*
+*16 / 20*
+```
+
+# DL4CV_Week11_Part05.pdf - Page 35
+
+```markdown
+# Everybody Dance Now: Overview
+
+## Stage 1
+
+$$\min \left( \max_{G} \sum_{Di} \mathcal{L}_{\text{smooth}}(G, Di) \right) + \lambda_{FM} \sum_{ki} \mathcal{L}_{FM}(G, Di) + \lambda_{P} \left( \mathcal{L}_{P}(G(x_{t-1}), y_{t-1}) + \mathcal{L}_{P}(G(x_{t}), y_{t}) \right)$$
+
+$$\mathcal{L}_{\text{smooth}}(G, D) = \mathbb{E}_{(x,y)} \left[ \log D(x_t, x_{t+1}, y_t, y_{t+1}) \right] + \mathbb{E}_{x} \left[ \log \left( 1 - D(x_t, x_{t+1}, G(x_t), G(x_{t+1})) \right) \right]$$
+
+$$\mathcal{L}_{FM}(G, D) \quad \text{Discriminator Feature-matching loss (as in Pix2Pix)}$$
+
+$$\mathcal{L}_{P}(G(x), y) \quad \text{Perceptual Reconstruction Loss}$$
+
+*Vineeth N B (IIT-H)*
+
+*§11.5 Applications to Video Understanding*
+
+*16 / 20*
+```
+
+# DL4CV_Week11_Part05.pdf - Page 36
+
+ the content of the image.
+
+```markdown
+# Everybody Dance Now: Overview
+
+## Stage 1
+
+**Freeze Stage 1 weights**
+
+![Diagram](https://placehold.co/300)
+
+$$
+\text{min}\left(\left(\max_{G} \sum_{D_i} \mathcal{L}_{\text{smooth}}(G, D_k)\right) + \lambda_{FM} \sum_{k_i} \mathcal{L}_{FM}(G, D_k) \right) + \lambda_P \left( \mathcal{L}_P(G(x_{t-1}), y_{t-1}) + \mathcal{L}_P(G(x_t), y_t) \right)
+$$
+```
+
+# DL4CV_Week11_Part05.pdf - Page 37
+
+ the OCR text and structure it into a markdown formatted document.
+
+```markdown
+# Everybody Dance Now: Overview
+
+## Stage 1
+
+- **Freeze Stage 1 weights**
+
+## Stage 2
+
+$$\min \left( \left( \max_{G_f} \sum_{D_i} \mathcal{L}_{\text{smooth}}(G, D_k) \right) + \lambda_{FM} \sum_{k_i} \mathcal{L}_{FM}(G, D_k) + \lambda_P \left( \mathcal{L}_P(G(x_{t-1}), y_{t-1}) + \mathcal{L}_P(G(x_t), y_t) \right) \right)$$
+
+$$\min \left( \left( \max_{G_f} \mathcal{L}_{\text{face}}(G_f, D_f) \right) + \lambda_P \mathcal{L}_P(r + G(x)_F, y_F) \right)$$
+
+![NPTEL](https://via.placeholder.com/150)
+
+*Vineeth N B (IIT-H)*
+
+*§11.5 Applications to Video Understanding*
+
+*16 / 20*
+```
+
+Note: The placeholder link for the image is used as the OCR process doesn't capture images directly. Replace it with the actual image URL if available.
+```
+
+# DL4CV_Week11_Part05.pdf - Page 38
+
+ is not needed for this task.
+
+```markdown
+# Everybody Dance Now: Overview
+
+## Stage 1
+
+## Stage 2
+
+- **Freeze Stage 1 weights**
+
+![Diagram](image placeholder)
+
+$$
+\text{min} \left( \max_{G} \sum_{D_i} \mathcal{L}_{\text{smooth}}(G, D_k) \right) + \lambda_{FM} \sum_{k_t} \mathcal{L}_{FM}(G, D_k) + \lambda_P \left( \mathcal{L}_P(G(x_{t-1}), y_{t-1}) + \mathcal{L}_P(G(x_t), y_t) \right)
+$$
+
+$$
+\text{min} \left( \left( \max_{G_f} \mathcal{L}_{\text{face}}(G_f, D_f) \right) + \lambda_P \mathcal{L}_P(r + G(x)_F, y_F) \right)
+$$
+
+*Vineeth N B (IIIT-H)*
+
+*11.5 Applications to Video Understanding*
+
+*16 / 20*
+```
+
+# DL4CV_Week11_Part05.pdf - Page 39
+
+```markdown
+# Everybody Dance Now: Results
+
+![Everybody Dance Now Results](https://via.placeholder.com/800x400?text=Results+Image)
+
+## Source Subject
+
+- **Source Subject 1**
+  - ![Source Subject 1](https://via.placeholder.com/200x200?text=1)
+  - ![Source Subject 1](https://via.placeholder.com/200x200?text=2)
+  - ![Source Subject 1](https://via.placeholder.com/200x200?text=3)
+
+- **Source Subject 2**
+  - ![Source Subject 2](https://via.placeholder.com/200x200?text=4)
+  - ![Source Subject 2](https://via.placeholder.com/200x200?text=5)
+  - ![Source Subject 2](https://via.placeholder.com/200x200?text=6)
+
+## Target Subject 1
+
+- **Target Subject 1**
+  - ![Target Subject 1](https://via.placeholder.com/200x200?text=7)
+  - ![Target Subject 1](https://via.placeholder.com/200x200?text=8)
+  - ![Target Subject 1](https://via.placeholder.com/200x200?text=9)
+
+## Target Subject 2
+
+- **Target Subject 2**
+  - ![Target Subject 2](https://via.placeholder.com/200x200?text=10)
+  - ![Target Subject 2](https://via.placeholder.com/200x200?text=11)
+  - ![Target Subject 2](https://via.placeholder.com/200x200?text=12)
+
+**Source Subject**
+
+- ![Source Subject 3](https://via.placeholder.com/200x200?text=13)
+- ![Source Subject 3](https://via.placeholder.com/200x200?text=14)
+- ![Source Subject 3](https://via.placeholder.com/200x200?text=15)
+
+## Results
+
+- **Target Subject 1**
+  - ![Target Subject 1](https://via.placeholder.com/200x200?text=16)
+  - ![Target Subject 1](https://via.placeholder.com/200x200?text=17)
+  - ![Target Subject 1](https://via.placeholder.com/200x200?text=18)
+
+- **Target Subject 2**
+  - ![Target Subject 2](https://via.placeholder.com/200x200?text=19)
+  - ![Target Subject 2](https://via.placeholder.com/200x200?text=20)
+  - ![Target Subject 2](https://via.placeholder.com/200x200?text=21)
+
+## References
+
+14 Chan et al. *Everybody Dance Now*, ICCV 2019
+
+Vineeth N B (IIT-H)
+
+§11.5 Applications to Video Understanding
+
+---
+
+Page 17 / 20
+```
+
+# DL4CV_Week11_Part05.pdf - Page 40
+
+```markdown
+# Everybody Dance Now: Results
+
+## Multi-subject synchronized dancing
+
+![Multi-subject synchronized dancing](image_url)
+
+15 Chan et al., Everybody Dance Now, ICCV 2019
+
+Vineeth N B (IIT-H)
+
+§11.5 Applications to Video Understanding
+
+---
+
+18 / 20
+```
+
+# DL4CV_Week11_Part05.pdf - Page 41
+
+```markdown
+# Homework
+
+## Readings
+
+- [ ] Check this demo video from [Everybody Dance Now paper](https://example.com/demo-video)
+- [ ] [Open Questions about Generative Adversarial Networks, Distill.pub](https://distill.pub/2017/gans/)
+- [ ] (Optional) Papers on respective slides
+
+## Question
+
+- Throughout this lecture, we saw methods that use videos as input for generating videos. Can we generate a video from a single image?
+
+**Vineeth N B (IIT-H)**
+
+**11.5 Applications to Video Understanding**
+
+**19 / 20**
+```
+
+# DL4CV_Week11_Part05.pdf - Page 42
+
+```markdown
+# References
+
+- Carl Vondrick, Hamed Pirsivash, and Antonio Torralba. "Generating Videos with Scene Dynamics". In: *Proceedings of the 30th International Conference on Neural Information Processing Systems. NIPS'16*. Barcelona, Spain: Curran Associates Inc., 2016, 613–621.
+
+- J. Walker et al. "The Pose Knows: Video Forecasting by Generating Pose Futures". In: *2017 IEEE International Conference on Computer Vision (ICCV)*. 2017, pp. 3352–3361.
+
+- C. Chan et al. "Everybody Dance Now". In: *2019 IEEE/CVF International Conference on Computer Vision (ICCV)*. 2019, pp. 5932–5941.
+```
+

@@ -1,0 +1,1697 @@
+# DL4CV_Week08_Part02.pdf - Page 1
+
+```markdown
+# Deep Learning for Computer Vision
+
+## Backpropagation in RNNs
+
+**Vineeth N Balasubramanian**
+
+Department of Computer Science and Engineering
+Indian Institute of Technology, Hyderabad
+
+![IIT logo](image-url)
+
+---
+
+Vineeth N B (IIT-H) 
+
+§8.2 Backprop in RNNs 
+
+1 / 13
+```
+
+In the markdown format provided:
+
+- The title "Deep Learning for Computer Vision" is a top-level heading.
+- The section "Backpropagation in RNNs" is a second-level heading.
+- The author's name **Vineeth N Balasubramanian** is in bold.
+- The author's affiliation is in a normal paragraph.
+- The image placeholder `![IIT logo](image-url)` is included for the IIT logo.
+- The footer includes the author's name, section, and slide number information.
+
+# DL4CV_Week08_Part02.pdf - Page 2
+
+
+
+```markdown
+# Review: Questions
+
+## Questions
+
+- Can RNNs have more than one hidden layer?
+
+![NPTEL Logo](data:image/png;base64,...) 
+
+*Vineeth N B (IIT-H)*
+
+*§8.2 Backprop in RNNs*
+
+*Page 2 of 13*
+```
+
+Note: The placeholder for the NPTEL Logo image is included due to the OCR's inability to capture the image directly. Replace it with the actual image if needed.
+
+# DL4CV_Week08_Part02.pdf - Page 3
+
+```markdown
+# Review: Questions
+
+## Questions
+
+- **Can RNNs have more than one hidden layer? Yes!** You can also have multiple **RNN blocks** - these are called **stacked RNNs**.
+
+- The state (\(h_t\)) of an RNN records information from all previous time steps. At each new timestep, the old information gets **morphed slightly** by the current input. **What would happen if we morphed the state too much?**
+
+![NF](https://example.com/nf-logo.png)
+
+*Vineeth N B (IIIT-H)*
+
+*§8.2 Backprop in RNNs*
+
+*2 / 13*
+```
+
+# DL4CV_Week08_Part02.pdf - Page 4
+
+```markdown
+# Review: Questions
+
+## Questions
+
+- **Can RNNs have more than one hidden layer?**
+  - **Yes!** You can also have multiple **RNN blocks** - these are called **stacked RNNs**.
+
+- **The state (h<sub>t</sub>) of an RNN records information from all previous time steps.**
+  - At each new timestep, the old information gets **morphed** slightly by the current input.
+  - **What would happen if we morphed the state too much?**
+    - Effect of previous time-steps will be reduced, may not be desirable for sequence learning problems.
+
+*Vineeth N B. (IIIT-H)*
+*§8.2 Backprop in RNNs*
+*2 / 13*
+```
+
+# DL4CV_Week08_Part02.pdf - Page 5
+
+```markdown
+# RNNs: Forward Pass
+
+![Diagram](image_url)
+
+- **Forward pass equations:**
+  \[
+  h_t = \tanh(U x_t + W h_{t-1})
+  \]
+  \[
+  \hat{y}_t = \text{softmax}(V h_t)
+  \]
+
+*Vineeth N B. (IIIT-H)*
+
+*§8.2 Backprop in RNNs*
+
+*3 / 13*
+```
+
+# DL4CV_Week08_Part02.pdf - Page 6
+
+```markdown
+# RNNs: Forward Pass
+
+![Image of RNN architecture](image_url)
+
+- Forward pass equations:
+
+  \[
+  h_t = \tanh(U x_t + W h_{t-1})
+  \]
+
+  \[
+  \hat{y}_t = \text{softmax}(V h_t)
+  \]
+
+- Loss function e.g., Cross Entropy loss:
+
+  \[
+  E_t(y_t, \hat{y}_t) = - y_t \log \hat{y}_t
+  \]
+
+  \[
+  E(y_t, \hat{y}_t) = \sum_{t} E_t(y_t, \hat{y}_t)
+  \]
+
+  \[
+  E(y_t, \hat{y}_t) = - \sum_{t} y_t \log \hat{y}_t
+  \]
+
+*Vineeth N B. (IIT-H) §8.2 Backprop in RNNs*
+```
+
+# DL4CV_Week08_Part02.pdf - Page 7
+
+```markdown
+# Backpropagation: How?
+
+- **Goal:** Calculate gradients of error \( E \) w.r.t. weights \( U, V, W \)
+- These gradients will be used to learn weights using SGD; how?
+
+![Diagram of RNN](image-url)
+
+\[
+\begin{aligned}
+&\text{Input sequence: } x_0, x_1, x_2, x_3, x_4 \\
+&\text{Hidden states: } h_0, h_1, h_2, h_3, h_4 \\
+&\text{Error terms: } E_0, E_1, E_2, E_3, E_4 \\
+\end{aligned}
+\]
+
+Vineeth N B (IIT-H) §8.2 Backprop in RNNs 4 / 13
+```
+
+# DL4CV_Week08_Part02.pdf - Page 8
+
+```markdown
+# Backpropagation: How?
+
+- **Goal:** Calculate gradients of error \(E\) w.r.t. weights \(U, V, W\)
+- These gradients will be used to learn weights using SGD; how?
+
+![Diagram of Backpropagation Through Time (BPTT)](image-url)
+
+- **Backpropagation Through Time (BPTT):** We sum up gradients at each time step for one training example: \(\frac{\partial E}{\partial W} = \sum_t \frac{\partial E_t}{\partial W}\)
+
+*Credit: Denny Britz, WildML RNN Tutorial*
+
+_Vineeth N B (IIIT-H) §8.2 Backprop in RNNs_
+
+4 / 13
+```
+
+# DL4CV_Week08_Part02.pdf - Page 9
+
+
+
+```markdown
+# Backpropagation Through Time (BPTT)
+
+## Diagram Representation
+
+### Components
+- **W**: Weight matrix
+- **U**: Recurrent weight matrix
+- **V**: Output weight matrix
+- **h**: Hidden state
+- **x**: Input vector
+- **y**: Output vector
+
+### Mathematical Notation
+- \(\hat{y}\) : Predicted output
+- \(E_3\) : Error at one time step
+- \(\frac{\partial E_3}{\partial V}\) : Gradient of the error with respect to V
+
+### Flow of Information
+1. Input at time \(t-1\) : \(x_{t-1}\)
+   - Processed through weight \(W\)
+   - Updated hidden state \(h_{t-1}\)
+   - Output prediction \(\hat{y}_{t-1}\)
+
+2. Input at time \(t\) : \(x_t\)
+   - Processed through weight \(W\)
+   - Updated hidden state \(h_t\)
+   - Output prediction \(\hat{y}_t\)
+
+3. Input at time \(t+1\) : \(x_{t+1}\)
+   - Processed through weight \(W\)
+   - Updated hidden state \(h_{t+1}\)
+   - Output prediction \(\hat{y}_{t+1}\)
+
+### Calculations
+- **Error Calculation**: Compute error \(E_3\) at each time step.
+- **Gradient Calculation**: Calculate the gradient \(\frac{\partial E_3}{\partial V}\) to update the model parameters.
+
+### Visual Element
+
+![Diagram](image_placeholder.png)
+
+### Speaker
+- **Vineeth N B** (IIIT-H)
+
+### Topic and Section
+- **Section**: 8.2 Backprop in RNNs
+- **Slide Number**: 5 / 13
+
+```
+
+# DL4CV_Week08_Part02.pdf - Page 10
+
+```markdown
+# Backpropagation Through Time (BPTT)
+
+- **Consider error at one time step: \(E_3\), let us calculate the gradient \(\frac{\partial E_3}{\partial V}\)**
+
+  ## Writing \(z_3 = Vh_3\), gradient can be calculated as:
+
+  \[
+  \frac{\partial E_3}{\partial V} = \frac{\partial E_3}{\partial y_3} \frac{\partial y_3}{\partial V}
+  \]
+
+  ![Diagram](image_url)
+
+  **Credit: Denny Britz, WildML RNN Tutorial**
+
+  Vineeth N B (IIT-H)
+
+  §8.2 Backprop in RNNs
+
+  5 / 13
+```
+
+```markdown
+# Backpropagation Through Time (BPTT)
+
+- **Consider error at one time step: \(E_3\), let us calculate the gradient \(\frac{\partial E_3}{\partial V}\)**
+
+  ## Writing \(z_3 = Vh_3\), gradient can be calculated as:
+
+  \[
+  \frac{\partial E_3}{\partial V} = \frac{\partial E_3}{\partial y_3} \frac{\partial y_3}{\partial V}
+  \]
+
+  ![Diagram](image_url)
+
+  **Credit: Denny Britz, WildML RNN Tutorial**
+
+  Vineeth N B (IIT-H)
+
+  §8.2 Backprop in RNNs
+
+  5 / 13
+```
+
+# DL4CV_Week08_Part02.pdf - Page 11
+
+ accuracy is the primary focus.
+
+```markdown
+# Backpropagation Through Time (BPTT)
+
+## Diagram and Description
+
+![Backpropagation Diagram](image_placeholder.png)
+
+- **Inputs and Variables**:
+  - \( x_{t-1} \)
+  - \( x_t \)
+  - \( x_{t+1} \)
+  - \( h_t \)
+  - \( h_{t-1} \)
+  - \( h_{t+1} \)
+  - \( W \)
+  - \( U \)
+  - \( V \)
+  - \(\hat{y}_{t-1} \)
+  - \(\hat{y}_t \)
+  - \(\hat{y}_{t+1} \)
+
+- **Credit**: Denny Britz, WildML RNN Tutorial
+
+## Equations and Calculations
+
+- Consider error at one time step: \( E_3 \), let us calculate the gradient \(\frac{\partial E_3}{\partial V}\).
+
+- Writing \(z_3 = Vh_3\), gradient can be calculated as:
+
+  \[
+  \frac{\partial E_3}{\partial V} = \frac{\partial E_3}{\partial y_3} \frac{\partial y_3}{\partial V}
+  \]
+
+  \[
+  = \frac{\partial E_3}{\partial y_3} \frac{\partial y_3}{\partial z_3} \frac{\partial z_3}{\partial V}
+  \]
+
+## Slide Metadata
+
+- Vineeth N B (IIIT-H)
+- §8.2 Backprop in RNNs
+- Slide 5 of 13
+```
+
+Note: Placeholder for the image is `image_placeholder.png`. Replace it with the actual image path or URL if applicable.
+
+# DL4CV_Week08_Part02.pdf - Page 12
+
+ accuracy, formatting, and readability.
+
+```markdown
+# Backpropagation Through Time (BPTT)
+
+## Diagram
+![Diagram](image_url)
+
+- Consider error at one time step: \( E_3 \), let us calculate the gradient \( \frac{\partial E_3}{\partial V} \)
+- Writing \( z_3 = V h_3 \), gradient can be calculated as:
+
+\[ \frac{\partial E_3}{\partial V} = \frac{\partial E_3}{\partial y_3} \frac{\partial y_3}{\partial V} \frac{\partial E_3}{\partial y_3} \frac{\partial z_3}{\partial V} = \frac{\partial E_3}{\partial y_3} \frac{\partial y_3}{\partial z_3} \frac{\partial z_3}{\partial V} = (\hat{y}_3 - y_3) \otimes h_3 \]
+
+   where \( \otimes \) is outer product
+
+## Credits
+*Denny Britz, WildML RNN Tutorial*
+
+*Vineeth N B (IIIT-H)*
+
+### Section 8.2 Backprop in RNNs
+
+*Slide 5 of 13*
+```
+
+# DL4CV_Week08_Part02.pdf - Page 13
+
+```markdown
+# Backpropagation Through Time (BPTT)
+
+## How about \(\partial E_3 / \partial W\)?
+
+Can we write it as:
+
+\[
+\frac{\partial E_3}{\partial W} = \frac{\partial E_3}{\partial \hat{y}_3} \frac{\partial \hat{y}_3}{\partial h_3} \frac{\partial h_3}{\partial W}
+\]
+
+![Diagram](image_url)
+
+Vineeth N B (IIT-H)
+
+§8.2 Backprop in RNNs
+
+6 / 13
+```
+
+# DL4CV_Week08_Part02.pdf - Page 14
+
+:
+
+```markdown
+# Backpropagation Through Time (BPTT)
+
+- How about \(\partial E_3 / \partial W\)?
+- Can we write it as:
+
+\[
+\frac{\partial E_3}{\partial W} = \frac{\partial E_3}{\partial \hat{y}_3} \frac{\partial \hat{y}_3}{\partial h_3} \frac{\partial h_3}{\partial W}
+\]
+
+- It’s not complete, since \(h_3\) depends on \(W\).
+
+\[
+h_3 = \tanh(U x_2 + W h_2)
+\]
+
+- Chain rule needs to be applied again!
+
+![Diagram of Backpropagation Through Time](image_url_placeholder)
+
+**Credit:** [Denny Britz, WildML RNN Tutorial](https://www.wildml.com/2016/08/rnn implementations-tutorial-numpy-and-tensorflow/)
+
+Vineeth N B (IIIT-H)
+
+## §8.2 Backprop in RNNs
+
+### Diagram of Backpropagation Through Time
+
+- **\(E_0\)**
+- **\(E_1\)**
+- **\(E_2\)**
+- **\(E_3\)**
+- **\(E_4\)**
+
+\[
+\begin{array}{cccc}
+h_0 & h_1 & h_2 & h_3 & h_4 \\
+\hline
+x_0 & x_1 & x_2 & x_3 & x_4
+\end{array}
+\]
+
+- \(h_3 = \tanh(U x_2 + W h_2)\)
+```
+
+This markdown format ensures that the content is clearly structured and accurately represents the original scientific documentation. Adjust the placeholders as necessary based on the actual image content.
+
+# DL4CV_Week08_Part02.pdf - Page 15
+
+```markdown
+# Backpropagation Through Time (BPTT)
+
+## Observation
+
+Observe that \( h_3 \) depends on \( W \) directly as well as indirectly via \( h_2, h_1, \ldots \)
+
+![Diagram Illustration](image-link)
+
+```markdown
+## Formatted Content from Slides
+
+### Title: Backpropagation Through Time (BPTT)
+
+- Observe that \( h_3 \) depends on \( W \) directly as well as indirectly via \( h_2, h_1, \ldots \)
+
+![Diagram Illustration](image-link)
+
+### Presented By: Vineeth N B (IIT-H)
+
+#### Section: §8.2 Backprop in RNNs
+
+##### Slide Number: 7 / 13
+
+### Diagram Breakdown
+
+- **Nodes and Arrows**:
+  - Nodes: \( h_0, h_1, h_2, h_3, h_4 \)
+  - Arrows: Indicate dependencies and flow between nodes.
+
+- **Formulas**:
+  - \( E_0, E_1, E_2, E_3, E_4 \) represent error terms.
+  - \( \frac{\partial h_1}{\partial h_0}, \frac{\partial h_2}{\partial h_1}, \frac{\partial h_3}{\partial h_2} \) represent partial derivatives indicating gradient flow.
+  - \( \frac{\partial E_3}{\partial h_3} \) is highlighted in the diagram.
+
+- **Inputs and Outputs**:
+  - Inputs: \( x_0, x_1, x_2, x_3, x_4 \)
+  - Outputs: Correspond to states \( h_0, h_1, h_2, h_3, h_4 \)
+
+### Visual Elements
+
+- **Flow and Dependencies**:
+  - The diagram illustrates the dependencies of the hidden states \( h_1, h_2, h_3, h_4 \) on previous states and weights \( W \).
+
+- **Highlighted Path**:
+  - The path from \( h_3 \) to \( E_3 \) is highlighted to show the direct and indirect dependencies.
+
+### Satisfying Markdown Structure
+
+The structured format of the content ensures clear understanding of the dependencies and flow within the Backpropagation Through Time (BPTT) process in neural networks.
+```
+
+# DL4CV_Week08_Part02.pdf - Page 16
+
+```markdown
+# Backpropagation Through Time (BPTT)
+
+![Diagram of BPTT](image_url)
+
+- **Observe that \( h_3 \) depends on \( W \) directly as well as indirectly via \( h_2, h_1, \ldots \) hence:**
+
+  \[
+  \frac{\partial E_3}{\partial W} = \sum_{k=0}^{3} \frac{\partial E_3}{\partial y_3} \frac{\partial y_3}{\partial h_3} \frac{\partial h_k}{\partial W}
+  \]
+
+Vineeth N B (IIT-H) §8.2 Backprop in RNNs 7 / 13
+
+---
+
+## Diagram of BPTT
+
+- **Nodes:**
+  - \( h_0, h_1, h_2, h_3, h_4 \): Hidden states at different time steps.
+  - \( E_0, E_1, E_2, E_3, E_4 \): Error terms at different time steps.
+  - \( x_0, x_1, x_2, x_3, x_4 \): Inputs at different time steps.
+
+- **Arrows:**
+  - Red arrows (\( \frac{\partial h_1}{\partial h_0}, \frac{\partial h_2}{\partial h_1}, \frac{\partial h_3}{\partial h_2} \)): Dependencies of hidden states on previous hidden states.
+  - Orange arrows (\( \frac{\partial E_3}{\partial h_3} \)): Dependencies of error terms on hidden states.
+  - Black arrows (\( \frac{\partial E_3}{\partial W} \)): Gradient of the error with respect to the weight matrix \( W \).
+
+```
+
+# DL4CV_Week08_Part02.pdf - Page 17
+
+```markdown
+# Backpropagation Through Time (BPTT)
+
+## Slide Details
+### Presented by Vineeth N B (IITH)
+### Section: §8.2 Backprop in RNNs
+### Slide Number: 7 / 13
+
+### Diagram of Recurrent Neural Network
+
+- **Nodes:**
+  - \( h_0 \)
+  - \( h_1 \)
+  - \( h_2 \)
+  - \( h_3 \)
+  - \( h_4 \)
+  
+- **Inputs:**
+  - \( x_0 \)
+  - \( x_1 \)
+  - \( x_2 \)
+  - \( x_3 \)
+  - \( x_4 \)
+  
+- **Outputs:**
+  - \( E_0 \)
+  - \( E_1 \)
+  - \( E_2 \)
+  - \( E_3 \)
+  - \( E_4 \)
+  
+- **Connections and Derivatives:**
+  - \( \frac{\partial h_1}{\partial h_0} \)
+  - \( \frac{\partial h_2}{\partial h_1} \)
+  - \( \frac{\partial h_3}{\partial h_2} \)
+  - \( \frac{\partial h_4}{\partial h_3} \)
+  
+- **Equations:**
+  - \( \frac{\partial E_3}{\partial W} = \sum_{k=0}^{3} \frac{\partial E_3}{\partial y_3} \frac{\partial y_3}{\partial h_3} \frac{\partial h_3}{\partial h_k} \frac{\partial h_k}{\partial W} \)
+
+### Observations and Questions
+
+- **Observation:** Observe that \( h_3 \) depends on \( W \) directly as well as indirectly via \( h_2, h_1, \ldots \) hence:
+  - \( \frac{\partial E_3}{\partial W} \)
+
+- **Question:** How about \( \frac{\partial E_3}{\partial U} \)?
+
+![Diagram of Recurrent Neural Network](image_placeholder.png)
+
+### Footer
+- **Presenter:** Vineeth N B (IITH)
+- **Section:** §8.2 Backprop in RNNs
+- **Slide Number:** 7 / 13
+```
+
+*Notes:*
+
+- Placeholder for the image since the actual image content couldn't be captured.
+- Formulae and mathematical expressions are maintained in LaTeX syntax for accuracy.
+- Ensure to replace `image_placeholder.png` with the actual image when available.
+
+# DL4CV_Week08_Part02.pdf - Page 18
+
+```markdown
+# Backpropagation Through Time (BPTT)
+
+## Observations and Derivations
+
+### Diagram
+![Diagram](image_url)
+
+### Text
+- **Observe that `h_3` depends on `W` directly as well as indirectly via `h_2`, `h_1`, ... hence:**
+  \[
+  \frac{\partial E_3}{\partial W} = \sum_{k=0}^{3} \frac{\partial E_3}{\partial y_3} \frac{\partial y_3}{\partial h_3} \frac{\partial h_k}{\partial W}
+  \]
+
+- **How about \(\frac{\partial E_3}{\partial U}\)? Similar to \(\frac{\partial E_3}{\partial W}\) – **Homework!**
+
+### Equation Derivation
+
+- The process of backpropagation through time involves calculating the gradients of the error with respect to the network parameters. The above equation illustrates this for the particular case of `h_3`.
+
+### Credit
+*Denny Britz, WildML RNN Tutorial*
+
+### Presentation Details
+- **Presented by:** Vineeth N B (IIT-H)
+- **Section:** §8.2 Backprop in RNNs
+- **Slide Number:** 7 / 13
+```
+
+# DL4CV_Week08_Part02.pdf - Page 19
+
+```markdown
+# Backpropagation Through Time (BPTT)
+
+- Observe that \(\frac{\partial h_3}{\partial h_k}\), when \(k = 1\), will be further expanded, using chain rule, as:
+
+  \[
+  \frac{\partial h_3}{\partial h_1} = \frac{\partial h_3}{\partial h_2} \frac{\partial h_2}{\partial h_1}
+  \]
+
+![NPTEL](https://example.com/nptel_logo.png)
+
+*Vineeth N B (IIT-H)*
+
+*§8.2 Backprop in RNNs*
+
+*8 / 13*
+```
+
+# DL4CV_Week08_Part02.pdf - Page 20
+
+ text or slides and convert the extracted content into a detailed markdown format. Ensure the following:
+
+1. **Accuracy**: Pay extra attention to scientific terms, symbols, and formulas, ensuring they are correctly captured.
+2. **Formatting**: 
+   - Encode section titles, headings, and subheadings using proper markdown syntax (`#`, `##`, etc.).
+   - Maintain paragraph structure, and use bullet points (`-`) or numbered lists where applicable.
+   - Ensure all **bold** and *italicized* text is correctly formatted.
+3. **Formulas and Equations**: Use inline code or block code (using ```math```) to format scientific formulas and equations.
+4. **Diagrams and Images**: For images, graphs, or diagrams, use markdown image syntax `![]()` with placeholders if OCR can't capture them directly.
+5. **Tables**: Properly format tables using markdown table syntax (`|` and `---`).
+6. **Code Blocks**: Wrap any code snippets or special notation using appropriate markdown code blocks ``` ``` with the correct language identifier.
+7. **Symbols**: Ensure that special characters or symbols (e.g., Greek letters, mathematical operators) are represented accurately.
+8. **Multilingual Content**: If there are sections with different languages, identify them appropriately in the output.
+
+---
+
+# Backpropagation Through Time (BPTT)
+
+- Observe that \(\frac{\partial h_3}{\partial h_k}\) when \(k = 1\), will be further expanded, using chain rule, as:
+
+  \[
+  \frac{\partial h_3}{\partial h_1} = \frac{\partial h_3}{\partial h_2} \frac{\partial h_2}{\partial h_1}
+  \]
+
+- Consequently, gradient \(\frac{\partial E_3}{\partial W}\) can be written as:
+
+  \[
+  \frac{\partial E_3}{\partial W} = \sum_{k=0}^{3} \frac{\partial E_3}{\partial y_3} \frac{\partial y_3}{\partial h_3} \left( \prod_{j=k+1}^{3} \frac{\partial h_j}{\partial h_{j-1}} \right) \frac{\partial h_k}{\partial W}
+  \]
+
+*Image source: Vineeth N B. (IIT-H), §8.2 Backprop in RNNs*
+
+# DL4CV_Week08_Part02.pdf - Page 21
+
+```markdown
+# Backpropagation Through Time (BPTT)
+
+![Diagram Placeholder](diagram.png)
+
+Do you see any problem?
+
+---
+
+NPTEL
+
+---
+
+**Vineeth N B (IIT-H)**
+
+**§8.2 Backprop in RNNs**
+
+Page 9 of 13
+```
+
+# DL4CV_Week08_Part02.pdf - Page 22
+
+ the provided image of scientific text or slides and convert the extracted content into a detailed markdown format.
+
+```markdown
+# Backpropagation Through Time (BPTT)
+
+![NPTEL](attachment:)
+
+**Do you see any problem?**
+
+- Sequences (sentences) can be quite long, perhaps 20 words or more - need to backpropagate through many layers! ⇒ **Vanishing Gradient Problem!**
+
+**Vineeth N B (IIT-H)**
+
+**§8.2 Backprop in RNNs**
+
+*Page 9 / 13*
+```
+
+# DL4CV_Week08_Part02.pdf - Page 23
+
+# Vanishing Gradient Problem
+
+![Graph of Functions](attachment:graph.png)
+
+## Observe the equation:
+$$
+\frac{\partial E_3}{\partial W} = \sum_{k=0}^{3} \frac{\partial E_3}{\partial y_3} \frac{\partial y_3}{\partial h_3} \left( \prod_{j=k+1}^{3} \frac{\partial h_j}{\partial h_{j-1}} \right) \frac{\partial h_k}{\partial W}
+$$
+
+## For sigmoid activations, gradient is upper bounded by 1; what does this tell us?
+- The gradient for sigmoid activations is constrained, meaning it does not explode or diminish too quickly.
+- This bounded gradient helps in stabilizing the training process of neural networks.
+
+---
+
+Vineeth N B (IIT-H)
+
+NPTel
+
+§8.2 Backprop in RNNs
+
+10 / 13
+
+# DL4CV_Week08_Part02.pdf - Page 24
+
+```markdown
+# Vanishing Gradient Problem
+
+![Graph of Vanishing Gradient Problem](image_url)
+
+### Equation
+
+Observe the equation:
+
+$$
+\frac{\partial E_3}{\partial W} = \sum_{k=0}^{3} \frac{\partial E_3}{\partial \dot{y}_3} \frac{\partial \dot{y}_3}{\partial h_3} \left( \prod_{j=k+1}^{3} \frac{\partial h_j}{\partial h_{j-1}} \right) \frac{\partial h_k}{\partial W}
+$$
+
+### Sigmoid Activations
+
+- For sigmoid activations, gradient is upper bounded by 1; what does this tell us?
+
+### Gradient Vanishing
+
+- Gradients will vanish over time, and long-range dependencies will not contribute at all! How to combat?
+
+---
+
+_Vineeth N B (IIT-H)_
+
+_§8.2 Backprop in RNNs_
+
+_10 / 13_
+```
+
+# DL4CV_Week08_Part02.pdf - Page 25
+
+```markdown
+# Vanishing Gradient Problem
+
+![Graph of Activation Functions](image_url)
+
+- Observe the equation:
+
+  \[
+  \frac{\partial E_3}{\partial W} = \sum_{k=0}^{3} \frac{\partial E_3}{\partial \hat{y}_3} \frac{\partial \hat{y}_3}{\partial h_3} \left( \prod_{j=k+1}^{3} \frac{\partial h_j}{\partial h_{j-1}} \right) \frac{\partial h_k}{\partial W}
+  \]
+
+- For sigmoid activations, gradient is upper bounded by 1; what does this tell us?
+
+- Gradients will vanish over time, and long-range dependencies will not contribute at all! How to combat? We'll see in the next lecture
+
+**Credit:** *Denny Britz, WildML RNN Tutorial*
+
+_Vineeth N B (IIIT-H) §8.2 Backprop in RNNs 10 / 13_
+```
+
+# DL4CV_Week08_Part02.pdf - Page 26
+
+```markdown
+# Exploding Gradients Problem
+
+- **What if weights are high?**
+
+![NPTEL Logo](https://example.com/logo.png)
+
+_Vineeth N B (IIT-H)_
+
+### 8.2 Backprop in RNNs
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+```
+
+# DL4CV_Week08_Part02.pdf - Page 27
+
+ the content of the image into a detailed markdown format.
+
+```markdown
+# Exploding Gradients Problem
+
+- **What if weights are high?**
+- **Could lead to the exploding gradients problem**
+- **This, however, is not much of a problem; why?**
+
+![NPTel Logo](https://example.com/logo)
+
+*Vineeth N B (IIIT-H)*
+
+*§8.2 Backprop in RNNs*
+
+*11 / 13*
+```
+
+# DL4CV_Week08_Part02.pdf - Page 28
+
+
+
+```markdown
+# Exploding Gradients Problem
+
+- **What if weights are high?**
+  - Could lead to the **exploding gradients problem**
+- This, however, is not much of a problem; why?
+  - Will show up as NaN during implementation
+  - **Gradient clipping** works!
+
+![Diagram or Image of NPTEL](NPTEL)
+
+Vineeth N B (IIT-H) §8.2 Backprop in RNNs
+
+| Slide Number | 11 / 13 |
+```
+
+This markdown format captures the structure and content of the provided scientific text or slide, accurately representing headings, bullet points, and emphasis.
+
+# DL4CV_Week08_Part02.pdf - Page 29
+
+```markdown
+# Homework: Readings
+
+## Homework Readings
+
+### Readings
+
+- [ ] Chapter 10 of *Deep Learning Book* (Goodfellow et al.)
+- [ ] Part 3, Denny Britz, *WildML Recurrent Neural Networks Tutorial*
+
+### Question
+
+- In the next lecture, we'll see architectures that tackle the vanishing gradient problem reasonably well; meanwhile, can you think of simpler solutions (preferably those which don’t change the RNN architecture)?
+
+---
+
+**Vineeth N B (IIIT-H)**
+
+**§8.2 Backprop in RNNs**
+
+**12 / 13**
+```
+
+# DL4CV_Week08_Part02.pdf - Page 30
+
+```markdown
+# References
+
+- **Sepp Hochreiter and Jürgen Schmidhuber.** "Long Short-Term Memory". *In: Neural Comput. 9.8 (Nov. 1997)*. 1735–1780
+
+- **Razvan Pascanu, Tomas Mikolov, and Yoshua Bengio.** "On the difficulty of training recurrent neural networks". *In: ICML. 2013*.
+
+- **Kyunghyun Cho et al.** "On the Properties of Neural Machine Translation: Encoder-Decoder Approaches". *In: SSST@EMNLP. 2014*.
+
+- **Ian Goodfellow, Yoshua Bengio, and Aaron Courville.** *Deep Learning*. MIT Press, 2016.
+```
+

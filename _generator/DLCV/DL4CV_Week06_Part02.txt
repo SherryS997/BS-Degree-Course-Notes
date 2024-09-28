@@ -1,0 +1,777 @@
+# DL4CV_Week06_Part02.pdf - Page 1
+
+```markdown
+# Deep Learning for Computer Vision
+
+## Explaining CNNs: Early Methods
+
+### Vineeth N Balasubramanian
+
+**Department of Computer Science and Engineering**
+
+**Indian Institute of Technology, Hyderabad**
+
+![IIT Hyderabad Logo](image-url)
+
+---
+
+**Vineeth N B (IIT-H)**
+
+**5.6.2 Explaining CNNs: Early Methods**
+
+---
+
+Page 1 / 14
+
+---
+
+This markdown format maintains the structure and content of the provided scientific text or slides, ensuring accuracy and proper formatting. Replace `image-url` with the actual URL or path of the IIT Hyderabad Logo if available.
+
+# DL4CV_Week06_Part02.pdf - Page 2
+
+```markdown
+# Backpropagation to Image
+
+![Convolutional Neural Network Architecture](image_url)
+
+**Question:** Can we find an image that maximizes some class score?
+
+Vineeth N B (IIT-H)
+
+## 6.2 Explaining CNNs: Early Methods
+
+### Image Parameters
+- **Input image (RGB):** 224x224
+- **Stride of 4:** 55x55
+- **First Convolutional Layer:**
+  - Output dimensions: 27x27
+  - Feature maps: 384
+  - Max pooling applied
+- **Second Convolutional Layer:**
+  - Output dimensions: 13x13
+  - Feature maps: 384
+  - Max pooling applied
+- **Third Convolutional Layer:**
+  - Output dimensions: 13x13
+  - Feature maps: 256
+  - Max pooling applied
+- **Dense Layers:**
+  - Dense layer with 4096 nodes
+  - Second dense layer with 4096 nodes
+  - Output layer with 1000 nodes (detailed in red box)
+```
+
+Note: The placeholder `image_url` should be replaced with the actual URL or path to the image if available. Ensure that the OCR captures any special symbols or notations accurately from the image in the slide.
+
+# DL4CV_Week06_Part02.pdf - Page 3
+
+```markdown
+# Backpropagation to Image<sup>1</sup>
+
+1. **Feed zeros as input.**
+
+   ![Zero Image](image-url)
+
+   ![Network Diagram](network-diagram-url)
+
+2. **Set the gradient of the scores vector to be [0, 0, ..., 1, ..., 0]. Then backprop to image.**
+
+3. **Do a small "image update".**
+
+4. **Forward pass the image through the network.**
+
+5. **Go back to step 2.**
+
+---
+
+<sup>1</sup> Simonyan, Vedaldi, and Zisserman. *Deep Inside Convolutional Networks: Visualising Image Classification Models and Saliency Maps*, ICLR Workshop 2014
+
+Vineeth N B (IIT-H)
+
+§6.2 Explaining CNNs: Early Methods
+
+---
+
+</details>
+```
+
+# DL4CV_Week06_Part02.pdf - Page 4
+
+```markdown
+# Backpropagation to Image<sup>2</sup>
+
+![Zero Image](image_url)
+
+- Formally, this optimization can be written as:
+
+  \[
+  \arg \max_{I} S_c(I) - \lambda \|I\|_2
+  \]
+
+  Here, \( S_c \) is the scores vector for class \( c \), before applying softmax.
+
+<sup>2</sup> Simonyan, Vedaldi, and Zisserman. Deep Inside Convolutional Networks: Visualising Image Classification Models and Saliency Maps, ICLR Workshop 2014
+
+Vineeth N B (IIT-H)
+
+## 6.2 Explaining CNNs: Early Methods
+
+4 / 14
+```
+
+# DL4CV_Week06_Part02.pdf - Page 5
+
+```markdown
+# Backpropagation to Image<sup>3</sup>
+
+- Finding images that maximize some class score:
+
+![Image of washing machine](image_url)
+
+![Image of computer keyboard](image_url)
+
+![Image of kit fox](image_url)
+
+![Image of goose](image_url)
+
+![Image of ostrich](image_url)
+
+![Image of limousine](image_url)
+
+<sup>3</sup>Simonyan, Vedaldi, and Zisserman, Deep Inside Convolutional Networks: Visualising Image Classification Models and Saliency Maps, ICLR Workshop 2014
+
+Vineeth N B (IIT-H) §6.2 Explaining CNNs: Early Methods
+
+---
+
+5 / 14
+```
+
+# DL4CV_Week06_Part02.pdf - Page 6
+
+```markdown
+# Backpropagation to Image[^4]
+
+- Such optimization can in fact be done for arbitrary neurons in the network
+
+![Diagram of a neural network](image-url)
+
+- Repeat:
+  1. Forward an image
+  2. Set activations in a layer of interest to all zero, except 1.0 for a neuron of interest
+  3. Backprop to image
+  4. Do an "image update"
+
+[^4]: Simoncelli, E., Olshausen, B. A., & Field, D. J. (2011). Deep Inside Convolutional Networks: Visualising Image Classification Models and Saliency Maps. ICLR Workshop 2014
+
+Vineeth N B (IIT-H)
+
+## 6.2 Explaining CNNs: Early Methods
+
+```
+
+This markdown format maintains the structure and details of the original content while ensuring readability and scientific accuracy.
+
+# DL4CV_Week06_Part02.pdf - Page 7
+
+```markdown
+# Visualizing the Data Gradient
+
+- Since the gradient on image data has three channels, visualise M such that:
+
+  \[
+  M_{ij} = \max_{c} \left| \nabla_I S_c(I) \right|_{(i,j,c)}
+  \]
+
+- At each pixel, take absolute value and pick maximum across channels
+
+![Image Example](image1.png)
+![Image Example](image2.png)
+![Image Example](image3.png)
+
+![Result](result.png)
+
+## References
+
+5 Simonyan, Vedaldi, and Zisserman, **Deep Inside Convolutional Networks: Visualising Image Classification Models and Saliency Maps**, ICLR Workshop 2014
+
+5 Vineeth N B (IIT-H)
+
+## Section
+
+5.2 Explaining CNNs: Early Methods
+
+Page 7 / 14
+```
+
+# DL4CV_Week06_Part02.pdf - Page 8
+
+```markdown
+# Visualizing the Data Gradient
+
+- Since the gradient on image data has three channels, visualize $M$ such that:
+
+  \[
+  M_{ij} = \max_{c} \left| \nabla_{I} S_{c}(I) \right|_{(i, j, c)}
+  \]
+
+- At each pixel, take absolute value and pick maximum across channels
+
+---
+
+*Simonyan, Vedaldi, and Zisserman. Deep Inside Convolutional Networks: Visualising Image Classification Models and Saliency Maps, ICLR Workshop 2014*
+
+*Vineeth N B (IIT-H)*
+
+## 6.2 Explaining CNNs: Early Methods
+
+![]()
+![]()
+![]()
+![]()
+![]()
+![]()
+```
+
+Note: The `![]()` placeholders are used for the images that couldn't be directly captured from OCR. Replace these with the correct image paths if available.
+
+# DL4CV_Week06_Part02.pdf - Page 9
+
+```markdown
+# Visualizing the Data Gradient
+
+- **GrabCut<sup>7</sup>**, a segmentation method, can be applied to obtain the object mask from the data gradient
+- Recall Graph-Cut segmentation we saw earlier - GrabCut is an extension/adaptation
+
+![Graph-Cut Segmentation Examples](image_url)
+
+<sup>7</sup>https://docs.opencv.org/3.4/d8/d83/tutorial_py_grabcut.html
+
+<sup>8</sup>Simonyan, Vedaldi, and Zisserman, *Deep Inside Convolutional Networks: Visualising Image Classification Models and Saliency Maps*, ICLR Workshop 2014
+
+Vineeth N B (IIT-H)
+
+## 6.2 Explaining CNNs: Early Methods
+
+---
+
+9 / 14
+```
+
+# DL4CV_Week06_Part02.pdf - Page 10
+
+```markdown
+# Image Reconstruction from Latent Representation
+
+**Given a CNN code (latent representation from a layer, say, FC7), is it possible to reconstruct the original image?**
+
+![CNN Architecture Diagram](image_url)
+
+Vineeth N B (IIT-H) §6.2 Explaining CNNs: Early Methods 10 / 14
+```
+
+In the markdown format above, I have:
+
+1. Used headings for the main titles and subheadings.
+2. Ensured that the main question and any diagrams or images are included.
+3. Included the speaker and section details at the bottom.
+4. Maintained the paragraph structure and relevant formatting.
+
+Please ensure to replace `image_url` with the actual URL or placeholder for the CNN architecture diagram if it's available.
+
+# DL4CV_Week06_Part02.pdf - Page 11
+
+```markdown
+# Image Reconstruction from Latent Representation
+
+Given a CNN code (latent representation from a layer, say, FC7), is it possible to reconstruct the original image?
+
+![CNN Architecture Diagram](image_url_here)
+
+Yes, solve an optimization problem such that:
+
+- The image's code is similar to a given code
+- It "looks natural" (image prior regularization)
+
+\[ x^* = \arg \min_{x \in \mathbb{R}^{H \times W \times C}} \| \Phi(x) - \Phi_0 \|^2 + \lambda \mathcal{R}(x) \]
+
+*Vineeth N B (IIT-H)*
+
+## 6.2 Explaining CNNs: Early Methods
+
+*Page 10 / 14*
+```
+
+# DL4CV_Week06_Part02.pdf - Page 12
+
+```markdown
+# Image Reconstruction from Latent Representation
+
+## On AlexNet model
+
+![Original Image and Reconstructions](image-url)
+
+- **original image**
+
+  ![Original Image](original-image-url)
+
+- **reconstructions from the 1000 log probabilities for ImageNet (ILSVRC) classes**
+
+  ![Reconstruction 1](reconstruction1-url)
+  ![Reconstruction 2](reconstruction2-url)
+  ![Reconstruction 3](reconstruction3-url)
+  ![Reconstruction 4](reconstruction4-url)
+  ![Reconstruction 5](reconstruction5-url)
+  ![Reconstruction 6](reconstruction6-url)
+
+*Vineeth N B (IIT-H) § 6.2 Explaining CNNs: Early Methods*
+
+*Slide 11 / 14*
+```
+
+# DL4CV_Week06_Part02.pdf - Page 13
+
+```markdown
+# Image Reconstruction from Latent Representation
+
+## Reconstructions from representations after last pooling layer (before first FC layer) in AlexNet
+
+![Reconstruction Examples](image-url)
+
+- **Top Row**: Original images
+  - Fruit
+  - Vehicle (Campervan)
+  - Fish
+  - Apples
+  - Animal (possibly a dog)
+
+- **Bottom Row**: Reconstructed images from latent representations
+  - Fruit
+  - Vehicle (Campervan)
+  - Fish
+  - Apples
+  - Animal (possibly a dog)
+
+*Vineeth N B (IIIT-H) §6.2 Explaining CNNs: Early Methods*
+
+---
+
+*Page 12 / 14*
+```
+
+# DL4CV_Week06_Part02.pdf - Page 14
+
+```markdown
+# Guided Backpropagation (also known as Deconvolution method) 
+
+![Diagram of Guided Backpropagation](image_url)
+
+9 Springenberg et al, Striving for Simplicity: The All Convolutional Net, ICLR Workshop 2015
+
+Vineeth N B (IIT-H)
+
+## 6.2 Explaining CNNs: Early Methods
+
+```
+
+# DL4CV_Week06_Part02.pdf - Page 15
+
+```markdown
+# Guided Backpropagation (also known as Deconvolution method)
+
+## a) Feed image into net.
+
+![Image of kitten](image_url)
+
+![Convolutional Network](network_diagram_url)
+
+---
+
+^Springenberg et al, Striving for Simplicity: The All Convolutional Net, ICLR Workshop 2015
+
+Vineeth N B (IIT-H)
+
+5.6.2 Explaining CNNs: Early Methods
+
+---
+
+13 / 14
+```
+
+# DL4CV_Week06_Part02.pdf - Page 16
+
+```markdown
+# Guided Backpropagation (also known as Deconvolution method)
+
+## Guided Backpropagation
+
+### a) Feed image into net.
+
+![Cat Image](https://example.com/cat_image)
+
+### b) Pick a layer, set the gradient there to zero except for the neuron of interest.
+
+- **Input image** \(I\)
+  - Forward pass
+  - Activation: \(f_i^{l+1} = relu(f_i^l) = \max(f_i^l, 0)\)
+
+  ```
+  Input image 
+  1 1 5 
+  2 3 7 
+  3 2 4 
+  ```
+  ```
+  Activation
+  1 0 5 
+  2 0 0 
+  3 0 4 
+  ```
+
+_Reference:_
+
+\({}^{9}\) Springenberg et al., Striving for Simplicity: The All Convolutional Net, ICLR Workshop 2015
+
+_Vineeth N B (IIT-H)_
+
+## 6.2 Explaining CNNs: Early Methods
+
+### Slide Content
+
+```markdown
+Guided Backpropagation is a technique used for interpreting the activations and gradients in a neural network to understand which parts of an input image are important for the network's decision-making process. It involves modifying the gradient flow during the backpropagation step to suppress certain activations.
+
+### Steps in Guided Backpropagation
+
+1. **Feed Image into Network**: Start with an input image and pass it through the network to generate activations at different layers.
+2. **Modify Gradients**: At a chosen layer, set the gradients to zero for all neurons except the one of interest. This highlights the importance of specific features in the image.
+
+### Example
+
+- **Input Image**: The image is fed into the network.
+- **Forward Pass**: Compute activations layer-by-layer.
+- **Activation**: Apply ReLU to the activations.
+- **Gradient Modification**: Setting gradients to zero for neurons not of interest, which helps identify crucial features.
+
+### Mathematical Formulation
+
+For a neuron \(f_i^{l+1}\) in layer \(l+1\):
+
+\[ f_i^{l+1} = relu(f_i^l) = \max(f_i^l, 0) \]
+
+This process helps in visualizing the contribution of specific features in the input image to the network's output, providing insights into model interpretability.
+
+### References
+
+- "Striving for Simplicity: The All Convolutional Net" by Springenberg et al., ICLR Workshop 2015.
+```
+
+# DL4CV_Week06_Part02.pdf - Page 17
+
+```markdown
+# Guided Backpropagation (also known as Deconvolution method)
+
+![Guided Backpropagation Diagram](image_url)
+
+## Guided Backpropagation (also known as Deconvolution method)
+
+### a) Feed image into net.
+![Cat Image](image_url)
+
+### b) Pick a layer, set the gradient there to zero except for the neuron of interest.
+
+![Neural Network Diagram](image_url)
+
+### c) Backprop to image.
+
+![Backpropagation Diagram](image_url)
+
+---
+
+9 Springenberg et al., Striving for Simplicity: The All Convolutional Net, ICLR Workshop 2015
+
+Vineeth N B (IIT-H)
+
+§6.2 Explaining CNNs: Early Methods
+
+---
+
+13 / 14
+```
+```markdown
+# Guided Backpropagation (also known as Deconvolution method)
+
+![Guided Backpropagation Diagram](image_url)
+
+## Guided Backpropagation (also known as Deconvolution method)
+
+### a) Feed image into net.
+![Cat Image](image_url)
+
+### b) Pick a layer, set the gradient there to zero except for the neuron of interest.
+
+![Neural Network Diagram](image_url)
+
+### c) Backprop to image.
+
+![Backpropagation Diagram](image_url)
+
+---
+
+9 Springenberg et al., Striving for Simplicity: The All Convolutional Net, ICLR Workshop 2015
+
+Vineeth N B (IIT-H)
+
+§6.2 Explaining CNNs: Early Methods
+
+---
+
+13 / 14
+```
+
+# DL4CV_Week06_Part02.pdf - Page 18
+
+```markdown
+# Guided Backpropagation (also known as Deconvolution method)[^9]
+
+## Steps
+
+### a) Feed image into net.
+![Image of a cat](image_url)
+
+### b) Pick a layer, set the gradient there to zero except for the neuron of interest.
+![Activation visualization](image_url)
+
+### c) Backprop to image.
+![Reconstructed image](image_url)
+
+### Diagram
+
+**Forward pass:**
+```math
+f_{i}^{l} = relu(f_i^{l}) = \max(f_i^{l}, 0)
+```
+**Backward pass:**
+```math
+R_i^{l} = f_i^{l} \cdot 0 \text{ where } R_i^{l+1} = \frac{\partial f^{out}}{\partial f_i^{l}}
+```
+
+## Activation
+```math
+\begin{bmatrix}
+1 & 0 & 1 & 5 \\
+2 & 3 & 8 & 7 \\
+3 & 2 & 4 & 2 \\
+0 & 2 & 0 & 4
+\end{bmatrix}
+```
+
+## Reconstruction
+```math
+\begin{bmatrix}
+1 & 0 \\
+2 & 3 \\
+1 & 4 \\
+2 & 3 \\
+6 & 3 \\
+0 & 1 \\
+\end{bmatrix}
+```
+
+## References
+[^9]: Springenberg et al., *Striving for Simplicity: The All Convolutional Net*, ICLR Workshop 2015
+Vineeth N B (IIT-H)
+
+Section: 5.6.2 Explaining CNNs: Early Methods
+Slide: 13 / 14
+```
+
+# DL4CV_Week06_Part02.pdf - Page 19
+
+```markdown
+# Guided Backpropagation (also known as Deconvolution method)
+
+![Guided Backpropagation Diagram](image_url)
+
+**Reconstructed image** \(R'\):
+
+\[
+\text{Backward pass} \quad
+\begin{bmatrix}
+0 & 0 \\
+0 & 2
+\end{bmatrix}
+\quad
+\text{backpropagation} \quad
+R_t^i = (J_t^i > 0) \cdot R_{t+1}^i \quad \text{where} \quad R_{t+1}^i = \frac{\partial F^{out}}{\partial J_{t+1}^i}
+\]
+
+---
+
+- **Image Example**: ![Kitten Image](kitten_image_url)
+- **Network Layers**: The following diagram shows various layers of a neural network used in the backpropagation process:
+    - **Input Layer**: Receives the input image.
+    - **Convolutional Layers**: Process the input through a series of convolutions.
+    - **Pooling Layers**: Apply pooling operations.
+    - **Fully Connected Layers**: Perform fully connected operations.
+    - **Output Layer**: Produces the final output.
+
+![Network Diagram](network_diagram_url)
+
+---
+
+**Source**:
+- Springenberg et al., *Striving for Simplicity: The All Convolutional Net*, ICLR Workshop 2015
+- Vineeth N B (IIIT-H)
+- §6.2 Explaining CNNs: Early Methods
+
+---
+
+**Slide Details**:
+- **Page Number**: 13 / 14
+```
+
+This markdown format ensures the section titles, formulas, and images are correctly displayed, and special attention is given to formatting scientific terms and symbols accurately.
+
+# DL4CV_Week06_Part02.pdf - Page 20
+
+```markdown
+# Guided Backpropagation (also known as Deconvolution method)
+
+## Process Overview
+
+### Reconstructed Image (R^i)
+
+- Backward pass
+  ```
+  R^i
+  ```
+  ```
+  0  0
+  0  2
+  ```
+
+### Backpropagation
+
+$$
+R_i^t = (J_i^t > 0) \cdot R_i^{t+1}, \text{ where } R_i^{t+1} = \frac{\partial L^{out}}{\partial R_i^{t+1}}
+$$
+
+### Image Processing
+
+![Image of a cat](image-url)
+
+### Network Layers
+- Initial layers (green)
+- Intermediate layers (blue)
+- Final layers (pink)
+
+### Guided Backpropagation
+
+$$
+R_i^t = (J_i^t > 0) \cdot (R_i^{t+1} > 0) \cdot R_i^{t+1}
+$$
+
+### Reconstructed Image (R^t)
+
+- Backward pass
+  ```
+  R^t
+  ```
+  ```
+  0  0
+  0  2
+  ```
+
+### Final Output
+
+![Final Output](image-url)
+
+## References
+
+> 9. Springenberg et al., Striving for Simplicity: The All Convolutional Net, ICLR Workshop 2015
+>
+> Vineeth N B (IIT-H)
+>
+> §6.2 Explaining CNNs: Early Methods
+
+---
+
+Page 13 / 14
+```
+
+# DL4CV_Week06_Part02.pdf - Page 21
+
+```markdown
+# Guided Backpropagation (also known as Deconvolution method)
+
+## Process Overview
+
+### Reconstructed image \( R' \)
+- **Backward pass**:
+  ```
+  R' <- ... <- R^2 <- R^1
+  ```
+  - Formulation: \( R_t' = (J_t' > 0) \cdot R_{t+1} \), where \( R_{t+1} \) is given by \( \frac{\partial f^{out}}{\partial R_{t+1}} \)
+
+### Network Architecture
+- Input image of a kitten is processed through a series of convolutional layers.
+  - Convolutional layers:
+    ```
+    Conv (3x3, 64, stride 2)
+    Conv (3x3, 128, stride 2)
+    Conv (3x3, 256, stride 2)
+    Conv (3x3, 256, stride 2)
+    ```
+  - Fully connected layers:
+    ```
+    FC (4096)
+    FC (4096)
+    FC (1000)
+    ```
+
+### Reconstructed image \( R'' \)
+- **Backward pass**:
+  ```
+  R'' <- ... <- R^2 <- R^1
+  ```
+  - Guided backpropagation: \( R_t'' = (J_t'' > 0) \cdot (R_{t+1}'' > 0) \cdot R_{t+1}'' \)
+
+## Visual Outputs
+- **Standard Backpropagation Output**:
+  ![Standard Backpropagation Output](image_not_captured.png)
+
+- **Guided Backpropagation Output**:
+  ![Guided Backpropagation Output](image_not_captured.png)
+
+## Reference
+- Springenberg et al., Striving for Simplicity: The All Convolutional Net, ICLR Workshop 2015
+- Vineeth N B (IIT-H)
+- §6.2 Explaining CNNs: Early Methods
+
+```
+
+# DL4CV_Week06_Part02.pdf - Page 22
+
+```markdown
+# Homework Readings
+
+## Readings
+
+### Summary of Visualizing CNNs
+
+- **Lecture Notes of CS231n, Stanford**
+
+## Other Recommended Readings/References
+
+- **Simonyan, Vedaldi, and Zisserman**, Deep Inside Convolutional Networks: Visualising Image Classification Models and Saliency Maps, ICLR Workshop 2014
+- **Zeiler and Fergus**, Visualizing and Understanding Convolutional Networks, ECCV 2014
+- **Springenberg et al**, Striving for Simplicity: The All Convolutional Net, ICLR Workshop 2015
+
+## Exercises
+
+- **Understand GrabCut and how it can be used to generate masks from data gradients**
+
+*Vineeth N B (IIIT-H) §0.2 Explaining CNNs: Early Methods 14 / 14*
+```
+

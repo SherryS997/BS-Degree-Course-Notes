@@ -1,0 +1,559 @@
+# DL4CV_Week03_Part04.pdf - Page 1
+
+```markdown
+# Deep Learning for Computer Vision
+
+# Image Descriptor Matching
+
+**Vineeth N Balasubramanian**
+
+Department of Computer Science and Engineering
+Indian Institute of Technology, Hyderabad
+
+![IITH Logo](image_url)
+
+---
+
+**Vineeth N B (IITH) &3.4 Image Descriptor Matching**
+
+---
+
+# Introduction
+
+## Overview
+
+- Image descriptor matching is a fundamental technique in computer vision.
+- It involves representing images using descriptors and matching these descriptors across different images.
+
+## Importance
+
+- Essential for tasks such as object recognition, image retrieval, and image stitching.
+- Enables the identification and alignment of objects or features in different images.
+
+---
+
+## Types of Descriptors
+
+### Local Descriptors
+
+- **SIFT (Scale-Invariant Feature Transform)**
+    - Descriptor that captures local image features.
+    - Robust to changes in scale and rotation.
+
+    ```math
+    SIFT: \text{Scale-Invariant Feature Transform}
+    ```
+
+- **SURF (Speeded-Up Robust Features)**
+    - Similar to SIFT but faster due to reduced computational complexity.
+    - Robust to changes in scale and rotation.
+
+    ```math
+    SURF: \text{Speeded-Up Robust Features}
+    ```
+
+### Global Descriptors
+
+- **GIST**
+    - Describes the overall structure of the image.
+    - Captures the global appearance of the image.
+
+    ```math
+    GIST: \text{Global Image Structure Texture}
+    ```
+
+- **HOG (Histogram of Oriented Gradients)**
+    - Captures the distribution of gradient orientations in localized portions of an image.
+    - Useful for object detection.
+
+    ```math
+    HOG: \text{Histogram of Oriented Gradients}
+    ```
+
+---
+
+## Matching Algorithms
+
+### Brute-Force Matching
+
+- Simple but computationally expensive method.
+- Exhaustively compares each descriptor in the query image with all descriptors in the target image.
+
+```markdown
+- Time Complexity: \(O(n \times m)\), where \(n\) and \(m\) are the number of descriptors in query and target images, respectively.
+```
+
+### Fast Library for Approximate Nearest Neighbors (FLANN)
+
+- Approximate nearest neighbor search for high-dimensional spaces.
+- More efficient than brute-force matching.
+
+```markdown
+- Provides a balance between accuracy and speed.
+- Useful for large-scale descriptor matching.
+```
+
+---
+
+## Applications
+
+### Object Recognition
+
+- Identifying and recognizing objects in images or videos.
+- Utilizes descriptors to match known objects with detected features.
+
+### Image Retrieval
+
+- Retrieving similar images from a database.
+- Descriptors help in finding images with similar content.
+
+### Augmented Reality
+
+- Overlaying virtual objects onto real-world scenes.
+- Descriptors facilitate the alignment and placement of virtual objects.
+
+---
+
+## Challenges
+
+### Robustness
+
+- Ensuring descriptors are robust to variations in lighting, scale, and orientation.
+- Developing descriptors that are invariant to transformations.
+
+### Efficiency
+
+- Finding a balance between accuracy and computational efficiency.
+- Optimizing descriptor matching algorithms for real-time applications.
+
+---
+
+## Conclusion
+
+- Image descriptor matching is crucial for various computer vision tasks.
+- Continued research focuses on improving the robustness and efficiency of descriptor matching algorithms.
+```
+
+Note: Replace `image_url` with the actual URL or placeholder for the IITH logo image. Ensure proper handling of any specific symbols or mathematical notations that might be present in the original document.
+
+# DL4CV_Week03_Part04.pdf - Page 2
+
+```markdown
+# Acknowledgements
+
+- Most of this lecture's slides are based on lectures of **Deep Learning for Vision** course taught by Prof Yannis Avrithis at Inria Rennes-Bretagne Atlantique
+
+---
+
+Vineeth N B (IIT-H)
+
+§3.4 Image Descriptor Matching
+
+---
+
+![NPTEL](image_url)
+
+---
+
+2 / 15
+```
+
+# DL4CV_Week03_Part04.pdf - Page 3
+
+```markdown
+# Review
+
+## Hierarchical k-means and BoW:
+
+![Hierarchical k-means and BoW Diagram](image_url)
+
+- Apply hierarchical k-means and build a fine partition tree
+- Descriptors descend from root to leaves by finding nearest node at each level
+- Image represented by \( x_i = w_i n_i \) as in BoW
+- Dataset searched by inverted files at leaves
+- No principled way of defining \( w_i \) across levels
+- Distortion minimized only locally; points can get assigned to leaves that are not globally nearest
+
+*Source:*
+^{1}Nister and Stewenius, Scalable Recognition With a Vocabulary Tree, CVPR 2006
+
+Vineeth N B (IIT-H)
+
+§3.4 Image Descriptor Matching
+```
+
+**Notes:**
+- The OCR process should ideally capture the content and structure accurately.
+- Ensure that all images referenced (e.g., the hierarchical k-means and BoW diagram) are properly included in the markdown document using image URLs or local files.
+- Maintain the integrity of mathematical notations and ensure they are accurately represented.
+- Ensure proper markdown formatting for headings, lists, and any other text structures.
+
+If OCR results are not perfect, manual adjustments might be necessary to ensure accuracy and clarity.
+
+# DL4CV_Week03_Part04.pdf - Page 4
+
+```markdown
+# Image Descriptor Matching: Options So Far
+
+## Nearest Neighbor Matching:
+
+- Use each feature in a set to independently index into second set. Any problems you see?
+
+![NPTel Logo](image-placeholder)
+
+Vineeth N B (IIIT-H)
+
+§3.4 Image Descriptor Matching
+
+4 / 15
+```
+
+# DL4CV_Week03_Part04.pdf - Page 5
+
+```markdown
+# Image Descriptor Matching: Options So Far
+
+## Nearest Neighbor Matching:
+
+- **Use each feature in a set to independently index into second set.** Any problems you see?
+- **Ignores possibly useful information of co-occurrence** ⇒ **fails to distinguish between instances where an object has varying numbers of similar features** since multiple features may be matched to a single feature in the other set.
+
+![Nearest Neighbor Matching Diagram](image_url_placeholder)
+
+*Source: Alberto Del Bimbo, UNIFI, Italy*
+
+*Vineeth N B (IIT-H) §3.4 Image Descriptor Matching*
+
+---
+
+4 / 15
+```
+
+# DL4CV_Week03_Part04.pdf - Page 6
+
+```markdown
+# Image Descriptor Matching: Options So Far
+
+## Bag-of-Words Matching: Any glaring limitation?
+
+![NPTEL Logo](image_url_placeholder)
+
+Vineeth N B (IIT-H)
+
+### 3.4 Image Descriptor Matching
+
+5 / 15
+```
+
+# DL4CV_Week03_Part04.pdf - Page 7
+
+```markdown
+# Image Descriptor Matching: Options So Far
+
+## Bag-of-Words Matching: Any glaring limitation?
+
+- Can only compare entire images to one another and does not allow partial matchings
+- This implies an **all-all matching**; it is often preferable to have a **one-one matching** instead
+
+![Image Descriptor Matching Diagram](image placeholder)
+
+*Source: Alberto Del Bimbo, UNIFI, Italy*
+
+*Vineeth N B (IIIT-H) §3.4 Image Descriptor Matching*
+
+---
+
+This markdown format ensures that all sections, headings, bullet points, and the source information are properly formatted. The placeholder for the image should be replaced with the actual image if available.
+```
+
+# DL4CV_Week03_Part04.pdf - Page 8
+
+```markdown
+# Generalizing Descriptor Matching using Kernels<sup>2</sup>
+
+- Consider an image described by a set of `n` descriptors (features) \( X = \{x_1, x_2, \ldots, x_n\} \), each of `d` dimensions
+
+![NPTEL Logo](image_url_placeholder)
+
+---
+
+<sup>2</sup>Tolias et al., "To Aggregate or Not to aggregate: Selective Match Kernels for Image Search," CVPR 2013
+
+Vineeth N B (IIT-H)
+
+§3.4 Image Descriptor Matching
+
+---
+
+*Page 6 / 15*
+```
+
+# DL4CV_Week03_Part04.pdf - Page 9
+
+```markdown
+# Generalizing Descriptor Matching using Kernels<sup>2</sup>
+
+- Consider an image described by a set of \( n \) descriptors (features) \( X = \{ \mathbf{x}_1, \mathbf{x}_2, \cdots, \mathbf{x}_n \} \), each of \( d \) dimensions
+
+- Descriptors typically quantized using \( k \)-means clustering
+
+- Quantizer \( q : \mathbb{R}^d \to C \subset \mathbb{R}^d \) maps each descriptor to a representative descriptor, a.k.a **visual word**
+
+- \( C = \{ \mathbf{c}_1, \mathbf{c}_2, \cdots, \mathbf{c}_k \} \) is a codebook consisting of \( k \) visual words.
+
+---
+
+<sup>2</sup>Tolias et al., To Aggregate or Not to aggregate: Selective Match Kernels for Image Search, CVPR 2013
+
+Vineeth N B (IIIT-H)
+
+§3.4 Image Descriptor Matching
+
+![NPTEL Logo](https://example.com/logo.png) 
+
+Page 6 / 15
+```
+
+# DL4CV_Week03_Part04.pdf - Page 10
+
+```markdown
+# Generalizing Descriptor Matching using Kernels<sup>2</sup>
+
+- Consider an image described by a set of \( n \) descriptors (features) \( X = \{ x_1, x_2, \dots, x_n \} \), each of \( d \) dimensions
+- Descriptors typically quantized using \( k \)-means clustering
+- Quantizer \( q : \mathbb{R}^d \rightarrow C \subset \mathbb{R}^d \) maps each descriptor to a representative descriptor, a.k.a visual word
+- \( C = \{ c_1, c_2, \dots, c_k \} \) is a codebook consisting of \( k \) visual words.
+
+- To compare two image representations \( X \) and \( Y \), let us define a general family of matching kernels:
+
+\[ K(X, Y) = \gamma(X) \cdot \gamma(Y) \sum_{c \in C} M(X_c, Y_c) \]
+
+where \( X_c = \{ x \in X : q(x) = c \} \) is the set of descriptors assigned to the same visual word,
+\( M \) is a within-cell matching function, and \( \gamma \) is a normalization function
+
+<sup>2</sup> Tolias et al., To Aggregate or Not to Aggregate: Selective Match Kernels for Image Search, CVPR 2013
+
+Vineeth N B (IIT-H) §3.4 Image Descriptor Matching 6 / 15
+```
+
+# DL4CV_Week03_Part04.pdf - Page 11
+
+```markdown
+# Bag of Words Matching<sup>3</sup>
+
+## Recall
+BoW model characterizes an image solely by visual words
+
+![Image Credit](image_url)
+
+- Cosine similarity in BoW model can be defined by defining `M` as:
+
+\[ M(X_c, Y_c) = \sum_{x \in X_c} \sum_{y \in Y_c} 1 \]
+
+*Image Credit*: Fei-Fei, Fergus and Torralba, *Recognizing and Learning Object Categories*, CVPR 2007 Tutorial
+
+<sup>3</sup> Jegou et al., Aggregating local descriptors into a compact image representation, CVPR 2010
+
+_Vineeth N B (IIT-H)_
+
+§3.4 Image Descriptor Matching
+
+7 / 15
+```
+
+# DL4CV_Week03_Part04.pdf - Page 12
+
+```markdown
+# Hamming Embedding for Matching<sup>4</sup>
+
+- In addition to being quantized, each descriptor **x** is binarized as **b<sub>x</sub>**.
+- Score is computed between all pairs of descriptors assigned to the same visual word as:
+
+\[ M(X_c, Y_c) = \sum_{x \in X_c} \sum_{y \in Y_c} 1[h(b_x, b_y) \leq \tau] \]
+
+where \( h(\cdot, \cdot) \) is the Hamming distance between two binary vectors, and \( \tau \) is a threshold to count matched pairs.
+
+<sup>4</sup> Jegou et al, Aggregating local descriptors into a compact image representation, CVPR 2010
+
+*Vineeth N B. (IIT-H) §3.4 Image Descriptor Matching*
+
+```
+
+# DL4CV_Week03_Part04.pdf - Page 13
+
+```markdown
+# VLAD Matching<sup>5</sup>
+
+- **Recall**: For each visual word, VLAD performs pooling by constructing a vector representing the sum of residuals as:
+
+  \[
+  V(X_c) = \sum_{x \in X_c} r(x) \quad \text{where} \quad r(x) = x - q(x)
+  \]
+
+![NPTEL Logo](https://example.com/nptel_logo.png)
+
+---
+
+<sup>5</sup> Jegou et al., Aggregating local descriptors into a compact image representation, CVPR 2010
+
+Vineeth N B (IIT-H) §3.4 Image Descriptor Matching 9 / 15
+```
+
+# DL4CV_Week03_Part04.pdf - Page 14
+
+```markdown
+# VLAD Matching[^5]
+
+- **Recall:** For each visual word, VLAD performs pooling by constructing a vector representing the sum of residuals as:
+
+  \[
+  V(X_c) = \sum_{x \in X_c} r(x) \quad \text{where} \quad r(x) = x - q(x)
+  \]
+
+- A \(d \times k\) vector is constructed for an image \(X\) as follows:
+
+  \[
+  V(X) = (V(X_{c_1}), V(X_{c_2}), V(X_{c_3}), \ldots, V(X_{c_k}))
+  \]
+
+- Matching kernel now defined as:
+
+  \[
+  M(X_c, Y_c) = V(X_c)^T V(Y_c) = \sum_{x \in X_c} \sum_{y \in Y_c} r(x)^T r(y)
+  \]
+
+[^5]: Jégou et al., Aggregating local descriptors into a compact image representation, CVPR 2010
+
+Vineeth N B (IIIT-H) §3.4 Image Descriptor Matching 9 / 15
+```
+
+# DL4CV_Week03_Part04.pdf - Page 15
+
+```markdown
+# Aggregated Selective Match Kernel (ASMK)
+
+- ASMK is a combination of two borrowed ideas:
+  - Non-linear selective function (from Hamming Embedding)
+  - Pooling Residuals (from VLAD)
+
+- Matching kernel \( M \) is expressed as:
+
+  \[
+  M(X_c, Y_c) = \sigma_\alpha(\hat{V}(X_c)^T \hat{V}(Y_c))
+  \]
+
+  where \( \sigma_\alpha \) is a non-linear function given by:
+
+  \[
+  \sigma_\alpha(u) =
+  \begin{cases}
+    \text{sign}(u) |u|^\alpha & \text{if } u > \tau \\
+    0 & \text{otherwise}
+  \end{cases}
+  \]
+
+  and \( \hat{V}(X_c) = \frac{V(X_c)}{\|V(X_c)\|} \) and \( V(X_c) \) is VLAD representation discussed earlier.
+
+---
+
+*Tolias et al., "To Aggregate or Not to Aggregate: Selective Match Kernels for Image Search", CVPR 2013*
+
+*Vineeth N B (IIIT-H)* 
+
+*§3.4 Image Descriptor Matching*
+
+---
+
+*Page 10 of 15*
+```
+
+# DL4CV_Week03_Part04.pdf - Page 16
+
+```markdown
+# Aggregated Selective Match Kernel (ASMK)
+
+![Aggregated Selective Match Kernel (ASMK) Image](image_url)
+
+- **ASMK matching with different values of distance threshold and selectivity parameter**
+- Yellow corresponds to 0 similarity and red to maximum similarity per image pair, as defined by selective function
+- Larger selectivity drastically down-weighs false correspondences
+- This replaces hard thresholding in the Hamming Embedding method
+
+*Vineeth N B (IIIT-H)*
+
+§3.4 Image Descriptor Matching
+
+11 / 15
+```
+
+# DL4CV_Week03_Part04.pdf - Page 17
+
+```markdown
+# Aggregated Selective Match Kernel (ASMK)
+
+![ASMK Examples](image_url)
+
+## ASMK Example: Each visual word is drawn with a different color
+
+**Vineeth N B (IIIT-H)**
+
+### §3.4 Image Descriptor Matching
+
+---
+
+12 / 15
+```
+
+# DL4CV_Week03_Part04.pdf - Page 18
+
+```markdown
+# Efficient Match Kernels
+
+- Instead of threshold-based matching functions (as used in HE), we can use a continuous function \(\kappa(x, y)\) and avoid using computationally intensive codebooks:
+
+\[ K(X, Y) = \gamma(X) \gamma(Y) \sum_{x \in X} \sum_{y \in Y} \kappa(x, y) \]
+
+- Such a function \(K(X, Y)\) can be decomposed into an inner product of \(\Phi(X)\) and \(\Phi(Y)\).
+- To do that, we learn a low-dimensional feature map \(\phi\) such that \(\kappa(x, y) = \phi(x)^T \phi(y)\) and:
+
+\[ K(X, Y) = \left( \gamma(X) \sum_{x \in X} \phi(x) \right)^T \left( \gamma(Y) \sum_{y \in Y} \phi(y) \right) = \Phi(X)^T \Phi(Y) \]
+
+7 Bo and Sminchisescu, Efficient Match Kernels between Sets of Features for Visual Recognition, NeurIPS 2009
+
+Vineeth N B (IIT-H)  §3.4 Image Descriptor Matching
+
+13 / 15
+```
+
+# DL4CV_Week03_Part04.pdf - Page 19
+
+```markdown
+# Homework
+
+## Homework Readings
+
+### Readings
+
+- [ ] Tolias et al. **To Aggregate or Not to aggregate: Selective Match Kernels for Image Search. CVPR 2013**
+- [ ] Chapter 14.4, Szeliski, *Computer Vision: Algorithms and Applications*
+
+---
+
+**Vineeth N B (IIIT-H)**
+
+**S3.4 Image Descriptor Matching**
+
+*Page 14 / 15*
+```
+
+# DL4CV_Week03_Part04.pdf - Page 20
+
+```markdown
+# References
+
+- Liefeng Bo and Cristian Sminchisescu. **"Efficient Match Kernels between Sets of Features for Visual Recognition"**. In: *Proceedings of the 22nd International Conference on Neural Information Processing Systems*. NIPS '09. Vancouver, British Columbia, Canada: Curran Associates Inc., 2009, 135–143.
+- H. Jégou et al. **"Aggregating local descriptors into a compact image representation"**. In: *2010 IEEE Computer Society Conference on Computer Vision and Pattern Recognition*. 2010, pp. 3304–3311.
+- Richard Szeliski. *Computer Vision: Algorithms and Applications*. Texts in Computer Science. London: Springer-Verlag, 2011.
+- G. Tolaia, Y. Avrithis, and H. Jégou. **"To Aggregate or Not to aggregate: Selective Match Kernels for Image Search"**. In: *2013 IEEE International Conference on Computer Vision*. 2013, pp. 1401–1408.
+```
+

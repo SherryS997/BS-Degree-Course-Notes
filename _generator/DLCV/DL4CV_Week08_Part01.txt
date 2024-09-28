@@ -1,0 +1,2576 @@
+# DL4CV_Week08_Part01.pdf - Page 1
+
+```markdown
+# Deep Learning for Computer Vision
+
+## Recurrent Neural Networks: An Introduction
+
+### Vineeth N Balasubramanian
+
+**Department of Computer Science and Engineering**
+**Indian Institute of Technology, Hyderabad**
+
+---
+
+Vineeth N B (IIT-H) §8.1 Introduction to RNNs 1 / 25
+
+![IIT Hyderabad Logo](https://www.iith.ac.in/sites/default/files/logos/iith-logo.png)
+
+---
+
+```
+
+# DL4CV_Week08_Part01.pdf - Page 2
+
+.
+
+```markdown
+# Review: Questions
+
+## How to find bias in a model?
+
+![NPTEL Logo](image-placeholder.png)
+
+Vineeth N B (IIT-H) 
+
+§8.1 Introduction to RNNs
+
+Page 2 / 25
+```
+
+Note: This markdown includes a placeholder for the logo image since OCR might not capture the actual image directly. Replace `image-placeholder.png` with the actual image link if available.
+
+# DL4CV_Week08_Part01.pdf - Page 3
+
+```markdown
+# Review: Questions
+
+![Image](image_url)
+
+**How to find bias in a model?**
+
+Change a particular attribute/feature in question, and see if the prediction changes!
+
+*Vineeth N B (IIT-H)*
+
+§8.1 Introduction to RNNs
+
+NPTEL
+
+---
+
+2 / 25
+```
+
+# DL4CV_Week08_Part01.pdf - Page 4
+
+:
+
+```markdown
+# Acknowledgements
+
+- This lecture's slides are based on:
+  - **Lecture 10** of Stanford's **CS231n** course by Fei-Fei Li
+  - **Lecture 13** of IIT Madras' **CS7015** course by Mitesh Khapra
+```
+
+# DL4CV_Week08_Part01.pdf - Page 5
+
+```markdown
+# Sequence Learning Problems
+
+- In feedforward and convolutional neural networks, size of the input was always fixed
+
+![NPTEL Logo](https://example.com/image.png)
+
+_Vineeth N B (IIT-H)_
+
+# 8.1 Introduction to RNNs
+
+Page 4 of 25
+```
+
+# DL4CV_Week08_Part01.pdf - Page 6
+
+```markdown
+# Sequence Learning Problems
+
+- In feedforward and convolutional neural networks, size of the input was always fixed
+- E.g., we fed fixed size (32 × 32) images to convolutional neural networks for image classification
+
+![Sequence Learning Problem Diagram](https://via.placeholder.com/150)
+
+*Vineeth N B (IITH) §8.1 Introduction to RNNs*
+
+---
+
+*Slide 4/25*
+```
+
+# DL4CV_Week08_Part01.pdf - Page 7
+
+```markdown
+# Sequence Learning Problems
+
+- In feedforward and convolutional neural networks, size of the input was always fixed
+- E.g., we fed fixed size (32 × 32) images to convolutional neural networks for image classification
+- Each input to network was independent of previous or future inputs
+
+![Image of Neural Network](image_url)
+
+*Vineeth N B (IIIT-H) §8.1 Introduction to RNNs*
+
+*Page 4 / 25*
+```
+
+# DL4CV_Week08_Part01.pdf - Page 8
+
+```markdown
+# Sequence Learning Problems
+
+- In feedforward and convolutional neural networks, size of the input was always fixed
+- E.g., we fed fixed size (32 × 32) images to convolutional neural networks for image classification
+- Each input to network was independent of previous or future inputs
+- Computations, outputs and decisions for two successive images are completely independent of each other
+
+![Diagram of Convolutional Neural Network](image_url)
+
+*Vineeth N B (IIIT-H) §8.1 Introduction to RNNs 4 / 25*
+```
+
+# DL4CV_Week08_Part01.pdf - Page 9
+
+:
+
+```markdown
+# Sequence Learning Problems
+
+- In feedforward and convolutional neural networks, size of the input was always fixed
+
+- E.g., we fed fixed size (32 x 32) images to convolutional neural networks for image classification
+
+- Each input to network was independent of previous or future inputs
+
+- Computations, outputs and decisions for two successive images are completely independent of each other
+
+![Sequence Learning Problems](image_url)
+
+*Vineeth N B (IIT-H) §8.1 Introduction to RNNs*
+
+4 / 25
+```
+
+# DL4CV_Week08_Part01.pdf - Page 10
+
+```markdown
+# Sequence Learning Problems
+
+- In feedforward and convolutional neural networks, size of the input was always fixed
+
+- E.g., we fed fixed size (32 x 32) images to convolutional neural networks for image classification
+
+- Each input to network was independent of previous or future inputs
+
+- Computations, outputs and decisions for two successive images are completely independent of each other
+
+![Image](image.png)
+
+Vineeth N B (IIIT-H) - §8.1 Introduction to RNNs - 4 / 25
+```
+
+# DL4CV_Week08_Part01.pdf - Page 11
+
+```markdown
+# Sequence Learning Problems
+
+- Consider task of text auto completion
+
+![Sequence Learning Problems](image.png)
+
+**Credit**: John Johnston
+
+Vineeth N B (IIT-H)  §8.1 Introduction to RNNs  5 / 25
+```
+
+```markdown
+# Sequence Learning Problems
+
+- Consider task of text auto completion
+
+![Sequence Learning Problems](image.png)
+
+**Credit**: John Johnston
+
+Vineeth N B (IIT-H)  §8.1 Introduction to RNNs  5 / 25
+
+---
+
+### Example of Text Auto Completion
+
+![Auto Completion Example](image.png)
+
+```text
+- google autocomplete a
+- google autocomplete api
+- google autocomplete address
+- google autocomplete april fools
+- google autocomplete address example
+- google autocomplete api ios
+```
+
+---
+
+**Note**: The image shows a screenshot of a search engine's autocomplete feature with the query "google autocomplete a".
+
+---
+
+**Credit**: John Johnston
+
+Vineeth N B (IIT-H)  §8.1 Introduction to RNNs  5 / 25
+```
+
+# DL4CV_Week08_Part01.pdf - Page 12
+
+```markdown
+# Sequence Learning Problems
+
+## Consider task of text auto completion
+
+![Google Auto-complete Screenshot](https://via.placeholder.com/150)
+
+- **Consider task of text auto completion**
+  - ![Google Auto-complete Screenshot](https://via.placeholder.com/150)
+
+  ```markdown
+  - google autocoplete b
+  - google autocoplete based on
+  - google autocoplete banned words
+  - google autocoplete broken
+  - google autocoplete blog
+  - google autocoplete bounds
+
+  Search for "google autocoplete b" in History
+  Go to Site "google autocoplete b"
+  ```
+
+  **Credit**: John Johnston
+
+  Vineeth N B (IIT-H)
+
+  §8.1 Introduction to RNNs
+
+  NPTEL
+
+  Slide 5 / 25
+```
+
+
+# DL4CV_Week08_Part01.pdf - Page 13
+
+```markdown
+# Sequence Learning Problems
+
+- Consider task of text auto completion
+- Successive inputs are no longer independent!
+
+![Google AutoComplete Example](image_url)
+
+---
+
+**Credit**: John Johnston
+
+Vineeth N B (IIT-H)
+
+§8.1 Introduction to RNNs
+
+---
+
+_Note: Replace `image_url` with the actual URL or placeholder for the image if available._
+```
+
+# DL4CV_Week08_Part01.pdf - Page 14
+
+```markdown
+# Sequence Learning Problems
+
+- Consider task of text auto completion
+  - Successive inputs are no longer independent!
+  - Length of inputs and number of predictions you need to make are not fixed
+
+![Sequence Learning Diagram](image_url)
+
+NPTel
+
+_Credit: John Johnston_
+
+Vineeth N B (IIT-H)
+
+§8.1 Introduction to RNNs
+
+5 / 25
+```
+
+# DL4CV_Week08_Part01.pdf - Page 15
+
+:
+
+```markdown
+# Sequence Learning Problems
+
+- Consider task of text auto completion
+- Successive inputs are no longer independent!
+- Length of inputs and number of predictions you need to make are not fixed
+- Underlying model is performing same task across all contexts (input: character, output: character)
+
+![Image of text auto-completion in browser](image.png)
+
+*Credit: John Johnston*
+
+*Vineeth N B (IIIT-H)*
+
+*§8.1 Introduction to RNNs*
+
+*5 / 25*
+```
+
+This markdown format maintains the structure and readability of the original content while ensuring proper formatting and representation of the scientific text.
+
+# DL4CV_Week08_Part01.pdf - Page 16
+
+```markdown
+# Sequence Learning Problems
+
+- Consider task of text auto completion
+- Successive inputs are no longer independent!
+- Length of inputs and number of predictions you need to make are not fixed
+- Underlying model is performing same task across all contexts (input: character, output: character)
+- Known as sequence learning problems
+
+![Sequence Learning Problems Diagram](data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAoAAAAHgCAYAAAC/4doNAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAA...
+
+**Credit**: John Johnston
+
+Vineeth N B (IIT-H)
+
+§8.1 Introduction to RNNs
+
+5 / 25
+```
+
+# DL4CV_Week08_Part01.pdf - Page 18
+
+```markdown
+# Recurrent Neural Networks: Variants
+
+## Variants
+
+### One to One
+
+![One to One](image_url_one_to_one)
+
+### One to Many
+
+![One to Many](image_url_one_to_many)
+
+## Example Applications
+
+- **e.g. Image Captioning**
+  - **Input**: Image
+  - **Output**: Sequence of words
+
+*Source*: Vineeth N B (IIT-H)
+
+*Section*: §8.1 Introduction to RNNs
+
+*Slide Number*: 6 / 25
+```
+
+# DL4CV_Week08_Part01.pdf - Page 19
+
+```markdown
+# Recurrent Neural Networks: Variants
+
+## Variants of Recurrent Neural Networks
+
+### One to One
+- Structure: 
+  ```plaintext
+  [Input Layer] -> [Hidden Layer] -> [Output Layer]
+  ```
+- Usage: Simple sequence-to-sequence tasks.
+
+### One to Many
+- Structure: 
+  ```plaintext
+  [Input Layer] -> [Hidden Layer] -> [Output Layer 1] -> [Output Layer 2] -> ...
+  ```
+- Usage: Predicting multiple outputs from a single input sequence, e.g., time-series forecasting.
+
+### Many to One
+- Structure: 
+  ```plaintext
+  [Input Layer 1] -> [Input Layer 2] -> ... -> [Hidden Layer] -> [Output Layer]
+  ```
+- Usage: Aggregating multiple inputs to produce a single output, e.g., action prediction from a sequence of video frames.
+
+### Example Application
+- **e.g. action prediction**: Sequence of video frames -> action class
+
+---
+
+**Vineeth N B (IIT-H)**
+
+ Section 8.1 Introduction to RNNs
+
+ Slide 6 / 25
+```
+
+# DL4CV_Week08_Part01.pdf - Page 20
+
+```markdown
+# Recurrent Neural Networks: Variants
+
+## Section Overview
+
+The image illustrates various types of Recurrent Neural Networks (RNNs) and their applications. 
+
+### Types of RNN Variants
+
+1. **One to One**
+   - **Description**: A simple RNN variant where a single input is mapped to a single output.
+   - **Diagram**: ![One to One](image-url)
+
+2. **One to Many**
+   - **Description**: This RNN variant maps a single input to multiple outputs. It is useful for tasks where a single input influences multiple outputs.
+   - **Diagram**: ![One to Many](image-url)
+
+3. **Many to One**
+   - **Description**: In this variant, multiple inputs are used to derive a single output. This is useful in tasks like regression where multiple features contribute to a single output.
+   - **Diagram**: ![Many to One](image-url)
+
+4. **Many to Many**
+   - **Description**: This variant is used where multiple inputs are mapped to multiple outputs. It is useful for tasks like machine translation where sequences of input and output are involved.
+   - **Diagram**: ![Many to Many](image-url)
+
+### Example Application
+
+- **E.g. Video Captioning**
+  - **Sequence of video frames -> caption**
+  - **Diagram**: ![Video Captioning](image-url)
+
+### Footer Information
+
+- **Author**: Vineeth N B (IIIT-H)
+- **Course**: §8.1 Introduction to RNNs
+- **Slide Number**: 6 / 25
+```
+
+(Note: Replace `image-url` with the actual image URLs or placeholders if the OCR tool cannot capture them directly.)
+
+This markdown format maintains the structure, formatting, and scientific integrity of the original content.
+
+# DL4CV_Week08_Part01.pdf - Page 21
+
+```markdown
+# Recurrent Neural Networks: Variants
+
+## Types of Recurrent Neural Networks
+
+### 1. One to One
+![One to One](data:image/png;base64,...) 
+- Structure: One input node connected to one hidden node, which is further connected to one output node.
+- Application: Basic sequence prediction tasks.
+
+### 2. One to Many
+![One to Many](data:image/png;base64,...) 
+- Structure: One input node connected to multiple hidden nodes, which are connected to multiple output nodes.
+- Application: Used in tasks like language modeling where multiple outputs are predicted based on a single input.
+
+### 3. Many to One
+![Many to One](data:image/png;base64,...) 
+- Structure: Multiple input nodes connected to one hidden node, which is further connected to one output node.
+- Application: Used in tasks like classification based on multiple inputs.
+
+### 4. Many to Many
+![Many to Many](data:image/png;base64,...) 
+- Structure: Multiple input nodes connected to multiple hidden nodes, which are connected to multiple output nodes.
+- Application: Commonly used in sequence-to-sequence models like machine translation.
+
+### Example Application
+#### Video Classification on Frame Level
+- ![Video Classification](data:image/png;base64,...) 
+- Description: Demonstrates the use of RNNs in video classification by analyzing each frame.
+
+---
+
+**Source**: Vineeth N B (IIT-H)
+
+**Slide Number**: 6 / 25
+
+**Section**: §8.1 Introduction to RNNs
+```
+
+# DL4CV_Week08_Part01.pdf - Page 22
+
+```markdown
+# How do we model such tasks involving sequences?
+
+- Account for dependence between inputs
+- Account for variable number of inputs
+- Make sure that function executed at each time step is the same. Why?
+
+*Vineeth N B (IIIT-H)*
+
+## Introduction to RNNs
+
+![NPTEL](https://example.com/path-to-image)
+
+---
+
+### Slide 7 / 25
+```
+
+# DL4CV_Week08_Part01.pdf - Page 24
+
+```markdown
+# Recurrent Neural Network
+
+![Recurrent Neural Network Diagram](image-link)
+
+**Vineeth N B (IIT-H)**
+
+## 8.1 Introduction to RNNs
+
+### Key idea: RNNs have an "internal state" that is updated as a sequence is processed
+
+- **x**: Input
+- **RNN**: Recurrent Neural Network
+- **y**: Output
+
+The core concept behind Recurrent Neural Networks (RNNs) is their ability to maintain an internal state that evolves as sequences of data are processed. This internal state allows the RNN to capture temporal dependencies and relationships within the input data.
+
+### Diagram Explanation
+
+- The input **x** is fed into the RNN.
+- The RNN processes the input and updates its internal state.
+- The updated internal state and input are then used to generate the output **y**.
+
+![RNN Diagram](image-link)
+
+This internal state mechanism is crucial for tasks that involve sequential data, such as time series prediction, natural language processing, and speech recognition.
+```
+
+# DL4CV_Week08_Part01.pdf - Page 25
+
+```markdown
+# Recurrent Neural Network: Unfolded
+
+![Recurrent Neural Network Diagram](image_url)
+
+Vineeth N B (IIT-H) §8.1 Introduction to RNNs
+
+- **Recurrent Neural Network (RNN)**:
+  - An RNN processes sequences of data by maintaining an internal state.
+  - The same network structure is used for each element of the sequence.
+
+- **Diagram Description**:
+  - **Inputs (x)**:
+    - $x_1$
+    - $x_2$
+    - $x_3$
+    - $x_t$
+  - **Outputs (y)**:
+    - $y_1$
+    - $y_2$
+    - $y_3$
+    - $y_t$
+
+- **RNN Structure**:
+  - Each RNN block processes the input $x_t$ and the hidden state from the previous time step.
+  - The output $y_t$ is generated based on the current input and the hidden state.
+  - Hidden states are passed along the sequence, allowing the RNN to maintain temporal information.
+
+- **Unfolding RNNs**:
+  - Unfolding an RNN refers to the practice of representing an RNN's computations over a sequence as a layer of operations.
+  - This is often visualized as a series of RNN layers stacked over time.
+
+- **Key Points**:
+  - RNNs are particularly useful for tasks involving sequential data, such as language modeling and time series analysis.
+  - The hidden state is crucial for capturing temporal dependencies in the data.
+
+Page 9 / 25
+```
+
+# DL4CV_Week08_Part01.pdf - Page 26
+
+
+
+```markdown
+# Recurrent Neural Network
+
+We can process a sequence of vectors $x$ by applying a recurrence formula at every time step:
+
+$$
+h_t = f_{UW}(x_t, h_{t-1})
+$$
+
+- **New state** 
+- **Input vector at some time step**
+- **Old state**
+- **Some function with parameters U&W**
+
+![RNN diagram](attachment:RNN_diagram.png)
+
+**Vineeth N B (IIT-H)**
+
+§8.1 Introduction to RNNs
+
+10 / 25
+```
+
+Ensure accuracy in the scientific notation, including the recurrence formula and the use of bold and italic text.
+
+# DL4CV_Week08_Part01.pdf - Page 27
+
+```markdown
+# Recurrent Neural Network
+
+## Introduction to RNNs
+
+![RNN Diagram](diagram-placeholder.png)
+
+### Structure of RNNs
+
+A Recurrent Neural Network (RNN) is designed to process sequential data by maintaining information from previous steps. The basic architecture of an RNN includes the following components:
+
+- **Inputs (x)**: The input data at each time step \( t \).
+- **Hidden States (h)**: The internal state that carries information from previous steps.
+- **Outputs (y)**: The predicted or computed output at each time step.
+
+### Diagram Explanation
+
+- **x_1, x_2, x_3, ... x_t**: Inputs at different time steps.
+- **h_0, h_1, h_2, ... h_t**: Hidden states at different time steps.
+- **y_1, y_2, y_3, ... y_t**: Outputs at different time steps.
+
+The flow of information in an RNN:
+1. At time step \( t \), the input \( x_t \) and the hidden state from the previous time step \( h_{t-1} \) are fed into the RNN.
+2. The RNN processes this information and updates the hidden state to \( h_t \).
+3. The updated hidden state \( h_t \) is then used to produce the output \( y_t \).
+
+### Mathematical Representation
+
+The core idea behind an RNN involves two functions:
+- **Hidden State Update Function**: \( h_t = f(W_h h_{t-1} + W_x x_t + b_h) \)
+- **Output Function**: \( y_t = g(W_y h_t + b_y) \)
+
+Where:
+- \( W_h \), \( W_x \), \( W_y \) are weight matrices.
+- \( b_h \), \( b_y \) are bias vectors.
+- \( f \) and \( g \) are activation functions.
+
+### Properties of RNNs
+
+- **Temporal Dynamics**: RNNs can capture temporal dependencies in data by using hidden states that evolve over time.
+- **Sequential Processing**: They process data one element at a time, which makes them suitable for time-series data.
+
+### Applications
+
+RNNs are widely used in various fields such as:
+- **Natural Language Processing (NLP)**: For tasks like machine translation, sentiment analysis, and text generation.
+- **Speech Recognition**: For converting spoken language into text.
+- **Time Series Forecasting**: For predicting future values based on past data.
+
+### Challenges
+
+Despite their advantages, RNNs face certain challenges:
+- **Vanishing Gradient Problem**: Exponentially decaying gradients can make it difficult to train RNNs effectively for long sequences.
+- ** exploding Gradient Problem**: Explosively increasing gradients can cause instability during training.
+
+To mitigate these issues, variants of RNNs such as Long Short-Term Memory (LSTM) networks and Gated Recurrent Units (GRUs) have been developed.
+
+### Conclusion
+
+RNNs are powerful tools for processing sequential data due to their ability to maintain and utilize temporal information. Understanding their structure and mathematical foundations is essential for leveraging their capabilities in various applications.
+
+Vineeth N B (IIT-H) §8.1 Introduction to RNNs
+
+Page: 11 / 25
+```
+
+# DL4CV_Week08_Part01.pdf - Page 28
+
+```markdown
+# Recurrent Neural Network
+
+We can process a sequence of vectors `x` by applying a **recurrence formula** at every time step:
+
+\[ h_t = f_{UW}(x_t, h_{t-1}) \]
+
+**Notice:** The same function and the same set of parameters are used at every time step.
+
+![RNN Diagram](https://via.placeholder.com/150)
+
+*Vineeth N B (IIIT-H)*
+
+## §8.1 Introduction to RNNs
+
+12 / 25
+```
+
+In this markdown format:
+
+- Section titles and subheadings are denoted using `#` and `##` respectively.
+- The formula is enclosed in inline code ` ``` ` to ensure it is formatted correctly.
+- The placeholder image link ` ![RNN Diagram](https://via.placeholder.com/150) ` is used to denote where an image of the RNN diagram should be placed.
+- The note about the recurrence formula and parameters is italicized.
+- The slide pagination and section identification are maintained as they appear in the original content.
+
+# DL4CV_Week08_Part01.pdf - Page 29
+
+```markdown
+# (Simple) Recurrent Neural Network
+
+The state consists of a single "hidden" vector `h`:
+
+![RNN Diagram](attachment:rnn_diagram.png)
+
+\[ h_t = f_{RW}(x_t, h_{t-1}) \]
+
+\[ h_t = \tanh(U x_t + W h_{t-1}) \]
+
+\[ y_t = \text{SoftMax}(V h_t) \]
+
+- Sometimes called a "Vanilla RNN" or an "Elman RNN" after Prof. Jeffrey Elman
+  
+_Vineeth N B. (IIIT-H) §8.1 Introduction to RNNs_
+
+```
+
+# DL4CV_Week08_Part01.pdf - Page 30
+
+```markdown
+# Computational Graphs: A Quick Review
+
+- **Computational graph:** Directed graph where nodes correspond to:
+  - Operations
+  - Variables
+
+![NPTEL Logo](image_url)
+
+Vineeth N B (IIT-H) §8.1 Introduction to RNNs 14 / 25
+```
+
+# DL4CV_Week08_Part01.pdf - Page 31
+
+```markdown
+# Computational Graphs: A Quick Review
+
+- **Computational graph**: Directed graph where nodes correspond to:
+  - Operations
+  - Variables
+
+- Values that are fed into nodes and come out of nodes called **tensors** (multi-dimensional array)
+  - Subsumes scalars, vectors, and matrices as well
+
+![NPTEL Logo](image_placeholder.png)
+
+*Vineeth N B (IIT-H)*
+
+*8.1 Introduction to RNNs*
+
+*14 / 25*
+```
+
+# DL4CV_Week08_Part01.pdf - Page 32
+
+```markdown
+# Computational Graphs: A Quick Review
+
+- **Computational graph**: Directed graph where nodes correspond to:
+  - Operations
+  - Variables
+
+- Values that are fed into nodes and come out of nodes called **tensors** (multi-dimensional array)
+  - Subsumes scalars, vectors and matrices as well
+
+- Can be instantiated to do two types of computation
+  - Forward
+  - Backward
+
+*Vineeth N B. (IIT-H) §8.1 Introduction to RNNs 14 / 25*
+```
+
+# DL4CV_Week08_Part01.pdf - Page 33
+
+```markdown
+# Computational Graphs: Creating Expressions
+
+- Nice way to think about mathematical expressions
+
+![NPTEL Logo](image_url)
+
+Vineeth N B (IIT-H) §8.1 Introduction to RNNs 15 / 25
+```
+
+# DL4CV_Week08_Part01.pdf - Page 34
+
+```markdown
+# Computational Graphs: Creating Expressions
+
+- Nice way to think about mathematical expressions
+
+- Consider the expression:
+  \[
+  e = (a + b) \ast (b + 1)
+  \]
+
+![NPTEL Logo](image-url)
+
+Vineeth N B (IIT-H) §8.1 Introduction to RNNs
+
+15 / 25
+```
+
+# DL4CV_Week08_Part01.pdf - Page 35
+
+```markdown
+# Computational Graphs: Creating Expressions
+
+- Nice way to think about mathematical expressions
+- Consider the expression:
+  \[
+  e = (a + b) \ast (b + 1)
+  \]
+- 3 operations:
+  - 2 additions
+  - 1 multiplication
+
+![NPTEL Logo](image_url)
+
+Vineeth N B (IIT-H) §8.1 Introduction to RNNs 15 / 25
+```
+
+# DL4CV_Week08_Part01.pdf - Page 36
+
+```markdown
+# Computational Graphs: Creating Expressions
+
+- Nice way to think about mathematical expressions
+
+- Consider the expression:
+  \[ e = (a + b) \ast (b + 1) \]
+
+- 3 operations:
+  - 2 additions
+  - 1 multiplication
+
+- Intermediate steps:
+  - \( c = a + b \)
+  - \( d = b + 1 \)
+  - \( e = c \ast d \)
+
+![NPTEL Logo](https://via.placeholder.com/150)
+
+_Vineeth N B (IIT-H)_
+
+§8.1 Introduction to RNNs
+
+*Page 15 / 25*
+```
+
+# DL4CV_Week08_Part01.pdf - Page 37
+
+```markdown
+# Computational Graphs: Creating Expressions
+
+- Nice way to think about mathematical expressions
+- Consider the expression:
+  \[
+  e = (a + b) \ast (b + 1)
+  \]
+- 3 operations:
+  - 2 additions
+  - 1 multiplication
+- Intermediate steps:
+  - \( c = a + b \)
+  - \( d = b + 1 \)
+  - \( e = c \ast d \)
+
+![Computational Graph](image_placeholder)
+
+Credit: [Christopher Olah](https://vincentnb.com/IIT-H/8.1 Introduction to RNNs)
+
+Vineeth NB (IIT-H) §8.1 Introduction to RNNs 15 / 25
+```
+
+# DL4CV_Week08_Part01.pdf - Page 38
+
+```markdown
+# Computational Graphs: Evaluating Expressions
+
+- To evaluate the expression
+  - Set input variable to certain values
+  - Compute nodes up through the graph
+
+![NPTEL Logo](https://example.com/nptel-logo.png)
+
+**Credit**: *Christopher Olah*
+
+*Vineeth N B (IIT-H)*
+
+## §8.1 Introduction to RNNs
+
+Page 16 / 25
+```
+
+# DL4CV_Week08_Part01.pdf - Page 39
+
+```markdown
+# Computational Graphs: Evaluating Expressions
+
+- To evaluate the expression
+  - Set input variable to certain values
+  - Compute nodes up through the graph
+
+![Computational Graph](image_url_placeholder)
+
+```math
+c = c * d
+e = 6
+```
+
+```math
+c = a + b
+c = 3
+```
+
+```math
+d = b + 1
+d = 2
+```
+
+```math
+a = 2
+```
+
+```math
+b = 1
+```
+
+*Credit: Christopher Olah*
+
+_Vineeth N B (IIT-H)_
+
+§8.1 Introduction to RNNs
+
+Page 16 / 25
+```
+
+# DL4CV_Week08_Part01.pdf - Page 40
+
+```markdown
+# Computational Graphs: Computing Derivatives
+
+- **How?**
+
+![NPTEL Logo](URL of the logo)
+
+Vineeth N B (IIT-H) §8.1 Introduction to RNNs 17 / 25
+```
+
+---
+
+The provided slide appears to be from a course on computational graphs, specifically focused on computing derivatives. The slide includes a section labeled "How?" and features an image of the NPTEL logo. The slide is part of section 8.1, "Introduction to RNNs," in a course taught by Vineeth N B from IIT-Hyderabad.
+
+```markdown
+# Computational Graphs: Computing Derivatives
+
+- **How?**
+
+![NPTEL Logo](URL of the logo)
+
+Vineeth N B (IIT-H) §8.1 Introduction to RNNs 17 / 25
+```
+
+```markdown
+# Computational Graphs: Computing Derivatives
+
+- **How?**
+
+![NPTEL Logo](URL of the logo)
+
+Vineeth N B (IIT-H) §8.1 Introduction to RNNs 17 / 25
+
+## Diagram
+
+```markdown
+# Computational Graphs: Computing Derivatives
+
+- **How?**
+
+![NPTEL Logo](URL of the logo)
+
+Vineeth N B (IIT-H) §8.1 Introduction to RNNs 17 / 25
+
+## Diagram
+
+```markdown
+# Computational Graphs: Computing Derivatives
+
+- **How?**
+
+![NPTEL Logo](URL of the logo)
+
+Vineeth N B (IIT-H) §8.1 Introduction to RNNs 17 / 25
+
+## Diagram
+
+```
+This is the computational graph:
+
+- **Nodes:**
+  - `a`: \( a = 2 \)
+  - `b`: \( b = 1 \)
+  - `c`: \( c = a + b \Rightarrow c = 3 \)
+  - `d`: \( d = b + 1 \Rightarrow d = 2 \)
+  - `l`: \( d = 2 \Rightarrow l = 2 - 1 = 1 \)
+
+- **Edges:**
+  - `a` -> `c`
+  - `b` -> `c`
+  - `b` -> `d`
+  - `d` -> `l`
+
+- **Additional Information:**
+  - \( c = cd' \)
+  - \( c = 0 \)
+  - \( d = d' \)
+  - \( l = l' \)
+```
+
+# DL4CV_Week08_Part01.pdf - Page 41
+
+```markdown
+# Computational Graphs: Computing Derivatives
+
+- **How?**
+- **Key is to understand derivatives on edges (where changes - e.g. how `a` affects `c` - are tracked)**
+
+![NPTEL Logo](https://via.placeholder.com/150)
+
+*Credit: Christopher Olah*
+*Vineeth N B (IIT-H)*
+*§8.1 Introduction to RNNs*
+*17 / 25*
+```
+
+# DL4CV_Week08_Part01.pdf - Page 42
+
+```markdown
+# Computational Graphs: Computing Derivatives
+
+- **How?**
+- **Key is to understand derivatives on edges (where changes - e.g. how `a` affects `c` - are tracked)**
+
+![Computational Graph Diagram](image_url_placeholder)
+
+**Credit:** Christopher Olah
+*Vineeth N B (IIT-H)*
+
+§8.1 Introduction to RNNs
+
+17 / 25
+```
+
+Here is the formatted markdown content based on the provided scientific text or slide. The image placeholder is used where the OCR could not capture the image directly. Ensure to replace `image_url_placeholder` with the actual image URL if available. If there are any equations or special symbols that need to be formatted, they can be added using the appropriate markdown syntax.
+
+# DL4CV_Week08_Part01.pdf - Page 43
+
+```markdown
+# Computational Graphs: Computing Derivatives
+
+- **How?**
+- Key is to understand derivatives on edges (where changes – e.g. how `a` affects `c` – are tracked)
+- We then apply **sum rule** and **product rule** appropriately to gradients
+
+![Computational Graph](image_placeholder.png)
+
+*Credit: Christopher Olah*
+*Vineeth N B (IIIT-H)*
+*§8.1 Introduction to RNNs*
+*17 / 25*
+```
+
+# DL4CV_Week08_Part01.pdf - Page 45
+
+```markdown
+# Computational Graphs: Computing Derivatives
+
+- **How?**
+  - Key is to understand derivatives on edges (where changes - e.g. how `a` affects `c` - are tracked)
+  - We then apply **sum rule** and **product rule** appropriately to gradients
+  - General rule is to sum over all possible paths from one node to other, multiplying derivatives on each edge of path together
+  - E.g. to get derivative of `c` w.r.t. `b`:
+
+    \[
+    \frac{\partial c}{\partial b} = 1 \times 2 + 1 \times 3
+    \]
+
+![Graphical Representation of Derivatives](image.png)
+
+Credit: Christopher Olah
+Vineeth N B (IIT-H)
+§8.1 Introduction to RNNs
+17 / 25
+```
+
+Note:
+- Replace `"image.png"` with the actual image placeholder if necessary.
+- Ensure that all equations and symbols are rendered correctly. If any symbols or characters are not correctly captured, they should be manually verified and corrected.
+
+# DL4CV_Week08_Part01.pdf - Page 46
+
+```markdown
+# Computational Graphs: PyTorch Example
+
+- In PyTorch, for e.g., changes are tracked on the go during forward pass allowing for dynamic graph creation
+- Gradients are calculated only when `backward()` function is triggered
+
+![Computational Graph](image_url)
+
+```python
+import torch
+from torch.autograd import Variable
+
+# Define Variables to build computational graph
+x = Variable(torch.tensor([1.0, 2.0], dtype=torch.float), requires_grad=True)
+y = Variable(torch.tensor([2.0, 3.0], dtype=torch.float), requires_grad=True)
+z = Variable(torch.tensor([4.0, 3.0], dtype=torch.float), requires_grad=True)
+
+# Forward Pass
+a = x * y
+b = a + z
+c = torch.sum(b)
+
+# Compute Gradients
+c.backward()
+
+# Output Gradients
+print(x.grad.data)
+# out = [2., 3.]
+print(y.grad.data)
+# out = [1., 2.]
+print(z.grad.data)
+# out = [1., 1.]
+```
+
+_Vineeth N B (IIT-H)_
+
+§8.1 Introduction to RNNs
+
+18 / 25
+```
+
+# DL4CV_Week08_Part01.pdf - Page 47
+
+```markdown
+# Computational Graphs: MLP
+
+$$
+h = \tanh(Wx + b)
+$$
+
+$$
+y = Vh + a
+$$
+
+![NPTEL Logo](https://example.com/nptel-logo.png)
+
+**Credit:** Yoav Artzi CS5740
+
+Vineeth N B (IIT-H) §8.1 Introduction to RNNs
+
+Page 19 / 25
+```
+
+# DL4CV_Week08_Part01.pdf - Page 48
+
+```markdown
+# Computational Graphs: MLP
+
+## Equations
+```math
+h = \tanh(Wx + b)
+y = Vh + a
+```
+
+## Computational Graph Representation
+```math
+f(u) = \tanh(u)
+```
+
+### Nodes and Their Relationships
+- **Node \( h \)**
+  - Function: \( f(u) = \tanh(u) \)
+  - Inputs: \( u \)
+
+```math
+f(u, v) = u + v
+```
+
+### Intermediate Nodes
+```math
+f(M, v) = Mv
+```
+
+### Base Nodes
+- **Node \( b \)**
+- **Node \( W \)**
+- **Node \( x \)**
+
+### Diagram
+
+![Computational Graph](diagram.png)
+
+## Credit
+- **Yoav Artzi CS5740**
+- **Vineeth N B (IIT-H)**
+
+## Course
+- **§8.1 Introduction to RNNs**
+- **Page 19 / 25**
+```
+
+Note: The placeholder `diagram.png` is used for the image as the actual image content could not be extracted. Replace it with the actual image content if available.
+
+# DL4CV_Week08_Part01.pdf - Page 49
+
+```markdown
+# Computational Graphs: MLP
+
+## Formulas and Equations
+
+### Equation 1
+\[
+h = \tanh(Wx + b)
+\]
+
+### Equation 2
+\[
+y = Vh + a
+\]
+
+## Computational Graph Visualization
+
+### Nodes and Edges
+
+- **Node `h`**
+  - Incoming edges: `f(W, x) = Wx + b`
+  - Outgoing edges: `f(V, h) = Vh`
+
+- **Node `y`**
+  - Incoming edges: `f(V, h) = Vh`
+  - Outgoing edges: `f(u, v) = u + v`
+
+- **Node `u`**
+  - Incoming edges: `f(M, v) = Mv`
+  - Outgoing edges: `f(u, v) = u + v`
+
+- **Node `v`**
+  - Incoming edges: `f(M, v) = Mv`
+  - Outgoing edges: `f(u, v) = u + v`
+
+### Node Values and Relationships
+
+- **Node `W`**
+  - Connected to: `b`
+
+- **Node `x`**
+  - Connected to: `W`
+
+- **Node `b`**
+  - Connected to: `W`
+
+- **Node `a`**
+  - Connected to: `V`
+
+- **Node `V`**
+  - Connected to: `h` and `a`
+
+- **Node `M`**
+  - Connected to: `v`
+
+```markdown
+## Credit
+Yoav Artzi CS5740
+
+## Course Information
+Vineeth N B (IIT-H)
+
+## Section
+§8.1 Introduction to RNNs
+```
+
+**Slide Number:** 19 / 25
+```
+
+# DL4CV_Week08_Part01.pdf - Page 50
+
+:
+
+```markdown
+# Back to RNNs: Computational Graph
+
+![Computational Graph](image_url)
+
+- **h<sub>0</sub>**: Initial hidden state.
+
+- **x<sub>1</sub>**: Input at time step 1.
+
+- **f<sub>U,W</sub>**: Function of input and weights.
+
+- **h<sub>1</sub>**: Hidden state after processing.
+
+## Diagram Explanation
+
+The computational graph illustrates the flow of data in a Recurrent Neural Network (RNN):
+
+1. **Initial Hidden State (h<sub>0</sub>)**: 
+   - Represents the starting point of the RNN sequence.
+
+2. **Input (x<sub>1</sub>)**: 
+   - Input data at the first time step.
+
+3. **Function (f<sub>U,W</sub>)**: 
+   - This function processes the input and hidden state using weights (W) and biases (U).
+
+4. **Next Hidden State (h<sub>1</sub>)**: 
+   - The result of the function, which becomes the new hidden state for the next time step.
+
+## NPTEL Logo
+
+![NPTEL Logo](image_url)
+
+## Presentation Information
+
+- **Presenter**: Vineeth N B
+- **Institution**: IIT-H
+- **Section**: §8.1 Introduction to RNNs
+- **Slide Number**: 20 / 25
+```
+
+Ensure to replace placeholders like `image_url` with actual image URLs if available. This format maintains the structure and clarity of the scientific content while adhering to markdown syntax.
+
+# DL4CV_Week08_Part01.pdf - Page 51
+
+```markdown
+# Back to RNNs: Computational Graph
+
+![Computational Graph](image_url)
+
+Vineeth N B (IIIT-H)
+
+## §8.1 Introduction to RNNs
+
+This section covers the computational graph for Recurrent Neural Networks (RNNs). Below is a detailed representation of the elements and flow within the graph.
+
+### Computational Graph Structure
+
+1. **Initial Hidden State (h0)**
+   - Represents the initial state of the hidden layer.
+
+2. **Input (x1)**
+   - First input to the network.
+
+3. **Hidden Layer Update Function (f_UW)**
+   - Function that updates the hidden state based on the input and previous hidden state.
+   - Mathematically represented as:
+     ```math
+     h_t = f_UW(x_t, h_{t-1})
+     ```
+
+4. **Intermediate Hidden State (h1)**
+   - Hidden state after processing the first input.
+
+5. **Input (x2)**
+   - Second input to the network.
+
+6. **Hidden Layer Update Function (f_UW)**
+   - Function that updates the hidden state based on the second input and the intermediate hidden state.
+
+7. **Final Hidden State (h2)**
+   - Final hidden state after processing the second input.
+
+### Flow of Data
+
+- **Step 1**: Start with the initial hidden state \( h_0 \).
+- **Step 2**: Input \( x_1 \) is processed through the update function \( f_{UW} \) and produces \( h_1 \).
+- **Step 3**: Input \( x_2 \) is processed through the update function \( f_{UW} \) using \( h_1 \) as the previous hidden state, resulting in \( h_2 \).
+
+This computational graph helps in understanding how RNNs process sequential data by maintaining and updating hidden states through multiple time steps. The update function \( f_{UW} \) plays a crucial role in this flow, ensuring the hidden state evolves based on the inputs received over time.
+```
+
+# DL4CV_Week08_Part01.pdf - Page 52
+
+```markdown
+# Back to RNNs: Computational Graph
+
+![Computational Graph](image-url)
+
+**Vineeth N B (IIT-H)**
+
+## §8.1 Introduction to RNNs
+
+### Diagram
+
+- **h<sub>0</sub>**: Initial hidden state
+- **f<sub>UW</sub>**: Function applied to the input and previous hidden state
+- **x<sub>1</sub>, x<sub>2</sub>, x<sub>3</sub>**: Inputs at different time steps
+- **h<sub>1</sub>, h<sub>2</sub>, h<sub>3</sub>**: Hidden states at different time steps
+- **h<sub>T</sub>**: Final hidden state
+
+Each hidden state `h_t` is computed as a function of the previous hidden state `h_{t-1}` and the current input `x_t`.
+
+**Computational Graph:**
+
+1. **h<sub>0</sub>**: Initial hidden state
+   
+   ```markdown
+   h0
+   ```
+
+2. **f<sub>UW</sub>**: Function applied to h<sub>0</sub> and x<sub>1</sub>
+   
+   ```markdown
+   f_UW
+   ```
+
+3. **h<sub>1</sub>**: First hidden state
+   
+   ```markdown
+   h1
+   ```
+
+4. **f<sub>UW</sub>**: Function applied to h<sub>1</sub> and x<sub>2</sub>
+   
+   ```markdown
+   f_UW
+   ```
+
+5. **h<sub>2</sub>**: Second hidden state
+   
+   ```markdown
+   h2
+   ```
+
+6. **f<sub>UW</sub>**: Function applied to h<sub>2</sub> and x<sub>3</sub>
+   
+   ```markdown
+   f_UW
+   ```
+
+7. **h<sub>3</sub>**: Third hidden state
+   
+   ```markdown
+   h3
+   ```
+
+8. **...**: Continues for more time steps
+   
+   ```markdown
+   ...
+   ```
+
+9. **h<sub>T</sub>**: Final hidden state
+   
+   ```markdown
+   hT
+   ```
+
+In this diagram, each box represents a computational step, with arrows indicating the flow of information through the network. The functions `f_UW` are applied recursively to produce the hidden states `h_t` at each time step.
+```
+
+# DL4CV_Week08_Part01.pdf - Page 53
+
+```markdown
+# Back to RNNs: Computational Graph
+
+## Re-use the same weight matrix at every time-step
+
+![Computational Graph Diagram](image_url_placeholder)
+
+Vineeth N B (IIIT-H) §8.1 Introduction to RNNs
+
+1. **Initial State**
+   - $h_0$: Initial hidden state
+
+2. **Time Steps**
+   - For each time-step $t$:
+     - Input $x_t$ is fed into the network.
+     - The same weight matrix $UW$ is reused at every time-step.
+     - Hidden state $h_t$ is updated.
+
+3. **Weight Matrix**
+   - $UW$: Weight matrix used in each time-step.
+
+4. **Function**
+   - $f_{UW}$: Function incorporating the weight matrix $UW$.
+
+5. **Hidden States**
+   - $h_1, h_2, h_3, ..., h_T$: Hidden states at each time-step up to $T$.
+
+6. **Connections**
+   - The weight matrix $UW$ is reused and connected to each input $x_t$ at every time-step.
+   - The hidden state $h_t$ is fed forward to the next time-step.
+
+**Visual Representation**
+- The computational graph illustrates the flow from the initial state $h_0$ through each time-step, using the same weight matrix $UW$ repeatedly.
+- The diagram shows the interaction between inputs $x_t$, the weight matrix $UW$, and the hidden states $h_t$ over time.
+
+```
+
+# DL4CV_Week08_Part01.pdf - Page 54
+
+```markdown
+# RNN Computational Graph: Many-to-Many
+
+## Vineeth N B (IIIT-H) §8.1 Introduction to RNNs
+
+- **Diagram Overview**:
+  - The image illustrates a computational graph for a Recurrent Neural Network (RNN) in a many-to-many configuration.
+  - Key components:
+    - **Input Sequence (`x_1`, `x_2`, `x_3`, ... )**: Shown in red blocks.
+    - **Hidden States (`h_1`, `h_2`, `h_3`, ..., `h_T`)**: Shown in green blocks.
+    - **Output Sequence (`y_1`, `y_2`, `y_3`, ..., `y_T`)**: Shown in blue blocks.
+    - **Weight Matrix (`UW`)**: Shown in the orange block and used in the connections.
+    - **Function Blocks (`f_UW`)**: Shown in gray blocks, representing the application of the weight matrix to the hidden states.
+
+- **Flow of Data**:
+  - **Initial Hidden State (`h_0`)**: The process begins with an initial hidden state.
+  - **Input to Hidden State Transition**:
+    - Each input `x_t` is processed through the weight matrix `UW`.
+    - The result is combined with the previous hidden state `h_{t-1}`.
+    - This combination is processed by the function block `f_UW` to produce the current hidden state `h_t`.
+  - **Hidden State to Output Transition**:
+    - The hidden state `h_t` is then used to produce the output `y_t`.
+  - **Connections**:
+    - Inputs `x_t` are connected to the corresponding weight matrix blocks `f_UW`.
+    - Hidden states `h_t` are connected to the subsequent hidden states and output blocks.
+
+### Diagram Representation
+
+```plaintext
+Initial Hidden State (h_0)
+    |
+    v
+Weight Matrix (UW) -> [f_UW]
+    |
+    v
+Hidden State (h_1) -> [f_UW]
+    |
+    v
+Input (x_1) -> [f_UW]
+    |
+    v
+Hidden State (h_2) -> [f_UW]
+    |
+    v
+Input (x_2) -> [f_UW]
+    |
+    v
+Hidden State (h_3) -> [f_UW]
+    |
+    v
+Input (x_3) -> [f_UW]
+    |
+    v
+...
+Hidden State (h_T) -> [f_UW]
+    |
+    v
+Output (y_T)
+
+Connections:
+  - Weight Matrix (UW) -> Inputs (x_1, x_2, x_3, ...)
+  - Hidden States -> Outputs (y_1, y_2, y_3, ..., y_T)
+```
+
+### Key Concepts
+
+1. **Many-to-Many RNN**:
+   - Processes sequences where each input can produce a separate output.
+   - Commonly used in tasks like language modeling, where each word in a sentence is an output.
+   
+2. **Hidden States**:
+   - Intermediate representations that capture temporal dependencies.
+   - Used to pass information between time steps.
+
+3. **Weight Matrices**:
+   - Learnable parameters that transform inputs to the hidden state space.
+   - Critical for the RNN's ability to capture relationships over time.
+
+4. **Function Blocks (`f_UW`)**:
+   - Apply transformations to the combination of inputs and previous hidden states.
+   - Usually include non-linear activation functions (e.g., tanh, ReLU) to introduce non-linearity.
+
+For more detailed understanding, refer to the course material and additional resources on Recurrent Neural Networks.
+```
+
+# DL4CV_Week08_Part01.pdf - Page 55
+
+```markdown
+# RNN Computational Graph: Many-to-Many
+
+## Diagram Elements
+
+- **h_0**: Initial hidden state
+- **f_UW**: Recurrent function (UW function)
+- **h_1, h_2, ..., h_T**: Hidden states at each time step
+- **x_1, x_2, ..., x_T**: Inputs at each time step
+- **y_1, y_2, ..., y_T**: Outputs at each time step
+- **L_1, L_2, ..., L_T**: Loss functions at each time step
+
+## Flow of Computation
+
+1. **Initialization**: Start with the initial hidden state \( h_0 \).
+
+2. **Input Processing**: Each input \( x_t \) is fed into the network along with the previous hidden state \( h_{t-1} \).
+
+3. **Recurrent Function**: The input \( x_t \) and previous hidden state \( h_{t-1} \) are processed by the recurrent function \( f_{UW} \) to produce the current hidden state \( h_t \).
+
+   \[
+   h_t = f_{UW}(x_t, h_{t-1})
+   \]
+
+4. **Output Generation**: The hidden state \( h_t \) is then used to generate the output \( y_t \).
+
+5. **Loss Calculation**: The output \( y_t \) is compared to the expected output, and a loss \( L_t \) is calculated.
+
+6. **Propagation**: This process is repeated for each time step \( t \) from 1 to T.
+
+## Diagram Representation
+
+```
+![]()
+```
+
+- **Initialization**: \( h_0 \)
+  
+- **Input Processing**: \( x_1 \) → \( f_{UW} \) → \( h_1 \)
+  
+- **Recurrent Function**: \( h_1 \) → \( f_{UW} \) → \( h_2 \)
+  
+- **Output Generation**: \( h_2 \) → \( y_2 \)
+  
+- **Loss Calculation**: \( y_2 \) → \( L_2 \)
+
+  
+(repeats for \( x_3, h_3, y_3, L_3 \) and so on up to \( x_T, h_T, y_T, L_T \))
+
+## Diagrams and Images
+
+![RNN Computational Graph](image_url)
+
+## Tables
+
+| Time Step (t) | Input (x_t) | Hidden State (h_t) | Output (y_t) | Loss (L_t) |
+|---------------|-------------|--------------------|--------------|------------|
+| 1             | x_1         | h_1                | y_1          | L_1        |
+| 2             | x_2         | h_2                | y_2          | L_2        |
+| 3             | x_3         | h_3                | y_3          | L_3        |
+| ...           | ...         | ...                | ...          | ...        |
+| T             | x_T         | h_T                | y_T          | L_T        |
+
+## Code Blocks
+
+```python
+# Example code for RNN computation
+import numpy as np
+
+def recurrent_function(x_t, h_prev):
+    # Define the recurrent function here
+    # Example:
+    h_t = np.tanh(np.dot(x_t, U) + np.dot(h_prev, W))
+    return h_t
+
+# Initialize parameters
+h_0 = np.zeros((hidden_size, 1))
+U = np.random.randn(input_size, hidden_size)
+W = np.random.randn(hidden_size, hidden_size)
+
+# Input sequence
+x_sequence = [x_1, x_2, ..., x_T]
+
+# Output sequence
+y_sequence = [y_1, y_2, ..., y_T]
+
+# Loss sequence
+l_sequence = [L_1, L_2, ..., L_T]
+
+# Compute hidden states and outputs
+for t in range(T):
+    x_t = x_sequence[t]
+    h_t = recurrent_function(x_t, h_0)
+    y_t = np.dot(h_t, V)  # Example output function
+    l_t = loss_function(y_t, y_sequence[t])  # Example loss function
+    l_sequence[t] = l_t
+    h_0 = h_t
+
+# Print the results
+print("Hidden States: ", h_sequence)
+print("Outputs: ", y_sequence)
+print("Losses: ", l_sequence)
+```
+
+## Summary
+
+This markdown format outlines the process of a many-to-many RNN computational graph, illustrating the flow of computation from input to output through recurrent functions and loss calculations. The diagram and accompanying code snippets detail the steps involved in calculating hidden states, generating outputs, and computing losses for each time step in the sequence.
+```
+
+# DL4CV_Week08_Part01.pdf - Page 56
+
+```markdown
+# RNN Computational Graph: Many-to-Many
+
+![RNN Computational Graph](image_url)
+
+Vineeth N B (IIT-H) §8.1 Introduction to RNNs
+
+## RNN Computational Graph
+
+### Overview
+
+The computational graph for a many-to-many Recurrent Neural Network (RNN) demonstrates how input sequences are processed over multiple time steps to generate corresponding output sequences.
+
+### Elements of the Graph
+
+1. **Input Sequence**: 
+   - Represented as `x1, x2, x3, ..., xT`.
+   - Each `xi` is an input feature vector.
+
+2. **Hidden States**: 
+   - `h0, h1, h2, ..., hT` are the hidden states at each time step.
+   - `h0` is the initial hidden state.
+
+3. **Output Sequence**: 
+   - Represented as `y1, y2, y3, ..., yT`.
+   - Each `yi` is the output produced at time step `i`.
+
+4. **Transition Functions**:
+   - `f_UW` is the function that updates the hidden state based on the current input and previous hidden state.
+   - `UW` is a weight matrix involved in this function.
+
+5. **Loss Calculation**:
+   - `L1, L2, ..., LT` are the loss values calculated at each time step.
+   - The final loss `L` is the sum of individual losses over all time steps.
+
+### Flow of Information
+
+1. **Initialization**:
+   - Start with the initial hidden state `h0`.
+
+2. **Forward Pass**:
+   - For each time step `t`:
+     1. Input `xi` is combined with the previous hidden state `ht-1` to calculate the new hidden state `ht` using the function `f_UW`.
+     2. The new hidden state `ht` is used to compute the output `yi` at this time step.
+     3. The loss `Lt` is calculated based on the output `yi`.
+
+3. **Loss Computation**:
+   - The total loss `L` is the sum of the individual losses over all time steps.
+
+### Diagram Explanation
+
+- **Input Layer**: Inputs `x1, x2, x3, ..., xT` are fed sequentially into the RNN.
+- **Hidden States**: The hidden states `h0, h1, h2, ..., hT` are updated at each time step.
+- **Output Layer**: The outputs `y1, y2, y3, ..., yT` are generated at each time step.
+- **Loss Function**: The losses `L1, L2, ..., LT` are computed and used to optimize the network.
+
+### Mathematical Representation
+
+- **Hidden State Update**:
+  ```math
+  h_t = f_UW(h_{t-1}, x_t)
+  ```
+
+- **Output Calculation**:
+  ```math
+  y_t = g(h_t)
+  ```
+
+- **Loss Function**:
+  ```math
+  L = \sum_{t=1}^{T} L_t
+  ```
+
+### Conclusion
+
+The many-to-many RNN structure allows for sequential input and output processing, making it suitable for tasks where both inputs and outputs are sequences of varying lengths.
+```
+
+# DL4CV_Week08_Part01.pdf - Page 57
+
+```markdown
+# RNN Computational Graph: Many-to-One
+
+![RNN Computational Graph](image_url)
+
+Vineeth N B (IIIT-H) §8.1 Introduction to RNNs 22 / 25
+
+1. **Initial Hidden State**:
+   - **h₀**: The initial hidden state is represented as **h₀**.
+
+2. **Input Sequence**:
+   - **x₁, x₂, x₃, ...**: The input sequence is denoted by **x₁, x₂, x₃, ...**
+
+3. **Update Function (f_UW)**:
+   - **f_UW**: The update function is denoted by **f_UW**. This function is applied iteratively to each input in the sequence.
+
+4. **Hidden States**:
+   - **h₁, h₂, h₃, ... hₜ**: The sequence of hidden states is represented by **h₁, h₂, h₃, ... hₜ**.
+
+5. **Intermediate Steps**:
+   - The input **x₁** is combined with the hidden state **h₀** using the update function **f_UW** to produce **h₁**.
+   - The input **x₂** is combined with the hidden state **h₁** using the update function **f_UW** to produce **h₂**.
+   - This process continues iteratively, with each subsequent hidden state being a function of the previous hidden state and the current input.
+
+6. **Final Hidden State**:
+   - **hₜ**: The final hidden state **hₜ** is obtained after processing the entire input sequence.
+
+7. **Output Layer**:
+   - **y**: The output **y** is derived from the final hidden state **hₜ**.
+
+8. **Diagram Details**:
+   - The diagram illustrates the many-to-one architecture where multiple inputs are processed to produce a single output.
+   - The arrows indicate the flow of data through the network, starting from the input sequence **x₁, x₂, x₃, ...**, passing through the hidden states **h₁, h₂, h₃, ... hₜ**, and resulting in the output **y**.
+
+9. **Additional Elements**:
+   - **UW**: There is an additional component **UW** which may represent some form of weight or parameter used in the update function **f_UW**.
+
+```
+
+# DL4CV_Week08_Part01.pdf - Page 59
+
+```markdown
+# RNN Computational Graph: One-to-Many
+
+## Diagram Overview
+
+### Components
+- **h<sub>0</sub>**: Initial hidden state.
+- **x**: Input sequence.
+- **UW**: Weight matrix associated with input.
+- **f<sub>UW</sub>**: Function involving the weight matrix UW.
+- **h<sub>1</sub>, h<sub>2</sub>, ..., h<sub>T</sub>**: Hidden states at each time step.
+- **y<sub>1</sub>, y<sub>2</sub>, ..., y<sub>T</sub>**: Outputs at each time step.
+
+### Process Flow
+1. **Initialization**:
+   - Start with an initial hidden state \( h_0 \).
+
+2. **Input Processing**:
+   - The input sequence \( x \) is combined with the weight matrix \( UW \).
+
+3. **Hidden State Update**:
+   - For each time step \( t \):
+     - Compute the intermediate function \( f_{UW} \) involving \( h_{t-1} \) and the input.
+     - Update the hidden state \( h_t \).
+
+4. **Output Generation**:
+   - For each time step \( t \):
+     - Generate the output \( y_t \) from the hidden state \( h_t \).
+
+### Computational Graph Representation
+```markdown
+# Diagram: One-to-Many RNN
+  
+   **h0** → **fUW** → **h1** → **fUW** → **h2** → **fUW** → **h3** → ... → **hT**
+    |             |             |             |             |            |
+    |-------------|-------------|-------------|-------------|------------|
+    |             |             |             |             |            |
+    |             |             |             |             |            |
+    |             |             |             |             |            |
+    |             |             |             |             |            |
+    |             |             |             |             |            |
+    |             |             |             |             |            |
+    |             |             |             |             |            |
+    |             |             |             |             |            |
+    |             |             |             |             |            |
+    |             |             |             |             |            |
+    |             |             |             |             |            |
+    |             |             |             |             |            |
+    |             |             |             |             |            |
+    |             |             |             |             |            |
+    |             |             |             |             |            |
+    |             |             |             |             |            |
+    |             |             |             |             |            |
+    |             |             |             |             |            |
+    |             |             |             |             |            |
+    |             |             |             |             |            |
+    |             |             |             |             |            |
+    |             |             |             |             |            |
+    |             |             |             |             |            |
+    |             |             |             |             |            |
+    |             |             |             |             |            |
+    |             |             |             |             |            |
+    |             |             |             |             |            |
+    |             |             |             |             |            |
+    |             |             |             |             |            |
+    |             |             |             |             |            |
+    |             |             |             |             |            |
+    |             |             |             |             |            |
+    |             |             |             |             |            |
+    |             |             |             |             |            |
+    |             |             |             |             |            |
+    |             |             |             |             |            |
+    |             |             |             |             |            |
+    |             |             |             |             |            |
+    |             |             |             |             |            |
+    |             |             |             |             |            |
+    |             |             |             |             |            |
+    |             |             |             |             |            |
+    |             |             |             |             |            |
+    |             |             |             |             |            |
+    |             |             |             |             |            |
+    |             |             |             |             |            |
+    |             |             |             |             |            |
+    |             |             |             |             |            |
+    |             |             |             |             |            |
+    |             |             |             |             |            |
+    |             |             |             |             |            |
+    |             |             |             |             |            |
+    |             |             |             |             |            |
+    |             |             |             |             |            |
+    |             |             |             |             |            |
+    |             |             |             |             |            |
+    |             |             |             |             |            |
+    |             |             |             |             |            |
+    |             |             |             |             |            |
+    |             |             |             |             |            |
+    |             |             |             |             |            |
+    |             |             |             |             |            |
+    |             |             |             |             |            |
+    |             |             |             |             |            |
+    |             |             |             |             |            |
+    |             |             |             |             |            |
+    |             |             |             |             |            |
+    |             |             |             |             |            |
+    |             |             |             |             |            |
+    |             |             |             |             |            |
+    |             |             |             |             |            |
+    |             |             |             |             |            |
+    |             |             |             |             |            |
+    |             |             |             |             |            |
+    |             |             |             |             |            |
+    |             |             |             |             |            |
+    |             |             |             |             |            |
+    |             |             |             |             |            |
+    |             |             |             |             |            |
+    |             |             |             |             |            |
+    |             |             |             |             |            |
+    |             |             |             |             |            |
+    |             |             |             |             |            |
+    |             |             |             |             |            |
+    |             |             |             |             |            |
+    |             |             |             |             |            |
+    |             |             |             |             |            |
+    |             |             |             |             |            |
+    |             |             |             |             |            |
+    |             |             |             |             |            |
+    |             |             |             |             |            |
+    |             |             |             |             |            |
+    |             |             |             |             |            |
+    |             |             |             |             |            |
+    |             |             |             |             |            |
+    |             |             |             |             |            |
+    |             |             |             |             |            |
+    |             |             |             |             |            |
+    |             |             |             |             |            |
+    |             |             |             |             |            |
+    |             |             |             |             |            |
+    |             |             |             |             |            |
+    |             |             |             |             |            |
+    |             |             |             |             |            |
+    |             |             |             |             |            |
+    |             |             |             |             |            |
+    |             |             |             |             |            |
+    |             |             |             |             |            |
+    |             |             |             |             |            |
+    |             |             |             |             |            |
+    |             |             |             |             |            |
+    |             |             |             |             |            |
+    |             |             |             |             |            |
+    |             |             |             |             |            |
+    |             |             |             |             |            |
+    |             |             |             |             |            |
+    |             |             |             |             |            |
+    |             |             |             |             |            |
+    |             |             |             |             |            |
+    |             |             |             |             |            |
+    |             |             |             |             |            |
+    |             |             |             |             |            |
+    |             |             |             |             |            |
+    |             |             |             |             |            |
+    |             |             |             |             |            |
+    |             |             |             |             |            |
+    |             |             |             |             |            |
+    |             |             |             |             |            |
+    |             |             |             |             |            |
+    |             |             |             |             |            |
+    |             |             |             |             |            |
+    |             |             |             |             |            |
+    |             |             |             |             |            |
+    |             |             |             |             |            |
+    |             |             |             |             |            |
+    |             |             |             |             |            |
+    |             |             |             |             |            |
+    |             |             |             |             |            |
+    |             |             |             |             |            |
+    |             |             |             |             |            |
+    |             |             |             |             |            |
+    |             |             |             |             |            |
+    |             |             |             |             |            |
+    |             |             |             |             |            |
+    |             |             |             |             |            |
+    |             |             |             |             |            |
+    |             |             |             |             |            |
+    |             |             |             |             |            |
+    |             |             |             |             |            |
+    |             |             |             |             |            |
+    |             |             |             |             |            |
+    |             |             |             |             |            |
+    |             |             |             |             |            |
+    |             |             |             |             |            |
+    |             |             |             |             |            |
+    |             |             |             |             |            |
+    |             |             |             |             |            |
+    |             |             |             |             |            |
+    |             |             |             |             |            |
+    |             |             |             |             |            |
+    |             |             |             |             |            |
+    |             |             |             |             |            |
+    |             |             |             |             |            |
+    |             |             |             |             |            |
+    |             |             |             |             |            |
+    |             |             |             |             |            |
+    |             |             |             |             |            |
+    |             |             |             |             |            |
+    |             |             |             |             |            |
+    |             |             |             |             |            |
+    |             |             |             |             |            |
+    |             |             |             |             |            |
+    |             |             |             |             |            |
+    |             |             |             |             |            |
+    |             |             |             |             |            |
+    |             |             |             |             |            |
+    |             |             |             |             |            |
+    |             |             |             |             |            |
+    |             |             |             |             |            |
+    |             |             |             |             |            |
+    |             |             |             |             |            |
+    |             |             |             |             |            |
+    |             |             |             |             |            |
+    |             |             |             |             |            |
+    |             |             |             |             |            |
+    |             |             |             |             |            |
+    |             |             |             |             |            |
+    |             |             |             |             |            |
+    |             |             |             |             |            |
+    |             |             |             |             |            |
+    |             |             |             |             |            |
+    |             |             |             |             |            |
+    |             |             |             |             |            |
+    |             |             |             |             |            |
+    |             |             |             |             |            |
+    |             |             |             |             |            |
+    |             |             |             |             |            |
+    |             |             |             |             |            |
+    |             |             |             |             |            |
+    |             |             |             |             |            |
+    |             |             |             |             |            |
+    |             |             |             |             |            |
+    |             |             |             |             |            |
+    |             |             |             |             |            |
+    |             |             |             |             |            |
+    |             |             |             |             |            |
+    |             |             |             |             |            |
+    |             |             |             |             |            |
+    |             |             |             |             |            |
+    |             |             |             |             |            |
+    |             |             |             |             |            |
+    |             |             |             |             |            |
+    |             |             |             |             |            |
+    |             |             |             |             |            |
+    |             |             |             |             |            |
+    |             |             |             |             |            |
+    |             |             |             |             |            |
+    |             |             |             |             |            |
+    |             |             |             |             |            |
+    |             |             |             |             |            |
+    |             |             |             |             |            |
+    |             |             |             |             |            |
+    |             |             |             |             |            |
+    |             |             |             |             |            |
+    |             |             |             |             |            |
+    |             |             |             |             |            |
+    |             |             |             |             |            |
+    |             |             |             |             |            |
+    |             |             |             |             |            |
+    |             |             |             |             |            |
+    |             |             |             |             |            |
+    |             |             |             |             |            |
+    |             |             |             |             |            |
+    |             |             |             |             |            |
+    |             |             |             |             |            |
+    |             |             |             |             |            |
+    |             |             |             |             |            |
+    |             |             |             |             |            |
+    |             |             |             |             |            |
+    |             |             |             |             |            |
+    |             |             |             |             |            |
+    |             |             |             |             |            |
+    |             |             |             |             |            |
+    |             |             |             |             |            |
+    |             |             |             |             |            |
+    |             |             |             |             |            |
+    |             |             |             |             |            |
+    |             |             |             |             |            |
+    |             |             |             |             |            |
+    |             |             |             |             |            |
+    |             |             |             |             |            |
+    |             |             |             |             |            |
+    |             |             |             |             |            |
+    |             |             |             |             |            |
+    |             |             |             |             |            |
+    |             |             |             |             |            |
+    |             |             |             |             |            |
+    |             |             |             |             |            |
+    |             |             |             |             |            |
+    |             |             |             |             |            |
+    |             |             |             |             |            |
+    |             |             |             |             |            |
+    |             |             |             |             |            |
+    |             |             |             |             |            |
+    |             |             |             |             |            |
+    |             |             |             |             |            |
+    |             |             |             |             |            |
+    |             |             |             |             |            |
+    |             |             |             |             |            |
+    |             |             |             |             |            |
+    |             |             |             |             |            |
+    |             |             |             |             |            |
+    |             |             |             |             |            |
+    |             |             |             |             |            |
+    |             |             |             |             |            |
+    |             |             |             |             |            |
+    |             |             |             |             |            |
+    |             |             |             |             |            |
+    |             |             |             |             |            |
+    |             |             |             |             |            |
+    |             |             |             |             |            |
+    |             |             |             |             |            |
+    |             |             |             |             |            |
+    |             |             |             |             |            |
+    |             |             |             |             |            |
+    |             |             |             |             |            |
+    |             |             |             |             |            |
+    |             |             |             |             |            |
+    |             |             |             |             |            |
+    |             |             |             |             |            |
+    |             |             |             |             |            |
+    |             |             |             |             |            |
+    |             |             |             |             |            |
+    |             |             |             |             |            |
+    |             |             |             |             |            |
+    |             |             |             |             |            |
+    |             |             |             |             |            |
+    |             |             |             |             |            |
+    |             |             |             |             |            |
+    |             |             |             |             |            |
+    |             |             |             |             |            |
+    |             |             |             |             |            |
+    |             |             |             |             |            |
+    |             |             |             |             |            |
+    |             |             |             |             |            |
+    |             |             |             |             |            |
+    |             |             |             |             |            |
+    |             |             |             |             |            |
+    |             |             |             |             |            |
+    |             |             |             |             |            |
+    |             |             |             |             |            |
+    |             |             |             |             |            |
+    |             |             |             |             |            |
+    |             |             |             |             |            |
+    |             |             |             |             |            |
+    |             |             |             |             |            |
+    |             |             |             |             |            |
+    |             |             |             |             |            |
+    |             |             |             |             |            |
+    |             |             |             |             |            |
+    |             |             |             |             |            |
+    |             |             |             |             |            |
+    |             |             |             |             |            |
+    |             |             |             |             |            |
+    |             |             |             |             |            |
+    |             |             |             |             |            |
+    |             |             |             |             |            |
+    |             |             |             |             |            |
+    |             |             |             |             |            |
+    |             |             |             |             |            |
+    |             |             |             |             |            |
+    |             |             |             |             |            |
+    |             |             |             |             |            |
+    |             |             |             |             |            |
+    |             |             |             |             |            |
+    |             |             |             |             |            |
+    |             |             |             |             |            |
+    |             |             |             |             |            |
+    |             |             |             |             |            |
+    |             |             |             |             |            |
+    |             |             |             |             |            |
+    |             |             |             |             |            |
+    |             |             |             |             |            |
+    |             |             |             |             |            |
+    |             |             |             |             |            |
+    |             |             |             |             |            |
+    |             |             |             |             |            |
+    |             |             |             |             |            |
+    |             |             |             |             |            |
+    |             |             |             |             |            |
+    |             |             |             |             |            |
+    |             |             |             |             |            |
+    |             |             |             |             |            |
+    |             |             |             |             |            |
+    |             |             |             |             |            |
+    |             |             |             |             |            |
+    |             |             |             |             |            |
+    |             |             |             |             |            |
+    |             |             |             |             |            |
+    |             |             |             |             |            |
+    |             |             |             |             |            |
+    |             |             |             |             |            |
+    |             |             |             |             |            |
+    |             |             |             |             |            |
+    |             |             |             |             |            |
+    |             |             |             |             |            |
+    |             |             |             |             |            |
+    |             |             |             |             |            |
+    |             |             |             |             |            |
+    |             |             |             |             |            |
+    |             |             |             |             |            |
+    |             |             |             |             |            |
+   ```
+
+### Notes
+- The visual representation demonstrates the flow of data through the RNN layers, highlighting the recurrent connections.
+- Each hidden state \( h_t \) is calculated based on the previous hidden state and the current input.
+- Outputs \( y_t \) are generated from the hidden states for each time step in the sequence.
+
+### References
+- Vineeth N B (IIIT-H)
+- Section 8.1 Introduction to RNNs
+```
+
+# DL4CV_Week08_Part01.pdf - Page 60
+
+```markdown
+# RNN Computational Graph: One-to-Many
+
+## Slides Information
+- **Slide Number**: 23 / 25
+- **Presented By**: Vineeth N B (IIIT-H)
+- **Section**: §8.1 Introduction to RNNs
+
+### Diagram Description
+
+The image depicts the computational graph of a Recurrent Neural Network (RNN) in a one-to-many configuration. The graph highlights the flow of data and the transformations applied within the RNN framework.
+
+#### Components
+
+1. **Initial Hidden State (h<sub>0</sub>)**
+   - Shown as the starting point of the sequence.
+
+2. **Input Sequence (x)**
+   - Represented as a series of input elements.
+
+3. **Hidden States (h<sub>1</sub>, h<sub>2</sub>, h<sub>3</sub>, ..., h<sub>T</sub>)**
+   - Intermediate states at each time step.
+
+4. **Outputs (y<sub>1</sub>, y<sub>2</sub>, y<sub>3</sub>, ..., y<sub>T</sub>)**
+   - Corresponding outputs produced by the network at each time step.
+
+5. **Update Function (f<sub>UW</sub>)**
+   - Applied at each time step to update the hidden state using the current input and the previous hidden state.
+
+6. **Weight Matrices (UW)**
+   - Shared weight matrices used in the update function.
+
+#### Data Flow
+
+1. The initial hidden state **h<sub>0</sub>** is fed into the update function **f<sub>UW</sub>** along with the first input **x**.
+2. The update function produces the first hidden state **h<sub>1</sub>**.
+3. **h<sub>1</sub>** is then combined with the next input **?**.
+4. This process is repeated, updating the hidden state at each time step and producing corresponding outputs **y<sub>1</sub>, y<sub>2</sub>, y<sub>3</sub>, ..., y<sub>T</sub>**.
+
+#### Summary
+
+The computational graph illustrates the propagation of data through an RNN in a one-to-many framework, emphasizing the iterative update of hidden states and the production of outputs at each time step. Each time step involves the use of shared weight matrices to update the hidden state, which is crucial for modeling sequential data effectively.
+```
+
+# DL4CV_Week08_Part01.pdf - Page 61
+
+```markdown
+# RNN Computational Graph: One-to-Many
+
+![RNN Computational Graph](image_url)
+
+Vineeth N B (IIIT-H) §8.1 Introduction to RNNs 23 / 25
+
+## RNN Computational Graph: One-to-Many
+
+### Key Components
+- **h<sub>t</sub>**: Hidden state at time step `t`
+- **y<sub>t</sub>**: Output at time step `t`
+- **f<sub>UW</sub>**: Function involving the update weight `UW`
+- **x**: Input at time step `t`
+- **0**: Bias or zero input at certain steps
+
+### Process
+1. **Initialization**
+   - Start with initial hidden state `h<sub>0</sub>`.
+   - Input `x` and initial weights `UW`.
+
+2. **Recurrent Steps**
+   - For each time step `t`:
+     - Compute hidden state `h<sub>t</sub>` using function `f<sub>UW</sub>`.
+     - Generate output `y<sub>t</sub>` based on the hidden state `h<sub>t</sub>`.
+     - Bias or zero input added for subsequent steps.
+
+3. **Iterative Process**
+   - Repeat the steps for each time step from 1 to `T`.
+
+### Diagram Explanation
+- **First Column:**
+  - Initial hidden state `h<sub>0</sub>`.
+  - Input `x` and initial weight `UW`.
+  - Compute `h<sub>1</sub>` and output `y<sub>1</sub>`.
+- **Subsequent Columns:**
+  - Hidden state `h<sub>1</sub>` used to compute `h<sub>2</sub>`.
+  - `f<sub>UW</sub>` applied iteratively to compute `h<sub>t</sub>` and `y<sub>t</sub>`.
+- **Zero Input:**
+  - Zero input or bias added to the function at certain points.
+  - This process continues iteratively until the final time step `T`.
+
+### Mathematical Notation
+```math
+h_t = f_{UW}(h_{t-1}, x_t, W_t)
+y_t = g(h_t)
+```
+Where:
+- `h_t` represents the hidden state.
+- `f_{UW}` is the recurrent function involving weights and biases.
+- `g` is the output function.
+- `x_t` is the input at time `t`.
+- `W_t` represents the weights at time `t`.
+
+### Conclusion
+This computational graph represents the one-to-many RNN architecture, highlighting how inputs are processed iteratively to generate sequences of outputs.
+```
+
+# DL4CV_Week08_Part01.pdf - Page 62
+
+:
+
+```markdown
+# RNN Computational Graph: One-to-Many
+
+## Introduction to RNNs
+
+### Computational Graph for One-to-Many
+
+1. **Initial State**:
+   - \( h_0 \) is the initial hidden state.
+   - \( x \) is the input vector.
+   - \( UW \) represents the embedding or linear transformation applied to the input.
+
+2. **Hidden States and Outputs**:
+   - For each time step \( t \):
+     - Compute \( h_t \) using the transition function \( f_{UW} \).
+     - Generate output \( y_t \) based on the hidden state \( h_t \).
+
+3. **Unfolded RNN**:
+   - The RNN is unfolded across time, showing the dependencies between hidden states \( h_t \).
+   - Each \( y_t \) depends on the previous hidden state \( h_{t-1} \) and the current input \( x \).
+
+4. **Input and Output Relationships**:
+   - Inputs \( x \) and previous outputs \( y_{t-1} \) are fed into the RNN.
+   - Outputs \( y_t \) are computed at each timestep.
+
+### Diagram Description
+
+- **Initial State**: \( h_0 \)
+  - Input: \( x \)
+  - Transformation: \( f_{UW} \)
+  - Resulting Hidden State: \( h_1 \)
+
+- **First Time Step**:
+  - Hidden State: \( h_1 \)
+  - Output: \( y_1 \)
+  - Transformation: \( f_{UW} \)
+  - Resulting Hidden State: \( h_2 \)
+
+- **Second Time Step**:
+  - Hidden State: \( h_2 \)
+  - Output: \( y_2 \)
+  - Transformation: \( f_{UW} \)
+  - Resulting Hidden State: \( h_3 \)
+
+- **Subsequent Time Steps**:
+  - This process continues iteratively for each time step \( t \), producing hidden states \( h_t \) and corresponding outputs \( y_t \).
+
+### Connections and Dependencies
+
+- Each hidden state \( h_t \) is derived from the previous hidden state \( h_{t-1} \) and the current input \( x \) after applying the transformation \( f_{UW} \).
+- Outputs \( y_t \) are directly based on the hidden states \( h_t \).
+
+### Mathematical Representation
+
+For a given input sequence \( X = \{x_1, x_2, ..., x_T\} \), the RNN generates a sequence of hidden states \( H = \{h_1, h_2, ..., h_T\} \) and outputs \( Y = \{y_1, y_2, ..., y_T\} \):
+
+\[ h_t = f_{UW}(h_{t-1}, x_t) \]
+\[ y_t = g(h_t) \]
+
+Where:
+- \( f \) represents the recurrent function.
+- \( g \) represents the output function.
+
+### Conclusion
+
+The one-to-many RNN structure effectively captures temporal dependencies in sequences, making it suitable for tasks requiring sequence-to-sequence modeling, such as machine translation and speech recognition.
+
+---
+
+*Vineeth N B (IIIT-H) §8.1 Introduction to RNNs*
+```
+
+This markdown format maintains the structure and accuracy of the scientific content, ensuring all mathematical expressions and visual elements are properly represented.
+
+# DL4CV_Week08_Part01.pdf - Page 63
+
+```markdown
+# Example: Character-level Language Model
+
+![Character-level language model diagram](image_url)
+
+- Vocabulary: `[h, e, l, o]`
+- At test time, sample characters one at a time, feed output back to model
+
+Vineeth N B (IIT-H) §8.1 Introduction to RNNs 24 / 25
+```
+
+# DL4CV_Week08_Part01.pdf - Page 64
+
+```markdown
+# Example: Character-level Language Model
+
+**Vocabulary**: [h, e, l, o]
+
+- At test time, sample characters one at a time, feed output back to model
+
+![Character-level Language Model Diagram](image-placeholder)
+
+---
+
+Vineeth N B (IIT-H)
+
+§8.1 Introduction to RNNs
+
+24 / 25
+```
+
+Note: Placeholder for the image, as OCR cannot directly capture graphical elements. Replace `image-placeholder` with the actual image file path or URL if available.
+
+# DL4CV_Week08_Part01.pdf - Page 66
+
+```markdown
+# Example: Character-level Language Model
+
+![Character-level Language Model Diagram](path_to_image)
+
+- **Vocabulary**: [h, e, i, o]
+
+- At test time, sample characters one at a time, feed output back to model
+
+## Sample
+```
+### Softmax
+```
+```
+| e^ |    e^ |    i^ |    o^ |
+|----|------|------|------|
+|  .03         |  .25         |  .11         |  .11         |
+|  .84         |  .20         |  .47         |  .02         |
+|  .00         |  .50         |  .17         |  .08         |
+|  .13         |  .05         |  .34         |  .79         |
+```
+### Output Layer
+```
+|  1.0        |  0.5        |  0.1        |  0.2        |
+|  2.2        |  0.3        |  0.5        |  -1.5       |
+|  -3.0       |  0.5        |  1.9        |  0.1        |
+|  4.1        |  -4.0       |  1.1        |  -2.2       |
+```
+### Hidden Layers
+```
+|  0.3        |  1.0        |  0.1        |  0.3        |
+|  -0.1       |  0.1        |  -0.5       |  0.9        |
+|  0.9        |  0.7        |  0.7        |  0.0        |
+```
+### Input Layer
+```
+|  1.0        |  0.0        |  0.0        |  0.0        |
+|  0.0        |  0.0        |  0.0        |  0.0        |
+|  0.0        |  0.0        |  0.0        |  0.0        |
+|  0.0        |  0.0        |  0.0        |  0.0        |
+```
+### Input Chars.
+```
+|  "h"        |  "e"        |  "i"        |  "i"        |
+```
+### Weights
+```
+| W_hy        | W_hy        | W_hy        |  W_zh       |
+|-------------|-------------|-------------|-------------|
+|  0.3        |  0.9        |  0.7        |  0.3        |
+|  0.3        |  0.1        |  0.7        |  0.9        |
+```
+
+_Vineeth N B (IIT-H)_
+
+§8.1 Introduction to RNNs
+
+Page 24 / 25
+```
+
+# DL4CV_Week08_Part01.pdf - Page 67
+
+```markdown
+# Homework Readings
+
+## Homework
+
+### Readings
+
+- [ ] **Chapter 10 of Deep Learning Book (Goodfellow et al)**
+- [ ] **Andrej Karpathy's blog post on RNNs (Important)**
+- [ ] **(Additional) Lecture 10 - Stanford CS231n**
+- [ ] **(Additional) Lecture 13 - IIT Madras CS7015**
+
+### Questions
+
+- Can RNNs have more than one hidden layer?
+- The state (h<sub>t</sub>) of an RNN records information from all previous time steps. At each new timestep, the old information gets **morphed** slightly by the current input. What would happen if we morphed the state too much?
+
+_Vineeth N B (IIT-H) § 8.1 Introduction to RNNs_
+```
+

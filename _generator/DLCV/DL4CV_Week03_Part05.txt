@@ -1,0 +1,1185 @@
+# DL4CV_Week03_Part05.pdf - Page 1
+
+```markdown
+# Deep Learning for Computer Vision
+
+## Pyramid Matching
+
+### Vineeth N Balasubramanian
+
+**Department of Computer Science and Engineering**
+
+**Indian Institute of Technology, Hyderabad**
+
+![IIT Logo](image_url)
+
+Vineeth N B (IIT-H) §3.5 Pyramid Matching 1 / 21
+```
+
+If there are specific sections, sub-sections, or other detailed content in the slides, please provide them so I can include those details in the markdown format accordingly.
+
+# DL4CV_Week03_Part05.pdf - Page 2
+
+```markdown
+# Acknowledgements
+
+- Most of this lecture’s slides are based on lectures of **Deep Learning for Vision** course taught by Prof Yannis Avrithis at Inria Rennes-Bretagne Atlantique
+
+---
+
+Vineeth N B (IIT-H) §3.5 Pyramid Matching 2 / 21
+
+![NPTEL Logo](image_url)
+```
+
+**Note**: Replace `image_url` with the URL or file path of the logo image if it's available in the original document. If the logo cannot be captured via OCR, you may need to obtain the image separately and insert it manually.
+
+# DL4CV_Week03_Part05.pdf - Page 3
+
+```markdown
+# Recall: Descriptor Matching
+
+- Given two images with descriptors \(X, Y \subset \mathbb{R}^d\), \(X_c = \{x \in X : q(x) = c\}\) where \(q\) maps vector \(x\) to its nearest centroid, bag-of-words similarity on \(C\) is given by:
+
+  \[
+  S_{BoW}(X, Y) \propto \sum_{c \in C} w_c |X_c||Y_c| = \sum_{c \in C} w_c \sum_{x \in X_c} \sum_{y \in Y_c} 1
+  \]
+
+  ![Diagram Placeholder](diagram.png)
+
+- More general form:
+
+  \[
+  K(X, Y) := \gamma(X) \gamma(Y) \sum_{c \in C} w_c M(X_c, Y_c)
+  \]
+
+  where \(M\) is a within-cell matching function, and \(\gamma(X)\) serves for normalization
+
+*Source: Vineeth N B (IIT-H), §3.5 Pyramid Matching*
+
+```
+
+# DL4CV_Week03_Part05.pdf - Page 4
+
+```markdown
+# Going Beyond Single-level Matching: Pyramid Match Kernel (PMK)1
+
+- **Pyramid matching**: an efficient method that maps unordered feature sets to multi-resolution histograms
+
+- Computes a weighted histogram intersection to find implicit correspondences based on finest resolution histogram cell where a matched pair first appears
+
+- Approximates similarity measured by optimal correspondences between feature sets of unequal cardinality
+
+![Pyramid Matching Diagram](image_url)
+
+1 Grauman and Darrell, The Pyramid Match Kernel: Discriminative Classification with Sets of Image Features, IEEE ICCV 2005, Vol 2, pp. 1458–1465
+
+Vineeth N B (IIIT-H) §3.5 Pyramid Matching
+
+---
+
+* footnote: For a deeper dive into the mathematical formulation and principles behind Pyramid Matching, refer to the cited paper by Grauman and Darrell.
+```
+
+Note: Replace `image_url` with the actual URL or placeholder for the image if available. Ensure the content maintains the scientific integrity and formatting as per the markdown syntax.
+
+# DL4CV_Week03_Part05.pdf - Page 5
+
+```markdown
+# Histogram Intersection<sup>2</sup>
+
+![Histogram Intersection Diagram](image-placeholder-url)
+
+- Given two histograms **x**, **y** of **b** bins each, their **histogram intersection** is:
+
+  \[
+  \kappa_{HI}(\textbf{x}, \textbf{y}) = \sum_{i=1}^{b} \min(x_i, y_i)
+  \]
+
+- This is related to **L1 distance** as:
+
+  \[
+  \|\textbf{x} - \textbf{y}\|_1 = \|\textbf{x}\|_1 + \|\textbf{y}\|_1 - 2\kappa_{HI}(\textbf{x}, \textbf{y})
+  \]
+
+<sup>2</sup>Swain and Ballard, Color Indexing, IJCV 1991, pp 11–32
+
+*Vineeth N B (IIIT-H)*
+
+§3.5 Pyramid Matching
+
+NPTEL
+
+5 / 21
+```
+
+# DL4CV_Week03_Part05.pdf - Page 6
+
+```markdown
+# Pyramid Match Kernel (PMK)
+
+**Weighted sum of histogram intersections at different levels of two images approximates their optimal pairwise matching**
+
+![Pyramid Match Kernel Diagram](image_url)
+
+- **X = {X1, ..., Xm}, Xi ∈ ℝ^d^**
+- **Y = {Y1, ..., Yn}, Yi ∈ ℝ^d^**
+
+![Equation](image_url)
+
+- **Optimal Partial Matching**
+
+## References
+
+- Grauman and Darrell, *The Pyramid Match Kernel: Discriminative Classification with Sets of Image Features*, IEEE ICCV 2005, Vol 2, pp. 1458–1465
+- Vineeth N B (IIT-H)
+
+### Slide Number
+6 / 21
+```
+
+# DL4CV_Week03_Part05.pdf - Page 7
+
+```markdown
+# Pyramid Match Kernel: Method
+
+![Pyramid Match Kernel Diagram](image_url)
+
+- **1-D point sets X, Y on grid of size 1**
+
+| X          | Y          |
+|------------|------------|
+|            |            |
+| ⚫         | ⚫         |
+| ⚫         | ⚫         |
+| ⚫         | ⚫         |
+| ⚫         | ⚫         |
+| ⚫         | ⚫         |
+| ⚫         | ⚫         |
+| ⚫         | ⚫         |
+| ⚫         | ⚫         |
+| ⚫         | ⚫         |
+
+| X0         | Y0         |
+|------------|------------|
+| ![Kernel Image](image_url) | ![Kernel Image](image_url) |
+
+| min(X0, Y0) |
+|-------------|
+| ![Result](image_url) |
+| ![Result](image_url) |
+
+*Vineeth N B (IIIT-H)*
+
+*§3.5 Pyramid Matching*
+
+*7 / 21*
+```
+
+# DL4CV_Week03_Part05.pdf - Page 8
+
+```markdown
+# Pyramid Match Kernel: Method
+
+## 1-D point sets \(X\), \(Y\) on grid of size 1 - level 0 histograms
+
+### Visual Representation
+
+![Pyramid Match Kernel Visual](image_url_placeholder)
+
+### Steps in the Method
+
+1. **Grid Creation**:
+   - Create a grid of size 1 for point sets \(X\) and \(Y\).
+
+2. **Histogram Generation**:
+   - Generate level 0 histograms for point sets \(X\) and \(Y\).
+
+   \[
+   X_0 \text{ and } Y_0 \text{ represent the histograms of } X \text{ and } Y \text{ respectively}
+   \]
+
+3. **Distance Calculation**:
+   - Calculate the minimum distance between the histograms \(X_0\) and \(Y_0\).
+
+   \[
+   \min(X_0, Y_0)
+   \]
+
+### Example Visualization
+
+```markdown
+| X       | Y       | X_0      | Y_0      | \(\min(X_0, Y_0)\) |
+|---------|---------|----------|----------|---------------------|
+| Point Set 1 | Point Set 2 | Histogram 1 | Histogram 2 | Minimum Distance Calculation |
+```
+
+- **First Column**: Points in \(X\).
+- **Second Column**: Points in \(Y\).
+- **Third Column**: Histogram \(X_0\) representation.
+- **Fourth Column**: Histogram \(Y_0\) representation.
+- **Fifth Column**: Minimum Distance calculation.
+
+### References
+
+- Vineeth N B (IIIT-H)
+- Section 3.5 Pyramid Matching
+
+**Date**: 7 / 21
+```
+
+**Note**: Replace `image_url_placeholder` with the actual URL if an image is available. Ensure to check and correct any OCR-induced inaccuracies in the scientific terms, symbols, and formulas.
+
+# DL4CV_Week03_Part05.pdf - Page 9
+
+```markdown
+# Pyramid Match Kernel: Method
+
+![Pyramid Match Kernel Method Diagram](image_url)
+
+## 1-D point sets X, Y on grid of size 1 - level 0 histograms - intersection
+
+- **X**
+  ```
+  +------+------+
+  |  .   |      |
+  |  .   |      |
+  |  .   |      |
+  |  .   |      |
+  |  .   |      |
+  |  .   |      |
+  |  .   |      |
+  |  .   |      |
+  |  .   |      |
+  +------+------+
+  ```
+
+- **Y**
+  ```
+  +------+------+
+  |      |  .   |
+  |      |  .   |
+  |      |  .   |
+  |      |  .   |
+  |      |  .   |
+  |      |  .   |
+  |      |  .   |
+  |      |  .   |
+  |      |  .   |
+  +------+------+
+  ```
+
+- **X<sub>0</sub>**
+  ```
+  +------+------+
+  |  .   |      |
+  |  .   |      |
+  |  .   |      |
+  |  .   |      |
+  |  .   |      |
+  |  .   |      |
+  |  .   |      |
+  |  .   |      |
+  |  .   |      |
+  +------+------+
+  ```
+
+- **Y<sub>0</sub>**
+  ```
+  +------+------+
+  |      |  .   |
+  |      |  .   |
+  |      |  .   |
+  |      |  .   |
+  |      |  .   |
+  |      |  .   |
+  |      |  .   |
+  |      |  .   |
+  |      |  .   |
+  +------+------+
+  ```
+
+- **min(X<sub>0</sub>, Y<sub>0</sub>)**
+  ```
+  +------+------+
+  |      |      |
+  |  .   |      |
+  |      |      |
+  |  .   |      |
+  |      |      |
+  |      |      |
+  |  .   |      |
+  |      |      |
+  |      |      |
+  +------+------+
+  ```
+
+*Source*: Vineeth N B. (IIIT-H)
+
+*Section*: §3.5 Pyramid Matching
+
+*Date*: 7 / 21
+```
+
+# DL4CV_Week03_Part05.pdf - Page 10
+
+```markdown
+# Pyramid Match Kernel: Method
+
+![Pyramid Match Kernel Diagram](diagram.png)
+
+## 1-D point sets X, Y on grid of size 1 - level 0 histograms - intersection
+
+- 2 matches weighted by 1
+- Total similarity score: 2 x 1 = 2
+
+![Diagrams and visual representation](diagram.png)
+
+Vineeth N B (IIIT-H) §3.5 Pyramid Matching
+```
+
+Note: Replace `diagram.png` with the actual path to the image if available. Ensure that the diagram is correctly referenced in the markdown file.
+
+# DL4CV_Week03_Part05.pdf - Page 11
+
+```markdown
+# Pyramid Match Kernel: Method
+
+![Pyramid Match Kernel Diagram](image_url)
+
+- **1-D point sets \(X, Y\)** on grid of size 2 - level 1 histograms - intersection
+- **(2 matches weighted by 1) + (2 weighted by \(\frac{1}{2}\))**
+- **Total similarity score:** \(2 \times 1 + 2 \times \frac{1}{2} = 3\)
+
+*Vineeth N B (IIT-H) §3.5 Pyramid Matching*
+
+---
+
+## Diagram Explanation
+
+### Columns
+
+1. **X**
+   - Blue points on a grid.
+   - Lines connecting corresponding points in \(Y\).
+
+2. **Y**
+   - Red points on a similar grid.
+
+3. **\(X_1\)**
+   - Histograms showing the level 1 distribution for \(X\).
+   - Blue bins with exact and approximate matches highlighted.
+
+4. **\(Y_1\)**
+   - Histograms showing the level 1 distribution for \(Y\).
+   - Red bins with exact and approximate matches highlighted.
+
+5. **\(\min(X_1, Y_1)\)**
+   - Green bins showing the minimum value between \(X_1\) and \(Y_1\).
+   - Indicates the intersection for similarity scoring.
+```
+
+# DL4CV_Week03_Part05.pdf - Page 12
+
+```markdown
+# Pyramid Match Kernel: Method
+
+![Pyramid Match Kernel Diagram](image-url)
+
+## Steps:
+
+1. **1-D Point Sets on Grid:**
+   - Sets \(X\) and \(Y\) are placed on a grid of size 4.
+   - Level 2 histograms are created for intersection analysis.
+
+2. **Weighted Matches Calculation:**
+   - 2 matches weighted by 1
+   - 2 matches weighted by \(\frac{1}{2}\)
+   - 1 match weighted by \(\frac{1}{4}\)
+
+3. **Total Similarity Score:**
+   \[
+   2 \times 1 + 2 \times \frac{1}{2} + 1 \times \frac{1}{4} = 3.25
+   \]
+
+## References:
+- Vineeth N B, (IIIT-H)
+- §3.5 Pyramid Matching
+
+---
+
+*Source: Slide 7/21*
+
+```
+
+# DL4CV_Week03_Part05.pdf - Page 13
+
+```markdown
+# Pyramid Match Kernel
+
+- Given a set \( X = \{ x_1, \cdots, x_n \} \subset \mathbb{R}^d \), where distances of elements range in \([1, D]\)
+
+![NPTEL](https://example.com/nptel_logo.png)
+
+_Vineeth N B (IIT-H)_
+
+## 3.5 Pyramid Matching
+
+- Section content here would detail the pyramid matching concept, methods, and applications.
+
+_8 / 21_
+```
+
+# DL4CV_Week03_Part05.pdf - Page 14
+
+```markdown
+# Pyramid Match Kernel
+
+- Given a set \( X = \{ \mathbf{x}_1, \cdots, \mathbf{x}_n \} \subset \mathbb{R}^d \), where distances of elements range in \([1, D]\)
+- Let \( X_i \) be a histogram of \( X \) in \( \mathbb{R}^d \) on a regular grid of side length \( 2^i \)
+
+  - \( i \) ranges from -1 (a base case where there is no intersection, 0 (where each bin has at least one element)), and so on to \( L = \lceil \log_2 D \rceil \), where all of \( X \) is contained in a single bin
+```
+
+# DL4CV_Week03_Part05.pdf - Page 15
+
+```markdown
+# Pyramid Match Kernel
+
+- Given a set \( X = \{ x_1, \cdots, x_n \} \subset \mathbb{R}^d \), where distances of elements range in \([1, D]\)
+- Let \( X_i \) be a histogram of \( X \) in \( \mathbb{R}^d \) on a regular grid of side length \( 2^i \)
+  - \( i \) ranges from -1 (a base case where there is no intersection, 0 (where each bin has at least one element)), and so on to \( L = \lceil \log_2 D \rceil \), where all of \( X \) is contained in a single bin
+- Given two images with descriptors \( X, Y \subset \mathbb{R}^d \), their **pyramid match** is:
+
+\[ K_\Delta (X, Y) = \gamma(X) \gamma(Y) \sum_{i=0}^{L} \frac{1}{2^i} \left( \underbrace{\kappa_{HI}(X_i, Y_i)}_{\text{Matches at this level}} - \underbrace{\kappa_{HI}(X_{i-1}, Y_{i-1})}_{\text{Matches at previous level}} \right) \]
+
+\[ = \gamma(X) \gamma(Y) \left( \frac{1}{2^L} \kappa_{HI}(X_L, Y_L) + \sum_{i=0}^{L-1} \frac{1}{2^{i+1}} \kappa_{HI}(X_i, Y_i) \right) \]
+
+where \( \gamma(X) \) serves for normalization
+
+*Vineeth N B (IIT-H) §3.5 Pyramid Matching*
+
+![IITH Logo](https://example.com/logo.png)
+
+8 / 21
+```
+
+# DL4CV_Week03_Part05.pdf - Page 16
+
+# Pyramid Match Kernel
+
+- Given a set \( X = \{ x_1, \ldots, x_n \} \subset \mathbb{R}^d \), where distances of elements range in \([1, D]\)
+- Let \( X_i \) be a histogram of \( X \) in \(\mathbb{R}^d\) on a regular grid of side length \( 2^i \)
+  - \( i \) ranges from -1 (a base case where there is no intersection, 0 (where each bin has at least one element)), and so on to \( L = \lfloor \log_2 D \rfloor \), where all of \( X \) is contained in a single bin
+- Given two images with descriptors \( X, Y \subset \mathbb{R}^d \), their **pyramid match** is:
+
+\[ K_{\Delta}(X, Y) = \gamma(X) \gamma(Y) \sum_{i=0}^{L} \frac{1}{2^i} \left( \underbrace{\kappa_{HI}(X_i, Y_i)}_{\text{Matches at this level}} - \underbrace{\kappa_{HI}(X_{i-1}, Y_{i-1})}_{\text{Matches at previous level}} \right) \]
+
+\[ = \gamma(X) \gamma(Y) \left( \frac{1}{2^L} \kappa_{HI}(X_L, Y_L) + \sum_{i=0}^{L-1} \frac{1}{2^i} \kappa_{HI}(X_i, Y_i) \right) \]
+
+where \( \gamma(X) \) serves for normalization
+
+![HTML5 UP Logo](https://example.com/logo.png)
+
+*Counts number of new pairs matched*
+
+Vineeth N B (IIIT-H) §3.5 Pyramid Matching 8 / 21
+
+# DL4CV_Week03_Part05.pdf - Page 17
+
+```markdown
+# PMK is a Positive Definite Kernel
+
+- $K_\Delta$ can be written as a weighted sum of $\kappa_{HI}$ terms, with non-negative coefficients
+- $\kappa_{HI}$ can be written as a sum of $\min$ terms
+- $\min$ can be written as a dot product:
+
+  \[
+  \begin{array}{c|c}
+    x & \phi(x) \\
+    \hline
+    3 & 1 1 1 0 0 0 0 \\
+    5 & 1 1 1 1 1 0 0 \\
+    \hline
+    \min(x, y) & 3 1 1 1 1 0 0 0 \\
+  \end{array}
+  \]
+
+- Therefore, so can $K_\Delta$
+
+*Vineeth N B (IIT-H) §3.5 Pyramid Matching 9 / 21*
+```
+
+# DL4CV_Week03_Part05.pdf - Page 18
+
+```markdown
+# PMK as an Embedding<sup>4</sup>
+
+- There is an explicit embedding for $\kappa_{Ht}$, therefore also for $K_\Delta$. What could it be?
+
+![NPTEL](https://example.com/image.png)
+
+<sup>4</sup>Indyk and Thaper, Fast Image Retrieval via Embeddings, WSCTV. 2003
+
+Vineeth N B (IIT-H) §3.5 Pyramid Matching
+
+---
+
+[Return to Slide 9](https://example.com/slide9)
+[Go to Slide 11](https://example.com/slide11)
+```
+
+# DL4CV_Week03_Part05.pdf - Page 19
+
+```markdown
+# PMK as an Embedding<sup>4</sup>
+
+- There is an explicit embedding for \(\kappa_{HI}\), therefore also for \(K_{\Delta}\). What could it be?
+
+- If \(|X| \leq |Y|\) and \(\pi : X \rightarrow Y\) is one-to-one, then \(K_{\Delta}(X, Y)\) approximates the optimal pairwise matching:
+
+    \[
+    \max_{\pi} \sum_{x \in X} \|x - \pi(x)\|_{1}^{-1}
+    \]
+
+<sup>4</sup> Indyk and Thaper, Fast Image Retrieval via Embeddings, WSCTV. 2003
+
+Vineeth N B (IIT-H)
+
+§3.5 Pyramid Matching
+
+![NPTEL Logo](https://example.com/logo.png)
+
+10 / 21
+```
+
+# DL4CV_Week03_Part05.pdf - Page 20
+
+```markdown
+# PMK as an Embedding<sup>4</sup>
+
+- There is an explicit embedding for $\kappa_{HI}$, therefore also for $K_\Delta$. What could it be?
+
+- If $|X| \leq |Y|$ and $\pi : X \rightarrow Y$ is one-to-one, then $K_\Delta(X, Y)$ approximates the optimal pairwise matching:
+
+  \[
+  \max_{\pi} \sum_{x \in X} \| x - \pi(x) \|_1^{-1}
+  \]
+
+  ![Optimal Pairwise Matching Diagram](image-url)
+
+- This is similar to the **Earth mover's distance**:
+
+  \[
+  \min_{\pi} \sum_{x \in X} \| x - \pi(x) \|_1
+  \]
+
+  ![Earth Mover's Distance Diagram](image-url)
+
+- But PMK is a similarity measure; it allows partial matching and does not penalize clutter, except for the normalization
+
+<sup>4</sup> Indyk and Thaper, Fast Image Retrieval via Embeddings, WSCTV. 2003
+
+Vineeth N B (IIT-H) §3.5 Pyramid Matching
+
+---
+
+10 / 21
+```
+
+# DL4CV_Week03_Part05.pdf - Page 21
+
+```markdown
+# PMK and Vocabulary Tree<sup>5</sup>
+
+![Vocabulary Tree Comparison](image_url)
+
+- **Uniform bins**
+- **Vocabulary-guided bins**
+
+- Replace regular grid with hierarchical vocabulary cells
+- Compared to vocabulary tree, there is a principle in assigning cell weights
+- Still, its approximation quality can suffer at high dimensions
+
+<sup>5</sup> Grauman and Darrell, Approximate Correspondences in High Dimensions, NeurIPS 2007
+
+Vineeth N B (IIT-H)
+
+---
+
+## 3.5 Pyramid Matching
+
+```
+
+# DL4CV_Week03_Part05.pdf - Page 22
+
+```markdown
+# PMK and Spatial Matching<sup>6</sup>
+
+![PMK and Spatial Matching](image_url)
+
+- Same idea, applied to image 2-D coordinate space for spatial matching
+- Matching cost is only based on point coordinates; No appearance
+
+<sup>6</sup> Grauman and Darrell, Fast Contour Matching Using Approximate Earth Mover’s Distance, CVPR 2004
+
+Vineeth N B (IIT-H) §3.5 Pyramid Matching
+
+---
+
+**References:**
+- Grauman and Darrell, Fast Contour Matching Using Approximate Earth Mover’s Distance, CVPR 2004
+
+---
+
+## Visual Representation
+
+![Visual Example Image](image_url)
+
+### Steps:
+1. **Initial Representation:**
+   - A blue point cloud representing the initial 2-D coordinate space.
+
+2. **Dividing into Subspaces:**
+   - The initial representation is divided into smaller subspaces.
+
+3. **Pyramid Matching:**
+   - The process of matching involves progressively dividing the space and comparing the point coordinates in smaller subspaces.
+   - The matching cost is calculated solely based on the coordinates of the points.
+
+## Conclusion
+
+The method described involves a hierarchical approach to spatial matching using the pyramid matching technique. The primary focus is on the coordinates of the points, and no appearance-based matching is considered.
+
+---
+
+**References:**
+- Vineeth N B (IIT-H) §3.5 Pyramid Matching
+
+```
+
+**Note:** Replace `image_url` with the actual image URLs or file paths when embedding images in the final markdown document.
+
+# DL4CV_Week03_Part05.pdf - Page 23
+
+```markdown
+# Spatial Pyramid Matching (SPM)[^7]
+
+![Spatial Pyramid Matching Diagram](image-url)
+
+## Diagram Explanation
+
+- **level 0**
+  - Displays the initial set of feature coordinates for images X and Y.
+  - Descriptors are assigned to visual words.
+  - Example images show how descriptors are positioned.
+
+- **level 1**
+  - Shows a downsampled version of the initial feature coordinates.
+  - Each descriptor is represented in a grid format.
+  - Example images illustrate the descriptors at this level.
+
+- **level 2**
+  - Represents a further downsampled version of the feature coordinates.
+  - The descriptors are shown in a finer grid.
+  - Example images are provided for visual reference.
+
+## Mathematical Formulation
+
+If $X^{(i)}$ and $Y^{(i)}$ are the feature coordinates of images X and Y with descriptors assigned to visual word $j$,
+
+\[ K_{SP}(X, Y) = \sum_{j=1}^{k} K_{\Delta}(X^{(i)}, Y^{(i)}) \]
+
+## References
+
+[^7]: Lazebnik et al, Beyond Bags of Features: Spatial Pyramid Matching for Recognizing Natural Scene Categories, CVPR 2006
+
+Vineeth N B (IIT-H) §3.5 Pyramid Matching
+```
+
+**Note**: Replace `image-url` with the actual URL of the image if available, or provide a placeholder if the image cannot be captured directly.
+
+# DL4CV_Week03_Part05.pdf - Page 24
+
+```markdown
+# Spatial Pyramid Matching (SPM)
+
+## Levels of Pyramid Matching
+
+![Spatial Pyramid Matching Diagram](image-url)
+
+- **level 0**
+  - ![Level 0 Diagram](image-url)
+  - Scaled by 1/4
+- **level 1**
+  - ![Level 1 Diagram](image-url)
+  - Scaled by 1/4
+- **level 2**
+  - ![Level 2 Diagram](image-url)
+  - Scaled by 1/2
+
+### Key Points
+
+- Coupled with BoW, it is a set of joint appearance-geometry histograms
+- Robust to deformation but not invariant to transformations; Applied for global scene classification
+
+### References
+
+[7] Lazebnik et al, "Beyond Bags of Features: Spatial Pyramid Matching for Recognizing Natural Scene Categories," CVPR 2006.
+
+---
+
+**Vineeth N B (IIT-H)**
+
+**§3.5 Pyramid Matching**
+
+**13 / 21**
+```
+
+# DL4CV_Week03_Part05.pdf - Page 25
+
+```markdown
+# Hough Pyramid Matching (HPM)
+
+![Hough Pyramid Matching](image_url)
+
+## Fast Pyramid Matching
+
+---
+
+### References
+
+- Tolias and Avrithis, [Speeded-up, relaxed spatial matching](https://example.com/speed-up-relaxed-spatial-matching.pdf), ICCV 2011
+- Vineeth N B, [Pyramid Matching](https://example.com/pyramid-matching.pdf), §3.5
+
+---
+
+### Page Number
+
+14 / 21
+```
+If you have any specific sections or content that you would like to highlight or extract in more detail, please let me know!
+
+# DL4CV_Week03_Part05.pdf - Page 26
+
+```markdown
+# Hough Pyramid Matching (HPM)
+
+![Hough Pyramid Matching](https://via.placeholder.com/150)
+
+- Work with a single set of correspondences instead of two sets of features
+- Determine a transformation hypothesis by a pair of features and then use histograms to collect votes in the transformation space
+
+---
+
+**References:**
+
+- Tolias and Avrithis, Speeded-up, relaxed spatial matching, ICCV 2011
+- Vineeth N B (IIT-H) §3.5 Pyramid Matching
+
+---
+
+14 / 21
+```
+
+# DL4CV_Week03_Part05.pdf - Page 27
+
+```markdown
+# Hough Pyramid Matching
+
+- **A local feature** \(p\) in image \(P\) has position \(\mathbf{t}(p)\), scale \(s(p)\) and orientation \(\theta(p)\) given by matrix \(R(p) \in \mathbb{R}^{2 \times 2}\):
+
+  \[
+  F(p) = \begin{pmatrix}
+  s(p)R(p) & \mathbf{t}(p) \\
+  0^\top & 1
+  \end{pmatrix}
+  \]
+
+![NPTEL](https://example.com/logo.png)
+
+Vineeth N B (IIT-H) §3.5 Pyramid Matching 15 / 21
+```
+
+# DL4CV_Week03_Part05.pdf - Page 28
+
+```markdown
+# Hough Pyramid Matching
+
+- **A local feature** $p$ in image $P$ has position $\mathbf{t}(p)$, scale $s(p)$ and orientation $\theta(p)$ given by matrix $R(p) \in \mathbb{R}^{2 \times 2}$:
+
+  \[
+  F(p) = \begin{pmatrix}
+  s(p) R(p) & \mathbf{t}(p) \\
+  \mathbf{0}^\top & 1
+  \end{pmatrix}
+  \]
+
+- **A correspondence** $c = (p, q)$ is a pair of features $p \in P$, $q \in Q$ of two images $P, Q$ and determines relative similarity transformation from $p$ to $q$:
+
+  \[
+  F(c) = F(q) F(p)^{-1} = \begin{pmatrix}
+  s(c) R(c) & \mathbf{t}(c) \\
+  \mathbf{0}^\top & 1
+  \end{pmatrix}
+  \]
+
+  with translation $\mathbf{t}(c) = \mathbf{t}(q) - s(c) R(c) \mathbf{t}(p)$, relative scale $s(c) = s(q)/s(p)$ and rotation $R(c) = R(q) R(p)^{-1}$ or $\theta(c) = \theta(q) - \theta(p)$
+
+![Vineeth N B (IIT-H)](https://example.com/image.jpg) §3.5 Pyramid Matching 15 / 21
+```
+
+# DL4CV_Week03_Part05.pdf - Page 29
+
+```markdown
+# Hough Pyramid Matching
+
+- **The 4-DoF relative transformation represented by 4-D vector:**
+
+  \[
+  f(c) = (t(c), s(c), \theta(c))
+  \]
+
+- **To enforce one-to-one mapping, two correspondences \( c = (p, q) \) and \( c' = (p', q') \) are said to be conflicting if they refer to the same feature on either image, i.e., \( p = p' \) or \( q = q' \).**
+
+*Image placeholder (if applicable):* ![Image](image_url)
+
+_Vineeth N B (IIT-H)_
+
+§3.5 Pyramid Matching
+
+_Page 16 / 21_
+```
+
+# DL4CV_Week03_Part05.pdf - Page 30
+
+```markdown
+# Hough Pyramid Matching
+
+## Correspondences and Similarity Scores
+
+### Correspondences
+
+```plaintext
+c1  c2  c3  c4  c5
+c6  c7  c8  c9  c10
+```
+
+### Similarity Scores
+
+| p  | q  | similarity score              |
+|----|----|--------------------------------|
+| c1 | c1 | (1 + 1 + 1 + 1) * w(c1)         |
+| c2 | c2 | (1 + 1 + 1 + 1) * w(c2)         |
+| c3 | c3 | (1 + 1 + 1 + 1) * w(c3)         |
+| c4 | c4 | (1 + 1 + 1 + 1) * w(c4)         |
+| c5 | c5 | (1 + 1 + 1 + 1) * w(c5)         |
+| c6 | c6 | 0 * w(c6)                      |
+| c7 | c7 | 0 * w(c7)                      |
+| c8 | c8 | (1 + 0) * w(c8)                |
+| c9 | c9 | (0 + 0) * w(c9)                |
+```
+
+**Note**: Correspondence `c` weighted by `w(c)`, based e.g. on visual word.
+
+Vineeth N B (IIT-H) §3.5 Pyramid Matching
+
+---
+
+```plaintext
+17 / 21
+```
+
+# DL4CV_Week03_Part05.pdf - Page 31
+
+```markdown
+# Hough Pyramid Matching
+
+## Slide Content
+
+### Visual Explanation
+
+![Hough Pyramid Matching Diagram](image_url) 
+
+- **pyramid level I**
+
+|       |       |       |
+|-------|-------|-------|
+|       |       |       |
+|       |       |       |
+|       |       |       |
+
+- **pyramid level II**
+
+|    |    |    |    |    |    |
+|----|----|----|----|----|----|
+|   |   |   |   |   |   |
+|   |   |   |   |   |   |
+|   |   |   |   |   |   |
+|   |   |   |   |   |   |
+
+### Correspondence Weighting and Similarity Scoring
+
+|  \(\rho\) |  \(q\)  |  similarity score  |
+|----------|---------|---------------------|
+|  \(c_1\) |  \(\circ\)  | \( (\beta + \gamma + \delta) w(c_1) \) |
+|  \(c_2\) |  \(\circ\)  | \( (\beta + \gamma + \delta) w(c_2) \) |
+|  \(c_3\) |  \(\circ\)  | \( (\beta + \gamma + \delta) w(c_3) \) |
+|  \(c_4\) |  \(\circ\)  | \( (\beta + \gamma + \delta) w(c_4) \) |
+|  \(c_5\) |  \(\circ\)  | \( (\beta + \gamma + \delta) w(c_5) \) |
+|  \(c_6\) |  \(\circ\)  | \( 0 \) |
+|  \(c_7\) |  \(\circ\)  | \( 0 \) |
+|  \(c_8\) |  \(\times\)  | \( (\gamma) w(c_8) \) |
+|  \(c_9\) |  \(\circ\)  | \( (\delta) w(c_9) \) |
+
+### Notes
+
+- Correspondence \( c \) weighted by \( w(c) \), based e.g. on visual word
+- Conflicting correspondences in same bin are erased
+
+### Slide Metadata
+
+- **Vineeth N B (IIT-H)**
+- **§3.5 Pyramid Matching**
+- **17 / 21**
+```
+
+This markdown format maintains the structure and content of the original scientific slide while ensuring accuracy and proper formatting for scientific notation and symbols.
+
+# DL4CV_Week03_Part05.pdf - Page 32
+
+```markdown
+# Hough Pyramid Matching
+
+![Hough Pyramid Matching](image_url)
+
+- **Correspondence** $c$ weighted by $w(c)$, based e.g. on visual word
+- Conflicting correspondences in same bin are erased
+- In bin $b$ with $n_b$ correspondences, each correspondence groups with $[n_b - 1]$+ others
+- Level 0 Weight 1
+
+| p | q | similarity score |
+|---|---|---|
+| $c_1$ | $c_2$ | $(2~~~2~~~)$ $w(c_1)$ |
+| $c_2$ | $c_4$ | $(2~~~2~~~)$ $w(c_2)$ |
+| $c_3$ | $c_4$ | $(2~~~2~~~)$ $w(c_3)$ |
+| $c_4$ | $c_5$ | $(1~~~1~~~)$ $w(c_4)$ |
+| $c_5$ | $c_6$ | $(1~~~1~~~)$ $w(c_5)$ |
+| $c_6$ | $c_7$ | $0$ |
+| $c_7$ | $c_8$ | $0$ |
+| $c_8$ | $c_9$ | $(~~~)$ $w(c_8)$ |
+| $c_9$ | $c_9$ | $(~~~)$ $w(c_9)$ |
+
+![Diagram](diagram_url)
+
+**Vineeth N B (IIT-H)**
+**§3.5 Pyramid Matching**
+17 / 21
+```
+
+# DL4CV_Week03_Part05.pdf - Page 33
+
+```markdown
+# Hough Pyramid Matching
+
+![Hough Pyramid Matching Image](link-to-image)
+
+- **Correspondence** `c` weighted by `w(c)`, based e.g. on visual word
+- **Conflicting correspondences** in same bin are erased
+- In bin `b` with `n_b` correspondences, each correspondence groups with `[n_b - 1]_+` others
+- **Level 1 Weight** `1/2`
+
+Vineeth N B (IIT-H)
+
+## Pyramid Matching
+
+|          | p           | q           | similarity score            |
+|----------|-------------|-------------|-----------------------------|
+| `c1`     | ![c1 image](link-to-image) | `(2 + 1/2)` | `2 * w(c1)`               |
+| `c2`     | ![c2 image](link-to-image) | `(2 + 3/2)` | `2 * w(c2)`               |
+| `c3`     | ![c3 image](link-to-image) | `(2 + 4/2)` | `2 * w(c3)`               |
+| `c4`     | ![c4 image](link-to-image) | `(1 + 3/2)` | `2 * w(c4)`               |
+| `c5`     | ![c5 image](link-to-image) | `(1 + 1/2)` | `2 * w(c5)`               |
+| `c6`     | ![c6 image](link-to-image) | `0`          | `0`                       |
+| `c7`     | ![c7 image](link-to-image) | `0`          | `0`                       |
+| `c8`     | ![c8 image](link-to-image) | `0`          | `0`                       |
+| `c9`     | ![c9 image](link-to-image) | `0`          | `0`                       |
+
+---
+
+Vineeth N B (IIT-H) 
+
+## Pyramid Matching
+
+![Pyramid Matching Image](link-to-image)
+
+- **Correspondence** `c` weighted by `w(c)`, based e.g. on visual word
+- **Conflicting correspondences** in same bin are erased
+- In bin `b` with `n_b` correspondences, each correspondence groups with `[n_b - 1]_+` others
+- **Level 1 Weight** `1/2`
+```
+
+# DL4CV_Week03_Part05.pdf - Page 34
+
+```markdown
+# Hough Pyramid Matching
+
+![Hough Pyramid Matching Diagram](image-url)
+
+## Correspondence Weighting and Grouping
+
+- **Correspondence `c` weighted by `w(c)`, based e.g. on visual word**
+- **Conflicting correspondences in same bin are erased**
+- In bin `b` with `n_b` correspondences, each correspondence groups with `[n_b - 1]_+` others
+- **Level 2 Weight** `1/4`
+
+| `p`   | `q`   | similarity score                     |
+|-------|-------|--------------------------------------|
+| `c1`  | `c1`  | `(2 + 1/2 + 1/2)w(c1)`               |
+| `c2`  | `c2`  | `(2 + 1/2 + 1/2)w(c2)`               |
+| `c3`  | `c3`  | `(2 + 1/2 + 1/2)w(c3)`               |
+| `c4`  | `c4`  | `(1 + 1/3 + 1/2)w(c4)`               |
+| `c5`  | `c5`  | `(1 + 1/3 + 1/2)w(c5)`               |
+| `c6`  |       | `0`                                  |
+|       | `c7`  | `0`                                  |
+|       | `c8`  | `(3/6)w(c8)`                         |
+|       | `c9`  | `(3/6)w(c9)`                         |
+
+![Vineeth N B (IIT-H)](image-url)
+
+## §3.5 Pyramid Matching
+
+*Vineeth N B (IIT-H) 17 / 21*
+```
+
+# DL4CV_Week03_Part05.pdf - Page 35
+
+```markdown
+# Hough Pyramid Matching
+
+![Hough Pyramid Matching Diagram](image_url)
+
+## Mode Seeking
+We are looking for regions where density is maximized in transformation space
+
+Vineeth N B (IIT-H) §3.5 Pyramid Matching
+
+---
+
+### Hough Pyramid Matching
+
+![Hough Pyramid Matching Diagram](image_url)
+
+- **Assignment**: ![Assignment](image_url)
+- **Crossed**: ![Crossed](image_url)
+
+#### Mode Seeking
+We are looking for regions where density is maximized in transformation space
+
+Vineeth N B (IIT-H) §3.5 Pyramid Matching
+
+---
+
+## Diagrams and Visualization
+
+### Horizontal Translation vs. Vertical Translation
+
+```markdown
+| Horizontal Translation, x | Vertical Translation, y |
+|--------------------------|-------------------------|
+| ![Translation Diagram](image_url) | ![Translation Diagram](image_url) |
+```
+
+### Log Scale Bar Sigma
+
+```markdown
+| Vertical Scale, barsigma | Log Scale, barsigma |
+|-------------------------|-------------------|
+| ![Log Scale Diagram](image_url) | ![Log Scale Diagram](image_url) |
+```
+
+#### Key Points
+- **Assignment**: ![Assignment](image_url)
+- **Crossed**: ![Crossed](image_url)
+
+#### Mode Seeking
+We are looking for regions where density is maximized in transformation space
+
+Vineeth N B (IIT-H) §3.5 Pyramid Matching
+
+---
+
+### Additional Information
+
+```markdown
+| Horizontal Translation, x | Vertical Translation, y |
+|--------------------------|-------------------------|
+| ![Horizontal Translation Diagram](image_url) | ![Vertical Translation Diagram](image_url) |
+```
+
+#### Mode Seeking
+We are looking for regions where density is maximized in transformation space
+
+Vineeth N B (IIT-H) §3.5 Pyramid Matching
+
+---
+
+```
+
+# DL4CV_Week03_Part05.pdf - Page 36
+
+```markdown
+# Hough Pyramid Matching
+
+- **Linear in number of correspondences; no need to count inliers**
+- **Robust to deformations and multiple matching surfaces, invariant to transformations**
+- **Only applies to same instance matching**
+
+*Image placeholder: ![NPTEL Logo](image_url)*
+
+**Vineeth N B (IIT-H)**
+
+**Section 3.5 Pyramid Matching**
+
+*Page 19 / 21*
+```
+
+# DL4CV_Week03_Part05.pdf - Page 37
+
+```markdown
+# Homework
+
+## Readings
+
+- Chapter 16.1.4, Forsyth and Ponce, *Computer Vision: A Modern Approach* (2nd ed.)
+
+## Other Resources
+
+- [Pyramid Match Kernel project page](https://example.com)
+
+---
+
+*Vineeth N B (IIT-H) §3.5 Pyramid Matching*
+
+---
+
+*Date: 20 / 21*
+```
+
+# DL4CV_Week03_Part05.pdf - Page 38
+
+```markdown
+# References
+
+- Michael J. Swain and Dana H. Ballard. **"Color Indexing"**. In: *Int. J. Comput. Vision* 7.1 (Nov. 1991), 11–32.
+- Piotr Indyk and Nitin Thaper. **"Fast Image Retrieval via Embeddings"**. In: *WSCTV*. 2003.
+- Kristen Grauman and Trevor Darrell. **"Fast Contour Matching Using Approximate Earth Mover's Distance"**. In: *IEEE CVPR*. Oct. 2004, pp. 1–220.
+- K. Grauman and T. Darrell. **"The Pyramid Match Kernel: Discriminative Classification with Sets of Image Features"**. In: *IEEE ICCV*. Nov. 2005, Vol 2, pp. 1458–1465.
+- Svetlana Lazebnik, Cordelia Schmid, and J. Ponce. **"Beyond Bags of Features: Spatial Pyramid Matching for Recognizing Natural Scene Categories"**. In: *IEEE CVPR Vol. 2*. Feb. 2006, pp. 2169 – 2178.
+- Kristen Grauman and Trevor Darrell. **"Approximate Correspondences in High Dimensions"**. In: *Neural Information Processing Systems*. 2007.
+- Giorgos Tolias and Yannis Avrithis. **"Speeded-up, relaxed spatial matching"**. In: *IEEE ICCV*. 2011, pp. 1653–1660.
+- David Forsyth and Jean Ponce. *Computer Vision: A Modern Approach*. 2 edition. Boston: Pearson Education India, 2015.
+
+![Vinod N B (IIT-H)](https://via.placeholder.com/150)
+```
+

@@ -1,0 +1,639 @@
+# DL4CV_Week12.2 CLIP The Anchoring Inflection Point.pdf - Page 1
+
+```markdown
+# Deep Learning for Computer Vision
+
+# CLIP: The Anchoring Inflection Point
+
+**Vineeth N Balasubramanian**
+
+**Department of Computer Science and Engineering**
+**Indian Institute of Technology, Hyderabad**
+
+![IIT Hyderabad Logo](https://example.com/logo.png)
+
+---
+
+**Vineeth N B (IIT-H)**
+## §14.2 CLIP: The Anchoring Inflection Point
+
+---
+
+1 / 17
+```
+
+# DL4CV_Week12.2 CLIP The Anchoring Inflection Point.pdf - Page 2
+
+```markdown
+# Paper
+
+## Learning Transferable Visual Models from Natural Language Supervision (ICML '21)
+
+**Authors:**
+- Alec Radford
+- JongWook Kim
+- Chris Hallacy
+- Aditya Ramesh
+- Gabriel Goh
+- Sandhini Agarwal
+- Girish Sastry
+- Amanda Askell
+- Pamela Mishkin
+- Jack Clark
+- Gretchen Krueger
+- Iya Sutskever
+
+---
+
+**Presented by:**
+- Vineeth N B (IIIT-H)
+
+**Event:**
+- §14.2 CLIP: The Anchoring Inflection Point
+
+---
+
+(Slide number: 2 / 17)
+```
+
+# DL4CV_Week12.2 CLIP The Anchoring Inflection Point.pdf - Page 3
+
+ the original text.
+
+### Contrastive Language Image Pre-training (CLIP)
+
+- **Mechanism for natural language supervision**
+- **Pair an image with it’s caption using contrastive learning**
+- **Beats fully supervised learning baseline on many datasets.**
+- **Can be used as a zero-shot classifier.**
+
+---
+
+*Vineeth N B (IIT-H)*
+
+*§14.2 CLIP: The Anchoring Inflection Point*
+
+*3 / 17*
+
+# DL4CV_Week12.2 CLIP The Anchoring Inflection Point.pdf - Page 4
+
+```markdown
+# What is Contrastive Learning?
+
+![Contrastive Learning Diagram](https://via.placeholder.com/150)
+
+- **Negative**
+  - Anchor
+  - Positive
+
+```markdown
+## Learning
+
+  - Anchor
+    - Positive
+    - Negative
+
+![Contrastive Learning Diagram](https://via.placeholder.com/150)
+
+Vineeth N B (IIT-H)
+
+## Similar (image, text) pair
+
+### Input Image
+![Dog Image](https://via.placeholder.com/150)
+- **Image representation**
+
+  ```math
+  \vec{H_i}
+  ```
+
+### Input Text
+![Text Description](https://via.placeholder.com/150)
+- **Text representation**
+
+  ```math
+  \vec{H_i}
+  ```
+
+```math
+  \text{maximize} \left(  \frac{\vec{H_i} \cdot \vec{H_i}}{|\vec{H_i}| \cdot |\vec{H_i}|} \right)
+```
+
+## Dissimilar (image, text) pair
+
+### Input Image
+![Plane Image](https://via.placeholder.com/150)
+- **Image representation**
+
+  ```math
+  \vec{H_i}
+  ```
+
+### Input Text
+![Text Description](https://via.placeholder.com/150)
+- **Text representation**
+
+  ```math
+  \vec{H_i}
+  ```
+
+```math
+  \text{minimize} \left(  \frac{\vec{H_i} \cdot \vec{H_i}}{|\vec{H_i}| \cdot |\vec{H_i}|} \right)
+```
+
+---
+
+Vineeth N B (IIT-H)
+
+§14.2 CLIP: The Anchoring Inflection Point
+
+4 / 17
+```
+
+# DL4CV_Week12.2 CLIP The Anchoring Inflection Point.pdf - Page 5
+
+ captured.
+
+```markdown
+# CLIP: Training
+
+![CLIP Training Diagram](image-url)
+
+**Vineeth N B (IIT-H)**
+
+## CLIP: Training
+
+### Inputs
+
+- **Text Encoder**
+  - Input: Text (e.g., "pepper the anime pup")
+  - Output: Embeddings for each token (T1, T2, T3, ..., TN)
+
+- **Image Encoder**
+  - Input: Image (e.g., multiple images of a cat)
+  - Output: Embeddings for each image (I1, I2, I3, ..., IN)
+
+### Cross-Attention Mechanism
+
+- **Attention Weights**
+  - Token embeddings and image embeddings interact through cross-attention weights.
+
+### Outputs
+
+- **Loss Functions**
+
+  - **One-Hot Encoded Label Vector:**
+    - $m_i$: one-hot encoded label vector for the $i^{th}$ image sample.
+
+  - **Cosine Similarities Vector:**
+    - $y_i^m$: cosine similarities vector for the $i^{th}$ image sample.
+    - $t_i$: one-hot encoded label for the $i^{th}$ text sample.
+    - $y_i^t$: cosine similarities vector for the $i^{th}$ text sample.
+
+  - **Cross Entropy Loss:**
+    - $\phi$: Cross entropy loss
+
+  - **Loss Functions:**
+    - Image loss: $L_m = \frac{\sum_{i=1}^{N} \phi(y_i^m, m_i)}{N}$
+    - Text loss: $L_t = \frac{\sum_{i=1}^{N} \phi(y_i^t, t_i)}{N}$
+
+  - **Total Loss:**
+    - $L = \frac{L_m + L_t}{2}$
+
+### Equation
+
+```math
+L = \frac{L_m + L_t}{2}
+```
+
+*Section 14.2 CLIP: The Anchoring Inflection Point*
+
+*Slide 5/17*
+```
+
+# DL4CV_Week12.2 CLIP The Anchoring Inflection Point.pdf - Page 6
+
+:
+
+```markdown
+# CLIP: Pseudo Code
+
+```pseudo
+# image_encoder - ResNet or Vision Transformer
+# text_encoder - CBOW or Text Transformer
+# I[n, h, w, c] - minibatch of aligned images
+# T[n, l] - minibatch of aligned texts
+# W_ild_i, d_e - learned proj of image to embed
+# W_ild_t, d_e - learned proj of text to embed
+# t - learned temperature parameter
+
+# extract feature representations of each modality
+I_f = image_encoder(I) [n, d_i]
+T_f = text_encoder(T) [n, d_t]
+
+# joint multimodal embedding [n, d_e]
+I_e = I2_normalize(np.dot(I_f, W_i), axis=1)
+T_e = I2_normalize(np.dot(T_f, W_t), axis=1)
+
+# scaled pairwise cosine similarities [n, n]
+logits = np.dot(I_e, T_e.T) * np.exp(t)
+
+# symmetric loss function
+labels = np.arange(n)
+loss_i = cross_entropy_loss(logits, labels, axis=0)
+loss_t = cross_entropy_loss(logits, labels, axis=1)
+loss = (loss_i + loss_t) / 2
+```
+Vineeth N B (IIT-H) $14.2 CLIP: The Anchoring Inflection Point
+```
+
+# DL4CV_Week12.2 CLIP The Anchoring Inflection Point.pdf - Page 7
+
+```markdown
+# Supervised Learning
+
+![Cat Image](image-url)
+
+- **convolution**
+- **pooling**
+- **fully-connected**
+
+**Model Outputs:**
+- Cat: 0.7
+- Dog: 0.1
+- Tiger: 0.02
+
+**Key Processes:**
+- We need labeled data to train the model
+- There is a specific training phase involved
+- Test the model on held-out val/test sets
+
+*Vineeth N B (IIT-H)*
+
+*§14.2 CLIP: The Anchoring Inflection Point*
+
+*7 / 17*
+```
+
+# DL4CV_Week12.2 CLIP The Anchoring Inflection Point.pdf - Page 8
+
+ it carefully to maintain the fidelity of the original scientific work.
+
+```markdown
+# Zero-Shot Learning
+
+![Diagram of Zero-Shot Learning](image-url)
+
+## Description
+
+- **Data**: Data can be labeled/unlabeled
+- **Model Training**: Model is only trained on seen class labeled data
+- **Model Evaluation**: Model is evaluated on unseen classes
+
+## Limitations
+
+- **Image Classification Models**: Limited in classification space with fixed label space
+- **Model Generalization**: Models also lack generalization
+
+## References
+
+1. Socher, Richard et al. "Zero-Shot Learning Through Cross-Modal Transfer." *Neural Information Processing Systems* (2013).
+
+Vineeth N B (IIT-H) §14.2 CLIP: The Anchoring Inflection Point
+
+Date: 8 / 17
+```
+
+# DL4CV_Week12.2 CLIP The Anchoring Inflection Point.pdf - Page 9
+
+ the provided image and the markdown format output.
+
+---
+
+# CLIP for Zero-Shot Classification
+
+## Create dataset classifier from label text
+
+```plaintext
+plane
+car
+dog
+...
+bird
+```
+
+A photo of a {object...}
+
+```plaintext
+Text Encoder
+```
+
+## Use for zero-shot prediction
+
+```plaintext
+Image Encoder
+```
+
+```plaintext
+A photo of a dog.
+```
+
+![CLIP for Zero-Shot Classification](attachment:image.png)
+
+Vineeth N B (IIT-H) §14.2 CLIP: The Anchoring Inflection Point
+
+# DL4CV_Week12.2 CLIP The Anchoring Inflection Point.pdf - Page 10
+
+
+
+```markdown
+# CLIP Training dataset
+
+- Existing crowd-labeled datasets are MS-COCO, Visual Genome and YFCC100M
+- MS-COCO and Visual Genome is relatively small with 100,000 images each.
+- YFCC100M is an alternate dataset with relatively sparse metadata. Filtering images to retain the ones with natural description titles results in 15M which is same size as that of ImageNet.
+- To address these concerns, WebImageText(WIT) is introduced which consists of 400M (image,text) pairs curated from various publicly available sources on the internet.
+```
+
+# DL4CV_Week12.2 CLIP The Anchoring Inflection Point.pdf - Page 11
+
+```markdown
+# Other Implementation details
+
+## Architectures
+
+- 5 Resnets - ResNet-50, ResNet-101 and EfficientNet-Style model scaling upto 4x, 16x and 64x of ResNet-50
+- 3 ViTs - ViT-B/16, ViT-B/32, ViT-L/14
+
+## Details
+
+- Models are trained for 32 epochs
+- Adam optimizer
+- Temperature scaling factor of 0.007
+- Batch size of 32,768
+
+## Hardware and Training time
+
+- For the largest ResNet, RN50x64 it took 18 days on 592 V100s
+- For the largest ViT, ViT-L/14 it took 12 days on 256 V100s
+
+*Vineeth N B (IIT-H), §14.2 CLIP:The Anchoring Inflection Point*
+```
+
+# DL4CV_Week12.2 CLIP The Anchoring Inflection Point.pdf - Page 12
+
+```markdown
+# Experiments: CLIP's Zero Shot Transfer
+
+**Figure 1: 27 Evaluation Dataset details. The first 12 are referred to as Kornblith et al.’s datasets.**
+
+## Dataset Details
+
+| Dataset         | Classes | Train size | Test size | Evaluation metric    |
+|-----------------|---------|------------|-----------|----------------------|
+| Food-101        | 102     | 75,750     | 25,250    | accuracy            |
+| Caltech-101     | 102     | 6,667      | 2,333     | accuracy            |
+| CIFAR-100       | 100     | 50,000     | 10,000    | accuracy            |
+| Birdsnap        | 500     | 42,283     | 2,149     | accuracy            |
+| SUN397          | 397     | 19,850     | 1,985     | accuracy            |
+| Stanford Cars   | 196     | 7,348      | 8,041     | accuracy            |
+| FGVC Aircraft   | 100     | 6,667      | 3,333     | mean per class      |
+| Pascal VOC'07 Classification | 20 | 5,011 | 4,955 | 11-point mAP        |
+| CIFAR-10        | 10      | 50,000     | 10,000    | accuracy            |
+| Oxford IIIT Pets| 37      | 3,669      | 3,669     | mean per class      |
+| Caltech-101     | 102     | 3,060      | 6,085     | mean-per-class      |
+| Oxford Flowers 102 | 102 | 2,040 | 6,449 | mean per class      |
+| MNIST           | 10      | 60,000     | 10,000    | accuracy            |
+| Omniglot        | 16      | 964        | 1,240     | accuracy            |
+| SVHN            | 10      | 73,257     | 26,032    | accuracy            |
+| STL-10          | 10      | 1000       | 3000      | accuracy            |
+| EuroSAT         | 10      | 10000      | 5000      | accuracy            |
+| Resisc45        | 4      | 6,230      | 820       | OA                  |
+| GTSRB           | 43      | 26,640     | 12,630    | accuracy            |
+| KITTI           | 4       | 6,770      | 1,311     | accuracy            |
+| iNaturalist211  | 211     | 145,801    | 21,782    | accuracy            |
+| PetsCamelyston  | 10      | 294,912    | 32,768    | accuracy            |
+| UCF101          | 101     | 9,537      | 1,794     | accuracy            |
+| Kinetics700     | 700     | 394,001    | 31,666    | mean(per 505)       |
+| KineticsSound   | 300     | 10,000     | 3,000     | mean(per 505)       |
+| Haftel Menem    | 2       | 8,500      | 500       | ROC AUC              |
+| Renduelo SS32    | 2       | 7,792      | 1,821     | accuracy            |
+| Imagenet         | 1000    | 1,281,167  | 10,000    | accuracy            |
+
+_Vineeth N B (IIT-H)_
+
+_$14.2 CLIP: The Anchoring Inflection Point_
+
+---
+
+Page 12 / 17
+```
+
+# DL4CV_Week12.2 CLIP The Anchoring Inflection Point.pdf - Page 13
+
+:
+
+```markdown
+# Experiments: CLIP's Zero-Shot Transfer
+
+![Zero-Shot CLIP vs. Linear Probe on ResNet50](image_url)
+
+- **StanfordCars**: +28.9
+- **Country211**: +23.2
+- **Food101**: +22.5
+- **Kinetics700**: +14.5
+- **SUN397**: +13.3
+- **UCF101**: +7.7
+- **HatefulMemes**: +6.7
+- **CIFAR10**: +5.9
+- **CIFAR100**: +3.1
+- **STL10**: +3.0
+- **FER2013**: +2.8
+- **Caltech101**: +2.8
+- **ImageNet**: +1.9
+- **OxfordPets**: +1.8
+- **PascalVOC2007**: +0.5
+- **Birdsnap**: -2.7
+- **MNIST**: -10.0
+- **SVHN**: -11.0
+- **iWildCam**: -12.1
+- **Resisc45**: -16.0
+- **Flowers102**: -16.1
+- **DTD**: -18.2
+- **ClevrCounts**: -18.7
+- **ClevrDist**: -19.4
+- **iNaturalist**: -19.5
+- **PatchCamelyon**: -19.5
+- **KITTI Distance**: -37.1
+- **EuroSAT**: -37.1
+
+## Observations
+
+- **Performance on Popular Datasets**: CLIP outperforms on a wide variety of popular datasets.
+- **Overall Performance**: Across a 27-dataset eval suite, a zero-shot CLIP classifier outperforms a fully supervised linear classifier fitted on ResNet-50 features on 16 datasets, including ImageNet.
+- **Complex Datasets**: Underperforms on complex datasets like Satellite images, Tumor images.
+- **Task Suitability**: Not suited for hyper-specified tasks, requires fine-tuning.
+
+_Reference: Vineeth N B. (IIT-H) §14.2 CLIP: The Anchoring Inflection Point_
+```
+
+(Replace `image_url` with the actual URL or path of the image if available.)
+
+This markdown format ensures that the text is structured accurately and scientifically, with visuals and special notations properly represented.
+
+# DL4CV_Week12.2 CLIP The Anchoring Inflection Point.pdf - Page 14
+
+```markdown
+# Experiments: CLIP’s Zero Shot Transfer
+
+## Image: Bar Chart of Number of Labeled Examples Per Class
+
+### Data Points from the Bar Chart
+
+- FER2013: 184
+- CIFAR10: 81
+- Food101: 64
+- OxfordPets: 37
+- Country211: 32
+- ImageNet: 16.0
+- PCam: 14.7
+- EuroSAT: 10.0
+- Kinetics700: 13.6
+- STL10: 12.7
+- Caltech101: 12.0
+- CIFAR100: 10.0
+- Flowers102: 6.0
+- StanfordCars: 6.0
+- MNIST: 4.8
+- SUN397: 4.8
+- DTD: 4.7
+- KITTI Distance: 2.9
+- UCF101: 2.9
+- Birdsnap: 2.6
+- FGVCAircraft: 2.6
+- GTSRB: 1.6
+- CLEVR: 1.5
+- RESISC45: 1.1
+- EuroSAT: 0.9
+- Flowers102: 0.9
+
+## Statistical Summary
+
+- Mean: 28.8
+- Median: 5.4
+
+## Text Box Description
+
+**Calculating the number of labeled examples per class a linear classifier on the same CLIP feature space requires to match the performance of the zero-shot classifier contextualizes the effectiveness of zero-shot transfer.**
+
+---
+
+Vineeth N B (IIT-H) §14.2 CLIP: The Anchoring Inflection Point
+
+Page 14 / 17
+```
+
+# DL4CV_Week12.2 CLIP The Anchoring Inflection Point.pdf - Page 15
+
+:
+
+```markdown
+# Experiments: Linear probing performance of CLIP
+
+## Figure 2: ViT based CLIP outperforms everything. Performance gap increases with GFLOPS
+
+### Linear probe average over Kornblith et al.'s 12 datasets
+
+```markdown
+![Figure 2a](image-url)
+
+```markdown
+- **CLIP-ViT**: Red stars
+- **CLIP-ResNet**: Red triangles
+- **EfficientNet-NoisyStudent**: Blue diamonds
+- **EfficientNet**: Blue triangles
+- **Instagram-pretrained**: Pink circles
+- **SimCLRv2**: Orange circles
+- **BYOL**: Yellow squares
+- **ViT (imageNet-21k)**: Green squares
+- **BIT-M**: Light blue circles
+- **BIT-S**: Green circles
+- **MoCo**: Purple squares
+- **ReSNet**: Yellow stars
+
+### Linear probe average over all 21 datasets
+
+```markdown
+![Figure 2b](image-url)
+
+```markdown
+- **CLIP-ViT**: Red stars
+- **CLIP-ResNet**: Red triangles
+- **EfficientNet-NoisyStudent**: Blue diamonds
+- **EfficientNet**: Blue triangles
+- **Instagram-pretrained**: Pink circles
+- **SimCLRv2**: Orange circles
+- **BYOL**: Yellow squares
+- **ViT (imageNet-21k)**: Green squares
+- **BIT-M**: Light blue circles
+- **BIT-S**: Green circles
+- **MoCo**: Purple squares
+- **ReSNet**: Yellow stars
+
+### Summary
+
+- Vineeth N B (IIT-H)
+- §14.2 CLIP: The Anchoring Inflection Point
+```
+
+# DL4CV_Week12.2 CLIP The Anchoring Inflection Point.pdf - Page 16
+
+```markdown
+# Few-shot performance
+
+![Few-shot performance graph](image.png)
+
+**Few-shot performance**
+
+- Zero-Shot CLIP outperforms few-shot linear probes upto 16 shots
+- Linear probe CLIP outperforms all the baselines with a glaring margin
+
+---
+
+**Vineeth N B (IIIT-H)**
+
+**§14.2 CLIP: The Anchoring Inflection Point**
+
+---
+
+16 / 17
+```
+
+# DL4CV_Week12.2 CLIP The Anchoring Inflection Point.pdf - Page 17
+
+ errors may happen because the image is too complex.
+
+---
+
+# Experiments: Robustness to distribution shifts
+
+## Table of Results
+
+| Dataset Examples       | ImageNet ResNet101 | Zero-Shot CLIP | Δ Score   |
+|------------------------|---------------------|----------------|-----------|
+| ImageNet              | ![ImageNet](image_url) | ![Zero-Shot CLIP](image_url) | 0%         |
+| ImageNetV2            | ![ImageNetV2](image_url) | ![Zero-Shot CLIP](image_url) | +0.8%      |
+| ImageNet-R            | ![ImageNet-R](image_url) | ![Zero-Shot CLIP](image_url) | +51.2%     |
+| ObjectNet             | ![ObjectNet](image_url) | ![Zero-Shot CLIP](image_url) | +39.7%     |
+| ImageNet Sketch       | ![ImageNet Sketch](image_url) | ![Zero-Shot CLIP](image_url) | +30.0%     |
+| ImageNet-A            | ![ImageNet-A](image_url) | ![Zero-Shot CLIP](image_url) | +74.4%     |
+
+## Observations
+
+- Zero-shot CLIP is much more robust to distribution shift than standard ImageNet models.
+- Visualizing distribution shift for bananas, a class shared across 5 of the 7 natural distribution shift datasets.
+
+---
+
+Vineeth N B. (IIT-H) §14.2 CLIP: The Anchoring Inflection Point 17 / 17
+

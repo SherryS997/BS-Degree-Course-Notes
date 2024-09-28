@@ -1,0 +1,839 @@
+# DL4CV_Week11.3 Transformers for Segmentation.pdf - Page 1
+
+```markdown
+# Deep Learning for Computer Vision
+
+# Transformers for Image Segmentation
+
+**Vineeth N Balasubramanian**
+
+Department of Computer Science and Engineering
+Indian Institute of Technology, Hyderabad
+
+![IIT Hyderabad Logo](https://www.iith.ac.in/sites/default/files/logo.png)
+
+_Vineeth N B (IIT-H)_
+
+#13.3 Transformers for Image Segmentation
+
+---
+
+Page 1 / 20
+```
+
+# DL4CV_Week11.3 Transformers for Segmentation.pdf - Page 2
+
+```markdown
+# Image Segmentation
+
+- ![Segmented Image](image-segmentation.png)
+  - Image segmentation seeks to partition images into multiple image segments or regions
+
+---
+
+**Vineeth N B (IIT-H)**
+
+**§13.3 Transformers for Image Segmentation**
+
+---
+
+**2 / 20**
+```
+
+# DL4CV_Week11.3 Transformers for Segmentation.pdf - Page 3
+
+```markdown
+# Image Segmentation
+
+![Image Segmentation Example](image-segmentation-example.png)
+
+- **Image segmentation** seeks to partition images into multiple image segments or regions
+- CNNs have achieved remarkable success in image segmentation tasks, but in recent state-of-the-art approaches, transformers have provided simpler and more robust solutions
+
+_Vineeth N B (IIT-H)_
+
+## §13.3 Transformers for Image Segmentation
+
+Page 2 of 20
+```
+
+# DL4CV_Week11.3 Transformers for Segmentation.pdf - Page 4
+
+
+
+```markdown
+# Segment Anything Model (SAM)
+
+- The Segment Anything Model (SAM) is the first foundational model (model trained on broad data that can be used for different tasks with minimal fine-tuning) for image segmentation
+
+![Kirrilov et al, Segment Anything, ICCV 2023](image_url)
+
+Vineeth N B (IIT-H)
+
+## §13.3 Transformers for Image Segmentation
+
+Page: 3 / 20
+```
+
+# DL4CV_Week11.3 Transformers for Segmentation.pdf - Page 5
+
+```markdown
+# Segment Anything Model (SAM)<sup>1</sup>
+
+- The Segment Anything Model (SAM) is the first foundational model (model trained on broad data that can be used for different tasks with minimal fine-tuning) for image segmentation
+- It is a **promptable model pre-trained** on a broad dataset using a task that enables powerful downstream generalization
+
+<sup>1</sup> Kirillov et al., Segment Anything, ICCV 2023
+
+---
+
+Vineeth N B (IIT-H)
+
+§13.3 Transformers for Image Segmentation
+
+---
+
+3 / 20
+```
+
+# DL4CV_Week11.3 Transformers for Segmentation.pdf - Page 6
+
+```markdown
+# Segment Anything Model (SAM)
+
+- **The Segment Anything Model (SAM)** is the first foundational model (model trained on broad data that can be used for different tasks with minimal fine-tuning) for image segmentation
+- It is a **promptable model pre-trained on a broad dataset** using a task that enables powerful downstream generalization
+
+![Promptable Segmentation](image_link_to_promptable_segmentation.png)
+
+(a) **Task: promptable segmentation**
+- The model takes an image and a segmentation prompt to generate a valid mask
+
+![Segment Anything Model (SAM)](image_link_to_SAM.png)
+
+(b) **Model: Segment Anything Model (SAM)**
+- The model consists of an image encoder, prompt encoder, and a lightweight mask decoder
+- The prompt and image are processed to generate a valid mask
+
+![Data Engine & Dataset](image_link_to_data_engine_dataset.png)
+
+(c) **Data: data engine (top) & dataset (bottom)**
+- Segment Anything 1B (SA-1B)
+  - 1+ billion masks
+  - 11 million images
+  - privacy respecting
+  - licensed images
+
+The model is trained using a combination of the data engine and the dataset, which includes annotating data and feeding it back into the training process.
+
+\*Kirillov et al., Segment Anything, ICCV 2023
+Vineeth N B (IIT-H)
+§13.3 Transformers for Image Segmentation
+
+3 / 20
+```
+
+# DL4CV_Week11.3 Transformers for Segmentation.pdf - Page 7
+
+ the following markdown content:
+
+```
+# The Task
+
+- A task needs to be defined, which is general enough and provides a powerful objective to enable zero-shot generalization to a wide range of downstream applications
+
+![Vineeth N B (IIT-H)](https://via.placeholder.com/150) *Transformers for Image Segmentation* #13.3
+
+---
+
+4 / 20
+```
+
+---
+```
+```
+
+# DL4CV_Week11.3 Transformers for Segmentation.pdf - Page 8
+
+```markdown
+# The Task
+
+- A task needs to be defined, which is general enough and provides a powerful objective to enable zero-shot generalization to a wide range of downstream applications
+- To achieve this, a *promptable segmentation task* is defined, i.e., given an image and a prompt (box, point, text etc), it returns a valid segmentation mask (even when a prompt is ambiguous/refers to multiple objects, a mask must be returned for at least one of the objects)
+
+*Source: Vineeth N B (IIIT-H) §13.3 Transformers for Image Segmentation*
+```
+
+# DL4CV_Week11.3 Transformers for Segmentation.pdf - Page 9
+
+```markdown
+# The Task
+
+- A task needs to be defined, which is general enough and provides a powerful objective to enable zero-shot generalization to a wide range of downstream applications
+- To achieve this, a promptable segmentation task is defined, i.e., given an image and a prompt (box, point, text etc), it returns a valid segmentation mask (even when a prompt is ambiguous/refers to multiple objects, a mask must be returned for at least one of the objects)
+
+![Diagram of promptable segmentation task](image)
+
+(a) Task: promptable segmentation
+
+Vineeth N B (IIIT-H) §13.3 Transformers for Image Segmentation 4 / 20
+```
+
+# DL4CV_Week11.3 Transformers for Segmentation.pdf - Page 10
+
+```markdown
+# The Model
+
+- The model supports flexible prompts, computes masks in amortized real time (~ 50 ms per mask) for interactive usage and is ambiguity aware
+
+*Vineeth N B (IIT-H) §13.3 Transformers for Image Segmentation*
+
+---
+
+**Note**: The images and graphs are placeholders as OCR could not capture them directly.
+
+---
+
+```
+
+# DL4CV_Week11.3 Transformers for Segmentation.pdf - Page 11
+
+ the OCR output of the provided scientific text or slides.
+
+```markdown
+# The Model
+
+- The model supports flexible prompts, computes masks in amortized real time (≈ 50 ms per mask) for interactive usage and is ambiguity aware
+- The model has three components: an image encoder, a flexible prompt encoder, and a fast mask decoder
+
+*Vineeth N B (IIT-H) §13.3 Transformers for Image Segmentation*
+
+![Slide Image](image-url)
+
+5 / 20
+```
+
+# DL4CV_Week11.3 Transformers for Segmentation.pdf - Page 12
+
+ is not applicable.
+
+```markdown
+# The Model
+
+- The model supports flexible prompts, computes masks in amortized real time (~ 50 ms per mask) for interactive usage and is ambiguity aware
+- The model has three components: an image encoder, a flexible prompt encoder, and a fast mask decoder
+
+![Image Encoder](image_url)
+
+Vineeth N B (IIT-H) §13.3 Transformers for Image Segmentation 5 / 20
+
+```
+
+# DL4CV_Week11.3 Transformers for Segmentation.pdf - Page 13
+
+:
+
+```markdown
+# The Model
+
+- For the image encoder, a pre-trained Vision Transformer is used
+
+---
+
+^{2}Radford et al., Learning Transferable Visual Models From Natural Language Supervision, arXiv.org 2021
+
+Vineeth N B (IIT-H)
+
+§13.3 Transformers for Image Segmentation
+
+6 / 20
+```
+
+# DL4CV_Week11.3 Transformers for Segmentation.pdf - Page 14
+
+
+
+```markdown
+# The Model
+
+- For the image encoder, a pre-trained Vision Transformer is used
+- For the prompt encoder, box and point prompts are represented using positional encodings, text prompts are encoded using the text-encoder from CLIP<sup>2</sup>, and mask prompts are embedded using convolutions
+
+<sup>2</sup> Radford et al., Learning Transferable Visual Models From Natural Language Supervision, arXiv.org 2021
+
+Vineeth N B (IIT-H)
+
+§13.3 Transformers for Image Segmentation
+
+```
+```
+
+# DL4CV_Week11.3 Transformers for Segmentation.pdf - Page 15
+
+```markdown
+# The Model
+
+- For the image encoder, a pre-trained Vision Transformer is used
+- For the prompt encoder, box and point prompts are represented using positional encodings, text prompts are encoded using the text-encoder from CLIP<sup>2</sup>, and mask prompts are embedded using convolutions
+- The mask decoder uses a modified Transformer decoder block
+
+![Image of the Model](image_url)
+
+<sup>2</sup> Radford et al, Learning Transferable Visual Models From Natural Language Supervision, arXiv.org 2021
+
+Vineeth N B (IIT-H)
+
+§13.3 Transformers for Image Segmentation
+
+---
+
+## Image Embedding
+- **Input**: Image embedding (256x64x64)
+- **Process**:
+  - Image to token attention
+  - mLP (multi-layer perceptron)
+  - Token to image attention
+  - Self attention
+
+## Mask Decoder
+- **Input**: Output tokens + prompt tokens (N<sub>tokens</sub> * 256)
+- **Process**:
+  - 2x convolutional transformation
+  - Dot product for mask generation
+  - Token to image attention
+  - mLP for mask generation
+  - IoU (Intersection over Union) scores
+
+**Output**: Masks
+```
+
+# DL4CV_Week11.3 Transformers for Segmentation.pdf - Page 16
+
+```markdown
+# The Data Engine
+
+- To enable strong generalization to new data-distributions, it is needed to train SAM on a large and diverse set of masks
+
+*Vineeth N B (IIT-H) §13.3 Transformers for Image Segmentation*
+
+---
+
+**Slide Number**: 7 / 20
+```
+
+# DL4CV_Week11.3 Transformers for Segmentation.pdf - Page 17
+
+```markdown
+# The Data Engine
+
+- To enable strong generalization to new data-distributions, it is needed to train SAM on a large and diverse set of masks
+
+- A **"data engine"** is built to with model-in-the-loop dataset annotation to create the SA-1B dataset with 1 billion masks
+
+*Vineeth N B (IIT-H)*
+
+*§13.3 Transformers for Image Segmentation*
+
+*7 / 20*
+```
+
+# DL4CV_Week11.3 Transformers for Segmentation.pdf - Page 18
+
+
+
+```markdown
+# The Data Engine
+
+- To enable strong generalization to new data-distributions, it is needed to train SAM on a large and diverse set of masks
+- A "data engine" is built to with model-in-the-loop dataset annotation to create the SA-1B dataset with 1 billion masks
+- The data engine was built in three stages -
+
+*Vineeth N B (IIIT-H) §13.3 Transformers for Image Segmentation*
+
+*7 / 20*
+```
+
+# DL4CV_Week11.3 Transformers for Segmentation.pdf - Page 19
+
+```markdown
+# The Data Engine
+
+- To enable strong generalization to new data-distributions, it is needed to train SAM on a large and diverse set of masks
+- A "data engine" is built to with model-in-the-loop dataset annotation to create the SA-1B dataset with 1 billion masks
+- The data engine was built in three stages -
+  - Assisted-manual stage: Human annotators labeled masks using a browser-based interactive tool. SAM was trained using public segmentation datasets and the above collected data.
+
+*Vineeth N B (IIIT-H)  §13.3 Transformers for Image Segmentation  7 / 20*
+```
+
+# DL4CV_Week11.3 Transformers for Segmentation.pdf - Page 20
+
+```markdown
+# The Data Engine
+
+- To enable strong generalization to new data-distributions, it is needed to train SAM on a large and diverse set of masks
+- A "data engine" is built to with model-in-the-loop dataset annotation to create the SA-1B dataset with 1 billion masks
+- The data engine was built in three stages -
+
+  - **Assisted-manual stage**: Human annotators labeled masks using a browser-based interactive tool. SAM was trained using public segmentation datasets and the above collected data.
+  - **Semi-automatic stage**: This was aimed at increasing diversity of masks. High confidence masks were pre-labeled and human annotators were asked to label any additional objects in the image. SAM was retrained on this data.
+
+_Vineeth N B (IIIT-H)_
+
+§13.3 Transformers for Image Segmentation
+
+_7 / 20_
+```
+
+# DL4CV_Week11.3 Transformers for Segmentation.pdf - Page 21
+
+```markdown
+# The Data Engine
+
+- To enable strong generalization to new data-distributions, it is needed to train SAM on a large and diverse set of masks
+- A "data engine" is built to with model-in-the-loop dataset annotation to create the SA-1B dataset with 1 billion masks
+- The data engine was built in three stages -
+  - **Assisted-manual stage**: Human annotators labeled masks using a browser-based interactive tool. SAM was trained using public segmentation datasets and the above collected data.
+  - **Semi-automatic stage**: This was aimed at increasing diversity of masks. High confidence masks were pre-labeled and human annotators were asked to label any additional objects in the image. SAM was retrained on this data.
+  - **Fully-automatic stage**: The model was prompted with a 32 x 32 grid of points to generate masks
+
+_Image credit: Vineeth N B (IIIT-H) §13.3 Transformers for Image Segmentation_
+```
+
+# DL4CV_Week11.3 Transformers for Segmentation.pdf - Page 22
+
+```markdown
+# Zero-Shot Single Point Valid Mask Evaluation
+
+**SAM** is evaluated on the task of segmenting an object from a single foreground point on 23 new datasets with diverse data distributions. This task is ill-posed as one point can refer to multiple objects.
+
+![ADE20K](image1.png) ![BBCG038v1](image2.png) ![Cityscapes](image3.png) ![DOORS](image4.png) ![DRAM](image5.png) ![EgoHOS](image6.png) ![GTEA](image7.png) ![Hypersim](image8.png)
+
+![IBD](image9.png) ![iShape](image10.png) ![LVIS](image11.png) ![ND020](image12.png) ![NDISpark](image13.png) ![OVIS](image14.png) ![PFDLS](image15.png) ![Petersdorf](image16.png)
+
+![STREETS](image17.png) ![TimberSeg](image18.png) ![TrashCan](image19.png) ![VISOR](image20.png) ![WoodScape](image21.png) ![PIDRay](image22.png) ![ZeroWaste](image23.png)
+
+**Figure 8:** Samples from the 23 diverse segmentation datasets used to evaluate SAM's zero-shot transfer capabilities.
+
+*Vineeth N B (IIT-H) §13.3 Transformers for Image Segmentation*
+```
+
+# DL4CV_Week11.3 Transformers for Segmentation.pdf - Page 23
+
+:
+
+```markdown
+# Zero-Shot Single Point Valid Mask Evaluation
+
+The performance of SAM is compared with the state-of-the-art RITM model.
+
+## SAM vs. RITM [92] on 23 datasets
+
+| Dataset                | IoU delta at 1 center point |
+|------------------------|----------------------------|
+| PPDLS [74]             | +46.9                       |
+| BRS [13, 90]           | +44.7                       |
+| HERE-U [10]            | +41.1                       |
+| TimberSeg [38]         | +28.9                       |
+| NDD201 [10]            | +21.4                       |
+| LVIS [44]              | +18.5                       |
+| STEGO [89]             | +17.3                       |
+| ZeroWaste [16]         | +9.1                        |
+| iShape [11]            | +8.8                        |
+| ADE20K [117]           | +7.8                        |
+| COCO [33]              | +7.0                        |
+| Hypersim [98]          | +6.7                        |
+| NDISBark [22, 23]      | +6.7                        |
+| VISOR [28, 27]         | +5.8                        |
+| BONNet [36]            | +4.4                        |
+| EgoHOS [11]            | +0.8                        |
+| IBD [17]               | -0.31                       |
+| WoodScape [112]        | -0.61                       |
+| PASC-3D [108]          | -4.0                        |
+| PIDRay [104]           | -5.8                        |
+| DRAM [24]              | -6.8                        |
+| TrashCan [55]          | -21.4                       |
+| GLEA [84, 64]          | -                            |
+
+![Graph](url_to_graph)
+
+3Sofiiuk et al., Reviving iterative training with mask guidance for interactive segmentation, ICIP 2022
+
+Vineeth N B (IIT-H)
+
+§13.3 Transformers for Image Segmentation
+```
+
+Note: Replace `url_to_graph` with the actual URL or path to the graph/image if available.
+
+# DL4CV_Week11.3 Transformers for Segmentation.pdf - Page 24
+
+
+
+```markdown
+# Zero-Shot Edge Detection
+
+- SAM is evaluated on the classic low-level task of edge detection using BSDS500a.
+- SAM is prompted with a 16x16 regular grid of foreground points resulting in 768 predicted masks (3 per point).
+- Redundant masks are removed by non-maximal suppression (NMS). Then, edge maps are computed using Sobel filtering of unthresholded mask probability maps and standard lightweight postprocessing, including edge NMS.
+
+![Figure 10: Zero-shot edge prediction on BSDS500. SAM was not trained to predict edge maps nor did it have access to BSDS images or annotations during training.](image_path)
+
+---
+
+aMartin et al, A database of human segmented natural images and its application to evaluating segmentation algorithms and measuring ecological statistics, ICCV 2021
+
+---
+
+| method          | year | ODS | OIS | AP | RS0 |
+|-----------------|------|-----|-----|----|-----|
+| HED [108]       | 2015 | .788 | .808 | .840 | .923 |
+| EDETR [79]      | 2022 | .840 | .858 | .896 | .930 |
+| zero-shot transfer methods: | | | | | |
+| Sobel filter    | 1968 | .539 | . . | . . | . . |
+| Canny [13]      | 1986 | .600 | .640 | .580 | . . |
+| Felz-Hutt [35]  | 2004 | .610 | .640 | .560 | . . |
+| SAM             | 2023 | .768 | .786 | .794 | .928 |
+
+---
+
+Vineeth N B (IIIT-H)
+
+§13.3 Transformers for Image Segmentation
+
+---
+
+10 / 20
+```
+
+# DL4CV_Week11.3 Transformers for Segmentation.pdf - Page 25
+
+```markdown
+# Zero-Shot Object Proposals
+
+## Table 4: Object proposal generation on LVIS v1. SAM is applied zero-shot, i.e. it was not trained for object proposal generation nor did it access LVIS images or annotations.
+
+| method | mask AR@1000 |
+| --- | --- |
+| | all | small | med. | large | freq. | com. | rare |
+| ViTDet-H [62] | 63.0 | 51.7 | 80.8 | 87.0 | 63.1 | 63.3 | 58.3 |
+| **zero-shot transfer methods:** | | | | | | | |
+| SAM – single out. | 54.9 | 42.8 | 76.7 | 74.4 | 54.7 | 59.8 | 62.0 |
+| SAM | 59.3 | 45.5 | 81.6 | 86.9 | 59.1 | 63.9 | 65.8 |
+```
+
+# DL4CV_Week11.3 Transformers for Segmentation.pdf - Page 26
+
+# Zero-Shot Instance Segmentation
+
+```markdown
+|                       | COCO [66]                     | LVIS v1 [44]              |
+|-----------------------|-------------------------------|---------------------------|
+| method                | AP | AP^S | AP^M | AP^L | AP | AP^S | AP^M | AP^L |
+|-----------------------|----|------|------|------|----|------|------|------|
+| ViTDet-H [62]         | 51.0 | 32.0 | 54.3 | 68.9 | 46.6 | 35.0 | 58.0 | 66.3 |
+| **zero-shot transfer methods (segmentation module only):**   |
+| SAM                   | 46.5 | 30.8 | 51.0 | 61.7 | 44.7 | 32.5 | 57.6 | 65.5 |
+```
+
+**Table 5:** Instance segmentation results. SAM is prompted with ViTDet boxes to do zero-shot segmentation. The fully-supervised ViTDet outperforms SAM, but the gap shrinks on the higher-quality LVIS masks. Interestingly, SAM outperforms ViTDet according to human ratings (see Fig. 11).
+
+---
+
+*Vineeth N B. (IIIT-H)*
+
+*$13.3 Transformers for Image Segmentation*
+
+*12 / 20*
+```
+
+# DL4CV_Week11.3 Transformers for Segmentation.pdf - Page 27
+
+```markdown
+# Zero-Shot Text-to-Mask
+
+![Zero-Shot Text-to-Mask Examples](image_url)
+
+**Figure 12: Zero-shot text-to-mask.** SAM can work with simple and nuanced text prompts. When SAM fails to make a correct prediction, an additional point prompt can help.
+
+_Vineeth N B (IIT-H)_
+## §13.3 Transformers for Image Segmentation
+
+- **SAM can work with simple and nuanced text prompts.**
+  - Examples:
+    - "a wheel"
+    - "beaver tooth grille"
+    - "a wiper"
+    - "wipers"
+- **When SAM fails to make a correct prediction, an additional point prompt can help.**
+  - Examples:
+    - "a wiper" + point
+    - "wipers" + point
+
+```
+
+# DL4CV_Week11.3 Transformers for Segmentation.pdf - Page 28
+
+```markdown
+# Grounded SAM: Open-Vocabulary Detection and Segmentation
+
+- Grounded SAM uses **Grounding DINO<sup>4</sup>** as an open-set object detector to combine with the segment anything model (SAM)
+
+<sup>4</sup> Liu et al. Grounding DINO: Marrying DINO with Grounded Pre-Training for Open-Set Object Detection, arXiv.org
+
+2023
+
+Vineeth N B (IIIT-H)
+
+§13.3 Transformers for Image Segmentation
+
+14 / 20
+```
+
+# DL4CV_Week11.3 Transformers for Segmentation.pdf - Page 29
+
+
+
+```markdown
+# Grounded SAM: Open-Vocabulary Detection and Segmentation
+
+- Grounded SAM uses **Grounding DINO**<sup>4</sup> as an open-set object detector to combine with the segment anything model (SAM).
+- The annotation cost of detection data is relatively lower compared to segmentation tasks, enabling the collection of more higher-quality annotated data.
+
+<sup>4</sup> Liu et al. Grounding DINO: Marrying DINO with Grounded Pre-Training for Open-Set Object Detection, arXiv.org
+
+*2023*
+
+*Vineeth N B (IIIT-H)*
+
+*§13.3 Transformers for Image Segmentation*
+
+*14 / 20*
+```
+
+# DL4CV_Week11.3 Transformers for Segmentation.pdf - Page 30
+
+```markdown
+# Grounded SAM: Open-Vocabulary Detection and Segmentation
+
+- **Grounded SAM uses Grounding DINO<sup>4</sup> as an open-set object detector to combine with the segment anything model (SAM)**
+
+- The annotation cost of detection data is relatively lower compared to segmentation tasks, enabling the collection of more higher-quality annotated data.
+
+- Given an input image and a text prompt, Grounded SAM employs Grounding DINO to generate precise boxes for objects or regions within the image by leveraging the textual information as condition. Subsequently, the annotated boxes obtained through Grounding DINO serve as the box prompts for SAM to generate precise mask annotations.
+
+<sup>4</sup>Liu et al. Grounding DINO: Marrying DINO with Grounded Pre-Training for Open-Set Object Detection, arXiv.org
+
+2023
+
+*Vineeth N B (IIIT-H)*
+
+§13.3 Transformers for Image Segmentation
+
+14 / 20
+```
+
+# DL4CV_Week11.3 Transformers for Segmentation.pdf - Page 31
+
+```markdown
+# Grounded SAM: Open-Vocabulary Detection and Segmentation
+
+- Grounded SAM uses Grounding DINO<sup>4</sup> as an open-set object detector to combine with the segment anything model (SAM)
+- The annotation cost of detection data is relatively lower compared to segmentation tasks, enabling the collection of more higher-quality annotated data.
+- Given an input image and a text prompt, Grounded SAM employs Grounding DINO to generate precise boxes for objects or regions within the image by leveraging the textual information as condition. Subsequently, the annotated boxes obtained through Grounding DINO serve as the box prompts for SAM to generate precise mask annotations
+- A wide range of vision tasks can be achieved by using the versatile Grounded SAM pipeline.
+
+<sup>4</sup>Liu et al. Grounding DINO: Marrying DINO with Grounded Pre-Training for Open-Set Object Detection, arXiv.org
+
+2023
+
+Vineeth N B (IIT-H)
+
+§13.3 Transformers for Image Segmentation
+
+14 / 20
+```
+
+# DL4CV_Week11.3 Transformers for Segmentation.pdf - Page 32
+
+ your output such that it can be used directly within a markdown document.
+
+```markdown
+# RAM-Grounded-SAM: Automatic Dense Image Annotation
+
+- An automatic image annotation system has numerous practical applications, such as enhancing the efficiency of manual annotation of data, reducing the cost of human annotation, or providing real-time scene annotation and understanding in autonomous driving to enhance driving safety.
+
+---
+
+#### References
+[^5]: Li et al, BLIP: Bootstrapping Language-Image Pre-training for Unified Vision-Language Understanding and Generation, ICML 2022
+[^6]: Huang et al, Tag2Text: Guiding Vision-Language Model via Image Tagging, 2023
+[^7]: Zhang et al, Recognize Anything: A Strong Image Tagging Model, arXiv.org 2023
+
+*Vineeth N B (IIT-H) §13.3 Transformers for Image Segmentation*
+
+*Page 15 / 20*
+```
+
+# DL4CV_Week11.3 Transformers for Segmentation.pdf - Page 33
+
+```markdown
+# RAM-Grounded-SAM: Automatic Dense Image Annotation
+
+- An automatic image annotation system has numerous practical applications, such as enhancing the efficiency of manual annotation of data, reducing the cost of human annotation, or providing real-time scene annotation and understanding in autonomous driving to enhance driving safety.
+- An image-caption model (like BLIP<sup>5</sup> and Tag2Text<sup>6</sup>) or an image tagging model (like RAM<sup>7</sup>), can be used to generate output results (captions or tags) that can be given as inputs to Grounded SAM to generate precise box and mask for each instance.
+
+<sup>5</sup> Li et al, BLIP: Bootstrapping Language-Image Pre-training for Unified Vision-Language Understanding and Generation, ICML 2022
+<sup>6</sup> Huang et al, Tag2Text: Guiding Vision-Language Model via Image Tagging, 2023
+<sup>7</sup> Zhang et al, Recognize Anything: A Strong Image Tagging Model, arXiv.org 2023
+
+Vineeth N B (IIT-H) §13.3 Transformers for Image Segmentation
+
+---
+
+15 / 20
+```
+
+# DL4CV_Week11.3 Transformers for Segmentation.pdf - Page 34
+
+Error: No OCR data was returned from the API. Please check your API key and try again.
+
+The OCR process did not return any data. Please ensure that the API key is valid and try again.
+
+# DL4CV_Week11.3 Transformers for Segmentation.pdf - Page 35
+
+```markdown
+# Grounded-SAM-SD: Highly Accurate and Controllable Image Editing
+
+- By integrating the powerful text-to-image capability of image generation models with Grounded SAM, a comprehensive framework that enables the creation of a robust data synthesis factory can be created.
+
+_Vineeth N B (IIT-H)_
+_$13.3 Transformers for Image Segmentation_
+_17 / 20_
+```
+
+# DL4CV_Week11.3 Transformers for Segmentation.pdf - Page 36
+
+
+
+```markdown
+# Grounded-SAM-SD: Highly Accurate and Controllable Image Editing
+
+- **By integrating the powerful text-to-image capability of image generation models with Grounded SAM, a comprehensive framework that enables the creation of a robust data synthesis factory can be created.**
+
+- **with the additional capability of an image generation model, highly precise and controlled image manipulation, including modifying the image representation, replacing objects, removing the corresponding regions, etc can be achieved.**
+
+*Vineeth N B (IIIT-H)*
+
+*§13.3 Transformers for Image Segmentation*
+
+*17 / 20*
+```
+
+# DL4CV_Week11.3 Transformers for Segmentation.pdf - Page 37
+
+```markdown
+# Grounded-SAM-SD: Highly Accurate and Controllable Image Editing
+
+- By integrating the powerful text-to-image capability of image generation models with Grounded SAM, a comprehensive framework that enables the creation of a robust data synthesis factory can be created.
+
+- with the additional capability of an image generation model, highly precise and controlled image manipulation, including modifying the image representation, replacing objects, removing the corresponding regions, etc can be achieved.
+
+- In downstream scenarios where data scarcity arises, the system can generate new data, addressing the data requirements for the training of models.
+
+*Vineeth N B (IIIT-H) §13.3 Transformers for Image Segmentation 17 / 20*
+```
+
+# DL4CV_Week11.3 Transformers for Segmentation.pdf - Page 38
+
+```markdown
+# Grounded-SAM-SD: Highly Accurate and Controllable Image Editing
+
+## Grounded-SAM-SD: Highly Controllable Image Editing
+
+### Figure 4: Grounded-SAM-SD combines the open-set ability of Grounded SAM with inpainting
+
+![Grounded-SAM-SD: Highly Controllable Image Editing](image_url)
+
+- **Mountain**
+  - Original image
+  - Modified image with the mountain having a red hue
+
+- **Concept Art Digital Painting of an Elven Castle, Inspired by Lord of the Rings, Highly Detailed, 8k**
+  - Original image of an elven castle
+  - Modified image of the same castle with additional details and textures
+
+- **"Left Eye"**
+  - Original image of a cat's face
+  - Modified image with a green highlight on the cat's left eye
+
+- **Cat Eye with Galaxy In It, Highly Detailed, 8k**
+  - Original image of a cat's eye
+  - Modified image with a galaxy visible in the cat's eye
+
+**Vineeth N B (IIIT-H)**
+**§13.3 Transformers for Image Segmentation**
+
+*Page 18 / 20*
+```
+
+# DL4CV_Week11.3 Transformers for Segmentation.pdf - Page 39
+
+```markdown
+# Grounded-SAM-OSX: Promptable Human Motion Analysis
+
+- The Grounded SAM and OSX<sup>8</sup> models can be integrated to achieve a novel promptable (instance-specific) whole-body human detection and mesh recovery system, thereby realizing a promptable human motion analysis system.
+
+<sup>8</sup> Lin et al., One-Stage 3D Whole-Body Mesh Recovery with Component Aware Transformer, CVPR 2023
+
+Vineeth N B (IIT-H)
+
+§13.3 Transformers for Image Segmentation
+
+19 / 20
+```
+
+# DL4CV_Week11.3 Transformers for Segmentation.pdf - Page 40
+
+ the input should be treated as a text block only.
+
+```
+# Grounded-SAM-OSX: Promptable Human Motion Analysis
+
+- The Grounded SAM and OSX<sup>8</sup> models can be integrated to achieve a novel promptable (instance-specific) whole-body human detection and mesh recovery system, thereby realizing a promptable human motion analysis system.
+- Specifically, given an image and a prompt to refer to a specific person, Grounded SAM is first used to generate a precise specific human box. Then, OSX is used to estimate an instance-specific human mesh.
+
+<sup>8</sup>Lin et al., One-Stage 3D Whole-Body Mesh Recovery with Component Aware Transformer, CVPR 2023
+
+Vineeth N B (IIT-H) §13.3 Transformers for Image Segmentation
+
+19 / 20
+```
+```
+
+# DL4CV_Week11.3 Transformers for Segmentation.pdf - Page 41
+
+```markdown
+# Grounded-SAM-OSX: Promptable Human Motion Analysis
+
+## Grounded-SAM-OSX: Promptable Human Motion Analysis
+
+![Grounded-SAM-OSX Demonstration](image1.png)
+
+![Grounded-SAM-OSX Demonstration](image2.png)
+
+![Grounded-SAM-OSX Demonstration](image3.png)
+
+![Grounded-SAM-OSX Demonstration](image4.png)
+
+**Figure 5:** Grounded-SAM-OSX merges the text-promptable capability of Grounded SAM with the whole body mesh recovery ability of OSX [33], facilitating a precise human motion analysis system.
+
+**Vineeth N B (IIIT-H)**
+
+**§13.3 Transformers for Image Segmentation**
+
+---
+
+Page 20 / 20
+```
+

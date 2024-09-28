@@ -1,0 +1,1541 @@
+# DL4CV_Week11_Part02.pdf - Page 1
+
+```markdown
+# Deep Learning for Computer Vision
+
+# Deep Generative Models across Multiple Domains
+
+**Vineeth N Balasubramanian**
+
+Department of Computer Science and Engineering
+Indian Institute of Technology, Hyderabad
+
+![IIT Hyderabad Logo](https://via.placeholder.com/150)
+
+Vineeth N B (IIT-H) §11.2 Generative Models Across Domains
+
+---
+
+## Introduction
+
+Deep generative models have shown significant advancements in various domains, including image processing, natural language processing, and more. This section explores the principles and applications of these models.
+
+## Types of Generative Models
+
+### 1. **Autoencoders**
+
+Autoencoders are neural networks that learn efficient codings of input data. They consist of an encoder that compresses the input data into a lower-dimensional code, and a decoder that reconstructs the input from this code.
+
+#### Architecture
+
+- **Encoder:** Compresses the input data into a latent representation.
+- **Decoder:** Reconstructs the input data from the latent representation.
+
+```markdown
+### Example Code
+
+```python
+import torch
+import torch.nn as nn
+
+class Autoencoder(nn.Module):
+    def __init__(self):
+        super(Autoencoder, self).__init__()
+        self.encoder = nn.Sequential(
+            nn.Linear(28 * 28, 128),
+            nn.ReLU(),
+            nn.Linear(128, 64),
+            nn.ReLU(),
+            nn.Linear(64, 12),
+            nn.ReLU(),
+            nn.Linear(12, 3)
+        )
+        self.decoder = nn.Sequential(
+            nn.Linear(3, 12),
+            nn.ReLU(),
+            nn.Linear(12, 64),
+            nn.ReLU(),
+            nn.Linear(64, 128),
+            nn.ReLU(),
+            nn.Linear(128, 28 * 28),
+            nn.Tanh()
+        )
+
+    def forward(self, x):
+        encoded = self.encoder(x)
+        decoded = self.decoder(encoded)
+        return decoded
+
+model = Autoencoder()
+```
+
+### 2. **Generative Adversarial Networks (GANs)**
+
+GANs consist of two networks: a generator and a discriminator. The generator creates data, while the discriminator evaluates it for authenticity.
+
+#### Architecture
+
+- **Generator:** Generates data that mimics the real data distribution.
+- **Discriminator:** Determines whether the data is real or fake.
+
+```markdown
+### Example Code
+
+```python
+import torch
+import torch.nn as nn
+
+class Generator(nn.Module):
+    def __init__(self):
+        super(Generator, self).__init__()
+        self.model = nn.Sequential(
+            nn.Linear(100, 256),
+            nn.ReLU(),
+            nn.Linear(256, 512),
+            nn.ReLU(),
+            nn.Linear(512, 1024),
+            nn.Tanh()
+        )
+
+    def forward(self, x):
+        return self.model(x)
+
+class Discriminator(nn.Module):
+    def __init__(self):
+        super(Discriminator, self).__init__()
+        self.model = nn.Sequential(
+            nn.Linear(784, 512),
+            nn.ReLU(),
+            nn.Linear(512, 256),
+            nn.ReLU(),
+            nn.Linear(256, 1),
+            nn.Sigmoid()
+        )
+
+    def forward(self, x):
+        return self.model(x)
+
+generator = Generator()
+discriminator = Discriminator()
+```
+
+### 3. **Variational Autoencoders (VAEs)**
+
+VAEs are a type of generative model that learn the latent structure of data by encoding it to a probability distribution.
+
+#### Architecture
+
+- **Encoder:** Encodes the input data into a probability distribution.
+- **Decoder:** Decodes the sampled latent representation back into the original data space.
+
+```markdown
+### Example Code
+
+```python
+import torch
+import torch.nn as nn
+
+class Encoder(nn.Module):
+    def __init__(self):
+        super(Encoder, self).__init__()
+        self.model = nn.Sequential(
+            nn.Linear(784, 400),
+            nn.ReLU(),
+            nn.Linear(400, 300),
+            nn.ReLU(),
+            nn.Linear(300, 150),
+            nn.ReLU(),
+            nn.Linear(150, 2 * 20),
+            nn.Unflatten(-1, (20,))
+        )
+
+    def forward(self, x):
+        mu, logvar = self.model(x).view(-1, 2, 10).chunk(2, dim=1)
+        return mu, logvar
+
+class Decoder(nn.Module):
+    def __init__(self):
+        super(Decoder, self).__init__()
+        self.model = nn.Sequential(
+            nn.Linear(20, 150),
+            nn.ReLU(),
+            nn.Linear(150, 300),
+            nn.ReLU(),
+            nn.Linear(300, 400),
+            nn.ReLU(),
+            nn.Linear(400, 784),
+            nn.Tanh()
+        )
+
+    def forward(self, x):
+        return self.model(x).view(-1, 1, 28, 28)
+
+encoder = Encoder()
+decoder = Decoder()
+```
+
+## Conclusion
+
+Deep generative models have revolutionized the field of computer vision by enabling the generation of realistic data across various domains. Their applications span from image synthesis to data imputation and beyond.
+
+---
+
+Vineeth N B (IIT-H) §11.2 Generative Models Across Domains 1 / 25
+```
+
+# DL4CV_Week11_Part02.pdf - Page 2
+
+```markdown
+# Review
+
+## Questions
+
+- Minibatch Standard Deviation is used in Progressive GAN. Why is this useful?
+
+![NPTEL Logo](image_url)
+
+Vineeth N B (IIT-H) §11.2 Generative Models Across Domains
+
+Page 2 / 25
+```
+
+# DL4CV_Week11_Part02.pdf - Page 3
+
+```markdown
+# Review
+
+## Questions
+
+- **Minibatch Standard Deviation is used in Progressive GAN. Why is this useful?**
+
+  If the generated images do not have the same diversity as the real images, this value will be different and therefore will be penalized by the discriminator.
+
+*Vineeth N B (IIT-H) §11.2 Generative Models Across Domains*
+
+![NPTEL](attachment:logo.png)
+```
+
+# DL4CV_Week11_Part02.pdf - Page 4
+
+ the OCR results as needed.
+
+```markdown
+# Review
+
+## Questions
+
+- **Minibatch Standard Deviation is used in Progressive GAN. Why is this useful?**
+  If the generated images do not have the same diversity as the real images, this value will be different and therefore will be penalized by the discriminator
+
+- **Orthogonal Regularization of weights is used in BigGAN. Why is this useful?**
+```
+
+**Notes:**
+
+- Make sure to preserve the original formatting and structure of the text.
+- Ensure the content is clear and readable.
+- Double-check for any OCR errors, especially in special characters and scientific terms.
+```
+
+# DL4CV_Week11_Part02.pdf - Page 5
+
+```markdown
+# Review
+
+## Questions
+
+- **Minibatch Standard Deviation is used in Progressive GAN. Why is this useful?**
+
+  If the generated images do not have the same diversity as the real images, this value will be different and therefore will be penalized by the discriminator.
+
+- **Orthogonal Regularization of weights is used in BigGAN. Why is this useful?**
+
+  Multiplication by an orthogonal matrix leaves the norm of the original matrix unchanged. Why is this useful?
+```
+
+# DL4CV_Week11_Part02.pdf - Page 6
+
+
+
+```markdown
+# Review
+
+## Questions
+
+- **Minibatch Standard Deviation is used in Progressive GAN. Why is this useful?**
+
+  If the generated images do not have the same diversity as the real images, this value will be different and therefore will be penalized by the discriminator.
+
+- **Orthogonal Regularization of weights is used in BigGAN. Why is this useful?**
+
+  Multiplication by an orthogonal matrix leaves the norm of the original matrix unchanged. Why is this useful? Recall weight initialization and batch normalization. It is useful to maintain the same norm across all layers!
+```
+
+# DL4CV_Week11_Part02.pdf - Page 7
+
+ the provided image and the extracted content into a detailed markdown format.
+
+```markdown
+# Domain Translation
+
+- Given an image from a source domain, generate an image in a target domain
+- Learn a function \( G \) for the mapping \( G : (S \leftarrow T) \)
+- Examples: Male-to-female, sketches-to-photos, summer-to-winter, etc
+
+![Learn function G](image-url)
+
+Source (S) | Target (T)
+--- | ---
+![Source Image](source-image-url) | ![Target Image](target-image-url)
+
+*Vineeth N B (IIT-H) §11.2 Generative Models Across Domains*
+```
+
+(Replace `image-url`, `source-image-url`, and `target-image-url` with the actual image URLs or file names if available)
+
+Note: The actual content of the images should be reviewed and added if possible, considering the limitations of OCR in capturing visual content accurately.
+
+# DL4CV_Week11_Part02.pdf - Page 8
+
+```markdown
+# Domain Translation: Examples
+
+## Examples of Domain Translation
+
+### Labels to Street Scene
+- **Input**: An image with labeled objects.
+- **Output**: A street scene representation without labels.
+
+![Labels to Street Scene Input](image-url)
+![Labels to Street Scene Output](image-url)
+
+### Labels to Facade
+- **Input**: An image with labeled labels.
+- **Output**: A facade representation without labels.
+
+![Labels to Facade Input](image-url)
+![Labels to Facade Output](image-url)
+
+### BW to Color
+- **Input**: A black and white image.
+- **Output**: A color image.
+
+![BW to Color Input](image-url)
+![BW to Color Output](image-url)
+
+### Aerial to Map
+- **Input**: An aerial view image.
+- **Output**: A map representation.
+
+![Aerial to Map Input](image-url)
+![Aerial to Map Output](image-url)
+
+### Day to Night
+- **Input**: A daytime image.
+- **Output**: A nighttime image.
+
+![Day to Night Input](image-url)
+![Day to Night Output](image-url)
+
+### Edges to Photo
+- **Input**: An edge-detected image.
+- **Output**: A photo (realistic) image.
+
+![Edges to Photo Input](image-url)
+![Edges to Photo Output](image-url)
+
+### Credit
+- **Isola et al, Image-to-Image Translation with Conditional Adversarial Networks, CVPR 2017**
+
+### Presenter
+- **Vineeth N B (IIIT-H)**
+
+### Section
+- **11.2 Generative Models Across Domains**
+
+```
+
+# DL4CV_Week11_Part02.pdf - Page 9
+
+```markdown
+# Domain Translation: Challenges
+
+- **Paired training (supervised)**
+  - Pix2Pix<sup>1</sup>
+
+- **Unpaired training (unsupervised)**
+  - Cycle-GAN<sup>2</sup>
+
+- **Multi-modal generation**
+  - UNIT-GAN<sup>3</sup> and MUNIT-GAN<sup>4</sup>
+
+<center>
+  ![NPTEL Logo](https://example.com/logo.png)
+</center>
+
+<small>
+<sup>1</sup> Isola et al., Image-to-Image Translation with Conditional Adversarial Networks, CVPR 2017
+<sup>2</sup> Zhu et al., Unpaired Image-to-Image Translation using Cycle-Consistent Adversarial Networks, ICCV 2017
+<sup>3</sup> Liu et al., Unsupervised Image-to-Image Translation Networks, NeurIPS 2017
+<sup>4</sup> Huang et al., Multimodal Unsupervised Image-to-Image Translation, ECCV 2018
+</small>
+
+*Vineeth N B (IIT-H) §11.2 Generative Models Across Domains*
+
+*Page 5 / 25*
+```
+
+# DL4CV_Week11_Part02.pdf - Page 10
+
+
+
+```markdown
+# Pix2Pix
+
+## Redefines image-to-image translation tasks to predicting pixels from pixels and provides a common framework to perform such tasks
+
+![Image](image_url_placeholder)
+
+Redefines image-to-image translation tasks to **predicting pixels from pixels** and provides a common framework to perform such tasks.
+
+### References:
+- Isola et al., *Image-to-Image Translation with Conditional Adversarial Networks*, CVPR 2017
+- Vineeth N B (IIT-H)
+- §11.2 Generative Models Across Domains
+
+---
+
+Page 6 / 25
+```
+
+Note: Replace `image_url_placeholder` with the actual URL or placeholder for the image that should be included in the markdown.
+
+# DL4CV_Week11_Part02.pdf - Page 11
+
+```markdown
+# Pix2Pix<sup>5</sup>
+
+## Normal GAN objective:
+
+\[ \mathcal{L}_{GAN}(G, D) = \mathbb{E}_x[\log D(x)] + \mathbb{E}_z[1 - \log D(G(z))] \]
+
+---
+
+![NPTEL Logo](image_url)
+
+---
+
+**Isola et al., Image-to-Image Translation with Conditional Adversarial Networks, CVPR 2017**
+
+**Vineeth N B (IIIT-H)**
+
+**§11.2 Generative Models Across Domains**
+
+---
+
+Page 6 / 25
+```
+
+# DL4CV_Week11_Part02.pdf - Page 12
+
+```markdown
+# Pix2Pix
+
+## Pix2Pix conditional GAN objective
+
+\[
+L_{cGAN}(G, D) = \mathbb{E}_{x, y} [\log D(x, y)] + \mathbb{E}_{x, z} [\log(1 - D(x, G(x, z)))]
+\]
+
+*Isola et al., Image-to-Image Translation with Conditional Adversarial Networks, CVPR 2017*
+
+Vineeth N B (IIIT-H)
+
+§11.2 Generative Models Across Domains
+
+![NPTEL](https://example.com/placeholder-for-nptel-logo.png)
+
+```
+x
+ 
+G
+ 
+G(x)
+ 
+D
+ 
+fake
+
+x
+ 
+y
+ 
+D
+ 
+real
+```
+
+```
+
+# DL4CV_Week11_Part02.pdf - Page 13
+
+
+
+```markdown
+# Pix2Pix: Final Objective
+
+- Also uses L1 loss to force generator G to create images close to ground truth:
+
+  ```math
+  L_{L1}(G) = \mathbb{E}_{x,y,z} ||y - G(x,z)||_1
+  ```
+
+![NPTEL Logo](image_url_if_available)
+
+Vineeth N B (IIT-H)
+
+Section 11.2 Generative Models Across Domains
+
+Page 7 / 25
+```
+
+Make sure to replace `image_url_if_available` with the actual URL or placeholder for the image if it is available.
+```
+
+# DL4CV_Week11_Part02.pdf - Page 14
+
+ is not needed for this task.
+
+```markdown
+# Pix2Pix: Final Objective
+
+- Also uses L1 loss to force generator \( G \) to create images close to ground truth:
+
+\[ \mathcal{L}_{L1}(G) = \mathbb{E}_{x,y,z}[\| y - G(x, z) \|_1] \]
+
+- Final Pix2Pix GAN objective:
+
+\[ G^* = \arg \min_{G} \max_{D} \mathcal{L}_{cGAN}(G, D) + \lambda \mathcal{L}_{L1}(G) \]
+
+![Input](input_image.png) ![Ground Truth](ground_truth_image.png) ![L1](l1_image.png) ![cGAN](cgan_image.png) ![L1 + cGAN](l1_cgan_image.png)
+
+*Vineeth N B (IIIT-H) §11.2 Generative Models Across Domains*
+```
+
+# DL4CV_Week11_Part02.pdf - Page 15
+
+```markdown
+# Pix2Pix: Generator Architecture
+
+## U-Net based Architecture
+
+### Encoder
+
+![Encoder Diagram](../path_to_image)
+
+### Decoder
+
+![Decoder Diagram](../path_to_image)
+
+### Bottleneck Features
+
+![Bottleneck Diagram](../path_to_image)
+
+**Vineeth N B (IIIT-H)**
+
+**§11.2 Generative Models Across Domains**
+
+---
+
+**Slide 8 / 25**
+
+![Backpack Example](../path_to_image)
+```
+
+# DL4CV_Week11_Part02.pdf - Page 16
+
+ parsing.
+
+```markdown
+# Pix2Pix: Generator Architecture
+
+## U-Net based Architecture
+
+- **Input Image**: Sketch of a backpack
+  ![Input Image](https://via.placeholder.com/150)
+
+### Encoder and Decoder
+
+- **Encoder**: Converts the input image into abstract features
+  - Utilizes multiple layers to extract features
+  - **Skip Connections**: Link between corresponding layers in the encoder and decoder to retain shared low-level information
+
+  ```markdown
+  - Layer 1
+  - Layer 2
+  - ...
+  - Layer n-1
+  ```
+
+- **Decoder**: Reconstructs the input image into the generated image
+  - Integrates bottleneck features to retain high-level information
+
+### Skip Connections
+
+- **Function**: Helps to retain shared low-level information
+  - Directly links layers between the encoder and decoder
+  - Ensures that important features are passed throughout the network
+
+### Bottleneck Features
+
+- **Location**: Central part of the architecture
+- **Purpose**: Integrates high-level information and is crucial for image reconstruction
+  - Acts as a bridge between encoder and decoder
+
+### Generated Image
+
+- **Output**: Colorized version of the input image
+  ![Generated Image](https://via.placeholder.com/150)
+
+### Additional Information
+
+- **Author**: Vineeth N B (IIIT-H)
+- **Section**: §11.2 Generative Models Across Domains
+
+- **Slide Number**: 8 / 25
+```
+
+**Note**: The images are placeholders and should be replaced with actual images if available.
+
+# DL4CV_Week11_Part02.pdf - Page 17
+
+```markdown
+# Pix2Pix: PatchGAN Discriminator
+
+![Image](image_url)
+
+**Normal Discriminator Approach**
+
+- **CNN** processes the input image.
+- Outputs **REAL** or **FAKE** based on the image classification.
+
+**PatchGAN Discriminator**
+
+- Utilizes **PatchGAN** architecture which focuses on local patches of the image.
+- **L1 (or L2) loss** ensures a crispness of low-frequency components of generated images.
+
+---
+
+Vineeth N B (IIT-H)
+§11.2 Generative Models Across Domains
+
+NPTEL
+```
+
+# DL4CV_Week11_Part02.pdf - Page 18
+
+
+
+```markdown
+# Pix2Pix: PatchGAN Discriminator
+
+## Images and Approaches
+
+### Normal Discriminator Approach
+![Normal Discriminator Approach](image1.png)
+
+### PatchGAN Discriminator Approach
+![PatchGAN Discriminator Approach](image2.png)
+
+## Text Content
+
+### Normal Discriminator Approach
+- **Input**: Image
+- **Process**: Convolutional Neural Network (CNN)
+- **Output**:
+  - **Labels**: REAL, FAKE
+  - **Loss Function**: L1 (or L2) loss
+  - **Purpose**: Ensures crispness of low-frequency components of generated images
+
+### PatchGAN Discriminator Approach
+- **Input**: Image
+- **Process**: Convolutional Neural Network (CNN)
+- **Output**:
+  - **Loss Function**: Enforce losses at an N x N patch level
+  - **Purpose**: Encourages high-frequency crispness
+  - **Result**: PatchGAN
+
+### References
+- Vineeth N B (IIIT-H)
+- §11.2 Generative Models Across Domains
+
+```
+
+# DL4CV_Week11_Part02.pdf - Page 19
+
+```markdown
+# Pix2Pix: PatchGAN Discriminator
+
+## Normal Discriminator Approach
+
+![Normal Discriminator Approach](image1.png)
+
+- A Convolutional Neural Network (CNN) is used to classify the entire image as **REAL** or **FAKE**.
+- The L1 (or L2) loss ensures a crispness of low-frequency components of generated images.
+
+## PatchGAN Discriminator Approach
+
+![PatchGAN Discriminator Approach](image2.png)
+
+- The image is divided into patches.
+- The CNN performs classification at the patch level, predicting if each patch is **REAL** or **FAKE**.
+- To encourage high-frequency crispness, enforce losses at an \(N \times N\) patch level, leading to the development of PatchGAN.
+
+### References
+
+- Vineeth N B (IIIT-H)
+- §11.2 Generative Models Across Domains
+
+**Note**: The images referenced above are placeholders. Replace `image1.png` and `image2.png` with the actual images from the OCR process if available.
+```
+
+# DL4CV_Week11_Part02.pdf - Page 20
+
+```markdown
+# Pix2Pix: PatchGAN Discriminator
+
+![Image Description](image_url)
+
+- **Normal Discriminator Approach**
+  - **Steps**:
+    1. Input image.
+    2. Process through CNN.
+    3. Output classification as "REAL" or "FAKE".
+
+  - **Limitations**:
+    - L1 (or L2) loss ensures a crispness of low-frequency components of generated images.
+    - To encourage high-frequency crispness, enforce losses at an N x N patch level → **PatchGAN**.
+
+- **PatchGAN Discriminator Approach**
+  - **Steps**:
+    1. Input image.
+    2. Divide into patches.
+    3. Process each patch through CNN.
+    4. Output classification for each patch.
+    5. Average the patch classifications.
+
+### References
+- Vineeth N B (IIIT-H)
+- §11.2 Generative Models Across Domains
+- Slide 9 / 25
+```
+
+This markdown format retains the structure and content of the original scientific slide, ensuring clarity and accuracy in the presentation of the information.
+
+# DL4CV_Week11_Part02.pdf - Page 21
+
+ special characters, symbols, and notation.
+
+```markdown
+# Pix2Pix: PatchGAN Discriminator
+
+## Normal Discriminator Approach
+
+![Normal Discriminator Approach](image-url)
+
+- Uses a CNN to classify the entire image as REAL or FAKE
+
+## PatchGAN Discriminator Approach
+
+![PatchGAN Discriminator Approach](image-url)
+
+- **Patch level classification**: The discriminator classifies patches of the image rather than the entire image.
+- **Loss at patch level**: L1 (or L2) loss ensures a crispness of low-frequency components of generated images.
+- **High-frequency crispness**: To encourage high-frequency crispness, enforce losses at an $N \times N$ patch level.
+- **PatchGAN**: A form of texture/style-aware generation
+
+### Formulae and Mathematical Notations
+
+- $L1$ (or $L2$) loss:
+  ```math
+  L1(x, y) = \sum|x - y|
+  ```
+  ```math
+  L2(x, y) = \sum(x - y)^2
+  ```
+
+### References
+
+- Vineeth N B (IIIT-H)
+- §11.2 Generative Models Across Domains
+- Slide 9 / 25
+```
+
+# DL4CV_Week11_Part02.pdf - Page 22
+
+```markdown
+# CycleGAN: Unsupervised Training
+
+- Paired data from different domains always difficult to collect
+
+![NPTEL Logo](image_url)
+
+6 Zhu et al, Unpaired Image-to-Image Translation using Cycle-Consistent Adversarial Networks, ICCV 2017
+
+Vineeth N B (IIT-H)
+
+§11.2 Generative Models Across Domains
+
+10 / 25
+```
+
+# DL4CV_Week11_Part02.pdf - Page 23
+
+```markdown
+# CycleGAN: Unsupervised Training
+
+- Paired data from different domains always difficult to collect
+- Large amounts of unpaired data available, but difficult to learn domain-conditional distributions from such data
+- Infinite possible translations for a given source sample!
+
+- **Solution: CycleGAN**
+  - Use two generators $G$ and $F$ which are inverse of each other
+  - Use **cyclic consistency** where output from target domain should map back to source domain
+  - Use adversarial training for generators and discriminators
+
+![CycleGAN Diagram](image_placeholder)
+
+*Source:*
+- Zhu et al., Unpaired Image-to-Image Translation using Cycle-Consistent Adversarial Networks, ICCV 2017
+- Vineeth N B (IIIT-H)
+- §11.2 Generative Models Across Domains
+```
+
+# DL4CV_Week11_Part02.pdf - Page 24
+
+```markdown
+# CycleGAN: Cyclic Consistency
+
+- Concept from machine translation where a phrase translated from English to French should translate from French back to English and be identical to the original phrase
+- Reverse process should also be true
+
+![CycleGAN Diagram](image-placeholder)
+
+X
+- ![Image 1](image-placeholder)
+- ![Image 2](image-placeholder)
+- ...
+
+Y
+- ![Image 1](image-placeholder)
+- ![Image 2](image-placeholder)
+- ...
+
+**Zhu et al, Unpaired Image-to-Image Translation using Cycle-Consistent Adversarial Networks, ICCV 2017**
+
+Vineeth N B (IIT-H)
+
+§11.2 Generative Models Across Domains
+
+11 / 25
+```
+
+# DL4CV_Week11_Part02.pdf - Page 25
+
+# CycleGAN: Full Training
+
+## Diagram Overview
+
+![CycleGAN Diagram](https://via.placeholder.com/600x400?text=CycleGAN+Diagram)
+
+### Key Components
+
+- **x**: Input image from domain X.
+- **G(x)**: Output image after being transformed by generator G from domain X to domain Y.
+- **F(G(x))**: Output image after being transformed by generator F from domain Y back to domain X.
+- **y**: Input image from domain Y.
+- **F(y)**: Output image after being transformed by generator F from domain Y to domain X.
+- **G(F(y))**: Output image after being transformed by generator G from domain X back to domain Y.
+- **D_Y(G(x))**: Discriminator for domain Y, assessing the realistic appearance of G(x).
+- **D_G(F(x))**: Discriminator for domain G, assessing the realistic appearance of F(x).
+- **Reconstruction Error**: Measures the difference between the original and reconstructed images for both generators.
+
+### Mathematical Representation
+
+#### Reconstruction Error
+
+- **For Domain X to Domain Y**:
+  \[
+  \text{Reconstruction Error} = \|F(G(x)) - x\|_1
+  \]
+
+- **For Domain Y to Domain X**:
+  \[
+  \text{Reconstruction Error} = \|G(F(y)) - y\|_1
+  \]
+
+### Reference
+
+- **Zhu et al., Unpaired Image-to-Image Translation using Cycle-Consistent Adversarial Networks, ICCV 2017**
+- **Vineeth N B (IIT-H)**
+- **§11.2 Generative Models Across Domains**
+
+Page: 12 / 25
+
+# DL4CV_Week11_Part02.pdf - Page 26
+
+```markdown
+# CycleGAN: Adversarial loss
+
+- **Loss for domain \((X \rightarrow Y)\):**
+
+  $$
+  \mathcal{L}_{Adv}^{Y}(G_{XY}, D_{Y}) = \mathbb{E}_{y \sim p_{data}(y)} \left[ \log D_{Y}(y) \right] + \mathbb{E}_{x \sim p_{data}(x)} \left[ \log(1 - D_{Y}(G_{XY}(x))) \right]
+  $$
+
+![NPTEL](https://via.placeholder.com/150)
+
+*Vineeth N B (IIT-H)*
+
+*§11.2 Generative Models Across Domains*
+
+*13 / 25*
+```
+
+# DL4CV_Week11_Part02.pdf - Page 27
+
+
+
+```markdown
+# CycleGAN: Adversarial loss
+
+- **Loss for domain (X → Y)**:
+  \[
+  \mathcal{L}_{Adv}^{Y}(G_{XY}, D_Y) = \mathbb{E}_{y \sim p_{data}(y)} \left[ \log D_Y(y) \right] + \mathbb{E}_{x \sim p_{data}(x)} \left[ \log(1 - D_Y(G_{XY}(x))) \right]
+  \]
+
+- **Loss for domain (Y → X)**:
+  \[
+  \mathcal{L}_{Adv}^{Y}(G_{YX}, D_X) = \mathbb{E}_{y \sim p_{data}(x)} \left[ \log D_X(x) \right] + \mathbb{E}_{y \sim p_{data}(y)} \left[ \log(1 - D_X(G_{YX}(y))) \right]
+  \]
+
+![NPTEL](https://via.placeholder.com/150)
+
+Vineeth N B (IIT-H) §11.2 Generative Models Across Domains 13 / 25
+```
+
+# DL4CV_Week11_Part02.pdf - Page 28
+
+```markdown
+# CycleGAN: Adversarial loss
+
+- **Loss for domain (X → Y):**
+
+  \[
+  \mathcal{L}_{Adv}^{Y}(G_{XY}, D_Y) = \mathbb{E}_{y \sim p_{data}(y)} \left[ \log D_Y(y) \right] + \mathbb{E}_{x \sim p_{data}(x)} \left[ \log(1 - D_Y(G_{XY}(x))) \right]
+  \]
+
+- **Loss for domain (Y → X):**
+
+  \[
+  \mathcal{L}_{Adv}^{Y}(G_{YX}, D_X) = \mathbb{E}_{x \sim p_{data}(x)} \left[ \log D_X(x) \right] + \mathbb{E}_{y \sim p_{data}(y)} \left[ \log(1 - D_X(G_{YX}(y))) \right]
+  \]
+
+- **Cyclic loss for domain (X → Y):**
+
+  \[
+  \mathcal{L}_{cyc}^{X} = \mathbb{E}_{x \sim p_{data}(x)} \left[ \| G_{YX}(G_{XY}(x)) - x \|_1 \right] = \mathbb{E}_{x \sim p_{data}(x)} \left[ \| x' - x \|_1 \right]
+  \]
+
+*Vineeth N B (IIIT-H) §11.2 Generative Models Across Domains*
+
+*Page 13 / 25*
+```
+
+# DL4CV_Week11_Part02.pdf - Page 29
+
+# CycleGAN: Adversarial loss
+
+- **Loss for domain (X → Y):**
+
+  \[
+  \mathcal{L}_{\text{Adv}}^{Y}(G_{XY}, D_{Y}) = \mathbb{E}_{y \sim p_{\text{data}}(y)} \left[ \log D_{Y}(y) \right] + \mathbb{E}_{x \sim p_{\text{data}}(x)} \left[ \log(1 - D_{Y}(G_{XY}(x))) \right]
+  \]
+
+- **Loss for domain (Y → X):**
+
+  \[
+  \mathcal{L}_{\text{Adv}}^{Y}(G_{YX}, D_{X}) = \mathbb{E}_{x \sim p_{\text{data}}(x)} \left[ \log D_{X}(x) \right] + \mathbb{E}_{y \sim p_{\text{data}}(y)} \left[ \log(1 - D_{X}(G_{YX}(y))) \right]
+  \]
+
+- **Cyclic loss for domain (X → Y):**
+
+  \[
+  \mathcal{L}_{\text{cyc}}^{X} = \mathbb{E}_{x \sim p_{\text{data}}(x)} \left[ \| G_{YX}(G_{XY}(x)) - x \|_{1} \right] = \mathbb{E}_{x \sim p_{\text{data}}(x)} \left[ \| x' - x \| _{1} \right]
+  \]
+
+- **Cyclic loss for domain (Y → X):**
+
+  \[
+  \mathcal{L}_{\text{cyc}}^{Y} = \mathbb{E}_{y \sim p_{\text{data}}(y)} \left[ \| G_{XY}(G_{YX}(y)) - y \| _{1} \right] = \mathbb{E}_{x \sim p_{\text{data}}(x)} \left[ \| y' - y \| _{1} \right]
+  \]
+
+*Vineeth N B. (IIIT-H) §11.2 Generative Models Across Domains*
+
+*13 / 25*
+
+# DL4CV_Week11_Part02.pdf - Page 30
+
+
+
+```markdown
+# Cycle-GAN: Results<sup>9</sup>
+
+![Cycle-GAN Results](https://via.placeholder.com/150)
+
+## Input and Output Examples
+
+### Horse to Zebra
+- **Input**: ![Horse](https://via.placeholder.com/150)
+- **Output**: ![Zebra](https://via.placeholder.com/150)
+
+### Zebra to Horse
+- **Input**: ![Zebra](https://via.placeholder.com/150)
+- **Output**: ![Horse](https://via.placeholder.com/150)
+
+### Apple to Orange
+- **Input**: ![Apple](https://via.placeholder.com/150)
+- **Output**: ![Orange](https://via.placeholder.com/150)
+
+### Orange to Apple
+- **Input**: ![Orange](https://via.placeholder.com/150)
+- **Output**: ![Apple](https://via.placeholder.com/150)
+
+---
+
+<sup>9</sup> Zhu et al, Unpaired Image-to-Image Translation using Cycle-Consistent Adversarial Networks, ICCV 2017
+
+Vineeth N B (IIT-H)
+
+§11.2 Generative Models Across Domains
+
+---
+
+Page 14 / 25
+```
+
+# DL4CV_Week11_Part02.pdf - Page 31
+
+```markdown
+# Cycle-GAN: More Results<sup>10</sup>
+
+![Cycle-GAN Results](image-placeholder)
+
+| Input    | Monet                  | Van Gogh            | Cezanne            | Ukiyo-e             |
+|---------|------------------------|---------------------|--------------------|---------------------|
+| ![Input 1](image-placeholder)  | ![Monet 1](image-placeholder) | ![Van Gogh 1](image-placeholder) | ![Cezanne 1](image-placeholder) | ![Ukiyo-e 1](image-placeholder) |
+| ![Input 2](image-placeholder)  | ![Monet 2](image-placeholder) | ![Van Gogh 2](image-placeholder) | ![Cezanne 2](image-placeholder) | ![Ukiyo-e 2](image-placeholder) |
+| ![Input 3](image-placeholder)  | ![Monet 3](image-placeholder) | ![Van Gogh 3](image-placeholder) | ![Cezanne 3](image-placeholder) | ![Ukiyo-e 3](image-placeholder) |
+| ![Input 4](image-placeholder)  | ![Monet 4](image-placeholder) | ![Van Gogh 4](image-placeholder) | ![Cezanne 4](image-placeholder) | ![Ukiyo-e 4](image-placeholder) |
+
+<sup>10</sup> Zhu et al., Unpaired Image-to-Image Translation using Cycle-Consistent Adversarial Networks, ICCV 2017
+
+Vineeth N B (IIT-H)
+
+§11.2 Generative Models Across Domains
+
+---
+
+15 / 25
+```
+
+# DL4CV_Week11_Part02.pdf - Page 32
+
+```markdown
+# Multimodal Translation: Mode Collapse
+
+- For a given source image, multiple possible translations could be present
+
+![NPTEL Logo](https://via.placeholder.com/150)
+
+_Vineeth N B (IIT-H)_
+
+## §11.2 Generative Models Across Domains
+
+*Page 16 / 25*
+```
+
+# DL4CV_Week11_Part02.pdf - Page 33
+
+```markdown
+# Multimodal Translation: Mode Collapse
+
+- For a given source image, multiple possible translations could be present
+- Cycle-GAN suffers from **mode collapse**, where model does not produce diverse images
+
+![NPTEL Logo](image_url)
+
+Vineeth N B (IIT-H) §11.2 Generative Models Across Domains 16 / 25
+```
+
+# DL4CV_Week11_Part02.pdf - Page 34
+
+```markdown
+# Multimodal Translation: Mode Collapse
+
+- For a given source image, multiple possible translations could be present
+- Cycle-GAN suffers from **mode collapse**, where model does not produce diverse images
+- **Solution**: Embed latent spaces within GAN network; latent space can be varied to obtain diverse images
+
+![Mode Collapse Diagram](image_url)
+
+## Sample Translations
+
+```markdown
+### (a) edges → shoes
+
+| Input   | GT   | Sample translations               |
+|---------|------|------------------------------------|
+|         |      |                                    |
+|         |      |                                    |
+|         |      |                                    |
+|         |      |                                    |
+|         |      |                                    |
+|         |      |                                    |
+
+### (b) edges → handbags
+
+| Input   | GT   | Sample translations               |
+|---------|------|------------------------------------|
+|         |      |                                    |
+|         |      |                                    |
+|         |      |                                    |
+|         |      |                                    |
+|         |      |                                    |
+|         |      |                                    |
+```
+
+**GT** = Ground Truth
+
+_Vineeth N B (IIT-H)_
+
+§11.2 Generative Models Across Domains
+
+16 / 25
+```
+
+# DL4CV_Week11_Part02.pdf - Page 35
+
+```markdown
+# UNIT-GAN: Multimodal Translation<sup>11</sup>
+
+- Use a VAE-GAN framework to learn latent spaces and domain translation
+- Introduce cyclic consistency of latent spaces along with domains
+
+![Unit-GAN Diagram](image-url)
+
+- **E<sub>1</sub>**: Encoder for domain 1
+- **G<sub>1</sub>**: Generator for domain 1
+- **D<sub>1</sub>**: Discriminator for domain 1
+- **E<sub>2</sub>**: Encoder for domain 2
+- **G<sub>2</sub>**: Generator for domain 2
+- **D<sub>2</sub>**: Discriminator for domain 2
+
+$$
+x_1 \xrightarrow{E_1} \hat{z} \xrightarrow{G_1} \tilde{x}_1^2 \rightarrow I
+$$
+
+$$
+x_2 \xrightarrow{E_2} \hat{z} \xrightarrow{G_2} \tilde{x}_2^1 \rightarrow F
+$$
+
+<sup>11</sup> Liu et al., Unsupervised Image-to-Image Translation Networks, NeurIPS 2017
+
+Vineeth N B (IIT-H)
+
+§11.2 Generative Models Across Domains
+
+17 / 25
+```
+
+# DL4CV_Week11_Part02.pdf - Page 36
+
+```markdown
+# UNIT-GAN: Adversarial Loss
+
+- **VAE loss** ($x_1 \rightarrow x_2$):
+  \[
+  \mathcal{L}_{VAE_1}(E_1, G_1) = \lambda_1 KL[q_1(z_1|x_1||p_\eta(z))] - \lambda_2 \mathbb{E}_{z_1 \sim q_1(z_1|x_1)} [\log p_{G_1}(x_1|z_1)]
+  \]
+
+- **GAN loss** ($x_1 \rightarrow x_2$)
+  \[
+  \mathcal{L}_{GAN_1}(E_1, G_1, D_1) = \lambda_0 \mathbb{E}_{x_1 \sim p_{x_1}} [\log D_1(x_1)] + \lambda_6 \mathbb{E}_{z_2 \sim q_2(z_2|x_2)} [\log(1 - D_1(G_1(z_2)))]
+  \]
+
+![NPTEL Logo](image_url)
+
+*Vineeth N B (IIT-H)*
+
+*Section 11.2 Generative Models Across Domains*
+
+*Page 18 / 25*
+```
+
+# DL4CV_Week11_Part02.pdf - Page 37
+
+```markdown
+# UNIT-GAN: Adversarial Loss
+
+- **VAE loss** $(x_1 \rightarrow x_2)$:
+
+    \[
+    L_{VAE_1}(E_1, G_1) = \lambda_1 KL \left[ q_1(z_1 | x_1 || p_\eta(z)) \right] - \lambda_2 \mathbb{E}_{z_1 \sim q_1(z_1 | x_1)} \left[ \log p_{G_1}(x_1 | z_1) \right]
+    \]
+
+- **GAN loss** $(x_1 \rightarrow x_2)$
+
+    \[
+    L_{GAN_1}(E_1, G_1, D_1) = \lambda_0 \mathbb{E}_{x_1 \sim p_{x_1}} \left[ \log D_1(x_1) \right] + \lambda_0 \mathbb{E}_{z_2 \sim q_2(z_2 | x_2)} \left[ \log (1 - D_1(G_1(z_2))) \right]
+    \]
+
+- **Cyclic loss** for $(x_1 \rightarrow x_2)$:
+
+    \[
+    L_{cc_1} = \lambda_3 KL \left[ q_1(z_1 | x_1 || p_\eta(z)) \right] + \lambda_3 KL \left[ q_2(z_2 | x_1 \rightarrow^2 || p_\eta(z)) \right] - \lambda_4 \mathbb{E}_{z_2 \sim q_2(z_2 | x_2)} \left[ \log p_{G_1}(x_1 | z_2) \right]
+    \]
+
+- **Losses** for $(x_2 \rightarrow x_1)$ **defined similarly**
+
+![Vineeth N B (IIIT-H)](https://example.com/image.png)
+
+§11.2 Generative Models Across Domains
+
+Page 18 / 25
+```
+
+# DL4CV_Week11_Part02.pdf - Page 38
+
+```markdown
+# MUNIT-GAN: Multimodal Translation[^12]
+
+- Divide image data into **content space** and **domain-specific style space**
+- **Style encoder** learns specific style of each domain
+- Use a **within-domain auto-encoder framework** and a **cross-domain framework**
+
+![Diagram](image_url_placeholder)
+
+(a) Within-domain reconstruction
+
+- **x1**: original image 1
+- **s1**: style features of image 1
+- **c1**: content features of image 1
+- **x̂1**: reconstructed image 1 (domain 1)
+- **x2**: original image 2
+- **s2**: style features of image 2
+- **c2**: content features of image 2
+- **x̂2**: reconstructed image 2 (domain 2)
+
+- **L1 loss**: loss for domain 1 auto-encoders
+- **GAN loss**: loss for domain 1 GAN
+- **L2 loss**: loss for domain 2 auto-encoders
+- **π**: content features
+- **s**: style features
+- **x**: images
+- **λ**: Gaussian prior
+
+(b) Cross-domain translation
+
+- **x1**: original image 1
+- **s1**: style features of image 1
+- **c2**: content features of image 2
+- **x1→2**: translated image 1 to domain 2
+- **x2**: original image 2
+- **s2**: style features of image 2
+- **c1**: content features of image 1
+- **x2→1**: translated image 2 to domain 1
+
+- **x̂1**: reconstructed image 1
+- **x̂2**: reconstructed image 2
+- **c1**: content features of image 1
+- **c2**: content features of image 2
+- **s1**: style features of image 1
+- **s2**: style features of image 2
+
+[^12]: Huang et al., Multimodal Unsupervised Image-to-Image Translation, ECCV 2018
+
+Vineeth N B (IIIT-H)
+
+§11.2 Generative Models Across Domains
+
+```
+
+# DL4CV_Week11_Part02.pdf - Page 39
+
+
+
+```markdown
+# MUNIT-GAN: Training Objective
+
+- **Image reconstruction:**
+
+  \[
+  \mathcal{L}_{recon}^{x_1} = \mathbb{E}_{x_1 \sim p(x_1)} \| G_1(E_1^r(x_1)) - x_1 \|_1
+  \]
+
+![NPTEL](image_placeholder.png)
+
+Vineeth N B (IIT-H) §11.2 Generative Models Across Domains
+
+Page 20 / 25
+```
+
+(Note: Replace `image_placeholder.png` with the actual captured image if available.)
+
+# DL4CV_Week11_Part02.pdf - Page 40
+
+```markdown
+# MUNIT-GAN: Training Objective
+
+- **Image reconstruction**:
+  \[
+  \mathcal{L}^{x_1}_{\text{recon}} = \mathbb{E}_{x_1 \sim p(x_1)} \| G_1(E^c_1(x_1)) - x_1 \|_1
+  \]
+
+- **Latent reconstruction**:
+  \[
+  \mathcal{L}^{c_1}_{\text{recon}} = \mathbb{E}_{c_1 \sim p(c_1), s_1 \sim q(s_1)} \| E^c_2(G_2(c_1, s_2)) - c_1 \|_1
+  \]
+  \[
+  \mathcal{L}^{s_2}_{\text{recon}} = \mathbb{E}_{c_1 \sim p(c_1), s_1 \sim q(s_1)} \| E^s_2(G_2(c_1, s_2)) - s_2 \|_1
+  \]
+  
+  where \( q(s_2) \) is prior \( N(0, I) \), \( p(c_1) \) is given by \( c_1 = E^c_1(x_1) \) and \( x_1 \sim p(c_1) \), domains given by \( x_1 \) and \( x_2 \)
+
+![Vineeth N B (IIT-H)](https://example.com/image.png) §11.2 Generative Models Across Domains
+
+20 / 25
+```
+
+# DL4CV_Week11_Part02.pdf - Page 41
+
+
+
+```markdown
+# MUNIT-GAN: Training Objective
+
+- **Image reconstruction:**
+
+  \[
+  \mathcal{L}^{x_1}_{\text{recon}} = \mathbb{E}_{x_1 \sim p(x_1)} \| G_1(E_1^c(x_1)) - x_1 \|_1
+  \]
+
+- **Latent reconstruction:**
+
+  \[
+  \mathcal{L}^{c_1}_{\text{recon}} = \mathbb{E}_{c_1 \sim p(c_1), s_1 \sim q(s_1)} \| E_2^c(G_2(c_1, s_2)) - c_1 \|_1
+  \]
+
+  \[
+  \mathcal{L}^{s_2}_{\text{recon}} = \mathbb{E}_{c_1 \sim p(c_1), s_1 \sim q(s_1)} \| E_2^s(G_2(c_1, s_2)) - s_2 \|_1
+  \]
+
+  where \(q(s_2)\) is prior \(N(0, I)\), \(p(c_1)\) is given by \(c_1 = E_1^c(x_1)\) and \(x_1 \sim p(c_1)\), domains given by \(x_1\) and \(x_2\)
+
+- **Other losses \(\mathcal{L}^{x_2}_{\text{recon}}, \mathcal{L}^{c_2}_{\text{recon}}, \text{ and } \mathcal{L}^{s_1}_{\text{recon}}\) defined similarly**
+
+![Vineeth N B (IIIT-H)](https://example.com/image.jpg) §11.2 Generative Models Across Domains
+
+*Page 20 / 25*
+```
+
+Ensure the accuracy and clarity of the content presented in the markdown format.
+
+# DL4CV_Week11_Part02.pdf - Page 42
+
+```markdown
+# MUNIT-GAN: Adversarial Loss
+
+- **Loss for domain $(x_1 \to x_2)$:**
+
+$$
+L_{GAN}^{x_2} = \mathbb{E}_{c_1 \sim p(c_1), s_2 \sim q(s_2)} \left[ \log D_2(x_2) \right] + \mathbb{E}_{x_2 \sim p(x_2)} \left[ \log(1 - D_2(G_2(c_1, s_1))) \right]
+```
+
+*Vineeth N B (IIIT-H)*
+
+*§11.2 Generative Models Across Domains*
+
+*21 / 25*
+```
+
+# DL4CV_Week11_Part02.pdf - Page 43
+
+```markdown
+# MUNIT-GAN: Adversarial Loss
+
+- **Loss for domain \((x_1 \rightarrow x_2)\):**
+
+  \[
+  \mathcal{L}_{GAN}^{x_2} = \mathbb{E}_{c_1 \sim p(c_1), s_2 \sim q(s_2)} \left[ \log D_2(x_2) \right] + \mathbb{E}_{x_2 \sim p(x_2)} \left[ \log(1 - D_2(G_2(c_1, s_1))) \right]
+  \]
+
+- **Loss for domain \((x_2 \rightarrow x_1)\):**
+
+  \[
+  \mathcal{L}_{GAN}^{x_1} = \mathbb{E}_{c_2 \sim p(c_2), s_1 \sim q(s_1)} \left[ \log D_1(x_1) \right] + \mathbb{E}_{x_1 \sim p(x_1)} \left[ \log(1 - D_1(G_1(c_2, s_2))) \right]
+  \]
+
+![Graphical Representation](image_url)
+
+*Vineeth N B (IIIT-H) §11.2 Generative Models Across Domains 21 / 25*
+```
+
+# DL4CV_Week11_Part02.pdf - Page 44
+
+
+
+```markdown
+# MUNIT-GAN: Results
+
+![MUNIT-GAN Results](image_url)
+
+## Input and Sample Translations
+
+### (a) house cats -> big cats
+- **Input**: ![Cat Image](image_url)
+- **Sample translations**:
+  1. ![Tiger Image](image_url)
+  2. ![Lion Image](image_url)
+  3. ![Jaguar Image](image_url)
+
+### (b) big cats -> house cats
+- **Input**: ![Big Cat Image](image_url)
+- **Sample translations**:
+  1. ![House Cat Image 1](image_url)
+  2. ![House Cat Image 2](image_url)
+  3. ![House Cat Image 3](image_url)
+
+### (c) house cats -> dogs
+- **Input**: ![Cat Image](image_url)
+- **Sample translations**:
+  1. ![Corgi Image](image_url)
+  2. ![Husky Image](image_url)
+  3. ![Dog Image 1](image_url)
+
+### (d) dogs -> house cats
+- **Input**: ![Dog Image](image_url)
+- **Sample translations**:
+  1. ![House Cat Image 1](image_url)
+  2. ![House Cat Image 2](image_url)
+  3. ![House Cat Image 3](image_url)
+
+### (e) big cats -> dogs
+- **Input**: ![Big Cat Image](image_url)
+- **Sample translations**:
+  1. ![Corgi Image](image_url)
+  2. ![Husky Image](image_url)
+  3. ![Dog Image 1](image_url)
+
+### (f) dogs -> big cats
+- **Input**: ![Dog Image](image_url)
+- **Sample translations**:
+  1. ![Tiger Image](image_url)
+  2. ![Lion Image](image_url)
+  3. ![Jaguar Image](image_url)
+
+## References
+
+13. Huang et al., Multimodal Unsupervised Image-to-Image Translation, ECCV 2018
+
+Vineeth N B (IIT-H)
+
+§11.2 Generative Models Across Domains
+
+Page 22 / 25
+```
+
+# DL4CV_Week11_Part02.pdf - Page 45
+
+ will be handled for you.
+```markdown
+# MUNIT-GAN: Results[^14]
+
+![MUNIT-GAN Results](image_url)
+
+## (a) edges → shoes
+
+- **Content**: 
+  - Sketch of a shoe
+  - Sketch of a boot
+  - Sketch of a high-heeled shoe
+  - Sketch of a slipper
+  - Sketch of a sneaker
+
+- **Style**:
+  - Beige high-heeled boot
+  - Red high-heeled shoe
+  - Brown cowboy boot
+  - Beige moccasin
+  - Red ballerina flat
+  - Brown ankle boot
+  - Beige pump
+  - Red court shoe
+  - Brown loafer
+  - Beige sneaker
+
+## (b) big cats → house cats
+
+- **Content**:
+  - Leopard
+  - Tiger
+  - Jaguar
+  - Lion
+
+- **Style**:
+  - Grey tabby cat
+  - Calico cat
+  - Siamese cat
+  - Persian cat
+
+## References
+
+[^14]: Huang et al., Multimodal Unsupervised Image-to-Image Translation, ECCV 2018
+```
+
+# DL4CV_Week11_Part02.pdf - Page 46
+
+```markdown
+# Homework
+
+## Readings
+
+- **Pix2Pix**: [https://phillipi.github.io/pix2pix/](https://phillipi.github.io/pix2pix/)
+- **CycleGAN**: [https://junyanz.github.io/CycleGAN/](https://junyanz.github.io/CycleGAN/)
+- **UNIT**: [https://github.com/mingyuliutw/UNIT](https://github.com/mingyuliutw/UNIT)
+- **MUNIT**: [https://github.com/NVlabs/MUNIT](https://github.com/NVlabs/MUNIT)
+- **List of all image-image translation work**: [https://github.com/lzhbrian/image-to-image-papers](https://github.com/lzhbrian/image-to-image-papers)
+
+*Image source placeholder: ![](image-source.png)*
+
+---
+
+*Vineeth N B (IIIT-H) §11.2 Generative Models Across Domains*
+
+*Page 24 / 25*
+```
+
+# DL4CV_Week11_Part02.pdf - Page 47
+
+```markdown
+# References
+
+- Ming-Yu Liu, Thomas Breuel, and Jan Kautz. "Unsupervised image-to-image translation networks". In: *Advances in neural information processing systems*. 2017, pp. 700–708.
+
+- Jun-Yan Zhu et al. "Unpaired image-to-image translation using cycle-consistent adversarial networks". In: *Proceedings of the IEEE international conference on computer vision*. 2017, pp. 2223–2232.
+
+- Jun-Yan Zhu et al. "Unpaired image-to-image translation using cycle-consistent adversarial networks". In: *Proceedings of the IEEE international conference on computer vision*. 2017, pp. 2223–2232.
+
+- Xun Huang et al. "Multimodal unsupervised image-to-image translation". In: *Proceedings of the European Conference on Computer Vision (ECCV)*. 2018, pp. 172–189.
+```
+

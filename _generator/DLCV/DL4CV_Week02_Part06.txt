@@ -1,0 +1,726 @@
+# DL4CV_Week02_Part06.pdf - Page 1
+
+```markdown
+# Deep Learning for Computer Vision
+
+## Other Feature Spaces
+
+**Vineeth N Balasubramanian**
+
+Department of Computer Science and Engineering
+Indian Institute of Technology, Hyderabad
+
+![Indian Institute of Technology Logo](https://example.com/logo.png)
+
+*Vineeth N B (IIT-H)*
+
+*Section 2.6 Other Feature Spaces*
+
+---
+
+Page 1 / 18
+
+```
+
+# DL4CV_Week02_Part06.pdf - Page 2
+
+```markdown
+# Shape Context
+
+![Log-polar binning over 12 x 5 bins](image_url)
+
+**Log-polar representation:**
+- Coordinate system in two dimensions parametrized by logarithmic distance from origin and angle.
+- For each point taken on edge of shape, count number of points in each log-polar bin.
+- More precision for nearby points, more flexibility for farther points.
+- It is translation- and scale-invariant
+
+**Credit:** Derek Hoiem, UIUC
+
+Vineeth N B. (IIIT-H)
+
+§2.6 Other Feature Spaces
+
+2 / 18
+```
+
+# DL4CV_Week02_Part06.pdf - Page 3
+
+```markdown
+# Shape Context
+
+![Shape Context Image](image_url)
+
+- **As graphs of \( \circ \) and \( \diamond \) points match, they are correspondence points between the two As.**
+
+- **Two points said to be in correspondence if they minimize value of \( C_{ij} \) given by:**
+
+  \[
+  C_{ij} = \frac{1}{2} \sum_{k=1}^{K} \frac{\left[ h_i(k) - h_j(k') \right]^2}{h_i(k) + h_j(k')}
+  \]
+
+  where \( h_i \) and \( h_j \) are histogram representations of two points \( i \) and \( j \) across figures and \( K \) is total number of bins (12 × 5 = 60).
+
+![Histograms over Log-polar binning for points \( \circ, \diamond, \triangle \) respectively](histogram_image_url)
+
+Vineeth N B (IIIT-H) §2.6 Other Feature Spaces 3 / 18
+```
+
+# DL4CV_Week02_Part06.pdf - Page 4
+
+```markdown
+# Shape Context
+
+![Shape Context Diagram](image-link)
+
+- **One-to-one point matching** is done sequentially w.r.t. correspondence point
+- **Distance less than a threshold** implies shape match
+
+![NPTEL Logo](image-link)
+
+**Vineeth N B (IIT-H)**
+
+**§2.6 Other Feature Spaces**
+
+4 / 18
+```
+
+# DL4CV_Week02_Part06.pdf - Page 5
+
+```markdown
+# MSER: Maximally Stable Extremal Regions
+
+- **Method for blob detection in images**, based on Watershed segmentation algorithm
+
+- **Identify regions in image** that stay nearly the same through wide range of gray-level thresholds
+
+  - Sweep threshold of intensity from black to white, performing a simple luminance thresholding of image
+
+- **Extract connected components (Extremal Regions)**
+
+- **Region descriptors** serve as features
+
+![Diagram Placeholder](https://via.placeholder.com/150)
+
+*Vineeth N B (IIT-H)*
+
+*§2.6 Other Feature Spaces*
+
+*Page 5 / 18*
+```
+
+# DL4CV_Week02_Part06.pdf - Page 6
+
+```markdown
+# MSER: Maximally Stable Extremal Regions
+
+- **Method for blob detection in images**, based on Watershed segmentation algorithm
+
+- **Identify regions in image** that stay nearly the same through a wide range of gray-level thresholds
+
+- **Sweep threshold of intensity** from black to white, performing a simple luminance thresholding of image
+
+- **Extract connected components (Extremal Regions)**
+
+- **Region descriptors serve as features**
+
+*Vineeth N B (IIIT-H)*
+*§2.6 Other Feature Spaces*
+*5 / 18*
+
+![Image Placeholder](image-url)
+```
+
+Note: Replace `image-url` with the actual URL or placeholder for the image if available.
+
+# DL4CV_Week02_Part06.pdf - Page 7
+
+```markdown
+# MSER: Methodology and Notation
+
+- As we start thresholding the image about a grey-scale intensity level (q), regions (or blobs, a collection of pixels) appear
+
+![NPTEL logo](image_url)
+
+*Vineeth N B (IIT-H)*
+
+**Section 2.6: Other Feature Spaces**
+
+*Page 6 / 18*
+```
+
+# DL4CV_Week02_Part06.pdf - Page 8
+
+```markdown
+# MSER: Methodology and Notation
+
+- As we start thresholding the image about a grey-scale intensity level \( g \), regions (or blobs, a collection of pixels) appear
+
+- As we decrease value of \( g \), new regions appear, or regions at higher \( g \) values coalesce. Such regions can be depicted in a tree-like structure
+
+![NPTEL Logo](image_url)
+
+*Vineeth N B (IIT-H) §2.6 Other Feature Spaces*
+
+*Page 6 / 18*
+```
+
+# DL4CV_Week02_Part06.pdf - Page 9
+
+```markdown
+# MSER: Methodology and Notation
+
+- As we start thresholding the image about a grey-scale intensity level (g), regions (or blobs, a collection of pixels) appear
+- As we decrease value of g, new regions appear, or regions at higher g values coalesce. Such regions can be depicted in a tree-like structure
+- Regions at a particular g level denoted as: \( R_1^g, R_2^g, ..., R_n^g \) where \( |R_i^g| = \) total number of pixels in \( R_i^g \)
+- Define \( \Psi(\cdot) \) as:
+
+  \[
+  \Psi(R_i^g) = \frac{|R_j^{g-\Delta}| - |R_k^{g+\Delta}|}{|R_i^g|}
+  \]
+
+  where \( \Delta = \) manually chosen intensity buffer, \( R_j \) and \( R_k \) are parent and child regions at levels \( g - \Delta \) and \( g + \Delta \) in the tree
+
+- **MSER regions**: Regions where \( \Psi(\cdot) \) is below a user-defined threshold
+
+*Vineeth N B (IIT-H) §2.6 Other Feature Spaces*
+
+![Image](image-url)
+
+```
+
+# DL4CV_Week02_Part06.pdf - Page 10
+
+```markdown
+# MSER: Example
+
+![Image](image.png)
+
+## Levels and Regions
+
+### Level \( g = 75 \)
+
+- **Region 1**
+  - Size: 864
+
+### Level \( g = 105 \)
+
+- **Region 2**
+  - Size: 1283
+
+- **Region 3**
+  - Size: 271
+
+### Level \( g = 135 \)
+
+- **Region 4**
+  - Size: 970
+
+- **Region 5**
+  - Size: 278
+
+- **Region 6**
+  - Size: 201
+
+### Level \( g = 165 \)
+
+- **Region 7**
+  - Size: 869
+  - ![Region 7 Image](region7.png)
+
+- **Region 8**
+  - Size: 212
+
+### Level \( g = 195 \)
+
+- **Region 9**
+  - Size: 745
+  - ![Region 9 Image](region9.png)
+
+- **Region 10**
+  - Size: 210
+  - ![Region 10 Image](region10.png)
+
+---
+
+## Input Image
+
+![Input Image](input_image.png)
+
+### Various Levels
+
+- **Level \( u = 75 \)**
+  - ![Level 75 Image](level75.png)
+
+- **Level \( u = 105 \)**
+  - ![Level 105 Image](level105.png)
+
+- **Level \( u = 135 \)**
+  - ![Level 135 Image](level135.png)
+
+- **Level \( u = 165 \)**
+  - ![Level 165 Image](level165.png)
+
+- **Level \( u = 195 \)**
+  - ![Level 195 Image](level195.png)
+
+- **Level \( u = 225 \)**
+  - ![Level 225 Image](level225.png)
+
+- **Level \( u = 255 \)**
+  - ![Level 255 Image](level255.png)
+
+---
+
+**Credit**: Fred A. Hamprecht
+
+---
+
+Vineeth N B (IIT-H)
+
+§2.6 Other Feature Spaces
+```
+
+# DL4CV_Week02_Part06.pdf - Page 11
+
+```markdown
+# MSER: Example
+
+![MSER Example](image_url)
+
+**Credit**: Alberto Del Bimbo
+
+*Vineeth N B (IIT-H)*
+
+## Other Feature Spaces
+
+From white to black:
+```
+![From white to black](image_url)
+
+Row 1:
+1. ![Image 1](image_url)
+2. ![Image 2](image_url)
+3. ![Image 3](image_url)
+4. ![Image 4](image_url)
+5. ![Image 5](image_url)
+
+Row 2:
+1. ![Image 1](image_url)
+2. ![Image 2](image_url)
+3. ![Image 3](image_url)
+4. ![Image 4](image_url)
+5. ![Image 5](image_url)
+
+Row 3:
+1. ![Image 1](image_url)
+2. ![Image 2](image_url)
+3. ![Image 3](image_url)
+4. ![Image 4](image_url)
+5. ![Image 5](image_url)
+
+Row 4:
+1. ![Image 1](image_url)
+2. ![Image 2](image_url)
+3. ![Image 3](image_url)
+4. ![Image 4](image_url)
+5. ![Image 5](image_url)
+```
+
+From black to white:
+```
+![From black to white](image_url)
+
+Row 1:
+1. ![Image 1](image_url)
+2. ![Image 2](image_url)
+3. ![Image 3](image_url)
+4. ![Image 4](image_url)
+5. ![Image 5](image_url)
+
+Row 2:
+1. ![Image 1](image_url)
+2. ![Image 2](image_url)
+3. ![Image 3](image_url)
+4. ![Image 4](image_url)
+5. ![Image 5](image_url)
+
+Row 3:
+1. ![Image 1](image_url)
+2. ![Image 2](image_url)
+3. ![Image 3](image_url)
+4. ![Image 4](image_url)
+5. ![Image 5](image_url)
+
+Row 4:
+1. ![Image 1](image_url)
+2. ![Image 2](image_url)
+3. ![Image 3](image_url)
+4. ![Image 4](image_url)
+5. ![Image 5](image_url)
+```
+
+```
+
+# DL4CV_Week02_Part06.pdf - Page 12
+
+```markdown
+# Histogram of Oriented Gradients
+
+![Histogram of Oriented Gradients](image_url)
+
+## Detection Process
+
+1. **detection window selected on image**
+   - At each location where the gradient magnitude and gradients are computed.
+
+2. **orientation histogram**
+   - Window is evenly partitioned into relative cells and each pixel of the cell contributes to cell gradient orientation histogram.
+
+3. **orientation histograms for different blocks of cells**
+   - These histograms are normalized and collected to form the descriptor of the cell.
+   - This is called Contrast Normalization.
+
+4. **final descriptor**
+   - Intensity orientation in a cell.
+
+5. **histogram**
+   - Binning and weighted voting of magnitude.
+
+![Credit: Michał Olejniczak, Marek Kraft](image_url)
+   - Vineeth N B (IIT-H)
+   - §2.6 Other Feature Spaces
+
+---
+
+*Section headings and descriptions are provided in the detailed markdown format as per the instructions.*
+
+### Detection Process
+
+1. **detection window selected on image**
+   - At each location where the gradient magnitude and gradients are computed.
+
+2. **orientation histogram**
+   - Window is evenly partitioned into relative cells and each pixel of the cell contributes to cell gradient orientation histogram.
+
+3. **orientation histograms for different blocks of cells**
+   - These histograms are normalized and collected to form the descriptor of the cell.
+   - This is called Contrast Normalization.
+
+4. **final descriptor**
+   - Intensity orientation in a cell.
+
+5. **histogram**
+   - Binning and weighted voting of magnitude.
+
+---
+
+**Credit:**
+- Michał Olejniczak, Marek Kraft
+- Vineeth N B (IIT-H)
+- §2.6 Other Feature Spaces
+```
+
+# DL4CV_Week02_Part06.pdf - Page 13
+
+```markdown
+# Pyramidal HoG (PHoG)
+
+![Image of flower](image_url)
+
+- Divide image into \(2^l \times 2^l\) cells at each pyramid level, \( l \).
+
+  ![Pyramid image](pyramid_image_url)
+
+- HOG descriptors with same dimension are extracted over each cell.
+
+  ![HOG descriptor](hog_descriptor_image_url)
+
+- Final PHOG descriptor is concatenation of the HOG descriptors at different pyramid levels.
+
+  ![Final descriptor](final_descriptor_image_url)
+
+- Captures spatial relationship of oriented gradients better than HOG.
+
+![Credit Logo](credit_logo_image_url)
+
+**Credit:** Bosch, Zisserman, Munoz 2007
+
+Vineeth N B (IIT-H)
+
+§2.6 Other Feature Spaces
+
+10 / 18
+```
+
+# DL4CV_Week02_Part06.pdf - Page 14
+
+```markdown
+# Local Binary Patterns
+
+![Image of Indian Institute of Technology Hyderabad](image_url)
+
+## Extracting and Converting Local Binary Patterns
+
+### 3x3 Pixels Example
+- **Original Image**: A section of an image from the Indian Institute of Technology Hyderabad.
+- **Highlighted Section**: A 3x3 pixel section extracted from the image.
+
+### Threshold Calculation
+The pixel values in the 3x3 section are used to determine the threshold value for converting the image to a binary pattern.
+
+|   |   |   |
+|---|---|---|
+| 116 | 116 | 128 |
+| 254 | 209 | 155 |
+| 255 | 252 | 252 |
+
+**Threshold**: 209
+
+### Binary Pattern Formation
+The threshold value of 209 is applied to the pixel values to convert them into a binary pattern.
+
+|   |   |   |
+|---|---|---|
+| 0 | 0 | 0 |
+| 1 | 0 | 0 |
+| 1 | 1 | 1 |
+
+**Binary Pattern**: 00001111
+
+### Decimal Conversion
+The binary pattern is then converted into its decimal equivalent.
+
+```
+150 90  80
+ 30 15 ...
+ ...
+```
+
+**Decimal**: 15
+
+## References
+- Vineeth N B (IIT-H)
+- §2.6 Other Feature Spaces
+
+---
+
+*Date: 2023-11-18*
+```
+
+# DL4CV_Week02_Part06.pdf - Page 15
+
+```markdown
+# Local Binary Patterns
+
+## Different radii (R) and neighbours (P) can be considered for per-pixel binary encoding
+
+- Bilinear interpolation done if point shares pixels
+
+### Credit: Ojala, Pietikainen, Harwood 2007
+
+![Image](image_url)
+
+```math
+P = 8, R = 2
+```
+![Image](image_url)
+
+```math
+P = 8, R = 1
+```
+![Image](image_url)
+
+```math
+P = 12, R = 2
+```
+![Image](image_url)
+
+```math
+P = 12, R = 3
+```
+![Image](image_url)
+
+## Vineeth N B (IIT-H)
+
+### §2.6 Other Feature Spaces
+```
+12 / 18
+```
+
+# DL4CV_Week02_Part06.pdf - Page 16
+
+```markdown
+# Local Binary Patterns
+
+![Local Binary Patterns](https://via.placeholder.com/150)
+
+- **Original Image**
+  ![Original Image](https://via.placeholder.com/150)
+
+  ![Image of IIT-H](https://via.placeholder.com/150)
+
+- **LBP result**
+  ![LBP Result](https://via.placeholder.com/150)
+
+  ![Image of IIT-H](https://via.placeholder.com/150)
+
+- **Regions/Grids**
+  ![Regions/Grids](https://via.placeholder.com/150)
+
+  ![Image of IIT-H](https://via.placeholder.com/150)
+
+- **Histogram of each region**
+  ![Histogram](https://via.placeholder.com/150)
+
+  ![Combined Histogram](https://via.placeholder.com/150)
+
+- **Concatenated Histogram**
+  ![Concatenated Histogram](https://via.placeholder.com/150)
+
+### Vineeth N B (IIT-H)
+
+#### §2.6 Other Feature Spaces
+
+---
+
+**NPTEL**
+
+13 / 18
+```
+
+# DL4CV_Week02_Part06.pdf - Page 17
+
+```markdown
+# Comparison of Feature Detectors
+
+## Table 7.1 Overview of feature detectors.
+
+| Feature Detector | Corner | Blob | Region | Rotation invariant | Scale invariant | Affine invariant | Repeatability | Localization accuracy | Robustness | Efficiency |
+|------------------|--------|------|--------|---------------------|-----------------|------------------|--------------|-----------------------|------------|-----------|
+| Harris          | ✓      |      |        | ✓                   |                |                 | +++          | +++                  | +++        | ++        |
+| Hessian         |        | ✓    |        | ✓                   |                |                 | ++           | ++                   | ++         | +         |
+| SUSAN           | ✓      |      |        |                     |                |                 | ++           | ++                   | ++         | +++       |
+| Harris-Laplace  | ✓      | (✓)  |        | ✓                   | ✓              |                 | +++          | +++                  | ++         | +         |
+| Hessian-Laplace | (✓)   | ✓    |        | ✓                   | ✓              |                 | +++          | +++                  | +++        | +         |
+| DoG             | (✓)   | ✓    |        | ✓                   | ✓              |                 | ++           | ++                   | ++         | ++        |
+| SURF            | (✓)   | ✓    |        | ✓                   | ✓              | ✓               | ++           | ++                   | +++        | +         |
+| Harris-Affine   | ✓      | (✓)  |        | ✓                   | ✓              | ✓               | +++          | +++                  | ++         | ++        |
+| Hessian-Affine  | (✓)   | ✓    |        | ✓                   | ✓              | ✓               | +++          | +++                  | +++        | ++        |
+| Salient Regions | (✓)   | ✓    |        |                     |                | (✓)             | +            | +                    | ++         | +         |
+| Edge-based      | ✓      |      |        | ✓                   | ✓              |                 | +++          | +++                  | ++         | +         |
+| MSER            |        | ✓    |        | ✓                   | ✓              |                 | +++          | +++                  | +++        | +         |
+| Intensity-based | ✓      |      |        | ✓                   |                |                 | ++           | ++                   | ++         | ++        |
+| Superpixels     | ✓      | ✓    | (✓)   | ✓                   | ✓              | (✓)             | +            | +                    | ++         | +         |
+
+*Credit: Tuytelaars, Mikolajczyk 2008*
+
+*Vineeth N B (IIIT-H) §2.6 Other Feature Spaces*
+
+---
+
+*Page 14 / 18*
+```
+
+# DL4CV_Week02_Part06.pdf - Page 18
+
+```markdown
+# ...and along came Deep Learning
+
+![Image of comic strip](https://xkcd.com/1425/)
+
+**Comic Strip Text:**
+
+- **Panel 1:**
+  WHEN A USER TAKES A PHOTO
+  THE APP SHOULD CHECK WHETHER
+  THEY'RE IN A NATIONAL PARK...
+  SURE, EASY GIS LOOKS LIKE IT WOULD
+  GIMME A FEW HOURS...
+  ...AND CHECK WHETHER
+  THE PHOTO IS OF A BIRD.
+  I'LL NEED A RESEARCH TEAM AND FIVE YEARS.
+
+- **Panel 2:**
+  IN CS IT CAN BE HARD TO EXPLAIN
+  THE DIFFERENCE BETWEEN THE EASY
+  AND THE VIRTUALLY IMPOSSIBLE.
+
+**Main Text:**
+
+In the 60s, Marvin Minsky assigned a couple of undergrads to spend the summer programming a computer to use a camera to identify objects in a scene. He figured they’d have the problem solved by the end of the summer.
+
+Over 45 years later, came along deep learning...
+
+**Credit:**
+xkcd comics, [https://xkcd.com/1425/](https://xkcd.com/1425/)
+
+_Vineeth N B (IIT-H)_
+
+§2.6 Other Feature Spaces
+
+15 / 18
+```
+
+# DL4CV_Week02_Part06.pdf - Page 19
+
+```markdown
+# Homework
+
+## Readings
+
+- Chapter 4.1.1, 4.1.2, Szeliski, *Computer Vision: Algorithms and Applications*
+
+## Further Readings
+
+- **Feature Detectors in Computer Vision**: [Wikipedia](https://en.wikipedia.org/wiki/Feature_detectors_in_computer_vision)
+- **Shape Context**: [Wikipedia](https://en.wikipedia.org/wiki/Shape_context)
+- **MSER**: [Wikipedia](https://en.wikipedia.org/wiki/Maximally_stable_extremal_regions)
+- **HoG**: [Wikipedia](https://en.wikipedia.org/wiki/Histogram_of_oriented_gradients)
+
+![NPTel Logo](https://example.com/logo.png)
+
+*Vineeth N B (IIT-H) §2.6 Other Feature Spaces*
+```
+
+# DL4CV_Week02_Part06.pdf - Page 20
+
+```markdown
+# References
+
+## References
+
+- **T. Ojala, M. Pietikainen, and D. Harwood.** "Performance evaluation of texture measures with classification based on Kullback discrimination of distributions". In: *Proceedings of 12th International Conference on Pattern Recognition*. Vol. 1. 1994, 582–585 vol.1.
+
+- **Serge Belongie, Jitendra Malik, and Jan Puzicha.** "Shape matching and object recognition using shape contexts". In: *IEEE transactions on pattern analysis and machine intelligence* 24.4 (2002), pp. 509–522.
+
+- **Jiri Matas et al.** "Robust wide-baseline stereo from maximally stable extremal regions". In: *Image and vision computing* 22.10 (2004), pp. 761–767.
+
+- **Navneet Dalal and Bill Triggs.** "Histograms of Oriented Gradients for Human Detection". In: *Proceedings of the 2005 IEEE Computer Society Conference on Computer Vision and Pattern Recognition (CVPR'05)* - Volume 1 - Volume 01. CVPR '05. USA: IEEE Computer Society, 2005, 886–893.
+
+- **Anna Bosch, Andrew Zisserman, and Xavier Munoz.** "Representing Shape with a Spatial Pyramid Kernel". In: *Proceedings of the 6th ACM International Conference on Image and Video Retrieval*. CIVR '07. Amsterdam, The Netherlands: Association for Computing Machinery, 2007, 401–408.
+
+--- 
+
+*Vineeth N B (IIT-H) §2.6 Other Feature Spaces*
+
+--- 
+
+*Page 17 / 18*
+```
+
+# DL4CV_Week02_Part06.pdf - Page 21
+
+```markdown
+# References II
+
+- [ ] Tinne Tuytelaars and Krystian Mikolajczyk. *Local invariant feature detectors: a survey*. Now Publishers Inc, 2008.
+- [ ] Richard Szeliski. *Computer Vision: Algorithms and Applications*. Texts in Computer Science. London: Springer-Verlag, 2011.
+
+![NPTEL Logo](image_url)
+
+Vineeth N B (IIT-H) §2.6 Other Feature Spaces
+
+Page 18 / 18
+```
+

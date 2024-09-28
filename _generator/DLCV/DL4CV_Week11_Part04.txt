@@ -1,0 +1,1096 @@
+# DL4CV_Week11_Part04.pdf - Page 1
+
+```markdown
+# Deep Learning for Computer Vision
+
+## Deep Generative Models: Image Applications
+
+**Vineeth N Balasubramanian**
+
+Department of Computer Science and Engineering
+Indian Institute of Technology, Hyderabad
+
+![IIT Logo](image-url)
+
+---
+
+Vineeth N B (IIT-H)
+
+Section 11.4 Deep Generative Models: Applications
+
+---
+
+## Outline
+
+1. Introduction to Generative Models
+2. Variational Autoencoders (VAEs)
+3. Generative Adversarial Networks (GANs)
+4. Applications in Image Synthesis
+5. Challenges and Future Directions
+
+---
+
+### 1. Introduction to Generative Models
+
+- Generative models are used to learn the probability distribution of a dataset.
+- They can generate new data points that resemble the training data.
+- Examples include VAEs and GANs.
+
+### 2. Variational Autoencoders (VAEs)
+
+- VAEs are composed of an encoder and a decoder.
+- The encoder maps the input data to a lower-dimensional latent space.
+- The decoder reconstructs the input data from the latent space representation.
+
+```math
+P(x|z) \sim N(\mu, \sigma^2)
+```
+
+### 3. Generative Adversarial Networks (GANs)
+
+- GANs consist of a generator and a discriminator.
+- The generator creates synthetic data, while the discriminator distinguishes real data from fake.
+
+```math
+\text{min}_G \max_D V(D, G) = \mathbb{E}_{x \sim p_{\text{data}}(x)}[\log D(x)]
++ \mathbb{E}_{z \sim p_z(z)}[\log (1 - D(G(z)))]
+```
+
+### 4. Applications in Image Synthesis
+
+- **Image Super-Resolution**: Increasing the resolution of images using GANs.
+- **Image Inpainting**: Filling in missing parts of an image.
+- **Image-to-Image Translation**: Converting an image from one domain to another.
+
+### 5. Challenges and Future Directions
+
+- **Mode Collapse**: GANs can sometimes collapse to a limited number of modes.
+- **Training Instability**: GANs are notoriously difficult to train.
+- **Future Work**: Improving training stability, overcoming mode collapse, and exploring new architectures.
+
+---
+
+1 / 22
+```
+
+# DL4CV_Week11_Part04.pdf - Page 2
+
+ the text content only.
+
+```markdown
+# Homework
+
+## Question: Why is MI Gap and not MI used as a metric for disentanglement?
+```
+
+```
+
+# DL4CV_Week11_Part04.pdf - Page 3
+
+
+
+```markdown
+# Homework
+
+**Question:** Why is MI Gap and not MI used as a metric for disentanglement?
+
+- MI Gap penalizes unaligned latent variables (contains information about more than one generative factor) → undesirable for disentanglement
+- If one latent variable reliably models a generative factor, not required for other latent variables to be informative about this factor
+- Read Chen et al, Isolating Sources of Disentanglement in Variational Autoencoders, NeurIPS 2018 for more information!
+
+_Vineeth N B (IIT-H)_
+## §11.4 Deep Generative Models: Applications
+
+2 / 22
+```
+
+Note: Placeholders for images or diagrams should be indicated using descriptions like `[Image Description]` if OCR cannot directly capture them.
+
+# DL4CV_Week11_Part04.pdf - Page 4
+
+# GANs for Image Editing
+
+- Simple image edits such as grayscaling, brightness adjustment or contrast don’t require an understanding of the image
+
+![NPTEL Logo](image_url)
+
+Vineeth N B (IIT-H) §11.4 Deep Generative Models: Applications 3 / 22
+
+# DL4CV_Week11_Part04.pdf - Page 5
+
+```markdown
+# GANs for Image Editing
+
+- Simple image edits such as grayscaling, brightness adjustment or contrast **don’t require an understanding of the image**
+
+  ![Real image](image1.png) ![Reconstructed images](image2.png)
+
+  **Real image**
+
+  **Reconstructed images**
+
+  | Blonde          | Bangs           | Smile          | Male          |
+  | --------------- | --------------- | -------------- | ------------- |
+  | ![Blonde](blonde.png) | ![Bangs](bangs.png) | ![Smile](smile.png) | ![Male](male.png) |
+
+- However, challenging operations such as changing attributes of a face **require sound understanding of the input image. Can GANs help?**
+
+*Vineeth N R B. (IIIT-H) §11.4 Deep Generative Models: Applications 3 / 22*
+```
+
+# DL4CV_Week11_Part04.pdf - Page 6
+
+ the provided content is a slide from a presentation titled "GANs for Image Editing".
+
+### Slide Content:
+
+#### GANs for Image Editing
+
+- **Simple image edits** such as grayscaling, brightness adjustment or contrast don't require an understanding of the image
+
+**Real image**
+
+| Real image | Blonde | Bangs | Smile | Male |
+|-------------|--------|-------|-------|------|
+| ![Real image](image1.jpg) | ![Blonde](image2.jpg) | ![Bangs](image3.jpg) | ![Smile](image4.jpg) | ![Male](image5.jpg) |
+
+**Reconstructed images**
+
+- However, challenging operations such as changing attributes of a face require sound understanding of the input image. Can GANs help?
+- But a GAN on its own does not have the mechanism to map a real image to its latent representation
+
+**Source:**
+- Vineeth N B (IIT-H)
+- §11.4 Deep Generative Models: Applications
+- Slide 3/22
+
+---
+
+### Markdown:
+
+```markdown
+# GANs for Image Editing
+
+- **Simple image edits** such as grayscaling, brightness adjustment or contrast don't require an understanding of the image
+
+**Real image**
+
+| Real image | Blonde | Bangs | Smile | Male |
+|-------------|--------|-------|-------|------|
+| ![Real image](image1.jpg) | ![Blonde](image2.jpg) | ![Bangs](image3.jpg) | ![Smile](image4.jpg) | ![Male](image5.jpg) |
+
+**Reconstructed images**
+
+- However, challenging operations such as changing attributes of a face require sound understanding of the input image. Can GANs help?
+- But a GAN on its own does not have the mechanism to map a real image to its latent representation
+
+**Source:**
+- Vineeth N B (IIT-H)
+- §11.4 Deep Generative Models: Applications
+- Slide 3/22
+```
+
+Ensure that the images are correctly referenced if they are available in the source file.
+
+# DL4CV_Week11_Part04.pdf - Page 7
+
+:
+
+```markdown
+# Image Editing with Invertible Conditional GANs (IcGAN)
+
+- Combines a conditional GAN with an encoder which can encode an image to its latent representation
+
+![Image Editing Process](image_placeholder.png)
+
+- **Input Image (x)**: An image of a person
+- **Encoder (E_z)**: Encodes the input image into a latent representation (z)
+- **Latent Representation (z)**: Vector representation of the input image
+- **Attribute Vector (y)**: Describes the attributes of the input image (female, black hair, brown hair, make-up, sunglasses)
+- **Modified Attribute Vector (y')**: Describes the desired attributes of the edited image (female, black hair, brown hair, make-up, no sunglasses)
+- **Generator (G)**: Decodes the latent representation and the modified attribute vector to generate the edited image (x')
+- **Output Image (x')**: Edited image of the person with the desired attributes
+
+### References
+
+1. Perarnau et al., *Invertible Conditional GANs for Image Editing*, NeurIPS-W 2016
+2. Vineeth N B (IIT-H), *§11.4 Deep Generative Models: Applications*
+```
+
+Ensure that all the extracted text and symbols are correctly formatted, and maintain the scientific integrity of the content. If an image or graph is present but not captured in the OCR process, use a placeholder and describe it appropriately.
+
+# DL4CV_Week11_Part04.pdf - Page 8
+
+!
+
+# Image Editing with Invertible Conditional GANs (IcGAN)
+
+- Combines a conditional GAN with an encoder which can encode an image to its latent representation
+
+![Encoder](link_to_encoder_image)
+![Generator](link_to_generator_image)
+
+- Can be used for face editing as follows:
+  1. Pass image through encoder;
+  2. Change attribute vector \( y \);
+  3. Pass through generator
+
+\`\`\`math
+x \rightarrow E_z(x) \rightarrow y' \rightarrow G(y') \rightarrow x'
+\`\`\`
+
+![IcGAN](link_to_icgan_image)
+![cGAN](link_to_cgan_image)
+
+\`\`\`math
+\begin{array}{ccc}
+\text{female} & 1 & 0 \\
+\text{black hair} & 0 & 1 \\
+\text{brown hair} & 1 & 0 \\
+\text{make-up} & 1 & 0 \\
+\text{sunglasses} & 0 & 1
+\end{array}
+\`\`\`
+
+\`\`\`math
+\begin{array}{ccc}
+\text{female} & 1 & 0 \\
+\text{black hair} & 0 & 1 \\
+\text{brown hair} & 1 & 0 \\
+\text{make-up} & 1 & 0 \\
+\text{sunglasses} & 0 & 1
+\end{array}
+\`\`\`
+
+### Reference
+Perarnau et al., Invertible Conditional GANs for Image Editing. NeurIPS-W 2016
+Vineeth N B (IIT-H)
+§11.4 Deep Generative Models: Applications
+
+---
+
+This output maintains the structure and formatting of the original scientific content presented in the image, ensuring that all mathematical expressions, symbols, and sections are accurately captured and formatted.
+
+# DL4CV_Week11_Part04.pdf - Page 9
+
+
+
+```markdown
+# Invertible Conditional GANs
+
+- **Generator** $G$ samples an image $x'$ from a latent representation $z$ and conditional information $y$ i.e., $G(z, y) = x'$ 
+
+  ![Generator Process](image_url)
+
+  - Encoder $E_z$
+  - Encoder $E_y$
+
+  **IcGAN**
+
+  - Encoder performs the inverse i.e., $E(x) = (z, y)$
+
+  **cGAN**
+
+  - Change vector:
+    - Female: 1
+    - Black hair: 0
+    - Brown hair: 1
+    - Make-up: 0
+    - Sunglasses: 0
+
+  - Change vector:
+    - Female: 1
+    - Black hair: 1
+    - Brown hair: 0
+    - Make-up: 1
+    - Sunglasses: 0
+
+**Vineeth N B** (IIIT-H) 
+**§11.4 Deep Generative Models: Applications**
+```
+
+(Note: Replace `image_url` with the actual URL or placeholder for the image if it can't be directly extracted.)
+
+# DL4CV_Week11_Part04.pdf - Page 10
+
+:
+
+```markdown
+# Training IcGAN
+
+- First, a conditional GAN is trained to optimize the following objective:
+
+  ```math
+  \min_{\theta_g} \max_{\theta_d} v(\theta_g, \theta_d) = E_{x, y \sim p_{data}}[\log D(x, y)] + E_{z \sim p_z, x \sim p_x}[\log(1 - D(G(z, y'), y'))]
+  ```
+
+![NPTEL Logo](https://example.com/logo.png)
+
+*Vineeth N B (IIT-H)*
+
+*§11.4 Deep Generative Models: Applications*
+
+*Page 6 / 22*
+```
+
+Note: Replace the image placeholder `https://example.com/logo.png` with the actual image URL or path if available.
+```
+
+# DL4CV_Week11_Part04.pdf - Page 11
+
+```markdown
+# Training IcGAN
+
+- First, a conditional GAN is trained to optimize the following objective:
+
+  \[
+  \min_{\theta_g, \theta_d} \max_{v(\theta_g, \theta_d)} = E_{x, y \sim p_{data}}[\log D(x, y)] + E_{z \sim p_z, x \sim p_x}[\log(1 - D(G(z, y'), y'))]
+  \]
+
+- Encoder has two parts: \(E_z\) which maps an image to its latent representation, and \(E_y\) which maps an image to its conditional information (attributes)
+
+![NPTEL](https://example.com/nptel.png)
+
+_Section: §11.4 Deep Generative Models: Applications_
+
+_Slide: 6/22_
+
+_Submitted by: Vineeth N B (IIIT-H)_
+```
+
+# DL4CV_Week11_Part04.pdf - Page 12
+
+# Training IcGAN
+
+- First, a conditional GAN is trained to optimize the following objective:
+
+  \[
+  \min_{\theta_g, \theta_d} \max_{\theta_d} v(\theta_g, \theta_d) = \mathbb{E}_{x, y \sim p_{data}}[\log D(x, y)] + \mathbb{E}_{z \sim p_z, x \sim p_x}[\log(1 - D(G(z, y'), y'))]
+  \]
+
+- Encoder has two parts: \(E_z\) which maps an image to its latent representation, and \(E_y\) which maps an image to its conditional information (attributes)
+
+- To train \(E_z\), generator is used to generate a dataset of images. Pairs of images and their latent representations \((x', z)\) are used to train \(E_z\) using reconstruction loss:
+
+  \[
+  \mathcal{L}_{ez} = \mathbb{E}_{z \sim p_z, y' \sim p_y}[\| z - E_z(G(z, y')) \|_2^2]
+  \]
+
+---
+
+Vineeth N B (IIT-H) 
+
+§11.4 Deep Generative Models: Applications
+
+6 / 22
+
+# DL4CV_Week11_Part04.pdf - Page 13
+
+```markdown
+# Training IcGAN
+
+- First, a conditional GAN is trained to optimize the following objective:
+
+  \[
+  \min_{g} \max_{d} V(\theta_g, \theta_d) = E_{x, y \sim P_{data}}[\log D(x, y)] + E_{z \sim P_z, x \sim P_x}[\log(1 - D(G(z, y'), y'))]
+  \]
+
+- Encoder has two parts: \(E_z\) which maps an image to its latent representation, and \(E_y\) which maps an image to its conditional information (attributes)
+
+- To train \(E_z\), generator is used to generate a dataset of images. Pairs of images and their latent representations \((x', z)\) are used to train \(E_z\) using reconstruction loss:
+
+  \[
+  \mathcal{L}_{ez} = E_{z \sim P_z, y' \sim P_y} \| z - E_z(G(z, y')) \|_2^2
+  \]
+
+- \(E_y\) is trained using real image and attribute pairs:
+
+  \[
+  \mathcal{L}_{ey} = E_{x, y \sim P_{data}} \| y - E_y(x) \|_2^2
+  \]
+
+*Image placeholder* (if an image is referenced in the original document)
+
+_Vineeth N B. (IIIT-H)_
+
+§11.4 Deep Generative Models: Applications
+
+*Page 6 / 22*
+```
+
+# DL4CV_Week11_Part04.pdf - Page 14
+
+```markdown
+# IcGAN: Results on CelebA dataset
+
+![IcGAN Results on CelebA dataset](image_url)
+
+## Image Transformations
+
+### Row 1
+1. Original
+2. Reconstruction
+3. Bald
+4. Bangs
+5. Black hair
+6. Blonde
+7. Eyeglasses
+8. Heavy makeup
+9. Gender change
+10. Pale skin
+11. Smiling
+
+### Row 2
+1. Original
+2. Reconstruction
+3. Bald
+4. Bangs
+5. Black hair
+6. Blonde
+7. Eyeglasses
+8. Heavy makeup
+9. Gender change
+10. Pale skin
+11. Smiling
+
+### Row 3
+1. Original
+2. Reconstruction
+3. Bald
+4. Bangs
+5. Black hair
+6. Blonde
+7. Eyeglasses
+8. Heavy makeup
+9. Gender change
+10. Pale skin
+11. Smiling
+
+### Row 4
+1. Original
+2. Reconstruction
+3. Bald
+4. Bangs
+5. Black hair
+6. Blonde
+7. Eyeglasses
+8. Heavy makeup
+9. Gender change
+10. Pale skin
+11. Smiling
+
+### Row 5
+1. Original
+2. Reconstruction
+3. Bald
+4. Bangs
+5. Black hair
+6. Blonde
+7. Eyeglasses
+8. Heavy makeup
+9. Gender change
+10. Pale skin
+11. Smiling
+
+## References
+
+Vineeth N B (IIIT-H)
+
+§11.4 Deep Generative Models: Applications
+
+---
+
+Page 7 / 22
+```
+
+# DL4CV_Week11_Part04.pdf - Page 15
+
+ accuracy is the priority.
+
+```markdown
+# GANs for Super-Resolution<sup>2</sup>
+
+- **Image Super-Resolution**: Task of obtaining a High-Resolution (HR) image from a Low Resolution (LR) image, a challenging task
+
+- **SRGAN (Super-Resolution GAN)** aims to generate photo-realistic images with 4× upscaling factors
+
+![SRGAN example](image_url)
+
+4× SRGAN (proposed)
+
+![Original image](image_url)
+
+original
+
+<sup>2</sup>Ledig et al, Photo-Realistic Single Image Super-Resolution Using a Generative Adversarial Network, CVPR 2017
+
+Vineeth N B (IIT-H)
+
+§11.4 Deep Generative Models: Applications
+
+8 / 22
+```
+
+# DL4CV_Week11_Part04.pdf - Page 16
+
+```markdown
+# SR-GAN
+
+![Graph of SR-GAN Solutions](image-url)
+
+- **Natural Image Manifold** (red)
+- **MSE-based Solution** (blue)
+- **GAN-based Solution** (yellow)
+
+## Explanation
+
+- The graph shows different solutions for super-resolution tasks.
+- **Super-Resolution CNNs** minimize Mean Square Error (MSE) -> tend to overly smoothen output images, due to pixel-wise averaging of outcomes.
+- **SR-GAN**, because of its adversarial objective, drives outputs to the natural image manifold -> results in high quality super-resolved images.
+
+---
+
+### Visualization Details
+- **Pixel-wise average of possible solutions**: Illustrated with dashed green lines connecting different solutions.
+- **SR-GAN Solution**: Highlighted with yellow arrows pointing to a preferred solution within the natural image manifold.
+
+---
+
+**Vineeth N B (IIT-H)**
+
+§11.4 Deep Generative Models: Applications
+
+---
+
+*Page 9 / 22*
+```
+
+# DL4CV_Week11_Part04.pdf - Page 17
+
+
+
+```markdown
+# SR-GAN: Content and Adversarial Losses
+
+- **Content Loss Calculation**:
+  - Uses a pretrained VGG-19 network to compute **content loss** as Mean Squared Error (MSE) between VGG-19 feature representations of generator \( G_{\theta_G}(I^{LR}) \) and true image \( I^{HR} \).
+
+  \[
+  l^{SR}_{VGG/i,j} = \frac{1}{W_{i,j}H_{i,j}} \sum_{x=1}^{W_{i,j}} \sum_{y=1}^{H_{i,j}} \left( \phi_{i,j}(I^{HR})_{x,y} - \phi_{i,j}(G_{\theta_G}(I^{LR}))_{x,y} \right)^2
+  \]
+
+  - Where \( \phi_{i,j} = \) feature map obtained by j-th convolution before i-th max pooling layer, \( W_{i,j} \) and \( H_{i,j} \) are width and height of feature map respectively.
+
+---
+
+Vineeth N B (IIIT-H) §11.4 Deep Generative Models: Applications 10 / 22
+```
+
+# DL4CV_Week11_Part04.pdf - Page 18
+
+ is correctly captured.
+
+```markdown
+# SR-GAN: Content and Adversarial Losses
+
+- **Uses a pretrained VGG-19 network to compute content loss** as MSE between VGG-19 feature representations of generator \( G_{\theta_G}(I^{LR}) \) and true image \( I^{HR} \):
+
+  \[
+  l_{VGG/i,j}^{SR} = \frac{1}{W_{i,j} H_{i,j}} \sum_{x=1}^{W_{i,j}} \sum_{y=1}^{H_{i,j}} \left( \phi_{i,j}(I^{HR})_{x,y} - \phi_{i,j}(G_{\theta_G}(I^{LR}))_{x,y} \right)^2
+  \]
+
+  where \( \phi_{i,j} = \) feature map obtained by j-th convolution before i-th max pooling layer, \( W_{i,j} \) and \( H_{i,j} \) are width and height of feature map respectively.
+
+- **Adversarial loss** given by:
+
+  \[
+  l_{Gen}^{SR} = \sum_{n=1}^{N} - \log D_{\theta_D}(G_{\theta_G}(I^{LR}))
+  \]
+
+*Vineeth N B (IIT-H) §11.4 Deep Generative Models: Applications* 10 / 22
+```
+
+
+# DL4CV_Week11_Part04.pdf - Page 19
+
+ text and images should be used only as a reference.
+
+# SR-GAN: Content and Adversarial Losses
+
+- Uses a pretrained VGG-19 network to compute **content loss** as MSE between VGG-19 feature representations of generator \((G_{\theta_G}(I^{LR}))\) and true image \(I^{HR}\):
+
+  \[
+  l_{VGG/i,j}^{SR} = \frac{1}{W_{i,j} H_{i,j}} \sum_{x=1}^{W_{i,j}} \sum_{y=1}^{H_{i,j}} (\phi_{i,j}(I^{HR})_{x,y} - \phi_{i,j}(G_{\theta_G}(I^{LR}))_{x,y})^2
+  \]
+
+  where \(\phi_{i,j}\) = feature map obtained by j-th convolution before i-th max pooling layer, \(W_{i,j}\) and \(H_{i,j}\) are width and height of feature map respectively
+
+- **Adversarial loss** given by:
+
+  \[
+  l_{Gen}^{SR} = \sum_{n=1}^{N} - \log D_{\theta_D}(G_{\theta_G}(I^{LR}))
+  \]
+
+- **Perceptual loss**, a weighted sum of content and adversarial loss:
+
+  \[
+  l^{SR} = l_{X}^{SR} + 10^{-3} l_{Gen}^{SR}
+  \]
+
+(Vineeth N B. (IIIT-H) $11.4$ Deep Generative Models: Applications 10 / 22)
+
+# DL4CV_Week11_Part04.pdf - Page 20
+
+```markdown
+# SR-GAN Results
+
+![SR-GAN Results](image_url)
+
+## Comparison of Super-Resolution Models
+
+1. **Bicubic**
+   - **dB**: 21.59
+   - **PSNR**: 0.6423
+
+   ![Bicubic Result](bicubic_image_url)
+
+2. **SRResNet**
+   - **dB**: 23.53
+   - **PSNR**: 0.7832
+
+   ![SRResNet Result](srresnet_image_url)
+
+3. **SRGAN**
+   - **dB**: 21.15
+   - **PSNR**: 0.6868
+
+   ![SRGAN Result](srgan_image_url)
+
+4. **Original Image**
+
+   ![Original Image](original_image_url)
+
+## References
+
+3. Ledig et al., *Photo-Realistic Single Image Super-Resolution Using a Generative Adversarial Network*, CVPR 2017
+
+   - **Authors**: Vineeth N B (IIT-H)
+   - **Section**: §11.4 Deep Generative Models: Applications
+
+---
+
+*This is a generated markdown output from the provided scientific text or slides.*
+```
+
+# DL4CV_Week11_Part04.pdf - Page 21
+
+```markdown
+# SR-GAN More Results
+
+## Comparison of Image Super-Resolution Models
+
+### Models Compared
+- bicubic
+- SRResNet
+- SRGAN
+- original
+
+### Sample Images and Comparisons
+
+#### Row 1: Harbour Scene
+- **bicubic**: ![Harbour Scene - Bicubic](path_to_image)
+- **SRResNet**: ![Harbour Scene - SRResNet](path_to_image)
+- **SRGAN**: ![Harbour Scene - SRGAN](path_to_image)
+- **original**: ![Harbour Scene - Original](path_to_image)
+
+#### Row 2: Indoor Scene
+- **bicubic**: ![Indoor Scene - Bicubic](path_to_image)
+- **SRResNet**: ![Indoor Scene - SRResNet](path_to_image)
+- **SRGAN**: ![Indoor Scene - SRGAN](path_to_image)
+- **original**: ![Indoor Scene - Original](path_to_image)
+
+### Source Information
+
+#### Reference
+Ledig et al., Photo-Realistic Single Image Super-Resolution Using a Generative Adversarial Network, CVPR 2017
+
+#### Author
+Vineeth N B (IIT-H)
+
+#### Section
+§11.4 Deep Generative Models: Applications
+
+#### Page
+12 / 22
+```
+
+# DL4CV_Week11_Part04.pdf - Page 22
+
+ is not required.
+
+```markdown
+# GANs for 3D Object Generation<sup>5</sup>
+
+![Diagram](image-url)
+
+- We have seen GANs generate photo-realistic 2D images; can GANs generate 3D objects too?
+
+## References
+
+5. Wu et al., Learning a Probabilistic Latent Space of Object Shapes via 3D Generative Adversarial Modeling, NeurIPS 2016
+
+Vineeth N B (IIT-H)
+
+§11.4 Deep Generative Models: Applications
+
+---
+
+Page 13 / 22
+```
+
+Explanation:
+
+1. The main heading is formatted with `#`, indicating a top-level section.
+2. The diagram uses a placeholder `image-url` for the OCR-extracted image.
+3. Bullet points (`-`) are used to list key points.
+4. The superscript reference is formatted with `<sup>5</sup>`.
+5. The subheading is formatted with `##`.
+6. References are formatted with proper citation and section details.
+7. Page numbering is aligned to the bottom right.
+8. Additional formatting such as bold and italic text is retained where applicable.
+
+# DL4CV_Week11_Part04.pdf - Page 23
+
+```markdown
+# GANs for 3D Object Generation<sup>5</sup>
+
+![3D Object Generation Diagram](image_placeholder.png)
+
+- **We have seen GANs generate photo-realistic 2D images; can GANs generate 3D objects too?**
+
+  - **Yes!** Recent advances in volumetric (3D) convolutional networks have made it possible to learn 3D object representations.
+
+<sup>5</sup> Wu et al. Learning a Probabilistic Latent Space of Object Shapes via 3D Generative Adversarial Modeling, NeurIPS 2016
+
+Vineeth N B (IIT-H) §11.4 Deep Generative Models: Applications
+
+---
+
+### Slide Details
+- **Slide Number**: 13 / 22
+```
+
+In this markdown format, I have preserved the scientific and academic integrity of the content, ensuring that the structure, headings, and special notations are accurately represented. The image placeholder is included to represent the visual content that cannot be directly captured from the OCR process.
+
+# DL4CV_Week11_Part04.pdf - Page 24
+
+```markdown
+# GANs for 3D Object Generation
+
+- Generator \( G \) maps a 200-length latent vector \( z \) to a 64 × 64 × 64 cube, representing an object \( G(z) \) in 3D-voxel space
+
+![Generator Mapping Process](image_url)
+
+- The latent vector \( z \) of length 200 is fed into the generator \( G \), which progressively scales up the representation through various layers:
+  - Initial layer: 512 × 4 × 4 × 4
+  - Second layer: 256 × 8 × 8 × 8
+  - Third layer: 128 × 16 × 16 × 16
+  - Fourth layer: 64 × 32 × 32 × 32
+- Final output: 64 × 64 × 64 cube representing the object \( G(z) \) in 3D voxel space
+
+## References
+
+- Wu et al., Learning a Probabilistic Latent Space of Object Shapes via 3D Generative Adversarial Modeling, NeurIPS 2016
+- Vineeth N B (IIT-H), §11.4 Deep Generative Models: Applications
+```
+
+**Note:** Replace `image_url` with the actual image URL or path if available. Ensure to maintain the integrity of the figures and diagrams as per the original content.
+
+# DL4CV_Week11_Part04.pdf - Page 25
+
+```markdown
+# GANs for 3D Object Generation
+
+- **Generator \( G \)** maps a 200-length latent vector \( z \) to a \( 64 \times 64 \times 64 \) cube, representing an object \( G(z) \) in 3D-voxel space
+
+  ![Generator Process Diagram](image-placeholder.png)
+
+  - \( z \)
+  - \( 512 \times 4 \times 4 \times 4 \)
+  - \( 256 \times 8 \times 8 \times 8 \)
+  - \( 128 \times 16 \times 16 \times 16 \)
+  - \( 64 \times 32 \times 32 \times 32 \)
+  - \( G(z) \) in 3D Voxel Space: \( 64 \times 64 \times 64 \)
+
+- **Discriminator \( D \)** classifies whether an input 3D object \( x \) is real or synthetic
+
+---
+
+### Citation
+
+Wu et al., Learning a Probabilistic Latent Space of Object Shapes via 3D Generative Adversarial Modeling, NeurIPS 2016
+
+Vineeth N B (IIT-H) §11.4 Deep Generative Models: Applications
+
+---
+
+14 / 22
+```
+
+# DL4CV_Week11_Part04.pdf - Page 26
+
+
+
+```markdown
+# GANs for 3D Object Generation
+
+- **Generator** $G$ maps a 200-length latent vector $z$ to a 64 × 64 × 64 cube, representing an object $G(z)$ in 3D-voxel space
+
+  ![Generator Visualization](data:image/png;base64,...) 
+
+- **Discriminator** $D$ classifies whether an input 3D object $x$ is real or synthetic
+- **Adversarial loss in 3D-GAN**:
+
+  $$L_{3DGAN} = \log D(x) + \log(1 - D(G(z)))$$
+
+---
+
+Wu et al, Learning a Probabilistic Latent Space of Object Shapes via 3D Generative Adversarial Modeling, NeurIPS 2016
+
+Vineeth N B (IIT-H), §11.4 Deep Generative Models: Applications
+```
+
+# DL4CV_Week11_Part04.pdf - Page 27
+
+ is required.
+
+```markdown
+# 3D-GAN Generated Objects
+
+## Categories
+
+### Gun
+- ![Gun 1](path_to_image1)
+- ![Gun 2](path_to_image2)
+- ![Gun 3](path_to_image3)
+- ![Gun 4](path_to_image4)
+- ![Gun 5](path_to_image5)
+- ![Gun 6](path_to_image6)
+
+### Chair
+- ![Chair 1](path_to_image1)
+- ![Chair 2](path_to_image2)
+- ![Chair 3](path_to_image3)
+- ![Chair 4](path_to_image4)
+- ![Chair 5](path_to_image5)
+- ![Chair 6](path_to_image6)
+
+### Car
+- ![Car 1](path_to_image1)
+- ![Car 2](path_to_image2)
+- ![Car 3](path_to_image3)
+- ![Car 4](path_to_image4)
+- ![Car 5](path_to_image5)
+- ![Car 6](path_to_image6)
+
+### Sofa
+- ![Sofa 1](path_to_image1)
+- ![Sofa 2](path_to_image2)
+- ![Sofa 3](path_to_image3)
+- ![Sofa 4](path_to_image4)
+- ![Sofa 5](path_to_image5)
+- ![Sofa 6](path_to_image6)
+
+## Details
+- **Author**: Vineeth N B (IIIT-H)
+- **Course**: §11.4 Deep Generative Models: Applications
+- **Slide Number**: 15 / 22
+```
+
+# DL4CV_Week11_Part04.pdf - Page 28
+
+
+```markdown
+# GANs for Image Inpainting<sup>7</sup>
+
+![Image Inpainting Examples](image_url)
+
+- **Image inpainting** a reconstruction technique used for filling missing parts in an image
+
+- Can a GAN be trained to perform image inpainting?
+
+## Image Examples
+
+### Swimming Pool Scene
+![Swimming Pool Before and After Inpainting](image_url)
+
+### Surfer Scene
+![Surfer Before and After Inpainting](image_url)
+
+## References
+
+7. Demir and Uğur, Patch-Based Image Inpainting with Generative Adversarial Networks, arXiv 2018
+
+Vineeth N B (IIT-H)
+
+§11.4 Deep Generative Models: Applications
+
+---
+
+Page 16 / 22
+```
+
+# DL4CV_Week11_Part04.pdf - Page 29
+
+
+```markdown
+# PG-GAN
+
+## PG-GAN Discriminator
+
+- **PG-GAN Discriminator**
+    - Consists of a ResNet-based generator and a novel discriminator with two heads:
+        - **G-GAN Discriminator**: reasons globally at image level (decide real vs fake)
+        - **Patch GAN Discriminator**: reasons locally at patch level (decide real vs fake) - helps capture local texture details
+
+---
+
+### References
+
+- Demir and UNAL, Patch-Based Image Inpainting with Generative Adversarial Networks, arXiv 2018
+- Vineeth N B (IIT-H), §11.4 Deep Generative Models: Applications
+```
+
+# DL4CV_Week11_Part04.pdf - Page 30
+
+```markdown
+# PG-GAN Objective
+
+- **Reconstruction loss**: pixel-wise L1 distance between generated image and ground truth:
+
+  \[
+  \mathcal{L}_{rec} = \frac{1}{N} \sum_{i=1}^{N} \frac{1}{WHC} \| y - x \|_1
+  \]
+
+- **Adversarial loss**: standard GAN objective:
+
+  \[
+  \mathcal{L}_{GAN}(G, D) = \mathbb{E}_{x \sim p(x)}[\log D(x)] + \mathbb{E}_{y \sim p_G(x')} [\log(1 - D(G(x')))]
+  \]
+
+  where \(\mathcal{L}_{g-adv} = \text{adversarial loss for global GAN}\); \(\mathcal{L}_{p-adv} = \text{adversarial loss for Patch GAN}\)
+
+- **Overall objective**:
+
+  \[
+  \mathcal{L} = \lambda_1 \mathcal{L}_{rec} + \lambda_2 \mathcal{L}_{g-adv} + \lambda_3 \mathcal{L}_{p-adv}
+  \]
+
+*Vineeth N B (IIIT-H) §11.4 Deep Generative Models: Applications 18 / 22*
+```
+
+# DL4CV_Week11_Part04.pdf - Page 31
+
+```markdown
+# PG-GAN Results
+
+![PG-GAN Results](image-url)
+
+---
+
+## References
+
+9. Demir and Unal, Patch-Based Image Inpainting with Generative Adversarial Networks, arXiv 2018
+
+Vineeth N B (IIT-H)
+
+§11.4 Deep Generative Models: Applications
+
+---
+
+Page 19 / 22
+```
+
+# DL4CV_Week11_Part04.pdf - Page 32
+
+:
+
+```markdown
+# PG-GAN More Results
+
+### Input | Output
+![Image 1](image1.png) | ![Image 2](image2.png)
+
+### Input | Output
+![Image 3](image3.png) | ![Image 4](image4.png)
+
+### Input | Output
+![Image 5](image5.png) | ![Image 6](image6.png)
+
+### Input | Output
+![Image 7](image7.png) | ![Image 8](image8.png)
+
+---
+
+**Reference**
+- Demir and Unal, Patch-Based Image Inpainting with Generative Adversarial Networks, arXiv 2018
+- Vineeth N B (IIT-H)
+- §11.4 Deep Generative Models: Applications
+
+Page 20/22
+```
+
+Note: Replace `image1.png`, `image2.png`, etc., with the actual filenames or use placeholders if the images cannot be extracted directly.
+
+# DL4CV_Week11_Part04.pdf - Page 33
+
+
+
+```markdown
+# Homework
+
+## Homework Readings
+
+### Readings
+
+- **3D-GANs**
+- **Avinash H, GAN Zoo**
+- **(Optional) Respective papers**
+
+![Graph Placeholder](image_url)
+
+### Author Information
+**Vineeth N B (IIT-H)**
+
+### Course Information
+**Section:** §11.4 Deep Generative Models: Applications
+
+### Date
+**21 / 22**
+```
+
+Note: Replace `image_url` with the actual image URL or placeholder if the image data cannot be extracted from the OCR.
+
+
+# DL4CV_Week11_Part04.pdf - Page 34
+
+```markdown
+# References
+
+- Guim Perarnau et al. **"Invertible Conditional GANs for image editing"**. In: *ArXiv abs/1611.06355* (2016).
+
+- Jiajun Wu et al. **"Learning a probabilistic latent space of object shapes via 3d generative-adversarial modeling"**. In: *Advances in Neural Information Processing Systems*. 2016, pp. 82–90.
+
+- C. Ledig et al. **"Photo-Realistic Single Image Super-Resolution Using a Generative Adversarial Network"**. In: *2017 IEEE Conference on Computer Vision and Pattern Recognition (CVPR)*. 2017, pp. 105–114.
+
+- Ugur Demir and Gözde B. Ünal. **"Patch-Based Image Inpainting with Generative Adversarial Networks"**. In: *CoRR abs/1803.07422* (2018). arXiv: 1803.07422.
+
+![Vineeth N B (IIT-H)](https://example.com/image.png)
+
+**Vineeth N B (IIT-H)**
+
+*§11.4 Deep Generative Models: Applications*
+
+*Page 22 / 22*
+```
+

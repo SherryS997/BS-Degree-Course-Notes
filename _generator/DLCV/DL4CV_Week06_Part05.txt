@@ -1,0 +1,1072 @@
+# DL4CV_Week06_Part05.pdf - Page 1
+
+```markdown
+# Deep Learning for Computer Vision
+
+# Going Beyond Explaining CNNs
+
+**Vineeth N Balasubramanian**
+
+Department of Computer Science and Engineering
+Indian Institute of Technology, Hyderabad
+
+## Section Title
+
+### Subsection Title
+
+#### Subsubsection Title
+
+**Bold Text Example**
+
+*Italicized Text Example*
+
+**Vineeth N B** (IIT-H)
+
+### 6.5 Beyond Explaining CNNs
+
+**Figure 1: Image Description**
+
+![Image](image-url)
+
+**Table 1: Sample Data**
+
+| Column 1 | Column 2 |
+|---------|---------|
+| Data    | Data    |
+| Data    | Data    |
+
+#### List of Items
+
+- Item 1
+- Item 2
+- Item 3
+
+#### Numbered List
+
+1. First item
+2. Second item
+3. Third item
+
+#### Equation Example
+
+Inline equation: $E = mc^2$
+
+Block equation:
+
+```math
+E = mc^2
+```
+
+#### Special Characters and Symbols
+
+Greek letters: $\alpha, \beta, \gamma$
+
+Mathematical Operators: $\sum, \int, \lim$
+
+#### Multilingual Content
+
+**French Phrase:** Exemple de texte en français
+
+**Spanish Phrase:** Ejemplo de texto en español
+
+---
+
+**Footer Note**
+
+Page 1 of 11
+```
+
+# DL4CV_Week06_Part05.pdf - Page 2
+
+```markdown
+# Review: Axioms of Attribution<sup>1</sup>
+
+## Completeness
+
+For any input `x`, the sum of the feature attributions equals `F(x) = \sum_i A_i^F(x)`
+
+## Sensitivity
+
+If `x` has only one non-zero feature and `F'(x) \neq 0`, then the attribution to that feature should be non-zero
+
+## Implementation Invariance
+
+When two neural networks compute the same mathematical function `F(x)`, regardless of how differently they are implemented, the attributions to all features should always be identical.
+
+## Symmetry-Preserving
+
+For any input `x` where the two values of two symmetric features are the same, their attributions should be identical as well.
+
+<sup>1</sup> Sundararajan et al, Axiomatic Attribution for Deep Networks, ICML 2017
+
+Vineeth N B (IIIT-H)
+
+§6.5 Beyond Explaining CNNs
+
+---
+
+![]()
+```
+
+# DL4CV_Week06_Part05.pdf - Page 3
+
+```markdown
+# DeepDream²
+
+![DeepDream² Image](link_to_image)
+
+- Modifies a given image in a way that boosts all activations at any layer, creating a feedback loop
+
+![Diagram](link_to_diagram)
+
+² Mordvintsev et al., [Deepdream – a code example for visualizing neural networks](https://arxiv.org/abs/1501.00092), 2015
+
+Vineeth N B (IIT-H)
+
+§6.5 Beyond Explaining CNNs
+
+---
+
+3 / 11
+```
+
+# DL4CV_Week06_Part05.pdf - Page 4
+
+```markdown
+# DeepDream<sup>2</sup>
+
+![DeepDream Image](image_url)
+
+- Modifies a given image in a way that **boosts all activations at any layer**, creating a feedback loop
+- Any slightly detected **dog face** will be made more and more dog-like over time
+
+<sup>2</sup> Mordvintsev et al., Deepdream - a code example for visualizing neural networks, 2015
+
+Vineeth N B (IIT-H)
+
+§ 6.5 Beyond Explaining CNNs
+
+---
+
+3 / 11
+```
+
+In this markdown format:
+- The section title "DeepDream<sup>2</sup>" is rendered using markdown headers.
+- The list points are properly formatted with bullet points.
+- The superscript note and the citation text are formatted using HTML for superscripts and normal text.
+- Placeholder for the image URL is included.
+- The footer information is preserved using markdown code blocks for the section and page number.
+
+# DL4CV_Week06_Part05.pdf - Page 5
+
+```markdown
+# DeepDream
+
+![DeepDream Image](image_url)
+
+**Vineeth N B (IIIT-H)**
+**§6.5 Beyond Explaining CNNs**
+
+---
+
+### Steps Overview
+
+1. Choose a layer/filter.
+
+![Layer Selection](image_url)
+
+#### Image Input
+![Input Image](image_url)
+
+#### Layer Filtering Process
+![Layer Filtering](image_url)
+
+#### Convolutional Layers
+![Convolutional Layers](image_url)
+
+##### Layer Outputs
+- **Output 1:** \( \text{Output 1} \)
+- **Output 2:** \( \text{Output 2} \)
+
+#### Final Output
+![Final Output](image_url)
+
+---
+
+### Process Flow
+
+1. **Choose a layer/filter.**
+    - Select the desired layer or filter from the neural network for further processing.
+
+2. **Input Image:**
+    - Begin with the input image.
+
+3. **Layer Filtering:**
+    - Apply the chosen layer/filter to the input image.
+
+4. **Convolutional Layers:**
+    - Pass the filtered image through several convolutional layers to extract features.
+
+5. **Output Analysis:**
+    - Observe and analyze the output at different stages of the convolutional layers.
+
+6. **Final Output:**
+    - Obtain the final output after processing through the entire network.
+
+---
+
+This framework provides insights into the visualization and understanding of different layers and their contributions within Convolutional Neural Networks (CNNs).
+
+---
+
+Page 4 / 11
+```
+
+# DL4CV_Week06_Part05.pdf - Page 6
+
+ accuracy is paramount.
+
+```markdown
+# DeepDream
+
+![DeepDream Image](image_url)
+
+## Steps
+
+1. **Choose a layer/filter.**
+2. **Compute the activations for your image up to that layer.**
+
+Vineeth N B (IIT-H) §6.5 Beyond Explaining CNNs 4 / 11
+```
+
+# DL4CV_Week06_Part05.pdf - Page 7
+
+```markdown
+# DeepDream
+
+![DeepDream Diagram](image_url)
+
+**Vineeth N B (IIT-H)**
+
+**§6.5 Beyond Explaining CNNs**
+
+4 / 11
+
+1. **Choose a layer/filter.**
+2. **Compute the activations for your image up to that layer.**
+3. **Backpropagate the activations of your filter back to the input image.**
+
+![Input Image](image_url)
+
+1. ![Layer 1](image_url)
+2. ![Layer 2](image_url)
+3. ![Layer 3](image_url)
+
+![Convolutional Layers](image_url)
+
+1. 256
+2. 512
+3. 256
+4. 128
+5. 64
+6. 32
+
+**Kaggle**
+```
+
+# DL4CV_Week06_Part05.pdf - Page 8
+
+```markdown
+# DeepDream
+
+![DeepDream Image](image-url)
+
+**Vineeth N B (IIT-H)**
+
+**Beyond Explaining CNNs**
+
+## Steps in DeepDream Process
+
+1. **Choose a layer/filter.**
+2. **Compute the activations for your image up to that layer.**
+3. **Backpropagate the activations of your filter back to the input image.**
+4. **Multiply the gradients (\(\nabla\)) with your learning rate (\(\alpha\)) and add them to your input image.**
+
+### Diagram Explanation
+
+1. ![Step 1](step1-image)
+   - Select a specific layer or filter within the neural network.
+
+2. ![Step 2](step2-image)
+   - Compute the activations for the chosen layer.
+
+3. ![Step 3](step3-image)
+   - Perform backpropagation to the input image using the activations of the selected filter.
+
+4. ![Step 4](step4-image)
+   - Multiply the gradients \(\nabla\) by the learning rate \(\alpha\) and add them to the input image to enhance the features.
+
+### Notes
+- The process involves iterative steps of selecting layers, computing activations, backpropagating, and adjusting the input image to visualize and enhance certain features as perceived by the neural network.
+- This technique allows for interpretability and visualization of what the neural network "sees" in an image.
+
+---
+
+*Page 4 / 11*
+```
+
+# DL4CV_Week06_Part05.pdf - Page 9
+
+```markdown
+# DeepDream
+
+![DeepDream Image](image-url)
+
+**Vineeth N B (IIT-H)**
+
+**Section 6.5 Beyond Explaining CNNs**
+
+## Steps Overview
+
+1. Choose a layer/filter.
+2. Compute the activations for your image up to that layer.
+3. Backpropagate the activations of your filter back to the input image.
+4. Multiply the gradients (∇) with your learning rate (α) and add them to your input image.
+5. Go back to 2.
+
+### Diagram
+
+![Diagram](diagram-url)
+
+1. Choose a layer/filter.
+2. Compute the activations for your image up to that layer.
+3. Backpropagate the activations of your filter back to the input image.
+4. Multiply the gradients (∇) with your learning rate (α) and add them to your input image.
+
+```math
+∇ * α
+```
+5. Go back to 2.
+```
+
+# DL4CV_Week06_Part05.pdf - Page 10
+
+# DeepDream
+
+![DeepDream Image](image-url)
+
+1. Choose a layer/filter.
+2. Compute the activations for your image up to that layer.
+3. Backpropagate the activations of your filter back to the input image.
+4. Multiply the gradients ($\nabla$) with your learning rate ($\alpha$) and add them to your input image.
+5. Go back to 2.
+
+Vineeth N B (IIT-H) §6.5 Beyond Explaining CNNs 4 / 11
+
+```
+1. Choose a layer/filter.
+2. Compute the activations for your image up to that layer.
+3. Backpropagate the activations of your filter back to the input image.
+4. Multiply the gradients ($\nabla$) with your learning rate ($\alpha$) and add them to your input image.
+5. Go back to 2.
+```
+
+# DL4CV_Week06_Part05.pdf - Page 11
+
+```markdown
+# DeepDream
+
+![DeepDream Image](image_url)
+
+1. Choose a layer/filter.
+2. Compute the activations for your image up to that layer.
+3. Backpropagate the activations of your filter back to the input image.
+4. Multiply the gradients (∇) with your learning rate (α) and add them to your input image.
+5. Go back to 2.
+
+Vineeth N B (IIT-H)
+
+§6.5 Beyond Explaining CNNs
+
+4 / 11
+```
+
+# DL4CV_Week06_Part05.pdf - Page 12
+
+```markdown
+# DeepDream
+
+![DeepDream Image](image_url)
+
+---
+
+**Vineeth N B (IIT-H)**
+
+## Slide: 6.5 Beyond Explaining CNNs
+
+### Steps:
+
+1. **Choose a layer/filter.**
+2. **Compute the activations for your image up to that layer.**
+3. **Backpropagate the activations of your filter back to the input image.**
+4. **Multiply the gradients (∇) with your learning rate (α) and add them to your input image.**
+5. **Go back to 2.**
+
+---
+
+### Diagram Details:
+
+1. **Choosing a Layer/Filter:**
+   - Select a specific layer and filter within the neural network.
+   ![Step 1 Image](step1_image_url)
+
+2. **Compute Activations:**
+   - Calculate the activation values for the chosen filter at a specific layer.
+   ![Step 2 Image](step2_image_url)
+
+3. **Backpropagation:**
+   - Backpropagate the filter activations to the input image.
+   ![Step 3 Image](step3_image_url)
+
+4. **Gradient Update:**
+   - Update the input image by adding the gradients scaled by the learning rate.
+   ```math
+   \nabla^\alpha
+   ```
+
+5. **Iteration:**
+   - Repeat the process to refine the input image further.
+   ![Step 4 Image](step4_image_url)
+
+```
+
+# DL4CV_Week06_Part05.pdf - Page 13
+
+```markdown
+# DeepDream
+
+![DeepDream Image](image_url)
+
+## Vineeth N B (IIIT-H) §6.5 Beyond Explaining CNNs
+
+### Higher layers produce complex features, while lower ones enhance edges and textures.
+
+![DeepDream Process](process_image_url)
+
+1. **Input Image**: The initial image fed into the neural network.
+2. **Convolutional Layers**: These layers extract various features from the input image. 
+   - **Feature Maps**: Represent different aspects of the image, such as edges, textures, and more complex patterns as you move to higher layers.
+3. **ReLU Activation**: Activation function that introduces non-linearity, allowing the model to learn more complex representations.
+4. **Gradient Calculation**: The gradient of the loss function with respect to the image is computed.
+   - **∇^α (α)**: Gradient of the activation layer, indicating the sensitivity of the network's output to changes in the input image.
+
+**Process Flow**:
+1. **Input Image**: The original image is processed.
+2. **Convolutional Layers**: Extract features at different levels of complexity.
+3. **ReLU Activation**: Non-linear activation function applied to enhance non-linearities.
+4. **Gradient Calculation**: Compute the gradient of the loss function relative to the input image to optimize the network.
+
+![Output Image](output_image_url)
+
+```
+
+# DL4CV_Week06_Part05.pdf - Page 14
+
+```markdown
+# DeepDream: Examples
+
+![Horizon Image](image-url)
+
+## Horizon
+
+![Tower Image](image-url)
+
+## Tower
+
+*Vineeth N B. (IIIT-H)*
+
+§6.5 Beyond Explaining CNNs
+
+![NPTEL Logo](image-url)
+```
+
+Note: Placeholders `image-url` should be replaced with the actual image URLs if available.
+
+# DL4CV_Week06_Part05.pdf - Page 15
+
+```udder
+# DeepDream: Examples
+
+## Vineeth N B (IIT-H)
+
+### 6.5 Beyond Explaining CNNs
+
+- **Horizon**
+  ![Horizon](path_to_horizon_image)
+
+- **Tower**
+  ![Tower](path_to_tower_image)
+
+- **Trees**
+  ![Trees](path_to_trees_image)
+
+- **Building**
+  ![Building](path_to_building_image)
+
+*Source: §6.5 Beyond Explaining CNNs*
+
+Page 5 of 11
+```
+
+# DL4CV_Week06_Part05.pdf - Page 16
+
+```markdown
+# DeepDream: Examples
+
+## Examples
+
+### Horizon
+![Horizon](image1.png)
+
+- **Generated Image**: Tower
+![Tower](image2.png)
+
+### Trees
+![Trees](image3.png)
+
+- **Generated Image**: Building
+![Building](image4.png)
+
+### Leaves
+![Leaves](image5.png)
+
+- **Generated Image**: Birds & Insects
+![Birds & Insects](image6.png)
+
+_Vineeth N B. (IIT-H)_
+§6.5 Beyond Explaining CNNs
+
+*Page 5 of 11*
+```
+
+# DL4CV_Week06_Part05.pdf - Page 17
+
+```markdown
+# DeepDream: Examples
+
+![Deep Dream Image 1](image1.png)
+**Admiral-Dog**
+
+![Deep Dream Image 2](image2.png)
+**Pig-Snail**
+
+![Deep Dream Image 3](image3.png)
+**Camel-Bird**
+
+![Deep Dream Image 4](image4.png)
+**Dog-Fish**
+
+*Credit: Fei-Fei Li and Andrej Karpathy, CS231n course, Stanford, Winter 2016*
+
+*Vineeth N B (IIT-H)*
+
+*§6.5 Beyond Explaining CNNs*
+
+---
+
+Page 6 / 11
+```
+
+# DL4CV_Week06_Part05.pdf - Page 18
+
+```markdown
+# Neural Style
+
+![Dog Image](image-url) ![NPTEL Logo](image-url)
+
+Vineeth N B (IIT-H) §6.5 Beyond Explaining CNNs 7 / 11
+```
+
+# DL4CV_Week06_Part05.pdf - Page 19
+
+```markdown
+# Neural Style
+
+![Dog Image](image_url)
+![Abstract Art](image_url)
+
+---
+
+**Slide Details:**
+- **Author**: Vineeth N B (IIT-H)
+- **Section**: §6.5 Beyond Explaining CNNs
+- **Page Number**: 7 / 11
+
+---
+
+## Neural Style
+
+![Dog Image](image_url) ![Abstract Art](image_url)
+```
+
+Please replace `image_url` with the actual URLs or placeholders for the images if they are available.
+
+# DL4CV_Week06_Part05.pdf - Page 20
+
+```markdown
+# Neural Style
+
+![Neural Style](image_url)
+
+## Vineeth N B (IIT-H)
+
+### §6.5 Beyond Explaining CNNs
+
+An image of a dog standing on grass is shown on the left. In the center, there is an abstract painting with vibrant colors and shapes. The dog image and the painting are combined through an overlay process, resulting in an artistic rendition of the dog on the right.
+
+```math
+Overlay
+```
+
+![Dog](image_url)
+```
+![Abstract Painting](image_url)
+
+```
+![Overlay Result](image_url)
+```
+```
+
+# DL4CV_Week06_Part05.pdf - Page 21
+
+```markdown
+# Neural Style
+
+![Neural Style Diagram](image-placeholder.png)
+
+**Vineeth N B (IIT-H)**
+
+**§6.5 Beyond Explaining CNNs**
+
+---
+
+## Neural Style
+
+A neural style transfer example is shown below:
+
+- **Input Image**: ![Input Image](input-image-placeholder.png)
+- **Style Image**: ![Style Image](style-image-placeholder.png)
+- **Result**: ![Result](result-image-placeholder.png)
+
+### Process
+1. **Input Image**: A realistic dog image.
+   - ![Input Image](input-image-placeholder.png)
+
+2. **Style Image**: An abstract painting.
+   - ![Style Image](style-image-placeholder.png)
+
+3. **Result**: An unsuccessful attempt to combine the two images.
+   - ![Result](result-image-placeholder.png)
+
+### Analysis
+- The combination process indicates that the neural style transfer did not yield expected results.
+- The output image is marked as "Oops!" with a red cross, indicating a failure in the style transfer process.
+```
+
+# DL4CV_Week06_Part05.pdf - Page 22
+
+```markdown
+# Neural Style
+
+![Image of a Dog](image-dog.png)
+![Abstract Art](image-art.png)
+
+### Vineeth N B (IIT-H)
+
+#### §6.5 Beyond Explaining CNNs
+
+**Neural Style**
+
+![Equation Diagram](equation.png)
+
+- **Ours**: ![Equation](equation.png)
+- **Human**
+
+---
+
+**Image of a Dog** ![Image of a Dog](image-dog.png)
+
++ **Abstract Art** ![Abstract Art](image-art.png) =
+
+**Vineeth N B (IIT-H)**
+
+**§6.5 Beyond Explaining CNNs**
+```
+
+# DL4CV_Week06_Part05.pdf - Page 23
+
+```markdown
+# Neural Style
+
+![Neural Style Diagram](image_url)
+
+## Diagram Explanation
+
+- **Input Images:**
+  - **Content Image:** A photograph of a dog standing on grass.
+  - **Style Image:** An abstract painting with vibrant colors and various shapes.
+
+- **Process:**
+  - **Content Representation:** Extracted from the content image.
+  - **Style Representation:** Extracted from the style image.
+  - **Transformation:**
+    - Combine the content and style representations using a neural network model.
+    - Produce an output that merges the content structure of the dog image with the abstract style of the painting.
+
+- **Output:**
+  - The resulting image combines elements of both the content and style images.
+
+---
+
+*Vineeth N B (IIIT-H)*
+*§6.5 Beyond Explaining CNNs*
+*Page 7 / 11*
+```
+
+# DL4CV_Week06_Part05.pdf - Page 24
+
+```markdown
+# Neural Algorithm of Artistic Style
+
+## Section 8
+
+![Original Image](original_image_url)
+
+![Style Image](style_image_url)
+
+![Result Image](result_image_url)
+
+- **Original Image**: This image is a photograph of a yellow Labrador Retriever standing on grass.
+- **Style Image**: This is an example of a painting with an abstract style featuring vibrant, chaotic patterns.
+- **Result Image**: This image is the output generated by applying the neural style algorithm, combining the content of the original photograph with the artistic style of the painting.
+
+### Equations and Formulas
+
+```math
+\text{Result} = f(Content, Style)
+```
+
+### References
+
+- Gatys et al, *A Neural Algorithm of Artistic Style*, 2015
+- Vineeth N B, *Beyond Explaining CNNs*
+
+### Notes
+
+- The algorithm involves the use of Convolutional Neural Networks (CNNs) to transfer the style of one image to another.
+
+---
+
+*Further details on the algorithm and its implementation can be found in the referenced papers.*
+```
+
+# DL4CV_Week06_Part05.pdf - Page 25
+
+```markdown
+# Neural Style
+
+## Step 1: Extract input targets
+- **Extract input targets**: ConvNet activations of all layers for the given input image.
+
+![Input Image](image_url)
+
+---
+
+**Reference:**
+Gatys et al, *A Neural Algorithm of Artistic Style*, 2015
+
+**Presented by:**
+Vineeth N B (IIT-H)
+
+**Section:**
+§ 6.5 Beyond Explaining CNNs
+
+**Slide Number:**
+9 / 11
+```
+
+# DL4CV_Week06_Part05.pdf - Page 26
+
+```markdown
+# Neural Style
+
+## Process Overview
+
+### Input Image
+![Input Image](input_image_placeholder)
+
+### Style Image
+![Style Image](style_image_placeholder)
+
+### Steps
+
+1. **Extract input targets**: ConvNet activations of all layers for the given input image.
+2. **Extract style targets**: Gram matrix of ConvNet activations of all layers for the given style image.
+
+## References
+[^4]: Gatys et al., *A Neural Algorithm of Artistic Style*, 2015
+
+---
+
+**Presenter Information**
+
+- **Vineeth N B** (IIT-H)
+- **Section**: §6.5 Beyond Explaining CNNs
+
+---
+
+Page Number: 9 / 11
+```
+
+# DL4CV_Week06_Part05.pdf - Page 27
+
+```markdown
+# Neural Style
+
+![Neural Style Diagram](image-url)
+
+## Process Steps
+1. **Extract input targets**: ConvNet activations of all layers for the given input image.
+2. **Extract style targets**: Gram matrix of ConvNet activations of all layers for the given style image.
+3. **Initialize a new network**.
+
+### Input
+![Input Image](image-url)
+
+### Style
+![Style Image](image-url)
+
+---
+
+<sup>4</sup> Gatys et al, *A Neural Algorithm of Artistic Style*, 2015
+
+Vineeth N B (IIT-H)
+
+§6.5 Beyond Explaining CNNs
+
+Page 9 / 11
+```
+
+# DL4CV_Week06_Part05.pdf - Page 28
+
+```markdown
+# Neural Style
+
+## Process Overview
+
+1. **Input**: 
+   - Extract input targets: ConvNet activations of all layers for the given input image.
+   
+2. **Style**:
+   - Extract style targets: Gram matrix of ConvNet activations of all layers for the given style image.
+   
+3. **Initialization**:
+   - Initialize a new network.
+
+4. **Optimization**:
+   - Optimize over image to match:
+     - Activations of input.
+
+## References
+- Gatys et al, A Neural Algorithm of Artistic Style, 2015
+- Vineeth N B (IIT-H)
+- §6.5 Beyond Explaining CNNs
+
+---
+
+## Diagram Explanation
+
+![Diagram](https://example.com/diagram.png)
+
+### Input
+- **Image**: An image of a dog.
+
+### Style
+- **Image**: An artistic style image.
+
+### Steps
+1. **Extract input targets**: ConvNet activations of all layers for the given input image.
+2. **Extract style targets**: Gram matrix of ConvNet activations of all layers for the given style image.
+3. **Initialize a new network**.
+4. **Optimize over image to match**:
+   - Activations of input.
+```
+
+# DL4CV_Week06_Part05.pdf - Page 29
+
+```markdown
+# Neural Style
+
+## Gatys et al, A Neural Algorithm of Artistic Style, 2015
+
+### Vineeth N B (IIT-H)
+
+**§6.5 Beyond Explaining CNNs**
+
+![Neural Style Diagram](image_url)
+
+1. **Extract input targets**:
+   - ConvNet activations of all layers for the given input image.
+
+2. **Extract style targets**:
+   - Gram matrix of ConvNet activations of all layers for the given style image.
+
+3. **Initialize a new network**.
+
+4. **Optimize over image to match**:
+   - Activations of input.
+   - Gram matrix of activations of style.
+```
+
+# DL4CV_Week06_Part05.pdf - Page 30
+
+```markdown
+# Neural Style
+
+![Neural Style Diagram](https://via.placeholder.com/600x400)
+
+## Input
+- Input Image
+- Style Image
+
+## Process
+
+1. **Extract input targets**: ConvNet activations of all layers for the given input image.
+2. **Extract style targets**: Gram matrix of ConvNet activations of all layers for the given style image.
+3. **Initialize a new network**.
+4. **Optimize over image to match**:
+   - Activations of input.
+   - Gram matrix of activations of style.
+
+---
+
+*Gatys et al., A Neural Algorithm of Artistic Style, 2015*
+
+*Vineeth N B (IIT-H)*
+
+*§6.5 Beyond Explaining CNNs*
+
+*9 / 11*
+```
+
+# DL4CV_Week06_Part05.pdf - Page 31
+
+```markdown
+# Neural Style: Examples
+
+## Examples of Neural Style Transfer
+
+### Top Row
+- **First Pair:**
+  - Original Image: ![Original Image 1](path/to/original_image_1)
+  - Stylized Image: ![Stylized Image 1](path/to/stylized_image_1)
+
+- **Second Pair:**
+  - Original Image: ![Original Image 2](path/to/original_image_2)
+  - Stylized Image: ![Stylized Image 2](path/to/stylized_image_2)
+
+- **Third Pair:**
+  - Original Image: ![Original Image 3](path/to/original_image_3)
+  - Stylized Image: ![Stylized Image 3](path/to/stylized_image_3)
+
+### Bottom Row
+- **First Pair:**
+  - Original Image: ![Original Image 4](path/to/original_image_4)
+  - Stylized Image: ![Stylized Image 4](path/to/stylized_image_4)
+
+- **Second Pair:**
+  - Original Image: ![Original Image 5](path/to/original_image_5)
+  - Stylized Image: ![Stylized Image 5](path/to/stylized_image_5)
+
+- **Third Pair:**
+  - Original Image: ![Original Image 6](path/to/original_image_6)
+  - Stylized Image: ![Stylized Image 6](path/to/stylized_image_6)
+
+## Credit
+
+**Author:** Thushan Ganegedara
+**Reference:** Intuitive Guide to Neural Style Transfer, TowardsDataScience
+
+**Instructor:** Vineeth N B (IIT-H)
+
+**Course:** §6.5 Beyond Explaining CNNs
+
+**Slide Number:** 10 / 11
+```
+
+**Note:** Replace `path/to/original_image_*` and `path/to/stylized_image_*` with actual file paths or placeholders for the respective images. This markdown format ensures the scientific integrity and readability of the content.
+
+# DL4CV_Week06_Part05.pdf - Page 32
+
+```markdown
+# Neural Style: Examples
+
+## Content vs. Style
+
+### Style
+![Style 1](image-url)
+![Style 2](image-url)
+![Style 3](image-url)
+![Style 4](image-url)
+![Style 5](image-url)
+
+### Content
+![Content 1](image-url)
+![Content 2](image-url)
+![Content 3](image-url)
+![Content 4](image-url)
+![Content 5](image-url)
+
+### Outputs
+![Output 1](image-url)
+![Output 2](image-url)
+![Output 3](image-url)
+![Output 4](image-url)
+![Output 5](image-url)
+
+## Credit:
+
+- **Artistic Style Transfer with TensorFlow Lite**
+- **Vineeth N B (IIT-H)**
+
+---
+
+*Beyond Explaining CNNs*
+
+### Page Number
+10 / 11
+```
+
+# DL4CV_Week06_Part05.pdf - Page 33
+
+```markdown
+# Homework
+
+## Readings
+
+- Sarthak Gupta, [DeepDream with Code](https://hackernoon.com/deepdream-with-code), HackerNoon
+
+- Thushan Ganegedara, [Intuitive Guide to Neural Style Transfer](https://towardsdatascience.com/intuitive-guide-to-neural-style-transfer-9639f9f9669), Towards Data Science
+
+  - (Optional) [Another good tutorial on Neural Style Transfer](https://towardsdatascience.com/intuitive-guide-to-neural-style-transfer-9639f9f9669) on Towards Data Science
+
+## Exercises
+
+- Watch this [fun video on YouTube](https://www.youtube.com/watch?v=example) of using DeepDream on videos, try to figure out how this was done!
+
+---
+
+Vineeth N B (IIIT-H) §6.5 Beyond Explaining CNNs 11 / 11
+```
+

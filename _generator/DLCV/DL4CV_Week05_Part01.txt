@@ -1,0 +1,4626 @@
+# DL4CV_Week05_Part01.pdf - Page 1
+
+```markdown
+# Deep Learning for Computer Vision
+
+# Convolutional Neural Networks: An Introduction
+
+**Vineeth N Balasubramanian**
+
+Department of Computer Science and Engineering
+Indian Institute of Technology, Hyderabad
+
+![IIT Hyderabad Logo](image-url)
+
+---
+
+Vineeth N B (IIT-H) §5.1 Introduction to CNNs
+
+---
+
+**Table of Contents**
+
+- [Introduction](#introduction)
+- [What are Convolutional Neural Networks?](#what-are-convolutional-neural-networks)
+- [History and Development](#history-and-development)
+- [Architecture of CNNs](#architecture-of-cnns)
+- [Components of CNNs](#components-of-cnns)
+  - [Convolutional Layer](#convolutional-layer)
+  - [Activation Function](#activation-function)
+  - [Pooling Layer](#pooling-layer)
+  - [Fully Connected Layer](#fully-connected-layer)
+  - [Output Layer](#output-layer)
+
+---
+
+## Introduction
+
+Convolutional Neural Networks (CNNs) are a class of deep learning models that are particularly effective for tasks involving image and video data. They are inspired by the organization of the visual cortex in mammals.
+
+## What are Convolutional Neural Networks?
+
+CNNs are a type of neural network that is designed to process grid-like data, such as images. They have a unique architecture that includes convolutional layers, pooling layers, and fully connected layers.
+
+## History and Development
+
+The concept of CNNs was first introduced by Yann LeCun and colleagues in the 1990s. Over the years, CNNs have undergone significant advancements, leading to their widespread use in various applications, including image classification, object detection, and facial recognition.
+
+## Architecture of CNNs
+
+The architecture of a CNN typically consists of the following components:
+
+- Convolutional layers
+- Activation functions
+- Pooling layers
+- Fully connected layers
+- Output layer
+
+These components are organized in a sequence to extract features from the input data and perform classification or regression tasks.
+
+### Convolutional Layer
+
+The convolutional layer is the core component of a CNN. It applies a set of learnable filters to the input image to extract features. The filters slide over the image, performing element-wise multiplication and summing the results to produce feature maps.
+
+### Activation Function
+
+Activation functions introduce non-linearity into the network, allowing it to learn complex patterns. Commonly used activation functions include ReLU (Rectified Linear Unit), sigmoid, and tanh.
+
+### Pooling Layer
+
+Pooling layers reduce the spatial dimensions of the input data, making the network more computationally efficient. Max pooling and average pooling are the most common types of pooling operations.
+
+### Fully Connected Layer
+
+Fully connected layers are standard layers found in traditional neural networks. They take the flattened output from the convolutional and pooling layers and perform classification or regression tasks.
+
+### Output Layer
+
+The output layer produces the final output of the network. For classification tasks, it typically uses a softmax activation function to output probabilities for each class.
+
+---
+
+This document provides an overview of Convolutional Neural Networks, highlighting their architecture, components, and importance in deep learning for computer vision tasks.
+```
+
+# DL4CV_Week05_Part01.pdf - Page 2
+
+```markdown
+# Homework Exercises
+
+## Input: Values of \( x \) over a mini-batch: \( B = \{ x_1, \ldots, x_m \} \)
+
+### Parameters to be learned: \( \gamma, \beta \)
+
+## Output: \( \{ y_i = \text{BN}_{\gamma, \beta}(x_i) \} \)
+
+\[ \mu_B \leftarrow \frac{1}{m} \sum_{i=1}^{m} x_i \]
+// mini-batch mean
+
+\[ \sigma_B^2 \leftarrow \frac{1}{m} \sum_{i=1}^{m} (x_i - \mu_B)^2 \]
+// mini-batch variance
+
+\[ \hat{x}_i \leftarrow \frac{x_i - \mu_B}{\sqrt{\sigma_B^2 + \epsilon}} \]
+// normalize
+
+\[ y_i \leftarrow \gamma \hat{x}_i + \beta \equiv \text{BN}_{\gamma, \beta}(x_i) \]
+// scale and shift
+
+![Diagram](image-url)
+
+## Forward propagation is straight-forward:
+
+![Diagram](image-url)
+
+_Vineeth N B. (IIT-H)_
+
+§5.1 Introduction to CNNs
+
+2 / 37
+```
+
+# DL4CV_Week05_Part01.pdf - Page 3
+
+```markdown
+# Homework Exercises
+
+## Input: Values of \(x\) over a mini-batch; \(B = \{x_1, \ldots, x_m\}\):
+
+### Parameters to be learned: \(\gamma, \beta\)
+
+### Output: \(\{y_i = \text{BN}_{\gamma, \beta}(x_i)\}\)
+
+\[
+\mu_B \leftarrow \frac{1}{m} \sum_{i=1}^{m} x_i
+\]
+
+// mini-batch mean
+
+\[
+\sigma_B^2 \leftarrow \frac{1}{m} \sum_{i=1}^{m} (x_i - \mu_B)^2
+\]
+
+// mini-batch variance
+
+\[
+\hat{x}_i \leftarrow \frac{x_i - \mu_B}{\sqrt{\sigma_B^2 + \epsilon}}
+\]
+
+// normalize
+
+\[
+y_i \leftarrow \gamma \hat{x}_i + \beta \equiv \text{BN}_{\gamma, \beta}(x_i)
+\]
+
+// scale and shift
+
+![Diagram](image_url) 
+
+*Forward propagation is straight-forward.*
+
+![Image Credit: Aditya Agrawal](image_url)
+
+_Vineeth N B (IIT-H)_
+
+## Backprop?
+
+### Section: §5.1 Introduction to CNNs
+
+Page: 2 / 37
+```
+
+# DL4CV_Week05_Part01.pdf - Page 4
+
+```markdown
+# Homework: Backprop in Batch Normalization
+
+![Graph](image1.png)
+
+---
+
+```math
+\frac{\partial L}{\partial \beta} = \frac{\partial L}{\partial y_1} \frac{\partial y_1}{\partial \beta} + \frac{\partial L}{\partial y_2} \frac{\partial y_2}{\partial \beta}
+```
+
+```math
+= \frac{\partial L}{\partial y_1} + \frac{\partial L}{\partial y_2} = \sum_{i=1}^{2} \frac{\partial L}{\partial y_i}
+```
+
+---
+
+**Vineeth N B (IITH)**
+
+**§5.1 Introduction to CNNs**
+
+NPTEL
+
+---
+
+```markdown
+3 / 37
+```
+```
+
+# DL4CV_Week05_Part01.pdf - Page 5
+
+```markdown
+# Homework: Backprop in Batch Normalization
+
+![Diagram](image.png)
+
+## Derivatives of Loss with respect to Batch Normalization Parameters
+
+### Derivative of Loss with respect to β
+
+The derivative of the loss \( L \) with respect to the batch normalization parameter \( \beta \) is given by:
+
+\[
+\frac{\partial L}{\partial \beta} = \frac{\partial L}{\partial y_1} \frac{\partial y_1}{\partial \beta} + \frac{\partial L}{\partial y_2} \frac{\partial y_2}{\partial \beta}
+\]
+
+This can be simplified to:
+
+\[
+\frac{\partial L}{\partial \beta} = \frac{\partial L}{\partial y_1} + \frac{\partial L}{\partial y_2} = \sum_{i=1}^{2} \frac{\partial L}{\partial y_i}
+\]
+
+### Derivative of Loss with respect to γ
+
+The derivative of the loss \( L \) with respect to the batch normalization parameter \( \gamma \) is given by:
+
+\[
+\frac{\partial L}{\partial \gamma} = \frac{\partial L}{\partial y_1} \frac{\partial y_1}{\partial \gamma} + \frac{\partial L}{\partial y_2} \frac{\partial y_2}{\partial \gamma}
+\]
+
+This can be simplified to:
+
+\[
+\frac{\partial L}{\partial \gamma} = \frac{\partial L}{\partial y_1} \hat{x}_1 + \frac{\partial L}{\partial y_2} \hat{x}_2 = \sum_{i=1}^{2} \frac{\partial L}{\partial y_i} \hat{x}_i
+\]
+
+---
+
+*Vineeth N B (IIT-H) §5.1 Introduction to CNNs 3 / 37*
+```
+
+# DL4CV_Week05_Part01.pdf - Page 6
+
+```markdown
+# Homework: Backprop in Batch Normalization
+
+![Graph Diagram](image_url)
+
+## Equation Derivatives
+
+### Partial Derivatives
+
+\[
+\frac{\partial L}{\partial \beta} = \frac{\partial L}{\partial y_1} \frac{\partial y_1}{\partial \beta} + \frac{\partial L}{\partial y_2} \frac{\partial y_2}{\partial \beta}
+\]
+
+\[
+= \frac{\partial L}{\partial y_1} + \frac{\partial L}{\partial y_2} = \sum_{i=1}^{2} \frac{\partial L}{\partial y_i}
+\]
+
+\[
+\frac{\partial L}{\partial \gamma} = \frac{\partial L}{\partial y_1} \frac{\partial y_1}{\partial \gamma} + \frac{\partial L}{\partial y_2} \frac{\partial y_2}{\partial \gamma}
+\]
+
+\[
+= \frac{\partial L}{\partial y_1} \hat{x_1} + \frac{\partial L}{\partial y_2} \hat{x_2} = \sum_{i=1}^{2} \frac{\partial L}{\partial y_i} \hat{x_i}
+\]
+
+### Backpropagation Formulas
+
+\[
+\frac{\partial L}{\partial \hat{x_1}} = \frac{\partial L}{\partial y_1} \frac{\partial y_1}{\partial \hat{x_1}} - \frac{\partial L}{\partial y_1} \gamma
+\]
+
+\[
+\frac{\partial L}{\partial \hat{x_2}} = \frac{\partial L}{\partial y_2} \frac{\partial y_2}{\partial \hat{x_2}} - \frac{\partial L}{\partial y_2} \gamma
+\]
+
+### Chain Rule Application
+
+**Credit**: Aditya Agrawal
+
+*Vineeth N B (IIT-H)*
+
+§5.1 Introduction to CNNs
+
+3 / 37
+```
+
+# DL4CV_Week05_Part01.pdf - Page 7
+
+```markdown
+# Homework: Backprop in Batch Normalization
+
+![Network Diagram](placeholder_image_url)
+
+Credit: **Aditya Agrawal**
+
+---
+
+```math
+\frac{\partial L}{\partial \sigma^2} = \frac{\partial L}{\partial \hat{x}_1} \frac{\partial \hat{x}_1}{\partial \sigma^2} + \frac{\partial L}{\partial \hat{x}_2} \frac{\partial \hat{x}_2}{\partial \sigma^2} = \sum_{i=1}^2 \frac{\partial L}{\partial \hat{x}_i} \frac{\partial \hat{x}_i}{\partial \sigma^2}
+```
+
+```math
+= \sum_{i=1}^2 \frac{\partial L}{\partial \hat{x}_i} \left( x_i - \mu \right) \frac{-1}{2} \left( \sigma^2 + \epsilon \right)^{-3/2}
+```
+
+---
+
+Vineeth N B. (IIT-H)
+
+§5.1 Introduction to CNNs
+
+NPTel
+
+![NPTel Logo](placeholder_image_url)
+
+4 / 37
+```
+
+# DL4CV_Week05_Part01.pdf - Page 8
+
+```markdown
+# Homework: Backprop in Batch Normalization
+
+![Graph of nodes](image.png)
+
+```math
+\frac{\partial L}{\partial \mu} = \frac{\partial L}{\partial \hat{x}_1} \frac{\partial \hat{x}_1}{\partial \mu} + \frac{\partial L}{\partial \hat{x}_2} \frac{\partial \hat{x}_2}{\partial \mu} + \frac{\partial L}{\partial \sigma^2} \frac{\partial \sigma^2}{\partial \mu}
+```
+
+```math
+= \sum_{i=1}^{2} \frac{\partial L}{\partial \hat{x}_i} \frac{\partial \hat{x}_i}{\partial \mu} + \frac{\partial L}{\partial \sigma^2} \frac{\partial \sigma^2}{\partial \mu}
+```
+
+```math
+= \sum_{i=1}^{2} \frac{\partial L}{\partial \hat{x}_i} \frac{-1}{\sqrt{\sigma^2 + \epsilon}} + \frac{\partial L}{\partial \sigma^2} \frac{-2(x_i - \mu)}{2}
+```
+
+```math
+= \sum_{i=1}^{2} \frac{\partial L}{\partial \hat{x}_i} \frac{-1}{\sqrt{\sigma^2 + \epsilon}} + \frac{\partial L}{\partial \sigma^2} \sum_{i=1}^{2} \frac{-(x_i - \mu)}{2}
+```
+
+**Credit:** Aditya Agrawal
+
+Vineeth N B. (IIT-H)
+
+§5.1 Introduction to CNNs
+
+5 / 37
+```
+
+# DL4CV_Week05_Part01.pdf - Page 9
+
+```markdown
+# Homework: Backpropagation in Batch Normalization
+
+## Diagram
+
+![Diagram](imageUrl)
+
+## Mathematical Formulation
+
+### Gradient of the Loss with Respect to Input Variable \( x_1 \)
+
+\[
+\frac{\partial L}{\partial x_1} = \frac{\partial L}{\partial \hat{x_1}} \frac{\partial \hat{x_1}}{\partial x_1}
+\]
+
+### Gradient of the Loss with Respect to Mean \( \mu \) and Variance \( \sigma^2 \)
+
+\[
+\frac{\partial L}{\partial \mu} = \frac{\partial L}{\partial \sigma^2} \frac{\partial \sigma^2}{\partial x_1} \frac{\partial \hat{\mu}}{\partial \mu}
+\]
+
+### Simplified Gradient Expression
+
+\[
+\frac{\partial L}{\partial x_1} = \frac{\partial L}{\partial \hat{x_1}} \frac{1}{\sqrt{\sigma^2 + \epsilon}} + \frac{\partial L}{2 \sigma^2} 2 (x_1 - \mu) + \frac{\partial L}{\partial \mu} \frac{1}{2}
+\]
+
+---
+
+_Vineeth N B (IIT-H)_
+
+NPTEL
+
+§5.1 Introduction to CNNs
+```
+
+# DL4CV_Week05_Part01.pdf - Page 10
+
+```markdown
+# Homework: Backprop in Batch Normalization
+
+![Diagram of neural network](image_url)
+
+## Equations
+
+The partial derivatives of the loss function \( L \) with respect to the batch normalization parameters \( x_1, \sigma^2, \mu \) are given by:
+
+\[
+\frac{\partial L}{\partial x_1} = \frac{\partial L}{\partial \hat{x_1}} \frac{\partial \hat{x_1}}{\partial x_1} + \frac{\partial L}{\partial \sigma^2} \frac{\partial \sigma^2}{\partial x_1} + \frac{\partial L}{\partial \mu} \frac{\partial \mu}{\partial x_1}
+\]
+
+\[
+\frac{\partial L}{\partial \hat{x_1}} = \frac{\partial L}{\partial \hat{x_1}} \frac{1}{\sqrt{\sigma^2 + \epsilon}} + \frac{\partial L}{2 \sigma^2} \frac{2 (x_1 - \mu)}{\partial \sigma^2} + \frac{\partial L}{\partial \mu} \frac{1}{\partial \mu}
+\]
+
+\[
+\frac{\partial L}{\partial x_i} = \frac{\partial L}{\partial \hat{x_i}} \frac{1}{\sqrt{\sigma^2 + \epsilon}} + \frac{\partial L}{2 \sigma^2} \frac{2 (x_i - \mu)}{\partial \sigma^2} + \frac{\partial L}{\partial \mu} \frac{1}{\partial \mu}
+\]
+
+## Credit
+Aditya Agrawal
+
+Vineeth N B (IIT-H)
+
+§5.1 Introduction to CNNs
+
+Page 6 / 37
+```
+
+# DL4CV_Week05_Part01.pdf - Page 11
+
+```markdown
+# Acknowledgements
+
+- This lecture's content is largely based on Lecture 11 of CS7015 course taught by Mitesh Khapra at IIT Madras
+
+![NPTEL Logo](image_placeholder)
+
+Vineeth N B (IIT-H) §5.1 Introduction to CNNs
+
+Page 7 / 37
+```
+
+# DL4CV_Week05_Part01.pdf - Page 12
+
+```markdown
+# Review: Convolution Operation
+
+- **Convolution** is a mathematical way of combining two signals to form a third signal
+
+![Convolution Image](https://example.com/convolution_image)
+
+---
+
+Vineeth N B (IIT-H) §5.1 Introduction to CNNs
+
+---
+
+Page 8 of 37
+```
+
+# DL4CV_Week05_Part01.pdf - Page 13
+
+```markdown
+# Review: Convolution Operation
+
+- **Convolution** is a mathematical way of combining two signals to form a third signal
+- As we saw in Part 5 of Week 1, it is one of the most important techniques in signal processing
+
+![NPTEL Logo](https://example.com/nptel_logo.png)
+
+Vineeth N B (IIT-H) §5.1 Introduction to CNNs
+
+Page 8 of 37
+```
+
+# DL4CV_Week05_Part01.pdf - Page 14
+
+```markdown
+# Review: Convolution Operation
+
+- **Convolution** is a mathematical way of combining two signals to form a third signal
+- As we saw in Part 5 of Week 1, it is one of the most important techniques in signal processing
+- In case of 2D data (grayscale images), the convolution operation between a filter \( W^{k \times k} \) and an image \( X^{N_1 \times N_2} \) can be expressed as:
+
+  \[
+  Y(i, j) = \sum_{u=-k}^{k} \sum_{v=-k}^{k} W(u, v) X(i - u, j - v)
+  \]
+
+![Diagram Placeholder](image_url)
+
+**Vineeth N B. (IIT-H)**
+
+**§5.1 Introduction to CNNs**
+
+Page 8 / 37
+```
+
+# DL4CV_Week05_Part01.pdf - Page 15
+
+```markdown
+# Convolution Operation
+
+- More generally, given a $K_1 \times K_2$ filter $W$, we can write it as:
+
+  \[
+  Y(i, j) = \sum_{a=\left\lfloor \frac{K_1}{2} \right\rfloor}^{\left\lfloor \frac{K_1}{2} \right\rfloor} \sum_{b=\left\lfloor \frac{K_2}{2} \right\rfloor}^{\left\lfloor \frac{K_2}{2} \right\rfloor} X(i-a, j-b) W\left(\frac{K_1}{2} + a, \frac{K_2}{2} + b\right)
+  \]
+
+- This allows kernel to be centered on pixel of interest
+
+![Pixel of interest](image_placeholder)
+
+_Image placeholder for the pixel of interest._
+
+---
+
+**Vineeth N B (IIT-H)**
+
+§5.1 Introduction to CNNs
+
+Page 9 / 37
+```
+
+# DL4CV_Week05_Part01.pdf - Page 16
+
+```markdown
+# Pause and Ponder
+
+- In the 1D case, we slide a one-dimensional filter over a one-dimensional input
+- In the 2D case, we slide a two-dimensional filter over a two-dimensional input
+- **What would happen in the 3D case where your images are in color (RGB)?**
+
+![NPTEL Logo](https://example.com/logo.png)
+
+*Vineeth N B (IIT-H)*
+
+*§5.1 Introduction to CNNs*
+
+*Page 10 / 37*
+```
+
+# DL4CV_Week05_Part01.pdf - Page 17
+
+```markdown
+# Convolution Operation
+
+- **What would a 3D filter look like?**
+
+![NPTEL Logo](image-url)
+
+![3D Filter Diagram](image-url)
+
+*Vineeth N B (IIT-H)*
+
+*Section 5.1 Introduction to CNNs*
+
+*Page 11 / 37*
+```
+
+# DL4CV_Week05_Part01.pdf - Page 18
+
+```markdown
+# Convolution Operation
+
+- What would a 3D filter look like?
+- It will be in 3D too and we will refer to it as a volume
+
+![3D Filter Visualization](image-placeholder.png)
+
+![Input Diagram](image-placeholder.png)
+
+*Vineeth N B (IIT-H) §5.1 Introduction to CNNs*
+
+*Page 11 / 37*
+```
+
+# DL4CV_Week05_Part01.pdf - Page 19
+
+```markdown
+# Convolution Operation
+
+- **What would a 3D filter look like?**
+  - It will be in 3D too and we will refer to it as a **volume**.
+  - Once again we will slide the volume over the 3D input and perform the convolution operation.
+
+![NPTEL Logo](https://example.com/nptel_logo.png)
+
+*Vineeth N B (IIT-H) §5.1 Introduction to CNNs*
+
+---
+
+11 / 37
+```
+
+In this markdown format:
+- I have maintained the section titles and headings.
+- Bulleted points are used to list the details under the "Convolution Operation" heading.
+- The title and the list items are formatted in bold for emphasis.
+- The OCR placeholder for the NPTEL logo is included, assuming the exact URL isn't provided.
+- Page numbers are formatted as they appear in the original slide.
+- Special attention is given to the scientific terms and notation, ensuring they are accurately represented.
+
+# DL4CV_Week05_Part01.pdf - Page 20
+
+```markdown
+# Convolution Operation
+
+- **What would a 3D filter look like?**
+  - It will be in 3D too and we will refer to it as a volume.
+  - Once again we will slide the volume over the 3D input and perform the convolution operation.
+
+![Convolution Operation Diagram](image_url)
+
+*Vineeth N B (IIT-H) §5.1 Introduction to CNNs*
+
+*11 / 37*
+```
+
+# DL4CV_Week05_Part01.pdf - Page 21
+
+```markdown
+# Convolution Operation
+
+- **What would a 3D filter look like?**
+  - It will be in 3D too and we will refer to it as a volume.
+  - Once again we will slide the volume over the 3D input and perform the convolution operation.
+
+![Convolution Operation Diagram](image_placeholder)
+
+*Vineeth N B (IITH) §5.1 Introduction to CNNs*
+
+*11 / 37*
+```
+
+# DL4CV_Week05_Part01.pdf - Page 22
+
+```markdown
+# Convolution Operation
+
+- **What would a 3D filter look like?**
+  - It will be in 3D too and we will refer to it as a volume
+  - Once again we will slide the volume over the 3D input and perform the convolution operation
+
+![Convolution Operation](image_url)
+
+*Vineeth N B (IIT-H) §5.1 Introduction to CNNs*
+
+*Source: NPTEL*
+
+**Note:** Replace `image_url` with the actual URL of the image or a placeholder if necessary.
+```
+
+# DL4CV_Week05_Part01.pdf - Page 23
+
+```markdown
+# Convolution Operation
+
+- **What would a 3D filter look like?**
+- It will be in 3D too and we will refer to it as a volume
+- Once again we will slide the volume over the 3D input and perform the convolution operation
+
+![Convolution Operation Diagram](image_url)
+
+*Vineeth N B. (IIT-H) §5.1 Introduction to CNNs*
+
+---
+
+**Note:** The placeholder for the image URL (`image_url`) should be replaced with the actual image URL if available. This placeholder is used to denote where the image should go.
+```
+
+# DL4CV_Week05_Part01.pdf - Page 24
+
+```markdown
+# Convolution Operation
+
+- **What would a 3D filter look like?**
+- It will be in 3D too and we will refer to it as a volume
+- Once again we will slide the volume over the 3D input and perform the convolution operation
+
+![Convolution Operation Diagram](image-url)
+
+Vineeth N B (IIT-H) §5.1 Introduction to CNNs
+
+---
+
+*Note: Replace "image-url" with the actual URL or filename of the image if available.*
+```
+
+# DL4CV_Week05_Part01.pdf - Page 25
+
+```markdown
+# Convolution Operation
+
+- **What would a 3D filter look like?**
+- It will be in 3D too and we will refer to it as a volume
+- Once again we will slide the volume over the 3D input and perform the convolution operation
+
+![Diagram of Convolution Operation](diagram_of_convolution_operation.png)
+
+*Vineeth N B (IIT-H) §5.1 Introduction to CNNs*
+
+*11 / 37*
+```
+
+# DL4CV_Week05_Part01.pdf - Page 26
+
+```markdown
+# Convolution Operation
+
+- **What would a 3D filter look like?**
+- It will be in 3D too and we will refer to it as a volume
+- Once again we will slide the volume over the 3D input and perform the convolution operation
+
+![NPTEL Logo](https://example.com/logo.png)
+
+![Convolution Operation Diagram](https://example.com/convolution_diagram.png)
+
+*Vineeth N B (IIT-H) §5.1 Introduction to CNNs*
+
+*11 / 37*
+```
+
+Note: The placeholders for the images (`https://example.com/logo.png` and `https://example.com/convolution_diagram.png`) should be replaced with the actual image URLs or paths if available.
+
+# DL4CV_Week05_Part01.pdf - Page 27
+
+```markdown
+# Convolution Operation
+
+- **What would a 3D filter look like?**
+- It will be in 3D too and we will refer to it as a volume.
+- Once again we will slide the volume over the 3D input and perform the convolution operation.
+
+![Convolution Operation Diagram](image_url)
+
+*Vineeth N B. (IIT-H) §5.1 Introduction to CNNs*
+
+---
+
+NPTEL
+
+---
+
+11 / 37
+```
+
+# DL4CV_Week05_Part01.pdf - Page 28
+
+```markdown
+# Convolution Operation
+
+- **What would a 3D filter look like?**
+  - It will be in 3D too and we will refer to it as a volume
+  - Once again we will slide the volume over the 3D input and perform the convolution operation
+
+![Convolution Operation Diagram](image_url)
+
+_Vineeth N B (IIT-H)_
+
+## §5.1 Introduction to CNNs
+
+```
+```
+
+# DL4CV_Week05_Part01.pdf - Page 29
+
+```markdown
+# Convolution Operation
+
+- **What would a 3D filter look like?**
+  - It will be in 3D too and we will refer to it as a volume.
+- **Once again we will slide the volume over the 3D input and perform the convolution operation**
+  - We assume that the filter always extends to the depth of the image.
+- **In effect, we are doing a 2D convolution operation on a 3D input (because the filter moves along the height and the width but not along the depth).**
+
+![Convolution Operation Diagram](image_url)
+
+*Vineeth N B (IIT-H) §5.1 Introduction to CNNs*
+
+*Page 11/37*
+```
+
+# DL4CV_Week05_Part01.pdf - Page 30
+
+```markdown
+# Convolution Operation
+
+- What would a 3D filter look like?
+  - It will be in 3D too and we will refer to it as a volume
+  - Once again we will slide the volume over the 3D input and perform the convolution operation
+  - We assume that the filter always extends to the depth of the image
+  - In effect, we are doing a 2D convolution operation on a 3D input (because the filter moves along the height and the width but not along the depth)
+  - As a result, the output will be 2D (only width and height, no depth)
+
+![Convolution Operation Diagram](image_url)
+
+*Vineeth N B (IIIT-H) §5.1 Introduction to CNNs*
+
+*Slide 11 / 37*
+```
+
+# DL4CV_Week05_Part01.pdf - Page 31
+
+```markdown
+# Convolution Operation
+
+- **What would a 3D filter look like?**
+- It will be in 3D too and we will refer to it as a volume
+- Once again we will slide the volume over the 3D input and perform the convolution operation
+- We assume that the filter always extends to the depth of the image
+- In effect, we are doing a 2D convolution operation on a 3D input (because the filter moves along the height and the width but not along the depth)
+- As a result the output will be 2D (only width and height, no depth)
+- We can apply multiple filters to get multiple feature maps
+
+![Convolution Operation Diagram](image_url)
+
+_Vineeth N B. (IIIT-H)_
+## §5.1 Introduction to CNNs
+
+![Image Placeholder](image_url)
+```
+
+# DL4CV_Week05_Part01.pdf - Page 32
+
+```markdown
+# Convolution: Understanding the (Hyper)Parameters
+
+- **Input dimensions:** Width $(W_1)$ × Height $(H_1)$ × Depth $(D_1)$
+
+![NPTEL Logo](https://example.com/nptel_logo.png)
+
+![3D Convolutional Layer](https://example.com/3d_conv_layer.png)
+
+*Vineeth N B. (IIIT-H)*
+
+**§5.1 Introduction to CNNs**
+
+---
+
+12 / 37
+```
+
+Note: The images referenced in the markdown (e.g., `NPTEL Logo` and `3D Convolutional Layer`) are placeholders. Replace these with the actual image URLs or paths if available. Ensure the text accurately reflects the scientific content and formatting as per your specifications.
+
+# DL4CV_Week05_Part01.pdf - Page 33
+
+```markdown
+# Convolution: Understanding the (Hyper)Parameters
+
+- **Input dimensions**: Width (\(W_1\)) × Height (\(H_1\)) × Depth (\(D_1\))
+
+- Spatial extent (F) of each filter (the depth of each filter is same as the depth of input)
+
+- Output dimensions is \(W_2 \times H_2 \times D_2\) (we will soon see a formula for computing \(W_2, H_2\) and \(D_2\))
+
+![Convolution Process](image-url)
+
+Vineeth N B (IIT-H) §5.1 Introduction to CNNs 12 / 37
+```
+
+**Note:** Place the placeholder `image-url` with the actual path to the image if available. This placeholder is used to denote where the image would be included in the markdown format.
+
+# DL4CV_Week05_Part01.pdf - Page 34
+
+```markdown
+# Convolution: Understanding the (Hyper)Parameters
+
+- **Input dimensions**: Width (\(W_1\)) × Height (\(H_1\)) × Depth (\(D_1\))
+- **Spatial extent (F)** of each filter (the depth of each filter is same as the depth of input)
+- **Output dimensions** is \(W_2 \times H_2 \times D_2\) (we will soon see a formula for computing \(W_2\), \(H_2\) and \(D_2\))
+- **Stride (S)** (explained in following slides)
+- **Number of filters K**
+
+![Diagram of Convolution Operation](image_url)
+
+*Vineeth N B (IIIT-H) §5.1 Introduction to CNNs*
+
+*Slide 12 / 37*
+```
+
+# DL4CV_Week05_Part01.pdf - Page 35
+
+```markdown
+# Convolution: Understanding the (Hyper)Parameters
+
+- Let us compute dimensions \((W_2, H_2)\) of output
+
+![NPTEL Logo](image_url)
+
+_Vineeth N B (IIT-H)_
+
+## §5.1 Introduction to CNNs
+
+13 / 37
+```
+
+To ensure accuracy, replace `image_url` with the actual URL or filename of the image if available. This markdown format maintains the structure and formatting of the original content while accurately representing scientific terms and symbols.
+
+# DL4CV_Week05_Part01.pdf - Page 36
+
+```markdown
+# Convolution: Understanding the (Hyper)Parameters
+
+- Let us compute dimensions \((W_2, H_2)\) of output
+
+![Diagram](image_placeholder.png)
+
+![Diagram](image_placeholder.png)
+
+---
+
+Vineeth N B (IIIT-H) 
+
+# 5.1 Introduction to CNNs
+
+13 / 37
+```
+
+# DL4CV_Week05_Part01.pdf - Page 37
+
+```markdown
+# Convolution: Understanding the (Hyper)Parameters
+
+- Let us compute dimensions $(W_2, H_2)$ of output
+
+![Convolution Operation](image_url_if_available)
+
+![Convolution Example](image_url_if_available)
+
+---
+
+**Vineeth N B (IIIT-H)**
+
+**§5.1 Introduction to CNNs**
+
+Page 13 / 37
+```
+
+# DL4CV_Week05_Part01.pdf - Page 38
+
+```markdown
+# Convolution: Understanding the (Hyper)Parameters
+
+- Let us compute dimensions $(W_2, H_2)$ of output
+
+![Diagram](https://via.placeholder.com/150 "Diagram")
+
+![Grid Image](https://via.placeholder.com/150 "Grid Image")
+
+## Diagram Representation
+
+![Diagram](https://via.placeholder.com/150 "Diagram")
+
+![Grid Image 1](https://via.placeholder.com/150 "Grid Image 1")
+
+---
+
+**Vineeth N B (IIT-H)**
+
+**§5.1 Introduction to CNNs**
+
+**Page 13 / 37**
+```
+
+# DL4CV_Week05_Part01.pdf - Page 39
+
+```markdown
+# Convolution: Understanding the (Hyper)Parameters
+
+- Let us compute dimensions $(W_2, H_2)$ of output
+
+![Diagram of Convolution Process](image_url_placeholder)
+
+![Diagram of Convolution Operation](image_url_placeholder)
+
+Vineeth N B (IIT-H) §5.1 Introduction to CNNs 13 / 37
+```
+
+Note: The actual images and their URLs are placeholders as the OCR process couldn't directly capture the images from the provided content. Ensure to replace `image_url_placeholder` with the actual image URLs or embed the images directly into the markdown file.
+
+# DL4CV_Week05_Part01.pdf - Page 40
+
+```markdown
+# Convolution: Understanding the (Hyper)Parameters
+
+- Let us compute dimensions $(W_2, H_2)$ of output
+
+![Image of Convolution Process](image_url)
+
+```math
+\begin{bmatrix}
+  x_{11} & x_{12} & x_{13} & \cdots & x_{1n} \\
+  x_{21} & x_{22} & x_{23} & \cdots & x_{2n} \\
+  x_{31} & x_{32} & x_{33} & \cdots & x_{3n} \\
+  \vdots & \vdots & \vdots & \ddots & \vdots \\
+  x_{m1} & x_{m2} & x_{m3} & \cdots & x_{mn} \\
+\end{bmatrix}
+\ast
+\begin{bmatrix}
+  k_{11} & k_{12} & \cdots & k_{1k} \\
+  k_{21} & k_{22} & \cdots & k_{2k} \\
+  \vdots & \vdots & \ddots & \vdots \\
+  k_{n1} & k_{n2} & \cdots & k_{nk} \\
+\end{bmatrix}
+=
+\begin{bmatrix}
+  o_{11} & o_{12} & \cdots & o_{1m} \\
+  o_{21} & o_{22} & \cdots & o_{2m} \\
+  \vdots & \vdots & \ddots & \vdots \\
+  o_{p1} & o_{p2} & \cdots & o_{pm} \\
+\end{bmatrix}
+```
+
+*Vineeth N B (IIT-H) §5.1 Introduction to CNNs*
+
+Page 13 / 37
+
+```
+
+# DL4CV_Week05_Part01.pdf - Page 41
+
+```markdown
+# Convolution: Understanding the (Hyper)Parameters
+
+- Let us compute dimensions \((W_2, H_2)\) of output
+
+![Convolution Diagram](image-url)
+
+**Vineeth N B (IIT-H)**
+
+## §5.1 Introduction to CNNs
+
+NPT.E.L.
+
+---
+
+![NPT.E.L. Logo](image-url)
+
+```math
+W_2 = W_1 - (k - 1)
+```
+
+```math
+H_2 = H_1 - (k - 1)
+```
+
+```math
+k = 3
+```
+
+---
+
+**Note:** The example provided likely includes visual components for convolution process. Ensure the extracted image URLs are correctly substituted with actual image sources.
+
+```markdown
+```
+
+# DL4CV_Week05_Part01.pdf - Page 42
+
+```markdown
+# Convolution: Understanding the (Hyper)Parameters
+
+- Let us compute dimensions \((W_2, H_2)\) of output
+- Recall that we can't place the kernel at corners as it will cross the input boundary
+
+![Diagram of Convolution Operation](diagram_of_convolution.png)
+
+![Pixel of Interest](pixel_of_interest.png)
+
+*Vineeth N B. (IIT-H) §5.1 Introduction to CNNs*
+
+---
+
+13 / 37
+```
+
+# DL4CV_Week05_Part01.pdf - Page 43
+
+```markdown
+# Convolution: Understanding the (Hyper)Parameters
+
+- Let us compute dimensions \((W_2, H_2)\) of output
+- Recall that we can't place the kernel at corners as it will cross the input boundary
+  - This is true for all shaded points (the kernel crosses the input boundary)
+
+![Kernel Boundary Illustration](image_url)
+
+```math
+= 
+\begin{bmatrix}
+  & & & & & &  &  \\
+  & & & & & &  &  \\
+  & & & & & &  &  \\
+  & & & & & &  &  \\
+  & & & & & &  &  \\
+  & & & & & &  &  \\
+  & & & & & &  &  \\
+  & & & & & &  &  \\
+\end{bmatrix}
+=
+\begin{bmatrix}
+  \bullet & \bullet & \bullet & \bullet & \bullet & \bullet & \bullet & \bullet \\
+  \bullet & \bullet & \bullet & \bullet & \bullet & \bullet & \bullet & \bullet \\
+  \bullet & \bullet & \bullet & \bullet & \bullet & \bullet & \bullet & \bullet \\
+  \bullet & \bullet & \bullet & \bullet & \bullet & \bullet & \bullet & \bullet \\
+  \bullet & \bullet & \bullet & \bullet & \bullet & \bullet & \bullet & \bullet \\
+  \bullet & \bullet & \bullet & \bullet & \bullet & \bullet & \bullet & \bullet \\
+  \bullet & \bullet & \bullet & \bullet & \bullet & \bullet & \bullet & \bullet \\
+  \bullet & \bullet & \bullet & \bullet & \bullet & \bullet & \bullet & \bullet \\
+\end{bmatrix}
+```
+
+*Vineeth N B (IIT-H)*
+
+§5.1 Introduction to CNNs
+
+*Page 13 / 37*
+```
+
+# DL4CV_Week05_Part01.pdf - Page 44
+
+```markdown
+# Convolution: Understanding the (Hyper)Parameters
+
+- Let us compute dimensions \( (W_2, H_2) \) of output
+- Recall that we can't place the kernel at corners as it will cross the input boundary
+- This is true for all shaded points (the kernel crosses the input boundary)
+- This results in an output which is of smaller dimensions than input
+
+![Diagram](image-placeholder)
+
+_Figure: Visual representation of kernel placement and its effect on output dimensions._
+
+---
+
+Vineeth N B (IIT-H) §5.1 Introduction to CNNs 13 / 37
+```
+
+# DL4CV_Week05_Part01.pdf - Page 45
+
+```markdown
+# Convolution: Understanding the (Hyper)Parameters
+
+- Let us compute dimensions $(W_2, H_2)$ of output
+- Recall that we can't place the kernel at corners as it will cross the input boundary
+  - This is true for all shaded points (the kernel crosses the input boundary)
+  - This results in an output which is of smaller dimensions than input
+  - As size of kernel increases, this becomes true for even more pixels
+
+![Diagram of Convolution Process](image_url)
+
+*Vineeth N B (IIIT-H) §5.1 Introduction to CNNs*
+
+*Page 13 / 37*
+```
+
+# DL4CV_Week05_Part01.pdf - Page 46
+
+```markdown
+# Convolution: Understanding the (Hyper)Parameters
+
+- Let us compute dimensions $(W_2, H_2)$ of output
+
+- Recall that we can't place the kernel at corners as it will cross the input boundary
+
+- This is true for all shaded points (the kernel crosses the input boundary)
+
+- This results in an output which is of smaller dimensions than input
+
+- As size of kernel increases, this becomes true for even more pixels
+
+- For example, let's consider a $5 \times 5$ kernel
+
+![Input and Kernel Diagram](image-url)
+
+```
+
+# DL4CV_Week05_Part01.pdf - Page 47
+
+```markdown
+# Convolution: Understanding the (Hyper)Parameters
+
+- Let us compute dimensions \((W_2, H_2)\) of output
+
+- Recall that we can't place the kernel at corners as it will cross the input boundary
+
+- This is true for all shaded points (the kernel crosses the input boundary)
+
+- This results in an output which is of smaller dimensions than input
+
+- As size of kernel increases, this becomes true for even more pixels
+
+- For example, let's consider a \(5 \times 5\) kernel
+
+- We have an even smaller output now
+
+![Kernel Diagram](image_url)
+
+```
+
+# DL4CV_Week05_Part01.pdf - Page 48
+
+```markdown
+# Convolution: Understanding the (Hyper)Parameters
+
+- Let us compute dimensions $(W_2, H_2)$ of output
+   
+- Recall that we can't place the kernel at corners as it will cross the input boundary
+   
+- This is true for all shaded points (the kernel crosses the input boundary)
+   
+- This results in an output which is of smaller dimensions than input
+   
+- As size of kernel increases, this becomes true for even more pixels
+   
+- For example, let's consider a $5 \times 5$ kernel
+   
+- We have an even smaller output now
+
+![Image Placeholder](image_url)
+```
+
+# DL4CV_Week05_Part01.pdf - Page 49
+
+```markdown
+# Convolution: Understanding the (Hyper)Parameters
+
+- Let us compute dimensions \((W_2, H_2)\) of output
+- Recall that we can't place the kernel at corners as it will cross the input boundary
+  - This is true for all shaded points (the kernel crosses the input boundary)
+  - This results in an output which is of smaller dimensions than input
+    - As size of kernel increases, this becomes true for even more pixels
+      - For example, let's consider a \(5 \times 5\) kernel
+      - We have an even smaller output now
+
+![Diagram of Convolution](image_url_if_available)
+
+*Vineeth N B (IIIT-H) §5.1 Introduction to CNNs 13 / 37*
+```
+
+# DL4CV_Week05_Part01.pdf - Page 50
+
+```markdown
+# Convolution: Understanding the (Hyper)Parameters
+
+- Let us compute dimensions $(W_2, H_2)$ of output
+- Recall that we can’t place the kernel at corners as it will cross the input boundary
+- This is true for all shaded points (the kernel crosses the input boundary)
+- This results in an output which is of smaller dimensions than input
+- As size of kernel increases, this becomes true for even more pixels
+- For example, let’s consider a $5 \times 5$ kernel
+- We have an even smaller output now
+
+![Diagrams](image_url)
+
+*Vineeth N B (IIIT-H)*
+
+*§5.1 Introduction to CNNs*
+
+*13 / 37*
+```
+
+**Note**: The `![]()` placeholder is used for the images since the OCR process could not capture the images directly. Replace `image_url` with the actual URL or file path of the images if available.
+
+# DL4CV_Week05_Part01.pdf - Page 51
+
+```markdown
+# Convolution: Understanding the (Hyper)Parameters
+
+- Let us compute dimensions $(W_2, H_2)$ of output
+- Recall that we can’t place the kernel at corners as it will cross the input boundary
+- This is true for all shaded points (the kernel crosses the input boundary)
+- This results in an output which is of smaller dimensions than input
+- As size of kernel increases, this becomes true for even more pixels
+- For example, let’s consider a $5 \times 5$ kernel
+- We have an even smaller output now
+
+![Diagram](image_url)
+
+*Vineeth N B (IIIT-H) §5.1 Introduction to CNNs*
+
+```
+
+# DL4CV_Week05_Part01.pdf - Page 52
+
+```markdown
+# Convolution: Understanding the (Hyper)Parameters
+
+- Let us compute dimensions $(W_2, H_2)$ of output
+- Recall that we can't place the kernel at corners as it will cross the input boundary
+    - This is true for all shaded points (the kernel crosses the input boundary)
+    - This results in an output which is of smaller dimensions than input
+    - As size of kernel increases, this becomes true for even more pixels
+    - For example, let's consider a $5 \times 5$ kernel
+    - We have an even smaller output now
+
+![Input and Kernel Diagram](image-placeholder.png)
+
+---
+
+**Vineeth N B (IIIT-H)**
+
+**§5.1 Introduction to CNNs**
+
+**13 / 37**
+```
+
+# DL4CV_Week05_Part01.pdf - Page 53
+
+```markdown
+# Convolution: Understanding the (Hyper)Parameters
+
+- Let us compute dimensions $(W_2, H_2)$ of output
+
+- Recall that we can't place the kernel at corners as it will cross the input boundary
+
+  ![Kernel Position Diagram](image_url)
+
+- This is true for all shaded points (the kernel crosses the input boundary)
+
+- This results in an output which is of smaller dimensions than input
+
+- As size of kernel increases, this becomes true for even more pixels
+
+- For example, let's consider a $5 \times 5$ kernel
+
+- We have an even smaller output now
+
+  ![Output Diagram](image_url)
+
+  In general,
+
+  \[
+  W_2 = W_1 - F + 1
+  \]
+
+  \[
+  H_2 = H_1 - F + 1
+  \]
+
+  *We will refine this formula further*
+
+---
+
+*Vineeth N B (IIIT-H)*
+
+*§5.1 Introduction to CNNs*
+
+*13 / 37*
+```
+
+# DL4CV_Week05_Part01.pdf - Page 54
+
+```markdown
+# Convolution: Understanding the (Hyper)Parameters
+
+- What if we want output to be of same size as input?
+
+::: image placeholder for figure :::
+
+Vineeth N B (IIT-H) §5.1 Introduction to CNNs
+
+14 / 37
+
+::: nptel logo image placeholder :::
+```
+
+# DL4CV_Week05_Part01.pdf - Page 55
+
+```markdown
+# Convolution: Understanding the (Hyper)Parameters
+
+- What if we want output to be of same size as input?
+- Recall use of **padding**
+  - Pad inputs with appropriate number of inputs so you can now apply kernel at corners
+
+![NPTEL Logo](https://example.com/nptel_logo.png)
+
+*Vineeth N B. (IIT-H) §5.1 Introduction to CNNs*
+
+*Page 14 / 37*
+```
+
+# DL4CV_Week05_Part01.pdf - Page 56
+
+```markdown
+# Convolution: Understanding the (Hyper)Parameters
+
+- **What if we want output to be of same size as input?**
+- **Recall use of padding:**
+  - Pad inputs with appropriate number of inputs so you can now apply kernel at corners
+
+- Let us use pad P = 1 with a 3 × 3 kernel
+  - This means we will add one row and one column of 0 inputs at the top, bottom, left and right; recall there are other ways of padding, see Week 1 Part 5 lecture
+
+![Padding Illustration](image_url)
+
+Vineeth N B. (IIT-H)
+
+§5.1 Introduction to CNNs
+
+14 / 37
+```
+
+Note: For the image placeholder, replace `image_url` with the actual URL or filename if available.
+
+# DL4CV_Week05_Part01.pdf - Page 57
+
+```markdown
+# Convolution: Understanding the (Hyper)Parameters
+
+- What if we want output to be of same size as input?
+- Recall use of **padding**
+- Pad inputs with appropriate number of inputs so you can now apply kernel at corners
+- Let us use pad $P = 1$ with a $3 \times 3$ kernel
+- This means we will add one row and one column of $0$ inputs at the top, bottom, left and right; recall there are other ways of padding, see Week 1 Part 5 lecture
+
+![Convolution Padding Example](image_url)
+
+_Image description: Demonstration of padding with a $3 \times 3$ kernel on a $3 \times 3$ matrix, resulting in padding each corner with 0s._
+
+_Vineeth N B. (IIT-H)_
+
+_§5.1 Introduction to CNNs_
+
+_14 / 37_
+```
+
+# DL4CV_Week05_Part01.pdf - Page 58
+
+```markdown
+# Convolution: Understanding the (Hyper)Parameters
+
+- What if we want output to be of same size as input?
+
+- Recall use of **padding**
+
+  - Pad inputs with appropriate number of inputs so you can now apply kernel at corners
+
+- Let us use pad P = 1 with a 3 × 3 kernel
+
+  - This means we will add one row and one column of 0 inputs at the top, bottom, left, and right; recall there are other ways of padding, see Week 1 Part 5 lecture
+
+![Convolution Padding Example](image-url)
+
+---
+
+Vineeth N B (IIIT-H)
+
+S5.1 Introduction to CNNs
+
+14 / 37
+```
+
+# DL4CV_Week05_Part01.pdf - Page 59
+
+```markdown
+# Convolution: Understanding the (Hyper)Parameters
+
+- What if we want output to be of same size as input?
+    - Recall use of **padding**
+    - Pad inputs with appropriate number of inputs so you can now apply kernel at corners
+    - Let us use pad P = 1 with a 3 × 3 kernel
+    - This means we will add one row and one column of 0 inputs at the top, bottom, left and right; recall there are other ways of padding, see Week 1 Part 5 lecture
+
+![Convolution Padding Example](image-placeholder.png)
+
+*Vineeth N B (IIIT-H) §5.1 Introduction to CNNs 14 / 37*
+```
+
+# DL4CV_Week05_Part01.pdf - Page 60
+
+```markdown
+# Convolution: Understanding the (Hyper)Parameters
+
+- What if we want output to be of same size as input?
+- Recall use of **padding**
+  - Pad inputs with appropriate number of inputs so you can now apply kernel at corners
+    ![Padding Diagram](https://via.placeholder.com/150)
+    ```
+    0 0 0 0 0 0 0
+    0 0 0 0 0 0 0
+    0 0 0 0 0 0 0
+    0 0 1 1 1 0 0
+    0 0 1 1 1 0 0
+    0 0 0 0 0 0 0
+    0 0 0 0 0 0 0
+    ```
+    ```
+    =   
+    0 0 0 0 0 0 0
+    0 0 0 0 0 0 0
+    0 0 0 0 0 0 0
+    0 0 0 0 0 0 0
+    0 0 0 0 0 0 0
+    0 0 0 0 0 0 0
+    0 0 0 0 0 0 0
+    ```
+- Let us use pad \( P = 1 \) with a \( 3 \times 3 \) kernel
+- This means we will add one row and one column of 0 inputs at the top, bottom, left and right; recall there are other ways of padding, see Week 1 Part 5 lecture
+
+Vineeth N B. (IIT-H) §5.1 Introduction to CNNs 14 / 37
+```
+
+# DL4CV_Week05_Part01.pdf - Page 61
+
+```markdown
+# Convolution: Understanding the (Hyper)Parameters
+
+- What if we want output to be of same size as input?
+
+  ![Diagram of Padding](image-url)
+
+- Recall use of **padding**
+
+- Pad inputs with appropriate number of inputs so you can now apply kernel at corners
+
+- Let us use pad P = 1 with a 3 x 3 kernel
+
+  ![Padding Example](image-url)
+
+- This means we will add one row and one column of 0 inputs at the top, bottom, left and right; recall there are other ways of padding, see Week 1 Part 5 lecture
+
+*Vineeth N B. (IIT-H) §5.1 Introduction to CNNs 14 / 37*
+```
+
+# DL4CV_Week05_Part01.pdf - Page 62
+
+```markdown
+# Convolution: Understanding the (Hyper)Parameters
+
+- What if we want output to be of same size as input?
+- Recall use of **padding**
+- Pad inputs with appropriate number of inputs so you can now apply kernel at corners
+- Let us use pad P = 1 with a 3 × 3 kernel
+- This means we will add one row and one column of 0 inputs at the top, bottom, left and right; recall there are other ways of padding, see Week 1 Part 5 lecture
+
+*Vineeth N B. (IIIT-H)*
+
+*§5.1 Introduction to CNNs*
+
+*14 / 37*
+```
+
+# DL4CV_Week05_Part01.pdf - Page 63
+
+```markdown
+# Convolution: Understanding the (Hyper)Parameters
+
+- What if we want output to be of same size as input?
+- Recall use of **padding**
+  - Pad inputs with appropriate number of inputs so you can now apply kernel at corners
+  - We now have:
+    \[
+    W_2 = W_1 - F + 2P + 1
+    \]
+    \[
+    H_2 = H_1 - F + 2P + 1
+    \]
+- Let us use pad \( P = 1 \) with a \( 3 \times 3 \) kernel
+- This means we will add one row and one column of 0 inputs at the top, bottom, left, and right; recall there are other ways of padding, see Week 1 Part 5 lecture
+- We will refine this formula further
+ 
+*Vineeth N B. (IIT-H) §5.1 Introduction to CNNs*
+
+*14 / 37*
+```
+
+# DL4CV_Week05_Part01.pdf - Page 64
+
+```markdown
+# Convolution: Understanding the (Hyper)Parameters
+
+- **What does stride \( S \) do?**
+
+![NPTEL Logo](image-url)
+
+Vineeth N B (IIT-H) 
+
+## §5.1 Introduction to CNNs
+
+Page 15 / 37
+```
+
+# DL4CV_Week05_Part01.pdf - Page 66
+
+```markdown
+# Convolution: Understanding the (Hyper)Parameters
+
+- **What does stride \( S \) do?**
+  - It defines the intervals at which the filter is applied (here \( S = 2 \))
+  - Skip every 2nd pixel (\( S = 2 \)) which will result in an output of smaller dimensions
+
+![Diagram](image-url)
+
+Vineeth N B. (IIT-H) §5.1 Introduction to CNNs
+
+15 / 37
+```
+
+# DL4CV_Week05_Part01.pdf - Page 67
+
+```markdown
+# Convolution: Understanding the (Hyper)Parameters
+
+- **What does `stride S` do?**
+  - It defines the intervals at which the filter is applied (here $S = 2$)
+  - Skip every 2nd pixel ($S = 2$) which will result in an output of smaller dimensions
+
+![Diagram of Convolution](https://via.placeholder.com/150)
+
+\```
+0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0
+\```
+=
+\[
+\begin{array}{cc}
+\cdot & \cdot \\
+\cdot & \cdot \\
+\end{array}
+\]
+
+_Vineeth N B. (IIT-H)_
+
+## §5.1 Introduction to CNNs
+
+*NPTEL*
+
+15 / 37
+```
+
+# DL4CV_Week05_Part01.pdf - Page 68
+
+```markdown
+# Convolution: Understanding the (Hyper)Parameters
+
+- **What does stride \(S\) do?**
+  - It defines the intervals at which the filter is applied (here \(S = 2\))
+  - Skip every 2nd pixel (\(S = 2\)) which will result in an output of smaller dimensions
+
+![Convolution Diagram](image_url)
+
+Vineeth N B (IIT-H) §5.1 Introduction to CNNs 15 / 37
+```
+
+# DL4CV_Week05_Part01.pdf - Page 69
+
+```markdown
+# Convolution: Understanding the (Hyper)Parameters
+
+- **What does **stride** \(S\) do?**
+  - It defines the intervals at which the filter is applied (here \(S = 2\))
+  - Skip every 2nd pixel (\(S = 2\)) which will result in an output of smaller dimensions
+
+![Diagram](image_url)
+
+\[
+\begin{array}{|c|c|c|c|c|c|c|c|}
+\hline
+0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\
+\hline
+0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\
+\hline
+0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\
+\hline
+0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\
+\hline
+0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\
+\hline
+0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\
+\hline
+0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\
+\hline
+0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\
+\hline
+\end{array}
+\]
+
+= 
+
+\[
+\begin{array}{|c|c|c|}
+\hline
+\cdot & \cdot & \cdot \\
+\hline
+\cdot & \cdot & \cdot \\
+\hline
+\cdot & \cdot & \cdot \\
+\hline
+\end{array}
+\]
+
+*Vineeth N B. (IIIT-H) §5.1 Introduction to CNNs*
+
+*15 / 37*
+```
+
+# DL4CV_Week05_Part01.pdf - Page 70
+
+```markdown
+# Convolution: Understanding the (Hyper)Parameters
+
+- **What does stride \( S' \) do?**
+  - It defines the intervals at which the filter is applied (here \( S' = 2 \))
+  - Skip every 2nd pixel (\( S' = 2 \)) which will result in an output of smaller dimensions
+
+![Stride Example](image-url)
+
+```
+0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0
+```
+
+```
+0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0
+0 0 0 0 0 0
+0 0 0 0 0
+```
+
+\(
+= \quad
+\begin{bmatrix}
+  \bullet & \bullet & \bullet & \bullet  \\
+  \bullet & \bullet & \bullet & \bullet  \\
+  \bullet & \bullet & \bullet & \bullet  \\
+  \bullet & \bullet & \bullet & \bullet  \\
+\end{bmatrix}
+\)
+
+---
+
+*Vineeth N B (IIIT-H) §5.1 Introduction to CNNs*
+
+---
+
+15 / 37
+```
+
+# DL4CV_Week05_Part01.pdf - Page 71
+
+```markdown
+# Convolution: Understanding the (Hyper)Parameters
+
+- **What does `stride` \( S' \) do?**
+  - It defines the intervals at which the filter is applied (here \( S = 2 \)).
+  - Skip every 2nd pixel (\( S = 2 \)) which will result in an output of smaller dimensions
+
+![Diagram](image-url)
+
+| 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 |
+| 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 |
+| 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 |
+| 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 |
+| 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 |
+| 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 |
+| 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 |
+| 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 |
+
+![Result](image-url)
+
+![NPTEL](image-url)
+  
+**Vineeth N B. (IIT-H)**
+
+**§5.1 Introduction to CNNs**
+
+**15 / 37**
+```
+
+# DL4CV_Week05_Part01.pdf - Page 72
+
+```markdown
+# Convolution: Understanding the (Hyper)Parameters
+
+- **What does stride \( S \) do?**
+  - It defines the intervals at which the filter is applied (here \( S = 2 \)).
+  - Skip every 2nd pixel (\( S = 2 \)) which will result in an output of smaller dimensions
+
+![Diagram](diagram.png)
+
+Vineeth N B (IIT-H) §5.1 Introduction to CNNs
+
+NPTEL
+```
+
+# DL4CV_Week05_Part01.pdf - Page 73
+
+```markdown
+# Convolution: Understanding the (Hyper)Parameters
+
+- **What does stride \(S\) do?**
+  - It defines the intervals at which the filter is applied (here \(S = 2\))
+  - Skip every 2nd pixel (\(S = 2\)) which will result in an output of smaller dimensions
+
+![Image placeholder](image_url)
+
+Vineeth N B (IIT-H) §5.1 Introduction to CNNs
+
+15 / 37
+```
+
+# DL4CV_Week05_Part01.pdf - Page 74
+
+```markdown
+# Convolution: Understanding the (Hyper)Parameters
+
+- **What does **stride** \( S \) do?**
+
+  - It defines the intervals at which the filter is applied (here \( S = 2 \))
+
+- Skip every 2nd pixel (\( S = 2 \)) which will result in an output of smaller dimensions
+
+![Convolution Example](image-url)
+
+![NPTEL](image-url)
+
+*Vineeth N B. (IIT-H)*
+
+*5.1 Introduction to CNNs*
+
+*15 / 37*
+```
+
+# DL4CV_Week05_Part01.pdf - Page 75
+
+```markdown
+# Convolution: Understanding the (Hyper)Parameters
+
+- **What does stride \( S \) do?**
+  - It defines the intervals at which the filter is applied (here \( S = 2 \)).
+  - Skip every 2nd pixel (\( S = 2 \)) which will result in an output of smaller dimensions
+
+![Diagram of Convolution](image_url)
+
+Vineeth N B (IIT-H) §5.1 Introduction to CNNs 15 / 37
+```
+
+# DL4CV_Week05_Part01.pdf - Page 76
+
+```markdown
+# Convolution: Understanding the (Hyper)Parameters
+
+- **What does stride \( S \) do?**
+  - It defines the intervals at which the filter is applied (here \( S = 2 \)).
+  - Skip every 2nd pixel (\( S = 2 \)) which will result in an output of smaller dimensions.
+
+![Diagram of Convolution](data:image/png;base64,...) 
+
+| 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 |
+|---|---|---|---|---|---|---|---|---|---|---|
+| 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 |
+| 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 |
+| 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 |
+| 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 |
+| 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 |
+| 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 |
+| 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 |
+| 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 |
+| 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 |
+| 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 |
+
+= ![Resultant Image](data:image/png;base64,...) 
+
+_Vineeth N B. (IIT-H)_
+
+_§5.1 Introduction to CNNs_
+
+_Page 15 / 37_
+```
+
+# DL4CV_Week05_Part01.pdf - Page 77
+
+```markdown
+# Convolution: Understanding the (Hyper)Parameters
+
+- **What does stride \( S \) do?**
+  - It defines the intervals at which the filter is applied (here \( S = 2 \)).
+  - Skip every 2nd pixel (\( S = 2 \)) which will result in an output of smaller dimensions
+
+![Diagram of Convolution](https://via.placeholder.com/150)
+
+\[
+\begin{bmatrix}
+0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\
+0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\
+0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\
+0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\
+0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\
+0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\
+0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\
+0 & 0 & 0 & 0 & 0 & 0 & 0 & 0
+\end{bmatrix}
+\quad
+\underbrace{\begin{bmatrix}
+0 & 0 & 0 \\
+0 & 0 & 0 \\
+0 & 0 & 0
+\end{bmatrix}}_{\text{Filter}}
+\quad
+=
+\quad
+\begin{bmatrix}
+\cdot & \cdot & \cdot \\
+\cdot & \cdot & \cdot \\
+\cdot & \cdot & \cdot
+\end{bmatrix}
+\]
+
+![NPTEL Logo](https://via.placeholder.com/150)
+
+*Vineeth N B (IIT-H)*
+
+*§5.1 Introduction to CNNs*
+
+*Page 15 / 37*
+```
+
+# DL4CV_Week05_Part01.pdf - Page 78
+
+```markdown
+# Convolution: Understanding the (Hyper)Parameters
+
+- **What does stride \( S' \) do?**
+  - It defines the intervals at which the filter is applied (here \( S = 2 \)).
+  - Skip every 2nd pixel (\( S = 2 \)) which will result in an output of smaller dimensions.
+
+![Convolution Diagram](image-url)
+
+Vineeth N B (IIT-H) §5.1 Introduction to CNNs
+
+NPTel
+
+Page 15 / 37
+```
+
+# DL4CV_Week05_Part01.pdf - Page 79
+
+```markdown
+# Convolution: Understanding the (Hyper)Parameters
+
+- **What does **stride** \( S' \) do?**
+  - It defines the intervals at which the filter is applied (here \( S' = 2 \)).
+  - Skip every 2nd pixel (\( S' = 2 \)) which will result in an output of smaller dimensions.
+
+![Convolution Diagram](image_url)
+
+![Convolution Example](image_url)
+
+Vineeth N B (IIT-H) §5.1 Introduction to CNNs
+
+Page 15 / 37
+```
+
+# DL4CV_Week05_Part01.pdf - Page 80
+
+```markdown
+# Convolution: Understanding the (Hyper)Parameters
+
+- **What does stride \( S \) do?**
+  - It defines the intervals at which the filter is applied (here \( S = 2 \)).
+  - Skip every 2nd pixel (\( S = 2 \)) which will result in an output of smaller dimensions.
+
+**So our final formula should mostly look like:**
+
+\[ W_2 = \frac{W_1 - F + 2P}{S} + 1 \]
+
+\[ H_2 = \frac{H_1 - F + 2P}{S} + 1 \]
+
+**Not done yet, we will refine this formula further!**
+
+*Vineeth N B. (IIT-H) §5.1 Introduction to CNNs*
+
+*NP*
+
+```
+
+# DL4CV_Week05_Part01.pdf - Page 81
+
+```markdown
+# Convolution: Understanding the (Hyper)Parameters
+
+- Finally, coming to depth of output
+
+![NPTEL Logo](image_url_here)
+
+*Vineeth N B (IIT-H)*
+
+## §5.1 Introduction to CNNs
+
+Page 16 / 37
+```
+
+# DL4CV_Week05_Part01.pdf - Page 82
+
+```markdown
+# Convolution: Understanding the (Hyper)Parameters
+
+![Image of NPTEL logo](image_url)
+
+- Finally, coming to depth of output
+- Each filter gives us one 2D output
+
+*Vineeth N B (IIT-H) §5.1 Introduction to CNNs*
+
+*Page 16 / 37*
+```
+
+# DL4CV_Week05_Part01.pdf - Page 83
+
+```markdown
+# Convolution: Understanding the (Hyper)Parameters
+
+- Finally, coming to depth of output
+- Each filter gives us one 2D output
+- K filters will give us K such 2D outputs
+- We can think of resulting output as K x W2 x H2 volume
+- Thus D2 = K
+
+![Diagram of Convolution](image_url)
+
+Vineeth N B. (IIIT-H) §5.1 Introduction to CNNs
+
+16 / 37
+```
+
+Note: The placeholder `image_url` should be replaced if the actual image URL or identifier is available. If the diagram cannot be captured through OCR, a description or text representation should be included appropriately.
+
+# DL4CV_Week05_Part01.pdf - Page 84
+
+```markdown
+# Quick Exercise
+
+## Work out output dimensions for the setting below!
+
+![Diagram of CNN layers](image-url)
+
+```plaintext
+Vineeth N B (IIIT-H) §5.1 Introduction to CNNs 17 / 37
+```
+
+### Diagram Description
+- **Left Paragraph Text**:
+  - The diagram on the left shows a three-dimensional tensor with dimensions labeled as 227, 227, and 3.
+
+### Central Layer Parameters
+- **Filter Information**:
+  - Number of filters: 96
+  - Stride: 4
+  - Padding: 0
+
+### Mathematical Formulas
+- **Width Calculation**:
+  - \( W_2 = \frac{W_1 - F + 2P}{S} + 1 \)
+  - Where:
+    - \( W_1 \) = initial width of the input tensor
+    - \( F \) = filter size
+    - \( P \) = padding
+    - \( S \) = stride
+    - \( W_2 \) = output width
+
+- **Height Calculation**:
+  - \( H_2 = \frac{H_1 - F + 2P}{S} + 1 \)
+  - Where:
+    - \( H_1 \) = initial height of the input tensor
+    - \( F \) = filter size
+    - \( P \) = padding
+    - \( S \) = stride
+    - \( H_2 \) = output height
+
+### Right Paragraph Text
+- The diagram on the right shows a resulting three-dimensional tensor with dimensions labeled as \( H_2 \), \( W_2 \), and \( D_2 \).
+
+### Equation Parameters
+- **Dimensions**:
+  - \( H_2 \) = ?
+  - \( W_2 \) = ?
+  - \( D_2 \) = ?
+```
+
+# DL4CV_Week05_Part01.pdf - Page 87
+
+```markdown
+# Quick Exercise
+
+## Work out output dimensions for the setting below!
+
+![Diagram](image_url)
+
+- **Left Box (Input):**
+
+  - Dimensions: \(227 \times 227 \times 3\)
+
+- **Operation:**
+
+  - Convolution with 96 filters
+  - Stride = 4
+  - Padding = 0
+  
+  - Kernel size \(W_2 = W_1 - F + 2P + 1\)
+  - Height \(H_2 = H_1 - F + 2P + 1\)
+
+- **Right Box (Output):**
+  
+  - Dimensions: \(55 \times 55 \times 96\)
+
+### Equations:
+
+\[ 55 = \frac{227 - 11}{4} + 1 \]
+
+\[ 55 = \frac{227 - 11 + 1}{4} \]
+
+*Vineeth N B (IIT-H)*
+
+*§5.1 Introduction to CNNs*
+
+*17 / 37*
+```
+
+# DL4CV_Week05_Part01.pdf - Page 88
+
+```markdown
+# Pause and Ponder
+
+- **What is the connection between convolution and neural networks? Won't feedforward neural networks do?**
+- **We will try to understand this by considering the task of "image classification"**
+
+_Vineeth N B (IIT-H)_
+
+## §5.1 Introduction to CNNs
+
+NPTEL
+
+![NPTEL Logo](image_url_if_available)
+
+18 / 37
+```
+
+# DL4CV_Week05_Part01.pdf - Page 89
+
+```markdown
+# Traditional Machine Learning for Vision
+
+- Traditional ML-based computer vision solutions involve static feature engineering from images (e.g., recall SIFT, LBP, HoG, etc)
+- Though effective, static feature engineering was a bottleneck of pre-DL vision solutions
+
+![Image of a building](image_link_here)
+
+**Static Feature Engineering (No Learning)**
+
+- Use Raw Pixels
+- Edge Detector
+- SIFT/HOG
+
+![Diagram demonstrating static feature engineering steps](image_link_here)
+
+*Vineeth N B (IIT-H) §5.1 Introduction to CNNs*
+
+*Page 19 / 37*
+```
+
+# DL4CV_Week05_Part01.pdf - Page 90
+
+```markdown
+# Traditional Machine Learning for Vision
+
+- Traditional ML-based computer vision solutions involve static feature engineering from images (e.g., recall SIFT, LBP, HoG, etc)
+- Though effective, static feature engineering was a bottleneck of pre-DL vision solutions
+
+![Image of Taj Mahal](https://via.placeholder.com/200)
+
+## Static Feature Engineering (No Learning)
+- Use Raw Pixels
+- Edge Detector
+- SIFT/HOG
+
+![Flowchart depicting the process](https://via.placeholder.com/200)
+
+## Learning Weights of Classifier
+
+![Diagram showing the connection between Static Feature Engineering and Learning Weights of Classifier](https://via.placeholder.com/200)
+
+*Vineeth N B (IIIT-H) §5.1 Introduction to CNNs*
+
+*Page 19 / 37*
+```
+
+# DL4CV_Week05_Part01.pdf - Page 91
+
+```markdown
+# Beyond Static Feature Engineering
+
+- Instead of using handcrafted kernels such as edge detectors can we **learn meaningful kernels/filters** in addition to learning the weights of the classifier?
+
+![Input Example](example-image-a.jpg) ![Features Example](example-image-b.jpg) ![Classifier Example](example-image-c.jpg)
+
+![Input Example](example-image-d.jpg) ![Features Example](example-image-e.jpg) ![Classifier Example](example-image-f.jpg)
+
+*Vineeth N B (IIT-H) §5.1 Introduction to CNNs*
+
+*Page 20 / 37*
+```
+
+# DL4CV_Week05_Part01.pdf - Page 93
+
+```markdown
+# Beyond Static Feature Engineering
+
+- **Even better:** Instead of using handcrafted kernels such as edge detectors can we learn **multiple meaningful kernels/filters** in addition to learning the weights of the classifier?
+
+![Image of Input](image1.png) ![Image of Features](image2.png) ![Image of Classifier](image3.png)
+
+![Another Image of Input](image4.png) ![Another Image of Features](image5.png) ![Another Image of Classifier](image6.png)
+
+**Learn these weights**
+
+*Vineeth N B (IIT-H) §5.1 Introduction to CNNs*
+
+---
+
+20 / 37
+```
+
+# DL4CV_Week05_Part01.pdf - Page 94
+
+```markdown
+# Beyond Static Feature Engineering
+
+- **Can we learn multiple layers of meaningful kernels/filters in addition to learning the weights of the classifier?**
+
+![Input Image](image-url)
+
+### Input
+![Input Example](input-image-url)
+
+![Filtered Images](filtered-image-url)
+
+### Classifier
+![Classifier](classifier-image-url)
+
+_NPTEL_
+
+_Vineeth N B (IIT-H)_
+
+§5.1 Introduction to CNNs
+
+20 / 37
+```
+
+# DL4CV_Week05_Part01.pdf - Page 95
+
+```markdown
+# Beyond Static Feature Engineering
+
+- **Can we learn multiple layers of meaningful kernels/filters in addition to learning the weights of the classifier? Yes, we can!**
+- **Simply by treating these kernels as parameters and learning them in addition to the weights of the classifier (using backpropagation, discussed in the next lecture)**
+
+![Input Example](image1.png)
+
+- **Input**
+  ![Image](input_image.png)
+
+- **Classifer**
+  ![Image](classifier_image.png)
+
+  ```
+  Input
+  ```
+
+  ```
+  Backpropagation
+  ```
+
+  ```
+  Classifier
+  ```
+
+  ```
+  Output Layer
+  ```
+
+_By Vineeth N B (IIIT-H)_
+
+_Section 5.1 Introduction to CNNs_
+
+_Slide 20 / 37_
+```
+
+# DL4CV_Week05_Part01.pdf - Page 96
+
+ level: high
+
+```markdown
+# Beyond Static Feature Engineering
+
+- Can we learn multiple layers of meaningful kernels/filters in addition to learning the weights of the classifier? Yes, we can!
+- Simply by treating these kernels as parameters and learning them in addition to the weights of the classifier (using backpropagation, discussed in the next lecture)
+
+![Input](input_image_placeholder.png) ![Classifier](classifier_image_placeholder.png)
+
+- Such a network is called a **Convolutional Neural Network!**
+
+**Vineeth N B (IIIT-H) §5.1 Introduction to CNNs**
+
+---
+
+## Input
+
+![Taj Mahal](input_image_placeholder.png)
+
+## Classifier
+
+![Convolutional Network](classifier_image_placeholder.png)
+
+### Backpropagation
+
+**Note:** The image placeholders (`input_image_placeholder.png` and `classifier_image_placeholder.png`) should be replaced with the actual image URLs or paths if available.
+```
+
+# DL4CV_Week05_Part01.pdf - Page 97
+
+```markdown
+# Pause and Ponder
+
+- Learning kernels/filters by treating them as parameters definitely is interesting
+- But why not directly use flattened images with fully connected neural networks (or feedforward neural networks, FNNs) instead?
+
+![Network Diagram](image_url)
+
+*Vineeth N B (IIT-H) §5.1 Introduction to CNNs*
+
+21 / 37
+```
+
+# DL4CV_Week05_Part01.pdf - Page 98
+
+```markdown
+# Challenges of Applying FNNs to Images
+
+![MNIST Dataset](image_url)
+
+On a reasonably simple dataset like MNIST, we can get about 2% error (or even better) using FNNs, but:
+
+- Ignores spatial (2-D) structure of input images – unroll each 28 x 28 image into a 784-D vector
+- Pixels that are spatially separate are treated the same way as pixels that are adjacent
+- No obvious way for networks to learn same features (e.g., edges) at different places in the input image
+- Can get computationally expensive for large images
+- For a 1MP color image with 20 neurons in the first hidden layer, how many weights in the first layer?
+
+*Vineeth N B (IIT-H)*
+
+*§5.1 Introduction to CNNs*
+
+*22 / 37*
+```
+
+# DL4CV_Week05_Part01.pdf - Page 99
+
+```markdown
+# Challenges of Applying FNNs to Images
+
+On a reasonably simple dataset like MNIST, we can get about 2% error (or even better) using FNNs, but
+
+- Ignores spatial (2-D) structure of input images – unroll each 28 x 28 image into a 784-D vector
+- Pixels that are spatially separate are treated the same way as pixels that are adjacent
+- No obvious way for networks to learn same features (e.g. edges) at different places in the input image
+- Can get computationally expensive for large images
+- For a 1MP color image with 20 neurons in the first hidden layer, how many weights in the first layer?
+
+![MNIST Dataset](image_url)
+
+**MNIST Dataset**
+
+*Credit: Steve Renals*
+
+Vineeth N B (IIT-H) §5.1 Introduction to CNNs
+
+22 / 37
+```
+
+# DL4CV_Week05_Part01.pdf - Page 100
+
+```markdown
+# How do Convolutional Neural Networks Solve these Challenges?
+
+- **Local receptive fields**, in which hidden units are connected to local patches of the layer below, serve two purposes:
+  - Capture local spatial relationships in pixels (which would not be captured by FNNs)
+  - Greatly reduces number of parameters in the model
+  - For a 1MP color image a filter size of \( K_1 \times K_2 \) in the first hidden layer, how many weights in a convolutional layer?
+
+![Diagram Placeholder](image_url)
+
+*Vineeth N B (IIIT-H)*
+
+## §5.1 Introduction to CNNs
+
+---
+
+23 / 37
+```
+
+# DL4CV_Week05_Part01.pdf - Page 101
+
+```markdown
+# How do Convolutional Neural Networks Solve these Challenges?
+
+- **Local receptive fields**, in which hidden units are connected to local patches of the layer below, serve two purposes:
+  - Capture local spatial relationships in pixels (which would not be captured by FNNs)
+  - Greatly reduces number of parameters in the model
+  - For a 1MP color image a filter size of $K_1 \times K_2$ in the first hidden layer, how many weights in a convolutional layer? $K_1 \times K_2$, compare with 60 million for FNNs on the previous slide!
+
+![NPTEL Logo](image_url)
+
+*Vineeth N B (IIIT-H) §5.1 Introduction to CNNs*
+
+*23 / 37*
+```
+
+# DL4CV_Week05_Part01.pdf - Page 102
+
+```markdown
+# How do Convolutional Neural Networks Solve these Challenges?
+
+## Local receptive fields
+
+In which hidden units are connected to local patches of the layer below, serve two purposes:
+
+- Capture local spatial relationships in pixels (which would not be captured by FNNs)
+- Greatly reduces number of parameters in the model
+  - For a 1MP color image a filter size of \(K_1 \times K_2\) in the first hidden layer, how many weights in a convolutional layer? \(K_1 \times K_2\), compare with 60 million for FNNs on the previous slide!
+
+## Weight sharing
+
+Which also serves two purposes:
+
+- Enables translation-invariance of neural network to objects in images
+- Reduces number of parameters in the model
+
+_Vineeth N B (IIT-H) §5.1 Introduction to CNNs_
+
+![NPTEL](https://via.placeholder.com/150 "NPTEL")
+```
+
+# DL4CV_Week05_Part01.pdf - Page 103
+
+```markdown
+# How do Convolutional Neural Networks Solve these Challenges?
+
+- **Local receptive fields**, in which hidden units are connected to local patches of the layer below, serve two purposes:
+  - Capture local spatial relationships in pixels (which would not be captured by FNNs)
+  - Greatly reduces number of parameters in the model
+  - For a 1MP color image a filter size of \( K_1 \times K_2 \) in the first hidden layer, how many weights in a convolutional layer? \( K_1 \times K_2 \), compare with 60 million for FNNs on the previous slide!
+
+- **Weight sharing**, which also serves two purposes:
+  - Enables translation-invariance of neural network to objects in images
+  - Reduces number of parameters in the model
+
+- **Pooling** which condenses information from previous layer, serves two purposes:
+  - Aggregates information, especially minor variations
+  - Reduces size of output of a previous layer, which reduces number of computations in later layers
+
+*Credit: Steve Renals*
+
+_Vineeth N B (IIIT-H) §5.1 Introduction to CNNs_
+
+23 / 37
+```
+
+# DL4CV_Week05_Part01.pdf - Page 104
+
+```markdown
+# Local Receptive Fields
+
+- This is what a regular feedforward neural network will look like
+- There are many dense connections here
+
+![Local Receptive Fields Diagram](image_url)
+
+**Vineeth N B (IIT-H)**
+
+## §5.1 Introduction to CNNs
+
+**Slide 24 / 37**
+```
+
+# DL4CV_Week05_Part01.pdf - Page 105
+
+```markdown
+# Local Receptive Fields
+
+- **This is what a regular feedforward neural network will look like**
+  - There are many dense connections here
+  - All 16 input neurons are contributing to the computation of \( h_{11} \)
+  - Let us contrast this to what happens in case of convolution
+
+![Local Receptive Fields Diagram](image-placeholder.png)
+
+**Vineeth N B (IIIT-H)**
+
+**§5.1 Introduction to CNNs**
+
+24 / 37
+```
+
+# DL4CV_Week05_Part01.pdf - Page 106
+
+```markdown
+# Local Receptive Fields
+
+- Only a few local neurons participate in computation of \( h_{11} \)
+- E.g. only pixels 1, 2, 5, 6 contribute to \( h_{11} \)
+
+![Receptive Fields Diagram](image-placeholder.png)
+
+---
+
+Vineeth N B (IIT-H) §5.1 Introduction to CNNs 25 / 37
+```
+
+# DL4CV_Week05_Part01.pdf - Page 107
+
+```markdown
+# Local Receptive Fields
+
+- Only a few local neurons participate in the computation of \( h_{11} \)
+  - E.g., only pixels 1, 2, 5, 6 contribute to \( h_{11} \)
+
+![Receptive Fields Diagram](image-url)
+
+Vineeth N B (IIT-H) §5.1 Introduction to CNNs
+
+25 / 37
+```
+
+# DL4CV_Week05_Part01.pdf - Page 108
+
+```markdown
+# Local Receptive Fields
+
+- Only a few local neurons participate in computation of \( h_{11} \)
+- E.g. only pixels 1, 2, 5, 6 contribute to \( h_{11} \)
+- Similar for other pixels
+
+![Local Receptive Fields Diagram](image-url)
+
+---
+
+```math
+h_{11} 
+h_{12} 
+h_{13} 
+h_{14}
+```
+
+```math
+\begin{array}{c|c|c|c|c}
+  & h_{11} & h_{12} & h_{13} & h_{14}
+\end{array}
+```
+
+![Input Pixels](image-url)
+
+```math
+h_{14} = * \cdot h_{input}
+```
+
+---
+
+Vineeth N B (IIIT-H) §5.1 Introduction to CNNs
+
+Page 25 / 37
+
+NPTel
+```
+
+# DL4CV_Week05_Part01.pdf - Page 109
+
+```markdown
+# Local Receptive Fields
+
+- Only a few local neurons participate in computation of \( h_{11} \)
+- E.g. only pixels 1, 2, 5, 6 contribute to \( h_{11} \)
+- Similar for other pixels
+- The connections are much sparser
+- This sparse connectivity reduces the number of parameters in the model
+
+![Diagram of Local Receptive Fields](image_url_from_OCR)
+
+Vineeth N B (IIIT-H) §5.1 Introduction to CNNs 25 / 37
+```
+
+# DL4CV_Week05_Part01.pdf - Page 110
+
+```markdown
+# Local Receptive Fields
+
+- Only a few local neurons participate in computation of \( h_{11} \)
+- E.g. only pixels 1, 2, 5, 6 contribute to \( h_{11} \)
+- Similar for other pixels
+- The connections are much sparser
+- This sparse connectivity reduces the number of parameters in the model
+- We are taking advantage of the structure of the image (interactions between neighboring pixels are interesting in images)
+
+![Diagram of Local Receptive Fields](image_url)
+
+Vineeth N B (IIT-H) §5.1 Introduction to CNNs
+
+25 / 37
+```
+
+In the image, the connections between different nodes are represented visually:
+
+- There are 16 input nodes connected to multiple output nodes.
+- The output nodes \( h_{11} \), \( h_{12} \), \( h_{13} \), and \( h_{14} \) are connected to specific input nodes.
+- The connections are illustrated with lines indicating which input nodes contribute to each output node.
+
+Below the main diagram is an additional visualization showing how specific pixels (represented by colored dots) are involved in the computation:
+
+- The surrounding pixels contribute to the central pixel.
+- The interaction between neighboring pixels is emphasized.
+
+This visual representation helps in understanding how the sparse connectivity in neural networks impacts the computation and reduces the model parameters, leveraging the spatial structure of the image data.
+
+# DL4CV_Week05_Part01.pdf - Page 111
+
+```markdown
+# Local Receptive Fields
+
+- But is sparse connectivity really a good thing?
+
+![Image Placeholder](image_url)
+
+---
+
+**Vineeth N B (IIT-H)**
+
+**§5.1 Introduction to CNNs**
+
+---
+
+Page 26 / 37
+```
+
+# DL4CV_Week05_Part01.pdf - Page 112
+
+```markdown
+# Local Receptive Fields
+
+- But is sparse connectivity really a good thing?
+- Aren't we losing information (by losing interactions between some input pixels)?
+
+![NPTEL Logo](https://via.placeholder.com/150)
+
+Vineeth N B (IIT-H) §5.1 Introduction to CNNs
+
+---
+
+Number of slides: 37
+
+---
+
+Slide number: 26
+```
+
+# DL4CV_Week05_Part01.pdf - Page 113
+
+```markdown
+# Local Receptive Fields
+
+- But is sparse connectivity really a good thing?
+- Aren’t we losing information (by losing interactions between some input pixels)?
+- Well, not really
+
+![Graph of Local Receptive Fields](image-placeholder.png)
+
+*Vineeth N B. (IIT-H) §5.1 Introduction to CNNs 26 / 37*
+```
+
+# DL4CV_Week05_Part01.pdf - Page 114
+
+```markdown
+# Local Receptive Fields
+
+- But is sparse connectivity really a good thing?
+- Aren’t we losing information (by losing interactions between some input pixels)
+- Well, not really
+- The two highlighted neurons \((x_1, x_5)\) do not interact in layer 1
+
+![Network Diagram](image_url)
+
+*Vineeth N B (IIIT-H) §5.1 Introduction to CNNs*
+
+*26 / 37*
+```
+
+# DL4CV_Week05_Part01.pdf - Page 115
+
+```markdown
+# Local Receptive Fields
+
+- But is sparse connectivity really a good thing?
+- Aren’t we losing information (by losing interactions between some input pixels)?
+- Well, not really
+- The two highlighted neurons (x₁, x₅) do not interact in layer 1
+- But they indirectly contribute to the computation of g₃ and hence interact indirectly
+
+![Diagram](image_placeholder.png)
+
+*Vineeth N B (IIIT-H) §5.1 Introduction to CNNs*
+
+```
+
+# DL4CV_Week05_Part01.pdf - Page 116
+
+```markdown
+# Weight Sharing
+
+- Consider the following network; do we want the kernel weights to be different for different parts of the image?
+
+![NPTEL Logo](image-placeholder)
+
+![Network Diagram](network-diagram-placeholder)
+
+- Kernel 1
+
+  ![Kernel 1](kernel1-placeholder)
+
+- Kernel 2
+
+  ![Kernel 2](kernel2-placeholder)
+
+![4x4 Image](4x4-image-placeholder)
+
+*Vineeth N B (IIT-H) §5.1 Introduction to CNNs*
+
+*27 / 37*
+```
+
+# DL4CV_Week05_Part01.pdf - Page 117
+
+```markdown
+# Weight Sharing
+
+- Consider the following network; do we want the kernel weights to be different for different parts of the image?
+  - Not really. We would want the filter to respond to an object or an artefact in an image in the same way irrespective of where it is located in the image
+    → **translation-invariance**
+
+![Diagram of network](image_url)
+
+- Kernel 1
+- Kernel 2
+
+![4x4 Image](image_url)
+
+_Vineeth N B (IIT-H)_
+
+_§5.1 Introduction to CNNs_
+```
+
+# DL4CV_Week05_Part01.pdf - Page 118
+
+```markdown
+# Weight Sharing
+
+- Consider the following network; do we want the kernel weights to be different for different parts of the image?
+- Not really. We would want the filter to respond to an object or an artefact in an image in the same way irrespective of where it is located in the image
+
+  → **translation-invariance**
+
+- We can have as many different kernels to capture different kinds of artifacts, but each one is intended to give the same response on all parts of the image
+- This is called **weight sharing**
+
+*Vineeth N B (IIIT-H) §5.1 Introduction to CNNs*
+
+![Diagram Placeholder](image-url)
+```
+
+### Notes:
+1. **Translation Invariance**: Emphasized using bold `translation-invariance`.
+2. **Weight Sharing**: Emphasized using bold `weight sharing`.
+3. *Vineeth N B (IIIT-H) §5.1 Introduction to CNNs*: Italicized as per the original.
+4. **Diagram Placeholder**: Added a placeholder for the diagram that OCR couldn't capture directly.
+
+# DL4CV_Week05_Part01.pdf - Page 119
+
+```markdown
+# Convolutional Neural Network
+
+- A typical CNN looks as follows:
+
+![NPTEL Logo](image_placeholder.png)
+
+---
+
+Vineeth N B (IIT-H) & section 5.1 Introduction to CNNs 28 / 37
+```
+
+This markdown format accurately portrays the given scientific slide with proper formatting and placeholders for the image. The section title, bullet point, and attribution are correctly represented.
+
+# DL4CV_Week05_Part01.pdf - Page 121
+
+```markdown
+# Convolutional Neural Network
+
+- A typical CNN looks as follows:
+
+![CNN Architecture](image_url_placeholder)
+
+  - Input
+    - Size: 32 x 32
+
+  - Convolution Layer 1
+    - Size: 28 x 28
+    - Parameters:
+      - $S = 1$
+      - $F = 5$
+      - $K = 6$
+      - $P = 0$
+      - Total Parameters: 150
+
+  - Pooling Layer 1
+    - Size: 14 x 14
+
+  - Convolution Layer 2
+    - Size: 10 x 10
+    - Parameters:
+      - $S = 1$
+      - $F = 2$
+      - $K = 6$
+      - $P = 0$
+      - Total Parameters: 0
+
+  - Pooling Layer 2
+    - Size: 5 x 5
+
+  - Convolution Layer 3
+    - Size: 1 x 1
+    - Parameters:
+      - $S = 1$
+      - $F = 5$
+      - $K = 16$
+      - $P = 0$
+      - Total Parameters: 2400
+
+  - Fully Connected Layer 1 (FC1)
+    - Size: 120
+    - Total Parameters: 10164
+
+  - Fully Connected Layer 2 (FC2)
+    - Size: 84
+    - Total Parameters: 850
+
+  - Output Layer
+    - Size: 10
+
+- It has alternate convolution and pooling layers
+- What do pooling layers do?
+
+_Source: Vineeth N B (IIT-H) §5.1 Introduction to CNNs_
+```
+
+# DL4CV_Week05_Part01.pdf - Page 122
+
+```markdown
+# Pooling Layer
+
+![Pooling Layer Diagram](image_url)
+
+```markdown
+- **Input**: Input data matrix
+- **Filter**: Single filter applied to input data
+- **Operation**: Parameter-free down sampling operation
+- **Results**: Maxpooling results with different strides
+
+## Pooling Layer
+
+### Pooling is a parameter-free down sampling operation
+
+**Vineeth N B (IIIT-H)**
+
+### §5.1 Introduction to CNNs
+
+**Slide 29 / 37**
+
+### Pooled Outputs
+
+- **Maxpool with stride 2**: 
+  ```
+  Input: 
+  [1  4  2  1]
+  [5  8  3  4]
+  [7  6  4  5]
+  [1  3  1  2]
+  ```
+  ```
+  Maxpool Result:
+  [8]
+  ```
+
+- **Maxpool with stride 1**:
+  ```
+  Input:
+  [1  4  2  1]
+  [5  8  3  4]
+  [7  6  4  5]
+  [1  3  1  2]
+  ```
+  ```
+  Maxpool Result:
+  [8 8]
+  ```
+
+```
+
+# DL4CV_Week05_Part01.pdf - Page 123
+
+```markdown
+# Pooling Layer
+
+## Pooling is a parameter-free down sampling operation
+
+**Vineeth N B (IIT-H)**
+
+### §5.1 Introduction to CNNs
+
+#### Input
+```
+[![Input](image-url)](image-url)
+```
+
+#### Filter
+```
+[![1 filter](image-url)](image-url)
+```
+
+#### 2x2 filters (stride 2)
+```
+| 1  4  2  1 |
+| 5  8  3  4 |
+| 7  6  4  5 |
+| 1  3  1  2 |
+```
+
+**maxpool**
+```
+| 8  4 |
+```
+
+#### 2x2 filters (stride 1)
+```
+| 1  4  2  1 |
+| 5  8  3  4 |
+| 7  6  4  5 |
+| 1  3  1  2 |
+```
+
+**maxpool**
+```
+| 8  8 |
+```
+
+Page 29 / 37
+```
+
+# DL4CV_Week05_Part01.pdf - Page 124
+
+```markdown
+# Pooling Layer
+
+- **Input**: 
+  ![Input](input_image_placeholder)
+
+- **Filter**: 
+  ![Filter](filter_image_placeholder)
+
+- **Operation**: 
+
+  ## Pooling
+  Pooling is a parameter-free down sampling operation.
+
+  **Max Pooling Example**:
+
+  ```
+  Input:
+  | 1  4  2  1 |
+  | 5  8  3  4 |
+  | 7  6  4  5 |
+  | 1  3  1  2 |
+  ```
+
+  ```
+  2x2 filters (stride 2):
+  ```
+  ![Filter Application](filter_application_image_placeholder)
+
+  ```
+  Output:
+  | 8  4 |
+  | 7  4 |
+  ```
+
+  ```
+  Input:
+  | 1  4  2  1 |
+  | 5  8  3  4 |
+  | 7  6  4  5 |
+  | 1  3  1  2 |
+  ```
+
+  ```
+  2x2 filters (stride 1):
+  ```
+  ![Filter Application](filter_application_image_placeholder)
+
+  ```
+  Output:
+  | 8  8  4 |
+  | 8  8  4 |
+  ```
+
+  *Note: The exact images would be captured from the OCR process.*
+
+Vineeth N B (IIT-H) §5.1 Introduction to CNNs
+
+Page 29 / 37
+```
+
+# DL4CV_Week05_Part01.pdf - Page 125
+
+```markdown
+# Pooling Layer
+
+## Pooling Layer Diagram
+
+![Pooling Layer Diagram](image-url)
+
+**Input**
+
+- **Input**: The input data represented as a multi-dimensional array.
+
+**Filter**
+
+- **Filter**: A single filter used in the convolution process.
+
+**Convolution Operation**
+
+- **Convolution**: The convolution operation performed by the filter on the input data. The filter slides over the input data to perform the operation.
+
+## Max Pooling Examples
+
+### Example 1
+
+- **Matrix**:
+  ```
+  1  4  2  1
+  5  8  3  4
+  7  6  4  5
+  1  3  1  2
+  ```
+
+- **Filters (2x2 with stride 2)**:
+  ```
+  1  4  2  1
+  5  8  3  4
+  ```
+  - **Max-pooled Result**:
+    ```
+    8  4
+    8  5
+    ```
+
+### Example 2
+
+- **Matrix**:
+  ```
+  1  4  2  1
+  5  8  3  4
+  7  6  4  5
+  1  3  1  2
+  ```
+
+- **Filters (2x2 with stride 1)**:
+  ```
+  1  4  2  1
+  5  8  3  4
+  ```
+  - **Max-pooled Result**:
+    ```
+    8  8  4
+    8  8  8
+    ```
+
+## Pooling Description
+
+**Pooling** is a parameter-free down sampling operation.
+
+---
+
+_Vineeth N B (IIT-H)_
+
+§5.1 Introduction to CNNs
+
+_29 / 37_
+```
+
+# DL4CV_Week05_Part01.pdf - Page 126
+
+```markdown
+# Pooling Layer
+
+![Pooling Layer Diagram](image_url)
+
+**Pooling** is a parameter-free down sampling operation
+
+- **Input**: Represents the input data.
+- **Filter**: Represents a single filter applied to the input data.
+
+## Pooling Operations
+
+### Max Pooling with 2x2 Filters (Stride 2)
+
+- Grid: 
+  ```
+  1  4  2  1
+  5  8  3  4
+  7  6  4  5
+  1  3  1  2
+  ```
+
+- Applied Filter:
+  ```
+  2x2 filters (stride 2)
+  ```
+
+- Result:
+  ```
+  8  4
+  7  5
+  ```
+
+### Max Pooling with 2x2 Filters (Stride 1)
+
+- Grid: 
+  ```
+  1  4  2  1
+  5  8  3  4
+  7  6  4  5
+  1  3  1  2
+  ```
+
+- Applied Filter:
+  ```
+  2x2 filters (stride 1)
+  ```
+
+- Result:
+  ```
+  8  8  4
+  8  8
+  ```
+
+**Note**: Pooling is a parameter-free down sampling operation used to reduce the spatial dimensions (width and height) of the input volume.
+
+Vineeth N B (IIT-H) §5.1 Introduction to CNNs 29 / 37
+```
+
+# DL4CV_Week05_Part01.pdf - Page 127
+
+```markdown
+# Pooling Layer
+
+![Input](image_url)
+
+- **Input**
+
+  ![Filter](image_url)
+
+  - **1 filter**
+
+  ![Maxpool](image_url)
+
+  - **Maxpool**
+
+  ![2x2 Filters (stride 2)](image_url)
+
+  - **2x2 filters (stride 2)**
+
+  ![Maxpool](image_url)
+
+  - **Maxpool**
+
+  ![2x2 Filters (stride 1)](image_url)
+
+  - **2x2 filters (stride 1)**
+
+**Pooling** is a parameter-free down sampling operation
+
+*Vineeth N B. (IIT-H)*
+
+§5.1 Introduction to CNNs
+
+Page: 29 / 37
+```
+
+# DL4CV_Week05_Part01.pdf - Page 128
+
+```markdown
+# Pooling Layer
+
+![Pooling Layer Diagram](link_to_diagram_if_available)
+
+**Input**
+
+![Input Image](link_to_image_if_available)
+
+* **Filter**
+
+![Filter Image](link_to_image_if_available)
+
+**\[= \text{Convolution with 2x2 filters}\]**
+
+## Pooling
+
+Pooling is a parameter-free down sampling operation.
+
+### Max Pooling Examples
+
+**2x2 filters (stride 2)**
+
+```
+1  4  2  1
+5  8  3  4
+7  6  4  5
+1  3  1  2
+
+maxpool
+```
+
+Result:
+
+```
+8  4
+7  5
+```
+
+**2x2 filters (stride 1)**
+
+```
+1  4  2  1
+5  8  3  4
+7  6  4  5
+1  3  1  2
+
+maxpool
+```
+
+Result:
+
+```
+8  8  4
+8  8  5
+7  7
+```
+
+*Vineeth N B (IIIT-H) §5.1 Introduction to CNNs*
+
+Page 29 / 37
+```
+
+# DL4CV_Week05_Part01.pdf - Page 129
+
+```markdown
+# Pooling Layer
+
+![Pooling Layer Diagram](image-url)
+
+- **Input**: 
+  - Represented as a 3D block.
+  - This is the initial data that will be processed.
+
+- **Filter**: 
+  - Shown as a single red layer.
+  - This filter will be applied to the input data.
+
+- **Operation**: 
+  - The process involves using 2x2 filters with a stride of 2 and 1.
+  - **Pooling** is a parameter-free down sampling operation.
+
+  ## Max Pooling
+
+  - **First Max Pooling Layer**:
+    ```
+    1  4  2  1
+    5  8  3  4  -> Maxpool
+    7  6  4  5
+    1  3  1  2
+    ```
+
+    **Output**:
+    ```
+    8  4
+    7  5
+    ```
+
+  - **Second Max Pooling Layer**:
+    ```
+    1  4  2  1
+    5  8  3  4  -> Maxpool
+    7  6  4  5
+    1  3  1  2
+    ```
+
+    **Output**:
+    ```
+    8  8  4
+    8  8  5
+    7  6  5
+    ```
+
+  ## Notes
+
+  - Pooling is a parameter-free down sampling operation.
+  - It reduces the spatial dimensions of the input, helping to control overfitting and computational complexity.
+
+**Source**:
+- Vineeth N B (IIT-H)
+- §5.1 Introduction to CNNs
+- Slide 29/37
+```
+
+# DL4CV_Week05_Part01.pdf - Page 130
+
+```markdown
+# Pooling Layer
+
+![Input](image-url)
+
+**Input**
+
+* ![Filter](image-url)
+
+**1 filter**
+
+![Formula](image-url)
+
+**=**
+
+![Pooling Operation](image-url)
+
+**2x2 filters (stride 2)**
+
+```
+maxpool
+```
+
+```
+8 4
+7 5
+```
+
+![Pooling Operation](image-url)
+
+**2x2 filters (stride 1)**
+
+```
+maxpool
+```
+
+```
+8 8 4
+8 8 5
+7 6 5
+```
+
+**Pooling** is a parameter-free down sampling operation
+
+---
+
+ Vineeth N B. (IIT-H) §5.1 Introduction to CNNs
+
+Page 29 / 37
+```
+
+# DL4CV_Week05_Part01.pdf - Page 131
+
+```markdown
+# Pooling Layer
+
+![Pooling Layer Diagram](image_url)
+
+## Pooling
+
+**Pooling** is a parameter-free down sampling operation
+
+### Input
+```
+Input
+```
+
+### Filter
+```
+1 filter
+```
+
+### 2x2 Filters (stride 2)
+```
+| 1  4  2  1 |
+| 5  8  3  4 |
+| 7  6  4  5 |
+| 1  3  1  2 |
+```
+
+![Max Pooling](image_url)
+
+### Max Pooling Output (stride 2)
+```
+| 8  4 |
+| 7  5 |
+```
+
+### 2x2 Filters (stride 1)
+```
+| 1  4  2  1 |
+| 5  8  3  4 |
+| 7  6  4  5 |
+| 1  3  1  2 |
+```
+
+![Max Pooling](image_url)
+
+### Max Pooling Output (stride 1)
+```
+| 8  8  4 |
+| 8  8  5 |
+| 7  6  5 |
+```
+
+![NPTEL Logo](image_url)
+
+**Vineeth N B. (IIT-H)**
+
+**§5.1 Introduction to CNNs**
+
+Page 29 / 37
+```
+
+# DL4CV_Week05_Part01.pdf - Page 132
+
+```markdown
+# Pooling Layer
+
+![Pooling Diagram](https://via.placeholder.com/600x400)
+
+**Pooling** is a parameter-free down sampling operation
+
+- Instead of **Max Pooling**, we can also do **Average Pooling**, **L2 Pooling**, etc
+
+Vineeth N B (IIT-H) §5.1 Introduction to CNNs 29 / 37
+```
+
+# DL4CV_Week05_Part01.pdf - Page 133
+
+```markdown
+# Pooling Layer
+
+![Input](image-url)
+
+```
+Input
+
+```
+* + =
+
+```
+![Filter](image-url)
+
+1 filter
+
+```
+= 
+
+```
+![2x2 Filters (stride 2)](image-url)
+
+2x2 filters (stride 2)
+
+```
+maxpool
+
+```
+![Max Pooling Result](image-url)
+```
+maxpool
+
+```
+![2x2 Filters (stride 1)](image-url)
+
+2x2 filters (stride 1)
+
+```
+maxpool
+
+```
+![Max Pooling Result](image-url)
+```
+maxpool
+
+## Pooling
+
+- **Pooling** is a parameter-free down sampling operation
+- Instead of **Max Pooling**, we can also do **Average Pooling**, **L₂ Pooling**, etc
+- Other notable mentions: **Mixed Pooling** (combines max and average pooling), **Spatial Pyramid Pooling**, **Spectral Pooling** - we'll see some of these in later lectures
+
+*Vineeth N B (IIIT-H) §5.1 Introduction to CNNs*
+
+![Footer](image-url)
+
+29 / 37
+```
+
+# DL4CV_Week05_Part01.pdf - Page 134
+
+```markdown
+# Other Variants of Convolution: Dilated Convolution
+
+- Introduces another parameter to convolutional layer called **dilation rate**
+
+![Image Description](image_url)
+
+_Note_: The image placeholder is used because the OCR process could not directly capture the graphical content.
+
+**Image Credit**: Vincent Dumoulin
+
+_Vineeth N B (IITH)_
+
+# 5.1 Introduction to CNNs
+
+- Other Variants of Convolution: Dilated Convolution
+
+  - Introduces another parameter to convolutional layer called **dilation rate**
+
+![Diagram](image_url)
+
+_Note_: The image placeholder is used because the OCR process could not directly capture the graphical content.
+
+**Image Credit**: Vincent Dumoulin
+
+_Vineeth N B (IITH)_
+
+# 5.1 Introduction to CNNs
+
+- Other Variants of Convolution: Dilated Convolution
+
+  - Introduces another parameter to convolutional layer called **dilation rate**
+
+![Diagram](image_url)
+
+_Note_: The image placeholder is used because the OCR process could not directly capture the graphical content.
+
+**Image Credit**: Vincent Dumoulin
+
+_Vineeth N B (IITH)_
+
+# 5.1 Introduction to CNNs
+
+- Other Variants of Convolution: Dilated Convolution
+
+  - Introduces another parameter to convolutional layer called **dilation rate**
+
+![Diagram](image_url)
+
+_Note_: The image placeholder is used because the OCR process could not directly capture the graphical content.
+
+**Image Credit**: Vincent Dumoulin
+
+_Vineeth N B (IITH)_
+
+# 5.1 Introduction to CNNs
+
+- Other Variants of Convolution: Dilated Convolution
+
+  - Introduces another parameter to convolutional layer called **dilation rate**
+
+![Diagram](image_url)
+
+_Note_: The image placeholder is used because the OCR process could not directly capture the graphical content.
+
+**Image Credit**: Vincent Dumoulin
+
+_Vineeth N B (IITH)_
+
+# 5.1 Introduction to CNNs
+```
+
+# DL4CV_Week05_Part01.pdf - Page 135
+
+```markdown
+# Other Variants of Convolution: Dilated Convolution
+
+- Introduces another parameter to convolutional layer called **dilation rate**
+- Controls spacing between values in a kernel
+
+![Diagram of Dilated Convolution](image-url)
+
+*Image Credit: Vincent Dumoulin*
+
+*Vineeth N B (IIT-H)*
+
+*§5.1 Introduction to CNNs*
+
+Page 30 / 37
+```
+
+# DL4CV_Week05_Part01.pdf - Page 136
+
+```markdown
+# Other Variants of Convolution: Dilated Convolution
+
+- Introduces another parameter to convolutional layer called **dilation rate**
+- Controls spacing between values in a kernel
+- Figure shows 3 × 3 kernel with dilation rate 2
+
+![Dilated Convolution](image_url)
+
+_Note:_
+- **Image Credit:** Vincent Dumoulin
+- **Source:** Vineeth N B (IIT-H)
+
+## §5.1 Introduction to CNNs
+```
+
+**Additional Notes:**
+
+- Ensure the image placeholder `image_url` is replaced with the actual URL or file path of the image if available.
+- The section header and notes are formatted to maintain the structure and hierarchy of the original content.
+
+# DL4CV_Week05_Part01.pdf - Page 137
+
+```markdown
+# Other Variants of Convolution: Dilated Convolution
+
+- Introduces another parameter to convolutional layer called **dilation rate**
+- Controls spacing between values in a kernel
+- Figure shows \(3 \times 3\) kernel with dilation rate 2
+
+![Dilated Convolution Example](image-url)
+
+*Image Credit: Vincent Dumoulin*
+
+---
+
+Vineeth N B (IIIT-H) §5.1 Introduction to CNNs
+
+Page 30 of 37
+```
+
+# DL4CV_Week05_Part01.pdf - Page 138
+
+```markdown
+# Other Variants of Convolution: Dilated Convolution
+
+- Introduces another parameter to convolutional layer called **dilation rate**
+- Controls spacing between values in a kernel
+  - Figure shows \(3 \times 3\) kernel with dilation rate 2
+
+![Kernel with Dilation Rate](link-to-image)
+
+*Image Credit: Vincent Dumoulin*
+
+---
+
+Vineeth N B (IIIT-H) 
+
+§5.1 Introduction to CNNs
+
+30 / 37
+```
+
+# DL4CV_Week05_Part01.pdf - Page 139
+
+```markdown
+# Other Variants of Convolution: Dilated Convolution
+
+- Introduces another parameter to convolutional layer called **dilation rate**
+- Controls spacing between values in a kernel
+- Figure shows 3 × 3 kernel with dilation rate 2
+
+![Dilated Convolution](image_url)
+
+*Image Credit: Vincent Dumoulin*
+
+---
+
+Vineeth N B (IIIT-H) 
+
+§5.1 Introduction to CNNs
+
+---
+
+Page 30 / 37
+```
+
+# DL4CV_Week05_Part01.pdf - Page 140
+
+```markdown
+# Other Variants of Convolution: Dilated Convolution
+
+- Introduces another parameter to convolutional layer called **dilation rate**
+- Controls spacing between values in a kernel
+- Figure shows \(3 \times 3\) kernel with dilation rate 2
+
+![Dilated Convolution](image_url)
+
+*Image Credit: Vincent Dumoulin*
+
+---
+
+Vineeth N B (IIT-H) §5.1 Introduction to CNNs
+
+Page 30 / 37
+```
+
+# DL4CV_Week05_Part01.pdf - Page 141
+
+```udder
+# Other Variants of Convolution: Dilated Convolution
+
+- Introduces another parameter to convolutional layer called **dilation rate**
+- Controls spacing between values in a kernel
+  - **Figure shows \(3 \times 3\) kernel with dilation rate 2**
+
+![Kernel with Dilation Rate 2](image_url)
+
+**Image Credit**: *Vincent Dumoulin*
+
+---
+
+Vineeth N B (IIIT-H) §5.1 Introduction to CNNs
+
+---
+
+30 / 37
+```
+
+# DL4CV_Week05_Part01.pdf - Page 142
+
+```markdown
+# Other Variants of Convolution: Dilated Convolution
+
+- Introduces another parameter to convolutional layer called **dilation rate**
+- Controls spacing between values in a kernel
+- Figure shows 3 × 3 kernel with dilation rate 2
+
+![Kernel with Dilation Rate 2](image_url)
+
+*Image Credit: Vincent Dumoulin*
+
+Vineeth N B (IIIT-H) §5.1 Introduction to CNNs
+
+Page 30 / 37
+```
+
+# DL4CV_Week05_Part01.pdf - Page 143
+
+```markdown
+# Other Variants of Convolution: Dilated Convolution
+
+- Introduces another parameter to convolutional layer called **dilation rate**
+- Controls spacing between values in a kernel
+- Figure shows 3 × 3 kernel with dilation rate 2
+
+![Dilated Convolution Diagram](image-url)
+
+*Image Credit: Vincent Dumoulin*
+
+Vineeth N B. (IIIT-H) §5.1 Introduction to CNNs
+
+```
+
+# DL4CV_Week05_Part01.pdf - Page 144
+
+```markdown
+# Other Variants of Convolution: Dilated Convolution
+
+- Introduces another parameter to convolutional layer called **dilation rate**
+- Controls spacing between values in a kernel
+- **Figure shows 3 × 3 kernel with dilation rate 2**
+
+![Dilated Convolution Diagram](image-url)
+
+*Image Credit: Vincent Dumoulin*
+
+Vineeth N B (IIT-H) §5.1 Introduction to CNNs 
+
+---
+
+30 / 37
+```
+
+# DL4CV_Week05_Part01.pdf - Page 145
+
+```markdown
+# Other Variants of Convolution: Dilated Convolution
+
+- Introduces another parameter to convolutional layer called **dilation rate**
+- Controls spacing between values in a kernel
+  - Figure shows 3 × 3 kernel with dilation rate 2
+    - Notice that dilated rate 1 is standard convolution
+
+![Dilated Convolution Diagram](image_url)
+
+*Image Credit: Vincent Dumoulin*
+
+Vineeth N B (IIT-H) §5.1 Introduction to CNNs
+
+```
+
+# DL4CV_Week05_Part01.pdf - Page 146
+
+# Other Variants of Convolution: Dilated Convolution
+
+- Introduces another parameter to convolutional layer called **dilated rate**
+- Controls spacing between values in a kernel
+  ![](https://via.placeholder.com/150)
+  - Figure shows \(3 \times 3\) kernel with dilation rate 2
+- Notice that dilated rate 1 is standard convolution
+- A subtle difference between dilated convolution and standard convolution with stride > 1, what is it?
+
+**Image Credit: Vincent Dumoulin**
+
+---
+
+**Vineeth N B (IIT-H)**
+
+**§5.1 Introduction to CNNs**
+
+---
+
+```markdown
+## Other Variants of Convolution: Dilated Convolution
+
+- Introduces another parameter to convolutional layer called **dilated rate**
+- Controls spacing between values in a kernel
+  ![](https://via.placeholder.com/150)
+  - Figure shows \(3 \times 3\) kernel with dilation rate 2
+- Notice that dilated rate 1 is standard convolution
+- A subtle difference between dilated convolution and standard convolution with stride > 1, what is it?
+
+**Image Credit: Vincent Dumoulin**
+
+---
+
+**Vineeth N B (IIT-H)**
+
+**§5.1 Introduction to CNNs**
+
+```
+
+# DL4CV_Week05_Part01.pdf - Page 147
+
+```markdown
+# Other Variants of Convolution: Transpose Convolution
+
+- Allows for learnable upsampling
+- Also known as Deconvolution (bad) or Upconvolution
+
+![NPTEL Logo](image_url)
+
+Vineeth N B (IIT-H) §5.1 Introduction to CNNs
+
+---
+
+Page 31 / 37
+```
+
+# DL4CV_Week05_Part01.pdf - Page 148
+
+```markdown
+# Other Variants of Convolution: Transpose Convolution
+
+- Allows for learnable upsampling
+
+- Also known as **Deconvolution (bad)** or **Upconvolution**
+
+- Traditionally, we could achieve upsampling through interpolation or similar rules
+
+- Why not allow the network to learn the rules by itself?
+
+![NPTEL Logo](https://via.placeholder.com/150)
+
+*Vineeth N B (IIIT-H)*
+
+*§5.1 Introduction to CNNs*
+
+*31 / 37*
+```
+
+# DL4CV_Week05_Part01.pdf - Page 149
+
+```markdown
+# Other Variants of Convolution: Transpose Convolution
+
+- Allows for learnable upsampling
+- Also known as Deconvolution (bad) or Upconvolution
+- Traditionally, we could achieve upsampling through interpolation or similar rules
+- Why not allow the network to learn the rules by itself?
+- Let us see a 1D example
+
+![Transposed Convolution Layer Diagram](image-url)
+
+## Transposed Convolution Layer
+
+### Input
+```
+2  3  0  -1
+```
+### W
+```
+1  2  -1
+```
+
+### Output
+```
+W + w - 1
+```
+
+_Image Source: Vineeth N B (IIIT-H) §5.1 Introduction to CNNs_
+
+Page 31 / 37
+```
+
+# DL4CV_Week05_Part01.pdf - Page 150
+
+```markdown
+# Other Variants of Convolution: Transpose Convolution
+
+- Allows for learnable upsampling
+- Also known as Deconvolution (bad) or Upconvolution
+- Traditionally, we could achieve upsampling through interpolation or similar rules
+- Why not allow the network to learn the rules by itself?
+- Let us see a 1D example
+
+![Transposed Convolution Layer Diagram](data:image/png;base64,...) 
+
+## Transposed Convolution Layer
+
+### Input
+```
+2 3 0 -1
+```
+
+### W
+```
+1 2 -1
+2 4 -2
+```
+
+### Output
+```
+2 2 2 2
+```
+
+```
+W + w - 1
+```
+
+*Vineeth N B (IIIT-H)*
+
+*§5.1 Introduction to CNNs*
+
+*31 / 37*
+```
+
+# DL4CV_Week05_Part01.pdf - Page 151
+
+```markdown
+# Other Variants of Convolution: Transpose Convolution
+
+- Allows for learnable upsampling
+- Also known as Deconvolution (bad) or Upconvolution
+- Traditionally, we could achieve upsampling through interpolation or similar rules
+- Why not allow the network to learn the rules by itself?
+- Let us see a 1D example
+
+![Transposed Convolution Process](image_url)
+
+## Transposed convolution layer
+
+### Input
+```
+2 3 0 -1
+```
+
+### W
+```
+1 2 -1
+```
+
+### Output
+```
+2 4 -2
+3 6 -3
+```
+
+### Final Output
+```
+2 7
+```
+
+*Credit: François Fleuret*
+
+*Vineeth N B (IIIT-H)*
+*§5.1 Introduction to CNNs*
+*31 / 37*
+```
+
+# DL4CV_Week05_Part01.pdf - Page 152
+
+```markdown
+# Other Variants of Convolution: Transpose Convolution
+
+- **Allows for learnable upsampling**
+
+- **Also known as Deconvolution (bad) or Upconvolution**
+
+- **Traditionally, we could achieve upsampling through interpolation or similar rules**
+
+- **Why not allow the network to learn the rules by itself?**
+
+- **Let us see a 1D example**
+
+![Transposed Convolution Layer Diagram](attachment:image1.png)
+
+## Transposed Convolution Layer
+
+### Input
+```
+2  3  0  1
+```
+
+### Weight
+```
+W
+```
+```
+1  2  1
+```
+
+### Output Calculation
+```
+Output
+```
+```
+2  4  -2
+ 3  6  -3
+  0  0  0
+```
+
+### Final Output
+```
+2  7  4  4  2  1
+```
+
+*Credit: François Fleuret*
+
+*Vineeth N B (IIIT-H)*
+
+*§5.1 Introduction to CNNs*
+
+*31 / 37*
+```
+
+# DL4CV_Week05_Part01.pdf - Page 153
+
+```markdown
+# Other Variants of Convolution: Transpose Convolution
+
+- Allows for learnable upsampling
+- Also known as **Deconvolution** (bad) or **Upconvolution**
+- Traditionally, we could achieve upsampling through interpolation or similar rules
+- Why not allow the network to learn the rules by itself?
+- Let us see a 1D example
+
+![Transposed Convolution Layer Example](image_url)
+
+**Transposed convolution layer**
+
+```
+Input:
+2  3  0  1
+W:
+1  2  -1
+```
+
+```
+2  4  -2
+3  6  -3
+0  0  0
+-1  -2  1
+```
+
+```
+Output:
+2  7  4  4  -2  1
+W + w - 1
+```
+
+*Credit: François Fleuret*
+
+_Vineeth N B (IIT-H)_
+
+§5.1 Introduction to CNNs
+```
+
+# DL4CV_Week05_Part01.pdf - Page 154
+
+```markdown
+# Other Variants of Convolution: Transpose Convolution
+
+![Transpose Convolution Diagram](image-url)
+
+**Upsampling 2 × 2 input to a 4 × 4 output**
+
+**Upsampling 2 × 2 input to a 5 × 5 output**
+
+_GIF Credit: Vincent Dumoulin_
+
+Vineeth N B (IIT-H)
+
+§5.1 Introduction to CNNs
+
+---
+
+32 / 37
+```
+
+# DL4CV_Week05_Part01.pdf - Page 155
+
+```markdown
+# Other Variants of Convolution: Transpose Convolution
+
+![Transpose Convolution](https://via.placeholder.com/800x400?text=Transpose+Convolution+Image)
+
+## Upsampling 2 × 2 input to a 4 × 4 output
+
+![Upsampling 2x2 to 4x4](https://via.placeholder.com/400x400?text=Upsampling+2x2+to+4x4)
+
+## Upsampling 2 × 2 input to a 5 × 5 output
+
+![Upsampling 2x2 to 5x5](https://via.placeholder.com/400x400?text=Upsampling+2x2+to+5x5)
+
+*GIF Credit: Vincent Dumoulin*
+
+![IIT-H](https://via.placeholder.com/100x100?text=IIT-H)
+
+## Section Details
+
+- **Section Title**: Introduction to CNNs
+- **Slide Number**: 32/37
+```
+
+# DL4CV_Week05_Part01.pdf - Page 156
+
+```markdown
+# Other Variants of Convolution: Transpose Convolution
+
+![Transpose Convolution Diagram](image_url)
+
+**Upsampling \(2 \times 2\) input to a \(4 \times 4\) output**
+
+![Upsampling Diagram](image_url)
+
+**Upsampling \(2 \times 2\) input to a \(5 \times 5\) output**
+
+**GIF Credit: Vincent Dumoulin**
+
+*Vineeth N B (IIT-H)*
+
+**§5.1 Introduction to CNNs**
+
+---
+
+32 / 37
+```
+
+# DL4CV_Week05_Part01.pdf - Page 157
+
+```markdown
+# Other Variants of Convolution: Transpose Convolution
+
+![Transpose Convolution Diagram](image_url)
+
+**Upsampling 2 × 2 input to a 4 × 4 output**
+
+![Upsampling Diagram](image_url)
+
+**Upsampling 2 × 2 input to a 5 × 5 output**
+
+*GIF Credit: Vincent Dumoulin*
+
+*Vineeth N B (IIT-H)*
+
+*§5.1 Introduction to CNNs*
+
+---
+
+32 / 37
+```
+
+# DL4CV_Week05_Part01.pdf - Page 158
+
+```markdown
+# Other Variants of Convolution: Transpose Convolution
+
+![Transpose Convolution Diagram](image-url)
+
+- **Upsampling 2 × 2 input to a 4 × 4 output**
+
+  ![Upsampling Diagram](image-url)
+
+- **Upsampling 2 × 2 input to a 5 × 5 output**
+
+  ![Upsampling Diagram](image-url)
+
+*GIF Credit: Vincent Dumoulin*
+
+*Vineeth N B (IIT-H)*
+
+*§5.1 Introduction to CNNs*
+
+---
+
+32 / 37
+```
+
+Note: Replace `image-url` with the actual URLs or placeholders of the images if they can't be captured directly from the OCR process.
+
+# DL4CV_Week05_Part01.pdf - Page 159
+
+```markdown
+# Other Variants of Convolution: Transpose Convolution
+
+![Transpose Convolution Diagram](image_url)
+
+- **Upsampling \(2 \times 2\) input to a \(4 \times 4\) output**
+  - Visualization: The left side of the image shows a \(2 \times 2\) input grid being upsampled to a \(4 \times 4\) output grid.
+  - Process: The input values are expanded and distributed in a way that increases the spatial resolution of the output.
+
+- **Upsampling \(2 \times 2\) input to a \(5 \times 5\) output**
+  - Visualization: The right side of the image shows a \(2 \times 2\) input grid being upsampled to a \(5 \times 5\) output grid.
+  - Process: The input values are expanded and distributed in a way that increases the spatial resolution of the output.
+
+**GIF Credit:** Vincent Dumoulin
+
+*Vineeth N B (IIIT-H)*
+
+§5.1 Introduction to CNNs
+
+32 / 37
+```
+
+# DL4CV_Week05_Part01.pdf - Page 160
+
+```markdown
+# Other Variants of Convolution: Transpose Convolution
+
+![Transpose Convolution Diagram](https://via.placeholder.com/600x300)
+
+**Upsampling 2 × 2 input to a 4 × 4 output**
+
+![Transpose Convolution Diagram](https://via.placeholder.com/600x300)
+
+**Upsampling 2 × 2 input to a 5 × 5 output**
+
+*GIF Credit: Vincent Dumoulin*
+
+*Vineeth N B (IIT-H)*
+
+## §5.1 Introduction to CNNs
+
+```markdown
+32 / 37
+```
+
+```
+
+# DL4CV_Week05_Part01.pdf - Page 161
+
+```markdown
+# Other Variants of Convolution: Transpose Convolution
+
+![Transpose Convolution Diagram](url_to_image)
+
+**Upsampling 2 x 2 input to a 4 x 4 output**
+
+**Upsampling 2 x 2 input to a 5 x 5 output**
+
+_GIF Credit: Vincent Dumoulin_
+
+Vineeth N B (IIT-H)
+
+§5.1 Introduction to CNNs
+
+32 / 37
+```
+
+# DL4CV_Week05_Part01.pdf - Page 162
+
+```markdown
+# Other Variants of Convolution: Transpose Convolution
+
+![Transpose Convolution Diagram](image_url)
+
+**Upsampling 2 × 2 input to a 4 × 4 output**
+
+**Upsampling 2 × 2 input to a 5 × 5 output**
+
+_GIF Credit: Vincent Dumoulin_
+
+*Vineeth N B (IIT-H)*
+
+## §5.1 Introduction to CNNs
+
+32 / 37
+```
+
+# DL4CV_Week05_Part01.pdf - Page 163
+
+```markdown
+# Other Variants of Convolution: Transpose Convolution
+
+![Transpose Convolution Diagram](image-url)
+
+**Upsampling \(2 \times 2\) input to a \(4 \times 4\) output**
+
+**Upsampling \(2 \times 2\) input to a \(5 \times 5\) output**
+
+*GIF Credit: Vincent Dumoulin*
+
+*Vineeth N B (IIIT-H)*
+
+§5.1 Introduction to CNNs
+
+32 / 37
+```
+
+# DL4CV_Week05_Part01.pdf - Page 164
+
+```markdown
+# Other Variants of Convolution: Transpose Convolution
+
+![Transpose Convolution](image-url)
+
+**Upsampling 2 × 2 input to a 4 × 4 output**
+
+**Upsampling 2 × 2 input to a 5 × 5 output**
+
+*GIF Credit: Vincent Dumoulin*
+
+*Vineeth N B (IIT-H)*
+
+§5.1 Introduction to CNNs
+
+---
+
+32 / 37
+```
+
+# DL4CV_Week05_Part01.pdf - Page 165
+
+```markdown
+# Other Variants of Convolution: Transpose Convolution
+
+![Transpose Convolution Diagram](image_url)
+
+## Upsampling 2 × 2 input to a 4 × 4 output
+
+![Upsampling 2 × 2 to 4 × 4](image_url)
+
+## Upsampling 2 × 2 input to a 5 × 5 output
+
+![Upsampling 2 × 2 to 5 × 5](image_url)
+
+**GIF Credit: Vincent Dumoulin**
+
+*Vineeth N B (IIIT-H)*
+
+§5.1 Introduction to CNNs
+
+---
+
+```
+
+# DL4CV_Week05_Part01.pdf - Page 166
+
+```markdown
+# Other Variants of Convolution: Transpose Convolution
+
+![Transpose Convolution Diagram](image_url)
+
+## Upsampling 2 × 2 input to a 4 × 4 output
+
+![Upsampling 2 × 2 to 4 × 4](image_url)
+
+## Upsampling 2 × 2 input to a 5 × 5 output
+
+![Upsampling 2 × 2 to 5 × 5](image_url)
+
+*GIF Credit: Vincent Dumoulin*
+
+*Vineeth N B (IIIT-H)*
+
+*§5.1 Introduction to CNNs*
+
+Page 32 / 37
+```
+
+# DL4CV_Week05_Part01.pdf - Page 167
+
+```markdown
+# Other Variants of Convolution: Transpose Convolution
+
+![Transpose Convolution Diagram](image_url)
+
+**Upsampling 2 x 2 input to a 4 x 4 output**
+
+**Upsampling 2 x 2 input to a 5 x 5 output**
+
+*GIF Credit: Vincent Dumoulin*
+
+*Vineeth N B (IIT-H)*
+
+*§5.1 Introduction to CNNs*
+
+---
+
+```
+
+# DL4CV_Week05_Part01.pdf - Page 168
+
+```markdown
+# Other Variants of Convolution: Transpose Convolution
+
+![Transpose Convolution Diagram](https://via.placeholder.com/600x300)
+
+Upsampling \(2 \times 2\) input to a \(4 \times 4\) output
+
+Upsampling \(2 \times 2\) input to a \(5 \times 5\) output
+
+**GIF Credit:** Vincent Dumoulin
+
+*Vineeth N B (IIT-H)*
+
+## §5.1 Introduction to CNNs
+
+---
+
+32 / 37
+```
+
+# DL4CV_Week05_Part01.pdf - Page 169
+
+```markdown
+# Other Variants of Convolution: Transpose Convolution
+
+![Transpose Convolution Diagram](image_url)
+
+## Upsampling 2 × 2 input to a 4 × 4 output
+
+![4x4 Output Example](image_url)
+
+## Upsampling 2 × 2 input to a 5 × 5 output
+
+![5x5 Output Example](image_url)
+
+*GIF Credit: Vincent Dumoulin*
+
+*Vineeth N B (IIT-H)*
+
+*§5.1 Introduction to CNNs*
+
+*32 / 37*
+```
+
+# DL4CV_Week05_Part01.pdf - Page 170
+
+```markdown
+# Other Variants of Convolution
+
+![3D Convolution](image-url-1.png) ![1 x 1 Convolution (Pointwise Convolution)](image-url-2.png) ![Grouped Convolution](image-url-3.png)
+
+- **3D Convolution**: This type of convolution extends the 2D convolution to three dimensions, typically used in volumetric data analysis.
+- **1 x 1 Convolution (Pointwise Convolution)**: Also known as the depthwise convolution, it is used to reduce the number of input channels while preserving spatial resolution.
+- **Grouped Convolution**: This technique partitions the input into groups and each group is convolved separately. The outputs are then concatenated.
+
+**Credit**: Illarion Khlestov, Chi-Feng Wang
+
+_Vineeth N B (IIT-H)_
+
+# 5.1 Introduction to CNNs
+
+## Other Variants of Convolution
+
+### 3D Convolution
+This type of convolution extends the 2D convolution to three dimensions, typically used in volumetric data analysis.
+
+### 1 x 1 Convolution (Pointwise Convolution)
+Also known as the depthwise convolution, it is used to reduce the number of input channels while preserving spatial resolution.
+
+### Grouped Convolution
+This technique partitions the input into groups and each group is convolved separately. The outputs are then concatenated.
+
+![3D Convolution](image-url-1.png) ![1 x 1 Convolution (Pointwise Convolution)](image-url-2.png) ![Grouped Convolution](image-url-3.png)
+
+**Credit**: Illarion Khlestov, Chi-Feng Wang
+
+_Vineeth N B (IIT-H)_
+
+# 5.1 Introduction to CNNs
+
+**Page 33 / 37**
+```
+
+# DL4CV_Week05_Part01.pdf - Page 171
+
+```markdown
+# Other Variants of Convolution
+
+## Spatial Separable Convolution
+
+- **Input**: The input matrix is represented as a multi-dimensional array.
+- **Kernel**: The convolution kernel is applied to the input matrix.
+- **Intermediate Output**: The result of the convolution operation.
+- **Kernel**: Another convolution kernel applied to the intermediate output.
+- **Output**: The final output after applying the second kernel.
+
+## Depthwise Separable Convolution
+
+- **Input**: The input feature map with dimensions (batch size, height, width, channels).
+- **Depthwise Convolution**: A convolution operation applied separately to each input channel.
+  - **Process**: Each channel is convolved with a depthwise kernel.
+  - **Output**: Intermediate feature map of dimensions (batch size, height, width, depthwise filters).
+- **Pointwise Convolution**: A 1x1 convolution applied to the intermediate feature map.
+  - **Process**: Combines the intermediate feature maps into the output.
+  - **Output**: Final output feature map with dimensions (batch size, height, width, output channels).
+
+*Credit: Chi-Feng Wang*
+
+*Vineeth N B (IIT-H)*
+
+*§5.1 Introduction to CNNs*
+```
+
+# DL4CV_Week05_Part01.pdf - Page 172
+
+```markdown
+# Other Variants of Convolutions
+
+## Flattened Convolutions
+
+![Flattened Convolutions Diagram](image-url-placeholder)
+
+## Spatial and Cross-Channel Convolutions
+
+![Spatial and Cross-Channel Convolutions Diagram](image-url-placeholder)
+
+**Credit**: [Ilarion Khlestov](https://github.com/IlarionKhlestov)
+
+---
+
+*Vineeth N B (IIIT-H) §5.1 Introduction to CNNs*
+
+Page 35 of 37
+```
+
+# DL4CV_Week05_Part01.pdf - Page 173
+
+```markdown
+# Homework
+
+## Readings
+
+- For an interactive illustration of the convolution operation, visit [setosa.io/ev/image-kernels/](https://setosa.io/ev/image-kernels/)
+- Read more about deconvolution operation at [Distill](https://distill.pub)
+- **Other good resources:**
+  - *Deep Learning Book: Chapter 9 - Convolutional Networks*
+  - *Stanford CS231n Notes*
+
+## Questions
+
+- Given a \(32 \times 32 \times 3\) image and 6 filters of size \(5 \times 5 \times 3\), what will be the dimension of the output volume when a stride of 1 and a padding of 0 is considered?
+- Is the max-pooling layer differentiable? How to backpropagate across it?
+
+*Vineeth N B (IIT-H) §5.1 Introduction to CNNs*
+
+*Page 36 / 37*
+```
+
+# DL4CV_Week05_Part01.pdf - Page 174
+
+```markdown
+# References
+
+- David Lowe. "Distinctive Image Features from Scale-Invariant Keypoints". In: *International Journal of Computer Vision* 60 (Nov. 2004), pp. 91–110.
+- Navneet Dalal and Bill Triggs. "Histograms of oriented gradients for human detection". In: *2005 IEEE Computer Society Conference on Computer Vision and Pattern Recognition (CVPR'05)* 1 (2005), 886–893 vol. 1.
+- Svetlana Lazebnik, Cordelia Schmid, and J. Ponce. "Beyond Bags of Features: Spatial Pyramid Matching for Recognizing Natural Scene Categories". In: vol. 2. Feb. 2006, pp. 2169 –2178.
+- Kaiming He et al. "Spatial Pyramid Pooling in Deep Convolutional Networks for Visual Recognition". In: *Lecture Notes in Computer Science* (2014), 346–361.
+- Dingjun Yu et al. "Mixed Pooling for Convolutional Neural Networks". In: Oct. 2014, pp. 364–375.
+- Oren Rippel, Jasper Snoek, and Ryan P. Adams. "Spectral Representations for Convolutional Neural Networks". In: *NIPS*. 2015.
+- Nal Kalchbrenner et al. "Neural Machine Translation in Linear Time". In: *ArXiv abs/1610.10099* (2016).
+
+Vineeth N B (IIT-H) §5.1 Introduction to CNNs 37 / 37
+```
+

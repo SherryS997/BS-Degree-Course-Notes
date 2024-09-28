@@ -1,0 +1,764 @@
+# DL4CV_Week12_Part05.pdf - Page 1
+
+```markdown
+# Deep Learning for Computer Vision
+
+## Neural Architecture Search
+
+### Vineeth N Balasubramanian
+
+**Department of Computer Science and Engineering**
+
+**Indian Institute of Technology, Hyderabad**
+
+![IIT Hyderabad Logo](https://example.com/logo.png)
+
+---
+
+**Vineeth N B (IIT-H)**
+
+**§12.5 Neural Architecture Search**
+
+---
+
+Page 1 of 19
+```
+
+# DL4CV_Week12_Part05.pdf - Page 2
+
+```markdown
+# Neural Architecture Search: Why?
+
+![Canziani et al (2017)](image_url)
+
+- Most popular and successful model architectures designed by human experts
+- Requires hundreds of hours of arbitrary training and testing and hyperparameter tuning
+- However, it doesn't mean we explored the entire network architecture space or that we found an optimal solution
+- Can we adopt a systematic and automatic way of learning high-performance model architectures?
+
+![Complex hand-engineered layers from Inception-V4 (Szegedy et al., 2017)](image_url)
+
+**Vineeth N B (IIIT-H)**
+**$12.5 Neural Architecture Search**
+**2 / 19**
+```
+
+# DL4CV_Week12_Part05.pdf - Page 3
+
+```markdown
+# Neural Architecture Search: Why?
+
+![Canziani et al. (2017)](https://via.placeholder.com/150)
+
+- Most popular and successful model architectures designed by human experts
+- Requires hundreds of hours of arbitrary training and testing and hyperparameter tuning
+- However, it doesn't mean we explored the entire network architecture space or that we found an optimal solution
+- Can we adopt a systematic and automatic way of learning high-performance model architectures? **Solution: Neural Architecture Search**
+
+![Complex hand-engineered layers from Inception-V4 (Szegedy et al., 2017)](https://via.placeholder.com/150)
+
+**Credit:** *Nikhil Naik, Neural Architecture Search: A Tutorial, 2019*
+
+*Vineeth N B (IIT-H)*
+
+*§12.5 Neural Architecture Search*
+
+---
+
+## Canziani et al. (2017)
+
+## Complex hand-engineered layers from Inception-V4 (Szegedy et al., 2017)
+```
+
+# DL4CV_Week12_Part05.pdf - Page 4
+
+```markdown
+# Neural Architecture Search (NAS): Brief History
+
+## Early Work
+
+- **Neuroevolution**: Evolutionary algorithms (e.g., Miller et al., 89; Schaffer et al., 92; Stanley & Miikkulainen, 02; Verbancsics & Harguess, 13)
+- **Random search** (e.g., Pinto et al., 09; Bergstra & Bengio, 12)
+- **Bayesian optimization for architecture and hyperparameter tuning** (e.g., Snoek et al., 12; Bergstra et al., 13; Domhan et al., 15)
+
+## Renewed Interest (2017-)
+
+- **Zoph and Le**, Neural Network Architecture Search with Reinforcement Learning, ICLR'17.
+- **Baker et al.**, Designing Neural Network Architectures using Reinforcement Learning, ICLR'17.
+
+*Vineeth N B. (IIIT-H)*
+
+*§12.5 Neural Architecture Search*
+
+*3 / 19*
+```
+
+# DL4CV_Week12_Part05.pdf - Page 5
+
+```markdown
+# NAS: General Problem Setup
+
+![Search Space](image1.png)
+
+- **Search Space**: Defines which architectures can be represented in principle
+
+- **Search Strategy**: Details how to explore search space (which is often exponentially large or even unbounded)
+
+- **Performance Estimation Strategy**: Estimating an architecture’s performance - standard training and validation of architecture on data may be computationally expensive and limits the number of architectures that can be explored
+
+**Credit**: Elsken et al., *Neural Architecture Search: A Survey, 2018*
+
+![Performance Estimation Strategy](image2.png)
+
+Vineeth N B (IIT-H) §12.5 Neural Architecture Search 4 / 19
+```
+
+# DL4CV_Week12_Part05.pdf - Page 6
+
+```markdown
+# Neural Architecture Search Space
+
+- **Neural networks** represent a function that transforms input variables \( \mathbf{x} \) to output variables \( \mathbf{\hat{y}} \) through a series of operations
+
+![NPTEL Logo](link-to-nptel-logo)
+
+*Vineeth N B (IIT-H)*
+
+*Section 12.5: Neural Architecture Search*
+
+*Slide 5 / 19*
+```
+
+# DL4CV_Week12_Part05.pdf - Page 7
+
+```markdown
+# Neural Architecture Search Space
+
+- Neural networks represent a function that transforms input variables **x** to output variables **ŷ** through a series of operations
+
+- Recall computational graphs (W8P1); each node \(z^{(k)} \in \mathbb{Z}\) represents a tensor and is associated with an operation \(o^{(k)} \in \mathcal{O}\) on its parent nodes \(I^k\)
+
+![NPTEL Logo](image_url)
+
+- **Vineeth N B. (IIT-H)**
+- §12.5 Neural Architecture Search
+
+---
+
+Page 5 / 19
+```
+
+# DL4CV_Week12_Part05.pdf - Page 8
+
+```markdown
+# Neural Architecture Search Space
+
+- Neural networks represent a function that transforms input variables **x** to output variables **ŷ** through a series of operations
+
+- Recall computational graphs (W8P1); each node **z**<sup>(k)</sup> ∈ **Z** represents a tensor and is associated with an operation **o**<sup>(k)</sup> ∈ **O** on its parent nodes **I**<sup>k</sup>
+
+- Computation at a node **k**:
+  \[
+  z^{(k)} = o^{(k)}(I^{(k)})
+  \]
+  where operations include unary operations such as convolutions, pooling, activation functions or n-ary operations such as concatenation or addition
+
+![Diagram Placeholder](diagram.png)
+
+*Vineeth N B (IIT-H) §12.5 Neural Architecture Search*
+
+*Page 5 / 19*
+```
+
+# DL4CV_Week12_Part05.pdf - Page 9
+
+# Neural Architecture Search Space
+
+- Neural networks represent a function that transforms input variables **x** to output variables **ŷ** through a series of operations
+
+- Recall computational graphs (W8P1); each node \( z^{(k)} \in \mathbb{Z} \) represents a tensor and is associated with an operation \( o^{(k)} \in \mathbb{O} \) on its parent nodes \( I^{k} \)
+
+  ![Computational Graph](image_placeholder_for_computational_graph.png)
+
+- Computation at a node \( k \):
+
+  \[
+  z^{(k)} = o^{(k)} ( I^{(k)} )
+  \]
+
+  where operations include unary operations such as convolutions, pooling, activation functions or \( n \)-ary operations such as concatenation or addition
+
+- **NAS space**: Subspace of this general definition of neural architectures
+
+*Vineeth N B (IIT-H) §12.5 Neural Architecture Search 5 / 19*
+
+# DL4CV_Week12_Part05.pdf - Page 10
+
+```markdown
+# NAS Space: Global vs Cell-based<sup>1</sup>
+
+## Global Search Space
+
+- Large degrees of freedom regarding arrangement of operations
+- Allowed operations examples:
+  - convolutions, pooling, dense layers (FCs) with activation, global average pooling
+- Constraints examples:
+  - pooling as first operation; dense layers (FCs) before convolution operations
+- Rigid, impractical to scale and transfer
+
+## Cell-based Search Space
+
+- Many effective handcrafted architectures designed with repetitions of fixed structures
+- Network constructed by repeating a **cell** structure, a small directed acyclic graph representing a feature transformation
+  - e.g. NASNet search space: Learns two types of cells:
+    - **Normal Cell**: Input and output feature maps have same dimension
+    - **Reduction Cell**: Output feature map has width and height reduced by half
+
+<sup>1</sup>Zoph et al, Learning Transferable Architectures for Scalable Image Recognition, CVPR 2018
+
+Vineeth N B (III-T-B)
+
+S12.5 Neural Architecture Search
+
+6 / 19
+```
+
+# DL4CV_Week12_Part05.pdf - Page 11
+
+```markdown
+# Global Search Space
+
+Simplest example: a chain-structured search space as shown below
+
+## Chain-Structured Search Space
+
+### (a) Baker et al. (2017)
+
+```markdown
+- **softmax**
+  - **z^(n)**
+    - **o_n**
+      - **o_2**
+        - **z^(1)**
+          - **o_1**
+            - **x**
+```
+
+```markdown
+z^(k) = o^(k) (z^(k-1) j)
+```
+
+### (b) Zoph and Le (2017)
+
+```markdown
+- **softmax**
+  - **z^(n)**
+    - **o_n**
+      - **o_2**
+        - **z^(1)**
+          - **o_1**
+            - **x**
+```
+
+```markdown
+z^(k) = o^(k) (z^(k-1) j) \cup (z^(i) \mid i < k - 1)
+```
+
+*(Skip Connections)*
+
+**Credit:** Wistuba et al., *A Survey on Neural Architecture Search*, 2019
+
+**Vineeth N B** (IIT-H) **§12.5 Neural Architecture Search**
+
+![NPTEL Logo](logo.png)
+
+```markdown
+NPTEL
+```
+
+```markdown
+      
+     
+```
+
+# DL4CV_Week12_Part05.pdf - Page 12
+
+```markdown
+# Cell-Based Search Space
+
+![Cell-Based Search Space Diagram](image_source_placeholder)
+
+## Architecture Template
+
+```plaintext
+x
+
+normal cell × n
+
+reduction cell
+
+normal cell × n
+
+reduction cell
+
+normal cell × n
+
+softmax
+```
+
+## Reduction cell of the NASNet-A architecture (Zoph et al., 2018)
+
+- **Cell 1**
+  - Block 1
+  - Block 2
+  - Block 3
+  - Block 4
+  - Block 5
+
+- **Cell 1-1**
+  - sep 3x3
+  - sep 3x3
+  - sep 3x3
+  - sep 3x3
+  - sep 3x3
+
+- **Cell 1-2**
+  - sep 3x3
+  - sep 3x3
+  - sep 3x3
+  - sep 3x3
+  - sep 3x3
+
+### NASNet:
+
+While cell topology is maintained across network, its hyperparameters are often varied; merging operation is concatenation.
+
+**Image Source:** Wistuba et al., *A Survey on Neural Architecture Search*, 2019
+
+*Vineeth N B (IIIT-H)*
+
+*$12.5 Neural Architecture Search*
+
+*8 / 19*
+```
+
+# DL4CV_Week12_Part05.pdf - Page 13
+
+```markdown
+# NAS with Reinforcement Learning (RL)^2
+
+- A controller, which proposes child architecture, is implemented as a RNN; outputs a sequence of tokens that configure network architecture
+- Controller trained as a RL task using REINFORCE (Monte-Carlo policy gradient)
+  - **Action space**: List of tokens \(T (a_{1:T})\) for defining a child network predicted by controller
+  - **Reward**: Accuracy of a child network, \(R\).
+  - **Loss**: NAS optimizes controller parameters \(\theta\) with a REINFORCE loss
+
+  \[
+  \nabla_\theta J(\theta) = \sum_{t=1}^{T} \mathbb{E} \left[ \nabla_\theta \log P(a_t | a_{1:t-1} ; \theta) R \right]
+  \]
+
+![Sample architecture A with probability p](image_placeholder)
+
+The controller (RNN) -> Trains a child network with architecture \(A\) to get reward \(R\)
+
+Compute gradient of \(p\) and scale it by \(R\) to update the controller
+
+^2 Zoph and Le, Neural Network Architecture Search with Reinforcement Learning, ICLR 2017.
+
+Vineeth N B (IIT-H)
+
+S12.5 Neural Architecture Search
+
+9 / 19
+```
+
+# DL4CV_Week12_Part05.pdf - Page 14
+
+```markdown
+# Training with REINFORCE
+
+## Softmax
+
+- Number of Filters
+- Filter Height
+- Filter Width
+- Stride Height
+- Stride Width
+- Number of Filters
+- Filter Height
+
+## Hidden State
+
+- Layer N-1
+- Layer N
+- Layer N+1
+
+## Embedding
+
+- Layer N-1
+- Layer N
+- Layer N+1
+
+**Credit**: Nikhil Naik, *Neural Architecture Search: A Tutorial*, 2019
+
+*Vineeth N B (IIT-H) §12.5 Neural Architecture Search*
+
+![NPTEL](https://example.com/nptel.png)
+```
+
+# DL4CV_Week12_Part05.pdf - Page 15
+
+```markdown
+# Training with REINFORCE
+
+## Neural Architecture Search
+
+### Diagram Overview
+
+```plaintext
+-------------------------------------------------
+| Layer N-1    | Layer N    | Layer N+1       |
+-------------------------------------------------
+|    Embedding    |    Embedding    |    Embedding    |
+|   Hidden State  |   Hidden State  |   Hidden State  |
+|       |       |       |
+| Softmax  | Softmax  | Softmax  |
+-------------------------------------------------
+```
+
+### Layer Parameters
+
+```plaintext
+[1,3,5,7] -> Filter Height
+[1,3,5,7] -> Filter Width
+[1,2,3]  -> Stride Height
+[1,2,3]  -> Stride Width
+[24,36,48,64] -> Number of Filters
+```
+
+### Parameter Values
+
+```plaintext
+Filter Height: 3
+Filter Width: 7
+Stride Height: 1
+Stride Width: 2
+Number of Filters: 36
+```
+
+### Credits
+
+**Credit**: Nikhil Naik, Neural Architecture Search: A Tutorial, 2019
+
+**Vineeth N B (IIT-H)**
+
+**$12.5 Neural Architecture Search**
+
+---
+
+**Slide Number**: 10 / 19
+```
+
+# DL4CV_Week12_Part05.pdf - Page 16
+
+```markdown
+# How To Make NAS More Efficient?
+
+![Graph](image_url)
+
+- Models defined by path A and path B are trained independently
+- Instead, can we treat all model trajectories as sub-graphs of a single directed acyclic graph?
+- **Efficient NAS (ENAS)**: aggressively shares parameters among child models
+
+*Credit: Nikhil Naik, Neural Architecture Search: A Tutorial, 2019*
+
+*[^3]: Pham et al., Efficient Neural Architecture Search via Parameters Sharing, ICML 2018*
+
+*Vineeth N B (IIT-H)*
+
+*$12.5 Neural Architecture Search*
+
+[^3]: Pham et al., Efficient Neural Architecture Search via Parameters Sharing, ICML 2018
+```
+
+# DL4CV_Week12_Part05.pdf - Page 17
+
+```markdown
+# Efficient NAS with Weight Sharing
+
+- All sampled architecture graphs viewed as subgraphs of a larger supergraph
+
+- Graph represents entire search space while red arrows define a model in the search space, decided by an RNN controller (trained with REINFORCE)
+
+- Weights of controller and a part of over-parameterized network are alternately updated
+
+- ENAS achieved 2.89% test error on CIFAR-10, took less than 16 hours to search (significantly less than other NAS models)
+
+**Credit:** Pham et al., Efficient Neural Architecture Search via Parameters Sharing. ICML 2018.
+
+![Image of Graph](image_url)
+
+_Vineeth N B. (IIIT-H)_
+
+_$12.5 Neural Architecture Search_
+
+_12 / 19_
+```
+
+# DL4CV_Week12_Part05.pdf - Page 18
+
+# Differentiable Architecture Search: Gradient-based NAS<sup>4</sup>
+
+- Introduced binary variables in {α_{i,j,k}} to make search space continuous. This simplifies definition to:
+
+  \[
+  z^{(k)} = \sum_{i \in I^{(k)}} \sum_{j \in [O]} \alpha_{i,j,k} \cdot o^{(j)}(z^{(i)}) \quad \text{with} \quad \alpha_{i,j,k} \in \{0, 1\}
+  \]
+
+- So far, the assumption: every operation is either part of the network or not
+- This method relaxes categorical choice of a particular operation as a softmax over all operations
+
+  \[
+  \tilde{o}^{(i,j)}(x) = \sum_{o \in O} \frac{\exp(\alpha_{i,j}^o)}{\sum_{o' \in O} \exp(\alpha_{i,j}^{o'})} o^{(x)}
+  \]
+
+- This reduces search to learning a set of mixing probabilities α
+
+<sup>4</sup> Liu et al., DARTS: Differentiable Architecture Search, ICLR 2019
+
+Vineeth N B (IIT-H)
+
+§12.5 Neural Architecture Search
+
+13 / 19
+
+# DL4CV_Week12_Part05.pdf - Page 19
+
+```markdown
+# Differentiable Architecture Search: Gradient-based NAS<sup>5</sup>
+
+- **Uses an alternating (bilevel) optimization method:**
+  - Learn model parameters $w$ by minimizing loss on training set
+  - Learn structural parameters $\alpha$ by minimizing loss on validation set
+    \[
+    \min_{\alpha} \quad \mathcal{L}_{\text{validate}}(w^*(\alpha), \alpha)
+    \]
+    s.t. \[
+    w^*(\alpha) = \arg \min_w \mathcal{L}_{\text{train}}(w, \alpha)
+    \]
+
+- **Final architecture chosen based on:**
+  \[
+  o^{(i, j)} = \arg \max_{o \in O} \alpha_o^{(i, j)}
+  \]
+
+- **Elegant solution that makes all parameters differentiable!**
+
+---
+
+<sup>5</sup> Liu et al., DARTS: Differentiable Architecture Search, ICLR 2019
+
+Vineeth N B (IIT-H)
+
+Section 12.5 Neural Architecture Search
+
+---
+
+14 / 19
+```
+
+# DL4CV_Week12_Part05.pdf - Page 20
+
+```markdown
+# Architecture Transferability of NAS Networks
+
+## Models and Parameters
+
+| Model                   | Params | x+    | 1/5-Acc (%) |
+|-------------------------|--------|-------|-------------|
+| Inception V3            | 23.8M  | 5.72B | 78.8 / 94.4 |
+| Xception               | 22.8M  | 8.37B | 79.0 / 94.5 |
+| Inception ResNet V2     | 55.8M  | 13.2B | 80.4 / 95.3 |
+| ResNeXt-101 (64x4d)     | 83.6M  | 31.5B | 80.9 / 95.6 |
+| PNASNet-5 (110)         | 85.9M  | 15.0B | 81.8 / 95.5 |
+| DARTS-20 (CIFAR-10)     | 3.4M   | 5.0B  | 75.6 / 95.8 |
+| NASNet-A (131)          | 79.5M  | 32.0B | 82.5 / 95.8 |
+| Squeeze-Excite-Net      | 145.8M | 42.3B | 82.7 / 96.2 |
+| GeNet-2<sup>2</sup>     | 156M   | –     | 72.1 / 90.4 |
+| Block-QNN-B (N=3)<sup>2</sup> | 64M    | –     | 75.7 / 92.6 |
+| AmoebaNet-A (6, 64)<sup>2</sup> | 64M    | –     | 82.4 / 96.1 |
+| PNASNet-5 (4, 216)      | 86.1M  | 25.0B | 82.9 / 96.1 |
+| NASNet-A (6, 168)       | 88.9M  | 23.8B | 82.7 / 96.2 |
+
+## CIFAR-10 to ImageNet
+
+## Datasets and Accuracy Comparisons
+
+| Dataset            | Acc. | Network                             | Acc. | Best network                       |
+|--------------------|------|-------------------------------------|------|------------------------------------|
+| Food-101           | 90.0 | Deep layer aggregation [40]        | 90.1 | NASNet-A Large, fine-tuned         |
+| CIFAR-10           | 97.9 | AmoebaNet [41]                      | 98.4 | NASNet-A Large, fine-tuned         |
+| CIFAR-100          | 87.8 | ShakeDrop [42]                      | 88.2 | NASNet-A Large, fine-tuned         |
+| ImageNet           | 79.1 | Shake-CNN [43]                      | 79.3 | NASNet-A Large, fine-tuned         |
+| SUN397             | 63.2 | Pluralistic VGG [44]                | 66.5 | NASNet-A Large, fine-tuned         |
+| Stanford Cars     | 94.1 | Deep layer aggregation [40]        | 93.0 | Inception v4, random init          |
+| FGVC Aircraft      | 92.9 | Deep layer aggregation [40]        | 89.4 | Inception v3, fine-tuned           |
+| VOC 2007 Cls.      | 89.7 | VGG [9]                            | 88.4 | NASNet-A Large, fine-tuned         |
+| DTD                | 75.5 | FC+FV+CNN+D-SIFT [45]               | 76.7 | Inception-ResNet v2, fine-tuned    |
+| Oxford-IIIT Pets   | 93.8 | Object-part attention [46]         | 94.3 | NASNet-A Large, fine-tuned         |
+| Caltech-101       | 93.4 | Spatial pyramid pooling [47]       | 95.0 | NASNet-A Large, fine-tuned         |
+| Oxford 102 Flowers| 97.1 | Object-part attention [46]         | 97.7 | NASNet-A Large, fine-tuned         |
+
+## Credits
+
+**Nikhil Naik, Neural Architecture Search A Tutorial, 2019**
+
+## Additional Information
+
+- Vineeth N B (IIIT-H)
+- $12.5 Neural Architecture Search
+- Page 15 / 19
+```
+
+# DL4CV_Week12_Part05.pdf - Page 21
+
+```markdown
+# Future Directions<sup>6,7,8</sup>
+
+- **Search efficiency**
+- **Moving towards less constrained search spaces**
+- **Designing efficient architectures: automated scaling, pruning and quantization**
+- **Joint optimization of all components in deep learning pipeline (data augmentation, architectures, activation functions, training algorithms)**
+
+![Diagram](image_url)
+
+- Input Image
+  -|- Pre-Processing
+  -|- Neural Network
+      -|- Data Augmentation (AutoAugment, Cubuk et al., 2018)
+      -|- Activation Function (Ramachandran et al., 2018)
+      -|- Optimizer (Bello et al., 2017)
+  -|- Outputs
+
+- **Designing architectures for multimodal problems, e.g., vision and language**
+
+<sup>6</sup> Cubuk et al., AutoAugment: Learning Augmentation Policies from Data, CVPR 2019
+<sup>7</sup> Ramachandran et al., Swish: A Self-Gated Activation Function, NEC Journal 2017
+<sup>8</sup> Bello et al., Neural Optimizer Search with Reinforcement Learning, ICML 2017
+
+Vineeth N B (IIT-H) §12.5 Neural Architecture Search
+
+```
+
+# DL4CV_Week12_Part05.pdf - Page 22
+
+```markdown
+# The Curious Case of Random Search<sup>9</sup>
+
+![Graph](image_url)
+
+**Evolution**  
+![Evolution](image_url)  
+**RL**  
+![RL](image_url)  
+**RS**  
+![RS](image_url)
+
+**Difference in accuracy between best models found by random search, RL, and Evolution is less than 1% on CIFAR-10**
+
+---
+
+CIFAR-10
+
+## Difference in accuracy between best models found by random search, RL, and Evolution is less than 1% on CIFAR-10
+
+---
+
+<sup>9</sup> Real et al., *Regularized Evolution for Image Classifier Architecture Search*, AAAI 2019
+
+Vineeth N B (IIT-H)
+
+$12.5 Neural Architecture Search
+
+---
+
+17 / 19
+```
+
+# DL4CV_Week12_Part05.pdf - Page 23
+
+```markdown
+# The Curious Case of Random Search<sup>10.11</sup>
+
+| Architecture            | Source       | Test Error     | Params (M) |
+|-------------------------|--------------|----------------|------------|
+| NASNet-A<sup>∗</sup>    | [52]         | N/A            | 3.3        |
+| AmoebaNet-B<sup>∗</sup> | [43]         | N/A            | 2.8        |
+| ProxylessNAS<sup>†</sup>| [7]          | 2.08           | N/A        |
+| GHN<sup>†</sup>         | [50]         | N/A            | 5.7        |
+| SNAS<sup>†</sup>        | [47]         | N/A            | 2.8        |
+| ENAS<sup>†</sup>        | [41]         | 2.89           | N/A        |
+| ENAS                    | [34]         | 2.91           | 4.2        |
+| Random search baseline  | [34]         | N/A            | 3.2        |
+| DARTS (first order)     | [34]         | N/A            | 3.3        |
+| DARTS (second order)    | [34]         | 3.00 ± 0.14    | 3.3        |
+| DARTS (second order)<sup>‡</sup>| Ours | 2.62           | 2.78 ± 0.12 | 3.3        |
+| ASHA baseline           | Ours         | 2.85           | 3.03 ± 0.13 | 2.2        |
+| Random search WS<sup>‡</sup>| Ours         | 2.71           | 2.85 ± 0.08 | 4.3        |
+
+*Li and Talwalker (2019)*
+
+---
+
+## CIFAR-10
+
+**Credit**: Nikhil Naik, *Neural Architecture Search A Tutorial, 2019*
+
+---
+
+## ImageNet
+
+| Network                  | Test size | Epochs | Top-1 acc. | Top-5 acc. | FLOPs (B) | Params (M) |
+|--------------------------|-----------|--------|------------|------------|------------|------------|
+| NASNet-A [56]            | 331<sup>2</sup> | >250   | 82.7       | 96.2       | 23.8       | 88.9       |
+| Amoeba-B [34]            | 331<sup>2</sup> | >250   | 82.3       | 96.1       | 22.3       | 84.0       |
+| Amoeba-A [34]            | 331<sup>2</sup> | >250   | 82.8       | 96.1       | 23.1       | 86.7       |
+| PNASNet-5 [26]           | 331<sup>2</sup> | >250   | 82.9       | 96.2       | 25.0       | 86.1       |
+| RandWire-WS              | 320<sup>2</sup> | 100    | 81.6 ± 0.13 | 95.6 ± 0.07 | 16.0 ± 0.36 | 61.5 ± 1.32 |
+
+*Xie et al. (2019)*
+
+---
+
+<sup>10</sup>Li and Talwalker, *Random Search and Reproducibility for Neural Architecture Search*, UA I 2019
+
+<sup>11</sup>Xie et al., *Exploring Randomly Wired Neural Networks for Image Recognition*, ICCV 2019
+
+Vimeeth N B (IIT-H)
+
+$12.5 Neural Architecture Search
+
+18 / 19
+```
+
+# DL4CV_Week12_Part05.pdf - Page 24
+
+```markdown
+# Homework
+
+## Readings
+
+- **Neural Architecture Search article by Lilian Weng**
+
+## Survey Papers:
+
+- Witsuba et al., *A Survey on Neural Architecture Search*, 2019.
+- Elksen et al., *Neural Architecture Search: A Survey*, 2018.
+
+![Diagram Placeholder](image_url)
+
+Vineeth N B (IIT-H) §12.5 Neural Architecture Search
+
+Page 19 / 19
+```
+

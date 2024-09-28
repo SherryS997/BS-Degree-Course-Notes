@@ -1,0 +1,1405 @@
+# DL4CV_Week11.2 Transformers for Detection.pdf - Page 1
+
+```markdown
+# Deep Learning for Computer Vision
+
+# Transformers for Detection
+
+**Vineeth N Balasubramanian**
+
+Department of Computer Science and Engineering
+Indian Institute of Technology, Hyderabad
+
+![IIT-H Logo](iiit_hyd_logo.png)
+
+---
+
+Vineeth N B (IIT-H)
+
+13.2 Transformers for Detection
+
+---
+
+Page 1 / 32
+```
+
+# DL4CV_Week11.2 Transformers for Detection.pdf - Page 2
+
+:
+
+```markdown
+# Recall: Transformers to Vision Transformers
+
+- Transformers [4] revolutionized NLP by offering more efficient and effective ways to model sequential data
+
+*Vineeth N B (IIT-H) §13.2 Transformers for Detection*
+
+![Transformers](image-url)
+
+*Page 2 / 32*
+```
+
+In this markdown format:
+- The main title is formatted with `#`.
+- The subheading is in bold.
+- The bullet points are created using `-`.
+- The author and section name are italicized.
+- Placeholder for an image is added.
+- The footer is preserved as-is, with the page number included.
+```
+
+# DL4CV_Week11.2 Transformers for Detection.pdf - Page 3
+
+ it correctly and place it in markdown code blocks.
+
+```markdown
+# Recall: Transformers to Vision Transformers
+
+- Transformers [4] revolutionized NLP by offering more efficient and effective ways to model sequential data
+
+- ViT [7] extended transformer architecture to vision tasks, replacing CNNs with self-attention mechanisms and excelling in image classification benchmarks like ImageNet.
+
+*Vineeth N B (IIT-H) §13.2 Transformers for Detection*
+
+*Page 2 / 32*
+```
+
+Ensure all citations and references are correctly formatted as in the original content.
+
+# DL4CV_Week11.2 Transformers for Detection.pdf - Page 4
+
+```markdown
+# Recall: Transformers to Vision Transformers
+
+- Transformers [4] revolutionized NLP by offering more efficient and effective ways to model sequential data.
+- ViT [7] extended transformer architecture to vision tasks, replacing CNNs with self-attention mechanisms and excelling in image classification benchmarks like ImageNet.
+- Object detection often involves processing large volumes of visual data and making fine-grained decisions.
+
+*Vineeth N B (IIT-H)*
+
+*§13.2 Transformers for Detection*
+
+*2 / 32*
+```
+
+# DL4CV_Week11.2 Transformers for Detection.pdf - Page 5
+
+ and ensure the correct representation of all symbols, equations, and notation.
+
+```markdown
+# Recall: Transformers to Vision Transformers
+
+- Transformers [4] revolutionized NLP by offering more efficient and effective ways to model sequential data.
+- ViT [7] extended transformer architecture to vision tasks, replacing CNNs with self-attention mechanisms and excelling in image classification benchmarks like ImageNet.
+- Object detection often involves processing large volumes of visual data and making fine-grained decisions.
+
+## Problem:
+
+Traditional object detectors rely on hand-crafted components like anchor boxes and non-maximum suppression, adding complexity and inefficiency.
+
+![Vineeth N B (IIT-H)](13.2 Transformers for Detection)
+
+2 / 32
+```
+
+# DL4CV_Week11.2 Transformers for Detection.pdf - Page 6
+
+```markdown
+# Recall: Transformers to Vision Transformers
+
+- **Transformers** [^4] revolutionized NLP by offering more efficient and effective ways to model sequential data.
+- **ViT** [^7] extended transformer architecture to vision tasks, replacing CNNs with self-attention mechanisms and excelling in image classification benchmarks like ImageNet.
+- Object detection often involves processing large volumes of visual data and making fine-grained decisions.
+
+## Problem:
+Traditional object detectors rely on hand-crafted components like anchor boxes and non-maximum suppression, adding complexity and inefficiency.
+
+## Solution:
+DETR [^6] was introduced as an end-to-end object detection framework, eliminating the need for hand-crafted components by leveraging transformer architecture.
+
+![Vineeth N B (IIT-H)](https://example.com/image)
+*Vineeth N B (IIT-H) §13.2 Transformers for Detection*
+
+---
+
+[^4]: Reference to the original source of Transformers.
+[^6]: Reference to the original source of DETR.
+[^7]: Reference to the original source of Vision Transformers (ViT).
+```
+
+# DL4CV_Week11.2 Transformers for Detection.pdf - Page 7
+
+```markdown
+# Detection TRansformer (DETR)¹
+
+![DETR Architecture Diagram](image_url)
+
+**Components:**
+
+- **Backbone:**
+  - **CNN:** Extracts a set of image features.
+  - **Positional Encoding:** Adds positional information to the image features.
+
+- **Encoder:**
+  - **Transformer Encoder:** Processes the combined image features and positional encoding.
+
+- **Decoder:**
+  - **Transformer Decoder:** Processes object queries to predict objects.
+
+- **Prediction Heads:**
+  - **FFN:** Fully connected networks used to determine class and bounding box coordinates.
+  - **Output:** Provides predictions such as class, bounding box, or "no object".
+
+**Key Points:**
+- DETR views object detection as a direct set prediction problem.
+- Main components of DETR include:
+  - A set-based global loss that forces unique predictions via bipartite matching.
+  - A transformer encoder-decoder architecture.
+
+¹ Carion et al., "End-to-End Object Detection with Transformers", ECCV 2020
+
+![Example Image with Detection](image_url)
+
+**Bullet Points:**
+- DETR views object detection as a direct set prediction problem.
+- The main components of DETR are:
+  - A set-based global loss that forces unique predictions via bipartite matching.
+  - A transformer encoder-decoder architecture.
+```
+
+Note: Replace `image_url` with the actual URL or placeholder for the images if applicable.
+
+This markdown format ensures that the structure, formatting, and scientific integrity of the original content are maintained accurately.
+
+# DL4CV_Week11.2 Transformers for Detection.pdf - Page 8
+
+
+
+```markdown
+# DETection TRansformer (DETR)
+
+![Image](image-url)
+
+- **The input image is passed through a Convolutional Neural Network (CNN) to extract a set of feature maps.**
+
+- **These feature maps capture the visual information of the image at different spatial scales.**
+
+_Vineeth N B (IIT-H)_
+
+§13.2 Transformers for Detection
+
+4 / 32
+```
+
+# DL4CV_Week11.2 Transformers for Detection.pdf - Page 9
+
+```markdown
+# DETection TRansformer (DETR)
+
+![Image](image_url)
+
+- **Input:** 3 × H' × W'
+- **CNN:** Convolutional Neural Network
+- **F:** Feature map
+- **C × H × W:** Channel, height, and width dimensions of the feature map
+- **Flattened F:** Flat representation of the feature map
+- **C × HW:** Flattened dimensions
+- **Positional encoding:** Adds spatial information about the objects in the image
+
+## Description
+
+- **Positional encoding**: Added to the flattened feature maps to provide spatial information about the objects in the image.
+- **Relative positions**: This allows the model to understand the relative positions of different parts of the image.
+
+**Vineeth N B (IIT-H)**
+
+**§13.2 Transformers for Detection**
+
+---
+
+Page 5 / 32
+```
+
+# DL4CV_Week11.2 Transformers for Detection.pdf - Page 10
+
+# Detection Transformer (DETR)
+
+```markdown
+## Image
+
+![Image](image_url)
+
+3 x H' x W'
+
+- CNN
+- F
+- Flattened F
+- Positional encoding
+- Transformer encoder
+  - Encoder representations
+
+## Key Points
+
+- The feature maps with positional encoding are passed through an encoder.
+- The encoder consists of multiple transformer encoder layers, each comprising self-attention mechanisms and feed-forward networks (FFNs).
+- Self-attention mechanisms allow the model to capture global context and relationships between different parts of the image.
+```
+
+### References
+- Vineeth N B. (IIIT-H)
+- §13.2 Transformers for Detection
+
+Page Number: 6 / 32
+```
+
+# DL4CV_Week11.2 Transformers for Detection.pdf - Page 11
+
+
+
+```markdown
+# Detection TRansformer (DETR)
+
+## Image Processing Pipeline
+
+### Input
+- **Image**: 
+  - Dimensions: 3 x H' x W'
+
+### CNN Feature Extraction
+- **CNN**: 
+  - Output: F 
+    - Dimensions: C x H x W
+
+### Feature Flattening
+- **Flattened F**: 
+  - Dimensions: C x HW
+
+### Positional Encoding
+- **Positional Encoding**: 
+  - Applied to Flatened F
+
+### Transformer Encoder
+- **Transformer Encoder**: 
+  - Input: Flatened F with positional encoding
+  - Output: Encoder representations
+    - Dimensions: d x HW
+
+### Transformer Decoder
+- **Transformer Decoder**: 
+  - Input: 
+    - Encoder representations
+    - Learnable queries
+      - Dimensions: d x N
+  - Output: 
+    - Output embeddings
+      - Dimensions: d x N
+
+## Explanation
+- **Encoder Output**: 
+  - Passed to the decoder along with a set of learnable queries representing possible object locations and classes.
+
+- **Decoder Structure**: 
+  - Comprises transformer layers with self-attention and feedforward networks (FFNs).
+
+- **Decoder Functionality**: 
+  - Attends to both the encoded image features and the object queries to make predictions about the presence, location, and class of objects.
+
+## Source Information
+- **Author**: Vineeth N B (IIT-H)
+- **Section**: §13.2 Transformers for Detection
+- **Slide Number**: 7 / 32
+```
+
+# DL4CV_Week11.2 Transformers for Detection.pdf - Page 12
+
+```markdown
+# Detection TRansformer (DETR)
+
+![Diagram](image_url)
+
+- **Image**
+  - Size: $3 \times H' \times W$
+  
+- **CNN**
+  - Output: $F$
+  - Dimensions: $C \times H \times W$
+
+- **Flattening and Positional Encoding**
+  - Flattened Output: $F$
+  - Dimensions: $C \times HW$
+  - Adds Positional Encoding
+
+- **Transformer Encoder**
+  - Input: Flattened $F$
+  - Output: Encoder Representations
+  - Dimensions: $d \times HW$
+
+- **Transformer Decoder**
+  - Input: Encoder Representations and Learnable Queries
+  - Output: Output Embeddings
+  - Dimensions: $d \times N$
+  
+- **Feed-Forward Network (FFN)**
+  - Input: Output Embeddings
+  - Output: Predictions
+
+- **Predictions**
+  - Visualization of object detections in the image
+
+## Key Points
+
+- **The decoder produces output embeddings for each object query.**
+- **These embeddings include class probabilities, bounding box coordinates, and a special "no object" class indicating the absence of an object.**
+- **The model predicts these outputs in parallel for all object queries, allowing end-to-end training without additional post-processing steps.**
+
+_Vineeth N B (IIIT-H)_
+
+_§13.2 Transformers for Detection_
+
+_8 / 32_
+```
+
+# DL4CV_Week11.2 Transformers for Detection.pdf - Page 13
+
+
+
+---
+
+# Detection TRansformer (DETR)
+
+## Bipartite matching:
+
+- **DETR predicts N objects in one decoder pass, with N larger than typical object counts**
+
+---
+
+_Vineeth N B (IIT-H)_
+#13.2 Transformers for Detection
+9 / 32
+
+# DL4CV_Week11.2 Transformers for Detection.pdf - Page 14
+
+ the provided scientific text or slides.
+
+```markdown
+# Detection TRansformer (DETR)
+
+## Bipartite matching:
+
+- DETR predicts N objects in one decoder pass, with N larger than typical object counts
+- Unlike traditional object detection methods [2, 3], DETR does not rely on heuristic assignment rules for matching proposals or anchors to ground truth.
+
+*Vineeth N B (IIT-H) §13.2 Transformers for Detection 9 / 32*
+```
+
+# DL4CV_Week11.2 Transformers for Detection.pdf - Page 15
+
+ is not a placeholder and should be included in the final output.
+
+```markdown
+# DEtection TRansformer (DETR)
+
+## Bipartite matching:
+
+- DETR predicts N objects in one decoder pass, with N larger than typical object counts
+- Unlike traditional object detection methods [2, 3], DETR does not rely on heuristic assignment rules for matching proposals or anchors to ground truth.
+- Instead, DETR utilizes a loss function to achieve an optimal bipartite matching
+
+*Vineeth N B (IIIT-H) §13.2 Transformers for Detection 9 / 32*
+```
+
+# DL4CV_Week11.2 Transformers for Detection.pdf - Page 16
+
+ any OCR limitations or errors.
+
+```markdown
+# DETection TRansformer (DETR)
+
+## Bipartite matching:
+
+- **DETR predicts N objects in one decoder pass, with N larger than typical object counts**
+- Unlike traditional object detection methods [2, 3], DETR does not rely on heuristic assignment rules for matching proposals or anchors to ground truth.
+- Instead, DETR utilizes a loss function to achieve an optimal bipartite matching
+
+Let y denote the set of ground truth objects padded with φ (no object) to match the size of ŷ = {ŷ_i}_{i=1}^{N}, the set of N predictions. A bipartite matching between these sets is found by searching for a permutation σ ∈ S_N with the lowest cost:
+
+\[ \hat{\sigma} = \arg \min_{\sigma \in S_N} \sum_{i=1}^{N} \mathcal{L}_{match} \left(y_i, y_{\sigma(i)}\right) \]
+```
+
+In the above markdown, note the following:
+
+- The section titles and subheadings are properly formatted using `#` and `##` for hierarchy.
+- Bullet points (`-`) are used for list items.
+- The mathematical formula is presented using inline code for inline equations and block code for display equations.
+- Any special symbols or Greek letters in the formula are accurately represented.
+- The section title "Bipartite matching:" is bolded as per the original source.
+- The text content is accurately transcribed with proper punctuation and spacing.
+
+# DL4CV_Week11.2 Transformers for Detection.pdf - Page 17
+
+ extraction should be exhaustive and high-quality.
+
+```markdown
+# Detection Transformer (DETR)
+
+## Matching loss:
+
+$$
+L_{match} \left( y_i; \hat{y}_{\sigma(i)} \right) = -\mathbb{1}_{\{c_i \neq \phi\}} \hat{p}_{\sigma(i)}(c_i) + \mathbb{1}_{\{c_i \neq \phi\}} L_{box} \left( b_i; \hat{b}_{\sigma(i)} \right)
+$$
+
+Every ground truth element $y_i$ can be seen as $y_i = (c_i, b_i)$ where $c_i$ is the target class label (which may be $\phi$) and $b_i \in [0,1]^4$ is a vector that defines ground truth box coordinates. For the prediction with index $\sigma(i)$, $\hat{p}_{\sigma(i)}(c_i)$ is the probability of class $c_i$ and $\hat{b}_{\sigma(i)}$ is the predicted box.
+
+![Predicted boxes](image1_url)
+
+![Ground-truth boxes](image2_url)
+
+Vineeth N B (IIIT-H) §13.2 Transformers for Detection 10 / 32
+```
+
+# DL4CV_Week11.2 Transformers for Detection.pdf - Page 18
+
+# Detection TRansformer (DETR)
+
+## Hungarian Loss:
+
+Following the matching (Eq. 1), DETR optimizes object-specific losses for training. As the optimal assignment σ̂ is computed with the Hungarian algorithm [1], the loss for all the pairs matched is termed **Hungarian loss**.
+
+$$
+\mathcal{L}_{Hungarian}(y, \hat{y}) = \sum_{i=1}^{N} \left[ - \log \hat{p}_{\hat{\sigma}(i)}(c_i) + 1_{\{c_i \neq \hat{\sigma}\}} \mathcal{L}_{box}(b_i, \hat{b}_{\hat{\sigma}(i)}) \right],
+$$
+
+*Vineeth N B (IIIT-H)*
+
+*§13.2 Transformers for Detection*
+
+*11 / 32*
+
+# DL4CV_Week11.2 Transformers for Detection.pdf - Page 19
+
+ the provided content.
+
+```markdown
+# Detection TRansformer (DETR)
+
+## Hungarian Loss:
+
+Following the matching (Eq. 1), DETR optimizes object-specific losses for training. As the optimal assignment \( \hat{\sigma} \) is computed with the Hungarian algorithm [1], the loss for all the pairs matched is termed **Hungarian loss**.
+
+\[
+\mathcal{L}_{\text{Hungarian}}(y, \hat{y}) = \sum_{i=1}^{N} \left[ - \log \hat{p}_{\hat{\sigma}(i)}(c_i) + 1_{\{c_i \neq \varnothing\}} \mathcal{L}_{\text{box}}(b_i, \hat{b}_{\hat{\sigma}(i)}) \right],
+\]
+
+The most commonly used \( \mathcal{L}_1 \) loss has different scales for small and large boxes even if their relative errors are similar. To mitigate this issue, bounding box loss \( \mathcal{L}_{\text{box}} \) is defined as a linear combination of \( \mathcal{L}_1 \) loss and generalized IOU loss [5], which is scale-invariant.
+
+\[
+\mathcal{L}_{\text{box}}(b_i, \hat{b}_{\hat{\sigma}(i)}) = \lambda_i \mathcal{L}_{\text{iou}}(b_i, \hat{b}_{\hat{\sigma}(i)}) + \lambda_L 1_{\{b_i - \hat{b}_{\hat{\sigma}(i)}\}}^1
+\]
+
+*Vineeth N B. (IIT-H)*
+*§13.2 Transformers for Detection*
+*11 / 32*
+```
+
+This markdown format keeps the scientific integrity intact, ensuring that all mathematical formulas, equations, and special symbols are accurately represented.
+
+# DL4CV_Week11.2 Transformers for Detection.pdf - Page 20
+
+ doesn't allow for inline execution of Python code. However, you can execute Python code in a Jupyter notebook or a Python script file.
+
+# DETR: Performance
+
+| Model                    | GFLOPS/FPS | #params | AP  | AP_50 | AP_75 | AP_S | AP_M | AP_L |
+|--------------------------|------------|---------|-----|-------|-------|------|------|------|
+| Faster RCNN-DC5          | 320/16     | 166M    | 39.0 | 60.5  | 42.3  | 21.4 | 43.5 | 52.5 |
+| Faster RCNN-FPN          | 180/26     | 42M     | 40.2 | 61.0  | 43.8  | 24.2 | 43.5 | 52.0 |
+| Faster RCNN-R101-FPN     | 246/20     | 60M     | 42.0 | 62.5  | 45.9  | 25.2 | 45.6 | 54.6 |
+| Faster RCNN-DC5+         | 320/16     | 166M    | 41.1 | 61.4  | 44.3  | 22.9 | 45.9 | 55.0 |
+| Faster RCNN-FPN+         | 180/26     | 42M     | 42.0 | 62.1  | 45.5  | 26.6 | 45.4 | 53.4 |
+| Faster RCNN-R101-FPN+    | 246/20     | 60M     | 44.0 | 63.9  | 47.8  | 27.2 | 48.1 | 56.0 |
+| DETR                     | 86/28      | 41M     | 42.0 | 62.4  | 44.2  | 20.5 | 45.8 | 61.1 |
+| DETR-DC5                 | 187/12     | 41M     | 43.3 | 63.1  | 45.9  | 22.5 | 47.3 | 61.1 |
+| DETR-R101                | 152/20     | 60M     | 43.5 | 63.8  | 46.4  | 21.9 | 48.0 | 61.8 |
+| DETR-DC5-R101            | 253/10     | 60M     | 44.9 | 64.7  | 47.7  | 23.7 | 49.5 | 62.3 |
+
+_Vineeth N B (IIIT-H)_
+
+_S13.2 Transformers for Detection_
+
+_Page 12 / 32_
+
+# DL4CV_Week11.2 Transformers for Detection.pdf - Page 21
+
+
+
+```markdown
+# DETR: Limitations
+
+## Computational cost
+
+**DETR** demands significant computational resources due to the quadratic complexity of the self-attention mechanism, making it impractical to handle high-resolution feature maps.
+
+---
+
+Vineeth N B (IIIT-H) §13.2 Transformers for Detection 13 / 32
+```
+
+This markdown format maintains the structure, formatting, and scientific accuracy of the original scientific text or slides.
+
+# DL4CV_Week11.2 Transformers for Detection.pdf - Page 22
+
+ blocks for equations, tables, and images.
+
+```markdown
+# DETR: Limitations
+
+## Computational cost
+
+DETR demands significant computational resources due to the quadratic complexity of the self-attention mechanism, making it impractical to handle high-resolution feature maps.
+
+## Long training schedules and instability
+
+Initially, almost equal attention weights of $\frac{1}{N_k}$ are set to all the pixels, where $N_k$ is the number of key elements. In the image domain, where the key elements are usually image pixels, $N_k$ can be very large and the convergence is tedious.
+```
+
+# DL4CV_Week11.2 Transformers for Detection.pdf - Page 23
+
+ is the number of key elements. In the image domain, where the key elements are usually image pixels, Nk can be very large and the convergence is tedious.
+
+```markdown
+# DETR: Limitations
+
+## Computational cost
+
+DETR demands significant computational resources due to the quadratic complexity of the self-attention mechanism, making it impractical to handle high-resolution feature maps.
+
+## Long training schedules and instability
+
+Initially, almost equal attention weights of \\(\frac{1}{N_k}\\) are set to all the pixels, where \\(N_k\\) is the number of key elements. In the image domain, where the key elements are usually image pixels, \\(N_k\\) can be very large and the convergence is tedious.
+
+## Limited performance on small objects
+
+The self-attention mechanism in DETR may not effectively capture the intricate details of small objects, resulting in insufficient focus on relevant image regions during the detection process.
+
+*Vineeth N B (IIIT-H)*
+*§13.2 Transformers for Detection*
+*13 / 32*
+```
+
+# DL4CV_Week11.2 Transformers for Detection.pdf - Page 24
+
+ the following output:
+
+```markdown
+# Recent DETR-like models
+
+**Question:** How can we reduce the quadratic computational complexity of self-attention?
+
+---
+
+_Vineeth N B (IIT-H)_
+
+### §13.2 Transformers for Detection
+
+_14 / 32_
+
+```
+
+---
+
+This markdown format ensures the scientific integrity and readability of the extracted content.
+
+# DL4CV_Week11.2 Transformers for Detection.pdf - Page 25
+
+```markdown
+# Recent DETR-like models
+
+**Question:** How can we reduce the quadratic computational complexity of self-attention?
+
+**Deformable DETR [9]:**
+For a given pixel, only attend to a few key points around it instead of attending to every other pixel in the image.
+
+![Transformer attention](image1.png) ![Sparse local attention](image2.png) ![Deformable convolution](image3.png) ![Deformable attention (k=4)](image4.png)
+
+- **Transformer attention**
+- **Sparse local attention:** inefficient in implementation
+- **Deformable convolution:** lacks the relation modeling
+- **Deformable attention (k=4)**
+
+_Vineeth N B (IIT-H)_
+
+§13.2 Transformers for Detection
+
+_14 / 32_
+```
+
+# DL4CV_Week11.2 Transformers for Detection.pdf - Page 26
+
+: 
+
+```markdown
+# Deformable DETR<sup>2</sup>
+
+## Recall: Multi-Head Attention in Transformers
+
+Let $q \in \Omega_q$ denote a query element with feature $z_q \in \mathbb{R}^C$, $k \in \Omega_k$ represent a key element with feature $x_k \in \mathbb{R}^C$, and $m$ denote the attention head. Here, $C$ is the feature dimension, and $\Omega_q$ and $\Omega_k$ specify the sets of query and key elements. The multi-head attention feature is then calculated as
+
+$$
+\text{MultiHeadAttn}(z_q, x) = \sum_{m=1}^{M} W_m \left[ \sum_{k \in \Omega_k} A_{mqk} \cdot W_m^T x_k \right]
+$$
+
+(Xizhou Zhu et al., "Deformable DETR: Deformable Transformers for End-to-End Object Detection", ICLR 2021)
+
+Vineeth N B (IIT-H)
+
+§13.2 Transformers for Detection
+
+15 / 32
+```
+```
+
+# DL4CV_Week11.2 Transformers for Detection.pdf - Page 27
+
+:
+
+```markdown
+# Deformable DETR<sup>2</sup>
+
+## Recall: Multi-Head Attention in Transformers
+
+Let $q \in \Omega_q$ denote a query element with feature $z_q \in \mathbb{R}^C$, $k \in \Omega_k$ represent a key element with feature $x_k \in \mathbb{R}^C$, and $m$ denote the attention head. Here, $C$ is the feature dimension, and $\Omega_q$ and $\Omega_k$ specify the sets of query and key elements. The multi-head attention feature is then calculated as
+
+$$
+\text{MultiHeadAttn}(z_q, x) = \sum_{m=1}^{M} W_m \left[ \sum_{k \in \Omega_k} A_{mqk} \cdot W_m^T x_k \right] \tag{2}
+$$
+
+## Two main problems:
+
+- The initialization of attention weights $A_{mqk}$ close to $\frac{1}{N_k}$ causes ambiguous gradients, necessitating lengthy training schedules for the weights to focus on specific keys.
+- The computational complexity of Eq. 2 is $O(N_q C^2 + N_k C^2 + N + q N_k C)$, which is quadratic to the feature map size.
+
+<sup>2</sup>Xizhou Zhu et al., "Deformable DETR: Deformable Transformers for End-to-End Object Detection", ICLR 2021
+
+Vineeth N B (IIT-H)
+
+$13.2 Transformers for Detection
+
+15 / 32
+```
+
+# DL4CV_Week11.2 Transformers for Detection.pdf - Page 28
+
+ the markdown data of the provided image below:
+
+```markdown
+# Deformable DETR
+
+Inspired by deformable convolution, the deformable attention module focuses on a small set of key sampling points near a reference point, irrespective of feature map size.
+```
+
+---
+
+Vineeth N B (IIIT-H) §13.2 Transformers for Detection 16 / 32
+```
+
+# DL4CV_Week11.2 Transformers for Detection.pdf - Page 29
+
+```markdown
+# Deformable DETR
+
+Inspired by deformable convolution, the deformable attention module focuses on a small set of key sampling points near a reference point, irrespective of feature map size.
+
+Given an input feature map \(x \in \mathbb{R}^{C \times H \times W}\), let \(q\) index a query element with content feature \(z_q\) and a 2-d reference point \(p_q\), the deformable attention feature is calculated by
+
+\[ \text{DeformAttn}(z_q, p_q; x) = \sum_{m=1}^{M} W_m \left[ \sum_{k=1}^{K} A_{mqk} W'_m x(p_q + \Delta p_{mqk}) \right], \tag{3} \]
+
+where \(m\) indexes attention heads, \(k\) indexes sampled keys (\(K << H \times W\)), \(\Delta p_{mqk}\), \(A_{mqk}\) represents sampling offset and attention weight for the \(k^{th}\) sampling point in the \(m^{th}\) head.
+
+*Vineeth N B (IIIT-H)*
+*§13.2 Transformers for Detection*
+*16 / 32*
+```
+
+# DL4CV_Week11.2 Transformers for Detection.pdf - Page 30
+
+ the output content should be properly formatted.
+
+---
+
+# Deformable DETR
+
+Inspired by deformable convolution, the deformable attention module focuses on a small set of key sampling points near a reference point, irrespective of feature map size.
+
+Given an input feature map \( x \in \mathbb{R}^{C \times H \times W} \), let \( q \) index a query element with content feature \( z_q \) and a 2-d reference point \( p_q \), the deformable attention feature is calculated by
+
+\[ \text{DeformAttn}(z_q, p_q, x) = \sum_{m=1}^{M} W_m \left[ \sum_{k=1}^{K} A_{mqk} W'_m x (p_q + \Delta p_{mqk}) \right], \]
+
+where \( m \) indexes attention heads, \( k \) indexes sampled keys \( (K \ll HW) \), \( \Delta p_{mqk} \), \( A_{mqk} \) represents sampling offset and attention weight for the \( k^{th} \) sampling point in the \( m^{th} \) head.
+
+Let \( N_q \) be the number of query elements. The complexity of the deformable attention module is of \( O(2N_q C^2 + \min(HW C^2, N_q KC^2)) \). For encoder, it becomes \( O(HWC^2) \) which is linear to the feature map size, and for decoder, it is \( O(NKC^2) \), which is irrelevant to the spatial size.
+
+*Vineeth N B (IIIT-H) §13.2 Transformers for Detection 16 / 32*
+
+```
+
+# DL4CV_Week11.2 Transformers for Detection.pdf - Page 31
+
+ on the provided scientific text or slides and convert the extracted content into a detailed markdown format. Ensure the following:
+## Deformable DETR
+
+```markdown
+# Deformable DETR
+
+## Inputs
+- **Query Feature \( z_q \)**
+- **Reference Point \( p_g \) \((p_{gx}, p_{gy}) \)**
+- **Input Feature Map \( x \)**
+
+## Process Flow
+1. **Linear Transformation**
+   - Query Feature \( z_q \) undergoes a linear transformation.
+   - Reference Point \( p_g \) is used as an input feature.
+
+2. **Multi-Head Self-Attention Mechanism**
+   - **Heads 1, 2, 3**: Each head processes different parts of the input features.
+   - **Sampling Offsets (\( \Delta p_{mh} \))**: These offsets are calculated within each head to attend to different regions of the feature map.
+   - **Attention Weights (\( A_{mh} \))**: Weights are calculated for each head.
+
+3. **Aggregation**
+   - The sampled values from each head are aggregated.
+   - Aggregated sampled values from each head are further processed.
+
+4. **Final Linear Transformation**
+   - The aggregated sampled values from each head undergo a linear transformation.
+   - Output is produced after the final linear transformation.
+
+## Visualization
+- **Heads 1, 2, 3**: Represent different attention heads.
+- **Values (\( W_{mh}^v \))**: Values from each head are visualized.
+
+## Footer
+- **Author**: Vineeth N B (IIIT-H)
+- **Title**: §13.2 Transformers for Detection
+- **Page Number**: 17 / 32
+```
+
+Ensure all **bold** and *italicized* text is correctly formatted and maintain the structure and integrity of the provided content.
+```
+
+# DL4CV_Week11.2 Transformers for Detection.pdf - Page 32
+
+```markdown
+# Deformable DETR: Multi-Scale
+
+## Input Multi-Scale Features
+
+$$\{x_l\}_{l=1}^L \text{ - input multi-scale features}$$
+
+### MSDeformAttn\(z_q, p_q, \{x_l\}_{l=1}^L\):
+
+$$
+\sum_{m=1}^M W_m \left[ \sum_{l=1}^L \sum_{k=1}^K A_{mlqk} \cdot W_{m} x_l^k (\phi_l (p_q) + \Delta_{p_{mlqk}}) \right]
+$$
+
+## Multi-Scale Feature Maps
+
+- **Multi-scale Deformable Self-Attention in Encoder**
+- **Multi-scale Deformable Cross Attention in Decoder**
+- **Transformer Self-Attention in Decoder**
+
+## Image Feature Maps
+
+![Image](image_url)
+
+## Bounding Box Predictions
+
+![Bounding Box Predictions](bounding_box_url)
+
+## Object Queries
+
+- ![Object Query 1](object_query1_url)
+- ![Object Query 2](object_query2_url)
+- ![Object Query 3](object_query3_url)
+
+Vineeth N B (IIT-H)
+
+§13.2 Transformers for Detection
+
+Page 18 / 32
+```
+
+# DL4CV_Week11.2 Transformers for Detection.pdf - Page 33
+
+
+
+```markdown
+# Deformable DETR: Additional Improvements
+
+## Iterative Bounding Box Refinement
+
+Deformable DETR established a simple and effective iterative bounding box refinement mechanism to improve detection performance. Here, each decoder layer refines the bounding boxes based on the predictions from the previous layer.
+
+## Two-Stage Deformable DETR
+
+- Inspired by two-stage object detectors, Deformable DETR explored a variant for generating region proposals as the first stage.
+- The generated region proposals will be fed into the decoder as object queries for further refinement, forming a two-stage Deformable DETR.
+
+*Vineeth N B (IIIT-H)*
+
+*§13.2 Transformers for Detection*
+
+*19 / 32*
+```
+
+# DL4CV_Week11.2 Transformers for Detection.pdf - Page 34
+
+:
+
+```markdown
+# Deformable DETR: Performance
+
+![Performance Graph](image_url)
+
+**Method** | **Epochs** | **AP** | **AP<sub>50</sub>** | **AP<sub>75</sub>** | **AP<sub>S</sub>** | **AP<sub>M</sub>** | **AP<sub>L</sub>** | **Params** | **FLOPs** | **Training GPU hours** | **Inference FPS**
+--- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | ---
+Faster R-CNN + FPN | 109 | 42.0 | 62.1 | 45.5 | 26.6 | 45.4 | 53.4 | 42M | 180G | 380 | 26
+DETR | 500 | 42.0 | 62.4 | 44.2 | 20.5 | 45.8 | 61.1 | 41M | 86G | 2000 | 28
+DETR-DC5<sup>1</sup> | 500 | 43.3 | 63.1 | 45.9 | 22.5 | 47.3 | 61.1 | 41M | 187G | 7000 | 12
+DETR-DC5 | 50 | 35.3 | 55.7 | 36.8 | 15.2 | 37.5 | 53.6 | 41M | 187G | 700 | 12
+DETR-DC5<sup>2</sup> | 50 | 36.2 | 57.0 | 37.4 | 16.3 | 39.2 | 53.9 | 41M | 187G | 700 | 12
+Deformable DETR | 50 | 43.8 | 62.6 | 47.7 | 26.4 | 47.1 | 58.0 | 40M | 173G | 325 | 19
++ iterative bounding box refinement | 50 | 45.4 | 64.7 | 49.0 | 26.8 | 48.3 | 61.7 | 40M | 173G | 325 | 19
+++ two-stage Deformable DETR | 50 | 46.2 | 65.2 | 50.0 | 28.8 | 49.2 | 61.7 | 40M | 173G | 340 | 19
+
+Vineeth N B (IIIT-H)
+
+$13.2 Transformers for Detection$
+```
+
+**Footnote:**
+1. Note specific to DETR-DC5.
+2. Note specific to DETR-DC5.
+
+**Graph Description:**
+- The graph shows the performance comparison between Deformable DETR and DETR-DC5 over epochs.
+- Deformable DETR (in red) generally performs better and more consistently than DETR-DC5 (in black).
+
+**Table Description:**
+- Multiple methods for object detection are compared across several metrics including Epochs, AP (Average Precision), AP at varying IoU thresholds, AP for different object sizes (small, medium, large), number of parameters, FLOPs, training GPU hours, and inference FPS.
+- The training and inference efficiency of each method is highlighted, showing the trade-offs between performance and computational cost. 
+
+**Note:**
+- The provided markdown includes placeholders for images and footnotes for additional context.
+- Ensure to replace `image_url` with the actual image URL or path if available.
+
+# DL4CV_Week11.2 Transformers for Detection.pdf - Page 35
+
+
+
+```markdown
+## Recent DETR-like models
+
+Several improvements to DETR have been proposed to address its limitations and enhance its performance in various aspects. For example:
+
+- Deformable DETR [9] introduced a deformable attention mechanism to achieve faster convergence, reduce the quadratic computational cost of self-attention, and improve detection accuracy for objects with deformable shapes or varying scales.
+
+![Vineeth N B (IIT-H)](https://via.placeholder.com/150) Transformers for Detection
+
+21 / 32
+```
+
+# DL4CV_Week11.2 Transformers for Detection.pdf - Page 36
+
+```markdown
+# Recent DETR-like models
+
+Several improvements to DETR have been proposed to address its limitations and enhance its performance in various aspects. For example:
+
+- **Deformable DETR** [9] introduced a deformable attention mechanism to achieve faster convergence, reduce the quadratic computational cost of self-attention, and improve detection accuracy for objects with deformable shapes or varying scales.
+
+- **DAB-DETR** [11] proposed to formulate DETR queries as dynamic anchor boxes (DAB), which bridges the gap between classical anchor-based detectors and DETR-like ones.
+
+*Vineeth N B (IIIT-H) §13.2 Transformers for Detection 21 / 32*
+```
+
+# DL4CV_Week11.2 Transformers for Detection.pdf - Page 37
+
+
+
+```markdown
+# Recent DETR-like models
+
+Several improvements to DETR have been proposed to address its limitations and enhance its performance in various aspects. For example:
+
+- **Deformable DETR** [9] introduced a deformable attention mechanism to achieve faster convergence, reduce the quadratic computational cost of self-attention, and improve detection accuracy for objects with deformable shapes or varying scales.
+
+- **DAB-DETR** [11] proposed to formulate DETR queries as dynamic anchor boxes (DAB), which bridges the gap between classical anchor-based detectors and DETR-like ones.
+
+- **DN-DETR** [10] further solved the instability of bipartite matching by introducing a denoising (DN) technique.
+
+*Vineeth N B (IIT-H)*
+
+*§13.2 Transformers for Detection*
+
+*21 / 32*
+```
+
+# DL4CV_Week11.2 Transformers for Detection.pdf - Page 38
+
+```markdown
+# Recent DETR-like models
+
+Several improvements to DETR have been proposed to address its limitations and enhance its performance in various aspects. For example:
+
+- **Deformable DETR** [9] introduced a deformable attention mechanism to achieve faster convergence, reduce the quadratic computational cost of self-attention, and improve detection accuracy for objects with deformable shapes or varying scales.
+
+- **DAB-DETR** [11] proposed to formulate DETR queries as dynamic anchor boxes (DAB), which bridges the gap between classical anchor-based detectors and DETR-like ones.
+
+- **DN-DETR** [10] further solved the instability of bipartite matching by introducing a denoising (DN) technique.
+
+- More recent methods include Cascade DETR [15], DINO [16] and Grounding DINO [14].
+
+_Vineeth N B (IIT-H)_
+
+_§13.2 Transformers for Detection_
+
+_21 / 32_
+```
+
+# DL4CV_Week11.2 Transformers for Detection.pdf - Page 39
+
+
+
+```markdown
+# DINO: DETR with Improved DeNoising Anchor Boxes
+
+## Overview
+
+DINO incorporated elements from DN-DETR (denoising training), a "look forward twice" scheme for better box prediction, and a mixed query selection method for anchor initialization.
+
+### Components
+
+1. **Multi-Scale Features**
+   - Extracted features at different scales.
+
+2. **Positional Embeddings**
+   - Added to capture spatial information.
+
+3. **Encoder Layers x N**
+   - N layers of encoder processing the input data.
+
+4. **Query Selection**
+   - Selection mechanism for queries.
+
+5. **Decoder Layers x M**
+   - M layers of decoder that processes the encoded data.
+
+6. **Matching**
+   - Component for matching features.
+
+7. **CDN (Content-Based Denoising)**
+   - Component used for content-based denoising.
+
+### Workflow
+
+1. **Input**
+   - Multi-Scale Features and Positional Embeddings are combined.
+
+2. **Encoding**
+   - Input data is flattened and passed through multiple encoder layers.
+
+3. **Query Selection**
+   - Queries are selected from the encoded data.
+
+4. **Decoding**
+   - Decoder layers process the queries along with learnable content queries.
+
+5. **Matching**
+   - Matching process to align with the input data.
+
+6. **Denoising**
+   - Final step to refine and denoise the predictions using the CDN.
+
+### References
+
+- Hao Zhang et al., "DINO: DETR with Improved DeNoising Anchor Boxes for End-to-End Object Detection", ICLR'23
+- Vineeth N B (IIT-H)
+
+### Additional Information
+
+- Section: Transformers for Detection
+- Page: 22 / 32
+
+```
+
+This markdown format maintains the structure and readability of the scientific content while ensuring accuracy in formatting and special characters.
+
+# DL4CV_Week11.2 Transformers for Detection.pdf - Page 40
+
+
+
+```markdown
+# DINO: DETR with Improved DeNoising Anchor Boxes
+
+## Methods adopted from previous works
+
+- Following DN-DETR [10], DINO adds ground truth labels and boxes with noises into the Transformer decoder layers to help stabilize bipartite matching during training
+- DINO adopted deformable attention [9] for its computational efficiency.
+- DINO formulates queries as dynamic anchor boxes [11] and refine them step-by-step across decoder layers.
+
+*Vineeth N B (IIIT-H)*
+
+*§13.2 Transformers for Detection*
+
+*23 / 32*
+```
+
+# DL4CV_Week11.2 Transformers for Detection.pdf - Page 41
+
+.
+
+```markdown
+# DINO: DETR with Improved DeNoising Anchor Boxes
+
+## Methods adopted from previous works
+
+- Following DN-DETR [10], DINO adds ground truth labels and boxes with noises into the Transformer decoder layers to help stabilize bipartite matching during training
+- DINO adopted deformable attention [9] for its computational efficiency.
+- DINO formulates queries as dynamic anchor boxes [11] and refine them step-by-step across decoder layers.
+
+## Methods newly proposed
+
+- Contrastive denoising training to improve the one-to-one matching.
+- Mixed query selection that helps better initialize the queries
+- Look forward twice scheme to leverage the refined box information from later decoder layers and to help optimize the parameters of their adjacent early layers.
+```
+
+# DL4CV_Week11.2 Transformers for Detection.pdf - Page 42
+
+:
+
+```markdown
+# DINO: Contrastive DeNoising Training
+
+DN-DETR leverages DN queries to learn predictions based on nearby ground truth boxes. However, it cannot predict "no object" for anchors without nearby objects. DINO proposed Contrastive DeNoising Training (CDN) to solve this problem.
+
+![Diagram](https://via.placeholder.com/150)
+
+## Decoder Layers x M
+
+- **reconstruction loss**
+- **no object**
+
+![Diagram](https://via.placeholder.com/150)
+
+- **reconstruction loss**
+- **no object**
+
+## CDN group0
+
+- **positive**
+- **negative**
+
+![Diagram](https://via.placeholder.com/150)
+
+## CDN group1
+
+- **positive**
+- **negative**
+
+![Negative and Positive](https://via.placeholder.com/150)
+
+**Vineeth N B (IIT-H)**
+
+**§13.2 Transformers for Detection**
+
+**24 / 32**
+```
+
+# DL4CV_Week11.2 Transformers for Detection.pdf - Page 43
+
+ is used to define positive and negative queries.
+
+```markdown
+# DINO: Contrastive DeNoising Training
+
+## Implementation:
+
+- Unlike DN-DETR, **DINO** uses two hyper-parameters \(\lambda_1\) and \(\lambda_2\), where \(\lambda_1 < \lambda_2\), to define positive and negative queries.
+
+  - **Positive queries**: \(\text{noise} < \lambda_1\); expected to reconstruct corresponding ground truth boxes.
+
+  - **Negative queries**: \(\lambda_1 < \text{noise} < \lambda_2\); expected to predict "no object".
+
+*Source: Vineeth N B (IIT-H)*
+
+*Section: §13.2 Transformers for Detection*
+
+*Slide: 25 / 32*
+```
+
+This markdown structure ensures that the scientific content is accurately represented with clear formatting and notation.
+
+# DL4CV_Week11.2 Transformers for Detection.pdf - Page 44
+
+
+
+```markdown
+# DINO: Contrastive DeNoising Training
+
+## Implementation:
+
+- Unlike DN-DETR, DINO uses two hyper-parameters λ₁ and λ₂, where λ₁ < λ₂, to define positive and negative queries.
+  - **Positive queries**: noise < λ₁; expected to reconstruct corresponding ground truth boxes.
+  - **Negative queries**: λ₁ < noise < λ₂; expected to predict "no object".
+
+## Analysis:
+
+- When multiple anchors are close to an object, the model might get confused to decide which anchor to choose.
+  - This may lead to two problems: Duplicate predictions and Incorrect anchor selection
+- With CDN queries, it is shown that DINO can distinguish slight differences between anchors to avoid duplicate predictions and reject farther anchors.
+
+*Vineeth N B (IIT-H) §13.2 Transformers for Detection*
+
+*25 / 32*
+```
+
+# DL4CV_Week11.2 Transformers for Detection.pdf - Page 45
+
+```markdown
+# DINO: Mixed Query Selection
+
+As studied in DAB-DETR [11], it becomes clear that queries in DETR are formed by two parts: a content part and a positional part.
+
+![Figure](image_placeholder)
+
+**Vineeth N B (IIT-H)**
+
+**§13.2 Transformers for Detection**
+
+**26 / 32**
+```
+
+# DL4CV_Week11.2 Transformers for Detection.pdf - Page 46
+
+```markdown
+# DINO: Mixed Query Selection
+
+As studied in DAB-DETR [11], it becomes clear that queries in DETR are formed by two parts: a content part and a positional part.
+
+In DETR [6] and DN-DETR [10], decoder queries are static embeddings without taking any encoder features from an individual image.
+
+They learn anchors or positional queries from training data directly and set the content queries as all 0 vectors.
+
+![Static Query Selection](image_url_if_available)
+
+_Static Anchors and Content Queries_
+```
+
+_Static Query Selection_
+
+# DL4CV_Week11.2 Transformers for Detection.pdf - Page 47
+
+ line breaks and indentation are captured accurately.
+
+```markdown
+# DINO: Mixed Query Selection
+
+Deformable DETR [9] learns both the positional and content queries which are generated by a linear transform of the selected features.
+
+It has a query selection variant (called "two-stage"), which selects top K encoder features from the last encoder layer as priors to enhance decoder queries.
+
+![Diagram](attachment:image.png)
+
+**Vineeth N B (IIIT-H)**
+**$13.2 Transformers for Detection**
+**27 / 32**
+```
+
+# DL4CV_Week11.2 Transformers for Detection.pdf - Page 48
+
+```markdown
+# DINO: Mixed Query Selection
+
+![DINO: Mixed Query Selection Diagram](image_url)
+
+**Vineeth N B (IIT-H)**
+
+## Description
+
+In Deformable DETR, the selected encoder features are preliminary content features without further refinement which might be ambiguous and misleading to the decoder.
+
+To mitigate this, DINO only initializes anchor boxes using the position information associated with the selected top-K features but leaves the content queries static.
+
+## Mixed Query Selection
+
+![Mixed Query Selection Diagram](image_url)
+
+1. **Encoder**: Processes the input features.
+2. **Query Selection**: Selects relevant queries from the encoder outputs.
+3. **Decoder**: Utilizes the selected queries.
+4. **Static Content Queries**: These remain unchanged.
+5. **Dynamic Anchors**: These are initialized dynamically.
+
+### Mixed Query Selection Process
+
+- Encoder processes the input data.
+- Query selection from the encoder outputs.
+- Decoder uses the selected queries.
+- Static content queries are maintained.
+- Dynamic anchors are initialized based on the encoder's top-K features.
+```
+
+# DL4CV_Week11.2 Transformers for Detection.pdf - Page 49
+
+ the provided image of a scientific slide.
+
+```markdown
+# DINO: Look Forward Twice
+
+The iterative box refinement in Deformable DETR [9] blocks gradient backpropagation to stabilize training.
+
+DINO terms this method as "look forward once" since the parameters of layer i are updated based on the auxiliary loss of boxes bi only.
+
+- Gradient detach
+
+---
+
+![Diagram Placeholder](image_url)
+
+bi+1(pred)
+```
+
+# DL4CV_Week11.2 Transformers for Detection.pdf - Page 50
+
+.
+
+```markdown
+# DINO: Look Forward Twice
+
+DINO conjectures that the improved box information from a later layer could be more helpful in correcting the box prediction in its adjacent early layer.
+
+It proposed another way called "look forward twice" to perform box update, where the parameters of layer-i are influenced by losses of both layer-i and layer-(i + 1).
+
+![Look forward twice diagram](image_url_placeholder)
+
+- **prediction** $b_{i-1}^{\text{(pred)}}$
+- **prediction** $b_{i}^{\text{(pred)}}$
+- **prediction** $b_{i+1}^{\text{(pred)}}$
+
+Layer i
+
+Layer i+1
+
+- ** Look forward twice **
+
+- $\Delta b_{i-1}$
+- $\Delta b_{i}$
+- $\Delta b_{i+1}$
+
+Vineeth N B (IIT-H) §13.2 Transformers for Detection 30 / 32
+```
+
+Replace `image_url_placeholder` with the actual URL or filename if available.
+
+This markdown format ensures the content is properly structured and the scientific terminology is accurately represented.
+
+# DL4CV_Week11.2 Transformers for Detection.pdf - Page 51
+
+ accuracy is prioritized.
+
+```markdown
+# DINO: Performance
+
+## Graphs and Plots
+
+### Left Graph - AP on val2017 vs Epoch
+
+- **Ours**: Magenta stars
+- **DN-DETR**: Blue line with triangle markers
+- **Dynamic-DETR**: Orange line with cross markers
+- **HTC**: Green diamonds
+- **Deformable-DETR**: Red triangles
+- **DAF-DETR (DCS)**: Purple circles
+- **Faster-RCNN**: Brown squares
+- **Vanilla DETR (DCS)**: Green circles
+
+### Right Graph - AP on test-dev vs Model size (M)
+
+- **Ours**: Magenta star
+- **SwiV2-G**: Blue square
+- **Florence-CoSwiT-II**: Orange circle
+- **GLIP**: Green circle
+- **Soft Teacher-SwinL**: Red triangle
+- **DyHead**: Brown triangle
+- **SwinL**: Brown triangle
+
+## Table - Model size (M) and parameters
+
+| Model                  | 14M | 1.7M |
+|------------------------|-----|------|
+| **Ours**               |     |      |
+| SwiV2-G                | 70M | 1.7M |
+| Florence-CoSwiT-II     | 90M | 9M   |
+| GLIP                   | 14M | 4M   |
+| Soft Teacher-SwinL     | 14M | 1.7M |
+| DyHead                 | 14M | *    |
+| SwinL                  |     |      |
+
+## References
+
+- Vineeth N B (IIIT-H)
+- §13.2 Transformers for Detection
+- Page 31 / 32
+```
+
+Note: The OCR process might not capture images or graphs directly, so placeholders are used for those elements. Ensure to manually verify and replace them as necessary.
+
+# DL4CV_Week11.2 Transformers for Detection.pdf - Page 52
+
+ the original text:
+
+```
+References
+
+[1] Harold W Kuhn. “The Hungarian method for the assignment problem”. In: Naval research logistics quarterly 2.1-2 (1955), pp. 83–97.
+
+[2] Shaoqing Ren et al. “Faster R-CNN: Towards real-time object detection with region proposal networks”. In: IEEE transactions on pattern analysis and machine intelligence 39.6 (2016), pp. 1137–1149.
+
+[3] Tsung-Yi Lin et al. “Feature pyramid networks for object detection”. In: Proceedings of the IEEE conference on computer vision and pattern recognition. 2017, pp. 2117–2125.
+
+[4] Ashish Vaswani et al. “Attention is all you need”. In: Advances in neural information processing systems 30 (2017).
+
+[5] Hamid Rezatofighi et al. “Generalized intersection over union: A metric and a loss for bounding box regression”. In: Proceedings of the IEEE/CVF conference on computer vision and pattern recognition. 2019, pp. 658–666.
+
+[6] Nicolas Carion et al. “End-to-end object detection with transformers”. In: European conference on computer vision. Springer. 2020, pp. 213–229.
+
+[7] Alexey Dosovitskiy et al. “An image is worth 16x16 words: Transformers for image recognition at scale”. In: arXiv preprint arXiv:2010.11929 (2020).
+
+[8] Depu Meng et al. “Conditional detr for fast training convergence”. In: Proceedings of the IEEE/CVF
+
+Vineeth N B (IIT-H)
+§13.2 Transformers for Detection
+32 / 32
+```
+
+```markdown
+# References
+
+1. Harold W Kuhn. "The Hungarian method for the assignment problem". In: *Naval research logistics quarterly* 2.1-2 (1955), pp. 83–97.
+
+2. Shaoqing Ren et al. "Faster R-CNN: Towards real-time object detection with region proposal networks". In: *IEEE transactions on pattern analysis and machine intelligence* 39.6 (2016), pp. 1137–1149.
+
+3. Tsung-Yi Lin et al. "Feature pyramid networks for object detection". In: *Proceedings of the IEEE conference on computer vision and pattern recognition*. 2017, pp. 2117–2125.
+
+4. Ashish Vaswani et al. "Attention is all you need". In: *Advances in neural information processing systems* 30 (2017).
+
+5. Hamid Rezatofighi et al. "Generalized intersection over union: A metric and a loss for bounding box regression". In: *Proceedings of the IEEE/CVF conference on computer vision and pattern recognition*. 2019, pp. 658–666.
+
+6. Nicolas Carion et al. "End-to-end object detection with transformers". In: *European conference on computer vision*. Springer. 2020, pp. 213–229.
+
+7. Alexey Dosovitskiy et al. "An image is worth 16x16 words: Transformers for image recognition at scale". In: *arXiv preprint arXiv:2010.11929* (2020).
+
+8. Depu Meng et al. "Conditional detr for fast training convergence". In: *Proceedings of the IEEE/CVF*
+```
+

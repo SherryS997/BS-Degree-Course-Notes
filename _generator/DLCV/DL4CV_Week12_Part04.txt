@@ -1,0 +1,2008 @@
+# DL4CV_Week12_Part04.pdf - Page 1
+
+```markdown
+# Deep Learning for Computer Vision
+
+## Pruning and Model Compression
+
+**Vineeth N Balasubramanian**
+
+Department of Computer Science and Engineering
+Indian Institute of Technology, Hyderabad
+
+![IIT Hyderabad Logo](https://example.com/logo.png)
+
+*Vineeth N B (IIT-H)*
+*§12.4 Pruning and Model Compression*
+*1 / 22*
+```
+
+This markdown format represents the original slide, ensuring the scientific integrity and proper formatting of the content.
+
+# DL4CV_Week12_Part04.pdf - Page 2
+
+```markdown
+# Motivation
+
+- **Deep Neural Networks (DNNs)** generally optimized for performance in terms of predictive accuracy
+
+- As a result, DNNs are huge and have parameters in the order of millions
+
+- The popular AlexNet has around 61M parameters!
+  - A trained AlexNet takes around 200MB of space
+
+*Credit: Xu et al, 2019*
+
+Vineeth N B (IIT-H) §12.4 Pruning and Model Compression
+
+![F-NN](image_url)
+
+```
+
+# DL4CV_Week12_Part04.pdf - Page 3
+
+```markdown
+# Motivation
+
+- While it’s acceptable for DNNs to utilize high-end GPUs for training, requiring such powerful processors for inference, is highly limiting
+
+- Applications to various new and battery constrained technologies necessitate low-compute environments:
+  - Mobile Phones
+  - Unmanned Aerial Vehicles (UAVs)
+  - IoT devices
+
+![Phones](phone.png) ![Drones](drone.png) ![Robots](robot.png) ![Glasses](glasses.png) ![Self Driving Cars](self_driving_car.png)
+
+**Battery Constrained!**
+
+*Credit: Song Han, 2016*
+
+*Vineeth N B (IIT-H) §12.4 Pruning and Model Compression*
+
+*Page 3 / 22*
+```
+
+# DL4CV_Week12_Part04.pdf - Page 4
+
+```markdown
+# Motivation
+
+- On mobile devices, crucial to reduce memory consumption for apps, as well as reduce energy consumption
+
+| Operation                   | Energy [pJ] | Relative Cost |
+|-----------------------------|-------------|--------------|
+| 32 bit int ADD              | 0.1         | 1            |
+| 32 bit float ADD            | 0.9         | 9            |
+| 32 bit Register File        | 1           | 10           |
+| 32 bit int MULT             | 3.1         | 31           |
+| 32 bit float MULT           | 3.7         | 37           |
+| 32 bit SRAM Cache           | 5           | 50           |
+| 32 bit DRAM Memory          | 640         | 6400         |
+
+- DRAM accesses cost more energy, which drains battery
+- If deep models were compact enough to fit on SRAM, that would reduce energy consumption drastically
+
+*Credit: Song Han, 2016*
+
+*Vineeth N B (IIT-H)*
+
+*§12.4 Pruning and Model Compression*
+
+*4 / 22*
+```
+
+# DL4CV_Week12_Part04.pdf - Page 5
+
+```markdown
+# Categorization of Methods for Model Compression
+
+| Category Name                             | Description                                                                 |
+|-------------------------------------------|-----------------------------------------------------------------------------|
+| Parameter pruning and quantization        | Reducing redundant parameters which are not sensitive to the performance      |
+| Low-rank factorization                    | Using matrix/tensor decomposition to estimate the informative parameters       |
+| Transferred/compact convolutional filters  | Designing special structural convolutional filters to save parameters          |
+| Knowledge distillation                    | Training a compact neural network with distilled knowledge of a large model    |
+
+We'll see a few sample methods: Pruning-based, Knowledge Distillation-based, and the "Lottery Ticket Hypothesis".
+
+**Credit:** Cheng et al., *A Survey of Model Compression and Acceleration for Deep Neural Networks*, 2017
+
+*Vineeth N B (IIT-B) §12.4 Pruning and Model Compression*
+
+5 / 22
+```
+
+# DL4CV_Week12_Part04.pdf - Page 6
+
+```markdown
+# Deep Compression<sup>1</sup>
+
+- One of the most popular, game-changing methods in this space
+- A three-stage pipeline to reduce the storage requirement of neural nets
+
+![Three-stage pipeline diagram](image_url)
+
+1. **Pruning**: less number of weights
+    - Train Connectivity
+    - Prune Connections
+    - Train Weights
+    - **Original network** ➔ Pruned network
+    - **Original size** ➔ 9x-13x reduction
+    - Same accuracy
+
+2. **Quantization**: less bits per weight
+    - Cluster the Weights
+    - Generate Code Book
+    - Quantize the Weights with Code Book
+    - Retrain Code Book
+    - **Same accuracy**
+    - 27x-31x reduction
+
+3. **Huffman Encoding**
+    - Encode Weights
+    - Encode Index
+    - **Same accuracy**
+    - 35x-49x reduction
+
+- Showed a 35× decrease in size of AlexNet from 240MB to 6.9MB!
+
+<sup>1</sup>Han et al., Deep Compression: Compressing Deep Neural Network with Pruning, Trained Quantization and Huffman Coding, ICLR 2016
+
+*Vineeth N B (IIT-H)*
+
+## §12.4 Pruning and Model Compression
+
+*[6 / 22]*
+```
+
+# DL4CV_Week12_Part04.pdf - Page 7
+
+```markdown
+# Deep Compression: Pruning
+
+A three-step procedure:
+
+1. **Train Connectivity**: Model weights are learned using standard neural network training
+
+2. **Prune Connections**: Weights (connections) below a certain threshold are removed from network
+
+3. **Train Weights**: Remaining sparse network is retrained
+
+![Diagram Placeholder](https://via.placeholder.com/200)
+
+**Train Connectivity**
+
+↓
+
+**Prune Connections**
+
+↓
+
+**Train Weights**
+
+*Vineeth N B (IIIT-H)*
+
+*§12.4 Pruning and Model Compression*
+
+*7 / 22*
+```
+
+# DL4CV_Week12_Part04.pdf - Page 8
+
+```markdown
+# Deep Compression: Pruning<sup>2</sup>
+
+| Network                  | Top-1 Error | Top-5 Error | Parameters | Compression Rate |
+|--------------------------|-------------|-------------|------------|------------------|
+| LeNet-300-100 Ref        | 1.64%       | -           | 267K       | -                |
+| LeNet-300-100 Pruned      | 1.59%       | -           | 22K        | 12×              |
+| LeNet-5 Ref              | 0.80%       | -           | 431K       | -                |
+| LeNet-5 Pruned           | 0.77%       | -           | 36K        | 12×              |
+| AlexNet Ref              | 42.78%      | 19.73%      | 61M        | -                |
+| AlexNet Pruned           | 42.77%      | 19.67%      | 6.7M       | 9×               |
+| VGG-16 Ref               | 31.50%      | 11.32%      | 138M       | -                |
+| VGG-16 Pruned            | 31.34%      | 10.88%      | 10.3M      | 13×              |
+
+*As seen in table, pruning shown to compress networks by 9-13×*
+
+![Training Flow Diagram](image-url)
+
+1. **Train Connectivity**
+2. **Prune Connections**
+3. **Train Weights**
+
+<sup>2</sup>Han et al, Deep Compression: Compressing Deep Neural Network with Pruning, Trained Quantization and Huffman Coding, ICLR 2016
+
+*Vineeth N B (IIIT-H)*
+
+*$12.4$ Pruning and Model Compression*
+
+![NPTEL](image-url)
+
+8 / 22
+```
+
+# DL4CV_Week12_Part04.pdf - Page 9
+
+```markdown
+# Deep Compression: Weight Sharing
+
+- In each layer, weights are partitioned into \( k \) clusters using simple K-means clustering
+
+| Weights (32 bit float) | Cluster Index (2 bit uint) | Centroids |
+|------------------------|----------------------------|-----------|
+| 2.09   | -0.98   | 1.48   | 0.09   | 3 | 0 | 2 | 1 | 3: 2.00 |
+| 0.05    | -0.14   | -1.08  | 2.12   | 1 | 1 | 0 | 3 | 2: 1.50 |
+| -0.91   | 1.92    | 0      | -1.03   | 0 | 3 | 1 | 0 | 1: 0.00 |
+| 1.87    | 0       | 1.53   | 1.49   | 3 | 1 | 2 | 2 | 0: -1.00 |
+
+- Weights (and gradients) with same color (cluster) are grouped together, all weights of same color are represented by corresponding centroid
+
+_Vineeth N B (IIIT-H)_
+_§12.4 Pruning and Model Compression_
+_9 / 22_
+```
+
+# DL4CV_Week12_Part04.pdf - Page 10
+
+```markdown
+# Deep Model Compression: Weight Sharing
+
+## Weights (32 bit float)
+
+|         |         |         |         |
+|---------|---------|---------|---------|
+| 2.09    | -0.88   | 1.48    | 0.09    |
+| 0.05    | -0.14   | -1.08   | 2.12    |
+| -0.91   | 1.93    | 0       | -1.03   |
+| 1.87    | 0       | 1.53    | 1.49    |
+
+## Cluster Index (2 bit unit)
+
+|         |         |         |         |
+|---------|---------|---------|---------|
+| 3       | 0       | 2       | 1       |
+| 1       | 1       | 0       | 3       |
+| 0       | 3       | 1       | 0       |
+| 3       | 1       | 2       | 2       |
+
+## Centroids
+
+|         |         |
+|---------|---------|
+| 2.00    |         |
+| 1.50    |         |
+| 0.00    |         |
+| -1.00   |         |
+
+## Fine-tuned Centroids
+
+|         |         |
+|---------|---------|
+| 1.96    |         |
+| 1.48    |         |
+| 0.04    |         |
+| -0.97   |         |
+
+## Gradient
+
+|         |         |         |         |
+|---------|---------|---------|---------|
+| 0.03    | -0.61   | 0.03    | 0.02    |
+| -0.01   | 0.01    | -0.02   | 0.12    |
+| -0.01   | 0.02    | 0.04    | 0.01    |
+| 0.07    | -0.02   | 0.01    | -0.02   |
+
+## Group by
+
+|         |         |         |         |
+|---------|---------|---------|---------|
+| 0.03    | -0.12   | 0.02    | -0.07   |
+| 0.03    | 0.01    | -0.02   | 0.04    |
+| -0.01   | -0.02   | -0.01   | 0.01    |
+| -0.12   | 0.04    | -0.01   | 0.01    |
+
+## Reduced Gradient
+
+|         |         |
+|---------|---------|
+| 0.04    |         |
+| 0.02    |         |
+| 0.04    |         |
+| -0.03   |         |
+
+---
+
+### Gradients of same color are added, sum is used to update corresponding centroid
+
+*Vineeth N B (IIT-H)*
+
+*$12.4 Pruning and Model Compression*
+
+*10 / 22*
+```
+
+# DL4CV_Week12_Part04.pdf - Page 11
+
+```markdown
+# Deep Model Compression: Quantization and Huffman Coding<sup>3</sup>
+
+- Instead of using 32-bit floating point values for weights, experiments showed no loss of accuracy when weights were quantized upto 8 bits
+
+![NPTEL Logo](image_url_placeholder)
+
+<sup>3</sup>Han et al, Deep Compression: Compressing Deep Neural Network with Pruning, Trained Quantization and Huffman Coding, ICLR 2016
+
+**Vineeth N B** (IIT-H)
+
+**§12.4 Pruning and Model Compression**
+
+11 / 22
+```
+
+# DL4CV_Week12_Part04.pdf - Page 12
+
+```markdown
+# Deep Model Compression: Quantization and Huffman Coding
+
+- Instead of using 32-bit floating point values for weights, experiments showed no loss of accuracy when weights were quantized upto 8 bits
+- Pruned and quantized network encoded using **Huffman coding**: frequently observed values stored with less number of bits, and rare values stored with more bits
+
+![NPTEL Logo](https://via.placeholder.com/150)
+
+---
+
+[^3]: Han et al. *Deep Compression: Compressing Deep Neural Network with Pruning, Trained Quantization and Huffman Coding*, ICLR 2016
+
+Vineeth N B (IIT-H)
+
+### §12.4 Pruning and Model Compression
+
+11 / 22
+```
+
+# DL4CV_Week12_Part04.pdf - Page 13
+
+```markdown
+# Deep Model Compression: Quantization and Huffman Coding
+
+- Instead of using 32-bit floating point values for weights, experiments showed no loss of accuracy when weights were quantized upto 8 bits
+- Pruned and quantized network encoded using **Huffman coding**: frequently observed values stored with less number of bits, and rare values stored with more bits
+- Deep compression method compressed various networks from 35× to 49× less than original size with minimal loss of accuracy!
+
+| Network                         | Top-1 Error | Top-5 Error | Parameters | Compress Rate |
+|---------------------------------|-------------|-------------|------------|---------------|
+| LeNet-300-100 Ref               | 1.64%       | -           | 1070 KB    | -             |
+| LeNet-300-100 Compressed         | 1.58%       | -           | 27 KB      | 40×           |
+| LeNet-5 Ref                     | 0.80%       | -           | 1720 KB    | -             |
+| LeNet-5 Compressed               | 0.74%       | -           | 44 KB      | 39×           |
+| AlexNet Ref                     | 42.78%      | 19.73%      | 240 MB     | -             |
+| AlexNet Compressed               | 42.78%      | 19.70%      | 6.9 MB     | 35×           |
+| VGG-16 Ref                      | 31.50%      | 11.32%      | 552 MB     | -             |
+| VGG-16 Compressed                | 31.17%      | 10.91%      | 11.3 MB    | 49×           |
+
+*Han et al., Deep Compression: Compressing Deep Neural Network with Pruning, Trained Quantization and Huffman Coding, ICLR 2016*
+
+Vineeth N B (IIT-H) §12.4 Pruning and Model Compression
+```
+
+# DL4CV_Week12_Part04.pdf - Page 14
+
+```markdown
+# Knowledge Distillation
+
+## Key Idea
+
+Transfer "knowledge" from a cumbersome large model (teacher) to a small model (student), whose size is more optimized for deployment.
+
+![Diagram](image-url)
+
+Vineeth N B (IIT-H) §12.4 Pruning and Model Compression 12 / 22
+```
+
+# DL4CV_Week12_Part04.pdf - Page 15
+
+```markdown
+# Knowledge Distillation
+
+## Key Idea
+
+**Transfer "knowledge" from a cumbersome large model (teacher) to a small model (student), whose size is more optimized for deployment; but how? What is "knowledge" in a DNN model?**
+
+![Image Placeholder](image_url)
+
+*Vineeth N B (IIT-H) S12.4 Pruning and Model Compression 12 / 22*
+```
+
+# DL4CV_Week12_Part04.pdf - Page 16
+
+```markdown
+# Knowledge Distillation
+
+- In the case of image classification, **knowledge** can be seen as the **mapping** between input (images) and output (softmax probabilities).
+
+[![NPTEL](https://example.com/nptel_logo.png)](https://example.com/nptel)
+
+---
+
+Hinton et al., Distilling the Knowledge in a Neural Network, NeurIPS-W 2015
+
+Vineeth N B (IIT-H)
+
+§12.4 Pruning and Model Compression
+
+13 / 22
+```
+
+# DL4CV_Week12_Part04.pdf - Page 17
+
+```markdown
+# Knowledge Distillation<sup>4</sup>
+
+- In the case of image classification, **knowledge** can be seen as the mapping between input (images) and output (softmax probabilities)
+- Instead of training a student network with hard labels, they can be trained to mimic the softmax outputs of the teacher model, for each image
+
+![Distillation Process Diagram](image_url)
+
+```
+matching soft targets
+
+```
+the cumbersome model
+      
+      
+       
+       
+      
+      
+       
+       
+      
+       
+      
+       
+      
+       
+      
+      
+      
+      
+      
+      
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+       
+       
+      
+
+      _Credit: Yangyang, 2014._
+
+      <sup>4</sup> Hinton et al., Distilling the Knowledge in a Neural Network, NeurIPS-W 2015
+
+      *Vineeth N B (IIT-H)*
+
+      §12.4 Pruning and Model Compression
+
+      13 / 22
+```
+
+# DL4CV_Week12_Part04.pdf - Page 18
+
+```markdown
+# Knowledge Distillation: A Simple Example on MNIST
+
+## Models
+
+- **Cumbersome model:** 2 layers, 1200 ReLU nodes, dropout regularization
+- **Small model:** 2 layers, 800 ReLU nodes, no regularization
+
+## Number of errors on MNIST
+
+- **Cumbersome Model:** 67
+- **Small model with standard training:** 146
+- **Small model with distillation:** 74
+
+*Vineeth N B (IIIT-H)*
+
+*§12.4 Pruning and Model Compression*
+
+*14 / 22*
+```
+
+# DL4CV_Week12_Part04.pdf - Page 19
+
+```markdown
+# Lottery Ticket Hypothesis: Motivation<sup>5</sup>
+
+- **Observation:** A very sparse subnetwork obtained after pruning a fully trained network produces accuracy close to the full model
+
+```
+- Random Init Weights and Train
+
+    - **Full Network**
+
+      ![Network Diagram](image_url) 
+
+      **Pruning**
+
+    - **Sparse Sub Network**
+
+      **90% Accuracy**
+
+- Random Init Weights and Train
+
+    - **Sparse Sub Network**
+
+      **60% Accuracy**
+
+<sup>5</sup> Frankle and Carbin, The Lottery Ticket Hypothesis: Finding Sparse, Trainable NeuralNetworks, ICLR 2019
+
+Vineeth N B (IIT-H) §12.4 Pruning and Model Compression 15 / 22
+```
+
+# DL4CV_Week12_Part04.pdf - Page 20
+
+```markdown
+# Lottery Ticket Hypothesis
+
+## The Hypothesis
+
+A randomly-initialized, dense neural network contains a subnetwork that is initialized such that — when trained in isolation — it can match the test accuracy of the original network after training for at most the same number of iterations.
+
+![NPTEL Logo](https://example.com/logo.png)
+
+Vineeth N B (IIT-H) §12.4 Pruning and Model Compression 16 / 22
+```
+
+# DL4CV_Week12_Part04.pdf - Page 21
+
+```markdown
+# Lottery Ticket Hypothesis
+
+## The Hypothesis
+
+A randomly-initialized, dense neural network contains a subnetwork that is initialized such that — when trained in isolation — it can match the test accuracy of the original network after training for at most the same number of iterations.
+
+## How to find the network?
+
+![NPTEL](https://example.com/nptel_logo.png)
+
+*Vineeth N B (IIT-H) §12.4 Pruning and Model Compression 16 / 22*
+```
+
+# DL4CV_Week12_Part04.pdf - Page 22
+
+```markdown
+# Lottery Ticket Hypothesis
+
+## The Hypothesis
+
+A randomly-initialized, dense neural network contains a subnetwork that is initialized such that — when trained in isolation — it can match the test accuracy of the original network after training for at most the same number of iterations.
+
+## How to find the network? **One shot pruning:**
+
+- Train a neural network with random initialization
+- Prune `p%` of smallest weights
+- Reset remaining weights to their previous initialization, to create the winning ticket
+
+*Vineeth N B. (IIT-H) §12.4 Pruning and Model Compression 16 / 22*
+```
+
+# DL4CV_Week12_Part04.pdf - Page 23
+
+```markdown
+# Lottery Ticket Hypothesis
+
+## The Hypothesis
+
+A randomly-initialized, dense neural network contains a subnetwork that is initialized such that — when trained in isolation — it can match the test accuracy of the original network after training for at most the same number of iterations.
+
+## How to find the network? One shot pruning:
+
+- Train a neural network with random initialization
+- Prune p% of smallest weights
+- Reset remaining weights to their previous initialization, to create the winning ticket
+
+Alternatively, repeatedly pruning the network over n rounds (iterative pruning) has shown much better results, although more computationally expensive
+
+![Diagram](image_url)
+
+*Vineeth N B (IIT-H)*
+
+*§12.4 Pruning and Model Compression*
+
+*16 / 22*
+```
+
+# DL4CV_Week12_Part04.pdf - Page 24
+
+```markdown
+# Lottery Ticket Hypothesis: Results
+
+## Percent of weights remaining vs early stop iterations (MNIST and CIFAR-10 datasets)
+
+![Early Stop Iterations vs Weights Remaining (MNIST and CIFAR-10 datasets)](image-url)
+
+- **Lenet**
+- **Conv-6**
+- **Conv-4**
+- **Conv-2**
+- **Random**
+
+## Percent of weights remaining vs accuracy (MNIST and CIFAR-10 datasets)
+
+![Accuracy vs Weights Remaining (MNIST and CIFAR-10 datasets)](image-url)
+
+- **Lenet**
+- **Conv-6**
+- **Conv-4**
+- **Conv-2**
+- **Random**
+
+### Dotted lines show randomly sampled sparse networks while solid lines represent winning tickets (which attain more accuracy than randomly sampled sparse nets)
+
+**Vineeth N B. (IIT-H)**
+
+**§12.4 Pruning and Model Compression**
+
+**17 / 22**
+```
+
+# DL4CV_Week12_Part04.pdf - Page 25
+
+```markdown
+# Lottery Ticket Hypothesis: Limitations and Further Work
+
+## Limitations
+
+- While iterative pruning produces better results, it requires training the network 15 times per round of pruning (5 trials, training each winning ticket 3 times and taking the average)
+- Harder to study large datasets like ImageNet
+
+---
+
+Vineeth N B (IIT-H) & Section B4.4 Pruning and Model Compression 18 / 22
+```
+
+Note: The main content of the image (title, section, and bullet points) has been accurately captured in markdown format.
+
+# DL4CV_Week12_Part04.pdf - Page 26
+
+```markdown
+# Lottery Ticket Hypothesis: Limitations and Further Work
+
+## Limitations
+
+- While iterative pruning produces better results, it requires training the network 15 times per round of pruning (5 trials, training each winning ticket 3 times and taking the average)
+- Harder to study large datasets like ImageNet
+
+## Further Studies
+
+- Can we find winning tickets early on in training? (You et al, 2020)
+- Do winning tickets generalize across datasets and optimizers? (Morcos et al, 2019)
+- Can this hypothesis hold in other domains like text processing/NLP? (Yu et al, 2019)
+
+*Vineeth N B (IIT-H)*
+*S12.4 Pruning and Model Compression*
+*18 / 22*
+```
+
+# DL4CV_Week12_Part04.pdf - Page 27
+
+```markdown
+# Extensions and Other Methods
+
+## Pruning and Quantization
+
+- **XNOR-Net**: Using binary weights and approximating convolutions with XNOR operations
+- **Thi-Net**: Compressing CNNs with filter pruning
+
+## Distillation
+
+- **Noisy Teachers**: Perturbing teacher logits to regularize the student
+- **Relational Knowledge Distillation**: Adapting metric learning for distillation
+
+## Architectures
+
+- **MobileNets**: Depth-wise separable convolutions
+- **ShuffleNet**: Group Convolutions and Channel Shuffle
+- **SqueezeNet**: Replacing 3x3 with 1x1 convolutions
+- **SqueezeDet**: Fully convolutional network for fast object detection
+- **SEP-NET**: Transforming k x k convolutions into binary patterns for reducing model size
+
+_Vineeth N B (IIT-H)_
+
+_§12.4 Pruning and Model Compression_
+
+_19 / 22_
+```
+
+# DL4CV_Week12_Part04.pdf - Page 28
+
+```markdown
+# Recall: Categorization of Methods for Model Compression
+
+| Category Name                                 | Description                                                                                      |
+|-----------------------------------------------|--------------------------------------------------------------------------------------------------|
+| Parameter pruning and quantization            | Reducing redundant parameters which are not sensitive to the performance                      |
+| Low-rank factorization                        | Using matrix/tensor decomposition to estimate the informative parameters                         |
+| Transferred/compact convolutional filters      | Designing special structural convolutional filters to save parameters                            |
+| Knowledge distillation                        | Training a compact neural network with distilled knowledge of a large model                     |
+
+*Many more methods!*
+
+*Credit: Cheng et al, A Survey of Model Compression and Acceleration for Deep Neural Networks, 2017*
+
+*Vineeth N B (IIT-H)*
+*$12.4 Pruning and Model Compression*
+*20 / 22*
+```
+
+# DL4CV_Week12_Part04.pdf - Page 29
+
+```markdown
+# Homework
+
+## Readings
+
+- **Robert T. Lange**, *Lottery Ticket Hypothesis: A Survey*, 2020
+
+- **Cheng et al.**, *A Survey of Model Compression and Acceleration for Deep Neural Networks*, 2017.
+
+*Vineeth N B (IIT-H)*
+
+*§12.4 Pruning and Model Compression*
+
+*21 / 22*
+```
+
+# DL4CV_Week12_Part04.pdf - Page 30
+
+```markdown
+# References
+
+- Song Han et al. "Learning both Weights and Connections for Efficient Neural Networks". In: *CoRR* abs/1506.02626 (2015). arXiv: 1506.02626.
+
+- Geoffrey Hinton, Oriol Vinyals, and Jeffrey Dean. "Distilling the Knowledge in a Neural Network". In: *NIPS Deep Learning and Representation Learning Workshop*. 2015.
+
+- Song Han, Huizi Mao, and W. Dally. "Deep Compression: Compressing Deep Neural Network with Pruning, Trained Quantization and Huffman Coding". In: *CoRR* abs/1510.00149 (2016).
+
+- Jonathan Frankle and Michael Carbin. "The Lottery Ticket Hypothesis: Finding Sparse, Trainable Neural Networks". In: *International Conference on Learning Representations*. 2019.
+
+- Ari Morcos et al. "One ticket to win them all: generalizing lottery ticket initializations across datasets and optimizers". In: *Advances in Neural Information Processing Systems*. Ed. by H. Wallach et al. Vol. 32. Curran Associates, Inc., 2019, pp. 4932–4942.
+
+- T. Xu and I. Darwazeh. "Design and Prototyping of Neural Network Compression for Non-Orthogonal IoT Signals". In: *2019 IEEE Wireless Communications and Networking Conference (WCNC)*. 2019, pp. 1–6.
+
+- Haoran You et al. "Drawing Early-Bird Tickets: Toward More Efficient Training of Deep Networks". In: *International Conference on Learning Representations*. 2020.
+
+Vineeth N B (IIT-H) §12.4 Pruning and Model Compression 22 / 22
+```
+

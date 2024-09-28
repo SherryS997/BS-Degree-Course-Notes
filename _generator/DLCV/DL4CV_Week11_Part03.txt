@@ -1,0 +1,1051 @@
+# DL4CV_Week11_Part03.pdf - Page 1
+
+```markdown
+# Deep Learning for Computer Vision
+
+## VAEs and Disentanglement
+
+**Vineeth N Balasubramanian**
+
+Department of Computer Science and Engineering
+Indian Institute of Technology, Hyderabad
+
+![IIT Hyderabad Logo](image_url)
+
+---
+
+Vineeth N B (IIT-H)
+
+### §11.3 VAEs and Disentanglement
+
+1 / 14
+```
+
+# DL4CV_Week11_Part03.pdf - Page 2
+
+
+
+```markdown
+# What is Disentanglement?
+
+- Isolating sources of variation in observational data
+- E.g. separating underlying concepts of "Big Red Apple": size (big), color (red) and shape (apple)
+
+![NPTEL Logo](image_url)
+
+Vineeth N B (IIT-H) §11.3 VAEs and Disentanglement 2 / 14
+```
+
+# DL4CV_Week11_Part03.pdf - Page 3
+
+# What is Disentanglement?
+
+- **Isolating sources of variation in observational data**
+  - E.g. separating underlying concepts of **"Big Red Apple"**: size (**big**), color (**red**) and shape (**apple**)
+- **Can we isolate these factors using some representation learning method?**
+
+![NPTEL](image_placeholder)
+
+*Vineeth N B (IIT-H) §11.3 VAEs and Disentanglement*
+
+2 / 14
+
+# DL4CV_Week11_Part03.pdf - Page 4
+
+```markdown
+# What is Disentanglement?
+
+- **Isolating sources of variation in observational data**
+  - E.g., separating underlying concepts of **"Big Red Apple"**: size (**big**), color (**red**) and shape (**apple**)
+- **Can we isolate these factors using some representation learning method?**
+- **Why do we need this?**
+
+![NPTET](data:image/png;base64,...) 
+
+*Vineeth N B (IIT-H) §11.3 VAEs and Disentanglement*
+
+*2 / 14*
+```
+
+# DL4CV_Week11_Part03.pdf - Page 5
+
+```markdown
+# What is Disentanglement?
+
+- Isolating sources of variation in observational data
+  - E.g., separating underlying concepts of **"Big Red Apple"**: size (**big**), color (**red**) and shape (**apple**)
+- Can we isolate these factors using some representation learning method?
+- Why do we need this? Useful to generate new images that are not in observed dataset
+  - E.g.: Generate an image corresponding to **"Small Black Apple"** using a model that was trained on **"Small Black Grapes"** and **"Big Red Apples"**
+
+![Diagram Placeholder](diagram-url)
+
+*Vineeth N B (IIT-H) §11.3 VAEs and Disentanglement*
+
+*2 / 14*
+```
+
+# DL4CV_Week11_Part03.pdf - Page 6
+
+```markdown
+# Disentanglement: Example
+
+![Image of faces](image_url)
+
+Images generated when latents (dimensions encoding generative factors) corresponding to gender are changed; more control when latents are disentangled
+
+**Credit:** Chen et al, *Isolating Sources of Disentanglement in Variational Autoencoders*, NeurIPS 2018
+
+Vineeth N B (IIT-H)
+
+§11.3 VAEs and Disentanglement
+
+3 / 14
+```
+
+# DL4CV_Week11_Part03.pdf - Page 7
+
+```markdown
+# Disentanglement: Why VAEs?
+
+## Recall VAEs:
+
+![VAE Diagram](https://via.placeholder.com/800x400)
+
+- **Input**: $\mathbf{x}$
+
+  - Passed through a **Probabilistic Encoder** $q_{\phi}(\mathbf{z}|\mathbf{x})$
+
+- **Probabilistic Encoder**:
+  - Outputs **Mean** $\boldsymbol{\mu}$ and **Standard Deviation** $\boldsymbol{\sigma}$
+
+  - **Latent Variable** $\mathbf{z} = \boldsymbol{\mu} + \boldsymbol{\sigma} \odot \boldsymbol{\epsilon}$ where $\boldsymbol{\epsilon} \sim \mathcal{N}(0, \mathbf{I})$
+
+- **Ideally**: $\mathbf{x} \approx \mathbf{x}'$
+
+- **Sampled Latent Vector**: $\mathbf{z}$
+
+  - An **Annotated** compressed low-dimensional representation of the input
+
+- **Probabilistic Decoder**: $p_{\theta}(\mathbf{x}'|\mathbf{z})$
+
+  - Generates **Reconstructed Input**: $\mathbf{x}'$
+
+**VAEs learn latent variables which can be used to generate data; if these latent variables are disentangled, allows controlled generation of images**
+
+*Credit: Lilian Weng*
+
+*Vineeth N B (IIT-H)*
+
+*§11.3 VAEs and Disentanglement*
+
+*4 / 14*
+```
+
+# DL4CV_Week11_Part03.pdf - Page 8
+
+```markdown
+# β-VAE
+
+- A variant of VAE which allows disentanglement
+
+![NPTEL](https://example.com/image_placeholder)
+
+1 Higgins et al, beta-VAE: Learning Basic Visual Concepts with a Constrained Variational Framework, ICLR 2017
+   - Vineeth N B (IIT-H)
+   - Section 11.3 VAEs and Disentanglement
+
+---
+
+Page 5 of 14
+```
+
+# DL4CV_Week11_Part03.pdf - Page 9
+
+
+
+```markdown
+# β-VAE
+
+- **A variant of VAE which allows disentanglement**
+
+- **Recall VAE loss**:
+  \[
+  L_{VAE} = -\log p_{\theta}(\mathbf{x}) + D_{KL}(q_{\phi}(\mathbf{z}|\mathbf{x}) \| p_{\theta}(\mathbf{z}|\mathbf{x}))
+  \]
+
+![NPTEL Logo](image_url_placeholder)
+
+1 Higgins et al, beta-VAE: Learning Basic Visual Concepts with a Constrained Variational Framework, ICLR 2017
+2 Vineeth N B (IIT-H)
+
+**Section**: §11.3 VAEs and Disentanglement
+**Slide Number**: 5 / 14
+```
+
+# DL4CV_Week11_Part03.pdf - Page 10
+
+```markdown
+# β-VAE
+
+- **A variant of VAE which allows disentanglement**
+
+- **Recall VAE loss**: \( L_{VAE} = -\log p_{\theta}(\mathbf{x}) + D_{KL}(q_{\phi}(\mathbf{z}|\mathbf{x}) || p_{\theta}(\mathbf{z})) \)
+
+- **Another way of writing the VAE objective**:
+
+  \[
+  \max_{\phi, \theta} \mathbb{E}_{\mathbf{x} \sim \mathcal{D}} \left[ \mathbb{E}_{\mathbf{z} \sim q_{\phi}(\mathbf{z}|\mathbf{x})} \log p_{\theta}(\mathbf{x}|\mathbf{z}) \right]
+  \]
+
+  subject to \( D_{KL}(q_{\phi}(\mathbf{z}|\mathbf{x}) || p_{\theta}(\mathbf{z})) < \delta \)
+
+  **Maximize probability of generating real data, while keeping distance between real and approximate posterior distributions small (under a small constant δ)**
+
+---
+
+\({}^{1}\) Higgins et al., beta-VAE: Learning Basic Visual Concepts with a Constrained Variational Framework, ICLR 2017
+
+Vineeth N B. (IIT-H)
+
+§11.3 VAEs and Disentanglement
+
+---
+
+```
+
+# DL4CV_Week11_Part03.pdf - Page 11
+
+ accurately the special characters, symbols and equations as they are critical for scientific integrity.
+
+```markdown
+# β-VAE
+
+- VAE maximization objective can then be rewritten as a Lagrangian with a Lagrangian multiplier β under KKT conditions (similar to SVM):
+
+  \[
+  \mathbb{E}_{\mathbf{z} \sim q_{\phi}(\mathbf{z}|\mathbf{x})} \log p_{\theta}(\mathbf{x}|\mathbf{z}) - \beta \left( D_{\text{KL}}(q_{\phi}(\mathbf{z}|\mathbf{x}) \| p_{\theta}(\mathbf{z})) - \delta \right)
+  \]
+
+  \[
+  = \mathbb{E}_{\mathbf{z} \sim q_{\phi}(\mathbf{z}|\mathbf{x})} \log p_{\theta}(\mathbf{x}|\mathbf{z}) - \beta D_{\text{KL}}(q_{\phi}(\mathbf{z}|\mathbf{x}) \| p_{\theta}(\mathbf{z})) + \beta \delta
+  \]
+
+  \[
+  \geq \mathbb{E}_{\mathbf{z} \sim q_{\phi}(\mathbf{z}|\mathbf{x})} \log p_{\theta}(\mathbf{x}|\mathbf{z}) - \beta D_{\text{KL}}(q_{\phi}(\mathbf{z}|\mathbf{x}) \| p_{\theta}(\mathbf{z}))
+  \]
+
+  since β, δ ≥ 0
+
+![NPTEL](https://via.placeholder.com/150)
+
+Vineeth N B (IIT-H) §11.3 VAEs and Disentanglement 6 / 14
+```
+
+Note: This markdown format ensures that the scientific text, including formulas and symbols, is accurately represented. Adjustments should be made based on the exact content and format of the OCR output.
+
+# DL4CV_Week11_Part03.pdf - Page 12
+
+```markdown
+# β-VAE
+
+- The VAE maximization objective can then be rewritten as a Lagrangian with a Lagrangian multiplier β under KKT conditions (similar to SVM):
+
+  \[
+  \mathbb{E}_{\mathbf{z} \sim q_{\phi}(\mathbf{z}|\mathbf{x})} \log p_{\theta}(\mathbf{x}|\mathbf{z}) - \beta (D_{\text{KL}}(q_{\phi}(\mathbf{z}|\mathbf{x}) || p_{\theta}(\mathbf{z}))) - \delta
+  \]
+
+  \[
+  = \mathbb{E}_{\mathbf{z} \sim q_{\phi}(\mathbf{z}|\mathbf{x})} \log p_{\theta}(\mathbf{x}|\mathbf{z}) - \beta D_{\text{KL}}(q_{\phi}(\mathbf{z}|\mathbf{x}) || p_{\theta}(\mathbf{z})) + \beta \delta
+  \]
+
+  \[
+  \geq \mathbb{E}_{\mathbf{z} \sim q_{\phi}(\mathbf{z}|\mathbf{x})} \log p_{\theta}(\mathbf{x}|\mathbf{z}) - \beta D_{\text{KL}}(q_{\phi}(\mathbf{z}|\mathbf{x}) || p_{\theta}(\mathbf{z}))
+  \]
+
+  since \(\beta, \delta \geq 0\)
+
+- The β-VAE loss is hence given by:
+
+  \[
+  L_{\text{BETA}}(\phi, \beta) = -\mathbb{E}_{\mathbf{z} \sim q_{\phi}(\mathbf{z}|\mathbf{x})} \log p_{\theta}(\mathbf{x}|\mathbf{z}) + \beta D_{\text{KL}}(q_{\phi}(\mathbf{z}|\mathbf{x}) || p_{\theta}(\mathbf{z}))
+  \]
+
+![NPTEL](https://example.com/nptel.png)
+
+Vineeth N B (IIT-H)
+
+§11.3 VAEs and Disentanglement
+
+6 / 14
+```
+
+# DL4CV_Week11_Part03.pdf - Page 13
+
+```markdown
+# β-VAE
+
+- **VAE maximization objective can then be rewritten as a Lagrangian with a Lagrangian multiplier β under KKT conditions (similar to SVM):**
+
+  \[
+  \mathbb{E}_{\mathbf{z} \sim q_{\phi}(\mathbf{z}|\mathbf{x})} \log p_{\theta}(\mathbf{x}|\mathbf{z}) - \beta \left( D_{\text{KL}}(q_{\phi}(\mathbf{z}|\mathbf{x}) \| p_{\theta}(\mathbf{z})) - \delta \right)
+  \]
+
+  \[
+  = \mathbb{E}_{\mathbf{z} \sim q_{\phi}(\mathbf{z}|\mathbf{x})} \log p_{\theta}(\mathbf{x}|\mathbf{z}) - \beta D_{\text{KL}}(q_{\phi}(\mathbf{z}|\mathbf{x}) \| p_{\theta}(\mathbf{z})) + \beta \delta
+  \]
+
+  \[
+  \geq \mathbb{E}_{\mathbf{z} \sim q_{\phi}(\mathbf{z}|\mathbf{x})} \log p_{\theta}(\mathbf{x}|\mathbf{z}) - \beta D_{\text{KL}}(q_{\phi}(\mathbf{z}|\mathbf{x}) \| p_{\theta}(\mathbf{z}))
+  \]
+
+  since β, δ ≥ 0
+
+- **β-VAE loss hence given by:**
+
+  \[
+  L_{\text{BETA}}(\phi, \beta) = -\mathbb{E}_{\mathbf{z} \sim q_{\phi}(\mathbf{z}|\mathbf{x})} \log p_{\theta}(\mathbf{x}|\mathbf{z}) + \beta D_{\text{KL}}(q_{\phi}(\mathbf{z}|\mathbf{x}) \| p_{\theta}(\mathbf{z}))
+  \]
+
+- **When β = 1 → standard VAE**
+
+![NPTEL](https://via.placeholder.com/150)
+
+_Vineeth N B. (IIT-H)_
+
+_§11.3 VAEs and Disentanglement_
+
+_Page 6 of 14_
+```
+
+# DL4CV_Week11_Part03.pdf - Page 14
+
+ content if any, is lost.
+
+```markdown
+# β-VAE
+
+- **VAE maximization objective can then be rewritten as a Lagrangian with a Lagrangian multiplier β under KKT conditions (similar to SVM):**
+
+  \[
+  \mathbb{E}_{\mathbf{z} \sim q_{\phi}(\mathbf{z}|\mathbf{x})} \log p_{\theta}(\mathbf{x}|\mathbf{z}) - \beta \left(D_{\text{KL}}(q_{\phi}(\mathbf{z}|\mathbf{x}) \| p_{\theta}(\mathbf{z})) - \delta \right)
+  \]
+
+  \[
+  = \mathbb{E}_{\mathbf{z} \sim q_{\phi}(\mathbf{z}|\mathbf{x})} \log p_{\theta}(\mathbf{x}|\mathbf{z}) - \beta D_{\text{KL}}(q_{\phi}(\mathbf{z}|\mathbf{x}) \| p_{\theta}(\mathbf{z})) + \beta \delta
+  \]
+
+  \[
+  \geq \mathbb{E}_{\mathbf{z} \sim q_{\phi}(\mathbf{z}|\mathbf{x})} \log p_{\theta}(\mathbf{x}|\mathbf{z}) - \beta D_{\text{KL}}(q_{\phi}(\mathbf{z}|\mathbf{x}) \| p_{\theta}(\mathbf{z}))
+  \]
+  
+  since \(\beta, \delta \geq 0\)
+
+- **β-VAE loss hence given by:**
+
+  \[
+  L_{\text{BETA}}(\phi, \beta) = -\mathbb{E}_{\mathbf{z} \sim q_{\phi}(\mathbf{z}|\mathbf{x})} \log p_{\theta}(\mathbf{x}|\mathbf{z}) + \beta D_{\text{KL}}(q_{\phi}(\mathbf{z}|\mathbf{x}) \| p_{\theta}(\mathbf{z}))
+  \]
+
+- **When \(\beta = 1 \rightarrow\) standard VAE**
+
+- **When \(\beta > 1 \rightarrow\) stronger constraint on latent bottleneck, follow generative process and thus encourage disentanglement**
+
+*Image placeholder* ![Image](image-url)
+
+*Source*: Vineeth N B. (IIT-H) §11.3 VAEs and Disentanglement
+```
+
+# DL4CV_Week11_Part03.pdf - Page 15
+
+```markdown
+# β-VAE
+
+- **VAE maximization objective can then be rewritten as a Lagrangian with a Lagrangian multiplier β under KKT conditions (similar to SVM):**
+
+  \[
+  \mathbb{E}_{\mathbf{z} \sim q_{\phi}(\mathbf{z}|\mathbf{x})} \log p_{\theta}(\mathbf{x}|\mathbf{z}) - \beta \left( D_{\text{KL}}(q_{\phi}(\mathbf{z}|\mathbf{x}) \| p_{\theta}(\mathbf{z})) - \delta \right)
+  \]
+
+  \[
+  = \mathbb{E}_{\mathbf{z} \sim q_{\phi}(\mathbf{z}|\mathbf{x})} \log p_{\theta}(\mathbf{x}|\mathbf{z}) - \beta D_{\text{KL}}(q_{\phi}(\mathbf{z}|\mathbf{x}) \| p_{\theta}(\mathbf{z})) + \beta \delta
+  \]
+
+  \[
+  \geq \mathbb{E}_{\mathbf{z} \sim q_{\phi}(\mathbf{z}|\mathbf{x})} \log p_{\theta}(\mathbf{x}|\mathbf{z}) - \beta D_{\text{KL}}(q_{\phi}(\mathbf{z}|\mathbf{x}) \| p_{\theta}(\mathbf{z}))
+  \]
+
+  since $\beta, \delta \geq 0$
+
+- **β-VAE loss hence given by:**
+
+  \[
+  L_{\text{BETA}}(\phi, \beta) = - \mathbb{E}_{\mathbf{z} \sim q_{\phi}(\mathbf{z}|\mathbf{x})} \log p_{\theta}(\mathbf{x}|\mathbf{z}) + \beta D_{\text{KL}}(q_{\phi}(\mathbf{z}|\mathbf{x}) \| p_{\theta}(\mathbf{z}))
+  \]
+
+- When $\beta = 1 \rightarrow$ standard VAE
+
+- When $\beta > 1 \rightarrow$ stronger constraint on latent bottleneck, follow generative process and thus encourage **disentanglement**
+
+- Could limit representation capacity of $\mathbf{z}$, creating a trade-off between reconstruction quality and extent of disentanglement
+
+**Credit:** Lilian Weng
+
+(Vineeth N B (IIT-H))
+
+\[\#11.3 \text{ VAEs and Disentanglement}\]
+
+\[\text{6 / 14}\]
+```
+
+# DL4CV_Week11_Part03.pdf - Page 16
+
+```markdown
+# β-TCVAE²
+
+## Disadvantage of β-VAE: Trade-off between disentanglement and reconstruction capability. How can we get both?
+
+- **Chen et al., Isolating Sources of Disentanglement in Variational Autoencoders, NeurIPS 2018**
+
+  **Vineeth N B (IIT-H)**
+
+  **§11.3 VAEs and Disentanglement**
+
+![NPTEL](image_url)
+
+---
+
+Note: Replace `image_url` with the actual URL or path to the image if it exists.
+
+```
+
+# DL4CV_Week11_Part03.pdf - Page 17
+
+```markdown
+# β-TCVAE²
+
+## Disadvantage of β-VAE: Trade-off between disentanglement and reconstruction capability. How can we get both? β-TCVAE the solution
+
+![NPTEL](image_url)
+
+---
+
+Reference:
+- Chen et al., Isolating Sources of Disentanglement in Variational Autoencoders, NeurIPS 2018
+- Vineeth N B (IIT-H), §11.3 VAEs and Disentanglement
+
+---
+
+```
+
+# DL4CV_Week11_Part03.pdf - Page 18
+
+```markdown
+# β-TCVAE²
+
+- **Disadvantage of β-VAE**: Trade-off between disentanglement and reconstruction capability. How can we get both? **β-TCVAE** the solution
+
+- KL-divergence term can be decomposed as:
+  \[
+  D_{\text{KL}}(q_{\phi}(\mathbf{z} | \mathbf{x}) \| p_{\theta}(\mathbf{z})) = \underbrace{I_q(\mathbf{z}, \mathbf{n})}_{\text{index-code mutual information (MI)}} + \underbrace{D_{\text{KL}}(q_{\phi}(\mathbf{z}) \| p_{\theta}(\mathbf{z}))}_{\text{marginal KL to prior}}
+  \]
+
+![Diagram Placeholder](diagram.png)
+
+---
+
+*Chen et al., Isolating Sources of Disentanglement in Variational Autoencoders, NeurIPS 2018*
+
+*Vineeth N B (IIT-H) §11.3 VAEs and Disentanglement*
+
+---
+
+*Page 7 / 14*
+```
+
+# DL4CV_Week11_Part03.pdf - Page 19
+
+.
+
+```markdown
+# β-TCVAE<sup>2</sup>
+
+- **Disadvantage of β-VAE**: Trade-off between disentanglement and reconstruction capability. How can we get both? **β-TCVAE** the solution
+- KL-divergence term can be decomposed as:
+
+  \[
+  D_{\text{KL}}(q_{\phi}(\mathbf{z}|\mathbf{x}) || p_{\theta}(\mathbf{z})) = \underbrace{I_q(\mathbf{z}, \mathbf{n})}_{\text{index-code mutual information (MI)}} + \underbrace{D_{\text{KL}}(q_{\phi}(\mathbf{z}) || p_{\theta}(\mathbf{z}))}_{\text{marginal KL to prior}}
+  \]
+
+- **Marginal KL to prior** more important to learn disentangled representations; reducing **MI** might be causing poor reconstruction. What to do?
+
+\*Chen et al., Isolating Sources of Disentanglement in Variational Autoencoders, NeurIPS 2018
+
+Vineeth N B (IIT-H) §11.3 VAEs and Disentanglement
+
+```
+
+# DL4CV_Week11_Part03.pdf - Page 20
+
+```markdown
+# β-TCVAE³
+
+- **Further decompose marginal KL:**
+
+  \[
+  D_{\text{KL}}(q_{\phi}(\mathbf{z}) \| p_{\theta}(\mathbf{z})) = D_{\text{KL}}(q_{\phi}(\mathbf{z}) \|\prod_{j} q_{\phi}(\mathbf{z}_{j})) + \sum_{j} D_{\text{KL}}(q_{\phi}(\mathbf{z}_{j}) \| p_{\theta}(\mathbf{z}_{j}))
+  \]
+
+  - **Total Correlation**
+  - **Dimension-wise KL**
+
+**References**
+
+³ Chen et al., Isolating Sources of Disentanglement in Variational Autoencoders, NeurIPS 2018
+
+Vineeth N B (IIT-H)
+
+§11.3 VAEs and Disentanglement
+
+---
+
+NPTEL
+
+8 / 14
+```
+
+# DL4CV_Week11_Part03.pdf - Page 21
+
+.
+
+```markdown
+# β-TCVAE³
+
+- **Further decompose marginal KL:**
+
+  \[
+  D_{\text{KL}}(q_{\phi}(\mathbf{z}) \| p_{\theta}(\mathbf{z})) = D_{\text{KL}}(q_{\phi}(\mathbf{z}) \| \prod_{j} q_{\phi}(\mathbf{z}_{j})) + \sum_{j} D_{\text{KL}}(q_{\phi}(\mathbf{z}_{j}) \| p_{\theta}(\mathbf{z}_{j}))
+  \]
+
+  - **Total Correlation** important for learning disentangled representation
+
+  ![NPTEL](https://example.com/nptel.png)
+
+³ Chen et al, Isolating Sources of Disentanglement in Variational Autoencoders, NeurIPS 2018
+
+Vineeth N B (IIT-H) §11.3 VAEs and Disentanglement 8 / 14
+```
+
+**Note:** Replace `https://example.com/nptel.png` with the actual link or identifier for the image if available.
+
+# DL4CV_Week11_Part03.pdf - Page 22
+
+```markdown
+# β-TCVAE³
+
+- **Further decompose marginal KL:**
+
+\[ D_{\text{KL}}(q_{\phi}(\mathbf{z})||p_{\theta}(\mathbf{z})) = D_{\text{KL}}(q_{\phi}(\mathbf{z})||\prod_{j} q_{\phi}(\mathbf{z}_{j})) + \sum_{j} D_{\text{KL}}(q_{\phi}(\mathbf{z}_{j})||p_{\theta}(\mathbf{z}_{j})) \]
+
+  - **Total Correlation** important for learning disentangled representation
+  - **Hence, final β-TCVAE loss:**
+
+\[ -\mathbb{E}_{\mathbf{z} \sim q_{\phi}(\mathbf{z}|\mathbf{x})} \log p_{\theta}(\mathbf{x}|\mathbf{z}) + I_q(\mathbf{z}, \mathbf{n}) + \beta D_{\text{KL}}(q_{\phi}(\mathbf{z})||\prod_{j} q_{\phi}(\mathbf{z}_{j})) + \sum_{j} D_{\text{KL}}(q_{\phi}(\mathbf{z}_{j})||p_{\theta}(\mathbf{z}_{j})) \]
+
+<p align="center">
+  ![Image Placeholder](image_url)
+</p>
+
+<sup>3</sup> Chen et al., Isolating Sources of Disentanglement in Variational Autoencoders, NeurIPS 2018
+
+Vineeth N B (IIT-H)
+
+§11.3 VAEs and Disentanglement
+
+8 / 14
+```
+
+# DL4CV_Week11_Part03.pdf - Page 23
+
+```markdown
+# β-TCVAE
+
+- **Further decompose marginal KL:**
+
+  \[
+  D_{\text{KL}}(q_{\phi}(\mathbf{z}) \parallel p_{\theta}(\mathbf{z})) = D_{\text{KL}}(q_{\phi}(\mathbf{z}) \parallel \prod_{j} q_{\phi}(\mathbf{z}_{j})) + \sum_{j} D_{\text{KL}}(q_{\phi}(\mathbf{z}_{j}) \parallel p_{\theta}(\mathbf{z}_{j}))
+  \]
+  - **Total Correlation** important for learning disentangled representation
+
+- **Hence, final β-TCVAE loss:**
+
+  \[
+  -\mathbb{E}_{\mathbf{z} \sim q_{\phi}(\mathbf{z} | \mathbf{x})} \log p_{\theta}(\mathbf{x} | \mathbf{z}) + I_q(\mathbf{z}, \mathbf{n}) + \beta D_{\text{KL}}(q_{\phi}(\mathbf{z}) \parallel \prod_{j} q_{\phi}(\mathbf{z}_{j})) + \sum_{j} D_{\text{KL}}(q_{\phi}(\mathbf{z}_{j}) \parallel p_{\theta}(\mathbf{z}_{j}))
+  \]
+
+- **Weight β > 1 to disentangle without affecting reconstruction**
+
+![Chen et al., Isolating Sources of Disentanglement in Variational Autoencoders, NeurIPS 2018](https://via.placeholder.com/150)
+
+**Vineeth N B (IIT-H) §11.3 VAEs and Disentanglement**
+
+---
+
+8 / 14
+```
+
+# DL4CV_Week11_Part03.pdf - Page 24
+
+```markdown
+# Disentangled Representation Learning: How to evaluate?
+
+![NPTel Logo](image_url)
+
+---
+
+Vineeth N B (IIT-H)
+
+## §11.3 VAEs and Disentanglement
+
+---
+
+Page 9 / 14
+```
+
+To enhance the markdown format, ensure that the specific sections and headings are accurately captured. If there is any additional text or content within the slide, it should also be included accordingly.
+
+# DL4CV_Week11_Part03.pdf - Page 25
+
+```markdown
+# Disentangled Representation Learning: How to evaluate?
+
+## Mutual Information Gap (MIG)
+
+- Use mutual information between generative factors (`g`) and latent dimensions (`z`) in some way; how?
+
+![NPTEL Logo](https://example.com/nptel-logo.png)
+
+Vineeth N B (IIT-H)
+
+Section 11.3 VAEs and Disentanglement
+
+Slide 9 / 14
+```
+
+# DL4CV_Week11_Part03.pdf - Page 26
+
+```markdown
+# Disentangled Representation Learning: How to evaluate?
+
+## Mutual Information Gap (MIG)
+
+- Use mutual information between generative factors (\(\mathbf{g}\)) and latent dimensions (\(\mathbf{z}\)) in some way; how?
+- Compute mutual information between each generative factor (\(\mathbf{g_i}\)) and each latent dimension (\(\mathbf{z_i}\))
+
+![NPTEL Logo](https://example.com/logo.png)
+
+*Vineeth N B (IIT-H) §11.3 VAEs and Disentanglement*
+
+*Slide 9 / 14*
+```
+
+# DL4CV_Week11_Part03.pdf - Page 27
+
+```markdown
+# Disentangled Representation Learning: How to evaluate?
+
+## Mutual Information Gap (MIG)
+
+- Use mutual information between generative factors (`g`) and latent dimensions (`z`) in some way; how?
+- Compute mutual information between each generative factor (`g_i`) and each latent dimension (`z_i`)
+- For each `g_i`, take `z_j, z_j` that have highest and second highest mutual information with `g_i`
+
+![NPTEL Logo](https://via.placeholder.com/150)
+
+Vineeth N B (IIT-H)
+
+Section 11.3 VAEs and Disentanglement
+
+9 / 14
+```
+
+# DL4CV_Week11_Part03.pdf - Page 28
+
+```markdown
+# Disentangled Representation Learning: How to evaluate?
+
+## Mutual Information Gap (MIG)
+
+- Use mutual information between generative factors (g) and latent dimensions (z) in some way; how?
+- Compute mutual information between each generative factor (g_i) and each latent dimension (z_i)
+- For each g_i, take z_j, z_l that have highest and second highest mutual information with g_i
+- MIG = \frac{1}{K} \sum_{i=1}^{K} \frac{1}{H(g_i)} (I(g_i, z_j) - I(g_i, z_l)) \text{ where } H(g_i) \text{ is entropy of g_i and } 0 \leq I(g_i, z_j) \leq H(g_i)
+
+![NPTEL Logo](https://via.placeholder.com/150)
+
+Vineeth N B. (IIT-H)
+
+§11.3 VAEs and Disentanglement
+
+9 / 14
+```
+
+This markdown format preserves the structure and content of the original scientific text, including section titles, formulas, bullet points, and visual elements. Ensure to replace any placeholder images with actual images if available.
+
+# DL4CV_Week11_Part03.pdf - Page 29
+
+```markdown
+# Disentangled Representation Learning: How to evaluate?
+
+## Mutual Information Gap (MIG)
+
+- Use mutual information between generative factors ($\mathbf{g}$) and latent dimensions ($\mathbf{z}$) in some way; how?
+- Compute mutual information between each generative factor ($\mathbf{g}_i$) and each latent dimension ($\mathbf{z}_i$)
+- For each $\mathbf{g}_i$, take $\mathbf{z}_j, \mathbf{z}_l$ that have highest and second highest mutual information with $\mathbf{g}_i$
+- $\text{MIG} = \frac{1}{K} \sum_{i=1}^{K} \frac{1}{H(\mathbf{g}_i)} \left( I(\mathbf{g}_i, \mathbf{z}_j) - I(\mathbf{g}_i, \mathbf{z}_l) \right)$ where $H(\mathbf{g}_i)$ is entropy of $\mathbf{g}_i$ and $0 \leq I(\mathbf{g}_i, \mathbf{z}_j) \leq H(\mathbf{g}_i)$
+- Averaging by $K$ and normalizing by $H(\mathbf{g}_i)$ provides values between 0 and 1
+
+_Vineeth N B (IIIT-H)_
+
+_§11.3 VAEs and Disentanglement_
+
+*Image placeholder: ![](image_url)*
+```
+
+# DL4CV_Week11_Part03.pdf - Page 30
+
+ OCR on the provided scientific text or slides and convert the extracted content into a detailed markdown format.
+
+```markdown
+# Disentangled Representation Learning: How to evaluate?
+
+## Mutual Information Gap (MIG)
+
+- Use mutual information between generative factors (**g**) and latent dimensions (**z**) in some way; how?
+- Compute mutual information between each generative factors (**gi**) and each latent dimension (**zi**)
+- For each **gi**, take **zi**, **zj** that have highest and second highest mutual information with **gi**
+- MIG = \(\frac{1}{K} \sum_{i=1}^{K} \frac{1}{H(gi)} (I(gi, zi) - I(gi, zj))\) where \(H(gi)\) is entropy of **gi** and \(0 \leq I(gi, zi) \leq H(gi)\)
+- Averaging by \(K\) and normalizing by \(H(gi)\) provides values between 0 and 1
+- MIG → 0: bad disentanglement, MIG → 1: good disentanglement
+
+![Diagram Placeholder](image_url)
+
+*Vineeth N B (IIT-H) §11.3 VAEs and Disentanglement 9 / 14*
+```
+
+# DL4CV_Week11_Part03.pdf - Page 31
+
+ is a placeholder for actual images.
+
+```markdown
+# Disentangled Representation Learning: How to evaluate?
+
+## Mutual Information Gap (MIG)
+
+- Use mutual information between generative factors (**g**) and latent dimensions (**z**) in some way; how?
+- Compute mutual information between each generative factors (**g_i**) and each latent dimension (**z_i**)
+- For each **g_i**, take **z_j**, **z_l** that have highest and second highest mutual information with **g_i**
+- MIG = \frac{1}{K} \sum_{i=1}^{K} \frac{1}{H(g_i)} \left( I(g_i, z_j) - I(g_i, z_l) \right) where H(g_i) is entropy of g_i and 0 \leq I(g_i, z_j) \leq H(g_i)
+- Averaging by K and normalizing by H(g_i) provides values between 0 and 1
+- MIG \rightarrow 0: bad disentanglement, MIG \rightarrow 1: good disentanglement
+- Why not simply use MI? Why MI gap?
+
+![Vineeth N B (IIIT-H)](https://example.com/placeholder_image.png) 
+
+## Section Information
+
+- **Title**: §11.3 VAEs and Disentanglement
+- **Page Number**: 9 / 14
+```
+
+(Note: Replace the placeholder image URL `https://example.com/placeholder_image.png` with the actual image URL if available.)
+
+This markdown format ensures that the structure and content of the scientific text or slides are accurately preserved and can be easily read and interpreted.
+
+# DL4CV_Week11_Part03.pdf - Page 32
+
+```markdown
+# Disentangled Representation Learning: How to evaluate?
+
+## Mutual Information Gap (MIG)
+
+- Use mutual information between generative factors \((\mathbf{g})\) and latent dimensions \((\mathbf{z})\) in some way; how?
+- Compute mutual information between each generative factor \((\mathbf{g}_i)\) and each latent dimension \((\mathbf{z}_i)\)
+- For each \(\mathbf{g}_i\), take \(\mathbf{z}_j, \mathbf{z}_l\) that have highest and second highest mutual information with \(\mathbf{g}_i\)
+- \[
+  \text{MIG} = \frac{1}{K} \sum_{i=1}^{K} \frac{1}{H(\mathbf{g}_i)} \left( I(\mathbf{g}_i, \mathbf{z}_j) - I(\mathbf{g}_i, \mathbf{z}_l) \right)
+  \]
+  where \(H(\mathbf{g}_i)\) is entropy of \(\mathbf{g}_i\) and \(0 \leq I(\mathbf{g}_i, \mathbf{z}_j) \leq H(\mathbf{g}_i)\)
+- Averaging by \(K\) and normalizing by \(H(\mathbf{g}_i)\) provides values between 0 and 1
+- \(\text{MIG} \rightarrow 0\): bad disentanglement, \(\text{MIG} \rightarrow 1\): good disentanglement
+- Why not simply use MI? Why MI gap? **Homework!** (Hint: Read metric section in Chen et al, *Isolating Sources of Disentanglement in Variational Autoencoders*, NeurIPS 2018)
+
+---
+
+**Vineeth N B (IIIT-H)**
+
+**S11.3 VAEs and Disentanglement**
+
+**9 / 14**
+```
+
+
+# DL4CV_Week11_Part03.pdf - Page 33
+
+
+
+```markdown
+# Disentangled Representation Learning: How to evaluate?
+
+## DCI Metric
+
+[a]Eastwood and Williams, A Framework for the Quantitative Evaluation of Disentangled Representations, ICLR 2018
+
+- Considers three properties of representations: **D - Disentanglement**, **C - Completeness**, **I - Informativeness**
+
+![NPTel Logo](https://via.placeholder.com/150 "NPTel Logo")
+
+*Vineeth N B (IIT-H) §11.3 VAEs and Disentanglement*
+
+*10 / 14*
+```
+
+# DL4CV_Week11_Part03.pdf - Page 34
+
+```markdown
+# Disentangled Representation Learning: How to evaluate?
+
+## DCI Metric
+
+Eastwood and Williams, *A Framework for the Quantitative Evaluation of Disentangled Representations*,
+ICLR 2018
+
+- Considers three properties of representations: **D - Disentanglement, C - Completeness, I - Informativeness**
+- Train a model (e.g. β-VAE) to get latent representations
+
+![NPTEL Logo](image_url_placeholder)
+
+*Vineeth N B. (IIIT-H) §11.3 VAEs and Disentanglement*
+
+*Slide 10 / 14*
+```
+
+# DL4CV_Week11_Part03.pdf - Page 35
+
+```markdown
+# Disentangled Representation Learning: How to evaluate?
+
+## DCI Metric
+
+Eastwood and Williams, A Framework for the Quantitative Evaluation of Disentangled Representations, ICLR 2018
+
+- Considers three properties of representations: D - Disentanglement, C - Completeness, I - Informativeness
+- Train a model (e.g. β-VAE) to get latent representations
+- Get latent representation of each image in a dataset
+
+![NPTEL Logo](https://example.com/logo.png)
+
+Vineeth N B (IIT-H) §11.3 VAEs and Disentanglement 10 / 14
+```
+
+# DL4CV_Week11_Part03.pdf - Page 36
+
+```markdown
+# Disentangled Representation Learning: How to evaluate?
+
+## DCI Metric
+
+Eastwood and Williams, A Framework for the Quantitative Evaluation of Disentangled Representations, ICLR 2018
+
+- Considers three properties of representations: **D** - Disentanglement, **C** - Completeness, **I** - Informativeness
+- Train a model (e.g. β-VAE) to get latent representations
+- Get latent representation of each image in a dataset
+- Train *k* linear regressors (one for each **g_i**, f_1, ..., f_k) to predict **g_i** given **z**
+
+---
+
+*Vineeth N B (IIT-H) §11.3 VAEs and Disentanglement*
+
+```
+
+# DL4CV_Week11_Part03.pdf - Page 37
+
+```markdown
+# Disentangled Representation Learning: How to evaluate?
+
+## DCI Metric
+
+*Eastwood and Williams, A Framework for the Quantitative Evaluation of Disentangled Representations, ICLR 2018*
+
+- Considers three properties of representations: **D** - Disentanglement, **C** - Completeness, **I** - Informativeness
+- Train a model (e.g. β-VAE) to get latent representations
+- Get latent representation of each image in a dataset
+- Train *k* linear regressors (one for each **g_i**, f_1,...,f_k) to predict **g_i** given **z**
+- From the regressors, we get **W_ij** (how much **z_i** is important to predict **g_j**)
+
+![Diagram Placeholder](image-url)
+
+*Vineeth N B (IIT-H) §11.3 VAEs and Disentanglement*
+
+*Page 10 / 14*
+```
+
+# DL4CV_Week11_Part03.pdf - Page 38
+
+
+
+```markdown
+# Disentangled Representation Learning: How to evaluate?
+
+## DCI Metric
+
+Eastwood and Williams, A Framework for the Quantitative Evaluation of Disentangled Representations, ICLR 2018
+
+- Considers three properties of representations: **D - Disentanglement, C - Completeness, I - Informativeness**
+  - Train a model (e.g. β-VAE) to get latent representations
+  - Get latent representation of each image in a dataset
+  - Train k linear regressors (one for each \( g_i \), \( f_1, \ldots, f_k \)) to predict \( g_i \) given z
+  - From the regressors, we get \( W_{ij} \) (how much \( z_i \) is important to predict \( g_j \))
+  - Create a **relative importance matrix** \( R \) such that \( R_{ij} = |W_{ij}| \)
+```
+
+# DL4CV_Week11_Part03.pdf - Page 39
+
+
+
+```markdown
+# Disentangled Representation Learning: How to evaluate?
+
+## DCI Metric: Disentanglement
+
+- Degree to which a representation disentangles underlying factors of variation
+
+- Disentanglement score of $i^{th}$ latent: $D_i = (1 - H(P_i))$ where $H$ is entropy and
+  $P_{ij} = \frac{R_{ij}}{\sum_k R_{ik}}$, importance of $\mathbf{z}_i$ to predict $\mathbf{g}_j$
+
+- Total disentanglement score: $D = \sum_i \rho_i D_i$ where $\rho_i = \frac{\sum_j R_{ij}}{\sum_{ij} R_{ij}}$, relative latent importance
+  used to normalize the score
+
+*Image placeholder* (If an image was part of the slide)
+
+Vineeth N B (IIT-H) §11.3 VAEs and Disentanglement 11 / 14
+```
+
+# DL4CV_Week11_Part03.pdf - Page 40
+
+```markdown
+# Disentangled Representation Learning: How to evaluate?
+
+## DCI Metric: Disentanglement
+
+- Degree to which a representation disentangles underlying factors of variation
+- Disentanglement score of $i^{th}$ latent: $D_i = (1 - H(P_i))$ where $H$ is entropy and $P_{ij} = \frac{R_{ij}}{\sum_k R_{ik}}$, importance of $z_i$ to predict $g_i$
+- Total disentanglement score: $D = \sum_i \rho_i D_i$ where $\rho_i = \frac{\sum_j R_{ij}}{\sum_{ij} R_{ij}}$, relative latent importance used to normalize the score
+
+![Disentanglement Visualization](image_url)
+
+## DCI Metric: Completeness
+
+- Degree to which each underlying generative factor is captured by a single latent variable
+- For each generative factor $g_j$, $C_j = (1 - H(P_j))$ where the distribution $P_j$ is as above
+- If a single latent variable contributes to $g_j$'s prediction, score is 1 (complete); if all latent variables equally contribute to $g_j$'s prediction, score is 0 (maximally overcomplete)
+
+*Vineeth N B (IIT-H) §11.3 VAEs and Disentanglement*
+
+*Slide 11 / 14*
+```
+
+# DL4CV_Week11_Part03.pdf - Page 41
+
+```markdown
+# Disentangled Representation Learning: How to evaluate?
+
+## DCI Metric: Informativeness
+
+- Amount of useful information a representation captures about underlying factors
+- Useful for natural tasks which require knowledge of important attributes of data; e.g. for classification task, representation should capture information about object of interest
+
+![NPTel Logo](image-url)
+
+*Vineeth N B (IIT-H) §11.3 VAEs and Disentanglement*
+
+*12 / 14*
+```
+
+# DL4CV_Week11_Part03.pdf - Page 42
+
+```markdown
+# Disentangled Representation Learning: How to evaluate?
+
+## DCI Metric: Informativeness
+
+- Amount of useful information a representation captures about underlying factors
+- Useful for natural tasks which require knowledge of important attributes of data; e.g. for classification task, representation should capture information about object of interest
+- **Informativeness** of **z** about **g_j** quantified by prediction error \( E(\mathbf{g_j}, \mathbf{\hat{g}_j}) \) where \( \mathbf{\hat{g}_j} = f_j(\mathbf{z}) \)
+
+*Vineeth N B (IIT-H) §11.3 VAEs and Disentanglement 12 / 14*
+```
+
+# DL4CV_Week11_Part03.pdf - Page 43
+
+```markdown
+# Disentangled Representation Learning: How to evaluate?
+
+## DCI Metric: Informativeness
+
+- Amount of useful information a representation captures about underlying factors
+- Useful for natural tasks which require knowledge of important attributes of data; e.g. for classification task, representation should capture information about object of interest
+- **Informativeness** of z about gj quantified by prediction error E(gj, ã gj) where ã gj = fj(z)
+- Note that I value depends on capacity of model fi also
+
+*Vineeth N B (IIT-H) §11.3 VAEs and Disentanglement 12 / 14*
+```
+
+# DL4CV_Week11_Part03.pdf - Page 44
+
+```markdown
+# Homework
+
+## Homework Readings
+
+### Readings
+- [ ] Lilian Weng, From Autoencoders to Beta-VAE
+- [ ] Prashnna Gyawali, Disentanglement with VAEs: A Review
+- [ ] (Optional) Papers on respective slides
+
+### Questions
+- [ ] Why is MI Gap and not MI used as a metric for disentanglement?
+
+---
+
+Vineeth N B (IIIT-H)
+
+#11.3 VAEs and Disentanglement
+
+13 / 14
+```
+
+# DL4CV_Week11_Part03.pdf - Page 45
+
+: 
+
+```markdown
+# References
+
+- Ricky TQ Chen et al. "Isolating sources of disentanglement in variational autoencoders". In: *Advances in Neural Information Processing Systems*. 2018, pp. 2610–2620.
+
+- Cian Eastwood and Christopher KI Williams. "A framework for the quantitative evaluation of disentangled representations". In: *International Conference on Learning Representations*. 2018.
+
+- Irina Higgins et al. "beta-VAE: Learning Basic Visual Concepts with a Constrained Variational Framework". In: *ICLR*. 2017.
+
+- Diederik P Kingma and Max Welling. *Auto-Encoding Variational Bayes*. 2013. arXiv: 1312.6114 [stat.ML].
+
+![Image Placeholder](image-url-here)
+
+*Vineeth N B (IIT-H) §11.3 VAEs and Disentanglement 14 / 14*
+```
+
+(Replace `image-url-here` with the actual URL or placeholder if needed.)
+
+This markdown format ensures that the references section is structured clearly and maintains the scientific integrity expected in academic and technical documentation.
+

@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>BS Degree Notes</title>
+<title>Sequence-to-Sequence Models and Attention Mechanisms – BS Degree Notes</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -23,24 +23,24 @@ ul.task-list li input[type="checkbox"] {
 </style>
 
 
-<script src="site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="site_libs/quarto-nav/headroom.min.js"></script>
-<script src="site_libs/clipboard/clipboard.min.js"></script>
-<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="site_libs/quarto-search/fuse.min.js"></script>
-<script src="site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="./">
-<script src="site_libs/quarto-html/quarto.js"></script>
-<script src="site_libs/quarto-html/popper.min.js"></script>
-<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="site_libs/quarto-html/anchor.min.js"></script>
-<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
-<script src="site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -69,6 +69,35 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 <link rel="stylesheet" href="https://lalten.github.io/lmweb/style/latinmodern-roman.css">
 <link rel="stylesheet" href="https://lalten.github.io/lmweb/style/latinmodern-sans.css">
@@ -84,7 +113,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./index.html">Home</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../pages/LLM/Week01.html">LLM</a></li><li class="breadcrumb-item"><a href="../../pages/LLM/Week01.html">Week 1</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -99,7 +128,7 @@ ul.task-list li input[type="checkbox"] {
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
     <div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
-      <a href="./">BS Degree Notes</a> 
+      <a href="../../">BS Degree Notes</a> 
         <div class="sidebar-tools-main">
   <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
 </div>
@@ -114,7 +143,7 @@ ul.task-list li input[type="checkbox"] {
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./index.html" class="sidebar-item-text sidebar-link active">
+  <a href="../../index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Home</span></a>
   </div>
 </li>
@@ -129,43 +158,43 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./pages/DL/Week01_1.html" class="sidebar-item-text sidebar-link">
+  <a href="../../pages/DL/Week01_1.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Week 1.1</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./pages/DL/Week01_2.html" class="sidebar-item-text sidebar-link">
+  <a href="../../pages/DL/Week01_2.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Week 1.2</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./pages/DL/Week02.html" class="sidebar-item-text sidebar-link">
+  <a href="../../pages/DL/Week02.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Week 2</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./pages/DL/Week03.html" class="sidebar-item-text sidebar-link">
+  <a href="../../pages/DL/Week03.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Week 3</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./pages/DL/Week04.html" class="sidebar-item-text sidebar-link">
+  <a href="../../pages/DL/Week04.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Week 4</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./pages/DL/Week05.html" class="sidebar-item-text sidebar-link">
+  <a href="../../pages/DL/Week05.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Week 5</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./pages/DL/Week06.html" class="sidebar-item-text sidebar-link">
+  <a href="../../pages/DL/Week06.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Week 6</span></a>
   </div>
 </li>
@@ -182,37 +211,37 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./pages/AI/Week01.html" class="sidebar-item-text sidebar-link">
+  <a href="../../pages/AI/Week01.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Week 1</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./pages/AI/Week02.html" class="sidebar-item-text sidebar-link">
+  <a href="../../pages/AI/Week02.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Week 2</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./pages/AI/Week03.html" class="sidebar-item-text sidebar-link">
+  <a href="../../pages/AI/Week03.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Week 3</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./pages/AI/Week04.html" class="sidebar-item-text sidebar-link">
+  <a href="../../pages/AI/Week04.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Week 4</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./pages/AI/Week05.html" class="sidebar-item-text sidebar-link">
+  <a href="../../pages/AI/Week05.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Week 5</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./pages/AI/Week06.html" class="sidebar-item-text sidebar-link">
+  <a href="../../pages/AI/Week06.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Week 6</span></a>
   </div>
 </li>
@@ -229,73 +258,73 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./pages/ST/Week01.html" class="sidebar-item-text sidebar-link">
+  <a href="../../pages/ST/Week01.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Week 1</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./pages/ST/Week02.html" class="sidebar-item-text sidebar-link">
+  <a href="../../pages/ST/Week02.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Week 2</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./pages/ST/Week03.html" class="sidebar-item-text sidebar-link">
+  <a href="../../pages/ST/Week03.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Week 3</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./pages/ST/Week04.html" class="sidebar-item-text sidebar-link">
+  <a href="../../pages/ST/Week04.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Week 4</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./pages/ST/Week05.html" class="sidebar-item-text sidebar-link">
+  <a href="../../pages/ST/Week05.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Week 5</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./pages/ST/Week06.html" class="sidebar-item-text sidebar-link">
+  <a href="../../pages/ST/Week06.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Week 6</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./pages/ST/Week07.html" class="sidebar-item-text sidebar-link">
+  <a href="../../pages/ST/Week07.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Week 7</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./pages/ST/Week08.html" class="sidebar-item-text sidebar-link">
+  <a href="../../pages/ST/Week08.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Week 8</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./pages/ST/Week09.html" class="sidebar-item-text sidebar-link">
+  <a href="../../pages/ST/Week09.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Week 9</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./pages/ST/Week10.html" class="sidebar-item-text sidebar-link">
+  <a href="../../pages/ST/Week10.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Week 10</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./pages/ST/Week11.html" class="sidebar-item-text sidebar-link">
+  <a href="../../pages/ST/Week11.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Week 11</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./pages/ST/Week12.html" class="sidebar-item-text sidebar-link">
+  <a href="../../pages/ST/Week12.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Week 12</span></a>
   </div>
 </li>
@@ -312,43 +341,43 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./pages/SE/Week01.html" class="sidebar-item-text sidebar-link">
+  <a href="../../pages/SE/Week01.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Week 1</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./pages/SE/Week02.html" class="sidebar-item-text sidebar-link">
+  <a href="../../pages/SE/Week02.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Week 2</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./pages/SE/Week03.html" class="sidebar-item-text sidebar-link">
+  <a href="../../pages/SE/Week03.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Week 3</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./pages/SE/Week04.html" class="sidebar-item-text sidebar-link">
+  <a href="../../pages/SE/Week04.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Week 4</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./pages/SE/Week09.html" class="sidebar-item-text sidebar-link">
+  <a href="../../pages/SE/Week09.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Week 9</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./pages/SE/Week10.html" class="sidebar-item-text sidebar-link">
+  <a href="../../pages/SE/Week10.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Week 10</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./pages/SE/Week11.html" class="sidebar-item-text sidebar-link">
+  <a href="../../pages/SE/Week11.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Week 11</span></a>
   </div>
 </li>
@@ -365,19 +394,19 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./pages/RL/Week01_1.html" class="sidebar-item-text sidebar-link">
+  <a href="../../pages/RL/Week01_1.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Week 1.1</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./pages/RL/Week01_2.html" class="sidebar-item-text sidebar-link">
+  <a href="../../pages/RL/Week01_2.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Week 1.2</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./pages/RL/Week02.html" class="sidebar-item-text sidebar-link">
+  <a href="../../pages/RL/Week02.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Week 2</span></a>
   </div>
 </li>
@@ -394,7 +423,7 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./pages/NLP/Week01.html" class="sidebar-item-text sidebar-link">
+  <a href="../../pages/NLP/Week01.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Week 1</span></a>
   </div>
 </li>
@@ -402,16 +431,16 @@ ul.task-list li input[type="checkbox"] {
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="false">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="true">
  <span class="menu-text">LLM</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="false" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth1 ">  
+      <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./pages/LLM/Week01.html" class="sidebar-item-text sidebar-link">
+  <a href="../../pages/LLM/Week01.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">Week 1</span></a>
   </div>
 </li>
@@ -422,15 +451,65 @@ ul.task-list li input[type="checkbox"] {
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#overview" id="toc-overview" class="nav-link active" data-scroll-target="#overview">Overview</a></li>
+  <li><a href="#sequence-to-sequence-models" id="toc-sequence-to-sequence-models" class="nav-link" data-scroll-target="#sequence-to-sequence-models">Sequence-to-Sequence Models</a>
+  <ul class="collapse">
+  <li><a href="#definition-and-scope" id="toc-definition-and-scope" class="nav-link" data-scroll-target="#definition-and-scope">Definition and Scope</a></li>
+  <li><a href="#encoder-decoder-architecture" id="toc-encoder-decoder-architecture" class="nav-link" data-scroll-target="#encoder-decoder-architecture">Encoder-Decoder Architecture</a>
+  <ul class="collapse">
+  <li><a href="#encoder-rnn" id="toc-encoder-rnn" class="nav-link" data-scroll-target="#encoder-rnn">Encoder RNN</a></li>
+  <li><a href="#decoder-rnn" id="toc-decoder-rnn" class="nav-link" data-scroll-target="#decoder-rnn">Decoder RNN</a></li>
+  </ul></li>
+  <li><a href="#limitations-of-traditional-encoder-decoder-rnns" id="toc-limitations-of-traditional-encoder-decoder-rnns" class="nav-link" data-scroll-target="#limitations-of-traditional-encoder-decoder-rnns">Limitations of Traditional Encoder-Decoder RNNs</a></li>
+  </ul></li>
+  <li><a href="#attention-mechanisms" id="toc-attention-mechanisms" class="nav-link" data-scroll-target="#attention-mechanisms">Attention Mechanisms</a>
+  <ul class="collapse">
+  <li><a href="#definition-and-motivation" id="toc-definition-and-motivation" class="nav-link" data-scroll-target="#definition-and-motivation">Definition and Motivation</a></li>
+  <li><a href="#attention-mechanism-a-quick-tour" id="toc-attention-mechanism-a-quick-tour" class="nav-link" data-scroll-target="#attention-mechanism-a-quick-tour">Attention Mechanism: A Quick Tour</a></li>
+  <li><a href="#context-vector-computation" id="toc-context-vector-computation" class="nav-link" data-scroll-target="#context-vector-computation">Context Vector Computation</a></li>
+  <li><a href="#alignment-of-words" id="toc-alignment-of-words" class="nav-link" data-scroll-target="#alignment-of-words">Alignment of Words</a></li>
+  <li><a href="#computing-alignment-scores" id="toc-computing-alignment-scores" class="nav-link" data-scroll-target="#computing-alignment-scores">Computing Alignment Scores</a></li>
+  </ul></li>
+  <li><a href="#self-attention" id="toc-self-attention" class="nav-link" data-scroll-target="#self-attention">Self-Attention</a>
+  <ul class="collapse">
+  <li><a href="#definition" id="toc-definition" class="nav-link" data-scroll-target="#definition">Definition</a></li>
+  <li><a href="#example" id="toc-example" class="nav-link" data-scroll-target="#example">Example</a></li>
+  <li><a href="#goal" id="toc-goal" class="nav-link" data-scroll-target="#goal">Goal</a></li>
+  <li><a href="#relational-score-table" id="toc-relational-score-table" class="nav-link" data-scroll-target="#relational-score-table">Relational Score Table</a></li>
+  </ul></li>
+  <li><a href="#multi-head-attention" id="toc-multi-head-attention" class="nav-link" data-scroll-target="#multi-head-attention">Multi-Head Attention</a>
+  <ul class="collapse">
+  <li><a href="#motivation" id="toc-motivation" class="nav-link" data-scroll-target="#motivation">Motivation</a></li>
+  <li><a href="#mechanism" id="toc-mechanism" class="nav-link" data-scroll-target="#mechanism">Mechanism</a></li>
+  <li><a href="#benefits" id="toc-benefits" class="nav-link" data-scroll-target="#benefits">Benefits</a></li>
+  </ul></li>
+  <li><a href="#transition-to-transformers" id="toc-transition-to-transformers" class="nav-link" data-scroll-target="#transition-to-transformers">Transition to Transformers</a>
+  <ul class="collapse">
+  <li><a href="#encoder-and-decoder" id="toc-encoder-and-decoder" class="nav-link" data-scroll-target="#encoder-and-decoder">Encoder and Decoder</a></li>
+  <li><a href="#encoder-components" id="toc-encoder-components" class="nav-link" data-scroll-target="#encoder-components">Encoder Components</a></li>
+  <li><a href="#decoder-components" id="toc-decoder-components" class="nav-link" data-scroll-target="#decoder-components">Decoder Components</a></li>
+  </ul></li>
+  <li><a href="#scaled-dot-product-attention" id="toc-scaled-dot-product-attention" class="nav-link" data-scroll-target="#scaled-dot-product-attention">Scaled Dot-Product Attention</a>
+  <ul class="collapse">
+  <li><a href="#computation" id="toc-computation" class="nav-link" data-scroll-target="#computation">Computation</a></li>
+  <li><a href="#mathematical-representation" id="toc-mathematical-representation" class="nav-link" data-scroll-target="#mathematical-representation">Mathematical Representation</a></li>
+  </ul></li>
+  <li><a href="#summary-and-key-takeaways" id="toc-summary-and-key-takeaways" class="nav-link" data-scroll-target="#summary-and-key-takeaways">Summary and Key Takeaways</a></li>
+  <li><a href="#review-questions" id="toc-review-questions" class="nav-link" data-scroll-target="#review-questions">Review Questions</a></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default">
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../pages/LLM/Week01.html">LLM</a></li><li class="breadcrumb-item"><a href="../../pages/LLM/Week01.html">Week 1</a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">BS Degree Notes</h1>
+<h1 class="title">Sequence-to-Sequence Models and Attention Mechanisms</h1>
 </div>
 
 
@@ -447,9 +526,282 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<p>I put the course notes for my own easy perusal. Some of it is AI generated, and I cannot guarantee the accuracy of the notes. Please use them, if you wish to, at your own discretion.</p>
+<section id="overview" class="level2">
+<h2 class="anchored" data-anchor-id="overview">Overview</h2>
+<p>These notes cover the fundamentals of sequence-to-sequence (seq2seq) models, particularly focusing on Recurrent Neural Networks (RNNs) and the transformative role of attention mechanisms. We’ll explore the architecture of seq2seq models, the limitations of traditional encoder-decoder RNNs, and how attention addresses these limitations. We’ll delve into the details of self-attention and multi-head attention, examining their computational aspects and benefits. Finally, we’ll connect these concepts to the Transformer architecture, a powerful model that leverages attention mechanisms extensively.</p>
+</section>
+<section id="sequence-to-sequence-models" class="level1">
+<h1>Sequence-to-Sequence Models</h1>
+<section id="definition-and-scope" class="level2">
+<h2 class="anchored" data-anchor-id="definition-and-scope">Definition and Scope</h2>
+<p>Sequence-to-sequence models are a class of deep learning models designed to map input sequences (e.g., sentences in one language) to output sequences (e.g., sentences in another language). They are widely used in tasks like machine translation, text summarization, speech recognition, and question answering.</p>
+</section>
+<section id="encoder-decoder-architecture" class="level2">
+<h2 class="anchored" data-anchor-id="encoder-decoder-architecture">Encoder-Decoder Architecture</h2>
+<section id="encoder-rnn" class="level3">
+<h3 class="anchored" data-anchor-id="encoder-rnn">Encoder RNN</h3>
+<ul>
+<li>The encoder RNN processes the input sequence one element at a time.</li>
+<li>At each step, it updates its hidden state based on the current input and the previous hidden state.</li>
+<li>The final hidden state of the encoder, often called the <strong>context vector</strong>, encapsulates the information from the entire input sequence.</li>
+</ul>
+</section>
+<section id="decoder-rnn" class="level3">
+<h3 class="anchored" data-anchor-id="decoder-rnn">Decoder RNN</h3>
+<ul>
+<li>The decoder RNN takes the context vector as its initial hidden state.</li>
+<li>It generates the output sequence element by element, conditioning on the context vector and the previously generated outputs.</li>
+</ul>
+</section>
+</section>
+<section id="limitations-of-traditional-encoder-decoder-rnns" class="level2">
+<h2 class="anchored" data-anchor-id="limitations-of-traditional-encoder-decoder-rnns">Limitations of Traditional Encoder-Decoder RNNs</h2>
+<ul>
+<li>The context vector acts as a bottleneck, as it needs to represent the entire input sequence in a fixed-size vector.</li>
+<li>This can lead to information loss, especially for long input sequences.</li>
+<li>The decoder may struggle to align words in the input and output sequences effectively.</li>
+</ul>
+</section>
+</section>
+<section id="attention-mechanisms" class="level1">
+<h1>Attention Mechanisms</h1>
+<section id="definition-and-motivation" class="level2">
+<h2 class="anchored" data-anchor-id="definition-and-motivation">Definition and Motivation</h2>
+<p>Attention mechanisms address the limitations of traditional encoder-decoder RNNs by allowing the decoder to focus on different parts of the input sequence at each step of the output generation process. This is achieved by computing attention weights that indicate the relevance of each input element to the current decoder state.</p>
+</section>
+<section id="attention-mechanism-a-quick-tour" class="level2">
+<h2 class="anchored" data-anchor-id="attention-mechanism-a-quick-tour">Attention Mechanism: A Quick Tour</h2>
+<ol type="1">
+<li><strong>RNN Encoder:</strong>
+<ul>
+<li>The encoder produces a sequence of hidden state vectors (h0, h1, h2, …). Each vector corresponds to a word or token in the input sequence.</li>
+</ul></li>
+<li><strong>Decoder Access to Encoder States:</strong>
+<ul>
+<li>The decoder has access to all the hidden state vectors generated by the encoder.</li>
+</ul></li>
+<li><strong>Attention Mechanism Input:</strong>
+<ul>
+<li>The attention mechanism takes these encoder hidden state vectors as input.</li>
+</ul></li>
+</ol>
+</section>
+<section id="context-vector-computation" class="level2">
+<h2 class="anchored" data-anchor-id="context-vector-computation">Context Vector Computation</h2>
+<ul>
+<li>The context vector <code>ct</code> for output <code>yt</code> at time step <code>t</code> is computed as a weighted sum of the encoder hidden states:</li>
+</ul>
+<p><span class="math display">\[ct = \sum_{i=1}^{n} \alpha_{ti} h_i\]</span></p>
+<p>where:</p>
+<ul>
+<li><code>n</code> is the number of words in the input sequence</li>
+<li><code>αti</code> is the attention weight for the i-th input word at time step <code>t</code></li>
+<li><code>hi</code> is the hidden state of the encoder for the i-th input word</li>
+</ul>
+</section>
+<section id="alignment-of-words" class="level2">
+<h2 class="anchored" data-anchor-id="alignment-of-words">Alignment of Words</h2>
+<p>Traditional seq2seq models without attention struggle to align words between the source and target sentences. Attention mechanisms resolve this by learning to focus on the relevant parts of the source sentence when generating each word in the target sentence.</p>
+</section>
+<section id="computing-alignment-scores" class="level2">
+<h2 class="anchored" data-anchor-id="computing-alignment-scores">Computing Alignment Scores</h2>
+<p>The alignment score <code>αi</code> between the output word <code>yt</code> at time step <code>t</code> and the input word with hidden state <code>hi</code> is computed as:</p>
+<p><span class="math display">\[ \alpha_i = align(y_t, h_i) = \frac{exp(score(s_{t-1}, h_i))}{\sum_{i'=1}^{n} exp(score(s_{t-1}, h_{i'}))} \]</span></p>
+<p>where:</p>
+<ul>
+<li><code>st-1</code> is the decoder’s hidden state at the previous time step</li>
+<li><code>score</code> is a function that computes the relevance between the decoder state and the encoder hidden state (e.g., dot product)</li>
+</ul>
+</section>
+</section>
+<section id="self-attention" class="level1">
+<h1>Self-Attention</h1>
+<section id="definition" class="level2">
+<h2 class="anchored" data-anchor-id="definition">Definition</h2>
+<p>Self-attention is a type of attention mechanism where the model attends to different positions within the same input sequence. It allows the model to learn relationships between different words in a sentence and capture contextual information.</p>
+</section>
+<section id="example" class="level2">
+<h2 class="anchored" data-anchor-id="example">Example</h2>
+<p>Consider the sentence: “The animal didn’t cross the street because it was too tired.”</p>
+<ul>
+<li>Self-attention helps the model understand that “it” refers to “animal.”</li>
+<li>If we modify the sentence to: “The animal didn’t cross the street because it was congested,” self-attention helps the model understand that “it” now refers to “street.”</li>
+</ul>
+</section>
+<section id="goal" class="level2">
+<h2 class="anchored" data-anchor-id="goal">Goal</h2>
+<p>Given a word in a sentence, self-attention aims to compute the relational score between that word and all other words in the sentence.</p>
+</section>
+<section id="relational-score-table" class="level2">
+<h2 class="anchored" data-anchor-id="relational-score-table">Relational Score Table</h2>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Word</th>
+<th>The</th>
+<th>animal</th>
+<th>didn’t</th>
+<th>cross</th>
+<th>the</th>
+<th>street</th>
+<th>because</th>
+<th>it</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>The</td>
+<td>0.6</td>
+<td>0.1</td>
+<td>0.05</td>
+<td>0.05</td>
+<td>0.02</td>
+<td>0.02</td>
+<td>0.02</td>
+<td>0.1</td>
+</tr>
+<tr class="even">
+<td>animal</td>
+<td>0.02</td>
+<td>0.5</td>
+<td>0.06</td>
+<td>0.15</td>
+<td>0.02</td>
+<td>0.05</td>
+<td>0.01</td>
+<td>0.12</td>
+</tr>
+<tr class="odd">
+<td>didn’t</td>
+<td>0.01</td>
+<td>0.35</td>
+<td>0.45</td>
+<td>0.1</td>
+<td>0.01</td>
+<td>0.02</td>
+<td>0.01</td>
+<td>0.03</td>
+</tr>
+<tr class="even">
+<td>…</td>
+<td>…</td>
+<td>…</td>
+<td>…</td>
+<td>…</td>
+<td>…</td>
+<td>…</td>
+<td>…</td>
+<td>…</td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+<section id="multi-head-attention" class="level1">
+<h1>Multi-Head Attention</h1>
+<section id="motivation" class="level2">
+<h2 class="anchored" data-anchor-id="motivation">Motivation</h2>
+<ul>
+<li>Similar to using multiple filters in Convolutional Neural Networks (CNNs) to learn different features, multi-head attention allows the model to capture different aspects of the relationships between words in a sentence.</li>
+<li>Each attention head learns to focus on a different type of relationship (e.g., syntactic, semantic).</li>
+</ul>
+</section>
+<section id="mechanism" class="level2">
+<h2 class="anchored" data-anchor-id="mechanism">Mechanism</h2>
+<ul>
+<li>Multi-head attention consists of multiple self-attention heads operating in parallel.</li>
+<li>Each head has its own set of learnable parameters (WQ, WK, WV).</li>
+<li>The outputs of the different heads are concatenated and then transformed through a linear layer.</li>
+</ul>
+</section>
+<section id="benefits" class="level2">
+<h2 class="anchored" data-anchor-id="benefits">Benefits</h2>
+<ul>
+<li>Captures richer contextual information.</li>
+<li>Allows for parallel computation.</li>
+</ul>
+</section>
+</section>
+<section id="transition-to-transformers" class="level1">
+<h1>Transition to Transformers</h1>
+<section id="encoder-and-decoder" class="level2">
+<h2 class="anchored" data-anchor-id="encoder-and-decoder">Encoder and Decoder</h2>
+<ul>
+<li>The Transformer architecture is based on the encoder-decoder framework but replaces RNNs with attention mechanisms.</li>
+</ul>
+</section>
+<section id="encoder-components" class="level2">
+<h2 class="anchored" data-anchor-id="encoder-components">Encoder Components</h2>
+<ul>
+<li><strong>Word Embedding:</strong> Converts words into vector representations.</li>
+<li><strong>Self-Attention:</strong> Captures relationships between words in the input sequence.</li>
+<li><strong>Feed Forward Networks:</strong> Processes the output of the self-attention layer.</li>
+</ul>
+</section>
+<section id="decoder-components" class="level2">
+<h2 class="anchored" data-anchor-id="decoder-components">Decoder Components</h2>
+<ul>
+<li><strong>Word Embedding:</strong> Converts words into vector representations.</li>
+<li><strong>Self-Attention:</strong> Captures relationships between words in the output sequence.</li>
+<li><strong>Encoder-Decoder Attention:</strong> Allows the decoder to attend to different parts of the input sequence.</li>
+<li><strong>Feed Forward Networks:</strong> Processes the output of the attention layers.</li>
+</ul>
+</section>
+</section>
+<section id="scaled-dot-product-attention" class="level1">
+<h1>Scaled Dot-Product Attention</h1>
+<section id="computation" class="level2">
+<h2 class="anchored" data-anchor-id="computation">Computation</h2>
+<p>The scaled dot-product attention is a core component of the Transformer architecture. It computes the attention weights as follows:</p>
+<ol type="1">
+<li><strong>Query (Q), Key (K), and Value (V):</strong>
+<ul>
+<li>The input sequence is transformed into three matrices: Q, K, and V, using learnable weight matrices.</li>
+</ul></li>
+<li><strong>Scaled Dot Product:</strong>
+<ul>
+<li>The dot product of Q and K is computed, and then scaled down by the square root of the dimension of the key vectors (dk).</li>
+</ul></li>
+<li><strong>Softmax:</strong>
+<ul>
+<li>A softmax function is applied to the scaled dot product to obtain the attention weights.</li>
+</ul></li>
+<li><strong>Weighted Sum:</strong>
+<ul>
+<li>The attention weights are multiplied with the value matrix V, and the results are summed to produce the output.</li>
+</ul></li>
+</ol>
+</section>
+<section id="mathematical-representation" class="level2">
+<h2 class="anchored" data-anchor-id="mathematical-representation">Mathematical Representation</h2>
+<p><span class="math display">\[ Attention(Q, K, V) = softmax(\frac{QK^T}{\sqrt{d_k}})V \]</span></p>
+</section>
+</section>
+<section id="summary-and-key-takeaways" class="level1">
+<h1>Summary and Key Takeaways</h1>
+<ul>
+<li>Sequence-to-sequence models are powerful tools for mapping input sequences to output sequences.</li>
+<li>Traditional encoder-decoder RNNs suffer from information loss and alignment issues.</li>
+<li>Attention mechanisms address these limitations by allowing the decoder to focus on different parts of the input sequence.</li>
+<li>Self-attention enables the model to learn relationships between words within the same sequence.</li>
+<li>Multi-head attention captures richer contextual information by using multiple attention heads in parallel.</li>
+<li>The Transformer architecture leverages attention mechanisms extensively, achieving state-of-the-art performance in various NLP tasks.</li>
+</ul>
+</section>
+<section id="review-questions" class="level1">
+<h1>Review Questions</h1>
+<ol type="1">
+<li>Explain the limitations of traditional encoder-decoder RNNs for sequence-to-sequence tasks.</li>
+<li>How do attention mechanisms address the limitations of traditional encoder-decoder RNNs?</li>
+<li>What is the difference between self-attention and cross-attention?</li>
+<li>Explain the concept of multi-head attention and its benefits.</li>
+<li>Describe the components of a Scaled Dot-Product Attention head.</li>
+<li>How does the Transformer architecture differ from traditional seq2seq models based on RNNs?</li>
+<li>What are some real-world applications of sequence-to-sequence models and attention mechanisms?</li>
+</ol>
 
 
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">

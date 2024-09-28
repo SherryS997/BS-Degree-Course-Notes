@@ -1,0 +1,1924 @@
+# DL4CV_Week01_Part06.pdf - Page 1
+
+```markdown
+# Deep Learning for Computer Vision
+
+## Image in the Frequency Domain
+
+### Vineeth N Balasubramanian
+
+**Department of Computer Science and Engineering**
+
+**Indian Institute of Technology, Hyderabad**
+
+![IIT Hyderabad Logo](https://example.com/logo.png)
+
+---
+
+### Vineeth N B (IIT-H)
+
+#### §1.6 Frequency Domain
+
+---
+
+**Note**: The placeholders for images and other media are for illustrative purposes. Replace them with actual URLs or the appropriate image files.
+```
+
+# DL4CV_Week01_Part06.pdf - Page 2
+
+```markdown
+# Review: Questions to Think About
+
+![NPTEL Logo](https://via.placeholder.com/150)
+
+- Do we then need **(cross)-correlation at all?**
+- Are all filters always linear?
+
+*Vineeth N B (IIT-H)*
+*Section 1.6 Frequency Domain*
+*Slide 2 / 37*
+```
+
+# DL4CV_Week01_Part06.pdf - Page 3
+
+```markdown
+# Is Correlation Still Useful?
+
+- Can be used for Template Matching
+- Filters look like objects they are intended to find → use **Normalized Cross-correlation** (to control relative brightness) score to find a given pattern in an image
+
+![Template Matching Process](https://via.placeholder.com/150)
+
+- **Scene**: Original image containing objects
+- **Template (mask)**: Subset of the scene used as a reference
+- **Detected template**: Identified pattern within the scene
+- **Correlation map**: Visual representation of the correlation scores
+
+**Credit**: K. Grauman, Univ of Texas Austin
+
+---
+
+Vineeth N B (IIT-H)
+
+§1.6 Frequency Domain
+```
+
+# DL4CV_Week01_Part06.pdf - Page 4
+
+```markdown
+# Is Correlation Still Useful?
+
+- Even if the template is not identical to some subimage in the scene, match can be meaningful, if scale, orientation and general appearance is right.
+
+![Scene Image](image_url)
+
+*Template*
+
+![Detected Template Image](image_url)
+
+**Credit:** K Grauman, Univ of Texas Austin
+
+Vineeth N B (IIT-H) §1.6 Frequency Domain
+
+---
+
+## Slide Details
+
+- **Slide Number:** 4 / 37
+```
+
+### Explanation:
+
+1. **Title**: The main heading is formatted using `#`.
+2. **Bullet Points**: The list of bullet points is created using `-`.
+3. **Images**: Placeholders are used for the images as the actual image URLs are not provided.
+4. **Bold and Italics**: Texts such as "Credit" and "K Grauman, Univ of Texas Austin" are correctly formatted in bold and italics, respectively.
+5. **Footer**: The footer text is included as a standard paragraph.
+6. **Slide Details**: The slide number and section information are formatted in a standard paragraph.
+
+This markdown format ensures that the content is both readable and retains the scientific integrity of the source material.
+
+# DL4CV_Week01_Part06.pdf - Page 5
+
+```markdown
+# Non-Linear Filters
+
+## Different types of noise in images
+
+### Reducing Salt-and-Pepper noise using Gaussian filters
+
+**Credit:** S Seitz, Univ of Washington & J Košecká, George Mason University
+
+**Vineeth N B (IIIT-H)**
+
+**§1.6 Frequency Domain**
+
+![Original Image](image-url)
+
+![Salt and Pepper Noise Image](image-url)
+
+- **Original**
+- **Salt and pepper noise**
+- **Impulse noise**
+- **Gaussian noise**
+
+![Reducing Salt-and-Pepper noise using Gaussian filters](image-url)
+
+- 3x3
+- 5x5
+- 7x7
+
+**See the problem? What do we do?**
+```
+
+# DL4CV_Week01_Part06.pdf - Page 6
+
+```markdown
+# Non-Linear Filters: Median Filter
+
+- **Replace each pixel with MEDIAN value of all pixels in neighbourhood**
+
+## Properties:
+- **Non-linear**
+- **Does not spread noise**
+- **Can remove spike noise**
+- **Robust to outliers, but not good for Gaussian noise**
+
+![Filter Comparison](image_url)
+
+**Credit: J Košecká, George Mason University**
+
+---
+
+### Filter Comparison
+
+#### Gaussian Filter
+- **3x3**
+  ![Gaussian 3x3](image_url)
+
+- **5x5**
+  ![Gaussian 5x5](image_url)
+
+- **7x7**
+  ![Gaussian 7x7](image_url)
+
+#### Median Filter
+- **3x3**
+  ![Median 3x3](image_url)
+
+- **5x5**
+  ![Median 5x5](image_url)
+
+- **7x7**
+  ![Median 7x7](image_url)
+
+---
+
+*Vineeth N B (IIT-H)*
+
+*1.6 Frequency Domain*
+
+---
+
+*Slide 6 / 37*
+```
+
+# DL4CV_Week01_Part06.pdf - Page 7
+
+```markdown
+# Median Filter: Example
+
+![Median Filter Example](image_url)
+
+**Credit: J Košecká, George Mason University**
+
+## Notice how the outlier pixel value (99) got filtered out
+
+### Steps Illustrating the Median Filter Process
+
+1. **Initial Array**
+   ```
+   | 10 | 11 | 10 | 0 | 1 |
+   | 9  | 10 | 11 | 1 | 0 |
+   | 1  | 10 |  9 | 10 | 1 |
+   | 11 | 10 |  9 | 10 | 11 |
+   | 9  | 10 | 11 |  9 | 99 |
+   | 10 |  9 | 11 | 10 | 10 |
+   ```
+
+2. **Sorting the Array**
+   ```
+   9, 9, 10, 10, 10, 10, 11, 11, 11, 99
+   ```
+
+3. **Finding the Median Value**
+   ```
+   10
+   ```
+
+4. **Substituted in the Array**
+   ```
+   | 10 | 11 | 10 | 0 | 1 |
+   | 9  | 10 | 11 | 1 | 0 |
+   | 1  | 10 |  9 | 10 | 1 |
+   | 11 | 10 |  9 | 10 | 11 |
+   | 9  | 10 | 11 |  9 | 10 |
+   | 10 |  9 | 11 | 10 | 10 |
+   ```
+
+5. **Another Array Example**
+   ```
+   | 10 |  1 | 10 | 0 | 1 |
+   |  9 | 10 | 11 | 1 | 0 |
+   |  1 | 10 |  9 | 0 | 2 |
+   |  1 | 11 | 10 |  9 | 9 |
+   |  9 |  1 | 11 |  9 | 99 |
+   |  1 | 10 |  9 | 11 | 10 |
+   ```
+
+6. **Sorting the Array**
+   ```
+   0, 1, 1, 1, 1, 9, 9, 10, 10, 10, 11, 11, 99
+   ```
+
+7. **Finding the Median Value**
+   ```
+   1
+   ```
+
+8. **Substituted in the Array**
+   ```
+   | 10 |  1 | 10 | 0 | 1 |
+   |  9 | 10 | 11 | 1 | 0 |
+   |  1 | 10 |  9 | 0 | 2 |
+   |  1 | 11 | 10 |  9 | 9 |
+   |  9 |  1 | 11 |  9 | 10 |
+   |  1 | 10 |  9 | 11 | 10 |
+   ```
+
+9. **Another Array Example**
+   ```
+   | 10 | 11 |  1 | 10 | 1 |
+   |  9 | 10 | 11 | 1 | 0 |
+   |  1 | 10 |  9 | 10 | 1 |
+   |  1 | 11 | 10 |  9 | 9 |
+   |  9 | 10 | 11 |  9 | 99 |
+   |  1 | 10 |  9 | 10 | 10 |
+   ```
+
+10. **Sorting the Array**
+    ```
+    1, 1, 1, 1, 9, 9, 10, 10, 10, 10, 11, 11, 99
+    ```
+
+11. **Finding the Median Value**
+    ```
+    1
+    ```
+
+12. **Substituted in the Array**
+    ```
+    | 10 | 11 |  1 | 10 | 1 |
+    |  9 | 10 | 11 | 1 | 0 |
+    |  1 | 10 |  9 | 10 | 1 |
+    |  1 | 11 | 10 |  9 | 9 |
+    |  9 | 10 | 11 |  9 | 1 |
+    |  1 | 10 |  9 | 10 | 10 |
+    ```
+
+### Conclusion
+
+The median filter effectively replaces the outlier pixel value (99) with the median value of the surrounding pixels, significantly reducing noise.
+
+*Vineeth N B (IIT-H)*
+
+*§1.6 Frequency Domain*
+```
+
+# DL4CV_Week01_Part06.pdf - Page 8
+
+```markdown
+# Non-Linear Filters: Bilateral Filtering
+
+- Noise removal comes at expense of image blurring at edges
+- **Bilateral filtering**: Simple, non-linear edge-preserving smoothing
+  - Reject (in a soft manner) pixels whose values differ too much from the central pixel value.
+  - Output pixel value is weighted combination of neighboring pixel values: 
+    \[
+    g(i, j) = \frac{\sum_{k, l} I(k, l) w(i, j, k, l)}{\sum_{k, l} w(i, j, k, l)}
+    \]
+  - Data-dependent bilateral weight function composed of domain and range kernel:
+    \[
+    w(i, j, k, l) = \exp \left( - \frac{(i - k)^2 + (j - l)^2}{2\sigma_d^2} - \frac{\|I(i, j) - I(k, l)\|^2}{2\sigma_r^2} \right)
+    \]
+
+*Credit: Wikipedia; CVOnline*
+
+_Vineeth N B (IIIT-H)_
+
+*§1.6 Frequency, Domain*
+
+![Image of a child](image_url)
+```
+
+# DL4CV_Week01_Part06.pdf - Page 9
+
+```markdown
+# Bilateral Filters: Example
+
+![Bilateral Filter Example](image_url)
+
+**Credit: CVOnline**
+
+## Bilateral Filters: Example
+
+### Given region in an image
+![Given Region](image_url)
+
+### 23 x 23 filter centered two pixels to right of step in previous figure
+![Filter](image_url)
+
+### Filtered output
+![Filtered Output](image_url)
+
+---
+
+**Vineeth N B (IIT-H)**
+
+**Section: 1.6 Frequency Domain**
+
+**Slide Number: 9 / 37**
+```
+
+# DL4CV_Week01_Part06.pdf - Page 10
+
+```markdown
+# What do we lose in a low-resolution image?
+
+![Low Resolution Image Comparison](image_url)
+
+Credit: Derek Hoeim, UIUC; James Hays, Gated
+
+Vineeth N B (IIIT-H)
+
+## Frequency Domain
+
+1. **Section Title**: Discuss the implications of low-resolution images on image quality and detail.
+
+2. **Visual Comparison**:
+   - **High-resolution image**: Detailed and clear depiction of the landscape.
+   - **Low-resolution image**: Blurred and less detailed representation of the same scene.
+
+3. **Loss of detail**:
+   - **High-resolution image**: Retains fine details such as tree leaves, water texture, and color gradients.
+   - **Low-resolution image**: Loses fine detail, resulting in a lack of clarity and definition.
+
+4. **Impact on Analysis**:
+   - High-resolution images are crucial for tasks requiring precise detail, such as medical imaging, satellite imagery, and scientific research.
+   - Low-resolution images can lead to inaccurate interpretations or missed details.
+
+![Low-Resolution Image Example](image_url)
+
+## Conclusion
+
+- **High-resolution images** provide significant advantages in maintaining detail and accuracy.
+- **Low-resolution images** compromise these aspects, leading to potential inaccuracies and loss of critical information.
+
+For more information, refer to the works by Derek Hoeim and James Hays.
+
+```
+
+# DL4CV_Week01_Part06.pdf - Page 11
+
+```markdown
+# Fourier
+
+Jean Baptist Joseph Fourier (1768-1830) had an idea in (1807).
+
+- **Idea**: Any univariate function can be rewritten as a weighted sum of sines and cosines of different frequencies.
+
+![Fourier Series Diagram](image-url)
+
+**Vineeth N B (IIIT-H)**
+
+**§1.6 Frequency Domain**
+
+NPTEL
+
+Page 11 / 37
+```
+
+# DL4CV_Week01_Part06.pdf - Page 12
+
+```markdown
+# Fourier
+
+Jean Baptist Joseph Fourier (1768-1830) had an idea in (1807).
+
+- **Idea**: Any univariate function can be rewritten as a weighted sum of sines and cosines of different frequencies.
+
+  > ...the manner in which the author arrives at these equations is not exempt of difficulties and...his analysis to integrate them still leaves something to be desired on the score of generality and even rigour.
+
+- **Of course, what’s new?**
+
+  - Many including Lagrange, Laplace, Poisson and other big wigs did not believe him.
+  - Not translated into English until 1878!
+
+- **(Mostly) true**
+
+  - Called Fourier Series
+  - Some subtle restrictions
+
+*Credit: James Hays*
+
+![Laplace](images/Laplace.png) ![Legendre](images/Legendre.png)
+
+---
+
+Vineeth N B (IITH)
+
+Frequency Domain $1.6$
+```
+
+# DL4CV_Week01_Part06.pdf - Page 13
+
+```markdown
+# A sum of sines
+
+- **Building block:**
+
+  \[ A \sin (\omega x + \phi) \]
+
+- **Add enough of them to get any signal** \( f(x) \) **you want!**
+
+![Graphs of Sine Waves and Their Summation](image_url)
+
+**Credit:** James Hays, Gatech
+
+_Vineeth N B (IIT-H)_
+
+**Section:** §1.6 Frequency Domain
+
+**Slide Number:** 12 / 37
+```
+
+# DL4CV_Week01_Part06.pdf - Page 14
+
+```markdown
+# The Fourier Spectrum
+
+## Example: \( g(t) = \sin(2\rho ft) + \left( \frac{1}{3} \right) \sin(2\rho(3f)t) \)
+
+![Waveform Diagram](waveform_diagram_url)
+
+---
+
+Vineeth N B (IIT-H) | §1.6 Frequency Domain | 13 / 37
+
+---
+
+Note: Replace `waveform_diagram_url` with the actual URL or filename of the waveform diagram if available.
+
+In this example, the function \( g(t) \) is given as a combination of sine waves. The first term is \( \sin(2\rho ft) \), and the second term is \( \left( \frac{1}{3} \right) \sin(2\rho(3f)t) \). This is a fundamental example in understanding the Fourier series and how it decomposes a time-domain signal into its constituent frequencies.
+
+The resulting waveform can be visualized with the provided diagram. This visualization shows the combination of the two sine waves, illustrating their interference and constructive/destructive patterns.
+
+### Key Concepts:
+- **Fourier Series**: A way to represent periodic functions as a sum of sine and cosine functions.
+- **Sine Function**: A fundamental mathematical function representing a wave.
+- **Frequency Component**: The frequency at which the sine wave oscillates.
+- **Amplitude**: The weight of each frequency component in the sum.
+
+For further analysis and understanding, it's essential to compute the Fourier transform of \( g(t) \) to determine the frequency components and their contributions to the overall signal.
+
+This section is part of a broader discussion on frequency domain analysis, crucial for signal processing and various engineering applications.
+```
+
+# DL4CV_Week01_Part06.pdf - Page 15
+
+# The Fourier Spectrum
+
+## Example: \( g(t) = \sin(2\rho ft) + \left( \frac{1}{3} \right) \sin(2\rho(3f)t) \)
+
+![Fourier Spectrum](image.png)
+
+- **Graph of \( \sin(2\rho ft) \)**: The left graph represents the sine wave function \( \sin(2\rho ft) \).
+- **Graph of \( \left( \frac{1}{3} \right) \sin(2\rho(3f)t) \)**: The right graph represents the sine wave function scaled by \( \frac{1}{3} \), \( \left( \frac{1}{3} \right) \sin(2\rho(3f)t) \).
+
+When these two functions are combined, they result in the composite waveform shown in the center.
+
+![Composite Waveform](image.png)
+
+From the Fourier spectrum, we can see how the combination of these two sine waves leads to the overall signal. The amplitude and frequency components can be analyzed to understand the characteristics of the combined signal.
+
+### Footer
+- **Vineeth N B (IIT-H)**
+- **Section**: §1.6 Frequency Domain
+- **Page Number**: 13 / 37
+
+# DL4CV_Week01_Part06.pdf - Page 16
+
+```markdown
+# The Fourier Spectrum
+
+## Example: \( g(t) = \sin(2 \rho ft) + \frac{1}{3} \sin(2 \rho(3f)t) \)
+
+![Fourier Spectrum Illustration](image_url)
+
+- **Graph 1**: Represents \(\sin(2 \rho ft)\).
+
+  ```math
+  \sin(2 \rho ft)
+  ```
+
+- **Graph 2**: Represents \(\frac{1}{3} \sin(2 \rho(3f)t)\).
+
+  ```math
+  \frac{1}{3} \sin(2 \rho(3f)t)
+  ```
+
+  ![Combined Graph](image_url)
+
+  This graph shows the combination of \(\sin(2 \rho ft)\) and \(\frac{1}{3} \sin(2 \rho(3f)t)\).
+
+- **Fourier Transform**:
+
+  ![Fourier Transform Graph](image_url)
+
+  The graph represents the frequency domain of the function \( g(t) \).
+
+**Credit**: Alexei Efros, UCBerkely; James Hays, Gatech
+
+_Vineeth N B (IIT-H)_
+
+**Slide**: §1.6 Frequency Domain
+
+---
+
+**Slide Number**: 13 / 37
+```
+
+# DL4CV_Week01_Part06.pdf - Page 17
+
+```markdown
+# The Fourier Spectrum
+
+![Fourier Spectrum Image](image_url)
+
+Vineeth N B (IIT-H) & Frequency Domain
+
+---
+
+## The Fourier Spectrum
+
+### Introduction
+The Fourier spectrum is a fundamental concept in signal processing and physics, which describes the frequency content of a signal. It is named after the French mathematician Jean-Baptiste Joseph Fourier, who developed the mathematical theory behind it.
+
+### Mathematical Description
+The Fourier spectrum of a signal \(x(t)\) is obtained by taking the Fourier transform of the signal. The Fourier transform \(X(f)\) is defined as:
+
+\[ X(f) = \int_{-\infty}^{\infty} x(t) e^{-j2\pi f t} \, dt \]
+
+where:
+- \(x(t)\) is the time-domain signal.
+- \(X(f)\) is the frequency-domain representation.
+- \(f\) is the frequency variable.
+- \(j\) is the imaginary unit.
+
+### Properties of the Fourier Transform
+1. **Linearity**: The Fourier transform is a linear operation. If \(x(t)\) and \(y(t)\) are two signals, then:
+
+\[ \mathcal{F}\{ax(t) + by(t)\} = aX(f) + bY(f) \]
+
+2. **Convolution**: The convolution of two time-domain signals \(x(t)\) and \(y(t)\) in the time domain corresponds to multiplication in the frequency domain:
+
+\[ \mathcal{F}\{x(t) * y(t)\} = X(f)Y(f) \]
+
+3. **Shifting**: A time shift in the time domain corresponds to a phase shift in the frequency domain:
+
+\[ \mathcal{F}\{x(t - a)\} = X(f) e^{-j2\pi f a} \]
+
+4. **Scaling**: A time scaling in the time domain corresponds to a frequency scaling in the frequency domain:
+
+\[ \mathcal{F}\{x(at)\} = \frac{1}{|a|} X\left(\frac{f}{a}\right) \]
+
+### Practical Applications
+The Fourier spectrum is widely used in various fields, including:
+- **Signal Processing**: For analyzing and filtering signals.
+- **Image Processing**: For edge detection and noise reduction.
+- **Physics**: For analyzing wave phenomena and quantum mechanics.
+- **Communication Systems**: For modulation and demodulation.
+
+### Example
+Consider a rectangular pulse in the time domain:
+
+\[ x(t) = \begin{cases}
+1 & \text{if } 0 \leq t \leq 1 \\
+0 & \text{otherwise}
+\end{cases} \]
+
+The Fourier transform of this signal is:
+
+\[ X(f) = \frac{\sin(\pi f)}{\pi f} \]
+
+This is known as the **sinc function**.
+
+### Conclusion
+The Fourier spectrum provides a powerful tool for understanding the frequency content of signals, enabling more efficient signal processing and analysis in various applications.
+
+---
+
+Vineeth N B (IIT-H) & Frequency Domain
+```
+
+# DL4CV_Week01_Part06.pdf - Page 18
+
+```markdown
+# The Fourier Spectrum
+
+![Fourier Spectrum Image](image_url)
+
+**Credit: James Hays, Gatech**
+
+Vineeth N B (IIT-H)
+
+## Frequency Domain
+
+### Diagram 1
+![Diagram 1](image_url)
+
+### Diagram 2
+![Diagram 2](image_url)
+
+### Equation
+$$
+X(f) = \mathcal{F}\{x(t)\} = \int_{-\infty}^{\infty} x(t) e^{-j 2 \pi f t} dt
+$$
+
+### Fourier Transform Analysis
+- The Fourier Transform converts a time-domain signal into its frequency components.
+- The inverse Fourier Transform reconstructs the time-domain signal from its frequency components.
+- The Fourier series represents a time-domain signal as a sum of sinusoids.
+
+### Example 1
+```markdown
+# Time Domain Signal
+![]()
+
+# Frequency Domain Representation
+![]()
+```
+
+### Example 2
+```markdown
+# Time Domain Signal
+![]()
+
+# Frequency Domain Representation
+![]()
+```
+
+### Equations
+$$
+X(f) = \mathcal{F}\{x(t)\} \quad \text{and} \quad x(t) = \mathcal{F}^{-1}\{X(f)\}
+$$
+
+$$
+x(t) = \sum_{n=-\infty}^{\infty} c_n e^{j 2 \pi n f_0 t}
+$$
+
+### Conclusion
+The Fourier Spectrum provides a powerful tool for analyzing signals in the frequency domain, enabling us to understand the frequency composition of a signal.
+
+```
+
+# DL4CV_Week01_Part06.pdf - Page 19
+
+```markdown
+# The Fourier Spectrum
+
+![Fourier Spectrum Diagram](image_url)
+
+**Credit:** James Hays, Gatech
+
+Vineeth N B (IIT-H)
+§1.6 Frequency Domain
+
+## Diagram Explanation
+
+### Top Row
+
+1. **Green Square Wave**
+   - The green square wave on the left represents a periodic discontinuous signal.
+   - This signal is shown as a series of sharp transitions between high and low values.
+
+2. **Fourier Series Components**
+   - The square wave can be decomposed into a series of sine waves.
+   - The upper middle part shows the combination of several sine waves that sum up to recreate the square wave.
+
+3. **Resultant Wave**
+   - The resultant wave on the right exhibits a continuous periodic wave.
+   - This is the Fourier series representation of the original square wave.
+
+### Bottom Row
+
+1. **Alternate Fourier Series Components**
+   - Similar to the top row, this section shows a different combination of sine waves.
+   - These waves are also summed to produce the same square wave.
+
+2. **Resultant Wave**
+   - Again, the resultant continuous wave on the right is the Fourier series representation of the square wave.
+
+## Mathematical Representation
+
+The Fourier series representation of a periodic signal \( f(t) \) can be expressed as:
+\[ f(t) = a_0 + \sum_{n=1}^{\infty} \left( a_n \cos(n\omega t) + b_n \sin(n\omega t) \right) \]
+
+Where:
+- \( a_0 \) is the zero-frequency component (dc term).
+- \( a_n \) and \( b_n \) are the Fourier coefficients.
+- \( \omega \) is the angular frequency.
+
+For a square wave:
+- \( a_0 = 0 \)
+- The coefficients \( a_n \) and \( b_n \) are determined by the specific properties of the square wave.
+
+### Example of Fourier Coefficients Calculation
+
+For a square wave with amplitude \( A \) and period \( T \):
+\[ a_n = \frac{2A}{n\pi} \text{ for even } n \]
+\[ b_n = 0 \text{ for all } n \]
+
+This represents how the square wave can be constructed from a combination of sine waves of varying frequencies and amplitudes.
+```
+
+# DL4CV_Week01_Part06.pdf - Page 20
+
+```markdown
+# The Fourier Spectrum
+
+## Credit: James Hays, Gatech
+
+![Fourier Spectrum Diagram](image_url)
+
+```math
+\text{Green Square Wave} = \text{Sinusoidal Waveforms}
+```
+
+### Diagram Description
+
+- The green square wave on the left represents a discrete signal.
+- The central section shows the decomposition of this signal into its sinusoidal components using Fourier analysis.
+- The right side of the diagram illustrates the resultant waveform after combining these components.
+
+### Components
+
+1. **Square Wave (Green Line)**
+   - The original discrete signal depicted as a square wave.
+
+2. **Fourier Transform**
+   - The middle section represents the Fourier transform, showing how the original signal is decomposed into a series of sinusoidal waves.
+   - These waves are combined to replicate the original signal.
+
+3. **Resultant Waveform**
+   - The final waveform on the right, which is the sum of the sinusoidal components, replicates the original square wave.
+
+### Mathematical Representation
+
+The Fourier series expansion of a square wave can be represented as:
+
+```math
+\text{Square Wave} = \sum_{n=1}^{\infty} \left( \frac{4}{n \pi} \sin\left(\frac{n \pi x}{L}\right) \right)
+```
+
+Where:
+- \( L \) is the wavelength.
+- \( n \) is the harmonic number.
+
+### Frequency Domain Analysis
+
+The Fourier spectrum analysis helps in understanding the frequency components of the signal. It is particularly significant in digital signal processing, control systems, and telecommunications.
+
+### Reference
+Vineeth N B (IIT-H) §1.6 Frequency Domain
+
+Page 14 of 37
+```
+
+# DL4CV_Week01_Part06.pdf - Page 21
+
+```markdown
+# The Fourier Spectrum
+
+![Fourier Spectrum Diagram](image_url)
+
+**Credit**: James Hays, Gatech
+
+Vineeth N B (IIT-H)
+
+## Frequency Domain
+
+### Diagram Analysis
+
+- **Left Diagram**: Represents the input signal in the time domain.
+  - **Green Rectangle**: Indicates a square wave.
+
+- **Middle Top Diagram**: Depicts the Fourier Transform of the input signal.
+  - **Spectral Lines**: Show frequency components of the square wave.
+
+- **Right Diagram**: Represents the reconstructed signal in the time domain.
+  - **Sine Waves**: Indicate the superposition of frequency components.
+
+- **Middle Bottom Diagram**: Depicts another transformation or a variation of the input signal’s Fourier Transform.
+  - **Spectral Lines**: Show different frequency components compared to the middle top diagram.
+
+### Mathematical Representation
+
+Given a square wave \(x(t)\):
+
+\[ x(t) = \begin{cases}
+1 & \text{for } 0 \leq t < T \\
+-1 & \text{for } T \leq t < 2T
+\end{cases} \]
+
+The Fourier Transform \(X(f)\) of \(x(t)\) is given by:
+
+\[ X(f) = \frac{2}{T} \left( \frac{\sin(\pi f T)}{f \pi} \right) \]
+
+This equation indicates the frequency components that represent the square wave.
+
+---
+
+14 / 37
+```
+
+# DL4CV_Week01_Part06.pdf - Page 22
+
+```markdown
+# The Fourier Spectrum
+
+![Fourier Spectrum Diagram](image-url)
+
+**Credit:** James Hays, Gatech
+
+Vineeth N B (IIT-H)
+
+## Slide Content
+
+### Top Section
+
+- **Left Side**:
+  - **Graph**:
+    - Green Square Waveform
+  - **Equation**:
+    ```
+    = ...
+    ```
+
+- **Middle Section**:
+  - **Graph**:
+    - Complex Fourier Series Representation
+    - Spiral Pattern Indicating Frequency Components
+
+- **Right Side**:
+  - **Graph**:
+    - Sine Wave Representation
+    - Indicating a Single Frequency Component
+
+### Bottom Section
+
+- **Left Side**:
+  - **Graph**:
+    - Green Square Waveform
+  - **Equation**:
+    ```
+    = ...
+    ```
+
+- **Middle Section**:
+  - **Graph**:
+    - Complex Fourier Series Representation
+    - Spiral Pattern Indicating Frequency Components
+
+### Bottom Section
+
+- **Right Side**:
+  - **Graph**:
+    - Sine Wave Representation
+    - Indicating a Single Frequency Component
+
+### Footer
+
+**Vineeth N B (IIT-H)**
+
+**Session**: 1.6 Frequency Domain
+
+**Slide Number**: 14 / 37
+```
+
+# DL4CV_Week01_Part06.pdf - Page 23
+
+```markdown
+# The Fourier Spectrum
+
+![Fourier Spectrum Diagram](imageURL)
+
+## Equation
+
+\[
+x(t) = A \sum_{k=-\infty}^{\infty} \frac{1}{k} \sin (2 \pi k t)
+\]
+
+## Credit
+
+*James Hays, Gatech*
+
+---
+
+### Vineeth N B (IIIT-H)
+
+### §1.6 Frequency Domain
+
+![Fourier Transform Graph](imageURL)
+```
+
+# DL4CV_Week01_Part06.pdf - Page 24
+
+```markdown
+# Fourier Analysis of Images
+
+## Intensity Image
+
+![Intensity Image 1](image1.png)
+![Intensity Image 2](image2.png)
+![Intensity Image 3](image3.png)
+
+## Fourier Image
+
+![Fourier Image 1](fourier1.png)
+![Fourier Image 2](fourier2.png)
+![Fourier Image 3](fourier3.png)
+
+**Credit:** Derek Hoeim, UIUC
+
+*Vineeth N B (IIT-H)*
+
+*Section I.6: Frequency Domain*
+
+---
+
+Note: Replace the `image1.png`, `image2.png`, `image3.png`, `fourier1.png`, `fourier2.png`, and `fourier3.png` placeholders with actual image paths or filenames if available.
+
+Content extracted from the provided scientific text or slides in a detailed markdown format.
+```
+
+# DL4CV_Week01_Part06.pdf - Page 25
+
+```markdown
+# Fourier Analysis of Images
+
+- Encodes a whole series of sinusoids through a range of spatial frequencies from zero all the way up to ‘Nyquist frequency’ (more on this later)
+
+- Signal containing only a single spatial frequency of frequency \( f \) is plotted as:
+  - a single peak at point \( f \) along spatial frequency axis
+  - height of that peak corresponding to the amplitude, or contrast of that sinusoidal signal
+
+![Fourier Analysis of Images](image_url)
+
+Amplitude &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+DC term &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+\( f \) &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+N &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+```
+Vineeth N B (IIT-H) &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+§1.6 Frequency Domain &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;17 / 37
+```
+
+# DL4CV_Week01_Part06.pdf - Page 26
+
+```markdown
+# Fourier Analysis of Images
+
+## Mirror-image reflections along the axes
+
+![Fourier Transform](data:image/png;base64,[Base64-encoded-image-data])
+
+- **Amplitude**: Refers to the magnitude of the signal in the frequency domain.
+- **Frequency**: The measurement of the frequency components present in the signal.
+- **DC Term**: The zero-frequency component, representing the average value of the signal.
+- **Spatial Frequency**: The frequency of spatial variations in the image.
+
+### Spatial Frequency
+
+- **N**: Denotes the Nyquist frequency, which is the highest frequency that can be represented without aliasing.
+- **0**: Represents the DC term or the zero-frequency component.
+- **f**: Indicates the frequency components present in the image.
+
+### Why?
+
+See [Why is the FFT mirrored?](http://dsp.stackexchange.com/questions/4825/why-is-the-fft-mirrored)
+
+---
+
+Vineeth N B (IIT-H) §1.6 Frequency Domain
+
+---
+
+18 / 37
+```
+
+# DL4CV_Week01_Part06.pdf - Page 27
+
+```markdown
+# Fourier Analysis of Images: Examples
+
+## Frequency Domain Representations
+
+### Image Transformations and Frequency Components
+
+This section explores the Fourier analysis of images using various frequency domain representations. The images undergo transformations that highlight different frequency components present in the original image.
+
+#### Original Image
+
+The original image is shown at the top left, representing the spatial domain of the image.
+
+#### Image Frequency Components
+
+- **Column 1**: Displays the low-frequency components of the image. These components capture the overall structure and large-scale features.
+- **Column 3**: Illustrates intermediate frequency components. These components highlight mid-range details and textures within the image.
+- **Column 5**: Shows higher frequency components. These components emphasize fine details and smaller structures within the image.
+
+#### Frequency Domain Visualization
+
+Below each image transformation are the corresponding frequency domain visualizations. These visualizations help in understanding how the frequency components are distributed in the spatial domain.
+
+- **Column 1**: The frequency domain representation shows the low-frequency components concentrated towards the center.
+- **Column 3**: The intermediate frequency components are spread out more than the low-frequency components.
+- **Column 5**: The high-frequency components are distributed throughout the frequency domain representation.
+
+### Frequency Components in Context
+
+The frequency domain representations are crucial for various image processing tasks such as:
+
+- **Image denoising**: Identifying and removing noise in the high-frequency components.
+- **Image enhancement**: Enhancing details by manipulating specific frequency components.
+- **Image compression**: Reducing image size by focusing on essential frequency components.
+
+### Example Transformations
+
+The examples given in this section provide a visual representation of how different frequency components contribute to the overall image structure. Each transformation helps in understanding the separation and reconstruction of image details.
+
+#### Image Analysis
+
+- **Low Frequencies**: Capture the large-scale shape and general structure of the image.
+- **Medium Frequencies**: Detail the intermediate textures and patterns.
+- **High Frequencies**: Highlight the fine details and edges within the image.
+
+### Application in Image Processing
+
+Fourier analysis is widely applied in image processing algorithms for tasks such as:
+
+- **Edge detection**: Identifying sharp transitions in pixel intensities.
+- **Image restoration**: Correcting distortions and blurring.
+- **Pattern recognition**: Analyzing and identifying specific patterns within the image.
+
+### Conclusion
+
+Understanding the frequency domain representations of images is fundamental in image processing and analysis. It allows for effective manipulation and enhancement of images by targeting specific frequency components.
+
+---
+
+*Vineeth N B (IIIT-H)*
+*1.6 Frequency Domain*
+*Page 19 / 37*
+```
+
+# DL4CV_Week01_Part06.pdf - Page 28
+
+```markdown
+# Fourier Analysis of Images: Examples
+
+![Fourier Analysis](image_url)
+
+1 | 1+3 | 1+3+5 | 1+3+5+7
+--- | --- | --- | ---
+![Image 1](image_url) | ![Image 2](image_url) | ![Image 3](image_url) | ![Image 4](image_url)
+![Image 1 Fourier](image_url) | ![Image 2 Fourier](image_url) | ![Image 3 Fourier](image_url) | ![Image 4 Fourier](image_url)
+
+*Vineeth N B (IIT-H)*
+
+*1.6 Frequency Domain*
+
+---
+
+### Fourier Analysis of Images
+
+#### Introduction
+Fourier analysis is a powerful technique used to analyze the frequency components of images. It transforms an image from the spatial domain to the frequency domain, where different frequency components can be studied and manipulated.
+
+#### Example Images
+
+1. **Original Image**: 
+   - ![Original Image](image_url)
+   - This is a simple grayscale image.
+
+2. **Combined Frequency Components**:
+   - **1 + 3**: 
+     - ![1+3 Image](image_url)
+     - This image combines the low-frequency components (1) with the next set of frequencies (3).
+   - **1 + 3 + 5**: 
+     - ![1+3+5 Image](image_url)
+     - This image combines low-frequency components (1) with the next sets of frequencies (3 and 5).
+   - **1 + 3 + 5 + 7**: 
+     - ![1+3+5+7 Image](image_url)
+     - This image combines all the frequency components from 1 to 7.
+
+#### Fourier Transforms of Images
+
+1. **Original Image Fourier Transform**:
+   - ![Original Image Fourier](image_url)
+   - The Fourier transform of the original image shows the distribution of frequencies.
+
+2. **Fourier Transforms with Combined Frequency Components**:
+   - **1 + 3**: 
+     - ![1+3 Fourier](image_url)
+   - **1 + 3 + 5**: 
+     - ![1+3+5 Fourier](image_url)
+   - **1 + 3 + 5 + 7**: 
+     - ![1+3+5+7 Fourier](image_url)
+
+These transforms highlight how different frequency components contribute to the overall image structure.
+
+### Conclusion
+Fourier analysis is a critical tool in image processing for identifying and manipulating frequency components, which can aid in various applications such as image enhancement and noise reduction.
+
+```
+
+# DL4CV_Week01_Part06.pdf - Page 29
+
+```markdown
+# Fourier Analysis of Images: Examples
+
+![Fourier Analysis of Images: Examples](image_url)
+
+## Brightness Image
+
+![Brightness Image](image_url)
+
+## Fourier Transform
+
+![Fourier Transform](image_url)
+
+Vineeth N B (IITH)
+Section 1.6: Frequency Domain
+
+---
+
+**Note:**
+
+- Ensure images are correctly linked using `![]()` syntax.
+- Adjust section titles and headings as necessary based on the structure of the OCR output.
+- Maintain paragraph and list structures where applicable.
+- Use proper markdown syntax for bold and italicized text.
+- Include any special symbols or formulas accurately.
+```
+
+# DL4CV_Week01_Part06.pdf - Page 30
+
+```markdown
+# Fourier Analysis of Images: Examples
+
+![Fourier Analysis Examples](image_url)
+
+**Credit:** Forsyth and Ponce, *Computer Vision: A Modern Approach, 2003*
+
+Vineeth N B (IIT-H)
+
+## Frequency Domain Examples
+
+### Zebra Image Analysis
+- **Original Image**: ![Zebra](image_url)
+- **Fourier Transform**: ![Zebra FT](image_url)
+- **Magnitude Spectrum**: ![Zebra FT Magnitude](image_url)
+
+### Cheetah Image Analysis
+- **Original Image**: ![Cheetah](image_url)
+- **Fourier Transform**: ![Cheetah FT](image_url)
+- **Magnitude Spectrum**: ![Cheetah FT Magnitude](image_url)
+
+### Text Image Analysis
+- **Original Image**: ![Text](image_url)
+- **Fourier Transform**: ![Text FT](image_url)
+- **Magnitude Spectrum**: ![Text FT Magnitude](image_url)
+
+---
+
+### Frequency Domain Insights
+1. **Zebra Image**:
+   - The original image depicts a zebra.
+   - The Fourier Transform shows symmetrical patterns indicating the periodic nature of the zebra's stripes.
+   - The magnitude spectrum highlights the dominant frequencies, focusing on the high-frequency components due to the stripes.
+
+2. **Cheetah Image**:
+   - The original image shows a cheetah.
+   - The Fourier Transform reveals patterns related to the cheetah's spots and facial features.
+   - The magnitude spectrum emphasizes the mid-frequency components due to the cheetah's spots and texture.
+
+3. **Text Image**:
+   - The original image contains text.
+   - The Fourier Transform displays patterns corresponding to the text's edges and shapes.
+   - The magnitude spectrum focuses on low to mid-frequency components, representing the text's structural elements.
+
+### Notes
+- **Fourier Transform**: A mathematical technique used to decompose an image into its constituent frequencies.
+- **Magnitude Spectrum**: Represents the amplitude of each frequency component, highlighting the image's significant features.
+
+---
+
+Page: 22 / 37
+```
+
+# DL4CV_Week01_Part06.pdf - Page 31
+
+```markdown
+# Fourier Transform: Magnitude and Phase
+
+- **Fourier transform stores the magnitude and phase at each frequency**
+  - For mathematical convenience, this is often denoted in terms of real and complex numbers
+    - **Magnitude** encodes how much signal is there at a particular frequency
+    - **Phase** encodes spatial information (indirectly)
+
+  \[
+  A = \pm \sqrt{\text{Re}(\varphi)^2 + \text{Im}(\varphi)^2}
+  \]
+
+  \[
+  \varphi = \tan^{-1} \frac{\text{Im}(\varphi)}{\text{Re}(\varphi)}
+  \]
+
+**Credit:** Derek Hoeim, UIUC
+
+![Fourier Transform Diagram](image_url)
+
+**Credit: Wikimedia Commons**
+
+Vineeth N B (IIT-H)
+
+**Section:** §1.6 Frequency Domain
+
+Slide: 23 / 37
+```
+
+# DL4CV_Week01_Part06.pdf - Page 32
+
+```markdown
+# Fourier Transform: Magnitude and Phase
+
+- Fourier transform stores the **magnitude** and **phase** at each frequency.
+- For mathematical convenience, this is often denoted in terms of real and complex numbers.
+- **Magnitude** encodes how much signal is there at a particular frequency.
+  \[
+  A = \pm \sqrt{\text{Re}(\varphi)^2 + \text{Im}(\varphi)^2}
+  \]
+- Phase encodes spatial information (indirectly).
+  \[
+  \varphi = \tan^{-1} \left( \frac{\text{Im}(\varphi)}{\text{Re}(\varphi)} \right)
+  \]
+
+![Fourier Transform Diagram](image_url)
+
+*Credit: Derek Hoeim, UIUC*
+
+*Credit: Wikimedia Commons*
+
+*Vineeth N B (IIT-H)*
+
+*§1.6 Frequency Domain*
+
+*23 / 37*
+```
+
+# DL4CV_Week01_Part06.pdf - Page 33
+
+```markdown
+# Fourier Transform: Magnitude and Phase
+
+- Fourier transform stores the **magnitude** and **phase** at each frequency
+- For mathematical convenience, this is often denoted in terms of real and complex numbers
+- **Magnitude** encodes how much signal is there at a particular frequency
+
+  \[
+  A = \pm \sqrt{\text{Re}(\varphi)^2 + \text{Im}(\varphi)^2}
+  \]
+
+- **Phase** encodes spatial information (indirectly)
+
+  \[
+  \phi = \tan^{-1} \frac{\text{Im}(\varphi)}{\text{Re}(\varphi)}
+  \]
+
+![Fourier Transform Diagram](image-url)
+
+*Credit: Derek Hoeim, UIUC*
+
+![Complex Plane Diagram](image-url)
+
+*Credit: Wikimedia Commons*
+
+*Vineeth N B (IIT-H)*
+
+*§1.6 Frequency Domain*
+
+*Slide 23/37*
+```
+
+# DL4CV_Week01_Part06.pdf - Page 34
+
+```markdown
+# Continuous vs Discrete Fourier Transform
+
+![Fourier Transform Image](link-to-image)
+
+## Continuous Fourier transform (FT):
+
+- **Formula:**
+  \[
+  H(\omega) = \int_{-\infty}^{\infty} h(x) e^{-j \omega x} dx
+  \]
+
+## Discrete Fourier Transform (DFT):
+
+- **Formula:**
+  \[
+  H(\omega) = \sum_{n=0}^{N-1} h(x) e^{-j \frac{2 \pi n x}{N}} dx
+  \]
+  where \(N\) is the length of the sampled signal.
+
+## Process:
+
+1. **Fourier Transform:**
+   - **Signal:**
+     - Input Signal
+   - **Magnitude Spectrum:**
+     - Output as a Continuous Spectrum
+
+2. **Copy and Shift:**
+   - **Process:**
+     - Copy and shift the signal to process further
+
+3. **Fourier Transform:**
+   - **Sampled Signal:**
+     - Input as sampled signal
+   - **Magnitude Spectrum:**
+     - Output as Discrete Spectrum
+
+## Diagram:
+
+- **Magnitude Spectrum:**
+  - Shows the output of the Fourier Transform representing frequency components.
+
+## Credit:
+Elgammal, Rutgers University
+
+## Notes:
+- Vineeth N B (IIIT-H)
+- §1.6 Frequency Domain
+- Slide 24 / 37
+```
+
+**Note:** Replace `link-to-image` with the actual link or path to the image if available. Adjust any placeholders or annotations as needed based on the OCR results.
+
+# DL4CV_Week01_Part06.pdf - Page 35
+
+```markdown
+# More on the Fourier Transform
+
+If you want to learn more on the Fourier transform:
+
+- **An intuitive explanation (highly recommended if you don't have a background in signal processing):** [An Interactive Guide to the Fourier Transform](link)
+
+- **Other good tutorial-styled references:**
+  - Lecture by Lennart Lindegren, Lund University
+  - [An Introduction to the DFT](link)
+  - [Wikipedia: Discrete Fourier Transform](link)
+
+- **Any Digital Signal Processing course on NPTEL**
+
+*Vineeth N B (IITH)*
+
+*Section I.6 Frequency Domain*
+
+*25 / 37*
+```
+
+# DL4CV_Week01_Part06.pdf - Page 36
+
+```markdown
+# Convolution Theorem
+
+- **Fourier transform of convolution of two functions is product of their Fourier transforms:**
+
+  \[
+  F[g * h] = F[g]F[h]
+  \]
+
+- **Convolution in spatial domain can be obtained through multiplication in frequency domain!**
+
+  \[
+  g * h = F^{-1}[F[g]F[h]]
+  \]
+
+*Credit: James Hays, Gatech*
+
+![NPTEL Logo](https://via.placeholder.com/150)
+
+_Vineeth N B (IIT-H)_
+
+*Section 1.6 Frequency Domain*
+
+*Slide 26 / 37*
+```
+
+# DL4CV_Week01_Part06.pdf - Page 37
+
+```markdown
+# Properties of Fourier Transform
+
+| Property             | Signal                                      | Transform                          |
+|----------------------|---------------------------------------------|------------------------------------|
+| superposition        | \( f_1(x) + f_2(x) \)                       | \( F_1(\omega) + F_2(\omega) \)    |
+| shift                | \( f(x - x_0) \)                            | \( F(\omega)e^{-j\omega x_0} \)    |
+| reversal             | \( f(-x) \)                                 | \( F^*(\omega) \)                   |
+| convolution          | \( f(x) * h(x) \)                           | \( F(\omega)H(\omega) \)           |
+| correlation          | \( f(x) \otimes h(x) \)                     | \( F(\omega)H^*(\omega) \)          |
+| multiplication       | \( f(x)h(x) \)                              | \( F(\omega) * H(\omega) \)         |
+| differentiation      | \( f'(x) \)                                 | \( j\omega F(\omega) \)             |
+| domain scaling       | \( f(ax) \)                                 | \( 1/a F(\omega/a) \)               |
+| real images          | \( f(x) = f^*(x) \)                         | \( F(\omega) = F(-\omega) \)        |
+| Parseval's Theorem   | \( \sum_x |f(x)|^2 \)                          | \( \sum_\omega |F(\omega)|^2 \)          |
+
+*Credit: Szeliski, Computer Vision: Algorithms and Applications, 2010*
+
+Vineeth N B (IIT-H) §1.6 Frequency Domain 27 / 37
+```
+
+# DL4CV_Week01_Part06.pdf - Page 38
+
+```markdown
+# Fast Fourier Transform
+
+- Number of arithmetic operations to compute Fourier transform of \( N \) numbers (i.e., function defined at \( N \) points) is....
+
+![NPTEL Logo](https://example.com/nptel-logo.png)
+
+**Vineeth N B (IIT-H)**
+
+**§1.6 Frequency Domain**
+
+Page 28 / 37
+```
+
+# DL4CV_Week01_Part06.pdf - Page 39
+
+# Fast Fourier Transform
+
+- Number of arithmetic operations to compute Fourier transform of \(N\) numbers (i.e., function defined at \(N\) points) is ... proportional to \(N^2\).
+- Possible to reduce this to \(N \log N\) using **Fast Fourier Transform (FFT)**.
+
+For more, see [https://www.karlsims.com/fft.html](https://www.karlsims.com/fft.html).
+
+![Image Placeholder](image-url)
+
+---
+
+Vineeth N B (IIT-H) & Frequency Domain
+
+---
+
+```markdown
+# Fast Fourier Transform
+
+- Number of arithmetic operations to compute Fourier transform of \(N\) numbers (i.e., function defined at \(N\) points) is ... proportional to \(N^2\).
+- Possible to reduce this to \(N \log N\) using **Fast Fourier Transform (FFT)**.
+
+For more, see [https://www.karlsims.com/fft.html](https://www.karlsims.com/fft.html).
+
+![Image Placeholder](image-url)
+
+---
+
+Vineeth N B (IIT-H) & Frequency Domain
+
+---
+
+```
+
+# DL4CV_Week01_Part06.pdf - Page 40
+
+```markdown
+# Fast Fourier Transform
+
+- Number of arithmetic operations to compute Fourier transform of $N$ numbers (i.e., function defined at $N$ points) is ... proportional to $N^2$
+- Possible to reduce this to $N \log N$ using **Fast Fourier Transform (FFT)**
+- FFT is a **recursive divide-and-conquer algorithm** for computing DFT
+
+For more, see [https://www.karlsims.com/fft.html](https://www.karlsims.com/fft.html)
+
+![Graphic Placeholder](image-url)
+
+---
+
+Vineeth N B (IIT-H)       §1.6 Frequency Domain             28 / 37
+```
+
+# DL4CV_Week01_Part06.pdf - Page 41
+
+```markdown
+# Fast Fourier Transform
+
+- Number of arithmetic operations to compute Fourier transform of $N$ numbers (i.e., function defined at $N$ points) is.... proportional to $N^2$
+- Possible to reduce this to $N \log N$ using **Fast Fourier Transform (FFT)**
+- FFT is a **recursive divide-and-conquer algorithm** for computing DFT
+- Applications of FFT? Examples: Convolution, correlation
+
+For more, see [https://www.karlsims.com/fft.html](https://www.karlsims.com/fft.html)
+
+![Image](https://www.karlsims.com/fft.html)
+
+*Vineeth N B (IIT-H) Frequency Domain §1.6 Frequency Domain 28 / 37*
+```
+
+# DL4CV_Week01_Part06.pdf - Page 42
+
+```markdown
+# Filtering in Spatial Domain
+
+## Diagram
+
+![Filtering Process](https://example.com/filtering_process_diagram.png)
+
+**Top Left Matrix**:
+```
+1  0 -1
+2  0 -2
+1  0 -1
+```
+
+**Intensity Image** (Left Image)
+![Intensity Image](https://example.com/intensity_image.png)
+
+**Small Section of Image**
+![Small Image Section](https://example.com/small_image_section.png)
+
+**Filtered Image** (Right Image)
+![Filtered Image](https://example.com/filtered_image.png)
+
+## Process Overview
+
+1. The filter matrix is applied to each pixel of the input intensity image.
+2. The center pixel is multiplied by the central element of the filter matrix.
+3. The surrounding pixels are multiplied by the corresponding filter elements.
+4. The results of these multiplications are summed to produce a single output pixel value.
+
+## Credit
+
+*Derek Hoeim*
+Vineeth N B (IIT-H)
+
+## Slide Information
+
+* Slide Number: 29 / 37
+* Section: §1.6 Frequency Domain
+```
+
+# DL4CV_Week01_Part06.pdf - Page 43
+
+```markdown
+# Filtering in Frequency Domain
+
+## Diagram Explanation
+
+This diagram illustrates the process of filtering in the frequency domain. The steps are as follows:
+
+1. **Input Image**: The process starts with an input image. 
+   ![Input Image](image-url)
+
+2. **FFT (Fast Fourier Transform)**: The input image undergoes a Fast Fourier Transform (FFT). This converts the image from the spatial domain to the frequency domain, which highlights different frequency components.
+   ![FFT Result](fft-image-url)
+
+3. **Filtering**: In the frequency domain, specific frequency components are filtered. The filtering operation is represented by multiplying the FFT result with a filter (shown as a red and blue matrix).
+   ![Filtering](filtering-image-url)
+
+4. **Inverse FFT**: The filtered frequency domain data is then processed with an Inverse Fast Fourier Transform (Inverse FFT) to convert it back to the spatial domain.
+   ![Inverse FFT Result](inverse-fft-image-url)
+
+5. **Output**: The final output image is produced, which has been processed through the frequency domain filtering.
+
+## Image Breakdown
+
+### Intensity Image
+- **Description**: This is the original input image.
+- **Credit**: Derek Hoeim, UIUC
+
+### FFT Result
+- **Description**: This is the frequency domain representation of the input image.
+- **Symbol**: FFT
+
+### Filtering
+- **Description**: In this step, specific frequency components are filtered.
+- **Symbol**: × (Multiplication)
+
+### Inverse FFT Result
+- **Description**: This is the result after applying the Inverse FFT to the filtered frequency domain data.
+- **Symbol**: Inverse FFT
+
+## Additional Information
+
+- **Credit**: Derek Hoeim, UIUC
+- **Vineeth N B (IIIT-H)**
+
+## Slides Information
+
+- **Slide Number**: 30 / 37
+- **Section**: §1.6 Frequency Domain
+
+```
+
+# DL4CV_Week01_Part06.pdf - Page 44
+
+```markdown
+# Filtering in Frequency Domain
+
+![Filtering in Frequency Domain](image-url)
+
+**Question**: What cost improvement does use of convolution theorem (or FFT over vanilla convolution) give?
+
+![Graph](graph-url)
+
+![Frequency Image](frequency-image-url)
+
+**Vineeth N B (IIT-H)**
+**Frequency Domain**
+
+![Inverse FFT](inverse-fft-url)
+
+![Frequency Domain Diagram](frequency-domain-diagram-url)
+```
+
+# DL4CV_Week01_Part06.pdf - Page 45
+
+```markdown
+# Low-Pass and High-Pass Filters
+
+![Filters Diagram](image_url)
+
+## Low-Pass Filters
+
+- **Low-Pass Filters**: Filters that allow low frequencies to pass through (block high frequencies). Example?
+
+---
+
+**NPTEL**
+
+---
+
+**Vineeth N B (IIT-H)**
+
+**S1.6 Frequency Domain**
+
+---
+
+Page 32 / 37
+```
+
+# DL4CV_Week01_Part06.pdf - Page 46
+
+```markdown
+# Low-Pass and High-Pass Filters
+
+![Filter Diagram](image_url)
+
+- **Low-Pass Filters**: Filters that allow low frequencies to pass through (block high frequencies). Example?
+  - Gaussian filter
+
+- **High-Pass Filters**: Filters that allow high frequencies to pass through (block low frequencies). Example?
+
+*Vineeth N B (IIT-H) §1.6 Frequency Domain 32 / 37*
+
+NPTEL
+```
+
+# DL4CV_Week01_Part06.pdf - Page 47
+
+```markdown
+# Low-Pass and High-Pass Filters
+
+![Filter Diagram](image_url)
+
+- **Low-Pass Filters**: Filters that allow low frequencies to pass through (block high frequencies). Example?
+  - Gaussian filter
+
+- **High-Pass Filters**: Filters that allow high frequencies to pass through (block low frequencies). Example?
+  - Edge filter
+
+*Image credit: NPTEL*
+
+Vineeth N B. (IIT-H) §1.6 Frequency Domain 32 / 37
+```
+
+# DL4CV_Week01_Part06.pdf - Page 48
+
+```markdown
+# Which has more information: Magnitude or Phase?
+
+## Magnitude
+![Magnitude Image](image1.png)
+
+## Phase
+![Phase Image](image2.png)
+
+## Swap phase and reconstruct?
+
+![Swap Phase and Reconstruct Image](image3.png)
+
+### Image Examples
+
+#### Example 1: Cheetah
+- **Original Image**: ![Cheetah Original](cheetah_original.png)
+- **Magnitude**: ![Cheetah Magnitude](cheetah_magnitude.png)
+- **Phase**: ![Cheetah Phase](cheetah_phase.png)
+
+#### Example 2: Zebra
+- **Original Image**: ![Zebra Original](zebra_original.png)
+- **Magnitude**: ![Zebra Magnitude](zebra_magnitude.png)
+- **Phase**: ![Zebra Phase](zebra_place.png)
+
+### Note
+- Vineeth N B (IIT-H)
+- §1.6 Frequency Domain
+- Slide Number: 33 / 37
+```
+
+**Note**: Placeholders are used for images as OCR may not directly capture them. Replace these placeholders with actual image URLs or filenames as needed.
+
+# DL4CV_Week01_Part06.pdf - Page 49
+
+```markdown
+# Which has more information: Magnitude or Phase?
+
+## Magnitude vs. Phase Comparison
+
+- **Magnitude**
+  ![Magnitude Example](image1.png)
+
+- **Phase**
+  ![Phase Example](image2.png)
+
+## Swap Phase and Reconstruct?
+
+- **Original Image 1**
+  ![Original Image 1](image3.png)
+
+- **Reconstructed Image 1**
+  ![Reconstructed Image 1](image4.png)
+
+- **Original Image 2**
+  ![Original Image 2](image5.png)
+
+- **Reconstructed Image 2**
+  ![Reconstructed Image 2](image6.png)
+
+**Credit:** Forsyth and Ponce, *Computer Vision: A Modern Approach*, 2003
+
+*Vineeth N B (IIT-H)*
+
+*1.6 Frequency Domain*
+
+# Section Titles and Headings
+
+- **Magnitude**
+  ![Magnitude Image](magnitude_image.png)
+
+- **Phase**
+  ![Phase Image](phase_image.png)
+
+## Swap phase and reconstruct?
+
+- **Original Image 1**
+  ![Original Image 1](original_image1.png)
+
+- **Reconstructed Image 1**
+  ![Reconstructed Image 1](reconstructed_image1.png)
+
+- **Original Image 2**
+  ![Original Image 2](original_image2.png)
+
+- **Reconstructed Image 2**
+  ![Reconstructed Image 2](reconstructed_image2.png)
+
+**Note:** The images provided are placeholders for the actual images extracted from the OCR process.
+
+```
+
+# DL4CV_Week01_Part06.pdf - Page 50
+
+# Hybrid Images
+
+## Images
+
+### Top Row
+- ![Elephant Image](image1.png)
+  - **Graph**: Gain vs. Frequency (e/f)
+    - ![Graph](graph1.png)
+
+- ![Hybrid Elephant Image](image2.png)
+
+### Bottom Row
+- ![Leopard Image](image3.png)
+  - **Graph**: Gain vs. Frequency (e/f)
+    - ![Graph](graph2.png)
+
+- ![Hybrid Leopard Image](image4.png)
+
+## Credit
+- **Authors**: A. Oliva, A. Torralba, P.G. Schyns
+- **Title**: "Hybrid Images"
+- **Conference**: SIGGRAPH 2006
+
+---
+
+Vineeth N B. (IIIT-H)
+
+Section: §1.6 Frequency Domain
+
+Slide Number: 34 / 37
+
+# DL4CV_Week01_Part06.pdf - Page 51
+
+```markdown
+# Exercise: Match spatial domain image to Fourier magnitude image
+
+## Spatial Domain Images
+1. ![Image 1](image1.png)
+2. ![Image 2](image2.png)
+3. ![Image 3](image3.png)
+4. ![Image 4](image4.png)
+5. ![Image 5](image5.png)
+
+## Fourier Magnitude Images
+- **A**: ![Image A](image_a.png)
+- **B**: ![Image B](image_b.png)
+- **C**: ![Image C](image_c.png)
+- **D**: ![Image D](image_d.png)
+- **E**: ![Image E](image_e.png)
+
+## Additional Images
+- ![Additional Image 1](additional_image1.png)
+- ![Additional Image 2](additional_image2.png)
+- ![Additional Image 3](additional_image3.png)
+
+## References
+- Vineeth N B (IIT-H)
+- Frequency Domain
+- Page Number: 35 / 37
+```
+
+# DL4CV_Week01_Part06.pdf - Page 52
+
+```markdown
+# Homework
+
+## Readings
+
+- **Chapter 3.4**, Szeliski, *Computer Vision: Algorithms and Applications*
+
+- For more information on Fourier transforms:
+  - [http://www.thefouriertransform.com/](http://www.thefouriertransform.com/)
+  - [http://betterexplained.com/articles/an-interactive-guide-to-the-fourier-transform/](http://betterexplained.com/articles/an-interactive-guide-to-the-fourier-transform/)
+  - [http://wwwpub.zih.tu-dresden.de/~ds24/lehre/bvme_ss_2013/ip_05_fourier.pdf](http://wwwpub.zih.tu-dresden.de/~ds24/lehre/bvme_ss_2013/ip_05_fourier.pdf)
+
+- Other links provided on respective slides
+
+## Questions/Exercises
+
+- What cost improvement does convolution theorem give?
+
+- Complete the matching exercise
+```
+
+# DL4CV_Week01_Part06.pdf - Page 53
+
+```markdown
+# References
+
+- Richard Szeliski. *Computer Vision: Algorithms and Applications*. Texts in Computer Science. London: Springer-Verlag, 2011.
+
+- David Forsyth and Jean Ponce. *Computer Vision: A Modern Approach*. 2 edition. Boston: Pearson Education India, 2015.
+
+- Hays, James. CS 6476 - *Computer Vision (Fall 2018)*. URL: [https://www.cc.gatech.edu/~hays/compvision/](https://www.cc.gatech.edu/~hays/compvision/) (visited on 04/28/2020).
+
+- Hoiem, Derek, CS 543 - *Computer Vision (Spring 2011)*. URL: [https://courses.engr.illinois.edu/cs543/sp2017/](https://courses.engr.illinois.edu/cs543/sp2017/) (visited on 04/25/2020).
+
+- Oliva, Aude, 6.819/6.869 - *Advances in Computer Vision (Fall 2015)*. URL: [http://6.869.csail.mit.edu/fa15/](http://6.869.csail.mit.edu/fa15/) (visited on 04/28/2020).
+```
+

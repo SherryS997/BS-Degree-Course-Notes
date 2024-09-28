@@ -1,0 +1,1345 @@
+# DL4CV_Week10_Part04.pdf - Page 1
+
+```markdown
+# Deep Learning for Computer Vision
+
+# Combining VAEs and GANs
+
+**Vineeth N Balasubramanian**
+
+Department of Computer Science and Engineering
+Indian Institute of Technology, Hyderabad
+
+![NITEL Logo](image_url_placeholder)
+
+---
+
+Vineeth N B (IIT-H)
+
+§10.4 VAE-GAN Hybrids
+
+---
+
+### Section Title (if applicable)
+
+#### Subsection (if applicable)
+
+**Bold Text Example**
+
+*Italicized Text Example*
+
+- Bullet point 1
+- Bullet point 2
+
+```math
+Equation or formula example
+```
+
+| Table Header 1 | Table Header 2 |
+| -------------- | --------------- |
+| Table Row 1    | Table Row 2     |
+
+```python
+Code Block Example
+```
+
+```text
+Inline Code Block Example
+```
+
+### Greek Letters and Special Characters
+
+- α (alpha)
+- β (beta)
+- γ (gamma)
+- δ (delta)
+- ε (epsilon)
+- ζ (zeta)
+
+---
+
+Page 1 of 19
+```
+
+# DL4CV_Week10_Part04.pdf - Page 2
+
+```markdown
+# Review: Questions
+
+## Questions
+
+- Why does the encoder of a VAE map to a vector of means and a vector of standard deviations? Why does it not instead map to a vector of means and a covariance matrix?
+
+![IITH Logo](https://www.iiit.ac.in/wp-content/uploads/2018/03/cropped-1955-1.png)
+
+_IITH_
+
+_Vineeth N B (IIIT-H)_
+
+_§10.4 VAE-GAN Hybrids_
+
+_2 / 19_
+```
+
+# DL4CV_Week10_Part04.pdf - Page 3
+
+```markdown
+# Review: Questions
+
+## Questions
+
+- Why does the encoder of a VAE map to a vector of means and a vector of standard deviations? Why does it not instead map to a vector of means and a covariance matrix?
+  - **We are explicitly learning a set of independent Gaussians, which makes the learning easier - and of course, it works!**
+
+![IIT-H Logo](https://example.com/logo.png)
+
+**Vineeth N B (IIT-H)**
+
+**§10.4 VAE-GAN Hybrids**
+
+Page 2 / 19
+```
+
+# DL4CV_Week10_Part04.pdf - Page 4
+
+ the output markdown content.
+
+```markdown
+# Review: Questions
+
+## Questions
+
+- **What about the decoder?** If we assume a **Mean Squared Error** for the reconstruction loss, **what is the covariance of the _p(x|z) Gaussian?**
+
+![NPTEL Logo](image_url)
+
+_Vineeth N B. (IIIT-H)_
+
+*§10.4 VAE-GAN Hybrids*
+
+_3 / 19_
+```
+
+This markdown format ensures that the content remains scientifically accurate and visually well-formatted for easy comprehension.
+
+# DL4CV_Week10_Part04.pdf - Page 5
+
+```markdown
+# Review: Questions
+
+## Questions
+
+- **What about the decoder?** If we assume a Mean Squared Error for the reconstruction loss, what is the covariance of the \( p(x|z) \) Gaussian?
+
+  **Equivalent to modeling \( p(x|z) \) as Gaussian with identity covariance; in this case, decoder output is mean \( \mu(t) \) and, therefore, for an example \( x_i \), you get the following reconstruction loss:**
+
+  \[
+  -\log(p(x_i|t_i)) = -\log\left(\frac{1}{\sqrt{(2\pi)^k|I|}} \exp\left(-\frac{1}{2}(x_i - \mu(t_i))^T I (x_i - \mu(t_i))\right)\right)
+  \]
+
+  \[
+  = \frac{1}{2}||x_i - \mu(t_i)||^2 + \text{const.}
+  \]
+
+  **This is MSE!**
+
+---
+
+*Vineeth N B (IIIT-H)*
+*810.4 VAE-GAN Hybrids*
+*3 / 19*
+```
+
+In this markdown format:
+- The headings follow markdown syntax for different levels (e.g., `#`, `##`).
+- The mathematical formulas are maintained within code blocks for better readability.
+- Special symbols and Greek letters are correctly represented.
+- The text is parsed accurately, maintaining the intended structure and formatting.
+
+# DL4CV_Week10_Part04.pdf - Page 6
+
+```markdown
+# VAE vs GAN
+
+## VAE
+
+- **Pros**:
+  - Learns an inference machine by mapping data to a latent space with distribution of choice enabling **fast/efficient inference**.
+  
+- **Cons**:
+  - Tends to distribute probability mass diffusely over data space resulting in **blurred/low quality image samples**.
+
+## GAN
+
+- **Pros**:
+  - Bypass inference and learn generative model that produces high quality samples without sacrificing sampling speed.
+
+- **Cons**:
+  - Lacks an effective inference mechanism preventing from reasoning about data at an abstract level.
+
+*Source: Vineeth N B (IIIT-H)*
+
+*Section: §10.4 VAE-GAN Hybrids*
+
+*Slide Number: 4 / 19*
+```
+
+# DL4CV_Week10_Part04.pdf - Page 7
+
+
+
+```markdown
+# Can we combine VAEs and GANs?
+
+## Solution: Bridge the gap between VAEs and GANs, learn models that generate high-quality samples along with an effective inference network
+
+![Variational Autoencoder](image_path_vae.png) ![GAN](image_path_gan.png) ![VAE-GAN](image_path_vae_gan.png)
+
+- **Variational Autoencoder**
+  - Encoder
+    - Latent Space
+  - Decoder
+
+- **GAN**
+  - Generator
+    - Random Noise
+  - Discriminator
+
+- **VAE-GAN**
+  - Encoder
+    - Latent Space
+  - Decoder
+  - Discriminator
+
+*Vineeth N B (IIT-H) §10.4 VAE-GAN Hybrids 5 / 19*
+```
+
+# DL4CV_Week10_Part04.pdf - Page 8
+
+```markdown
+# VAE Limitations
+
+Let's recall the VAE objective:
+
+\[
+\mathcal{L}_{VAE} = -\mathbb{E}_{q(z|x)}[\log p((x)|z)] + D_{KL}(q(z|x) || p(z))
+\]
+
+![NPTEL Logo](https://via.placeholder.com/150)
+
+*Vineeth N B (IIT-H)*
+
+*§10.4 VAE-GAN Hybrids*
+
+*Page 6 of 19*
+```
+
+# DL4CV_Week10_Part04.pdf - Page 9
+
+
+
+```markdown
+# VAE Limitations
+
+Let's recall the VAE objective:
+
+$$
+\mathcal{L}_{VAE} = -\mathbb{E}_{q(z|x)}[\log p((x)|z)] + D_{KL}(q(z|x)||p(z))
+$$
+
+$$
+= \mathcal{L}_{reconstruction} + \mathcal{L}_{prior}
+$$
+
+![NPTEL Logo](https://via.placeholder.com/150 "NPTEL Logo")
+
+Vineeth N B (IIT-H) &10.4 VAE-GAN Hybrids
+
+6 / 19
+```
+
+Note: Placeholder for image URL if the OCR can't extract the image directly and the actual URL should be replaced with the correct one.
+
+# DL4CV_Week10_Part04.pdf - Page 10
+
+```markdown
+# VAE Limitations
+
+Let's recall the VAE objective:
+
+$$
+\mathcal{L}_{VAE} = -\mathbb{E}_{q(z|x)}[\log p((x)|z)] + D_{KL}(q(z|x) || p(z))
+$$
+
+$$
+= \mathcal{L}_{reconstruction} + \mathcal{L}_{prior}
+$$
+
+$$
+= MSE(x, \hat{x}) + D_{KL}(q(z|x) || p(z))
+$$
+
+![NPTEL](https://example.com/nptel.png)
+
+Vineeth N B (IIIT-H)
+
+§10.4 VAE-GAN Hybrids
+
+6 / 19
+```
+
+# DL4CV_Week10_Part04.pdf - Page 11
+
+```markdown
+# VAE Limitations
+
+Let's recall the VAE objective:
+
+\[ \mathcal{L}_{VAE} = -\mathbb{E}_{q(z|x)}[\log p((x)|z)] + D_{KL}(q(z|x) || p(z)) \]
+
+\[ = \mathcal{L}_{reconstruction} + \mathcal{L}_{prior} \]
+\[ = MSE(x, \hat{x}) + D_{KL}(q(z|x) || p(z)) \]
+
+## Mean-Squared Error
+
+![NPTEL](https://example.com/nptel_logo.png)
+
+Vineeth N B (IIT-H)
+
+§10.4 VAE-GAN Hybrids
+
+6 / 19
+```
+
+# DL4CV_Week10_Part04.pdf - Page 12
+
+```markdown
+# VAE Limitations
+
+Let’s recall the VAE objective:
+
+$$
+\mathcal{L}_{VAE} = -\mathbb{E}_{q(z|x)}[\log p((x)|z)] + D_{KL}(q(z|x) || p(z))
+$$
+
+$$
+= \mathcal{L}_{reconstruction} + \mathcal{L}_{prior}
+$$
+
+$$
+= MSE(x, \hat{x}) + D_{KL}(q(z|x) || p(z))
+$$
+
+## Mean-Squared Error
+
+- Assumes signal fidelity is independent of temporal/spatial relationships → does not hold for images
+
+![NPTEL](https://example.com/image.png)
+
+*Vineeth N B (IIIT-H)*
+
+*§10.4 VAE-GAN Hybrids*
+
+*6 / 19*
+```
+
+# DL4CV_Week10_Part04.pdf - Page 13
+
+```markdown
+# VAE Limitations
+
+Let's recall the VAE objective:
+
+$$
+\mathcal{L}_{VAE} = -\mathbb{E}_{q(z|x)}[\log p((x)|z)] + D_{KL}(q(z|x)||p(z))
+$$
+
+$$
+= \mathcal{L}_{reconstruction} + \mathcal{L}_{prior}
+$$
+
+$$
+= MSE(x,\hat{x}) + D_{KL}(q(z|x)||p(z))
+$$
+
+## Mean-Squared Error
+
+- Assumes signal fidelity is independent of temporal/spatial relationships → does not hold for images
+- Element-wise metric unable to model human perception of image fidelity and quality → low image quality
+
+![NPTEL](https://example.com/path/to/image.png)
+
+*Vineeth N B (IIT-H)*
+*810.4 VAE-GAN Hybrids*
+*6 / 19*
+```
+
+# DL4CV_Week10_Part04.pdf - Page 14
+
+ extraction should be detailed and structured.
+
+```markdown
+# VAE Limitations
+
+Let's recall the VAE objective:
+
+$$
+\mathcal{L}_{VAE} = -\mathbb{E}_{q(z|x)}[\log p((x)|z)] + D_{KL}(q(z|x)||p(z))
+$$
+
+$$
+= \mathcal{L}_{reconstruction} + \mathcal{L}_{prior}
+$$
+
+$$
+= MSE(x,\hat{x}) + D_{KL}(q(z|x)||p(z))
+$$
+
+## Mean-Squared Error
+
+- **Assumes signal fidelity is independent of temporal/spatial relationships** → does not hold for images
+- **Element-wise metric unable to model human perception of image fidelity and quality** → low image quality
+- **Pixel-based loss metric does not respect semantic-preserving transforms, e.g. scaling/translation**
+
+![NPTEl](https://example.com/image.png)
+
+*Vineeth N B (IIIT-H)*
+
+*§10.4 VAE-GAN Hybrids*
+
+*6 / 19*
+```
+
+# DL4CV_Week10_Part04.pdf - Page 15
+
+```markdown
+# MSE and Image Fidelity<sup>1</sup>
+
+![Image Grid](image_grid_url)
+
+- **MSE values of all distorted images** - images (b)-(g) relative to (a) - are nearly identical, even though images are perceptually different
+
+- **Images with small geometrical modifications** - images (h)-(i) - present large MSE values relative to (a), yet show negligible change in perceived quality
+
+<sup>1</sup> Wang and Bovik, Mean Squared Error: Love It or Leave It? IEEE Signal Processing Magazine, 2009
+
+Vineeth N B (IIIT-H)
+
+§10.4 VAE-GAN Hybrids
+
+---
+
+## Image Grid
+
+![Image Grid](image_grid_url)
+
+- **MSE = 60.05**
+  CW = 0.0084
+  (a)
+
+- **MSE = 60.06**
+  CW = 0.0084
+  (b)
+
+- **MSE = 60.07**
+  CW = 0.0084
+  (c)
+
+- **MSE = 60.06**
+  CW = 0.0084
+  (d)
+
+- **MSE = 60.08**
+  CW = 0.0084
+  (e)
+
+- **MSE = 60.05**
+  CW = 0.0084
+  (f)
+
+- **MSE = 60.07**
+  CW = 0.0084
+  (g)
+
+- **MSE = 123.63**
+  CW = 0.0084
+  (h)
+
+- **MSE = 150.88**
+  CW = 0.0084
+  (i)
+
+### Notes
+- [Image Fidelity Measures](https://example.com/image_fidelity): Explanation of image fidelity measures for "funny" image altered with different types of distortions.
+- (a) Reference image.
+- (b) Mean contrast distortion.
+- (c) Luminescence distortion.
+- (d) Color distortion.
+- (e) Blurring distortion.
+- (f) Sharpening distortion.
+- (g) Multiplication noise distortion.
+- (h) Rotation (clockwise).
+- (i) Rotation (counterclockwise).
+
+---
+
+```
+
+# DL4CV_Week10_Part04.pdf - Page 16
+
+```markdown
+# VAE Limitations
+
+## KL Divergence
+
+- Focused on encouraging \( q(z) \) to pick modes of \( p(z) \) \( \rightarrow \) unable to match \( q(z) \) to whole distribution of \( p(z) \) well
+
+![Image Placeholder](image-url)
+
+Vineeth N B (IIT-H)
+
+§10.4 VAE-GAN Hybrids
+
+Page 8 / 19
+```
+
+# DL4CV_Week10_Part04.pdf - Page 17
+
+
+
+```markdown
+# VAE Limitations
+
+## KL Divergence
+
+- Focused on encouraging q(z) to pick modes of p(z) -> unable to match q(z) to whole distribution of p(z) well
+- 'Spaces' or 'holes' in learned latent space -> may fail to capture data manifold
+
+![Graph](image.png)
+
+*Vineeth N B (IIIT-H)*
+
+*§10.4 VAE-GAN Hybrids*
+
+*8 / 19*
+```
+
+# DL4CV_Week10_Part04.pdf - Page 18
+
+
+
+```markdown
+# VAE Limitations
+
+## KL Divergence
+
+- Focused on encouraging $q(z)$ to pick modes of $p(z)$ $\rightarrow$ unable to match $q(z)$ to whole distribution of $p(z)$ well
+- 'Spaces' or 'holes' in learned latent space $\rightarrow$ may fail to capture data manifold
+- May miss several local regions in data space $\rightarrow$ adversely effect generalization capability
+
+*Image placeholder*
+
+Vineeth N B (IIT-H) §10.4 VAE-GAN Hybrids 8 / 19
+```
+
+# DL4CV_Week10_Part04.pdf - Page 19
+
+```markdown
+# VAE Limitations
+
+## KL Divergence
+
+- Focused on encouraging \( q(z) \) to pick modes of \( p(z) \) \( \rightarrow \) unable to match \( q(z) \) to whole distribution of \( p(z) \) well
+- 'Spaces' or 'holes' in learned latent space \( \rightarrow \) may fail to capture data manifold
+- May miss several local regions in data space \( \rightarrow \) adversely effect generalization capability
+
+## Form of Prior
+
+- Requires access to exact functional form of prior
+
+_Vineeth N B. (IIT-H)_
+
+§10.4 VAE-GAN Hybrids
+
+8 / 19
+```
+
+# DL4CV_Week10_Part04.pdf - Page 20
+
+```markdown
+# VAE Limitations
+
+## KL Divergence
+
+- Focused on encouraging \( q(z) \) to pick modes of \( p(z) \) → unable to match \( q(z) \) to whole distribution of \( p(z) \) well
+- 'Spaces' or 'holes' in learned latent space → may fail to capture data manifold
+- May miss several local regions in data space → adversely effect generalization capability
+
+## Form of Prior
+
+- Requires access to exact functional form of prior
+- Difficult to optimize; not computable in closed form always for all priors → limits choice of priors that can be used
+
+### How to address?
+
+*Vineeth N B. (IIIT-H)*
+
+§10.4 VAE-GAN Hybrids
+
+8 / 19
+```
+
+# DL4CV_Week10_Part04.pdf - Page 21
+
+```markdown
+# VAE Limitations
+
+## KL Divergence
+- Focused on encouraging \( q(z) \) to pick modes of \( p(z) \) → unable to match \( q(z) \) to whole distribution of \( p(z) \) well
+- 'Spaces' or 'holes' in learned latent space → may fail to capture data manifold
+- May miss several local regions in data space → adversely effect generalization capability
+
+## Form of Prior
+- Requires access to exact functional form of prior
+- Difficult to optimize; not computable in closed form always for all priors → limits choice of priors that can be used
+
+### How to address? Integrate with GANs to use its positives to overcome limitations!
+  
+_Vineeth N B (IIIT-H)_
+
+§10.4 VAE-GAN Hybrids
+
+8 / 19
+```
+
+# DL4CV_Week10_Part04.pdf - Page 22
+
+```markdown
+# Adversarial Autoencoder (AAE)²
+
+![Diagram of Adversarial Autoencoder](image_url)
+
+- **Aims to match aggregated posterior, q(z), to an arbitrary prior, p(z) via adversarial objective-based training**
+
+## Diagram Explanation
+
+- **Input (x)**: Original data input.
+- **q(z|x)**: Encoder maps input to latent space.
+- **z ~ q(z)**: Sample from the aggregated posterior.
+- **p(z)**: Arbitrary prior.
+- **Adversarial cost**: For distinguishing positive samples p(z) from negative samples q(z).
+
+### (Top) Standard VAE
+Standard Variational Autoencoder process where the encoder maps input to latent space and the decoder reconstructs the input.
+
+### (Bottom) Second network trained to discriminatively predict
+Whether a sample arises from the hidden code of the autoencoder or the input training distribution.
+
+## References
+
+2 Makhzani et al., Adversarial Autoencoders, ICLRW 2016
+
+Vineeth N B (IIIT-H)
+
+§10.4 VAE-GAN Hybrids
+
+NPTEL
+```
+
+# DL4CV_Week10_Part04.pdf - Page 23
+
+```markdown
+# Adversarial Autoencoder (AAE)<sup>2</sup>
+
+![Diagram](image_url)
+
+- **Input**: `x`
+- **Encoding**: `z ~ q(z|x)`
+- **Latent Space**: `z`
+- **Decoding**: `q(z|x)`
+- **Output**: `x ~ p(x|z)`
+
+## Diagram Structure
+
+- **Top**: Standard VAE
+  - **Input** `x`
+  - **Encoding** `z ~ q(z|x)`
+  - **Latent Space** `z`
+  - **Decoding** `x ~ p(x|z)`
+  - **Adversarial cost** for distinguishing positive samples `p(z)` from negative samples `q(z)`
+
+- **Bottom**: Second network trained to discriminatively predict whether a sample arises from hidden code of autoencoder or input training distribution
+
+## Adversarial Autoencoder (AAE)<sup>2</sup>
+### Goals
+- Aims to match aggregated posterior, `q(z)`, to an arbitrary prior, `p(z)`, via adversarial objective-based training
+- Renders continuous learned latent space -> captures data manifold well
+
+### References
+- Makhzani et al., Adversarial Autoencoders, ICLRW 2016
+- Vineeth N B (IIIT-H)
+- §10.4 VAE-GAN Hybrids
+```
+
+Note: Replace `image_url` with the actual URL or placeholder for the image. Adjust the formatting and references as needed for clarity and accuracy.
+
+# DL4CV_Week10_Part04.pdf - Page 24
+
+```markdown
+# Adversarial Autoencoder (AAE)^2
+
+![Adversarial Autoencoder (AAE)^2 Diagram](image_url)
+
+- **Aims to match aggregated posterior, q(z), to an arbitrary prior, p(z) via adversarial objective-based training**
+- **Renders continuous learned latent space -> captures data manifold well**
+- **Encoder converts data distribution to prior distribution, while decoder learns a deep generative model that maps imposed prior to data distribution**
+
+---
+
+(Top) Standard VAE
+![Standard VAE Diagram](image_url)
+
+(Bottom) Second network trained to discriminatively predict whether a sample arises from hidden code of autoencoder or input training distribution
+
+---
+
+^2 Makhzani et al, Adversarial Autoencoders, ICLRW 2016
+
+Vineeth N B (IIT-H)
+
+§10.4 VAE-GAN Hybrids
+
+9 / 19
+```
+
+# DL4CV_Week10_Part04.pdf - Page 25
+
+
+
+```markdown
+# Training AAE
+
+**Objective:**
+
+\[
+\mathcal{L} = \mathbb{E}_{x} \left[ \mathbb{E}_{q(z|x)} [-\log p(x|z)] \right] + \mathbb{E}_{x} \left[ \text{KL}(q(z|x) \| p(z)) \right]
+\]
+
+- **Reconstruction Error**
+- **KL Regularizer**
+
+**Note:** Replaced by adversarial loss in AAE
+
+*Vineeth N B (IIIT-H) §10.4 VAE-GAN Hybrids*
+
+10 / 19
+```
+
+# DL4CV_Week10_Part04.pdf - Page 26
+
+```markdown
+# Training AAE
+
+## Objective:
+
+\[ \mathcal{L} = \mathbb{E}_{x} \left[ \mathbb{E}_{q(z|x)} [-\log p(x|z)] \right] + \mathbb{E}_{x} \left[ \text{KL}(q(z|x) \| p(z)) \right] \]
+
+### Reconstruction Error
+### KL Regularizer
+
+Replaced by adversarial loss in AAE
+
+## Reconstruction Phase:
+
+- Introduce latent variable \(z\) with simple prior \(p(z)\) (e.g., Gaussian)
+- Sample \(z \sim p(z)\), pass it through Generator \(\hat{x} = G(z)\); where \(\hat{x} \sim p_G\)
+- Introduce mechanism to ensure \(p_G \approx p_{\text{data}}\)
+
+*Image source: Vineeth N B. (IIIT-H)*
+```
+
+# DL4CV_Week10_Part04.pdf - Page 27
+
+# Training AAE
+
+![Training AAE Diagram](https://via.placeholder.com/500)
+
+## Regularization Phase
+
+- **Aims to match aggregated posterior, \(q(z|x)\), to an arbitrary prior, \(p(z)\) via adversarial objective-based training**
+
+### Diagram Explanation
+
+- **Input \(x\)**: 
+  - The input data is passed through **Encoder / GAN Generator**.
+  
+- **Encoder / GAN Generator**:
+  - Converts the input data \(x\) to latent variable \(z\) according to \(q(z|x)\).
+  - Generates \(z\) sampled from \(q(z|x)\).
+
+- **Latent Variable \(z\)**:
+  - Represented as a 3D surface plot, \(p(z)\).
+
+- **Discriminator \(D\)**:
+  - Takes \(z\) as input.
+  - Outputs a value in the range \([0, 1]\).
+
+### Mathematical Representations
+
+- \(z \sim q(z|x)\): Represents the latent variable \(z\) generated by the encoder/generator.
+- \(z \sim p(z)\): Represents the latent variable \(z\) sampled from the prior distribution \(p(z)\).
+
+### Training Process
+
+1. **Encoder / GAN Generator**:
+   - Encodes the input data \(x\) to generate the latent variable \(z\).
+   - The generated \(z\) is used to reconstruct the input data \(x\).
+
+2. **Discriminator \(D\)**:
+   - Discriminates between the generated latent variables \(z\) from the encoder/generator and the sampled latent variables \(z\) from the prior distribution \(p(z)\).
+   - The discriminator output is used to adjust the generator to produce \(z\) that better matches the prior distribution \(p(z)\).
+
+### Objective
+
+- **Adversarial Training**:
+  - The generator aims to fool the discriminator by generating \(z\) that closely matches the prior distribution \(p(z)\).
+  - The discriminator aims to accurately distinguish between the generated \(z\) and the sampled \(z\).
+
+### Summary
+
+- The **Regularization Phase** focuses on aligning the aggregated posterior \(q(z|x)\) with an arbitrary prior \(p(z)\) using adversarial training techniques.
+- This process involves using an encoder/generator and a discriminator to iteratively improve the quality of the generated latent variables \(z\).
+
+**Reference**:
+- Vineeth N B. (IIT-H). §10.4 VAE-GAN Hybrids. Slide 11 / 19.
+
+# DL4CV_Week10_Part04.pdf - Page 28
+
+```markdown
+# Learned Latent Space: AAE vs VAE<sup>3</sup>
+
+![]()
+
+## Latent space of test data using models trained on MNIST:
+- **Top:** Spherical 2-D Gaussian prior distribution
+- **Bottom:** Mixture of 10 2-D Gaussian
+
+![Latent Space Visualization](image-url)
+
+### AAE
+- **Gap in the latent space, not well-packed**
+
+### VAE
+- **VAE emphasizes the modes of the distribution; has systematic differences from the prior**
+
+## References
+- Makhzani et al., Adversarial Autoencoders, ICLRW 2016
+- Vineeth N B (IIT-H)
+- §10.4 VAE-GAN Hybrids
+
+---
+
+12 / 19
+```
+
+# DL4CV_Week10_Part04.pdf - Page 29
+
+:
+
+```markdown
+# Learned Latent Space: AAE vs VAE<sup>3</sup>
+
+![Learned Latent Space: AAE vs VAE](image_url)
+
+## Latent Space of Test Data Using Models Trained on MNIST:
+
+### Top: Spherical 2-D Gaussian Prior Distribution
+- **AAE**
+  - **Image A**: Shows gaps in the latent space, not well-packed.
+  - **Image B**: Emphasizes the modes of the distribution; has systematic differences from the prior.
+
+- **VAE**
+  - **Image C**: Shows a more continuous latent space relative to KL divergence-based (VAE) distribution alignment.
+  - **Image D**: Adversarial training to impose prior (AAE) renders a more continuous latent space.
+
+### Bottom: Mixture of 10 2-D Gaussian
+
+### Adversarial Training to Impose Prior (AAE)
+- Adversarial training results in a more continuous latent space compared to KL divergence-based (VAE) distribution alignment.
+
+**References:**
+- Makhzani et al., Adversarial Autoencoders, ICLRW 2016
+- Vineeth N B (IIIT-H)
+- §10.4 VAE-GAN Hybrids
+
+---
+
+3 Makhzani et al., Adversarial Autoencoders, ICLRW 2016
+Vineeth N B (IIIT-H)
+§10.4 VAE-GAN Hybrids
+```
+
+# DL4CV_Week10_Part04.pdf - Page 30
+
+ the content of the image is as follows.
+
+```markdown
+# Learned Latent Space: AAE vs VAE<sup>3</sup>
+
+![Learned Latent Space AAE vs VAE](learned_latent_space_ae_vs_vae.png)
+
+## Latent space of test data using models trained on MNIST:
+
+- **Top:** Spherical 2-D Gaussian prior distribution
+- **Bottom:** Mixture of 10 2-D Gaussian
+
+## Adversarial training to impose prior (AAE) renders a more continuous latent space relative to KL divergence-based (VAE) distribution alignment (Top)
+
+## AAE imposes multi-modal distributions better than VAE (Bottom)
+
+### Panels:
+
+- **AAE:**
+  - **A:** Displays gaps in the latent space, not well-packed
+  - **B:** VAE emphasizes the modes of the distribution; has systematic differences from the prior
+
+- **VAE:**
+  - **C:** Displays gaps in the latent space, not well-packed
+  - **D:** VAE emphasizes the modes of the distribution; has systematic differences from the prior
+
+### References:
+
+<sup>3</sup> Makhzani et al., Adversarial Autoencoders, ICLRW 2016
+
+Vineeth N B (IIIT-H)
+
+810.4 VAE-GAN Hybrids
+
+---
+
+12 / 19
+```
+
+# DL4CV_Week10_Part04.pdf - Page 31
+
+```markdown
+# Imposing Complex Priors
+
+![Latent Space of AAE](image1.png) ![Samples Generated](image2.png)
+
+- **Left:** Latent space of AAE trained on MNIST dataset with Swiss roll distribution as prior \( p(z) \)
+- **Right:** Samples generated by walking along the main Swiss roll axis
+
+*Vineeth N B (IIIT-H) §10.4 VAE-GAN Hybrids*
+
+*13 / 19*
+```
+
+# DL4CV_Week10_Part04.pdf - Page 32
+
+
+
+```markdown
+# Imposing Complex Priors
+
+![Latent Space Visualization](image1.png)
+
+![MNIST Samples](image2.png)
+
+- **Left: Latent space of AAE trained on MNIST dataset with Swiss roll distribution as prior \( p(z) \)**
+
+- **Right: Samples generated by walking along the main Swiss roll axis**
+
+  For AAE, only require sampling from prior distribution in order to induce \( q(z) \) to match \( p(z) \); exact functional form of prior is not required
+
+*Vineeth N B. (IIIT-H)*
+
+*810.4 VAE-GAN Hybrids*
+
+*13 / 19*
+```
+
+Note: Replace `image1.png` and `image2.png` with the actual images if they can be captured. If OCR cannot capture the images, provide placeholders or descriptions accordingly.
+
+# DL4CV_Week10_Part04.pdf - Page 33
+
+```markdown
+# VAE-GAN<sup>4</sup>
+
+![Diagram Overview](image-placeholder.png)
+
+## Figure 1. Overview of our network.
+
+We combine a VAE with a GAN by collapsing the decoder and the generator into one.
+
+- Replace element-wise MSE in pixel space with feature-wise metric between discriminator's hidden representations.
+
+<sup>4</sup> Larsen et al., Autoencoding beyond Pixels using a Learned Similarity Metric, ICML 2016
+
+Vineeth N B (IIT-H)
+
+§10.4 VAE-GAN Hybrids
+
+14 / 19
+```
+
+# DL4CV_Week10_Part04.pdf - Page 34
+
+```markdown
+# VAE-GAN<sup>4</sup>
+
+![VAE-GAN Network Overview](image_url)
+
+**Figure 1.** Overview of our network. We combine a VAE with a GAN by collapsing the decoder and the generator into one.
+
+- Replace element-wise MSE in pixel space with feature-wise metric between discriminator’s hidden representations
+- Combines advantage of GAN as high-quality generative model and VAE as a method that produces an encoding of data into latent space `z`
+
+<sup>4</sup> Larsen et al., Autoencoding beyond Pixels using a Learned Similarity Metric, ICML 2016
+
+*Vineeth N B (IIT-H)*
+
+*§10.4 VAE-GAN Hybrids*
+
+*14 / 19*
+```
+
+# DL4CV_Week10_Part04.pdf - Page 35
+
+
+
+```markdown
+# Loss Formulation
+
+Let $Dis_l(x)$ denote hidden representation of $l^{th}$ layer of discriminator; then:
+
+$$
+p(Dis_l(x) | z) = \mathcal{N}(Dis_l(x) | Dis_l(\tilde{x}), I)
+$$
+
+where $\tilde{x} \sim Dec(z)$ is a sample from decoder
+
+![NPTEL](https://example.com/path/to/image.png)
+
+Vineeth N B (IIIT-H) §10.4 VAE-GAN Hybrids 15 / 19
+```
+
+# DL4CV_Week10_Part04.pdf - Page 36
+
+
+
+```markdown
+# Loss Formulation
+
+Let $Dis_{l}(x)$ denote hidden representation of $l^{th}$ layer of discriminator; then:
+
+\[ p(Dis_{l}(x) \vert z) = \mathcal{N}(Dis_{l}(x) \vert Dis_{l}(\tilde{x}), I) \]
+
+where $\tilde{x} \sim Dec(z)$ is a sample from decoder
+
+\[ \mathcal{L}_{recon-content}^{Dis_{l}} = -\mathbb{E}_{q(z \vert x)}[\log p(Dis_{l}(x) \vert z)] \]
+
+![NPTEL Logo](image_url)
+
+Vineeth N B (IIT-H) §10.4 VAE-GAN Hybrids 15 / 19
+```
+
+This markdown format ensures the scientific content is accurately represented, with proper formatting for headings, equations, and images.
+
+# DL4CV_Week10_Part04.pdf - Page 37
+
+```markdown
+# Loss Formulation
+
+Let $Dis_l(x)$ denote hidden representation of $l^{th}$ layer of discriminator; then:
+
+$$
+p(Dis_l(x) | z) = \mathcal{N}(Dis_l(x) | Dis_l(\tilde{x}), I)
+$$
+
+where $\tilde{x} \sim Dec(z)$ is a sample from decoder
+
+$$
+\mathcal{L}^{Dis_l}_{recon-content} = -\mathbb{E}_{q(z|x)}[\log p(Dis_l(x) | z)]
+$$
+
+$$
+\mathcal{L}^{GAN}_{recon-style} = \log(Dis(x)) + \log(1 - Dis(Gen(z)))
+```
+
+*Vineeth N B. (IIT-H) §10.4 VAE-GAN Hybrids*
+
+*15 / 19*
+```
+
+# DL4CV_Week10_Part04.pdf - Page 38
+
+ accuracy and detail are paramount.
+
+```markdown
+# Loss Formulation
+
+Let $Dis_l(x)$ denote hidden representation of $l^{th}$ layer of discriminator; then:
+
+$$
+p(Dis_l(x)|z) = \mathcal{N}(Dis_l(x)|Dis_l(\tilde{x}), I)
+$$
+
+where $\tilde{x} \sim Dec(z)$ is a sample from decoder.
+
+$$
+\mathcal{L}_{recon-content}^{Dis_l} = - \mathbb{E}_{q(z|x)}[\log p(Dis_l(x)|z)]
+$$
+
+$$
+\mathcal{L}_{recon-style}^{GAN} = \log(Dis(x)) + \log(1 - Dis(Gen(z)))
+$$
+
+$$
+\mathcal{L}_{prior} = D_{KL}(q(z|x)||p(z))
+$$
+
+*Vineeth N B (IIT-H) §10.4 VAE-GAN Hybrids*
+
+*15 / 19*
+```
+
+# DL4CV_Week10_Part04.pdf - Page 39
+
+```markdown
+# Loss Formulation
+
+Let $Dis_l(x)$ denote hidden representation of $l^{th}$ layer of discriminator; then:
+
+\[ p(Dis_l(x)|z) = \mathcal{N}(Dis_l(x)|Dis_l(\tilde{x}), I) \]
+
+where $\tilde{x} \sim Dec(z)$ is a sample from decoder
+
+\[ \mathcal{L}_{recon-content}^{Dis_l} = -\mathbb{E}_{q(z|x)}[\log p(Dis_l(x)|z)] \]
+
+\[ \mathcal{L}_{recon-style}^{GAN} = \log(Dis(x)) + \log(1 - Dis(Gen(z))) \]
+
+\[ \mathcal{L}_{prior} = D_{KL}(q(z|x)||p(z)) \]
+
+\[ \mathcal{L}_{total} = \mathcal{L}_{recon-content}^{Dis_l} + \mathcal{L}_{recon-style}^{GAN} + \mathcal{L}_{prior} \]
+
+![Vineeth N B (IIT-H)](#) ![NIPS](#)
+
+![NIPS](#)
+```
+
+# DL4CV_Week10_Part04.pdf - Page 40
+
+# Training Algorithm
+
+## Algorithm 1 Training the VAE/GAN model
+
+```markdown
+θ_Enc, θ_Dec, θ_Dis ← initialize network parameters
+
+repeat
+    X ← random mini-batch from dataset
+    Z ← Enc(X)
+    L_prior ← D_KL(q(Z|X)||p(Z))
+    Xhat ← Dec(Z)
+    L_Dis_like ← -E_q(z|x) [p(Dis_f(X)|Z)]
+    Zp ← samples from prior N(0, I)
+    Xp ← Dec(Zp)
+    L_GAN ← log(Dis(X)) + log(1 - Dis(Xhat))
+                       + log(1 - Dis(Xp))
+
+    // Update parameters according to gradients
+    θ_Enc ← θ_Enc - ε * ∇θ_Enc (L_prior + L_Dis_like)
+    θ_Dec ← θ_Dec - ε * ∇θ_Dec (γ * L_Dis_like - L_GAN)
+    θ_Dis ← θ_Dis - ε * ∇θ_Dis L_GAN
+
+until deadline
+```
+
+![Diagram](image-placeholder.png)
+
+*Dis_f should not try to minimize I^Dis_f I^recon-content as this would collapse the discriminator to 0*
+
+---
+
+Vineeth N B (IIIT-H)
+
+§10.4 VAE-GAN Hybrids
+
+16 / 19
+
+# DL4CV_Week10_Part04.pdf - Page 41
+
+# Training Algorithm
+
+```markdown
+## Algorithm 1 Training the VAE/GAN model
+
+$\theta_{\text{Enc}}, \theta_{\text{Dec}}, \theta_{\text{Dis}} \leftarrow$ initialize network parameters
+
+repeat
+  $X \leftarrow$ random mini-batch from dataset
+  $Z \leftarrow \text{Enc}(X)$
+  $\mathcal{L}_{\text{prior}} \leftarrow D_{\text{KL}}(q(Z|X) || p(Z))$
+  $\hat{X} \leftarrow \text{Dec}(Z)$
+  $\mathcal{L}^{\text{Dis}}_{\text{like}} \leftarrow - \mathbb{E}_{q(Z|X)} [p(\text{Dis}_I(X)|Z)]$
+  $Z_p \leftarrow$ samples from prior $N(0, I)$
+  $\hat{X}_p \leftarrow \text{Dec}(Z_p)$
+  $\mathcal{L}_{\text{GAN}} \leftarrow \log(\text{Dis}(\hat{X})) + \log(1 - \text{Dis}(\hat{X})) + \log(1 - \text{Dis}(\hat{X}_p))$
+
+  // Update parameters according to gradients
+  $\theta_{\text{Enc}} \leftarrow \theta_{\text{Enc}} - \nabla \theta_{\text{Enc}} (\mathcal{L}_{\text{prior}} + \mathcal{L}^{\text{Dis}}_{\text{like}})$
+  $\theta_{\text{Dec}} \leftarrow \theta_{\text{Dec}} - \nabla \theta_{\text{Dec}} (\gamma \mathcal{L}^{\text{Dis}}_{\text{like}} - \mathcal{L}_{\text{GAN}})$
+  $\theta_{\text{Dis}} \leftarrow \theta_{\text{Dis}} - \nabla \theta_{\text{Dis}} \mathcal{L}_{\text{GAN}}$
+
+until deadline
+
+$\text{\textbf{\textit{Dis}}_I}$ should not try to minimize $\mathcal{L}^{\text{Dis}}_{\text{recon-content}}$ as this would collapse the discriminator to 0
+
+- Use samples $\hat{X}_p$ from prior directly in GAN loss in addition to $\hat{X}$
+```
+
+**Source:** Vineeth N B. (IIT-H) §10.4 VAE-GAN Hybrids 16 / 19
+
+# DL4CV_Week10_Part04.pdf - Page 42
+
+```markdown
+# Training Algorithm
+
+## Algorithm 1 Training the VAE/GAN model
+
+```markdown
+θ_{Enc}, θ_{Dec}, θ_{Dis} ← initialize network parameters
+
+repeat
+    X ← random mini-batch from dataset
+    Z ← Enc(X)
+    L_{prior} ← D_{KL}(q(Z|X)||p(Z))
+    X ← Dec(Z)
+    L_{Dis}^{i} ← −E_{q(Z|X)} [p(Dis_{i}(X)|Z)]
+    Z_{p} ← samples from prior N(0, I)
+    X_{p} ← Dec(Z_{p})
+    L_{GAN} ← log(Dis(X)) + log(1 − Dis(X̃))
+                + log(1 − Dis(X_{p}))
+
+    // Update parameters according to gradients
+    θ_{Enc} ← −∇θ_{Enc}(L_{prior} + L_{Dis}^{i})
+    θ_{Dec} ← −∇θ_{Dec}(γL_{Dis}^{i} − L_{GAN})
+    θ_{Dis} ← −∇θ_{Dis}L_{GAN}
+
+until deadline
+```
+
+- Dis_{i} should not try to minimize L_{recon−content}^{i} as this would collapse the discriminator to 0
+- Use samples X_{p} from prior directly in GAN loss in addition to X̃
+- Weight L_{recon−content}^{i} and L_{recon−style}^{i} to weight ability to reconstruct vs fooling discriminator
+```
+
+# DL4CV_Week10_Part04.pdf - Page 43
+
+```markdown
+# Comparing Generated Samples
+
+![Comparison of Generated Samples](image1.png)
+
+**Figure 3. Samples from different generative models.**
+
+- VAE
+- VAE_{213}
+- VAE/GAN
+- GAN
+
+---
+
+![Reconstructions from different autoencoders](image2.png)
+
+**Figure 4. Reconstructions from different autoencoders.**
+
+- Input
+- VAE
+- VAE_{213}
+- VAE/GAN
+
+---
+
+### Observations
+
+- **Drawing Samples and Propagation**:
+  - Draw samples from \( p(z) \) and propagate these through the decoder to generate new images.
+
+- **VAE**:
+  - Draws frontal part well, but the off-center gets blurry.
+
+- **VAE<sup>D</sup>_{Dis)**:
+  - Produces sharper images even off-center.
+
+**Vineeth N B (IIIT-H)**
+
+**§10.4 VAE-GAN Hybrids**
+
+17 / 19
+```
+
+# DL4CV_Week10_Part04.pdf - Page 44
+
+```markdown
+# Conditional Generation
+
+## Query
+
+### Prominent attributes: White, Fully Visible Forehead, Mouth Closed, Male, Curly Hair, Young, Wearing Lipstick, Family Nose, Teeth Not Visible, No Eyeglasses
+
+### VAE
+![VAE Results](image1.png)
+
+### GAN
+![GAN Results](image2.png)
+
+### VAE/GAN
+![VAE/GAN Results](image3.png)
+
+## Query
+
+### Prominent attributes: White, Male, Curly Hair, Frowning, Eyes Open, Junk Nose, Flash, Posted Photo, Eyeless, Narrow Eyes, Teeth Not Visible, Senior, Receding Hairline
+
+### VAE
+![VAE Results](image4.png)
+
+### GAN
+![GAN Results](image5.png)
+
+### VAE/GAN
+![VAE/GAN Results](image6.png)
+
+- Concatenate face attribute vector (LFW image dataset) to vector representation of input in *Enc*, *Dec*, and *Dis* while training
+- Use trained model to generate faces conditioned on held-out test attributes
+- Compared to an ordinary VAE, the VAE/GAN model yields significantly better images visually
+
+*Vineeth N B (IIIT-H)*
+
+*810.4 VAE-GAN Hybrids*
+
+*18 / 19*
+```
+
+# DL4CV_Week10_Part04.pdf - Page 45
+
+
+
+```markdown
+# Homework
+
+## Readings
+
+- [ ] **A wizard's guide to Adversarial Autoencoders: Part 1, Autoencoder**
+- [ ] **A wizard's guide to Adversarial Autoencoders: Part 2, Exploring latent space with Adversarial Autoencoders**
+- [ ] **What The Heck Are VAE-GANs?**
+- [ ] **(YouTube video) VAE-GAN Explained**
+
+---
+
+*Vineeth N B (IIT-H) §10.4 VAE-GAN Hybrids*
+
+Page 19 / 19
+```
+

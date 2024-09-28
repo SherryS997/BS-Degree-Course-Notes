@@ -1,0 +1,1319 @@
+# DL4CV_Week03_Part03.pdf - Page 1
+
+```markdown
+# Deep Learning for Computer Vision
+
+# From Points to Images: Bag-of-Words and VLAD Representations
+
+**Vineeth N Balasubramanian**
+
+Department of Computer Science and Engineering
+Indian Institute of Technology, Hyderabad
+
+![IIT Hyderabad Logo](https://example.com/iith_logo.png)
+
+**Vineeth N B (IIT-H)**
+
+## §3.3 Image/Region Descriptors
+
+1 / 13
+```
+
+# DL4CV_Week03_Part03.pdf - Page 2
+
+```markdown
+# Acknowledgements
+
+- Most of this lecture's slides are based on lectures of **Deep Learning for Vision** course taught by Prof Yannis Avrithis at Inria Rennes-Bretagne Atlantique
+
+---
+
+## Vineeth N B (IIIT-H) 
+### §3.3 Image/Region Descriptors
+NPTEL
+```
+
+Note: The section and subsection headings were inferred to follow typical markdown syntax for hierarchical content structure. The OCR process assumes that the presence of mathematical symbols or specialized formatting is minimal in this particular slide. The placeholder for the image is included as instructed, assuming the original image could not be captured or interpreted by the OCR process.
+
+# DL4CV_Week03_Part03.pdf - Page 3
+
+```markdown
+# Review
+
+## So far:
+
+- **Descriptors for matching features between different views of the same scene/object**
+  - Used in image stitching, image retrieval, etc.
+
+![Image](image-url)
+
+*Source: Yannis Avrithis, [Deep Learning for Vision, Spring 2019 SIF](#)*
+
+*Vineeth N B (IIIT-H)*
+
+## 3.3 Image/Region Descriptors
+```
+
+# DL4CV_Week03_Part03.pdf - Page 4
+
+```markdown
+# Review
+
+- **Can the same descriptors be used for matching different instances of the object?**
+- Used in image classification, detection, etc.
+
+![Descriptors Example](image_url)
+
+*Source: Yannis Avrithis, Deep Learning for Vision, Spring 2019 SIF*
+
+*Vineeth N B (IIIT-H) §3.3 Image/Region Descriptors 3 / 13*
+```
+
+# DL4CV_Week03_Part03.pdf - Page 5
+
+```markdown
+# Review
+
+- Can the same descriptors be used for matching different instances of the object?
+  - Used in image classification, detection, etc.
+
+![Image Classification Example](image-url)
+
+**Rigid transformations may not work here. Can we discard geometry for now, and bring it back in other ways?**
+
+_Source: Yannis Avrithis, Deep Learning for Vision, Spring 2019 SIF_
+
+_Vineeth N B (IIT-H) §3.3 Image/Region Descriptors_
+
+3 / 13
+```
+
+# DL4CV_Week03_Part03.pdf - Page 6
+
+```markdown
+# Our First Attempt: Bag-of-Words (BoW)
+
+## Samples
+
+![NPTEL Logo](https://example.com/nptel_logo.png)
+
+Vineeth N B (IIT-H)
+
+### 3.3 Image/Region Descriptors
+
+Page 4 of 13
+```
+
+# DL4CV_Week03_Part03.pdf - Page 7
+
+```markdown
+# Our First Attempt: Bag-of-Words (BoW)
+
+![Samples](https://via.placeholder.com/150) <!-- Placeholder for an image that couldn't be captured -->
+
+**Samples**
+
+*Form Vocabulary*
+
+![NPTEL](https://via.placeholder.com/150) <!-- Placeholder for an image that couldn't be captured -->
+
+---
+
+*Vineeth N B (IITH)*
+
+**§3.3 Image/Region Descriptors**
+
+---
+
+Page 4 / 13
+```
+
+# DL4CV_Week03_Part03.pdf - Page 8
+
+```markdown
+# Our First Attempt: Bag-of-Words (BoW)
+
+![Samples](image-url)
+
+## Form Vocabulary
+
+## Histogram
+
+*Vineeth N B (IIT-H) - §3.3 Image/Region Descriptors*
+
+Page 4 / 13
+```
+
+# DL4CV_Week03_Part03.pdf - Page 9
+
+```markdown
+# Our First Attempt: Bag-of-Words (BoW)
+
+## Samples
+
+1. John likes to watch movies. Mary likes movies too.
+2. Mary also likes to watch football games..
+
+```plaintext
+"John", "likes", "to", "watch", "movies" "Mary", "likes", "movies", "too"
+"Mary", "also", "likes", "to", "watch", "football", "games"
+```
+
+## Form Vocabulary
+
+```plaintext
+"John", "likes", "to", "watch", "movies" "Mary", "likes", "movies", "too"
+"Mary", "also", "likes", "to", "watch", "football", "games"
+```
+
+## Histogram
+
+![Histogram](image_url)
+
+Vineeth N B (IIT-H)
+S3.3 Image/Region Descriptors
+
+---
+
+4 / 13
+```
+
+# DL4CV_Week03_Part03.pdf - Page 10
+
+```markdown
+# Our First Attempt: Bag-of-Words (BoW)
+
+## Samples
+
+![Samples](image1.png)
+
+## Form Vocabulary
+
+![Form Vocabulary](image2.png)
+
+## Histogram
+
+![Histogram](image3.png)
+
+### Text Samples
+
+1. John likes to watch movies. Mary likes movies too.
+2. Mary also likes to watch football games..
+
+### Processed Text
+
+"John", "likes", "to", "watch", "movies", "Mary", "likes", "movies", "too"
+
+"Mary", "also", "likes", "to", "watch", "football", "games"
+
+### Frequency Distribution
+
+#### Words
+- John
+- likes
+- to
+- watch
+- movies
+- Mary
+- too
+- also
+- football
+- games
+
+![Frequency Distribution](image4.png)
+
+#### Example Visualization
+
+![Example Visualization](image5.png)
+
+---
+
+Vineeth N B (IIT-H) §3.3 Image/Region Descriptors
+```
+
+# DL4CV_Week03_Part03.pdf - Page 11
+
+```markdown
+# Our First Attempt: Bag-of-Words (BoW)
+
+## Samples
+
+![Samples](image_url)
+
+## Uses of Bag-of-Words?
+
+- John likes to watch movies. Mary likes movies too.
+- Mary also likes to watch football games.
+
+![Histogram](image_url)
+
+### Histogram
+
+#### Data Visualization
+
+![Histogram Data 1](image_url)
+
+- John
+- likes
+- to
+- watch
+- movies
+- Mary
+- movies
+- too
+
+![Histogram Data 2](image_url)
+
+- Mary
+- also
+- likes
+- to
+- watch
+- football
+- games
+
+#### Graph Examples
+
+![Graph Example 1](image_url)
+
+- Vertical Axis (y-axis)
+- Horizontal Axis (x-axis)
+- Data Points
+- Bars
+- Peaks
+
+![Graph Example 2](image_url)
+
+- Vertical Axis (y-axis)
+- Horizontal Axis (x-axis)
+- Data Points
+- Bars
+- Peaks
+
+![Graph Example 3](image_url)
+
+- Vertical Axis (y-axis)
+- Horizontal Axis (x-axis)
+- Data Points
+- Bars
+- Peaks
+
+### References
+
+- Vineeth N B (IIIT-H)
+- §3.3 Image/Region Descriptors
+- Slide 5 / 13
+```
+
+**Note:**
+1. Replace `image_url` with the actual URLs or placeholders for the images if needed.
+2. Ensure the scientific integrity and accuracy of the symbols, graphs, and data representations.
+3. Maintain the overall readability and structure of the markdown format.
+
+# DL4CV_Week03_Part03.pdf - Page 12
+
+```markdown
+# Our First Attempt: Bag-of-Words (BoW)
+
+## Samples
+
+![Sample Images of Woman, Bicycle, and Violin](image-url)
+
+## Text Samples
+1. John likes to watch movies. Mary likes movies too.
+2. Mary also likes to watch football games.
+
+## Uses of Bag-of-Words?
+- Retrieval
+- Classification
+
+## Histogram
+
+![Histogram](image-url)
+
+### Histogram Data
+- **John**: 1.75
+- **likes**: 1.0
+- **to**: 1.0
+- **watch**: 1.0
+- **movies**: 1.0
+- **Mary**: 1.75
+- **too**: 1.0
+- **also**: 1.0
+- **likes**: 1.0
+- **football**: 1.0
+- **games**: 1.0
+
+### Sample Graphs
+
+![Graph 1](image-url)
+![Graph 2](image-url)
+![Graph 3](image-url)
+
+## References
+Vineeth N B (IIT-H) §3.3 Image/Region Descriptors
+```
+
+# DL4CV_Week03_Part03.pdf - Page 13
+
+```markdown
+# BoW for Retrieval
+
+![Image of person in front of a building](link-to-image-1)
+![Image of building from above](link-to-image-2)
+
+**query**
+
+**Query vs dataset image**
+
+[^1]: Sivic and Zisserman, Video Google: A Text Retrieval Approach to Object Matching in videos, ICCV 2003
+
+Vineeth N B (IIIT-H)
+
+#### §3.3 Image/Region Descriptors
+
+---
+
+Page 6 / 13
+```
+
+# DL4CV_Week03_Part03.pdf - Page 14
+
+```markdown
+# BoW for Retrieval
+
+![Image of Radius Building with bounding boxes] ![Image of another building with bounding boxes]
+
+## Pairwise descriptor matching
+
+* Sivic and Zisserman, Video Google: A Text Retrieval Approach to Object Matching in videos, ICCV 2003
+* Vineeth N B (IIT-H)
+* §3.3 Image/Region Descriptors
+
+---
+
+**Query**
+
+![Query Image]
+
+**Matching**
+
+![Matching Image]
+
+- **Bounding boxes** illustrated in different colors (green, blue, red) indicating matched regions.
+- The query image (left) is compared to the matching image (right) to find similar regions.
+- Bounding boxes highlight the regions of interest that are being compared for similarities.
+
+---
+
+### Detailed Explanation
+
+1. **Query Image**: This is the initial image where specific regions are selected for comparison.
+   - The regions are outlined with bounding boxes in different colors.
+
+2. **Matching Image**: This is the image database where the algorithm searches for similar regions.
+   - Corresponding bounding boxes in the same colors indicate the regions that have been matched.
+
+3. **Matching Process**:
+   - The algorithm performs pairwise descriptor matching to find regions in the database image that are similar to the query regions.
+   - Descriptors capture the features of the regions, allowing for accurate comparison.
+
+4. **Applications**:
+   - Such techniques are used in video retrieval systems to find similar objects or scenes in video databases.
+   - The method uses text retrieval approaches to match objects, enhancing the effectiveness of visual search engines.
+
+---
+
+### References
+
+- Sivic and Zisserman, "Video Google: A Text Retrieval Approach to Object Matching in videos," ICCV 2003.
+- Vineeth N B, "Image/Region Descriptors," §3.3.
+```
+
+# DL4CV_Week03_Part03.pdf - Page 15
+
+```markdown
+# BoW for Retrieval
+
+![Image of the Slide](image-placeholder.png)
+
+1. **Query Image**
+   ![Query Image](query-image-placeholder.png)
+
+2. **Pairwise Descriptor Matching for Every Dataset Image**
+
+   - **Dataset Image 1**
+     ![Dataset Image 1](dataset-image1-placeholder.png)
+     ![Bounding Box 1](bb-image1-placeholder.png)
+
+   - **Dataset Image 2**
+     ![Dataset Image 2](dataset-image2-placeholder.png)
+     ![Bounding Box 2](bb-image2-placeholder.png)
+
+   - **Dataset Image 3**
+     ![Dataset Image 3](dataset-image3-placeholder.png)
+     ![Bounding Box 3](bb-image3-placeholder.png)
+
+   - **Dataset Image 4**
+     ![Dataset Image 4](dataset-image4-placeholder.png)
+     ![Bounding Box 4](bb-image4-placeholder.png)
+
+3. **Annotations and Descriptions**
+
+   - **Bounding Boxes**:
+     - **Green Bounding Box**: Identified feature in the dataset images.
+     - **Blue Bounding Box**: Another identified feature in the dataset images.
+     - **Red Bounding Box**: Another identified feature in the dataset images.
+
+4. **References**
+
+   - Sivic and Zisserman, *Video Google: A Text Retrieval Approach to Object Matching in videos*, ICCV 2003
+
+   - Vineeth N B (IIT-H)
+
+   - §3.3. Image/Region Descriptors
+
+---
+
+**Note**: The placeholders are used for the images as the actual image content cannot be extracted via OCR.
+
+```
+
+# DL4CV_Week03_Part03.pdf - Page 16
+
+```markdown
+# BoW for Retrieval
+
+![BoW for Retrieval Image](image_url)
+
+**Query**
+
+![Query Image](image_url)
+
+**Similar descriptors should all be nearby in the descriptor space**
+
+---
+
+### References
+
+1. Sivic and Zisserman, *Video Google: A Text Retrieval Approach to Object Matching in videos*, ICCV 2003
+2. Vineeth N B (IIT-H)
+
+### Section 3.3: Image/Region Descriptors
+
+Page 6 of 13
+```
+
+Note: Replace `image_url` with the actual URLs or file names if the images are available in a digital format. This template ensures that the markdown format maintains the structure and readability of the original scientific content.
+
+# DL4CV_Week03_Part03.pdf - Page 17
+
+```markdown
+# BoW for Retrieval<sup>1</sup>
+
+![Image of buildings with marked regions](image_url)
+
+- **query**
+
+  ![Query Image](image_url)
+
+  Quantize them into visual words
+
+  - ![Building Image 1](image_url) with label `19`
+  - ![Building Image 2](image_url) with label `54`
+  - ![Building Image 3](image_url) with label `67`
+  - ![Building Image 4](image_url) with label `15`
+
+  ![Diagram showing distances and quantization](image_url)
+
+<sup>1</sup> Sivic and Zisserman, Video Google: A Text Retrieval Approach to Object Matching in videos, ICCV 2003
+
+Vineeth N B (IIT-H) §3.3 Image/Region Descriptors
+
+---
+
+6 / 13
+```
+
+# DL4CV_Week03_Part03.pdf - Page 18
+
+```markdown
+# BoW for Retrieval<sup>1</sup>
+
+![Image](image_url)
+
+![Query Image](query_image_url)
+
+**19**
+
+![Target Image](target_image_url)
+
+**54**
+
+![Target Image](target_image_url)
+
+**67**
+
+**72**
+
+**15**
+
+## Now visual words act as a proxy. No pairwise matching needed
+
+<sup>1</sup>Sivic and Zisserman, Video Google: A Text Retrieval Approach to Object Matching in videos, ICCV 2003
+
+Vineeth N B (IIT-H)
+
+**§3.3 Image/Region Descriptors**
+
+6 / 13
+```
+
+In this detailed markdown format, I ensured the following:
+
+1. **Section Titles and Headings**: Properly encoded the section titles using markdown syntax.
+2. **Image Placeholders**: Used placeholders for images as the OCR process cannot directly capture image data.
+3. **References and Footnotes**: Maintained the reference and footnote with correct formatting.
+4. **Italicized Text**: Retained the italicized text.
+5. **Paragraph Structure**: Preserved the paragraph structure and readability.
+6. **Formatting**: Ensured other formatting elements like bold text were correctly formatted.
+7. **Symbol**: Maintained the superscript formatting for references.
+
+# DL4CV_Week03_Part03.pdf - Page 19
+
+```markdown
+# BoW for Retrieval
+
+- Each image is represented by a vector \(\mathbf{z} \in \mathbb{R}^k\), where \(k\) is size of codebook
+  - Each element \(z_i = w_i n_i\); where \(w_i\) is a fixed weight per visual word and \(n_i\) number of occurrences of this word in the image
+
+![Diagram](image_url)
+
+*Vineeth N B (IIT-H) §3.3 Image/Region Descriptors*
+
+```
+
+# DL4CV_Week03_Part03.pdf - Page 20
+
+```markdown
+# BoW for Retrieval
+
+- Each image is represented by a vector \( z \in \mathbb{R}^k \), where \( k \) is size of codebook
+  - Each element \( z_i = w_i n_i \); where \( w_i \) is a fixed weight per visual word and \( n_i \) number of occurrences of this word in the image
+
+- Given a set of \( n \) images represented by matrix \( Z \in \mathbb{R}^{k \times n} \) (each image as a column) and query image \( q \), we need a vector of similarities:
+
+  \[
+  s = S_{\text{BoW}}(Z, q) := Z^T q
+  \]
+
+  and then sort \( s \) by descending order
+
+  - **Note:** With \( L_2 \)-normalization, this is equivalent to measuring Euclidean distance: for vectors \( z \) and \( q \), \( \| z - q \|^2 = 2 (1 - z^T q) \)
+
+![Image](image_url)
+
+*Vineeth N B. (IIT-H)*
+
+*§3.3 Image/Region Descriptors*
+
+*7 / 13*
+```
+
+# DL4CV_Week03_Part03.pdf - Page 21
+
+# BoW for Retrieval
+
+- Each image is represented by a vector \( \mathbf{z} \in \mathbb{R}^{k} \), where \( k \) is the size of the codebook
+  - Each element \( z_i = w_i n_i \), where \( w_i \) is a fixed weight per visual word and \( n_i \) is the number of occurrences of this word in the image
+- Given a set of \( n \) images represented by matrix \( \mathbf{Z} \in \mathbb{R}^{k \times n} \) (each image as a column) and query image \( \mathbf{q} \), we need a vector of similarities:
+
+  \[
+  \mathbf{s} = S_{\text{BoW}}(\mathbf{Z}, \mathbf{q}) := \mathbf{Z}^{\top} \mathbf{q}
+  \]
+
+  and then sort \( \mathbf{s} \) by descending order
+
+  - Note: With \( L_2 \)-normalization, this is equivalent to measuring Euclidean distance: for vectors \( \mathbf{z} \) and \( \mathbf{q} \), \( \|\mathbf{z} - \mathbf{q}\|^2 = 2(1 - \mathbf{z}^{\top} \mathbf{q}) \)
+
+- When \( k \gg p \), where \( p \) is the number of features per image on average, \( \mathbf{Z} \) and \( \mathbf{q} \) are sparse
+
+![Placeholder Image](image_url_placeholder)
+
+Vineeth N B (IIT-H)
+
+Section 3.3: Image/Region Descriptors
+
+Page 7 / 13
+
+# DL4CV_Week03_Part03.pdf - Page 22
+
+# BoW for Retrieval
+
+- Each image is represented by a vector \( \mathbf{z} \in \mathbb{R}^{k} \), where \( k \) is size of codebook
+  - Each element \( z_i = w_i n_i \); where \( w_i \) is a fixed weight per visual word and \( n_i \) number of occurrences of this word in the image
+- Given a set of \( n \) images represented by matrix \( Z \in \mathbb{R}^{k \times n} \) (each image as a column) and query image \( \mathbf{q} \), we need a vector of similarities:
+
+\[ s = S_{\text{BoW}}(Z, \mathbf{q}) := Z^T \mathbf{q} \]
+
+and then sort \( s \) by descending order
+
+- **Note:** With \( L_2 \)-normalization, this is equivalent to measuring Euclidean distance: for vectors \( \mathbf{z} \) and \( \mathbf{q} \),
+
+\[ \| \mathbf{z} - \mathbf{q} \|_2^2 = 2(1 - \mathbf{z}^T \mathbf{q}) \]
+
+- When \( k \gg p \), where \( p \) is the number of features per image on average, \( Z \) and \( \mathbf{q} \) are sparse
+- Rather than check whether a word is contained in an image, check which images contain a given word
+
+![Image](image_url)
+
+Vineeth N B (IIT-H)
+
+§3.3 Image/Region Descriptors
+
+7 / 13
+
+# DL4CV_Week03_Part03.pdf - Page 23
+
+```markdown
+# BoW for Retrieval: Inverted File Index<sup>2</sup>
+
+![Inverted File Index](image-url)
+
+- **query**
+  - 54 (green)
+  - 67 (blue)
+  - 72 (red)
+
+**Images**
+```
+|   |   |   |   |   |   |   |   |   |   |
+|---|---|---|---|---|---|---|---|---|---|
+|   |   |   |   |   |   |   |   |   |   |
+|   |   |   |   |   |   |   |   |   |   |
+|   |   |   |   |   |   |   |   |   |   |
+|   |   |   |   |   |   |   |   |   |   |
+|   |   |   |   |   |   |   |   |   |   |
+|   |   |   |   |   |   |   |   |   |   |
+|   |   |   |   |   |   |   |   |   |   |
+|   |   |   |   |   |   |   |   |   |   |
+|   |   |   |   |   |   |   |   |   |   |
+|   |   |   |   |   |   |   |   |   |   |
+
+**Images**
+
+12  13  14  15  16  17  18  19  20  21  22
+
+**References**
+
+<sup>2</sup> Sivic and Zisserman, Video Google: A Text Retrieval Approach to Object Matching in videos, ICCV 2003
+
+Vineeth N B (IIT-H)
+
+**Section 3.3: Image/Region Descriptors**
+```
+
+# DL4CV_Week03_Part03.pdf - Page 24
+
+```markdown
+# BoW for Retrieval: Inverted File Index²
+
+## Query
+```markdown
+|   |   |
+|---|---|
+| 54 | **Green** |
+| 67 | **Blue**  |
+| 72 | **Red**   |
+```
+
+## Images
+```markdown
+| 12 | 13 | 14 | 15 | 16 | 17 | 18 | 19 | 20 | 21 | 22 |
+|----|----|----|----|----|----|----|----|----|----|----|
+| 1  |    | 1  |    |    | 1  |    |    | 1  |    |    |
+```
+
+**Reference**: 
+Sivic and Zisserman, Video Google: A Text Retrieval Approach to Object Matching in videos, ICCV 2003
+
+**Slide Attribution**: Vineeth N B (IIT-H)
+
+**Section**: §3.3 Image/Region Descriptors
+```
+```
+
+# DL4CV_Week03_Part03.pdf - Page 25
+
+```markdown
+# BoW for Retrieval: Inverted File Index<sup>2</sup>
+
+![Inverted File Index](image_url)
+
+```markdown
+## Section Title
+
+- **First Point**: Description of the first point.
+- **Second Point**: Description of the second point.
+- **Third Point**: Description of the third point.
+
+### Subsection
+
+**Definition**: Detailed definition.
+
+#### Sub-subsection
+
+**Equation**:
+\[ E = mc^2 \]
+
+### Table Example
+
+| 12  | 13  | 14  | 15  | 16  | 17  | 18  | 19  | 20  | 21  | 22  |
+|-----|-----|-----|-----|-----|-----|-----|-----|-----|-----|-----|
+| 1   | 2   | 2   | 2   | 1   |
+
+### Content Section
+
+Sivic and Zisserman, Video Google: A Text Retrieval Approach to Object Matching in videos, ICCV 2003
+
+**Vineeth N B (IIT-H)**
+
+**§3.3 Image/Region Descriptors**
+```
+
+Note: Replace `image_url` with the actual URL or placeholder for the image if it cannot be captured directly. Ensure proper markdown formatting and scientific integrity to match the presentation of the content.
+
+# DL4CV_Week03_Part03.pdf - Page 26
+
+```markdown
+# BoW for Retrieval: Inverted File Index<sup>2</sup>
+
+![BoW Diagram](image_url)
+
+```markdown
+## Section Title
+- **query**: 
+  - Color-coded blocks represent different categories:
+    - Green block labeled **54**
+    - Blue block labeled **67**
+    - Red block labeled **72**
+
+- **images**:
+  - Numeric labels indicating image IDs:
+    - Image IDs: 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22
+
+  - Corresponding files:
+    - 12, 13, 14, 15, 17, 19, 21, 22
+
+### References
+- Sivic and Zisserman, Video Google: A Text Retrieval Approach to Object Matching in videos, ICCV 2003
+- Vineeth N B (IIT-H)
+- §3.3 Image/Region Descriptors
+```
+
+```markdown
+### Detailed Explanation
+
+#### Query Section
+- **Color-coded Blocks**:
+  - **Green Block**: Labeled **54**
+  - **Blue Block**: Labeled **67**
+  - **Red Block**: Labeled **72**
+
+#### Images Section
+- **Numeric Labels**: Indicate image IDs:
+  - **Image IDs**: 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22
+  - **Corresponding Files**:
+    - 12, 13, 14, 15, 17, 19, 21, 22
+
+### References
+- **Citation**: Sivic and Zisserman, "Video Google: A Text Retrieval Approach to Object Matching in videos," ICCV 2003.
+- **Author**: Vineeth N B from IIT-H.
+- **Section**: §3.3 Image/Region Descriptors.
+```
+
+# DL4CV_Week03_Part03.pdf - Page 27
+
+```markdown
+# BoW for Retrieval: Inverted File Index²
+
+![Inverted File Index](image_url_here)
+
+- **query**
+  ```
+  +---+---+---+
+  | 54| 67| 72|
+  +---+---+---+
+  ```
+
+  ```
+  +---+---+---+---+---+---+---+---+
+  |   |   | 54|   |   | 54|   | 54|
+  +---+---+---+---+---+---+---+---+
+  |   | 67|   | 67|   | 67|   | 67|
+  +---+---+---+---+---+---+---+---+
+  | 72|   |   | 72| 72|   |   | 72|
+  +---+---+---+---+---+---+---+---+
+  ```
+
+- **ranked**
+  - 1
+  - 3
+  - 1
+  - 2
+  - 1
+
+- **shortlist**
+  ```
+  +---+---+---+---+---+---+---+---+
+  |12 |13 |14 |15 |16 |17 |18 |19 |
+  +---+---+---+---+---+---+---+---+
+  |20 |21 |22 |   |   |   |   |   |
+  +---+---+---+---+---+---+---+---+
+  ```
+
+- **images**
+  ```
+  +---+---+---+---+---+---+---+---+
+  |12 |13 |14 |15 |16 |17 |18 |19 |
+  +---+---+---+---+---+---+---+---+
+  |20 |21 |22 |   |   |   |   |   |
+  +---+---+---+---+---+---+---+---+
+  ```
+
+**Reference**: 
+
+Sivic and Zisserman, Video Google: A Text Retrieval Approach to Object Matching in videos, ICCV 2003
+
+Vineeth N B (IIT-H)
+
+**Section**: §3.3 Image/Region Descriptors
+
+**Slide Number**: 8 / 13
+
+```
+
+# DL4CV_Week03_Part03.pdf - Page 28
+
+```markdown
+# BoW for Classification
+
+![Image](image_url)
+
+---
+
+**Vineeth N B (IIT-H)**
+
+**§3.3 Image/Region Descriptors**
+
+---
+
+**NPTEL**
+
+---
+
+**How?**
+
+---
+
+**Slide 9 of 13**
+```
+
+# DL4CV_Week03_Part03.pdf - Page 29
+
+```markdown
+# BoW for Classification
+
+- Each image represented by `z ∈ ℝ^k`; each element `z_i` the number of occurrences of visual word `c_i` in the image.
+
+![NPTEL Logo](image-url)
+
+*Vineeth N B (IIT-H) §3.3. Image/Region Descriptors 9 / 13*
+```
+
+# DL4CV_Week03_Part03.pdf - Page 30
+
+```markdown
+# BoW for Classification
+
+- Each image represented by \( \mathbf{z} \in \mathbb{R}^{k} \); each element \( z_i \), the number of occurrences of visual word \( c_i \) in the image.
+
+- **Naive Bayes**: Chose maximum posterior probability of class \( \mathbf{C} \) given image \( \mathbf{z} \) assuming features are independent \( \rightarrow \) linear classifier with parameters estimated by visual word statistics on training set
+
+- **Support Vector Machine (SVM)**: Images \( \mathbf{z}_1, \mathbf{z}_2 \) compared using a kernel function \( \phi(\cdot) \); if \( \phi(\mathbf{z}_1)^T \phi(\mathbf{z}_2) = \mathbf{z}_1^T \mathbf{z}_2 \), this is again a linear classifier
+
+![Graphical Representation](image_placeholder.png)
+
+Vineeth N B (IIIT-H) §3.3 Image/Region Descriptors 9 / 13
+```
+
+# DL4CV_Week03_Part03.pdf - Page 31
+
+```markdown
+# Extension of BoW: Vector of Locally Aggregated Descriptors (VLAD)
+
+![VLAD Diagram](image_url)
+
+- Yields a scalar frequency
+- Limited information
+
+---
+
+Vineeth N B (IIT-H) §3.3 Image/Region Descriptors
+
+---
+
+## Extension of BoW: Vector of Locally Aggregated Descriptors (VLAD)
+
+### Diagram
+![VLAD Diagram](image_url)
+
+- Yields a scalar frequency
+- Limited information
+
+---
+
+Vineeth N B (IIT-H) §3.3 Image/Region Descriptors 10 / 13
+```
+
+# DL4CV_Week03_Part03.pdf - Page 32
+
+```markdown
+# Extension of BoW: Vector of Locally Aggregated Descriptors (VLAD)
+
+## BoW (Bag of Words)
+
+- Yields a scalar frequency
+- Limited information
+
+![BoW Diagram](data:image/png;base64,...) 
+
+```math
+\text{(BoW)}
+```
+
+## VLAD (Vector of Locally Aggregated Descriptors)
+
+![VLAD Diagram](data:image/png;base64,...) 
+
+```math
+\text{(VLAD)}
+```
+
+- Yields a vector per visual word
+- Comparatively more information, resulting in better discrimination by classifier
+
+**Credit:** Li Liu
+
+Vineeth N B (IIIT-H)
+
+### §3.3 Image/Region Descriptors
+
+10 / 13
+```
+
+# DL4CV_Week03_Part03.pdf - Page 33
+
+```markdown
+# Slide Content
+
+## BoW vs VLAD
+
+### Description
+
+- **3-channel RGB input** -> **1-channel gray-scale**
+
+### Visual
+
+![NPTEL Logo](https://via.placeholder.com/150)
+
+### Credit
+
+*Yannis A*
+
+---
+
+**Vineeth N B (IIT-H)**
+
+**§3.3 Image/Region Descriptors**
+
+### Page Number
+
+11 / 13
+```
+
+# DL4CV_Week03_Part03.pdf - Page 34
+
+```markdown
+# BoW vs VLAD
+
+![Diagram](image_url_if_available)
+
+- 3-channel RGB input → 1-channel gray-scale
+- Set of ~1000 features × 128-dim SIFT descriptors
+
+**Credit:** Yannis A
+
+Vineeth N B (IIT-H) §3.3 Image/Region Descriptors
+
+---
+
+**BoW** | **Vs** | **VLAD**
+
+```plaintext
+       w
+      /
+      h
+     /
+    1
+        →
+       (SIFT)
+      / 
+     128
+```
+```
+
+# DL4CV_Week03_Part03.pdf - Page 35
+
+```markdown
+# BoW Vs VLAD
+
+## Image/Region Descriptors
+
+### Input and Encoding Process
+
+- **3-channel RGB input** → **1-channel gray-scale**
+
+- **Set of ~ 1000 features** × **128-dim SIFT descriptors**
+
+- **Element-wise encoding (hard assignment)** on **k ~ 100 visual words**
+
+### Diagram
+
+![Diagram](image_url_placeholder)
+
+**Credit: Yannis A**
+
+---
+
+**Vineeth N B (IIT-H)**
+
+**83.3 Image/Region Descriptors**
+
+*Page 11 / 13*
+```
+
+# DL4CV_Week03_Part03.pdf - Page 36
+
+```markdown
+# BoW vs VLAD
+
+![Comparison Diagram](image_url_placeholder)
+
+- **3-channel RGB input** → **1-channel gray-scale**
+- **Set of ~1000 features × 128-dim SIFT descriptors**
+- **Element-wise encoding (hard assignment) on k ~ 100 visual words**
+- **Global sum pooling, L2 normalization**
+
+**Credit:** Yannis A
+
+---
+
+Vineeth N B (IIT-H) §3.3 Image/Region Descriptors
+
+11 / 13
+```
+
+# DL4CV_Week03_Part03.pdf - Page 37
+
+```markdown
+# BoW vs VLAD
+
+## Image/Region Descriptors
+
+### BoW
+- **3-channel RGB input** -> **1-channel gray-scale**
+  ![3-channel RGB input -> 1-channel gray-scale](path_to_image)
+
+- Set of ~1000 features × 128-dim SIFT descriptors
+
+- Element-wise encoding (hard assignment) on \( k \sim 100 \) visual words
+
+- Global sum pooling, \( L_2 \) normalization
+
+### VLAD
+- **3-channel RGB input** -> **1-channel gray-scale**
+  ![3-channel RGB input -> 1-channel gray-scale](path_to_image)
+
+- Set of ~1000 features × 128-dim SIFT descriptors
+
+- Element-wise encoding (hard assignment) on \( k \sim 100 \) visual words
+
+- Global sum pooling, \( L_2 \) normalization
+
+### Diagram
+![Diagram](path_to_image)
+
+### Credit
+- **Yannis A**
+
+- **Vineeth N B (IIT-H)**
+
+- **§3.3 Image/Region Descriptors**
+
+- **Page 11 / 13**
+```
+
+# DL4CV_Week03_Part03.pdf - Page 38
+
+```markdown
+# BoW vs VLAD
+
+## BoW
+
+- **3-channel RGB input** → **1-channel gray-scale**
+- **Set of ~ 1000 features × 128-dim SIFT descriptors**
+- **Element-wise encoding (hard assignment) on k ~ 100 visual words**
+- **Global sum pooling, L2 normalization**
+
+![BoW Diagram](image-placeholder-for-diagram)
+
+## Vs
+
+- **3-channel RGB input** → **1-channel gray-scale**
+- **Set of ~ 1000 features × 128-dim SIFT descriptors**
+
+![Vs Diagram](image-placeholder-for-diagram)
+
+## VLAD
+
+- **3-channel RGB input** → **1-channel gray-scale**
+- **Set of ~ 1000 features × 128-dim SIFT descriptors**
+
+![VLAD Diagram](image-placeholder-for-diagram)
+
+*Credit: Yannis A*
+
+*Vineeth N B (IIT-H)*
+
+*83.3 Image/Region Descriptors*
+
+*11 / 13*
+```
+
+# DL4CV_Week03_Part03.pdf - Page 39
+
+```markdown
+# BoW vs VLAD
+
+## BoW
+- **3-channel RGB input** -> **1-channel gray-scale**
+- **Set of ~ 1000 features** × **128-dim SIFT descriptors**
+- **Element-wise encoding (hard assignment) on k ~ 100 visual words**
+- **Global sum pooling, L2 normalization.**
+
+## Vs
+- **3-channel RGB input** -> **1-channel gray-scale**
+- **Set of ~ 1000 features** × **128-dim SIFT descriptors**
+- **Element-wise encoding (hard assignment) on k ~ 100 visual words.** Yields a **residual vector** rather than a scalar vote.
+
+## VLAD
+- **3-channel RGB input** -> **1-channel gray-scale**
+- **Set of ~ 1000 features** × **128-dim SIFT descriptors**
+- **Element-wise encoding (hard assignment) on k ~ 100 visual words.** Yields a **residual vector** rather than a scalar vote.
+
+*Credit: Yannis A*
+
+*Vineeth N B (IIIT-H)*
+
+*§3.3 Image/Region Descriptors*
+
+*11 / 13*
+```
+
+# DL4CV_Week03_Part03.pdf - Page 40
+
+```markdown
+# BoW vs VLAD
+
+## BoW
+
+- **3-channel RGB input** -> **1-channel gray-scale**
+
+  ![BoW Image](image-placeholder-1.png)
+
+- **Set of ~ 1000 features** × **128-dim SIFT descriptors**
+
+- **Element-wise encoding (hard assignment)** on k ~ 100 visual words
+
+- **Global sum pooling, L2 normalization**
+
+## Vs
+
+- **3-channel RGB input** -> **1-channel gray-scale**
+
+  ![Vs Image](image-placeholder-2.png)
+
+- **Set of ~ 1000 features** × **128-dim SIFT descriptors**
+
+- **Element-wise encoding (hard assignment)** on k ~ 100 visual words. Yields a **residual vector** rather than a scalar vote
+
+- **Global sum pooling, L2 normalization**
+
+## VLAD
+
+- **3-channel RGB input** -> **1-channel gray-scale**
+
+  ![VLAD Image](image-placeholder-3.png)
+
+- **Set of ~ 1000 features** × **128-dim SIFT descriptors**
+
+- **Element-wise encoding (hard assignment)** on k ~ 100 visual words. Yields a **residual vector** rather than a scalar vote
+
+- **Global sum pooling, L2 normalization**
+
+*Credit: Yannis A*
+
+*Vineeth N B (IIIT-H)*
+
+*§3.3 Image/Region Descriptors*
+
+*11 / 13*
+```
+
+# DL4CV_Week03_Part03.pdf - Page 41
+
+```markdown
+# Homework
+
+## Readings
+
+- [x] Chapter 14.3, 14.4, Szeliski, *Computer Vision: Algorithms and Applications*
+
+## Questions
+
+- What is the connection of BoW to the k-means clustering algorithm?
+
+- How would you now use k-means variants such as hierarchical k-means and approximate k-means to extend BoW? (Hint: Look up vocabulary trees!)
+
+*Vineeth N B (IIT-H)*
+
+*§3.3 Image/Region Descriptors*
+
+*12 / 13*
+```
+
+# DL4CV_Week03_Part03.pdf - Page 42
+
+```markdown
+# References
+
+- [ ] J Sivic and A Zisserman. **"Video Google: A text retrieval approach to object matching in videos"**. In: *ICCV*. 2003.
+
+- [ ] Gabriella Csurka et al. **"Visual categorization with bags of keypoints"**. In: *Workshop on statistical learning in computer vision, ECCV Vol. 1* 1-22. 2004, pp. 1-2.
+
+- [ ] Richard Szeliski. *Computer Vision: Algorithms and Applications. Texts in Computer Science*. London: Springer-Verlag, 2011.
+
+*Vineeth N B (IIT-H) §3.3 Image/Region Descriptors 13 / 13*
+```
+

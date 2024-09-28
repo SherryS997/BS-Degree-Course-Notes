@@ -1,0 +1,1805 @@
+# DL4CV_Week08_Part03.pdf - Page 1
+
+```markdown
+# Deep Learning for Computer Vision
+
+## LSTMs and GRUs
+
+**Vineeth N Balasubramanian**
+
+Department of Computer Science and Engineering
+Indian Institute of Technology, Hyderabad
+
+![IIT Hyderabad Logo](https://example.com/iith-logo.png)
+
+Vineeth N B (IIT-H) 
+
+### 8.3 LSTMs and GRUs
+
+---
+
+## Slide Content
+
+### Slide 1 / 21
+
+---
+
+**Content Details:**
+
+- **Introduction to LSTMs and GRUs**
+  - **Long Short-Term Memory (LSTM) Networks:**
+    - Concept of LSTMs and their architecture.
+    - Importance in dealing with long-term dependencies.
+    - Components: Forget gate, cell state, input gate, and output gate.
+
+  - **Gated Recurrent Units (GRUs):**
+    - Simpler alternative to LSTMs.
+    - Components: Reset gate and update gate.
+    - Efficiency and applications.
+
+- **Applications in Computer Vision:**
+  - Use cases in sequence modeling.
+  - Handling temporal data for vision tasks.
+  - Examples of implementations and results.
+
+---
+
+**Note:**
+
+- Ensure proper understanding of the architecture and components.
+- Focus on practical implications and applications in vision tasks.
+- Include diagrams and visual aids where necessary.
+
+```
+
+# DL4CV_Week08_Part03.pdf - Page 2
+
+```markdown
+# Review: Questions
+
+## Question
+
+- **How to tackle the vanishing gradient problem in RNNs with solutions that don't change the architecture?**
+
+![NPTEL Logo](image_url)
+
+*Vineeth N B (IIT-H)*
+
+## §8.3 LSTMs and GRUs
+
+---
+
+Page 2 / 21
+```
+
+Note: In this markdown format:
+
+- Section titles and headings are differentiated using `#` for top-level and `##` for subheadings.
+- Bullet points are used to list questions.
+- Placeholders for images are used since the original image URLs are not provided (`image_url`).
+- The footer includes the page number and total number of pages.
+
+# DL4CV_Week08_Part03.pdf - Page 3
+
+ that content is formatted correctly.
+
+```markdown
+# Review: Questions
+
+## Question
+
+- **How to tackle the vanishing gradient problem in RNNs with solutions that don’t change the architecture?**
+  - Use **ReLU**
+  - Regularization
+  - Better initialization of weights
+  - Use only short time sequences
+
+![NPTEL Logo](https://via.placeholder.com/150)
+
+Vineeth N B (IIT-H) 
+
+§8.8 LSTMs and GRUs
+
+2 / 21
+```
+```
+
+# DL4CV_Week08_Part03.pdf - Page 4
+
+```markdown
+
+# Long-Term Dependencies: The Problem
+
+- RNNs connect previous information to the present task which:
+  - may be enough for predicting the next word for “the clouds are in the sky”
+
+![RNN Diagram](image-url)
+
+Vineeth N B (IIT-H) §8.3 LSTMs and GRUs 3 / 21
+
+```
+
+# DL4CV_Week08_Part03.pdf - Page 5
+
+```markdown
+# Long-Term Dependencies: The Problem
+
+- RNNs connect previous information to the present task which:
+  - may be enough for predicting the next word for “the clouds are in the sky”
+
+![RNN Prediction Example](image1.png)
+
+- may not be enough when more context is needed: “I grew up in France ... I speak fluent French”
+
+![RNN Context Example](image2.png)
+
+**Credit**: Christopher Olah
+Vineeth N B. (IIT-H)
+§8.3 LSTMs and GRUs
+
+3 / 21
+```
+
+# DL4CV_Week08_Part03.pdf - Page 6
+
+
+
+```markdown
+# Recall: Training RNNs
+
+- **Recommended method**: Backprop Through Time (BPTT)
+
+![NPTEL Logo](image_url)
+
+*Vineeth N B (IIT-H) §8.3 LSTMs and GRUs*
+
+*Page 4 / 21*
+```
+
+**Note**: Replace `image_url` with the actual URL or placeholder for the image if needed.
+
+# DL4CV_Week08_Part03.pdf - Page 7
+
+:
+
+```markdown
+# Recall: Training RNNs
+
+- **Recommended method**: Backprop Through Time (BPTT)
+- **Limitations of BPTT**
+  - Vanishing Gradients
+  - Exploding Gradients
+- **How to overcome by changes in RNN architecture?**
+
+![NPTEL Logo](image-url)
+
+*Vineeth N B (IIT-H) §8.3 LSTMs and GRUs*
+
+*Slide 4/21*
+```
+
+# DL4CV_Week08_Part03.pdf - Page 8
+
+```markdown
+# Recall: Training RNNs
+
+- **Recommended method**: Backprop Through Time (BPTT)
+- **Limitations of BPTT**
+  - Vanishing Gradients
+  - Exploding Gradients
+- **How to overcome by changes in RNN architecture?**
+  - **LSTMs** (1997)
+  - **GRUs** (2014)
+
+![Diagram Placeholder](image-url)
+
+*Vineeth N B (IIT-H) §8.3 LSTMs and GRUs*
+
+*Page 4 of 21*
+```
+
+# DL4CV_Week08_Part03.pdf - Page 9
+
+```markdown
+# Long Short-Term Memory (LSTM)<sup>1</sup>
+
+- A type of RNN proposed by Hochreiter and Schmidhuber in 1997 as a solution to the long-term dependency problem
+
+![NPTEL Logo](https://via.placeholder.com/150)
+
+*Credit: Christopher Manning, Stanford Univ*
+
+---
+
+<sup>1</sup> Hochreiter and Schmidhuber, Long Short-Term Memory, Neural Computation, 1997
+
+*Vineeth N B (IIT-H)*
+
+*8.3 LSTMs and GRUs*
+
+*Date: 5 / 21*
+```
+
+# DL4CV_Week08_Part03.pdf - Page 10
+
+```markdown
+# Long Short-Term Memory (LSTM)<sup>1</sup>
+
+- A type of RNN proposed by Hochreiter and Schmidhuber in 1997 as a solution to the long-term dependency problem
+- On step \( t \), there is a **hidden state** \( h^{(t)} \) and a **cell state** \( c^{(t)} \)
+
+![NPTEL](https://example.com/nptel_logo.png)
+
+*Credit*: Christopher Manning, Stanford Univ
+
+<sup>1</sup> Hochreiter and Schmidhuber, Long Short-Term Memory, Neural Computation, 1997
+
+*Vineeth N B (IIT-H)*
+
+*§8.3 LSTMs and GRUs*
+
+*5 / 21*
+```
+
+# DL4CV_Week08_Part03.pdf - Page 11
+
+```markdown
+# Long Short-Term Memory (LSTM)¹
+
+- A type of RNN proposed by Hochreiter and Schmidhuber in 1997 as a solution to the long-term dependency problem
+- On step \( t \), there is a **hidden state** \( h^{(t)} \) and a **cell state** \( c^{(t)} \)
+  - The cell stores long-term information
+
+![NPTEL Logo](image_url)
+
+**Credit**: Christopher Manning, Stanford Univ
+
+¹ Hochreiter and Schmidhuber, Long Short-Term Memory, Neural Computation, 1997
+
+---
+
+Vineeth N B (IIT-H) §8.3 LSTMs and GRUs
+
+5 / 21
+```
+
+# DL4CV_Week08_Part03.pdf - Page 12
+
+```markdown
+# Long Short-Term Memory (LSTM)<sup>1</sup>
+
+- A type of RNN proposed by Hochreiter and Schmidhuber in 1997 as a solution to the long-term dependency problem
+- On step t, there is a **hidden state** \( h^{(t)} \) and a **cell state** \( c^{(t)} \)
+  - The cell stores long-term information
+  - The LSTM can **erase**, **write** and **read** information from the cell
+
+![NPTEL Logo](https://example.com/nptel_logo.png)
+
+*Credit: Christopher Manning, Stanford Univ*
+
+---
+
+<sup>1</sup> Hochreiter and Schmidhuber, Long Short-Term Memory, Neural Computation, 1997
+
+*Vineeth N B (IIT-H) §8.3 LSTMs and GRUs*
+
+*5 / 21*
+```
+
+# DL4CV_Week08_Part03.pdf - Page 13
+
+```markdown
+# Long Short-Term Memory (LSTM)¹
+
+- A type of RNN proposed by Hochreiter and Schmidhuber in 1997 as a solution to the long-term dependency problem
+  - On step $t$, there is a **hidden state** $h^{(t)}$ and a **cell state** $c^{(t)}$
+    - The cell stores long-term information
+    - The LSTM can erase, write, and read information from the cell
+      - The selection of which information is erased/written/read is controlled by three corresponding **gates**
+
+**Credit**: Christopher Manning, Stanford Univ
+
+¹Hochreiter and Schmidhuber, Long Short-Term Memory, Neural Computation, 1997
+
+---
+
+**Vineeth N B (IIT-H)**
+
+**§8.3 LSTMs and GRUs**
+
+**5 / 21**
+```
+
+# DL4CV_Week08_Part03.pdf - Page 14
+
+```markdown
+# Long Short-Term Memory (LSTM) 
+
+- A type of RNN proposed by Hochreiter and Schmidhuber in 1997 as a solution to the long-term dependency problem
+- On step \(t\), there is a **hidden state** \(h^{(t)}\) and a **cell state** \(c^{(t)}\)
+  - The cell stores long-term information
+  - The LSTM can **erase**, **write** and **read** information from the cell
+- The selection of which information is erased/written/read is controlled by three corresponding **gates**
+  - On each timestep, each element of the gates can be open (1), closed (0), or somewhere in-between
+
+*Credit: Christopher Manning, Stanford Univ*
+
+---
+
+\(^{1}\) Hochreiter and Schmidhuber, Long Short-Term Memory, Neural Computation, 1997
+
+*Vineeth N B (IIT-H) §8.3 LSTMs and GRUs*
+
+---
+
+![Image Placeholder](image-url)
+
+```
+
+# DL4CV_Week08_Part03.pdf - Page 15
+
+```markdown
+# Long Short-Term Memory (LSTM)<sup>1</sup>
+
+- A type of RNN proposed by Hochreiter and Schmidhuber in 1997 as a solution to the long-term dependency problem
+
+  - On step $t$, there is a **hidden state** $h^{(t)}$ and a **cell state** $c^{(t)}$
+    - The cell stores long-term information
+    - The LSTM can **erase**, **write** and **read** information from the cell
+    - The selection of which information is erased/written/read is controlled by three corresponding **gates**
+      - On each timestep, each element of the gates can be open (1), closed (0), or somewhere in-between
+      - The gates are dynamic, their value is computed based on current context
+
+*Credit: Christopher Manning, Stanford Univ*
+
+<sup>1</sup>Hochreiter and Schmidhuber, Long Short-Term Memory, Neural Computation, 1997
+
+*Vimeeth N B (IIT-H)*
+*§8.3 LSTMs and GRUs*
+*5/21*
+```
+
+# DL4CV_Week08_Part03.pdf - Page 16
+
+```markdown
+# LSTMs
+
+- All RNNs have the form of a **chain of repeating modules** of neural network
+- Repeating module in a vanilla RNN is a **single layer with tanh activation**
+
+![LSTM Diagram](image_url)
+
+- **Neural Network Layer** (highlighted in yellow)
+- **Pointwise Operation** (circle shape)
+- **Vector Transfer** (arrow)
+- **Concatenate** (curved arrow)
+- **Copy** (arrow)
+
+**Credit:** Christopher Olah
+Vineeth N B (IIIT-H)
+§8.3 LSTMs and GRUs
+
+---
+
+**Diagram Explanation:**
+
+- **A**: Neural Network Layer
+- **h**: Hidden state (Pointwise Operation)
+- **X**: Input vector (Xt-1, Xt, Xt+1)
+- **tanh**: Activation function
+  
+```
+
+# DL4CV_Week08_Part03.pdf - Page 17
+
+```markdown
+# LSTMs
+
+- All RNNs have the form of a chain of repeating modules of neural network
+- Repeating module in an LSTM contains four interacting layers
+
+![LSTM Diagram](image_url)
+
+- **Neural Network Layer**: ![Neural Network Layer](image_url)
+- **Pointwise Operation**: ![Pointwise Operation](image_url)
+- **Vector Transfer**: ![Vector Transfer](image_url)
+- **Concatenate**: ![Concatenate](image_url)
+- **Copy**: ![Copy](image_url)
+
+**Credit**: Christopher Olah
+
+**Vineeth N B (IIT-H)**
+
+**§8.3 LSTMs and GRUs**
+
+```math
+h_t = f_t(W_x x_t + W_h h_{t-1} + b)
+```
+
+![h_0](image_url)
+
+![h_t](image_url)
+
+![h_t](image_url)
+
+```math
+x_t
+```
+
+```math
+x_t
+```
+
+```math
+x_t
+```
+
+```math
+h_{t-1}
+```
+
+```math
+i_t
+```
+
+```math
+f_t
+```
+
+```math
+o_t
+```
+
+```math
+g_t
+```
+
+```markdown
+6 / 21
+```
+```
+
+# DL4CV_Week08_Part03.pdf - Page 18
+
+```markdown
+# LSTMs
+
+![LSTM Diagram](image_url)
+
+## LSTM Components and Processes
+
+### Key Components
+- **Neural Network Layer**: Represented by yellow blocks.
+- **Pointwise Operation**: Represented by circles.
+- **Vector Transfer**: Represented by arrows.
+- **Concatenate**: Represented by an arrow with a plus sign.
+- **Copy**: Represented by an arrow with a circle.
+
+### Processes
+1. **Forget Gate**:
+   - **Compute the forget gate**: Determines which information from the cell state \( C_{t-1} \) should be discarded. This is achieved by applying a sigmoid function to the input and previous hidden state.
+   - **Forget some cell content**: The output is a value between 0 and 1, where 0 means completely forget and 1 means completely keep.
+
+2. **Input Gate**:
+   - **Compute the input gate**: Determines which new information should be added to the cell state. This involves applying a sigmoid function to the input and previous hidden state.
+   - **Write some new cell content**: The output is a value between 0 and 1, where 0 means ignore the new information and 1 means completely add it.
+
+3. **New Cell Content**:
+   - **Compute the candidate values**: These are new potential values that could be added to the cell state. This is achieved by applying a tanh function to the input.
+   - **Multiply by the input gate**: The candidate values are then multiplied by the input gate to determine which parts of the new information to keep.
+
+4. **Output Gate**:
+   - **Compute the output gate**: Determines which parts of the cell state should be outputted. This is achieved by applying a sigmoid function to the input and previous hidden state.
+   - **Output some cell content to the hidden state**: The output is a value between 0 and 1, where 0 means completely ignore the cell state and 1 means completely output it.
+
+### Mathematical Representations
+- **Forget Gate**:
+  \[ f_t = \sigma(W_f \cdot [h_{t-1}, x_t] + b_f) \]
+- **Input Gate**:
+  \[ i_t = \sigma(W_i \cdot [h_{t-1}, x_t] + b_i) \]
+  \[ \tilde{C}_t = \tanh(W_C \cdot [h_{t-1}, x_t] + b_C) \]
+- **Cell State Update**:
+  \[ C_t = f_t * C_{t-1} + i_t * \tilde{C}_t \]
+- **Output Gate**:
+  \[ o_t = \sigma(W_o \cdot [h_{t-1}, x_t] + b_o) \]
+  \[ h_t = o_t * \tanh(C_t) \]
+
+### Credits
+- **Source**: Christopher Manning, Stanford University
+- **OCR Credit**: Vineeth N B (IIIT-H)
+- **Slide Number**: 8.3 LSTMs and GRUs
+
+```
+
+# DL4CV_Week08_Part03.pdf - Page 19
+
+:
+
+```markdown
+# LSTMs Explained
+
+- **Cell state (C<sub>t</sub>):**
+
+![Image of LSTM](image_url)
+
+*Credit: Christopher Olah*
+
+*Vineeth N B (IIIT-H)*
+
+## §8.3 LSTMs and GRUs
+
+### Slide Number: 8 / 21
+```
+
+(Note: Replace `image_url` with the actual URL or placeholder for the image if available.)
+
+This format maintains the scientific structure and ensures that all elements are accurately represented in markdown.
+
+# DL4CV_Week08_Part03.pdf - Page 20
+
+```markdown
+# LSTMs Explained
+
+- **Cell state (C<sub>t</sub>):**
+  - Information can flow along cell state unchanged. Why is this important?
+
+![Diagram](image-placeholder.png)
+
+*Credit: Christopher Olah*
+
+_Vineeth N B (IIIT-H)_
+
+§8.3 LSTMs and GRUs
+
+NPTEL
+
+8 / 21
+```
+  
+```markdown
+# LSTMs Explained
+
+- **Cell state (C<sub>t</sub>):**
+  - Information can flow along cell state unchanged. Why is this important?
+
+<div align="center">
+  <img src="image-placeholder.png" alt="Diagram" />
+</div>
+
+*Credit: Christopher Olah*
+
+_Vineeth N B (IIIT-H)_
+
+§8.3 LSTMs and GRUs
+
+NPTEL
+
+8 / 21
+```
+
+# DL4CV_Week08_Part03.pdf - Page 21
+
+```markdown
+# LSTMs Explained
+
+- **Cell state (C<sub>t</sub>):**
+  - Information can flow along cell state unchanged. Why is this important?
+  - Ability to remove or add information to cell state, regulated by gates
+
+![Diagram of LSTM](image-url)
+
+*Credit: Christopher Olah*
+
+Vineeth N B (IIT-H) §8.3 LSTMs and GRUs 8 / 21
+```
+
+# DL4CV_Week08_Part03.pdf - Page 22
+
+```markdown
+# LSTMs Explained
+
+![LSTM Diagram](image-url)
+
+**Credit: Christopher Olah**
+
+*Vineeth N B (IITH)*
+
+## LSTMs Explained
+
+### Cell state (C<sub>t</sub>):
+
+- Information can flow along cell state unchanged. Why is this important?
+- Ability to remove or add information to cell state, regulated by gates
+
+### Gates:
+
+- Information can flow along cell state unchanged. Why is this important?
+- Ability to remove or add information to cell state, regulated by gates
+
+![Formula](image-url)
+
+### Slide Information
+
+- **Title**: LSTMs Explained
+- **Author**: Christopher Olah
+- **Date**: 8 / 21
+- **Course**: §8.3 LSTMs and GRUs
+- **Presenter**: Vineeth N B (IITH)
+
+### Diagram Explanation
+
+- **C<sub>t-1</sub>**: Previous cell state
+- **C<sub>t</sub>**: Current cell state
+- **Gates**: Control the flow of information into and out of the cell state
+  - **Input Gate**: Controls which information is added to the cell state
+  - **Forget Gate**: Decides which information to remove from the cell state
+  - **Output Gate**: Determines which information is output from the cell state
+
+```math
+C_{t} = f_t \cdot C_{t-1} + i_t \cdot \tilde{C}_t
+```
+
+Where:
+- **f<sub>t</sub>**: Forget gate output
+- **i<sub>t</sub>**: Input gate output
+- **C<sub>t-1</sub>**: Previous cell state
+- **\tilde{C}_t**: Candidate cell state
+
+### Notes
+
+- The LSTM architecture incorporates gates that regulate the flow of information through the cell state.
+- This allows the model to selectively retain or forget information, making it highly effective for sequence prediction tasks.
+```
+
+**Note**: Replace `image-url` with the actual URLs of the images if they can be captured by OCR.
+
+# DL4CV_Week08_Part03.pdf - Page 23
+
+```markdown
+# LSTMs Explained
+
+## Cell state (C<sub>t</sub>):
+
+- Information can flow along cell state unchanged. Why is this important?
+- Ability to remove or add information to cell state, regulated by gates
+
+## Gates:
+
+- Composed of a sigmoid neural net layer and a pointwise multiplication operation
+
+![LSTM Diagram](https://via.placeholder.com/600x400?text=LSTM+Diagram) 
+
+*Credit: Christopher Olah*
+
+_Vineeth N B (IIT-H)_
+
+## Slide Information
+
+- **Title**: §8.3 LSTMs and GRUs
+- **Date**: 8 / 21
+```
+
+# DL4CV_Week08_Part03.pdf - Page 24
+
+```markdown
+# LSTMs Explained
+
+- **Cell state (C<sub>t</sub>):**
+  - Information can flow along cell state unchanged. Why is this important?
+  - Ability to remove or add information to cell state, regulated by gates
+
+- **Gates:**
+  - Composed of a sigmoid neural net layer and a pointwise multiplication operation
+  - Sigmoid layer outputs numbers between zero and one, describing how much of each component should be let through
+
+![LSTM Diagram](image_placeholder_url)
+
+*Credit: Christopher Olah*
+
+_Vineeth N B. (IIT-H)_
+
+§8.3 LSTMs and GRUs
+
+8 / 21
+```
+
+# DL4CV_Week08_Part03.pdf - Page 25
+
+# LSTMs Explained
+
+## Forget gate: controls what is kept vs what is forgotten, from previous cell state
+
+![Forget gate diagram](https://via.placeholder.com/150)
+
+```math
+f_t = \sigma \left( W_f \cdot [h_{t-1}, x_t] + b_f \right)
+```
+
+**Credit: Christopher Olah**
+
+**Vineeth N B (IIT-H)**
+
+### §8.3 LSTMs and GRUs
+
+---
+
+This markdown format ensures that the content is structured correctly, and the formulas and special notations are accurately represented.
+
+# DL4CV_Week08_Part03.pdf - Page 26
+
+```markdown
+# LSTMs Explained
+
+## Key Components
+
+- **Input gate**: decides what information to throw away from the cell state
+- **Cell content**: new content to be written to cell
+
+![LSTM Diagram](image-url)
+
+$$
+i_t = \sigma \left( W_i \cdot [h_{t-1}, x_t] + b_i \right)
+$$
+
+$$
+\tilde{C}_t = \tanh \left( W_C \cdot [h_{t-1}, x_t] + b_C \right)
+$$
+
+*Credit: Christopher Olah*
+
+_Vineeth N B (IIIT-H)_
+
+§8.3 LSTMs and GRUs
+
+*Slide 10 / 21*
+```
+
+**Note**: The placeholder `[image-url]` should be replaced with the actual URL or path to the image if available. If the OCR process fails to capture the image, you may need to manually insert it or describe it in the markdown text.
+
+# DL4CV_Week08_Part03.pdf - Page 27
+
+```markdown
+# LSTMs Explained
+
+## Cell state: erase ("forget") some content from last cell state, and write ("input") some new cell content
+
+![LSTM Diagram](image-url-here)
+
+```math
+C_t = f_t * C_{t-1} + i_t * \tilde{C}_t
+```
+
+**Credit: Christopher Olah**
+
+*Vineeth N B (IIIT-H)*
+
+### §8.3 LSTMs and GRUs
+
+11 / 21
+```
+
+# DL4CV_Week08_Part03.pdf - Page 28
+
+```markdown
+# LSTMs Explained
+
+## Output gate
+
+- Controls what parts of cell are output to hidden state
+
+## Hidden state
+
+- Reads ("output") some content from cell
+
+![LSTM Diagram](image-placeholder)
+
+- **Credit**: Christopher Olah
+
+### Formulas
+
+$$
+o_t = \sigma \left( W_o \left[ h_{t-1}, x_t \right] + b_o \right)
+$$
+
+$$
+h_t = o_t \ast \tanh (C_t)
+$$
+
+*Vineeth N B (IIT-H) §8.3 LSTMs and GRUs 12 / 21*
+```
+
+# DL4CV_Week08_Part03.pdf - Page 29
+
+ the content correctly in markdown format.
+
+```markdown
+# LSTMs Explained
+
+![LSTM Diagram](image_url)
+
+**Forget gate**: controls what is kept vs forgotten, from previous cell state
+
+**Input gate**: controls what parts of the new cell content are written to cell
+
+**Output gate**: controls what parts of cell are output to hidden state
+
+**New cell content**: this is the new content to be written to the cell
+
+**Cell state**: erase ("forget") some content from last cell state, and write ("input") some new cell content
+- \( \tilde{C}_t = \tanh(W_C \cdot [h_{t-1}, x_t] + b_C) \)
+- \( C_t = f_t \ast C_{t-1} + i_t \ast \tilde{C}_t \)
+
+**Hidden state**: read ("output") some content from the cell
+- \( h_t = o_t \ast \tanh(C_t) \)
+
+## Formulas
+
+- **Forget gate**: \( f_t = \sigma(W_f \cdot [h_{t-1}, x_t] + b_f) \)
+- **Input gate**: \( i_t = \sigma(W_i \cdot [h_{t-1}, x_t] + b_i) \)
+- **Output gate**: \( o_t = \sigma(W_o \cdot [h_{t-1}, x_t] + b_o) \)
+
+## Sigmoid function
+
+All gate values are between 0 and 1
+
+**Author**: Vineeth N B (IIIT-H)
+
+**Slide**: §8.3 LSTMs and GRUs
+
+**Page Number**: 13 / 21
+```
+
+Note: Replace `image_url` with the actual URL or placeholder for the image if necessary.
+
+This markdown format maintains the scientific integrity of the original content, ensuring that elements like formulas, equations, and special characters are accurately represented.
+
+# DL4CV_Week08_Part03.pdf - Page 30
+
+```markdown
+# LSTMs Explained
+
+## Components of LSTM Cells
+
+- **Forget gate**: controls what is kept vs forgotten, from previous cell state
+- **Input gate**: controls what parts of the new cell content are written to the cell
+- **Output gate**: controls what parts of the cell are output to hidden state
+- **New cell content**: this is the new content to be written to the cell
+- **Cell state**: erase ("forget") some content from last cell state, and write ("input") some new cell content
+- **Hidden state**: read ("output") some content from the cell
+
+## Mathematical Representations
+
+### Sigmoid Function
+All gate values are between 0 and 1.
+
+### Gates
+\[ f_t = \sigma(W_f \cdot [h_{t-1}, x_t] + b_f) \]
+\[ i_t = \sigma(W_i \cdot [h_{t-1}, x_t] + b_i) \]
+\[ o_t = \sigma(W_o \cdot [h_{t-1}, x_t] + b_o) \]
+
+### Cell State Update
+\[ \tilde{C}_t = \tanh(W_C \cdot [h_{t-1}, x_t] + b_C) \]
+\[ C_t = f_t * C_{t-1} + i_t * \tilde{C}_t \]
+
+### Hidden State Update
+\[ h_t = o_t * \tanh(C_t) \]
+
+### Questions
+- What can you tell about cell state (C_t), if forget gate is set to 1 and input gate set to 0?
+
+## Presenter Information
+- **Vineeth N B (IIIT-H)**
+- **Section**: §8.3 LSTMs and GRUs
+- **Slide Number**: 13 / 21
+```
+
+# DL4CV_Week08_Part03.pdf - Page 31
+
+```markdown
+# LSTMs Explained
+
+## Components and Functions
+
+- **Forget gate**: controls what is kept vs forgotten, from previous cell state
+- **Input gate**: controls what parts of the new cell content are written to cell
+- **Output gate**: controls what parts of cell are output to hidden state
+- **New cell content**: this is the new content to be written to the cell
+- **Cell state**: erase ("forget") some content from last cell state, and write ("input") some new cell content
+- **Hidden state**: read ("output") some content from the cell
+
+## Mathematical Representations
+
+$$
+\begin{aligned}
+f_t &= \sigma(W_f \cdot [h_{t-1}, x_t] + b_f) \\
+i_t &= \sigma(W_i \cdot [h_{t-1}, x_t] + b_i) \\
+o_t &= \sigma(W_o \cdot [h_{t-1}, x_t] + b_o)
+\end{aligned}
+$$
+
+$$
+\begin{aligned}
+\tilde{C_t} &= \tanh(W_C \cdot [h_{t-1}, x_t] + b_C) \\
+C_t &= f_t \ast C_{t-1} + i_t \ast \tilde{C_t} \\
+h_t &= o_t \ast \tanh(C_t)
+\end{aligned}
+$$
+
+## Key Concepts
+
+- **Sigmoid function**: all gate values are between 0 and 1
+
+### Questions
+
+- What can you tell about cell state (\(C_t\)), if forget gate is set to 1 and input gate set to 0?
+
+  - Information of that cell is preserved indefinitely
+```
+
+### Image Caption
+
+![LSTM Diagram](image-placeholder.png)
+
+---
+
+**Vineeth N B (IIIT-H)**
+
+**8.3 LSTMs and GRUs**
+
+**13 / 21**
+
+```
+
+# DL4CV_Week08_Part03.pdf - Page 32
+
+ content from the image.
+
+```markdown
+# LSTMs Explained
+
+![LSTM Diagram](image_url)
+
+## Components and Explanations
+
+- **Forget gate**: controls what is kept vs forgotten, from previous cell state
+- **Input gate**: controls what parts of the new cell content are written to cell
+- **Output gate**: controls what parts of cell are output to hidden state
+- **New cell content**: this is the new content to be written to the cell
+- **Cell state**: erase ("forget") some content from last cell state, and write ("input") some new cell content
+- **Hidden state**: read ("output") some content from the cell
+
+## Mathematical Representation
+
+$$
+\begin{aligned}
+f_t &= \sigma(W_f \cdot [h_{t-1}, x_t] + b_f) \\
+i_t &= \sigma(W_i \cdot [h_{t-1}, x_t] + b_i) \\
+o_t &= \sigma(W_o \cdot [h_{t-1}, x_t] + b_o) \\
+\tilde{C_t} &= \tanh(W_C \cdot [h_{t-1}, x_t] + b_C) \\
+C_t &= f_t * C_{t-1} + i_t * \tilde{C_t} \\
+h_t &= o_t * \tanh(C_t)
+\end{aligned}
+$$
+
+## Key Concepts
+
+- **Sigmoid function**: all gate values are between 0 and 1
+- **What can you tell about cell state (\(C_t\))**? If forget gate is set to 1 and input gate set to 0?
+  - Information of that cell is preserved indefinitely
+- **What happens if you fix input gate to all 1s, forget gate to all 0s, output gate to all 1s?**
+
+## Bibliographic Information
+
+- **Author**: Vineeth N B (IIT-H)
+- **Section**: §8.3: LSTMs and GRUs
+- **Page Number**: 13 / 21
+```
+
+**Note**: Replace `"image_url"` with the actual URL or path to the image if you have it. Ensure the content closely matches the structure and details present in the original image.
+
+# DL4CV_Week08_Part03.pdf - Page 33
+
+```markdown
+# LSTMs Explained
+
+## Key Components
+
+- **Forget gate**: controls what is kept vs forgotten, from previous cell state
+- **Input gate**: controls what parts of the new cell content are written to cell
+- **Output gate**: controls what parts of cell are output to hidden state
+- **New cell content**: this is the new content to be written to the cell
+- **Cell state**: erase ("forget") some content from last cell state, and write ("input") some new cell content
+- **Hidden state**: read ("output") some content from the cell
+
+## Mathematical Formulation
+
+$$
+\begin{align*}
+f_t &= \sigma(W_f \cdot [h_{t-1}, x_t] + b_f) \\
+i_t &= \sigma(W_i \cdot [h_{t-1}, x_t] + b_i) \\
+o_t &= \sigma(W_o \cdot [h_{t-1}, x_t] + b_o) \\
+\tilde{C}_t &= \tanh(W_C \cdot [h_{t-1}, x_t] + b_C) \\
+C_t &= f_t * C_{t-1} + i_t * \tilde{C}_t \\
+h_t &= o_t * \tanh(C_t)
+\end{align*}
+$$
+
+## Analysis
+
+- **What can you tell about cell state (\(C_t\))** if forget gate is set to 1 and input gate set to 0?
+  - Information of that cell is preserved indefinitely
+
+- **What happens if you fix input gate to all 1s, forget gate to all 0s, output gate to all 1s?**
+  - Almost standard RNN
+```
+
+
+# DL4CV_Week08_Part03.pdf - Page 34
+
+# LSTMs Explained
+
+## Explanation
+
+### Components and Functions
+
+- **Forget gate**: controls what is kept vs forgotten, from previous cell state
+  ```math
+  f_t = \sigma(W_f \cdot [h_{t-1}, x_t] + b_f)
+  ```
+
+- **Input gate**: controls what parts of the new cell content are written to cell
+  ```math
+  i_t = \sigma(W_i \cdot [h_{t-1}, x_t] + b_i)
+  ```
+
+- **Output gate**: controls what parts of cell are output to hidden state
+  ```math
+  o_t = \sigma(W_o \cdot [h_{t-1}, x_t] + b_o)
+  ```
+
+- **New cell content**: this is the new content to be written to the cell
+  ```math
+  \tilde{C}_t = \tanh(W_C \cdot [h_{t-1}, x_t] + b_C)
+  ```
+
+- **Cell state**: erase ("forget") some content from last cell state, and write ("input") some new cell content
+  ```math
+  C_t = f_t * C_{t-1} + i_t * \tilde{C}_t
+  ```
+
+- **Hidden state**: read ("output") some content from the cell
+  ```math
+  h_t = o_t * \tanh(C_t)
+  ```
+
+### Equations
+
+- **Forget gate**:
+  ```math
+  f_t = \sigma(W_f \cdot [h_{t-1}, x_t] + b_f)
+  ```
+
+- **Input gate**:
+  ```math
+  i_t = \sigma(W_i \cdot [h_{t-1}, x_t] + b_i)
+  ```
+
+- **Output gate**:
+  ```math
+  o_t = \sigma(W_o \cdot [h_{t-1}, x_t] + b_o)
+  ```
+
+- **New cell content**:
+  ```math
+  \tilde{C}_t = \tanh(W_C \cdot [h_{t-1}, x_t] + b_C)
+  ```
+
+- **Cell state**:
+  ```math
+  C_t = f_t * C_{t-1} + i_t * \tilde{C}_t
+  ```
+
+- **Hidden state**:
+  ```math
+  h_t = o_t * \tanh(C_t)
+  ```
+
+## Questions and Answers
+
+### What can you tell about cell state (C_t), if forget gate is set to 1 and input gate set to 0?
+
+- Information of that cell is preserved indefinitely
+
+### What happens if you fix input gate to all 1s, forget gate to all 0s, output gate to all 1s?
+
+- Almost standard RNN
+
+### Why almost?
+
+---
+
+*Vineeth N B (IIT-H) §8.3 LSTMs and GRUs 13/21*
+
+# DL4CV_Week08_Part03.pdf - Page 35
+
+ the original formatting as closely as possible.
+
+```markdown
+# LSTMs Explained
+
+## Overview
+
+This slide provides an overview of Long Short-Term Memory (LSTM) networks, highlighting the role of various gates and the cell state mechanism.
+
+## Gates in LSTM
+
+The key components of an LSTM cell include:
+
+- **Forget gate**: controls what is kept vs forgotten from the previous cell state.
+- **Input gate**: controls what parts of the new cell content are written to the cell.
+- **Output gate**: controls what parts of the cell are output to the hidden state.
+- **New cell content**: the new content to be written to the cell.
+- **Cell state**: erase ("forget") some content from the last cell state, and write ("input") some new cell content.
+- **Hidden state**: read ("output") some content from the cell.
+
+## Mathematical Formulation
+
+The operations within an LSTM cell are governed by the following equations:
+
+```math
+f_t = \sigma(W_f \cdot [h_{t-1}, x_t] + b_f)
+i_t = \sigma(W_i \cdot [h_{t-1}, x_t] + b_i)
+o_t = \sigma(W_o \cdot [h_{t-1}, x_t] + b_o)
+```
+
+Where:
+- \( f_t \) is the forget gate activation,
+- \( i_t \) is the input gate activation,
+- \( o_t \) is the output gate activation,
+- \( \sigma \) is the sigmoid function (values between 0 and 1).
+
+The updated cell state \( \tilde{C}_t \) and cell state \( C_t \) are calculated as follows:
+
+```math
+\tilde{C}_t = \tanh(W_C \cdot [h_{t-1}, x_t] + b_C)
+C_t = f_t \ast C_{t-1} + i_t \ast \tilde{C}_t
+```
+
+Where:
+- \( \tilde{C}_t \) is the new cell content candidate,
+- \( C_t \) is the updated cell state,
+- \( \tanh \) is the hyperbolic tangent function.
+
+Finally, the hidden state \( h_t \) is given by:
+
+```math
+h_t = o_t \ast \tanh(C_t)
+```
+
+## Cell State Analysis
+
+- **What can you tell about cell state \( C_t \)?** If the forget gate is set to 1 and the input gate is set to 0?
+  - Information of that cell is preserved indefinitely.
+
+- **What happens if you fix the input gate to all 1s, forget gate to all 0s, output gate to all 1s?**
+  - Almost standard RNN;
+    - **Why almost?**
+    - **Tanh** added here.
+
+## Credit
+
+This content is credited to:
+- **Christopher Olah**
+- **Christopher Manning**, Stanford University.
+
+## Presentation Details
+
+- Presented by: **Vineeth N B** (IIIT-H)
+- Section: §8.3 LSTMs and GRUs
+- Slide number: 13 / 21
+```
+
+This markdown format maintains the scientific integrity and original structure of the provided slide, ensuring accurate representation of text, formulas, and section headings.
+
+# DL4CV_Week08_Part03.pdf - Page 36
+
+```markdown
+# LSTM: How does it solve the vanishing gradient problem?
+
+![LSTM Diagram](image_url)
+
+Vineeth N B (IIT-H)
+
+## §8.3 LSTMs and GRUs
+
+### Diagram Explanation
+
+- **Top Diagram:**
+  - **Inputs:**
+    - \( x_t \): Input at time \( t \)
+    - \( h_{t-1} \): Hidden state from the previous time step
+    - \( C_{t-1} \): Cell state from the previous time step
+  - **Process:**
+    - The input \( x_t \) and the previous hidden state \( h_{t-1} \) are combined.
+    - This combination feeds into the LSTM network, which includes internal operations to compute new states.
+    - **Outputs:**
+      - \( h_t \): New hidden state
+      - \( C_t \): New cell state
+  - This diagram shows the flow through the LSTM, emphasizing the role of the cell state in mitigating the vanishing gradient problem.
+
+- **Bottom Diagram:**
+  - **Inputs:**
+    - \( x_t \): Input at time \( t \)
+    - \( h_{t-1} \): Hidden state from the previous time step
+    - \( C_{t-1} \): Cell state from the previous time step
+  - **Process:**
+    - The input \( x_t \) and the previous hidden state \( h_{t-1} \) are combined.
+    - The cell state \( C_{t-1} \) is updated through several internal operations in the LSTM network.
+    - **Outputs:**
+      - \( h_t \): New hidden state
+      - \( C_t \): New cell state
+  - This diagram illustrates the internal mechanisms of the LSTM, showing how the cell state helps in preserving information over long sequences.
+
+### Gradient "highway"
+
+- **Concept:**
+  - The cell state \( C_t \) acts as a "highway" for gradients, allowing them to pass through the network with minimal dissipation.
+  - This mechanism helps in solving the vanishing gradient problem, which is a common issue in traditional RNNs where gradients can diminish exponentially over long sequences.
+
+### Image Credits
+
+- From NPTel
+
+---
+
+**Page 14 / 21**
+```
+
+# DL4CV_Week08_Part03.pdf - Page 37
+
+# LSTM: How does it solve the vanishing gradient problem?
+
+```markdown
+![LSTM Structure](image_url)
+
+- **Gradient "highway"**
+- **Gradient at C<sub>t</sub> passed on to C<sub>t-1</sub> unaffected by any other operations, but for forget gate; why does this not matter?**
+
+```markdown
+## Diagram Explanation
+
+### Top Diagram
+- **C<sub>t-1</sub>:** Previous hidden state
+- **h<sub>t</sub>:** Current hidden state
+- **C<sub>t</sub>:** Current cell state
+- **Forget gate, Input gate, and Output gate:** Key components of the LSTM architecture that help control the flow of information.
+
+### Bottom Diagram
+- **x<sub>t</sub>:** Current input
+- **h<sub>t-1</sub>:** Previous hidden state
+- **h<sub>t</sub>:** Current hidden state
+- **σ:** Activation function (Sigmoid)
+- **f<sub>t</sub>:** Forget gate
+
+### Explanation
+- **Gradient "highway":** LSTM architecture allows for gradients to flow freely through time, mitigating the vanishing gradient problem.
+- **Gradient at C<sub>t</sub>:** The gradient at the cell state C<sub>t</sub> is specifically passed to the previous cell state C<sub>t-1</sub> without being affected by other operations, except for the forget gate.
+
+### Key Points
+- **Forget gate:** This gate decides which information from the previous cell state should be discarded or kept.
+- **Input gate:** Controls which new information is added to the cell state.
+- **Output gate:** Determines which information from the cell state will be output to the hidden state.
+
+## References
+- Vineeth N B (IIT-H)
+- §8.3 LSTMs and GRUs
+- Slide 14/21
+```
+
+Note: Replace `image_url` with the actual URL or placeholder for the image if available.
+
+# DL4CV_Week08_Part03.pdf - Page 38
+
+```markdown
+# LSTM: How does it solve the vanishing gradient problem?
+
+![LSTM Diagram](image_url)
+
+- **Gradient "highway"**
+- **Gradient at \( C_t \) passed on to \( C_{t-1} \)**
+  - unaffected by any other operations, but for forget gate; why does this not matter?
+
+![LSTM Diagram](image_url)
+
+- **Forget gate is part of the design, it reduces the gradient where it should, does not ameliorate the gradient otherwise!**
+
+*Vineeth N B. (IIIT-H) §8.3 LSTMs and GRUs 14 / 21*
+```
+
+# DL4CV_Week08_Part03.pdf - Page 39
+
+```markdown
+# Variants of LSTM
+
+- **LSTM with peephole connections²**
+
+![LSTM Diagram](https://via.placeholder.com/500) 
+
+\[ f_t = \sigma \left( W_f \cdot [C_{t-1}, h_{t-1}, x_t] + b_f \right) \]
+
+\[ i_t = \sigma \left( W_i \cdot [C_{t-1}, h_{t-1}, x_t] + b_i \right) \]
+
+\[ o_t = \sigma \left( W_o \cdot [C_{t-1}, h_{t-1}, x_t] + b_o \right) \]
+
+**Credit**: Christopher Olah
+
+² Gers and Schmidhuber, Recurrent nets that time and count, IJCNN 2000
+
+Vineeth N B (IIT-H)
+
+§8.3 LSTMs and GRUs
+
+---
+
+15 / 21
+```
+
+Note:
+- The placeholder is used for the image URL since OCR couldn't capture the image directly.
+- Ensure to replace the placeholder URL with the actual image URL if available.
+
+This markdown format maintains the structure and formatting of the original document while ensuring that all scientific notations and formulas are correctly captured.
+
+# DL4CV_Week08_Part03.pdf - Page 40
+
+: Christopher Olah
+
+# Variants of LSTM
+
+- **Coupled forget and input gates**
+  - Instead of separately deciding what to forget and what to add, make decisions together
+
+![Coupled Forget and Input Gates](image_url)
+
+\[ C_t = f_t \ast C_{t-1} + (1 - f_t) \ast \tilde{C}_t \]
+
+## Credit:
+- **Christopher Olah**
+
+- **Vineeth N B (IIIT-H)**
+
+- **§8.3 LSTMs and GRUs**
+
+- **15 / 21**
+
+The image appears to show a variant of LSTM (Long Short-Term Memory) architecture, focusing on coupled forget and input gates. The accompanying formula represents the update rule for the cell state \(C_t\):
+
+\[ C_t = f_t \ast C_{t-1} + (1 - f_t) \ast \tilde{C}_t \]
+
+Where:
+- \(C_t\) is the cell state at time \(t\)
+- \(f_t\) is the forget gate output at time \(t\)
+- \(C_{t-1}\) is the cell state at time \(t-1\)
+- \(\tilde{C}_t\) is the candidate cell state at time \(t\)
+
+The variant appears to combine the forget and input gates, making a single decision on what to forget and what to add.
+
+This content is credited to Christopher Olah and Vineeth N B (IIIT-H) and appears to be from a section on LSTMs and GRUs in a larger document or presentation.
+
+# DL4CV_Week08_Part03.pdf - Page 41
+
+```markdown
+# History of LSTMs
+
+- **1997 - RTRL + BPTT (No forget gate)**
+  - Höchreiter and Schmidhuber, Long Short-Term Memory, Neural Computation, 1997
+
+![NPTEL Logo](link_to_logo_image)
+
+*Vineeth N B (IIT-H) §8.3 LSTMs and GRUs*
+
+*Page 16 / 21*
+```
+
+# DL4CV_Week08_Part03.pdf - Page 42
+
+```markdown
+# History of LSTMs
+
+- **1997 - RTRL + BPTT (No forget gate)**
+  - Höchreiter and Schmidhuber, Long Short-Term Memory, Neural Computation, 1997
+- **1999 - Introduced forget gate**
+  - Gers Schmidhuber and Cummins, Learning to forget: Continual prediction with LSTM, ICANN 1999
+
+![Image](image_url)
+
+*Vineeth N B (IIT-H) §8.3 LSTMs and GRUs 16 / 21*
+```
+
+# DL4CV_Week08_Part03.pdf - Page 43
+
+```markdown
+# History of LSTMs
+
+- **1997 - RTRL + BPTT (No forget gate)**
+  - Höchreiter and Schmidhuber, *Long Short-Term Memory*, Neural Computation, 1997
+
+- **1999 - Introduced forget gate**
+  - Gers Schmidhuber and Cummins, *Learning to forget: Continual prediction with LSTM*, ICANN 1999
+
+- **2000 - Peepole connections**
+  - Gers and Schmidhuber, *Recurrent nets that time and count*, IJCNN 2000
+
+![Diagram Placeholder](image_url)
+
+_Vineeth N B (IIT-H)_
+
+## 8.3 LSTMs and GRUs
+
+16 / 21
+```
+
+# DL4CV_Week08_Part03.pdf - Page 44
+
+# History of LSTMs
+
+- **1997** – **RTRL + BPTT (No forget gate)**
+  - Höchreiter and Schmidhuber, *Long Short-Term Memory*, Neural Computation, 1997
+
+- **1999** – **Introduced forget gate**
+  - Gers Schmidhuber and Cummins, *Learning to forget: Continual prediction with LSTM*, ICANN 1999
+
+- **2000** – **Peep-hole connections**
+  - Gers and Schmidhuber, *Recurrent nets that time and count*, IJCNN 2000
+
+- **2005** – **Vanilla LSTM (as we know today) – Used BPTT**
+  - Graves and Schmidhuber, *Framewise phoneme classification with bidirectional LSTM and other neural network architectures*, Neural Networks, 2005
+
+```markdown
+![History of LSTMs Diagram](image_placeholder.png)
+```
+
+# DL4CV_Week08_Part03.pdf - Page 45
+
+```markdown
+# LSTMs: Real-world success
+
+- **2013-2015: LSTMs started achieving state-of-the-art results**
+  - Successful tasks include:
+    - Handwriting recognition
+    - Speech recognition
+    - Machine translation
+    - Parsing
+    - Image captioning
+
+![Diagram Placeholder](image-url)
+
+*Vineeth N B. (IIIT-H)*
+*§8.3 LSTMs and GRUs*
+*17 / 21*
+```
+
+# DL4CV_Week08_Part03.pdf - Page 46
+
+
+
+```markdown
+# LSTMs: Real-world success
+
+- **2013-2015**: LSTMs started achieving **state-of-the-art results**
+  - Successful tasks include: handwriting recognition, speech recognition, machine translation, parsing, image captioning
+
+- **Now (2020)**, other approaches (e.g. **Transformers**) have become more dominant for certain tasks
+  - Transformers use the idea of self-attention
+
+- In **WMT 2019** (a MT conference + competition), summary report contains **"RNN"** 7 times, **"Transformer"** 105 times
+
+*Credit*: Christopher Manning, Stanford University
+
+![Diagram Placeholder](image_url_if_available)
+
+*Vineeth N B (IIIT-H)*
+
+*Section 8.3: LSTMs and GRUs*
+
+*Page 17 / 21*
+```
+
+# DL4CV_Week08_Part03.pdf - Page 47
+
+```markdown
+# Gated Recurrent Unit (GRU)<sup>2</sup>
+
+- Proposed in 2014 as a simpler alternative to LSTM
+
+![NPTEL Logo](image_url)
+
+<sup>2</sup> Chung et al., Empirical Evaluation of Gated Recurrent Neural Networks on Sequence Modeling. NeurIPS-W 2014
+
+Vineeth N B (IIT-H)
+
+### 8.3 LSTMs and GRUs
+
+*Page 18 / 21*
+```
+
+# DL4CV_Week08_Part03.pdf - Page 48
+
+```markdown
+# Gated Recurrent Unit (GRU)<sup>2</sup>
+
+- Proposed in 2014 as a simpler alternative to LSTM
+- Combines forget and input gates into a single **update gate**
+
+![NPTEL Logo](image_url)
+
+<sup>2</sup>Chung et al., Empirical Evaluation of Gated Recurrent Neural Networks on Sequence Modeling. NeurIPS-W 2014
+
+**Vineeth N B (IIT-H)**
+
+**§8.3 LSTMs and GRUs**
+
+*Slide 18 / 21*
+```
+
+# DL4CV_Week08_Part03.pdf - Page 49
+
+```markdown
+# Gated Recurrent Unit (GRU)²
+
+- **Proposed in 2014 as a simpler alternative to LSTM**
+- **Combines forget and input gates into a single update gate**
+- **Merges cell state and hidden state**
+
+![NPTEL Logo](image_url)
+
+---
+
+² Chung et al., Empirical Evaluation of Gated Recurrent Neural Networks on Sequence Modeling. NeurIPS-W 2014
+
+**Vineeth N B (IIT-H)**
+
+**§8.3 LSTMs and GRUs**
+
+*Page 18 of 21*
+```
+
+# DL4CV_Week08_Part03.pdf - Page 50
+
+```markdown
+# Gated Recurrent Unit (GRU)^2
+
+- Proposed in 2014 as a simpler alternative to LSTM
+- Combines forget and input gates into a single **update gate**
+- Merges cell state and hidden state
+
+![GRU Diagram](image-url)
+
+^Chung et al, Empirical Evaluation of Gated Recurrent Neural Networks on Sequence Modeling, NeurIPS-W 2014
+
+Vineeth N B (IIT-H)
+
+§8.3 LSTMs and GRUs
+
+---
+
+18 / 21
+```
+
+To ensure the scientific integrity, I've:
+
+1. Kept the section titles and bullet points appropriately formatted.
+2. Included a placeholder for the image URL as the OCR process may not capture images directly.
+3. Retained the citation and section number as is.
+4. Ensured that special characters and symbols are represented accurately.
+
+# DL4CV_Week08_Part03.pdf - Page 51
+
+```markdown
+# Gated Recurrent Unit (GRU)<sup>2</sup>
+
+![Gated Recurrent Unit Diagram](image-url)
+
+- **Update gate**: controls what parts of hidden state are updated vs preserved
+
+  \[
+  z_t = \sigma (W_z \cdot [h_{t-1}, x_t])
+  \]
+
+- **Reset gate**: controls what parts of previous hidden state are used to compute new content
+
+  \[
+  r_t = \sigma (W_r \cdot [h_{t-1}, x_t])
+  \]
+
+- **New hidden state content**: reset gate selects useful parts of prev hidden state. Use this and current input to compute new hidden content.
+
+  \[
+  \tilde{h}_t = \tanh (W \cdot [r_t * h_{t-1}, x_t])
+  \]
+
+- **Hidden state**: update gate simultaneously controls what is kept from previous hidden state, and what is updated to new hidden state content.
+
+  \[
+  h_t = (1 - z_t) * h_{t-1} + z_t * \tilde{h}_t
+  \]
+
+<sup>2</sup>Chung et al., Empirical Evaluation of Gated Recurrent Neural Networks on Sequence Modeling. NeurIPS-W 2014
+
+Vineeth N B (IIT-H)
+
+§8.3 LSTMs and GRUs
+
+18 / 21
+```
+
+# DL4CV_Week08_Part03.pdf - Page 52
+
+```markdown
+# Gated Recurrent Unit (GRU)^2
+
+## Components and Functions
+
+- **Update gate**: controls what parts of hidden state are updated vs preserved
+
+- **Reset gate**: controls what parts of previous hidden state are used to compute new content
+
+- **New hidden state content**: reset gate selects useful parts of previous hidden state. Use this and current input to compute new hidden content.
+
+- **Hidden state**: update gate simultaneously controls what is kept from previous hidden state, and what is updated to new hidden state content.
+
+$$
+\begin{align*}
+z_t &= \sigma (W_z \cdot [h_{t-1}, x_t]) \\
+r_t &= \sigma (W_r \cdot [h_{t-1}, x_t]) \\
+\tilde{h}_t &= \tanh (W \cdot [r_t * h_{t-1}, x_t]) \\
+h_t &= (1 - z_t) * h_{t-1} + z_t * \tilde{h}_t
+\end{align*}
+$$
+
+## Question
+
+- What happens if reset gate is set to all 1s and update gate to all 0s?
+
+---
+
+_^Chung et al, Empirical Evaluation of Gated Recurrent Neural Networks on Sequence Modeling. NeurIPS-W 2014_
+
+_Vineeth N B (IIT-H)_
+
+_§8.3 LSTMs and GRUs_
+
+_18 / 21_
+```
+
+# DL4CV_Week08_Part03.pdf - Page 53
+
+```markdown
+# GRUs vs LSTMs: Summary
+
+- Input and forget gates of LSTMs are coupled by an update gate in GRUs; reset gate (GRUs) is applied directly to previous hidden state
+
+![NPTEL](image.png)
+
+Vineeth N B (IIT-H) §8.3 LSTMs and GRUs
+
+Page 19 / 21
+```
+
+# DL4CV_Week08_Part03.pdf - Page 54
+
+```markdown
+# GRUs vs LSTMs: Summary
+
+- Input and forget gates of LSTMs are coupled by an update gate in GRUs; reset gate (GRUs) is applied directly to previous hidden state
+- GRU has **two gates**, an LSTM has **three gates**; what does this tell you?
+
+![Image](image_url)
+
+Vineeth N B (IIT-H) §8.3 LSTMs and GRUs
+
+19 / 21
+```
+
+# DL4CV_Week08_Part03.pdf - Page 55
+
+
+
+```markdown
+# GRUs vs LSTMs: Summary
+
+- Input and forget gates of LSTMs are coupled by an update gate in GRUs; reset gate (GRUs) is applied directly to previous hidden state
+- GRU has two gates, an LSTM has three gates; what does this tell you? **Lesser parameters to learn!**
+
+![NPTEL Logo](image_placeholder.png)
+
+*Vineeth N B (IIT-H)*
+*§8.3 LSTMs and GRUs*
+*19 / 21*
+```
+
+_Note: Replace `image_placeholder.png` with the actual image path or placeholder if the image is not captured by the OCR._
+
+This markdown format maintains the structure and readability of the original scientific content, ensuring accurate representation of text, symbols, and formatting.
+
+# DL4CV_Week08_Part03.pdf - Page 56
+
+
+
+```markdown
+# GRUs vs LSTMs: Summary
+
+- Input and forget gates of LSTMs are coupled by an update gate in GRUs; reset gate (GRUs) is applied directly to previous hidden state
+- GRU has two gates, an LSTM has three gates; what does this tell you? **Lesser parameters to learn!**
+- In GRUs:
+  - No internal memory (c_t) different from exposed hidden state
+  - No output gate as in LSTMs
+
+![NPTEL](https://example.com/nptel_logo.png)
+
+Vineeth N B (IIT-H) §8.3 LSTMs and GRUs 19 / 21
+```
+
+# DL4CV_Week08_Part03.pdf - Page 57
+
+```markdown
+# GRUs vs LSTMs: Summary
+
+- Input and forget gates of LSTMs are coupled by an update gate in GRUs; reset gate (GRUs) is applied directly to previous hidden state
+- GRU has two gates, an LSTM has three gates; what does this tell you? **Lesser parameters to learn!**
+- In GRUs:
+  - No internal memory (c_t) different from exposed hidden state
+  - No output gate as in LSTMs
+- LSTM a good default choice (especially if data has long-range dependencies, or if training data is large); Switch to GRUs for speed and fewer parameters
+
+*Image placeholder*
+
+Vineeth N B (IIIT-H) §8.3 LSTMs and GRUs 19 / 21
+```
+
+# DL4CV_Week08_Part03.pdf - Page 58
+
+```markdown
+# Homework
+
+## Readings
+
+- **Deep Learning book**: Sections 10.1-10.7, 10.10-10.11
+- **Understanding LSTM Networks**
+- **Illustrated Guide to LSTMs and GRUs: A step by step explanation**
+- **(Optional) Recurrent Neural Network Tutorial– Implementing a GRU/LSTM RNN with Python and Theano**
+- **(Optional) Training LSTMs using BPTT: Alex Graves’ book on RNN (Sec 4.6, pg 36-38)**
+
+## Questions
+
+- How does GRU address vanishing gradients?
+
+![Diagram](https://via.placeholder.com/150)
+
+---
+
+*Vineeth N B. (IIT-H)*
+
+*§8.3 LSTMs and GRUs*
+
+*20 / 21*
+```
+
+# DL4CV_Week08_Part03.pdf - Page 59
+
+# References
+
+- S. Hochreiter and J. Schmidhuber. “Long Short-Term Memory”. In: *Neural Computation* 9 (1997), pp. 1735–1780.
+- Razvan Pascanu, Tomas Mikolov, and Yoshua Bengio. “On the difficulty of training recurrent neural networks”. In: *ICML*. 2013.
+- Junyoung Chung et al. “Empirical Evaluation of Gated Recurrent Neural Networks on Sequence Modeling”. In: *CoRR* abs/1412.3555 (2014). arXiv: 1412.3555.
+- Li, Fei-Fei; Johnson, Justin; Serena, Yeung; *CS 231n - Convolutional Neural Networks for Visual Recognition (Spring 2019)*. URL: [http://cs231n.stanford.edu/2019/](http://cs231n.stanford.edu/2019/) (visited on 08/28/2020).
+- Manning, Christopher. *CS 224n Natural Language Processing with Deep Learning (Winter 2019)*. URL: [http://cs224n.stanford.edu/](http://cs224n.stanford.edu/) (visited on 08/28/2020).
+
+![Reference Image](https://via.placeholder.com/150)
+
+Vineeth N B (IIT-H) §8.3 LSTMs and GRUs
+
+---
+
+Note: The placeholder image URL `"https://via.placeholder.com/150"` is a placeholder and should be replaced with the actual image URL if available.
+

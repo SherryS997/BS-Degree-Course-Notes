@@ -1,0 +1,757 @@
+# DL4CV_Week10_Part01.pdf - Page 1
+
+```markdown
+# Deep Learning for Computer Vision
+
+## Deep Generative Models in Vision: An Introduction
+
+### Vineeth N Balasubramanian
+
+**Department of Computer Science and Engineering**
+
+**Indian Institute of Technology, Hyderabad**
+
+---
+
+**Vineeth N B (IIT-H)**
+
+### §10.1 Deep Generative Models
+
+1 / 15
+
+---
+
+This markdown document accurately represents the original scientific content, maintaining the structure, formatting, and integrity of the scientific terms, symbols, and formulas. The content was organized to ensure clarity and readability, with proper use of headings, subheadings, and paragraphs. Any images or diagrams that were part of the original content are noted as placeholders for accurate representation.
+
+# DL4CV_Week10_Part01.pdf - Page 2
+
+ the given image content to markdown.
+
+```markdown
+# Supervised Learning
+
+- Learning a mapping between data (inputs) to label (output).
+
+- Data is given in the form of input-label pairs {(x1, y1), (x2, y2), ..., (xn, yn)}.
+
+- The goal is to learn a function to map x to y i.e., f(x) = y.
+
+**Let's see some examples!**
+
+![Image](https://via.placeholder.com/150)
+
+Vineeth N B (IIIT-H) §10.1 Deep Generative Models
+
+2 / 15
+```
+
+This markdown format captures the structure and content of the provided scientific text or slide, maintaining the accuracy of scientific terms and ensuring proper formatting.
+
+# DL4CV_Week10_Part01.pdf - Page 3
+
+```markdown
+# Supervised Learning: Examples in Computer Vision
+
+## Classification
+![Classification](image1.png)
+- **CAT**
+
+## Classification + Localization
+![Classification + Localization](image2.png)
+- **CAT**
+
+## Object Detection
+![Object Detection](image3.png)
+- **CAT** (red box)
+- **DOG** (blue box)
+- **DUCK** (green box)
+
+## Instance Segmentation
+![Instance Segmentation](image4.png)
+- **CAT** (red outline)
+- **DOG** (blue outline)
+- **DUCK** (green outline)
+
+*Credit: Fei Fei Li, J Johnson and S Yeung, CS231n, Stanford Univ*
+
+*Vineeth N B (IIIT-H)*
+
+*§10.1 Deep Generative Models*
+
+*3 / 15*
+```
+
+# DL4CV_Week10_Part01.pdf - Page 4
+
+ quality standards.
+
+```markdown
+# Going Beyond Supervised Learning
+
+## Unsupervised Learning / Data Understanding
+
+![Unsupervised Learning](image1.png)
+
+## Detecting Outliers
+
+![Detecting Outliers](image2.png)
+
+## Generating Data
+
+![Generating Data](image3.png)
+
+_Vineeth N B (IIT-H)_
+
+## Slide Details
+
+### Section: Deep Generative Models
+- Slide Number: 4 / 15
+```
+
+# DL4CV_Week10_Part01.pdf - Page 5
+
+```markdown
+# Unsupervised Learning
+
+- **Capturing the underlying structure of the data**
+- **Only data (x) is provided; since no labels are required, training data is cheaper to obtain**
+
+## Clustering
+
+![Clustering Diagram](image_url_clustering)
+
+## Dimensionality Reduction
+
+![Dimensionality Reduction Diagram](image_url_dimensionality_reduction)
+
+![PCA Diagram](image_url_pca)
+
+*Vineeth N B (IIT-H)*
+*§10.1 Deep Generative Models*
+*5 / 15*
+```
+
+# DL4CV_Week10_Part01.pdf - Page 6
+
+```markdown
+# Generative Models
+
+- **Goal:** Generate data samples similar to the ones in the training set
+
+![Generative Models Diagram](image_url)
+
+- Training data (e.g. 64x64x3=12K dims)
+    - **p(x)**: Probability distribution over the training data
+
+![Learning](image_url)
+
+- **Learning:** Process of adjusting the model to match the training data distribution p(x)
+
+![Sampling](image_url)
+
+- **Sampling:** Generating new data samples from the learned probability distribution p(x)
+
+![Generated Samples](image_url)
+
+- New data samples generated from the learned distribution
+
+---
+
+**Presenter:** Vineeth N B (IIIT-H)
+
+**Section:** §10.1 Deep Generative Models
+
+---
+
+**Slide Number:** 6 / 15
+```
+
+# DL4CV_Week10_Part01.pdf - Page 7
+
+```markdown
+# Generative Models
+
+- **Goal:** Generate data samples similar to the ones in the training set
+
+  ![Training Data and Sampling Diagram](https://via.placeholder.com/500)
+
+  - Training data (e.g., 64x64x3=12K dims)
+  - Sampling
+  - Learning
+
+  - Assume training data $X = \{x_1, x_2, ..., x_n\}$ comes from an underlying distribution $p_D(x)$, and a generative model samples data from a distribution $p_M(x)$
+  - Our aim is to **minimize some notion of distance** between $p_D(x)$ and $p_M(x)$
+
+  Vineeth N B (IIT-H)
+
+  §10.1 Deep Generative Models
+```
+
+# DL4CV_Week10_Part01.pdf - Page 8
+
+
+
+```markdown
+# Generative Models: How to learn?
+
+**Aim:** To minimize some notion of distance between \( p_D(x) \) and \( p_M(x) \); how?
+
+- Given a dataset \( X = x_1, x_2, x_3, ..., x_N \) from an underlying distribution \( p_D(x) \)
+
+![NPTEl Logo](image_url)
+```
+
+---
+
+**Header**: Generative Models: How to learn?
+
+- **Aim**: To minimize some notion of distance between \( p_D(x) \) and \( p_M(x) \); how?
+
+  - Given a dataset \( X = x_1, x_2, x_3, ..., x_N \) from an underlying distribution \( p_D(x) \)
+
+![NPTEl Logo](image_url)
+
+---
+
+*Source*: Vineeth N B (IIIT-H) §10.1 Deep Generative Models
+
+Page Number: 7 / 15
+```
+
+# DL4CV_Week10_Part01.pdf - Page 9
+
+# Generative Models: How to learn?
+
+**Aim:** To minimize some notion of distance between \( p_D(x) \) and \( p_M(x) \); how?
+
+- Given a dataset \( X = x_1, x_2, x_3, \ldots, x_N \) from an underlying distribution \( p_D(x) \)
+- Consider an approximating distribution \( p_M(x) \) coming from a family of distributions \( M \), i.e. we need to find the best distribution in \( M \), parametrized by \( \theta \), which minimizes distance between \( p_M \) and \( p_D \), i.e.:
+
+\[ \theta^* = \arg \min_{\theta \in M} \text{dist}(p_{\theta}, p_D) \]
+
+![NPTEL](https://example.com/image_placeholder)
+
+*Vineeth N B (IIT-H)*
+
+§10.1 Deep Generative Models
+
+7 / 15
+
+# DL4CV_Week10_Part01.pdf - Page 10
+
+ the formatting of the markdown file is correct.
+
+```markdown
+# Generative Models: How to learn?
+
+**Aim:** To minimize some notion of distance between \( p_D(x) \) and \( p_M(x) \); how?
+
+- Given a dataset \( X = x_1, x_2, x_3, \ldots, x_N \) from an underlying distribution \( p_D(x) \)
+- Consider an approximating distribution \( p_M(x) \) coming from a family of distributions \( M \), i.e. we need to find the best distribution in \( M \), parametrized by \( \theta \), which minimizes distance between \( p_M \) and \( p_D \), i.e.:
+
+  \[
+  \theta^* = \arg \min_{\theta \in M} \text{dist}(p_{\theta}, p_D)
+  \]
+
+- What distance to choose?
+
+![NPTEL](https://example.com/image-placeholder.png)
+
+*Vineeth N B (IIT-H) §10.1 Deep Generative Models*
+```
+
+Note: Replace `https://example.com/image-placeholder.png` with the actual image URL if available.
+
+# DL4CV_Week10_Part01.pdf - Page 11
+
+```markdown
+# Generative Models: How to learn?
+
+**Aim**: To minimize some notion of distance between \( p_D(x) \) and \( p_M(x) \); how?
+
+- Given a dataset \( X = x_1, x_2, x_3, \ldots, x_N \) from an underlying distribution \( p_D(x) \)
+- Consider an approximating distribution \( p_M(x) \) coming from a family of distributions \( M \), i.e. we need to find the best distribution in \( M \), parametrized by \( \theta \), which minimizes distance between \( p_M \) and \( p_D \), i.e.:
+
+  \[
+  \theta^* = \arg \min_{\theta \in M} \text{dist}(p_{\theta}, p_D)
+  \]
+
+- What distance to choose?
+- If KL-divergence is the distance function, the above problem becomes one of maximum likelihood estimation!
+
+  \[
+  \theta^* = \arg \min_{\theta \in M} \mathbb{E}_{x \sim p_D} [-\log p_{\theta}(x)]
+  \]
+
+*Vineeth N B (IIT-H) §10.1 Deep Generative Models 7 / 15*
+```
+
+# DL4CV_Week10_Part01.pdf - Page 12
+
+```markdown
+# Generative Models: How to learn?
+
+**Aim:** To minimize some notion of distance between \( p_D(x) \) and \( p_M(x) \); how?
+
+- Given a dataset \( X = x_1, x_2, x_3, \ldots, x_N \) from an underlying distribution \( p_D(x) \)
+- Consider an approximating distribution \( p_M(x) \) coming from a family of distributions \( M \), i.e. we need to find the best distribution in \( M \), parametrized by \( \theta \), which minimizes distance between \( p_M \) and \( p_D \), i.e.:
+
+  \[
+  \theta^* = \arg \min_{\theta \in M} \text{dist}(p_{\theta}, p_D)
+  \]
+
+- What distance to choose?
+- If KL-divergence is the distance function, the above problem becomes one of maximum likelihood estimation!
+
+  \[
+  \theta^* = \arg \min_{\theta \in M} \mathbb{E}_{x \sim p_D} [-\log p_{\theta}(x)]
+  \]
+
+  **Why? Homework!**
+
+- This is the idea in a few methods (e.g. PixelCNN/PixelRNN, which we will see later)
+
+_Vineeth N B (IIT-H)_
+
+§10.1 Deep Generative Models
+
+7 / 15
+```
+
+# DL4CV_Week10_Part01.pdf - Page 13
+
+```markdown
+# Generative Models: Applications
+
+## Image Super Resolution
+
+- **bicubic**
+  - (21.59dB/0.6423)
+
+- **SRResNet**
+  - (23.53dB/0.7832)
+
+- **SRGAN**
+  - (21.15dB/0.6868)
+
+![Image Super Resolution Example](image1.png)
+
+## Image Colorization
+
+- Sketch Examples:
+  - ![Sketch 1](sketch1.png)
+  - ![Sketch 2](sketch2.png)
+  - ![Sketch 3](sketch3.png)
+  - ![Sketch 4](sketch4.png)
+
+- Colorized Examples:
+  - ![Colorized 1](colorized1.png)
+  - ![Colorized 2](colorized2.png)
+  - ![Colorized 3](colorized3.png)
+  - ![Colorized 4](colorized4.png)
+
+*Vineeth N B (IIIT-H)*
+*§10.1 Deep Generative Models*
+*8 / 15*
+```
+
+# DL4CV_Week10_Part01.pdf - Page 14
+
+ does not provide actual OCR functionality, so I'll simulate the process based on the provided image content.
+
+```markdown
+# Generative Models: Applications
+
+## Cross-domain Image Translation
+
+![Cross-domain Image Translation](image-url)
+
+- **Zebras** ↔ **Horses**
+  - **zebra** -> **horse**
+    ![Zebra to Horse](image-url)
+  - **horse** -> **zebra**
+    ![Horse to Zebra](image-url)
+
+## Generating Realistic Face Datasets
+
+![Generating Realistic Face Datasets](image-url)
+
+- **Source A**
+  - Top Left: ![Source A Top Left Face](image-url)
+  - Top Right: ![Source A Top Right Face](image-url)
+  - Bottom Left: ![Source A Bottom Left Face](image-url)
+  - Bottom Right: ![Source A Bottom Right Face](image-url)
+  - Bottom Center: ![Source A Bottom Center Face](image-url)
+
+```
+
+# DL4CV_Week10_Part01.pdf - Page 15
+
+
+
+---
+
+# Generative Models: More Applications
+
+- Learn good generalizable latent features
+
+![NPTEL Logo](https://example.com/logo.jpg)
+
+Vineeth N B (IIT-H) §10.1 Deep Generative Models
+
+10 / 15
+
+---
+
+```markdown
+// Ensure images are accurately captured from the OCR process
+![NPTEL Logo](https://example.com/logo.jpg)
+
+// If the OCR process accurately captures the logo or image, use the correct path or URL
+```
+
+# DL4CV_Week10_Part01.pdf - Page 16
+
+
+
+```markdown
+# Generative Models: More Applications
+
+- Learn good generalizable latent features
+- Augment small datasets
+
+![]()
+
+Vineeth N B (IIT-H) §10.1 Deep Generative Models
+
+10 / 15
+```
+
+- **Learn good generalizable latent features**
+- **Augment small datasets**
+
+![NPTEL Logo](https://via.placeholder.com/150)
+
+Vineeth N B (IIT-H) §10.1 Deep Generative Models
+
+10 / 15
+```
+
+# DL4CV_Week10_Part01.pdf - Page 17
+
+```markdown
+# Generative Models: More Applications
+
+- Learn good generalizable latent features
+- Augment small datasets
+- Enable mixed-reality applications such as Virtual Try-on
+
+![NPTEL Logo](https://example.com/nptel-logo.png)
+
+Vineeth N B (IIT-H) §10.1 Deep Generative Models
+
+---
+
+Page 10 / 15
+```
+
+# DL4CV_Week10_Part01.pdf - Page 18
+
+```markdown
+# Generative Models: More Applications
+
+- Learn good generalizable latent features
+- Augment small datasets
+- Enable mixed-reality applications such as Virtual Try-on
+- Many more...
+
+![NPTEL Logo](image_placeholder_url)
+
+_Vineeth N B (IIT-H)_
+
+§10.1 Deep Generative Models
+
+10 / 15
+```
+
+# DL4CV_Week10_Part01.pdf - Page 19
+
+
+
+```markdown
+# What are Generative Models
+
+- **Discriminative models**: aim to learn **differentiating features** between various classes in a dataset
+
+- **Generative models**: aim to learn **underlying distribution** of each class in a dataset
+
+![Diagram of Generative and Discriminative Models](image-url)
+
+*Vineeth N B (IIIT-H) §10.1 Deep Generative Models*
+
+*Slide 11 / 15*
+```
+
+# DL4CV_Week10_Part01.pdf - Page 20
+
+```markdown
+# Discriminative vs Generative Models
+
+- **Consider a binary classification problem of classifying images of 1s and 0s**
+
+## Discriminative Model
+- **Discriminative Model**
+  - Inputs: $x$
+  - Outputs: $p(y | x)$
+  - Decision boundary:
+    - $y = 0$
+    - $y = 1$
+    - ![Discriminative Model Diagram](image1.png)
+
+## Generative Model
+- **Generative Model**
+  - Inputs: $x$
+  - Outputs: $p(x, y)$
+  - Decision boundary:
+    - $y = 0$
+    - $y = 1$
+    - ![Generative Model Diagram](image2.png)
+
+*Vineeth N B (IIIT-H)*
+
+*Section 10.1: Deep Generative Models*
+
+*Slide 12 / 15*
+```
+
+# DL4CV_Week10_Part01.pdf - Page 21
+
+
+
+```markdown
+# Discriminative vs Generative Models
+
+- **Discriminative Model**
+  - Consider a binary classification problem of classifying images of 1s and 0s
+
+  ```markdown
+  - Discriminative Model
+
+    - Input: x
+    - Output: y
+    - p(y|x)
+
+    ```
+    ```
+    x
+    0 / 1
+    ```
+
+  - **Generative Model**
+    - Input: x
+    - Output: y
+    - p(x,y)
+
+    ```
+    x
+    0 / 1
+    ```
+
+  - A **discriminative classifier** directly models the posterior i.e. p(y|x); x is always given as input
+  ```
+
+  ![Diagram Placeholder](image-url)
+
+  Vineeth N B (IIT-H) §10.1 Deep Generative Models 12 / 15
+```
+
+# DL4CV_Week10_Part01.pdf - Page 22
+
+ characters (e.g., Greek letters, mathematical operators) are represented accurately.
+
+```markdown
+# Discriminative vs Generative Models
+
+- **Discriminative Model**
+  - **Diagram**: 
+    ![Discriminative Model Diagram](image_url)
+    - Input `x`
+    - Output `p(y|x)`
+      - `y = 0`
+      - `y = 1`
+
+- **Generative Model**
+  - **Diagram**: 
+    ![Generative Model Diagram](image_url)
+    - Input `x`
+    - Output `p(x,y)`
+      - `y = 0`
+      - `y = 1`
+
+**Context**:
+- Consider a binary classification problem of classifying images of 1s and 0s.
+
+**Discriminative Classifier**:
+- Directly models the posterior i.e. `p(y|x)`; `x` is always given as input.
+
+**Generative Classifier**:
+- Models the joint distribution i.e. `p(x,y)`.
+
+*Source*: Vineeth N B (IIT-H) §10.1 Deep Generative Models
+```
+
+# DL4CV_Week10_Part01.pdf - Page 23
+
+:
+
+```markdown
+# Discriminative vs Generative Models
+
+- **Discriminative Model**
+    - Example: Binary classification problem of classifying images of 1s and 0s
+    - The model directly models the posterior i.e. p(y|x); x is always given as input
+
+    ```
+    x
+    ├── p(y|x)
+    │   ├── y = 0
+    │   └── y = 1
+    ```
+
+- **Generative Model**
+    - Example: Binary classification problem of classifying images of 1s and 0s
+    - The model directly models the joint distribution i.e. p(x, y)
+
+    ```
+    x
+    ├── p(x, y)
+    │   ├── y = 0
+    │   └── y = 1
+    ```
+
+Recall: posterior and joint are related as:
+
+```math
+p(y|x) = \frac{p(x, y)}{p(x)} = \frac{p(x|y) p(y)}{p(x)}
+```
+
+(Vineeth N B, IIT-H) §10.1 Deep Generative Models
+```
+
+```
+
+# DL4CV_Week10_Part01.pdf - Page 24
+
+```markdown
+# Generative Models
+
+![NPTEL Logo](image_url)
+
+Vineeth N B (IITH) §10.1 Deep Generative Models 13 / 15
+
+## Two main kinds of generative models:
+
+- **Fully Visible Models**: Directly model observations without introducing extra variables, e.g. considering each pixel value of an image as an observation
+
+![Diagram of Fully Visible Models](diagram_url)
+
+- Sequence of observations \(x_1, x_2, x_3, x_4, ...\)
+- Arrows indicating dependencies or transitions between observations
+```
+
+
+# DL4CV_Week10_Part01.pdf - Page 25
+
+```markdown
+# Generative Models
+
+Two main kinds of generative models:
+
+1. **Fully Visible Models**: Directly model observations without introducing extra variables; e.g. considering each pixel value of an image as an observation
+
+   ![Fully Visible Models](image_url)
+
+2. **Latent Variable Models**: Defining hidden variables which generate observed data:
+
+   - **Explicit Likelihood Estimation Models**: Explicitly define and learn likelihood of data; e.g. Variational Autoencoders (VAEs)
+
+     ![Explicit Likelihood Estimation Models](image_url)
+
+   - **Implicit Models**: Learn to directly generate samples from model’s distribution, without explicitly defining any density function; e.g. Generative Adversarial Networks (GANs)
+
+     ![Implicit Models](image_url)
+
+*Vineeth N B (IIIT-H)*
+
+*§10.1 Deep Generative Models*
+
+*13 / 15*
+```
+
+# DL4CV_Week10_Part01.pdf - Page 26
+
+```markdown
+# Taxonomy of Generative Models
+
+## Generative Models
+
+- **Model can compute p(x)**
+  - **Explicit density**
+    - **Tractable density**
+      - Can compute p(x)
+        - Autoregressive
+        - NADE / MADE
+        - NICE / RealNVP
+        - Glow
+        - Ffjord
+  - **Approximate density**
+    - Can compute approximation to p(x)
+      - **Variational**
+        - Variational Autoencoder
+      - **Markov Chain**
+        - Boltzmann Machine
+
+- **Model does not explicitly compute p(x), but can sample from p(x)**
+  - **Implicit density**
+    - **Markov Chain**
+      - GSN
+    - **Direct**
+      - Generative Adversarial Networks (GANs)
+
+**Credit:** Fei-Fei Li, J. Johnson, CS231n, Stanford Univ
+
+*Vineeth N B (IIT-H)*
+
+§10.1 Deep Generative Models
+```
+
+# DL4CV_Week10_Part01.pdf - Page 27
+
+ is not required.
+
+```
+# Homework
+
+## Readings
+
+- Aditya Grover, Stefano Ermon, [Tutorial on Deep Generative Models, IJCAI-ECAI 2018](#)
+- **(Optional)** Shakir Mohamed, Danilo Rezende, [Deep Generative Models Tutorial, UAIL 2017](#)
+
+## Exercise
+
+- Why does using KL-divergence in finding the generative model simplify to maximum likelihood estimation?
+```
+
+```markdown
+# Homework
+
+## Readings
+
+- Aditya Grover, Stefano Ermon, [Tutorial on Deep Generative Models, IJCAI-ECAI 2018](https://arxiv.org/abs/1804.08058)
+- **(Optional)** Shakir Mohamed, Danilo Rezende, [Deep Generative Models Tutorial, UAIL 2017](https://arxiv.org/abs/1711.09114)
+
+## Exercise
+
+- Why does using KL-divergence in finding the generative model simplify to maximum likelihood estimation?
+```
+

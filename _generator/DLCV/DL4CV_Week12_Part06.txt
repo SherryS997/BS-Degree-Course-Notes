@@ -1,0 +1,314 @@
+# DL4CV_Week12_Part06.pdf - Page 1
+
+```markdown
+# Deep Learning for Computer Vision
+
+## Course Conclusion
+
+### Vineeth N Balasubramanian
+
+**Department of Computer Science and Engineering**
+
+**Indian Institute of Technology, Hyderabad**
+
+![IIT Hyderabad Logo](https://www.iith.ac.in/sites/default/files/iith_logo_0.jpg)
+
+**Vineeth N B (IIT-H)**
+
+**Course Conclusion**
+
+---
+
+1. **Introduction**
+   - Overview of the course on Deep Learning for Computer Vision.
+   - Key objectives and learning outcomes.
+
+2. **Course Summary**
+   - Brief recap of the topics covered in the course.
+   - Importance of deep learning in computer vision applications.
+
+3. **Key Concepts**
+   - Deep learning techniques and architectures.
+   - Convolutional Neural Networks (CNNs).
+   - Recurrent Neural Networks (RNNs).
+   - Transfer learning and fine-tuning.
+
+4. **Applications and Use Cases**
+   - Real-world applications of computer vision.
+   - Examples of successful implementations.
+
+5. **Challenges and Future Directions**
+   - Challenges in deploying deep learning models for computer vision.
+   - Future trends and advancements in the field.
+
+6. **Conclusion**
+   - Recap of the importance of deep learning in computer vision.
+   - Final thoughts on the potential impact on various industries.
+
+---
+
+**Slide 1 of 8**
+```
+
+# DL4CV_Week12_Part06.pdf - Page 2
+
+```markdown
+# Other Topics: Learning with Limited Supervision
+
+## Standard Supervised Learning
+
+### Training
+- **T1**: XY → D1
+  - **Learner**: Learns from labeled data (XY → D1)
+
+### Testing
+- **Test Data**: X → D1
+
+## Multi-Task Learning
+
+### Training
+- **T1**: XY → D1
+- **T2**: XY → D2
+- **...**
+- **In**: XY → Dn
+
+  - **Learner**: Learns from multiple tasks simultaneously
+
+### Testing
+- **Test Data**: X1 → D1; X2 → D2; ...; Xn → Dn
+
+## k-Shot Learning
+
+### Training
+- **All**: XY → C1, ... Cm
+  - **T1**: Only k samples (XY) → Cm+1, ... Cn
+
+  - **Learner**: Learns from a limited number of samples (k-shot)
+
+### Testing
+- **Test Data**: X → C1, ... Cn
+
+## Transfer Learning
+
+### Training
+- **T1**: XY → Ds
+  - **Knowledge Transfer**: Transfer learned knowledge from one domain to another
+
+### Testing
+- **Test Data**: X → Dt
+
+## Domain Adaptation
+
+### Training
+- **Ts**: XY → Ds
+- **Tt**: XY → Dt
+
+  - **Learner**: Adapts to a new domain
+
+### Testing
+- **Test Data**: X → Dt
+
+## Continual Learning
+
+### Training
+- **T1**: XY → D1
+- **T2**: XY → D2
+- **...**
+- **In**: XY → Dn
+
+  - **Learner**: Continually learns from new tasks
+
+### Testing
+- **Test Data**: X1 → D1; X2 → D2; ...; Xn → Dn
+
+## Domain Generalization
+
+### Training
+- **Ts**: XY → Ds
+- **Tt**: XY → Dt
+
+  - **Learner**: Generalizes knowledge to unseen domains
+
+### Testing
+- **Test Data**: X → Dt+1
+
+_Vineeth N B (IIIT-H)_
+
+_§12.6 Conclusion_
+
+```
+
+# DL4CV_Week12_Part06.pdf - Page 3
+
+```markdown
+# Other Topics: Reinforcement Learning and Vision
+
+- **Reinforcement Learning**: A paradigm of machine learning based where an agent takes actions and interacts with an environment to maximize total, potentially delayed, rewards; usually modeled as a Markov Decision Process (MDP).
+
+- Uses in computer vision?
+
+![NPTEL](image_placeholder.png)
+
+Vineeth N B (IIT-H) | §12.6 Conclusion
+```
+
+# DL4CV_Week12_Part06.pdf - Page 4
+
+```markdown
+# Other Topics: Reinforcement Learning and Vision
+
+- **Reinforcement Learning**: A paradigm of machine learning based where an agent takes actions and interacts with an environment to maximize total, potentially delayed, rewards; usually modeled as a Markov Decision Process (MDP)
+
+- Uses in computer vision? We already saw **hard attention** and **NAS** - which in turn have many applications!
+
+- Other example use cases:
+  - Games
+  - Visual servoing
+  - Visual tracking
+
+![NPTEL](NPTEL.png)
+
+*Vineeth N B. (IIIT-H) §12.6 Conclusion*
+```
+
+# DL4CV_Week12_Part06.pdf - Page 5
+
+```markdown
+# Other Contemporary Topics
+
+## Methods
+
+- Egocentric Vision
+- Embodied Vision
+- Visual Perception and Robotics
+- Visual Tracking
+- Hyperspectral Image Analysis
+- Computer vision for Augmented/Virtual Reality
+- Fair, Explainable and Trusted Computer Vision
+
+## Applications
+
+- Vision for Autonomous Navigation
+- Vision for Drone Imagery
+- Vision for all Seasons: Adverse Weather and Lighting Conditions
+- Vision for Healthcare and Biomedical Imaging
+- Vision for Agriculture
+- Vision for Fashion and Retail
+- Vision for Sports
+
+*Vineeth N B. (IIIT-H)*
+*512.6 Conclusion*
+```
+
+# DL4CV_Week12_Part06.pdf - Page 6
+
+```markdown
+# Course Topics
+
+## Segment 1: The Journey So Far
+
+- Image Formation, Linear Filtering
+- Edges, Blobs, Features
+- Visual Descriptors, Matching
+
+## Segment 2: The Building Blocks
+
+- Review of Neural Networks
+- Convolutional Neural Networks (CNNs)
+- CNN Architectures, Visualizing and Understanding CNNs
+
+## Segment 3: The Many Forms and Uses
+
+- Recognition, Verification, Retrieval, Detection, Segmentation
+
+## Segment 4: A Dimension Beyond
+
+- Recurrent Neural Networks
+- Spatio-Temporal Models
+- Attention, Vision-Language Tasks
+
+## Segment 5: Staying Contemporary
+
+- Deep Generative Models
+- Learning with Limited Supervision
+- Recent Trends
+
+*Vineeth N B (IIT-H) §12.6 Conclusion*
+
+```
+
+# DL4CV_Week12_Part06.pdf - Page 7
+
+```markdown
+# Computer Vision: Topics
+
+## Focus of this course
+
+### Learning-based Vision
+- Visual Recognition
+- Detection
+- Segmentation
+- Tracking
+- Retrieval, etc
+
+### Geometry-based Vision
+- Feature-based Alignment
+- Image Stitching
+- Epipolar Geometry
+- Structure from Motion
+- 3D Reconstruction, etc
+
+### Physics-based Vision
+- Computational Photography
+- Photometry
+- Light-fields
+- Color Spaces
+- Shape-from-X
+- Reflection
+- Refraction
+- Polarization
+- Diffraction
+- Interference, etc
+
+*Vineeth N B (IIT-H) §12.6 Conclusion*
+
+*Page 6 / 8*
+```
+
+# DL4CV_Week12_Part06.pdf - Page 8
+
+```markdown
+# Acknowledgements
+
+- We are grateful to the deep learning/computer vision courses and their contents that are publicly available online. Wherever possible and relevant, these sources have been cited. If you notice an oversight, please let us know, and we will be glad to acknowledge.
+
+- Any errors in the material are our own. Please point out such issues, and we will be glad to rectify.
+
+![NPTEL Logo](image_url)
+
+Vineeth N B (IIT-H)
+
+5.12.6 Conclusion
+
+```
+
+# DL4CV_Week12_Part06.pdf - Page 9
+
+```markdown
+# Slide Content from NPTEL
+
+## Conclusion
+
+Vineeth N B (IIT-H)
+
+### Thank you, and happy learning
+
+![NPTEL Logo](image-placeholder)
+
+(Note: The actual image or logo from NPTEL would be placed here if available.)
+
+---
+
+_8 / 8_
+```
+

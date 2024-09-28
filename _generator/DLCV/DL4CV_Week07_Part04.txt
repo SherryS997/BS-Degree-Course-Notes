@@ -1,0 +1,1934 @@
+# DL4CV_Week07_Part04.pdf - Page 1
+
+```markdown
+# Deep Learning for Computer Vision
+
+# CNNs for Human Understanding: Faces
+
+### Vineeth N Balasubramanian
+
+**Department of Computer Science and Engineering**
+**Indian Institute of Technology, Hyderabad**
+
+![IIT Hyderabad Logo](https://example.com/logo)
+
+---
+
+Vineeth N B (IIT-H)
+
+## §7.4 CNNs for Human Understanding: Faces
+
+1 / 37
+```
+
+# DL4CV_Week07_Part04.pdf - Page 2
+
+ accuracy is crucial, particularly with respect to notation and symbols.
+
+```markdown
+# Face Recognition
+
+![Face Recognition Examples](image.png)
+
+- **Face Recognition (FR)**: Core vision task with applications in security, finance, healthcare and many other areas of social and financial importance
+- **Unconstrained FR**: challenging due to variations in lighting, occlusions, pose/alignment, expressions, etc
+
+**Credit**: *VGGFace2 Dataset*
+
+*Vineeth N B (IIT-H)*
+
+§7.4 CNNs for Human Understanding: Faces
+
+2 / 37
+```
+```
+
+# DL4CV_Week07_Part04.pdf - Page 3
+
+ the following markdown:
+
+```markdown
+# Face Recognition: History
+
+## Timeline of Milestones and Technologies
+
+### 1966
+- **W. K. Woodrow Bledsoe**
+  - **Automated Face Recognition (AFR)**
+
+### 1973
+- **T. Kanade**
+  - **First AFR thesis**
+
+### 1991
+- **Turk & Pentland**
+  - **Eigenface**
+
+### 1996
+- **P. N. Sugiyama & N.oki**
+  - **Local Feature Analysis**
+
+### 1997
+- **Wiskott et al.**
+  - **Elastic Bunch Graph Matching**
+
+### 2001
+- **Viola & Jones**
+  - **Face Detector**
+
+### 2006
+- **Ahonen et al.**
+  - **Local Binary Pattern (LBP)**
+
+### 2009
+- **Wright et al.**
+  - **Sparse Representation**
+
+### 2014
+- **L. Li et al.**
+  - **Deep Network Library Caffe**
+
+## Evolution of Imaging Technology
+
+### 1915
+- **35mm Still Camera**
+  - **Resolution**: 1024p
+
+### 1981
+- **Kodak Digital Camera**
+  - **Resolution**: 1024p
+
+### 1990s
+- **Surveillance Cameras**
+  - **Resolution**: 480p @ 30fps
+
+### 2000
+- **Sharp First Camera Phone**
+  - **Resolution**: 320p
+
+### 2010
+- **RGB-D Cameras**
+  - **Resolution**: 480p @ 30 fps
+  - **Depth accuracy**: ~2 mm @ 1 m distance
+
+### 2013-2014
+- **Samsung Galaxy Camera**
+  - **Resolution**: 720p @ 30fps
+
+### November 2011
+- **Google Goggles**
+  - **Feature**: Face Unlock
+
+### 2015
+- **Google Intel Smartphone**
+  - **Used by NPD & Chicago PD**
+
+### 2015+
+- **Body Camera**
+  - **Used by NPD & Chicago PD**
+
+## References
+
+- **Credit**: Jain et al., 50 Years of Biometric Research: Accomplishments, Challenges, and Opportunities, PR Letters 2016
+- **Vineeth N B (IIT-H)** 
+- **§7.4 CNNs for Human Understanding: Faces**
+```
+
+This markdown formatting ensures the content is presented clearly and maintains the scientific integrity of the original material.
+
+# DL4CV_Week07_Part04.pdf - Page 4
+
+```markdown
+# Face Recognition
+
+![Face Recognition Diagram](imageURL)
+
+- A typical deep FR system's pipeline is shown above
+- Face Recognition = Face Detection + Face Alignment + Face Matching
+
+**Credit**: Wang et al, *Deep Face Recognition: A Survey*, 2018
+
+Vineeth N B (IIT-H) §7.4 CNNs for Human Understanding: Faces
+
+4 / 37
+```
+
+### Training
+
+- **Input Data**: 
+  - **Single Image**: One input image
+  - **Multiple Images**: Multiple input images
+- **Face Detection**: Detect faces from the input
+- **Face Alignment**: Align detected faces
+- **Anti-Spoofing**: Detect spoofing attempts (e.g., photos)
+- **Face Processing**: Process input images
+  - **a) One-to-Many**: Matching one face to multiple faces
+  - **b) Many-to-One**: Matching multiple faces to one face
+- **Feature Extraction**: Extract features from input images
+  - **Methods**:
+    - Euclidean Distance
+    - Angular Distance
+    - Loss Function
+
+### Testing
+
+- **Input Data**: 
+  - **Single Image**: One input image
+  - **Multiple Images**: Multiple input images
+- **Face Detection**: Detect faces from the input
+- **Face Alignment**: Align detected faces
+- **Anti-Spoofing**: Detect spoofing attempts (e.g., photos)
+- **Face Processing**: Process input images
+  - **a) One-to-Many**: Matching one face to multiple faces
+  - **b) Many-to-One**: Matching multiple faces to one face
+- **Feature Extraction**: Extract features from input images
+  - **Methods**:
+    - k-Nearest Neighbors (k-NN)
+    - Support Vector Machine (SVM)
+    - Metric Learning
+    - SRC (Sparse Representation Classifier)
+
+### Deep Face Recognition
+
+```markdown
+![Face Recognition Diagram](imageURL)
+
+- A typical deep FR system's pipeline is shown above
+- Face Recognition = Face Detection + Face Alignment + Face Matching
+
+**Credit**: Wang et al, *Deep Face Recognition: A Survey*, 2018
+
+Vineeth N B (IIT-H) §7.4 CNNs for Human Understanding: Faces
+
+4 / 37
+```
+
+# DL4CV_Week07_Part04.pdf - Page 5
+
+```markdown
+# Face Recognition System: Key Components
+
+- **Face Processing**
+  - One-to-many Augmentation
+  - Many-to-one Normalization
+
+- **Deep Feature Extraction**
+  - Network Architecture
+  - Loss Function
+
+- **Face Matching by Deep Features**
+
+![Face Recognition System Diagram](image-url)
+
+**Feature extraction using deep conv. networks**
+
+## Face processing
+![One-to-many Augmentation and Many-to-one Normalization](image-url)
+
+## Loss function
+![Network Loss Comparison and Convolution Loss](image-url)
+
+## Face matching
+![Face Matching Techniques](image-url)
+
+*Credit: Wang et al, Deep Face Recognition: A Survey, 2018*
+
+*Vineeth N B (IIIT-H)*
+
+**§7.4 CNNs for Human Understanding: Faces**
+```
+
+# DL4CV_Week07_Part04.pdf - Page 6
+
+ is critical for maintaining the professionalism and clarity of the document.
+
+```markdown
+# Face (Pre-)Processing
+
+## One-to-many Augmentation
+- Generating many patches or images of pose variations from a single image (through rotations, for e.g.)
+
+### Many-to-one Normalization
+- Attempts to recover canonical view of face images from one or many images of a non-frontal view
+- Can help in preserving identity despite variations in pose, lighting, expression and background
+
+![One-to-many Augmentation](data:image/png;base64,...) 
+![Many-to-one Normalization](data:image/png;base64,...)
+
+**Credit:** Wang et al., *A Survey on Face Data Augmentation*, Neural Computing and Applications, 2019; Qian et al., *Unsupervised Face Normalization With Extreme Pose and Expression in the Wild*, CVPR 2019
+
+*Vineeth N B (IIIT-H)*
+
+*§7.4 CNNs for Human Understanding: Faces*
+
+*Page 6 of 37*
+```
+
+# DL4CV_Week07_Part04.pdf - Page 7
+
+```markdown
+# Network Architectures for Face Recognition
+
+- Few special CNN architectures proposed for deep FR
+- However, most successful backbone networks in deep FR shaped around then SOTA deep object classification networks
+
+## Methods and Architectures
+
+### Methods
+| Method | Public Time | Loss |
+|--------|-------------|------|
+| DeepFace [105] | 2014 | softmax |
+| DeepID2 [107] | 2015 | contrastive loss |
+| DeepID3 [118] | 2015 | contrastive loss |
+| FaceNet [106] | 2015 | triplet loss |
+| IDR [148] | 2017 | triplet loss |
+| Baidu [158] | 2017 | triplet loss |
+| VGGFace [159] | 2015 | hdd loss |
+| DeepID [120] | 2015 | hdd loss |
+| Light CNN [142] | 2015 | softmax |
+| Center Loss [214] | 2016 | center loss |
+| L-softmax [128] | 2016 | L-softmax |
+| Range Loss [36] | 2016 | range loss |
+| L2-softmax [157] | 2017 | L2-softmax |
+| AM-Softmax [38] | 2017 | AM-Softmax |
+| CosFace [126] | 2017 | CosFace loss |
+| MVP [98] | 2017 | MVP loss |
+| ArcFace [8] | 2018 | ArcFace loss |
+| GCar [135] | 2018 | center margin loss |
+| AMS [108] | 2018 | AMS loss |
+| AANet [215] | 2018 | AANet loss |
+| Curricular [111] | 2018 | Curricular loss |
+| Arcface [43] | 2018 | arcface |
+| Ring Loss [27] | 2018 | Ring Loss |
+
+### Architectures
+| Architecture | Number of Networks | Training Set | Accuracy ± Std(%) |
+|--------------|---------------------|--------------|---------------------|
+| FaceNet (LFM-5K) | 1 | 97.53 ± 0.35 |
+| DeepFace (CUHK) | 25 | 99.15±2.15 |
+| DeepID2 (CUHK) | 50 | 99.53±1.0 |
+| DeepID3 (CUHK) | 50 | 99.57±0.49 |
+| Baidu (MS-Celeb-1M) | 50 | 99.74±0.03 |
+| VGGFace (LFM-5K) | 10 | 98.95 |
+| VGGFace (LFM-5K) | 1 | VGGFace (LFM-5K) |
+| IDR (CelebA) | 1 | VGGFace (LFM-5K) |
+| Light CNN (MS-1M) | 1 | 98.58 |
+| Center Loss (CelebA) | 10 | 99.36 |
+| L-softmax (CelebA) | 10 | 98.71 |
+| Range Loss (MS-1M) | 10 | 98.8 |
+| L2-softmax (MS-1M) | 10 | 99.76 |
+| AM-Softmax (MS-1M) | 10 | 99.78 |
+| CosFace (MS-1M) | 10 | 99.86 |
+| MVP (MS-1M) | 10 | 99.89 |
+| ArcFace (MS-1M) | 10 | 99.83 |
+| GCar (MS-1M) | 10 | 99.88 |
+| AMS (MS-1M) | 10 | 99.83 |
+| AANet (MS-1M) | 10 | 99.47 |
+| Curricular (MS-1M) | 10 | 99.40 |
+| Arcface (MS-1M) | 10 | 99.87 |
+| GCar (MS-1M) | 10 | 99.85 |
+| Ring Loss (MS-1M) | 10 | 99.50 |
+
+Credit: Wang et al, Deep Face Recognition: A Survey, 2018
+
+Vineeth N B (IIT-H)
+
+§7.4 CNNs for Human Understanding: Faces
+```
+
+# DL4CV_Week07_Part04.pdf - Page 8
+
+```markdown
+# Face Recognition: Verification and Identification
+
+![Face Recognition Process](image_url)
+
+- Face recognition can be broadly divided into two tasks:
+  - **Face verification**
+  - **Face identification**
+
+![Flowchart of Face Recognition Process](flowchart_image_url)
+
+1. **Detection and Alignment**:
+   - Initial face detection and alignment occur using an algorithm.
+   - This helps in normalizing the face features for further processing.
+
+2. **Deep CNN (feature extractor)**:
+   - A deep convolutional neural network is used as a feature extractor.
+   - This network captures and extracts relevant features from the aligned face image.
+
+3. **Feature Representation**:
+   - The extracted features are represented in a format suitable for the subsequent systems.
+
+4. **Verification System**:
+   - The verification system uses the feature representation to verify the identity of a person.
+   - This involves comparing the features with stored data to confirm or reject a match.
+
+5. **Identification System**:
+   - The identification system uses the feature representation to identify a person.
+   - This involves matching the features against a database of known identities to determine the person's identity.
+
+**References**:
+- Vineeth N B (IIIT-H)
+- §7.4 CNNs for Human Understanding: Faces
+
+*Page 8 / 37*
+```
+
+# DL4CV_Week07_Part04.pdf - Page 9
+
+```markdown
+# Face Identification
+
+## Identification(x)
+
+- **Input**: Face image (x)
+- **Process**:
+  - **Deep CNN**: \( f(x, \theta) \)
+  - **Classifier**: f(x, θ) -> Class Labels
+    - id-1021
+    - id-1022
+    - id-1023
+    - id-1024
+- **Output**: Identity class/face ID
+  - Assign input image to person name/id from database (one-to-many matching)
+  - Formulated as K+1 multi-class classification (one additional class for unrecognized faces)
+
+### Key Points:
+- **Input**: Face image
+- **Output**: Identity class/face ID
+
+---
+
+Vineeth N B (IIT-H) §7.4 CNNs for Human Understanding: Faces
+
+Page 9 / 37
+```
+
+# DL4CV_Week07_Part04.pdf - Page 10
+
+```markdown
+# Softmax + CrossEntropy
+
+- Consider last linear layer \( W, b \) parameterizes the subjects i.e., maps feature embeddings on to subject labels, cross-entropy loss is
+
+  \[
+  L_{CE} = - \log \left( \frac{e^{W_i x^T + b_i}}{\sum_j e^{W_j x^T + b_j}} \right)
+  \]
+
+- Softmax+CE produces feature embeddings that geometrically looks like ellipsoids i.e., large intra-class variance
+
+- The loss enforces good classification (nice boundaries between classes i.e., small inter-class variance) but it does not enforce small intra-class variance
+
+*Source: Maci et al. Deep Face Recognition: A Survey, SIBGRAP'18. [9]*
+
+---
+
+Vineeth N B. (IIT-H) §7.4 CNNs for Human Understanding: Faces
+
+![Image with colored ellipsoids representing feature embeddings](image.png)
+```
+
+# DL4CV_Week07_Part04.pdf - Page 11
+
+```markdown
+# Face Verification
+
+## Verification(x, id-1021)
+
+### Test Image(x)
+
+- **Deep CNN** \( f(x, \theta) \) → Similarity measure → binary decision (0/1)
+
+### Face Database
+
+- **id-1021**: CNN \( f_1 \)
+- **id-1022**: CNN \( f_2 \)
+- **id-1023**: CNN \( f_3 \)
+- **id-1024**: CNN \( f_4 \)
+
+### Notes
+
+- Verifying whether two images belong to the same identity
+- Ascertain whether image is of claimed person/id (one-to-one matching)
+- **Input**: Face image, Face ID
+- **Output**: Match/Not match (binary classification)
+
+_Image Source: Vineeth N B (IIT-H) §7.4 CNNs for Human Understanding: Faces_
+```
+
+# DL4CV_Week07_Part04.pdf - Page 12
+
+ it to a human for final verification.
+
+```markdown
+# Identification via Verification
+
+![Identification via Verification Diagram](image-url)
+
+## Identification can be solved via verification approach
+
+- **Deep CNN \(f(x, \theta)\)**: Processes the test image \(x\).
+- **Verification Function**: Compares the processed test image against a database of known identities.
+  - **ID-1021**: Identity 1
+  - **ID-1022**: Identity 2
+  - **ID-1023**: Identity 3
+  - **ID-1024**: Identity 4
+- **CNN Outputs \(f_1, f_2, f_3, f_4\)**: Represent feature vectors for each identity.
+
+### Test Image(x)
+- Input image to the Deep CNN for feature extraction.
+
+### Verification Process
+- The feature vector \(f(x)\) from the test image is compared against stored feature vectors of known identities.
+- Verification function outputs the closest matching identity.
+
+### Identified Individuals
+- **ID-1021**: Individual 1
+- **ID-1022**: Individual 2
+- **ID-1023**: Individual 3
+- **ID-1024**: Individual 4
+
+### Identified via Verification
+- The process involves:
+  - Extracting features using Deep CNN \(f(x, \theta)\).
+  - Verifying against a database of known identities.
+  - Matching the extracted features to the closest stored feature vector.
+
+### Conclusion
+- Identification can be effectively solved using a verification approach by comparing feature vectors.
+
+### Additional Information
+- **Author**: Vineeth N B
+- **Affiliation**: IIT-H
+- **Course**: §7.4 CNNs for Human Understanding: Faces
+
+### Slide Number
+- 12 / 37
+```
+
+This markdown format captures the essence of the scientific slide, ensuring clarity and readability while maintaining the integrity of the scientific content.
+
+# DL4CV_Week07_Part04.pdf - Page 13
+
+```markdown
+# Identification via Verification
+
+![Identification via Verification](image-url)
+
+**Identification via Verification**
+
+- **Identification can be solved via verification approach**
+- **Removes need to retrain model on addition of new face classes to the database ⇒ more practical/feasible**
+
+*Vineeth N B (IIT-H) §7.4 CNNs for Human Understanding: Faces*
+
+---
+
+Test image(x) → Deep CNN f(x; θ) → verify(x; id-1021) → id-1021
+![CNNF1](image-url)
+
+verify(x; id-1022) → id-1022
+![CNNF2](image-url)
+
+verify(x; id-1023) → id-1023
+![CNNF3](image-url)
+
+verify(x; id-1024) → id-1024
+![CNNF4](image-url)
+
+```
+
+# DL4CV_Week07_Part04.pdf - Page 14
+
+```markdown
+# Identification via Verification
+
+![Diagram of Identification via Verification](image_url)
+
+## Identification via Verification
+
+- **Identification can be solved via verification approach**
+
+  - **Removes need to retrain model on addition of new face classes to the database** ⇒ **more practical/feasible**
+
+  - **Identification involves multiple verification steps** ⇒ **error gets amplified**
+
+## Vineeth N B (IIT-H) §7.4 CNNs for Human Understanding: Faces
+
+**Vineeth N B (IIT-H)**
+
+**§7.4 CNNs for Human Understanding: Faces**
+
+![Page Number](image_url)
+
+---
+
+**Note**: The actual image content placeholders should be replaced with the actual OCR results or descriptive placeholders if the images cannot be directly captured. Make sure to correctly format any equations, symbols, or special characters in the provided scientific text.
+```
+
+# DL4CV_Week07_Part04.pdf - Page 15
+
+```markdown
+# Identification via Verification
+
+![Identification via Verification](image-url)
+
+## Identification via Verification
+
+### Test Image(x)
+
+- **Deep CNN**: \( f(x) \)
+
+  \[
+  f(x) = \text{Deep CNN} (x, \theta)
+  \]
+
+### Verification(x)
+
+- Identify(x, id-1021)
+- Identify(x, id-1022)
+- Identify(x, id-1023)
+- Identify(x, id-1024)
+
+## Benefits of Verification Approach
+
+- **Identification via Verification**: Can be solved via verification approach.
+- **Practicality**: Removes need to retrain model on addition of new face classes to the database → more practical/feasible.
+- **Verification Steps**: Identification involves multiple verification steps → error gets amplified.
+- **Goal**: Becomes to build an accurate/efficient verification system via learning a robust similarity metric.
+
+## References
+
+- Vineeth N B. (IIT-H)
+- §7.4 CNNs for Human Understanding: Faces
+- Slide number 12 / 37
+```
+
+# DL4CV_Week07_Part04.pdf - Page 16
+
+:
+
+```markdown
+# Verification: Siamese Networks
+
+![Diagram](image-url)
+
+- **Signature1**
+  - Handwritten signature example 1.
+
+- **Signature2**
+  - Handwritten signature example 2.
+
+## Key Points
+
+- First proposed for signature verification in 1994.
+
+- Two replicas of the same architecture parameterized with the same weights working in tandem on different inputs.
+
+- Network parameters learned via some form of distance measure to extract distinctive features - an idea that is used even today.
+
+## References
+
+[1] Bromley et al., Signature Verification using a Siamese Time Delay Neural Network, NIPS 1994
+
+**Vineeth N B (IIT-H)**
+
+**§7.4 CNNs for Human Understanding: Faces**
+
+---
+
+(Page 13 / 37)
+```
+
+
+# DL4CV_Week07_Part04.pdf - Page 17
+
+ the OCR process to capture the details from the scientific text or slides accurately.
+
+```markdown
+# DeepFace: Identification<sup>2</sup>
+
+## Step 1: Face localization, fiducial point detection and alignment → frontal crop of face
+
+![Face Localization and Alignment](image_url)
+
+Figure 1: Alignment pipeline. (a) The detected face, with 6 initial fiducial points.
+(b) The induced 2D-aligned crop.
+(c) 97 fiducial points on the 2D image map.
+(d) Applying the sliding window strategy.
+(e) Valid triangles used to compute the displacement.
+(f) The synthesized 3D shape transformed to the 2D-aligned crop image plane.
+(g) Triangle similarity to the fitted 3D shape.
+(h) The frontal view generated by the 3D model that are used to detect the piece-wise affine warping.
+(i) The final frontalized crop.
+(j) A new view generated by the 3D model (not used in this paper).
+
+## Step 2: Frontal crop passed for identification to deep CNN model with K-way softmax (multi-class classification)
+
+![DeepFace Architecture](image_url)
+
+Figure 2: Outline of the DeepFace architecture. A front-end of a single convolution-pooling-convolution filtering on the rectified input. Followed by three locally-connected layers and two fully-connected layers. Colors illustrate feature maps produced at each layer. The set includes more than 120 million parameters, where more than 95% come from the local and fully connected layers.
+
+2<sup>2</sup>Taigman et al., DeepFace: Closing the Gap to Human-Level Performance in Face Verification, CVPR 2014
+
+Vineeth N B (IIIT-H)
+
+§7.4 CNNs for Human Understanding: Faces
+
+```
+
+# DL4CV_Week07_Part04.pdf - Page 18
+
+
+
+```markdown
+# DeepFace: Verification (Siamese Networks)
+
+- **Representation learned from identification used for verification** → **freeze classification parameters**
+
+![DeepFace Verification Process](image_url)
+
+I_1
+```
+![I_1 image](image_url)
+
+```
+                DeepFace Architecture
+                      |
+                      |
+                    f_1
+                      |
+                      v
+            |-----------------------|
+            |                       |
+   |--------------------|     |--------------------|
+   |                    |     |                    |
+I_2       DeepFace Architecture   DeepFace Architecture
+                      |
+                      |
+                    f_2
+                      |
+                      v
+            |-----------------------|
+            |                       |
+   |--------------------|     |--------------------|
+   |                    |     |                    |
+                         |----------------------|
+                         |                       |
+                         |                      FC layers
+                         |----------------------|
+                              |---------------|
+                              | binary         |
+                              | decision       |
+                              | (0/1)          |
+                              |
+                              v
+                         |----------------|
+                         |                |
+                    |-------|    |-------|
+                    |       |    |       |
+                   |  |f  ||  | f_2    |
+                   |  |    ||  |        |
+                   |__|    ||__|        |
+                        |    |          |
+                    |-------v-----------|
+                    |                    |
+                   result
+```
+
+Vineeth N B (IIT-H) §7.4 CNNs for Human Understanding: Faces 15 / 37
+```
+
+# DL4CV_Week07_Part04.pdf - Page 19
+
+```markdown
+# DeepFace: Verification (Siamese Networks)
+
+- Representation learned from identification used for verification ⇒ freeze classification parameters
+- Given a face image I, f = G(I) ⇒ penultimate layer representation for I
+
+![DeepFace Verification Process](attachment:deepface_verification_process.png)
+
+![Vineeth N B (IIT-H)](https://example.com/vineeth_n_b.png) §7.4 CNNs for Human Understanding: Faces 15 / 37
+```
+
+![DeepFace Verification Process](attachment:deepface_verification_process.png)
+
+![Vineeth N B (IIT-H)](https://example.com/vineeth_n_b.png) §7.4 CNNs for Human Understanding: Faces 15 / 37
+```
+
+# DL4CV_Week07_Part04.pdf - Page 20
+
+```markdown
+# DeepFace: Verification (Siamese Networks)
+
+- Representation learned from identification used for verification ⇒ freeze classification parameters
+- Given a face image \( I \), \( f = G(I) \) ⇒ penultimate layer representation for \( I \)
+- Network trained by taking absolute difference between features, followed by a fully connected head
+
+![DeepFace Architecture](url_to_image)
+
+```
+```markdown
+# DeepFace: Verification (Siamese Networks)
+
+## Key Points
+
+- **Representation learned from identification used for verification ⇒ freeze classification parameters**
+  - The representation learned during the identification process is utilized for verification.
+  - The classification parameters are frozen during this phase.
+
+- **Given a face image \( I \), \( f = G(I) \) ⇒ penultimate layer representation for \( I \)**
+  - For a given face image \( I \), the function \( G(I) \) generates the penultimate layer representation \( f \).
+
+- **Network trained by taking absolute difference between features, followed by a fully connected head**
+  - The network is trained by computing the absolute difference between the features of the images.
+  - This is followed by a fully connected head for the final decision.
+
+## Diagram
+
+![DeepFace Architecture](url_to_image)
+
+*Vineeth N B (IIIT-H) §7.4 CNNs for Human Understanding: Faces*
+
+Page 15 / 37
+```
+
+# DL4CV_Week07_Part04.pdf - Page 21
+
+```markdown
+# DeepFace: Verification (Siamese Networks)
+
+![DeepFace Verification Architecture](https://via.placeholder.com/500)
+
+- **Representation learned from identification used for verification** ⇒ **freeze classification parameters**
+
+- Given a face image \( I \), \( f = G(I) \) ⇒ **penultimate layer representation for \( I \)**
+
+    ![DeepFace Architecture](https://via.placeholder.com/500)
+
+    - **DeepFace Architecture**
+
+- **Network trained by taking absolute difference between features, followed by a fully connected head**
+
+- **Distance induced**:
+  \[
+  d(f_1, f_2) = \sum_i \alpha_i |f_1[i] - f_2[i]|
+  \]
+  where \( \alpha_i \) are trainable parameters
+
+*Vineeth N B (IIT-H) §7.4 CNNs for Human Understanding: Faces*
+
+*Page 15 / 37*
+```
+
+# DL4CV_Week07_Part04.pdf - Page 22
+
+```markdown
+# DeepFace: Verification (Siamese Networks)
+
+![DeepFace Architecture Diagram](image-url)
+
+- **Representation learned from identification used for verification** ⇒ **freeze classification parameters**
+- Given a face image `I`, `f = G(I)` ⇒ **penultimate layer representation for `I`**
+
+![Network Diagram](image-url)
+
+- **Network trained by taking absolute difference between features, followed by a fully connected head**
+  - Distance induced:
+    ```math
+    d(f_1, f_2) = \sum_i \alpha_i |f_1[i] - f_2[i]|
+    ```
+    where α_i are trainable parameters
+
+- **Output**: Binary decision (same/not same)
+
+*Vineeth N B (IIT-H) §7.4 CNNs for Human Understanding: Faces 15 / 37*
+```
+
+# DL4CV_Week07_Part04.pdf - Page 23
+
+```markdown
+# Contrastive Loss
+
+- **Based on metric learning paradigm**
+
+- **Used to learn distinctive discriminative feature representations for various downstream computer vision tasks**
+
+  - **Goal:** Map the input to embedding space where the distance between points corresponds to "semantic similarity" between input points
+
+- **Various formulations:** Pairwise Contrastive Loss, Ranking Loss, Triplet Loss
+
+  - We will look at some of these to build verification systems
+
+*Vineeth N B (IIIT-H)*
+
+*§7.4 CNNs for Human Understanding: Faces*
+
+*16 / 37*
+```
+
+# DL4CV_Week07_Part04.pdf - Page 24
+
+```markdown
+# Pairwise Contrastive Loss
+
+![Pairwise Contrastive Loss Diagram](image-link)
+
+- Hadsell et al introduced an approach to learn a mapping
+  - invariant to complex transforms
+  - "similar" points in input space are mapped to nearby points on a low-dimensional manifold.
+  - capable of consistently mapping new points (unseen during training)
+
+## Objective:
+Learn \(W\) such that \(D_W(X_1, X_2) = \|G_W(X_1) - G_W(X_2)\|_2\) approximates the "semantic similarity" of inputs
+
+> Hadsell et al, Dimensionality Reduction by Learning an Invariant Mapping, CVPR 2006
+
+_Vineeth N B (IIT-H)_
+
+§7.4 CNNs for Human Understanding: Faces
+
+---
+
+17 / 37
+```
+
+# DL4CV_Week07_Part04.pdf - Page 25
+
+```markdown
+# Pairwise Contrastive Loss
+
+## Algorithm
+
+The algorithm first generates the training set, then trains the machine.
+
+### Step 1: For each input sample $\vec{X}_i$, do the following:
+  - **a)** Using prior knowledge find the set of samples $\mathcal{S}_{\vec{X}_i} = \{\vec{X}_j\}_{j=1}^n$ such that $\vec{X}_j$ is deemed similar to $\vec{X}_i$.
+  - **b)** Pair the sample $\vec{X}_i$ with all the other training samples and label the pairs so that:
+    - $Y_{ij} = 0$ if $\vec{X}_j \in \mathcal{S}_{\vec{X}_i}$, and $Y_{ij} = 1$ otherwise.
+  - Combine all the pairs to form the labeled training set.
+
+### Step 2: Repeat until convergence:
+  - **a)** For each pair $(\vec{X}_i, \vec{X}_j)$ in the training set, do:
+    - **i.** If $Y_{ij} = 0$, then update $W$ to decrease $D_W = \|G_W(\vec{X}_i) - G_W(\vec{X}_j)\|_2$
+    - **ii.** If $Y_{ij} = 1$, then update $W$ to increase $D_W = \|G_W(\vec{X}_i) - G_W(\vec{X}_j)\|_2$
+
+$$\text{Let } \vec{x}_1, \vec{x}_2 \implies \text{ be a pair of high-dimensional input vectors}$$
+
+![Diagram Placeholder](image-url)
+
+_Vineeth N B (IIT-H)_
+
+§7.4 CNNs for Human Understanding: Faces
+
+Page 18 / 37
+```
+
+# DL4CV_Week07_Part04.pdf - Page 26
+
+# Pairwise Contrastive Loss
+
+## Algorithm
+
+The algorithm first generates the training set, then trains the machine.
+
+### Step 1:
+For each input sample \(\vec{X}_i\), do the following:
+
+(a) Using prior knowledge find the set of samples
+\[ \mathcal{S}_{\vec{X}_i} = \{ \vec{X}_j \}_{j=1}^p \]
+such that \(\vec{X}_j\) is deemed similar to \(\vec{X}_i\).
+
+(b) Pair the sample \(\vec{X}_i\) with all the other training samples and label the pairs so that:
+\[ Y_{ij} = 0 \text{ if } \vec{X}_j \in \mathcal{S}_{\vec{X}_i}, \text{ and } Y_{ij} = 1 \text{ otherwise}. \]
+
+Combine all the pairs to form the labeled training set.
+
+### Step 2:
+Repeat until convergence:
+
+(a) For each pair \((\vec{X}_i, \vec{X}_j)\) in the training set, do
+
+i. If \(Y_{ij} = 0\), then update \(W\) to decrease
+\[ D_W = \| G_W(\vec{X}_i) - G_W(\vec{X}_j) \|_2 \]
+
+ii. If \(Y_{ij} = 1\), then update \(W\) to increase
+\[ D_W = \| G_W(\vec{X}_i) - G_W(\vec{X}_j) \|_2 \]
+
+### Summary:
+- Let \(\vec{x}_1, \vec{x}_2\) be a pair of high-dimensional input vectors
+- \(y\) a binary label assigned to this pair:
+  \[
+  \begin{cases}
+  y = 0 & \text{if } \vec{x}_1, \vec{x}_2 \text{ are similar} \\
+  y = 1; & \text{otherwise}
+  \end{cases}
+  \]
+
+---
+
+*Vineeth N B (IIT-H)*
+
+§7.4 CNNs for Human Understanding: Faces
+
+*Page 18/37*
+
+# DL4CV_Week07_Part04.pdf - Page 27
+
+```markdown
+# Pairwise Contrastive Loss
+
+## Algorithm
+
+The algorithm first generates the training set, then trains the machine.
+
+**Step 1:** For each input sample \(\vec{X}_i\), do the following:
+
+1. Using prior knowledge find the set of samples \(S_{\vec{X}_i} = \{ \vec{X}_j \}_{j=1}^p\) such that \(\vec{X}_j\) is deemed similar to \(\vec{X}_i\).
+
+2. Pair the sample \(\vec{X}_i\) with all the other training samples and label the pairs so that:
+   - \(Y_{ij} = 0\) if \(\vec{X}_j \in S_{\vec{X}_i}\), and \(Y_{ij} = 1\) otherwise.
+
+   Combine all the pairs to form the labeled training set.
+
+**Step 2:** Repeat until convergence:
+1. For each pair \((\vec{X}_i, \vec{X}_j)\) in the training set, do:
+   i. If \(Y_{ij} = 0\), then update \(W\) to decrease:
+      \[
+      D_W = \|G_W(\vec{X}_i) - G_W(\vec{X}_j)\|_2
+      \]
+   ii. If \(Y_{ij} = 1\), then update \(W\) to increase:
+      \[
+      D_W = \|G_W(\vec{X}_i) - G_W(\vec{X}_j)\|_2
+      \]
+
+- Let \(\mathbf{x}_1, \mathbf{x}_2 \implies\) be a pair of high-dimensional input vectors
+- \(y\) a binary label assigned to this pair:
+  \[
+  \begin{cases}
+  y = 0 & \text{if } \mathbf{x}_1, \mathbf{x}_2 \text{ are similar} \\
+  y = 1 & \text{otherwise}
+  \end{cases}
+  \]
+
+Given \((y, \mathbf{x}_1, \mathbf{x}_2)\) are labeled pairs of data, **Pairwise Contrastive Loss**, \(L_{\text{contrastive}}(W; y, \mathbf{x}_1, \mathbf{x}_2)\) given by:
+\[
+\frac{1}{2} \left( 1 - y \right) D_W^2 + \frac{y}{2} \max(0, m - D_W^2)
+\]
+where \(m > 0\) is a margin which defines a radius around \(G_W(\mathbf{x})\)
+```
+
+# DL4CV_Week07_Part04.pdf - Page 28
+
+```markdown
+# DeepID2<sup>4</sup>
+
+![ConvNet Structure for DeepID2 Extraction](image_url)
+
+**Figure 1: The ConvNet structure for DeepID2 extraction.**
+
+- Trains a deep CNN to jointly perform identification and verification
+
+---
+
+*Sun et al., Deep Learning Face Representation by Joint Identification-Verification, NIPS 2014*
+
+_Vineeth N B (IIT-H)_
+
+§7.4 CNNs for Human Understanding: Faces
+
+---
+
+19 / 37
+```
+
+# DL4CV_Week07_Part04.pdf - Page 29
+
+```markdown
+# DeepID2<sup>4</sup>
+
+![ConvNet Structure](image_url)
+
+**Figure 1:** The ConvNet structure for DeepID2 extraction.
+
+- Trains a deep CNN to jointly perform identification and verification
+- **Identification task:** Increases inter-personal variations by pushing features from different identities apart
+
+<sup>4</sup>Sun et al., *Deep Learning Face Representation by Joint Identification-Verification*, NIPS 2014
+
+*Vineeth N B (IIT-H)*
+
+*§7.4 CNNs for Human Understanding: Faces*
+
+*Page 19 / 37*
+```
+
+# DL4CV_Week07_Part04.pdf - Page 30
+
+```markdown
+# DeepID2<sup>4</sup>
+
+![ConvNet structure for DeepID2 extraction](image_url)
+
+**Figure 1:** The ConvNet structure for DeepID2 extraction.
+
+- Trains a deep CNN to jointly perform identification and verification
+- **Identification task:** Increases inter-personal variations by pushing features from different identities apart
+- **Verification task:** Reduces intra-personal variations by pulling features from the same identity together
+
+<sup>4</sup> Sun et al., Deep Learning Face Representation by Joint Identification-Verification, NIPS 2014
+
+_Vineeth N B (IIT-H)_
+
+§7.4 CNNs for Human Understanding: Faces
+
+19 / 37
+```
+
+# DL4CV_Week07_Part04.pdf - Page 31
+
+```markdown
+# DeepID2
+
+- **Cross-entropy loss** for training identification parameters `θ_id`
+- **Pairwise contrastive loss** for learning verification parameters `θ_ve`
+
+## Identification Loss
+
+$$
+-\sum_{i=1}^{n} p_i \log \hat{p}_i = - \log \hat{p}_t
+$$
+
+- `f`: DeepID2 feature vector
+- `t`: target class
+- `θ_id`: softmax layer parameters
+- `p_i`: target probability distribution
+- `π_i`: is predicted probability distribution
+
+## Verification Loss
+
+$$
+L_{\text{contrastive}}(θ_{ve}, y_{ij}, f_i, f_j)
+$$
+
+- `f_i, f_j`: DeepID2 feature vectors for face images under comparison
+- `θ_ve`: verification loss parameters
+- `y_{ij} = 1` ⇒ `f_i` and `f_j` are from the same identity
+- `y_{ij} = -1` ⇒ different identities
+
+![Vineeth N B (IIT-H)](https://via.placeholder.com/150) §7.4 CNNs for Human Understanding: Faces
+```
+
+# DL4CV_Week07_Part04.pdf - Page 32
+
+# DeepID2: Algorithm
+
+```markdown
+# Table 1: The DeepID2 learning algorithm.
+
+**input:** training set $\chi = \{(x_i, l_i)\}$, initialized parameters $\theta_c$, $\theta_{id}$, and $\theta_{ve}$, hyperparameter $\lambda$, learning rate $\eta(t)$, $t \leftarrow 0$
+
+**while** not converge **do**
+
+  $t \leftarrow t + 1$
+
+  sample two training samples $(x_i, l_i)$ and $(x_j, l_j)$ from $\chi$
+
+  $f_i = \text{Conv}(x_i, \theta_c)$ and $f_j = \text{Conv}(x_j, \theta_c)$
+
+  $\nabla \theta_{id} = \frac{\partial \text{Ident}(f_i, l_i, \theta_{id})}{\partial \theta_{id}} + \frac{\partial \text{Ident}(f_j, l_j, \theta_{id})}{\partial \theta_{id}}$
+
+  $\nabla \theta_{ve} = \lambda \cdot \partial \text{Verif}(f_i, f_j, y_{ij}, \theta_{ve})$, where $y_{ij} = 1$ if $l_i = l_j$, and $y_{ij} = -1$ otherwise.
+
+  $\nabla f_i = \frac{\partial \text{Ident}(f_i, l_i, \theta_{id})}{\partial f_i} + \lambda \cdot \partial \text{Verif}(f_i, f_j, y_{ij}, \theta_{ve})$
+
+  $\nabla f_j = \frac{\partial \text{Ident}(f_j, l_j, \theta_{id})}{\partial f_j} + \lambda \cdot \partial \text{Verif}(f_i, f_j, y_{ij}, \theta_{ve})$
+
+  $\nabla \theta_c = \nabla f_i \cdot \frac{\partial \text{Conv}(x_i, \theta_c)}{\partial \theta_c} + \nabla f_j \cdot \frac{\partial \text{Conv}(x_j, \theta_c)}{\partial \theta_c}$
+
+  update $\theta_{id} = \theta_{id} - \eta(t) \cdot \nabla \theta_{id}$, $\theta_{ve} = \theta_{ve} - \eta(t) \cdot \nabla \theta_{ve}$, and $\theta_c = \theta_c - \eta(t) \cdot \nabla \theta_c$
+
+**end while**
+
+**output** $\theta_c$
+```
+
+- $\theta_{id}$ and $\theta_{ve}$: separately updated via respective objectives; $\theta_c$ (backbone CNN parameters): trained via weighted contribution from identification and verification objectives
+- enables backbone network to extract inter-personal features (via identification signal), and intra-personal features (via verification signal)
+```
+
+**Vineeth N B (IIT-H)**
+
+*§7.4 CNNs for Human Understanding: Faces*
+
+# DL4CV_Week07_Part04.pdf - Page 33
+
+```markdown
+# FaceNet
+
+![FaceNet image](image_url)
+
+**Figure 2. Model structure.** Our network consists of a batch input layer and a deep CNN followed by $L_2$ normalization, which results in the face embedding. This is followed by the triplet loss during training.
+
+- Previous methods use bottleneck representation from pre-trained classification model. **Do you see any problems?**
+
+---
+
+*Schroff et al, FaceNet: A Unified Embedding for Face Recognition and Clustering, CVPR 2015*
+
+*Vineeth N B (IIT-H)*
+
+*§7.4 CNNs for Human Understanding: Faces*
+
+---
+
+```
+
+# DL4CV_Week07_Part04.pdf - Page 34
+
+```markdown
+# FaceNet
+
+![Batch](image_url)
+
+**Figure 2. Model structure.** Our network consists of a batch input layer and a deep CNN followed by $L_2$ normalization, which results in the face embedding. This is followed by the triplet loss during training.
+
+- Previous methods use bottleneck representation from pre-trained classification model. **Do you see any problems?**
+  - Indirectness
+  - Possible ineffectiveness; one has to hope that bottleneck representation will generalize to new faces
+
+- FaceNet outputs compact 128-D embedding using a **triplet loss function** (commonly used today)
+
+*Schroff et al., FaceNet: A Unified Embedding for Face Recognition and Clustering, CVPR 2015*
+
+*Vineeth N B (IIT-H)*
+
+*§7.4 CNNs for Human Understanding: Faces*
+
+*22 / 37*
+```
+
+# DL4CV_Week07_Part04.pdf - Page 35
+
+```markdown
+# FaceNet: Triplet Loss
+
+![FaceNet Triplet Loss Diagram](image-url)
+
+**Figure 3. The Triplet Loss minimizes the distance between an anchor and a positive, both of which have the same identity, and maximizes the distance between the anchor and a negative of a different identity.**
+
+- Alternate formulation of contrastive loss; considers triplet of inputs (namely anchor, positive, negative) instead of input pairs
+
+---
+
+**Vineeth N B (IIT-H)**
+
+**S7.4 CNNs for Human Understanding: Faces**
+
+---
+
+This markdown format preserves the structure and content of the provided scientific text, ensuring accuracy and proper formatting for scientific terms, equations, and diagrams.
+```
+
+# DL4CV_Week07_Part04.pdf - Page 36
+
+
+
+```markdown
+# FaceNet: Triplet Loss
+
+![FaceNet Diagram](image_url)
+
+**Figure 3. The Triplet Loss** minimizes the distance between an *anchor* and a *positive*, both of which have the same identity, and maximizes the distance between the *anchor* and a *negative* of a different identity.
+
+- **Alternate formulation of contrastive loss**; considers triplet of inputs (namely anchor, positive, negative) instead of input pairs
+
+  - **Goal**: Ensure distance between anchor (x<sub>a</sub>) and negative sample (x<sub>n</sub>) representation is at least "margin" more than distance between anchor and positive sample (x<sub>p</sub>)
+```
+
+Vineeth N B. (IIT-H) §7.4 CNNs for Human Understanding: Faces
+
+23 / 37
+```
+
+# DL4CV_Week07_Part04.pdf - Page 37
+
+```markdown
+# FaceNet: Triplet Loss
+
+![Triplet Loss Figure](https://via.placeholder.com/150)
+
+- **Anchor**: Blue circle
+- **Positive**: Green circle
+- **Negative**: Red circle
+
+## Figure 3. The Triplet Loss minimizes the distance between an anchor and a positive, both of which have the same identity, and maximizes the distance between the anchor and a negative of a different identity.
+
+## Alternate formulation of contrastive loss:
+- Considers triplet of inputs (namely anchor, positive, negative) instead of input pairs
+
+## Goal:
+- Ensure distance between anchor (x<sub>a</sub>) and negative sample (x<sub>n</sub>) representation is at least “margin” more than distance between anchor and positive sample (x<sub>p</sub>)
+
+## Triplet Constraint:
+```math
+||f(x_a) - f(x_p)||_2^2 + \alpha < ||f(x_a) - f(x_n)||_2^2
+```
+where \(\alpha\) is margin
+
+---
+
+*Vineeth N B (IIIT-H) §7.4 CNNs for Human Understanding: Faces*
+
+---
+
+*Page 23 / 37*
+```
+
+# DL4CV_Week07_Part04.pdf - Page 38
+
+```markdown
+# FaceNet: Triplet Loss Formulation
+
+- Let \( f(x) \): representation/embedding on d-dimensional hypersphere s.t. \( \|f(x)\|_2 = 1 \)
+
+![Diagram of FaceNet Triplet Loss Formulation](image-url)
+
+## Deep Architecture
+
+### Input Images
+- \( x_a \)
+- \( x_p \)
+- \( x_n \)
+
+### Embeddings
+- \( f(x_a) \)
+- \( f(x_p) \)
+- \( f(x_n) \)
+
+## HyperSphere Diagram
+- **Anchor**: \( f(x_a) \)
+- **Positive**: \( f(x_p) \)
+- **Negative**: \( f(x_n) \)
+- **HyperSphere**: Representation space on the hypersphere
+
+## Relationships
+- Positive pair: \( f(x_p) \) should be close to the anchor \( f(x_a) \).
+- Negative pair: \( f(x_n) \) should be farther away from the anchor \( f(x_a) \).
+
+## References
+- Vineeth N B (IIT-H)
+- §7.4 CNNs for Human Understanding: Faces
+
+**Slide Number**: 24 / 37
+```
+
+# DL4CV_Week07_Part04.pdf - Page 39
+
+```markdown
+# FaceNet: Triplet Loss Formulation
+
+- **Let** \( f(x) \): representation/embedding on d-dimensional hypersphere s.t. \( \left\| f(x) \right\|_2 = 1 \)
+
+![Deep Architecture](image_url)
+
+- **Goal**: train \( \theta \) to ensure that for all triplets \( x_a (anchor) \), \( x_p (positive) \), \( x_n (negative) \):
+
+  \[
+  \left\| f(x_a) - f(x_p) \right\|_2^2 + \alpha < \left\| f(x_a) - f(x_n) \right\|_2^2
+  \]
+
+  where \( \alpha \) is margin
+
+## Diagram Explanation
+
+![Diagram](image_url)
+
+- **Deep Architecture** takes inputs \( x_a \), \( x_p \), and \( x_n \).
+- **HyperSphere** represents the d-dimensional hypersphere where embeddings lie.
+- **Anchor**, **Positive**, and **Negative** points on the hypersphere show the relative positions.
+
+## References
+
+Vineeth N B (IIT-H)
+
+§7.4 CNNs for Human Understanding: Faces
+
+Page 24 / 37
+```
+
+# DL4CV_Week07_Part04.pdf - Page 40
+
+```markdown
+# FaceNet: Triplet Loss Formulation
+
+![FaceNet Diagram](image_url)
+
+- **Let** \( f(x) \): representation/embedding on d-dimensional hypersphere s.t. \( \|f(x)\|_2 = 1 \)
+
+- **Goal**: train \( \theta \) to ensure that for all triplets \( x_a \) (anchor), \( x_p \) (positive), \( x_n \) (negative):
+
+  \[
+  \|f(x_a) - f(x_p)\|_2^2 + \alpha < \|f(x_a) - f(x_n)\|_2^2
+  \]
+  where \( \alpha \) is margin
+
+- **Achieved by training parameters \( \theta \) to minimize:**
+
+  \[
+  L_{\text{triplet}} = \sum_i \left[ \|f(x_a^i) - f(x_p^i)\|_2^2 - \|f(x_a^i) - f(x_n^i)\|_2^2 + \alpha \right]
+  \]
+
+**Vineeth N B (IIT-H)**
+**§7.4 CNNs for Human Understanding: Faces**
+```
+
+# DL4CV_Week07_Part04.pdf - Page 41
+
+```markdown
+# Triplet Selection Strategy
+
+## How to choose triplets?
+
+![NPTEL Logo](https://via.placeholder.com/150)
+
+Vineeth N B (IIT-H)
+
+### 7.4 CNNs for Human Understanding: Faces
+
+Page 25 of 37
+```
+
+The markdown format maintains the structure and content of the original slide, with proper formatting for headings and images. Ensure to replace the placeholder image URL with the actual image if available.
+
+# DL4CV_Week07_Part04.pdf - Page 42
+
+```markdown
+# Triplet Selection Strategy
+
+- **How to choose triplets?**
+
+## "Easy" triplets can:
+  - inhibit learning: model does not strive to learn parameters capturing distinctive features
+  - have slower convergence
+
+- Important to select triplets that violate triplet constraint initially, enabling the model to "work hard" to satisfy the constraint
+
+*Vineeth N B (IIIT-H)*
+*§7.4 CNNs for Human Understanding: Faces*
+*25 / 37*
+```
+
+# DL4CV_Week07_Part04.pdf - Page 43
+
+```markdown
+# Hard Triplet Mining
+
+- **Selecting "hard" triplets** ⇒ **choose** \( x^{i} \) **(hard positive):** \(\arg \max_{p} \frac{\| f(x^{i}_{a}) - f(x^{i}_{p}) \|^2_2}{x^{i}}\)
+- **choose** \( x^{i} \) **(hard negative):** \(\arg \min_{n} \frac{\| f(x^{i}_{a}) - f(x^{i}_{n}) \|^2_2}{x^{i}}\)
+
+*Vineeth N B (IIT-H)*
+
+* §7.4 CNNs for Human Understanding: Faces*
+
+![NPTel Logo](https://example.com/logo.png)
+
+---
+
+26 / 37
+```
+
+# DL4CV_Week07_Part04.pdf - Page 44
+
+```markdown
+# Hard Triplet Mining
+
+- **Selecting “hard” triplets**: choose $x^{i}$ (hard positive): $\arg\max_{p} x^{i}_{p} ||f(x^{i}_{a}) - f(x^{i}_{p})||^{2}_{2}$
+  - choose $x^{i}_{n}$ (hard negative): $\arg\min_{n} x^{i}_{n} ||f(x^{i}_{a}) - f(x^{i}_{n})||^{2}_{2}$
+
+- FaceNet uses online triplet sampling; hard positive/negatives sampled from every mini-batch
+
+![NPTEL Logo](image_url)
+
+*Vineeth N B (IIT-H) §7.4 CNNs for Human Understanding: Faces*
+
+*Page 26 / 37*
+```
+
+# DL4CV_Week07_Part04.pdf - Page 45
+
+# Hard Triplet Mining
+
+- **Selecting "hard" triplets** ⇒ **choose** \( x^i \) (hard positive): \( \arg \max_{x^i_p} \|f(x^i_a) - f(x^i_p)\|_2^2 \)
+
+  \( x^i_n \) (hard negative): \( \arg \min_{x^i_n} \|f(x^i_a) - f(x^i_n)\|_2^2 \)
+
+- **FaceNet uses online triplet sampling**; hard positive/negatives sampled from every mini-batch
+
+  **Problem**: Very hard negatives early on ⇒ bad local minima initially, potential training/model collapse
+
+```latex
+# Vineeth N B. (IIT-H) §7.4 CNNs for Human Understanding: Faces 26 / 37
+```
+
+# DL4CV_Week07_Part04.pdf - Page 46
+
+```markdown
+# Hard Triplet Mining
+
+- **Selecting “hard” triplets** ⇒ choose $x^{i}$ (hard positive): 
+  \[
+  \arg \max_{x_p^i} \| f(x_a^i) - f(x_p^i) \|_2^2
+  \]
+  $x_n^i$ (hard negative): 
+  \[
+  \arg \min_{x_n^i} \| f(x_a^i) - f(x_n^i) \|_2^2
+  \]
+
+- FaceNet uses online triplet sampling; hard positive/negatives sampled from every mini-batch
+
+- **Problem**: Very hard negatives early on ⇒ bad local minima initially, potential training/model collapse
+
+- **Solution**: “Semi-hard” negatives ⇒ negatives that lie inside margin $\alpha$; how?
+
+![Diagram](image_url)
+
+Vineeth N B (IIT-H) §7.4 CNNs for Human Understanding: Faces 26 / 37
+```
+
+# DL4CV_Week07_Part04.pdf - Page 47
+
+```markdown
+# Hard Triplet Mining
+
+- **Selecting "hard" triplets** ⇒ choose \( x^i \) (hard positive): \( \arg \max_{x^i_p} ||f(x^i_a) - f(x^i_p)||_2^2 \)
+  - \( x^i_p \) (hard negative): \( \arg \min_{x^i_n} ||f(x^i_a) - f(x^i_n)||_2^2 \)
+
+- FaceNet uses online triplet sampling; hard positive/negatives sampled from every mini-batch
+
+  - **Problem**: Very hard negatives early on ⇒ bad local minima initially, potential training/model collapse
+
+  - **Solution**: "Semi-hard" negatives ⇒ negatives that lie inside margin \(\alpha\); how? Choose \( x^i_n \) (semi-hard): \( ||f(x_a) - f(x_p)||_2^2 < ||f(x_a) - f(x_n)||_2^2 \)
+
+_Vineeth N B (IIT-H) §7.4 CNNs for Human Understanding: Faces 26 / 37_
+```
+
+# DL4CV_Week07_Part04.pdf - Page 48
+
+
+
+```markdown
+# Improving over Triplet Loss: Angular Softmax Loss<sup>6</sup>
+
+![Comparison among softmax loss, modified softmax loss and A-Softmax loss](image-url)
+
+**Figure 2:** Comparison among softmax loss, modified softmax loss and A-Softmax loss. In this toy experiment, we construct a CNN to learn 2-D features on a subset of the CASIA face dataset. In specific, we set the output dimension of FC1 layer as 2 and visualize the learned features. Yellow dots represent the first class face features, while purple dots represent the second class face features. One can see that features learned by the original softmax loss can not be classified simply via angles, while modified softmax loss can. Our A-Softmax loss can further increase the angular margin of learned features.
+
+- Features learned by softmax loss have intrinsic angular distribution ⇒ Euclidean margin-based losses incompatible with softmax loss
+
+<sup>6</sup> Liu et al., SphereFace: Deep Hypersphere Embedding for Face Recognition, CVPR 2017
+
+Vineeth N B (IIT-H)
+
+§7.4 CNNs for Human Understanding: Faces
+
+---
+
+27 / 37
+```
+
+Please replace `image-url` with the actual image URL or path if available, or provide a placeholder if it cannot be captured.
+```
+
+# DL4CV_Week07_Part04.pdf - Page 49
+
+```markdown
+# Improving over Triplet Loss: Angular Softmax Loss<sup>6</sup>
+
+![Comparison diagrams](image_url)
+
+**Figure 2:** Comparison among softmax loss, modified softmax loss and A-Softmax loss. In this toy experiment, we construct a CNN to learn 2-D features on a subset of the CASIA face dataset. In specific, we set the output dimension of PCI layer as 2 and visualize the learned features. Yellow dots represent the first class face features, while purple dots represent the second class face features. One can see that features learned by the original softmax loss can not be classified simply via angles, while modified softmax loss can. Our A-Softmax loss can further increase the angular margin of learned features.
+
+- **Features learned by softmax loss** have intrinsic angular distribution ⇒ Euclidean margin-based losses incompatible with softmax loss
+- **A-Softmax loss** hence uses angle between feature and classification layer vector, both in training and test
+
+<sup>6</sup>Liu et al., SphereFace: Deep Hypersphere Embedding for Face Recognition, CVPR 2017
+
+Vineeth N B (IIT-H)
+
+§7.4 CNNs for Human Understanding: Faces
+
+---
+
+## Features learned by softmax loss have intrinsic angular distribution ⇒ Euclidean margin-based losses incompatible with softmax loss
+
+## A-Softmax loss hence uses angle between feature and classification layer vector, both in training and test
+```
+
+# DL4CV_Week07_Part04.pdf - Page 50
+
+```markdown
+# A-Softmax Loss
+
+## Softmax Loss:
+
+- **Softmax Loss:**
+
+  \[
+  \mathcal{L}_{softmax} = \frac{1}{N} \sum_i - \log \left( \frac{e^{\frac{W_T y_i^Tx_i + b_{y_i}}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_{j}}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_{j}}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_{j}}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{\frac{W_j x_i + b_j}{\sum_j e^{W_T y_i^Tx_i + b_{y_i}}}}}}}}}}
+
+## Modified Softmax Loss (\|W_1\| = \|W_2\| = 1, b_1 = b_2 = 0):
+
+- **Modified Softmax Loss:**
+
+  \[
+  \mathcal{L}_{modified} = \frac{1}{N} \sum_i - \log \left( \frac{e^{||x_i|| \cos (\theta_{y_i^i})}}{\sum_j e^{||x_i|| \cos (\theta_{y_i^j})}} \right)
+  \]
+
+## A-Softmax Loss:
+
+- **A-Softmax Loss:**
+
+  \[
+  \mathcal{L}_{ang} = \frac{1}{N} \sum_i - \log \left( \frac{e^{||x_i|| \cos (m \theta_{y_i^i})}}{e^{||x_i|| \cos (m \theta_{y_i^i})} + \sum_{j \neq y_i} e^{||x_i|| \cos (\theta_{y_i^j})}} \right)
+  \]
+
+*Vineeth N B (IIT-H) §7.4 CNNs for Human Understanding: Faces*
+```
+
+# DL4CV_Week07_Part04.pdf - Page 51
+
+```markdown
+# A-Softmax Loss: Binary Classification Analysis
+
+![Image of A-Softmax Loss](image-url)
+
+**Let \( W_i, b_j \) be weights and bias in softmax loss:**
+
+![Softmax Decision Boundary](image-url)
+
+\[ \text{Softmax decision boundary} \iff (W_1 - W_2)x + b_1 - b_2 = 0 \]
+
+## Figure 3: Geometry Interpretation of Euclidean margin loss (e.g. contrastive loss, triplet loss, center loss, etc.), modified softmax loss and A-Softmax loss.
+
+The first row is 2D feature constraint, and the second row is 3D feature constraint. The orange region indicates the discriminative constraint for class 1, while the green region is for class 2.
+
+- Euclidean Margin Loss
+- Modified Softmax Loss
+- A-Softmax Loss (m ≥ 2)
+
+Vineeth N B (IIT-H) §7.4 CNNs for Human Understanding: Faces
+
+Page 29 / 37
+```
+
+# DL4CV_Week07_Part04.pdf - Page 52
+
+```markdown
+# A-Softmax Loss: Binary Classification Analysis
+
+## Geometry Interpretation of Various Loss Functions
+
+### Euclidean Margin Loss
+![Euclidean Margin Loss Diagram](image1.png)
+
+### Modified Softmax Loss
+![Modified Softmax Loss Diagram](image2.png)
+
+### A-Softmax Loss (m >= 2)
+![A-Softmax Loss Diagram](image3.png)
+
+The first row is 2D feature constraint, and the second row is 3D feature constraint. The orange region indicates the discriminative constraint for class 1, while the green region is for class 2.
+
+### Softmax Decision Boundary
+\[
+(W_1 - W_2)x + b_1 - b_2 = 0
+\]
+
+### Constraints
+\[
+\|W_1\| = \|W_2\| = 1, \quad b_1 = b_2 = 0
+\]
+
+### Modified Softmax Decision Boundary
+\[
+\|x\|( \cos(\theta_1) - \cos(\theta_2) ) = 0
+\]
+
+_Figure 3: Geometry Interpretation of Euclidean margin loss (e.g. contrastive loss, triplet loss, center loss, etc.), modified softmax loss and A-Softmax loss. The first row is 2D feature constraint, and the second row is 3D feature constraint. The orange region indicates the discriminative constraint for class 1, while the green region is for class 2._
+
+_Vineeth N B (IIT-H) §7.4 CNNs for Human Understanding: Faces_
+
+Page 29 / 37
+```
+
+# DL4CV_Week07_Part04.pdf - Page 53
+
+```markdown
+# A-Softmax Loss: Binary Classification Analysis
+
+![Geometry Interpretation of Loss Functions](image_url)
+
+Figure 3: Geometry Interpretation of Euclidean margin loss (e.g., contrastive loss, triplet loss, center loss, etc.), modified softmax loss and A-Softmax loss. The first row is 2D feature constraint, and the second row is 3D feature constraint. The orange region indicates the discriminative constraint for class 1, while the green region is for class 2.
+
+## Let $W_i, b_i$ be weights and bias in softmax loss:
+
+- **Softmax decision boundary** $\implies (W_1 - W_2)x + b_1 - b_2 = 0$
+
+- **Constraint** $\|W_1\| = \|W_2\| = 1$, $b_1 = b_2 = 0$;
+
+- **Modified Softmax decision boundary** $\implies \|x\|(cos(\theta_1) - cos(\theta_2)) = 0$
+
+- **Margin $m \geq 1$**: quantitatively controls the size of angular margin
+
+  **A-Softmax decision boundary**
+
+  - **class 1**: $\|x\|(cos(m\theta_1) - cos(\theta_2)) = 0$
+
+  - **class 2**: $\|x\|(cos(\theta_1) - cos(m\theta_2)) = 0$
+
+---
+
+**Vineeth N B (IIT-H)**
+
+**§7.4 CNNs for Human Understanding: Faces**
+
+---
+
+29 / 37
+```
+
+# DL4CV_Week07_Part04.pdf - Page 54
+
+:
+
+```markdown
+# Other Loss Functions used: CenterLoss<sup>7</sup>
+
+- Intended to augment Softmax+CE to also reduce intra-class variance
+
+  \[
+  L_{\text{new}} = L_{CE} + \lambda L_{CL}
+  \]
+
+  \[
+  L_{CE} + \frac{\lambda}{2} \sum_{i=1}^{m} \left| \left| x_i - c_{y_i} \right| \right|^2
+  \]
+
+- Added term minimizes intra-class distance between sample \( x \) and \( y_i \)th class centroid \( c_{y_i} \) of deep features
+
+- Centroid is updated online during learning
+
+![Diagram](image_url)
+
+(a) \(\lambda = 0.001\)
+
+![Diagram](image_url)
+
+(b) \(\lambda = 0.01\)
+
+![Diagram](image_url)
+
+(c) \(\lambda = 0.1\)
+
+![Diagram](image_url)
+
+(d) \(\lambda = 1\)
+
+<sup>7</sup> Wen et. al., Discriminative Feature Learning Approach for Deep Face Recognition, ECCV 2016
+
+*Vineeth N B (III-T-H)*
+
+*§7.4 CNNs for Human Understanding: Faces*
+```
+
+*Notes:*
+- Replace `image_url` with the actual URLs or filenames if available.
+- Ensure all mathematical symbols and equations are accurately formatted.
+- Adjust the section titles and headings as appropriate based on the structure of the provided scientific text or slides.
+
+# DL4CV_Week07_Part04.pdf - Page 55
+
+```markdown
+# L2-Softmax
+
+- **Enforces L2-norm of features to be fixed for every face image by adding an L2 constraint to feature descriptor such that it lies on hypersphere of fixed radius (α)**
+
+- **Features with high L2 norm are easy to classify for network (spatially placed at boundaries in feature space)**
+
+- **Features with low L2 norm are difficult to classify (spatially located near origin)**
+
+  \[
+  \min_{x} \quad L_{CE}
+  \]
+  subject to
+  \[
+  \| f(x_i) \|_{2} = \alpha, \quad i = 1, \ldots, m.
+  \]
+
+8Ranjan et al, L2-constrained Softmax Loss for Discriminative Face Verification, 2017
+
+![Image Placeholder](https://via.placeholder.com/150)
+
+![Image Placeholder](https://via.placeholder.com/150)
+
+![Image Placeholder](https://via.placeholder.com/150)
+
+![Image Placeholder](https://via.placeholder.com/150)
+
+![Graph Placeholder](https://via.placeholder.com/150)
+
+![Graph Placeholder](https://via.placeholder.com/150)
+
+Vineeth N B (IIT-H)
+
+§7.4 CNNs for Human Understanding: Faces
+
+```
+
+# DL4CV_Week07_Part04.pdf - Page 56
+
+
+
+```markdown
+# RingLoss
+
+- While L2-Softmax normalizes features with a projection method, **RingLoss** enforces feature normalizations directly in loss function; radius R is learned in training process.
+
+  ```math
+  \underset{x}{\text{minimize}} \quad \mathcal{L}_{CE}
+  \quad \text{subject to} \quad \|f(x_i)\|_2 = R
+  ```
+
+- Implemented as:
+
+  ```math
+  \mathcal{L}_R = \frac{\lambda}{2m} \sum_{i=1}^{m} ( \|f(x_i)\|_2 - R )^2
+  ```
+
+![Features trained using Softmax](image1.png)
+
+![Features trained using Ring loss](image2.png)
+
+*Zheng et al., Ring Loss: Convex Feature Normalization for Face Recognition, CVPR 2018*
+
+*Vineeth N B (IIIT-H)*
+
+*§7.4 CNNs for Human Understanding: Faces*
+
+*32 / 37*
+```
+
+# DL4CV_Week07_Part04.pdf - Page 57
+
+:
+
+```markdown
+# Other Recent Efforts
+
+- **CosFace**[^10]: proposes a large margin-based cosine loss (LMCL) for face recognition
+- **UniformFace**[^11]: proposes uniform loss to learn equidistributed representations to fully exploit feature space
+- **RegularFace**[^12]: proposes exclusive regularization to explicitly enlarge angular distance between different identities
+- **GroupFace**[^13]: proposes to utilize multiple group-aware representations, simultaneously, to improve quality of embedding
+- **CurricularFace**[^14]: proposes Adaptive Curriculum Learning loss to adaptively adjust relative importance of easy and hard samples during different training stages
+
+[^10]: Wang et al., CosFace: Large Margin Cosine Loss for Deep Face Recognition, CVPR 2018
+[^11]: Duan et al., UniformFace: Learning Deep Equidistributed Representation for Face Recognition, CVPR 2019
+[^12]: Zhao et al., RegularFace: Deep Face Recognition via Exclusive Regularization, CVPR 2019
+[^13]: Kim et al., GroupFace: Learning Latent Groups and Constructing Group-based Representations for Face Recognition, CVPR 2020
+[^14]: Huang et al., CurricularFace: Adaptive Curriculum Learning Loss for Deep Face Recognition, CVPR 2020
+
+![VinceethN.B.(III-T-H)](image_url)
+
+§7.4 CNNs for Human Understanding: Faces
+```
+
+```
+
+# DL4CV_Week07_Part04.pdf - Page 58
+
+# Face Recognition: Closed-Set vs Open-Set
+
+## Closed-Set Loss Functions (all subjects known)
+
+- **Softmax + CrossEntropy**
+- **Center Loss** (reduce intra-class variability)
+- **L2-Softmax** (reduce intra-class variability)
+- **RingLoss** (reduce intra-class variability)
+- **Angular Softmax** (increase margin between subjects)
+
+## Open-Set Loss Functions (all subjects not known)
+
+- **Double Margin Contrastive Loss** (Homework!!)
+- **Triplet Loss**
+
+*Source: Masi et al, Deep Face Recognition: A Survey, SIBGRAPI 2018*
+
+![NPTEL Logo](https://example.com/logo.png)
+
+*Vineeth N B (IIT-H)*
+*§7.4 CNNs for Human Understanding: Faces*
+
+---
+
+34 / 37
+
+# DL4CV_Week07_Part04.pdf - Page 59
+
+```markdown
+# Homework
+
+## Readings
+
+- Raúl Gómez, *Understanding Ranking Loss, Contrastive Loss, Margin Loss, Triplet Loss, Hinge Loss and all those confusing names*
+- A detailed tutorial on deep face recognition by Masi et al
+- **(Optional)** Adrian Rosebrock, *Face recognition with OpenCV, Python, and deep learning*
+- **(Optional)** Wang et al, *Deep Face Recognition: A Survey*, Neurocomputing 2018
+
+## Question
+
+What is double-margin contrastive loss, and how can it be used for open-set face recognition?
+(Hint: Read the tutorial above!)
+```
+
+# DL4CV_Week07_Part04.pdf - Page 60
+
+# References
+
+## References I
+
+- **R. Hadsell, S. Chopra, and Y. LeCun.** "Dimensionality Reduction by Learning an Invariant Mapping". In: *CVPR* (2006).
+- **Gary B. Huang, Manjunath Narayana, and Erik Learned-Miller.** "Towards Unconstrained Face Recognition". In: *Computer Vision and Pattern Recognition Workshops* (2008).
+- **Yi Sun, Xiaogang Wang, and Xiaoou Tang.** "Deep Learning Face Representation by Joint Identification-Verification". In: *NIPS* (2014).
+- **Yaniv Taigman, Ming Yang, and Marc'Aurelio Ranzato.** "DeepFace: Closing the Gap to Human-Level Performance in Face Verification". In: *CVPR* (2014).
+- **Florian Schroff, Dmitry Kalenichenko, and James Philbin.** "FaceNet: A Unified Embedding for Face Recognition and Clustering". In: *CVPR* (2015).
+- **Y. Wen et al.** "A Discriminative Feature Learning Approach for Deep Face Recognition". In: *ECCV*. 2016.
+
+---
+
+Vineeth N B (IIT-H) §7.4 CNNs for Human Understanding: Faces 36 / 37
+
+# DL4CV_Week07_Part04.pdf - Page 61
+
+:
+
+```markdown
+# References II
+
+- Weiyang Liu et al. **"SphereFace: Deep Hypersphere Embedding for Face Recognition"**. In: *2017 IEEE Conference on Computer Vision and Pattern Recognition (CVPR)* (2017), pp. 6738–6746.
+
+- Rajeev Ranjan, Carlos Castillo, and Rama Chellappa. **"L2-constrained Softmax Loss for Discriminative Face Verification"**. In: (Mar. 2017).
+
+- Iacopo Masi et al. **"Deep Face Recognition: a Survey"**. In: *SIBGRAPI - Conference on Graphics, Patterns and Images*. 2018.
+
+- Mei Wang and Weihong Deng. **"Deep Face Recognition: A Survey"**. In: *ArXiv abs/1804.06655* (2018).
+
+- Yutong Zheng, Dipan K. Pal, and Marios Savvides. **"Ring Loss: Convex Feature Normalization for Face Recognition"**. In: *CVPR* (2018), pp. 5089–5097.
+
+- Yichen Qian, Weihong Deng, and Jiani Hu. **"Unsupervised Face Normalization With Extreme Pose and Expression in the Wild"**. In: *CVPR* (2019), pp. 9843–9850.
+
+- Xiang Wang, Kai Wang, and Shiguo Lian. *A Survey on Face Data Augmentation*. Apr. 2019.
+```
+

@@ -1,0 +1,992 @@
+# DL4CV_Week02_Part07.pdf - Page 1
+
+```markdown
+# Deep Learning for Computer Vision
+
+## Human Visual System
+
+**Vineeth N Balasubramanian**
+
+Department of Computer Science and Engineering
+Indian Institute of Technology, Hyderabad
+
+![IIT Hyderabad Logo](image_url)
+
+---
+
+*Vineeth N B (IIT-H) §2.7 Human Visual System* 1 / 26
+```
+
+In the markdown formatting above, the main headings, subheadings, and the emphasized text (bold and italicized) have been correctly formatted. The section titles are denoted using `#` and `##` for main and subheadings, respectively. The placeholder for the image URL is included assuming the OCR couldn't capture it directly. The footnote and page numbering at the bottom are also retained in the markdown format.
+
+# DL4CV_Week02_Part07.pdf - Page 2
+
+```markdown
+# Acknowledgements
+
+- Most of this lecture’s slides are based on **Lecture 8 of CS455: Computer Vision** course taught by Prof. Rajesh Rao at University of Washington in 2009
+
+- Unless specifically cited, assume that figures are taken from the above source
+
+![NPTEL Logo](https://example.com/nptel_logo.png)
+
+**Vineeth N B (IIT-H)** §2.7 Human Visual System 2 / 26
+```
+
+# DL4CV_Week02_Part07.pdf - Page 3
+
+```markdown
+# Human Visual System: Visual Pathway
+
+## Eye & Retina
+
+![Visual Pathway](image_url)
+
+### Visual Pathway Components
+
+- **Temporal**
+- **Nasal**
+- **Right visual field**
+- **Left visual field**
+- **Optic chiasm**
+- **Pulvinar nucleus**
+- **Lateral geniculate nucleus**
+- **Superior colliculus**
+- **Primary visual cortex**
+
+### Pathway Description
+
+1. **Optic radiation**: The visual pathway starts with light entering the eye.
+2. **Optic nerve**: Light is then passed through the optic nerve to the brain.
+3. **Optic chiasm**: The optic chiasm is where the optic nerves from both eyes cross.
+4. **Temporal and Nasal**: The visual information is then divided into temporal and nasal regions.
+5. **Lateral geniculate nucleus**: This part of the thalamus processes the visual information.
+6. **Superior colliculus**: It plays a role in eye movement.
+7. **Pulvinar nucleus**: Further processes visual information.
+8. **Primary visual cortex**: Where the brain interprets visual information.
+
+### Image Source
+
+- **Image Source**: Rafael Redondo [@]
+- **Vineeth N B (IIT-H)**: §2.7 Human Visual System
+
+---
+
+Page 3 / 26
+```
+
+# DL4CV_Week02_Part07.pdf - Page 4
+
+```markdown
+# Light Visible to Human Eye
+
+![Light Spectrum](image_source_placeholder)
+
+## Image Source: [www.astronomersgroup.org](http://www.astronomersgroup.org)
+
+Vineeth N B (IIT-H)
+
+§2.7 Human Visual System
+
+## Light Spectrum
+
+### Short Wavelengths
+- **Cosmic rays**: \(10^{-19}\) meters
+- **Gamma rays**: \(10^{-8}\) nanometers
+- **X-rays**: \(10^{-5}\) nanometers
+- **Ultraviolet (UV)**: \(10^{-1}\) nanometers
+
+### Visible Light
+- **Visible range**: 400 nanometers to 700 nanometers
+
+### Long Wavelengths
+- **Microwaves**: \(10^{-4}\) millimeters
+- **Infrared (IR)**: \(10^{-1}\) millimeters
+- **Radio**: 1 meter
+- **Broadcast band**: 1 kilometer
+
+## Spectrum Details
+
+- **Cosmic rays**: Part of the shortest wavelengths, interacting with the highest energy particles.
+- **Gamma rays**: Follow cosmic rays in the spectrum, also highly energetic.
+- **X-rays**: Shorter than visible light, often used in medical imaging.
+- **Ultraviolet (UV)**: Just shorter than visible light, can cause sunburns.
+- **Visible Light**: The range of wavelengths that human eyes can detect, producing colors from violet to red.
+- **Infrared (IR)**: Longer than visible light, felt as heat.
+- **Microwaves**: Used in radar and telecommunications.
+- **Radio**: Longest wavelengths detectable by radio receivers.
+- **Broadcast band**: Frequencies used for broadcasting, including AM and FM radio.
+
+### Wavelengths Details
+- **400 nanometers**: Purple/blue light
+- **500 nanometers**: Green light
+- **600 nanometers**: Orange light
+- **700 nanometers**: Red light
+- **1000 nanometers**: Threshold between visible light and infrared
+
+## Visualization
+![Visual Spectrum Diagram](image_source_placeholder)
+
+This diagram illustrates the entire electromagnetic spectrum, emphasizing the visible light range in the middle. The spectrum starts from cosmic rays at the shortest wavelengths and extends to broadcast bands at the longest wavelengths.
+```
+
+# DL4CV_Week02_Part07.pdf - Page 5
+
+```markdown
+# Light Visible to Human Eye
+
+Our vision appears to be optimized for receiving the most abundant spectral radiance our star emits
+
+![Light Visible to Human Eye](image_link_here)
+
+- **Energy**: 
+  - UV (Ultraviolet)
+  - Visible
+  - Infrared
+
+- **Wavelength**:
+  - 400 nm (violet)
+  - 500 nm (blue)
+  - 600 nm (green)
+  - 700 nm (red)
+
+- **Spectral Radiance**:
+  - Sun's energy (at 6000 K)
+  - Earth's energy (at 300 K)
+
+### Graph Description
+
+- **X-Axis**: Wavelength in micrometers (µm)
+  - 0.1 µm
+  - 1 µm
+  - 10 µm
+  - 100 µm
+  - 1 mm
+  - 1 m
+
+- **Y-Axis**: Energy
+
+### Color Spectrum
+
+- **400 nm**: Violet
+- **500 nm**: Blue
+- **600 nm**: Green
+- **700 nm**: Red
+
+### Energy Emission
+
+- **Sun's Energy**: Peaks around 6000 K
+- **Earth's Energy**: Peaks around 300 K
+
+### Conclusion
+
+The human visual system is optimized to perceive the spectral radiance of sunlight, which is most abundant in the visible spectrum.
+
+---
+
+*Vineeth N B (IIT-H) 
+§2.7 Human Visual System
+
+*Slide 5/26*
+```
+
+# DL4CV_Week02_Part07.pdf - Page 6
+
+```markdown
+# The Retina
+
+The Retina = Photoreceptors + Image Filtering
+
+![Retina Diagram](image_source_placeholder)
+
+- **Light**
+  - (1) Light enters the eye and travels through the cornea and lens to reach the retina.
+
+- **Retina**
+  - Located at the back of the eye, the retina contains photoreceptor cells.
+  - The retina is responsible for converting light into electrical signals.
+
+- **Photoreceptors**
+  - **Cones**: Responsible for color vision and detailed vision.
+  - **Rods**: Responsible for low-light and peripheral vision.
+  - (2) Specific regions of photoreceptors within the retina.
+
+- **Image Filtering**
+  - (3) The filtering process within the retina to interpret the incoming light.
+
+- **Epithelial Cells**
+  - (4) Located between the photoreceptors and the optic nerve.
+  - Play a role in the conversion and processing of signals.
+
+- **Optic Nerve**
+  - (5) Transmits the visual information from the retina to the brain for interpretation.
+
+**Image Source**: [mymacularjournal.com](https://mymacularjournal.com)
+
+**Vineeth N B (IIT-H)**
+
+**82.7 Human Visual System**
+
+8 / 26
+```
+
+# DL4CV_Week02_Part07.pdf - Page 7
+
+```markdown
+# Photoreceptors in the Retina
+
+## Two Types:
+
+- **Rods**:
+  - Sensitive to intensity, but not color;
+  - Form blurred images
+
+- **Cones**:
+  - Color sensitive, form sharp images, require many photons. Three types, each maximally sensitive to one of three different wavelengths.
+
+![Photoreceptors](image_url)
+
+![Diagram](diagram_url)
+
+*Vineeth N B (IIT-H)*
+
+*82.7 Human Visual System*
+
+*7 / 26*
+```
+
+# DL4CV_Week02_Part07.pdf - Page 8
+
+```markdown
+# Coding of Light by Rods and Cones
+
+![Coding of Light by Rods and Cones](image_source_placeholder)
+
+**Image Source**: Michael C (StackExchange)
+
+---
+
+## Vineeth N B (IIT-H)
+
+### §2.7 Human Visual System
+
+---
+
+### Normalized Absorbance vs. Wavelength (nm)
+
+#### Color Coding by Cones:
+- **Blue Cones**: Absorb light maximally around **420 nm**.
+- **Green Cones**: Absorb light maximally around **534 nm**.
+- **Red Cones**: Absorb light maximally around **564 nm**.
+
+#### Rods:
+- Absorb light maximally around **498 nm**.
+
+#### Wavelength Absorptance Curve:
+- **Blue Cones**: Peak at ~420 nm
+- **Rods**: Peak at ~498 nm
+- **Green Cones**: Peak at ~534 nm
+- **Red Cones**: Peak at ~564 nm
+
+#### Spectral Sensitivity:
+- Short: 400-500 nm
+- Medium: 450-600 nm
+- Long: 500-700 nm
+
+---
+
+### Color Spectrum:
+- **Violet**: ~400 nm
+- **Blue**: ~450 nm
+- **Cyan**: ~500 nm
+- **Green**: ~550 nm
+- **Yellow**: ~580 nm
+- **Red**: ~650 nm
+
+---
+
+The graph illustrates the sensitivity of rods and cones to different wavelengths of light, highlighting the spectral regions where each type of photoreceptor is most responsive. This helps explain how the human visual system differentiates colors and varying intensities of light.
+
+```
+
+# DL4CV_Week02_Part07.pdf - Page 9
+
+```markdown
+# Image Filtering in Space and Time in the Retina
+
+![Image Filtering in Space and Time in the Retina](image_url)
+
+## On center, Off surround cell
+
+This space-time filter is also called the cell’s **receptive field**.
+
+- **Spot of Light**
+  - ![Spot of Light](image_url)
+
+- **Light On**
+  - ![Light On](image_url)
+  - The neuron responds with electrical pulses known as **Spikes** or **Action Potentials**.
+  - Example electrical pulses:
+    ```markdown
+    | Time       | 0.5 seconds      |
+    |------------|------------------|
+    | Light On   | ⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯ |
+    | Spikes     | ⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯ |
+    ```
+
+**Note**: The receptive field is the region in the visual field that, when stimulated, causes a nerve cell in the retina to respond.
+
+**Source**: Vineeth N B (IIT-H) &2.7 Human Visual System
+```
+
+# DL4CV_Week02_Part07.pdf - Page 10
+
+```markdown
+# Image Filtering in Space and Time in the Retina
+
+![Image Description](image_url)
+
+**Off center, On surround Cell**
+
+## Image Filtering Concepts
+
+### Light Stimulation and Neural Response
+
+#### Center Cell Activation
+- **Description**: Activation of the center cell of a retinal ganglion cell.
+- **Diagram**: ![Center Cell Activation](image_url)
+  - **Yellow Circle**: Represents the point of light stimulation.
+  - **Gray Circle**: Represents the cell's receptive area.
+  - **Signals**: Indicates light on stimulus.
+
+#### Surround Cell Activation
+- **Description**: Activation of the surround cell of a retinal ganglion cell.
+- **Diagram**: ![Surround Cell Activation](image_url)
+  - **Yellow Circle**: Represents the point of light stimulation.
+  - **Gray Circle**: Represents the cell's receptive area.
+  - **Signals**: Indicates light on stimulus.
+
+### Temporal Response to Light Stimulation
+- **Graph**: ![Temporal Response Graph](image_url)
+  - **X-axis**: Time in seconds.
+  - **Y-axis**: Neural response intensity.
+  - **Spikes**: Represent the neural signals over time during light stimulation.
+
+#### Detailed Breakdown
+- **Light On Duration**: Depicted as a horizontal bar in the graph.
+- **Neural Activity**: Shows the frequency and intensity of neural responses during the light on period.
+- **Time Interval**: Highlighted interval shows the duration of 0.5 seconds.
+
+### Additional Notes
+- **Cell Types**: 
+  - **Center Cell**: Responds directly to the light stimulus at the center.
+  - **Surround Cell**: Responds to the light stimulus in the surrounding area.
+
+```math
+\text{Light On period} = t_1 \rightarrow t_2
+```
+
+### References
+- **Author**: Vineeth N B (IIT-H)
+- **Section**: §2.7 Human Visual System
+- **Page Number**: 10 / 26
+```
+
+Note: Replace `image_url` with actual image URLs or placeholders if necessary. Ensure the text accurately reflects the scientific content and maintains the markdown format.
+
+# DL4CV_Week02_Part07.pdf - Page 11
+
+```markdown
+# Retina takes Spatial and Temporal Derivatives
+
+![Diagram of Retina](diagram.png)
+
+## Visual System Overview
+
+**Vineeth N B (IIT-H)**
+
+### 82.7 Human Visual System
+
+### Spatial and Temporal Derivatives
+
+#### Spatial
+- The retina processes spatial derivatives using Laplacians of Gaussians.
+- The visual system identifies changes in the intensity of light across different spatial regions.
+
+#### Temporal
+- The retina also processes temporal derivatives by detecting changes in light over time.
+- This involves analyzing the temporal structure of visual stimuli.
+
+## Diagram Explanation
+
+1. **Spatial Derivatives:**
+   - Illustrated by the Laplacian of Gaussians.
+   - Denoted mathematically as \(\nabla^2 h \sigma(u, v)\).
+   - Shows how spatial changes in light intensity are detected.
+
+2. **Temporal Derivatives:**
+   - Visualized through temporal graphs.
+   - Demonstrates how changes in light over time are registered.
+
+### Visual Stimuli Examples
+
+- **First Row:**
+  - Light distribution shown with a central bright spot.
+  - Temporal graph showing a sharp increase followed by a decrease in light intensity over 0.5 seconds.
+  - Peaks at around 2.5 milliseconds.
+  
+- **Second Row:**
+  - Light distribution with a bright spot shifted to the right.
+  - Corresponding temporal graph showing a similar pattern but with a phase shift.
+  - Highlights how temporal changes are detected differently depending on the spatial distribution of light.
+
+### Graph Analysis
+
+- The graph depicts temporal changes over 120 milliseconds.
+- Peaks indicating the onset and offset of light stimuli.
+- Demonstrates the temporal sensitivity of the visual system.
+
+### Mathematical Representation
+
+- Spatial derivatives: \(\nabla^2 h \sigma(u, v)\)
+- Temporal derivatives: Analyzed using temporal graphs showing light intensity over time.
+
+---
+
+### Additional Information
+
+- **Diagram Credit:** Vineeth N B (IIT-H)
+- **Section:** Human Visual System
+- **Slide Number:** 11 / 26
+```
+
+# DL4CV_Week02_Part07.pdf - Page 12
+
+```markdown
+# Your Retinal Filters at Work
+
+![Retinal Filters Grid](attachment:retinal_filters_grid.png)
+
+**Black dots or white dots?**
+
+*Vineeth N B (IIT-H)*
+
+*82.7 Human Visual System*
+
+*12 / 26*
+```
+
+# DL4CV_Week02_Part07.pdf - Page 13
+
+```markdown
+# Retina also takes Derivatives in Color Space
+
+## "Color-opponent" processing
+
+- **Yellow on, Blue off**
+  ![Yellow on, Blue off](image-url)
+
+- **Blue on, Yellow off**
+  ![Blue on, Yellow off](image-url)
+
+- **Red on, Green off**
+  ![Red on, Green off](image-url)
+
+- **Green on, Red off**
+  ![Green on, Red off](image-url)
+
+**Visual consequence: Negative afterimage**
+
+- An image is seen after a portion of the retina is exposed to an intense visual stimulus (colors complementary to those of stimulus)
+
+*Vineeth N B (IIIT-H) §2.7 Human Visual System 13 / 26*
+```
+
+# DL4CV_Week02_Part07.pdf - Page 14
+
+```markdown
+# The Visual Pathway: LGN
+
+![Visual Pathway Diagram](image_url)
+
+- **LGN receptive fields similar to retinal (center-surround, on-off)**
+
+  - LGN (Lateral Geniculate Nucleus) receptive fields mirror those found in the retina, characterized by a center-surround organization and on-off responses.
+
+- **Thought to be a relay but receives massive feedback from cortex**
+
+  - Initially believed to function primarily as a relay, it is now known that the LGN receives significant feedback from the cortex.
+
+**Image Source:** Rafael Redondo [@]
+
+---
+
+**Vineeth N B (IIIT-H)**
+
+**82.7 Human Visual System**
+
+---
+
+## Diagram Details
+
+- **Left visual field**
+- **Right visual field**
+
+### Visual Pathway Components
+
+- **Nasal**
+- **Temporal**
+- **Optic chiasm**
+- **Pulvinar nucleus**
+- **Lateral geniculate nucleus (LGN)**
+- **Superior colliculus**
+- **Optic radiation**
+- **Primary visual cortex**
+```
+
+# DL4CV_Week02_Part07.pdf - Page 15
+
+```markdown
+# The Visual Pathway: V1
+
+![Visual Pathway](image-source-url)
+
+**Image Source:** Rafael Redondo [6]
+
+**Vineeth N B (IIT-H)**
+
+## 82.7 Human Visual System
+
+### The Visual Pathway: V1
+
+- **Visual Fields:**
+  - **Left visual field**
+  - **Right visual field**
+
+- **Components:**
+  - **Temporal**
+  - **Nasal**
+  - **Optic chiasm**
+  - **Primary Visual Cortex (V1)**
+  - **Temporal**
+  - **Pulvinar nucleus**
+  - **Lateral geniculate nucleus**
+  - **Superior colliculus**
+  - **Optic radiation**
+  - **Primary visual cortex**
+
+``` 
+# The Visual Pathway: V1
+
+## Image Source:
+Rafael Redondo [6]
+
+Vineeth N B (IIT-H)
+
+## 82.7 Human Visual System
+
+### The Visual Pathway: V1
+
+- **Visual Fields:**
+  - **Left visual field**
+  - **Right visual field**
+
+- **Components:**
+  - **Temporal**
+  - **Nasal**
+  - **Optic chiasm**
+  - **Primary Visual Cortex (V1)**
+  - **Temporal**
+  - **Pulvinar nucleus**
+  - **Lateral geniculate nucleus**
+  - **Superior colliculus**
+  - **Optic radiation**
+  - **Primary visual cortex**
+```
+
+---
+
+*Insert image placeholder or link if available.*
+
+```
+
+# DL4CV_Week02_Part07.pdf - Page 16
+
+```markdown
+# A Tale of Two Receptive Fields
+
+**Recall:** David Hubel and Torsten Wiesel were the first to characterize V1 receptive fields by recording from a cat viewing stimuli on a screen.
+
+![Experimental Setup](image_url)
+
+- **Stimulus projected on screen**
+- **Microelectrode**
+- **Amplifier**
+- **Oscilloscope**
+
+In 1981, they received a Nobel prize in physiology and medicine for their work.
+
+Vineeth N B (IIT-H) 82.7 Human Visual System 16 / 26
+```
+
+# DL4CV_Week02_Part07.pdf - Page 17
+
+```markdown
+# Simple and Complex Cell Receptive Fields
+
+## Receptive fields
+
+### Simple Cells:
+- **Simple Cells:**
+  - Detect oriented bars and edges at a specific location
+
+### Complex Cells:
+- **Complex Cells:**
+  - Sensitive to orientation but invariant to position
+
+### Diagrams
+
+![Simple Cells: Bar and Edge Detectors](image_url)
+
+**Bar detectors** 
+```
++ - + - + - +
++ - + - + - +
+```
+
+**Edge Detector**
+```
++ + - - +
++ + - - +
+```
+
+**Position-invariant "bar" detector**
+```
++ - + - + - + - +
++ - + - + - + - +
++ - + - + - + - +
++ - + - + - + - +
+```
+
+---
+
+**References:**
+- Vineeth N B. (IIIT-H)
+- 82.7 Human Visual System
+- Slide 17/26
+```
+
+# DL4CV_Week02_Part07.pdf - Page 18
+
+```markdown
+# Cortical Cells Compute Derivatives
+
+## Spatial derivative is orientation-sensitive
+
+### Edge-detecting simple cell response over time
+
+![Edge-detecting simple cell response over time](image-url)
+
+**Time Stamps**:
+- t=30ms
+- t=70ms
+- t=110ms
+- t=150ms
+- t=190ms
+- t=230ms
+- t=270ms
+
+### Spatial Receptive Field
+
+**Graph**:
+![Spatial Receptive Field Graph](image-url)
+
+**Derivative in space**:
+- **Spatial Receptive Field**
+
+### Temporal Receptive Field
+
+**Graph**:
+![Temporal Receptive Field Graph](image-url)
+
+**Derivative in time**:
+- **Temporal Receptive Field**
+
+### Spatiotemporal Receptive Field (space-time filter)
+
+**Graph**:
+![Spatiotemporal Receptive Field Graph](image-url)
+
+**Graph Description**:
+- **Space**
+- **Time**
+
+**Axes**:
+- Temporal Receptive Field
+- Spatial Receptive Field
+
+---
+
+Vineeth N B (IIT-H)
+
+§2.7 Human Visual System
+
+Page 18 / 26
+```
+
+# DL4CV_Week02_Part07.pdf - Page 19
+
+```markdown
+# Direction Selectivity of Some Cortical Cells
+
+## Oriented derivative in X-T space
+
+![Direction Selectivity Diagram](image_url_placeholder)
+
+**Vineeth N B (IIT-H) 82.7 Human Visual System 19 / 26**
+
+- **Direction Selectivity of Some Cortical Cells**
+
+    - **Oriented derivative in X-T space!**
+
+    - **Cell is selective for rightward moving edge**
+
+        - **Time**
+
+            - **X**
+            - **Y**
+            - **T**
+
+            ![Time Diagram](image_url_placeholder)
+
+            ```
+            T
+            X
+            ```
+
+```
+
+# DL4CV_Week02_Part07.pdf - Page 20
+
+```markdown
+# Oriented Filters and Natural Images
+
+- **Goal:** Learn independent filters whose linear combination best represents natural images
+- **Optimal set of such filters are oriented and localized to specific regions of image**
+
+![Natural Images](image_url)
+
+**Natural Images**
+
+- Dark
+- White
+
+![Receptive Fields from Natural Images](image_url)
+
+**Receptive Fields from Natural Images**
+
+- See Olshausen and Field 1996, Rao and Ballard 1999 for more details
+
+Vineeth N B (IIT-H) §2.7 Human Visual System 20 / 26
+```
+
+# DL4CV_Week02_Part07.pdf - Page 21
+
+```markdown
+# Dorsal and Ventral Pathways in the Visual Cortex
+
+## Image Source: Rice University OpenStax
+
+## Vineeth N B (IIT-H)
+
+### 82.7 Human Visual System
+
+### 21 / 26
+
+### Dorsal and Ventral Pathways in the Visual Cortex
+
+- **Frontal lobe**
+- **Parietal lobe**
+- **Temporal lobe**
+- **Occipital lobe**
+
+#### Dorsal visual stream
+- **Function**: Determines "Where is it?"
+- **Pathway**: Connects the occipital lobe to the parietal lobe
+
+#### Ventral visual stream
+- **Function**: Determines "What is it?"
+- **Pathway**: Connects the occipital lobe to the temporal lobe
+
+![Visual Pathways Diagram](path_to_image)
+
+- **Dorsal visual stream; this portion determines "Where is it?"**
+- **Ventral visual stream; this portion determines "What is it?"**
+```
+
+# DL4CV_Week02_Part07.pdf - Page 22
+
+```markdown
+# Visual Cortex is Hierarchically Organized: "What" Pathway
+
+## Object Pathway: V1 → V2 → V4 → TEO → TE
+Cells respond to more and more complex stimuli as we go higher up
+
+### Example Receptive Fields
+
+| V2      | V4      | TEO     | TE      |
+|---------|---------|---------|---------|
+| ![V2](image_url) | ![V4](image_url) | ![TEO](image_url) | ![TE](image_url) |
+| ![Shape](image_url) | ![Color](image_url) | ![Complex Shape](image_url) | ![Object](image_url) |
+| ![Black Triangle](image_url) | ![Double Circles](image_url) | ![Crosses](image_url) | ![Smiley Face](image_url) |
+| ![Spokes](image_url) | ![Red Dot](image_url) | ![Circles](image_url) | ![Checkers](image_url) |
+| ![Circle](image_url) | ![Green Square](image_url) | ![Rectangles](image_url) | ![Wrench](image_url) |
+
+![Brain Diagram](image_url)
+
+Vineeth N B (IIT-H) §2.7 Human Visual System 22 / 26
+
+```
+
+# DL4CV_Week02_Part07.pdf - Page 23
+
+```markdown
+# "Where" Pathway
+
+## V1 → V2 → MT → MST → Posterior Parietal Cortex
+
+- Cells respond to more and more complex forms of motion and spatial relationships
+- Damage to right parietal cortex may result in spatial hemi-neglect - patient behaves as if the left part of the visual world doesn't exist
+
+![Eye movements only to right part of the screen](image-source-here.png)
+
+![Only right side of clock drawn](image-source-here.png)
+
+*Image Source: Scholarpedia - Hemineglect*
+
+*Vineeth N B (IIT-H)*
+
+*82.7 Human Visual System*
+
+*23 / 26*
+```
+
+# DL4CV_Week02_Part07.pdf - Page 24
+
+```markdown
+# The Visual Processing Hierarchy
+
+## Overview
+
+This diagram illustrates the hierarchy of visual processing in the human visual system. Various regions and pathways involved in processing different aspects of visual information are highlighted. The image source is attributed to Perry, Fallah 2014, from Vineeth N B (IIIT-H), section 82.7 Human Visual System.
+
+## Visual Processing Hierarchy
+
+### Primary Visual Cortex (V1)
+- Speed
+- Direction
+- Spatial frequency
+- Temporal frequency
+- Orientation
+- Color
+
+### Visual Area V2 (thick stripes)
+- Speed
+- Direction
+- Spatial frequency
+- Temporal frequency
+
+### Visual Area V2 (thin stripes, interstripes)
+- Edges
+- Thin stripes
+- Interstripes
+- Border ownership
+- Color
+
+### Visual Area V4
+- Angles
+- Curvature
+- Perceived color
+- Kinetic contours
+- Motion
+
+### Middle Temporal (MT) Area
+- Speed
+- Direction
+- Spatial frequency
+- Temporal frequency
+- Local-Global motion
+
+### Inferotemporal (TEO/PIT) Area
+- Simple shapes
+
+### Superior Temporal (TE/AIT) Area
+- Complex shapes/body parts
+- Object recognition
+- Object invariance
+
+### Motion-Sensitive Areas (MST)
+- Expansions
+- Contractions
+- Rotations
+- Translations
+- Spirals
+- Optic Flow
+
+### Parietal Regions
+- Heading
+- Optic flow
+- Self-motion
+- Multi-modal integration
+
+## Image Source
+
+- **Image Source**: Perry, Fallah 2014
+- **Vineeth N B (IIIT-H)**: 82.7 Human Visual System
+
+```
+
+# DL4CV_Week02_Part07.pdf - Page 25
+
+```markdown
+# Readings
+
+## Summary of Human Visual System
+
+- **Lecture Notes of Majumder, UCI on Visual Perception**
+
+### If you'd like to know more...
+
+- **Chapter on Vision by Martin A. Fischler and Oscar Firschein in Intelligence: The Eye, the Brain, and the Compute**
+
+- **Nobel laureate David Hubel's book: Eye, Brain, and Vision**
+
+- **The Joy of Visual Perception by Peter K. Kaiser (Web Book)**
+
+- **Lecture 8 of UWash's CS455: Computer Vision (Rao, 2009)**
+
+_Vineeth N B. (IIIT-H)_
+
+_§2.7 Human Visual System_
+
+_25 / 26_
+```
+
+# DL4CV_Week02_Part07.pdf - Page 26
+
+```markdown
+# References
+
+- Torsten N. Wiesel David H. Hubel. **"Effects of Monocular Deprivation in Kittens"**. In: *Naunyn Schmiedebergs Arch Exp Pathol Pharmacol* 248 (1964), pp. 492–497.
+
+- David C. Van Essen and Jack L. Gallant. **"Neural mechanisms of form and motion processing in the primate visual system"**. In: *Neuron* 13 (1994), pp. 1–10.
+
+- Bruno A. Olshausen and David J. Field. **"Natural image statistics and efficient coding"**. In: *Network* 7 2 (1996), pp. 333–9.
+
+- Rajesh Rao and Dana Ballard. **"Predictive Coding in the Visual Cortex: a Functional Interpretation of Some Extra-classical Receptive-field Effects"**. In: *Nature neuroscience* 2 (Feb. 1999), pp. 79–87.
+
+- Carolyn Jeane Perry and Mazyar Fallah. **"Feature integration and object representations along the dorsal stream visual hierarchy"**. In: *Frontiers in computational neuroscience* 8 (2014), p. 84.
+
+- Rafael Redondo. **"New contributions on image fusion and compression based on space-frequency representations"**. In: (July 2020).
+```
+

@@ -1,0 +1,386 @@
+# DL4CV_Week05_Part05.pdf - Page 1
+
+```markdown
+# Deep Learning for Computer Vision
+
+## Finetuning in CNNs
+
+**Vineeth N Balasubramanian**
+
+Department of Computer Science and Engineering
+Indian Institute of Technology, Hyderabad
+
+![IIT Hyderabad Logo](https://example.com/logo.png)
+
+---
+
+**Vineeth N B (IIT-H)**
+
+**5.5 Finetuning in CNNs**
+
+## 1 / 10
+```
+
+# DL4CV_Week05_Part05.pdf - Page 2
+
+```markdown
+# Limitations of Working with CNNs
+
+## Practical concerns of working with CNNs:
+
+- Optimization of parameters in deep models (characteristic of CNNs) very hard, requires careful parameter initializations and hyperparameter tuning
+
+![NPTEL Logo](image_url)
+
+*Vineeth N B. (IIT-H)*
+
+*Section 5.5: Finetuning in CNNs*
+
+*Slide 2 / 10*
+```
+
+# DL4CV_Week05_Part05.pdf - Page 3
+
+```markdown
+# Limitations of Working with CNNs
+
+## Practical concerns of working with CNNs:
+
+- Optimization of parameters in deep models (characteristic of CNNs) very hard, requires careful parameter initializations and hyperparameter tuning
+- Can suffer from overfitting, as data samples used for training are lesser compared to parameters being trained
+
+![NPTEL Image](https://via.placeholder.com/150)
+
+Vineeth N B (IIIT-H) §5.5 Finetuning in CNNs
+
+Page 2 / 10
+```
+
+# DL4CV_Week05_Part05.pdf - Page 4
+
+```markdown
+# Limitations of Working with CNNs
+
+## Practical concerns of working with CNNs:
+
+- Optimization of parameters in deep models (characteristic of CNNs) very hard, requires careful parameter initializations and hyperparameter tuning
+- Can suffer from overfitting, as data samples used for training are lesser compared to parameters being trained
+- Require a long time and computational power to train
+
+| Model             | Parameters |
+|-------------------|------------|
+| AlexNet           | 60m       |
+| VGG               | 138m      |
+| Inception v1      | 5m        |
+| Inception v3      | 23m       |
+| Resnet 50         | 25m       |
+
+| Model             | Training time | Hardware                          |
+|-------------------|---------------|-----------------------------------|
+| AlexNet           | 5-6 days      | two GTX 580 3GB                   |
+| VGG               | 2-3 weeks     | four NVIDIA Titan Black           |
+| Inception v1      | 1 week        | not mentioned                     |
+
+*Source: Vineeth N B (IIIT-H)*
+
+![Figure](image_placeholder)
+
+&Section 5.5 Fine-tuning in CNNs (Slide 2 / 10)
+```
+
+**Note:** The placeholder `[image_placeholder]` is used where the image from the slide should be referenced. Replace it with the actual image path or placeholder if needed.
+
+# DL4CV_Week05_Part05.pdf - Page 5
+
+```markdown
+# Strategies Used
+
+- **Better weight initialization:**
+  - **Glorot/He initialization:** Empirically shown to give good results
+  - **Hand-designed:** Using domain knowledge, come up with features like edges (with certain orientations), shapes etc.
+  - **Locally trained using unsupervised learning approaches:** Use unsupervised greedy layerwise pretraining to get features one layer at a time starting from the initial layer. Rarely used nowadays due to increased computational power and dataset sizes
+
+![NPTEL](image_placeholder.png)
+
+*Vineeth N B (IIT-H)*
+
+*§5.5 Finetuning in CNNs*
+
+*3 / 10*
+```
+
+# DL4CV_Week05_Part05.pdf - Page 6
+
+```markdown
+# Strategies Used
+
+- **Better weight initialization:**
+  - **Glorot/He initialization**: Empirically shown to give good results
+  - **Hand-designed**: Using domain knowledge, come up with features like edges (with certain orientations), shapes etc.
+  - **Locally trained using unsupervised learning approaches**: Use unsupervised greedy layerwise pretraining to get features one layer at a time starting from the initial layer. Rarely used nowadays due to increased computational power and dataset sizes
+
+- **Regularization methods:**
+  - **L2-weight decay, L1-weight decay**
+  - **DropOut, BatchNorm, Input/Gradient Noise**
+  - **Data augmentation**
+    - Alleviates overfitting, does not train faster though!
+
+_Vineeth N B (IIIT-H)_
+
+§5.5: Fine-tuning in CNNs
+
+3 / 10
+```
+
+# DL4CV_Week05_Part05.pdf - Page 7
+
+```markdown
+# Interesting Property of CNNs
+
+![CNN Feature Visualization](image_url)
+
+- **Low-Level Feature**
+- **Mid-Level Feature**
+- **High-Level Feature**
+- **Trainable Classifier**
+
+![Feature Visualization](image_url)
+
+*Feature visualization of convolutional net trained on ImageNet from [Zeiler & Fergus 2013]*
+
+- Features learned by CNN layers are hierarchical
+    - Initial layers learn simple/generic features like edges, colour blobs, etc. - remain constant across various models trained on different datasets
+    - Later layers perceive more abstract/specialized features and are generally dataset-specific
+    - **What can we do with this?**
+
+**Credit:** CS231N, Stanford Univ
+
+**Vineeth N B (IIT-H)**
+
+**§5.5 Finetuning in CNNs**
+
+```
+```
+
+# DL4CV_Week05_Part05.pdf - Page 8
+
+```markdown
+# Transfer Learning
+
+## Learning Process of Transfer Learning
+
+### Learning Process of Traditional Machine Learning
+![Traditional Machine Learning Diagram](diagram-traditional.png)
+
+**Different Tasks**
+
+- Circle containing shapes
+- Triangle containing shapes
+- Square containing shapes
+
+Each task feeds into an independent **Learning System**.
+
+### Learning Process of Transfer Learning
+![Transfer Learning Diagram](diagram-transfer.png)
+
+**Source Tasks**
+
+- Circle containing shapes
+- Triangle containing shapes
+
+These source tasks contribute to a central **Knowledge** component.
+
+**Target Task**
+
+- Circle containing shapes
+
+The knowledge is then used to feed into a **Learning System**.
+
+## (a) Traditional Machine Learning
+
+## (b) Transfer Learning
+
+*Credit: A Survey on Transfer Learning, Pan and Yang 2010*
+
+*Vineeth N B (IIIT-H) §5.5 Finetuning in CNNs*
+
+*Slide 5 / 10*
+```
+
+# DL4CV_Week05_Part05.pdf - Page 9
+
+```markdown
+# Transfer Learning
+
+- Using knowledge learned over a different task(s) (having sufficient data) to aid the training of current task
+
+![NPTEL Logo](https://via.placeholder.com/150)
+
+Vineeth N B (IIT-H) §5.5 Finetuning in CNNs
+
+---
+
+Page 6 of 10
+```
+
+# DL4CV_Week05_Part05.pdf - Page 10
+
+```markdown
+# Transfer Learning
+
+- Using knowledge learned over a different task(s) (having sufficient data) to aid the training of current task
+- Since pretrained models with good results are readily available, they can reduce the time spent on training, hyperparameter tuning and thus need for high-end computing hardware
+- Pretrained weights of CNN model can be used as:
+  - Only parameters of classification layers are trained; rest of the network is frozen
+  - Pretrained weights serve as initialization, and the entire network (or few layers at the end) are further finetuned to better model target task
+
+*Vineeth N B (IIT-H)*
+
+§5.5 Finetuning in CNNs
+```
+
+Ensure that all mathematical symbols, equation notations, and scientific terms are correctly represented.
+
+# DL4CV_Week05_Part05.pdf - Page 11
+
+```markdown
+# Transfer Learning
+
+- Using knowledge learned over a different task(s) (having sufficient data) to aid the training of current task
+- Since pretrained models with good results are readily available, they can reduce the time spent on training, hyperparameter tuning and thus need for high-end computing hardware
+- Pretrained weights of CNN model can be used as:
+  - Only parameters of classification layers are trained; rest of the network is frozen
+  - Pretrained weights serve as initialization, and the entire network (or few layers at the end) are further finetuned to better model target task
+- Choice depends on variables such as dataset size and similarity between target and source datasets
+
+![Image](image_placeholder.png)
+
+*Vineeth N B. (IIIT-H) §5.5 Finetuning in CNNs*
+
+*Page 6 / 10*
+```
+
+# DL4CV_Week05_Part05.pdf - Page 12
+
+```markdown
+# Which mode to select?
+
+## Dataset is small; target and source datasets are similar:
+
+- Specialized features likely remain same for source and target datasets
+- Parameters of classification layer are randomly initialized and trained, while rest of network remains frozen (to prevent overfitting)
+
+![Flow Diagram](image_url)
+
+```plaintext
+Input
+    |
+    v
+Feature Extraction Layers
+    |
+    v
+Source task Generic Layers
+    |
+    v
+Source task Special Layers
+    |
+    v
+Randomly Initialized Classification Layers
+    |
+    v
+Output
+```
+
+*Vineeth N B (IIIT-H)*
+*§5.5 Finetuning in CNNs*
+*7 / 10*
+```
+
+# DL4CV_Week05_Part05.pdf - Page 13
+
+```markdown
+# Which mode to select?
+
+## Dataset is small; target and source datasets are dissimilar:
+
+- Specialized features are different but generic features can be shared
+- An intermediate layer with appropriate specialization level is chosen and linear classifiers like SVMs are trained over those features.
+
+![Diagram](image_placeholder.png)
+
+**Vineeth N B (IIT-H)**
+
+§5.5 Finetuning in CNNs
+
+8 / 10
+```
+
+In the extracted markdown format:
+
+- The main heading `Which mode to select?` is properly formatted using `#`.
+- The subheading `Dataset is small; target and source datasets are dissimilar:` is formatted using `##`.
+- The bullet points are correctly formatted using `-`.
+- The formula or equation `§5.5 Finetuning in CNNs` is formatted using inline code.
+- The placeholder for the image is included with the syntax `![]()`.
+- The footer information is maintained in a plain text format.
+- The page number `8 / 10` is formatted inline.
+
+# DL4CV_Week05_Part05.pdf - Page 14
+
+```markdown
+# Which mode to select?
+
+## Dataset is large:
+
+- We can use pretrained network as a good initialization which is finetuned on target dataset
+- While finetuning, learning rate is kept low in order to not change pretrained parameters too much
+- If dataset is very different, it can either be trained from scratch or techniques like transitive transfer learning[^1] or its successors can be applied
+
+![Diagram](attachment:diagram.png)
+
+_Input_ → _Feature Extraction Layers_ → _Randomly Initialized Classification Layers_ → _Output_
+
+### Feature Extraction Layers
+
+- Source task/ Randomly initialized Generic Layers
+- Source task/ Randomly initialized Special Layers
+
+### Randomly Initialized Classification Layers
+
+---
+
+[^1]: Tan et al., Transitive Transfer Learning, KDD 2015
+
+_Vineeth N B (IIIT-H)_
+
+§5.5 Finetuning in CNNs
+
+---
+
+9 / 10
+```
+
+# DL4CV_Week05_Part05.pdf - Page 15
+
+```markdown
+# Homework Readings
+
+## Homework
+
+### Readings
+
+- [ ] Chapter 9 (§9.8-9.9), DL Book
+- [ ] Lecture on Transfer Learning, CS231n course, Stanford Univ
+- [ ] **(Optional)** How transferable are features in deep neural networks?
+
+---
+
+**Vineeth N B (IIIT-H)**
+
+**§5.5 Finetuning in CNNs**
+
+---
+
+10 / 10
+```
+

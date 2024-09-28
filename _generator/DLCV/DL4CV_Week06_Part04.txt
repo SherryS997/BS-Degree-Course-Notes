@@ -1,0 +1,1624 @@
+# DL4CV_Week06_Part04.pdf - Page 1
+
+```markdown
+# Deep Learning for Computer Vision
+
+## Explaining CNNs: Recent Methods
+
+**Vineeth N Balasubramanian**
+
+Department of Computer Science and Engineering
+Indian Institute of Technology, Hyderabad
+
+![IIT Hyderabad Logo](https://example.com/logo.png)
+
+---
+
+Vineeth N B (IIT-H)
+
+### 6.4 Explaining NNs: Recent Methods
+
+---
+
+Page 1 / 25
+```
+
+Note: The above Markdown content is a basic structure. For more detailed formatting, including images, specific scientific terms, or more complex structures, please provide the actual content or slides that need to be processed.
+
+# DL4CV_Week06_Part04.pdf - Page 2
+
+```markdown
+# Recall: Explaining using Vanilla Gradients<sup>1</sup>
+
+- Forward pass the data \( x \), to get \( y = f(x) \), where \( y \) is DNN’s output corresponding to a given class.
+
+![NPTEL Logo](image_url)
+
+<sup>1</sup> Simonyan et al, *Deep Inside Convolutional Networks: Visualising Image Classification Models and Saliency Maps*, ICLRW 2014
+
+*Vineeth N B (IIT-H)*
+
+### 6.4 Explaining NNs: Recent Methods
+
+---
+
+2 / 25
+```
+
+# DL4CV_Week06_Part04.pdf - Page 3
+
+```markdown
+# Recall: Explaining using Vanilla Gradients<sup>1</sup>
+
+- Forward pass the data \( x \), to get \( y = f(x) \), where \( y \) is DNN’s output corresponding to a given class.
+- Backward pass to input layer to get the gradient \( \frac{\partial y}{\partial x} \).
+
+![NPTEL Logo](image-url)
+
+<sup>1</sup> Simonyan et al, Deep Inside Convolutional Networks: Visualising Image Classification Models and Saliency Maps, ICLRW 2014
+
+_Section 6.4 Explaining NNs: Recent Methods_
+
+Vineeth N B (IIT-H)
+
+*Page 2 / 25*
+```
+
+# DL4CV_Week06_Part04.pdf - Page 4
+
+```markdown
+# Recall: Explaining using Vanilla Gradients<sup>1</sup>
+
+- Forward pass the data `x`, to get `y = f(x)`, where `y` is DNN’s output corresponding to a given class.
+- Backward pass to input layer to get the gradient `∂y/∂x`.
+
+![Original image (left); Vanilla Gradients Attribution map (right)](image-url)
+
+**Original image (left); Vanilla Gradients Attribution map (right)**
+
+**Is this enough to explain a Deep Neural Network?**
+
+<sup>1</sup> Simonyan et al, Deep Inside Convolutional Networks: Visualising Image Classification Models and Saliency Maps, ICLRW 2014
+
+*Vineeth N B (IIT-H)*
+
+**5.4 Explaining NNs: Recent Methods**
+
+2 / 25
+```
+
+# DL4CV_Week06_Part04.pdf - Page 5
+
+```markdown
+# Recall: Explaining using Vanilla Gradients<sup>1</sup>
+
+- Forward pass the data **x**, to get **y = f(x)**, where **y** is DNN’s output corresponding to a given class.
+- Backward pass to input layer to get the gradient **∂y/∂x**.
+
+![Original image (left); Vanilla Gradients Attribution map (right)](#)
+
+**Original image (left); Vanilla Gradients Attribution map (right)**
+
+Is this enough to explain a **Deep Neural Network**?
+**Not always!**
+
+<sup>1</sup>Simonyan et al, Deep Inside Convolutional Networks:Visualising Image Classification Models and Saliency Maps, ICLRW 2014
+
+*Vineeth N B (IIIT-H)*
+
+**5.4 Explaining NNs: Recent Methods**
+
+---
+
+2 / 25
+```
+
+# DL4CV_Week06_Part04.pdf - Page 6
+
+```markdown
+# Saturation Problem!
+
+![Saturation Problem Illustration](image_url)
+
+## Illustration of saturation problem
+
+### Vineeth N B (IIT-H) §6.4 Explaining NNs: Recent Methods
+
+Vineeth N B (IIT-H) §6.4 Explaining NNs: Recent Methods 3 / 25
+
+**y = i₁ + i₂ - 0**
+
+**y = (i₁ + i₂) when (i₁ + i₂) < 1**
+
+**y = 1 when (i₁ + i₂) >= 1**
+
+```math
+h = \max(0, 1 - i₁ - i₂)
+```
+
+![h](image_url)
+
+```math
+\begin{array}{cc}
+0 & 1 \\
+1 & 1 \\
+\end{array}
+```
+
+```math
+\begin{array}{cc}
+i₁ + i₂ & y \\
+0 & 1 \\
+1 & y \\
+\end{array}
+```
+
+![Saturation Problem Diagram](image_url)
+```
+
+# DL4CV_Week06_Part04.pdf - Page 7
+
+```markdown
+# Saturation Problem!
+
+![Saturation Problem Diagram](image.png)
+
+## Illustration of saturation problem
+
+- **Gradient of h w.r.t both \(i_1\) and \(i_2\) is zero when \(i_1 + i_2 > 1\) (causing both gradients and Guided Backprop to be zero)**
+
+*Vineeth N B (IIIT-H) §6.4 Explaining NNs: Recent Methods 3 / 25*
+```
+
+# DL4CV_Week06_Part04.pdf - Page 8
+
+```markdown
+# Saturation Problem!
+
+![Illustration of saturation problem](image-url)
+
+- **Gradient of h w.r.t both i₁ and i₂ is zero when i₁ + i₂ > 1 (causing both gradients and Guided Backprop to be zero)**
+
+- **Gradient of y w.r.t. h is negative (causing Guided Backprop and deconvolutional networks to assign zero importance)**
+
+*Vineeth N B (IIIT-H) §6.4 Explaining NNs: Recent Methods 3 / 25*
+```
+
+# DL4CV_Week06_Part04.pdf - Page 9
+
+```markdown
+# Deep Lift<sup>2</sup>
+
+- **Idea**: Instead of gradients, measure difference in output from some ‘reference’ output (\\(\Delta t\\)) in terms of difference of input from some ‘reference’ input (\\(\Delta x_r\\)).
+
+![NPTEL](https://example.com/nptel.png)
+
+*Shrikumar et al., Learning important features through propagating activation differences, ICML 2017*
+
+*Vineeth N B (IIT-H)*
+
+*§6.4 Explaining NNs: Recent Methods*
+
+---
+
+4 / 25
+```
+
+# DL4CV_Week06_Part04.pdf - Page 10
+
+```markdown
+# Deep Lift<sup>2</sup>
+
+- **Idea**: Instead of gradients, measure difference in output from some 'reference' output (Δt) in terms of difference of input from some 'reference' input (Δxi).
+
+- Assigns contribution scores C<sub>Δxi, Δt</sub> s.t. Σ<sub>i=1</sub><sup>n</sup> C<sub>Δxi, Δt</sub> = Δt
+
+![NPTEL](https://via.placeholder.com/150)
+
+<sup>2</sup>Shrikumar et al, Learning important features through propagating activation differences, ICML 2017
+
+Vineeth N B (IIT-H) §6.4 Explaining NNs: Recent Methods
+
+4 / 25
+```
+
+# DL4CV_Week06_Part04.pdf - Page 11
+
+```markdown
+# Deep Lift<sup>2</sup>
+
+- **Idea**: Instead of gradients, measure difference in output from some 'reference' output (Δt) in terms of difference of input from some 'reference' input (Δxi).
+
+- Assigns contribution scores CΔxiΔt s.t. ∑<sub>i=1</sub><sup>n</sup> CΔxiΔt = Δt
+
+![NPTEL Logo](image_url)
+
+*Shrikumar et al, Learning important features through propagating activation differences, ICML 2017*
+
+*Vineeth N B (IIT-H)*
+
+*6.4 Explaining NNs: Recent Methods*
+
+*4 / 25*
+```
+
+# DL4CV_Week06_Part04.pdf - Page 12
+
+```markdown
+# Deep Lift<sup>2</sup>
+
+- **Idea**: Instead of gradients, measure difference in output from some ‘reference’ output (\(\Delta t\)) in terms of difference of input from some ‘reference’ input (\(\Delta x_i\)).
+- Assigns contribution scores \(C_{\Delta x_i\Delta t}\) s.t. \(\sum_{i=1}^n C_{\Delta x_i\Delta t} = \Delta t\)
+
+![Graph](image_placeholder.png)
+
+- \(y^0 = 0\) as \((i_1^0 + i_2^0) = 0\) (reference)
+- Difference from reference (\(\Delta y\)) is +1, NOT 0
+
+---
+
+## DeepLift overcomes saturation problem
+
+<sup>2</sup>Shrikumar et al., Learning important features through propagating activation differences, ICML 2017
+
+Vineeth N B (IIT-H)
+
+56.4 Explaining NNs: Recent Methods
+
+4 / 25
+```
+
+# DL4CV_Week06_Part04.pdf - Page 13
+
+```markdown
+# Deep Lift: Rescale Rule
+
+- **Idea**: Start from output layer \(L\) & proceed backwards layer by layer, redistributing the difference of prediction score from baseline, until input layer is reached
+
+![NPTEL](attachment:payload)
+ 
+**Vineeth N B (IIT-H)**
+
+**6.4 Explaining NNs: Recent Methods**
+
+5 / 25
+```
+
+
+# DL4CV_Week06_Part04.pdf - Page 14
+
+```markdown
+# Deep Lift: Rescale Rule
+
+- **Idea:** Start from output layer \(L\) & proceed backwards layer by layer, redistributing the difference of prediction score from baseline, until input layer is reached
+
+- **Notations:**
+  - \(z_{ji}^{(l+1,t)} = w_{ji}^{(l+1,t)} a_i^l\) : weighted activation of a neuron \(i\) onto neuron \(j\) in the next layer
+
+![NPTEL Logo](image_placeholder)
+
+Vineeth N B (IIT-H) §6.4 Explaining NNs: Recent Methods 5/25
+```
+
+# DL4CV_Week06_Part04.pdf - Page 15
+
+```markdown
+# Deep Lift: Rescale Rule
+
+- **Idea:** Start from output layer \(L\) & proceed backwards layer by layer, redistributing the difference of prediction score from baseline, until input layer is reached
+
+- **Notations:**
+  - \(z_{ji}^{(l+1,l)} = w_{ji}^{(l+1,l)} x_i^l\): weighted activation of a neuron \(i\) onto neuron \(j\) in the next layer
+  - \(z_{ji}^{(l+1,l)} = w_{ji}^{(l+1,l)} \hat{x}_i^l\): weighted activation of a neuron \(i\) onto neuron \(j\) in the next layer, when baseline \(x\) fed as the input.
+
+![NPTEL](https://example.com/nptel_logo.png)
+
+Vineeth N B (IIT-H) §6.4 Explaining NNs: Recent Methods 5 / 25
+```
+
+# DL4CV_Week06_Part04.pdf - Page 16
+
+# Deep Lift: Rescale Rule
+
+- **Idea:** Start from output layer \(L\) & proceed backwards layer by layer, redistributing the difference of prediction score from baseline, until input layer is reached
+
+## Notations:
+
+- \( z_{ji}^{(l+1,l)} = w_{ji}^{(l+1,l)} x_i^l \): weighted activation of a neuron \(i\) onto neuron \(j\) in the next layer
+- \( \tilde{z}_{ji}^{(l+1,l)} = w_{ji}^{(l+1,l)} \tilde{x}_i^l \): weighted activation of a neuron \(i\) onto neuron \(j\) in the next layer, when baseline \(x\) fed as the input.
+- \( r_i^{(l)} \): relevance of unit \(i\) of layer \(l\).
+
+![NPTEL](https://example.com/placeholder-image.jpg)
+
+*Vineeth N B (IIT-H) §6.4 Explaining NNs: Recent Methods 5 / 25*
+
+# DL4CV_Week06_Part04.pdf - Page 17
+
+```markdown
+# Deep Lift: Rescale Rule
+
+- **Idea**: Start from output layer \(L\) & proceed backwards layer by layer, redistributing the difference of prediction score from baseline, until input layer is reached
+
+- **Notations**:
+  - \(z_{ji}^{(l+1,l)} = w_{ji}^{(l+1,l)} x_i^l\): weighted activation of a neuron \(i\) onto neuron \(j\) in the next layer
+  - \(z_{ji}^{(l+1,l)} = w_{ji}^{(l+1,l)} \bar{x}_i^l\): weighted activation of a neuron \(i\) onto neuron \(j\) in the next layer, when baseline \(x\) fed as the input.
+  - \(r_i^{(l)}\): relevance of unit \(i\) of layer \(l\).
+  - \(r_i^{(L)} = \begin{cases}
+    y_i(x) - y_i(\bar{x}) & \text{if unit } i \text{ is target unit of interest} \\
+    0 & \text{otherwise}
+    \end{cases}\)
+
+![Diagram Placeholder](image_url)
+
+*Vineeth N B. (IIT-H) §6.4 Explaining NNs: Recent Methods 5 / 25*
+```
+
+# DL4CV_Week06_Part04.pdf - Page 18
+
+```markdown
+# Deep Lift: Rescale Rule
+
+- **Idea:** Start from output layer $L$ & proceed backwards layer by layer, redistributing the difference of prediction score from baseline, until input layer is reached
+
+- **Notations:**
+  - $z_{ji}^{(l)} = w_{ji}^{(l+1,l)} x_i^{(l)}$: weighted activation of a neuron $i$ onto neuron $j$ in the next layer
+  - $\bar{z}_{ji} = w_{ji}^{(l+1,l)} \bar{x}_i^{(l)}$: weighted activation of a neuron $i$ onto neuron $j$ in the next layer, when baseline $x$ fed as the input.
+  - $r_i^{(l)}$: relevance of unit $i$ of layer $l$.
+
+  \[
+  r_i^{(L)} = \begin{cases}
+    y_i(x) - y_i(\bar{x}) & \text{if unit $i$ is target unit of interest} \\
+    0 & \text{otherwise}
+    \end{cases}
+  \]
+
+  \[
+  r_i^{(l)} = \sum_j \sum_i (z_{ji}^{(l)} - \bar{z}_{ji}^{(l)}) r_j^{(l+1)}
+  \]
+
+---
+
+*Vineeth N B. (IIIT-H)*
+
+*Section 6.4 Explaining NNs: Recent Methods*
+
+*Slide 5/25*
+```
+
+# DL4CV_Week06_Part04.pdf - Page 19
+
+```markdown
+# IG: Integrated Gradients
+
+![Image of Fireboat (left), Vanilla Gradients (right)](image_url)
+
+---
+
+**Image of Fireboat (left), Vanilla Gradients (right)**
+
+---
+
+<sup>3</sup> Sundararajan et al., Axiomatic Attribution for Deep Networks, ICML 2017
+
+Vineeth N B (IIT-H)
+
+§ 6.4 Explaining NNs: Recent Methods
+
+---
+
+6 / 25
+```
+
+# DL4CV_Week06_Part04.pdf - Page 20
+
+```markdown
+# IG: Integrated Gradients^3
+
+![Image of Fireboat (left), Vanilla Gradients (right)](#)
+
+- **Image of Fireboat (left), Vanilla Gradients (right)**
+  - Due to saturation problem, vanilla gradients highlight regions irrelevant to fireboat
+
+^3 Sundararajan et al, Axiomatic Attribution for Deep Networks, ICML 2017
+
+Vineeth N B (IIT-H)
+
+§6.4 Explaining NNs: Recent Methods
+
+---
+
+6 / 25
+```
+
+# DL4CV_Week06_Part04.pdf - Page 21
+
+```markdown
+# IG: Integrated Gradients<sup>3</sup>
+
+![Image of Fireboat (left), Vanilla Gradients (right)](image_url)
+
+- Due to saturation problem, vanilla gradients highlight regions irrelevant to fireboat
+- IG overcomes problem of saturating gradients by cumulating gradients at different pixel intensities, α's.
+
+<sup>3</sup> Sundararajan et al., *Axiomatic Attribution for Deep Networks*, ICML 2017
+
+*Vineeth N B (IIT-H)*
+
+# 6.4 Explaining NNs: Recent Methods
+```
+
+# DL4CV_Week06_Part04.pdf - Page 22
+
+```markdown
+# IG: Integrated Gradients
+
+![Integrated Gradients Visualization](data:image/png;base64,...) 
+
+## Gradients at increasing α values from top-left to bottom-right
+
+*Vineeth N B (IIT-H)*
+
+### 6.4 Explaining NNs: Recent Methods
+
+---
+
+7 / 25
+```
+
+This markdown format maintains the structure and formatting of the original scientific slide, ensuring that all sections, titles, and descriptions are accurately represented. The image placeholder is included to represent the visual elements captured from the slide.
+
+# DL4CV_Week06_Part04.pdf - Page 23
+
+```markdown
+# IG: Integrated Gradients
+
+![Gradients Visualization](image_url)
+
+## Gradients at increasing α values from top-left to bottom-right
+
+- **Region of importance is changing with increasing α.** To get a more realistic picture of what is going on, cumulate these gradients using **path integral**.
+
+*Vineeth N B (IIT-H) §6.4 Explaining NNs: Recent Methods*
+
+Page 7 / 25
+```
+
+# DL4CV_Week06_Part04.pdf - Page 24
+
+```markdown
+# IG: Integrated Gradients
+
+- **Integrated gradient** along *ith* dimension for input *x* and baseline *x'* given by:
+
+  \[
+  \text{IG}_i(x) ::= (x_i - x^{\prime}_i) \int_{\alpha=0}^{1} \frac{\partial f(x^{\prime} + \alpha (x - x^{\prime}))}{\partial x_i} \partial \alpha
+  \]
+
+![NPTEL Logo](image_placeholder.png)
+
+Vineeth N B (IIT-H) §6.4 Explaining NNs: Recent Methods 8 / 25
+```
+
+# DL4CV_Week06_Part04.pdf - Page 25
+
+```markdown
+# IG: Integrated Gradients
+
+- **Integrated gradient** along $i^{th}$ dimension for input $x$ and baseline $x'$ given by:
+
+  $$ \text{IG}_i(x) ::= (x_i - x'_i) \int_{\alpha=0}^{1} \frac{\partial f(x' + \alpha (x - x'))}{\partial x_i} d\alpha $$
+
+- $$ \text{IG}_{i}^{\text{approx}}(x) ::= (x_i - x'_i) \sum_{k=1}^{m} \frac{\partial f(x' + \frac{k}{m} (x - x'))}{\partial x_i} \frac{1}{m} $$ where $m$ is a hyperparameter.
+
+![NPTEL](https://example.com/nptel.png)
+
+Vineeth N B (IIT-H) §6.4 Explaining NNs: Recent Methods 8 / 25
+```
+
+# DL4CV_Week06_Part04.pdf - Page 26
+
+```markdown
+# IG: Integrated Gradients
+
+- **Integrated gradient** along $i^{th}$ dimension for input $x$ and baseline $x'$ given by:
+
+  \[
+  \text{IG}_i(x) := (x_i - x_i') \int_{\alpha=0}^{1} \frac{\partial f(x' + \alpha (x - x'))}{\partial x_i} d\alpha
+  \]
+
+- \(\text{IG}_{i}^{\text{approx}}(x) := (x_i - x_i') \sum_{k=1}^{m} \frac{\partial f(x' + \frac{k}{m} (x - x'))}{\partial x_i} \frac{1}{m}\) where $m$ is a hyperparameter.
+
+![IG attribution map](image_placeholder)
+
+*Vineeth N B (IIT-H) §6.4 Explaining NNs: Recent Methods*
+```
+
+# DL4CV_Week06_Part04.pdf - Page 27
+
+```markdown
+# SmoothGrad
+
+- Add pixel-wise Gaussian noise to many copies of the image, and average resulting gradients.
+
+![Image of SmoothGrad Method](image.png)
+
+---
+
+[^4]: Smilkov et al, *SmoothGrad: removing noise by adding noise*, ICMLW 2017
+
+Vineeth N B (IIT-H)
+
+## 6.4 Explaining NNs: Recent Methods
+
+9 / 25
+```
+
+# DL4CV_Week06_Part04.pdf - Page 28
+
+```markdown
+# SmoothGrad<sup>4</sup>
+
+- **Add** pixel-wise Gaussian noise to many copies of the image, and average resulting gradients.
+- **Removes** noise from saliency map by **adding noise!**
+
+![NPTel Logo](image-url)
+
+<sup>4</sup> Smilkov et al., SmoothGrad: removing noise by adding noise, ICMLW 2017
+
+*Vineeth N B (IIT-H)*
+
+## 6.4 Explaining NNs: Recent Methods
+
+*Page 9/25*
+```
+
+# DL4CV_Week06_Part04.pdf - Page 29
+
+```markdown
+# SmoothGrad<sup>4</sup>
+
+- Add pixel-wise Gaussian noise to many copies of the image, and average resulting gradients.
+- Removes noise from saliency map by adding noise!
+- Besides vanilla gradients, other attribution methods also have their SmoothGrad counterparts, e.g. Smooth Integrated Gradients
+
+![NPTEL Logo](image_url)
+
+<sup>4</sup>Smilkov et al., SmoothGrad: removing noise by adding noise, ICMLW 2017
+
+Vineeth N B (IIT-H)
+
+## 6.4 Explaining NNs: Recent Methods
+
+9 / 25
+```
+
+# DL4CV_Week06_Part04.pdf - Page 30
+
+```markdown
+# SmoothGrad<sup>4</sup>
+
+- Add pixel-wise Gaussian noise to many copies of the image, and average resulting gradients.
+- Removes noise from saliency map by adding noise!
+- Besides vanilla gradients, other attribution methods also have their SmoothGrad counterparts, e.g. Smooth Integrated Gradients
+
+![Original Image](image-url) ![Vanilla Gradients](image-url) ![SmoothGrad](image-url)
+
+Original Image (left), Vanilla Gradients (center), SmoothGrad (right)
+
+<sup>4</sup> Smilkov et al., SmoothGrad: removing noise by adding noise, ICMLW 2017
+
+Vineeth N B (IIT-H)
+
+§6.4 Explaining NNs: Recent Methods
+
+9 / 25
+```
+
+# DL4CV_Week06_Part04.pdf - Page 31
+
+```markdown
+# Recent Variant of IG: XRAI<sup>5</sup>
+
+- Get attribution map given by IG
+
+![NPTEL Logo](image_url)
+
+<sup>5</sup>Kapishnikov et al, XRAI: Better Attributions Through Regions, ICCV 2019
+
+Vineeth N B (IIT-H)
+
+# 6.4 Explaining NNs: Recent Methods
+
+---
+
+10 / 25
+```
+
+# DL4CV_Week06_Part04.pdf - Page 32
+
+```markdown
+# Recent Variant of IG: XRAI<sup>5</sup>
+
+- Get attribution map given by IG
+- Over-segment the image
+
+![NPTEL Logo](https://example.com/logo.png)
+
+<sup>5</sup>Kapishnikov et al, XRAI: Better Attributions Through Regions, ICCV 2019
+
+Vineeth N B (IIT-H)
+
+### 6.4 Explaining NNs: Recent Methods
+
+10 / 25
+```
+
+# DL4CV_Week06_Part04.pdf - Page 33
+
+```markdown
+# Recent Variant of IG: XRAI<sup>5</sup>
+
+- Get attribution map given by IG
+- Over-segment the image
+- Start with an empty mask
+
+![NPTEL Logo](https://example.com/nptel-logo.png)
+
+<sup>5</sup>Kapishnikov et al, XRAI: Better Attributions Through Regions, ICCV 2019
+
+Vineeth N B (IIT-H)
+
+### 6.4 Explaining NNs: Recent Methods
+
+10 / 25
+```
+
+# DL4CV_Week06_Part04.pdf - Page 34
+
+```markdown
+# Recent Variant of IG: XRAI<sup>5</sup>
+
+- Get attribution map given by IG
+- Over-segment the image
+- Start with an empty mask
+- Populate this mask by selectively adding segments that yield maximum gain in total attributions per area
+
+![NPTEl Logo](https://example.com/logo.png)
+
+<sup>5</sup>Kapishnikov et al, XRAI: Better Attributions Through Regions, ICCV 2019
+Vineeth N B (IIT-H)
+#6.4 Explaining NNs: Recent Methods
+10 / 25
+```
+
+# DL4CV_Week06_Part04.pdf - Page 35
+
+```markdown
+# Recent Variant of IG: XRAI<sup>5</sup>
+
+- Get attribution map given by IG
+- Over-segment the image
+- Start with an empty mask
+- Populate this mask by selectively adding segments that yield maximum gain in total attributions per area
+
+![Original Image](original_image.png) ![Integrated Gradients](ig_image.png) ![XRAI](xrai_image.png)
+
+**Original image (left), IG (center), XRAI (right)**
+
+<sup>5</sup>Kapishnikov et al, XRAI: Better Attributions Through Regions, ICCV 2019
+
+Vineeth N B (IIT-H)
+
+## 6.4 Explaining NNs: Recent Methods
+
+---
+
+**Footnotes:**
+- `<sup>5</sup>`Kapishnikov et al, XRAI: Better Attributions Through Regions, ICCV 2019
+- Vineeth N B (IIT-H)
+
+```
+
+# DL4CV_Week06_Part04.pdf - Page 36
+
+```markdown
+# Recent Variant of IG: XRAI<sup>6</sup>
+
+![Original Image](image1.png) ![3%](image2.png) ![10%](image3.png)
+
+![XRAI segments](image4.png) ![XRAI heatmap](image5.png) ![Top 10% segments](image6.png)
+
+<sup>6</sup>Kapishnikov et al, XRAI: Better Attributions Through Regions, ICCV 2019
+
+Vineeth N B (IIT-H)
+
+§6.4 Explaining NNs: Recent Methods
+
+---
+
+## Recent Variant of IG: XRAI<sup>6</sup>
+
+1. **Original Image**
+   ![Original Image](image1.png)
+
+2. **3%**
+   ![3%](image2.png)
+
+3. **10%**
+   ![10%](image3.png)
+
+![XRAI segments](image4.png)
+
+![XRAI heatmap](image5.png)
+
+![Top 10% segments](image6.png)
+
+<sup>6</sup>Kapishnikov et al, XRAI: Better Attributions Through Regions, ICCV 2019
+
+Vineeth N B (IIT-H)
+
+§6.4 Explaining NNs: Recent Methods
+
+---
+
+```
+
+# DL4CV_Week06_Part04.pdf - Page 37
+
+```markdown
+# LIME: Local Interpretable Model-agnostic Explanations
+
+- **Idea**: Approximate underlying model locally by an interpretable (typically linear) one
+
+![LIME Logo](image_url)
+
+---
+
+*Ribiero et al, Why Should I Trust You?: Explaining the Predictions of Any Classifier, KDD 2016*
+
+*Vineeth N B (IIT-H)*
+
+### 6.4 Explaining NNs: Recent Methods
+
+---
+
+12 / 25
+```
+
+**Note**: Replace `image_url` with the actual URL or placeholder for the image if it can't be directly captured from the OCR process.
+
+# DL4CV_Week06_Part04.pdf - Page 38
+
+```markdown
+# LIME: Local Interpretable Model-agnostic Explanations
+
+- **Idea**: Approximate underlying model locally by an interpretable (typically linear) one
+- **Interpretable models** are trained on small perturbations of original instance
+
+![NPTEL Logo](https://example.com/nptel_logo.png)
+
+*Ribiero et al, Why Should I Trust You?: Explaining the Predictions of Any Classifier, KDD 2016*
+
+*Vineeth N B (IIT-H) 56.4 Explaining NNs: Recent Methods*
+
+---
+
+* Slide 12 of 25
+```
+
+# DL4CV_Week06_Part04.pdf - Page 39
+
+```markdown
+# LIME: Local Interpretable Model-agnostic Explanations
+
+- **Idea:** Approximate underlying model locally by an interpretable (typically linear) one
+- **Interpretable models are trained on small perturbations of original instance**
+
+![Intuition for LIME](image_url)
+
+- **Blue/Pink background:** black box model’s decision function \( f \)
+
+*Ribiero et al, Why Should I Trust You?: Explaining the Predictions of Any Classifier, KDD 2016*
+
+*Vineeth N B (IIT-H) 56-4 Explaining NNs: Recent Methods*
+
+12 / 25
+```
+
+# DL4CV_Week06_Part04.pdf - Page 40
+
+```markdown
+# LIME: Local Interpretable Model-agnostic Explanations
+
+- **Idea**: Approximate underlying model locally by an interpretable (typically linear) one
+- Interpretable models are trained on small perturbations of original instance
+
+![Intuition for LIME](intuition-for-lime.png)
+
+- **Blue/Pink background**: black box model's decision function \( f \)
+- **Bold red cross**: instance being explained
+
+<sup>7</sup> Ribeiro et al, Why Should I Trust You?: Explaining the Predictions of Any Classifier, KDD 2016
+
+Vineeth N B (IIT-H) 56.4 Explaining NNs: Recent Methods 12 / 25
+```
+
+# DL4CV_Week06_Part04.pdf - Page 41
+
+```markdown
+# LIME: Local Interpretable Model-agnostic Explanations
+
+- **Idea**: Approximate underlying model locally by an interpretable (typically linear) one
+- Interpretable models are trained on small perturbations of original instance
+
+![Intuition for LIME](image_url)
+
+- **Blue/Pink background**: black box model’s decision function \( f \)
+- **Bold red cross**: instance being explained
+- **Dashed line**: learned explanation
+
+\*Ribiero et al, Why Should I Trust You?: Explaining the Predictions of Any Classifier, KDD 2016
+
+Vineeth N B (IIT-H)
+
+56.4 Explaining NNs: Recent Methods
+
+12 / 25
+```
+
+# DL4CV_Week06_Part04.pdf - Page 42
+
+```markdown
+# LIME: Local Interpretable Model-agnostic Explanations
+
+![LIME Diagram](image_url)
+
+- Given a point \( x \), let \( z' \in \mathcal{Z} \) be a point obtained by perturbing one dimension (or region) in \( x \); \( \mathcal{Z} \) is the set of perturbations.
+
+*Vineeth N B (IIT-H)*
+
+## 6.4 Explaining NNs: Recent Methods
+
+*Page 13 / 25*
+```
+
+# DL4CV_Week06_Part04.pdf - Page 43
+
+```markdown
+# LIME: Local Interpretable Model-agnostic Explanations
+
+![LIME Diagram](https://via.placeholder.com/150)
+
+- **Given a point \( x \)**, let \( z' \in \mathcal{Z} \) be a point obtained by perturbing one dimension (or region) in \( x \); \( \mathcal{Z} \) is the set of perturbations
+- \( \pi_{x}(z') \): proximity measure between instances \( z' \) and \( x \), e.g., \( \pi_{x}(z') = \exp(-D(x, z')^2 / \sigma^2) \)
+
+*Vineeth N B (IIT-H) §6.4 Explaining NNs: Recent Methods 13 / 25*
+```
+
+# DL4CV_Week06_Part04.pdf - Page 44
+
+# LIME: Local Interpretable Model-agnostic Explanations
+
+![LIME Diagram](image-url)
+
+- Given a point \( x \), let \( z' \in \mathcal{Z} \) be a point obtained by perturbing one dimension (or region) in \( x \); \( \mathcal{Z} \) is the set of perturbations
+- \( \pi_{x}(z') \): proximity measure between instances \( z' \) and \( x \), e.g., \( \pi_{x}(z') = \exp(-D(x, z')^2 / \sigma^2) \)
+- \( f: \mathbb{R}^d \rightarrow \mathbb{R} \): model being explained
+
+Vineeth N B (IIT-H) §6.4 Explaining NNs: Recent Methods 13 / 25
+
+# DL4CV_Week06_Part04.pdf - Page 45
+
+```markdown
+# LIME: Local Interpretable Model-agnostic Explanations
+
+![LIME Diagram](image_url)
+
+- **Given a point** \( x \), let \( z' \in \mathcal{Z} \) be a point obtained by perturbing one dimension (or region) in \( x \); \( \mathcal{Z} \) is the set of perturbations
+- \( \pi_{x}(z') \): proximity measure between instances \( z' \) and \( x \), e.g. \( \pi_{x}(z') = \exp(-D(x, z')^2 / \sigma^2) \)
+- \( f : \mathbb{R}^d \to \mathbb{R} \): model being explained
+- Build a sparse linear model, \( g(z') = w_g \cdot z' \)
+```
+
+# DL4CV_Week06_Part04.pdf - Page 46
+
+```markdown
+# LIME: Local Interpretable Model-agnostic Explanations
+
+![LIME Diagram](image-url)
+
+- Given a point \( x \), let \( z' \in \mathcal{Z} \) be a point obtained by perturbing one dimension (or region) in \( x \); \( \mathcal{Z} \) is the set of perturbations
+- \( \pi_{x}(z') \): proximity measure between instances \( z' \) and \( x \), e.g. \( \pi_{x}(z') = \exp(-D(x, z')^2 / \sigma^2) \)
+- \( f: \mathbb{R}^d \rightarrow \mathbb{R} \): model being explained
+- Build a sparse linear model, \( g(z') = w_g \cdot z' \)
+- Learn \( w_g \) to minimize:
+
+  \[
+  \mathcal{L}(f, g, \pi_x) = \sum_{z, z' \in \mathcal{Z}} \pi_x(z)(f(z) - g(z'))^2
+  \]
+
+*Vineeth N B (IIT-H) §6.4 Explaining NNs: Recent Methods 13 / 25*
+```
+
+# DL4CV_Week06_Part04.pdf - Page 47
+
+```markdown
+# LIME: Local Interpretable Model-agnostic Explanations
+
+![LIME Diagram](image_url)
+
+- Given a point \( x \), let \( z' \in \mathcal{Z} \) be a point obtained by perturbing one dimension (or region) in \( x \); \( \mathcal{Z} \) is the set of perturbations.
+- \( \pi_x(z') \): proximity measure between instances \( z' \) and \( x \), e.g., \( \pi_x(z') = \exp(-D(x, z')^2 / \sigma^2) \)
+- \( f : \mathbb{R}^d \rightarrow \mathbb{R} \): model being explained
+- Build a sparse linear model, \( g(z') = w_g \cdot z' \)
+- Learn \( w_g \) to minimize:
+
+  \[
+  \mathcal{L}(f, g, \pi_x) = \sum_{z, z' \in \mathcal{Z}} \pi_x(z)(f(z) - g(z'))^2
+  \]
+
+*Vineeth N B (IIT-H) § 6.4 Explaining NNs: Recent Methods 13 / 25*
+```
+
+# DL4CV_Week06_Part04.pdf - Page 48
+
+```markdown
+# LIME: Local Interpretable Model-agnostic Explanations
+
+![LIME](https://example.com/lime_image.png)
+
+## Vineeth N B (IIT-H)
+### §6.4 Explaining NNs: Recent Methods
+
+1. **Original Image**
+   ![Original Image](https://example.com/original_image.png)
+
+2. **Explaining Electric guitar**
+   ![Explaining Electric guitar](https://example.com/electric_guitar.png)
+   
+3. **Explaining Acoustic guitar**
+   ![Explaining Acoustic guitar](https://example.com/acoustic_guitar.png)
+   
+4. **Explaining Labrador**
+   ![Explaining Labrador](https://example.com/labrador.png)
+```
+
+# DL4CV_Week06_Part04.pdf - Page 49
+
+```markdown
+# LIME: Fidelity-Interpretability Trade-off
+
+## Notations:
+
+- $\mathcal{L}(f, g, \pi_x)$: measure of how unfaithful $g$ is in approximating $f$ in the locality defined by $\pi_x$
+
+![NPTEL Logo](image_url)
+
+Vineeth N B (IIT-H) §6.4 Explaining NNs: Recent Methods 15 / 25
+```
+
+# DL4CV_Week06_Part04.pdf - Page 50
+
+```markdown
+# LIME: Fidelity-Interpretability Trade-off
+
+## Notations:
+
+- $\mathcal{L}(f, g, \pi_x)$: measure of how unfaithful $g$ is in approximating $f$ in the locality defined by $\pi_x$
+- $g \in G$: model belonging to class of interpretable models, e.g. linear model $g(z') = w_g z'$
+
+![NPTEL](https://path-to-image.com/image.png)
+
+_Vineeth N B (IIT-H)_
+
+## Section 6.4 Explaining NNs: Recent Methods
+
+Page 15 / 25
+```
+
+# DL4CV_Week06_Part04.pdf - Page 51
+
+```markdown
+# LIME: Fidelity-Interpretability Trade-off
+
+## Notations:
+
+- $\mathcal{L}(f, g, \pi_x)$: measure of how unfaithful $g$ is in approximating $f$ in the locality defined by $\pi_x$
+- $g \in G$: model belonging to class of interpretable models, e.g. linear model $g(z') = w_g.z'$
+- $\Omega(g)$: Complexity of $g$ model
+
+![NPTEL Logo](https://example.com/logo.png)
+
+*Vineeth N B (IIT-H) §6.4 Explaining NNs: Recent Methods 15 / 25*
+```
+
+# DL4CV_Week06_Part04.pdf - Page 52
+
+```markdown
+# LIME: Fidelity-Interpretability Trade-off
+
+## Notations:
+
+- $\mathcal{L}(f, g, \pi_x)$: measure of how unfaithful $g$ is in approximating $f$ in the locality defined by $\pi_x$
+
+- $g \in G$: model belonging to class of interpretable models, e.g. linear model $g(z') = w_g . z'$
+
+- $\Omega(g)$: Complexity of $g$ model
+
+- Depth of trees in decision trees
+
+![NPTEL](https://example.com/nptel_logo.png)
+
+Vineeth N B (IIT-H) #6.4 Explaining NNs: Recent Methods 15 / 25
+```
+
+# DL4CV_Week06_Part04.pdf - Page 53
+
+# LIME: Fidelity-Interpretability Trade-off
+
+## Notations:
+
+- $\mathcal{L}(f, g, \pi_x)$: measure of how unfaithful $g$ is in approximating $f$ in the locality defined by $\pi_x$
+
+- $g \in G$: model belonging to class of interpretable models, e.g., linear model $g(z') = w_g.z'$
+
+- $\Omega(g)$: Complexity of $g$ model
+
+  - Depth of trees in decision trees
+  - Number of weights in linear models
+
+![NPTEL Logo](https://via.placeholder.com/150)
+
+*Vineeth N B (IIT-H)*
+
+*Section 6.4 Explaining NNs: Recent Methods*
+
+*Slide 15 / 25*
+
+# DL4CV_Week06_Part04.pdf - Page 54
+
+```markdown
+# LIME: Fidelity-Interpretability Trade-off
+
+## Notations:
+
+- $\mathcal{L}(f, g, \pi_x)$: measure of how unfaithful $g$ is in approximating $f$ in the locality defined by $\pi_x$
+- $g \in G$: model belonging to class of interpretable models, e.g., linear model $g(z') = w_g.z'$
+- $\Omega(g)$: Complexity of $g$ model
+  - Depth of trees in decision trees
+  - Number of weights in linear models
+  - For images, $\Omega(g) = 1[\|w_g\|_0 > K]$ where $K$ is limit on number of super-pixels
+
+![NPTEL](https://example.com/nptel-logo.png)
+
+*Vineeth N B (IIT-H) Section 6.4 Explaining NNs: Recent Methods Slide 15 / 25*
+```
+
+# DL4CV_Week06_Part04.pdf - Page 55
+
+# LIME: Fidelity-Interpretability Trade-off
+
+## Notations:
+
+- \(\mathcal{L}(f, g, \pi_x)\): measure of how unfaithful \(g\) is in approximating \(f\) in the locality defined by \(\pi_x\)
+- \(g \in G\): model belonging to class of interpretable models, e.g. linear model \(g(z') = w_g.z'\)
+- \(\Omega(g)\): Complexity of \(g\) model
+  - Depth of trees in decision trees
+  - Number of weights in linear models
+  - For images, \(\Omega(g) = 1 \left[ \left\| w_g \right\|_0 > K \right]\) where \(K\) is limit on number of super-pixels
+
+## LIME explanation obtained as a trade-off:
+
+\[ \varepsilon(x) = \operatorname*{arg\,min}_{g} \mathcal{L}(f, g, \pi_x) + \Omega(g) \]
+
+*Vineeth N B. (IIIT-H) §6.4 Explaining NNs: Recent Methods*
+
+# DL4CV_Week06_Part04.pdf - Page 56
+
+```markdown
+# SHAP (SHapley Additive exPlanations)
+
+- **Inspired from Shapley values in game theory**
+- **let** \( N \): Total number of features; \( v \): Value function that assigns a real number to any coalition \( S \subseteq N \); and \( \phi_v(i) \): Attribution score for feature \( i \)
+
+![NPTEL](https://example.com/nptel.png)
+
+[^8]: Lundberg et al., *A Unified Approach to Interpreting Model Predictions; NeurIPS 2017*
+
+Vineeth N B (IIT-H)
+
+## 6.4 Explaining NNs: Recent Methods
+
+16 / 25
+```
+
+# DL4CV_Week06_Part04.pdf - Page 57
+
+```markdown
+# SHAP
+
+- Inspired from Shapley values in game theory
+- let \( N \): Total number of features; \( v \): Value function that assigns a real number to any coalition \( S \subseteq N \); and \( \phi_v(i) \): Attribution score for feature \( i \)
+- **Attribution score**: Marginal contribution that player (in our case, feature) \( i \) makes upon joining the team, averaged over all orders in which team can be formed
+
+\[ \phi_v(i) = \sum_{S \subseteq \{1, 2, \ldots, N\} \setminus \{i\}} \frac{1}{\binom{N-1}{|S|}} |S|!(N - |S| - 1)! \left( v(S \cup i) - v(S) \right) \]
+
+    *Value of adding player \( i \) to a coalition*
+
+---
+
+Lundberg et al., *A Unified Approach to Interpreting Model Predictions; NeurIPS 2017*
+
+Vineeth N B (IIT-H) §6.4 Explaining NNs: Recent Methods
+
+---
+
+![NPTEL](https://example.com/image-url)
+
+Page 16 / 25
+```
+
+# DL4CV_Week06_Part04.pdf - Page 58
+
+```markdown
+# SHAP
+
+- **Inspired from Shapley values in game theory**
+
+- let \(N\): Total number of features; \(v\): Value function that assigns a real number to any coalition \(S \subseteq N\); and \(\phi_v(i)\): Attribution score for feature \(i\)
+
+- **Attribution score**: Marginal contribution that player (in our case, feature) \(i\) makes upon joining the team, averaged over all orders in which team can be formed
+
+\[
+\phi_v(i) = \sum_{S \subseteq \{1,2, \ldots, N\} \setminus \{i\}} \frac{1}{\binom{N-1}{|S|}} |S|!(N - |S| - 1)! \left( v(S \cup i) - v(S) \right)
+\]
+
+  - Value of adding player \(i\) to a coalition
+
+- With \(f(x)\) as model prediction, we marginalize over out-of-coalition features \(x_{\bar{S}}\) where \(\bar{S} = \{1,2, \ldots, N\} \setminus S\) to get:
+
+\[
+v(S) = \mathbb{E}_{p(x'|x_S)} [f(x_S \cup x_{\bar{S}})]
+\]
+
+- SHAP assumes features to be independent \(\implies v(S) = \mathbb{E}_{p(x')} [f(x_S \cup x_{\bar{S}})]\)
+
+*Lundberg et al, A Unified Approach to Interpreting Model Predictions; NeurIPS 2017*
+
+Vineeth N B ([IIT-H])
+
+**56-4 Explaining NNs: Recent Methods**
+
+---
+
+Page 16 / 25
+```
+
+# DL4CV_Week06_Part04.pdf - Page 59
+
+```markdown
+# DeepSHAP
+
+- **Assumes input features are independent of one another and explanation model is linear**
+
+---
+
+**Vineeth N B (IIT-H)**
+
+## 6.4 Explaining NNs: Recent Methods
+
+17 / 25
+
+---
+
+![Image](image_url)
+
+```
+
+# DL4CV_Week06_Part04.pdf - Page 61
+
+```markdown
+# DeepSHAP
+
+- **Assumes input features are independent of one another and explanation model is linear**
+- **Take distribution of baselines and compute DeepLIFT attribution for each input-baseline pair, then average resulting attributions per input example**
+
+![NPTEL Logo](https://via.placeholder.com/150)
+
+Vineeth N B (IIT-H) §6.4 Explaining NNs: Recent Methods 17 / 25
+```
+
+# DL4CV_Week06_Part04.pdf - Page 62
+
+```markdown
+# How to Evaluate Explanations?
+
+![NPTEL Logo](image-url)
+
+---
+
+## References
+
+- Melis et al. [Towards Robust Interpretability with Self-Explaining Neural Networks, NeurIPS 2018](#)
+- Petsiuk et al. [RISE: Randomized Input Sampling for Explanation of Black-box Models, BMVC 2018](#)
+
+---
+
+Vineeth N B (IIT-H)
+
+Section 6.4: Explaining NNs: Recent Methods
+
+---
+
+```
+
+# DL4CV_Week06_Part04.pdf - Page 63
+
+```markdown
+# How to Evaluate Explanations?
+
+- IoU of thresholded salient region with ground truth bounding box (if available)
+
+![NPTEL Logo](image_url_placeholder)
+
+---
+
+References:
+- Melis et al. *Towards Robust Interpretability with Self-Explaining Neural Networks*, NeurIPS 2018
+- Petsiuk et al. *RISE: Randomized Input Sampling for Explanation of Black-box Models*, BMVC 2018
+
+*Vineeth N B (IIT-H) §6.4 Explaining NNs: Recent Methods*
+
+---
+
+18 / 25
+```
+
+# DL4CV_Week06_Part04.pdf - Page 64
+
+```markdown
+# How to Evaluate Explanations?
+
+- IoU of thresholded salient region with ground truth bounding box (if available)
+- **Faithfulness**: Correlation between attribution scores and output differences on perturbation:
+
+  \[
+  F = \frac{\langle p(R, \Delta) \rangle_{p(x)}}{\text{ }}
+  \]
+
+  where \( R_i \) is relevance of pixel \( i \) and \(\Delta_i = f(x) - f(x_i)\) where \( x_i \) is image obtained after perturbing pixel \( i \)
+
+---
+
+\(^{9}\) Melis et al, Towards Robust Interpretability with Self-Explaining Neural Networks, NeurIPS 2018
+
+\(^{10}\) Petsiuk et al, RISE: Randomized Input Sampling for Explanation of Black-box Models, BMVC 2018
+
+Vineeth N B (IIT-H) #6.4 Explaining NNs: Recent Methods
+
+---
+
+![NPTEL](image_url_placeholder)
+```
+
+# DL4CV_Week06_Part04.pdf - Page 65
+
+```markdown
+# How to Evaluate Explanations?
+
+- **IoU of thresholded salient region with ground truth bounding box (if available)**
+- **Faithfulness**: Correlation between attribution scores and output differences on perturbation:
+
+  \[
+  F = \langle p(R, \Delta) \rangle_{p(x)}
+  \]
+
+  where \(R_i\) is relevance of pixel \(i\) and \(\Delta_i = f(x) - f(x_i)\) where \(x_i\) is image obtained after perturbing pixel \(i\)
+
+- **Causal Metric (Deletion Metric)**:
+  1. Delete pixels sequentially, most relevant first
+
+  *Melis et al, Towards Robust Interpretability with Self-Explaining Neural Networks, NeurIPS 2018*
+  *Petsiuk et al, RISE: Randomized Input Sampling for Explanation of Black-box Models, BMVC 2018*
+  *Vineeth N B (IIT-H)*
+  *56.4 Explaining NNs: Recent Methods*
+  *18 / 25*
+```
+
+# DL4CV_Week06_Part04.pdf - Page 66
+
+```markdown
+# How to Evaluate Explanations?
+
+- **IoU of thresholded salient region with ground truth bounding box (if available)**
+
+- **Faithfulness<sup>9</sup>**: Correlation between attribution scores and output differences on perturbation:
+
+  \[
+  F = \langle p(R, \Delta) \rangle_{p(x)}
+  \]
+
+  where \( R_i \) is relevance of pixel \( i \) and \( \Delta_i = f(x) - f(x_i) \) where \( x_i \) is image obtained after perturbing pixel \( i \)
+
+- **Causal Metric (Deletion Metric)<sup>10</sup>**:
+  1. Delete pixels sequentially, most relevant first
+  2. Compute AUC of network's output as function of perturbed inputs vs amount of perturbation; lesser AUC better
+
+<sup>9</sup> Melis et al. Towards Robust Interpretability with Self-Explaining Neural Networks, NeurIPS 2018
+
+<sup>10</sup> Petsiuk et al. RISE: Randomized Input Sampling for Explanation of Black-box Models, BMVC 2018
+
+*Vineeth N B (IIT-H)*
+
+# 6.4 Explaining NNs: Recent Methods
+
+18 / 25
+```
+
+# DL4CV_Week06_Part04.pdf - Page 67
+
+```markdown
+# How to Evaluate Explanations?
+
+- **IoU of thresholded salient region with ground truth bounding box (if available)**
+- **Faithfulness**: Correlation between attribution scores and output differences on perturbation:
+
+  \[
+  F = \langle p(R, \Delta) \rangle_{p(x)}
+  \]
+
+  where \(R_i\) is relevance of pixel \(i\) and \(\Delta_i = f(x) - f(x_i)\) where \(x_i\) is image obtained after perturbing pixel \(i\)
+
+- **Causal Metric (Deletion Metric)**:
+
+  1. Delete pixels sequentially, most relevant first
+  2. Compute AUC of network’s output as function of perturbed inputs vs amount of perturbation; lesser AUC better
+
+  Similarly, **Insertion Metric** inserts pixels sequentially, least relevant first; higher AUC better
+
+\[
+\* Melis et al., Towards Robust Interpretability with Self-Explaining Neural Networks, NeurIPS 2018
+\]
+\[
+\* Petsiuk et al., RISE: Randomized Input Sampling for Explanation of Black-box Models, BMVC 2018
+\]
+
+![Image](image_url)
+
+Vineeth N B (III-T-H)
+
+56-4 Explaining NNs: Recent Methods
+
+18 / 25
+```
+
+# DL4CV_Week06_Part04.pdf - Page 68
+
+```markdown
+# How to Evaluate Explanations?
+
+- **ROAR: RemOve And Retrain**
+
+  1. Get saliency map for each image in training data
+
+![NPTEL](https://path_to_image_url)
+
+---
+
+### References
+
+1. Hooker et al., *A Benchmark for Interpretability Methods in Deep Neural Networks*, NeurIPS 2019
+2. Adebayo et al., *Sanity Checks for Saliency Maps*, NeurIPS 2018
+3. Sundararajan et al., *Axiomatic Attribution for Deep Networks*, ICML 2017
+
+---
+
+Vineeth N B (IIT-H) #6.4 Explaining NNs: Recent Methods
+
+19 / 25
+```
+
+# DL4CV_Week06_Part04.pdf - Page 69
+
+```markdown
+# How to Evaluate Explanations?
+
+- **ROAR: RemOve And Retrain**
+
+  1. Get saliency map for each image in training data
+  2. Retrain the model after perturbing most relevant pixels
+
+![NPTEL](https://example.com/nptel_logo.png)
+
+---
+
+11. Hooker et al., *A Benchmark for Interpretability Methods in Deep Neural Networks*, NeurIPS 2019
+
+12. Adebayo et al., *Sanity Checks for Saliency Maps*, NeurIPS 2018
+
+13. Sundararajan et al., *Axiomatic Attribution for Deep Networks*, ICML 2017
+
+*Vineeth N B (IIT-H) §6.4 Explaining NNs: Recent Methods*
+
+*19 / 25*
+```
+
+# DL4CV_Week06_Part04.pdf - Page 70
+
+```markdown
+# How to Evaluate Explanations?
+
+- **ROAR: RemOve And Retrain**[^11].
+  1. Get saliency map for each image in training data
+  2. Retrain the model after perturbing most relevant pixels
+  3. New model should have large reduction in accuracy
+
+![NPTEL Logo](https://example.com/logo.png)
+
+[^11]: Hooker et al, A Benchmark for Interpretability Methods in Deep Neural Networks, NeurIPS 2019
+[^12]: Adebayo et al, Sanity Checks for Saliency Maps, NeurIPS 2018
+[^13]: Sundararajan et al, Axiomatic Attribution for Deep Networks, ICML 2017
+
+Vineeth N B (IIT-H) §6.4 Explaining NNs: Recent Methods
+
+19 / 25
+```
+
+# DL4CV_Week06_Part04.pdf - Page 71
+
+```markdown
+# How to Evaluate Explanations?
+
+- **ROAR: RemOve And Retrain**<sup>11</sup>.
+  1. Get saliency map for each image in training data
+  2. Retrain the model after perturbing most relevant pixels
+  3. New model should have large reduction in accuracy
+
+- **Sanity checks for saliency maps**<sup>12</sup>(Homework reading!).
+
+<div align="center">
+  ![NPTEL Logo](https://example.com/logo.png)
+</div>
+
+<sup>11</sup> Hooker et al, A Benchmark for Interpretability Methods in Deep Neural Networks, NeurIPS 2019
+<sup>12</sup> Adebayo et al, Sanity Checks for Saliency Maps, NeurIPS 2018
+<sup>13</sup> Sundararajan et al, Axiomatic Attribution for Deep Networks, ICML 2017
+
+*Vineeth N B (IIT-H) §6.4 Explaining NNs: Recent Methods*
+
+*Page 19 / 25*
+```
+
+# DL4CV_Week06_Part04.pdf - Page 72
+
+```markdown
+# How to Evaluate Explanations?
+
+- **ROAR: RemOve And Retrain**<sup>11</sup>
+  1. Get saliency map for each image in training data
+  2. Retrain the model after perturbing most relevant pixels
+  3. New model should have large reduction in accuracy
+
+- **Sanity checks for saliency maps**<sup>12</sup> (Homework reading!)
+- **Axioms for attribution**<sup>13</sup> (Homework reading!)
+
+![NPTEL Logo](image_url)
+
+<sup>11</sup> Hooker et al, A Benchmark for Interpretability Methods in Deep Neural Networks, NeurIPS 2019
+<sup>12</sup> Adebayo et al, Sanity Checks for Saliency Maps, NeurIPS 2018
+<sup>13</sup> Sundararajan et al, Axiomatic Attribution for Deep Networks, ICML 2017
+
+*Vineeth N B (IIT-H) §6.4 Explaining NNs: Recent Methods*
+```
+
+# DL4CV_Week06_Part04.pdf - Page 73
+
+```markdown
+# Summary
+
+- Both **DeepLIFT** and **Integrated Gradients** overcome saturating gradients problem; although DeepLIFT is usually faster, it violates **Implementation Invariance axiom**<sup>14</sup> (one of the axioms for homework reading!) due to use of discrete gradients
+- Smooth Integrated Gradients may be preferred over Integrated Gradients when sparsity is desired
+- For better interpretability in terms of visual coherence, **XRAI** is good choice whose mask is composed of relevant segments rather than pixels
+- **LIME** is model-agnostic and can be used for image, text as well as tabular data but is slow and appears inconsistent between runs
+- **SHAP** has strong game-theoretic background but needs approximations for real world experiments
+
+<sup>14</sup> Sundararajan et al, *Axiomatic Attribution for Deep Networks*, ICML 2017
+Vineeth N B (IIT-H) §6.4 Explaining NNs: Recent Methods
+```
+
+# DL4CV_Week06_Part04.pdf - Page 74
+
+```markdown
+# Homework
+
+## Reading
+
+- Go through list of axioms of attribution in Sundararajan et al, Axiomatic Attribution for Deep Networks, ICML 2017 and for each axiom try to identify the attribution algorithms that satisfy that
+- Go through proposed sanity checks and experimental findings in Adebayo et al, Sanity Checks for Saliency Maps, NeurIPS 2018
+
+## Programming
+
+- Play with Captum: A popular library for model interpretation by Facebook Open Source
+- Try visualizing your models through the lens of OpenAI Microscope
+
+---
+
+_Image: Placeholder image URL_
+
+---
+
+_Vineeth N B (IIT-H)_
+
+_§6.4 Explaining NNs: Recent Methods_
+
+_21 / 25_
+```
+
+# DL4CV_Week06_Part04.pdf - Page 75
+
+# Extra Resources
+
+- Molnar, *Interpretable machine learning: A Guide for Making Black Box Models Explainable*, 2019: [https://christophm.github.io/interpretable-ml-book/](https://christophm.github.io/interpretable-ml-book/)
+
+- For a collection of tutorials and software packages, please refer:
+  [https://github.com/jphall663/awesome-machine-learning-interpretability](https://github.com/jphall663/awesome-machine-learning-interpretability)
+
+![NPTEL](https://example.com/path_to_image)
+
+*Vineeth N B (IIT-H)*
+
+**§6.4 Explaining NNs: Recent Methods**
+
+*22 / 25*
+
+# DL4CV_Week06_Part04.pdf - Page 76
+
+```markdown
+# References
+
+- Karen Simonyan, Andrea Vedaldi, and Andrew Zisserman. **"Deep Inside Convolutional Networks: Visualising Image Classification Models and Saliency Maps"**. In: *2nd International Conference on Learning Representations, ICLR 2014, Banff, AB, Canada, April 14-16, 2014, Workshop Track Proceedings*. Ed. by Yoshua Bengio and Yann LeCun. 2014.
+- Marco Tulio Ribeiro, Sameer Singh, and Carlos Guestrin. **"'Why Should I Trust You?': Explaining the Predictions of Any Classifier"**. In: *Proceedings of the 22nd ACM SIGKDD International Conference on Knowledge Discovery and Data Mining, San Francisco, CA, USA, August 13-17, 2016*. 2016, pp. 1135–1144.
+- Scott M Lundberg and Su-In Lee. **"A Unified Approach to Interpreting Model Predictions"**. In: *Advances in Neural Information Processing Systems 30*. Ed. by I. Guyon et al. Curran Associates, Inc., 2017, pp. 4765–4774.
+
+---
+
+*Vineeth N B (IIT-H) §6.4 Explaining NNs: Recent Methods 23 / 25*
+```
+
+# DL4CV_Week06_Part04.pdf - Page 77
+
+# References II
+
+- **Avanti Shrikumar, Peyton Greenside, and Anshul Kundaje.** "Learning Important Features Through Propagating Activation Differences". In: *Proceedings of the 34th International Conference on Machine Learning*. Ed. by Doina Precup and Yee Whye Teh. Vol. 70. Proceedings of Machine Learning Research. International Convention Centre, Sydney, Australia: PMLR, 2017, pp. 3145–3153.
+- **D. Smilkov et al.** "SmoothGrad: removing noise by adding noise". In: *ICML workshop on visualization for deep learning* (June 2017). arXiv: 1706.03825 [cs.LG].
+- **Mukund Sundararajan, Ankur Taly, and Qiqi Yan.** "Axiomatic Attribution for Deep Networks". In: *Proceedings of the 34th International Conference on Machine Learning*. Ed. by Doina Precup and Yee Whye Teh. Vol. 70. Proceedings of Machine Learning Research. International Convention Centre, Sydney, Australia: PMLR, 2017, pp. 3319–3328.
+- **Julius Adebayo et al.** "Sanity Checks for Saliency Maps". In: *Advances in Neural Information Processing Systems 31*. Ed. by S. Bengio et al. Curran Associates, Inc., 2018, pp. 9505–9515.
+
+---
+
+*Vineeth N B (IIT-H) §6.4 Explaining NNs: Recent Methods*
+
+24 / 25
+
+# DL4CV_Week06_Part04.pdf - Page 78
+
+```markdown
+# References III
+
+- **David Alvarez Melis and Tommi Jaakkola.** "Towards Robust Interpretability with Self-Explaining Neural Networks". In: *Advances in Neural Information Processing Systems 31*. Ed. by S. Bengio et al. Curran Associates, Inc., 2018, pp. 7775–7784.
+
+- **Vitali Petsiuk, Abir Das, and Kate Saenko.** "RISE: Randomized Input Sampling for Explanation of Black-box Models". In: *Proceedings of the British Machine Vision Conference (BMVC)*. 2018.
+
+- **Sara Hooker et al.** "A Benchmark for Interpretability Methods in Deep Neural Networks". In: *Advances in Neural Information Processing Systems 32*. Ed. by H. Wallach et al. Curran Associates, Inc., 2019, pp. 9737–9748.
+
+- **Andrei Kapishnikov et al.** "XRAI: Better Attributions Through Regions". In: *Proceedings of the IEEE/CVF International Conference on Computer Vision (ICCV)*. 2019.
+
+- [http://www.unofficialgoogledatascience.com/2017/03/attributing-deep-networks-prediction-to.html](http://www.unofficialgoogledatascience.com/2017/03/attributing-deep-networks-prediction-to.html)
+
+*Vineeth N B (IIT-H)*
+
+*6.4 Explaining NNs: Recent Methods*
+
+*25 / 25*
+```
+

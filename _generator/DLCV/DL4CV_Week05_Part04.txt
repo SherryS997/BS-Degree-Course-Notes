@@ -1,0 +1,938 @@
+# DL4CV_Week05_Part04.pdf - Page 1
+
+```markdown
+# Deep Learning for Computer Vision
+
+## Recent CNN Architectures
+
+**Vineeth N Balasubramanian**
+
+Department of Computer Science and Engineering
+Indian Institute of Technology, Hyderabad
+
+![IIT Hyderabad Logo](https://www.iith.ac.in/sites/default/files/iith-logo.png)
+
+---
+
+Vineeth N B (IIT-H)
+
+**§5.4 Recent CNN Architectures**
+
+---
+
+### Slide 1 of 20
+
+```
+
+# DL4CV_Week05_Part04.pdf - Page 2
+
+```markdown
+# Recent CNN Architectures
+
+We have already seen some deep convolutional architectures, including a very deep network that uses residual connections. Here we consider some other recent CNN architectures:
+
+- Wide Residual Networks (WideResNet)
+- Aggregated Residual Transformations for Deep Neural Networks (ResNeXt)
+- Deep Networks with Stochastic Depth
+- Densely Connected Convolutional Networks (DenseNets)
+- More recent: MobileNet, EfficientNet, SENet
+
+![Diagram Placeholder](image_url)
+
+*Vineeth N B (IIIT-H) §5.4 Recent CNN Architectures 2 / 20*
+```
+
+# DL4CV_Week05_Part04.pdf - Page 3
+
+```markdown
+# Identity Mappings in Deep Residual Networks<sup>1</sup>
+
+- Improved ResNet block design from the creators of ResNet
+- Switches up the order of activations in the residual block
+- Creates a more direct path for propagating information through the network
+- Gives better performance
+
+![Original Residual Unit](image-url) ![Improved Residual Unit](image-url)
+
+**Credit:** Fei-Fei Li, CS231n, Stanford Univ
+
+<sup>1</sup> He et al., *Identity Mappings in Deep Residual Networks*, ECCV 2016
+
+*Vineeth N B (IIIT-H)*
+
+*§5.4 Recent CNN Architectures*
+
+*3 / 20*
+```
+
+# DL4CV_Week05_Part04.pdf - Page 4
+
+```markdown
+# Wide Residual Networks<sup>2</sup>
+
+- **Builds on ResNets**
+- **Argues that residuals are the important factor and not depth**
+- **Uses wider residual blocks (F × k filters instead of F filters in each layer)**
+- **50-layer WideResNet outperforms 152-layer original ResNet**
+- **Increasing width instead of depth computationally more efficient (parallelizable)**
+
+![Basic residual block](image1.png) ![Wide residual block](image2.png)
+
+**Basic residual block**
+```
+3x3 conv, F
+3x3 conv, F
+```
+
+**Wide residual block**
+```
+3x3 conv, F x k
+3x3 conv, F x k
+```
+
+_Credit: Fei-Fei Li, CS231n, Stanford Univ_
+
+<sup>2</sup>Zagoruyko and Komodakis, Wide Residual Networks, BMVC 2016
+
+_Vineeth N B (IIT-H)_
+
+## Recent CNN Architectures
+
+**Section 5.4 Recent CNN Architectures**
+
+---
+
+4 / 20
+```
+
+# DL4CV_Week05_Part04.pdf - Page 5
+
+```markdown
+# Aggregated Residual Transformations (ResNeXt)^3
+
+- Also from creators of ResNet
+- Increases width of residual block through multiple parallel pathways (called cardinality)
+- Parallel pathways similar in spirit to Inception module
+
+![Aggregated Residual Transformations Diagram](image-url)
+
+**Credit:** Fei-Fei Li, CS231n, Stanford Univ
+
+---
+
+^3 Xie et al, Aggregated Residual Transformations for Deep Neural Networks, CVPR 2017
+
+*Vineeth N B (IIT-H)*
+
+## Section 5.4 Recent CNN Architectures
+```
+
+# DL4CV_Week05_Part04.pdf - Page 6
+
+```markdown
+# Deep Networks with Stochastic Depth
+
+- Think DropOut of residual blocks!
+- Randomly drop a subset of layers during each training pass
+- Bypass with identity function
+- **Motivation**: Reduce vanishing gradients and training time through short networks during training, also an added regularizer
+- Use full deep network at test time
+
+*Credit: Fei-Fei Li, CS231n, Stanford Univ*
+
+---
+
+4 Huang et al., Deep Networks with Stochastic Depth, ECCV 2016
+
+Vineeth N B (III-T-H)
+
+## Recent CNN Architectures
+
+---
+
+![Diagram Placeholder](https://via.placeholder.com/500)
+
+```math
+```
+
+```markdown
+```
+
+# DL4CV_Week05_Part04.pdf - Page 7
+
+```markdown
+# Densely Connected Convolutional Networks (DenseNets)
+
+- **Dense blocks** where each layer is connected to every other layer in feedforward fashion
+- Alleviates vanishing gradient, strengthens feature propagation, encourages feature reuse
+- Showed that shallow 50-layer network can outperform deeper 152-layer ResNet
+- Quite popularly in use today for image classification problems
+
+![Dense Block Diagram](image_url)
+
+## Dense Block
+Input
+```
+Conv -> Concat -> 1x1 conv, 64
+Conv -> Concat -> 1x1 conv, 64
+Conv -> Concat -> 1x1 conv, 64
+```
+
+## Network Architecture
+```
+Input -> Conv -> Pool -> Dense Block 1 -> Conv -> Pool -> Dense Block 2 -> Conv -> Pool -> Dense Block 3 -> Conv -> Pool -> Dense Block 3 -> FC -> Softmax
+```
+
+5Huang et al, Densely Connected Convolutional Networks, CVPR 2017
+
+Vineeth N B (III-H)
+
+§5.4 Recent CNN Architectures
+
+7 / 20
+```
+
+# DL4CV_Week05_Part04.pdf - Page 8
+
+```markdown
+# MobileNets: Efficient Convolutional Neural Networks for Mobile Applications
+
+## A class of efficient models for mobile and embedded vision applications
+
+## What are desirable properties of a network for use in small devices?
+
+---
+
+- **Source**: Howard et al., *MobileNets: Efficient Convolutional Neural Networks for Mobile Applications*, 2017
+- **Author**: Vineeth N B (IIT-H)
+- **Section**: §5.4 Recent CNN Architectures
+- **Slide Number**: 8 / 20
+
+![NPTEL Logo](image_url_placeholder)
+
+```
+
+# DL4CV_Week05_Part04.pdf - Page 9
+
+```markdown
+# MobileNets: Efficient Convolutional Neural Networks for Mobile Applications
+
+- A class of efficient models for mobile and embedded vision applications
+
+## What are desirable properties of a network for use in small devices?
+
+- Low latency
+- Low power consumption
+- Small model size (devices are low memory)
+- Sufficiently high accuracy
+
+## MobileNets
+
+*MobileNets* are small, low latency networks which are trained directly. A complementary approach to building efficient networks is compressing pre-trained networks.
+
+---
+
+*Source: Howard et al., MobileNets: Efficient Convolutional Neural Networks for Mobile Applications, 2017*
+
+*Vineeth N B (IIT-H)*
+
+*Section 5.4 Recent CNN Architectures*
+
+*Slide 8 of 20*
+```
+
+# DL4CV_Week05_Part04.pdf - Page 10
+
+# Key Ingredient: Depthwise Separable Convolutions
+
+- MobileNets primarily built using **depthwise separable convolutions (DSC)**
+- DSC replaces standard convolutions with depthwise convolution and 1 x 1 convolution
+- DSC applies a single filter to each input channel; how does this help over normal convolution?
+
+![Depthwise Convolution](image_url)
+
+- Standard Convolution Filters
+  - M
+  - DK
+  - 1
+  - DK
+  - N
+
+- Depthwise Convolutional Filters
+  - 1
+  - DK
+  - M
+
+- Final Output
+  - M
+  - 1
+  - N
+
+Vineeth N B (IIIT-H)
+§5.4 Recent CNN Architectures
+9 / 20
+
+*Image placeholder is used for the diagram as OCR may not be able to capture it directly.*
+
+# DL4CV_Week05_Part04.pdf - Page 11
+
+```markdown
+# Depthwise Separable Convolutions
+
+- Let input have size \(D_f \times D_f \times M\) and output feature map (after passing input through conv layer) has \(D_f \times D_f \times N\) size. Assume padded convolution. Let width of the square kernel in conv layer be \(k\).
+
+![NPTEL](https://example.com/nptel_logo.png)
+
+*Vineeth N B (IIT-H) §5.4 Recent CNN Architectures*
+
+10 / 20
+```
+
+# DL4CV_Week05_Part04.pdf - Page 12
+
+```markdown
+# Depthwise Separable Convolutions
+
+- Let input have size $D_f \times D_f \times M$ and output feature map (after passing input through conv layer) has $D_f \times D_f \times N$ size. Assume padded convolution. Let width of the square kernel in conv layer be $k$:
+
+- A standard convolutional layer would have $k \times k \times M \times N$ parameters and a computational cost of $k \cdot k \cdot M \cdot N \cdot D_f \cdot D_f$
+
+![NPTEL Logo](https://example.com/logo.png)
+
+Vineeth N B (IIT-H) §5.4 Recent CNN Architectures
+
+10 / 20
+```
+
+# DL4CV_Week05_Part04.pdf - Page 13
+
+```markdown
+# Depthwise Separable Convolutions
+
+- Let input have size $D_f \times D_f \times M$ and output feature map (after passing input through conv layer) has $D_f \times D_f \times N$ size. Assume padded convolution. Let width of the square kernel in conv layer be $k$:
+
+- A standard convolutional layer would have $k \times k \times M \times N$ parameters and a computational cost of $k \cdot k \cdot M \cdot N \cdot D_f \cdot D_f$.
+
+- A depthwise separable conv layer factorizes the above into:
+  - **Depthwise convolutions**, having $k \times k \times M$ parameters and a cost of $k \cdot k \cdot M \cdot D_f \cdot D_f$.
+  - **Pointwise convolutions**, having $1 \times 1 \times M \times N$ parameters and cost of $M \cdot N \cdot D_f \cdot D_f$.
+
+- By what fraction is computation reduced when DSC is used?
+```
+
+# DL4CV_Week05_Part04.pdf - Page 14
+
+```markdown
+# Depthwise Separable Convolutions
+
+- Let input have size \(D_f \times D_f \times M\) and output feature map (after passing input through conv layer) has \(D_f \times D_f \times N\) size. Assume padded convolution. Let width of the square kernel in conv layer be \(k\):
+  - A standard convolutional layer would have \(k \times k \times M \times N\) parameters and a computational cost of \(k \cdot k \cdot M \cdot N \cdot D_f \cdot D_f\).
+  - A depthwise separable conv layer factorizes the above into:
+    - **Depthwise convolutions**, having \(k \times k \times M\) parameters and a cost of \(k \cdot k \cdot M \cdot D_f \cdot D_f\).
+    - **Pointwise convolutions**, having \(1 \times 1 \times M \times N\) parameters and cost of \(M \cdot N \cdot D_f \cdot D_f\).
+
+- By what fraction is computation reduced when DSC is used? **Homework!**
+
+- Depthwise convolutions filter feature maps channelwise, and pointwise convolutions combine feature maps across channels; standard convolutions do these operations together.
+```
+
+# DL4CV_Week05_Part04.pdf - Page 15
+
+```markdown
+# MobileNet: Architecture and Hyperparameters
+
+- **MobileNet** built of many depthwise convolutions and pointwise convolutions, each of which is followed by BatchNorm and ReLU
+
+- To obtain faster and smaller models, two more hyperparameters are considered:
+  - **Width multiplier**, α, controls number of channels, making the number of input channels as αM and number of output channels as αN for all layers
+  - **Resolution multiplier**, ρ, scales input image to a fraction of its size
+
+| 3x3 Conv | 3x3 Depthwise Conv |
+| --- | --- |
+| BN | BN |
+| ReLU | ReLU |
+| 1x1 Conv |
+| BN |
+| ReLU |
+
+**Left:** Standard conv layer with batchnorm and ReLU. **Right:** Depthwise Separable convolutions with
+
+*Vineeth N B (IIIT-H)*
+
+§5.4 Recent CNN Architectures
+
+11 / 20
+```
+
+# DL4CV_Week05_Part04.pdf - Page 16
+
+```markdown
+# EfficientNet: Rethinking Model Scaling for Convolutional Neural Networks
+
+![EfficientNet Diagram](image-url)
+
+**Scaling up a Baseline model with different network width (w), depth (d) and input resolution (r). Bigged networks with larger width, height and input resolution perform better but accuracy gain saturates.**
+
+- Conventional wisdom suggests that scaling up CNN architectures would lead to better accuracy i.e deeper and wider networks perform better in general
+- Explores a principled way to scale up a CNN to obtain better accuracy and efficiency
+
+_Tan and Le, EfficientNet: Rethinking Model Scaling for Convolutional Neural Networks, ICML 2019_
+
+Vineeth N B (IIT-H)
+
+§5.4 Recent CNN Architectures
+
+---
+
+**ImageNet Top-1 Accuracy (%)**
+
+- **w=1.0**
+- **w=1.4**
+- **w=1.8**
+- **w=2.0**
+- **w=3.8**
+- **w=5.0**
+
+**FLOPS (Billions)**
+
+| w | 1.0 | 1.4 | 1.8 | 2.0 | 3.8 | 5.0 |
+|---|----|----|----|----|----|----|
+| Accuracy | X | X | X | X | X | X |
+
+---
+
+**ImageNet Top-1 Accuracy (%)**
+
+- **d=1.0**
+- **d=2.0**
+- **d=3.4**
+- **d=4.0**
+
+**FLOPS (Billions)**
+
+| d | 1.0 | 2.0 | 3.4 | 4.0 |
+|---|----|----|----|----|
+| Accuracy | X | X | X | X |
+
+---
+
+**ImageNet Top-1 Accuracy (%)**
+
+- **r=1.0**
+- **r=1.3**
+- **r=1.5**
+- **r=1.8**
+- **r=2.0**
+- **r=2.4**
+
+**FLOPS (Billions)**
+
+| r | 1.0 | 1.3 | 1.5 | 1.8 | 2.0 | 2.4 |
+|---|----|----|----|----|----|----|
+| Accuracy | X | X | X | X | X | X |
+
+```
+
+# DL4CV_Week05_Part04.pdf - Page 17
+
+```markdown
+# EfficientNet
+
+- Makes two observations:
+  - Scaling up any dimension (w, d, r) independently improves accuracy, but return diminishes for bigger models
+  - For better accuracy, critical to balance all dimensions during scaling; Intuitively, does it make sense to have deeper and wider models for larger input dimensions?
+
+![NPTEL](https://via.placeholder.com/150)
+
+*Vineeth N B (IIT-H)*
+
+§5.4 Recent CNN Architectures
+
+13 / 20
+```
+
+# DL4CV_Week05_Part04.pdf - Page 18
+
+```markdown
+# EfficientNet
+
+- Makes two observations:
+  - Scaling up any dimension (w, d, r) independently improves accuracy, but return diminishes for bigger models
+  - For better accuracy, critical to balance all dimensions during scaling; Intuitively, does it make sense to have deeper and wider models for larger input dimensions?
+
+- Based on these observations, a new **compound scaling method** is proposed
+
+- A compound coefficient φ uniformly scales network width, depth and resolution
+
+  ```math
+  \text{depth}: d = \alpha^\phi
+  \text{width}: w = \beta^\phi
+  \text{resolution}: r = \gamma^\phi
+  ```
+
+  ```math
+  \text{s.t } \alpha \cdot \beta^2 \cdot \gamma^2 \approx 2
+  ```
+
+  ```math
+  \alpha \geq 1, \beta \geq 1, \gamma \geq 1
+  ```
+
+  where \(\alpha, \beta, \gamma\) are constants determined by a small grid search
+
+*Vineeth N B (IIT-H)*
+
+*§5.4 Recent CNN Architectures*
+
+*13 / 20*
+```
+
+# DL4CV_Week05_Part04.pdf - Page 19
+
+```markdown
+# EfficientNet
+
+![FLOPS vs. ImageNet Accuracy](image_url)
+
+- **For any new compound coefficient** φ, total FLOPS will approximately increase by 2^φ. Why?
+
+## FLOPS vs. ImageNet Accuracy
+
+![Diagram](image_url)
+
+**Vineeth N B (IIIT-H)**
+
+### §5.4 Recent CNN Architectures
+
+---
+
+**Note:** "image_url" is a placeholder for the actual image URLs or paths that should be included in the markdown for the diagrams and charts mentioned.
+
+```markdown
+# EfficientNet
+
+![FLOPS vs. ImageNet Accuracy](image_url)
+
+- **For any new compound coefficient** φ, total FLOPS will approximately increase by 2^φ. Why?
+
+## FLOPS vs. ImageNet Accuracy
+
+![Diagram](image_url)
+
+**Vineeth N B (IIIT-H)**
+
+### §5.4 Recent CNN Architectures
+
+---
+
+**Note:** "image_url" is a placeholder for the actual image URLs or paths that should be included in the markdown for the diagrams and charts mentioned.
+```
+
+# DL4CV_Week05_Part04.pdf - Page 20
+
+```markdown
+# EfficientNet
+
+![FLOPS vs. ImageNet Accuracy Graph](image_url)
+
+## Homework
+
+- **For any new compound coefficient** \(\phi\)**, total FLOPS will approximately increase by \(2^\phi\). Why?**
+
+### Explanation
+
+- Fixing \(\phi = 1\) and assuming double the amount of resources, a grid search is performed on \(\alpha, \beta, \gamma\) for chosen baseline network.
+- For every available computational budget, \(\phi\) is calculated and model is scaled accordingly.
+
+---
+
+### Recent CNN Architectures
+
+**Vineeth N B (IIIT-H)**
+
+**§5.4 Recent CNN Architectures**
+
+**14 / 20**
+```
+
+### Notes
+- Replace `image_url` with the actual URL or filename of the image if available.
+- Ensure that the math notations, such as \(\phi\), are correctly rendered.
+- Check the accuracy of the content against the provided image to ensure no important details are missed.
+
+# DL4CV_Week05_Part04.pdf - Page 21
+
+```markdown
+# EfficientNet
+
+## FLOPS vs. ImageNet Accuracy
+
+![FLOPS vs. ImageNet Accuracy Graph](imageurl.png)
+
+- For any new compound coefficient $\phi$, total FLOPS will approximately increase by $2^{\phi}$. Why?
+  - **Homework!**
+  - Fixing $\phi = 1$ and assuming double the amount of resources, a grid search is performed on $\alpha, \beta, \gamma$ for chosen baseline network.
+  - For every available computational budget, $\phi$ is calculated and model is scaled accordingly.
+  - Baseline model is obtained by performing **Neural Architecture Search** (an advanced topic we will see later in this course); scaling up this baseline leads to a family of models called EfficientNets.
+
+_Vineeth N B (IIIT-H)_
+
+## §5.4 Recent CNN Architectures
+
+Page 14 / 20
+```
+
+# DL4CV_Week05_Part04.pdf - Page 22
+
+```markdown
+# Squeeze-and-Excitation Networks (SENet)
+
+- **Motivation**: Improve quality of representations produced by network by explicitly modeling interdependencies between channels of its convolutional features
+
+- Proposes a novel architectural unit termed **Squeeze-and-Excitation (SE) block**:
+  - **Squeeze operation**: embeds global information
+  - **Excitation operation**: re-calibrates feature maps channel-wise
+
+![NPTEL](NPTEL)
+
+8Hu et al., Squeeze-and-Excitation Networks, CVPR 2018
+
+Vineeth N B (IIT-H)
+
+§5.4 Recent CNN Architectures
+
+15 / 20
+```
+
+# DL4CV_Week05_Part04.pdf - Page 23
+
+```markdown
+# Squeeze-and-Excitation Networks (SENet<sup>8</sup>)
+
+- **Motivation:** Improve quality of representations produced by network by explicitly modeling interdependencies between channels of its convolutional features
+
+- Proposes a novel architectural unit termed **Squeeze-and-Excitation (SE) block:**
+  - **Squeeze operation:** embeds global information
+  - **Excitation operation:** re-calibrates feature maps channel-wise
+
+- If \( F_{tr} \) is a transformation mapping input \( X \in \mathbb{R}^{H' \times W' \times C'} \) to output feature maps \( U \in \mathbb{R}^{H \times W \times C} \), e.g. a convolution, then SE block squeezes and recalibrates \( U \)
+
+---
+
+<sup>8</sup> Hu et al., Squeeze-and-Excitation Networks, CVPR 2018
+
+Vineeth N B (IIT-H)
+
+§5.4 Recent CNN Architectures
+
+15 / 20
+```
+
+# DL4CV_Week05_Part04.pdf - Page 24
+
+```markdown
+# SENet: Squeeze-and-Excitation Block
+
+![SENet Diagram](image_url_here)
+
+- **Learn to reweigh feature maps (using global information) in a way that emphasises informative features and inhibits less useful ones.**
+- $F_{sq}$, **the squeeze function**, is **channel-wise global average pooling** - globally aggregate feature maps spatially
+
+## Diagram Explanation
+
+### Input Tensor
+
+- **X**
+  - Dimensions: $H' \times W' \times C'$
+
+### Intermediate Tensor
+
+- **U**
+  - Dimensions: $H \times W \times C$
+
+### Squeeze Function
+
+- **$F_{sq}(\cdot)$**
+  - Transforms the input tensor $U$ into a vector of size $1 \times 1 \times C$
+
+### Excitation Function
+
+- **$F_{ex}(\cdot, W)$**
+  - A function applied to the output of the squeeze function to generate a weighting vector
+
+### Scale Function
+
+- **$F_{scale}(\cdot)$**
+  - Scales the original tensor $U$ using the weighting vector from the excitation function to produce the final output tensor $\hat{X}$
+
+## formula for Squeeze Function
+
+$$
+F_{sq}(x) = \frac{1}{H \times W} \sum_{i=1}^{H} \sum_{j=1}^{W} x_{i,j}
+$$
+
+## Formula for Excitation Function
+
+$$
+F_{ex}(z, W) = \sigma(W_2 \cdot \delta(W_1 \cdot z))
+$$
+
+Where:
+- $W_1$ is a weight matrix applied to the squeezed vector $z$
+- $\delta$ is a ReLU activation function
+- $W_2$ is a weight matrix applied to the ReLU output
+- $\sigma$ is a sigmoid activation function
+
+## Output Tensor
+
+- **$\hat{X}$**
+  - Dimensions: $H \times W \times C$
+
+## References
+
+- Vineeth N B (IIIT-H)
+- §5.4 Recent CNN Architectures
+- Slide 16 / 20
+```
+
+# DL4CV_Week05_Part04.pdf - Page 25
+
+```markdown
+# SENet: Squeeze-and-Excitation Block
+
+```markdown
+- **X**
+
+  ```markdown
+  ```
+  | **H'** | **W'** | **C'** |
+
+  ```markdown
+  ```
+
+  - **U**
+
+  ```markdown
+  ```
+  | **H** | **W** | **C** |
+
+  ```markdown
+  ```
+
+  - **F_sq** (\(\cdot\)): the **squeeze function**, is channel-wise **global average pooling** - globally aggregate feature maps spatially
+
+  - **F_ex** (\(\cdot, \mathbf{W}\)): the **excitation function**, learns the relationships between channels, and outputs channelwise activations
+
+  - **F_scale** (\(\cdot, \cdot\)): scales the features
+
+  - **\(\tilde{\mathbf{X}}\)**
+
+  ```markdown
+  ```
+  | **H** | **W** | **C** |
+
+  ```markdown
+  ```
+
+  - Learns to reweigh feature maps (using global information) in a way that emphasises informative features and inhibits less useful ones.
+
+  Vineeth N B. (IIT-H) §5.4 Recent CNN Architectures 16 / 20
+```
+
+```
+
+# DL4CV_Week05_Part04.pdf - Page 26
+
+```markdown
+# SENet: Squeeze-and-Excitation Block
+
+![SENet Diagram](https://via.placeholder.com/600x400?text=SENet+Diagram)
+
+- **X**: Input tensor with dimensions \(H' \times W' \times C'\)
+- **U**: Intermediate tensor with dimensions \(H \times W \times C\)
+- **F_{ir}**: Intermediate operation transforming \(X\) to \(U\)
+- **F_{sq}(\cdot)$: Squeeze function, performs channel-wise global average pooling
+- **F_{ex}(\cdot, \mathbf{w})$: Excitation function, learns relationships between channels and outputs channel-wise activations
+- **F_{scale}(\cdot, \cdot)$: Scaling function, performs channel-wise multiplication of feature maps \(U\) with learned activations
+- **X̃**: Output tensor with dimensions \(H \times W \times C\)
+
+## Key Processes
+
+- Learns to reweigh feature maps (using global information) in a way that emphasises informative features and inhibits less useful ones.
+- **F_{sq}(\cdot)$, the squeeze function, is channel-wise global average pooling - globally aggregate feature maps spatially
+- **F_{ex}(\cdot, \mathbf{w})$, the excitation function, learns the relationships between channels, and outputs channelwise activations
+- **F_{scale}(\cdot, \cdot)$ performs channelwise multiplication of feature maps \(U\) with learned activations
+
+_Vineeth N B (IIIT-H)_
+_§5.4 Recent CNN Architectures_
+_16 / 20_
+```
+
+# DL4CV_Week05_Part04.pdf - Page 27
+
+```markdown
+# Squeeze-and-Excitation Block in ResNet
+
+![Squeeze-and-Excitation Block](image_url)
+
+- **Residual**: $H \times W \times C$
+- **Global pooling**: $1 \times 1 \times C$
+- **FC**: $1 \times 1 \times \frac{C}{r}$
+- **ReLU**: $1 \times 1 \times \frac{C}{r}$
+- **FC**: $1 \times 1 \times C$
+- **Sigmoid**: $1 \times 1 \times C$
+  
+**Equation**:
+$$
+X' = X + \text{Scale}
+$$
+where Scale is the output after the Squeeze-and-Excitation block.
+
+**SE-ResNet Module**:
+$$
+\text{Scale} = \text{FC}(X_{\text{global}}) \times X
+$$
+
+**Note**: $r$ is a hyperparameter that controls the size of the hidden layer.
+
+---
+
+**Source**: Vineeth N B (IIIT-H) §5.4 Recent CNN Architectures 17 / 20
+```
+
+# DL4CV_Week05_Part04.pdf - Page 28
+
+```markdown
+# Squeeze-and-Excitation Block in ResNet
+
+![Squeeze-and-Excitation Block](https://via.placeholder.com/150)
+
+## Components
+
+- **Input**: \(X\) with dimensions \(H \times W \times C\)
+  
+## Residual Path
+- **Residual**: 
+  - Directly outputs the input \(X\) with dimensions \(H \times W \times C\)
+
+## Squeeze-and-Excitation Path
+
+1. **Global pooling**:
+   - Dimensionality: \(1 \times 1 \times C\)
+
+2. **Fully Connected (FC)**:
+   - Dimensionality: \(1 \times 1 \times \frac{C}{r}\)
+
+3. **ReLU Activation**:
+   - Dimensionality: \(1 \times 1 \times \frac{C}{r}\)
+
+4. **Fully Connected (FC)**:
+   - Dimensionality: \(1 \times 1 \times C\)
+
+5. **Sigmoid Activation**:
+   - Outputs \(F_{ex}\), a set of \(C\) numbers between (0, 1), each detailing how much attention each channel receives
+   - Dimensionality: \(1 \times 1 \times C\)
+
+## Scaling
+- **Scale**:
+  - Scales the input \(X\) with dimensions \(H \times W \times C\)
+  - Outputs the scaled \(X\) with dimensions \(H \times W \times C\)
+
+## Hyperparameters
+
+- **\(r\)**: A hyperparameter that controls the size of the hidden layer
+  
+## SE-ResNet Module
+- Combines the residual path and the squeeze-and-excitation path to produce the final output \(X\) with dimensions \(H \times W \times C\)
+
+## References
+- Vineeth N B (IIIT-H)
+- §5.4 Recent CNN Architectures
+
+---
+
+Page 17 / 20
+```
+
+# DL4CV_Week05_Part04.pdf - Page 29
+
+```markdown
+# Squeeze-and-Excitation Block in ResNet
+
+![Squeeze-and-Excitation Block Diagram](image_url)
+
+- **Residual**: `H x W x C`
+- **Global pooling**: `1 x 1 x C`
+- **FC**: `1 x 1 x C`
+  - Output of `F_{ex}` is a set of `C` numbers between (0, 1), each detailing how much attention each channel receives
+- **ReLU**: `1 x 1 x C`
+- **FC**: `1 x 1 x C`
+- **Sigmoid**: `1 x 1 x C`
+
+- `r` is a hyperparameter that controls the size of the hidden layer
+- The output of `F_{ex}` is a set of `C` numbers between (0, 1), each detailing how much attention each channel receives
+- SE block is a cheap way to increase model depth
+- Can be added to a wide variety of conv architectures, not just ResNet - to bring improvements to performance at minor additional computation cost
+
+![SE-ResNet Module Diagram](image_url)
+
+Vineeth N B (IIT-H)
+
+§5.4 Recent CNN Architectures
+
+17 / 20
+```
+
+# DL4CV_Week05_Part04.pdf - Page 30
+
+```markdown
+# Homework
+
+## Readings
+
+- Lecture 9 of CS231n, Stanford Univ
+- **Google AI Blog on MobileNet**
+- (Optional) Lecture 4 of Svetlana Lazebnik CS598 course, UIUC
+
+## Exercises
+
+- By what fraction is computation reduced when DSC is used over standard convolution? (Slide 10)
+- For a compound coefficient φ, total FLOPS will approximately increase by 2φ. Why? (Slide 14)
+
+_Note:_ This content is extracted from a presentation by Vineeth N B (IIIT-H) on "Recent CNN Architectures" at slide 18.
+
+```
+
+# DL4CV_Week05_Part04.pdf - Page 31
+
+```markdown
+# References
+
+- Kaiming He et al. **"Identity Mappings in Deep Residual Networks"**. In: *ArXiv abs/1603.05027* (2016).
+- Gao Huang et al. **"Deep Networks with Stochastic Depth"**. In: *ECCV*. 2016.
+- Sergey Zagoruyko and Nikos Komodakis. **"Wide Residual Networks"**. In: *ArXiv abs/1605.07146* (2016).
+- A. Howard et al. **"MobileNets: Efficient Convolutional Neural Networks for Mobile Vision Applications"**. In: *ArXiv abs/1704.04861* (2017).
+- Gao Huang, Zhuang Liu, and Kilian Q. Weinberger. **"Densely Connected Convolutional Networks"**. In: *2017 IEEE Conference on Computer Vision and Pattern Recognition (CVPR)* (2017), pp. 2261–2269.
+- Saining Xie et al. **"Aggregated Residual Transformations for Deep Neural Networks"**. In: *2017 IEEE Conference on Computer Vision and Pattern Recognition (CVPR)* (2017), pp. 5987–5995.
+- Barret Zoph and Quoc V. Le. **"Neural Architecture Search with Reinforcement Learning"**. In: *ArXiv abs/1611.01578* (2017).
+
+---
+
+Vineeth N B (IIT-H) §5.4 Recent CNN Architectures
+
+19 / 20
+```
+
+# DL4CV_Week05_Part04.pdf - Page 32
+
+```markdown
+# References II
+
+- Mark Sandler et al. **"MobileNetV2: Inverted Residuals and Linear Bottlenecks"**. In: *2018 IEEE/CVF Conference on Computer Vision and Pattern Recognition* (2018), pp. 4510–4520.
+- Barret Zoph et al. **"Learning Transferable Architectures for Scalable Image Recognition"**. In: *2018 IEEE/CVF Conference on Computer Vision and Pattern Recognition* (2018), pp. 8697–8710.
+- M. Tan and Quoc V. Le. **"EfficientNet: Rethinking Model Scaling for Convolutional Neural Networks"**. In: *ArXiv abs/1905.11946* (2019).
+- Jie Hu et al. **"Squeeze-and-Excitation Networks"**. In: *IEEE Transactions on Pattern Analysis and Machine Intelligence* 42 (2020), pp. 2011–2023.
+- Lilian Weng. **"Neural Architecture Search"**. In: *lilianweng.github.io/lil-log* (2020).
+
+```
+

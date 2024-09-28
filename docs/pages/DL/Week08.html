@@ -2,12 +2,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.5.56">
+<meta name="generator" content="quarto-1.4.553">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>BS Degree Notes</title>
+<title>BS Degree Notes - Convolutional Neural Networks</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -23,24 +23,24 @@ ul.task-list li input[type="checkbox"] {
 </style>
 
 
-<script src="site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="site_libs/quarto-nav/headroom.min.js"></script>
-<script src="site_libs/clipboard/clipboard.min.js"></script>
-<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="site_libs/quarto-search/fuse.min.js"></script>
-<script src="site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="./">
-<script src="site_libs/quarto-html/quarto.js"></script>
-<script src="site_libs/quarto-html/popper.min.js"></script>
-<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="site_libs/quarto-html/anchor.min.js"></script>
-<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
-<script src="site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -69,6 +69,35 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 <link rel="stylesheet" href="https://lalten.github.io/lmweb/style/latinmodern-roman.css">
 <link rel="stylesheet" href="https://lalten.github.io/lmweb/style/latinmodern-sans.css">
@@ -81,13 +110,15 @@ ul.task-list li input[type="checkbox"] {
   <header id="quarto-header" class="headroom fixed-top">
   <nav class="quarto-secondary-nav">
     <div class="container-fluid d-flex">
-      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./index.html">Home</a></li></ol></nav>
-        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">
+      BS Degree Notes
+      </li></ol></nav>
+        <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
-      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+      <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
         <i class="bi bi-search"></i>
       </button>
     </div>
@@ -99,7 +130,7 @@ ul.task-list li input[type="checkbox"] {
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
     <div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
-      <a href="./">BS Degree Notes</a> 
+      <a href="../../">BS Degree Notes</a> 
         <div class="sidebar-tools-main">
   <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
 </div>
@@ -114,58 +145,58 @@ ul.task-list li input[type="checkbox"] {
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./index.html" class="sidebar-item-text sidebar-link active">
+  <a href="../../index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Home</span></a>
   </div>
 </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="false">
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="false">
  <span class="menu-text">Deep Learning</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="false" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./pages/DL/Week01_1.html" class="sidebar-item-text sidebar-link">
+  <a href="../../pages/DL/Week01_1.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Week 1.1</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./pages/DL/Week01_2.html" class="sidebar-item-text sidebar-link">
+  <a href="../../pages/DL/Week01_2.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Week 1.2</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./pages/DL/Week02.html" class="sidebar-item-text sidebar-link">
+  <a href="../../pages/DL/Week02.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Week 2</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./pages/DL/Week03.html" class="sidebar-item-text sidebar-link">
+  <a href="../../pages/DL/Week03.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Week 3</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./pages/DL/Week04.html" class="sidebar-item-text sidebar-link">
+  <a href="../../pages/DL/Week04.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Week 4</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./pages/DL/Week05.html" class="sidebar-item-text sidebar-link">
+  <a href="../../pages/DL/Week05.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Week 5</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./pages/DL/Week06.html" class="sidebar-item-text sidebar-link">
+  <a href="../../pages/DL/Week06.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Week 6</span></a>
   </div>
 </li>
@@ -173,46 +204,46 @@ ul.task-list li input[type="checkbox"] {
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="false">
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="false">
  <span class="menu-text">AI: Search Methods</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="false" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
       <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./pages/AI/Week01.html" class="sidebar-item-text sidebar-link">
+  <a href="../../pages/AI/Week01.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Week 1</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./pages/AI/Week02.html" class="sidebar-item-text sidebar-link">
+  <a href="../../pages/AI/Week02.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Week 2</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./pages/AI/Week03.html" class="sidebar-item-text sidebar-link">
+  <a href="../../pages/AI/Week03.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Week 3</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./pages/AI/Week04.html" class="sidebar-item-text sidebar-link">
+  <a href="../../pages/AI/Week04.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Week 4</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./pages/AI/Week05.html" class="sidebar-item-text sidebar-link">
+  <a href="../../pages/AI/Week05.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Week 5</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./pages/AI/Week06.html" class="sidebar-item-text sidebar-link">
+  <a href="../../pages/AI/Week06.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Week 6</span></a>
   </div>
 </li>
@@ -220,82 +251,82 @@ ul.task-list li input[type="checkbox"] {
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="false">
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="false">
  <span class="menu-text">Software Testing</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="false" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
       <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./pages/ST/Week01.html" class="sidebar-item-text sidebar-link">
+  <a href="../../pages/ST/Week01.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Week 1</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./pages/ST/Week02.html" class="sidebar-item-text sidebar-link">
+  <a href="../../pages/ST/Week02.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Week 2</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./pages/ST/Week03.html" class="sidebar-item-text sidebar-link">
+  <a href="../../pages/ST/Week03.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Week 3</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./pages/ST/Week04.html" class="sidebar-item-text sidebar-link">
+  <a href="../../pages/ST/Week04.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Week 4</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./pages/ST/Week05.html" class="sidebar-item-text sidebar-link">
+  <a href="../../pages/ST/Week05.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Week 5</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./pages/ST/Week06.html" class="sidebar-item-text sidebar-link">
+  <a href="../../pages/ST/Week06.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Week 6</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./pages/ST/Week07.html" class="sidebar-item-text sidebar-link">
+  <a href="../../pages/ST/Week07.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Week 7</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./pages/ST/Week08.html" class="sidebar-item-text sidebar-link">
+  <a href="../../pages/ST/Week08.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Week 8</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./pages/ST/Week09.html" class="sidebar-item-text sidebar-link">
+  <a href="../../pages/ST/Week09.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Week 9</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./pages/ST/Week10.html" class="sidebar-item-text sidebar-link">
+  <a href="../../pages/ST/Week10.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Week 10</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./pages/ST/Week11.html" class="sidebar-item-text sidebar-link">
+  <a href="../../pages/ST/Week11.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Week 11</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./pages/ST/Week12.html" class="sidebar-item-text sidebar-link">
+  <a href="../../pages/ST/Week12.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Week 12</span></a>
   </div>
 </li>
@@ -303,52 +334,52 @@ ul.task-list li input[type="checkbox"] {
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="false">
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="false">
  <span class="menu-text">Software Engineering</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="false" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
       <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./pages/SE/Week01.html" class="sidebar-item-text sidebar-link">
+  <a href="../../pages/SE/Week01.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Week 1</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./pages/SE/Week02.html" class="sidebar-item-text sidebar-link">
+  <a href="../../pages/SE/Week02.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Week 2</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./pages/SE/Week03.html" class="sidebar-item-text sidebar-link">
+  <a href="../../pages/SE/Week03.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Week 3</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./pages/SE/Week04.html" class="sidebar-item-text sidebar-link">
+  <a href="../../pages/SE/Week04.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Week 4</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./pages/SE/Week09.html" class="sidebar-item-text sidebar-link">
+  <a href="../../pages/SE/Week09.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Week 9</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./pages/SE/Week10.html" class="sidebar-item-text sidebar-link">
+  <a href="../../pages/SE/Week10.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Week 10</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./pages/SE/Week11.html" class="sidebar-item-text sidebar-link">
+  <a href="../../pages/SE/Week11.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Week 11</span></a>
   </div>
 </li>
@@ -356,63 +387,29 @@ ul.task-list li input[type="checkbox"] {
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="false">
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="false">
  <span class="menu-text">Reinforcement Learning</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="false" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
       <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./pages/RL/Week01_1.html" class="sidebar-item-text sidebar-link">
+  <a href="../../pages/RL/Week01_1.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Week 1.1</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./pages/RL/Week01_2.html" class="sidebar-item-text sidebar-link">
+  <a href="../../pages/RL/Week01_2.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Week 1.2</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./pages/RL/Week02.html" class="sidebar-item-text sidebar-link">
+  <a href="../../pages/RL/Week02.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Week 2</span></a>
-  </div>
-</li>
-      </ul>
-  </li>
-        <li class="sidebar-item sidebar-item-section">
-      <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="false">
- <span class="menu-text">NLP</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="false" aria-label="Toggle section">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
-      </div>
-      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 ">  
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./pages/NLP/Week01.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Week 1</span></a>
-  </div>
-</li>
-      </ul>
-  </li>
-        <li class="sidebar-item sidebar-item-section">
-      <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="false">
- <span class="menu-text">LLM</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="false" aria-label="Toggle section">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
-      </div>
-      <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth1 ">  
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./pages/LLM/Week01.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Week 1</span></a>
   </div>
 </li>
       </ul>
@@ -422,15 +419,33 @@ ul.task-list li input[type="checkbox"] {
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction">Introduction</a>
+  <ul class="collapse">
+  <li><a href="#convolution-operation" id="toc-convolution-operation" class="nav-link" data-scroll-target="#convolution-operation">Convolution Operation</a></li>
+  <li><a href="#d-convolution" id="toc-d-convolution" class="nav-link" data-scroll-target="#d-convolution">1D Convolution</a></li>
+  <li><a href="#d-convolution-1" id="toc-d-convolution-1" class="nav-link" data-scroll-target="#d-convolution-1">2D Convolution</a></li>
+  <li><a href="#centered-formula-for-2d-convolution" id="toc-centered-formula-for-2d-convolution" class="nav-link" data-scroll-target="#centered-formula-for-2d-convolution">Centered Formula for 2D Convolution</a></li>
+  <li><a href="#examples-of-2d-convolution" id="toc-examples-of-2d-convolution" class="nav-link" data-scroll-target="#examples-of-2d-convolution">Examples of 2D Convolution</a></li>
+  <li><a href="#d-convolution-2" id="toc-d-convolution-2" class="nav-link" data-scroll-target="#d-convolution-2">3D Convolution</a></li>
+  <li><a href="#relationship-between-input-size-output-size-and-filter-size" id="toc-relationship-between-input-size-output-size-and-filter-size" class="nav-link" data-scroll-target="#relationship-between-input-size-output-size-and-filter-size">Relationship between Input Size, Output Size, and Filter Size</a></li>
+  <li><a href="#padding" id="toc-padding" class="nav-link" data-scroll-target="#padding">Padding</a></li>
+  <li><a href="#stride" id="toc-stride" class="nav-link" data-scroll-target="#stride">Stride</a></li>
+  <li><a href="#depth-of-the-output" id="toc-depth-of-the-output" class="nav-link" data-scroll-target="#depth-of-the-output">Depth of the Output</a></li>
+  </ul></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">BS Degree Notes</h1>
+<h1 class="title">Convolutional Neural Networks</h1>
 </div>
 
 
@@ -447,9 +462,72 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<p>I put the course notes for my own easy perusal. Some of it is AI generated, and I cannot guarantee the accuracy of the notes. Please use them, if you wish to, at your own discretion.</p>
+<section id="introduction" class="level1">
+<h1>Introduction</h1>
+<p>Convolutional Neural Networks (CNNs) are a type of neural network architecture that have revolutionized the field of image and signal processing. They are designed to take advantage of the spatial structure in data, such as images, and have been instrumental in achieving state-of-the-art performance in various computer vision tasks.</p>
+<section id="convolution-operation" class="level2">
+<h2 class="anchored" data-anchor-id="convolution-operation">Convolution Operation</h2>
+<p>The convolution operation is a fundamental component of CNNs. It is a weighted sum of the input data, where the weights are learned during training. Mathematically, the convolution operation can be represented as:</p>
+<p><span class="math display">\[\mathbf{y} = \mathbf{W} \ast \mathbf{x} + \mathbf{b}\]</span></p>
+<p>where <span class="math inline">\(\mathbf{x}\)</span> is the input vector, <span class="math inline">\(\mathbf{W}\)</span> is the weight matrix, <span class="math inline">\(\mathbf{b}\)</span> is the bias vector, and <span class="math inline">\(\ast\)</span> denotes the convolution operator.</p>
+</section>
+<section id="d-convolution" class="level2">
+<h2 class="anchored" data-anchor-id="d-convolution">1D Convolution</h2>
+<p>In 1D convolution, a filter (also known as a kernel) is applied to a 1D input data. The filter slides over the input data, and at each position, the dot product of the filter and the input data is computed. The resulting output is a feature map, which represents the presence of a particular feature in the input data.</p>
+<p>Mathematically, the 1D convolution operation can be represented as:</p>
+<p><span class="math display">\[y[i] = \sum_{m=0}^{M-1} x[i+m] \cdot w[m] + b\]</span></p>
+<p>where <span class="math inline">\(y[i]\)</span> is the output at position <span class="math inline">\(i\)</span>, <span class="math inline">\(x[i]\)</span> is the input data at position <span class="math inline">\(i\)</span>, <span class="math inline">\(w[m]\)</span> is the filter weight at position <span class="math inline">\(m\)</span>, and <span class="math inline">\(b\)</span> is the bias term.</p>
+</section>
+<section id="d-convolution-1" class="level2">
+<h2 class="anchored" data-anchor-id="d-convolution-1">2D Convolution</h2>
+<p>In 2D convolution, a 2D filter is applied to a 2D input data, such as an image. The filter slides over the input data, and at each position, the dot product of the filter and the input data is computed. The resulting output is a feature map, which represents the presence of a particular feature in the input data.</p>
+<p>Mathematically, the 2D convolution operation can be represented as:</p>
+<p><span class="math display">\[y[i, j] = \sum_{m=0}^{M-1} \sum_{n=0}^{N-1} x[i+m, j+n] \cdot w[m, n] + b\]</span></p>
+<p>where <span class="math inline">\(y[i, j]\)</span> is the output at position <span class="math inline">\((i, j)\)</span>, <span class="math inline">\(x[i, j]\)</span> is the input data at position <span class="math inline">\((i, j)\)</span>, <span class="math inline">\(w[m, n]\)</span> is the filter weight at position <span class="math inline">\((m, n)\)</span>, and <span class="math inline">\(b\)</span> is the bias term.</p>
+</section>
+<section id="centered-formula-for-2d-convolution" class="level2">
+<h2 class="anchored" data-anchor-id="centered-formula-for-2d-convolution">Centered Formula for 2D Convolution</h2>
+<p>The centered formula for 2D convolution is:</p>
+<p><span class="math display">\[y[i, j] = \sum_{m=-M/2}^{M/2} \sum_{n=-N/2}^{N/2} x[i+m, j+n] \cdot w[m, n] + b\]</span></p>
+<p>where <span class="math inline">\(M\)</span> and <span class="math inline">\(N\)</span> are the dimensions of the filter.</p>
+</section>
+<section id="examples-of-2d-convolution" class="level2">
+<h2 class="anchored" data-anchor-id="examples-of-2d-convolution">Examples of 2D Convolution</h2>
+<ul>
+<li>Blurring: A filter with all weights equal to <span class="math inline">\(1/9\)</span> can be used to blur an image.</li>
+<li>Sharpening: A filter with a weight of <span class="math inline">\(5\)</span> at the center and <span class="math inline">\(-1\)</span> at the surrounding pixels can be used to sharpen an image.</li>
+<li>Edge Detection: A filter with weights of <span class="math inline">\(-1, -1, -1, -1, 8, -1, -1, -1, -1\)</span> can be used to detect edges in an image.</li>
+</ul>
+</section>
+<section id="d-convolution-2" class="level2">
+<h2 class="anchored" data-anchor-id="d-convolution-2">3D Convolution</h2>
+<p>In 3D convolution, a 3D filter is applied to a 3D input data, such as a color image. The filter slides over the input data, and at each position, the dot product of the filter and the input data is computed. The resulting output is a feature map, which represents the presence of a particular feature in the input data.</p>
+<p>Mathematically, the 3D convolution operation can be represented as:</p>
+<p><span class="math display">\[y[i, j, k] = \sum_{m=0}^{M-1} \sum_{n=0}^{N-1} \sum_{o=0}^{O-1} x[i+m, j+n, k+o] \cdot w[m, n, o] + b\]</span></p>
+<p>where <span class="math inline">\(y[i, j, k]\)</span> is the output at position <span class="math inline">\((i, j, k)\)</span>, <span class="math inline">\(x[i, j, k]\)</span> is the input data at position <span class="math inline">\((i, j, k)\)</span>, <span class="math inline">\(w[m, n, o]\)</span> is the filter weight at position <span class="math inline">\((m, n, o)\)</span>, and <span class="math inline">\(b\)</span> is the bias term.</p>
+</section>
+<section id="relationship-between-input-size-output-size-and-filter-size" class="level2">
+<h2 class="anchored" data-anchor-id="relationship-between-input-size-output-size-and-filter-size">Relationship between Input Size, Output Size, and Filter Size</h2>
+<p>The output size of a convolution operation depends on the input size, filter size, and stride. The formula for the output size is:</p>
+<p><span class="math display">\[W_2 = \frac{W_1 - F + 2P}{S} + 1\]</span></p>
+<p><span class="math display">\[H_2 = \frac{H_1 - F + 2P}{S} + 1\]</span></p>
+<p>where <span class="math inline">\(W_1\)</span> and <span class="math inline">\(H_1\)</span> are the input sizes, <span class="math inline">\(F\)</span> is the filter size, <span class="math inline">\(P\)</span> is the padding, and <span class="math inline">\(S\)</span> is the stride.</p>
+</section>
+<section id="padding" class="level2">
+<h2 class="anchored" data-anchor-id="padding">Padding</h2>
+<p>Padding is used to ensure that the output size is the same as the input size. The padding is added to the input data, and the filter is applied to the padded input data.</p>
+</section>
+<section id="stride" class="level2">
+<h2 class="anchored" data-anchor-id="stride">Stride</h2>
+<p>The stride defines the interval at which the filter is applied. A stride of <span class="math inline">\(2\)</span> means that the filter is applied to every other pixel, resulting in an output size that is half of the input size.</p>
+</section>
+<section id="depth-of-the-output" class="level2">
+<h2 class="anchored" data-anchor-id="depth-of-the-output">Depth of the Output</h2>
+<p>The depth of the output is equal to the number of filters used in the convolution operation. Each filter produces a 2D feature map, and the depth of the output is the number of feature maps.</p>
 
 
+</section>
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -631,7 +709,18 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }
     return false;
   }
-  const onCopySuccess = function(e) {
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
     // button target
     const button = e.trigger;
     // don't keep focus
@@ -663,29 +752,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }, 1000);
     // clear code selection
     e.clearSelection();
-  }
-  const getTextToCopy = function(trigger) {
-      const codeEl = trigger.previousElementSibling.cloneNode(true);
-      for (const childEl of codeEl.children) {
-        if (isCodeAnnotation(childEl)) {
-          childEl.remove();
-        }
-      }
-      return codeEl.innerText;
-  }
-  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
-    text: getTextToCopy
   });
-  clipboard.on('success', onCopySuccess);
-  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
-    // For code content inside modals, clipBoardJS needs to be initialized with a container option
-    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
-    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
-      text: getTextToCopy,
-      container: window.document.getElementById('quarto-embedded-source-code-modal')
-    });
-    clipboardModal.on('success', onCopySuccess);
-  }
     var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
     var mailtoRegex = new RegExp(/^mailto:/);
       var filterRegex = new RegExp('/' + window.location.host + '/');
@@ -693,7 +760,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
         return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
     }
     // Inspect non-navigation links and adorn them if external
- 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool)');
     for (var i=0; i<links.length; i++) {
       const link = links[i];
       if (!isInternal(link.href)) {

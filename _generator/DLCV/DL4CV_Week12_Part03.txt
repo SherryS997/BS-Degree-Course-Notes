@@ -1,0 +1,1664 @@
+# DL4CV_Week12_Part03.pdf - Page 1
+
+```markdown
+# Deep Learning for Computer Vision
+
+# Adversarial Robustness
+
+**Vineeth N Balasubramanian**
+
+Department of Computer Science and Engineering
+Indian Institute of Technology, Hyderabad
+
+![IIT Hyderabad Logo](https://www.iith.ac.in/sites/default/files/2019-10/IIT_Hyderabad_Logo.png)
+
+---
+
+*Vineeth N B (IITH)*
+
+*12.3 Adversarial Robustness*
+
+*1 / 29*
+```
+
+# DL4CV_Week12_Part03.pdf - Page 2
+
+```markdown
+# Limitation of Supervised Machine Learning
+
+- In reality, the distributions we use ML on are often **NOT** the ones we train it on
+- Whenever there is a distribution shift, Deep Neural Networks tend to perform poorly
+
+![Distribution Shift](image_url)
+
+Vineeth N B (IIT-H)
+Credit: [https://adversarial-ml-tutorial.org/](https://adversarial-ml-tutorial.org/)
+
+#12.3 Adversarial Robustness
+
+## Training and Inference Process
+
+### Training
+![Training](image_url)
+
+### Inference
+![Inference](image_url)
+
+When the distribution shifts, the performance of the model can degrade significantly, as indicated by the red cross over the inference diagram.
+```
+
+# DL4CV_Week12_Part03.pdf - Page 3
+
+```markdown
+# Adversarial Examples
+
+- Examples indistinguishable from original input which leads to wrong predictions
+- \(\delta^* = \arg \inf_{\delta} \|\delta\|_p\) such that \(f(x + \delta) \neq f(x)\)
+
+![Pig Image](image1.png) "pig" (91%)
+
++ 0.005 x
+
+![Noise Image](image2.png) "noise (NOT random)"
+
+= 
+
+![Airliner Image](image3.png) "airliner" (99%)
+
+_Vineeth N B (IIIT-H)_
+
+§12.3 Adversarial Robustness
+
+3 / 29
+```
+
+# DL4CV_Week12_Part03.pdf - Page 4
+
+```markdown
+# Supervised Frameworks are Vulnerable to Adversarial Attacks<sup>1</sup>
+
+![Original Image](image_url)
+
+## Original Image
+- **Original Image Decomposition**: 
+  ![Original Image Decomposition](image_url)
+- **Original Image Segmentation**:
+  ![Original Image Segmentation](image_url)
+
+## Adversarial Perturbation
+- **Adversarial Image Decomposition**:
+  ![Adversarial Image Decomposition](image_url)
+- **Adversarial Image Segmentation**:
+  ![Adversarial Image Segmentation](image_url)
+
+## Original Input
+- **Text**:
+  Connoisseurs of Chinese film will be pleased to discover that Tian’s meticulous talent has not withered during his enforced hiatus.
+- **Prediction**:
+  Positive (77%)
+
+## Adversarial Example [Visually similar]
+- **Text**:
+  Admirers of Chinese film will be pleased to discover that Tian’s meticulous talent has not withered during his enforced hiatus.
+- **Prediction**:
+  Negative (52%)
+
+## Adversarial Example [Semantically similar]
+- **Text**:
+  Connoisseurs of Chinese footage will be pleased to discover that Tian’s meticulous talent has not withered during his enforced hiatus.
+- **Prediction**:
+  Negative (54%)
+
+<sup>1</sup> Xie et al., Adversarial Examples for Semantic Segmentation and Object Detection, ICCV 2017
+
+**Vineeth N B** (IIT-H)
+
+**$12.3$ Adversarial Robustness
+
+---
+
+**References**:
+- Xie et al., *Adversarial Examples for Semantic Segmentation and Object Detection*, ICCV 2017
+  
+---
+
+4 / 29
+```
+
+# DL4CV_Week12_Part03.pdf - Page 5
+
+```markdown
+# Supervised Frameworks are Vulnerable to Adversarial Attacks
+
+![Adversarial Attacks](image_url)
+
+## Example from Carlini et al., Audio Adversarial Examples: Targeted Attacks on Speech-to-Text, 2018
+
+### Vulnerability of Supervised Frameworks
+
+- **Initial Input**: Audio waveform is processed through a neural network.
+  - **Output**: "it was the best of times, it was the worst of times"
+
+- **Adversarial Noise**: Small perturbation (multiplied by 0.001) is added to the original audio waveform.
+  - **Modified Input**: Adversarial audio waveform is generated.
+  - **Output**: "it is a truth universally acknowledged that a single"
+
+### Diagram Explanation
+
+- **Original Audio Waveform**: Represented as a clean waveform, processed through a neural network to produce the original text output.
+- **Adversarial Noise Addition**: A small perturbation is added to the original waveform.
+  - **Adversarial Audio Waveform**: Resulting waveform is processed through the neural network to produce a different, unintended text output.
+
+### References
+
+- **Carlini et al., Audio Adversarial Examples: Targeted Attacks on Speech-to-Text, 2018**
+- **Vineeth N B, IIT-H**
+- **Section**: Adversarial Robustness
+
+---
+
+Additional Notes:
+- The small perturbation added to the audio waveform can significantly alter the output of the neural network, demonstrating the vulnerability of supervised frameworks to adversarial attacks.
+- This example highlights the importance of developing robust models that can resist such adversarial manipulations.
+```
+
+# DL4CV_Week12_Part03.pdf - Page 6
+
+```markdown
+# Taxonomy of Adversarial Attacks
+
+**On basis of Threat Model**
+
+- **White Box Attacks**: attacker has access to model's parameters.
+- **Black Box Attacks**: attacker has no access to model's parameters, i.e., it a different model or no model at all to generate adversarial images
+
+![NPTEL Logo](https://via.placeholder.com/150)
+
+*Vineeth N B (IIT-H) Section 12.3 Adversarial Robustness*
+
+*Slide 6 / 29*
+```
+
+# DL4CV_Week12_Part03.pdf - Page 7
+
+```markdown
+# Taxonomy of Adversarial Attacks
+
+## On basis of Threat Model
+
+- **White Box Attacks**: attacker has access to model's parameters.
+- **Black Box Attacks**: attacker has no access to model's parameters, i.e., it a different model or no model at all to generate adversarial images
+
+## On basis of Objective
+
+- **Untargeted Attacks**: aim is to enforce the model to misclassify adversarial image
+- **Targeted Attacks**: aim is to get the image classified as a specific target class, different from the true class
+
+*Vineeth N B (IIIT-H) §12.3 Adversarial Robustness*
+```
+
+# DL4CV_Week12_Part03.pdf - Page 8
+
+```markdown
+# Taxonomy of Adversarial Attacks
+
+## On basis of Threat Model
+
+- **White Box Attacks**: attacker has access to model's parameters.
+- **Black Box Attacks**: attacker has no access to model's parameters, i.e., it a different model or no model at all to generate adversarial images
+
+## On basis of Objective
+
+- **Untargeted Attacks**: aim is to enforce the model to misclassify adversarial image
+- **Targeted Attacks**: aim is to get the image classified as a specific target class, different from the true class
+
+## On basis of Distance Metrics
+
+- **L₀**: total number of pixels that differ between clean and adversarial images
+- **L₂**: squared difference between pixel values of clean and adversarial images
+- **L∞**: maximum pixel difference between clean and adversarial images
+
+*Vineeth N B. (IIIT-H) §12.3 Adversarial Robustness*
+```
+
+# DL4CV_Week12_Part03.pdf - Page 9
+
+```markdown
+# White-box Adversarial Attacks<sup>3</sup>
+
+## Fast Gradient Sign Method (FGSM)
+
+- Computes an adversarial image by adding a pixel-wise perturbation of magnitude in the direction of gradient
+
+![NPTEL](imageplaceholder.png)
+
+<sup>3</sup> Goodfellow et al., Explaining and Harnessing Adversarial Examples, ICLR 2015
+
+Vineeth N B (IIT-H) §12.3 Adversarial Robustness
+
+---
+
+*Date*: 7 / 29
+```
+
+# DL4CV_Week12_Part03.pdf - Page 10
+
+```markdown
+# White-box Adversarial Attacks<sup>3</sup>
+
+## Fast Gradient Sign Method (FGSM)
+
+- Computes an adversarial image by adding a pixel-wise perturbation of magnitude in the direction of gradient
+
+- **Single step method**: very efficient in terms of computation time:
+
+  \[
+  x_{\text{adv}} = x + \epsilon \cdot \text{sign}(\nabla_x \mathcal{L}(x, y_{\text{true}}))
+  \]
+
+<center>
+  ![NPTEL Logo](https://example.com/logo.png)
+</center>
+
+<sup>3</sup> Goodfellow et al., *Explaining and Harnessing Adversarial Examples*, ICLR 2015
+
+*Vineeth N B (IIT-H)*
+
+*§12.3 Adversarial Robustness*
+
+<p align="right">7 / 29</p>
+```
+
+# DL4CV_Week12_Part03.pdf - Page 11
+
+```markdown
+# White-box Adversarial Attacks<sup>3</sup>
+
+## Fast Gradient Sign Method (FGSM)
+
+- Computes an adversarial image by adding a pixel-wise perturbation of magnitude in the direction of gradient
+- **Single step method**: very efficient in terms of computation time:
+
+  \[
+  x_{adv} = x + \epsilon \cdot \text{sign}(\nabla_x \mathcal{L}(x, y_{true}))
+  \]
+
+- In case of **targeted attack**, direction is negative gradient with respect to target class:
+
+  \[
+  x_{adv} = x - \epsilon \cdot \text{sign}(\nabla_x \mathcal{L}(x, y_{target}))
+  \]
+
+  where \(x\) is clean input image, \(x_{adv}\) is corresponding adversarial image, \(\mathcal{L}\) is classification loss, \(y_{true}\) is actual label, \(y_{target}\) is target label and \(\epsilon\) is \(L_\infty\) budget
+
+<sup>3</sup> Goodfellow et al., Explaining and Harnessing Adversarial Examples, ICLR 2015
+
+Vineeth N B (IIT-H)
+
+§12.3 Adversarial Robustness
+
+![Placeholders for any images or diagrams that OCR can't capture](image_url)
+
+7 / 29
+```
+
+# DL4CV_Week12_Part03.pdf - Page 12
+
+```markdown
+# White-box Adversarial Attacks<sup>4</sup>
+
+## Projected Gradient Descent (PGD)
+
+- **"Complete" method** as it does not consider constraints on amount of time and effort
+
+  ![PGD Illustration](image-url)
+
+  \[
+  x_{adv}^0 = x
+  \]
+
+  \[
+  x_{adv}^{t+1} = \text{Proj}\{x_{adv}^t + \epsilon \cdot \text{sign}(\nabla_x \mathcal{L}(x_{adv}^t, y_{true}))\}
+  \]
+
+  where \(\text{Proj}\{\cdot\}\) projects the updated adversarial sample into the \(\epsilon\) neighborhood and a valid range
+
+  **Credit**: [Oscar Knagg, TowardsDataScience](https://towardsdatascience.com)
+
+  <sup>4</sup>Towards Deep Learning Models Resistant To Adversarial Attack — Madry et al 2017
+
+  Vineeth N B (IIT-H)
+
+  §12.3 Adversarial Robustness
+
+![Loss Landscape](image-url)
+
+  - Predicted gradient descent with respect to 2-norm finds a high-loss adversarial example within the L∞ ball.
+  - Sample is in a region of low loss.
+
+![Diagram](image-url)
+```
+
+Note: Replace `image-url` with the actual URLs or file paths where the images are hosted.
+
+This markdown format ensures that the scientific content is accurately represented, preserving the structure, formulas, and formatting required for clear understanding.
+
+# DL4CV_Week12_Part03.pdf - Page 13
+
+```markdown
+# White-box Adversarial Attacks<sup>4</sup>
+
+## Projected Gradient Descent (PGD)
+
+- ![L* ball](image_url)
+  - **High loss**
+  - **Low loss**
+  - *Prediction gradient descent with start1.2 is for finding a high loss adversarial example within the L* ball. Sample is in a region of low loss.*
+
+- "Complete" method as it does not consider constraints on amount of time and effort
+
+  \[
+  x_{adv}^0 = x
+  \]
+
+  \[
+  x_{adv}^{t+1} = \text{Proj}\left\{ x_{adv}^t + \epsilon \cdot \text{sign}(\nabla_x \mathcal{L}(x_{adv}^t, y_{true})) \right\}
+  \]
+
+  - where \(\text{Proj}(\cdot)\) projects the updated adversarial sample into the \(\epsilon\) neighborhood and a valid range
+
+- In case of \(L_2\), update is as follows:
+
+  \[
+  x_{adv}^{t+1} = \text{Proj}\left\{ x_{adv}^t + \epsilon \cdot \frac{\nabla_x \mathcal{L}(x_{adv}^t, y_{true})}{\|\nabla_x \mathcal{L}(x_{adv}^t, y_{true})\|_2} \right\}
+  \]
+
+**Credit:** Oscar Knagg, *TowardsDataScience*
+
+<sup>4</sup>*Towards Deep Learning Models Resistant To Adversarial Attack* — Madry et al 2017
+
+Vineeth N B (IIT-H)
+
+§12.3 Adversarial Robustness
+```
+
+# DL4CV_Week12_Part03.pdf - Page 14
+
+```markdown
+# White-box Adversarial Attacks
+
+## DeepFool
+
+- For affine classifier, \( f(x) = w^T x + b \), minimum perturbation to change the class of example \( x_0 \) is distance from the decision boundary hyperplane \( \mathcal{F} = \{ x : w^T x + b = 0 \} \), i.e., \( \frac{-f(x_0)}{\| w \|_2} \cdot w \)
+
+![Diagram](image-url)
+
+### References
+
+- Seyd-Mohsen et al., *DeepFool: A Simple and Accurate Method to Fool Deep Neural Networks*, CVPR 2016
+- Vineeth N B (IIIT-H)
+- §12.3 Adversarial Robustness
+```
+
+# DL4CV_Week12_Part03.pdf - Page 15
+
+```markdown
+# White-box Adversarial Attacks
+
+![DeepFool](https://via.placeholder.com/150 "DeepFool")
+
+## DeepFool
+
+- For affine classifier, \( f(x) = w^T x + b \), minimum perturbation to change the class of example \( x_0 \) is distance from the decision boundary hyperplane \( \mathcal{F} = \{ x : w^T x + b = 0 \} \), i.e., \( \frac{-f(x_0)}{\| w \|_2} \cdot w \)
+
+- For a general differentiable classifier, assuming \( f \) is linear around \( x_t \), iteratively compute perturbation \( \delta_t \):
+
+  \[
+  \arg \min \| \delta \|_2 \text{ subject to } f(x_t) + \nabla_x f(x_t)^T \delta_t = 0
+  \]
+
+  Runs until \( f(x_t') \neq f(x_0) \)
+
+![Diagram](https://via.placeholder.com/300 "Diagram")
+
+Source: Seyed-Mohsen et al., DeepFool: A Simple and Accurate Method to Fool Deep Neural Networks, CVPR 2016
+
+Vineeth N B (IIIT-H) 
+
+§12.3 Adversarial Robustness
+```
+
+# DL4CV_Week12_Part03.pdf - Page 16
+
+```markdown
+# White-box Adversarial Attacks
+
+![DeepFool](image_url_placeholder)
+
+## DeepFool
+
+- For affine classifier, \( f(x) = w^T x + b \), minimum perturbation to change the class of example \( x_0 \) is distance from the decision boundary hyperplane \( \mathcal{F} = \{ x : w^T x + b = 0 \} \), i.e., \( \frac{-f(x_0)}{\| w \|_2} \cdot w \)
+
+- For a general differentiable classifier, assuming \( f \) is linear around \( x_t \), iteratively compute perturbation \( \delta_t \):
+
+  \[
+  \arg \min_{\delta_t} \| \delta \|_2 \text{ subject to } f(x_t) + \nabla_x f(x_t)^T \delta_t = 0
+  \]
+
+  Runs until \( f(x_t') \neq f(x_0) \)
+
+- **Multi-class classifiers**: Compute distance from \( x_0 \) to surface of a convex polyhedron formed by decision boundaries between all classes
+
+(a) Source: Seyed-Mohsen et al., DeepFool: A Simple and Accurate Method to Fool Deep Neural Networks, CVPR 2016
+
+```
+
+# DL4CV_Week12_Part03.pdf - Page 17
+
+```markdown
+# White-box Adversarial Attacks<sup>6</sup>
+
+## Carlini and Wagner (C&W) attack
+
+- Optimization-based adversarial attack that can generate adversarial samples using:
+
+  \[
+  \min_{\delta} D(x, x + \delta) \text{ such that } f(x + \delta) = t
+  \]
+
+  subject to \( x + \delta \in [0, 1] \); \( D(.,.) \) is \( L_0 \), \( L_2 \) and \( L_\infty \) distance measures
+
+<sup>6</sup> Carlini and Wagner, Towards Evaluating the Robustness of Neural Networks, arXiv 2016
+
+Vineeth N B. (IIT-H) 
+
+§12.3 Adversarial Robustness
+
+NPTEL
+
+![NPTEL Logo](insert_link_here)
+
+10 / 29
+```
+
+# DL4CV_Week12_Part03.pdf - Page 18
+
+```markdown
+# White-box Adversarial Attacks<sup>6</sup>
+
+## Carlini and Wagner (C&W) attack
+
+- **Optimization-based adversarial attack** that can generate adversarial samples using:
+
+  \[
+  \min_{\delta} D(x, x + \delta) \text{ such that } f(x + \delta) = t
+  \]
+
+  Subject to \( x + \delta \in [0, 1] \); \( D(.,.) \) is \( L_0 \), \( L_2 \) and \( L_\infty \) distance measures
+
+- To ensure \( x + \delta \) yields a valid image (i.e., \( x + \delta \in [0, 1] \)), it introduces a new variable, \( \kappa \), to substitute as follows:
+
+  \[
+  \delta = \frac{1}{2}[\tanh(\kappa) + 1] - x
+  \]
+
+  Such that \( x + \delta = \frac{1}{2}[\tanh(\kappa) + 1] \) which always resides in the range of the optimization process
+
+<sup>6</sup> Carlini and Wagner, Towards Evaluating the Robustness of Neural Networks, arXiv 2016
+
+_Vineeth N B (IIT-M)_
+
+_$12.3 Adversarial Robustness_
+
+10 / 29
+```
+
+# DL4CV_Week12_Part03.pdf - Page 19
+
+```markdown
+# White-box Adversarial Attacks<sup>7</sup>
+
+## Jacobian-based Saliency Map Attack
+
+- Fool DNNs with small $L_0$ perturbations; compute Jacobian matrix of logits $f(x)$ before softmax layer:
+
+  \[
+  \nabla_x f(x) = \frac{\partial f(x)}{\partial x} = \left[ \frac{\partial f_i(x)}{\partial x_j} \right]_{i \in \{1, 2, ..., M_{out}\}; j \in \{1, 2, ..., M_{in}\}}
+  \]
+
+  where $M_{in}$ is input dimension and $M_{out}$ is output dimension
+
+---
+
+<sup>7</sup> Papernot et al., The Limitations of Deep Learning in Adversarial Settings, EuroS&P 2016
+
+Vineeth N B (IIT-H) §12.3 Adversarial Robustness
+```
+
+### Explanation:
+
+1. **Section Titles and Headings**:
+   - `#` is used for the main heading "White-box Adversarial Attacks".
+   - `##` is used for the subheading "Jacobian-based Saliency Map Attack".
+
+2. **Bullet Points**:
+   - Used `-` to list the key points under the subheading.
+
+3. **Mathematical Equations**:
+   - The equations are formatted using LaTeX syntax within double dollar signs (`$...$`). For more complex or display-style equations, use `\[...\]`.
+
+4. **Superscripts**:
+   - `<sup>7</sup>` is used to denote the superscript for citations.
+
+5. **Footnote**:
+   - The footnote is enclosed within `<sup>7</sup>` tags for clarity.
+
+6. **Italicized and Bold Text**:
+   - Italicized text is enclosed within `_..._` and bold text within `**...**`.
+
+This format ensures that the scientific content is accurately represented in a readable and structured manner.
+
+# DL4CV_Week12_Part03.pdf - Page 20
+
+```markdown
+# White-box Adversarial Attacks<sup>7</sup>
+
+## Jacobian-based Saliency Map Attack
+
+- Fool DNNs with small $L_0$ perturbations; compute Jacobian matrix of logits $f(x)$ before softmax layer:
+
+$$
+\nabla_x f(x) = \frac{\partial f(x)}{\partial x} = \left[ \frac{\partial f_i(x)}{\partial x_j} \right]_{i \in \{1, 2, \ldots, M_{out}\}, j \in \{1, 2, \ldots, M_{in}\}}
+$$
+
+where $M_{in}$ is input dimension and $M_{out}$ is output dimension
+
+- **Jacobian matrix**: how input pixels affect logits; **adversarial saliency map** $S(x, y_{true})$ - to select pixels that should be perturbed to obtain desired changes in logits
+
+$$
+S(x_j, y_{true})[i] = \begin{cases}
+0 & \text{if } \frac{\partial f_{y_{true}}(x)}{\partial x_j} \leq 0 \text{ or } \sum_{i \neq y_{true}} \frac{\partial f_i(x)}{\partial x_j} > 0 \\
+\frac{\partial f_{y_{true}}(x)}{\partial x_j} \left| \sum_{i \neq y_{true}} \frac{\partial f_i(x)}{\partial x_j} \right| & \text{otherwise}
+\end{cases}
+$$
+
+<sup>7</sup> Papernot et al. The Limitations of Deep Learning in Adversarial Settings, EuroS&P 2016
+
+_Vineeth N B (IIT-H)_
+
+_$12.3 Adversarial Robustness_
+
+![NPTE](https://via.placeholder.com/150)_
+
+11 / 29
+```
+
+# DL4CV_Week12_Part03.pdf - Page 21
+
+```markdown
+# White-box Adversarial Attacks<sup>7</sup>
+
+## Jacobian-based Saliency Map Attack
+
+- Fool DNNs with small $L_0$ perturbations; compute Jacobian matrix of logits $f(x)$ before softmax layer:
+
+  $$
+  \nabla_x f(x) = \frac{\partial f(x)}{\partial x} = \left[ \frac{\partial f_i(x)}{\partial x_j} \right]_{i \in \{1, 2, \ldots, M_{\text{out}}\}, j \in \{1, 2, \ldots, M_{\text{in}}\}}
+  $$
+
+  where $M_{\text{in}}$ is input dimension and $M_{\text{out}}$ is output dimension
+
+- Jacobian matrix - how input pixels affect logits; **adversarial saliency map** $S(x, y_{\text{true}})$ - to select pixels that should be perturbed to obtain desired changes in logits
+
+  $$
+  S(x, y_{\text{true}})[i] = \begin{cases}
+  0 & \text{if } \frac{\partial f_{y_{\text{true}}}(x)}{\partial x_i} \leq 0 \text{ or } \sum_{i \neq y_{\text{true}}} \frac{\partial f_i(x)}{\partial x_i} > 0 \\
+  \frac{\partial f_{y_{\text{true}}}(x)}{\partial x_i} \left| \sum_{i \neq y_{\text{true}}} \frac{\partial f_i(x)}{\partial x_i} \right| & \text{otherwise}
+  \end{cases}
+  $$
+
+- Finally, perturb element with highest value of $S(x, y_{\text{true}})[i]$ to increase/decrease logit outputs of target/other class significantly
+
+<sup>7</sup> Papernot et al., The Limitations of Deep Learning in Adversarial Settings, EuroS&P 2016
+
+*Vineeth N B (IIT-H)*
+
+*§12.3 Adversarial Robustness*
+
+---
+
+11/29
+```
+
+# DL4CV_Week12_Part03.pdf - Page 22
+
+```markdown
+# White-box Adversarial Attacks
+
+## Universal Adversarial Attack
+
+- One perturbation for all examples
+
+![Universal Adversarial Attack Image](image_url)
+
+8 Moosavi-Dezfooli et al., Universal Adversarial Perturbations, CVPR 2017
+
+Vineeth N B (IIT-H)
+
+§12.3 Adversarial Robustness
+
+---
+
+## Diagram Description
+
+![Diagram](image_url)
+
+- **Ghushua**: Various images with slight perturbations applied
+  - *Image 1*: Bird
+  - *Image 2*: Bird
+  - *Image 3*: Bird
+
+- **Jay**: Various images with slight perturbations applied
+  - *Image 1*: Vehicle
+  - *Image 2*: Vehicle
+  - *Image 3*: Vehicle
+
+- **Labrador**: Various images with slight perturbations applied
+  - *Image 1*: Dog
+  - *Image 2*: Dog
+  - *Image 3*: Dog
+
+- **Tibetan Mastiff**: Various images with slight perturbations applied
+  - *Image 1*: Dog
+  - *Image 2*: Dog
+  - *Image 3*: Dog
+
+---
+
+## References
+
+- Moosavi-Dezfooli et al., Universal Adversarial Perturbations, CVPR 2017
+- Vineeth N B (IIT-H), §12.3 Adversarial Robustness
+```
+
+# DL4CV_Week12_Part03.pdf - Page 23
+
+```markdown
+# White-box Adversarial Attacks
+
+## Universal Adversarial Attack
+
+- One perturbation for all examples
+- For each \(x_i\), compute minimal perturbation that sends \(x_i + v\) to decision boundary
+
+  Initialize \(v = 0\)
+  \[
+  \Delta v_i = \arg \min_r \left\| r \right\|_2 \text{ s.t } f(x_i + v + r) \neq f(x)
+  \]
+  \[
+  v = \mathcal{P}_{p, \epsilon}(v + \Delta v_i)
+  \]
+  \[
+  \mathcal{P}_{p, \epsilon}(v) = \arg \min_{v'} \left\| v - v' \right\|_2 \text{ subject to } \left\| v' \right\|_p \leq \epsilon
+  \]
+
+8 Moosavi-Dezfooli et al, Universal Adversarial Perturbations, CVPR 2017
+
+Vineeth N B (IIT-H)
+
+§12.3 Adversarial Robustness
+```
+
+# DL4CV_Week12_Part03.pdf - Page 24
+
+```markdown
+# Non-$L_p$ White-box Adversarial Attacks
+
+## Spatially Transformed Adversarial Attacks
+
+![Spatially Transformed Adversarial Attacks Diagram](image_url)
+
+\[ f^* = \arg \min_f \mathcal{L}_{adv}(x, f) + \tau \mathcal{L}_{flow}(x, f) \]
+
+- \(\mathcal{L}_{adv}\) encourages generated examples to be misclassified.
+- \(\mathcal{L}_{flow}\) ensures that spatial transformation distance is minimized.
+
+_References_:
+1. Xiao et al, *Spatially Transformed Adversarial Examples*, ICLR 2018
+2. Laidlaw et al, *Functional Adversarial Attacks*, NeurIPS 2019
+
+_Vineeth N B (IIT-H)_
+
+§12.3 Adversarial Robustness
+
+![NPTel Logo](nptel_logo_url)
+```
+
+# DL4CV_Week12_Part03.pdf - Page 25
+
+```markdown
+# Non-$L_p$ White-box Adversarial Attacks
+
+## Spatially Transformed Adversarial Attacks
+
+### Functional Adversarial Attacks
+
+![Spatially Transformed Adversarial Attacks](https://example.com/spatial_attack_diagram.png)
+
+```math
+f^* = \arg \min_f \mathcal{L}_{adv}(x, f) + \tau \mathcal{L}_{flow}(x, f)
+```
+
+- $\mathcal{L}_{adv}$ encourages generated examples to be misclassified.
+- $\mathcal{L}_{flow}$ ensures that spatial transformation distance is minimized.
+
+### Functional Adversarial Attacks
+
+![Functional Adversarial Attacks](https://example.com/functional_attack_diagram.png)
+
+- A single function to be used to perturb input features to produce an adversarial example.
+- E.g., attack applied on colors of an image can change all red pixels simultaneously to light red.
+
+#### References
+9. Xiao et al, Spatially Transformed Adversarial Examples, ICLR 2018
+10. Laidlaw et al, Functional Adversarial Attacks, NeurIPS 2019
+
+Vineeth N B (IIT-H)
+
+§12.3 Adversarial Robustness
+
+13 / 29
+```
+
+# DL4CV_Week12_Part03.pdf - Page 26
+
+```markdown
+# Black-box Adversarial Attacks: Gradient Estimation-based
+
+## Zeroth-Order Optimization (ZOO)
+
+- Need to estimate gradients of target DNN in order to produce an adversarial image
+- But now, target model can only be queried to obtain probability scores of all classes; how?
+
+$$
+\mathcal{L}(x, y) = \max_{i \neq y_{\text{true}}} \left\{ \max_{\| \delta \|_p \leq \epsilon} \left[ \log \left[ f_i(x) \right] - \log \left[ f_{y_{\text{true}}}(x) \right] - k \right] \right\}
+$$
+
+---
+
+11 Chen et al. ZOO: Zeroth Order Optimization Based Black-Box Attacks to Deep Neural Networks without Training Substitute Models, AISecW 2017, Cheng et al., Query-efficient Hard-label Black-box Attack: An Optimization-based Approach, 2018
+
+Vineeth N B (IIT-H) §12.3 Adversarial Robustness
+
+---
+
+14 / 29
+```
+
+# DL4CV_Week12_Part03.pdf - Page 27
+
+```markdown
+# Black-box Adversarial Attacks: Gradient Estimation-based
+
+## Zeroth-Order Optimization (ZOO)
+
+- Need to estimate gradients of target DNN in order to produce an adversarial image
+- But now, target model can only be queried to obtain probability scores of all classes; how?
+
+$$
+\mathcal{L}(x, y) = \max \left\{ \max_{i \neq y_{true}} \log \left[ f_i(x) \right] - \log \left[ f_{y_{true}}(x) \right] - k \right\}
+$$
+
+- To estimate gradient:
+
+$$
+\frac{\partial f(x)}{\partial x} \approx \frac{f(x + he_i) - f(x - he_i)}{2h}
+$$
+
+---
+
+[1] Chen et al. ZOO: Zeroth Order Optimization Based Black-Box Attacks to Deep Neural Networks without Training Substitute Models, AISecW 2017, Cheng et al., Query-efficient Hard-label Black-box Attack: An Optimization-based Approach, 2018
+
+Vineeth N B (IIIT-H) &12.3 Adversarial Robustness
+
+---
+
+14 / 29
+```
+
+# DL4CV_Week12_Part03.pdf - Page 28
+
+```markdown
+# Black-box Adversarial Attacks: Gradient Estimation-based
+
+## Zeroth-Order Optimization (ZOO)
+
+- Need to estimate gradients of target DNN in order to produce an adversarial image
+- But now, target model can only be queried to obtain probability scores of all classes; how?
+
+\[
+\mathcal{L}(x, y) = \max \{ \max_{i \neq y_{true}} \log [f_i(x)] - \log [f_{y_{true}}(x)] - \kappa \}
+\]
+
+- To estimate gradient:
+
+\[
+\frac{\partial f(x)}{\partial x} \approx \frac{f(x + he_i) - f(x - he_i)}{2h}
+\]
+
+## Opt-Attack
+
+- Target model can only be queried to obtain true label (hard-label setting); now, how?
+
+\[
+g(\theta) = \min_{\lambda, s, t} f\left(x + \lambda \cdot \frac{\theta}{|| \theta ||}\right) \neq y_{true} \quad \lambda > 0
+\]
+
+[^1]: Chen et al. ZOO: Zeroth Order Optimization Based Black-Box Attacks to Deep Neural Networks without Training Substitute Models, AISecW 2017, Cheng et al., Query-efficient Hard-label Black-box Attack: An Optimization-based Approach, 2018
+
+Vineeth N B (IIT-H)
+
+$12.3 Adversarial Robustness$
+
+14 / 29
+```
+
+# DL4CV_Week12_Part03.pdf - Page 29
+
+# Black-box Adversarial Attacks: Gradient Estimation-based
+
+## Zeroth-Order Optimization (ZOO)
+
+- Need to estimate gradients of target DNN in order to produce an adversarial image
+- But now, target model can only be queried to obtain probability scores of all classes; how?
+
+$$
+\mathcal{L}(x, y) = \max_{i \neq y_{true}} \left\{ \max_{i \neq y_{true}} \log [f_i(x)] - \log [f_{y_{true}}(x)] - k \right\}
+$$
+
+- To estimate gradient:
+
+$$
+\frac{\partial f(x)}{\partial x} \approx \frac{f(x + he_i) - f(x - he_i)}{2h}
+$$
+
+## Opt-Attack
+
+- Target model can only be queried to obtain true label (hard-label setting); now, how?
+
+$$
+g(\theta) = \min \lambda, s.t. \frac{f(x + \lambda \cdot \frac{\theta}{||\theta||}) \neq y_{true}}{\lambda > 0}
+$$
+
+- A coarse-grained search to initially find a decision boundary and then finetune the solution using Binary Search
+
+---
+
+^{11} Chen et al. ZOO: Zeroth Order Optimization Based Black-Box Attacks to Deep Neural Networks without Training Substitute Models, AISecW 2017, Cheng et al., Query-efficient Hard-label Black-box Attack: An Optimization-based Approach, 2018
+
+---
+
+Vineeth N B (IIIT-H) $§12.3$ Adversarial Robustness
+
+---
+
+![NPTEL Logo](https://example.com/nptel_logo.png)
+
+Page 14 / 29
+
+# DL4CV_Week12_Part03.pdf - Page 30
+
+```markdown
+# Black-box Adversarial Attacks: Gradient-Free<sup>12</sup>
+
+## Greedy Local-Search
+
+- Create a neighborhood consisting of all images that are different from previous round's image by one pixel only
+
+![NPTEL](image_placeholder.png)
+
+<sup>12</sup> Nina Narodytska et al., Simple Black-box Adversarial Perturbations for Deep Networks, 2016
+
+Vineeth N B (IIT-H)
+
+Adversarial Robustness
+
+15 / 29
+```
+
+# DL4CV_Week12_Part03.pdf - Page 31
+
+```markdown
+# Black-box Adversarial Attacks: Gradient-Free<sup>12</sup>
+
+## Greedy Local-Search
+
+- Create a neighborhood consisting of all images that are different from the previous round's image by one pixel only
+- Initially, a pixel location is randomly selected, and perturbation is added to it
+
+<center>
+  ![Image](image_placeholder)
+</center>
+
+<sup>12</sup> Nina Narodytska et al., Simple Black-box Adversarial Perturbations for Deep Networks, 2016
+
+Vineeth N B (IIIT-H) §12.3 Adversarial Robustness
+
+*Page 15 / 29*
+```
+
+# DL4CV_Week12_Part03.pdf - Page 32
+
+```markdown
+# Black-box Adversarial Attacks: Gradient-Free<sup>12</sup>
+
+## Greedy Local-Search
+
+- Create a neighborhood consisting of all images that are different from the previous round’s image by one pixel only
+- Initially, a pixel location is randomly selected, and perturbation is added to it
+- Calculate importance of pixel by observing change in classification accuracy after adding noise
+
+<sup>12</sup>Nina Narodytska et al., Simple Black-box Adversarial Perturbations for Deep Networks, 2016
+
+*Vineeth N B (IIT-H)*
+
+*12.3 Adversarial Robustness*
+
+*15 / 29*
+```
+
+# DL4CV_Week12_Part03.pdf - Page 33
+
+```markdown
+# Black-box Adversarial Attacks: Gradient-Free<sup>12</sup>
+
+## Greedy Local-Search
+
+- Create a neighborhood consisting of all images that are different from previous round’s image by one pixel only
+- Initially, a pixel location is randomly selected, and perturbation is added to it
+- Calculate importance of pixel by observe change in classification accuracy after adding noise
+- The next pixel location is chosen among pixels lying within a square whose side length is 2ρ
+
+<sup>12</sup> Nina Narodytska et al., Simple Black-box Adversarial Perturbations for Deep Networks, 2016
+
+Vineeth N B (IIT-H) §12.3 Adversarial Robustness
+
+---
+
+[15 / 29]
+```
+
+# DL4CV_Week12_Part03.pdf - Page 34
+
+```markdown
+# Black-box Adversarial Attacks: Gradient-Free<sup>12</sup>
+
+## Greedy Local-Search
+
+- Create a neighborhood consisting of all images that are different from previous round’s image by one pixel only
+
+- Initially, a pixel location is randomly selected, and perturbation is added to it
+
+- Calculate importance of pixel by observe change in classification accuracy after adding noise
+
+- The next pixel location is chosen among pixels lying within a square whose side length is $2\rho$
+
+- Use these importance to approximate the loss function’s gradient
+
+<sup>12</sup>Nina Narodytska et al., Simple Black-box Adversarial Perturbations for Deep Networks, 2016
+
+Vineeth N B (IIT-H)
+
+$12.3$ Adversarial Robustness
+
+15 / 29
+```
+
+# DL4CV_Week12_Part03.pdf - Page 35
+
+```markdown
+# Need for Adversarial Defenses: Adversarial Examples in Physical World
+
+- Poses a serious security threat to services using modern day Deep Learning models
+- E.g., TensorFlow Camera Demo app to classify clean and adversarial generated images
+
+![TensorFlow Camera Demo](image_link_here)
+
+- A clean image (b) recognized correctly as a "washer" when perceived through camera, while adversarial images (c) and (d) are misclassified
+
+  - (a) Image From dataset
+  - (b) Clean Image
+  - (c) Adv. image, r = 4
+  - (d) Adv. image, r = 8
+
+---
+
+#### Reference
+Alexey Kurakin et al., *Adversarial Examples in the Physical World*, ICLRW 2017
+Vineeth N B (IIT-H)
+Section 12.3 Adversarial Robustness
+
+---
+
+16 / 29
+```
+
+# DL4CV_Week12_Part03.pdf - Page 36
+
+```markdown
+# Adversarial Defenses: Randomization
+
+## Random Input Transformation
+
+- Two random transformations—random resizing and padding—to mitigate adversarial effects at inference time
+
+![Random Input Transformation Diagram](image_url)
+
+**Input image** → **Resized image** → **Padded image** → **CNN Classification**
+
+1. Random resizing layer
+2. Random padding layer
+3. Randomly selected spatial transform
+
+### References
+
+[^14]: Xie et al. *Mitigating Adversarial Effects through Randomization*, 2017
+
+[^15]: Liu et al. *Towards Robust Neural Networks via Random Self-Ensemble*, ECCV 2018
+
+*Vineeth N B (IIIT-H)*
+
+*$12.3$ Adversarial Robustness*
+
+---
+
+17 / 29
+```
+
+# DL4CV_Week12_Part03.pdf - Page 37
+
+```markdown
+# Adversarial Defenses: Randomization
+
+## Random Input Transformation
+
+- Two random transformations—random resizing and padding—to mitigate adversarial effects at inference time
+
+![Random Input Transformation Diagram](image_url)
+
+- Input image
+- Random resizing layer
+- Resized image
+- Random padding layer
+- Padded image
+- Randomly selected image
+
+![CNN Classification](image_url)
+
+## Random Noising
+
+- Adds a noise layer before each convolution layer in both training and testing phases
+- Ensembles prediction results over random noises to stabilize DNN’s outputs
+
+![Random Noising Diagram](image_url)
+
+- Noise layer
+- Convolution layer
+- Batch norm
+- Activation
+- Noise layer
+- Convolution layer
+- Batch norm
+- Activation
+- Pooling
+- Fully Connected Layer (FC)
+
+### References
+
+1. Xie et al. Mitigating Adversarial Effects through Randomization, 2017
+2. Liu et al. Towards Robust Neural Networks via Random Self-Ensemble, ECCV 2018
+
+*Vineeth N B (IIT-H)*
+
+*$12.3 Adversarial Robustness*
+
+*Page 17 / 29*
+```
+
+# DL4CV_Week12_Part03.pdf - Page 38
+
+```markdown
+# Adversarial Defenses: Input Cleansing/Reconstruction
+
+## Defense-GAN
+
+- **Seed**
+  - **Random number generator**
+    - **z0^(i)**
+    - **z0^(r)**
+    - **z0^(c)**
+
+- **Input image x**
+
+  - **Minimize**
+    - **||G(z) - x||^2**
+
+- **z'**
+
+  - **Generator**
+    - **x̂ = G(z')**
+
+  - **Classifier**
+
+    - **ŷ**
+
+### Train a generator to model distribution of benign images
+
+#### References
+- Samangouei et al., Defense-GAN: Protecting Classifiers Against Adversarial Attacks Using Generative Models, ICLR 2018
+- Vineeth N B (IIIT-H) §12.3 Adversarial Robustness
+```
+
+# DL4CV_Week12_Part03.pdf - Page 39
+
+```markdown
+# Adversarial Defenses: Input Cleansing/Reconstruction
+
+## Defense-GAN
+
+![Defense-GAN Diagram](https://placehold.co/600x400)
+
+### Diagram Components
+
+1. **Seed**
+2. **Random Number Generator**
+3. **$\mathbf{z}_0^{(i)}$**
+4. **$\mathbf{z}_0^{(r)}$**
+5. **$\mathbf{z}_0^{(c)}$**
+6. **Minimize $\|G(\mathbf{z}) - x\|_2^2$**
+7. **$\mathbf{z}^*$**
+8. **Generator**
+9. **$\hat{x} = G(\mathbf{z}^*)$**
+10. **Classifier**
+11. **$\hat{y}$**
+
+### Description
+- **Trains a generator to model the distribution of benign images**
+- **In the testing stage, cleanses an adversarial input by searching for a close image, and feeds this benign image into the classifier**
+
+### Additional Information
+- **Source:** Samangouei et al., "Defense-GAN: Protecting Classifiers Against Adversarial Attacks Using Generative Models," ICLR 2018
+- **Credit:** Vineeth N B (IIT-H)
+
+### Section
+- **Chapter 12.3: Adversarial Robustness**
+- **Page 18 / 29**
+```
+
+# DL4CV_Week12_Part03.pdf - Page 40
+
+```markdown
+# Adversarial Defenses: Input Cleansing/Reconstruction
+
+## Defense-GAN
+
+![Defense-GAN Diagram](image_url)
+
+- **Seed** → **Random number generator**
+  - Produces random numbers \( z_0^{(r)} \), \( z_0^{(s)} \), \( z_0^{(c)} \)
+
+- **Input image \( x \)**
+  - Used in the minimization process
+
+- **Minimize \( \| G(z) - x \|_2^2 \)**
+  - \( z^* \) is found by minimizing the distance between the generated image and the input image
+
+- **Generator**
+  - Takes the optimal latent vector \( z^* \) and generates the cleaned image \( \hat{x} = G(z^*) \)
+
+- **Classifier**
+  - Classifies the generated image \( \hat{x} \) and produces the output \( \hat{y} \)
+
+### Key Concepts
+- Trains a generator to model the distribution of benign images
+- In the testing stage, cleanses an adversarial input by searching for a close image, and feeds this benign image into the classifier
+- Other similar methods: PixelDefend, MagNet, APE-GAN, etc
+
+### References
+- Samangouei et al, "Defense-GAN: Protecting Classifiers Against Adversarial Attacks Using Generative Models," ICLR 2018
+- Vineeth N B (IIIT-H), §12.3 Adversarial Robustness
+
+```
+
+# DL4CV_Week12_Part03.pdf - Page 41
+
+```markdown
+# Adversarial Defenses: Network Distillation
+
+![Diagram of Network Distillation Process](image_url)
+
+- **Initial Network**
+  - Input: Training Data `X`
+  - Input: Training Labels `Y`
+  - Output: DNN `F` trained at temperature `T`
+  - Output: Probability Vector Predictions `F(X)`
+
+- **Distilled Network**
+  - Input: Training Data `X`
+  - Input: Training Labels `F(X)`
+  - Output: DNN `F'(X)` trained at temperature `T`
+  - Output: Probability Vector Predictions `F'(X)`
+
+**Note**: Probability of classes produced by the first DNN used as inputs to train the second DNN.
+
+*Source*: Papernot et al., Distillation as a Defense to Adversarial Perturbations against Deep Neural Networks, arXiv 2016
+
+*Presented by*: Vineeth N B (IIT-H)
+
+*Section*: §12.3 Adversarial Robustness
+
+---
+
+_Image Placeholder: Replace `image_url` with the actual URL or file path of the image._
+```
+
+# DL4CV_Week12_Part03.pdf - Page 42
+
+```markdown
+# Adversarial Defenses: Network Distillation
+
+![Network Distillation Diagram](image_url)
+
+- **Probability of classes produced by first DNN used as inputs to train second DNN**
+- **Using high-temperature softmax reduces model sensitivity to small perturbations**
+
+---
+
+## Initial Network
+
+1. **Input:**
+   - Training Data `X`
+   - Training Labels `Y`
+
+2. **DNN `F` trained at temperature `T`:**
+   - Processes input data to generate probability vector predictions `F(X)`
+
+3. **Output:**
+   - Probability Vector Predictions `F(X)`
+
+## Distilled Network
+
+1. **Input:**
+   - Training Data `X`
+   - Training Labels `F(X)` (class probabilities from `F(X)`)
+
+2. **DNN `F'(X)` trained at temperature `T`:**
+   - Processes input data to generate probability vector predictions `F'(X)`
+
+3. **Output:**
+   - Probability Vector Predictions `F'(X)`
+
+---
+
+## References
+
+[17] Papernot et al., Distillation as a Defense to Adversarial Perturbations against Deep Neural Networks, arXiv 2016
+
+Vineeth N B (IIT-H)
+
+§12.3 Adversarial Robustness
+
+---
+
+**Slide Number:** 19 / 29
+```
+
+# DL4CV_Week12_Part03.pdf - Page 43
+
+```markdown
+# Adversarial Defenses: Adversarial Training
+
+## PGD/FGSM Adversarial Training
+
+- Simply add PGD/FGSM attack inside your training loop
+- "Ultimate data augmentation"
+- Create specific perturbations that best fool our model and classify them correctly
+- Most popular and widely opted; current SOTA
+
+![Diagram](image_url)
+
+$$
+\text{Regular Training} \quad \min_{\theta} \mathcal{L}(x, y; \theta)
+$$
+
+$$
+\text{Adversarial Training} \quad \min_{\theta} \max_{\delta \in \Delta} \mathcal{L}(x + \delta, y; \theta)
+$$
+
+18Goodfellow et al., Explaining and Harnessing Adversarial Examples, ICLR 2015, Madry et al., Towards Deep Learning Models Resistant To Adversarial Attack, 2017
+
+Vineeth N B (IIT-H)
+
+§12.3 Adversarial Robustness
+
+20 / 29
+```
+
+# DL4CV_Week12_Part03.pdf - Page 44
+
+```markdown
+# Adversarial Defenses: Adversarial Training
+
+## Adversarial Logit Pairing
+
+- Encourages similarity between logits of clean $x$ and adversarial $x_{adv}$ examples
+
+$$
+L_{alp} = L_{ce} + \frac{\lambda}{N} \cdot \sum_{i=1}^{N} D(f(x^i), f(x_{adv}^i))
+$$
+
+*D encourages logits to be similar; e.g. $L_2$ loss*
+
+![Logit Pairing Diagram](image_url)
+
+*Kannan et al, Adversarial Logit Pairing, 2018*
+
+*Zhang et al, Theoretically Principled Trade-off between Robustness and Accuracy”, ICML 2019*
+
+*Vineeth N B (IIT-H)*
+
+*$12.3 Adversarial Robustness*
+
+*21 / 29*
+```
+
+# DL4CV_Week12_Part03.pdf - Page 45
+
+```markdown
+# Adversarial Defenses: Adversarial Training
+
+## Adversarial Logit Pairing
+
+- Encourages similarity between logits of clean \(x\) and adversarial \(x_{adv}\) examples
+  \[
+  \mathcal{L}_{alp} = \mathcal{L}_{ce} + \frac{\lambda}{N} \sum_{i=1}^{N} D(f(x^i), f(x_{adv}^i))
+  \]
+  where \(D\) encourages logits to be similar; e.g., \(L_2\) loss.
+
+  ![Logit Pairing Diagram](diagram.png)
+
+## TRADES
+
+- Decompose prediction error for adversarial examples as sum of natural error and boundary error
+  \[
+  \min_{f} \mathbb{E} \left\{ \mathcal{L}(f(x), y_{true}) + \max_{\delta \in \Delta} \frac{\mathcal{L}(f(x), f(x + \delta))}{\lambda} \right\}
+  \]
+  - While ALP uses PGD adversarial examples, TRADES computes \(x_{adv}\) as
+    \[
+    \max_{\delta \in \Delta} \mathcal{L}(f(x), f(x + \delta))
+    \]
+  - ALP enforces \(L_2\) loss while TRADES uses classification-calibrated loss
+
+## References
+- Kannan et al., Adversarial Logit Pairing, 2018
+- Zhang et al., Theoretically Principled Trade-off between Robustness and Accuracy, ICML 2019
+
+*Vineeth N B (IIIT-H)*
+
+*$12.3 Adversarial Robustness*
+
+*21 / 29*
+```
+
+# DL4CV_Week12_Part03.pdf - Page 46
+
+# Tradeoff between Robust and Clean Accuracy
+
+![Graph](https://example.com/graph.png)
+
+- Adversarial robustness comes at a cost of decreased clean/standard accuracy
+- Gap decreases with increase in training set size; tradeoff should disappear with infinite data
+- Recent methods like IAT, AVMixup reduce this tradeoff by increasing train set size
+
+## References
+- Tsipras et al., Robustness May Be at Odds with Accuracy, ICLR 2019
+- Lamb et al., Interpolated Adversarial Training: Achieving Robust Neural Networks Without Sacrificing Too Much Accuracy, AISec 2019
+- Lee et al., Adversarial Vertex Mixup: Toward Better Adversarially Robust Generalization, CVPR 2020
+
+Vineeth N B (IIIT-H)
+
+$12.3$ Adversarial Robustness
+
+---
+
+### Tradeoff between Robust and Clean Accuracy
+
+#### Graph
+**Figure: Tradeoff between Robust and Clean Accuracy**
+
+```markdown
+| Number of labeled samples (10^4) | Epsilon (ε) = 1/255 | Epsilon (ε) = 2/255 | Epsilon (ε) = 3/255 | Epsilon (ε) = 4/255 |
+|----------------------------------|----------------------|----------------------|----------------------|----------------------|
+| 1                                | Data points and trends for each ε |
+| 2                                | Data points and trends for each ε |
+| 3                                | Data points and trends for each ε |
+| 4                                | Data points and trends for each ε |
+| 5                                | Data points and trends for each ε |
+| ...                              | ...                   |
+```
+
+- **X-axis**: Number of labeled samples (10^4)
+- **Y-axis**: Standard Deviation of Error (AT vs. Std)
+
+#### Key Points
+1. **Adversarial Robustness**:
+   - Adversarial robustness comes at a cost of decreased clean/standard accuracy.
+
+2. **Training Set Size**:
+   - The gap decreases with an increase in training set size; the tradeoff should disappear with infinite data.
+
+3. **Recent Methods**:
+   - Recent methods like IAT (Interpolated Adversarial Training) and AVMixup (Adversarial Vertex Mixup) reduce this tradeoff by increasing the training set size.
+
+#### References
+```markdown
+- **Tsipras et al.** (2019), Robustness May Be at Odds with Accuracy, ICLR 2019
+- **Lamb et al.** (2019), Interpolated Adversarial Training: Achieving Robust Neural Networks Without Sacrificing Too Much Accuracy, AISec 2019
+- **Lee et al.** (2020), Adversarial Vertex Mixup: Toward Better Adversarially Robust Generalization, CVPR 2020
+
+Vineeth N B (IIIT-H)
+
+$12.3$ Adversarial Robustness
+```
+
+# DL4CV_Week12_Part03.pdf - Page 47
+
+# Other Notions of Robustness
+
+## Attributional Robustness: Robustness of attributions (explanations/ saliency maps)
+
+![Target Image](url_to_target_image) 
+![Urban Attribution](url_to_urban_attribution)
+
+![Integrated Gradients (IG)](url_to_ig_image) ![GradCAM+](url_to_gradcam_image) ![GradSHAP](url_to_gradshap_image)
+
+### Unseen Natural Corruptions: 
+Robustness to common occurring distribution shifts like fog, blur, snow, etc.
+
+![ImageNet-C Corruptions](url_to_corruptions_image)
+
+### References
+22 Hendrycks et al., Benchmarking Neural Network Robustness to Common Corruptions and Perturbations, 2019,
+Singh et al., Attributional Robustness Training using Input-Gradient Spatial Alignment, ECCV 2020
+
+Vineeth N B (IIT-H)
+§12.3 Adversarial Robustness
+
+---
+
+### Visual Representations
+
+- **Target Image:**
+  ![Target Image](url_to_target_image)
+
+- **Urban Attribution:**
+  ![Urban Attribution](url_to_urban_attribution)
+
+- **Integrated Gradients (IG):**
+  ![Integrated Gradients](url_to_ig_image)
+
+- **GradCAM+:**
+  ![GradCAM+](url_to_gradcam_image)
+
+- **GradSHAP:**
+  ![GradSHAP](url_to_gradshap_image)
+
+### ImageNet-C Corruptions
+
+![ImageNet-C Corruptions](url_to_corruptions_image)
+
+---
+
+### References
+
+```text
+22 Hendrycks et al., Benchmarking Neural Network Robustness to Common Corruptions and Perturbations, 2019,
+Singh et al., Attributional Robustness Training using Input-Gradient Spatial Alignment, ECCV 2020
+
+Vineeth N B (IIT-H)
+§12.3 Adversarial Robustness
+```
+
+---
+
+This markdown format ensures that all scientific terms, symbols, and references are accurately captured and formatted.
+
+# DL4CV_Week12_Part03.pdf - Page 48
+
+```markdown
+# Homework
+
+## Readings
+
+- **Adversarial Machine Learning Tutorials**: Tutorial 1, Tutorial 2 and Tutorial 3
+- **Opportunities and Challenges in Deep Learning Adversarial Robustness: A Survey**
+- **Adversarial Machine Learning Reading List from beginner to advanced.**
+- **PyTorch and TensorFlow Libraries/Implementations**: MadryLab, Cleverhans and Adversarial Robustness Toolbox (ART)
+  
+![Adversarial Robustness Logo](https://via.placeholder.com/150)
+
+*Vineeth N B (IIIT-H)*
+
+*12.3 Adversarial Robustness*
+
+*24 / 29*
+```
+
+# DL4CV_Week12_Part03.pdf - Page 49
+
+```markdown
+# References
+
+- Ian Goodfellow, Jonathon Shlens, and Christian Szegedy. **"Explaining and Harnessing Adversarial Examples"**. In: *International Conference on Learning Representations*. 2015.
+
+- Nicholas Carlini and David A. Wagner. **"Towards Evaluating the Robustness of Neural Networks"**. In: *CoRR* abs/1608.04644 (2016). arXiv: [1608.04644](https://arxiv.org/abs/1608.04644).
+
+- Seyed-Mohsen Moosavi-Dezfooli, Alhussein Fawzi, and Pascal Frossard. **"DeepFool: A Simple and Accurate Method to Fool Deep Neural Networks"**. In: *Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition (CVPR)*. 2016.
+
+- Nicolas Papernot et al. **"The Limitations of Deep Learning in Adversarial Settings"**. In: *2016 IEEE European Symposium on Security and Privacy (EuroSP)* (2016), pp. 372–387.
+
+- Pin-Yu Chen et al. **"ZOO: Zeroth Order Optimization Based Black-Box Attacks to Deep Neural Networks without Training Substitute Models"**. In: *Proceedings of the 10th ACM Workshop on Artificial Intelligence and Security, AISec '17*. Dallas, Texas, USA: Association for Computing Machinery, 2017, 15–26.
+
+![Vineeth N B (IIT-H)](https://example.com/image_url)
+
+**§12.3 Adversarial Robustness**
+
+Page 25 / 29
+```
+
+# DL4CV_Week12_Part03.pdf - Page 50
+
+```markdown
+# References II
+
+- [Alexey Kurakin, Ian Goodfellow, and Samy Bengio. "Adversarial examples in the physical world". In: *ICLR Workshop* (2017).](#)
+
+- [Seyed-Mohsen Moosavi-Dezfooli et al. "Universal Adversarial Perturbations". In: *Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition (CVPR)*. 2017.](#)
+
+- [Haxini Kannan, Alexey Kurakin, and Ian J. Goodfellow. "Adversarial Logit Pairing". In: *CoRR abs/1803.06373* (2018). arXiv: 1803.06373.](#)
+
+- [Pouya Samangouei, Maya Kabkab, and Rama Chellappa. "Defense-GAN: Protecting Classifiers Against Adversarial Attacks Using Generative Models". In: *International Conference on Learning Representations*. 2018.](#)
+
+- [Chaowei Xiao et al. "Spatially Transformed Adversarial Examples". In: *International Conference on Learning Representations*. 2018.](#)
+
+- [Dan Hendrycks and Thomas G. Dietterich. "Benchmarking Neural Network Robustness to Common Corruptions and Perturbations". In: *CoRR abs/1903.12261* (2019). arXiv: 1903.12261.](#)
+
+*Vineeth N B (IIIT-H)*
+*§12.3 Adversarial Robustness*
+*26 / 29*
+```
+
+# DL4CV_Week12_Part03.pdf - Page 51
+
+```markdown
+# References III
+
+- **Andrew Ilyas et al.** "Adversarial Examples Are Not Bugs, They Are Features". In: *Advances in Neural Information Processing Systems 32*. Ed. by H. Wallach et al. Curran Associates, Inc., 2019, pp. 125–136.
+
+- **Cassidy Laidlaw and Soheil Feizi.** "Functional Adversarial Attacks". In: *Advances in Neural Information Processing Systems 32*. Ed. by H. Wallach et al. Curran Associates, Inc., 2019, pp. 10408–10418.
+
+- **Alex Lamb et al.** "Interpolated Adversarial Training: Achieving Robust Neural Networks Without Sacrificing Too Much Accuracy". In: *Proceedings of the 12th ACM Workshop on Artificial Intelligence and Security*. AISec'19. London, United Kingdom: Association for Computing Machinery, 2019, 95–103.
+
+- **Seyed-Mohsen Moosavi-Dezfooli et al.** "Robustness via Curvature Regularization, and Vice Versa". In: *Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)*. 2019.
+
+- **Chongli Qin et al.** "Adversarial Robustness through Local Linearization". In: *Advances in Neural Information Processing Systems 32*. Ed. by H. Wallach et al. Curran Associates, Inc., 2019, pp. 13847–13856.
+
+---
+
+*Vineeth N B (IIIT-H)*
+*§12.3 Adversarial Robustness*
+*27 / 29*
+```
+
+# DL4CV_Week12_Part03.pdf - Page 52
+
+```markdown
+# References IV
+
+- [Shibani Santurkar et al.](). "Image Synthesis with a Single (Robust) Classifier". In: *Advances in Neural Information Processing Systems 32*. Ed. by H. Wallach et al. Curran Associates, Inc., 2019, pp. 1262–1273.
+
+- [Lukas Schott et al.](). "Towards the first adversarially robust neural network model on MNIST". In: *International Conference on Learning Representations*. 2019.
+
+- [Dimitris Tsipras et al.](). "Robustness May Be at Odds with Accuracy". In: *International Conference on Learning Representations*. 2019.
+
+- [Hongyang Zhang et al.](). "Theoretically Principled Trade-off between Robustness and Accuracy". In: ed. by Kamalika Chaudhuri and Ruslan Salakhutdinov. Vol. 97. *Proceedings of Machine Learning Research*. Long Beach, California, USA: PMLR, 2019, pp. 7472–7482.
+
+- [Tianyan Zhang and Zhanxing Zhu](). "Interpreting Adversarially Trained Convolutional Neural Networks". In: *CoRR abs/1905.09797 (2019)*. arXiv: [1905.09797](https://arxiv.org/abs/1905.09797).
+
+*Vineeth N B. (IIT-H)*
+
+*§12.3 Adversarial Robustness*
+
+*28 / 29*
+```
+
+# DL4CV_Week12_Part03.pdf - Page 53
+
+```markdown
+# References V
+
+- [ ] **Saehyung Lee, Hyungyu Lee, and Sungroh Yoon.** **"Adversarial Vertex Mixup: Toward Better Adversarially Robust Generalization".** In: *Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR).* 2020.
+
+- [ ] **Hadi Salman et al.** *Do Adversarially Robust ImageNet Models Transfer Better?* 2020. arXiv: [2007.08489](https://arxiv.org/abs/2007.08489) [cs.CV].
+
+- [ ] **Mayank Singh et al.** *Attributional Robustness Training using Input-Gradient Spatial Alignment.* 2020. arXiv: [1911.13073](https://arxiv.org/abs/1911.13073) [cs.CV].
+
+![NPTEL](https://example.com/nptel_logo.png)
+
+**Vineeth N B (IIT-H)**
+
+**§12.3 Adversarial Robustness**
+
+Page 29 / 29
+```
+

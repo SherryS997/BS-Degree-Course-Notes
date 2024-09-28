@@ -1,0 +1,1873 @@
+# Week 3 LLM.pdf - Page 1
+
+```markdown
+# Introduction to Large Language Models
+
+## Lecture 2: Language Modelling GPT, Decoding Strategies
+
+**Mitesh M. Khapra**
+
+---
+
+**Affiliation**:
+Al4Bharat, Department of Computer Science and Engineering, IIT Madras
+
+---
+
+```
+
+# Week 3 LLM.pdf - Page 2
+
+```markdown
+# Transformer Architecture in Machine Translation
+
+In the previous lecture, we learned about the components of the transformer architecture in the context of machine translation.
+
+## Components of the Transformer Architecture
+
+### Source and Target Encoders
+
+The transformer architecture consists of two main parts: the source encoder and the target encoder.
+
+#### Source Encoder \( h_{source} \)
+
+1. **Positional Encoding (PE)**
+   - The input sequence is first passed through a positional encoding layer to add positional information to the input embeddings.
+
+   ```math
+   PE = \text{Positional Encoding}
+   ```
+
+2. **Add & Norm**
+   - The positional encoding is added to the input embeddings.
+
+   ```math
+   \text{Input} + PE
+   ```
+
+3. **Feed Forward Neural Network (NN)**
+   - The positional-encoded input is passed through a feed-forward neural network.
+
+4. **Multi-Head Attention Mechanism**
+   - The output of the feed-forward neural network is processed using a multi-head attention mechanism.
+
+5. **Add & Norm**
+   - The multi-head attention output is added and normalized.
+
+6. **Output**
+   - The final output of the source encoder is the processed input sequence.
+
+#### Target Encoder \( h_{target} \)
+
+1. **Positional Encoding (PE)**
+   - Similar to the source encoder, the target sequence is passed through a positional encoding layer.
+
+   ```math
+   PE = \text{Positional Encoding}
+   ```
+
+2. **Add & Norm**
+   - The positional encoding is added to the input embeddings.
+
+   ```math
+   \text{Input} + PE
+   ```
+
+3. **Feed Forward Neural Network (NN)**
+   - The positional-encoded input is passed through a feed-forward neural network.
+
+4. **Multi-Head Masked Attention Mechanism**
+   - The output of the feed-forward neural network is processed using a multi-head masked attention mechanism.
+
+5. **Multi-Head Cross Attention Mechanism**
+   - The multi-head masked attention output is processed using a multi-head cross-attention mechanism.
+
+6. **Add & Norm**
+   - The multi-head cross-attention output is added and normalized.
+
+7. **Output**
+   - The final output of the target encoder is the processed input sequence.
+
+## Diagrams
+
+### Source Encoder Diagram
+
+```plaintext
+[Source Encoder Diagram]
+```
+
+### Target Encoder Diagram
+
+```plaintext
+[Target Encoder Diagram]
+```
+
+## Conclusion
+
+The transformer architecture is a powerful model for machine translation, utilizing components such as positional encoding, feed-forward neural networks, and attention mechanisms to effectively process and translate sequences of data.
+```
+
+# Week 3 LLM.pdf - Page 3
+
+```markdown
+# Machine Translation and Transformer Architecture
+
+In the previous lecture, we learned about the components of the transformer architecture in the context of machine translation.
+
+At a high-level, we can just think of it as an encoder-decoder block.
+
+![Transformer Architecture](https://via.placeholder.com/150)
+
+- **Encoder**: Transforms the input sequence into a continuous representation.
+- **Decoder**: Generates the output sequence from the encoded representation.
+
+## Components of the Transformer Architecture
+
+### Encoder
+
+The encoder consists of a stack of \( N \) identical layers. Each layer has two sub-layers:
+
+1. **Multi-head self-attention mechanism**: Allows the model to jointly attend to information from different representation subspaces at different positions.
+2. **Position-wise feed-forward network**: Applies a position-wise feed-forward network to each position.
+
+### Decoder
+
+The decoder also consists of a stack of \( N \) identical layers. Each layer has three sub-layers:
+
+1. **Masked multi-head self-attention mechanism**: Similar to the encoder but masked to prevent attending to subsequent positions.
+2. **Multi-head attention mechanism**: Attends to the encoder's output.
+3. **Position-wise feed-forward network**: Applies a position-wise feed-forward network to each position.
+
+### Attention Mechanism
+
+The attention mechanism is crucial for the transformer architecture. It computes a set of attention weights that indicate the importance of each input element for a given output element.
+
+#### Scaled Dot-Product Attention
+
+The scaled dot-product attention is defined as:
+
+\[ \text{Attention}(Q, K, V) = \text{softmax} \left( \frac{QK^T}{\sqrt{d_k}} \right) V \]
+
+Where:
+- \( Q \) is the query matrix.
+- \( K \) is the key matrix.
+- \( V \) is the value matrix.
+- \( d_k \) is the dimension of the keys.
+
+#### Multi-Head Attention
+
+Multi-head attention allows the model to jointly attend to information from different representation subspaces.
+
+\[ \text{MultiHead}(Q, K, V) = \text{Concat}(\text{head}_1, \text{head}_2, \ldots, \text{head}_h) W^O \]
+
+Where:
+- Each \( \text{head}_i \) is a scaled dot-product attention.
+- \( W^O \) is the output projection matrix.
+
+### Positional Encoding
+
+Since the transformer architecture does not have a recurrent layer, positional encoding is added to the input embeddings to provide information about the position of the tokens in the sequence.
+
+\[ \text{PE}_{(pos, 2i)} = \sin \left( \frac{pos}{10000^{\frac{2i}{d}}} \right) \]
+\[ \text{PE}_{(pos, 2i+1)} = \cos \left( \frac{pos}{10000^{\frac{2i}{d}}} \right) \]
+
+Where:
+- \( pos \) is the position.
+- \( i \) is the dimension.
+- \( d \) is the dimension of the model.
+
+The positional encodings are added to the input embeddings to give the model the ability to understand the order of the tokens in the sequence.
+
+```
+
+# Week 3 LLM.pdf - Page 4
+
+```markdown
+# Transformer Architecture in Machine Translation
+
+## Overview
+
+In the previous lecture, we learned about the components of the transformer architecture in the context of machine translation.
+
+At an even higher level of abstraction, we can think of it as a black box that receives an input and produces an output.
+
+## Transformer Diagram
+
+![Transformer](url_to_transformer_diagram)
+
+- **Text in source language**: The input to the transformer.
+- **Transformer**: The processing unit that translates the text.
+- **Translated text in target language**: The output from the transformer.
+
+**Credit**: Mitesh Khapro
+```
+
+# Week 3 LLM.pdf - Page 5
+
+```markdown
+# Transformer Architecture in Machine Translation and NLP Tasks
+
+In the previous lecture, we learned about the components of the transformer architecture in the context of machine translation.
+
+## Using Transformer Architecture for Other NLP Tasks
+
+### Question
+What if we want to use the transformer architecture for other NLP tasks?
+
+### Explanation
+We need to train a separate model for each task using datasets specific to the task.
+
+### Diagrams and Flow
+
+```plaintext
+[![Transformer Architecture Diagrams](https://link-to-diagram.com)](https://link-to-diagram.com)
+```
+
+### Detailed Flow
+
+1. **Predict the class/sentiment**
+   - **Transformer**: Takes the input text and predicts the class/sentiment.
+   - Input: Text
+
+2. **Summarize**
+   - **Transformer**: Takes the input text and generates a summary.
+   - Input: Text
+
+3. **Answer Questions**
+   - **Transformer**: Takes the input text and a question, generating an answer.
+   - Input: Text and Question
+
+### Example
+```plaintext
+[![Example Diagram](https://link-to-example.com)](https://link-to-example.com)
+```
+
+### Conclusion
+For each specific NLP task, a dedicated transformer model must be trained using relevant datasets.
+
+*Mitesh Khapro*
+```
+
+# Week 3 LLM.pdf - Page 6
+
+```markdown
+# Transformer Architecture for NLP Tasks
+
+In the previous lectures, we learned the components of transformer architecture in the context of machine translation.
+
+## Using Transformer Architecture for Other NLP Tasks
+
+What if we want to use the transformer architecture for other NLP tasks?
+
+We need to train a separate model for each task using dataset specific to the task.
+
+If we train the architecture from scratch (that is, by randomly initializing the parameters) for each task, it takes a long time for convergence.
+
+Often, we may not have enough labelled samples for many NLP tasks.
+
+![Transformer Architecture Diagram](image_url)
+
+### Steps in Transformer Architecture
+
+1. **Input Text**: The input text is fed into the Transformer model.
+2. **Transformer**: The Transformer processes the input text.
+3. **Prediction**: The Transformer predicts the class/sentiment.
+4. **Text Summarization**: The Transformer summarizes the input text.
+5. **Answer Generation**: The Transformer generates an answer from the input text.
+6. **Question Answering**: The Transformer answers a question based on the input text.
+
+### Challenges
+
+- Training from scratch for each task is time-consuming.
+- Lack of labelled data for many NLP tasks.
+
+By Mitresh Khapro
+```
+
+# Week 3 LLM.pdf - Page 7
+
+```markdown
+# Utilizing Unlabelled Data for Model Training
+
+## Challenges with Labelled Data
+
+- Preparing labelled data is laborious and costly
+  
+
+## Availability of Unlabelled Data
+
+- We have a large amount of unlabelled text easily available on the internet
+
+## Utilizing Unlabelled Data
+
+- Can we make use of such unlabelled data to train a model?
+
+![Internet and Unlabelled Data](https://via.placeholder.com/150)
+
+## Using Transformers for Different Tasks
+
+### Predict the Class/Sentiment
+
+1. **Input Text**
+   - Text to be classified or sentiment to be predicted
+
+2. **Transformer Model**
+   - Predicts the class or sentiment based on the input text
+
+### Text Summarization
+
+1. **Input Text**
+   - Text to be summarized
+
+2. **Transformer Model**
+   - Outputs a summarized version of the input text
+
+### Question Answering
+
+1. **Input Text**
+   - Text providing context or additional information
+
+2. **Question**
+   - Specific question based on the input text
+
+3. **Transformer Model**
+   - Provides an answer to the question based on the input text
+
+![Transformer Workflow](https://via.placeholder.com/150)
+
+### Transformer Model Workflow
+
+1. **Text Input**
+   - For each task, the transformer model takes the input text
+
+2. **Processing**
+   - The transformer model processes the input text to generate the desired output (class/sentiment, summary, or answer)
+
+3. **Output**
+   - Depending on the task, the transformer model provides the class/sentiment, summarized text, or the answer to the question
+
+---
+
+**Mitresh Khapra**
+```
+
+# Week 3 LLM.pdf - Page 8
+
+```markdown
+# Preparing Labelled Data vs Using Unlabelled Data
+
+## Challenge with Labelled Data
+
+- Preparing labelled data is laborious and costly.
+
+## Availability of Unlabelled Data
+
+- We have a huge unlabelled text data on the internet.
+
+## Utilization of Unlabelled Data
+
+- Can we make use of these unlabelled data to train a model?
+- What will be the training objective in that case?
+- Would that be helpful in adapting the model to downstream tasks with minimal fine-tuning (with zero or a few samples)?
+
+## Transformer Model for Different Tasks
+
+### Predict the Class/Sentiment
+
+1. **Transformer**
+   - **Input**: Text
+   - **Output**: Predict the class/sentiment
+
+### Summarize Text
+
+2. **Transformer**
+   - **Input**: Text
+   - **Output**: Summarize
+
+### Answer Questions
+
+3. **Transformer**
+   - **Input**: Text
+   - **Output**: Answer
+
+**Image Example**:
+![Transformer Diagram](https://via.placeholder.com/100)
+
+```
+
+The provided markdown format ensures the extraction of the text with proper scientific formatting, maintaining the structure and clarity of the content.
+
+# Week 3 LLM.pdf - Page 9
+
+```markdown
+# Module 2.1: Language Modelling
+
+**Mitesh M. Khapra**
+
+AI4Bharat, Department of Computer Science and Engineering, IIIT Madras
+
+---
+
+## Introduction
+
+Language modeling is a fundamental task in natural language processing (NLP). It involves predicting the likelihood of a sequence of words in a given language. This module will provide an overview of different language modeling techniques and their applications.
+
+### Types of Language Models
+
+1. **Unigram Language Models**
+2. **Bigram Language Models**
+3. **Trigram Language Models**
+4. **N-gram Language Models**
+5. **Hidden Markov Models (HMMs)**
+6. **Neural Language Models**
+7. **Transformers**
+
+### Unigram Language Models
+
+Unigram language models consider the probability of individual words occurring in a sentence. They do not take into account the context of surrounding words.
+
+#### Probability Calculation
+
+The probability \( P(w_i) \) of a word \( w_i \) is calculated as:
+
+\[ P(w_i) = \frac{\text{Count of } w_i}{\text{Total number of words}} \]
+
+### Bigram Language Models
+
+Bigram language models consider the probability of a word given the previous word in a sentence.
+
+#### Probability Calculation
+
+The probability \( P(w_i \mid w_{i-1}) \) of a word \( w_i \) given the previous word \( w_{i-1} \) is calculated as:
+
+\[ P(w_i \mid w_{i-1}) = \frac{\text{Count of } (w_{i-1}, w_i)}{\text{Total number of bigrams}} \]
+
+### Neural Language Models
+
+Neural language models utilize neural networks to predict the probability of a sequence of words. They can capture complex dependencies between words.
+
+#### Architecture
+
+- **Input**: A sequence of words represented as embeddings.
+- **Output**: Predicted word probabilities.
+
+### Transformers
+
+Transformers are a state-of-the-art architecture for language modeling. They use self-attention mechanisms to weigh the importance of different words in a sequence.
+
+#### Key Components
+
+- **Self-Attention Mechanism**: Allows the model to focus on different words in the sequence.
+- **Transformer Encoder-Decoder**: Used for sequence-to-sequence tasks.
+
+### Applications
+
+Language models have various applications in NLP, including:
+
+- **Machine Translation**
+- **Text Generation**
+- **Speech Recognition**
+- **Sentiment Analysis**
+
+### Conclusion
+
+Language modeling is a crucial aspect of natural language processing. Different types of language models have been developed to capture various aspects of language, from simple n-gram models to complex neural networks and transformers.
+
+```
+
+# Week 3 LLM.pdf - Page 10
+
+```markdown
+# Motivation
+
+Assume that we ask questions to a lay person based on a statement or some excerpt
+
+"Wow, India has now reached the moon"
+
+An excerpt from business today "What sets this mission apart is the pivotal role of artificial intelligence (AI) in guiding the spacecraft during its critical descent to the moon's surface."
+
+He likes to stay
+He likes to stray
+He likes to sway
+
+- Is this sentence expressing a positive or a negative sentiment?
+- Did the lander use AI for soft landing on the moon?
+- Are these meaningful sentences?
+
+The person will most likely answer all the questions, even though he/she may not be explicitly trained on any of these tasks. How?
+
+We develop a strong understanding of language through various language based interactions(listening/reading) over our life time without any explicit supervision
+
+![Mitresh Khapra](image_url)
+```
+
+# Week 3 LLM.pdf - Page 11
+
+```markdown
+# Idea
+
+Can a model develop basic understanding of language by getting exposure to a large amount of raw text? **[Pre-training]**
+
+More importantly, after getting exposed to such raw data can it learn to perform well on downstream tasks with minimum supervision? **[Supervised Fine-tuning]**
+
+Mitesh Khapra
+```
+
+# Week 3 LLM.pdf - Page 12
+
+```markdown
+# Language Modeling and Downstream Tasks
+
+## Pre-training and Fine-tuning
+
+### Pre-training
+- **Input:** Raw text
+- **Process:** Language Modeling
+
+### Fine-tuning
+- **Input:** Samples and labels
+- **Process:** Downstream tasks
+
+## Graph Representation
+
+### Description
+With this representation, a linear model classifies reviews with 91.8% accuracy beating the SOTA (Ref).
+
+- ...matches the performance of previous supervised systems using 30-100x fewer labeled examples (Ref)
+
+### Graph
+![Graph Representation](graph.png)
+
+## References
+- Mitesh Khapro
+```
+
+In the markdown format above:
+- The sections and subsections are clearly demarcated using `#` and `##` for headings and subheadings.
+- The descriptions are structured with bullet points where applicable.
+- The graph is represented with a placeholder `[graph.png]` which should be replaced with the actual graph image captured from the OCR process.
+- The references are noted at the end of the document.
+
+Please replace the placeholder for the graph image with the actual image captured from the OCR process.
+
+# Week 3 LLM.pdf - Page 13
+
+```markdown
+# Language modelling
+
+Let \( \mathcal{V} \) be a vocabulary of language (i.e., collection of all unique words in the language)
+
+We can think of a sentence as a sequence \( X_1, X_2, \dots, X_n \) where \( X_i \in \mathcal{V} \)
+
+For example, if \( \mathcal{V} = \{an, apple, ate, I\} \), some possible sentences (not necessarily grammatically correct) are
+
+a. An apple ate I
+
+b. I ate an apple
+
+c. I ate apple
+
+d. an apple
+
+e. ....
+
+Intuitively, some of these sentences are more probable than others.
+
+What do we mean by that?
+
+*Mitesh Khapra*
+```
+
+# Week 3 LLM.pdf - Page 14
+
+```markdown
+# Language Models
+
+Intuitively, we mean that give a very very large corpus, we expect some of these sentences to appear more frequently than others [hence, more probable]
+
+We are now looking for a function which takes a sequence as input and assigns a probability to each sequence
+
+\[ f: (X_1, X_2, \cdots X_n) \rightarrow [0, 1] \]
+
+Such a function is called a language model.
+```
+
+# Week 3 LLM.pdf - Page 15
+
+```markdown
+# Language modelling
+
+$$
+P(x_1, x_2, \cdots, x_T) = P(x_1)P(x_2 | x_1)P(x_3 | x_2, x_1) \cdots P(x_T | x_{T-1}, \cdots, x_1)
+$$
+
+$$
+= \prod_{i=1}^{T} P(x_i | x_1, \cdots, x_{i-1})
+$$
+
+If we naively assume that the words in a sequence are independent of each other then
+
+$$
+P(x_1, x_2, \cdots, x_T) = \prod_{i=1}^{T} P(x_i)
+$$
+
+*Mitesh Khapro*
+```
+
+# Week 3 LLM.pdf - Page 16
+
+```markdown
+# How do we enable a model to understand language?
+
+## Simple Idea: Teach it the task of predicting the next token in a sequence..
+
+You have tons of sequences available on the web which you can use as training data
+
+### Chandraayan-3
+
+#### Article: "Isk"
+
+**From Wikipedia, the free encyclopedia**
+
+**Chandrayaan-3** (/ˈtʃɑːndreɪən θɪˈriː/; lit. 'Moon vessel') is the third mission in the Chandrayaan programme, a series of lunar-exploration missions by the Indian Space Research Organisation (ISRO).[7] Launched on 14 July 2023, the mission comprises of ISRO's lander named Vikram and a lunar rover named Pragyan, which is scheduled to land on the Moon in August 2023.
+
+**Chandrayaan-3 was launched** from Satish Dhawan Space Centre on 14 July 2023. The spacecraft will carry a six-wheeled lunar rover named Pragyan. It will also carry a seismometer to measure vibrations caused by meteoroids and the Moon. The lander is scheduled to land on the Moon in August 2023. The rover will then perform experiments on the lunar surface.
+
+### Roughly speaking, this task of predicting the next token in a sequence is called language modelling
+
+---
+
+**BECAUSE he is the *** in conceiving and implementing India's digital building blocks such as UPI, Aadhaar, eKYC and FASTag. He also helped the government develop the IT infrastructure to *** GST and the Ayushman Bharat Yojana. The *** is the government's go-to person for tech intervention, irrespective of the party in power.
+
+**BECAUSE he was *** in the launch of the Beckn protocol, now being used in sectors such as e-commerce, mobility and health. He was *** the government-backed Open Network for Digital Commerce (ONDC), aimed at helping small Indian retailers fight back against e-com giants like Amazon and Flipkart. He is also supporting IT Madras's AI@Bharat, an AI initiative, in 22 Indian languages.**
+```
+
+# Week 3 LLM.pdf - Page 17
+
+```markdown
+However, we know that the words in a sentence are not independent but depend on the previous words
+
+a. I enjoyed reading a book
+
+b. I enjoyed reading a thermometer
+
+The presence of "enjoyed" makes the word "book" more likely than "thermometer"
+
+Hence, the naive assumption does not make sense
+
+$$\prod_{i=1}^{T} P(x_i | x_1, \ldots, x_{i-1}) : \text{Current word } x_i \text{ depends on previous words } x_1, \ldots, x_{i-1}$$
+
+*Mitesh Khapro*
+```
+
+# Week 3 LLM.pdf - Page 18
+
+```markdown
+# Estimation of Conditional Probabilities
+
+## Given Equation
+\[
+\prod_{i=1}^{T} P(x_i | x_1, \cdots, x_{i-1}) : \text{Current word } x_i \text{ depends on previous words } x_1, \cdots, x_{i-1}
+\]
+
+### Question
+![Confused Face Emoji](https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/apple/282/confused-face_1f615.png)
+
+**How do we estimate these conditional probabilities?**
+
+### Solution
+One solution: use **autoregressive** models where the conditional probabilities are given by parameterized functions with a fixed number of parameters (like transformers).
+
+*Mitesh Khapro*
+```
+
+# Week 3 LLM.pdf - Page 19
+
+```markdown
+# Causal Language Modelling (CLM)
+
+\[ P(x_1, x_2, \cdots, x_T) = \prod_{i=1}^{T} P(x_i | x_1, \cdots, x_{i-1}) \]
+
+\[
+= P(x_1) P(x_2 | x_1) P(x_3 | x_2, x_1) \cdots P(x_T | x_{T-1}, \cdots, x_1)
+\]
+
+We are looking for \( f_\theta \) such that
+
+\[ P(x_i | x_1, \cdots, x_{i-1}) = f_\theta(x_i | x_1, \cdots, x_{i-1}) \]
+
+Can \( f_\theta \) be a transformer?
+
+![Transformer Diagram](https://via.placeholder.com/150)
+
+- **\( f_\theta \)**: Transformer
+- **\( P(x_i) \)**: Output probability
+- **\( x_1, x_2, \cdots, x_i \)** : Input sequence
+
+*Mitesh Khapra*
+```
+
+# Week 3 LLM.pdf - Page 20
+
+```markdown
+# Some Possibilities
+
+## Using only the encoder of the transformer (encoder only models)
+
+```block
+P(<mask>)
+    |
+    |-> Add&Norm
+    |
+    |-> Feed forward NN
+    |
+    |-> Add&Norm
+    |
+    |-> Multi-Head Attention
+    |
+x_1, <mask>, ..., x_T
+```
+
+## Using only the decoder of the transformer (decoder only models)
+
+```block
+P(x_i)
+    |
+    |-> Add&Norm
+    |
+    |-> Feed forward NN
+    |
+    |-> Add&Norm
+    |
+    |-> Multi-Head masked Attention
+    |
+x_1, x_2, ..., x_{i-1}
+```
+
+## Using both the encoder and decoder of the transformer (encoder decoder models)
+
+```block
+P(<mask>)
+    |
+    |-> Add&Norm
+    |
+    |-> Feed forward NN
+    |
+    |-> Add&Norm
+    |
+    |-> Multi-Head cross Attention
+    |
+    |
+    |-> Add&Norm
+    |
+    |-> Feed forward NN
+    |
+    |-> Add&Norm
+    |
+    |-> Multi-Head Attention
+    |
+    |-> Add&Norm
+    |
+    |-> Multi-Head Masked Attention
+    |
+    |
+    |-> <go>
+```
+
+*Source: [Inside NLP](https://inside-nlp.com/)*
+```
+
+# Week 3 LLM.pdf - Page 21
+
+```markdown
+# The input is a sequence of words
+
+We want the model to see only the present and past inputs.
+
+We can achieve this by applying the mask.
+
+\[ M = \begin{bmatrix}
+0 & -\infty & -\infty & -\infty \\
+0 & 0 & -\infty & -\infty \\
+0 & 0 & 0 & -\infty \\
+0 & 0 & 0 & 0 \\
+\end{bmatrix} \]
+
+The masked multi-head attention layer is required.
+
+However, we do not need multi-head cross attention layer (as there is no encoder).
+
+![Diagram of the model architecture](image_placeholder)
+
+- **Feed Forward Network**
+- **Multi-Head (Cross) Attention**
+- **Masked Multi-Head (Self) Attention**
+
+```
+Inputs:
+- \( e \)
+- \( (go) \)
+- \( x_1 \)
+- \( x_2 \)
+- \( x_3 \)
+```
+
+- **Feed Forward Network**
+- **Multi-Head (Cross) Attention**
+- **Masked Multi-Head (Self) Attention**
+```
+
+- \( e \) -> Feed Forward Network
+- \( (go) \) -> Masked Multi-Head (Self) Attention
+- \( x_1 \) -> Masked Multi-Head (Self) Attention
+- \( x_2 \) -> Masked Multi-Head (Self) Attention
+- \( x_3 \) -> Masked Multi-Head (Self) Attention
+```
+
+# Week 3 LLM.pdf - Page 22
+
+```markdown
+## OCR Extracted Content
+
+### Diagram and Explanation
+
+```markdown
+# Diagram
+![Diagram of the model](image_url)
+
+### Explanation
+
+**The outputs represent each term in the chain rule**
+
+\[
+p(x_4|x_3, x_2, x_1) = P(x_1)P(x_2|x_1)P(x_3|x_2, x_1)P(x_4|x_3, x_2, x_1)
+\]
+
+**However, this time the probabilities are determined by the parameters of the model**
+
+\[
+= P(x_1;\theta)P(x_2|x_1;\theta)P(x_3|x_2, x_1;\theta)P(x_4|x_3, x_2, x_1;\theta)
+\]
+
+**Therefore, the objective is to maximize the likelihood \(L(\theta)\)**
+
+### Model Components
+
+\[
+\text{Feed Forward Network}
+\]
+
+\[
+\text{Masked Multi-Head (Self) Attention}
+\]
+
+### Inputs and Outputs
+
+\[
+\langle go\rangle, \quad x_1, \quad x_2, \quad x_3
+\]
+
+### Probabilities
+
+\[
+p(x_1), \quad \ldots, \quad p(x_4|x_3, x_2, x_1)
+\]
+
+### Maximizing Likelihood
+
+\[
+L(\theta)
+\]
+
+### References
+
+* Mitesh Khapra
+```
+
+---
+
+**Note**: The `image_url` placeholder should be replaced with the actual URL or filename of the image if available. The OCR process might not capture the image directly, so manual insertion may be required.
+
+# Week 3 LLM.pdf - Page 23
+
+```markdown
+# Module 2.2: Generative Pretrained Transformer (GPT)
+
+**Mitesh M. Khapra**
+
+AI4Bharat, Department of Computer Science and Engineering, IIT Madras
+
+---
+
+## Module Title
+
+**Module 2.2: Generative Pretrained Transformer (GPT)**
+
+## Author
+
+**Mitesh M. Khapra**
+
+## Affiliation
+
+AI4Bharat, Department of Computer Science and Engineering, IIT Madras
+
+---
+
+![IIT Madras Logo](https://example.com/iitmadras_logo.png)
+
+**IIT Madras**
+
+---
+
+This module covers the fundamentals of Generative Pretrained Transformers (GPT), a significant advancement in natural language processing. The GPT models are designed to understand and generate human-like text, enabling various applications in AI, including language translation, text summarization, and more.
+
+### Key Concepts
+
+- **Transformer Architecture**: Understanding the core components of the transformer model.
+- **Pretraining Techniques**: Methods used to pretrain the models on large datasets.
+- **Generative Models**: How GPT models generate text based on learned patterns.
+- **Applications**: Real-world use cases of GPT models.
+
+### Learning Objectives
+
+- Gain insights into the architecture and functionality of transformer models.
+- Understand the principles behind pretraining and fine-tuning GPT models.
+- Explore the applications and potential impact of GPT in various domains.
+
+### Outline
+
+1. **Introduction to Transformer Models**
+   - History and evolution of transformer architecture.
+   - Key components: attention mechanisms, encoding, and decoding processes.
+
+2. **Pretraining Techniques**
+   - Different strategies for pretraining models on vast datasets.
+   - The role of masked language modeling in GPT.
+
+3. **Generative Processes**
+   - How GPT models generate text.
+   - Examples of text generation and analysis.
+
+4. **Applications and Case Studies**
+   - Real-world applications of GPT in language translation, text summarization, etc.
+   - Case studies demonstrating the effectiveness of GPT models.
+
+### Conclusion
+
+The module concludes with a summary of the key concepts discussed and an outlook on future developments in the field of generative transformers. The session includes interactive demonstrations and hands-on exercises to reinforce the learning outcomes.
+
+---
+
+*For more information, visit the [AI4Bharat website](https://example.com/ai4bharat).*
+
+```
+
+# Week 3 LLM.pdf - Page 24
+
+```markdown
+# Generative Pretrained Transformer (GPT)
+
+Now we can create a stack (n) of modified decoder layers (called transformer block in the paper).
+
+Let, \( X \) denote the input sequence
+
+\[ h_0 = X \in \mathbb{R}^{T \times d_{model}} \]
+
+\[ h_i = transformer\_block(h_{i-1}), \forall i \in [1, n] \]
+
+Where \( h_n[i] \) is the \( i \)-the output vector in \( h_n \) block.
+
+\[ P(x_i) = \text{softmax}(h_n[i] W_v) \]
+
+\[ \mathcal{L} = \sum_{i=1}^T \log P(x_i | x_1, \ldots, x_{i-1}) \]
+
+![Transformer Blocks Diagram](image_url)
+
+- \( p(x_1) \)
+- ...
+- \( p(x_4 | x_3, x_2, x_1) \)
+
+```math
+h_{51} \rightarrow h_{52} \rightarrow h_{53} \rightarrow h_{54}
+```
+
+```math
+h_{41} \rightarrow h_{42} \rightarrow h_{43} \rightarrow h_{44}
+```
+
+```math
+h_{31} \rightarrow h_{32} \rightarrow h_{33} \rightarrow h_{34}
+```
+
+```math
+h_{21} \rightarrow h_{22} \rightarrow h_{23} \rightarrow h_{24}
+```
+
+```math
+h_{11} \rightarrow h_{12} \rightarrow h_{13} \rightarrow h_{14}
+```
+
+- **Transformer Block 5**
+- **Transformer Block 4**
+- **Transformer Block 3**
+- **Transformer Block 2**
+- **Transformer Block 1**
+
+- \( h_5 \)
+- \( h_4 \)
+- \( h_3 \)
+- \( h_2 \)
+- \( h_1 \)
+
+- \( x_1 \)
+- \( x_2 \)
+- \( x_3 \)
+
+(Mitesh Khapra)
+```
+
+# Week 3 LLM.pdf - Page 25
+
+```markdown
+# Input data
+
+![BookCorpus](image_url)
+
+## BookCorpus
+
+The corpus contains 7000 unique books, 74 Million sentences and approximately 1 Billion words across 16 genres
+
+Also, uses long-range contiguous text (i.e., no shuffling of sentences or paragraphs)
+
+- Tokenizer: Byte Pair Encoding
+- Vocab size |V|: 40478
+- Embedding dim: 768
+
+**Side Note**: The other benchmark dataset called 1B words could also be used. However, the sentences are not contiguous [implement]
+```
+
+# Week 3 LLM.pdf - Page 26
+
+```markdown
+# MODEL
+
+Contains 12 decoder layers (transformer blocks)
+
+Context size: 512
+
+Attention heads: 12
+
+FFN hidden layer size: 768 x 4 = 3072
+
+Activation: Gaussian Error Linear Unit (GELU)
+
+- Dropout, layer normalization, and residual connections were implemented to enhance convergence during training.
+
+![Transformer Model Diagram](image_url)
+
+Mitesh Khapro
+```
+
+# Week 3 LLM.pdf - Page 27
+
+The provided image appears to be a slide or a document related to the concept of "Transformer Block 1" in natural language processing (NLP) or machine learning, featuring a detailed text passage about Richard Hamming, a computer scientist known for his contributions to coding theory and error correction.
+
+Below is the extracted content formatted in markdown:
+
+```markdown
+# Transformer Block 1
+
+## A sample data
+
+```plaintext
+<go> at the bell labs hammering ........ bound ........ devising a new <stop>
+```
+
+### Text Explanation
+
+In the Bell Labs Hamming shared an office for a time with Claude Shannon. The Mathematical Research Department also included Jules Taylor and Lotfi Zadeh. Veteran Donald Ling and Bronson, McMillan and Hamming came to call themselves the Valiants. Tukey praised Hamming:
+
+> "We were first-class problem-solvers. Hamming and he recalled, "We had unconventional things in unconventional ways and still got valuable results. Thus management had to tolerate us and let us alone a lot of the time."
+
+Hamming had been hired to avoid an eclipse though he still spent much of his time with the calculating machines. Before he went home one Friday in 1947, he set the machines to perform a long line of complex series of calculations over the weekend, only to find when he arrived on Monday morning that an error had occurred early in the process and the calculation had been lost. Digital machines manipulated information as sequences of zeros and ones, units of information that Tukey would call bits. A single bit in a sequence was wrong, then the whole sequence would be. To detect this, a parity bit was used to verify the correctness of each sequence. "If the computer can tell when an error has occurred," Hamming reasoned, "surely there is a way of letting the computer correct the error itself."
+
+Hamming sat down and solved the problem which he realized would have an enormous range of applications. Each bit can only be zero or one, so if you know which bit is wrong, then it can be corrected. In a landmark paper published in 1950, he introduced a method for these purposes. Hamming developed the Hamming code, which is widely used in error-correcting codes.
+
+The Hamming bound, also known as the sphere-packing or volume bound, is a limit on the parameters of an arbitrary block code. It is from an interpretation in terms of sphere packing in the Hamming distance into the space of all possible words. It gives an important limitation on the efficiency with which any error-correcting code can utilize the space in which its code words are embedded. A code which attains the Hamming bound is said to be a perfect code.
+
+Returning to differential equations, Hamming studied means of numerically integrating them. A popular approach at the time was Milne's Method, attribute to Joseph Milne. [10] This has the drawback of being unstable, so that under certain conditions the result could be swamped by roundoff noise. Hamming developed an improved version, the Hamming predictor-corrector. This was in use for many years, but has since been superseded by the Adams predictor-corrector. Hamming also contributed to digital filters, creating the Hamming window, and eventually writing an entire book on the subject.
+
+### References
+
+- Digital Filters (1977) [10]
+
+### Images
+
+![Transformer Block 1](image_url)
+![Sample Data](image_url)
+
+### Notes
+
+- **$x_2$**
+- **$x_{18}$**
+- **$x_{351}$**
+- **$x_{511}$**
+```
+
+**Note:** Replace `image_url` with the actual URLs of the images if available. This markdown format captures the structure of the document while ensuring that the scientific content is accurately represented with proper formatting and emphasis on key terms and formulas.
+
+# Week 3 LLM.pdf - Page 28
+
+```markdown
+# Feed Forward Neural Network
+
+## Multi-head masked attention
+
+**Input Sequence:**
+- `<go>`
+- `at`
+- `the`
+- `bell`
+- `labs`
+- `hammering`
+- `.............`
+- `bound`
+- `.............`
+- `devising`
+- `a`
+- `new`
+- `<stop>`
+
+Each word in the input sequence is fed into the **Feed Forward Neural Network** with a focus on the **Multi-head masked attention** mechanism.
+
+*Mitesh Khapra*
+```
+
+# Week 3 LLM.pdf - Page 29
+
+```markdown
+# Masked Multi-head Attention Diagram
+
+## Diagram Components
+
+1. **Input Sequence**: 
+   - `<go>` at the bell labs hamming ......... bound devising a new <stop>`
+
+2. **MatMul Operations**: 
+   - `MatMul: Q^T K + M`
+   - `MatMul: Q^T K - M`
+
+3. **Scaling**:
+   - `Scale : \frac{1}{\sqrt{d_k}}`
+
+4. **Activation Functions**:
+   - `Softmax`
+   - `Scale : \frac{1}{\sqrt{d_k}}`
+
+5. **Droppout**:
+   - Applied after the softmax and before matrix multiplication.
+
+6. **Masked Multi-head Attention**:
+   - Center part of the diagram, combining the results from the two matrix multiplications.
+
+7. **Concatenation**:
+   - Combines the output of the two branches of the masked multi-head attention.
+
+8. **Linear Layer**:
+   - Processes the concatenated output.
+
+9. **Layer Norm**:
+   - Normalizes the output of the linear layer.
+
+10. **Residual Connection**:
+    - Connects the input to the output of the layer norm.
+
+11. **Overall Flow**:
+    - Input sequence undergoes matrix multiplications and scaling.
+    - Results are activated and dropped out.
+    - Outputs are concatenated and passed through a linear layer.
+    - Final normalization with residual connection is applied.
+
+## Detailed Process
+
+```markdown
+1. **Input Sequence**: 
+   ```
+   <go> at the bell labs hamming ......... bound devising a new <stop>
+   ```
+
+2. **MatMul Operations**:
+   ```
+   MatMul: Q^T K + M
+   MatMul: Q^T K - M
+   ```
+
+3. **Scaling**:
+   ```
+   Scale : \frac{1}{\sqrt{d_k}}
+   ```
+
+4. **Activation Functions**:
+   ```
+   Softmax
+   ```
+
+5. **Droppout**:
+   - Applied to manage overfitting after the softmax activation.
+
+6. **Masked Multi-head Attention**:
+   - Utilizes multiple attention heads to capture different aspects of the input sequence.
+
+7. **Concatenation**:
+   - Combines the outputs from the different attention heads.
+
+8. **Linear Layer**:
+   ```
+   Linear
+   ```
+
+9. **Layer Norm**:
+   ```
+   Layer norm
+   ```
+
+10. **Residual Connection**:
+    ```
+    Residual connection
+    ```
+
+This detailed markdown format ensures the scientific integrity of the content, with proper formatting, section headings, and the representation of special symbols and equations.
+```
+
+# Week 3 LLM.pdf - Page 30
+
+```markdown
+# Feed Forward Neural Network
+
+## Diagram Components
+
+### Layer Structure
+
+1. **Input Layer**
+   - Number of neurons: 8042
+   - Inputs: `x1 = R^768`
+
+2. **Hidden Layer**
+   - Number of neurons: 768
+   - Activation function: `σ(x) = ReLU`
+
+3. **Output Layer**
+   - Activation function: None
+
+4. **Regularization**
+   - Dropout applied after the hidden layer
+
+5. **Normalization**
+   - Layer normalization applied after the output of the hidden layer
+
+6. **Residual Connection**
+   - Connection from input to output layer
+
+### Activation Functions
+
+![Activation Functions Graph](image-url)
+
+**Legend:**
+- **ReLU (Rectified Linear Unit)**: Represented by a blue line, which is defined as `f(x) = max(0, x)`.
+- **ELU (Exponential Linear Unit)**: Represented by a green line, defined as `f(x) = x if x > 0 and α(e^x - 1) if x ≤ 0`.
+- **SELU (Scaled Exponential Linear Unit)**: Represented by a red line, defined as `f(x) = x if x > 0 and α(e^x - 1)` for x ≤ 0, with scaling factor `α`.
+
+## Masked Multi-head Attention
+- Positioned below the feed-forward neural network
+- Inputs from the bottom of the network
+
+### Example Input Sequence
+```plaintext
+<go> at the bell labs hammering ...... bound ..... devising a new <stop>
+```
+
+# Mitesh Khapra
+
+```
+
+# Week 3 LLM.pdf - Page 31
+
+```markdown
+# Number of Parameters
+
+## Token Embeddings: |V| × embedding_dim
+
+40478 × 768 = 31 × 10^6 = 31M
+
+## Position Embeddings: context_length × embedding_dim
+
+512 × 768 = 0.3 × 10^6 = 0.3M
+
+### Total: 31.3M
+
+The positional embeddings are also learned, unlike the original transformer which uses fixed sinusoidal embeddings to encode the positions.
+
+![Transformer Architecture Diagram](image_url)
+
+- **p(x1)**
+- **p(x4, x3, x2, x1)**
+
+```
+h12  => Transformer Block 12
+h3   => Transformer Block 3
+h2   => Transformer Block 2
+h1   => Transformer Block 1
+
+Embedding Matrix
+```
+
+Input:
+
+- `<go>`
+- `x1`
+- `x2`
+- `x3`
+```
+
+# Week 3 LLM.pdf - Page 32
+
+```markdown
+# Number of parameters
+
+## Attention parameters per block
+
+### Weights
+- \( W_Q = W_K = W_V = (768 \times 64) \)
+
+### Per attention head
+- \( 3 \times (768 \times 64) \approx 147 \times 10^3 \)
+
+### For 12 heads
+- \( 12 \times 147 \times 10^3 \approx 1.7M \)
+
+### For a Linear layer:
+- \( 768 \times 768 \approx 0.6M \)
+
+### For all 12 blocks
+- \( 12 \times 2.3 = 27.6M \)
+
+## Diagram
+
+![Transformer Block Diagram](image_placeholder.png)
+
+- \( p(x_1) \) to \( p(x_4 | x_3, x_2, x_1) \)
+- \( h_1 \): Transformer Block 1
+- \( h_2 \): Transformer Block 2
+- \( h_3 \): Transformer Block 3
+- \( h_{12} \): Transformer Block 12
+- Weights: \( W_q, W_k, W_v \)
+- Input tokens: \( x_1, x_2, x_3, x_4 \)
+- Special token: \( \langle go \rangle \)
+```
+
+# Week 3 LLM.pdf - Page 33
+
+```markdown
+# Number of parameters
+
+## FFN parameters per block
+
+**2 × (768 × 3072) + 3072 + 768**
+
+\[
+= 4.7 \times 10^6 = 4.7M
+\]
+
+### For all 12 blocks
+
+**12 × 4.7 = 56.4M**
+
+(Mitesh Khapra)
+
+![Transformer Diagram](https://via.placeholder.com/150)
+
+- \( p(x_1) \)
+- ...
+- \( p(x_4 | x_3, x_2, x_1) \)
+
+    - \( w_v \)
+    - \( w_i \)
+
+    - **Transformer Block 12**
+        - \( h_{12} \)
+    - **Transformer Block 3**
+        - \( h_3 \)
+    - **Transformer Block 2**
+        - \( h_2 \)
+    - **Transformer Block 1**
+        - \( h_1 \)
+
+    - \( \langle go \rangle \)
+    - \( x_1 \)
+    - \( x_2 \)
+    - \( x_3 \)
+```
+
+# Week 3 LLM.pdf - Page 34
+
+```markdown
+# Number of parameters
+
+## Table of Parameters
+
+| Layer                   | Parameters (in Millions) |
+|-------------------------|--------------------------|
+| Embedding Layer         | 31.3                     |
+| Attention layers       | 27.6                     |
+| FFN Layers              | 56.4                     |
+| **Total**               | **116.461056\***         |
+
+\*Without rounding the number of parameters in each layer
+
+Thus, GPT-1 has around 117 million parameters.
+
+![Diagram](image-placeholder.png)
+
+## Diagram
+
+### Inputs and Outputs
+- **Embedding Layer**
+  - Inputs: \( x_1, x_2, x_3, \ldots \)
+  - Output: Embedding Matrix
+
+### Transformer Blocks
+1. **Transformer Block 1**
+   - Input: Embedding Matrix
+   - Output: \( h_1 \)
+
+2. **Transformer Block 2**
+   - Input: \( h_1 \)
+   - Output: \( h_2 \)
+
+3. **Transformer Block 3**
+   - Input: \( h_2 \)
+   - Output: \( h_3 \)
+
+4. **Transformer Block 12**
+   - Input: \( h_3 \)
+   - Output: \( h_{12} \)
+
+### Final Layer
+- **Output Layer**
+  - Input: \( h_{12} \)
+  - Outputs: \( p(x_1), p(x_1|x_1, x_2), p(x_1|x_1, x_2, x_3, x_1) \)
+
+### Weight Matrices
+- **Weight Matrices \( w_q \)** and \( w_v \)
+```
+
+Note: `image-placeholder.png` is a placeholder for the diagram image in the actual markdown file.
+
+# Week 3 LLM.pdf - Page 35
+
+```markdown
+# Module 2.3: Pre-training and Fine Tuning
+
+**Mitesh M. Khapra**
+
+![IIT Madras Logo](https://example.com/logo)
+
+Aligarh, Department of Computer Science and Engineering, IIT Madras
+
+Mitesh Khapra
+```
+
+This markdown format captures the essential elements of the provided image, ensuring proper formatting and accuracy. The section titles, headings, and subheadings are correctly encoded, and any special symbols or scientific terms are maintained accurately.
+
+# Week 3 LLM.pdf - Page 36
+
+```markdown
+# Pre-Training
+
+**Batch Size:** 64
+
+**Input size:** $(B, T, C) = (64, 512, 768)$, where $C$ is an embedding dimension
+
+**Minimize**
+
+$$
+\mathcal{L} = - \sum_{x \in V; X \subset X; i = 1}^T y_i \log(\hat{y_i})
+$$
+
+**Optimizer:** Adam with cosine learning rate scheduler
+
+**Strategy:** Teacher forcing (instead of auto-regressive training) for quicker and stable convergence
+
+![Transformer Architecture](image_url)
+
+- **$\hat{y_i}$**: Output from the model
+- **$y_i$**: Target value
+- **$W_v$**: Value weights
+- **$W_e$**: Embedding weights
+- **$h_{12}$**: Output from Transformer Block 12
+- **$h_3$**: Output from Transformer Block 3
+- **$h_2$**: Output from Transformer Block 2
+- **$h_1$**: Output from Transformer Block 1
+- **Embedding Matrix**: Maps input to embedding space
+- **$\langle go \rangle$**: Go token
+- **$x_1, x_2, x_3$**: Input tokens
+```
+
+# Week 3 LLM.pdf - Page 37
+
+```markdown
+# Fine-tuning
+
+Fine-tuning involves adapting a model for various downstream tasks (with a minimal change in the architecture).
+
+Each sample in a labelled data set \(C\) consists of a sequence of tokens \(x_1, x_2, \ldots, x_m\) with the label \(y\).
+
+Initialize the parameters with the parameters learned by solving the pre-training objective.
+
+At the input side, add additional tokens based on the type of downstream task. For example, start \(\langle s \rangle\) and end \(\langle e \rangle\) tokens for classification tasks.
+
+At the output side, replace the pre-training LM head with the classification head (a linear layer \(W_y\)).
+
+![Transformer Model Diagram](image.png)
+
+- **Transformer Block 1**
+- **Transformer Block 2**
+- **Transformer Block 3**
+- **Transformer Block 12**
+
+Embedding Matrix
+
+\[
+\begin{aligned}
+& \langle s \rangle \\
+& x_1 \\
+& x_2 \\
+& \langle e \rangle
+\end{aligned}
+\]
+
+Output
+
+\[
+\begin{aligned}
+& h_1 \\
+& h_2 \\
+& h_3 \\
+& h_{12}
+\end{aligned}
+\]
+
+Classification head
+
+\[ W_y \]
+
+Mitesh Khapra
+```
+
+# Week 3 LLM.pdf - Page 38
+
+```markdown
+# Fine-tuning
+
+Now our objective is to predict the label of the input sequence
+
+\[ \hat{y} = P(y|x_1, \ldots, x_m) = \text{softmax}(W_y h_l^m) \]
+
+Note that we take the output representation at the last time step of the last layer \( h_l^m \).
+
+It makes sense as the entire sentence is encoded only at the last time step due to causal masking.
+
+Then we can minimize the following objective
+
+\[ \mathcal{L} = - \sum_{(x, y)} \log(y_i) \]
+
+Note that \( W_y \) is randomly initialized. Padding or truncation is applied if the length of input sequence is less or greater than the context length.
+
+![Transformer Architecture Diagram](image_url)
+
+- **Embedding Matrix**
+- **Transformer Block 1**
+- **Transformer Block 2**
+- **Transformer Block 3**
+- **Transformer Block 12**
+
+\[ h_1 \]
+
+\[ h_2 \]
+
+\[ h_3 \]
+
+\[ h_{12} \]
+
+\[ \hat{y} \]
+
+\[ W_y \]
+```
+
+# Week 3 LLM.pdf - Page 39
+
+```markdown
+# Sentiment Analysis
+
+## Text:
+Wow, India has now reached the moon
+
+## Sentiment:
+Positive
+
+$$\hat{y} \in \{+1, -1\}$$
+
+![Transformer Architecture Diagram](https://via.placeholder.com/150)
+
+Mitresh Khajuri
+
+### Embedding Matrix
+$$
+\begin{aligned}
+h_1 & = f(x_1) \\
+h_2 & = f(x_2) \\
+h_3 & = f(x_3) \\
+h_4 & = f(x_4) \\
+h_5 & = f(x_5) \\
+\end{aligned}
+$$
+
+### Transformer Blocks
+
+#### Transformer Block 1
+$$
+\begin{aligned}
+h_{1_1} & = g(h_1) \\
+h_{1_2} & = g(h_2) \\
+h_{1_3} & = g(h_3) \\
+h_{1_4} & = g(h_4) \\
+h_{1_5} & = g(h_5) \\
+\end{aligned}
+$$
+
+#### Transformer Block 2
+$$
+\begin{aligned}
+h_{2_1} & = g(h_{1_1}) \\
+h_{2_2} & = g(h_{1_2}) \\
+h_{2_3} & = g(h_{1_3}) \\
+h_{2_4} & = g(h_{1_4}) \\
+h_{2_5} & = g(h_{1_5}) \\
+\end{aligned}
+$$
+
+#### Transformer Block 3
+$$
+\begin{aligned}
+h_{3_1} & = g(h_{2_1}) \\
+h_{3_2} & = g(h_{2_2}) \\
+h_{3_3} & = g(h_{2_3}) \\
+h_{3_4} & = g(h_{2_4}) \\
+h_{3_5} & = g(h_{2_5}) \\
+\end{aligned}
+$$
+
+#### Transformer Block 12
+$$
+\begin{aligned}
+h_{12_1} & = g(h_{3_1}) \\
+h_{12_2} & = g(h_{3_2}) \\
+h_{12_3} & = g(h_{3_3}) \\
+h_{12_4} & = g(h_{3_4}) \\
+h_{12_5} & = g(h_{3_5}) \\
+\end{aligned}
+$$
+
+### Weighted Output
+$$
+\hat{y} = W_{\hat{y}} \cdot h_{12}
+$$
+```
+
+# Week 3 LLM.pdf - Page 40
+
+```markdown
+# Textual Entailment/Contradiction
+
+## Example
+
+**Text:** A soccer game with multiple males playing
+
+**Hypothesis:** Some men are playing a sport
+
+**Entailment:** True
+
+In this case, we need to use a delimiter token ($) to differentiate the text from the hypothesis.
+
+### Diagram
+
+![Transformer Architecture](image_url)
+
+- **Embedding Matrix**
+
+  - Mitesh Khanna
+
+  ```
+  s    <-    x1    x_{k-1}    s    ...    xm    e
+  ```
+
+- **Transformer Blocks**
+
+  ```
+  h1   ->  h2   ->  h3   ->  h12
+  ```
+
+  - **Transformer Block 1**
+  - **Transformer Block 2**
+  - **Transformer Block 3**
+  - **Transformer Block 12**
+
+- **Output Weight**
+
+  ```
+  w_y
+  ```
+
+  - $y$
+```
+```
+
+# Week 3 LLM.pdf - Page 41
+
+```markdown
+# Multiple Choice
+
+**Question:** Which of the following animals is an amphibian?
+
+- **Choice:** Frog
+- **Choice:** Fish
+
+*read in the question along with the choice f*
+
+![Transformer Model Diagram](https://example.com/transformer-diagram.png)
+
+```yaml
+# Transformer Model Structure
+
+Embedding Matrix
+    h1: Transformer Block 1 
+    h2: Transformer Block 2
+    h3: Transformer Block 3
+    h12: Transformer Block 12
+
+Linear-1
+```
+
+Mitesh Khapro
+```
+
+# Week 3 LLM.pdf - Page 42
+
+```markdown
+# Multiple Choice
+
+**Question**: Which of the following animals is an amphibian?
+
+- **Choice**: Frog
+- **Choice**: Fish
+
+Read in the question along with the choice-2
+
+Repeat this for all choices
+
+Normalize via softmax
+
+![Transformer Diagram](https://via.placeholder.com/150)
+
+```math
+\hat{y} = \text{softmax}(\mathbf{W} \mathbf{y})
+```
+
+Where:
+- $\mathbf{W}$: Weight matrix
+- $\mathbf{y}$: Input vector
+- $\hat{y}$: Output vector
+
+```plaintext
+## Transformer Architecture
+
+- **Embedding Matrix**
+    - Input: `<s>` Question `<s>` Choice-2 `</s>`
+
+- **Transformer Block 1**
+    - Output: $h_1$
+
+- **Transformer Block 2**
+    - Input: $h_1$
+    - Output: $h_2$
+
+- **Transformer Block 3**
+    - Input: $h_2$
+    - Output: $h_3$
+
+- **Transformer Block 12**
+    - Input: $h_3$
+    - Output: $h_{12}$
+
+- **Linear-2**
+    - Input: $h_{12}$
+    - Output: Final output
+```
+
+# Week 3 LLM.pdf - Page 43
+
+```markdown
+# Text Generation
+
+## Input:
+### Prompt: I like
+
+\[ M = \begin{bmatrix}
+0 & 0 & 0 & \infty & \infty \\
+0 & 0 & 0 & -\infty & -\infty \\
+0 & 0 & 0 & -\infty & -\infty \\
+0 & 0 & 0 & 0 & -\infty
+\end{bmatrix} \]
+
+Feed in the prompt along with the mask and run the model in autoregressive mode.
+
+## Stopping Criteria:
+- Sequence length: 5
+- or outputting a token: `<e>`
+
+## Output: I like to think that
+
+Does it produce the same output sequence for the given prompt?
+
+or Will it be creative?
+
+![](https://via.placeholder.com/150 "Transformer Block Diagram")
+```
+```
+
+# Week 3 LLM.pdf - Page 44
+
+```markdown
+# Wishlist for text generation
+
+## Discourage degenerative (that is, repeated or incoherent) texts
+
+- I like to think that I like to think...
+
+- I like to think that reference know how to think best selling book
+
+## Encourage it to be Creative in generating a sequence for the same prompt
+
+- I like to read a book
+
+- I like to buy a hot beverage
+
+- I like a person who cares about others
+
+## Accelerate the generation of tokens
+
+![OCR Image Placeholder](image-url)
+
+*Mitlesh Khapra*
+```
+

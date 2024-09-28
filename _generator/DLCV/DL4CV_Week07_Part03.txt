@@ -1,0 +1,2170 @@
+# DL4CV_Week07_Part03.pdf - Page 1
+
+```markdown
+# Deep Learning for Computer Vision
+
+## CNNs for Segmentation
+
+### Vineeth N Balasubramanian
+
+**Department of Computer Science and Engineering**
+**Indian Institute of Technology, Hyderabad**
+
+![IIT Hyderabad Logo](image-url)
+
+---
+
+**Vineeth N B (IIT-H)**
+
+**§7.3 CNNs for Segmentation**
+
+---
+
+## Slide 1 / 29
+
+---
+
+```markdown
+# Deep Learning for Computer Vision
+
+## CNNs for Segmentation
+
+### Vineeth N Balasubramanian
+
+**Department of Computer Science and Engineering**
+**Indian Institute of Technology, Hyderabad**
+
+![IIT Hyderabad Logo](image-url)
+
+---
+
+**Vineeth N B (IIT-H)**
+
+**§7.3 CNNs for Segmentation**
+
+---
+
+## Slide 1 / 29
+```
+
+# DL4CV_Week07_Part03.pdf - Page 2
+
+```markdown
+# Homework
+
+## Exercises
+
+- Given two bounding boxes in an image: an upper-left box which is 2 × 2, and a lower-right box which is 2 × 3 and an overlapping region of 1 × 1, what is the IoU between the two boxes? **1/9**
+
+- Consider using YOLO object detector on a 19 × 19 grid, on a detection problem with 20 classes, and with 5 anchor boxes. During training, for each image, you will need to construct an output volume `y` as the target value for the neural network; this corresponds to the last layer of the neural network. (y may include background). What is the dimension of this output volume? **19 × 19 × (5 × 5 + 20) = 19 × 19 × 45**
+
+*Vineeth N B. (IIT-H) §7.3 CNNs for Segmentation 2 / 29*
+```
+
+# DL4CV_Week07_Part03.pdf - Page 3
+
+```markdown
+# Recall: Image Segmentation
+
+- Image segmentation methods: **Watershed**, **Graph Cut**, **Normalized Cut**, **Mean Shift**, etc
+
+![NPTEL Logo](logo_url_placeholder)
+
+_Vineeth N B (IIT-H)_
+
+## §7.3 CNNs for Segmentation
+
+Page 3 / 29
+```
+Explanation:
+- The main heading "Recall: Image Segmentation" is denoted using a single `#`.
+- Bullet points are used for the list of image segmentation methods.
+- The logo placeholder is indicated with a markdown image syntax.
+- The author and section title are formatted in italics.
+- The section number `§7.3` is indicated using a single backtick for inline code.
+- The page number is included as is.
+
+# DL4CV_Week07_Part03.pdf - Page 4
+
+```markdown
+# Recall: Image Segmentation
+
+- Image segmentation methods: **Watershed**, **Graph Cut**, **Normalized Cut**, **Mean Shift**, etc
+
+- Classical segmentation methods inspired early versions of deep learning based methods for object detection; R-CNN used a version of min-cut segmentation method known as **CPMC** (Constrained Parametric Min Cuts) to generate region proposals for foreground segments
+
+---
+
+Vineeth N B (IIT-H) §7.3 CNNs for Segmentation
+
+---
+
+```
+
+# DL4CV_Week07_Part03.pdf - Page 5
+
+```markdown
+# Recall: Image Segmentation
+
+- **Image segmentation methods**: Watershed, Graph Cut, Normalized Cut, Mean Shift, etc
+
+- Classical segmentation methods inspired early versions of deep learning based methods for object detection; R-CNN used a version of min-cut segmentation method known as CPMC (Constrained Parametric Min Cuts) to generate region proposals for foreground segments
+
+- Moving on to deep learning for segmentation now...
+
+*Vineeth N B (IIIT-H)*
+
+*§7.3 CNNs for Segmentation*
+
+*3 / 29*
+```
+
+# DL4CV_Week07_Part03.pdf - Page 6
+
+ may not capture images directly. 
+
+---
+
+# Semantic Segmentation
+
+## Task of grouping together similar (in semantic content) pixels in an image. How to formulate this using DNNs?
+
+![Cat Image](cat-image.png)
+
+![Segmented Image](segmented-image.png)
+
+- Vineeth N B (IIIT-H)
+- §7.3 CNNs for Segmentation
+- NPTEL
+- 4 / 29
+```
+
+# DL4CV_Week07_Part03.pdf - Page 7
+
+```markdown
+# Semantic Segmentation
+
+- Task of grouping together similar (in semantic content) pixels in an image. How to formulate this using DNNs?
+  - **Cast as a pixel classification problem!**
+    - For each training image, each pixel is labeled with a semantic category. Quite annotation-intensive!
+
+![Image of a cat](image_url)
+
+![Semantic Segmentation Example](image_url)
+
+*Vineeth N B (IIT-H) §7.3 CNNs for Segmentation*
+
+*4 / 29*
+```
+
+# DL4CV_Week07_Part03.pdf - Page 9
+
+```markdown
+# Fully Convolutional Networks for Semantic Segmentation (FCN)<sup>1</sup>
+
+- Adapts various classification networks (VGG net, GoogLeNet) into fully convolutional networks by converting FC layers into 1 × 1 conv layers
+
+![NPTel](image_url)
+
+<sup>1</sup> Shelhamer et al., Fully Convolutional Networks for Semantic Segmentation, TPAMI 2016
+
+Vineeth N B (IIT-H)
+
+§7.3 CNNs for Segmentation
+
+5 / 29
+```
+
+# DL4CV_Week07_Part03.pdf - Page 10
+
+```markdown
+# Fully Convolutional Networks for Semantic Segmentation (FCN) [^1]
+
+- Adapts various classification networks (VGG net, GoogLeNet) into fully convolutional networks by converting FC layers into 1 × 1 conv layers
+- To obtain classification for each pixel, another 1 × 1 conv layer is appended with channel dimension C + 1 where C is number of classes.
+
+[^1]: Shelhamer et al., Fully Convolutional Networks for Semantic Segmentation, TPAMI 2016
+
+---
+
+*Vineeth N B (IIIT-H)*
+
+*§7.3 CNNs for Segmentation*
+
+*5 / 29*
+```
+
+# DL4CV_Week07_Part03.pdf - Page 11
+
+```markdown
+# Fully Convolutional Networks for Semantic Segmentation (FCN)
+
+- Adapts various classification networks (VGG net, GoogLeNet) into fully convolutional networks by converting FC layers into 1 × 1 conv layers
+- To obtain classification for each pixel, another 1 × 1 conv layer is appended with channel dimension C + 1 where C is number of classes.
+
+[Source](https://hal.archives-ouvertes.fr/hal-01375563/document): Shelhamer et al., Fully Convolutional Networks for Semantic Segmentation, TPAMI 2016
+```
+
+*Vineeth N B (IIT-H)*
+
+---
+
+### Section 7.3 CNNs for Segmentation
+
+Slide 5 of 29
+
+![NPTel Logo](https://example.com/logo.png)
+
+---
+
+Note: OCR could not capture the image directly; the placeholder image URL is provided.
+
+# DL4CV_Week07_Part03.pdf - Page 12
+
+```markdown
+# Fully Convolutional Networks for Semantic Segmentation (FCN)
+
+- Adapts various classification networks (VGG net, GoogLeNet) into fully convolutional networks by converting FC layers into 1 × 1 conv layers
+- To obtain classification for each pixel, another 1 × 1 conv layer is appended with channel dimension C + 1 where C is number of classes. *Do you see any problem?*
+
+![NPTEL Logo](https://example.com/logo.png)
+
+1 Shelhamer et al., Fully Convolutional Networks for Semantic Segmentation, TPAMI 2016
+Vineeth N B (IIT-H)
+§7.3 CNNs for Segmentation
+5 / 29
+```
+
+# DL4CV_Week07_Part03.pdf - Page 13
+
+```markdown
+# Fully Convolutional Networks for Semantic Segmentation (FCN)1
+
+- Adapts various classification networks (VGG net, GoogLeNet) into fully convolutional networks by converting FC layers into 1 × 1 conv layers
+
+- To obtain classification for each pixel, another 1 × 1 conv layer is appended with channel dimension C + 1 where C is number of classes. *Do you see any problem?*
+
+- Image classification architectures perform downsampling as they go deeper ⇒ fully convolutional architecture will have lower resolution than input. *What to do?*
+
+1 Shelhamer et al., Fully Convolutional Networks for Semantic Segmentation, TPAMI 2016
+
+*Vineeth N B (IIT-H)*
+
+§7.3 CNNs for Segmentation
+
+*Source: NPTEL*
+
+Figure or image placeholder: ![Diagram or Image](image_placeholder_url)
+
+Reference: Page 5/29
+```
+
+# DL4CV_Week07_Part03.pdf - Page 14
+
+```markdown
+# Fully Convolutional Networks for Semantic Segmentation (FCN)<sup>1</sup>
+
+- Adapts various classification networks (VGG net, GoogLeNet) into fully convolutional networks by converting FC layers into 1 × 1 conv layers
+- To obtain classification for each pixel, another 1 × 1 conv layer is appended with channel dimension C + 1 where C is number of classes. **Do you see any problem?**
+- Image classification architectures perform downsampling as they go deeper ⇒ fully convolutional architecture will have lower resolution than input. **What to do?**
+- Perform upsampling to get back to original resolution. **How to do?**
+
+<sup>1</sup> Shelhamer et al., Fully Convolutional Networks for Semantic Segmentation, TPAMI 2016
+
+_Vineeth N B (IIT-H)_
+
+§7.3 CNNs for Segmentation
+
+*5 / 29*
+```
+
+# DL4CV_Week07_Part03.pdf - Page 15
+
+```markdown
+# Fully Convolutional Networks for Semantic Segmentation (FCN)<sup>1</sup>
+
+- Adapts various classification networks (VGG net, GoogLeNet) into fully convolutional networks by converting FC layers into 1 × 1 conv layers
+- To obtain classification for each pixel, another 1 × 1 conv layer is appended with channel dimension C + 1 where C is number of classes. *Do you see any problem?*
+- Image classification architectures perform downsampling as they go deeper ➞ fully convolutional architecture will have lower resolution than input. *What to do?*
+- Perform upsampling to get back to original resolution. *How to do?*
+- Learnable upsampling done through **Transpose Convolution**
+
+<sup>1</sup> Shelhamer et al., *Fully Convolutional Networks for Semantic Segmentation*, TPAMI 2016
+
+*Vineeth N B (IIT-B)*
+
+*§7.3 CNNs for Segmentation*
+
+*5 / 29*
+```
+
+# DL4CV_Week07_Part03.pdf - Page 16
+
+```markdown
+# Recall: Transpose Convolution
+
+- Allows for learnable upsampling
+- Also known as Deconvolution (bad) or Upconvolution
+- Traditionally, we could achieve upsampling through interpolation or similar rules
+- Why not allow the network to learn the rules by itself?
+- Let us see a 1D example
+
+![Transposed Convolution Layer](image-link)
+
+Credit: Francois Fleuret
+
+Vineeth N B (IIT-H)
+
+§7.3 CNNs for Segmentation
+
+6 / 29
+```
+
+For the image of the transposed convolution layer, ensure you replace `image-link` with the actual image URL or placeholder if the OCR process cannot directly capture it.
+
+# DL4CV_Week07_Part03.pdf - Page 17
+
+```markdown
+# Recall: Transpose Convolution
+
+![Transpose Convolution Diagram](image_url)
+
+**Credit: Vincent Dumoulin**
+
+**Vineeth N B (IIT-H)**
+
+## §7.3 CNNs for Segmentation
+
+### Upsampling 2 × 2 input to a 5 × 5 output
+
+- The left diagram shows a basic example of a 2 × 2 input being processed through transpose convolution.
+- The right diagram shows the corresponding output after applying the transpose convolution, resulting in a 5 × 5 output.
+- The central part illustrates the overall structure and methodology involved in transpose convolution.
+
+### Summary
+
+This section explains the technique of using transpose convolution to upsample an input image from a 2 × 2 resolution to a 5 × 5 resolution. The process involves reversing the convolution operation to effectively increase the spatial dimensions of the input data.
+
+#### Key Points
+
+1. **Transpose Convolution**:
+    - Also known as deconvolution.
+    - Used to reverse the convolution process, effectively upsampling the input image.
+
+2. **Process**:
+    - Start with a 2 × 2 input.
+    - Apply transpose convolution.
+    - Produce a 5 × 5 output.
+
+3. **Applications**:
+    - Commonly used in segmentation tasks where higher resolution output is required.
+
+#### Diagrams
+
+- The diagrams visually represent the input and output of the transpose convolution process.
+- The left diagram shows the initial 2 × 2 input.
+- The right diagram shows the resulting 5 × 5 output.
+
+#### References
+
+- Vincent Dumoulin.
+- Vineeth N B from IIT-H.
+
+---
+
+Date: 7 / 29
+```
+
+# DL4CV_Week07_Part03.pdf - Page 18
+
+```markdown
+# FCN with VGG-16 Backbone
+
+- Remove fully connected layers
+
+![NPTEL Logo](https://example.com/nptel-logo.png)
+
+```text
+Vineeth N B (IIT-H) §7.3 CNNs for Segmentation 8 / 29
+
+Credit: Francois Fleuret
+```
+
+## Diagram Overview
+
+```text
+- 3d
+- 2 × conv/relu + maxpool
+  - 1/2, 64d
+- 2 × conv/relu + maxpool
+  - 1/4, 128d
+- 3 × conv/relu + maxpool
+  - 1/8, 256d
+- 3 × conv/relu + maxpool
+  - 1/16, 512d
+- 3 × conv/relu + maxpool
+  - 1/32, 512d
+```
+```
+
+# DL4CV_Week07_Part03.pdf - Page 19
+
+```markdown
+# FCN with VGG-16 Backbone
+
+- Remove fully connected layers
+- Replace three FC layers with 1D conv layers; last layer has `C + 1` filters which give class probabilities (note that spatial size is downsampled because of maxpool operations)
+
+![Diagram of VGG-16 Architecture](image_url)
+
+- 2 × conv/relu + maxpool
+- 2 × conv/relu + maxpool
+- 3 × conv/relu + maxpool
+- 3 × conv/relu + maxpool
+- 3 × conv/relu + maxpool
+- 1D conv/relu
+
+**Credit: Francois Fleuret**
+
+_Vineeth N B (IIT-H)_
+
+## §7.3 CNNs for Segmentation
+
+8 / 29
+```
+
+# DL4CV_Week07_Part03.pdf - Page 20
+
+```markdown
+# FCN with VGG-16 Backbone
+
+- **Remove fully connected layers**
+- **Replace three FC layers with 1D conv layers; last layer has \( C' + 1 \) filters which give class probabilities (note that spatial size is downsampled because of maxpool operations)**
+- **One final upsampling layer to get back to original size**
+
+![Diagram](image_url)
+
+*Credit: Francois Fleuret*
+
+*Vineeth N B (IIIT-H)*
+
+*§7.3 CNNs for Segmentation*
+
+*8 / 29*
+```
+
+# DL4CV_Week07_Part03.pdf - Page 21
+
+```markdown
+# FCN with VGG-16 Backbone
+
+- **Remove fully connected layers**
+- **Replace three FC layers with 1D conv layers; last layer has C + 1 filters which give class probabilities (note that spatial size is downsampled because of maxpool operations)**
+- **One final upsampling layer to get back to original size**
+- **Instead of one final upsampling layer, can have skip connections from earlier layers (we will see later how) for better boundaries**
+
+*Credit: Francois Fleuret*
+
+_Vineeth N B. (IIIT-H)_
+
+§7.3 CNNs for Segmentation
+
+8 / 29
+```
+
+# DL4CV_Week07_Part03.pdf - Page 23
+
+```markdown
+# SegNet²
+
+![SegNet² Visual Diagram](image-url)
+
+## Overview
+
+- **Input:**
+  - **RGB Image**
+    ![Input Image](input-image-url)
+
+- **Convolutional Encoder-Decoder:**
+  - **Pooling Indices**
+  - **Components:**
+    - **Conv + Batch Normalisation + ReLU** (Blue)
+    - **Pooling** (Green)
+    - **Upsampling** (Red)
+    - **Softmax** (Yellow)
+
+- **Output:**
+  - **Segmentation**
+    ![Output Segmentation](output-image-url)
+
+## Key Features
+
+- Fully convolutional encoder-decoder architecture
+- Encoder is VGG-16 without FC layers
+
+## References
+
+²Badrinarayanan et al. SegNet: A Deep Convolutional Encoder-Decoder Architecture for Image Segmentation, TPAMI 2017
+
+Vineeth N B (IIIT-H)
+
+§7.3 CNNs for Segmentation
+```
+Ensure to replace placeholders like `image-url`, `input-image-url`, and `output-image-url` with the actual image URLs or references as needed. This markdown format maintains the scientific integrity and proper formatting of the original content.
+
+# DL4CV_Week07_Part03.pdf - Page 24
+
+```markdown
+# SegNet²
+
+![SegNet² Diagram](image_url)
+
+## Input
+![RGB Image](image_url)
+
+- Fully convolutional encoder-decoder architecture
+- Encoder is VGG-16 without FC layers
+- Decoder maps low-resolution encoder feature maps to input resolution
+
+## Convolutional Encoder-Decoder
+- **Pooling indices**
+- **Pooling**
+- **Upsampling**
+- **Softmax**
+
+## Output
+![Segmentation](image_url)
+
+## References
+- Badrinarayanan et al. SegNet: A Deep Convolutional Encoder-Decoder Architecture for Image Segmentation, TPAMI 2017
+- Vineeth N B (IIIT-H)
+- §7.3 CNNs for Segmentation
+
+![Page Footer](image_url)
+```
+
+# DL4CV_Week07_Part03.pdf - Page 25
+
+```markdown
+# SegNet<sup>2</sup>
+
+![Input](image-url)
+**RGB Image**
+
+![Convolutional Encoder-Decoder](image-url)
+
+**Convolutional Encoder-Decoder**
+
+![Output](image-url)
+**Segmentation**
+
+- Fully convolutional encoder-decoder architecture
+- Encoder is VGG-16 without FC layers
+- Decoder maps low-resolution encoder feature maps to input resolution
+- Decoder uses pooling indices of corresponding max-pooling steps to perform upsampling!
+  These sparse upsampled maps are followed by conv layers to produce dense feature maps
+
+---
+
+<sup>2</sup> Badrinarayanan et al. SegNet: A Deep Convolutional Encoder-Decoder Architecture for Image Segmentation, TPAMI 2017
+
+*Vineeth N B (IIIT-H)*
+
+**§7.3 CNNs for Segmentation**
+
+9 / 29
+```
+
+# DL4CV_Week07_Part03.pdf - Page 26
+
+```markdown
+# Upsampling in SegNet
+
+**Convolution with trainable decoder filters**
+
+![Max pool indices](image_url)
+
+- **Max pool indices**: location of maximum feature value for each pooling window for each encoder feature map
+
+```markdown
+Vineeth N B. (IIIT-H)
+
+# 7.3 CNNs for Segmentation
+
+## Upsampling in SegNet
+
+**Convolution with trainable decoder filters**
+
+![Max pool indices](image_url)
+
+- **Max pool indices**: location of maximum feature value for each pooling window for each encoder feature map
+
+### Diagram
+
+- **Output map from prev decoder stage**
+  ```
+  a 0 0 0
+  0 0 b 0
+  0 0 0 d
+  c 0 0 0
+  ```
+
+- **Maxpool indices from encoder**
+  ```
+  00 10
+  10 01
+  ```
+
+```markdown
+
+```
+
+# DL4CV_Week07_Part03.pdf - Page 27
+
+```markdown
+# Upsampling in SegNet
+
+---
+
+## Convolution with Trainable Decoder Filters
+
+![Diagram](https://via.placeholder.com/150)
+
+**Max pool indices:** location of maximum feature value for each pooling window for each encoder feature map
+
+**Storing maxpool indices is memory-efficient (instead of storing full feature map)**
+
+---
+
+- **Convolution with trainable decoder filters**
+    - ![Formula](https://via.placeholder.com/50)
+
+    ```plaintext
+    a  0  0  0
+    0  0  b  0
+    0  0  0  d
+    c  0  0  0
+    ```
+
+    ![Formula](https://via.placeholder.com/50)
+
+    ```plaintext
+    a  b
+    c  d
+    ```
+
+- **output map from prev decoder stage**
+
+    ```plaintext
+    a  b
+    c  d
+    ```
+
+- **maxpool indices from encoder**
+
+    ```plaintext
+    00  10
+    10  01
+    ```
+
+---
+
+*Vineeth N B (IIT-H) §7.3 CNNs for Segmentation*
+
+*NPTEL*
+
+![Diagram](https://via.placeholder.com/150)
+
+```plaintext
+10 / 29
+```
+```
+
+# DL4CV_Week07_Part03.pdf - Page 28
+
+```markdown
+# Upsampling in SegNet
+
+## Convolution with Trainable Decoder Filters
+
+- **Max pool indices**: location of maximum feature value for each pooling window for each encoder feature map
+
+- **Storing maxpool indices is memory-efficient** (instead of storing full feature map)
+
+- **In each stage of decoder, max pooling indices from corresponding encoder stage used to produce sparse upsampled feature maps**
+
+![Output Map from Previous Decoder Stage](image1.png)
+```
+```
+- `a b c d` (output map from previous decoder stage)
+
+```
+- `00 10`
+- `10 01`
+```
+
+(maxpool indices from encoder)
+
+```
+
+# DL4CV_Week07_Part03.pdf - Page 29
+
+```markdown
+# Upsampling in SegNet
+
+## Convolution with trainable decoder filters
+
+- **Output map from prev decoder stage**:
+  ```
+  a  0  0  0
+  0  0  b  0
+  0  0  0  d
+  c  0  0  0
+  ```
+- **Max pool indices from encoder**:
+  ```
+  00  10
+  10  01
+  ```
+
+## Max pool indices
+
+- **Location of maximum feature value for each pooling window for each encoder feature map**.
+
+## Storing maxpool indices
+
+- **Storing maxpool indices is memory-efficient (instead of storing full feature map)**.
+
+## In each stage of decoder
+
+- **Max pooling indices from corresponding encoder stage used to produce sparse upsampled feature maps**.
+
+## Loss Function
+
+- **What is the loss function in all these methods?**
+
+_Vineeth N B. (IIIT-H)_
+
+## Citations
+
+- §7.3 CNNs for Segmentation
+- 10 / 29
+```
+
+# DL4CV_Week07_Part03.pdf - Page 30
+
+```markdown
+# Upsampling in SegNet
+
+## Convolution with trainable decoder filters
+
+- Convolution with trainable decoder filters
+
+    ```
+    a 0 0 0
+    0 0 b 0
+    0 0 0 d
+    c 0 0 0
+    ```
+
+    Output map from prev decoder stage
+
+    ```
+    a b
+    c d
+    ```
+
+    Maxpool indices from encoder
+
+    ```
+    00 10
+    10 01
+    ```
+
+## Max pool indices
+
+- Location of maximum feature value for each pooling window for each encoder feature map
+- Storing maxpool indices is memory-efficient (instead of storing full feature map)
+- In each stage of decoder, max pooling indices from corresponding encoder stage used to produce sparse upsampled feature maps
+- What is the loss function in all these methods? **Sum of pixel-wise cross-entropy losses**
+
+---
+
+Vineeth N B (IIIT-H) §7.3 CNNs for Segmentation 10 / 29
+```
+
+# DL4CV_Week07_Part03.pdf - Page 31
+
+```markdown
+# U-Net<sup>3</sup>
+
+- **Fully convolutional encoder-decoder architecture with skip connections** (an extension of FCN)
+
+![NPTEL](https://example.com/path/to/nptel_logo.png)
+
+<sup>3</sup>Ronneberger et al., U-Net: Convolutional Networks for Biomedical Image Segmentation, MICCAI 2015
+
+*Vineeth N B (IIIT-H)*
+
+*§7.3 CNNs for Segmentation*
+
+*11 / 29*
+```
+
+# DL4CV_Week07_Part03.pdf - Page 32
+
+```markdown
+# U-Net<sup>3</sup>
+
+- **Fully convolutional encoder-decoder architecture with skip connections** (an extension of FCN)
+- **Contracting path is an existing classification network with FC layers removed**
+
+![NPTel Logo](logo.png)
+
+*Ronneberger et al., U-Net: Convolutional Networks for Biomedical Image Segmentation, MICCAI 2015*
+
+*Vineeth N B (IIT-H)*
+
+*§7.3 CNNs for Segmentation*
+
+*11 / 29*
+```
+
+# DL4CV_Week07_Part03.pdf - Page 33
+
+```markdown
+# U-Net
+
+- **Fully convolutional encoder-decoder architecture with skip connections** (an extension of FCN)
+  - Contracting path is an existing classification network with FC layers removed
+  - Each step in expanding path consists of upsampling of feature maps, concatenated with corresponding feature maps of contracting path followed by further conv layers
+
+![NPTEL](https://example.com/path/to/image)
+
+*Ronneberger et al., U-Net: Convolutional Networks for Biomedical Image Segmentation, MICCAI 2015*
+
+*Vineeth N B (IIT-H)*
+
+*§7.3 CNNs for Segmentation*
+
+*11 / 29*
+```
+
+# DL4CV_Week07_Part03.pdf - Page 34
+
+```markdown
+# U-Net<sup>3</sup>
+
+- **Fully convolutional encoder-decoder architecture with skip connections** (an extension of FCN)
+  - Contracting path is an existing classification network with FC layers removed
+  - Each step in expanding path consists of upsampling of feature maps, concatenated with corresponding feature maps of contracting path followed by further conv layers
+  - Final layer is 1 × 1 conv with \(C + 1\) channels, \(C\) being number of classes
+
+![NPTEL](https://via.placeholder.com/150)
+
+<sup>3</sup>Ronneberger et al., U-Net: Convolutional Networks for Biomedical Image Segmentation, MICCAI 2015
+
+*Vineeth N B (IIT-H)*
+
+*§7.3 CNNs for Segmentation*
+
+*Page 11/29*
+```
+
+# DL4CV_Week07_Part03.pdf - Page 35
+
+```markdown
+# U-Net<sup>3</sup>
+
+- **Fully convolutional encoder-decoder architecture with skip connections** (an extension of FCN)
+- Contracting path is an existing classification network with FC layers removed
+- Each step in expanding path consists of upsampling of feature maps, concatenated with corresponding feature maps of contracting path followed by further convolutional layers
+- **Final layer** is 1 × 1 convolution with C + 1 channels, C being number of classes
+- Upsampling performed by 2 × 2 transpose convolution with s = 2, p = 0 with number of feature channels being halved each time (this operation doubles input map dimensions)
+
+---
+
+<sup>3</sup>Ronneberger et al., U-Net: Convolutional Networks for Biomedical Image Segmentation, MICCAI 2015
+
+Vineeth N B (IIT-H)
+
+§7.3 CNNs for Segmentation
+
+---
+
+11 / 29
+```
+
+# DL4CV_Week07_Part03.pdf - Page 36
+
+```markdown
+# U-Net<sup>3</sup>
+
+- **Fully convolutional encoder-decoder architecture with skip connections** (an extension of FCN)
+  - Contracting path is an existing classification network with FC layers removed
+  - Each step in expanding path consists of upsampling of feature maps, concatenated with corresponding feature maps of contracting path followed by further conv layers
+  - Final layer is 1 × 1 conv with C + 1 channels, C being number of classes
+  - Upsampling performed by 2 × 2 transpose conv with s = 2, p = 0 with number of feature channels being halved each time (this operation doubles input map dimensions)
+  - In original architecture, unpadded convolutions are performed, making output segmentation map smaller than input by a constant border width
+
+<sup>3</sup>Ronneberger et al., U-Net: Convolutional Networks for Biomedical Image Segmentation, MICCAI 2015
+
+*Vineeth N B (IIT-H)*
+
+*§7.3 CNNs for Segmentation*
+
+*11 / 29*
+```
+
+# DL4CV_Week07_Part03.pdf - Page 37
+
+ and
+
+```markdown
+# U-Net Architecture
+
+- One modification from FCN is: upsampling part has large number of feature channels
+- Concatenation of feature maps from encoder gives localization information to decoder
+- Other ways of concatenation include simply summing up feature maps
+
+![U-Net Architecture Diagram](image-url)
+
+**Legend:**
+- **blue diamond:** conv 3x3, ReLU
+- **gray rectangle:** copy and crop
+- **red triangle:** max pool 2x2
+- **green triangle:** up-conv 2x2
+- **green circle:** conv 1x1
+
+*Vineeth N B (IIIT-H)*
+*§7.3 CNNs for Segmentation*
+*12 / 29*
+```
+
+# DL4CV_Week07_Part03.pdf - Page 38
+
+```markdown
+# U-Net: Other Features and Extensions
+
+- **Designed for biomedical image segmentation**: How does this affect the model learning?
+
+![NPTel Logo](image_url)
+
+---
+
+**Vineeth N B (IIT-H)**
+
+**§7.3 CNNs for Segmentation**
+
+*Page 13 / 29*
+```
+
+# DL4CV_Week07_Part03.pdf - Page 39
+
+```markdown
+# U-Net: Other Features and Extensions
+
+- **Designed for biomedical image segmentation**: How does this affect the model learning?
+
+- **Very few training images available**, hence excessive data augmentation is performed by applying elastic deformations to available training images
+
+![NPTEL Logo](https://via.placeholder.com/150)
+
+**Vineeth N B** (IIT-H) *
+
+*Section 7.3: CNNs for Segmentation*
+
+*Slide 13/29*
+```
+
+# DL4CV_Week07_Part03.pdf - Page 40
+
+```markdown
+# U-Net: Other Features and Extensions
+
+- **Designed for biomedical image segmentation**: How does this affect the model learning?
+
+- Very few training images available, hence excessive data augmentation is performed by applying elastic deformations to available training images
+
+- **Another challenge in medical domain**: separation of touching objects of same class; hence, U-Net proposes a weighted loss to penalize pixels closer to edges
+
+![NPTEL Logo](data:image/png;base64,...)
+
+Vineeth N B (IIT-H) §7.3 CNNs for Segmentation
+
+13 / 29
+```
+
+# DL4CV_Week07_Part03.pdf - Page 41
+
+```markdown
+# U-Net: Other Features and Extensions
+
+- Designed for biomedical image segmentation: **How does this affect the model learning?**
+- Very few training images available, hence excessive data augmentation is performed by applying elastic deformations to available training images
+- Another challenge in medical domain: separation of touching objects of same class; hence, U-Net proposes a weighted loss to penalize pixels closer to edges
+- Variants of U-Net: Same principles but with different kinds of blocks (dense blocks instead of conv blocks), depths, etc
+
+![Image Placeholder](image_url)
+
+*Vineeth N B (IIT-H) §7.3 CNNs for Segmentation*
+
+*13 / 29*
+```
+
+# DL4CV_Week07_Part03.pdf - Page 42
+
+```markdown
+# PSPNet: Pyramid Scene Parsing Network<sup>4</sup>
+
+## What challenges could arise when using FCN on complex scenes?
+
+![NPTEL Logo](https://example.com/nptel-logo.png)
+
+<sup>4</sup> Zhao et al., Pyramid Scene Parsing Network, CVPR 2017
+Vineeth N B (IIT-H) §7.3 CNNs for Segmentation
+
+---
+
+**References:**
+- [Zhao et al., Pyramid Scene Parsing Network, CVPR 2017](https://example.com/paper-link)
+- Vineeth N B (IIT-H) §7.3 CNNs for Segmentation
+
+---
+
+**Page Number:** 14 / 29
+```
+
+# DL4CV_Week07_Part03.pdf - Page 43
+
+```markdown
+# PSPNet: Pyramid Scene Parsing Network
+
+- **What challenges could arise when using FCN on complex scenes?**
+  - FCN may not learn that some visual patterns are co-occurrent; E.g. cars are on roads, while boats are over rivers
+
+![NPTel Logo](https://example.com/nptel_logo.png)
+
+_4 Zhao et al., Pyramid Scene Parsing Network, CVPR 2017_
+
+_Vineeth N B (IIT-H)_
+
+_§7.3 CNNs for Segmentation_
+
+_14 / 29_
+```
+
+# DL4CV_Week07_Part03.pdf - Page 44
+
+```markdown
+# PSPNet: Pyramid Scene Parsing Network
+
+- **What challenges could arise when using FCN on complex scenes?**
+  - FCN may not learn that some visual patterns are co-occurrent; E.g. cars are on roads, while boats are over rivers
+  - FCN may predict parts of an object as different categories; E.g. parts of a skyscraper may be mis-classified as different buildings
+
+![NPTEL Logo](https://example.com/logo.png)
+
+<sup>4</sup>Zhao et al., Pyramid Scene Parsing Network, CVPR 2017
+
+Vineeth N B (IIIT-H)
+
+§7.3 CNNs for Segmentation
+
+14 / 29
+```
+
+# DL4CV_Week07_Part03.pdf - Page 45
+
+```markdown
+# PSPNet: Pyramid Scene Parsing Network<sup>4</sup>
+
+- **What challenges could arise when using FCN on complex scenes?**
+  - FCN may not learn that some visual patterns are co-occurrent; E.g. cars are on roads, while boats are over rivers
+  - FCN may predict parts of an object as different categories; E.g. parts of a skyscraper may be mis-classified as different buildings
+  - FCN may fail to correctly segment small objects and big objects (relative to its receptive field)
+
+![NPTEL](image-placeholder)
+
+<sup>4</sup>Zhao et al., Pyramid Scene Parsing Network, CVPR 2017
+
+*Vineeth N B (IIIT-H)*
+
+§7.3 CNNs for Segmentation
+
+14 / 29
+```
+
+# DL4CV_Week07_Part03.pdf - Page 46
+
+```markdown
+# PSPNet: Pyramid Scene Parsing Network<sup>4</sup>
+
+- **What challenges could arise when using FCN on complex scenes?**
+  - FCN may not learn that some visual patterns are co-occurrent; E.g. cars are on roads, while boats are over rivers
+  - FCN may predict parts of an object as different categories; E.g. parts of a skyscraper may be mis-classified as different buildings
+  - FCN may fail to correctly segment small objects and big objects (relative to its receptive field)
+
+- **Hypothesis:** Using global context information can lead to better segmentation; a network with suitable global scene-level information at different scales can improve segmentation
+
+<sup>4</sup>Zhao et al., Pyramid Scene Parsing Network, CVPR 2017
+
+Vineeth N B (IIIT-H)
+
+§7.3 CNNs for Segmentation
+
+14 / 29
+```
+
+# DL4CV_Week07_Part03.pdf - Page 47
+
+```markdown
+# PSPNet: Pyramid Pooling Module
+
+![PSPNet Diagram](image_url)
+
+- **Take final layer feature map of a deep network like ResNet**
+
+![Vineeth N.B. (IIIT-H)](image_url)
+
+## Average pooling done for four different scales
+
+**Vineeth N B (IIIT-H)**
+
+## §7.3 CNNs for Segmentation
+
+### Slide: 15 / 29
+```
+
+# DL4CV_Week07_Part03.pdf - Page 48
+
+```markdown
+# PSPNet: Pyramid Pooling Module
+
+![Image of urban scene with CNN and Pyramid Pooling Module](image-url)
+
+- **Take final layer feature map of a deep network like ResNet**
+- **Pyramid Pooling Module** combines features in four different scales:
+
+    - Average pooling done for four different scales
+
+**Vineeth N B (IIIT-H)**
+
+**§7.3 CNNs for Segmentation**
+
+---
+
+**Slide 15 / 29**
+```
+
+```markdown
+# PSPNet: Pyramid Pooling Module
+
+![Image of urban scene with CNN and Pyramid Pooling Module](image-url)
+
+- **Take final layer feature map of a deep network like ResNet**
+- **Pyramid Pooling Module** combines features in four different scales:
+
+    - Average pooling done for four different scales
+
+**Vineeth N B (IIIT-H)**
+
+**§7.3 CNNs for Segmentation**
+
+---
+
+**Slide 15 / 29**
+```
+
+# DL4CV_Week07_Part03.pdf - Page 49
+
+```markdown
+# PSPNet: Pyramid Pooling Module
+
+![PSPNet: Pyramid Pooling Module](image-url)
+
+**Vineeth N B (IIT-H)**
+
+## PSPNet: Pyramid Pooling Module
+
+The Pyramid Pooling Module (PPM) in PSPNet is designed to handle the feature extraction from the final layer feature map of a deep network like ResNet. The main goal is to combine features at four different scales using average pooling.
+
+### Steps Involved:
+
+1. **Input Image**: A sample image from the dataset is passed through the CNN.
+2. **Feature Extraction**: The CNN extracts the final layer feature map.
+3. **Pyramid Pooling Module**:
+   - The feature map is subjected to pooling operations at four different scales.
+   - **Coarsest Level**: This involves a global average pooling operation, where the entire feature map is averaged to a single value.
+   - **Other Levels**: Average pooling is done at three other scales.
+
+### Components:
+
+- **CNN**: Convolutional Neural Network used for initial feature extraction.
+- **PPM**: Pyramid Pooling Module that performs average pooling at four different scales.
+- **Output**: The result of the pyramid pooling module combines features from different scales to enhance the network's ability to capture context at various levels.
+
+### Diagram Explanation:
+
+- The diagram shows the flow from an input image through the CNN to the PPM.
+- The PPM takes the final layer feature map and performs pooling at different levels, indicated by different colored blocks.
+- The coarsest level (global average pooling) is highlighted, showing the combination of features at different scales.
+
+### References:
+
+- Vineeth N B (IIT-H)
+- §7.3 CNNs for Segmentation
+
+---
+
+Page 15 of 29
+```
+
+In this markdown format, the key points, diagrams, and references are accurately represented. Adjust the image URL placeholder as needed once the actual image URL is available.
+
+# DL4CV_Week07_Part03.pdf - Page 50
+
+```markdown
+# PSPNet: Pyramid Pooling Module
+
+![Image of urban street scene](image_url)
+
+## Pyramid Pooling Module
+
+- Take final layer feature map of a deep network like ResNet
+- **Pyramid Pooling Module** combines features in four different scales:
+  - Coarsest level is simply global average pooling
+  - Each successive pooling level gives increased localization information
+
+![Diagram of Pyramid Pooling Module](image_url)
+
+*Average pooling done for four different scales*
+
+_Note: Image placeholder used as OCR could not extract the actual image._
+
+## Presenter Information
+
+**Vineeth N B (IIT-H)**
+
+**§7.3 CNNs for Segmentation**
+
+*Slide Number: 15 / 29*
+```
+
+# DL4CV_Week07_Part03.pdf - Page 51
+
+# PSPNet: Pyramid Pooling Module
+
+## Average Pooling Done for Four Different Scales
+
+```plaintext
+Vineeth N B (IIT-H) §7.3 CNNs for Segmentation 15 / 29
+```
+
+### Steps:
+1. **Input Image**: Start with an input image.
+2. **CNN**: Pass the image through a Convolutional Neural Network (CNN).
+3. **Feature Map**: Obtain the final layer feature map of a deep network like ResNet.
+4. **Pyramid Pooling Module (POOL)**: Apply the Pyramid Pooling Module to the feature map.
+
+### Pyramid Pooling Module:
+- **Function**: Combines features in four different scales.
+- **Coarsest Level**:
+  - Simply global average pooling.
+  - Provides the broadest context.
+- **Subsequent Levels**:
+  - Each successive pooling level gives increased localization information.
+  - Different scales capture features at different resolutions.
+
+### Average Pooled Outputs:
+- The outputs after pooling are in the form of:
+  - `1 × 1 × c`
+  - `2 × 2 × c`
+  - `3 × 3 × c`
+  - `6 × 6 × c`
+
+  where `c` is the number of input channels.
+
+### Visual Representation:
+![Pyramid Pooling Module](image_url)
+
+- The visual shows the different scales of average pooling applied to the feature map.
+
+```plaintext
+Vineeth N B (IIT-H) §7.3 CNNs for Segmentation 15 / 29
+```
+
+# DL4CV_Week07_Part03.pdf - Page 52
+
+```markdown
+# Pyramid Pooling Module
+
+![Pyramid Pooling Module Diagram](https://via.placeholder.com/800x600)
+
+## Pyramid Pooling Module
+
+### (a) Input Image
+
+![Input Image](https://via.placeholder.com/300x200)
+
+### (b) Feature Map
+
+- The input image is processed by a **CNN**.
+
+![Feature Map](https://via.placeholder.com/300x200)
+
+### (c) Pyramid Pooling Module
+
+- Following average pooling, a **1 x 1 conv layer** is used to reduce the number of channels at each scale.
+- 4 scales are used which implies the channels at each level are reduced to **c/4**.
+
+![Pyramid Pooling Module](https://via.placeholder.com/300x200)
+
+### (d) Final Prediction
+
+- The final prediction is made using the processed feature maps.
+
+![Final Prediction](https://via.placeholder.com/300x200)
+
+Vineeth N B. (IIT-H)
+
+### §7.3 CNNs for Segmentation
+
+16 / 29
+```
+
+# DL4CV_Week07_Part03.pdf - Page 53
+
+```markdown
+# Pyramid Pooling Module
+
+![Pyramid Pooling Module Diagram](image_url)
+
+## Image Sequence
+
+1. **Input Image**
+   ![Input Image](input_image_url)
+
+2. **Feature Map**
+   ![Feature Map](feature_map_url)
+
+3. **Pyramid Pooling Module**
+   ![Pyramid Pooling Module](pyramid_pooing_module_url)
+
+4. **Final Prediction**
+   ![Final Prediction](final_prediction_url)
+
+## Detailed Explanation
+
+- Following average pooling, a `1 × 1` conv layer is used to reduce the number of channels at each scale; 4 scales used ⇒ each level’s channels reduced to `c/4`
+- Low-dimension pooled maps are upsampled (can use bilinear interpolation) to same size as original
+
+*Vineeth N B. (IIT-H) §7.3 CNNs for Segmentation*
+
+*Page 16 / 29*
+```
+
+# DL4CV_Week07_Part03.pdf - Page 54
+
+```markdown
+# Pyramid Pooling Module
+
+![Pyramid Pooling Module Diagram](image_url)
+
+- **a) Input Image**
+- **b) Feature Map**
+- **c) Pyramid Pooling Module**
+- **d) Final Prediction**
+
+- Following average pooling, a 1 × 1 conv layer is used to reduce the number of channels at each scale; 4 scales used ⇒ each level’s channels reduced to c/4
+- Low-dimension pooled maps are upsampled (can use bilinear interpolation) to same size as original
+- Features then concatenated with original feature map
+
+_Vineeth N B. (IIT-H)_
+
+## 7.3 CNNs for Segmentation
+
+_Page 16 / 29_
+```
+
+# DL4CV_Week07_Part03.pdf - Page 55
+
+```markdown
+# Pyramid Pooling Module
+
+![Pyramid Pooling Module Diagram](image_url)
+
+## Steps Involved
+
+### (a) Input Image
+- Original image input to the system.
+
+### (b) Feature Map
+- The input image is processed through a CNN to generate a feature map.
+
+### (c) Pyramid Pooling Module
+- **Following average pooling**, a 1 × 1 convolutional layer is used to reduce the number of channels at each scale; 4 scales used ⇒ each level’s channels reduced to `c/4`.
+- **Low-dimension pooled maps** are upsampled (can use bilinear interpolation) to the same size as the original.
+- **Features** then concatenated with the original feature map.
+- **Concatenated feature maps** passed through upsampling and convolutional layers to generate the final output.
+
+### (d) Final Prediction
+- The final prediction output, which is the segmented image.
+
+## Additional Notes
+- **Vineeth N B (IIT-H)**
+- **§7.3 CNNs for Segmentation**
+- Page: 16 / 29
+```
+
+Note: Replace `image_url` with the actual URL or path of the image if you are including it in the document. This markdown format ensures the scientific content is well-organized and accurately represented.
+
+# DL4CV_Week07_Part03.pdf - Page 56
+
+```markdown
+# DeepLab^5
+
+![Image](image_url)
+
+## Figure 5. Parallel modules with atrous convolution (ASPP), augmented with image-level features.
+
+### Note that atrous convolution = dilated convolution = transpose convolution = fractionally strided convolution
+
+---
+
+**Chen et al. DeepLab: Semantic Image Segmentation with Deep Convolutional Nets, Atrous Convolution, and Fully Connected CRFs, TPAMI 2017**
+
+**Vineeth N B (IIT-H)**
+
+## §7.3 CNNs for Segmentation
+
+17 / 29
+```
+
+# DL4CV_Week07_Part03.pdf - Page 57
+
+```markdown
+# DeepLab V3[^6]
+
+![DeepLab V3 Diagram](image-url)
+
+## Diagram Description
+
+### Encoder
+
+- **Image Input:** The process starts with an input image.
+- **DCNN and Atrous Conv:** The image is processed through a Deep Convolutional Neural Network (DCNN) and an Atrous Convolution.
+- **1x1 Conv:** Followed by a 1x1 Convolution.
+- **3x3 Conv (rate 6), 3x3 Conv (rate 12), 3x3 Conv (rate 18):** Perform multiple 3x3 Convolutions with different dilation rates.
+- **3x3 Pooling:** Pooling operation follows.
+- **1x1 Conv:** Another 1x1 Convolution is applied.
+
+### Decoder
+
+- **Low-Level Features:** Lower-level features are combined with the upsampled features.
+- **Upsample by 4:** Upsampling with a factor of 4.
+- **1x1 Conv:** Another 1x1 Convolution operation.
+- **Concatenation:** Feature maps are concatenated.
+- **3x3 Conv:** Followed by 3x3 Convolution.
+- **Upsample by 4:** Upsampling with a factor of 4.
+- **Output Prediction:** Final prediction output is generated.
+
+### Key Features
+
+- Adds image-level features to ASPP (Atrous Spatial Pyramid Pooling).
+- Batch normalization for easier training.
+- Decoder module to refine segmentation results.
+
+## Credit
+
+Kevin Windholm, Novatec-GMBH
+
+## References
+
+[^6]: Chen et al., Encoder-Decoder with Atrous Separable Convolution for Semantic Image Segmentation, ECCV 2018
+
+**Note:** Vimeeth N B (IIT-H)
+
+**Section:** §7.3 CNNs for Segmentation
+
+---
+
+```
+
+# DL4CV_Week07_Part03.pdf - Page 58
+
+```markdown
+# Instance Segmentation
+
+## Credit: Soroush, StackOverFlow
+
+Vineeth N B (IIT-H)
+
+## Slide 19: Instance Segmentation
+
+### Semantic Segmentation
+![Semantic Segmentation](image1.png)
+
+### Semantic Instance Segmentation
+![Semantic Instance Segmentation](image2.png)
+
+## §7.3 CNNs for Segmentation
+```
+
+# DL4CV_Week07_Part03.pdf - Page 59
+
+```markdown
+# Mask R-CNN
+
+![Mask R-CNN](image_url)
+
+## Mask R-CNN
+
+**Mask R-CNN** aims to tackle instance segmentation (where each pixel is given a class label, as well as an object ID).
+
+- **Box offset regressor**
+- **SVM object classifier**
+- **Mask FCN predictor**
+
+### Diagram Components
+- **Region CNN features**
+  - **RPN (Region Proposal Network)**
+  - **Deep CNN**
+
+### Process Flow
+1. **Deep CNN**: Processes the image.
+2. **RPN (Region Proposal Network)**: Generates region proposals.
+3. **Region CNN features**: Extracts features from proposed regions.
+4. **Joint processing**:
+   - **Box offset regressor**
+   - **SVM object classifier**
+   - **Mask FCN predictor**
+
+### Credit
+- **Lilian Weng, Github.io**
+
+### References
+- He, Mask R-CNN, ICCV 2017
+- Vineeth N B (IIIT-H)
+
+### Section
+- **§7.3 CNNs for Segmentation**
+```
+
+**Note**: Replace `image_url` with the actual URL of the image if it is to be included in the markdown file. If the image cannot be captured via OCR, include a placeholder comment or description.
+
+# DL4CV_Week07_Part03.pdf - Page 60
+
+```markdown
+# Mask R-CNN
+
+![Mask R-CNN](image_url)
+
+- **Box offset regressor**
+- **SVM object classifier**
+- **Mask FCN predictor**
+
+![Region CNN features](image_url)
+
+- **Region CNN features**
+- **RPN (Region Proposal Network)**
+- **Deep CNN**
+- **RoIAlign**
+
+## Mask R-CNN
+
+Mask R-CNN aims to tackle instance segmentation (where each pixel is given a class label, as well as an object ID).
+
+Mask R-CNN = Faster R-CNN with FCN on ROIs
+
+**Credit:** [Lilian Weng, Github.io](https://github.io)
+
+### Additional References
+
+- He, Mask R-CNN, ICCV 2017
+- Vineeth N B (IIT-H)
+
+---
+
+### Section: CNNs for Segmentation
+
+Slide # 20 / 29
+```
+
+# DL4CV_Week07_Part03.pdf - Page 61
+
+```markdown
+# Mask R-CNN
+
+![Mask R-CNN Diagram](image_url)
+
+**Mask R-CNN**
+
+- **Aims to tackle instance segmentation** (where each pixel is given a class label, as well as an object ID)
+  - **Mask R-CNN = Faster R-CNN with FCN on ROIs**
+  - Adds a parallel head to predict masks along with existing branches for classification and localization
+
+**Credit:** Lilian Weng, Github.io
+
+## References
+- He, Mask R-CNN, ICCV 2017
+- Vineeth N B (IIT-H)
+
+## Section: CNNs for Segmentation
+```
+
+Note: Replace `image_url` with the actual URL or placeholder for the image if it's available.
+
+This format ensures that the content is well-structured, readable, and maintains the scientific integrity of the original material.
+
+# DL4CV_Week07_Part03.pdf - Page 62
+
+```markdown
+# Mask R-CNN: RoIAlign
+
+- An improvement of RoIPool operation (used in detection frameworks)
+
+![NPTEL Logo](https://example.com/nptel-logo.png)
+
+Vineeth N B (IIT-H)
+
+### 7.3 CNNs for Segmentation
+
+---
+
+Page 21 of 29
+```
+
+# DL4CV_Week07_Part03.pdf - Page 63
+
+```markdown
+# Mask R-CNN: RoIAlign
+
+- **An improvement of RoIPool operation (used in detection frameworks)**
+
+- **There is loss of information due to quantization when moving from object proposals in image space to proposals in feature space; further loss in RoIPool operation. Why does this matter?**
+
+![NPTEL](attachment:image.png)
+
+*Vineeth N B (IIT-H)*
+
+*§7.3 CNNs for Segmentation*
+
+*21 / 29*
+```
+
+# DL4CV_Week07_Part03.pdf - Page 64
+
+```markdown
+# Mask R-CNN: RoIAlign
+
+- **An** improvement of RoIPool operation (used in detection frameworks)
+
+- There is loss of information due to quantization when moving from object proposals in image space to proposals in feature space; further loss in RoIPool operation. **Why does this matter?**
+
+- This is significant because one pixel in feature space is equivalent to **many** pixels on image
+
+![NPTEL](https://example.com/image.png)
+
+*Vineeth N B (IIIT-H)*
+
+**§7.3 CNNs for Segmentation**
+
+*21 / 29*
+```
+
+# DL4CV_Week07_Part03.pdf - Page 65
+
+# Mask R-CNN: RoIAlign
+
+- **An improvement of RoIPool operation (used in detection frameworks)**
+
+- **There is loss of information due to quantization when moving from object proposals in image space to proposals in feature space; further loss in RoIPool operation. Why does this matter?**
+  - **This is significant because one pixel in feature space is equivalent to many pixels on image**
+
+- **RoIAlign performs bilinear interpolation for the exact coordinate**
+
+*Vineeth N B (IIIT-H)*
+*§7.3 CNNs for Segmentation*
+*21 / 29*
+
+# DL4CV_Week07_Part03.pdf - Page 67
+
+```markdown
+# Mask R-CNN: RoIAlign
+
+![Mask R-CNN: RoIAlign](image_url)
+
+## target masks on RoIs
+
+![Target Masks on RoIs](image_url)
+
+Translation of object in RoI => Same translation of mask in RoI
+
+**Credit**: *Kaiming he, ICCV 2017 Tutorial*
+
+*Vineeth N B (IIT-H)*
+
+**§7.3 CNNs for Segmentation**
+
+---
+
+22 / 29
+```
+
+# DL4CV_Week07_Part03.pdf - Page 68
+
+```markdown
+# Mask R-CNN: RoIAlign
+
+## RoIAlign
+
+![RoIAlign Diagram](image_url)
+
+- **conv feat. map**: Convolutional feature map from the backbone network.
+- **Grid points of bilinear interpolation**: Points used for bilinear interpolation within the variable size RoI.
+- **RoIAlign output**: Fixed dimensional representation obtained after applying RoIAlign.
+
+### Diagram Explanation
+- **Variable size RoI**: Region of Interest, which can vary in size.
+- **Fixed dimensional representation**: The output of RoIAlign that aligns the variable size RoI into a fixed size representation.
+
+**Credit**: *Kaiming he, ICCV 2017 Tutorial*
+
+*Vineeth N B (IIIT-H)*
+
+**§7.3 CNNs for Segmentation**
+
+---
+
+*Slide 22 / 29*
+```
+
+# DL4CV_Week07_Part03.pdf - Page 69
+
+```markdown
+# Mask R-CNN: FCN Mask Head
+
+![Mask R-CNN: FCN Mask Head](image_url)
+
+**Faster R-CNN w/ FPN [20]**
+
+```
+Region of Interest (RoI)
+```
+
+- RoI 7x7 x256 -> 1024
+- class
+- box
+
+```
+Region of Interest (RoI)
+```
+
+- RoI 14x14 x256 -> 14x14 x4 -> 14x14 x256
+- 28x28 x256 -> 28x28 x80
+- mask
+
+**FCN branch generates mask for each proposal**
+
+**Credit:** *Kaiming he, ICCV 2017 Tutorial*
+
+**Vineeth N B (IIT-H)**
+
+**§7.3 CNNs for Segmentation**
+
+---
+
+*Slide 23 / 29*
+```
+
+# DL4CV_Week07_Part03.pdf - Page 70
+
+# Mask R-CNN: FCN Mask Head
+
+## Diagram Overview
+
+```plaintext
+Mask R-CNN: FCN Mask Head
+```
+
+### Components and Flow
+
+1. **Input Regions of Interest (RoI)**
+    - Two sets of RoI inputs: one of size \(7 \times 7 \times 256\) and another of size \(14 \times 14 \times 256\).
+
+2. **Intermediate Processing**
+    - **First Pathway:**
+        - Initial \(7 \times 7 \times 256\) tensor.
+        - Processed through a \(1024\)-channel feature extractor.
+        - Further processed to generate class and bounding box (bbox) predictions.
+    - **Second Pathway:**
+        - Initial \(14 \times 14 \times 256\) tensor.
+        - Passed through a \(14 \times 14 \times 256\) layer.
+        - Tensor upsampled to \(28 \times 28 \times 256\).
+        - Ultimately processed to a \(28 \times 28 \times 80\) mask output.
+
+### Key Functionalities
+
+- **FCN Branch:**
+  - Generates a mask for each proposal.
+- **Mask Size:**
+  - The mask is \(28 \times 28\) in size during training.
+
+## Credits
+
+```markdown
+Credit: Kaiming he, ICCV 2017 Tutorial
+```
+
+## Presentation Details
+
+- **Slide Number**: 23 / 29
+- **Title**: §7.3 CNNs for Segmentation
+- **Author**: Vineeth N B (IIIT-H)
+
+---
+
+*Note*: The provided content is based on OCR interpretation. Specific diagrams or images embedded in the original document may not be fully captured and should be reviewed in the context of the original source.
+
+# DL4CV_Week07_Part03.pdf - Page 71
+
+```markdown
+# Mask R-CNN: FCN Mask Head
+
+![Mask R-CNN: FCN Mask Head Diagram](image_url)
+
+- **FCN Mask Head**: This is a branch that generates a mask for each proposal.
+- **Mask Size During Training**: The mask is 28 x 28 in size during training.
+- **Rescaling During Inference**: The mask is rescaled to the bounding box size and overlaid on the image during inference.
+
+## Diagram Explanation
+
+- **Input**: RoI (Region of Interest) with dimensions 7x7 x 256 and 14x14 x 256.
+- **Faster R-CNN with FPN**: Utilized for class and box proposals.
+- **Intermediate Layers**:
+  - 7x7 x 1024
+  - 14x14 x 1024
+  - 14x14 x 256
+  - 14x14 x 256 (with a multiplication factor of 4)
+  - 28x28 x 256
+- **Output**:
+  - 28x28 x 80 (mask)
+
+## Credit
+*Kaiming he, ICCV 2017 Tutorial*
+
+## Additional Information
+*Vineeth N B (IIIT-H)*
+*§7.3 CNNs for Segmentation*
+*23 / 29*
+```
+
+# DL4CV_Week07_Part03.pdf - Page 72
+
+```markdown
+# Panoptic Segmentation
+
+![Panoptic Segmentation](https://via.placeholder.com/150)
+
+## Semantic Segmentation
+![Semantic Segmentation](https://via.placeholder.com/150)
+
+## Instance segmentation
+![Instance segmentation](https://via.placeholder.com/150)
+
+## Panoptic segmentation
+![Panoptic segmentation](https://via.placeholder.com/150)
+
+**Credit:** *Harshit Kumar, Github.io*
+
+---
+
+*Kirillov et al., Panoptic Segmentation, CVPR 2019*
+
+*Vineeth N B (IIT-H)*
+
+**§7.3 CNNs for Segmentation**
+
+---
+
+Page 24 / 29
+```
+
+# DL4CV_Week07_Part03.pdf - Page 73
+
+# Panoptic Segmentation: Possible Architectures
+
+## Overview
+
+The image illustrates various architectures and techniques used for panoptic segmentation, combining semantic segmentation and instance segmentation to achieve a comprehensive understanding of the scene.
+
+### Input
+- **Input Image**: The initial input is a scene captured in an image.
+
+### Architectures
+
+1. **Dilated FCN (Fully Convolutional Network)**
+   - This architecture uses dilated convolutions to capture features at multiple scales.
+   - The output provides **semantic segmentation**, which identifies different regions or classes in the image.
+
+2. **Mask R-CNN**
+   - This architecture is designed for object detection and instance segmentation.
+   - It provides **instance segmentation**, which identifies and delineates individual objects within the image.
+
+### Segmentation Types
+
+- **Semantic Segmentation**: Classifies each pixel in the image into a particular class, providing a segmented view of the scene.
+- **Instance Segmentation**: Identifies and delineates individual objects within the same class, distinguishing between different instances of the same category.
+- **Panoptic Segmentation**: Combines semantic and instance segmentation to provide a holistic view of the scene, identifying both the classes and individual instances.
+
+```markdown
+| Semantic Segmentation | Panoptic Segmentation |
+|-----------------------|-----------------------|
+| Identifies class labels | Identifies class labels and distinct instances |
+| No distinction between instances of the same class | Distinguishes between instances of the same class |
+```
+
+### Credit
+- **Author**: Harshit Kumar, Github.io
+- **Presentation Credit**: Vineeth N B (IIT-H)
+
+### Slide Information
+- **Slide Number**: 25 / 29
+- **Topic**: CNNs for Segmentation
+
+```markdown
+# Panoptic Segmentation: Possible Architectures
+
+## Overview
+
+The image illustrates various architectures and techniques used for panoptic segmentation, combining semantic segmentation and instance segmentation to achieve a comprehensive understanding of the scene.
+
+### Input
+- **Input Image**: The initial input is a scene captured in an image.
+
+### Architectures
+
+1. **Dilated FCN (Fully Convolutional Network)**
+   - This architecture uses dilated convolutions to capture features at multiple scales.
+   - The output provides **semantic segmentation**, which identifies different regions or classes in the image.
+
+2. **Mask R-CNN**
+   - This architecture is designed for object detection and instance segmentation.
+   - It provides **instance segmentation**, which identifies and delineates individual objects within the image.
+
+### Segmentation Types
+
+- **Semantic Segmentation**: Classifies each pixel in the image into a particular class, providing a segmented view of the scene.
+- **Instance Segmentation**: Identifies and delineates individual objects within the same class, distinguishing between different instances of the same category.
+- **Panoptic Segmentation**: Combines semantic and instance segmentation to provide a holistic view of the scene, identifying both the classes and individual instances.
+
+```markdown
+| Semantic Segmentation | Panoptic Segmentation |
+|-----------------------|-----------------------|
+| Identifies class labels | Identifies class labels and distinct instances |
+| No distinction between instances of the same class | Distinguishes between instances of the same class |
+```
+
+### Credit
+- **Author**: Harshit Kumar, Github.io
+- **Presentation Credit**: Vineeth N B (IIT-H)
+
+### Slide Information
+- **Slide Number**: 25 / 29
+- **Topic**: CNNs for Segmentation
+```
+
+# DL4CV_Week07_Part03.pdf - Page 74
+
+```markdown
+# Panoptic Segmentation: Possible Architectures
+
+![Diagram](image_url)
+
+## Diagram Components
+
+### Feature Pyramid Network (FPN)
+- **Backbone**: The initial feature extraction stage.
+- **Levels**: Various levels of feature maps denoted by `P_{n/2}`, `P_{n}`, and `P_{n+1}`.
+- **Connections**: Features from different levels are processed by the region-based recognition head and the pixel-level recognition head.
+
+### Region-based Recognition Head
+- **Mask R-CNN Head**: Processes features to generate masks around detected objects.
+  - **Example**: Detects and segments a "person" in the image.
+
+### Pixel-level Recognition Head
+- **Output**: Generates a dense segmentation mask for each pixel in the image.
+  - **Example**: Segments different classes such as "person", "bicycle", "car", etc.
+
+## Slide Information
+
+- **Author**: Vineeth N B (IIT-H)
+- **Topic**: CNNs for Segmentation
+- **Slide Number**: 26 / 29
+```
+
+# DL4CV_Week07_Part03.pdf - Page 75
+
+```markdown
+# Panoptic Segmentation: Possible Architectures
+
+![Panoptic Segmentation Architecture](image_url)
+
+- **Feature Pyramid Network (FPN)**
+  - **Backbone**
+    - Multiple stages of feature extraction
+  - **Mask R-CNN head**
+    - Region-based recognition head
+      - Outputs object masks
+      - Example: Detecting a "person" in an image
+
+![Mask R-CNN head Output](image_url)
+
+- **Region-based recognition head**
+  - Connects to the backbone for multi-scale feature extraction
+  - Produces region proposals
+  - Utilizes a pixel-level recognition head
+    - Outputs pixel-wise segmentation
+      - Example: Segmenting different objects like "car", "person", "bicycle" in an image
+
+![Pixel-level recognition head Output](image_url)
+
+## Loss Function?
+
+*Vineeth N B (IIIT-H)*
+
+*§7.3 CNNs for Segmentation*
+
+*Page 26 of 29*
+```
+
+# DL4CV_Week07_Part03.pdf - Page 76
+
+```markdown
+# Panoptic Segmentation: Possible Architectures
+
+![Diagram](image_url)
+
+- **backbone**
+- **Mask R-CNN head**
+- **region-based recognition head**
+- **pixel-level recognition head**
+
+![Feature Pyramid Network (FPN)](image_url)
+
+![Example Image](image_url)
+
+### Loss Function? L = λi (L_cls + L_bbox + L_mask) + λs L_s, where:
+
+- Instance segmentation branch has:
+  - L_cls = classification loss
+  - L_bbox = bounding-box loss
+  - L_mask = mask loss
+
+- Semantic segmentation branch has L_s = pixel-wise cross-entropy loss
+
+**Vineeth N B (IIIT-H)**
+
+*§7.3 CNNs for Segmentation*
+
+*Page 26 of 29*
+```
+
+# DL4CV_Week07_Part03.pdf - Page 77
+
+```markdown
+# Panoptic Segmentation: New Evaluation Metric
+
+Why do we need a new evaluation metric?
+
+- In **semantic segmentation**, we use **IoU** and **per-pixel accuracy**
+- In **instance segmentation**, we use **average precision over different IoU thresholds**
+- **Why can’t we use these for panoptic segmentation?**
+
+![NPTEL Logo](image_url)
+
+_Vineeth N B (IIT-H)_
+
+§7.3 CNNs for Segmentation
+
+27 / 29
+```
+
+# DL4CV_Week07_Part03.pdf - Page 78
+
+```markdown
+# Panoptic Segmentation: New Evaluation Metric
+
+## Why do we need a new evaluation metric?
+
+- In semantic segmentation, we use **IoU** and **per-pixel accuracy**
+- In instance segmentation, we use **average precision over different IoU thresholds**
+- Why can’t we use these for panoptic segmentation?
+  - Can cause asymmetry for classes with or without instance-level annotations
+
+![NPTEL](https://example.com/nptel-logo.png)
+
+*Credit: Harshit Kumar, GitHub.io*
+
+_Vineeth N B (IIT-H)_
+
+§7.3 CNNs for Segmentation
+
+27 / 29
+```
+
+# DL4CV_Week07_Part03.pdf - Page 79
+
+```markdown
+# Panoptic Segmentation: PQ Metric
+
+![Panoptic Segmentation: PQ Metric](image_url)
+
+For a ground truth segment \( g \) and for predicted segment \( p \), PQ is calculated as:
+
+\[
+PQ = \frac{\sum_{(p,g) \in TP} \text{IoU}(p, g)}{|TP| + \frac{1}{2}|FP| + \frac{1}{2}|FN|} = \frac{\sum_{(p,g) \in TP} \text{IoU}(p,g)}{|TP|} \times \frac{|TP|}{|TP| + \frac{1}{2}|FP| + \frac{1}{2}|FN|}
+\]
+
+- **Segmentation Quality (SQ)**:
+  \[
+  \text{SQ} = \frac{\sum_{(p,g) \in TP} \text{IoU}(p, g)}{|TP|}
+  \]
+
+- **Recognition Quality (RQ)**:
+  \[
+  \text{RQ} = \frac{|TP|}{|TP| + \frac{1}{2}|FP| + \frac{1}{2}|FN|}
+  \]
+
+**Credit**: Harshit Kumar, [Github.io](http://Github.io)
+
+_Vineeth N B (IIT-H)_
+
+§7.3 CNNs for Segmentation
+
+*Page 28 of 29*
+```
+
+# DL4CV_Week07_Part03.pdf - Page 80
+
+```markdown
+# Homework
+
+## Readings
+
+- [ ] **Semantic Segmentation Overview by Nanonets**
+- [ ] **Overview of Deep Lab, AnalyticsVidhya**
+- [ ] **Introduction to Panoptic Segmentation**
+
+---
+
+*Vineeth N B (IIIT-H)*
+
+## §7.3 CNNs for Segmentation
+
+---
+
+Page 29 / 29
+```
+

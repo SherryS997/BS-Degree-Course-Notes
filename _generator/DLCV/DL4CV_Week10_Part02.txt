@@ -1,0 +1,1870 @@
+# DL4CV_Week10_Part02.pdf - Page 1
+
+```markdown
+# Deep Learning for Computer Vision
+
+## Generative Adversarial Networks
+
+### Vineeth N Balasubramanian
+
+**Department of Computer Science and Engineering**
+
+**Indian Institute of Technology, Hyderabad**
+
+![IIT Hyderabad Logo](https://example.com/iith-logo.png)
+
+---
+
+**Vineeth N B (IIT-H)**
+
+**§10.2 GANs**
+
+---
+
+**1 / 24**
+
+```
+
+# DL4CV_Week10_Part02.pdf - Page 2
+
+ the original formatting as much as possible.
+
+```markdown
+# Review: Question
+
+**Why does using KL-divergence in finding the generative model simplify to maximum likelihood estimation?**
+
+- **Recall our problem:**
+
+  \[
+  \theta^* = \arg \min_{\theta \in M} \text{dist}(p_\theta, p_D)
+  \]
+
+- **If distance is KL-divergence:**
+
+  \[
+  \theta^* = \arg \min_{\theta \in M} D_{KL}(p_D || p_\theta)
+  \]
+
+  \[
+  = \arg \min_{\theta \in M} \mathbb{E}_{x \sim p_D} (\log p_D(x) - \log p_\theta(x))
+  \]
+
+  \[
+  = \arg \min_{\theta \in M} \mathbb{E}_{x \sim p_D} (-\log p_\theta(x)) \quad (\text{$\theta$ parameters are independent of $\log p_D(x)$})
+  \]
+
+  This is **maximum likelihood estimation** (minimizing negative log likelihood)!
+
+![Vineeth N B. (IIT-H)](#) ![§10.2 GANs](#) ![2 / 24](#)
+```
+
+(Note: Placeholders have been used for images as they can't be captured directly with OCR.)
+
+# DL4CV_Week10_Part02.pdf - Page 3
+
+
+
+```markdown
+# Recap
+
+![Graph](image_url)
+
+## Generative Models: Learn probability density function $p(x)$ over images $x$
+
+- $p(x)$ assigns positive number to each possible image $x$
+
+  $$\rightarrow \text{how likely is image } x \text{ under distribution } p(x)$$
+
+## Applications:
+
+- Sample to generate new data
+- Likelihood estimation (Outlier detection)
+- Feature learning (unsupervised)
+
+*Vineeth N B (IIT-H) §10.2 GANs*
+
+---
+
+*Page 3 / 24*
+```
+
+# DL4CV_Week10_Part02.pdf - Page 4
+
+```markdown
+# Density Estimation
+
+## Explicit Density Estimation
+
+- Write explicit function \( p(x) = f(x, \theta) \)
+  - **Input**: Image \( x \)
+  - **Output**: Likelihood value for image
+  - **Parameter**: Weights \( \theta \)
+  - Assign explicit likelihood to images
+  - Can enable outlier detection, but compromise generated image quality/sampling speed
+
+## Implicit Density Estimation
+
+- Give up estimating explicit form of \( p(x) \)
+  - Aim only to sample images from model; no explicit likelihood assignment
+  - High quality samples generated/fast sampling speed
+
+Vineeth N B (IIIT-H) @10.2 GANs 4 / 24
+```
+
+# DL4CV_Week10_Part02.pdf - Page 5
+
+```markdown
+# Generative Adversarial Networks (GANs)<sup>1</sup>
+
+## Goal:
+
+- Build good sampler that allows to draw high quality samples from $p_{model}(x)$
+- Not explicitly compute form of $p(x)$ but ensures $p_{model}(x)$ approximates/is close to $p_{data}(x)$
+- Output samples similar but not exactly same as train data; how?
+
+![NPTEL Logo](https://example.com/nptel_logo.png)
+
+<sup>1</sup> Goodfellow et al., Generative Adversarial Nets, NeurIPS 2014
+
+Vineeth N B (IIT-H)
+
+§10.2 GANs
+
+---
+
+5 / 24
+```
+
+# DL4CV_Week10_Part02.pdf - Page 6
+
+:
+
+```markdown
+# Generative Adversarial Networks (GANs)<sup>1</sup>
+
+## Goal:
+
+- Build good sampler that allows to draw high quality samples from \(p_{model}(x)\)
+- Not explicitly compute form of \(p(x)\) but ensures \(p_{model}(x)\) approximates/is close to \(p_{data}(x)\)
+- Output samples similar but not exactly same as train data; how?
+
+## Method:
+
+- Introduce latent variable \(z\) with simple prior \(p(z)\) (e.g., Gaussian)
+
+![Generative Adversarial Networks](image_url)
+
+<sup>1</sup> Goodfellow et al., Generative Adversarial Nets, NeurIPS 2014
+
+Vineeth N B (IIT-H)
+
+§10.2 GANs
+
+5 / 24
+```
+
+---
+
+1. **Accuracy**: The main text has been transcribed accurately, ensuring that the mathematical notations and symbols are correctly represented.
+2. **Formatting**: The markdown syntax has been used correctly for section titles, headings, and paragraphs. Bullet points are used where applicable.
+3. **Formulas and Equations**: Inline code is used for formulas and equations.
+4. **Diagrams and Images**: Placeholder for the image URL.
+5. **Tables**: Not applicable in this context.
+6. **Code Blocks**: Not applicable in this context.
+7. **Symbols**: Special characters and symbols, such as \(p(x)\) and \(p_{data}(x)\), are accurately represented.
+8. **Multilingual Content**: Not applicable in this context.
+
+```
+
+# DL4CV_Week10_Part02.pdf - Page 7
+
+:
+
+```markdown
+# Generative Adversarial Networks (GANs)
+
+## Goal:
+
+- Build good sampler that allows to draw high quality samples from `p_{model}(x)`
+- Not explicitly compute form of `p(x)` but ensures `p_{model}(x)` approximates/is close to `p_{data}(x)`
+- Output samples similar but not exactly same as train data; how?
+
+## Method:
+
+- Introduce latent variable `z` with simple prior `p(z)` (e.g., Gaussian)
+- Sample `z ~ p(z)`, pass it through Generator
+  - `x = G(z)`, where `x ~ p_G`
+
+![Generative Adversarial Networks](image_url)
+
+Goodfellow et al., Generative Adversarial Nets, NeurIPS 2014
+
+Vineeth N B (IIT-H)
+
+§10.2 GANs
+
+5 / 24
+```
+
+*Note: Replace `image_url` with the actual URL or placeholder for the image if it's missing in the OCR process.*
+
+# DL4CV_Week10_Part02.pdf - Page 8
+
+```markdown
+# Generative Adversarial Networks (GANs)
+
+## Goal:
+- Build good sampler that allows to draw high quality samples from $p_{model}(x)$
+- Not explicitly compute form of $p(x)$ but ensures $p_{model}(x)$ approximates/is close to $p_{data}(x)$
+- Output samples similar but not exactly same as train data; how?
+
+## Method:
+- Introduce latent variable $z$ with simple prior $p(z)$ (e.g., Gaussian)
+  - Sample $z \sim p(z)$, pass it through Generator
+  - $\hat{x} = G(z)$; where $\hat{x} \sim p_G$
+  - Introduce mechanism to ensure $p_G \approx p_{data}$
+
+![Generative Adversarial Networks](image_url)
+
+---
+
+1. Goodfellow et al., Generative Adversarial Nets, NeurIPS 2014
+2. Vimeeth N B (IIT-H)
+
+---
+
+### Slide Number: 5 / 24
+```
+
+# DL4CV_Week10_Part02.pdf - Page 9
+
+```markdown
+# GANs: Ensuring \( p_G \approx p_{data} \)
+
+## Generative Adversarial Networks
+
+![Generative Adversarial Networks](image_url)
+
+- **Idea:** Use a classifier (called discriminator) that differentiates between real samples \( x \sim p_{data} \) (class 1) and \( \hat{x} \sim p_G \) (class 0)
+
+**Vineeth N B (IIT-H)**
+
+**§10.2 GANs**
+
+**6 / 24**
+```
+
+# DL4CV_Week10_Part02.pdf - Page 10
+
+ is not required.
+
+```markdown
+# GANs: Ensuring \( p_G \approx p_{data} \)
+
+## Generative Adversarial Networks
+
+- **Idea**: Use a classifier (called **discriminator**) that differentiates between real samples \( x \sim p_{data} \) (class 1) and \( \hat{x} \sim p_G \) (class 0)
+
+- Train generator \( G \) such that discriminator misclassifies generated sample \( \hat{x} \) into class 1
+  \[
+  \implies \text{can no more differentiate between } x \sim p_{data} \text{ and } \hat{x} \sim p_G
+  \]
+
+![Generative Adversarial Networks](image-url)
+
+_Real_
+
+![Real](image-url)
+
+_Fake_
+
+![Fake](image-url)
+
+_Classifier/Discriminator_
+
+![Classifier/Discriminator](image-url)
+
+_Real or Fake (1/0)_
+
+![Real or Fake (1/0)](image-url)
+```
+
+# DL4CV_Week10_Part02.pdf - Page 11
+
+
+
+```markdown
+# GANs: How to train?
+
+## Training Objective: zero-sum game
+
+\[ \min_G \max_D \left( \mathbb{E}_{x \sim p_{data}} [\log D(x)] + \mathbb{E}_{z \sim p_z} [\log(1 - D(G(z)))] \right) \]
+
+(Assume sigmoid activation in discriminator \( D(.) \equiv \) probability that input sample is real)
+
+![Diagram](image_url)
+
+**Vineeth N B (IIIT-H)**
+
+**Section 10.2 GANs**
+
+**Slide 7 / 24**
+```
+
+# DL4CV_Week10_Part02.pdf - Page 12
+
+
+
+```markdown
+# GANs: How to train?
+
+## Training Objective: zero-sum game
+
+\[ \min_G \max_D \mathbb{E}_{x \sim p_{data}}[\log D(x)] + \mathbb{E}_{z \sim p_z}[\log(1 - D(G(z)))] \]
+
+Assume sigmoid activation in discriminator \(\implies D(.) =\) probability that input sample is real
+
+\[ O_1 = \max_D \mathbb{E}_{x \sim p_{data}}[\log D(x)] \]
+
+- Train discriminator, \(D\), such that if sample belongs to \(p_{data}\), maximize the log probability of it being a real sample
+```
+
+# DL4CV_Week10_Part02.pdf - Page 13
+
+
+
+```markdown
+# GANs: How to train?
+
+## Training Objective: zero-sum game
+
+\[ \min_G \max_D \left( \mathbb{E}_{x \sim p_{data}} [\log D(x)] + \mathbb{E}_{z \sim p_z} [\log(1 - D(G(z)))] \right) \]
+
+(Assume sigmoid activation in discriminator \( \Rightarrow D(.) = \text{probability that input sample is real} \))
+
+\[ O_1 = \max_D \mathbb{E}_{x \sim p_{data}} [\log D(x)] \]
+
+\[ O_2 = \min_G \mathbb{E}_{z \sim p_z} [\log(1 - D(G(z)))] \]
+
+- Train discriminator, \( D \), such that if sample belongs to \( p_{data} \), maximize the log probability of it being a real sample
+- Train Generator, \( G \), such that if sample belongs to \( p_G( \text{i.e } G(z) ) \), maximize the log probability of it being a real sample
+
+**Note**: the expectation in the objective function simply implies that losses are averaged over a batch of samples
+
+_Vineeth N B. (IIIT-H)_
+
+![Image](attachment:image1.png)
+
+_Session 10.2 GANs_
+
+_7 / 24_
+```
+
+# DL4CV_Week10_Part02.pdf - Page 14
+
+```markdown
+# GANs: Training Strategy
+
+## Idea: Two-Stage Training Strategy
+
+1. **First Stage**: Train the Discriminator (D) completely to optimize \(O_1\).
+2. **Second Stage**: Train the Generator (G) to optimize \(O_2\).
+
+### Visual Representations
+
+#### Function y = log(1 - σ(x))
+```markdown
+![Graph of y = log(1 - σ(x))](image-url)
+
+**Graph of y = log(1 - σ(x))**
+
+- x-axis: Value of x
+- y-axis: Value of y
+
+```
+
+#### Derivative of y with respect to x
+```markdown
+![Graph of dy/dx](image-url)
+
+**Graph of dy/dx**
+
+- x-axis: Value of x
+- y-axis: Value of dy/dx
+
+```
+
+### References
+
+- Vineeth N B (IIT-H)
+
+### Slide Details
+
+- Section: §10.2 GANs
+- Slide Number: 8 / 24
+
+![NPTEL Logo](image-url)
+```
+
+# DL4CV_Week10_Part02.pdf - Page 15
+
+
+
+```markdown
+# GANs: Training Strategy
+
+![Graph 1](image1.png)
+
+- **Idea:** First train D completely to optimize O₁; then train G to optimize O₂
+
+- **Problem:** If D is initially very confident that samples from G are fake, when x is obtained from G:
+  - $D(x)$ or $\sigma(x) = 0 \implies \log(1 - \sigma(x)) = 0$
+
+![Graph 2](image2.png)
+
+**Vineeth N B. (IIIT-H)**
+
+**Section 10.2 GANs**
+
+**Slide 8 / 24**
+```
+
+# DL4CV_Week10_Part02.pdf - Page 16
+
+ is not defined.
+
+```markdown
+# GANs: Training Strategy
+
+![Graph](image_url)
+
+- **Idea**: First train D completely to optimize \( O_1 \); then train G to optimize \( O_2 \)
+
+- **Problem**: If D is initially very confident that samples from G are fake, when \( x \) is obtained from \( G \):
+  \[
+  D(x) \text{ or } \sigma(x) = 0 \implies \log(1 - \sigma(x)) = 0
+  \]
+  \[
+  \implies \frac{\partial}{\partial x} \log(1 - \sigma(x)) = 0 \text{ (as shown in graph)}
+  \]
+
+_Vineeth N B. (IIIT-H)_
+
+_NPTel_
+
+![Slide Footer](image_url)
+```
+
+Ensure to replace any placeholder image URLs with actual image URLs if they are available.
+```
+
+# DL4CV_Week10_Part02.pdf - Page 17
+
+ the OCR output below:
+
+```markdown
+# GANs: Training Strategy
+
+## Idea
+
+- First train D completely to optimize \( O_1 \); then train G to optimize \( O_2 \)
+
+## Problem
+
+- If D is initially very confident that samples from G are fake, when \( x \) is obtained from \( G \):
+  \[
+  D(x) \text{ or } \sigma(x) = 0 \implies \log(1 - \sigma(x)) = 0
+  \]
+  \[
+  \implies \frac{\partial \log(1 - \sigma(x))}{\partial x} = 0 \text{ (as shown in graph)}
+  \]
+  \[
+  \implies G \text{ gets no gradients to train!}
+  \]
+
+![Graph of y = \log(1 - \sigma(x))](data:image/png;base64,...) 
+
+![Gradient graph of \frac{\partial}{\partial x} \log(1 - \sigma(x))](data:image/png;base64,...)
+
+*Vineeth N B (IIT-H)*
+
+*Section 10.2 GANs*
+
+*Slide 8 / 24*
+```
+
+**Note**: Placeholders for graphs are included as `data:image/png;base64,...`. Replace these with actual base64-encoded images if needed. Ensure the scientific content remains accurate and well-formatted.
+
+# DL4CV_Week10_Part02.pdf - Page 18
+
+```markdown
+# GANs: Training Strategy
+
+![Graphs](image_url_placeholder)
+
+- **Idea:** First train D completely to optimize \(O_1\); then train G to optimize \(O_2\)
+- **Problem:** If D is initially very confident that samples from G are fake, when \(x\) is obtained from \(G\):
+  - \(D(x)\) or \(\sigma(x) = 0 \implies \log(1 - \sigma(x)) = 0\)
+  - \(\frac{\partial}{\partial x}(\log(1 - \sigma(x))) = 0\) (as shown in graph)
+  - \(\implies\) G gets no gradients to train!
+
+- **Solution:** Alternate between Discriminator objective \(O_1\) and Generator objective \(O_2\)
+
+![Graphs](image_url_placeholder)
+
+*Vineeth N B. (IIT-H)*
+
+*§10.2 GANs*
+
+*8 / 24*
+```
+
+# DL4CV_Week10_Part02.pdf - Page 19
+
+```markdown
+# GANs: Algorithm<sup>2</sup>
+
+**Algorithm 1** Minibatch stochastic gradient descent training of generative adversarial nets. The number of steps to apply to the discriminator, \( k \), is a hyperparameter. We used \( k = 1 \), the least expensive option, in our experiments.
+
+**for** number of training iterations **do**
+
+    **for** \( k \) steps **do**
+
+    - Sample minibatch of \( m \) noise samples \( \{z^{(1)}, \ldots, z^{(m)}\} \) from noise prior \( p_g(z) \).
+    - Sample minibatch of \( m \) examples \( \{x^{(1)}, \ldots, x^{(m)}\} \) from data generating distribution \( p_{\text{data}}(x) \).
+    - Update the discriminator by ascending its stochastic gradient:
+
+      \[
+      \nabla_{\theta_d} \frac{1}{m} \sum_{i=1}^{m} \left[ \log D \left( x^{(i)} \right) + \log \left( 1 - D \left( G \left( z^{(i)} \right) \right) \right) \right]
+      \]
+
+    **end for**
+
+    - Sample minibatch of \( m \) noise samples \( \{z^{(1)}, \ldots, z^{(m)}\} \) from noise prior \( p_g(z) \).
+    - Update the generator by descending its stochastic gradient:
+
+      \[
+      \nabla_{\theta_g} \frac{1}{m} \sum_{i=1}^{m} \log \left( 1 - D \left( G \left( z^{(i)} \right) \right) \right)
+      \]
+
+    **end for**
+
+The gradient-based updates can use any standard gradient-based learning rule. We used momentum in our experiments.
+
+<sup>2</sup> Goodfellow et al., Generative Adversarial Nets, NeurIPS 2014
+
+Vineeth N B (IIT-H)
+
+§10.2 GANs
+
+9 / 24
+```
+
+# DL4CV_Week10_Part02.pdf - Page 20
+
+ the provided image is a slide from a presentation on GANs (Generative Adversarial Networks), focusing on evaluating optimality.
+
+```markdown
+# GANs: Evaluating Optimality
+
+## Objective
+
+\[ \min_{G} \max_{D} \ \mathbb{E}_{x \sim p_{data}}[\log D(x)] + \mathbb{E}_{z \sim p_z}[\log(1 - D(G(z)))] \]
+
+![NPTEL Logo](image_url)
+
+---
+
+**Vineeth N B (IIT-H)**
+
+**§10.2 GANs**
+
+---
+
+Page 10 / 24
+```
+
+Note: Replace `image_url` with the actual URL of the image if it needs to be displayed.
+
+# DL4CV_Week10_Part02.pdf - Page 21
+
+```markdown
+# GANs: Evaluating Optimality
+
+### Objective: min max \_{G \sim D} \mathbb{E}_{x \sim p_{\text{data}}} [\log D(x)] + \mathbb{E}_{z \sim p_z} [\log(1 - D(G(z)))]
+```
+$$
+\Rightarrow \min \max_{G \sim D} \int_{x} \left( p_{\text{data}}(x) \log D(x) + p_{G}(x) \log(1 - D(x)) \right) dx
+$$
+
+*(change of variable, expanding expectation)*
+
+![NPTEL](https://via.placeholder.com/150)
+
+Vineeth N B. (IIT-H) §10.2 GANs
+
+10 / 24
+```
+
+# DL4CV_Week10_Part02.pdf - Page 22
+
+ is skipped if it can not be captured from the image.
+
+```markdown
+# GANs: Evaluating Optimality
+
+## Objective
+
+$$\min \max_{G \sim D} \mathbb{E}_{x \sim p_{data}} [\log D(x)] + \mathbb{E}_{z \sim p_z} [\log (1 - D(G(z)))]$$
+
+$$\implies \min \max_{G \sim D} \int_x (p_{data}(x) \log D(x) + p_G(x) \log (1 - D(x))) dx$$
+
+(change of variable, expanding expectation)
+
+$$\implies \min \int_x \max_{D} (p_{data}(x) \log D(x) + p_G(x) \log (1 - D(x))) dx$$
+
+(taking max inside)
+
+*Vineeth N B. (IIIT-H)*
+
+*Section 10.2 GANs*
+```
+
+# DL4CV_Week10_Part02.pdf - Page 23
+
+```markdown
+# GANs: Evaluating Optimality
+
+## Objective:
+$$\min_{G} \max_{D} \quad \mathbb{E}_{x \sim p_{data}}[\log D(x)] + \mathbb{E}_{z \sim p_{z}}[\log(1 - D(G(z)))]$$
+
+$$\Rightarrow \min_{G} \max_{D} \int_{x} \left( p_{data}(x) \log D(x) + p_{G}(x) \log(1 - D(x)) \right) dx$$
+
+(change of variable, expanding expectation)
+
+$$\Rightarrow \min_{G} \int_{x} \max_{D} \left( p_{data}(x) \log D(x) + p_{G}(x) \log(1 - D(x)) \right) dx$$
+
+(taking max inside)
+
+Let $y = D(x)$; $a = p_{data}$; $b = p_{G}$
+
+![NPTEL](https://example.com/nptel_logo.png)
+
+Vineeth N B (IIT-H)
+
+§10.2 GANs
+
+10 / 24
+```
+
+# DL4CV_Week10_Part02.pdf - Page 24
+
+```markdown
+# GANs: Evaluating Optimality
+
+## Objective
+\[ \min_{G} \max_{D} \quad \mathbb{E}_{x \sim p_{data}} [\log D(x)] + \mathbb{E}_{z \sim p_z} [\log(1 - D(G(z)))] \]
+
+\[ \Rightarrow \min_{G} \max_{D} \int_{x} \left( p_{data}(x) \log D(x) + p_G(x) \log(1 - D(x)) \right) dx \]
+
+(change of variable, expanding expectation)
+
+\[ \Rightarrow \min_{G} \int_{x} \max_{D} \left( p_{data}(x) \log D(x) + p_G(x) \log(1 - D(x)) \right) dx \]
+
+(taking max inside)
+
+Let \( y = D(x) \); \( a = p_{data} \); \( b = p_G \)
+
+Then, \( f(y) = a \log y + b \log(1 - y) \)
+
+_Vineeth N B (IIT-H)_
+
+_§10.2 GANs_
+
+```
+
+# DL4CV_Week10_Part02.pdf - Page 25
+
+```markdown
+# GANs: Evaluating Optimality
+
+## Objective
+
+**Objective:** min max\_{G} max\_{D} \(\mathbb{E}_{x \sim p_{data}}[\log D(x)] + \mathbb{E}_{z \sim p_z}[\log(1 - D(G(z)))]\)
+
+\[
+\Rightarrow \min_{G} \max_{D} \int_x \left(p_{data}(x) \log D(x) + p_G(x) \log(1 - D(x))\right) dx
+\]
+
+*(change of variable, expanding expectation)*
+
+\[
+\Rightarrow \min_G \int_x \max_D \left(p_{data}(x) \log D(x) + p_G(x) \log(1 - D(x))\right) dx
+\]
+
+*(taking max inside)*
+
+Let \( y = D(x) \); \( a = p_{data} \); \( b = p_G \)
+
+Then, \( f(y) = a \log y + b \log(1 - y) \)
+
+\[
+f'(y) = \frac{a}{y} - \frac{b}{1 - y}; \, f'(y) = 0 \Rightarrow y = \frac{a}{a + b}
+\]
+
+*(local max)*
+
+![Image](image_url)
+
+*Vineeth N B. (IIT-H)*
+
+*§10.2 GANs*
+
+*10 / 24*
+```
+
+# DL4CV_Week10_Part02.pdf - Page 26
+
+ Markdown interpreters may require additional packages or fonts to render special characters correctly.
+
+```markdown
+# GANs: Evaluating Optimality
+
+## Objective
+
+$$
+\text{Objective: min max}_{G, D} \quad \mathbb{E}_{x \sim p_{data}}[\log D(x)] + \mathbb{E}_{z \sim p_z}[\log(1 - D(G(z)))]
+$$
+
+$$
+\Rightarrow \quad \min \max_{G, D} \int_x \left(p_{data}(x) \log D(x) + p_G(x) \log(1 - D(x))\right) dx
+$$
+
+(change of variable, expanding expectation)
+
+$$
+\Rightarrow \quad \min_G \int_x \max_D \left(p_{data}(x) \log D(x) + p_G(x) \log(1 - D(x))\right) dx
+$$
+
+(taking max inside)
+
+Let $y = D(x)$; $a = p_{data}$; $b = p_G$
+
+Then,
+
+$$
+f(y) = a \log y + b \log(1 - y)
+$$
+
+$$
+f'(y) = \frac{a}{y} - \frac{b}{1 - y}; \quad f'(y) = 0 \implies y = \frac{a}{a + b}
+$$
+
+(local max)
+
+## Optimal Discriminator
+
+$$
+D^*(x) = \frac{p_{data}(x)}{p_{data}(x) + p_G(x)}
+$$
+
+*Vineeth N B (IIIT-H)*
+```
+```
+
+# DL4CV_Week10_Part02.pdf - Page 27
+
+```markdown
+# GANs: Evaluating Optimality
+
+$$
+\text{min}_{G} \int_X \left(p_{data}(x) \log D_{G}^{*}(x) + p_{G}(x) \log (1 - D_{G}^{*}(x))\right) dx
+$$
+
+![NPTEL Logo](https://example.com/nptel-logo.png)
+
+*Vineeth N B (IITH)*
+
+## Slide Number: 11 / 24
+
+```
+
+# DL4CV_Week10_Part02.pdf - Page 28
+
+ and ensure the scientific integrity of the content.
+
+---
+
+# GANs: Evaluating Optimality
+
+```markdown
+# GANs: Evaluating Optimality
+
+## Formulas
+
+### First Formula
+
+$$
+\text{min}_G \int_X \left( p_{\text{data}}(x) \log D_G^*(x) + p_G(x) \log(1 - D_G^*(x)) \right) dx
+$$
+
+### Second Formula
+
+$$
+\text{min}_G \int_X \left( p_{\text{data}}(x) \left[ \log \frac{p_{\text{data}}(x)}{p_{\text{data}}(x) + p_G(x)} \right] + p_G(x) \left[ \log \frac{p_{\text{data}}(x)}{p_{\text{data}}(x) + p_G(x)} \right] \right) dx
+$$
+
+## References
+
+Vineeth N B (IIT-H)
+
+---
+
+## Slides
+
+### Slide Title
+
+**GANs: Evaluating Optimality**
+
+![Image](https://via.placeholder.com/150)
+
+NPTel
+
+---
+
+### Section 10.2 GANs
+
+**Slide Number**: 11 / 24
+```
+
+# DL4CV_Week10_Part02.pdf - Page 29
+
+ accuracy, and format consistency.
+
+```markdown
+# GANs: Evaluating Optimality
+
+## Formulas
+
+### Equation 1
+\[
+\min_G \int_X \left( p_{data}(x) \log D_G^*(x) + p_G(x) \log(1 - D_G^*(x)) \right) dx
+\]
+
+### Equation 2
+\[
+\min_G \int_X \left( p_{data}(x) \left[ \log \frac{p_{data}(x)}{p_{data}(x) + p_G(x)} \right] + p_G(x) \left[ \log\left( 1 - \frac{p_{data}(x)}{p_{data}(x) + p_G(x)} \right) \right] \right) dx
+\]
+
+### Equation 3
+\[
+\min_G \int_X \left( p_{data}(x) \left[ \log \frac{p_{data}(x)}{p_{data}(x) + p_G(x)} \right] + p_G(x) \left[ \log \frac{p_G(x)}{p_{data}(x) + p_G(x)} \right] \right) dx
+\]
+
+## Presentation Information
+
+- **Author**: Vineeth N B (IIT-H)
+- **Section**: §10.2 GANs
+- **Slide Number**: 11 / 24
+
+## Diagram
+![NPTEL](https://via.placeholder.com/150)
+
+```
+
+Ensure that the information is accurately transcribed and formatted following the markdown syntax and guidelines provided.
+
+# DL4CV_Week10_Part02.pdf - Page 30
+
+```markdown
+# GANs: Evaluating Optimality
+
+$$
+\begin{aligned}
+    \min_G \int_X \left( p_{data}(x) \log D_G^*(x) + p_G(x) \log(1 - D_G^*(x)) \right) dx
+\end{aligned}
+$$
+
+$$
+\begin{aligned}
+    \min_G \int_X \left( p_{data}(x) \left[ \log \frac{p_{data}(x)}{p_{data}(x) + p_G(x)} \right] + p_G(x) \left[ \log \frac{p_{data}(x)}{p_{data}(x) + p_G(x)} \right] \right) dx
+\end{aligned}
+$$
+
+$$
+\begin{aligned}
+    \min_G \int_X \left( p_{data}(x) \left[ \log \frac{p_{data}(x)}{p_{data}(x) + p_G(x)} \right] + p_G(x) \left[ \log \frac{p_G(x)}{p_{data}(x) + p_G(x)} \right] \right) dx
+\end{aligned}
+$$
+
+$$
+\begin{aligned}
+    \min_G \left( \mathbb{E}_{x \sim p_{data}} \left[ \log \frac{p_{data}(x)}{p_{data}(x) + p_G(x)} \right] + \mathbb{E}_{x \sim p_G} \left[ \log \frac{p_G(x)}{p_{data}(x) + p_G(x)} \right] \right)
+\end{aligned}
+$$
+
+_Vineeth N B. (IIIT-H)_
+
+_GANs_
+
+_§10.2_
+
+_11/24_
+```
+
+# DL4CV_Week10_Part02.pdf - Page 31
+
+```markdown
+# GANs: Evaluating Optimality
+
+\[
+\min_G \left( \mathbb{E}_{x \sim p_{\text{data}}} \left[ \log \left( \frac{2 * p_{\text{data}}(x)}{2 * (p_{\text{data}}(x) + p_\xi(x))} \right) \right] + \mathbb{E}_{x \sim p_G} \left[ \log \left( \frac{2 * p_G(x)}{2 * (p_{\text{data}}(x) + p_G(x))} \right) \right] \right)
+\]
+
+![NPTEL Logo](https://via.placeholder.com/150)
+
+Vineeth N B (IIT-H) §10.2 GANs
+
+12 / 24
+```
+
+# DL4CV_Week10_Part02.pdf - Page 32
+
+```markdown
+# GANs: Evaluating Optimality
+
+$$
+\min_G \left( \mathbb{E}_{x \sim p_{data}} \left[ \log \frac{2 * p_{data}(x)}{2 * (p_{data}(x) + p_G(x))} \right] + \mathbb{E}_{x \sim p_G} \left[ \log \frac{2 * p_G(x)}{2 * (p_{data}(x) + p_G(x))} \right] \right)
+$$
+
+$$
+\min_G \left( \mathbb{E}_{x \sim p_{data}} \left[ \log \frac{2 * p_{data}(x)}{p_{data}(x) + p_G(x)} \right] + \mathbb{E}_{x \sim p_G} \left[ \log \frac{2 * p_G(x)}{p_{data}(x) + p_G(x)} \right] - \log 4 \right)
+$$
+
+*Vineeth N B (IIT-H) §10.2 GANs*
+
+![NPTEL Logo](https://example.com/nptel-logo)
+
+Page 12 / 24
+```
+
+Note: The image placeholder `https://example.com/nptel-logo` should be replaced with the actual URL or path to the NPTEL logo if available.
+
+# DL4CV_Week10_Part02.pdf - Page 33
+
+```markdown
+# GANs: Evaluating Optimality
+
+$$
+\min_G \left( \mathbb{E}_{x \sim p_{data}} \left[ \log \left( \frac{2 * p_{data}(x)}{2 * (p_{data}(x) + p_G(z(x)))} \right) \right] + \mathbb{E}_{x \sim p_G} \left[ \log \left( \frac{2 * p_G(x)}{2 * (p_{data}(x) + p_G(x))} \right) \right] \right)
+$$
+
+$$
+\min_G \left( \mathbb{E}_{x \sim p_{data}} \left[ \log \left( \frac{2 * p_{data}(x)}{p_{data}(x) + p_G(x)} \right) \right] + \mathbb{E}_{x \sim p_G} \left[ \log \left( \frac{2 * p_G(x)}{p_{data}(x) + p_G(x)} \right) - \log 4 \right] \right)
+$$
+
+$$
+\min_G \left( \text{KL}(p_{data}(x), \frac{p_{data}(x) + p_G(x)}{2}) + \text{KL}(p_G(x), \frac{p_{data}(x) + p_G(x)}{2}) - \log 4 \right)
+$$
+
+_Vineeth N B (IIT-H)_
+
+_NPTel_
+
+_Session 10.2 GANs_
+
+_Slide 12/24_
+```
+
+# DL4CV_Week10_Part02.pdf - Page 34
+
+```markdown
+# GANs: Evaluating Optimality
+
+## Formulas
+
+### 1st Formula
+\[
+\min_G \left( \mathbb{E}_{x \sim p_{data}} \left[ \log \left( \frac{2 \ast p_{data}(x)}{2 \ast (p_{data}(x) + p_{G}(x))} \right) \right] + \mathbb{E}_{x \sim p_G} \left[ \log \left( \frac{2 \ast p_G(x)}{2 \ast (p_{data}(x) + p_G(x))} \right) \right] \right)
+\]
+
+### 2nd Formula
+\[
+\min_G \left( \mathbb{E}_{x \sim p_{data}} \left[ \log \left( \frac{2 \ast p_{data}(x)}{p_{data}(x) + p_G(x)} \right) \right] + \mathbb{E}_{x \sim p_G} \left[ \log \left( \frac{2 \ast p_G(x)}{p_{data}(x) + p_G(x)} \right) \right] - \log 4 \right)
+\]
+
+### 3rd Formula
+\[
+\min_G \left( \text{KL} \left( p_{data}(x), \frac{p_{data}(x) + p_G(x)}{2} \right) + \text{KL} \left( p_G(x), \frac{p_{data}(x) + p_G(x)}{2} \right) - \log 4 \right)
+\]
+
+## Divergences
+
+### Kullback-Leibler Divergence
+\[
+\text{KL}(p, q) = \mathbb{E}_{x \sim p} \left[ \log \frac{p(x)}{q(x)} \right]
+\]
+
+### Jensen-Shannon Divergence
+\[
+\text{JSD}(p_{data}, p_G) = \frac{\text{KL}(p_{data}, \frac{p_{data} + p_G}{2})}{2} + \frac{\text{KL}(p_G, \frac{p_{data} + p_G}{2})}{2}
+\]
+
+### Optimization Condition
+\[
+\min_G (2 \ast \text{JSD}(p_{data}, p_G) - \log 4) \implies \text{expression is minimized when } p_{data} = p_G
+\]
+
+**Note**: Recall that \( \text{JSD} \geq 0 \) by definition.
+```
+
+# DL4CV_Week10_Part02.pdf - Page 35
+
+```markdown
+# Optimality of GANs: Conclusions
+
+- **Optimal Discriminator for any G**
+
+  \[
+  D_G^{\ast}(x) = \frac{p_{data}(x)}{p_{data}(x) + p_G(x)}
+  \]
+
+  ![NPTEL Logo](image-link-here)
+
+---
+
+Vineeth N B (IIT-H)
+
+§10.2 GANs
+
+Page 13 of 24
+```
+
+# DL4CV_Week10_Part02.pdf - Page 36
+
+```markdown
+# Optimality of GANs: Conclusions
+
+- $D_{G}^{*}(x) = \frac{p_{data}(x)}{p_{data}(x) + p_{G}(x)}$ (Optimal Discriminator for any $G$)
+
+- $p_{data}(x) = p_{G}(x)$ (Optimal Generator for any $D$)
+
+![NPTEL Logo](https://example.com/nptel_logo.png)
+
+_Vineeth N B. (IIT-H)_
+
+_§10.2 GANs_
+
+_13 / 24_
+```
+
+# DL4CV_Week10_Part02.pdf - Page 37
+
+ is not required for this task.
+
+### Markdown Content
+
+```markdown
+# Optimality of GANs: Conclusions
+
+- $D^*_G(x) = \frac{p_{data}(x)}{p_{data}(x) + p_G(x)}$  (Optimal Discriminator for any G)
+
+- $p_{data}(x) = p_G(x)$  (Optimal Generator for any D)
+
+- $D^*_G(x) = \frac{p_G(x)}{p_G(x) + p_{G^I}(x)} = \frac{p_{data}(x)}{p_{data}(x) + p_{data}(x)} = \frac{1}{2}$
+
+![NPTEL Logo](image_placeholder.png)
+
+*Vineeth N B (IIIT-H)*
+
+*§10.2 GANs*
+
+*13 / 24*
+```
+
+# DL4CV_Week10_Part02.pdf - Page 38
+
+```markdown
+# Deep Convolution GAN (DCGAN)<sup>3</sup>
+
+![DCGAN Architecture](image-placeholder)
+
+- **Bridge the gap between success of CNNs for supervised learning and unsupervised generative models**
+
+---
+
+<sup>3</sup> Radford et al., Unsupervised Representation learning with deep convolutional GANs, NeurIPS 2016
+
+Vineeth N B (IIT-H)
+
+§10.2 GANs
+
+---
+
+# Deep Convolution GAN (DCGAN)<sup>3</sup>
+
+![DCGAN Architecture Diagram](image-placeholder)
+
+- Project and reshape
+  - Input shape: 100 x 1
+- **CONV1**
+  - Stride 2
+  - Kernel size: 4 x 4
+  - Output channels: 64
+- **CONV2**
+  - Stride 2
+  - Kernel size: 4 x 4
+  - Output channels: 128
+- **CONV3**
+  - Stride 2
+  - Kernel size: 4 x 4
+  - Output channels: 256
+- **CONV4**
+  - Stride 2
+  - Kernel size: 4 x 4
+  - Output channels: 512
+
+## Key Points
+- **Bridge the gap between success of CNNs for supervised learning and unsupervised generative models**
+
+---
+
+<sup>3</sup> Radford et al., Unsupervised Representation learning with deep convolutional GANs, NeurIPS 2016
+
+Vineeth N B (IIT-H)
+
+§10.2 GANs
+
+---
+
+```
+
+# DL4CV_Week10_Part02.pdf - Page 39
+
+
+
+```markdown
+# Deep Convolution GAN (DCGAN)
+
+![Deep Convolution GAN Diagram](image-url)
+
+- Bridge the gap between success of CNNs for supervised learning and unsupervised generative models
+- Best practices to enable stable training of GANs with deep architectures
+
+^Radford et al, Unsupervised Representation learning with deep convolutional GANs, NeurIPS 2016
+
+Vineeth N B (IIT-H) §10.2 GANs
+
+## Project and reshape
+
+- Dimensions: 100 x 1 x 1
+
+## CONV1
+
+- Stride 2
+- Kernel size: 4 x 4
+- Output dimensions: 512 x 32 x 32
+
+## CONV2
+
+- Stride 2
+- Kernel size: 4 x 4
+- Output dimensions: 256 x 16 x 16
+
+## CONV3
+
+- Stride 2
+- Kernel size: 4 x 4
+- Output dimensions: 128 x 8 x 8
+
+## CONV4
+
+- Stride 2
+- Kernel size: 4 x 4
+- Output dimensions: 64 x 4 x 4
+
+## G(x)
+
+- Output dimensions: 3
+
+```
+```
+
+# DL4CV_Week10_Part02.pdf - Page 40
+
+```markdown
+# Deep Convolution GAN (DCGAN)<sup>3</sup>
+
+![Deep Convolution GAN Diagram](image_url)
+
+- **Bridge the gap between success of CNNs for supervised learning and unsupervised generative models**
+- **Best practices to enable stable training of GANs with deep architectures**
+- **Smooth high-dimensional interpolations; Vector arithmetic**
+
+<sup>3</sup> Radford et al., Unsupervised Representation learning with deep convolutional GANs, NeurIPS 2016
+
+Vineeth N B (IIIT-H) §10.2 GANs
+
+---
+
+14 / 24
+```
+
+# DL4CV_Week10_Part02.pdf - Page 41
+
+```markdown
+# Deep Convolution GAN (DCGAN)
+
+![Deep Convolution GAN Architecture](image_url)
+
+- Bridge the gap between success of CNNs for supervised learning and unsupervised generative models
+- Best practices to enable stable training of GANs with deep architectures
+- Smooth high-dimensional interpolations; Vector arithmetic
+- Demonstrate unsupervised feature learning capabilities of GANs and its applications **(Representation Learning)**
+
+^Radford et al., Unsupervised Representation learning with deep convolutional GANs, NeurIPS 2016
+
+*Vineeth N B (IIT-H)*
+
+*§10.2 GANs*
+
+---
+
+14 / 24
+```
+
+# DL4CV_Week10_Part02.pdf - Page 42
+
+```markdown
+# DCGAN: Training Practices for Deeper GANs
+
+- Replaces deterministic spatial pooling functions (e.g. maxpooling) with **strided convolutions** → allows to learn spatial downsampling
+
+![NPTEL Logo](https://example.com/logo.png)
+
+---
+
+**Reference:**
+- Radford et al., Unsupervised Representation Learning with Deep Convolutional GANs, NeurIPS 2016
+- Vineeth N B (IIT-H)
+- §10.2 GANs
+
+---
+
+Page 15 of 24
+```
+
+# DL4CV_Week10_Part02.pdf - Page 43
+
+```markdown
+# DCGAN: Training Practices for Deeper GANs
+
+- **Replaces deterministic spatial pooling functions** (e.g. maxpooling) **with strided convolutions** -> allows to learn spatial downsampling
+
+- **Remove fully connected hidden layers** for deeper architectures
+
+![NPTEL Logo](link-to-nptel-logo.png)
+
+<sup>4</sup> Radford et al., Unsupervised Representation Learning with Deep Convolutional GANs, NeurIPS 2016
+
+*Vineeth N B (IIIT-H)*
+
+*S10.2 GANs*
+
+*15 / 24*
+```
+
+# DL4CV_Week10_Part02.pdf - Page 44
+
+```markdown
+# DCGAN: Training Practices for Deeper GANs<sup>4</sup>
+
+- **Replaces deterministic spatial pooling functions** (e.g. maxpooling) **with strided convolutions** → allows to learn spatial downsampling
+- **Remove fully connected hidden layers** for deeper architectures
+- **Batchnorm in G and D** → prevent generator collapse/enable gradient flow in deeper architectures; not applied at output of G and input of D
+
+<sup>4</sup>Radford et al., Unsupervised Representation Learning with Deep Convolutional GANs, NeurIPS 2016
+
+_Note:_
+- The OCR did not capture any diagrams or images.
+- Ensure to verify the OCR results for accuracy in scientific terms and symbols.
+```
+
+# DL4CV_Week10_Part02.pdf - Page 45
+
+```markdown
+# DCGAN: Training Practices for Deeper GANs<sup>4</sup>
+
+- **Replaces deterministic spatial pooling functions (e.g. maxpooling) with strided convolutions** → allows to learn spatial downsampling
+- **Remove fully connected hidden layers** for deeper architectures
+- **Batchnorm in G and D** → prevent generator collapse/enable gradient flow in deeper architectures; not applied at output of G and input of D
+- **Non-Linearity**: ReLU for generator, Leaky-ReLU (0.2) for discriminator
+
+<sup>4</sup> Radford et al., Unsupervised Representation Learning with Deep Convolutional GANs, NeurIPS 2016
+
+Vineeth N B (IIT-H)
+
+§10.2 GANs
+
+15 / 24
+```
+
+# DL4CV_Week10_Part02.pdf - Page 46
+
+
+
+```markdown
+# DCGAN: Training Practices for Deeper GANs[^4]
+
+- **Replaces deterministic spatial pooling functions** (e.g. maxpooling) with **strided convolutions** → allows to learn spatial downsampling
+
+- **Remove fully connected hidden layers** for deeper architectures
+
+- **Batchnorm in G and D** → prevent generator collapse/enable gradient flow in deeper architectures; not applied at output of G and input of D
+
+- **Non-Linearity**: ReLU for generator, Leaky-ReLU (0.2) for discriminator
+
+- **Output Non-Linearity**: tanh for generator, sigmoid for discriminator
+
+[^4]: Radford et al, Unsupervised Representation Learning with Deep Convolutional GANs, NeurIPS 2016
+```
+
+Ensure that this markdown output is formatted correctly and maintains all the special formatting, symbols, headers, and citations accurately.
+```markdown
+# DCGAN: Training Practices for Deeper GANs<sup>4</sup>
+
+- Replaces deterministic spatial pooling functions (e.g. maxpooling) with **strided convolutions** → allows to learn spatial downsampling
+
+- **Remove fully connected hidden layers** for deeper architectures
+
+- **Batchnorm in G and D** → prevent generator collapse/enable gradient flow in deeper architectures; not applied at output of G and input of D
+
+- **Non-Linearity**: ReLU for generator, Leaky-ReLU (0.2) for discriminator
+
+- **Output Non-Linearity**: tanh for generator, sigmoid for discriminator
+
+<sup>4</sup> Radford et al, Unsupervised Representation Learning with Deep Convolutional GANs, NeurIPS 2016
+```
+
+# DL4CV_Week10_Part02.pdf - Page 47
+
+```markdown
+# Walking the Latent Space
+
+- **We can interpolate between two points in latent space and visualize**
+    - ![Interpolation Diagram](image-url)
+
+- **Smooth transition in generated image space by changing latent (perceptual) features is a sign of a good model**
+
+  - ![Interpolation Result](image-url)
+
+  - Formula:
+    \[
+    z_{interp} = \alpha z_1 + (1 - \alpha) z_2
+    \]
+
+  - ![Interpolation Sequence](image-url)
+
+**Vineeth N B (IIIT-H)**
+
+**§10.2 GANs**
+
+16 / 24
+```
+
+# DL4CV_Week10_Part02.pdf - Page 48
+
+ accuracy is paramount.
+
+```markdown
+# Vector Arithmetic in Latent Space
+
+## Samples from the model
+
+- **Man with glasses**
+  ![Man with glasses](image1.png)
+  ![Man with glasses](image2.png)
+  ![Man with glasses](image3.png)
+
+- **Man without glasses**
+  ![Man without glasses](image4.png)
+  ![Man without glasses](image5.png)
+  ![Man without glasses](image6.png)
+
+- **Woman without glasses**
+  ![Woman without glasses](image7.png)
+  ![Woman without glasses](image8.png)
+  ![Woman without glasses](image9.png)
+
+- **Woman with glasses**
+  ![Woman with glasses](image10.png)
+  ![Woman with glasses](image11.png)
+  ![Woman with glasses](image12.png)
+
+## Average Z vectors, do arithmetic
+
+$$ \text{Man with glasses} - \text{Man without glasses} + \text{Woman without glasses} = \text{Woman with glasses} $$
+
+---
+
+### References
+
+- Radford et al., Unsupervised Representation Learning with Deep Convolutional GANs, NeurIPS 2016
+- Vineeth N B (IIT-H)
+
+---
+
+**Section:**
+
+$$\text{\$10.2 GANs}$$
+
+---
+
+**Slide Number:**
+
+17 / 24
+```
+
+Ensure the accuracy of all the provided labels and images. The scientific content should be presented accurately and clearly.
+
+# DL4CV_Week10_Part02.pdf - Page 49
+
+```markdown
+# Pose Transformation
+
+![Pose Transformation](image_url)
+
+- **z_left**: averaged latent vector of faces looking left
+- **z_right**: average latent vector of faces looking right
+
+$$
+z_{\text{turn}} = z_{\text{right}} - z_{\text{left}}
+$$
+$$
+z_{\text{new}} = z + \alpha z_{\text{turn}}
+$$
+
+- **G(z_new)**: Transformed image
+
+---
+
+\({}^{6}\) Radford et al., Unsupervised Representation Learning with Deep Convolutional GANs, NeurIPS 2016
+
+Vineeth N B (IIT-H)
+
+\(\$10.2\) GANs
+```
+
+# DL4CV_Week10_Part02.pdf - Page 50
+
+```markdown
+# Feature Learning
+
+Table 1: CIFAR-10 classification results using our pre-trained model. Our DCGAN is not pre-trained on CIFAR-10, but on ImageNet-1k, and the features are used to classify CIFAR-10 images.
+
+| Model                         | Accuracy | Accuracy (400 per class)          | max # of features units |
+| ----------------------------- | -------- | ------------------------------- | ---------------------- |
+| 1 Layer K-means               | 80.6%    | 63.7% (±0.7%)                   | 4800                   |
+| 3 Layer K-means Learned RF    | 82.0%    | 70.7% (±0.7%)                   | 3200                   |
+| View Invariant K-means        | 81.9%    | 72.6% (±0.7%)                   | 6400                   |
+| Exemplar CNN                  | 84.3%    | 77.4% (±0.2%)                   | 1024                   |
+| DCGAN (ours) + L2-SVM         | 82.8%    | 73.8% (±0.4%)                   | 512                    |
+
+## Train DCGAN on ImageNet-1k
+
+*Radford et al., Unsupervised Representation Learning with Deep Convolutional GANs, NeurIPS 2016*
+
+_Vineeth N B (IIT-H)_
+
+*§10.2 GANs*
+```
+
+# DL4CV_Week10_Part02.pdf - Page 51
+
+```markdown
+# Feature Learning
+
+**Table 1: CIFAR-10 classification results using our pre-trained model.** Our DCGAN is not pre-trained on CIFAR-10, but on ImageNet-1k, and the features are used to classify CIFAR-10 images.
+
+| Model | Accuracy | Accuracy (400 per class) | max # of features units |
+|---|---|---|---|
+| 1 Layer K-means | 80.6% | 63.7% (±0.7%) | 4800 |
+| 3 Layer K-means Learned RF | 82.0% | 70.7% (±0.7%) | 3200 |
+| View Invariant K-means | 81.9% | 72.6% (±0.7%) | 6400 |
+| Exemplar CNN | 84.3% | 77.4% (±0.2%) | 1024 |
+| DCGAN (ours) + L2-SVM | 82.8% | 73.8% (±0.4%) | 512 |
+
+- Train DCGAN on ImageNet-1k
+- Use discriminator’s convolution features for supervised tasks i.e. classify images from CIFAR-10 dataset
+
+*Radford et al., Unsupervised Representation Learning with Deep Convolutional GANs, NeurIPS 2016*
+
+_Vineeth N B (IIT-H)_
+
+*§10.2 GANs*
+
+![NPTel](https://example.com/link-to-image)
+
+Pg. 19 / 24
+```
+
+# DL4CV_Week10_Part02.pdf - Page 52
+
+:
+
+```markdown
+# Feature Learning
+
+Table 1: CIFAR-10 classification results using our pre-trained model. Our DCGAN is not pre-trained on CIFAR-10, but on Imagenet-1k, and the features are used to classify CIFAR-10 images.
+
+| Model                     | Accuracy | Accuracy (400 per class)       | max # of features units |
+|---------------------------|---------|------------------------------|------------------------|
+| 1 Layer K-means           | 80.6%   | 63.7% (±0.7%)                | 4800                   |
+| 3 Layer K-means Learned RF| 82.0%   | 70.7% (±0.7%)                | 3200                   |
+| View Invariant K-means    | 81.9%   | 72.6% (±0.7%)                | 6400                   |
+| Exemplar CNN              | 84.3%   | 77.4% (±0.2%)                | 1024                   |
+| DCGAN (ours) + L2-SVM     | 82.8%   | 73.8% (±0.4%)                | 512                    |
+
+- Train DCGAN on ImageNet-1k
+- Use discriminator's convolution features for supervised tasks i.e. classify images from CIFAR-10 dataset
+- **DCGAN never trained on CIFAR-10** ⇒ representation power and domain robustness of learned features
+
+[^7]: Radford et al., Unsupervised Representation Learning with Deep Convolutional GANs, NeurIPS 2016
+
+Vineeth N B (IIIT-H) §10.2 GANs
+```
+
+(Note: Placeholder used for the image that couldn't be captured with OCR)
+```
+
+# DL4CV_Week10_Part02.pdf - Page 53
+
+ inline images and videos by using markdown image and link syntax.
+
+```markdown
+# Feature Learning
+
+Table 1: CIFAR-10 classification results using our pre-trained model. Our DCGAN is not pre-trained on CIFAR-10, but on ImageNet-1k, and the features are used to classify CIFAR-10 images.
+
+| Model                         | Accuracy | Accuracy (400 per class) | max # of features units |
+| ----------------------------- | -------- | ----------------------- | ---------------------- |
+| 1 Layer K-means               | 80.6%    | 63.7% (±0.7%)           | 4800                   |
+| 3 Layer K-means Learned RF    | 82.0%    | 70.7% (±0.7%)           | 3200                   |
+| View Invariant K-means        | 81.9%    | 72.6% (±0.7%)           | 6400                   |
+| Exemplar CNN                  | 84.3%    | 77.4% (±0.2%)           | 1024                   |
+| DCGAN (ours) + L2-SVM         | 82.8%    | 73.8% (±0.4%)           | 512                    |
+
+- Train DCGAN on ImageNet-1k
+- Use discriminator’s convolution features for supervised tasks i.e. classify images from CIFAR-10 dataset
+- DCGAN never trained on CIFAR-10 ⇒ representation power and domain robustness of learned features
+- Competitive results when compared with other feature learning methods
+
+[^7]: Radford et al, Unsupervised Representation Learning with Deep Convolutional GANs, NeurlPS 2016
+```
+
+This markdown format preserves the structure and readability of the original content while ensuring accuracy in the representation of scientific data.
+
+# DL4CV_Week10_Part02.pdf - Page 54
+
+```markdown
+# GANs: How to evaluate?
+
+- **Human judgement**:
+  - Good generator ⇒ images with distinctly recognizable objects;
+  - Semantically diverse samples
+
+![NPTEL Logo](https://via.placeholder.com/150)
+
+*Vineeth N B (IIT-H)*
+
+*Section 10.2 GANs*
+
+*Slide 20 of 24*
+```
+
+# DL4CV_Week10_Part02.pdf - Page 55
+
+
+
+```markdown
+# GANs: How to evaluate?
+
+- **Human judgement**: Good generator ⇒ images with distinctly recognizable objects; Semantically diverse samples
+- **Recognizable objects**: classifier predicts class of generated sample correctly with high confidence
+- **Semantic diversity**: generated samples must be evenly from all classes in train set
+
+![NPTEL](attachment:)
+
+Vineeth N B (IIT-H) §10.2 GANs
+
+20 / 24
+```
+
+# DL4CV_Week10_Part02.pdf - Page 56
+
+```markdown
+# GANs: How to evaluate?
+
+- **Human judgement**: Good generator ⇒ images with distinctly recognizable objects; Semantically diverse samples
+
+  - **Recognizable objects**: classifier predicts class of generated sample correctly with high confidence
+  - **Semantic diversity**: generated samples must be evenly from all classes in train set
+
+- **Prediction power**: How ImageNet pre-trained Inception Network V3 performs on these generated images
+
+*Source: Vineeth N B (IIIT-H) §10.2 GANs*
+
+![NPTEL](data:image/png;base64,...) # Image placeholder
+```
+
+# DL4CV_Week10_Part02.pdf - Page 57
+
+```markdown
+# GANs: How to evaluate?
+
+- **Human judgement**: Good generator ⇒ images with distinctly recognizable objects; Semantically diverse samples
+  - **Recognizable objects**: classifier predicts class of generated sample correctly with high confidence
+  - **Semantic diversity**: generated samples must be evenly from all classes in train set
+
+- **Prediction power**: How ImageNet pre-trained Inception Network V3 performs on these generated images
+
+- Still an open research problem...
+
+![Diagram](image_placeholder.png)
+
+Vineeth N B (IIT-H) §10.2 GANs 20 / 24
+```
+
+# DL4CV_Week10_Part02.pdf - Page 58
+
+```markdown
+# Inception Score<sup>8</sup>
+
+- Correlates with human judgement
+- \( p(y|x) \): Inception model/classifier
+- \( p(y) \): Label/class distribution of generated samples
+
+![NPTEL Logo](https://example.com/logo.png)
+
+<sup>8</sup> Radford et al, Unsupervised Representation Learning with Deep Convolutional GANs, NeurIPS 2016
+
+Vineeth N B (IIT-H) §10.2 GANs
+```
+
+# DL4CV_Week10_Part02.pdf - Page 59
+
+ content is given in the description.
+
+The text from the image in markdown is:
+
+```markdown
+# Inception Score<sup>8</sup>
+
+- Correlates with human judgement
+- $p(y|x)$: Inception model/classifier
+- $p(y)$: Label/class distribution of generated samples
+- **Inception Score(IS)**: = exp($\mathbb{E}_{x\sim p_{g}} D_{KL} [p(y|x)||p(y)]$)
+  - = exp($\mathbb{E}_{x\sim p_{g}, y\sim p(y|x)} [\log(p(y|x)) - \log(p(y))]$)
+  - = exp($H(y) - H(y|x)$)
+
+  - $H(y)$: entropy of generated sample class labels (Semantic diversity = high $H(y)$)
+  - $H(y|x)$: entropy of class labels from classifier (Distinctly Classifiable = low $H(y|x)$)
+
+<sup>8</sup> Radford et al., Unsupervised Representation Learning with Deep Convolutional GANs, NeurIPS 2016
+
+Vineeth N B (IIT-H) §10.2 GANs
+```
+
+# DL4CV_Week10_Part02.pdf - Page 60
+
+:
+
+```markdown
+# Inception Score<sup>8</sup>
+
+- Correlates with human judgement
+- \( p(y|x) \): Inception model/classifier
+- \( p(y) \): Label/class distribution of generated samples
+- **Inception Score (IS)**: \( \exp(\mathbb{E}_{x \sim p_g} D_{KL}[p(y|x)||p(y)]) \)
+  - \( \exp(\mathbb{E}_{x \sim p_g,y \sim p(y|x)}[\log(p(y|x)) - \log(p(y))]) \)
+  - \( \exp(H(y) - H(y|x)) \)
+    - \( H(y) \): entropy of generated sample class labels (Semantic diversity \( \equiv \) high \( H(y) \))
+    - \( H(y|x) \): entropy of class labels from classifier (Distinctly Classifiable \( \equiv \) low \( H(y|x) \))
+- Higher IS \( \implies \) better generative model
+
+<sup>8</sup> Radford et al., Unsupervised Representation Learning with Deep Convolutional GANs, NeurIPS 2016
+
+Vineeth N B (III-T-H)
+
+§10.2 GANs
+
+21 / 24
+```
+
+```
+
+# DL4CV_Week10_Part02.pdf - Page 61
+
+ is not used to compare with statistics of synthetic samples
+FID enables us to capture more subtle differences; measures diversity better
+
+```markdown
+# Fréchet Inception Distance (FID)
+
+- **Drawback of IS**: Statistics of real-world samples are not used to compare with statistics of synthetic samples
+- **FID enables us to capture more subtle differences; measures diversity better**
+
+![NPTEL](image_url)
+
+*Heusel et al., GANs Trained by a Two Time-Scale Update Rule Converge to a Local Nash Equilibrium, NeurIPS 2017*
+
+*Vineeth N B (IIT-H)*
+
+*§10.2 GANs*
+
+*22 / 24*
+```
+
+# DL4CV_Week10_Part02.pdf - Page 62
+
+
+
+```markdown
+# Fréchet Inception Distance (FID)
+
+- **Drawback of IS:**
+  - Statistics of real-world samples are not used to compare with statistics of synthetic samples
+- FID enables us to capture more subtle differences; measures diversity better
+- **Intuition:**
+  - Distance between real-world data distribution and generating model's data distribution serves as performance measure for generative models; how?
+
+![NPTEL Logo](image_url)
+
+9Heusel et al, GANs Trained by a Two Time-Scale Update Rule Converge to a Local Nash Equilibrium, NeurIPS 2017
+
+Vineeth N B (IIT-H)
+
+§10.2 GANs
+
+22 / 24
+```
+
+# DL4CV_Week10_Part02.pdf - Page 63
+
+```markdown
+# Fréchet Inception Distance (FID)
+
+- **Drawback of IS:**
+  - Statistics of real-world samples are not used to compare with statistics of synthetic samples
+- FID enables us to capture more subtle differences; measures diversity better
+- **Intuition:** Distance between real-world data distribution and generating model’s data distribution serves as performance measure for generative models; how?
+- Embed image *x* into feature space (activations of Inception-v3 pool3 layer), and compute the Fréchet distance between two multivariate Gaussians:
+
+  \[
+  d^2((m, C), (m_w, C_w)) = \|m - m_w\|_2^2 + Tr(C + C_w - 2(C \cdot C_w))
+  \]
+
+  where *m* is mean, *C* is covariance of generated image features; *m_w* is mean, *C_w* is covariance of original image features
+
+__References__
+[9] Heusel et al, GANs Trained by a Two Time-Scale Update Rule Converge to a Local Nash Equilibrium, NeurIPS 2017
+Vineeth N B (III-T-H)
+§10.2 GANs
+
+![Image Placeholder](image_url)
+```
+
+# DL4CV_Week10_Part02.pdf - Page 64
+
+ the structure and style of markdown for readability.
+
+```markdown
+# Fréchet Inception Distance (FID)
+
+- **Drawback of IS**: Statistics of real-world samples are not used to compare with statistics of synthetic samples
+- FID enables us to capture more subtle differences; measures diversity better
+- **Intuition**: Distance between real-world data distribution and generating model's data distribution serves as performance measure for generative models; how?
+- Embed image x into feature space (activations of Inception-v3 pool3 layer), and compute the Fréchet distance between two multivariate Gaussians:
+
+  \[
+  d^2((m, C), (m_w, C_w)) = \|m - m_w\|_2^2 + Tr(C + C_w - 2(C \cdot C_w))
+  \]
+
+  where m is mean, C is covariance of generated image features; m_w is mean, C_w is covariance of original image features
+
+- **Lower FID ⇒ better generative model**
+
+\[
+\^9
+\]
+
+Heusel et al., GANs Trained by a Two Time-Scale Update Rule Converge to a Local Nash Equilibrium, NeurIPS 2017
+
+Vineeth N B (IIT-M)
+
+§10.2 GANs
+
+![]() 22 / 24
+```
+
+# DL4CV_Week10_Part02.pdf - Page 65
+
+```markdown
+# FID vs Inception Score<sup>10</sup>
+
+## CelebA dataset (Columns 1,3: FID Score; Columns 2,4: Inception Score)
+
+![FID vs Inception Scores Table](image-placeholder)
+
+### (Top:) Gaussian noise added to images
+![Gaussian Noise Added](image-placeholder)
+
+### (Bottom:) Gaussian blur added to images
+![Gaussian Blur Added](image-placeholder)
+
+### (Top:) Salt-and-pepper noise added to images
+![Salt-and-Pepper Noise Added](image-placeholder)
+
+### (Bottom:) ImageNet crops added to images
+![ImageNet Crops Added](image-placeholder)
+
+<sup>10</sup> Heusel et al., GANs Trained by a Two Time-Scale Update Rule Converge to a Local Nash Equilibrium, NeurIPS 2017
+
+Vineeth N B (IIT-H)
+
+§10.2 GANs
+
+23 / 24
+```
+
+# DL4CV_Week10_Part02.pdf - Page 66
+
+
+
+```markdown
+# Homework
+
+## Readings
+
+- **Dive into Deep Learning, Chapter 17**
+
+  [Dive into Deep Learning, Chapter 17](https://d2l.ai/chapter_generative-adversarial-networks/gan.html)
+
+- **Play with Generative Adversarial Networks (GANs) in your browser**
+
+  [GANLab](https://poloclub.github.io/ganlab/)
+
+- **Deep Learning With Python - François Chollet, Section 8.5**
+
+  [Deep Learning With Python - François Chollet, Section 8.5](https://github.com/veritone/ds-transcription-capstone)
+
+![Poloclub GANLab](https://poloclub.github.io/ganlab/)
+
+Vineeth N B (IIT-H)
+
+GANs
+
+24 / 24
+```
+

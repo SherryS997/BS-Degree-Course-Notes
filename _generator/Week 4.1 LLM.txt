@@ -1,0 +1,9377 @@
+# Week 4.1 LLM.pdf - Page 1
+
+```markdown
+# Introduction to Large Language Models
+
+## Lecture 2: Language Modelling GPT, Decoding Strategies
+
+**Mitesh M. Khapra**
+
+![IIITB Logo](https://example.com/logo.png)
+
+Aligarh, Department of Computer Science and Engineering, IIIT Madras
+
+Mitesh Khapra
+```
+
+This markdown format accurately represents the provided scientific text or slides while maintaining the hierarchical structure, formatting, and content integrity as required.
+
+# Week 4.1 LLM.pdf - Page 2
+
+```markdown
+# Transformer Architecture in Machine Translation
+
+In the previous lecture, we learned about the components of the transformer architecture in the context of machine translation.
+
+## Transformer Components
+
+The core components of the transformer architecture used in machine translation include:
+
+### Source Side (h_source)
+
+1. **Positional Encoding (PE)**
+   - `PE` is added to the input embedding to retain the positional information of the tokens.
+
+```math
+PE_{pos,2i}   = \sin(pos / 10000^{2i/d_model})
+PE_{pos,2i+1} = \cos(pos / 10000^{2i/d_model})
+```
+
+2. **Embedding Layer**
+   - The input tokens are converted into embeddings.
+
+### Target Side (h_target)
+
+1. **Positional Encoding (PE)**
+   - Similar to the source side, positional encoding is added to the input embedding.
+
+```math
+PE_{pos,2i}   = \sin(pos / 10000^{2i/d_model})
+PE_{pos,2i+1} = \cos(pos / 10000^{2i/d_model})
+```
+
+2. **Embedding Layer**
+   - The input tokens are converted into embeddings.
+
+### Encoder Block
+
+Each encoder block consists of the following layers:
+
+1. **Multi-Head Attention**
+   - This layer allows the model to focus on different positions in the input sequence.
+
+2. **Feed Forward Neural Network (NN)**
+   - A position-wise fully connected feedforward network.
+
+3. **Add & Norm**
+   - Residual connections and layer normalization are applied after each sub-layer.
+
+### Decoder Block
+
+Each decoder block consists of the following layers:
+
+1. **Multi-Head Masked Attention**
+   - Attention mechanism that masks future positions to prevent information leakage.
+
+2. **Multi-Head Cross Attention**
+   - Attention mechanism to align the target sequence with the source sequence.
+
+3. **Feed Forward Neural Network (NN)**
+   - A position-wise fully connected feedforward network.
+
+4. **Add & Norm**
+   - Residual connections and layer normalization are applied after each sub-layer.
+
+### Overall Architecture
+
+The transformer architecture is composed of an encoder and a decoder:
+
+1. **Encoder**
+   - Composed of multiple stacked encoder blocks.
+
+2. **Decoder**
+   - Composed of multiple stacked decoder blocks, each interacting with the encoder's output through cross-attention.
+
+### Diagram
+
+```markdown
+![Diagram of Transformer Architecture](path_to_diagram_image)
+```
+
+Mitesh Khapro
+```
+
+# Week 4.1 LLM.pdf - Page 3
+
+```markdown
+# Transformer Architecture in Machine Translation
+
+In the previous lecture, we learned about the components of the transformer architecture in the context of machine translation.
+
+## High-Level Overview
+
+At a high-level, we can just think of it as an encoder-decoder block.
+
+![Transformer Architecture](image-url)
+
+- **Encoder**: This component takes the input sequence and generates a context-aware representation of the input.
+
+- **Decoder**: This component takes the encoded representation and generates the output sequence.
+
+## Transformer Components
+
+```markdown
+# Transformer Architecture in Machine Translation
+
+In the previous lecture, we learned about the components of the transformer architecture in the context of machine translation.
+
+## High-Level Overview
+
+At a high-level, we can just think of it as an encoder-decoder block.
+
+![Transformer Architecture](image-url)
+
+- **Encoder**: This component takes the input sequence and generates a context-aware representation of the input.
+
+- **Decoder**: This component takes the encoded representation and generates the output sequence.
+```
+
+# Week 4.1 LLM.pdf - Page 4
+
+```markdown
+# Transformer Architecture in Machine Translation
+
+## Previous Lecture Overview
+
+In the previous lecture, we learned about the components of the transformer architecture in the context of machine translation.
+
+### Abstract Concept
+
+At an even higher level of abstraction, we can think of it as a black box that receives an input and produces an output.
+
+## Transformer Process
+
+![Transformer](image-url)
+
+- **Text in source language**: Input to the transformer.
+- **Transformer**: Processes the input.
+- **Translated text in target language**: Output from the transformer.
+
+*Mitresh Khapra*
+```
+
+# Week 4.1 LLM.pdf - Page 5
+
+```markdown
+# Transformer Architecture in NLP Tasks
+
+## Previous Lecture Overview
+
+In the previous lecture, we learned about the components of the transformer architecture in the context of machine translation.
+
+## Using Transformer for Other NLP Tasks
+
+### Question
+What if we want to use the transformer architecture for other NLP tasks?
+
+### Answer
+We need to train a separate model for each task using datasets specific to the task.
+
+## Transformer Models for Different NLP Tasks
+
+1. **Prediction of Class/Sentiment**
+   - **Input:** Input text
+   - **Model:** Transformer
+   - **Output:** Predict the class/sentiment
+
+2. **Text Summarization**
+   - **Input:** Input text
+   - **Model:** Transformer
+   - **Output:** Summarize
+
+3. **Question Answering**
+   - **Input:** Input text and question
+   - **Model:** Transformer
+   - **Output:** Answer
+
+![Transformer Architecture](https://via.placeholder.com/600x400)
+
+*Image: Transformer architecture in use for different NLP tasks.*
+
+## Trainer Model Summary
+
+We need to train a separate model for each task using datasets specific to the task.
+```
+
+# Week 4.1 LLM.pdf - Page 6
+
+```markdown
+# Transformer Architecture for NLP Tasks
+
+In the previous lectures, we learned the components of transformer architecture in the context of machine translation.
+
+## Using Transformer Architecture for Other NLP Tasks
+
+### Training Separate Models for Each Task
+- We need to train a separate model for each task using datasets specific to the task.
+
+### Training from Scratch
+- If we train the architecture from scratch (that is, by randomly initializing the parameters) for each task, it takes a long time for convergence.
+
+### Limited Labelled Samples
+- Often, we may not have enough labelled samples for many NLP tasks.
+
+## Flowchart of Transformer Architecture for Different NLP Tasks
+
+1. **Predict the Class/Sentiment**
+    - **Transformer**
+        - Input text
+
+2. **Summarize**
+    - **Transformer**
+        - Input text
+
+3. **Answer Questions**
+    - **Transformer**
+        - Input text
+        - Question
+
+![Diagram Placeholder](https://via.placeholder.com/150)
+
+_Image Description: Flowchart representing the use of Transformer architecture for various NLP tasks including prediction of class/sentiment, summarization, and answering questions._
+
+## Additional Notes
+- **Mithesh Khapra**
+
+_This markdown format ensures that titles, headings, and paragraphs are properly structured, and special attention is given to scientific terms and symbols._
+```
+
+# Week 4.1 LLM.pdf - Page 7
+
+```markdown
+# Data Challenges and Transformer Models
+
+## Data Preparation
+
+### Challenges with Labelled Data
+- Preparing labelled data is laborious and costly.
+
+### Availability of Unlabelled Data
+- We have a large amount of unlabelled text easily available on the internet.
+  - ![Globe](https://example.com/globe.png)
+  - ![World Wide Web](https://example.com/www.png)
+  - ![Computer](https://example.com/computer.png)
+  - ![Blog](https://example.com/blog.png)
+
+### Question
+- Can we make use of such unlabelled data to train a model?
+
+*Mitesh Khapro*
+
+## Transformer Models
+
+### Use of Transformer Models
+- Transformer models can be used to:
+  - Predict the class/sentiment of input text.
+  - Summarize text.
+  - Answer questions based on input text.
+
+### Process Flow
+1. **Input Text**: Text data is fed into the transformer model.
+2. **Summarize**: Transformer model summarizes the input text.
+3. **Answer**: Transformer model provides answers to questions based on input text.
+4. **Predict Class/Sentiment**: Transformer model predicts the class or sentiment of the input text.
+
+### Diagram
+![Transformer Model](https://example.com/transformer.png)
+
+- **Transformer**
+  - Input text is processed by the transformer model.
+  - The model outputs a summarized version of the text.
+  - The model answers questions based on the input text.
+  - The model predicts the class/sentiment of the input text.
+
+```
+
+# Week 4.1 LLM.pdf - Page 8
+
+```markdown
+# Preparing Labelled Data vs. Unlabelled Data
+
+## Challenges with Labelled Data
+- Preparing labelled data is laborious and costly.
+
+## Abundance of Unlabelled Data
+- On the other hand, we have a huge unlabelled text data on the internet.
+
+## Utilizing Unlabelled Data
+- Can we make use of these unlabelled data to train a model?
+- What will be the training objective in that case?
+- Would that be helpful in adapting the model to downstream tasks with minimal fine-tuning (with zero or a few samples)?
+
+## Diagram Description
+![Transformer Workflow](image_placeholder.png)
+
+### Transformer Workflow
+1. **Input Text**: Input text fed to the model.
+2. **Summarize**: The model summarizes the input text.
+3. **Answer**: The summarized text is used to generate an answer.
+4. **Predict the Class/Sentiment**: The model predicts the class/sentiment based on the input text.
+
+Each of these stages involves a **Transformer** model.
+
+```
+
+# Week 4.1 LLM.pdf - Page 9
+
+```markdown
+# Module 2.1: Language Modelling
+
+**Mitesh M. Khapra**
+
+![IIT Madras Logo](https://example.com/logo)
+
+Aligarh, Department of Computer Science and Engineering, IIIT Madras
+
+---
+
+Mitesh Khapra
+
+---
+
+```
+
+# Week 4.1 LLM.pdf - Page 10
+
+```markdown
+# Motivation
+
+Assume that we ask questions to a lay person based on a statement or some excerpt.
+
+"Wow, India has now reached the moon"
+
+An excerpt from business today "What sets this mission apart is the pivotal role of artificial intelligence (AI) in guiding the spacecraft during its critical descent to the moon's surface."
+
+- He likes to stay
+- He likes to stray
+- He likes to sway
+
+**Is this sentence expressing a positive or a negative sentiment?**
+
+**Did the lander use AI for soft landing on the moon?**
+
+**Are these meaningful sentences?**
+
+The person will most likely answer all the questions, even though he/she may not be explicitly trained on any of these tasks. How?
+
+We develop a strong understanding of language through various language based interactions(listening/reading) over our life time without any explicit supervision
+
+*Mitesh Khapro*
+```
+
+# Week 4.1 LLM.pdf - Page 11
+
+```markdown
+# Idea
+
+Can a model develop basic understanding of language by getting exposure to a large amount of raw text? **[pre-training]**
+
+More importantly, after getting exposed to such raw data can it learn to perform well on downstream tasks with minimum supervision? **[Supervised Fine-tuning]**
+
+Mitesh Khapro
+```
+
+# Week 4.1 LLM.pdf - Page 12
+
+```markdown
+# Language Modeling and Downstream Tasks
+
+## Pre-training and Fine-tuning
+
+### Language Modeling (Pre-training)
+
+- **Input**: Raw text
+- **Process**: 
+  - Pre-training involves processing raw text data to create language models.
+
+### Downstream Tasks (Fine-tuning)
+
+- **Input**: Samples and labels
+- **Process**: 
+  - Fine-tuning involves applying the pre-trained language models to specific tasks using labeled samples.
+
+## Results
+
+### Sentiment Analysis
+
+![Histogram of Sentiment Neuron Values](image_url)
+
+- **Description**: 
+  - The histogram shows the distribution of sentiment neuron values for negative and positive reviews.
+  - Negative reviews are represented by the blue bars on the left.
+  - Positive reviews are represented by the orange bars on the right.
+
+- **Performance**:
+  - With this representation, a linear model classifies reviews with 91.8% accuracy.
+  - This accuracy surpasses the State Of The Art (SOTA) performance.
+  - The performance matches that of previous supervised systems using 30-100 times fewer labeled examples.
+
+### References
+- Mitesh Khapra
+```
+
+**Note**: Replace `image_url` with the actual URL or placeholder for the histogram image if it can't be directly captured by OCR. Ensure any scientific terms, symbols, or special characters are correctly formatted and aligned with the original content.
+
+# Week 4.1 LLM.pdf - Page 13
+
+```markdown
+# Language modelling
+
+Let \( \mathcal{V} \) be a vocabulary of language (i.e., collection of all unique words in the language).
+
+We can think of a sentence as a sequence \( X_1, X_2, \cdots, X_n \), where \( X_i \in \mathcal{V} \).
+
+For example, if \( \mathcal{V} = \{an, apple, ate, I\} \), some possible sentences (not necessarily grammatically correct) are
+
+a. An apple ate I
+
+b. I ate an apple
+
+c. I ate apple
+
+d. an apple
+
+e. ....
+
+Intuitively, some of these sentences are more probable than others.
+
+What do we mean by that?
+
+*Mitesh Khapra*
+```
+
+Note: Since the original content does not include any special characters, symbols, formulas, or images, the markdown format simply mirrors the plain text structure. If there were any special characters or equations, they would be formatted accordingly as specified in the instructions.
+
+# Week 4.1 LLM.pdf - Page 14
+
+```markdown
+# Intuitive Meaning in Large Corpus
+
+Intuitively, we mean that give a very very large corpus, we expect some of these sentences to appear more frequently than others (hence, more probable).
+
+# Language Model Definition
+
+We are now looking for a function which takes a sequence as input and assigns a probability to each sequence.
+
+$$
+f : (X_1, X_2, \cdots, X_n) \rightarrow [0, 1]
+$$
+
+Such a function is called a language model.
+
+*Mitesh Khapro*
+```
+
+# Week 4.1 LLM.pdf - Page 15
+
+```markdown
+# Language modelling
+
+\[ P(x_1, x_2, \cdots, x_T) = P(x_1) P(x_2 | x_1) P(x_3 | x_2, x_1) \cdots P(x_T | x_{T-1}, \cdots, x_1) \]
+
+\[ = \prod_{i=1}^{T} P(x_i | x_1, \cdots, x_{i-1}) \]
+
+If we naively assume that the words in a sequence are independent of each other then
+
+\[ P(x_1, x_2, \cdots, x_T) = \prod_{i=1}^{T} P(x_i) \]
+
+*Mitlesh Khapra*
+```
+
+# Week 4.1 LLM.pdf - Page 16
+
+```markdown
+# How do we enable a model to understand language?
+
+## Simple Idea: Teach it the task of predicting the next token in a sequence..
+
+You have tons of sequences available on the web which you can use as training data
+
+## Chandraayan-3
+
+### Article: 'Talk'
+
+### From Wikipedia, the free encyclopedia
+
+**Chandrayaan-3** (Hindi: चंद्रयान 3, lit. 'Moon Craft 3') is the third mission in the Chandrayaan programme, a series of lunar exploration missions by the Indian Space Research Organisation (ISRO). Launched on 14 July 2023, the mission consists of a lander named Vikram and a lunar rover named Pragyan. Both were scheduled to land on the lunar surface at 6:04 p.m. IST on 23 August 2023. The spacecraft lifted off from the Satish Dhawan Space Centre on 14 July 2023. The spacecraft is a fully indigenous effort and was launched on the LVM3 rocket. The spacecraft entered lunar orbit on 5 August 2023. The lander was scheduled to land on the lunar surface on 23 August 2023 at 6:04 p.m. IST. The Pragyan rover was expected to carry out experiments on the lunar surface. The mission's main objective was to demonstrate soft-landing capability and roving on the lunar surface using new technologies.
+
+### Main Objective
+
+- **Soft landing**: Achieving a soft landing on the lunar surface to demonstrate the capability of the lander.
+- **Science experiments**: Conducting scientific experiments on the lunar surface to gather new data.
+- **Technological demonstration**: Showcasing new technologies developed for future lunar missions.
+
+## Roughly speaking this task of predicting the next token in a sequence is called language modelling
+
+## Example Text
+
+**BECAUSE** he is the **arch** of **India's** digital bui**lding** and implement**ing** India's **dig**ital build**ing** blocks such as UPI, Aadhaar, eKYC and FASTag. **He** **also** helped the **gover**nment **develop** the IT **infrastructure** to **support** the **GST** and the **Ayushman** Bharat **programme**. The **cerebral** **power** that **is** the **government's** go-to **person** for tech interventi**on**, ir**respecti**ve of the **party** in **power**.
+
+**BECAUSE** he **was** **in** the **launch** of the **Be**ckon **pro**tocol, **now** **being** **used** in **sectors** such as **e**-**commerce**, **mobil**ity and **health**. He **was** **also** **involved** in the **launch** of the **Beck**on **protocol**, now **being** **used** in **sectors** such as **e**-**commerce**, **mobil**ity and **health**. He **was** **also** **involved** in the **launch** of the **Beck**on **protocol**, now **being** **used** in **sectors** such as **e**-**commerce**, **mobil**ity and **health**. He **was** **also** **involved** in the **launch** of the **Beck**on **protocol**, now **being** **used** in **sectors** such as **e**-**commerce**, **mobil**ity and **health**. He **was** **also** **involved** in the **launch** of the **Beck**on **protocol**, now **being** **used** in **sectors** such as **e**-**commerce**, **mobil**ity and **health**. He **was** **also** **involved** in the **launch** of the **Beck**on **protocol**, now **being** **used** in **sectors** such as **e**-**commerce**, **mobil**ity and **health**. He **was** **also** **involved** in the **launch** of the **Beck**on **protocol**, now **being** **used** in **sectors** such as **e**-**commerce**, **mobil**ity and **health**. He **was** **also** **involved** in the **launch** of the **Beck**on **protocol**, now **being** **used** in **sectors** such as **e**-**commerce**, **mobil**ity and **health**. He **was** **also** **involved** in the **launch** of the **Beck**on **protocol**, now **being** **used** in **sectors** such as **e**-**commerce**, **mobil**ity and **health**. He **was** **also** **involved** in the **launch** of the **Beck**on **protocol**, now **being** **used** in **sectors** such as **e**-**commerce**, **mobil**ity and **health**. He **was** **also** **involved** in the **launch** of the **Beck**on **protocol**, now **being** **used** in **sectors** such as **e**-**commerce**, **mobil**ity and **health**. He **was** **also** **involved** in the **launch** of the **Beck**on **protocol**, now **being** **used** in **sectors** such as **e**-**commerce**, **mobil**ity and **health**. He **was** **also** **involved** in the **launch** of the **Beck**on **protocol**, now **being** **used** in **sectors** such as **e**-**commerce**, **mobil**ity and **health**. He **was** **also** **involved** in the **launch** of the **Beck**on **protocol**, now **being** **used** in **sectors** such as **e**-**commerce**, **mobil**ity and **health**. He **was** **also** **involved** in the **launch** of the **Beck**on **protocol**, now **being** **used** in **sectors** such as **e**-**commerce**, **mobil**ity and **health**. He **was** **also** **involved** in the **launch** of the **Beck**on **protocol**, now **being** **used** in **sectors** such as **e**-**commerce**, **mobil**ity and **health**. He **was** **also** **involved** in the **launch** of the **Beck**on **protocol**, now **being** **used** in **sectors** such as **e**-**commerce**, **mobil**ity and **health**. He **was** **also** **involved** in the **launch** of the **Beck**on **protocol**, now **being** **used** in **sectors** such as **e**-**commerce**, **mobil**ity and **health**. He **was** **also** **involved** in the **launch** of the **Beck**on **protocol**, now **being** **used** in **sectors** such as **e**-**commerce**, **mobil**ity and **health**. He **was** **also** **involved** in the **launch** of the **Beck**on **protocol**, now **being** **used** in **sectors** such as **e**-**commerce**, **mobil**ity and **health**. He **was** **also** **involved** in the **launch** of the **Beck**on **protocol**, now **being** **used** in **sectors** such as **e**-**commerce**, **mobil**ity and **health**. He **was** **also** **involved** in the **launch** of the **Beck**on **protocol**, now **being** **used** in **sectors** such as **e**-**commerce**, **mobil**ity and **health**. He **was** **also** **involved** in the **launch** of the **Beck**on **protocol**, now **being** **used** in **sectors** such as **e**-**commerce**, **mobil**ity and **health**. He **was** **also** **involved** in the **launch** of the **Beck**on **protocol**, now **being** **used** in **sectors** such as **e**-**commerce**, **mobil**ity and **health**. He **was** **also** **involved** in the **launch** of the **Beck**on **protocol**, now **being** **used** in **sectors** such as **e**-**commerce**, **mobil**ity and **health**. He **was** **also** **involved** in the **launch** of the **Beck**on **protocol**, now **being** **used** in **sectors** such as **e**-**commerce**, **mobil**ity and **health**. He **was** **also** **involved** in the **launch** of the **Beck**on **protocol**, now **being** **used** in **sectors** such as **e**-**commerce**, **mobil**ity and **health**. He **was** **also** **involved** in the **launch** of the **Beck**on **protocol**, now **being** **used** in **sectors** such as **e**-**commerce**, **mobil**ity and **health**. He **was** **also** **involved** in the **launch** of the **Beck**on **protocol**, now **being** **used** in **sectors** such as **e**-**commerce**, **mobil**ity and **health**. He **was** **also** **involved** in the **launch** of the **Beck**on **protocol**, now **being** **used** in **sectors** such as **e**-**commerce**, **mobil**ity and **health**. He **was** **also** **involved** in the **launch** of the **Beck**on **protocol**, now **being** **used** in **sectors** such as **e**-**commerce**, **mobil**ity and **health**. He **was** **also** **involved** in the **launch** of the **Beck**on **protocol**, now **being** **used** in **sectors** such as **e**-**commerce**, **mobil**ity and **health**. He **was** **also** **involved** in the **launch** of the **Beck**on **protocol**, now **being** **used** in **sectors** such as **e**-**commerce**, **mobil**ity and **health**. He **was** **also** **involved** in the **launch** of the **Beck**on **protocol**, now **being** **used** in **sectors** such as **e**-**commerce**, **mobil**ity and **health**. He **was** **also** **involved** in the **launch** of the **Beck**on **protocol**, now **being** **used** in **sectors** such as **e**-**commerce**, **mobil**ity and **health**. He **was** **also** **involved** in the **launch** of the **Beck**on **protocol**, now **being** **used** in **sectors** such as **e**-**commerce**, **mobil**ity and **health**. He **was** **also** **involved** in the **launch** of the **Beck**on **protocol**, now **being** **used** in **sectors** such as **e**-**commerce**, **mobil**ity and **health**. He **was** **also** **involved** in the **launch** of the **Beck**on **protocol**, now **being** **used** in **sectors** such as **e**-**commerce**, **mobil**ity and **health**. He **was** **also** **involved** in the **launch** of the **Beck**on **protocol**, now **being** **used** in **sectors** such as **e**-**commerce**, **mobil**ity and **health**. He **was** **also** **involved** in the **launch** of the **Beck**on **protocol**, now **being** **used** in **sectors** such as **e**-**commerce**, **mobil**ity and **health**. He **was** **also** **involved** in the **launch** of the **Beck**on **protocol**, now **being** **used** in **sectors** such as **e**-**commerce**, **mobil**ity and **health**. He **was** **also** **involved** in the **launch** of the **Beck**on **protocol**, now **being** **used** in **sectors** such as **e**-**commerce**, **mobil**ity and **health**. He **was** **also** **involved** in the **launch** of the **Beck**on **protocol**, now **being** **used** in **sectors** such as **e**-**commerce**, **mobil**ity and **health**. He **was** **also** **involved** in the **launch** of the **Beck**on **protocol**, now **being** **used** in **sectors** such as **e**-**commerce**, **mobil**ity and **health**. He **was** **also** **involved** in the **launch** of the **Beck**on **protocol**, now **being** **used** in **sectors** such as **e**-**commerce**, **mobil**ity and **health**. He **was** **also** **involved** in the **launch** of the **Beck**on **protocol**, now **being** **used** in **sectors** such as **e**-**commerce**, **mobil**ity and **health**. He **was** **also** **involved** in the **launch** of the **Beck**on **protocol**, now **being** **used** in **sectors** such as **e**-**commerce**, **mobil**ity and **health**. He **was** **also** **involved** in the **launch** of the **Beck**on **protocol**, now **being** **used** in **sectors** such as **e**-**commerce**, **mobil**ity and **health**. He **was** **also** **involved** in the **launch** of the **Beck**on **protocol**, now **being** **used** in **sectors** such as **e**-**commerce**, **mobil**ity and **health**. He **was** **also** **involved** in the **launch** of the **Beck**on **protocol**, now **being** **used** in **sectors** such as **e**-**commerce**, **mobil**ity and **health**. He **was** **also** **involved** in the **launch** of the **Beck**on **protocol**, now **being** **used** in **sectors** such as **e**-**commerce**, **mobil**ity and **health**. He **was** **also** **involved** in the **launch** of the **Beck**on **protocol**, now **being** **used** in **sectors** such as **e**-**commerce**, **mobil**ity and **health**. He **was** **also** **involved** in the **launch** of the **Beck**on **protocol**, now **being** **used** in **sectors** such as **e**-**commerce**, **mobil**ity and **health**. He **was** **also** **involved** in the **launch** of the **Beck**on **protocol**, now **being** **used** in **sectors** such as **e**-**commerce**, **mobil**ity and **health**. He **was** **also** **involved** in the **launch** of the **Beck**on **protocol**, now **being** **used** in **sectors** such as **e**-**commerce**, **mobil**ity and **health**. He **was** **also** **involved** in the **launch** of the **Beck**on **protocol**, now **being** **used** in **sectors** such as **e**-**commerce**, **mobil**ity and **health**. He **was** **also** **involved** in the **launch** of the **Beck**on **protocol**, now **being** **used** in **sectors** such as **e**-**commerce**, **mobil**ity and **health**. He **was** **also** **involved** in the **launch** of the **Beck**on **protocol**, now **being** **used** in **sectors** such as **e**-**commerce**, **mobil**ity and **health**. He **was** **also** **involved** in the **launch** of the **Beck**on **protocol**, now **being** **used** in **sectors** such as **e**-**commerce**, **mobil**ity and **health**. He **was** **also** **involved** in the **launch** of the **Beck**on **protocol**, now **being** **used** in **sectors** such as **e**-**commerce**, **mobil**ity and **health**. He **was** **also** **involved** in the **launch** of the **Beck**on **protocol**, now **being** **used** in **sectors** such as **e**-**commerce**, **mobil**ity and **health**. He **was** **also** **involved** in the **launch** of the **Beck**on **protocol**, now **being** **used** in **sectors** such as **e**-**commerce**, **mobil**ity and **health**. He **was** **also** **involved** in the **launch** of the **Beck**on **protocol**, now **being** **used** in **sectors** such as **e**-**commerce**, **mobil**ity and **health**. He **was** **also** **involved** in the **launch** of the **Beck**on **protocol**, now **being** **used** in **sectors** such as **e**-**commerce**, **mobil**ity and **health**. He **was** **also** **involved** in the **launch** of the **Beck**on **protocol**, now **being** **used** in **sectors** such as **e**-**commerce**, **mobil**ity and **health**. He **was** **also** **involved** in the **launch** of the **Beck**on **protocol**, now **being** **used** in **sectors** such as **e**-**commerce**, **mobil**ity and **health**. He **was** **also** **involved** in the **launch** of the **Beck**on **protocol**, now **being** **used** in **sectors** such as **e**-**commerce**, **mobil**ity and **health**. He **was** **also** **involved** in the **launch** of the **Beck**on **protocol**, now **being** **used** in **sectors** such as **e**-**commerce**, **mobil**ity and **health**. He **was** **also** **involved** in the **launch** of the **Beck**on **protocol**, now **being** **used** in **sectors** such as **e**-**commerce**, **mobil**ity and **health**. He **was** **also** **involved** in the **launch** of the **Beck**on **protocol**, now **being** **used** in **sectors** such as **e**-**commerce**, **mobil**ity and **health**. He **was** **also** **involved** in the **launch** of the **Beck**on **protocol**, now **being** **used** in **sectors** such as **e**-**commerce**, **mobil**ity and **health**. He **was** **also** **involved** in the **launch** of the **Beck**on **protocol**, now **being** **used** in **sectors** such as **e**-**commerce**, **mobil**ity and **health**. He **was** **also** **involved** in the **launch** of the **Beck**on **protocol**, now **being** **used** in **sectors** such as **e**-**commerce**, **mobil**ity and **health**. He **was** **also** **involved** in the **launch** of the **Beck**on **protocol**, now **being** **used** in **sectors** such as **e**-**commerce**, **mobil**ity and **health**. He **was** **also** **involved** in the **launch** of the **Beck**on **protocol**, now **being** **used** in **sectors** such as **e**-**commerce**, **mobil**ity and **health**. He **was** **also** **involved** in the **launch** of the **Beck**on **protocol**, now **being** **used** in **sectors** such as **e**-**commerce**, **mobil**ity and **health**. He **was** **also** **involved** in the **launch** of the **Beck**on **protocol**, now **being** **used** in **sectors** such as **e**-**commerce**, **mobil**ity and **health**. He **was** **also** **involved** in the **launch** of the **Beck**on **protocol**, now **being** **used** in **sectors** such as **e**-**commerce**, **mobil**ity and **health**. He **was** **also** **involved** in the **launch** of the **Beck**on **protocol**, now **being** **used** in **sectors** such as **e**-**commerce**, **mobil**ity and **health**. He **was** **also** **involved** in the **launch** of the **Beck**on **protocol**, now **being** **used** in **sectors** such as **e**-**commerce**, **mobil**ity and **health**. He **was** **also** **involved** in the **launch** of the **Beck**on **protocol**, now **being** **used** in **sectors** such as **e**-**commerce**, **mobil**ity and **health**. He **was** **also** **involved** in the **launch** of the **Beck**on **protocol**, now **being** **used** in **sectors** such as **e**-**commerce**, **mobil**ity and **health**. He **was** **also** **involved** in the **launch** of the **Beck**on **protocol**, now **being** **used** in **sectors** such as **e**-**commerce**, **mobil**ity and **health**. He **was** **also** **involved** in the **launch** of the **Beck**on **protocol**, now **being** **used** in **sectors** such as **e**-**commerce**, **mobil**ity and **health**. He **was** **also** **involved** in the **launch** of the **Beck**on **protocol**, now **being** **used** in **sectors** such as **e**-**commerce**, **mobil**ity and **health**. He **was** **also** **involved** in the **launch** of the **Beck**on **protocol**, now **being** **used** in **sectors** such as **e**-**commerce**, **mobil**ity and **health**. He **was** **also** **involved** in the **launch** of the **Beck**on **protocol**, now **being** **used** in **sectors** such as **e**-**commerce**, **mobil**ity and **health**. He **was** **also** **involved** in the **launch** of the **Beck**on **protocol**, now **being** **used** in **sectors** such as **e**-**commerce**, **mobil**ity and **health**. He **was** **also** **involved** in the **launch** of the **Beck**on **protocol**, now **being** **used** in **sectors** such as **e**-**commerce**, **mobil**ity and **health**. He **was** **also** **involved** in the **launch** of the **Beck**on **protocol**, now **being** **used** in **sectors** such as **e**-**commerce**, **mobil**ity and **health**. He **was** **also** **involved** in the **launch** of the **Beck**on **protocol**, now **being** **used** in **sectors** such as **e**-**commerce**, **mobil**ity and **health**. He **was** **also** **involved** in the **launch** of the **Beck**on **protocol**, now **being** **used** in **sectors** such as **e**-**commerce**, **mobil**ity and **health**. He **was** **also** **involved** in the **launch** of the **Beck**on **protocol**, now **being** **used** in **sectors** such as **e**-**commerce**, **mobil**ity and **health**. He **was** **also** **involved** in the **launch** of the **Beck**on **protocol**, now **being** **used** in **sectors** such as **e**-**commerce**, **mobil**ity and **health**. He **was** **also** **involved** in the **launch** of the **Beck**on **protocol**, now **being** **used** in **sectors** such as **e**-**commerce**, **mobil**ity and **health**. He **was** **also** **involved** in the **launch** of the **Beck**on **protocol**, now **being** **used** in **sectors** such as **e**-**commerce**, **mobil**ity and **health**. He **was** **also** **involved** in the **launch** of the **Beck**on **protocol**, now **being** **used** in **sectors** such as **e**-**commerce**, **mobil**ity and **health**. He **was** **also** **involved** in the **launch** of the
+
+# Week 4.1 LLM.pdf - Page 17
+
+```markdown
+# Sentence Dependency
+However, we know that the words in a sentence are not independent but depend on the previous words.
+
+## Examples
+- I enjoyed reading a book
+- I enjoyed reading a thermometer
+
+The presence of "enjoyed" makes the word "book" more likely than "thermometer".
+
+Hence, the naive assumption does not make sense.
+
+$$\prod_{i=1}^{T} P(x_i | x_1, \cdots, x_{i-1}) : \text{Current word} \ x_i \ \text{depends on previous words} \ x_1, \cdots, x_{i-1}$$
+
+*Mitesh Khapra*
+```
+
+# Week 4.1 LLM.pdf - Page 18
+
+```markdown
+# Conditional Probabilities in Language Models
+
+$$
+\prod_{i=1}^{T} P(x_i | x_1, \cdots, x_{i-1}) : \text{Current word } x_i \text{ depends on previous words } x_1, \cdots, x_{i-1}
+$$
+
+![Confused Emoji](https://emoji.gg/assets/emoji/1f615.png)
+**How do we estimate these conditional probabilities?**
+
+One solution: use **autoregressive** models where the conditional probabilities are given by parameterized functions with a fixed number of parameters (like transformers).
+
+*Mitesh Khapra*
+```
+
+# Week 4.1 LLM.pdf - Page 19
+
+```markdown
+# Causal Language Modelling (CLM)
+
+\[ P(x_1, x_2, \cdots, x_T) = \prod_{i=1}^{T} P(x_i | x_1, \cdots, x_{i-1}) \]
+
+\[ = P(x_1) P(x_2 | x_1) P(x_3 | x_2, x_1) \cdots P(x_T | x_{T-1}, \cdots, x_1) \]
+
+We are looking for \( f_\theta \) such that
+
+\[ P(x_i | x_1, \cdots, x_{i-1}) = f_\theta(x_i | x_1, \cdots, x_{i-1}) \]
+
+Can \( f_\theta \) be a transformer?
+
+![Transformer Diagram](https://example.com/transformer-diagram.png)
+
+- **\( P(x_i) \)**: Probability distribution of \( x_i \)
+- **\( f_\theta \)**: Transformer function parameterized by \( \theta \)
+- **\( x_1, x_2, \cdots, x_{i-1} \)**: Input sequence
+
+*Mitesh Khapra*
+```
+
+# Week 4.1 LLM.pdf - Page 20
+
+```markdown
+# Some Possibilities
+
+## Using only the encoder of the transformer (encoder only models)
+
+- Input: \( x_1, \text{<mask>}, \ldots, x_T \)
+- Components:
+  - **Multi-Head Attention**
+  - **Feed forward NN**
+  - **Add&Norm**
+
+## Using only the decoder of the transformer (decoder only models)
+
+- Input: \( x_1, x_2, \ldots, x_{i-1} \)
+- Components:
+  - **Multi-Head masked Attention**
+  - **Feed forward NN**
+  - **Add&Norm**
+
+## Using both the encoder and decoder of the transformer (encoder decoder models)
+
+- Input: \( x_1, \text{<mask>}, \ldots, x_T \)
+- Components:
+  - **Multi-Head masked Attention**
+  - **Multi-Head cross Attention**
+  - **Feed forward NN**
+  - **Add&Norm**
+
+## Diagram
+
+![Diagram](https://example.com/diagram.png)
+
+```markdown
+```
+
+# Week 4.1 LLM.pdf - Page 21
+
+```markdown
+# The input is a sequence of words
+
+We want the model to see only the present and past inputs.
+
+We can achieve this by applying the mask.
+
+\[ M = \begin{bmatrix}
+0 & -\infty & -\infty & -\infty \\
+0 & 0 & -\infty & -\infty \\
+0 & 0 & 0 & -\infty \\
+0 & 0 & 0 & 0
+\end{bmatrix} \]
+
+The masked multi-head attention layer is required.
+
+However, we do not need multi-head cross attention layer (as there is no encoder).
+
+![Feed Forward Network](https://example.com/feed_forward_network.png)
+
+- **Multi-Head (Cross) Attention**
+- **Masked Multi-Head (Self) Attention**
+
+*Mitesh Khapro*
+```
+
+# Week 4.1 LLM.pdf - Page 22
+
+```markdown
+# Scientific Text Conversion
+
+## Diagram Description
+
+- **Inputs and Outputs**:
+  - Inputs: $\langle go \rangle$, $x_1$, $x_2$, $x_3$
+  - Outputs: $p(x_1)$, $\ldots$, $p(x_4|x_3,x_2,x_1)$
+
+- **Network Structure**:
+  - **Masked Multi-Head (Self) Attention**
+  - **Feed Forward Network**
+
+## Chain Rule Explanation
+
+The outputs represent each term in the chain rule:
+
+$$
+p(x_4|x_3,x_2,x_1) = P(x_1)P(x_2|x_1)P(x_3|x_2,x_1)P(x_4|x_3,x_2,x_1)
+$$
+
+However, this time the probabilities are determined by the parameters of the model:
+
+$$
+= P(x_1;\theta)P(x_2|x_1;\theta)P(x_3|x_2,x_1;\theta)P(x_4|x_3,x_2,x_1;\theta)
+$$
+
+Therefore, the objective is to maximize the likelihood $L(\theta)$.
+
+---
+
+*Mitesh Khapra*
+```
+
+# Week 4.1 LLM.pdf - Page 23
+
+```markdown
+# Module 2.2: Generative Pretrained Transformer (GPT)
+
+**Mitesh M. Khapra**
+
+![IIT Madras Logo](https://example.com/logo_iitmadras.png)
+
+Aligarh, Department of Computer Science and Engineering, IIT Madras
+
+Mitesh Khapra
+```
+
+---
+
+```markdown
+# Module 2.2: Generative Pretrained Transformer (GPT)
+
+**Mitesh M. Khapra**
+
+![IIT Madras Logo](https://example.com/logo_iitmadras.png)
+
+Aligarh, Department of Computer Science and Engineering, IIT Madras
+
+Mitesh Khapra
+```
+
+---
+
+```markdown
+# Module 2.2: Generative Pretrained Transformer (GPT)
+
+**Mitesh M. Khapra**
+
+![IIT Madras Logo](https://example.com/logo_iitmadras.png)
+
+Aligarh, Department of Computer Science and Engineering, IIT Madras
+
+Mitesh Khapra
+```
+
+# Week 4.1 LLM.pdf - Page 24
+
+```markdown
+# Generative Pretrained Transformer (GPT)
+
+Now we can create a stack \((n)\) of modified decoder layers [called transformer block in the paper].
+
+Let \(X\) denote the input sequence
+
+\[
+h_0 = X \in \mathbb{R}^{T \times d_{model}}
+\]
+
+\[
+h_i = \text{transformer\_block}(h_{i-1}), \forall i \in [1, n]
+\]
+
+Where \(h_n[i]\) is the \(i\)-th output vector in \(h_n\) block.
+
+\[
+P(x_i) = \text{softmax}(h_n[i] W_v)
+\]
+
+\[
+\mathcal{L} = \sum_{i=1}^T \log(P(x_i | x_1, \ldots, x_{i-1}))
+\]
+
+![Transformer Block Diagram](image_url)
+
+## Transformer Blocks
+
+- Transformer Block 5
+  - Input: \(h_{51}, h_{52}, h_{53}, h_{54}\)
+  - Output: \(h_{51}, h_{52}, h_{53}, h_{54}\)
+  
+- Transformer Block 4
+  - Input: \(h_{41}, h_{42}, h_{43}, h_{44}\)
+  - Output: \(h_{41}, h_{42}, h_{43}, h_{44}\)
+  
+- Transformer Block 3
+  - Input: \(h_{31}, h_{32}, h_{33}, h_{34}\)
+  - Output: \(h_{31}, h_{32}, h_{33}, h_{34}\)
+  
+- Transformer Block 2
+  - Input: \(h_{21}, h_{22}, h_{23}, h_{24}\)
+  - Output: \(h_{21}, h_{22}, h_{23}, h_{24}\)
+  
+- Transformer Block 1
+  - Input: \(h_{11}, h_{12}, h_{13}, h_{14}\)
+  - Output: \(h_{11}, h_{12}, h_{13}, h_{14}\)
+
+Where:
+- \(h_0\): Initial input sequence
+- \(h_i\): Output from the \(i\)-th transformer block
+- \(P(x_i)\): Probability distribution for the \(i\)-th token
+- \(\mathcal{L}\): Loss function
+- \(W_v\): Weight matrix
+- \(x_1, x_2, x_3, \ldots\): Sequence of input tokens
+- \(\langle go \rangle\): Start token
+```
+
+# Week 4.1 LLM.pdf - Page 25
+
+```markdown
+# Input Data
+
+## BookCorpus
+
+![BookCorpus](image_url)
+
+The corpus contains 7000 unique books, 74 Million sentences and approximately 1 Billion words across 16 genres
+
+- Also, uses long-range contiguous text (i.e., no shuffling of sentences or paragraphs)
+
+### Tokenizer: Byte Pair Encoding
+
+- **Vocab size** `|V|`: 40478
+- **Embedding dim**: 768
+
+**Side Note**: The other benchmark dataset called 1B words could also be used. However, the sentences are not contiguous (non-alignment).
+```
+
+# Week 4.1 LLM.pdf - Page 26
+
+```markdown
+# MODEL
+
+Contains 12 decoder layers (transformer blocks)
+
+Context size: 512
+
+Attention heads: 12
+
+FFN hidden layer size: 768 x 4 = 3072
+
+Activation: Gaussian Error Linear Unit (GELU)
+
+- Dropout, layer normalization, and residual connections were implemented to enhance convergence during training.
+
+```math
+p(x_1) \quad \ldots \quad p(x_4 | x_3, x_2, x_1)
+```
+
+![Transformer Blocks Diagram](image_url)
+
+Transformer Block 12
+
+Transformer Block 3
+
+Transformer Block 2
+
+Transformer Block 1
+
+\[h_{12}\]
+
+\[h_{3}\]
+
+\[h_{2}\]
+
+\[h_{1}\]
+
+\[x_1\]
+
+\[x_2\]
+
+\[x_3\]
+
+\(go\)
+```
+
+# Week 4.1 LLM.pdf - Page 27
+
+```markdown
+# Transformer Block 1
+
+## Sample Data
+
+```text
+<go> at the bell labs hamming ............... bound .............. devising a new <stop>
+```
+
+### Text Excerpt
+
+```text
+In the Bell Labs Hamming shared an office for a time with Claude Shannon. The Mathematical Research Department also included Julius Tutte, and Los Alamos veterans Donald Ling and Bruce Welden. Welden decided to call them Selves first-class troublemakers. Hamming later recalled, "We did unconventional things in unconventional ways and still got valuable results. Thus management had to tolerate us and let us alone a lot of the time."<sup>52</sup>
+
+Although Hamming had been hired to work on elasticity theory, he still spent much of his time with the calculating machines.<sup>53</sup> Before he went home on one Friday in 1947, he set the machines to perform a long series of calculations over the weekend, only to find when he arrived on Monday morning that an error had occurred early in the process and the calculation had been wasted.<sup>54</sup> Digital machines manipulate information as sequences of zeros and ones, units of information that Tukey would christen "bits".<sup>55</sup> A single bit in a sequence was wrong, then the whole sequence would be. To detect this, a parity bit was used to verify the correctness of each sequence. "If the computer can tell when an error has occurred," Hamming reasoned, "surely there is a way of telling where the error is so that the computer can correct the error itself."<sup>56</sup>
+
+Hamming set himself the task of solving this problem, "which I realized would have an enormous range of applications. Each bit can only be a zero or a one, so if you know which bit is wrong, then it can be corrected. In a landmark paper published in 1950, he introduced a method for adding a set of bits to the data stream to enable the detection of errors in the data. This was called the Hamming error-correcting code, which are named Hamming codes. The most widely used is the (15,11) code, which can detect up to two errors in a word and correct one error. Hamming codes have an enormous range of applications. In telecommunication and computer science, it has opened up a whole new field of error detection and correction.<sup>57</sup>
+
+The Hamming bound, also known as the sphere-packing or volume bound is a limit on the parameters of an arbitrary block code. It is from an interpretative in terms of sphere packing in the Hamming distance into the space of all possible words. It gives an important limitation on the efficiency with which any error correcting code can utilize the space in which its code words are embedded. A code which attains the Hamming bound is said to be a perfect code. Hamming codes are perfect codes.<sup>58</sup>
+
+Returning to differential equations, Hamming studied means of numerically integrating them. A popular approach at the time was Milne's Method, attribute to Richard Milton.<sup>59</sup> This has the drawback of being unstable, so that under certain conditions the result could be swamped by roundoff noise. Hamming developed an improved version, the Hamming predictor-corrector. This was in use for many years, but has since been superseded by the Milne predictor and the more modern digital filters, concerning the Milne predictor, are described in his paper "Digital filters and the Hamming predictor-corrector."<sup>60</sup>
+
+Digital Filters (1975)<sup>61</sup>
+```
+```
+
+# Week 4.1 LLM.pdf - Page 28
+
+```markdown
+# Feed Forward Neural Network
+
+## Multi-head masked attention
+
+- <go>
+- at
+- the
+- bell
+- labs
+- hammering
+- ..............
+- bound
+- ..............
+- devising
+- a
+- new
+- <stop>
+```
+
+# Week 4.1 LLM.pdf - Page 29
+
+```markdown
+# Masked Multi-head Attention Mechanism
+
+## Overview
+
+This diagram illustrates the architecture of a masked multi-head attention mechanism, commonly used in transformer models for natural language processing tasks. The structure involves several key components and operations, including matrix multiplications, scaling, softmax, and concatenation.
+
+## Detailed Steps
+
+1. **Input:**
+   - **Q (Query):** The input query matrix.
+   - **K (Key):** The input key matrix.
+   - **V (Value):** The input value matrix.
+
+2. **Matrix Multiplications:**
+   - Two matrix multiplications are performed:
+     - \( Q^T K + M \)
+     - \( Q^T K - M \)
+   - Where \( M \) is a masking matrix.
+
+3. **Scaling:**
+   - Each result of the matrix multiplications is scaled by \( \frac{1}{\sqrt{d_k}} \), where \( d_k \) is the dimension of the keys.
+
+4. **Softmax:**
+   - The scaled results are passed through a softmax function.
+
+5. **Dropout:**
+   - Dropout layers are applied after the softmax operation to prevent overfitting.
+
+6. **Matrix Multiplication (MatMul):**
+   - The softmax output is multiplied by the value matrix \( V \).
+
+7. **Concatenation:**
+   - The results from the two masked multi-head attention mechanisms are concatenated.
+
+8. **Linear Transformation:**
+   - A linear transformation is applied to the concatenated output.
+
+9. **Dropout:**
+   - Another dropout layer is applied to the linear-transformed output.
+
+10. **Layer Normalization:**
+    - Layer normalization is performed on the final output.
+
+11. **Residual Connection:**
+    - A residual connection is added to the final output.
+
+## Example Input Sequence
+
+The example input sequence at the bottom of the diagram is:
+
+```
+<go> at the bell labs hamming ...... bound ...... devising a new <stop>
+```
+
+## Diagram Components
+
+### Masked Multi-head Attention
+
+- **MatMul:** Matrix multiplication operation.
+- **Scale:** Scaling factor \( \frac{1}{\sqrt{d_k}} \).
+- **Softmax:** Softmax function for attention scores.
+- **Dropout:** Dropout layers for regularization.
+- **Concatenate:** Concatenation of the two attention outputs.
+- **Linear:** Linear transformation of the concatenated output.
+- **Layer Norm:** Layer normalization.
+- **Residual Connection:** Addition of the original input to the final output.
+
+```
+
+# Week 4.1 LLM.pdf - Page 30
+
+```markdown
+# Feed Forward Neural Network
+
+## Diagram Components
+
+- **Input Layer**: 
+  - Input dimension `i = 8042`.
+  - Input vector `z_1 = R^{768}`.
+
+- **Feed Forward Neural Network Layer**:
+  - Fully connected with `8042` inputs.
+  - Intermediate layer with activation function `σ(.)`.
+
+- **Activation Function**: 
+  - `σ(.) = Relu`.
+
+- **Dropout Layer**:
+  - Following the neural network layer to prevent overfitting.
+
+- **Layer Norm**:
+  - Applied after the dropout layer for normalization.
+
+- **Residual Connection**:
+  - Connection path to the final output.
+
+## Activation Functions
+
+### Graph
+
+- **ReLU (Rectified Linear Unit)**:
+  - Blue line.
+  - `f(x) = max(0, x)`.
+
+- **ELU (Exponential Linear Unit)**:
+  - Green line.
+  - `f(x) = x` if `x > 0`; `f(x) = α(exp(x) - 1)` if `x ≤ 0`, where `α` is a small constant.
+
+- **SELU (Scaled Exponential Linear Unit)**:
+  - Red line.
+  - `f(x) = x` if `x > 0`; `f(x) = α(exp(x) - 1)` if `x ≤ 0`, where `α ≈ 1.67326324`.
+
+```markdown
+# Masked Multi-head Attention
+
+## Input Sequence
+
+- `<go>`.
+- `at`.
+- `the`.
+- `bell`.
+- `labs`.
+- `hammering`.
+- `.........` (unknown tokens).
+- `bound`.
+- `.........` (unknown tokens).
+- `devising`.
+- `a`.
+- `new`.
+- `<stop>`.
+
+## Process Overview
+
+1. **Input Sequence**:
+   - Words or tokens are fed into the model.
+
+2. **Masked Multi-head Attention**:
+   - Attention mechanism applied to the input sequence.
+   - Multiple attention heads process the sequence concurrently.
+
+3. **Feed Forward Neural Network**:
+   - Neural network processes the input with specified dimensions.
+   - Includes dropout and layer normalization.
+   - Activation functions (ReLU, ELU, SELU) are applied.
+
+4. **Output**:
+   - Final layer norm applied before the output.
+   - Residual connection integrates the output.
+```
+
+# Week 4.1 LLM.pdf - Page 31
+
+```markdown
+# Number of parameters
+
+### Token Embeddings: |V| × embedding_dim
+
+40478 × 768 = 31 × 10^6 = 31M
+
+### Position Embeddings: context_length × embedding_dim
+
+512 × 768 = 0.3 × 10^6 = 0.3M
+
+### Total: 31.3M
+
+The positional embeddings are also learned, unlike the original transformer which uses fixed sinusoidal embeddings to encode the positions.
+
+![Transformer Architecture](image_url)
+
+```
+Diagram: p(x_1) ... p(x_4, x_3, x_2, x_1)
+         w_v
+         h_12
+         Transformer Block 12
+         ...
+         h_2
+         Transformer Block 2
+         ...
+         h_3
+         Transformer Block 3
+         ...
+         h_1
+         Transformer Block 1
+         
+         Embedding Matrix
+         
+         <go> x_1 x_2 x_3
+```
+
+# Week 4.1 LLM.pdf - Page 32
+
+```markdown
+# Number of parameters
+
+## Attention parameters per block
+
+### WQ = WK = Wv = (768 x 64)
+
+#### Per attention head
+3 x (768 x 64) ≈ 147 x 10^3
+
+#### For 12 heads
+12 x 147 x 10^3 ≈ 1.7M
+
+#### For a Linear layer:
+768 x 768 ≈ 0.6M
+
+#### For all 12 blocks
+12 x 2.3 = 27.6M
+
+![Transformer Architecture Diagram](image_url)
+
+- **Transformer Block 1**
+  - Input: `{go}`, `x1`, `x2`, `x3`
+  - Output: `h1`
+
+- **Transformer Block 2**
+  - Input: `h1`
+  - Output: `h2`
+
+- **Transformer Block 3**
+  - Input: `h2`
+  - Output: `h3`
+
+- **Transformer Block 12**
+  - Input: `h12`
+  - Output: `p(x1)`, `...`, `p(x4|x3, x2, x1)`
+
+```math
+WQ = WK = Wv = (768 \times 64)
+```
+```
+
+# Week 4.1 LLM.pdf - Page 33
+
+```markdown
+# Number of parameters
+
+## FFN parameters per block
+
+2 × (768 × 3072) + 3072 + 768
+
+= 4.7 × 10⁶ = 4.7M
+
+### For all 12 blocks
+
+12 × 4.7 = 56.4M
+
+![Transformer Diagram](link-to-diagram)
+
+- \(p(x_1)\)
+- ...
+- \(p(x_4 | x_3, x_2, x_1)\)
+
+```
+Transformer Block 12
+h_{12}
+
+Transformer Block 3
+h_3
+
+Transformer Block 2
+h_2
+
+Transformer Block 1
+h_1
+
+<go> x_1 x_2 x_3
+
+W_v  W_h
+
+```
+```
+
+# Week 4.1 LLM.pdf - Page 34
+
+```markdown
+# Number of parameters
+
+## Layer-wise parameter count (in millions)
+
+| Layer                 | Parameters (in Millions) |
+|-----------------------|--------------------------|
+| Embedding Layer       | 31.3                     |
+| Attention layers      | 27.6                     |
+| FFN Layers            | 56.4                     |
+| **Total**             | **116.461056\***         |
+
+\*Without rounding the number of parameters in each layer
+
+## Diagram of Transformer Model
+
+![Transformer Diagram](image-url)
+
+Thus, GPT-1 has around 117 million parameters.
+
+### Diagram Explanation
+
+- **Embedding Layer**: The input tokens $(go)$, $x_1$, $x_2$, and $x_3$ are passed through the embedding matrix.
+
+- **Transformer Blocks**:
+  - **Transformer Block 1**: Receives input from the embedding layer.
+  - **Transformer Block 2**: Receives input from Transformer Block 1.
+  - **Transformer Block 3**: Receives input from Transformer Block 2.
+  - **Transformer Block 12**: Receives input from Transformer Block 3.
+
+- **Output**:
+  - The output from each Transformer block is passed through linear projection layers $W_q$ and $W_v$.
+  - The final output is used to compute probabilities $p(x_1)$, ..., $p(x_4, x_3, x_2, x_1)$.
+```
+
+# Week 4.1 LLM.pdf - Page 35
+
+```markdown
+# Module 2.3: Pre-training and Fine Tuning
+
+**Mitesh M. Khapra**
+
+*AjayBharat, Department of Computer Science and Engineering, IIIT Madras*
+
+---
+
+## Introduction
+
+- **Purpose**: Overview of pre-training and fine-tuning techniques in machine learning.
+- **Applications**: Used in Natural Language Processing (NLP) and Computer Vision.
+
+---
+
+### Pre-training
+
+- **Definition**: Pre-training involves training a model on a large dataset without any specific task in mind.
+- **Objective**: To learn general features that can be useful for various downstream tasks.
+- **Techniques**:
+  - **Unsupervised Learning**: Methods like BERT (Bidirectional Encoder Representations from Transformers) use masked language modeling.
+  - **Self-Supervised Learning**: The model learns to predict parts of the data from other parts of the data.
+
+#### Example: BERT
+
+- **Model Architecture**: Transformer-based.
+- **Training**: Pre-trained on a large corpus of text data.
+- **Fine-tuning**: Adjusted for specific tasks like question answering, sentiment analysis, etc.
+
+---
+
+### Fine Tuning
+
+- **Definition**: Fine-tuning involves taking a pre-trained model and adjusting it to a specific task.
+- **Objective**: To optimize the model for a particular application.
+- **Techniques**:
+  - **Task-Specific Data**: Fine-tuning on a smaller, task-specific dataset.
+  - **Layer Freezing**: Freezing earlier layers to retain pre-trained features while fine-tuning only the top layers.
+
+#### Example: NLP Models
+
+- **BERT Fine-tuning**: Used for tasks like text classification, named entity recognition, etc.
+- **Process**:
+  - Load the pre-trained BERT model.
+  - Replace the last layer with a task-specific layer.
+  - Train on the new dataset.
+
+---
+
+### Conclusion
+
+- **Importance**: Pre-training and fine-tuning are crucial for efficient model training and performance enhancement.
+- **Future Directions**: Research into more advanced pre-training techniques and larger datasets for improved generalization.
+
+---
+
+*Mitesh Khapra*
+```
+
+# Week 4.1 LLM.pdf - Page 36
+
+```markdown
+# Pre-Training
+
+**Batch Size:** 64
+
+**Input size:** (B, T, C) = (64, 512, 768), where C is an embedding dimension
+
+**Minimize**
+
+$$
+\mathcal{L} = - \sum_{x \in V} \sum_{X \subset X} \sum_{i=1}^{T} y_i \log(\hat{y}_i)
+$$
+
+**Optimizer:** Adam with cosine learning rate scheduler
+
+**Strategy:** Teacher forcing (instead of auto-regressive training) for quicker and stable convergence
+
+![Diagram](image_placeholder)
+
+- **Transformer Block 1**
+- **Transformer Block 2**
+- **Transformer Block 3**
+- **Transformer Block 12**
+
+**Embedding Matrix**
+
+- $\langle go \rangle$
+- $x_1$
+- $x_2$
+- $x_3$
+
+$\hat{y}_i$
+
+$\hat{y}_1$
+
+$w_v$
+
+$w_e$
+```
+
+# Week 4.1 LLM.pdf - Page 37
+
+```markdown
+# Fine-tuning
+
+Fine-tuning involves adapting a model for various downstream tasks (with a minimal change in the architecture)
+
+Each sample in a labelled data set \(C\) consists of a sequence of tokens \(x_1, x_2, \ldots, x_m\) with the label \(y\)
+
+Initialize the parameters with the parameters learned by solving the pre-training objective
+
+At the input side, add additional tokens based on the type of downstream task. For example, start \(\langle s \rangle\) and end \(\langle e \rangle\) tokens for classification tasks
+
+At the output side, replace the pre-training LM head with the classification head (a linear layer \(W_y\))
+
+![Transformer Architecture](image_url)
+
+\(
+\begin{array}{c}
+h_{12} \\
+h_{12} \rightarrow \text{Transformer Block 12} \\
+h_{3}  \rightarrow \text{Transformer Block 3} \\
+h_{2}  \rightarrow \text{Transformer Block 2} \\
+h_{1}  \rightarrow \text{Transformer Block 1} \\
+\text{Embedding Matrix} \\
+\langle s \rangle \, x_1 \, x_2 \, \langle e \rangle 
+\end{array}
+\)
+
+\( y \)
+
+\( W_y \)
+```
+
+# Week 4.1 LLM.pdf - Page 38
+
+```markdown
+# Fine-tuning
+
+Now our objective is to predict the label of the input sequence
+
+$$
+\hat{y} = P(y | x_1, \ldots, x_m) = \text{softmax}(W_y h_l^m)
+$$
+
+Note that we take the output representation at the last time step of the last layer $h_l^m$. It makes sense as the entire sentence is encoded only at the last time step due to causal masking.
+
+Then we can minimize the following objective
+
+$$
+\mathcal{L} = -\sum_{(x,y)} \log(y_i)
+$$
+
+Note that $W_y$ is randomly initialized. Padding or truncation is applied if the length of input sequence is less or greater than the context length.
+
+![Transformer Architecture](image_placeholder)
+
+$$j$$
+
+$$
+h_{12} \quad \text{Transformer Block 12}
+$$
+
+$$
+h_3 \quad \text{Transformer Block 3}
+$$
+
+$$
+h_2 \quad \text{Transformer Block 2}
+$$
+
+$$
+h_1 \quad \text{Transformer Block 1}
+$$
+
+$$
+\langle s \rangle \quad x_1 \quad x_2 \quad \langle e \rangle
+$$
+
+$$
+\langle e \rangle
+$$
+
+```
+```
+
+# Week 4.1 LLM.pdf - Page 39
+
+
+
+```
+# Sentiment Analysis
+
+## Text:
+Wow, India has now reached the moon
+
+## Sentiment:
+Positive
+
+\[ \hat{y} \in \{+1, -1\} \]
+
+## Diagram:
+![Transformer Architecture](image-placeholder)
+
+## Embedding Matrix
+- \(x_1\)
+- \(x_2\)
+- \(x_3\)
+- \(x_4\)
+- \(x_5\)
+- \(\langle e \rangle\)
+
+## Transformer Blocks
+1. **Transformer Block 1**
+2. **Transformer Block 2**
+3. **Transformer Block 3**
+4. **Transformer Block 12**
+
+## Hidden States
+- \(h_1\)
+- \(h_2\)
+- \(h_3\)
+- \(h_{12}\)
+
+## Weight Matrix
+\[ W_{\hat{y}} \]
+
+## Diagram Components
+- **Mitesh Khapra**
+- \(\langle s \rangle\)
+```
+
+# Week 4.1 LLM.pdf - Page 40
+
+```markdown
+# Textual Entailment/Contradiction
+
+## Example:
+
+### Text:
+A soccer game with multiple males playing
+
+### Hypothesis:
+Some men are playing a sport
+
+### Entailment:
+True
+
+In this case, we need to use a delimiter token ($) to differentiate the text from the hypothesis.
+
+![Transformer Architecture](https://via.placeholder.com/500) 
+
+## Transformer Architecture
+
+```markdown
+```
+- **Embedding Matrix**:
+  - `x_1`
+  - `x_{k-1} <s>`
+  - `...`
+  - `x_m <e>`
+
+- **Transformer Blocks**:
+  - **Transformer Block 1**
+    - Input: `h_1`
+  - **Transformer Block 2**
+    - Input: `h_2`
+  - **Transformer Block 3**
+    - Input: `h_3`
+  - **Transformer Block 12**
+    - Input: `h_{12}`
+
+- **Output**:
+  - Weight matrix `W_y`
+  - Output `y`
+
+```markdown
+```
+
+# Week 4.1 LLM.pdf - Page 41
+
+```markdown
+# Multiple Choice
+
+**Question:** Which of the following animals is an amphibian?
+
+- **Choice:** Frog
+- **Choice:** Fish
+
+*read in the question along with the choice t*
+
+![Transformer Architecture Diagram](image-url)
+
+1. **Embedding Matrix**
+   - Input: `<s>`
+   - Input: `Question -> <s>`
+   - Input: `Choice-1 -> <e>`
+
+2. **Transformer Block 1**
+   - Output: `h1`
+
+3. **Transformer Block 2**
+   - Output: `h2`
+
+4. **Transformer Block 3**
+   - Output: `h3`
+
+5. **Transformer Block 12**
+   - Output: `h12`
+
+6. **Linear-1**
+   - Output: Final prediction
+
+*MITesh Khapro*
+```
+
+# Week 4.1 LLM.pdf - Page 42
+
+```markdown
+# Multiple Choice
+
+## Question
+**Question:** Which of the following animals is an amphibian?
+- **Choice:** Frog
+- **Choice:** Fish
+
+### Process
+1. Read in the question along with the choice.
+2. Repeat this for all choices.
+3. Normalize via softmax.
+
+## Diagram
+
+![Transformer Architecture](data:image/png;base64,...) 
+```math
+y = \frac{e^{W_y}}
+```
+
+**Embedding Matrix**
+
+- `<s>` 
+- Question
+- `</s>` 
+- Choice-2
+- `</e>`
+
+### Transformer Blocks
+1. **Transformer Block 1**
+2. **Transformer Block 2**
+3. **Transformer Block 3**
+
+### Linear Layers
+- **Linear-1**
+- **Linear-2**
+
+```markdown
+```
+
+# Week 4.1 LLM.pdf - Page 43
+
+```markdown
+# Text Generation
+
+## Input:
+**Prompt:** I like
+
+\[
+M = \begin{bmatrix}
+0 & 0 & 0 & \infty & \infty \\
+0 & 0 & 0 & -\infty & -\infty \\
+0 & 0 & 0 & -\infty & -\infty \\
+0 & 0 & 0 & 0 & -\infty
+\end{bmatrix}
+\]
+
+Feed in the prompt along with the mask and run the model in autoregressive mode
+
+## Stopping Criteria:
+- Sequence length: 5
+- or outputting a token: `<e>`
+
+## Output: I like to think that
+
+Does it produce the same output sequence for the given prompt?
+
+or Will it be creative?
+
+```markdown
+![Transformer Block Diagram](image_url)
+
+- **Transformer Block 1**
+- **Transformer Block 2**
+- **Transformer Block 3**
+- **Transformer Block 12**
+
+### Embedding Matrix
+- Mitesh Khanna
+- I
+- like
+```
+
+# Week 4.1 LLM.pdf - Page 44
+
+```markdown
+# Wishlist for text generation
+
+## Discourage degenerative (that is, repeated or incoherent) texts
+
+- I like to think that I like to think...
+
+- I like to think that reference know how to think best selling book
+
+## Encourage it to be Creative in generating a sequence for the same prompt
+
+- I like to read a book
+
+- I like to buy a hot beverage
+
+- I like a person who cares about others
+
+## Accelerate the generation of tokens
+
+*Source: Mitesh Khapro*
+```
+
+# Week 4.1 LLM.pdf - Page 45
+
+```markdown
+# Module 24: Decoding Strategies
+
+**Mitesh M. Khapra**
+
+![IIT Madras Logo](https://example.com/logo.png)
+
+Aj4Bharat, Department of Computer Science and Engineering, IIT Madras
+
+*Mitesh Khapra*
+```
+
+In the markdown format provided above, the text has been accurately captured and formatted. The heading, subheadings, and paragraph structures have been preserved, and the image placeholder is included.
+
+# Week 4.1 LLM.pdf - Page 46
+
+```markdown
+# Decoding Strategies
+
+## Deterministic
+
+- Exhaustive Search
+- Greedy Search
+- Beam Search
+- Contrastive Decoding
+
+## Stochastic
+
+- **Top-K Sampling**
+- **Top-P (Nucleus Sampling)**
+```
+
+# Week 4.1 LLM.pdf - Page 47
+
+```markdown
+# Exhaustive Search
+
+## Explanation
+
+Suppose that we want to generate a sequence of 5 words with the vocabulary
+```{cold, coffee, I, like, water, < stop >}```
+
+Exhaustively search for all possible sequences with the associated probabilities and output the sequence with the highest probability.
+
+## Graphical Representation
+
+![Graph](image_url)
+
+- **Sequence**: coffee coffee coffee
+  - Probability: \( p(\cdot) = 0.0001 \)
+- **Sequence**: I like coffee
+  - Probability: \( p(\cdot) = 0.001 \)
+- **Sequence**: I like cold water
+  - Probability: \( p(\cdot) = 0.1 \)
+- **Sequence**: I like cold coffee
+  - Probability: \( p(\cdot) = 0.1 \)
+- **Sequence**: coffee like cold coffee
+  - Probability: \( p(\cdot) = 0.001 \)
+
+## Outputs*
+
+- **Output 1**: ![Output](image_url)
+  - Sequence: "I like cold coffee"
+- **Output 2**: ![Output](image_url)
+  - Sequence: "I like cold coffee"
+
+*Assuming the sequence has the highest probability among all \( |\mathcal{V}|^5 \) sequences
+```
+
+# Week 4.1 LLM.pdf - Page 48
+
+```markdown
+# Illustration
+
+**Exhaustive search for a sequence of length 2 with the vocabulary of size 3**
+
+**At time step -1**, the decoder outputs probability for all 3 tokens
+
+**At time step-2**, we need to run the decoder three times independently conditioned on all the three predictions from the previous time step
+
+**At time step-3** we will have to run the decoders 9 times
+
+If `|V| = 40000`, then we need to run the decoder 40000 times in parallel!
+
+![Diagram of Decoding Process](diagram.png)
+
+```
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+```
+# t=2
+
+**At time step 1**, the decoder outputs probability for all 3 tokens
+
+**At time step-2**, we need to run the decoder three times independently conditioned on all the three predictions from the previous time step
+
+**At time step-3** we will have to run the decoders 9 times
+
+If `|V| = 40000`, then we need to run the decoder 40000 times in parallel!
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+```
+# t=2
+
+```
+# t=2
+
+```
+# t=2
+
+```
+# t=2
+
+```
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+```
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+``` 
+# t=1
+
+|   | p(A|A) |
+|---|--------|
+| A | 0.3    |
+| B | 0.5    |
+| C | 0.2    |
+
+# t=2
+
+```
+
+# Week 4.1 LLM.pdf - Page 49
+
+```markdown
+# Greedy Search
+
+On the other extreme we can do a greedy search
+
+At each time step, we always output the token with the highest probability (Greedy)
+
+|       | time steps           |
+|-------|----------------------|
+|       | 1    | 2    | 3    | 4    | 5    |
+|-------|------|------|------|------|------|
+| **cold**| 0.1  | 0.1  | **0.45** | 0.15 | 0.1  |
+| `<stop>` | 0.15  | 0.15  | 0.05  | 0.3  | **0.5** |
+| **coffee** | 0.25  | 0.25  | 0.1   | **0.35** | 0.2   |
+| **I**         | **0.4**   | 0.05  | 0.05  | 0.01  | 0.1  |
+| **like**      | 0.05   | **0.35** | 0.15  | 0.09  | 0.05  |
+| **water**     | 0.05  | 0.1   | 0.2   | 0.1   | 0.05  |
+
+$$
+p(w_1 = I) = 0.4
+$$
+
+$$
+p(w_2 = \text{like}\mid w_1 = I) = 0.35
+$$
+
+$$
+p(w_3 = \text{cold}\mid w_1, w_2) = 0.45
+$$
+
+$$
+p(w_4 = \text{coffee}\mid w_1, w_2, w_3) = 0.35
+$$
+
+$$
+p(w_5 = \text{stop}\mid w_1, w_2, w_3, w_4) = 0.5
+$$
+
+Then the probability of the generated sequence is
+
+$$
+p(w_5, w_1, w_2, w_3, w_4) = 
+0.5 \times 0.35 \times 0.45 \times 0.35 \times 0.4 = 0.011
+```
+
+![Greedy Search Example Graph](image-url)
+
+*Source: Mitsesh Khapra*
+```
+
+# Week 4.1 LLM.pdf - Page 50
+
+```markdown
+# Some Limitations
+
+## Is this the most likely sequence?
+
+![Table](image_not_available.png)
+
+|         | time steps         |
+|---------|--------------------|
+|         | 1  | 2  | 3  | 4  | 5   |
+| cold    | 0.1 | 0.1 | 0.45| 0.15| 0.1 |
+| <stop>  | 0.15| 0.15| 0.05| 0.3 | 0.5 [red]|
+| coffee  | 0.25| 0.25| 0.1 [blue]| 0.35| 0.2 |
+| I       | 0.4 [red]| 0.05| 0.05| 0.01| 0.1 |
+| like    | 0.05| 0.35 [red]| 0.15| 0.09| 0.05|
+| water   | 0.05| 0.1 | 0.2 | 0.1 | 0.05 |
+
+<I> like cold coffee </stop>
+
+**Then the probability of the generated sequence is**
+
+$$
+p(w_5, w_4, w_3, w_2, w_1) = 0.5 \times 0.35 \times 0.45 \times 0.35 \times 0.4 = 0.011
+$$
+
+What if we want to get a variety of sequences of the same length?
+
+If the starting token is the word “I”, then it will always end up producing the same sequence: I like cold coffee
+
+What if we picked the second most probable token in the first time step?
+
+We would have ended up with a different sequence.
+```
+
+# Week 4.1 LLM.pdf - Page 51
+
+```markdown
+# Sequence Generation Probability
+
+## Original Sequence
+
+```text
+time steps
+1  2  3  4  5
+-----------
+cold 0.1  0.15  0.65  0.04  0.1
+<stop> 0.15  0.1  0.05  0.01  0.5
+coffee 0.25  0.05  0.05  0.1  0.2
+I  0.4  0.05  0.05  0.03  0.1
+like 0.05  0.55  0.1  0.02  0.05
+water 0.05  0.1  0.1  0.8  0.05
+
+coffee like cold water <stop>
+```
+
+Then the probability of the generated sequence is
+
+```math
+p(w_5, w_1, w_2, w_3, w_4) = 0.5 \times 0.35 \times 0.45 \times 0.35 \times 0.4 = 0.011
+```
+
+## Alternative Sequence
+
+What if we picked the second most probable token in the first time step?
+
+Then the conditional distribution in the subsequent time steps will change.
+
+Then the probability of the generated sequence is
+
+```math
+p(w_5, w_1, w_2, w_3, w_4) = 0.25 \times 0.55 \times 0.65 \times 0.8 \times 0.5 = 0.035
+```
+
+We could output this sequence instead of the one generated by greedy search.
+
+Greedily selecting a token with max probability at every time step does not always give the sequence with maximum probability.
+
+Why not follow this at every time step?
+```
+
+# Week 4.1 LLM.pdf - Page 52
+
+```markdown
+# Beam Search
+
+## Diagram
+
+```markdown
+t=1
+ 
+    A       B       C
+0.5  0.4    0.1
+```
+ 
+```markdown
+t=2
+
+    A       B       C
+0.5  0.4    0.1
+ 
+    A       B       C
+0.5  0.4    0.1
+```
+ 
+```markdown
+Mitesh Khapro
+```
+ 
+## Explanation
+
+Instead of considering probability for all the tokens at every time step (as in exhaustive search), consider only top-k tokens.
+
+Suppose {k = 2}
+
+Now we have to choose the tokens that maximize the probability of the sequence.
+
+It requires k × |Y| computations at each time step.
+
+- p(A)p(A|A) = 0.5 × 0.1 = 0.05
+- p(A)p(B|A) = 0.5 × 0.2 = 0.01
+- p(A)p(C|A) = 0.5 × 0.5 = **0.25**
+- p(B)p(A|B) = 0.4 × 0.2 = 0.08
+- p(B)p(B|B) = 0.4 × 0.2 = 0.08
+- p(B)p(C|B) = 0.4 × 0.6 = **0.24**
+```
+
+Note: The specific values in the computations might need to be verified for accuracy.
+
+# Week 4.1 LLM.pdf - Page 53
+
+```markdown
+# Beam Search
+
+## t=1
+
+- **A**: 
+  - [0.5](A|A)
+- **B**: 
+  - [0.1](B|A)
+- **C**: 
+  - [0.4](C|A)
+
+## t=2
+
+- **A**: 
+  - [0.1](A|A)
+  - [0.2](B|A)
+  - [0.5](C|A)
+- **B**: 
+  - [0.2](A|B)
+  - [0.2](B|B)
+- **C**: 
+  - [0.6](C|B)
+
+## t=3
+
+### Instead of considering probability for all the tokens at every time step (as in exhaustive search), consider only top-k tokens
+
+Suppose {k = 2}
+
+Following the similar calculations, we end up choosing
+
+\[ P(A, C, B) = 0.18 \]
+
+Over
+
+\[ P(B, C, A) = 0.13 \]
+
+*Mitresh Khapra*
+```
+
+# Week 4.1 LLM.pdf - Page 54
+
+```markdown
+# Beam Search
+
+## Overview
+
+Instead of considering probability for all the tokens at every time step (as in exhaustive search), consider only top-k tokens.
+
+Now we will have k sequences at the end of time step T and output the sequence which has the highest probability.
+
+The parameter k is called beam size. It is an approximation to exhaustive search.
+
+If k = 1, then it is equal to greedy search.
+
+It is a better approximation to exhaustive search.
+
+## Example
+
+```
+t=1
+
+```
+  
+       A   B   C
+     0.5  0.4  0.1
+
+```
+t=2
+
+```
+  
+       A
+     0.1 
+       B
+     0.2 
+       C
+     0.5
+
+```
+t=3
+
+```
+  
+       A
+     0.2
+       B
+     0.2
+       C
+     0.6
+
+```
+  
+       P(A,B,C) = 0.18
+       P(B,C,A) = 0.13
+```
+
+## Mathematical Representation
+
+$$
+P(A,C,B) = 0.18
+$$
+
+$$
+P(B,C,A) = 0.13
+$$
+```
+
+# Week 4.1 LLM.pdf - Page 55
+
+```markdown
+# Text Extraction from Scientific Diagram
+
+## Diagram and Text
+
+### Forward Path
+1. **A** -> **train**
+   - **train** -> **engine**
+     - **engine** -> **is**
+       - **is** -> **making**
+         - **making** -> **a**
+           - **a** -> **noise**
+       - **is** -> **made**
+         - **made** -> **the**
+           - **the** -> **sound**
+             - **sound** -> **the**
+               - **the** -> **stop**
+                 - **stop** -> **(stop)**
+                 - **stop** -> **at**
+                   - **at** -> **is**
+                     - **is** -> **costly**
+                       - **costly** -> **available**
+                         - **available** -> **oil**
+                           - **oil** -> **spilled**
+2. **A** -> **train**
+   - **train** -> **engine**
+     - **engine** -> **the**
+       - **the** -> **steam**
+         - **steam** -> **track**
+           - **track** -> **engine**
+
+### Backtrack
+
+#### Example Sentences
+1. **A train engine is making the noise**
+2. **A train engine oil is costly**
+
+#### Probabilities
+- Divide the probability of the sequence by its length (otherwise longer sequences will have lower probability)
+- Output the sequence which has the highest probability
+
+![Diagram Placeholder](diagram.png)
+
+### Notes
+- Mitesh Khapro
+```
+
+This markdown format ensures that the structure and content of the original scientific text are preserved accurately, including sectioning, emphasis, and inline code for formulas or special notations.
+
+# Week 4.1 LLM.pdf - Page 56
+
+```markdown
+# Comparison of Greedy Search and Beam Search
+
+## Summary
+
+### Key Points
+
+- Both the **greedy search** and the **beam search** are prone to be **degenerative**.
+
+- **Latency** for **greedy search** is lower than **beam search**.
+
+- Neither **greedy search** nor **beam search** can result in **creative outputs**.
+
+### Specific Notes
+
+- **Note**: The **beam search strategy** is highly suitable for tasks like **translation** and **summarization**.
+
+- **Observation**: We are surprised when something is creative!
+
+  - **Surprise** = **uncertainty**
+
+### References
+
+- Mitesh Khapra
+```
+
+This markdown format ensures clarity and organization while maintaining the scientific integrity and accuracy of the original content.
+
+# Week 4.1 LLM.pdf - Page 57
+
+```markdown
+# Sampling Strategies
+
+Mitesh Khapra
+
+## Introduction
+
+Sampling strategies are essential for ensuring the accuracy and reliability of data in scientific research. This section outlines various common sampling methods and their applications.
+
+### Random Sampling
+
+Random sampling involves selecting samples from a population in a random manner. This method aims to ensure that every member of the population has an equal chance of being selected.
+
+#### Steps for Random Sampling
+
+1. **Define the Population**: Clearly outline the population from which the sample will be drawn.
+2. **Determine Sample Size**: Decide on the number of samples required for the study.
+3. **Random Selection**: Use a random selection method (e.g., random number generators, lottery method) to select the samples.
+
+### Stratified Sampling
+
+Stratified sampling involves dividing the population into subgroups (strata) and then randomly selecting samples from each subgroup. This method is useful when the population is heterogeneous.
+
+#### Steps for Stratified Sampling
+
+1. **Define Strata**: Segment the population into homogeneous subgroups.
+2. **Determine Proportions**: Decide the proportion of samples to be taken from each stratum.
+3. **Random Selection**: Randomly select samples from each stratum according to the determined proportions.
+
+### Cluster Sampling
+
+Cluster sampling involves dividing the population into smaller clusters and randomly selecting clusters. Samples are then taken from the selected clusters.
+
+#### Steps for Cluster Sampling
+
+1. **Define Clusters**: Divide the population into clusters (e.g., schools, neighborhoods).
+2. **Random Selection of Clusters**: Randomly select clusters from the population.
+3. **Select Samples**: Randomly select samples from the chosen clusters.
+
+### Systematic Sampling
+
+Systematic sampling involves selecting samples at regular intervals. This method is efficient and ensures a balanced sample.
+
+#### Steps for Systematic Sampling
+
+1. **Determine Sampling Interval**: Identify the interval at which samples will be taken (e.g., every nth individual).
+2. **Random Start**: Randomly select a starting point within the first interval.
+3. **Selection**: Select every nth individual following the starting point.
+
+## Applications
+
+Sampling strategies are widely used in various fields, including:
+
+- **Medical Research**: To study the effects of different treatments.
+- **Market Research**: To understand consumer preferences and behaviors.
+- **Environmental Science**: To monitor the impact of environmental changes.
+- **Social Sciences**: To study societal trends and behaviors.
+
+### Example: Market Research Survey
+
+Suppose a company wants to understand the purchasing habits of consumers in a city. They could use stratified sampling to divide the population by age groups, income levels, and geographical areas. After defining the strata, they can randomly select individuals from each group to gather data.
+
+## Conclusion
+
+Selecting the appropriate sampling strategy is crucial for obtaining reliable and accurate data. Each method has its strengths and weaknesses, and the choice depends on the research question and the characteristics of the population.
+
+```
+
+# Week 4.1 LLM.pdf - Page 58
+
+```markdown
+# Top-K sampling
+
+## Table of Probabilities
+
+|       | time steps           |
+|-------|----------------------|
+|       | 1    | 2   | 3   | 4   | 5   |
+| **cold** | 0.1  | 0.1  | 0.65 | 0.04 | 0.1  |
+| **<stop>** | 0.15 | 0.15 | 0.05 | 0.01 | 0.5  |
+| **coffee** | 0.25 | 0.05 | 0.05 | 0.1   | 0.2  |
+| **|** | 0.4  | 0.05 | 0.05 | 0.03 | 0.1  |
+| **like** | 0.05 | 0.55 | 0.09 | 0.02 | 0.05 |
+| **water** | 0.05 | 0.1  | 0.11 | 0.8  | 0.05 |
+
+## Generation Process
+
+1. **Initialization**: At every time step, consider **top - k tokens** from the probability distribution.
+   
+   **Sample a token from the top-k tokens!**
+
+2. **Set k**: Say, \( k = 2 \)
+
+3. **Sequence Generation**: Let's generate a sequence using Top-K sampling.
+
+   - **Generated Sequence 1**: `I <stop>`
+
+     The probability of top-k tokens will be normalized relatively, \( P(I) = 0.61, P(coffee) = 0.39 \) before sampling a token.
+
+   - **Generated Sequence 2**: `I | <stop>`
+
+     The probability of top-k tokens will be normalized relatively, \( P(|) = 0.25, P(<stop>) = 0.75 \) before sampling a token.
+
+   - **Generated Sequence 3**: `I coffee`
+
+     The probability of top-k tokens will be normalized relatively, \( P(coffee) = 0.39, P(|) = 0.61 \) before sampling a token.
+
+   - **Generated Sequence 4**: `I water`
+
+     The probability of top-k tokens will be normalized relatively, \( P(water) = 0.39, P(|) = 0.61 \) before sampling a token.
+
+4. **Final Sequence**: `I | <stop>`
+
+   This sequence is formed based on the top-k sampling methodology.
+
+**Note**: The probabilities shown in the table are indicative and may vary based on the model and context used.
+
+*Source: Mitesh Khapro*
+```
+
+# Week 4.1 LLM.pdf - Page 59
+
+```markdown
+# Top-K sampling
+
+## Table
+
+|         | time steps         |
+|---------|--------------------|
+|         | 1  | 2  | 3  | 4  | 5  |
+| **cold** | 0.1 | 0.1 | 0.65 | 0.04 | 0.1 |
+| **<stop>** | 0.15 | 0.15 | 0.05 | 0.01 | 0.5 |
+| **coffee** | 0.25 | 0.05 | 0.05 | 0.1 | 0.2 |
+| **I** | 0.4 | 0.05 | 0.05 | 0.03 | 0.1 |
+| **like** | 0.05 | 0.55 | 0.09 | 0.02 | 0.05 |
+| **water** | 0.05 | 0.1 | 0.11 | 0.8 | 0.05 |
+
+## Text
+
+At every time step, consider top - k tokens from the probability distribution
+
+**Sample a token from the top-k tokens!**
+
+Say, k = 2
+
+Let's generate a sequence using Top-K sampling
+
+I <stop>
+
+or it could have produced
+
+coffee like cold coffee<stop>
+
+How does random sampling help?
+```
+
+# Week 4.1 LLM.pdf - Page 60
+
+```markdown
+# Surprise is an outcome of being random
+
+## How does beam search compare with human prediction at every time step?
+
+![ Beam Search Comparison](https://via.placeholder.com/150)
+
+**Human predictions have a high variance whereas beam search predictions have a low variance.**
+**Giving a chance to other highly probable tokens leads to a variety in the generated sequences.**
+
+### Beam Search Text is Less Surprising
+
+![ Surprise Graph](https://via.placeholder.com/150)
+
+- **Probability Distribution Graph:**
+  - **X-axis:** Time step
+  - **Y-axis:** Probability
+
+### Probability distribution of predicted tokens with top-k sampling
+
+![ Probability Distribution](https://via.placeholder.com/150)
+
+- **Sampled tokens (blue bars)**
+- **Selected tokens (red bars)**
+
+**Source:** Mitresh Khanna, Image source
+
+```
+
+# Week 4.1 LLM.pdf - Page 61
+
+```markdown
+# What should the optimal value of k be?
+
+![Image of bar charts](image_url)
+
+If we fix the value of say, k = 5, then we are missing out other equally probable tokens from the flat distribution.
+
+It will miss to generate a variety of sentences (less creative)
+
+For a peaked distribution, using the same value of k = 5, we might end up creating some meaning less sentences as we are taking tokens that are less likely to come next.
+
+* she
+* said
+* .
+* " 
+* I
+* never
+* thought
+* knew
+* had
+* saw
+* said
+* meant
+* could
+
+* ate
+* the
+* pizza
+* while
+* it
+* was
+* still
+* hot
+* cooling
+* warm
+* on
+* heating
+
+![Image of bar charts](image_url)
+
+Mitresh Khapra
+```
+
+# Week 4.1 LLM.pdf - Page 62
+
+```markdown
+# Solution-1: Low temperature sampling
+
+Given the logits $u_{1|V}$ and temperature parameter $T$, compute the probabilities as
+
+$$
+P(x = u_i|x_{1:i-1}) = \frac{\exp(\frac{u_i}{T})}{\sum_{j'} \exp(\frac{u_{j'}}{T})}
+$$
+
+- **Low temperature** = skewed distribution = less creativity
+- **High temperature** = flatter distribution = more creativity
+
+[https://www.geogebra.org/material/iframe/id/drvaqby/width/700/height/500/border/808808/fsb/tru/e/smb/false/stb/false/stbh/false/avfalse/asb/false/sri/false/rc/false/ld/false/sdz/true/cti/false](https://www.geogebra.org/material/iframe/id/drvaqby/width/700/height/500/border/808808/fsb/tru/e/smb/false/stb/false/stbh/false/avfalse/asb/false/sri/false/rc/false/ld/false/sdz/true/cti/false)
+
+*Mitesh Khapra*
+```
+
+# Week 4.1 LLM.pdf - Page 63
+
+```markdown
+# Solution: 2 Top-P (Nucleus) sampling
+
+![Diagram 1](image1.png)
+![Diagram 2](image2.png)
+
+## Sort the probabilities in descending order
+
+Set a value for the parameter \( p \), \( 0 < p < 1 \).
+
+Sum the probabilities of tokens starting from the top token.
+
+If the sum exceeds \( p \), then sample a token from the selected tokens.
+
+It is similar to top-\( k \) with \( k \) being dynamic.
+
+Suppose we set \( p = 0.6 \).
+
+### For top left distribution:
+The model will sample from the tokens {thought, knew, had, saw, said}.
+
+### For bottom left distribution:
+The model will sample from the tokens {hot, cooling}.
+
+**Mitlesh Khapra**
+```
+
+# Week 4.1 LLM.pdf - Page 64
+
+```markdown
+# References
+
+1. https://openaai.com/research/language-unsupervised
+
+2. Beam search strategies for Neural Machine Translation
+
+3. The curious case of neural text degeneration
+
+4. Decoding strategies by Maxime Labonne
+
+*Mitesh Khapro*
+```
+

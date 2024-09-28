@@ -1,0 +1,1629 @@
+# DL4CV_Week02_Part04.pdf - Page 1
+
+```markdown
+# Deep Learning for Computer Vision
+
+## Feature Detectors: SIFT and Variants
+
+### Vineeth N Balasubramanian
+
+Department of Computer Science and Engineering
+
+Indian Institute of Technology, Hyderabad
+
+---
+
+Vineeth N B (IIT-H)
+
+### 2.4 Feature Detectors
+
+1/28
+```
+
+# DL4CV_Week02_Part04.pdf - Page 2
+
+```markdown
+# SIFT: Scale Invariant Feature Transform
+
+- **David G. Lowe**, *Distinctive Image Features from Scale-invariant Keypoints*, IJCV 2004
+  - Over 50000 citations
+
+- Transforms image data into scale-invariant coordinates
+
+- Fundamental to many core vision problems/applications:
+  - Recognition
+  - Motion tracking
+  - Multiview geometry
+
+![NPTEL Logo](https://via.placeholder.com/150)
+
+*Vineeth N B (IIT-H)*
+*§2.4 Feature Detectors*
+*2 / 28*
+```
+
+# DL4CV_Week02_Part04.pdf - Page 3
+
+```markdown
+# SIFT: Invariant Local Features
+
+Image content is transformed into local feature coordinates that are invariant to translation, rotation, scale, shear.
+
+![SIFT Features Diagram](image_url)
+
+**Credit:** Mubarak Shah, University of Central Florida
+
+*Vineeth N B (IIT-H)*
+
+*2.4 Feature Detectors*
+
+---
+
+### SIFT: Invariant Local Features
+
+Image content is transformed into local feature coordinates that are invariant to translation, rotation, scale, shear.
+
+![SIFT Features Diagram](image_url)
+
+**Credit:** Mubarak Shah, University of Central Florida
+
+*Vineeth N B (IIT-H)*
+
+*2.4 Feature Detectors*
+```
+
+# DL4CV_Week02_Part04.pdf - Page 4
+
+```markdown
+# SIFT
+
+- **Step 1: Scale-space Extrema Detection**
+  - Detect interesting points (invariant to scale and orientation) using DOG.
+
+- **Step 2: Keypoint Localization**
+  - Determine location and scale at each candidate location, and select them based on stability.
+
+- **Step 3: Orientation Estimation**
+  - Use local image gradients to assign orientation to each localized keypoint. Preserve orientation, scale and location for each feature.
+
+- **Step 4: Keypoint Descriptor**
+  - Extract local image gradients at selected scale around keypoint and form a representation invariant to local shape and illumination distortion.
+
+*Vineeth N B (IIIT-H) §2.4 Feature Detectors 4 / 28*
+```
+
+# DL4CV_Week02_Part04.pdf - Page 5
+
+```markdown
+# SIFT: Scale-space Extrema Detection
+
+## Constructing Scale Space
+
+![SIFT Diagram](https://example.com/image.png)
+
+- **Increasing σ**: The scale space is constructed by convolving the image with Gaussian functions of varying standard deviations σ.
+
+- **Gaussian Function**:
+  - \( G(\sigma) * I \)
+  - \( G(k\sigma) * I \)
+  - \( G(k^2\sigma) * I \)
+
+- **First Octave**:
+  - \( G(k\sigma) * I \)
+
+- **Second Octave**:
+  - \( G(2\sigma) * I \)
+  - \( G(2k\sigma) * I \)
+  - \( G(2k^2\sigma) * I \)
+
+**Credit**: Ofir Pele
+
+Vineeth N B (IIT-H)
+
+§2.4 Feature Detectors
+
+5 / 28
+```
+
+# DL4CV_Week02_Part04.pdf - Page 6
+
+```markdown
+# SIFT: Scale-space Extrema Detection
+
+## Difference of Gaussians
+
+### Scale (next octave)
+
+```plaintext
+┌──────────────┐
+│ Gaussian     │
+│             │
+│             │
+│             │
+└──────────────┘
+      ↕
+┌──────────────┐
+│ Gaussian     │
+│             │
+│             │
+│             │
+└──────────────┘
+      ↕
+┌──────────────┐
+│ Gaussian     │
+│             │
+│             │
+│             │
+└──────────────┘
+      ↕
+┌──────────────┐
+│ Gaussian     │
+│             │
+│             │
+│             │
+└──────────────┘
+```
+
+### Difference of Gaussian (DOG)
+
+```plaintext
+┌──────────────┐
+│ Gaussian     │
+│             │
+│             │
+│             │
+└──────────────┘
+      ↕
+┌──────────────┐
+│ Gaussian     │
+│             │
+│             │
+│             │
+└──────────────┘
+      ↕
+┌──────────────┐
+│ Gaussian     │
+│             │
+│             │
+│             │
+└──────────────┘
+      ↕
+┌──────────────┐
+│ Gaussian     │
+│             │
+│             │
+│             │
+└──────────────┘
+      ↕
+┌──────────────┐
+│ Gaussian     │
+│             │
+│             │
+│             │
+└──────────────┘
+```
+
+---
+
+*Vineeth N B (IIT-H)*
+
+*Section 2.4 Feature Detectors*
+
+*Page 6 / 28*
+```
+
+# DL4CV_Week02_Part04.pdf - Page 7
+
+```markdown
+# SIFT: Scale-space Extrema Detection
+
+## Difference of Gaussians
+
+```markdown
+...
+``` 
+
+### Scale (next octave)
+
+```
+D(x, y, σ) = ÿ(x, y, σ) - ÿ(x, y, kσ)
+```
+
+where `ÿ(x, y, σ) = G(x, y, σ) * I(x, y)`
+
+### Scale (first octave)
+
+```
+Difference of Gaussian (DOG)
+``` 
+
+![Vineeth N B (IIT-H)](https://example.com/image.png)
+
+**52.4 Feature Detectors**
+
+Vineeth N B (IIT-H)
+
+**Section 6 / 28**
+```
+
+# DL4CV_Week02_Part04.pdf - Page 8
+
+```markdown
+# SIFT: Scale-space Extrema Detection
+
+## Difference of Gaussians
+
+...
+
+### Diagram
+
+![Difference of Gaussians](image_url)
+
+```math
+D(x, y, \sigma) = \hat{I}(x, y, \sigma) - \hat{I}(x, y, k\sigma)
+```
+where
+```math
+\hat{I}(x, y, \sigma) = G(x, y, \sigma) * I(x, y)
+```
+
+### Description
+
+- The process involves computing the difference of Gaussians at different scales.
+- Multiple Gaussian blurred images at varying scales are created.
+- The difference between Gaussian smoothed images is computed to detect local extrema in the scale-space.
+- The scale-space is built by convolving the image with Gaussian functions at different scales.
+- **Scale (next octave)** and **Scale (first octave)** are noted on the vertical axis.
+- The difference of Gaussian (DOG) images are shown on the right side of the process.
+- Arrows indicate the flow from the original Gaussian images to the DOG images.
+
+### Credit
+- "Distinctive Image Features from Scale-Invariant Points", IJCV 2004
+- Vineeth N B (IIT-H)
+
+### Section in Book
+- §2.4 Feature Detectors
+
+---
+
+Page: 6 / 28
+```
+
+**Note**: Replace `image_url` with the actual URL or placeholder for the image if necessary. Ensure to verify the correctness of the equations and scientific notations as per the context provided.
+
+# DL4CV_Week02_Part04.pdf - Page 9
+
+```markdown
+# SIFT: Scale-space Extrema Detection
+
+![SIFT Algorithm Diagram](image_url)
+
+- **Scale-space Extrema Detection**
+  - Compare a pixel (X) with 26 pixels in current and adjacent scales (Green Circles).
+  - Select a pixel (X) if it is larger/smaller than all 26 pixels.
+
+## Diagram Explanation
+
+### Scale
+- **Scale Levels**: Represented by different layers in the diagram.
+  - **D(k^2σ)**: Higher scale level.
+  - **D(kσ)**: Intermediate scale level.
+  - **D(σ)**: Lower scale level.
+
+### Comparison
+- **Current and Adjacent Scales**: Each pixel (X) is compared with 26 surrounding pixels (green circles).
+
+### Selection Criteria
+- **Extrema Detection**: A pixel (X) is selected if it is the maximum or minimum compared to its 26 neighbors across the scales.
+
+## Credit
+- "Distinctive Image Features from Scale-Invariant Points," IICV 2004
+- **Authors**: Vineeth N B (IIT-H)
+
+## Presentation Details
+- **Section**: Feature Detectors
+- **Slide Number**: 7 / 28
+```
+
+# DL4CV_Week02_Part04.pdf - Page 10
+
+```markdown
+# SIFT: Scale-space Extrema Detection
+
+![SIFT Diagram](https://via.placeholder.com/600x400?text=SIFT+Diagram)
+
+**Scale-space Extrema Detection**
+
+- Compare a pixel (X) with 26 pixels in current and adjacent scales (Green Circles)
+- Select a pixel (X) if it is larger/smaller than all 26 pixels
+
+## Diagram Details
+
+![Scale](https://via.placeholder.com/150x200?text=Scale)
+
+### Scales
+
+#### **D(kσ)**
+
+![D(kσ)](https://via.placeholder.com/200x200?text=D(kσ))
+
+#### **D(k²σ)**
+
+![D(k²σ)](https://via.placeholder.com/200x200?text=D(k²σ))
+
+#### **D(σ)**
+
+![D(σ)](https://via.placeholder.com/200x200?text=D(σ))
+
+## Credit
+
+*"Distinctive Image Features from Scale-Invariant Points"*, IJCV 2004
+
+---
+
+Vineeth N B (IIT-H)
+
+**Section 2.4 Feature Detectors**
+
+**Slide 7 / 28**
+```
+
+# DL4CV_Week02_Part04.pdf - Page 11
+
+```markdown
+# SIFT Algorithm Stages
+
+- **Step 1: Scale-space extrema Detection** - Detect interesting points (invariant to scale and orientation) using DOG.
+
+- **Step 2: Keypoint Localization** - Determine location and scale at each candidate location, and select them based on stability.
+
+- **Step 3: Orientation Estimation** - Use local image gradients to assign orientation to each localized keypoint. Preserve orientation, scale and location for each feature.
+
+- **Step 4: Keypoint Descriptor** - Extract local image gradients at selected scale around keypoint and form a representation invariant to local shape and illumination distortion them.
+
+![Diagram Placeholder](link-to-image)
+
+*Vineeth N B (IIT-H)*
+*§2.4 Feature Detectors*
+*8 / 28*
+```
+
+# DL4CV_Week02_Part04.pdf - Page 12
+
+```markdown
+# SIFT: Keypoint Localization
+
+## The Problem:
+
+![Diagram](diagram.png)
+
+*Credit: Öfir Pele*
+
+*Vineeth N B (IIT-H)*
+
+*2.4 Feature Detectors*
+
+---
+
+**SIFT: Keypoint Localization**
+
+### The Problem:
+
+- **True Extrema**: Points where the value is higher or lower than all neighboring points in the neighborhood.
+
+- **Detected Extrema**: Points identified in the image based on the sampling grid.
+
+**Diagram:**
+- The **black curve** represents the true function values.
+- **Red dots** indicate true extrema.
+- **Blue dots** show detected extrema.
+- **Black arrows** point to the corresponding extrema on the true function.
+- **Sampling grid** points are represented as vertical black lines.
+
+---
+
+_`Note: This markdown format is structured to maintain the scientific integrity and readability of the content._`
+```
+
+# DL4CV_Week02_Part04.pdf - Page 13
+
+```markdown
+# SIFT: Keypoint Localization
+
+## The Solution:
+
+- Use Taylor series expansion of the scale-space function:
+
+  \[
+  D(s_0 + \Delta s) = D(s_0) + \left. \frac{\partial D}{\partial s} \right|_{s_0} \Delta s + \frac{1}{2} \left. \Delta s^T \frac{\partial^2 D}{\partial s^2} \right|_{s_0} (\Delta s)^T
+  \]
+
+  where \( s_0 = (x_0, y_0, \sigma_0)^T \) and \( \Delta s = (\delta x, \delta y, \delta \sigma)^T \)
+
+![NPTEL Logo](https://via.placeholder.com/150)
+
+Vineeth N B (IIT-H) §2.4 Feature Detectors 10 / 28
+```
+
+# DL4CV_Week02_Part04.pdf - Page 14
+
+```markdown
+# SIFT: Keypoint Localization
+
+## The Solution:
+
+- Use Taylor series expansion of the scale-space function:
+
+  \[
+  D(s_0 + \Delta s) = D(s_0) + \left. \frac{\partial D}{\partial s} \right|_{s_0} \Delta s + \left. \frac{1}{2} \Delta s \left. \frac{\partial^2 D}{\partial s^2} \right|_{s_0} \Delta s
+  \]
+
+  where \(s_0 = (x_0, y_0, \sigma_0)^T\) and \(\Delta s = (\delta x, \delta y, \delta \sigma)^T\)
+
+- The location of the extremum, \(\hat{s}\), is determined by taking the derivative of this function with respect to \(s\) and setting it to zero:
+
+  \[
+  \hat{s} = -\left( \left. \frac{\partial^2 D}{\partial s^2} \right|_{s_0} \right)^{-1} \left. \frac{\partial D}{\partial s} \right|_{s_0}
+  \]
+
+---
+
+*Vineeth N B. (IIT-H) §2.4 Feature Detectors 10 / 28*
+```
+
+# DL4CV_Week02_Part04.pdf - Page 15
+
+```markdown
+# SIFT: Keypoint Localization
+
+## The Solution:
+
+- Use Taylor series expansion of the scale-space function:
+
+  \[
+  D(s_0 + \Delta s) = D(s_0) + \left. \frac{\partial D}{\partial s} \right|_{s_0} \Delta s + \frac{1}{2} \left. \Delta s \frac{\partial^2 D}{\partial s^2} \right|_{s_0} \Delta s
+  \]
+
+  where \( s_0 = (x_0, y_0, \sigma_0)^T \) and \( \Delta s = (\delta x, \delta y, \delta \sigma)^T \).
+
+- The location of the extremum, \(\hat{s}\), is determined by taking the derivative of this function with respect to \(s\) and setting it to zero:
+
+  \[
+  \hat{s} = -\left( \frac{\partial^2 D}{\partial s^2} \right)^{-1}_{s_0} \left. \frac{\partial D}{\partial s} \right|_{s_0}
+  \]
+
+- Next, reject low contrast points and points that lie on the edge.
+
+![Vineeth N B (IIT-H)](https://example.com/image.png) 
+
+*2.4 Feature Detectors*
+
+Page 10 / 28
+```
+
+# DL4CV_Week02_Part04.pdf - Page 16
+
+```markdown
+# SIFT: Keypoint Localization
+
+## The Solution:
+
+- Use Taylor series expansion of the scale-space function:
+
+  \[
+  D(s_0 + \Delta s) = D(s_0) + \left. \frac{\partial D}{\partial s} \right|_{s_0} \Delta s + \frac{1}{2} \left. \Delta s^2 \frac{\partial^2 D}{\partial s^2} \right|_{s_0} \Delta s
+  \]
+
+  where \( s_0 = (x_0, y_0, \sigma_0)^T \) and \( \Delta s = (\delta x, \delta y, \delta \sigma)^T \).
+
+- The location of the extremum, \( \hat{s} \), is determined by taking the derivative of this function with respect to \( s \) and setting it to zero:
+
+  \[
+  \hat{s} = -\left( \left. \frac{\partial^2 D}{\partial s^2} \right|_{s_0} \right)^{-1} \left. \frac{\partial D}{\partial s} \right|_{s_0}
+  \]
+
+- Next, reject low contrast points and points that lie on the edge.
+
+- **Low contrast points elimination:**
+
+  - Reject keypoint if \( D(\hat{s}) \) is smaller than 0.03 (assuming image values are normalized in \([0,1]\)).
+
+![Vineeth N B (IIT-H)](https://www.example.com/image)
+
+Feature Detectors
+
+Section 2.4
+
+Slide 10 / 28
+```
+
+# DL4CV_Week02_Part04.pdf - Page 17
+
+```markdown
+# SIFT: Keypoint Localization
+
+- Reject points with strong edge response in one direction only
+
+  **Edge Elimination - How?**
+
+![NPTEL Logo](https://example.com/logo.png)
+
+Vineeth N B (IIT-H)
+
+**Section 2.4: Feature Detectors**
+
+---
+
+11 / 28
+```
+
+Note: This markdown format ensures the content is structured properly with headings, bullet points, and image placeholders. Adjust the image URL to the correct one if available.
+
+# DL4CV_Week02_Part04.pdf - Page 18
+
+```markdown
+# SIFT: Keypoint Localization
+
+- Reject points with strong edge response in one direction only
+- **Edge Elimination - How?**
+  - Similar to Harris corner detector!
+  - SIFT instead uses Hessian
+- Compute Hessian of D (principal curvature)
+
+\[ H = \begin{bmatrix} D_{xx} & D_{xy} \\ D_{xy} & D_{yy} \end{bmatrix} \]
+
+  - \(\alpha\): largest eigenvalue(\(\lambda_{max}\))
+  - \(\beta\): smallest eigenvalue(\(\lambda_{min}\))
+
+\[ \text{Tr}(H) = D_{xx} + D_{yy} = \alpha + \beta \]
+
+\[ \text{Det}(H) = D_{xx} D_{yy} - D_{xy}^2 = \alpha \beta \]
+
+*Vineeth N B. (IIIT-H)*
+
+*2.4 Feature Detectors*
+
+*11 / 28*
+```
+
+# DL4CV_Week02_Part04.pdf - Page 19
+
+```markdown
+# SIFT: Keypoint Localization
+
+- Reject points with strong edge response in one direction only
+- **Edge Elimination** - How?
+  - Similar to Harris corner detector!
+  - SIFT instead uses Hessian
+- Compute Hessian of D (principal curvature)
+
+\[ H = \begin{bmatrix}
+D_{xx} & D_{xy} \\
+D_{xy} & D_{yy}
+\end{bmatrix} \]
+
+- \(\alpha\): largest eigenvalue(\(\lambda_{max}\))
+- \(\beta\): smallest eigenvalue(\(\lambda_{min}\))
+
+\[ \text{Tr}(H) = D_{xx} + D_{yy} = \alpha + \beta \]
+
+\[ \text{Det}(H) = D_{xx} D_{yy} - D_{xy}^2 = \alpha \beta \]
+
+- Evaluate ratio
+
+\[ \frac{\text{Tr}(H)^2}{\text{Det}(H)} = \frac{(\alpha + \beta)^2}{\alpha \beta} = \frac{(r \beta + \beta)^2}{r \beta^2} \]
+
+\[ \frac{\text{Tr}(H)^2}{\text{Det}(H)} = \frac{(r + 1)^2}{r} \quad \text{where } r = \frac{\alpha}{\beta} \]
+
+Vineeth N B. (IIIT-H) §2.4 Feature Detectors 11 / 28
+```
+
+# DL4CV_Week02_Part04.pdf - Page 20
+
+```markdown
+# SIFT: Keypoint Localization
+
+- Reject points with strong edge response in one direction only
+- **Edge Elimination** - How?
+  - Similar to Harris corner detector!
+  - SIFT instead uses Hessian
+- Compute Hessian of D (principal curvature)
+
+  \[
+  H = \begin{bmatrix}
+  D_{xx} & D_{xy} \\
+  D_{xy} & D_{yy}
+  \end{bmatrix}
+  \]
+
+  - \(\alpha\): largest eigenvalue(\(\lambda_{max}\))
+  - \(\beta\): smallest eigenvalue(\(\lambda_{min}\))
+  - \(\text{Tr}(H) = D_{xx} + D_{yy} = \alpha + \beta\)
+  - \(\text{Det}(H) = D_{xx} D_{yy} - D_{xy}^2 = \alpha \beta\)
+
+- Evaluate ratio
+
+  \[
+  \frac{\text{Tr}(H)^2}{\text{Det}(H)} = \frac{(\alpha + \beta)^2}{\alpha \beta} = \frac{(r \beta + \beta)^2}{r \beta^2}
+  \]
+
+  \[
+  \frac{\text{Tr}(H)^2}{\text{Det}(H)} = \frac{(r + 1)^2}{r} \text{ where } r = \frac{\alpha}{\beta}
+  \]
+
+  - This quantity is minimum when \(r = 1\) (eigenvalues are equal)
+  - Reject keypoint if: \(\frac{\text{Tr}(H)^2}{\text{Det}(H)} > \text{a threshold}\)
+    - (Original SIFT uses \(r = 10\))
+
+*Vineeth N B. (IIIT-H)*
+
+*§2.4 Feature Detectors*
+
+*11 / 28*
+```
+
+# DL4CV_Week02_Part04.pdf - Page 21
+
+```markdown
+# SIFT Algorithm Stages
+
+- **Step 1: Scale-space extrema Detection** - Detect interesting points (invariant to scale and orientation) using DOG.
+
+- **Step 2: Keypoint Localization** - Determine location and scale at each candidate location, and select them based on stability.
+
+- **Step 3: Orientation Estimation** - Use local image gradients to assign orientation to each localized keypoint. Preserve orientation, scale and location for each feature.
+
+- **Step 4: Keypoint Descriptor** - Extract local image gradients at selected scale around keypoint and form a representation invariant to local shape and illumination distortion them.
+
+![Diagram Image](image_placeholder)
+
+*Vineeth N B. (IIT-H)*
+
+*§2.4 Feature Detectors*
+
+*12 / 28*
+```
+
+# DL4CV_Week02_Part04.pdf - Page 22
+
+```markdown
+# SIFT: Orientation Estimation
+
+## Why?
+
+*Include detailed explanations or points related to the "Why?" section here.*
+
+![NPTEL Logo](image-url.jpg)
+
+---
+
+Vineeth N B (IIT-H)
+
+## §2.4 Feature Detectors
+
+---
+
+Page 13 / 28
+```
+
+**Note:** The placeholder `![]()` for the image URL should be replaced with the actual image URL if available.
+
+# DL4CV_Week02_Part04.pdf - Page 23
+
+```markdown
+# SIFT: Orientation Estimation
+
+- Why? To achieve rotation invariance
+
+![NPTEL Logo](https://example.com/logo.png)
+
+Vineeth N B (IIT-H) &num; 2.4 Feature Detectors
+
+---
+
+Page 13 / 28
+```
+
+Note: The image URL is a placeholder and should be replaced with the actual URL of the logo image if available.
+
+# DL4CV_Week02_Part04.pdf - Page 24
+
+```markdown
+# SIFT: Orientation Estimation
+
+- **Why?** To achieve rotation invariance
+- Use scale of point to choose correct image:
+
+  \[
+  \hat{I}(x, y) = G(x, y, \sigma) * I(x, y)
+  \]
+
+- Compute gradient magnitude and orientation using finite differences:
+
+  \[
+  m(x, y) = \sqrt{(\hat{I}(x+1, y) - \hat{I}(x-1, y))^2 + (\hat{I}(x, y+1) - \hat{I}(x, y-1))^2}
+  \]
+
+  \[
+  \theta(x, y) = \tan^{-1}\left(\frac{\hat{I}(x, y+1) - \hat{I}(x, y-1)}{\hat{I}(x+1, y) - \hat{I}(x-1, y)}\right)
+  \]
+
+*Vineeth N B (IIT-H) §2.4 Feature Detectors 13 / 28*
+```
+
+# DL4CV_Week02_Part04.pdf - Page 25
+
+```markdown
+# SIFT: Orientation Estimation
+
+- Create histogram of gradient directions, within a region around the keypoint, at selected scale:
+
+![Histogram of Gradient Directions](image_url)
+
+- The histogram is divided into 36 bins (i.e., \(10^\circ\) per bin).
+
+![Keypoint and Histogram](image_url)
+
+*Vineeth N B (IIIT-H)*
+
+*§2.4 Feature Detectors*
+
+*14 / 28*
+```
+
+# DL4CV_Week02_Part04.pdf - Page 26
+
+```markdown
+# SIFT: Orientation Estimation
+
+- Create histogram of gradient directions, within a region around the keypoint, at selected scale:
+
+  ![Gradient Directions](image-url)
+
+  - Histogram entries are weighted by:
+    - Gradient magnitude, and
+    - A Gaussian function with σ equal to 1.5 times scale of the keypoint
+
+  ![Histogram](image-url)
+
+36 bins (i.e., 10° per bin)
+
+---
+
+Vineeth N B (IIIT-H)
+
+§2.4 Feature Detectors
+
+14 / 28
+```
+
+* Note: Replace `image-url` with the actual image URLs or file paths if available. If images are not available or cannot be captured via OCR, provide a placeholder or description.
+
+# DL4CV_Week02_Part04.pdf - Page 27
+
+```markdown
+# SIFT: Orientation Estimation
+
+- **Create histogram of gradient directions**, within a region around the keypoint, at selected scale:
+
+  ![Histogram of Gradient Directions](image_url)
+
+  - Histogram entries are weighted by:
+    - gradient magnitude, and
+    - a Gaussian function with $\sigma$ equal to 1.5 times scale of the keypoint
+
+- **Select the peak as direction of keypoint**
+
+---
+
+**Vineeth N B (IIIT-H)**
+
+**S2.4 Feature Detectors**
+
+14 / 28
+```
+
+# DL4CV_Week02_Part04.pdf - Page 28
+
+```markdown
+# SIFT: Orientation Estimation
+
+- **Create histogram of gradient directions**, within a region around the keypoint, at selected scale:
+  ![Histogram of Gradient Directions](image-url)
+
+  - Histogram entries are weighted by:
+    - Gradient magnitude, and
+    - A Gaussian function with \(\sigma\) equal to 1.5 times scale of the keypoint
+
+- **Select the peak as direction of keypoint**
+
+- Introduce additional key points at same location if another peak is within 80% of max peak of histogram with different direction
+
+**Credit**: Svetlana Lazebnik, UIUC
+
+*Vineeth N B (IIIT-H)*
+
+## 2.4 Feature Detectors
+
+_§2.4 Feature Detectors_
+
+*Page 14 / 28*
+```
+
+# DL4CV_Week02_Part04.pdf - Page 29
+
+```markdown
+# SIFT
+
+![SIFT Image Example](image_url)
+
+**Credit:** Mubarak Shah, University of Central Florida
+
+Vineeth N B (IIIT-H)
+
+## 2.4 Feature Detectors
+
+### From 233x189 original image to 832 DoG Extrema
+
+### Image Comparison
+
+![Original Image](image_url)
+
+![Processed Image](image_url)
+
+```
+
+This markdown format preserves the structure and content of the original scientific text or slides, ensuring accuracy and readability.
+
+# DL4CV_Week02_Part04.pdf - Page 30
+
+```markdown
+# SIFT
+
+![SIFT Diagram](image-url)
+
+From 832 DoG Extrema to 729 keypoints after low contrast threshold
+
+**Credit:** Mubarak Shah, University of Central Florida
+
+Vineeth N B (IIIT-H)
+
+## §2.4 Feature Detectors
+
+15 / 28
+```
+
+# DL4CV_Week02_Part04.pdf - Page 31
+
+```markdown
+# SIFT
+
+![SIFT Image Example](image-url)
+
+## From 729 keypoints to 536 keypoints after testing ratio based on Hessian
+
+**Credit:** Mubarak Shah, University of Central Florida
+
+Vineeth N B (IIIT-H)
+
+### §2.4 Feature Detectors
+
+15 / 28
+```
+
+# DL4CV_Week02_Part04.pdf - Page 32
+
+```markdown
+# SIFT Algorithm Stages
+
+- **Step 1: Scale-space extrema Detection** - Detect interesting points (invariant to scale and orientation) using DOG.
+- **Step 2: Keypoint Localization** - Determine location and scale at each candidate location, and select them based on stability.
+- **Step 3: Orientation Estimation** - Use local image gradients to assign orientation to each localized keypoint. Preserve orientation, scale and location for each feature.
+- **Step 4: Keypoint Descriptor** - Extract local image gradients at selected scale around keypoint and form a representation invariant to local shape and illumination distortion.
+
+![Diagram Placeholder](image-diagram.png)
+
+*Vineeth N B (IIIT-H) §2.4 Feature Detectors 16 / 28*
+```
+
+# DL4CV_Week02_Part04.pdf - Page 33
+
+```markdown
+# SIFT: Keypoint Descriptor
+
+- Compute gradient at each pixel in a 16 x 16 window around the detected keypoint, using the appropriate level as detected.
+
+![Image Gradients](image-gradient.png)
+
+## Image Gradients
+
+![Keypoint Descriptor](keypoint-descriptor.png)
+
+## Keypoint Descriptor
+
+*Vineeth N B (IIT-H)*
+
+*Section 2.4 Feature Detectors*
+
+*Page 17 / 28*
+```
+
+# DL4CV_Week02_Part04.pdf - Page 34
+
+```markdown
+# SIFT: Keypoint Descriptor
+
+- Compute gradient at each pixel in a 16 × 16 window around the detected keypoint, using the appropriate level as detected.
+
+![Image Gradients to Keypoint Descriptor](image_url)
+
+- Downweight gradients by a Gaussian fall-off function (blue circle) to reduce the influence of gradients far from the center.
+
+![Keypoint Descriptor](image_url)
+
+**Vineeth N B (IIT-H)**
+
+**§2.4 Feature Detectors**
+
+**17 / 28**
+
+NPTEL
+```
+
+# DL4CV_Week02_Part04.pdf - Page 35
+
+```markdown
+# SIFT: Keypoint Descriptor
+
+- Compute gradient at each pixel in a 16 x 16 window around the detected keypoint, using the appropriate level as detected.
+
+  ![Image Gradients](image_url_placeholder)
+
+  ![Keypoint Descriptor](image_url_placeholder)
+
+- Downweight gradients by a Gaussian fall-off function (blue circle) to reduce the influence of gradients far from the center.
+
+- In each 4 x 4 quadrant, compute a gradient orientation histogram using 8 orientation histogram bins.
+
+*Credit: Raquel Urtasun, Szeliski*
+
+*Vineeth N B (IIT-H)*
+
+*§2.4 Feature Detectors*
+
+*17 / 28*
+```
+
+# DL4CV_Week02_Part04.pdf - Page 36
+
+```markdown
+# SIFT: Keypoint Descriptor
+
+- The resulting 128 non-negative values form a raw version of the SIFT descriptor vector.
+- To reduce the effects of contrast or gain (additive variations are already removed by the gradient), the 128-D vector is normalized to unit length.
+- To further make the descriptor robust to other photometric variations, values are clipped to 0.2 and the resulting vector is once again renormalized to unit length.
+
+**Credit:** Raquel Urtasun, Szeliski
+
+![NPTEl Logo](https://via.placeholder.com/150) 
+
+*Vineeth N B (IIIT-H) §2.4 Feature Detectors 18 / 28*
+```
+
+# DL4CV_Week02_Part04.pdf - Page 37
+
+```markdown
+# SIFT
+
+- **Extraordinarily robust feature detection**
+- **Changes in viewpoint:** up to about 60 degree out of plane rotation
+- **Changes in illumination:** sometimes even day vs night (below)
+- **Fast and efficient – can run in real-time**
+
+![Image Description](image_url)
+
+**Credit:** Raquel Urtasun, Szeliski
+
+*Vineeth N B (IIIT-H)*
+
+## 2.4 Feature Detectors
+
+![Image Description](image_url)
+
+19 / 28
+```
+
+# DL4CV_Week02_Part04.pdf - Page 38
+
+```markdown
+# SIFT: Example
+
+![SIFT Example](image_url)
+
+**Mars Rover images**
+
+*Credit: Raquel Urtasun, N Snavely*
+
+---
+
+Vineeth N B (IIT-H)
+
+**§2.4 Feature Detectors**
+
+---
+
+Page 20 / 28
+```
+
+# DL4CV_Week02_Part04.pdf - Page 39
+
+```markdown
+# SIFT: Example
+
+Maybe, look for tiny squares...? ![Image](image_url)
+
+---
+
+Vineeth N B (IIT-H) 
+# 2.4 Feature Detectors
+
+---
+
+NPTEL
+```
+
+# DL4CV_Week02_Part04.pdf - Page 40
+
+```markdown
+# SIFT: Example
+
+**Maybe, look for tiny squares…?**
+
+![Mars Rover images with SIFT feature matches](image-url)
+
+**Credit:** Raquel Urtasun, N Snavely
+
+*Vineeth N B (IIT-H)*
+
+## §2.4 Feature Detectors
+
+---
+
+- **SIFT (Scale-Invariant Feature Transform)**: 
+  - Developed by David Lowe.
+  - Detects keypoints that are invariant to image scale and rotation.
+  - Keypoints are represented by local feature vectors.
+
+  ```markdown
+  ## Example
+
+  **Maybe, look for tiny squares…?**
+
+  ![Mars Rover images with SIFT feature matches](image-url)
+
+  **Credit:** Raquel Urtasun, N Snavely
+
+  *Vineeth N B (IIT-H)*
+
+  ## §2.4 Feature Detectors
+  ```
+```
+
+# DL4CV_Week02_Part04.pdf - Page 41
+
+```markdown
+# SIFT: Invariances (Geometric Transformations)
+
+![Geometric Transformations Diagram](image-url)
+
+- **Credit**: Raquel Urtasun, Tinne Tuytelaars
+- **Source**: Vineeth N B (IIT-H)
+- **Section**: §2.4 Feature Detectors
+
+**SIFT: Invariances (Geometric Transformations)**
+
+SIFT (Scale-Invariant Feature Transform) is a feature detection algorithm that is widely used in computer vision and image processing for identifying and describing local features in images. One of the key aspects of SIFT is its invariance to geometric transformations such as scale, translation, and rotation.
+
+Here is a representation of how SIFT handles these transformations:
+
+![Example Image](image-url)
+
+- **Scale**: SIFT can detect features at different scales, making it robust to changes in the size of objects in the image.
+- **Translation**: The feature detector can locate the same feature in different positions within the image.
+- **Rotation**: SIFT is invariant to rotations, meaning it can identify features regardless of the orientation of the object.
+
+The example image demonstrates these invariances by showing the same book cover in multiple transformations.
+
+```
+
+# DL4CV_Week02_Part04.pdf - Page 42
+
+```markdown
+# SIFT: Invariances (Photometric Transformations)
+
+![SIFT Invariances](https://via.placeholder.com/150)
+
+- **Credit**: Raquel Urtasun, Tinne Tuytelaars
+- **Vineeth N B (IIIT-H)**
+- **§2.4 Feature Detectors**
+
+![Image of Bookshelf](https://via.placeholder.com/300)
+
+## SIFT: Invariances (Photometric Transformations)
+
+The Scale-Invariant Feature Transform (SIFT) algorithm is designed to detect and describe local features in images with robustness to:
+
+- **Scale changes**: SIFT detects keypoints that are invariant to changes in the scale of the image.
+- **Rotation**: Keypoints detected by SIFT are also invariant to rotations.
+- **Illumination changes**: SIFT can handle changes in image brightness and contrast.
+- **Affine transformations**: SIFT can cope with affine transformations, including translation, rotation, and scaling.
+
+### Photometric Transformations
+
+Photometric transformations refer to changes in the brightness and contrast of an image. These transformations can significantly affect the appearance of an image but should not affect the detection of stable keypoints used for feature matching.
+
+### Steps in SIFT for Handling Photometric Transformations
+
+1. **Gaussian Blurring**: The image is blurred using a Gaussian filter to reduce noise.
+2. **Difference of Gaussians (DoG)**: Multiple blurred images are created with different sigma values, and the differences between these images are computed to find potential keypoints.
+3. **Keypoint Localization**: Potential keypoints are identified at local maxima or minima in the DoG images.
+4. **Keypoint Orientation Assignment**: Each keypoint is assigned an orientation based on local image gradients to make the feature descriptor invariant to image rotation.
+5. **Keypoint Descriptors**: A descriptor is created around each keypoint using a 16 x 16 neighborhood, with gradient orientation histograms computed in 4 x 4 sub-regions.
+
+### Example Images
+
+The images below show examples of different photometric transformations applied to the same original image and the corresponding keypoints detected by the SIFT algorithm.
+
+```text
+|
+|
+|
+| --- Example Image 1
+|
+|
+|
+| --- Example Image 2
+|
+|
+|
+| --- Example Image 3
+```
+
+### References
+
+- Raquel Urtasun, Tinne Tuytelaars, "SIFT: Invariances (Photometric Transformations)"
+- Vineeth N B (IIIT-H), §2.4 Feature Detectors
+
+```math
+I(x, y) = G(x, y; σ) * I
+```
+Where \( I(x, y) \) is the blurred image, \( G(x, y; σ) \) is the Gaussian function with standard deviation \( σ \), and \( I \) is the original image.
+```
+
+# DL4CV_Week02_Part04.pdf - Page 43
+
+```markdown
+# SIFT Applications: Image Stitching
+
+![Image Stitching](image_stitching.png)
+
+- **NPTEL**
+
+Vineeth N B (IIIT-H) §2.4 Feature Detectors 22 / 28
+
+---
+
+### SIFT Applications: Image Stitching
+
+**Vineeth N B (IIIT-H)**
+#### §2.4 Feature Detectors
+
+---
+
+**Slide Content:**
+
+- **Title:** SIFT Applications: Image Stitching
+- **Image:** Two images of a mountain scene, showing the result of image stitching.
+- **Logo:** NPTEL
+
+---
+
+**Footer Information:**
+
+- **Author:** Vineeth N B
+- **Affiliation:** IIIT-H
+- **Section:** §2.4 Feature Detectors
+- **Slide Number:** 22 / 28
+
+---
+
+The content provided in this markdown format includes the title, the image description, the logo, and the footer information accurately. No specific OCR issues were encountered with this data.
+```
+
+# DL4CV_Week02_Part04.pdf - Page 44
+
+: 
+
+# SIFT Applications: Image Stitching
+
+![Image Stitching Example](image-url)
+
+- **Detect feature points in both images.**
+
+---
+
+**Vineeth N B (IIIT-H)**
+
+**§2.4 Feature Detectors**
+
+---
+
+- 22 / 28
+
+---
+
+In the context of image stitching, Scale-Invariant Feature Transform (SIFT) is a widely used technique for detecting and describing local features in images. This involves identifying key points and corresponding feature descriptors that are invariant to changes in scale, rotation, and illumination. Below is a step-by-step overview of the process:
+
+```markdown
+## Detect feature points in both images
+
+One of the initial steps in image stitching using SIFT is to detect feature points in both images. SIFT uses a scale-space approach to identify keypoints by finding local extrema in scale-space, typically through the use of Difference of Gaussian (DoG) function.
+
+### Key Steps:
+
+1. **Scale-Space Extrema Detection**:
+    - Construct a series of Gaussian-blurred images at different scales.
+    - Identify local maxima and minima in the DoG pyramid to find potential keypoints.
+
+2. **Keypoint Localization**:
+    - Refine the initial keypoints by fitting a model to nearby data points to eliminate low contrast or poorly localized points.
+
+3. **Orientation Assignment**:
+    - Assign an orientation to each keypoint to achieve invariance to image rotation. 
+    - Compute the gradient magnitude and orientation at each pixel around the keypoint and determine the primary orientation based on the local gradient distribution.
+
+4. **Keypoint Descriptors**:
+    - Construct a descriptor by computing a gradient histogram around the keypoint in a small region.
+    - Normalize the descriptor vector to make it robust to changes in illumination and scale.
+
+### Applications in Image Stitching:
+
+- **Feature Matching**: Once keypoints and descriptors are extracted from both images, feature matching algorithms such as the k-d tree or the ratio test can be used to find corresponding points between the images.
+
+- **Homography Estimation**: Using the matched feature points, a homography matrix can be computed to warp one image to align with the other.
+
+- **Blending and Stitching**: The overlapping regions of the images can be blended to create a seamless panoramic image.
+
+### Example:
+
+The following image demonstrates the detection of feature points in two overlapping images of a mountain landscape, identified by white circles.
+
+![Feature Points Detection](image-url)
+
+```
+
+# DL4CV_Week02_Part04.pdf - Page 45
+
+```markdown
+# SIFT Applications: Image Stitching
+
+![SIFT Image Stitching](image_url)
+
+- **Detect feature points in both images.**
+- **Find corresponding pairs of feature points.**
+
+Vineeth N B (IIT-H) §2.4 Feature Detectors
+
+22 / 28
+```
+
+# DL4CV_Week02_Part04.pdf - Page 46
+
+```markdown
+# SIFT Applications: Image Stitching
+
+![Image Stitching Example](image_url)
+
+- **Detect feature points** in both images.
+- **Find corresponding pairs of feature points**.
+- **Use the pairs the align the images**.
+
+**Credit**: Raquel Urtasun
+
+Vineeth N B (IIIT-H)
+
+#### 2.4 Feature Detectors
+
+---
+
+Page 22 of 28
+```
+
+# DL4CV_Week02_Part04.pdf - Page 47
+
+```markdown
+# More Resources
+
+If you want to learn more on **SIFT**
+
+- **The SIFT Keypoint Detector by David Lowe**
+- **Tutorial: SIFT (Scale-invariant feature transform)**
+- **OpenCV-Python Tutorials: Introduction to SIFT**
+- **Wikipedia: Scale-invariant feature transform**
+- **OpenSIFT: An Open-Source SIFT Library**
+
+*Vineeth N B (IITH) §2.4 Feature Detectors 23 / 28*
+```
+
+# DL4CV_Week02_Part04.pdf - Page 48
+
+```markdown
+# SURF: Speeded Up Robust Features
+
+## SIFT
+
+1. **Construct Scale Space**
+2. **Take Difference of Gaussians**
+    - **Locate DoG Extrema** (Circled in red)
+    - **Sub Pixel Locate Potential Feature Points**
+
+   ![Difference of Gaussians](image_url)
+
+3. **Filter Edge and Low Contrast Responses**
+4. **Assign Keypoints Orientations**
+
+   ![Keypoint Orientations](image_url)
+
+5. **Build Keypoint Descriptors**
+
+   ![Keypoint Descriptors](image_url)
+
+6. **Go Play with Your Features!**
+
+## Key Points
+
+- **Uses box filters instead of Gaussians to approximate Laplacians**
+    - *Example I<sub>xy</sub> and L<sub>xy</sub>*
+        ![Box Filters](image_url)
+- **Uses Haar wavelets to get keypoint orientations**
+
+## Reference
+
+- **Vineeth N B (IIT-H)**
+- **§2.4 Feature Detectors**
+- **Page 24 / 28**
+```
+
+Note: Replace `image_url` with the actual URLs or file paths of the images if available. For accurate formatting, ensure all special characters and symbols are properly represented.
+
+# DL4CV_Week02_Part04.pdf - Page 49
+
+```markdown
+# SURF: Speeded Up Robust Features
+
+## SIFT
+
+```mermaid
+graph TD;
+    A[Construct Scale Space] --> B[Take Difference of Gaussians];
+    B --> C[Locate DoG Extrema];
+    C --> D[Sub Pixel Locate Potential Feature Points];
+    D --> E[Filter Edge and Low Contrast Responses];
+    E --> F[Assign Keypoints Orientations];
+    F --> G[Build Keypoint Descriptors];
+    G --> H[Go Play with Your Features!!];
+```
+
+### Key Points:
+
+- **Uses box filters instead of Gaussians to approximate Laplacians**
+- **Uses Haar wavelets to get keypoint orientations**
+  - Haar wavelets are simple filters which can be used to find gradients in the x and y directions.
+
+### Diagram
+
+![Keypoint Orientation](data:image/png;base64,...)
+
+### Observations
+
+- SURF is good at handling blur and rotation variations.
+- SURF is not as good as SIFT on ...
+
+---
+
+Vineeth N B (IIIT-H)
+
+---
+
+## Notes
+
+- The image should ideally contain the diagrams and visuals from the OCR content.
+- Ensure all steps in the flowcharts are accurately captured.
+```
+
+# DL4CV_Week02_Part04.pdf - Page 50
+
+```markdown
+# SURF: Speeded Up Robust Features
+
+## SIFT
+
+1. **Construct Scale Space**
+2. **Take Difference of Gaussians**
+3. **Locate DoG Extrema**
+4. **Sub Pixel Locate Potential Feature Points**
+5. **Filter Edge and Low Contrast Responses**
+6. **Assign Keypoints Orientations**
+7. **Build Keypoint Descriptors**
+8. **Go Play with Your Features!**
+
+### Key Differences
+
+- **Uses box filters instead of Gaussians to approximate Laplacians**
+- **Uses Haar wavelets to get keypoint orientations**
+- **SURF is good at handling blur and rotation variations**
+- **SURF is not as good as SIFT on invariance to illumination and viewpoint changes**
+- **SURF is ~3 times faster than SIFT**
+
+**Vineeth N B (IIIT-H)**
+
+**§2.4 Feature Detectors**
+
+**24 / 28**
+```
+
+# DL4CV_Week02_Part04.pdf - Page 51
+
+```markdown
+# SURF: Speeded Up Robust Features
+
+## SIFT
+
+```mermaid
+graph LR
+A[Construct Scale Space] --> B[Take Difference of Gaussians]
+B --> C[Locate DoG Extrema]
+C --> D[Sub Pixel Locate Potential Feature Points]
+D --> E[Filter Edge and Low Contrast Responses]
+E --> F[Assign Keypoints Orientations]
+F --> G[Build Keypoint Descriptors]
+G --> H[Go Play with Your Features!]
+```
+
+- Uses box filters instead of Gaussians to approximate Laplacians
+- Uses Haar wavelets to get keypoint orientations
+- SURF is good at handling blur and rotation variations
+- SURF is not as good as SIFT on invariance to illumination and viewpoint changes
+- SURF is 3 times faster than SIFT
+
+*Vineeth N B (IIIT-H) §2.4 Feature Detectors 24 / 28*
+```
+
+# DL4CV_Week02_Part04.pdf - Page 52
+
+```markdown
+# SURF: Speeded Up Robust Features
+
+## SIFT
+
+### Workflow Steps
+
+1. **Construct Scale Space**
+2. **Take Difference of Gaussians**
+3. **Locate DoG Extrema**
+4. **Sub Pixel Locate Potential Feature Points**
+
+### Enhanced Steps
+
+1. **Filter Edge and Low Contrast Responses**
+2. **Assign Keypoints Orientations**
+3. **Build Keypoint Descriptors**
+4. **Go Play with Your Features!**
+
+### Notes
+
+- **Uses box filters instead of Gaussians to approximate Laplacians**
+- **Uses Haar wavelets to get keypoint orientations**
+- **SURF is good at handling blur and rotation variations**
+- **SURF is not as good as SIFT on invariance to illumination and viewpoint changes**
+- **SURF is ~3 times faster than SIFT**
+
+### Additional Information
+
+For more information:
+
+- [https://medium.com/data-breach/introduction-to-surf-speeded-up-robust-features-c7396d6e7c4e](https://medium.com/data-breach/introduction-to-surf-speeded-up-robust-features-c7396d6e7c4e)
+- [http://www.vision.ee.ethz.ch/~surf/](http://www.vision.ee.ethz.ch/~surf/)
+
+**Vineeth N B (III-T-B)**
+
+**Feature Detectors**
+```
+
+# DL4CV_Week02_Part04.pdf - Page 53
+
+```markdown
+# MOPS: Making Descriptor Rotation-invariant
+
+- **Multiscale Oriented PatchS descriptor**
+- Rotate patch according to its dominant gradient orientation.
+- This puts the patches into a canonical orientation
+
+![Patch Rotation Illustration](image_placeholder.png)
+
+*Credit: Matthew Brown, Kristen Grauman, Raquel Urtasun*
+
+_Vineeth N B (IIIT-H)_
+
+## §2.4 Feature Detectors
+
+### Slide Number: 25 / 28
+```
+
+Note: Replace `image_placeholder.png` with the actual path or placeholder for the image if needed.
+
+# DL4CV_Week02_Part04.pdf - Page 54
+
+```markdown
+# Gradient Location-Orientation Histogram (GLOH)
+
+- Variant of SIFT that uses a log-polar binning structure instead of four quadrants.
+- Uses 17 spatial bins and 16 orientation bins.
+- The 272D histogram is then projected onto a 128D descriptor using PCA trained on a large dataset.
+
+![Log-Polar Binning](image_url)
+
+*Credit: Matthew Brown, Kristen Grauman, Raquel Urtasun*
+
+*Vineeth N B (IIIT-H)*
+
+*2.4 Feature Detectors*
+
+*Page 26 of 28*
+```
+
+# DL4CV_Week02_Part04.pdf - Page 55
+
+```markdown
+# Homework
+
+## Readings
+
+- Section 3.5, Szeliski, *Computer Vision: Algorithms and Applications*
+- For more information on SURF:
+  - OpenCV-Python Tutorials: [Introduction to SURF](https://opencv-python-tutorials.com/introduction-to-surf/)
+  - Wikipedia: [Speedy up robust features](https://en.wikipedia.org/wiki/Speeded_up_robust_features)
+- **Multi-Scale Oriented Patches**
+- Other links provided on respective slides
+
+## Questions
+
+- Which descriptor performs better? **SIFT** or **MOPS**?
+- Why is **SIFT** descriptor better than **Harris Corner Detector**?
+
+_Vineeth N B (IIT-H)_
+
+**2.4 Feature Detectors**
+
+_27 / 28_
+```
+
+# DL4CV_Week02_Part04.pdf - Page 56
+
+```markdown
+# References
+
+- David G. Lowe. **"Distinctive Image Features from Scale-Invariant Keypoints"**. In: *Int. J. Comput. Vision* 60.2 (Nov. 2004), 91–110.
+- Richard Szeliski. *Computer Vision: Algorithms and Applications*. Texts in Computer Science. London: Springer-Verlag, 2011.
+- David Forsyth and Jean Ponce. *Computer Vision: A Modern Approach*. 2 edition. Boston: Pearson Education India, 2015.
+- Lazebnik, Svetlana, *CS 543 Computer Vision (Spring 2019)*. URL: [https://slazebni.cs.illinois.edu/spring19/](https://slazebni.cs.illinois.edu/spring19/) (visited on 06/01/2020).
+- Shah, Mubarak, *CAP 5415 - Computer Vision (Fall 2014)*. URL: [https://www.crcv.ucf.edu/courses/cap5415-fall-2014/](https://www.crcv.ucf.edu/courses/cap5415-fall-2014/) (visited on 06/01/2020).
+- Urtasun, Raquel, *Computer Vision (Winter 2013)*. URL: [https://www.cs.toronto.edu/~urtasun/courses/CV/cv.html](https://www.cs.toronto.edu/~urtasun/courses/CV/cv.html) (visited on 06/01/2020).
+
+Vineeth N B. ([IIT-H](#))
+
+§2.4 Feature Detectors
+
+28 / 28
+```
+

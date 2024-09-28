@@ -1,0 +1,1545 @@
+# DL4CV_Week12_Part02.pdf - Page 1
+
+```markdown
+# Deep Learning for Computer Vision
+
+## Self-Supervised Learning
+
+### Vineeth N Balasubramanian
+
+**Department of Computer Science and Engineering**
+
+**Indian Institute of Technology, Hyderabad**
+
+![IIT Logo](https://example.com/iit_logo.png)
+
+*Vineeth N B (IIT-H) 
+
+**§12.2 Self-Supervised Learning**
+
+---
+
+1. **Introduction to Self-Supervised Learning**
+
+    Self-supervised learning is a form of machine learning where the model trains itself to learn meaningful representations from the data without explicit supervision. 
+
+    - **Pretext Tasks**: The model is given a pretext task to learn, which is usually designed to be simple and does not require labeled data.
+    - **Learning Representations**: The learned representations are then used for downstream tasks, which can be supervised learning tasks that require labeled data.
+
+2. **Types of Self-Supervised Learning**
+
+    - **Contrastive Learning**: Methods like SimCLR and MoCo train models by pulling similar data points together and pushing dissimilar ones apart in the feature space.
+    - **Predictive Coding**: Methods like Autoencoders and Variational Autoencoders train models to predict missing parts of the data.
+    - **Generative Pre-Training**: Methods like GPT train models to generate text sequences.
+
+3. **Applications of Self-Supervised Learning**
+
+    - **Computer Vision**: Self-supervised learning is used for tasks like image classification, object detection, and image segmentation.
+    - **Natural Language Processing**: Self-supervised learning is used for tasks like text generation, language modeling, and sentiment analysis.
+    - **Reinforcement Learning**: Self-supervised learning is used to pre-train models for reinforcement learning tasks.
+
+4. **Evaluation Metrics**
+
+    - **Linear Probe Accuracy**: The accuracy of a linear classifier trained on the frozen features of the self-supervised model.
+    - **Transfer Learning Performance**: The performance of the self-supervised model when fine-tuned on a downstream task.
+
+5. **Challenges and Future Directions**
+
+    - **Scalability**: Self-supervised learning methods need to be scaled to larger datasets and more complex tasks.
+    - **Theoretical Understanding**: There is a need for a better theoretical understanding of why and how self-supervised learning works.
+
+---
+
+*Page 1 of 23*
+```
+
+# DL4CV_Week12_Part02.pdf - Page 2
+
+```markdown
+# Unsupervised Learning
+
+## Clustering
+
+Group the data into clusters to reveal something meaningful about the data
+
+## Dimensionality Reduction
+
+Learn low-dimensional representations of data that are meaningful for a given task
+
+## Data Generation
+
+Learn to generate data belonging to a given training distribution
+
+## Representation Learning
+
+Learn a distribution that implicitly reveals data representation that helps a downstream task
+
+*Vineeth N B (IIIT-H)*
+
+*12.2 Self-Supervised Learning*
+
+*2 / 23*
+```
+
+# DL4CV_Week12_Part02.pdf - Page 3
+
+```markdown
+# Unsupervised Learning
+
+## Clustering
+Group the data into clusters to reveal something meaningful about the data
+
+## Dimensionality Reduction
+Learn low-dimensional representations of data that are meaningful for a given task
+
+## Data Generation
+Learn to generate data belonging to a given training distribution
+
+## Representation Learning
+Learn a distribution that implicitly reveals data representation that helps a downstream task
+
+→ **Self-Supervised Learning!**
+
+![Image Placeholder](image_url)
+
+Vineeth N B (IIT-H) §12.2 Self-Supervised Learning 2 / 23
+```
+
+# DL4CV_Week12_Part02.pdf - Page 4
+
+```markdown
+# What is Self-Supervised Learning?
+
+- Exploit unlabeled data to yield labels
+- Design supervised tasks (called **pretext/auxiliary** tasks) that can learn meaningful representations for downstream tasks
+- Analogous to filling in the blanks: predict certain part of input from any other part
+
+![NPTEL Logo](https://example.com/logo.png)
+
+*Vineeth N B (IIT-H)*
+
+*Sec. 12.2 Self-Supervised Learning*
+
+*Page 3 / 23*
+```
+
+# DL4CV_Week12_Part02.pdf - Page 5
+
+```markdown
+# Self-Supervised Learning
+
+- Predict any part of the input from any other part.
+- Predict the **future** from the **past**.
+- Predict the **future** from the **recent past**.
+- Predict the **past** from the **present**.
+- Predict the **top** from the **bottom**.
+- Predict the **occluded** from the **visible**.
+
+> Pretend there is a part of the input you don’t know and predict that.
+
+*Credit: Yann LeCun*
+
+*Vineeth N B (IIIT-H)*
+
+*§12.2 Self-Supervised Learning*
+
+![Diagram of Self-Supervised Learning](image_url)
+
+```
+Time →
+Past  Present  Future →
+```
+```
+
+# DL4CV_Week12_Part02.pdf - Page 6
+
+```markdown
+# Why Self-Supervised Learning?
+
+- **Deep supervised learning works well when labeled data is abundant**
+- **There is a plethora of unlabeled data available; how can we exploit it?**
+- **Humans don’t always need supervision to learn, we learn by observation and prediction**
+
+![NPTEL Logo](https://via.placeholder.com/100)
+
+Vineeth N B (IIT-H)
+
+Section 12.2 Self-Supervised Learning
+
+Page 5 / 23
+```
+
+# DL4CV_Week12_Part02.pdf - Page 7
+
+```markdown
+# Self-Supervision In Computer Vision: Image Inpainting
+
+![Image Inpainting Example](image_url)
+
+- **Context autoencoder** trained to fill in missing parts of an image
+- Mask of missing region could be of any shape
+- Encoder derived from Alexnet architecture
+- Model trained with a combination of L2 loss and adversarial loss
+
+[^1]: Pathak et al, Context Encoders: Feature Learning by Inpainting, CVPR 2016
+
+Vineeth N B (IIT-H)
+
+## Slide Content
+
+### Self-Supervision In Computer Vision: Image Inpainting
+
+![Context Autoencoder](image_url)
+
+- **Context autoencoder** trained to fill in missing parts of an image
+- Mask of missing region could be of any shape
+- Encoder derived from Alexnet architecture
+- Model trained with a combination of L2 loss and adversarial loss
+
+[^1]: Pathak et al, Context Encoders: Feature Learning by Inpainting, CVPR 2016
+
+Vineeth N B (IIT-H)
+
+## Slide Content
+
+### Self-Supervision In Computer Vision: Image Inpainting
+
+![Image Inpainting Example](image_url)
+
+- **Context autoencoder** trained to fill in missing parts of an image
+- Mask of missing region could be of any shape
+- Encoder derived from Alexnet architecture
+- Model trained with a combination of L2 loss and adversarial loss
+
+[^1]: Pathak et al, Context Encoders: Feature Learning by Inpainting, CVPR 2016
+
+Vineeth N B (IIT-H)
+
+## Slide Content
+
+### Self-Supervision In Computer Vision: Image Inpainting
+
+![Context Autoencoder](image_url)
+
+- **Context autoencoder** trained to fill in missing parts of an image
+- Mask of missing region could be of any shape
+- Encoder derived from Alexnet architecture
+- Model trained with a combination of L2 loss and adversarial loss
+
+[^1]: Pathak et al, Context Encoders: Feature Learning by Inpainting, CVPR 2016
+
+Vineeth N B (IIT-H)
+```
+
+# DL4CV_Week12_Part02.pdf - Page 8
+
+```markdown
+# Self-Supervision In Computer Vision: Image Inpainting<sup>2</sup>
+
+![Image Inpainting](image_url)
+
+## Context
+
+### Input context
+![Input context](input_context_image_url)
+
+### Human artist
+![Human artist](human_artist_image_url)
+
+### Context Encoder (L2 loss)
+![Context Encoder (L2 loss)](context_encoder_l2_image_url)
+
+### Context Encoder (L2 + Adversarial loss)
+![Context Encoder (L2 + Adversarial loss)](context_encoder_adversarial_image_url)
+
+<sup>2</sup> Pathak et al., Context Encoders: Feature Learning by Inpainting, CVPR 2016
+
+*Vineeth N B (IIT-H)*
+
+*§12.2 Self-Supervised Learning*
+```
+
+# DL4CV_Week12_Part02.pdf - Page 9
+
+```markdown
+# Learning Image Representation by Solving Jigsaws<sup>3</sup>
+
+- Used to teach a model that object is made of different parts
+- Learns feature mapping of object parts and their spatial arrangement by solving a 9-tiled jigsaw puzzle
+
+![Image of a Tiger and its Jigsaw Parts](image_url)
+
+(a) 
+
+![Tiger Jigsaw Pieces](image_url)
+
+(b)
+
+<sup>3</sup>Noroozi and Favaro, Unsupervised Learning of Visual Representations by Solving Jigsaw Puzzles, ECCV 2016
+
+Vineeth N B (IIT-H)
+
+§12.2 Self-Supervised Learning
+
+8 / 23
+```
+
+# DL4CV_Week12_Part02.pdf - Page 10
+
+```markdown
+# Learning Image Representation by Solving Jigsaws
+
+- 9 tiles shuffled via a randomly chosen permutation from predefined permutation set are fed to network
+- Predicts index of permutation applied
+- Output vector gives probability of permutation indices used
+- Cross entropy loss used for training
+
+![Permutation Jigsaw Example](image_url)
+
+4 Noroozi and Favaro, Unsupervised Learning of Visual Representations by Solving Jigsaw Puzzles, ECCV 2016
+
+Vineeth N B (IIIT-H)
+
+§12.2 Self-Supervised Learning
+
+9 / 23
+```
+
+# DL4CV_Week12_Part02.pdf - Page 11
+
+# Representation Learning by Predicting Rotations
+
+## Objective
+Learn high level object concepts such as their location in the image, their type, their pose, etc.
+
+## Process Overview
+
+1. **Input Image**: An image \( X \) is given.
+
+2. **Rotation**: The image \( X \) is subjected to various rotations:
+   - \( g(X, y = 0) \) rotates the image by 0 degrees, resulting in \( X^0 \).
+   - \( g(X, y = 1) \) rotates the image by 90 degrees, resulting in \( X^1 \).
+   - \( g(X, y = 2) \) rotates the image by 180 degrees, resulting in \( X^2 \).
+   - \( g(X, y = 3) \) rotates the image by 270 degrees, resulting in \( X^3 \).
+
+3. **Convolutional Neural Network (ConvNet) Model**: Each rotated image \( X^y \) is then passed through a ConvNet model \( F(.) \).
+
+4. **Prediction and Optimization**: The ConvNet model predicts the degree of rotation, and the objective is to maximize the probability \( F^y(X^y) \) for the correct rotation \( y \).
+
+## Detailed Process
+
+- **0 Degrees Rotation**:
+  - Rotated image: \( X^0 \)
+  - ConvNet model prediction: \( F^0(X^0) \)
+  - Objective: Maximize probability \( F^0(X^0) \) for predicting 0 degrees rotation \( y = 0 \).
+
+- **90 Degrees Rotation**:
+  - Rotated image: \( X^1 \)
+  - ConvNet model prediction: \( F^1(X^1) \)
+  - Objective: Maximize probability \( F^1(X^1) \) for predicting 90 degrees rotation \( y = 1 \).
+
+- **180 Degrees Rotation**:
+  - Rotated image: \( X^2 \)
+  - ConvNet model prediction: \( F^2(X^2) \)
+  - Objective: Maximize probability \( F^2(X^2) \) for predicting 180 degrees rotation \( y = 2 \).
+
+- **270 Degrees Rotation**:
+  - Rotated image: \( X^3 \)
+  - ConvNet model prediction: \( F^3(X^3) \)
+  - Objective: Maximize probability \( F^3(X^3) \) for predicting 270 degrees rotation \( y = 3 \).
+
+## References
+- Gidaris et al., "Unsupervised Representation Learning by Predicting Image Rotations," ICLR 2018
+- Vineeth N B (IIIT-H)
+- §12.2 Self-Supervised Learning
+
+---
+
+```markdown
+# Representation Learning by Predicting Rotations
+
+## Objective
+Learn high level object concepts such as their location in the image, their type, their pose, etc.
+
+## Process Overview
+
+1. **Input Image**: An image \( X \) is given.
+
+2. **Rotation**: The image \( X \) is subjected to various rotations:
+   - \( g(X, y = 0) \) rotates the image by 0 degrees, resulting in \( X^0 \).
+   - \( g(X, y = 1) \) rotates the image by 90 degrees, resulting in \( X^1 \).
+   - \( g(X, y = 2) \) rotates the image by 180 degrees, resulting in \( X^2 \).
+   - \( g(X, y = 3) \) rotates the image by 270 degrees, resulting in \( X^3 \).
+
+3. **Convolutional Neural Network (ConvNet) Model**: Each rotated image \( X^y \) is then passed through a ConvNet model \( F(.) \).
+
+4. **Prediction and Optimization**: The ConvNet model predicts the degree of rotation, and the objective is to maximize the probability \( F^y(X^y) \) for the correct rotation \( y \).
+
+## Detailed Process
+
+- **0 Degrees Rotation**:
+  - Rotated image: \( X^0 \)
+  - ConvNet model prediction: \( F^0(X^0) \)
+  - Objective: Maximize probability \( F^0(X^0) \) for predicting 0 degrees rotation \( y = 0 \).
+
+- **90 Degrees Rotation**:
+  - Rotated image: \( X^1 \)
+  - ConvNet model prediction: \( F^1(X^1) \)
+  - Objective: Maximize probability \( F^1(X^1) \) for predicting 90 degrees rotation \( y = 1 \).
+
+- **180 Degrees Rotation**:
+  - Rotated image: \( X^2 \)
+  - ConvNet model prediction: \( F^2(X^2) \)
+  - Objective: Maximize probability \( F^2(X^2) \) for predicting 180 degrees rotation \( y = 2 \).
+
+- **270 Degrees Rotation**:
+  - Rotated image: \( X^3 \)
+  - ConvNet model prediction: \( F^3(X^3) \)
+  - Objective: Maximize probability \( F^3(X^3) \) for predicting 270 degrees rotation \( y = 3 \).
+
+## References
+- Gidaris et al., "Unsupervised Representation Learning by Predicting Image Rotations," ICLR 2018
+- Vineeth N B (IIIT-H)
+- §12.2 Self-Supervised Learning
+```
+
+# DL4CV_Week12_Part02.pdf - Page 12
+
+# Representation Learning by Predicting Rotations
+
+- **K** rotations are applied, and the model outputs a probability distribution over all rotations
+
+- Log loss is used for training
+
+- Loss for an image \(X\) is given by:
+
+\[
+\mathcal{L}(X,\theta) = - \frac{1}{K} \sum_{y=1}^{K} \log(F(g(X|y)|\theta))
+\]
+
+where \(g(\cdot|y)\) is the \(y^{th}\) transformation function, \(F\) denotes the ConvNet
+
+---
+
+_Reference:_
+
+Gidaris et al., Unsupervised Representation Learning by Predicting Image Rotations, ICLR 2018
+
+Vineeth N B (IIT-H)
+
+§12.2 Self-Supervised Learning
+
+---
+
+1. **Representation Learning by Predicting Rotations**
+
+    - Rotations are applied, and the model outputs a probability distribution over all rotations
+    - Log loss is used for training
+    - Loss for an image \(X\) is given by:
+
+      \[
+      \mathcal{L}(X, \theta) = - \frac{1}{K} \sum_{y=1}^{K} \log(F(g(X|y)|\theta))
+      \]
+
+      where \(g(\cdot|y)\) is the \(y^{th}\) transformation function, \(F\) denotes the ConvNet
+
+---
+
+_Reference:_
+
+Gidaris et al., Unsupervised Representation Learning by Predicting Image Rotations, ICLR 2018
+
+Vineeth N B (IIT-H)
+
+§12.2 Self-Supervised Learning
+
+# DL4CV_Week12_Part02.pdf - Page 13
+
+```markdown
+# Image Colorization
+
+- Predicts color of a grayscale input image in LAB space
+- Maps image to a distribution over 313 AB pairs of quantized color value outputs
+
+![Image Colorization Workflow](image-url)
+
+## Workflow
+
+1. **Input**: Grayscale image
+   - **Lightness L**: Represented as an input image with dimensions 1x256x256
+
+2. **Convolutional Layers**:
+   - **conv1**: 64 filters, 128x128 output
+   - **conv2**: 128 filters, 64x64 output
+   - **conv3**: 256 filters, 32x32 output
+   - **conv4**: 512 filters, 32x32 output
+   - **conv5**: 512 filters, 16x16 output
+   - **conv6**: 512 filters, 16x16 output
+   - **conv7**: 512 filters, 16x16 output
+   - **conv8**: 256 filters, 32x32 output
+
+3. **Output**:
+   - **Color ab**: Distribution over 313 AB pairs represented as a matrix of dimensions 313x64
+   - **Lab Image**: Combining original Lightness L with new Color ab
+
+## Training
+
+- Cross-entropy loss of predicted probability distribution over binned color values used to train the network
+
+---
+
+### References
+- Zhang et al., Colorful Image Colorization, ECCV 2016
+- Vineeth N B (III-T-H)
+
+---
+
+*Section 12.2: Self-Supervised Learning*
+```
+
+# DL4CV_Week12_Part02.pdf - Page 14
+
+```markdown
+# Contrastive Learning-Based SSL
+
+- Learns representations by contrasting positive and negative samples; goal is to learn an encoder \( f \) such that:
+
+\[ \text{score}(f(x), f(x^+)) >> \text{score}(f(x), f(x^-)) \]
+
+where \( x^+ \) obtained from same image as \( x \) and \( x^- \) dissimilar to \( x \); scores given by cosine similarity
+
+![NPTEL Logo](image_url)
+
+*Vineeth N B (IIT-H) §12.2 Self-Supervised Learning 13 / 23*
+```
+
+# DL4CV_Week12_Part02.pdf - Page 15
+
+```markdown
+# Contrastive Learning-Based SSL
+
+- Learns representations by contrasting positive and negative samples; goal is to learn an encoder \( f \) such that:
+
+  \[
+  \text{score}(f(x), f(x^{+})) \gg \text{score}(f(x), f(x^{-}))
+  \]
+
+  where \( x^{+} \) obtained from same image as \( x \) and \( x^{-} \) dissimilar to \( x \); scores given by cosine similarity
+
+- Softmax classifier used to classify positive and negative samples correctly
+
+![NPTEL Logo](image_url)
+
+Vineeth N B (IIT-H) §12.2 Self-Supervised Learning 13 / 23
+```
+
+# DL4CV_Week12_Part02.pdf - Page 16
+
+# Contrastive Learning-Based SSL
+
+- Learns representations by contrasting positive and negative samples; goal is to learn an encoder \( f \) such that:
+
+\[ \text{score}(f(x), f(x^{+})) \gg \text{score}(f(x), f(x^{-})) \]
+
+where \( x^{+} \) obtained from the same image as \( x \) and \( x^{-} \) dissimilar to \( x \); scores given by cosine similarity
+
+- Softmax classifier used to classify positive and negative samples correctly
+
+- General form of loss function given by:
+
+\[ \mathcal{L} = -\mathbb{E} \left[ \log \frac{\exp(\text{score}(f(x), f(x^{+}))/\tau)}{\exp(\text{score}(f(x), f(x^{+}))/\tau) + \sum_{j=1}^{N-1} \exp(\text{score}(f(x), f(x_j))/\tau)} \right] \]
+
+where \( \tau \) is temperature hyperparameter
+
+![Vineeth N B (IIT-H)](https://example.com/image.png)
+
+§12.2 Self-Supervised Learning
+
+13 / 23
+
+# DL4CV_Week12_Part02.pdf - Page 17
+
+```markdown
+# MoCO: Momentum Contrast
+
+- **Proposes unsupervised learning of visual representations as a dynamic dictionary look-up**
+
+![Diagram](image_url)
+
+- **gradient**
+  - **contrastive loss**
+  - **similarity**
+
+- **encoder**
+
+  ```
+  q
+  ```
+
+  ```
+  x_{query}
+  ```
+
+- **momentum encoder**
+
+  ```
+  k_0, k_1, k_2, ...
+  ```
+
+  ```
+  key_0, key_1, key_2, ...
+  ```
+
+  ```
+  queue
+  ```
+
+> **He et al., Momentum Contrast for Unsupervised Visual Representation Learning, CVPR 2020**
+
+_Vineeth N B (IIT-H)_
+
+_§12.2 Self-Supervised Learning_
+
+![NPTEL Logo](image_url)
+```
+
+# DL4CV_Week12_Part02.pdf - Page 18
+
+```markdown
+# MoCO: Momentum Contrast<sup>8</sup>
+
+**Proposes unsupervised learning of visual representations as a dynamic dictionary look-up**
+
+- Dictionary structured as a large FIFO queue of encoded representations of data samples
+
+![NPTEL Logo](image_url)
+
+## Diagram Explanation
+
+![Diagram](diagram_url)
+
+- **Encoder**: Processes the query input (`x_query`)
+- **Momentum Encoder**: Maintains a queue of encoded representations (`k_0`, `k_1`, `k_2`, ...)
+  - Encodes key inputs (`x_0`, `x_1`, `x_2`, ...)
+- **Gradient**: Flows back through the encoder
+- **Contrastive Loss**: Utilized to measure similarity between query and key representations
+
+## References
+
+- He et al., Momentum Contrast for Unsupervised Visual Representation Learning, CVPR 2020
+- Vineeth N B (IIT-H)
+
+**Section**: §12.2 Self-Supervised Learning
+
+---
+
+*Page 14 / 23*
+```
+
+# DL4CV_Week12_Part02.pdf - Page 19
+
+```markdown
+# MoCO: Momentum Contrast<sup>8</sup>
+
+- Proposes unsupervised learning of visual representations as a **dynamic dictionary look-up**
+- Dictionary structured as a large FIFO queue of encoded representations of data samples
+- Given query sample \( x_q \), query representation obtained using an encoder \( q = f_q(x_q) \)
+
+![NPTEL Logo](https://example.com/nptel_logo)
+
+## Diagram
+```
+  gradient         contrastive loss
+   ↓                ↑
+   similarity   
+   ↓                ↑
+  queue
+  ↓                ↑
+  encoder         momentum encoder
+  ↓                ↑
+  x_query         key  x_0  key  x_1  key  x_2  ...
+```
+
+<sup>8</sup>He et al., Momentum Contrast for Unsupervised Visual Representation Learning, CVPR 2020
+
+*Vineeth N B (IIT-H)*
+
+*Self-Supervised Learning*
+
+*Section 12.2*
+
+---
+
+*References:*
+```bibtex
+@inproceedings{he2020momentum,
+  title={Momentum Contrast for Unsupervised Visual Representation Learning},
+  author={He, Kaiming and Chen, Xiangyu and Berseth, Alexander and Le, Quoc V and Sun, Abdelrahman and Mohedano, Sergio and Xie, Enze and Liang, Shuai and regular, Chenliang and Li, Yu-Wing and Chen, Saining and Meng, Yang and Pedamallu, Chaitan and Rabinovich, Alexander and Bai, Xiaohua and Zoph, Barret and Le, Geoffrey and Singh, Aravindh and Chen, Michael and Li, Ross B},
+  booktitle={Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition},
+  year={2020}
+}
+```
+
+# DL4CV_Week12_Part02.pdf - Page 20
+
+```markdown
+# MoCO: Momentum Contrast<sup>8</sup>
+
+**Proposes unsupervised learning of visual representations as a dynamic dictionary look-up**
+
+- Dictionary structured as a large FIFO queue of encoded representations of data samples
+
+  ![Dictionary Structure](image-url)
+
+- Given query sample `x_query`, query representation obtained using an encoder `q = f_q(x_query)`
+
+- Key samples encoded by a momentum encoder `k_i = f_k(x_k_i)` gives a set of key representations `{k_1, k_2, ...}` in dictionary
+
+  ```markdown
+  - encoder
+    - gradient
+    - contrastive loss
+    - similarity
+  ```
+
+  ```markdown
+  - queue
+    - k_0, k_1, k_2, ...
+  ```
+
+  ```markdown
+  - x_query
+    - key x_0, key x_1, key x_2, ...
+  ```
+
+  ```markdown
+  - momentum encoder
+  ```
+
+**He et al., Momentum Contrast for Unsupervised Visual Representation Learning, CVPR 2020**
+
+*Vineeth N B (IIT-H)*
+
+*§12.2 Self-Supervised Learning*
+
+*14 / 23*
+```
+
+# DL4CV_Week12_Part02.pdf - Page 21
+
+```markdown
+# MoCO: Momentum Contrast<sup>8</sup>
+
+## Proposes unsupervised learning of visual representations as a dynamic dictionary look-up
+
+- Dictionary structured as a large FIFO queue of encoded representations of data samples
+- Given query sample \( x_q \), query representation obtained using an encoder \( q = f_q(x_q) \)
+- Key samples encoded by a momentum encoder \( k_i = f_k(x_{k_i}) \) gives a set of key representations: \( \{k_1, k_2, \dots\} \) in dictionary
+- Positive key \( k^+ \) in dictionary created using copy of \( x_q \) with different augmentation
+
+**Diagram:**
+![Diagram](image_url)
+
+<sup>8</sup>He et al., Momentum Contrast for Unsupervised Visual Representation Learning, CVPR 2020
+
+Vineeth N B (IIT-H)
+
+§12.2 Self-Supervised Learning
+
+14 / 23
+```
+
+# DL4CV_Week12_Part02.pdf - Page 22
+
+```markdown
+# MoCO: Momentum Contrast<sup>8</sup>
+
+- **Proposes unsupervised learning of visual representations as a dynamic dictionary look-up**
+
+  - Dictionary structured as a large FIFO queue of encoded representations of data samples
+
+  - Given query sample $x_q$, query representation obtained using an encoder $q = f_q(x_q)$
+
+  - Key samples encoded by a momentum encoder $k_i = f_k(x_{k_i})$ gives a set of key representations: $\{k_1, k_2, \cdots\}$ in dictionary
+
+  - Positive key $k^+$ in dictionary created using copy of $x_q$ with different augmentation
+
+  - Loss on previous slide (contrastive loss) used to learn
+
+```math
+\begin{aligned}
+    &\text{encoder} && x_{\text{query}} && \rightarrow q \\
+    &\text{momentum encoder} && x_0, x_1, x_2, \cdots && \rightarrow k_0, k_1, k_2, \cdots \\
+    &\text{contrastive loss} && q && \text{similarity}
+\end{aligned}
+```
+
+<sup>8</sup> He et al., Momentum Contrast for Unsupervised Visual Representation Learning, CVPR 2020
+
+Vineeth N B (IIT-H)
+
+Self-Supervised Learning
+
+14 / 23
+```
+
+# DL4CV_Week12_Part02.pdf - Page 23
+
+```markdown
+# MoCO: Momentum Contrast<sup>9</sup>
+
+## Momentum Contrast
+
+- Query and key encoders both updated based on loss
+- Maintains dictionary as queue of data samples
+- Allows reuse of encoded keys from immediate preceding mini-batches, decouples dictionary size from batch size
+- **Momentum-based update** proposed to keep keys approximately consistent
+
+<center>
+![Momentum Contrast Diagram](image.png)
+</center>
+
+*gradient* &rarr; *contrastive loss*
+<br>
+*similarity*
+<br>
+*queue*
+<br>
+*encoder*
+<br>
+<br>
+*q*
+<br>
+<br>
+*k<sub>0</sub> k<sub>1</sub> k<sub>2</sub> ...*
+<br>
+<br>
+*x<sup>query</sup>*
+<br>
+<br>
+*x<sub>0</sub><sup>key</sup> x<sub>1</sub><sup>key</sup> x<sub>2</sub><sup>key</sup> ...*
+<br>
+<br>
+*momentum encoder*
+
+<sup>9</sup>He et al, Momentum Contrast for Unsupervised Visual Representation Learning, CVPR 2020
+<br>
+Vineeth N B (IIT-H)
+<br>
+§12.2 Self-Supervised Learning
+<br>
+15 / 23
+```
+
+# DL4CV_Week12_Part02.pdf - Page 24
+
+```markdown
+# MoCO: Momentum Contrast
+
+## Momentum Contrast
+
+- Using queue as dictionary makes it difficult to update key encoder
+- Can we just copy the key encoder from the query encoder?
+
+### Diagram
+
+![Diagram](image_url)
+
+---
+
+**Equation:**
+
+$$
+\begin{aligned}
+\text{gradient} & \downarrow \\
+q & \uparrow \\
+&\text{contrastive loss} \\
+&\text{similarity} \\
+k_0 \quad k_1 \quad k_2 \ldots &  \\
+\text{queue} & \uparrow \\
+&\text{momentum encoder} \\
+x_0^\text{key} \quad x_1^\text{key} \quad x_2^\text{key} \ldots &  \\
+\end{aligned}
+$$
+
+---
+
+#### References
+
+1. He et al., Momentum Contrast for Unsupervised Visual Representation Learning, CVPR 2020
+2. Vineeth N B (IIT-H)
+
+#### Section
+
+- 12.2 Self-Supervised Learning
+
+---
+
+Page: 16 / 23
+```
+
+# DL4CV_Week12_Part02.pdf - Page 25
+
+```markdown
+# MoCO: Momentum Contrast<sup>10</sup>
+
+## Momentum Contrast
+
+- Using queue as dictionary makes it difficult to update key encoder
+- Can we just copy the key encoder from the query encoder? (No! Representation will not be consistent because of rapidly changing query encoder)
+- Query encoder (f_q) is updated using backpropagation and key encoder (f_k) is updated using momentum as:
+
+  \[
+  \theta_k = m\theta_k + (1 - m)\theta_q
+  \]
+
+<sup>10</sup> He et al., Momentum Contrast for Unsupervised Visual Representation Learning, CVPR 2020
+
+Vineeth N B (IIT-H)
+
+§12.2 Self-Supervised Learning
+
+16 / 23
+```
+
+![Diagram](image_url_if_available)
+
+**Note**: The image placeholder (`image_url_if_available`) should be replaced with the actual image URL or path if available.
+
+# DL4CV_Week12_Part02.pdf - Page 26
+
+```markdown
+# SimCLR: A Simple Framework for Contrastive Learning of Visual Representations
+
+![SimCLR](image.png)
+
+- **Learns via maximizing agreement between differently augmented views of same data example in latent space**
+
+- **Given n images, 2n samples obtained by 2 different augmentations. Given one positive pair, there exist 2(n - 1) negative pairs**
+
+- **Loss operates on top of an extra projection of the representation via g(.)**
+
+```math
+\text{Maximize agreement between } z_i \text{ and } z_j
+```
+
+```math
+\text{Representation } h_i
+```
+
+```math
+f(.) \rightarrow g(.)
+```
+
+```math
+x_i \rightarrow f(.) \rightarrow h_i, \quad x_j \rightarrow f(.) \rightarrow h_j
+```
+
+```math
+x_p \rightarrow \text{Positive pair}
+```
+
+```math
+x_n \rightarrow \text{Negative pairs}
+```
+
+```math
+p \sim \mathcal{T}, \quad \hat{p} \sim \mathcal{T}
+```
+
+**11 Chen et al., A Simple Framework for Contrastive Learning of Visual Representations, ICML 2020**
+
+*Vineeth N B (IIT-H)*
+
+*Self-Supervised Learning*
+
+*17 / 23*
+```
+
+# DL4CV_Week12_Part02.pdf - Page 27
+
+```markdown
+# SimCLR vs MoCo<sup>12</sup>
+
+![Graph Comparison](image_url)
+
+**SimCLR Advantages:** Strong data augmentation techniques, MLP projection over the representations
+
+## Graph Details
+
+- **Y-Axis:** ImageNet Top-1 Accuracy (%)
+- **X-Axis:** Number of Parameters (Millions)
+
+## Data Points
+
+- **Supervised:** ~75%
+- **SimCLR:** ~68% (25 million parameters)
+- **SimCLR (2x):** ~71% (50 million parameters)
+- **SimCLR (4x):** ~72% (100 million parameters)
+- **CPCv2:** ~62%
+- **PIRL:** ~62%
+- **MoCo (2x):** ~63%
+- **BigBiGAN:** ~62%
+- **Rotation:** ~55%
+- **InstDisc:** ~55%
+- **LA:** ~58%
+- **PIRL-ens.:** ~63%
+- **PIRL-c2x:** ~63%
+- **CMC:** ~64%
+- **MoCo:** ~65%
+- **CPCv2-L:** ~66%
+- **MoCo (4x):** ~69%
+- **AMDIM:** ~68%
+
+## Sources
+
+<sup>12</sup> Chen et al., Improved Baselines with Momentum Contrastive Learning, arXiv 2020
+
+Vineeth N B (IIIT-H)
+
+§12.2 Self-Supervised Learning
+
+**NPTEL**
+
+---
+
+*Page 18 / 23*
+```
+
+Note: Replace `image_url` with the actual URL or placeholder for the image if needed.
+
+# DL4CV_Week12_Part02.pdf - Page 28
+
+```markdown
+
+# SimCLR vs MoCo<sup>12</sup>
+
+![SimCLR vs MoCo](image-url) 
+
+## SimCLR Advantages:
+- **Strong data augmentation techniques**
+- **MLP projection over the representations**
+
+## SimCLR Disadvantages:
+- **Number of negative samples is limited by the batch size**
+
+# ImageNet Top-1 Accuracy (%)
+![ImageNet Accuracy Plot](image-url)
+
+## Data Points:
+- **Supervised**
+- **SimCLR**
+- **SimCLR (2x)**
+- **SimCLR (4x)**
+- **CPCv2**
+- **PIRL**
+- **PIRL-c2x**
+- **MoCo**
+- **MoCo (2x)**
+- **BigBiGAN**
+- **CMC**
+- **PIRL-ens.**
+- **Rotation**
+- **InstDisc**
+- **AMDIM**
+- **CPCv2-L**
+- **MoCo (4x)**
+
+## Number of Parameters (Millions)
+
+## Chen et al., Improved Baselines with Momentum Contrastive Learning, arXiv 2020
+Vineeth N B (IIIT-H)
+§12.2 Self-Supervised Learning
+
+---
+
+18 / 23
+```
+
+# DL4CV_Week12_Part02.pdf - Page 29
+
+```markdown
+# SimCLR vs MoCo<sup>12</sup>
+
+## SimCLR Advantages:
+- **Strong data augmentation techniques**
+- **MLP projection over the representations**
+
+## SimCLR Disadvantages:
+- **Number of negative samples is limited by the batch size**
+
+## MoCo Advantage:
+- **Decouples the batch size from the number of negatives**
+
+![Graph](https://via.placeholder.com/800x400)
+
+Source:
+- <sup>12</sup> Chen et al., Improved Baselines with Momentum Contrastive Learning, arXiv 2020
+- Vineeth N B (IIT-H)
+
+**Section:**
+- §12.2 Self-Supervised Learning
+
+**Slide Number:**
+- 18 / 23
+```
+
+**Explanation:**
+
+1. **Titles and Headings:**
+   - The main title "SimCLR vs MoCo<sup>12</sup>" is marked using `#` for the primary heading.
+   - Subheadings (SimCLR Advantages, SimCLR Disadvantages, MoCo Advantage) are marked using `##` for secondary headings.
+
+2. **Bullet Points:**
+   - Advantages and disadvantages are listed using `-`.
+
+3. **Superscripts:**
+   - Superscripts (`<sup>12</sup>`) are used to denote the footnote reference.
+
+4. **Images:**
+   - A placeholder image link is provided since the OCR can't directly capture the graph.
+
+5. **Source References:**
+   - The source is referenced using superscripts and properly formatted with citations.
+
+6. **Section and Slide Number:**
+   - These details are formatted as a simple text without any specific markdown syntax.
+
+This ensures that the content maintains its structure and readability while adhering to markdown conventions.
+
+# DL4CV_Week12_Part02.pdf - Page 30
+
+```markdown
+# SimCLR vs MoCo<sup>12</sup>
+
+![Graph](image_url)
+
+- **SimCLR Advantages**:
+  - Strong data augmentation techniques
+  - MLP projection over the representations
+
+- **SimCLR Disadvantages**:
+  - Number of negative samples is limited by the batch size
+
+- **MoCo Advantage**:
+  - Decouples the batch size from the number of negatives
+
+- **Chen et al combined advantages from these two methods in MoCoV2**
+
+<sup>12</sup> Chen et al, Improved Baselines with Momentum Contrastive Learning, arXiv 2020
+
+Vineeth N B (IIT-H)
+
+§12.2 Self-Supervised Learning
+
+18 / 23
+```
+
+# DL4CV_Week12_Part02.pdf - Page 31
+
+```markdown
+# Bootstrap your Own Latent (BYOL) [^13]
+
+![BYOL diagram](image_url)
+
+- **Input Image**
+  - \( x \)
+
+- **View**
+  - \( v \)
+  - \( v' \)
+
+- **Representation**
+  - \( f_\theta \)
+  - \( y_\theta \)
+  - \( f_\xi \)
+  - \( y_\xi \)
+
+- **Projection**
+  - \( g_\theta \)
+  - \( z_\theta \)
+  - \( g_\xi \)
+  - \( z_\xi \)
+
+- **Prediction**
+  - \( q_\theta(z_\theta) \)
+  - \( sg(z_\xi) \)
+
+- **Loss**
+  - \( \text{target} \)
+  - \( \text{online} \)
+
+**Online and Target Networks:**
+
+```markdown
+- **Online Network:**
+  - Path: \( x \to v \to f_\theta \to y_\theta \to g_\theta \to q_\theta(z_\theta) \)
+
+- **Target Network:**
+  - Path: \( x \to v' \to f_\xi \to y_\xi \to g_\xi \to sg(z_\xi) \)
+```
+
+**Claim:**
+- Claims to achieve state-of-the-art results without dependency on negative samples
+
+[^13]: Grill et al., Bootstrap Your Own Latent: A New Approach to Self-Supervised Learning, arXiv 2020
+
+_Vineeth N B (IIIT-H)_
+_§12.2 Self-Supervised Learning_
+_19 / 23_
+```
+
+# DL4CV_Week12_Part02.pdf - Page 32
+
+# Bootstrap your Own Latent (BYOL)
+
+![BYOL Process Diagram](image_url)
+
+## Claims
+- Claims to achieve state-of-the-art results without dependency on negative samples
+- Bootstraps outputs of a network to serve as targets
+
+## Diagram Explanation
+
+### Input
+- **Input Image**: \( x \)
+- **Views**: \( v \), \( v' \)
+
+### Representation
+- **Representation Functions**: \( f_{\theta} \) and \( f_{\xi} \)
+- **Representations**: \( y_{\theta} \), \( y'_{\xi} \)
+
+### Projection
+- **Projection Functions**: \( g_{\theta} \) and \( g_{\xi} \)
+- **Projections**: \( z_{\theta} \), \( z'_{\xi} \)
+
+### Prediction
+- **Prediction Functions**: \( q_{\theta} \)
+- **Predictions**: \( q_{\theta}(z_{\theta}) \)
+
+### Loss
+- **Loss Calculation**: 
+  - Online: \( q_{\theta}(z_{\theta}) \)
+  - Target: \( \text{sg}(z'_{\xi}) \)
+
+## References
+- Grill et al., Bootstrap Your Own Latent: A New Approach to Self-Supervised Learning, arXiv 2020
+- Vineeth N B (IIT-H)
+
+## Section
+- §12.2 Self-Supervised Learning
+
+---
+
+Page: 19 / 23
+
+# DL4CV_Week12_Part02.pdf - Page 33
+
+```markdown
+# Bootstrap your Own Latent (BYOL)<sup>13</sup>
+
+![BYOL Diagram](image_url)
+
+- Claims to achieve state-of-the-art results without dependency on negative samples
+- Bootstraps outputs of a network to serve as targets
+- Two networks: **online** and **target**, interact and learn from each other
+
+<sup>13</sup> Grill et al., Bootstrap Your Own Latent: A New Approach to Self-Supervised Learning, arXiv 2020
+Vineeth N B (IIT-H)
+§12.2 Self-Supervised Learning
+
+## Flow of Information
+
+### Input
+- **Input Image**: \( x \)
+
+### View
+- **Views**: \( v \), \( v' \)
+
+### Representation
+- **Online Network Representations**: \( y_\theta \), \( y'_\theta \)
+- **Target Network Representations**: \( y'_\xi \)
+
+### Projection
+- **Online Network Projections**: \( z_\theta \)
+- **Target Network Projections**: \( z'_\xi \)
+
+### Prediction
+- **Online Predictions**: \( q_\theta(z_\theta) \)
+- **Target Predictions**: \( \text{sg}(z'_\xi) \) (stop gradient)
+
+### Loss
+- **Loss Calculation**: Compare online and target networks
+
+### Interaction
+- Online and target networks interact and update based on the calculated loss.
+```
+Note: Replace `image_url` with the actual URL of the image or placeholder if it cannot be directly captured from the OCR process.
+
+Ensure to proofread the content for any inaccuracies and correct any OCR errors, especially with scientific terminology and symbols.
+
+# DL4CV_Week12_Part02.pdf - Page 34
+
+```markdown
+# Bootstrap your Own Latent (BYOL)
+
+![BYOL Diagram](image_url)
+
+- **Claims to achieve state-of-the-art results without dependency on negative samples**
+- **Bootstraps outputs of a network to serve as targets**
+- **Two networks: online and target, interact and learn from each other**
+- **Online network predicts target network's representation of another augmented view of the same image**
+
+*Grill et al., Bootstrap Your Own Latent: A New Approach to Self-Supervised Learning, arXiv 2020*
+
+*Vineeth N B (IIT-M)*
+
+## Notes
+
+- OCR could not capture the image directly; use the placeholder `image_url` for the actual image.
+- Ensure that all mathematical notations and symbols are accurately represented.
+- Bold and italicized text should be formatted correctly.
+- Tables and code blocks should adhere to markdown syntax.
+
+For further details, refer to the arXiv paper by Grill et al. on Bootstrap Your Own Latent.
+```
+
+# DL4CV_Week12_Part02.pdf - Page 35
+
+```markdown
+# Bootstrap your Own Latent (BYOL)¹⁴
+
+![BYOL Diagram](image-url)
+
+```
+- **input image**
+  - **t**
+    - **v**
+      - **f_θ**
+        - **y_θ**
+          - **g_θ**
+            - **z_θ**
+              - **q_θ(z_θ)**
+                - **online**
+                - **loss**
+                  - **target**
+                    - **sg(z_ξ')**
+                      - **sg**
+                        - **t'**
+                          - **v'**
+                            - **f_ξ**
+                              - **y'_ξ**
+                                - **g_ξ**
+                                  - **z'_ξ**
+                                    - **q_θ(z'_ξ)**
+
+- **L^BYOL = ‖q_θ(z_θ) - z'_ξ‖₂²**
+
+---
+
+¹⁴Grill et al., Bootstrap Your Own Latent: A New Approach to Self-Supervised Learning, arXiv 2020
+
+Vineeth N B (IIT-H) §12.2 Self-Supervised Learning
+
+---
+
+```
+
+# DL4CV_Week12_Part02.pdf - Page 36
+
+```markdown
+# Bootstrap your Own Latent (BYOL)<sup>14</sup>
+
+## Diagram Overview
+
+### Flow of Data through the Network
+
+- **Input Image (`x`)**
+  - Split into two branches (`t` and `t'`).
+
+#### Branch `t`
+- **View (`v`)**
+  - Processed by function `f_θ`.
+- **Representation (`y_θ`)**
+- **Projection (`z_θ`)**
+  - Processed by function `q_θ`.
+- **Prediction (`q_θ(z_θ)`)**
+  - Used for online loss calculation.
+
+#### Branch `t'`
+- **View (`v'`)**
+  - Processed by function `f_ξ`.
+- **Representation (`y_ξ'`)**
+- **Projection (`z_ξ'`)**
+  - Processed by function `q_ξ`.
+- **Target (`sg(z_ξ')`)**
+  - Used for target loss calculation.
+
+### Mathematical Formulation
+
+- **Loss Function (`L_BYOL`)**
+  \[
+  L^{BYOL}_{\theta} = \left\| \tilde{q}_{\theta}(z_{\theta}) - \tilde{z}_{\xi}' \right\|_2^2
+  \]
+
+- **Normalization**
+  - \(\tilde{q}_{\theta}(z_{\theta})\) and \(\tilde{z}_{\xi}'\) are \(L_2\)-normalized.
+
+### References
+
+- **Grill et al., Bootstrap Your Own Latent: A New Approach to Self-Supervised Learning, arXiv 2020**
+  - **Vineeth N B (IIT-H)**
+  - **Section: Self-Supervised Learning**
+
+---
+
+<sup>14</sup>Grill et al., Bootstrap Your Own Latent: A New Approach to Self-Supervised Learning, arXiv 2020
+```
+
+# DL4CV_Week12_Part02.pdf - Page 37
+
+```markdown
+# Bootstrap your Own Latent (BYOL)<sup>14</sup>
+
+![BYOL Diagram](https://example.com/byl-diagram.png)
+
+**Figure Caption:** 
+Input image `x` is processed through two different views `v` and `v'`. Each view is fed into its respective representation and projection networks, leading to predictions `q_θ(z_θ)` and `sg(z'_ξ)`. The loss function `L_0^BYOL` is calculated based on the difference between these predictions.
+
+## Key Components
+
+- **Input Image (`x`):** The starting point for the process.
+- **Views (`v`, `v'`):** Different transformations of the input image.
+- **Representation Networks (`f_θ`, `f_ξ`):** Learn to map the views into representations.
+- **Projection Networks (`g_θ`, `g_ξ`):** Map the representations to a latent space.
+- **Predictions (`q_θ(z_θ)`, `sg(z'_ξ)`):** Outputs from the projection networks.
+- **Loss:** Used to adjust the networks for better performance.
+
+### Equation for `L_0^BYOL`
+
+$$
+L_0^BYOL = \left\| \tilde{q}_θ(z_θ) - \tilde{z}'_ξ \right\|_2^2
+$$
+
+### Conditions
+
+- `q_θ(z_θ)` and `z'_ξ` are `L_2`-normalized.
+- `L_0^BYOL` is obtained by switching `v'` and `v`.
+
+## References
+
+<sup>14</sup> Grill et al., Bootstrap Your Own Latent: A New Approach to Self-Supervised Learning, arXiv 2020
+
+_ Vimeeth N B (IIT-K)_
+_ §12.2 Self-Supervised Learning_
+
+![NPTel Logo](https://example.com/nptel-logo.png)
+```
+
+# DL4CV_Week12_Part02.pdf - Page 38
+
+```markdown
+# Bootstrap your Own Latent (BYOL) 
+
+![BYOL Diagram](https://example.com/diagram.png)
+
+## Process Overview
+
+1. **Input Image**:
+   - `x` is the input image.
+
+2. **Views**:
+   - Two different augmented views are generated from the input image:
+     - `v` (view 1)
+     - `v'` (view 2)
+
+3. **Representation**:
+   - Each view is processed through separate representations:
+     - `y_θ` from view `v` using function `f_θ`
+     - `y_ξ` from view `v'` using function `f_ξ`
+
+4. **Projection**:
+   - Each representation is further processed:
+     - `z_θ` from `y_θ` using function `g_θ`
+     - `z_ξ` from `y_ξ` using function `g_ξ`
+
+5. **Prediction**:
+   - `q_θ(z_θ)` is used for online prediction from `z_θ`
+   - `sg(z_ξ)` is used as the target for the loss function
+
+## Loss Functions
+
+- **BYOL Loss (`L^BYOL_θ`)**: 
+
+  \[
+  L^BYOL_θ = \left\| \tilde{q_θ}(z_θ) - \tilde{z_ξ} \right\|^2_2
+  \]
+
+  - `q_θ(z_θ)` and `z_ξ` are `L_2`-normalized
+  - `L^BYOL_θ` is obtained by switching `v'` and `v`
+
+- **Final Loss**:
+
+  \[
+  L_{final} = L^BYOL_θ + L^BYOL_ξ
+  \]
+
+## References
+
+14. Grill et al., Bootstrap Your Own Latent: A New Approach to Self-Supervised Learning, arXiv 2020
+
+Vincent N B (IIIT-H)
+
+§12.2 Self-Supervised Learning
+
+```
+
+# DL4CV_Week12_Part02.pdf - Page 39
+
+```markdown
+# Homework
+
+## Readings
+
+- [Lilian Weng, Self-Supervised Representation Learning](#)
+
+![NPTEL](data:image/png;base64,...) 
+
+Vineeth N B (IIT-H)  §12.2 Self-Supervised Learning 
+
+21 / 23
+```
+
+# DL4CV_Week12_Part02.pdf - Page 40
+
+```markdown
+# References
+
+## References I
+
+- Mehdi Noroozi and Paolo Favaro. **"Unsupervised Learning of Visual Representations by Solving Jigsaw Puzzles"**. In: *Computer Vision – ECCV 2016*. Ed. by Bastian Leibe et al. 2016.
+- Deepak Pathak et al. **"Context Encoders: Feature Learning by Inpainting"**. In: 2016.
+- Richard Zhang, Phillip Isola, and Alexei A Efros. **"Colorful Image Colorization"**. In: *ECCV*. 2016.
+- Spyros Gidaris, Praveer Singh, and Nikos Komodakis. **"Unsupervised Representation Learning by Predicting Image Rotations"**. In: *International Conference on Learning Representations*. 2018.
+- Kaiming He et al. **"Momentum Contrast for Unsupervised Visual Representation Learning"**. In: *arXiv preprint arXiv:1911.05722* (2019).
+- Lilian Weng. **"Self-Supervised Representation Learning"**. In: *lilianweng.github.io/lil-log* (2019).
+- Ankan Anand. *Contrastive Self-Supervised Learning*. 2020.
+
+```
+
+# DL4CV_Week12_Part02.pdf - Page 41
+
+```markdown
+# References II
+
+- Ting Chen et al. **"A Simple Framework for Contrastive Learning of Visual Representations".** In: *arXiv preprint arXiv:2002.05709* (2020).
+
+- Jean-Bastien Grill et al. **Bootstrap your own latent: A new approach to self-supervised Learning.** 2020. arXiv: 2006.07733 [cs.LG].
+
+- Jeremy Howard. **Self-supervised learning and computer vision.** 2020.
+
+![NPTEL Logo](image_url_placeholder)
+
+Vineeth N B (IIT-H) §12.2 Self-Supervised Learning 23 / 23
+```
+

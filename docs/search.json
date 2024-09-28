@@ -8254,5 +8254,894 @@
       "Reinforcement Learning",
       "Week 1.2"
     ]
+  },
+  {
+    "objectID": "pages/DL/Week07.html",
+    "href": "pages/DL/Week07.html",
+    "title": "Topics in Deep Learning",
+    "section": "",
+    "text": "Training deep neural networks has been a long-standing challenge in machine learning. The main issue lies in the optimization of the network’s weights, which is a complex and non-convex problem. Before 2006, training deep neural networks was difficult due to the vanishing gradient problem, where the gradients used to update the weights become smaller as they propagate through the network, making it hard to optimize the weights.\n\n\n\nIn 2006, a seminal work introduced the concept of unsupervised pre-training, which allows for the training of deep neural networks. The idea is to train one layer at a time, using an unsupervised objective function. This is done by reconstructing the input from the hidden layer, rather than predicting the output.\n\n\nAn autoencoder is a neural network that tries to reconstruct its input. It consists of an encoder that maps the input to a hidden representation, and a decoder that maps the hidden representation back to the input. The objective function is to minimize the difference between the input and the reconstructed input.\nLet’s denote the input vector as \\(\\mathbf{x}\\), the hidden representation as \\(\\mathbf{h}\\), and the reconstructed input as \\(\\hat{\\mathbf{x}}\\). The autoencoder can be represented as:\n\\[\n\\mathbf{h} = \\mathbf{g}^{(1)}(\\mathbf{W}^{(1)} \\mathbf{x} + \\mathbf{b}^{(1)})\n\\]\n\\[\n\\hat{\\mathbf{x}} = \\mathbf{g}^{(2)}(\\mathbf{W}^{(2)} \\mathbf{h} + \\mathbf{b}^{(2)})\n\\]\nThe objective function is to minimize the reconstruction error, which is typically measured using the mean squared error (MSE) or cross-entropy loss:\n\\[\n\\mathcal{L}(\\theta) = \\frac{1}{2} \\left\\lVert \\mathbf{x} - \\hat{\\mathbf{x}} \\right\\rVert^2\n\\]\n\n\n\nIn unsupervised pre-training, the autoencoder is trained to reconstruct the input from the hidden layer. This is done by minimizing the reconstruction error using the objective function above. The hidden layer is trained to capture the important features of the input, and the decoder is trained to reconstruct the input from these features.\nThe unsupervised pre-training process is done in a greedy layer-wise manner. Each layer is trained independently, using the output of the previous layer as the input. This process is repeated until all layers are trained.\nLet’s denote the input to the \\(i\\)-th layer as \\(\\mathbf{x}^{(i-1)}\\), the hidden representation as \\(\\mathbf{h}^{(i)}\\), and the reconstructed input as \\(\\hat{\\mathbf{x}}^{(i-1)}\\). The \\(i\\)-th layer can be represented as:\n\\[\n\\mathbf{h}^{(i)} = \\mathbf{g}^{(i)}(\\mathbf{W}^{(i)} \\mathbf{x}^{(i-1)} + \\mathbf{b}^{(i)})\n\\]\n\\[\n\\hat{\\mathbf{x}}^{(i-1)} = \\mathbf{g}^{(i+1)}(\\mathbf{W}^{(i+1)} \\mathbf{h}^{(i)} + \\mathbf{b}^{(i+1)})\n\\]\nThe objective function for the \\(i\\)-th layer is to minimize the reconstruction error:\n\\[\n\\mathcal{L}(\\theta^{(i)}) = \\frac{1}{2} \\left\\lVert \\mathbf{x}^{(i-1)} - \\hat{\\mathbf{x}}^{(i-1)} \\right\\rVert^2\n\\]\n\n\n\nEach layer in the network captures an abstract representation of the input. The first layer captures the most important features of the input, and each subsequent layer captures a more abstract representation of the previous layer.\n\n\n\nOnce all layers are trained using unsupervised pre-training, the network is fine-tuned using a supervised objective function. The weights learned during unsupervised pre-training are used as the initialization for the supervised fine-tuning.\nLet’s denote the output vector as \\(\\mathbf{y}\\), and the network’s output as \\(\\hat{\\mathbf{y}}\\). The supervised objective function is to minimize the difference between the output and the predicted output:\n\\[\n\\mathcal{L}(\\theta) = \\frac{1}{2} \\left\\lVert \\mathbf{y} - \\hat{\\mathbf{y}} \\right\\rVert^2\n\\]\n\n\n\n\nThere are two possible reasons why unsupervised pre-training works: better optimization and better regularization.\n\n\nUnsupervised pre-training can lead to better optimization of the network’s weights. By training each layer independently, the network is able to converge to a better minimum of the loss function.\n\n\n\nUnsupervised pre-training can also lead to better regularization of the network. By capturing the important features of the input, the network is able to generalize better to unseen data.\n\n\n\n\nThe work on unsupervised pre-training led to a series of advances in deep learning, including better optimization algorithms, regularization techniques, and initialization methods. It also sparked interest in designing better methods for optimization and regularization.\n\n\nOne of the most popular optimization algorithms is Adam, which is an adaptive learning rate method. Adam adapts the learning rate for each parameter based on the magnitude of the gradient.\nLet’s denote the velocity at iteration \\(t\\) as \\(\\mathbf{u}_t\\), the accumulated history of squared gradients at iteration \\(t\\) as \\(v_t\\), and the hyperparameter controlling the exponential decay rate as \\(\\beta\\). The update rule for Adam is:\n\\[\n\\mathbf{u}_t = \\beta \\mathbf{u}_{t-1} + (1 - \\beta) \\nabla \\mathcal{L}_t\n\\]\n\\[\nv_t = \\beta v_{t-1} + (1 - \\beta) \\nabla \\mathcal{L}_t^2\n\\]\n\\[\n\\theta_t = \\theta_{t-1} - \\eta \\frac{\\mathbf{u}_t}{\\sqrt{v_t} + \\epsilon}\n\\]\n\n\n\nOne of the most popular regularization techniques is dropout, which randomly drops out neurons during training. Dropout prevents the network from overfitting by making it difficult for the network to rely on any single neuron.\nLet’s denote the dropout rate as \\(p\\), and the binary mask as \\(\\mathbf{m}\\). The output of the \\(i\\)-th layer with dropout is:\n\\[\n\\mathbf{h}^{(i)} = \\mathbf{g}^{(i)}(\\mathbf{W}^{(i)} \\mathbf{x}^{(i-1)} + \\mathbf{b}^{(i)}) \\odot \\mathbf{m}\n\\]\nwhere \\(\\odot\\) denotes element-wise multiplication."
+  },
+  {
+    "objectID": "pages/DL/Week07.html#the-challenge-of-training-deep-neural-networks",
+    "href": "pages/DL/Week07.html#the-challenge-of-training-deep-neural-networks",
+    "title": "Topics in Deep Learning",
+    "section": "",
+    "text": "Training deep neural networks has been a long-standing challenge in machine learning. The main issue lies in the optimization of the network’s weights, which is a complex and non-convex problem. Before 2006, training deep neural networks was difficult due to the vanishing gradient problem, where the gradients used to update the weights become smaller as they propagate through the network, making it hard to optimize the weights."
+  },
+  {
+    "objectID": "pages/DL/Week07.html#unsupervised-pre-training-a-solution-to-the-problem",
+    "href": "pages/DL/Week07.html#unsupervised-pre-training-a-solution-to-the-problem",
+    "title": "Topics in Deep Learning",
+    "section": "",
+    "text": "In 2006, a seminal work introduced the concept of unsupervised pre-training, which allows for the training of deep neural networks. The idea is to train one layer at a time, using an unsupervised objective function. This is done by reconstructing the input from the hidden layer, rather than predicting the output.\n\n\nAn autoencoder is a neural network that tries to reconstruct its input. It consists of an encoder that maps the input to a hidden representation, and a decoder that maps the hidden representation back to the input. The objective function is to minimize the difference between the input and the reconstructed input.\nLet’s denote the input vector as \\(\\mathbf{x}\\), the hidden representation as \\(\\mathbf{h}\\), and the reconstructed input as \\(\\hat{\\mathbf{x}}\\). The autoencoder can be represented as:\n\\[\n\\mathbf{h} = \\mathbf{g}^{(1)}(\\mathbf{W}^{(1)} \\mathbf{x} + \\mathbf{b}^{(1)})\n\\]\n\\[\n\\hat{\\mathbf{x}} = \\mathbf{g}^{(2)}(\\mathbf{W}^{(2)} \\mathbf{h} + \\mathbf{b}^{(2)})\n\\]\nThe objective function is to minimize the reconstruction error, which is typically measured using the mean squared error (MSE) or cross-entropy loss:\n\\[\n\\mathcal{L}(\\theta) = \\frac{1}{2} \\left\\lVert \\mathbf{x} - \\hat{\\mathbf{x}} \\right\\rVert^2\n\\]\n\n\n\nIn unsupervised pre-training, the autoencoder is trained to reconstruct the input from the hidden layer. This is done by minimizing the reconstruction error using the objective function above. The hidden layer is trained to capture the important features of the input, and the decoder is trained to reconstruct the input from these features.\nThe unsupervised pre-training process is done in a greedy layer-wise manner. Each layer is trained independently, using the output of the previous layer as the input. This process is repeated until all layers are trained.\nLet’s denote the input to the \\(i\\)-th layer as \\(\\mathbf{x}^{(i-1)}\\), the hidden representation as \\(\\mathbf{h}^{(i)}\\), and the reconstructed input as \\(\\hat{\\mathbf{x}}^{(i-1)}\\). The \\(i\\)-th layer can be represented as:\n\\[\n\\mathbf{h}^{(i)} = \\mathbf{g}^{(i)}(\\mathbf{W}^{(i)} \\mathbf{x}^{(i-1)} + \\mathbf{b}^{(i)})\n\\]\n\\[\n\\hat{\\mathbf{x}}^{(i-1)} = \\mathbf{g}^{(i+1)}(\\mathbf{W}^{(i+1)} \\mathbf{h}^{(i)} + \\mathbf{b}^{(i+1)})\n\\]\nThe objective function for the \\(i\\)-th layer is to minimize the reconstruction error:\n\\[\n\\mathcal{L}(\\theta^{(i)}) = \\frac{1}{2} \\left\\lVert \\mathbf{x}^{(i-1)} - \\hat{\\mathbf{x}}^{(i-1)} \\right\\rVert^2\n\\]\n\n\n\nEach layer in the network captures an abstract representation of the input. The first layer captures the most important features of the input, and each subsequent layer captures a more abstract representation of the previous layer.\n\n\n\nOnce all layers are trained using unsupervised pre-training, the network is fine-tuned using a supervised objective function. The weights learned during unsupervised pre-training are used as the initialization for the supervised fine-tuning.\nLet’s denote the output vector as \\(\\mathbf{y}\\), and the network’s output as \\(\\hat{\\mathbf{y}}\\). The supervised objective function is to minimize the difference between the output and the predicted output:\n\\[\n\\mathcal{L}(\\theta) = \\frac{1}{2} \\left\\lVert \\mathbf{y} - \\hat{\\mathbf{y}} \\right\\rVert^2\n\\]"
+  },
+  {
+    "objectID": "pages/DL/Week07.html#why-unsupervised-pre-training-works",
+    "href": "pages/DL/Week07.html#why-unsupervised-pre-training-works",
+    "title": "Topics in Deep Learning",
+    "section": "",
+    "text": "There are two possible reasons why unsupervised pre-training works: better optimization and better regularization.\n\n\nUnsupervised pre-training can lead to better optimization of the network’s weights. By training each layer independently, the network is able to converge to a better minimum of the loss function.\n\n\n\nUnsupervised pre-training can also lead to better regularization of the network. By capturing the important features of the input, the network is able to generalize better to unseen data."
+  },
+  {
+    "objectID": "pages/DL/Week07.html#impact-of-unsupervised-pre-training",
+    "href": "pages/DL/Week07.html#impact-of-unsupervised-pre-training",
+    "title": "Topics in Deep Learning",
+    "section": "",
+    "text": "The work on unsupervised pre-training led to a series of advances in deep learning, including better optimization algorithms, regularization techniques, and initialization methods. It also sparked interest in designing better methods for optimization and regularization.\n\n\nOne of the most popular optimization algorithms is Adam, which is an adaptive learning rate method. Adam adapts the learning rate for each parameter based on the magnitude of the gradient.\nLet’s denote the velocity at iteration \\(t\\) as \\(\\mathbf{u}_t\\), the accumulated history of squared gradients at iteration \\(t\\) as \\(v_t\\), and the hyperparameter controlling the exponential decay rate as \\(\\beta\\). The update rule for Adam is:\n\\[\n\\mathbf{u}_t = \\beta \\mathbf{u}_{t-1} + (1 - \\beta) \\nabla \\mathcal{L}_t\n\\]\n\\[\nv_t = \\beta v_{t-1} + (1 - \\beta) \\nabla \\mathcal{L}_t^2\n\\]\n\\[\n\\theta_t = \\theta_{t-1} - \\eta \\frac{\\mathbf{u}_t}{\\sqrt{v_t} + \\epsilon}\n\\]\n\n\n\nOne of the most popular regularization techniques is dropout, which randomly drops out neurons during training. Dropout prevents the network from overfitting by making it difficult for the network to rely on any single neuron.\nLet’s denote the dropout rate as \\(p\\), and the binary mask as \\(\\mathbf{m}\\). The output of the \\(i\\)-th layer with dropout is:\n\\[\n\\mathbf{h}^{(i)} = \\mathbf{g}^{(i)}(\\mathbf{W}^{(i)} \\mathbf{x}^{(i-1)} + \\mathbf{b}^{(i)}) \\odot \\mathbf{m}\n\\]\nwhere \\(\\odot\\) denotes element-wise multiplication."
+  },
+  {
+    "objectID": "pages/DL/Week08.html",
+    "href": "pages/DL/Week08.html",
+    "title": "Convolutional Neural Networks",
+    "section": "",
+    "text": "Convolutional Neural Networks (CNNs) are a type of neural network architecture that have revolutionized the field of image and signal processing. They are designed to take advantage of the spatial structure in data, such as images, and have been instrumental in achieving state-of-the-art performance in various computer vision tasks.\n\n\nThe convolution operation is a fundamental component of CNNs. It is a weighted sum of the input data, where the weights are learned during training. Mathematically, the convolution operation can be represented as:\n\\[\\mathbf{y} = \\mathbf{W} \\ast \\mathbf{x} + \\mathbf{b}\\]\nwhere \\(\\mathbf{x}\\) is the input vector, \\(\\mathbf{W}\\) is the weight matrix, \\(\\mathbf{b}\\) is the bias vector, and \\(\\ast\\) denotes the convolution operator.\n\n\n\nIn 1D convolution, a filter (also known as a kernel) is applied to a 1D input data. The filter slides over the input data, and at each position, the dot product of the filter and the input data is computed. The resulting output is a feature map, which represents the presence of a particular feature in the input data.\nMathematically, the 1D convolution operation can be represented as:\n\\[y[i] = \\sum_{m=0}^{M-1} x[i+m] \\cdot w[m] + b\\]\nwhere \\(y[i]\\) is the output at position \\(i\\), \\(x[i]\\) is the input data at position \\(i\\), \\(w[m]\\) is the filter weight at position \\(m\\), and \\(b\\) is the bias term.\n\n\n\nIn 2D convolution, a 2D filter is applied to a 2D input data, such as an image. The filter slides over the input data, and at each position, the dot product of the filter and the input data is computed. The resulting output is a feature map, which represents the presence of a particular feature in the input data.\nMathematically, the 2D convolution operation can be represented as:\n\\[y[i, j] = \\sum_{m=0}^{M-1} \\sum_{n=0}^{N-1} x[i+m, j+n] \\cdot w[m, n] + b\\]\nwhere \\(y[i, j]\\) is the output at position \\((i, j)\\), \\(x[i, j]\\) is the input data at position \\((i, j)\\), \\(w[m, n]\\) is the filter weight at position \\((m, n)\\), and \\(b\\) is the bias term.\n\n\n\nThe centered formula for 2D convolution is:\n\\[y[i, j] = \\sum_{m=-M/2}^{M/2} \\sum_{n=-N/2}^{N/2} x[i+m, j+n] \\cdot w[m, n] + b\\]\nwhere \\(M\\) and \\(N\\) are the dimensions of the filter.\n\n\n\n\nBlurring: A filter with all weights equal to \\(1/9\\) can be used to blur an image.\nSharpening: A filter with a weight of \\(5\\) at the center and \\(-1\\) at the surrounding pixels can be used to sharpen an image.\nEdge Detection: A filter with weights of \\(-1, -1, -1, -1, 8, -1, -1, -1, -1\\) can be used to detect edges in an image.\n\n\n\n\nIn 3D convolution, a 3D filter is applied to a 3D input data, such as a color image. The filter slides over the input data, and at each position, the dot product of the filter and the input data is computed. The resulting output is a feature map, which represents the presence of a particular feature in the input data.\nMathematically, the 3D convolution operation can be represented as:\n\\[y[i, j, k] = \\sum_{m=0}^{M-1} \\sum_{n=0}^{N-1} \\sum_{o=0}^{O-1} x[i+m, j+n, k+o] \\cdot w[m, n, o] + b\\]\nwhere \\(y[i, j, k]\\) is the output at position \\((i, j, k)\\), \\(x[i, j, k]\\) is the input data at position \\((i, j, k)\\), \\(w[m, n, o]\\) is the filter weight at position \\((m, n, o)\\), and \\(b\\) is the bias term.\n\n\n\nThe output size of a convolution operation depends on the input size, filter size, and stride. The formula for the output size is:\n\\[W_2 = \\frac{W_1 - F + 2P}{S} + 1\\]\n\\[H_2 = \\frac{H_1 - F + 2P}{S} + 1\\]\nwhere \\(W_1\\) and \\(H_1\\) are the input sizes, \\(F\\) is the filter size, \\(P\\) is the padding, and \\(S\\) is the stride.\n\n\n\nPadding is used to ensure that the output size is the same as the input size. The padding is added to the input data, and the filter is applied to the padded input data.\n\n\n\nThe stride defines the interval at which the filter is applied. A stride of \\(2\\) means that the filter is applied to every other pixel, resulting in an output size that is half of the input size.\n\n\n\nThe depth of the output is equal to the number of filters used in the convolution operation. Each filter produces a 2D feature map, and the depth of the output is the number of feature maps."
+  },
+  {
+    "objectID": "pages/DL/Week08.html#introduction",
+    "href": "pages/DL/Week08.html#introduction",
+    "title": "Convolutional Neural Networks",
+    "section": "",
+    "text": "Convolutional Neural Networks (CNNs) are a type of neural network architecture that have revolutionized the field of image and signal processing. They are designed to take advantage of the spatial structure in data, such as images, and have been instrumental in achieving state-of-the-art performance in various computer vision tasks."
+  },
+  {
+    "objectID": "pages/DL/Week08.html#convolution-operation",
+    "href": "pages/DL/Week08.html#convolution-operation",
+    "title": "Convolutional Neural Networks",
+    "section": "",
+    "text": "The convolution operation is a fundamental component of CNNs. It is a weighted sum of the input data, where the weights are learned during training. Mathematically, the convolution operation can be represented as:\n\\[\\mathbf{y} = \\mathbf{W} \\ast \\mathbf{x} + \\mathbf{b}\\]\nwhere \\(\\mathbf{x}\\) is the input vector, \\(\\mathbf{W}\\) is the weight matrix, \\(\\mathbf{b}\\) is the bias vector, and \\(\\ast\\) denotes the convolution operator."
+  },
+  {
+    "objectID": "pages/DL/Week08.html#d-convolution",
+    "href": "pages/DL/Week08.html#d-convolution",
+    "title": "Convolutional Neural Networks",
+    "section": "",
+    "text": "In 1D convolution, a filter (also known as a kernel) is applied to a 1D input data. The filter slides over the input data, and at each position, the dot product of the filter and the input data is computed. The resulting output is a feature map, which represents the presence of a particular feature in the input data.\nMathematically, the 1D convolution operation can be represented as:\n\\[y[i] = \\sum_{m=0}^{M-1} x[i+m] \\cdot w[m] + b\\]\nwhere \\(y[i]\\) is the output at position \\(i\\), \\(x[i]\\) is the input data at position \\(i\\), \\(w[m]\\) is the filter weight at position \\(m\\), and \\(b\\) is the bias term."
+  },
+  {
+    "objectID": "pages/DL/Week08.html#d-convolution-1",
+    "href": "pages/DL/Week08.html#d-convolution-1",
+    "title": "Convolutional Neural Networks",
+    "section": "",
+    "text": "In 2D convolution, a 2D filter is applied to a 2D input data, such as an image. The filter slides over the input data, and at each position, the dot product of the filter and the input data is computed. The resulting output is a feature map, which represents the presence of a particular feature in the input data.\nMathematically, the 2D convolution operation can be represented as:\n\\[y[i, j] = \\sum_{m=0}^{M-1} \\sum_{n=0}^{N-1} x[i+m, j+n] \\cdot w[m, n] + b\\]\nwhere \\(y[i, j]\\) is the output at position \\((i, j)\\), \\(x[i, j]\\) is the input data at position \\((i, j)\\), \\(w[m, n]\\) is the filter weight at position \\((m, n)\\), and \\(b\\) is the bias term."
+  },
+  {
+    "objectID": "pages/DL/Week08.html#centered-formula-for-2d-convolution",
+    "href": "pages/DL/Week08.html#centered-formula-for-2d-convolution",
+    "title": "Convolutional Neural Networks",
+    "section": "",
+    "text": "The centered formula for 2D convolution is:\n\\[y[i, j] = \\sum_{m=-M/2}^{M/2} \\sum_{n=-N/2}^{N/2} x[i+m, j+n] \\cdot w[m, n] + b\\]\nwhere \\(M\\) and \\(N\\) are the dimensions of the filter."
+  },
+  {
+    "objectID": "pages/DL/Week08.html#examples-of-2d-convolution",
+    "href": "pages/DL/Week08.html#examples-of-2d-convolution",
+    "title": "Convolutional Neural Networks",
+    "section": "",
+    "text": "Blurring: A filter with all weights equal to \\(1/9\\) can be used to blur an image.\nSharpening: A filter with a weight of \\(5\\) at the center and \\(-1\\) at the surrounding pixels can be used to sharpen an image.\nEdge Detection: A filter with weights of \\(-1, -1, -1, -1, 8, -1, -1, -1, -1\\) can be used to detect edges in an image."
+  },
+  {
+    "objectID": "pages/DL/Week08.html#d-convolution-2",
+    "href": "pages/DL/Week08.html#d-convolution-2",
+    "title": "Convolutional Neural Networks",
+    "section": "",
+    "text": "In 3D convolution, a 3D filter is applied to a 3D input data, such as a color image. The filter slides over the input data, and at each position, the dot product of the filter and the input data is computed. The resulting output is a feature map, which represents the presence of a particular feature in the input data.\nMathematically, the 3D convolution operation can be represented as:\n\\[y[i, j, k] = \\sum_{m=0}^{M-1} \\sum_{n=0}^{N-1} \\sum_{o=0}^{O-1} x[i+m, j+n, k+o] \\cdot w[m, n, o] + b\\]\nwhere \\(y[i, j, k]\\) is the output at position \\((i, j, k)\\), \\(x[i, j, k]\\) is the input data at position \\((i, j, k)\\), \\(w[m, n, o]\\) is the filter weight at position \\((m, n, o)\\), and \\(b\\) is the bias term."
+  },
+  {
+    "objectID": "pages/DL/Week08.html#relationship-between-input-size-output-size-and-filter-size",
+    "href": "pages/DL/Week08.html#relationship-between-input-size-output-size-and-filter-size",
+    "title": "Convolutional Neural Networks",
+    "section": "",
+    "text": "The output size of a convolution operation depends on the input size, filter size, and stride. The formula for the output size is:\n\\[W_2 = \\frac{W_1 - F + 2P}{S} + 1\\]\n\\[H_2 = \\frac{H_1 - F + 2P}{S} + 1\\]\nwhere \\(W_1\\) and \\(H_1\\) are the input sizes, \\(F\\) is the filter size, \\(P\\) is the padding, and \\(S\\) is the stride."
+  },
+  {
+    "objectID": "pages/DL/Week08.html#padding",
+    "href": "pages/DL/Week08.html#padding",
+    "title": "Convolutional Neural Networks",
+    "section": "",
+    "text": "Padding is used to ensure that the output size is the same as the input size. The padding is added to the input data, and the filter is applied to the padded input data."
+  },
+  {
+    "objectID": "pages/DL/Week08.html#stride",
+    "href": "pages/DL/Week08.html#stride",
+    "title": "Convolutional Neural Networks",
+    "section": "",
+    "text": "The stride defines the interval at which the filter is applied. A stride of \\(2\\) means that the filter is applied to every other pixel, resulting in an output size that is half of the input size."
+  },
+  {
+    "objectID": "pages/DL/Week08.html#depth-of-the-output",
+    "href": "pages/DL/Week08.html#depth-of-the-output",
+    "title": "Convolutional Neural Networks",
+    "section": "",
+    "text": "The depth of the output is equal to the number of filters used in the convolution operation. Each filter produces a 2D feature map, and the depth of the output is the number of feature maps."
+  },
+  {
+    "objectID": "pages/NLP/Week01.html",
+    "href": "pages/NLP/Week01.html",
+    "title": "Introduction to Natural Language Processing",
+    "section": "",
+    "text": "Natural Language (NL) refers to the languages spoken by humans for everyday communication. It is distinct from formal or artificial languages, such as programming languages, and non-human communication systems.\n\n\n\nExamples of natural languages include English, Tamil, Hindi, Mandarin, Spanish, and many others.\n\n\n\nUnderstanding natural language is essential for various applications, including chatbots, sentiment analysis, machine translation, and speech recognition.",
+    "crumbs": [
+      "NLP",
+      "Week 1"
+    ]
+  },
+  {
+    "objectID": "pages/NLP/Week01.html#definition-and-scope",
+    "href": "pages/NLP/Week01.html#definition-and-scope",
+    "title": "Introduction to Natural Language Processing",
+    "section": "",
+    "text": "Natural Language (NL) refers to the languages spoken by humans for everyday communication. It is distinct from formal or artificial languages, such as programming languages, and non-human communication systems.",
+    "crumbs": [
+      "NLP",
+      "Week 1"
+    ]
+  },
+  {
+    "objectID": "pages/NLP/Week01.html#examples-of-natural-languages",
+    "href": "pages/NLP/Week01.html#examples-of-natural-languages",
+    "title": "Introduction to Natural Language Processing",
+    "section": "",
+    "text": "Examples of natural languages include English, Tamil, Hindi, Mandarin, Spanish, and many others.",
+    "crumbs": [
+      "NLP",
+      "Week 1"
+    ]
+  },
+  {
+    "objectID": "pages/NLP/Week01.html#importance-of-natural-language",
+    "href": "pages/NLP/Week01.html#importance-of-natural-language",
+    "title": "Introduction to Natural Language Processing",
+    "section": "",
+    "text": "Understanding natural language is essential for various applications, including chatbots, sentiment analysis, machine translation, and speech recognition.",
+    "crumbs": [
+      "NLP",
+      "Week 1"
+    ]
+  },
+  {
+    "objectID": "pages/NLP/Week01.html#definition-and-scope-1",
+    "href": "pages/NLP/Week01.html#definition-and-scope-1",
+    "title": "Introduction to Natural Language Processing",
+    "section": "Definition and Scope",
+    "text": "Definition and Scope\nNatural Language Processing (NLP) enables computer systems to understand, interpret, and generate human language. It combines computational linguistics with machine learning and deep learning models to process and analyze large amounts of natural language data.",
+    "crumbs": [
+      "NLP",
+      "Week 1"
+    ]
+  },
+  {
+    "objectID": "pages/NLP/Week01.html#applications-of-nlp",
+    "href": "pages/NLP/Week01.html#applications-of-nlp",
+    "title": "Introduction to Natural Language Processing",
+    "section": "Applications of NLP",
+    "text": "Applications of NLP\nApplications of NLP include chatbots, sentiment analysis, machine translation, speech recognition, and many others.",
+    "crumbs": [
+      "NLP",
+      "Week 1"
+    ]
+  },
+  {
+    "objectID": "pages/NLP/Week01.html#nlp-as-a-field-of-ai",
+    "href": "pages/NLP/Week01.html#nlp-as-a-field-of-ai",
+    "title": "Introduction to Natural Language Processing",
+    "section": "NLP as a Field of AI",
+    "text": "NLP as a Field of AI\nNLP is a field of artificial intelligence that focuses on the interaction between computers and humans using natural language.",
+    "crumbs": [
+      "NLP",
+      "Week 1"
+    ]
+  },
+  {
+    "objectID": "pages/NLP/Week01.html#goals-of-nlp",
+    "href": "pages/NLP/Week01.html#goals-of-nlp",
+    "title": "Introduction to Natural Language Processing",
+    "section": "Goals of NLP",
+    "text": "Goals of NLP\nThe goal of NLP is to enable computers to understand, interpret, and generate human language in a way that is both valuable and meaningful.",
+    "crumbs": [
+      "NLP",
+      "Week 1"
+    ]
+  },
+  {
+    "objectID": "pages/NLP/Week01.html#overview",
+    "href": "pages/NLP/Week01.html#overview",
+    "title": "Introduction to Natural Language Processing",
+    "section": "Overview",
+    "text": "Overview\nThe levels of language processing in NLP include:\n\nPhonological Level\nMorphological Level\nLexical Level\nSyntactic Level\nSemantic Level\nDiscourse Level\nPragmatic Level",
+    "crumbs": [
+      "NLP",
+      "Week 1"
+    ]
+  },
+  {
+    "objectID": "pages/NLP/Week01.html#phonological-level",
+    "href": "pages/NLP/Week01.html#phonological-level",
+    "title": "Introduction to Natural Language Processing",
+    "section": "Phonological Level",
+    "text": "Phonological Level\nThe phonological level focuses on the processing of sounds in natural language, including their organization and patterns.\n\nKey Components\n\nPhonemes: The smallest units of sound that distinguish meaning.\nPhonetic Transcription: Representing sounds using phonetic symbols (e.g., IPA).\nProsody: The rhythm, stress, and intonation patterns of speech that convey meaning beyond the words themselves.\n\n\n\nExamples\n\nSpeech Recognition: Identifying spoken words by analyzing phonemes.\nText-to-Speech (TTS): Generating spoken language from text while considering prosody for natural-sounding speech.\nAccent Recognition: Differentiating between various accents (e.g., American vs. British English) by analyzing phonetic patterns.",
+    "crumbs": [
+      "NLP",
+      "Week 1"
+    ]
+  },
+  {
+    "objectID": "pages/NLP/Week01.html#key-components",
+    "href": "pages/NLP/Week01.html#key-components",
+    "title": "Introduction to Natural Language Processing",
+    "section": "Key Components",
+    "text": "Key Components\n\nPhonemes: The smallest units of sound that distinguish meaning.\nPhonetic Transcription: Representing sounds using phonetic symbols (e.g., IPA).\nProsody: The rhythm, stress, and intonation patterns of speech that convey meaning beyond the words themselves.",
+    "crumbs": [
+      "NLP",
+      "Week 1"
+    ]
+  },
+  {
+    "objectID": "pages/NLP/Week01.html#examples",
+    "href": "pages/NLP/Week01.html#examples",
+    "title": "Introduction to Natural Language Processing",
+    "section": "Examples",
+    "text": "Examples\n\nSpeech Recognition: Identifying spoken words by analyzing phonemes.\nText-to-Speech (TTS): Generating spoken language from text while considering prosody for natural-sounding speech.\nAccent Recognition: Differentiating between various accents (e.g., American vs. British English) by analyzing phonetic patterns.",
+    "crumbs": [
+      "NLP",
+      "Week 1"
+    ]
+  },
+  {
+    "objectID": "pages/NLP/Week01.html#morphological-level",
+    "href": "pages/NLP/Week01.html#morphological-level",
+    "title": "Introduction to Natural Language Processing",
+    "section": "Morphological Level",
+    "text": "Morphological Level\nThe morphological level involves the study of the structure and formation of words, including their internal components.\n\nKey Components\n\nMorphemes: The smallest meaningful units of language (e.g., prefixes, suffixes, roots).\nInflection: Modifications of words to express different grammatical categories (e.g., tense, number).\nDerivation: The process of creating new words by adding prefixes or suffixes (e.g., “happy” → “unhappy”).\n\n\n\nExamples\n\nMorphological Analysis: Analyzing the structure of words (prefixes, suffixes).\nLemmatization: Reducing words to their base or dictionary form.\nStemming: Cutting words to their root forms.\nPart-of-Speech Tagging: Identifying the grammatical category of words based on their morphology.",
+    "crumbs": [
+      "NLP",
+      "Week 1"
+    ]
+  },
+  {
+    "objectID": "pages/NLP/Week01.html#key-components-1",
+    "href": "pages/NLP/Week01.html#key-components-1",
+    "title": "Introduction to Natural Language Processing",
+    "section": "Key Components",
+    "text": "Key Components\n\nMorphemes: The smallest meaningful units of language (e.g., prefixes, suffixes, roots).\nInflection: Modifications of words to express different grammatical categories (e.g., tense, number).\nDerivation: The process of creating new words by adding prefixes or suffixes (e.g., “happy” → “unhappy”).",
+    "crumbs": [
+      "NLP",
+      "Week 1"
+    ]
+  },
+  {
+    "objectID": "pages/NLP/Week01.html#examples-1",
+    "href": "pages/NLP/Week01.html#examples-1",
+    "title": "Introduction to Natural Language Processing",
+    "section": "Examples",
+    "text": "Examples\n\nMorphological Analysis: Analyzing the structure of words (prefixes, suffixes).\nLemmatization: Reducing words to their base or dictionary form.\nStemming: Cutting words to their root forms.\nPart-of-Speech Tagging: Identifying the grammatical category of words based on their morphology.",
+    "crumbs": [
+      "NLP",
+      "Week 1"
+    ]
+  },
+  {
+    "objectID": "pages/NLP/Week01.html#lexical-level",
+    "href": "pages/NLP/Week01.html#lexical-level",
+    "title": "Introduction to Natural Language Processing",
+    "section": "Lexical Level",
+    "text": "Lexical Level\nThe lexical level deals with the vocabulary of a language, focusing on the meaning and usage of words.\n\nKey Components\n\nTokenization: The process of breaking text into individual words or tokens.\nLexical Semantics: The study of word meanings, relationships, and nuances (synonyms, antonyms, hypernyms).\nVocabulary: The set of words available in a language or a specific domain.\n\n\n\nExamples\n\nTokenization: Breaking text into individual words or tokens.\nLexical Semantics: Understanding the meanings of words and their relationships.\nSynonym Detection: Identifying words with similar meanings.",
+    "crumbs": [
+      "NLP",
+      "Week 1"
+    ]
+  },
+  {
+    "objectID": "pages/NLP/Week01.html#key-components-2",
+    "href": "pages/NLP/Week01.html#key-components-2",
+    "title": "Introduction to Natural Language Processing",
+    "section": "Key Components",
+    "text": "Key Components\n\nTokenization: The process of breaking text into individual words or tokens.\nLexical Semantics: The study of word meanings, relationships, and nuances (synonyms, antonyms, hypernyms).\nVocabulary: The set of words available in a language or a specific domain.",
+    "crumbs": [
+      "NLP",
+      "Week 1"
+    ]
+  },
+  {
+    "objectID": "pages/NLP/Week01.html#examples-2",
+    "href": "pages/NLP/Week01.html#examples-2",
+    "title": "Introduction to Natural Language Processing",
+    "section": "Examples",
+    "text": "Examples\n\nTokenization: Breaking text into individual words or tokens.\nLexical Semantics: Understanding the meanings of words and their relationships.\nSynonym Detection: Identifying words with similar meanings.",
+    "crumbs": [
+      "NLP",
+      "Week 1"
+    ]
+  },
+  {
+    "objectID": "pages/NLP/Week01.html#syntactic-level",
+    "href": "pages/NLP/Week01.html#syntactic-level",
+    "title": "Introduction to Natural Language Processing",
+    "section": "Syntactic Level",
+    "text": "Syntactic Level\nThe syntactic level involves the arrangement of words to form grammatical sentences and the study of sentence structure.\n\nKey Components\n\nParsing: The process of analyzing the grammatical structure of a sentence.\nConstituency Parsing: Identifying phrases within sentences based on hierarchical structure.\nDependency Parsing: Establishing relationships between words in a sentence and their dependencies.\n\n\n\nExamples\n\nParsing: Analyzing the grammatical structure of a sentence.\nConstituency Parsing: Identifying phrases within sentences.\nDependency Parsing: Establishing relationships between words.",
+    "crumbs": [
+      "NLP",
+      "Week 1"
+    ]
+  },
+  {
+    "objectID": "pages/NLP/Week01.html#key-components-3",
+    "href": "pages/NLP/Week01.html#key-components-3",
+    "title": "Introduction to Natural Language Processing",
+    "section": "Key Components",
+    "text": "Key Components\n\nParsing: The process of analyzing the grammatical structure of a sentence.\nConstituency Parsing: Identifying phrases within sentences based on hierarchical structure.\nDependency Parsing: Establishing relationships between words in a sentence and their dependencies.",
+    "crumbs": [
+      "NLP",
+      "Week 1"
+    ]
+  },
+  {
+    "objectID": "pages/NLP/Week01.html#examples-3",
+    "href": "pages/NLP/Week01.html#examples-3",
+    "title": "Introduction to Natural Language Processing",
+    "section": "Examples",
+    "text": "Examples\n\nParsing: Analyzing the grammatical structure of a sentence.\nConstituency Parsing: Identifying phrases within sentences.\nDependency Parsing: Establishing relationships between words.",
+    "crumbs": [
+      "NLP",
+      "Week 1"
+    ]
+  },
+  {
+    "objectID": "pages/NLP/Week01.html#semantic-level",
+    "href": "pages/NLP/Week01.html#semantic-level",
+    "title": "Introduction to Natural Language Processing",
+    "section": "Semantic Level",
+    "text": "Semantic Level\nThe semantic level deals with the meaning of words and phrases, focusing on their relationships and nuances.\n\nKey Components\n\nWord Sense Disambiguation: Resolving the meaning of words with multiple senses.\nSemantic Role Labeling: Identifying the roles played by entities in a sentence.\nCoreference Resolution: Identifying which words refer back to others.\n\n\n\nExamples\n\nWord Sense Disambiguation: Resolving the meaning of words.\nSemantic Role Labeling: Identifying the roles played by entities.\nCoreference Resolution: Identifying which words refer back to others.",
+    "crumbs": [
+      "NLP",
+      "Week 1"
+    ]
+  },
+  {
+    "objectID": "pages/NLP/Week01.html#key-components-4",
+    "href": "pages/NLP/Week01.html#key-components-4",
+    "title": "Introduction to Natural Language Processing",
+    "section": "Key Components",
+    "text": "Key Components\n\nWord Sense Disambiguation: Resolving the meaning of words with multiple senses.\nSemantic Role Labeling: Identifying the roles played by entities in a sentence.\nCoreference Resolution: Identifying which words refer back to others.",
+    "crumbs": [
+      "NLP",
+      "Week 1"
+    ]
+  },
+  {
+    "objectID": "pages/NLP/Week01.html#examples-4",
+    "href": "pages/NLP/Week01.html#examples-4",
+    "title": "Introduction to Natural Language Processing",
+    "section": "Examples",
+    "text": "Examples\n\nWord Sense Disambiguation: Resolving the meaning of words.\nSemantic Role Labeling: Identifying the roles played by entities.\nCoreference Resolution: Identifying which words refer back to others.",
+    "crumbs": [
+      "NLP",
+      "Week 1"
+    ]
+  },
+  {
+    "objectID": "pages/NLP/Week01.html#discourse-level",
+    "href": "pages/NLP/Week01.html#discourse-level",
+    "title": "Introduction to Natural Language Processing",
+    "section": "Discourse Level",
+    "text": "Discourse Level\nThe discourse level deals with how sentences relate to one another in larger contexts, focusing on coherence and cohesion in language.\n\nKey Components\n\nCoherence: The logical flow of ideas in a text, ensuring that sentences connect meaningfully.\nCohesion: The grammatical and lexical linking within a text that helps maintain the flow.\nAnaphora Resolution: Identifying which words refer back to others.\n\n\n\nExamples\n\nCoherence: Ensuring that sentences connect meaningfully.\nCohesion: Maintaining the flow of ideas in a text.\nAnaphora Resolution: Identifying which words refer back to others.",
+    "crumbs": [
+      "NLP",
+      "Week 1"
+    ]
+  },
+  {
+    "objectID": "pages/NLP/Week01.html#key-components-5",
+    "href": "pages/NLP/Week01.html#key-components-5",
+    "title": "Introduction to Natural Language Processing",
+    "section": "Key Components",
+    "text": "Key Components\n\nCoherence: The logical flow of ideas in a text, ensuring that sentences connect meaningfully.\nCohesion: The grammatical and lexical linking within a text that helps maintain the flow.\nAnaphora Resolution: Identifying which words refer back to others.",
+    "crumbs": [
+      "NLP",
+      "Week 1"
+    ]
+  },
+  {
+    "objectID": "pages/NLP/Week01.html#examples-5",
+    "href": "pages/NLP/Week01.html#examples-5",
+    "title": "Introduction to Natural Language Processing",
+    "section": "Examples",
+    "text": "Examples\n\nCoherence: Ensuring that sentences connect meaningfully.\nCohesion: Maintaining the flow of ideas in a text.\nAnaphora Resolution: Identifying which words refer back to others.",
+    "crumbs": [
+      "NLP",
+      "Week 1"
+    ]
+  },
+  {
+    "objectID": "pages/NLP/Week01.html#pragmatic-level",
+    "href": "pages/NLP/Week01.html#pragmatic-level",
+    "title": "Introduction to Natural Language Processing",
+    "section": "Pragmatic Level",
+    "text": "Pragmatic Level\nThe pragmatic level deals with the purposeful use of language in situations, focusing on context and implicit meaning.\n\nKey Components\n\nSpeech Acts: The phrase “Can you pass the salt?” is a request, not just a question about capability.\nDeixis: The interpretation of “here” and “tomorrow” depends on the speaker’s location and the current day.\nContextual Understanding: In a conversation where one person says, “It’s cold in here,” they may be implying a request to close a window rather than just stating a fact.\n\n\n\nExamples\n\nSpeech Acts: Understanding the purpose of language in a situation.\nDeixis: Understanding the interpretation of words based on context.\nContextual Understanding: Understanding the meaning of language in a conversation.",
+    "crumbs": [
+      "NLP",
+      "Week 1"
+    ]
+  },
+  {
+    "objectID": "pages/NLP/Week01.html#key-components-6",
+    "href": "pages/NLP/Week01.html#key-components-6",
+    "title": "Introduction to Natural Language Processing",
+    "section": "Key Components",
+    "text": "Key Components\n\nSpeech Acts: The phrase “Can you pass the salt?” is a request, not just a question about capability.\nDeixis: The interpretation of “here” and “tomorrow” depends on the speaker’s location and the current day.\nContextual Understanding: In a conversation where one person says, “It’s cold in here,” they may be implying a request to close a window rather than just stating a fact.",
+    "crumbs": [
+      "NLP",
+      "Week 1"
+    ]
+  },
+  {
+    "objectID": "pages/NLP/Week01.html#examples-6",
+    "href": "pages/NLP/Week01.html#examples-6",
+    "title": "Introduction to Natural Language Processing",
+    "section": "Examples",
+    "text": "Examples\n\nSpeech Acts: Understanding the purpose of language in a situation.\nDeixis: Understanding the interpretation of words based on context.\nContextual Understanding: Understanding the meaning of language in a conversation.",
+    "crumbs": [
+      "NLP",
+      "Week 1"
+    ]
+  },
+  {
+    "objectID": "pages/NLP/Week01.html#overview-1",
+    "href": "pages/NLP/Week01.html#overview-1",
+    "title": "Introduction to Natural Language Processing",
+    "section": "Overview",
+    "text": "Overview\nNLP faces various challenges, including:\n\nAmbiguity at various levels\nLinguistic diversity\nLimited resources for low-resource languages\nDialectal variations and sociolects\nIdiolects and individual language use\nEvolution of language\nData quality and quantity issues\nComputational complexity\nCultural and ethical considerations",
+    "crumbs": [
+      "NLP",
+      "Week 1"
+    ]
+  },
+  {
+    "objectID": "pages/NLP/Week01.html#ambiguity",
+    "href": "pages/NLP/Week01.html#ambiguity",
+    "title": "Introduction to Natural Language Processing",
+    "section": "Ambiguity",
+    "text": "Ambiguity\nAmbiguity occurs when words or sentences can have multiple meanings depending on context.",
+    "crumbs": [
+      "NLP",
+      "Week 1"
+    ]
+  },
+  {
+    "objectID": "pages/NLP/Week01.html#linguistic-diversity",
+    "href": "pages/NLP/Week01.html#linguistic-diversity",
+    "title": "Introduction to Natural Language Processing",
+    "section": "Linguistic Diversity",
+    "text": "Linguistic Diversity\nLinguistic diversity refers to the existence of many languages, each with its own grammar, syntax, and nuances.",
+    "crumbs": [
+      "NLP",
+      "Week 1"
+    ]
+  },
+  {
+    "objectID": "pages/NLP/Week01.html#limited-resources-for-low-resource-languages",
+    "href": "pages/NLP/Week01.html#limited-resources-for-low-resource-languages",
+    "title": "Introduction to Natural Language Processing",
+    "section": "Limited Resources for Low-Resource Languages",
+    "text": "Limited Resources for Low-Resource Languages\nLow-resource languages often lack large annotated datasets and linguistic tools, making it difficult to develop accurate NLP models.",
+    "crumbs": [
+      "NLP",
+      "Week 1"
+    ]
+  },
+  {
+    "objectID": "pages/NLP/Week01.html#dialectal-variations-and-sociolects",
+    "href": "pages/NLP/Week01.html#dialectal-variations-and-sociolects",
+    "title": "Introduction to Natural Language Processing",
+    "section": "Dialectal Variations and Sociolects",
+    "text": "Dialectal Variations and Sociolects\nDialectal variations and sociolects refer to the use of language depending on geographical region, social class, education level, or occupation.",
+    "crumbs": [
+      "NLP",
+      "Week 1"
+    ]
+  },
+  {
+    "objectID": "pages/NLP/Week01.html#idiolects-and-individual-language-use",
+    "href": "pages/NLP/Week01.html#idiolects-and-individual-language-use",
+    "title": "Introduction to Natural Language Processing",
+    "section": "Idiolects and Individual Language Use",
+    "text": "Idiolects and Individual Language Use\nIdiolects refer to the unique form of language used by an individual, reflecting their background, experiences, and personality.",
+    "crumbs": [
+      "NLP",
+      "Week 1"
+    ]
+  },
+  {
+    "objectID": "pages/NLP/Week01.html#evolution-of-language",
+    "href": "pages/NLP/Week01.html#evolution-of-language",
+    "title": "Introduction to Natural Language Processing",
+    "section": "Evolution of Language",
+    "text": "Evolution of Language\nLanguage is constantly changing with new slang, idioms, and phrases emerging, making it challenging for NLP systems to keep up.",
+    "crumbs": [
+      "NLP",
+      "Week 1"
+    ]
+  },
+  {
+    "objectID": "pages/NLP/Week01.html#data-quality-and-quantity-issues",
+    "href": "pages/NLP/Week01.html#data-quality-and-quantity-issues",
+    "title": "Introduction to Natural Language Processing",
+    "section": "Data Quality and Quantity Issues",
+    "text": "Data Quality and Quantity Issues\nHigh-quality, annotated data is necessary for training NLP models, but it is often scarce and expensive to obtain.",
+    "crumbs": [
+      "NLP",
+      "Week 1"
+    ]
+  },
+  {
+    "objectID": "pages/NLP/Week01.html#computational-complexity",
+    "href": "pages/NLP/Week01.html#computational-complexity",
+    "title": "Introduction to Natural Language Processing",
+    "section": "Computational Complexity",
+    "text": "Computational Complexity\nAdvanced NLP models require significant computational resources for training and inference.",
+    "crumbs": [
+      "NLP",
+      "Week 1"
+    ]
+  },
+  {
+    "objectID": "pages/NLP/Week01.html#cultural-and-ethical-considerations",
+    "href": "pages/NLP/Week01.html#cultural-and-ethical-considerations",
+    "title": "Introduction to Natural Language Processing",
+    "section": "Cultural and Ethical Considerations",
+    "text": "Cultural and Ethical Considerations\nNLP systems must be designed to avoid biases and respect cultural differences.",
+    "crumbs": [
+      "NLP",
+      "Week 1"
+    ]
+  },
+  {
+    "objectID": "pages/LLM/Week01.html",
+    "href": "pages/LLM/Week01.html",
+    "title": "Sequence-to-Sequence Models and Attention Mechanisms",
+    "section": "",
+    "text": "These notes cover the fundamentals of sequence-to-sequence (seq2seq) models, particularly focusing on Recurrent Neural Networks (RNNs) and the transformative role of attention mechanisms. We’ll explore the architecture of seq2seq models, the limitations of traditional encoder-decoder RNNs, and how attention addresses these limitations. We’ll delve into the details of self-attention and multi-head attention, examining their computational aspects and benefits. Finally, we’ll connect these concepts to the Transformer architecture, a powerful model that leverages attention mechanisms extensively.",
+    "crumbs": [
+      "LLM",
+      "Week 1"
+    ]
+  },
+  {
+    "objectID": "pages/LLM/Week01.html#overview",
+    "href": "pages/LLM/Week01.html#overview",
+    "title": "Sequence-to-Sequence Models and Attention Mechanisms",
+    "section": "",
+    "text": "These notes cover the fundamentals of sequence-to-sequence (seq2seq) models, particularly focusing on Recurrent Neural Networks (RNNs) and the transformative role of attention mechanisms. We’ll explore the architecture of seq2seq models, the limitations of traditional encoder-decoder RNNs, and how attention addresses these limitations. We’ll delve into the details of self-attention and multi-head attention, examining their computational aspects and benefits. Finally, we’ll connect these concepts to the Transformer architecture, a powerful model that leverages attention mechanisms extensively.",
+    "crumbs": [
+      "LLM",
+      "Week 1"
+    ]
+  },
+  {
+    "objectID": "pages/LLM/Week01.html#definition-and-scope",
+    "href": "pages/LLM/Week01.html#definition-and-scope",
+    "title": "Sequence-to-Sequence Models and Attention Mechanisms",
+    "section": "Definition and Scope",
+    "text": "Definition and Scope\nSequence-to-sequence models are a class of deep learning models designed to map input sequences (e.g., sentences in one language) to output sequences (e.g., sentences in another language). They are widely used in tasks like machine translation, text summarization, speech recognition, and question answering.",
+    "crumbs": [
+      "LLM",
+      "Week 1"
+    ]
+  },
+  {
+    "objectID": "pages/LLM/Week01.html#encoder-decoder-architecture",
+    "href": "pages/LLM/Week01.html#encoder-decoder-architecture",
+    "title": "Sequence-to-Sequence Models and Attention Mechanisms",
+    "section": "Encoder-Decoder Architecture",
+    "text": "Encoder-Decoder Architecture\n\nEncoder RNN\n\nThe encoder RNN processes the input sequence one element at a time.\nAt each step, it updates its hidden state based on the current input and the previous hidden state.\nThe final hidden state of the encoder, often called the context vector, encapsulates the information from the entire input sequence.\n\n\n\nDecoder RNN\n\nThe decoder RNN takes the context vector as its initial hidden state.\nIt generates the output sequence element by element, conditioning on the context vector and the previously generated outputs.",
+    "crumbs": [
+      "LLM",
+      "Week 1"
+    ]
+  },
+  {
+    "objectID": "pages/LLM/Week01.html#limitations-of-traditional-encoder-decoder-rnns",
+    "href": "pages/LLM/Week01.html#limitations-of-traditional-encoder-decoder-rnns",
+    "title": "Sequence-to-Sequence Models and Attention Mechanisms",
+    "section": "Limitations of Traditional Encoder-Decoder RNNs",
+    "text": "Limitations of Traditional Encoder-Decoder RNNs\n\nThe context vector acts as a bottleneck, as it needs to represent the entire input sequence in a fixed-size vector.\nThis can lead to information loss, especially for long input sequences.\nThe decoder may struggle to align words in the input and output sequences effectively.",
+    "crumbs": [
+      "LLM",
+      "Week 1"
+    ]
+  },
+  {
+    "objectID": "pages/LLM/Week01.html#definition-and-motivation",
+    "href": "pages/LLM/Week01.html#definition-and-motivation",
+    "title": "Sequence-to-Sequence Models and Attention Mechanisms",
+    "section": "Definition and Motivation",
+    "text": "Definition and Motivation\nAttention mechanisms address the limitations of traditional encoder-decoder RNNs by allowing the decoder to focus on different parts of the input sequence at each step of the output generation process. This is achieved by computing attention weights that indicate the relevance of each input element to the current decoder state.",
+    "crumbs": [
+      "LLM",
+      "Week 1"
+    ]
+  },
+  {
+    "objectID": "pages/LLM/Week01.html#attention-mechanism-a-quick-tour",
+    "href": "pages/LLM/Week01.html#attention-mechanism-a-quick-tour",
+    "title": "Sequence-to-Sequence Models and Attention Mechanisms",
+    "section": "Attention Mechanism: A Quick Tour",
+    "text": "Attention Mechanism: A Quick Tour\n\nRNN Encoder:\n\nThe encoder produces a sequence of hidden state vectors (h0, h1, h2, …). Each vector corresponds to a word or token in the input sequence.\n\nDecoder Access to Encoder States:\n\nThe decoder has access to all the hidden state vectors generated by the encoder.\n\nAttention Mechanism Input:\n\nThe attention mechanism takes these encoder hidden state vectors as input.",
+    "crumbs": [
+      "LLM",
+      "Week 1"
+    ]
+  },
+  {
+    "objectID": "pages/LLM/Week01.html#context-vector-computation",
+    "href": "pages/LLM/Week01.html#context-vector-computation",
+    "title": "Sequence-to-Sequence Models and Attention Mechanisms",
+    "section": "Context Vector Computation",
+    "text": "Context Vector Computation\n\nThe context vector ct for output yt at time step t is computed as a weighted sum of the encoder hidden states:\n\n\\[ct = \\sum_{i=1}^{n} \\alpha_{ti} h_i\\]\nwhere:\n\nn is the number of words in the input sequence\nαti is the attention weight for the i-th input word at time step t\nhi is the hidden state of the encoder for the i-th input word",
+    "crumbs": [
+      "LLM",
+      "Week 1"
+    ]
+  },
+  {
+    "objectID": "pages/LLM/Week01.html#alignment-of-words",
+    "href": "pages/LLM/Week01.html#alignment-of-words",
+    "title": "Sequence-to-Sequence Models and Attention Mechanisms",
+    "section": "Alignment of Words",
+    "text": "Alignment of Words\nTraditional seq2seq models without attention struggle to align words between the source and target sentences. Attention mechanisms resolve this by learning to focus on the relevant parts of the source sentence when generating each word in the target sentence.",
+    "crumbs": [
+      "LLM",
+      "Week 1"
+    ]
+  },
+  {
+    "objectID": "pages/LLM/Week01.html#computing-alignment-scores",
+    "href": "pages/LLM/Week01.html#computing-alignment-scores",
+    "title": "Sequence-to-Sequence Models and Attention Mechanisms",
+    "section": "Computing Alignment Scores",
+    "text": "Computing Alignment Scores\nThe alignment score αi between the output word yt at time step t and the input word with hidden state hi is computed as:\n\\[ \\alpha_i = align(y_t, h_i) = \\frac{exp(score(s_{t-1}, h_i))}{\\sum_{i'=1}^{n} exp(score(s_{t-1}, h_{i'}))} \\]\nwhere:\n\nst-1 is the decoder’s hidden state at the previous time step\nscore is a function that computes the relevance between the decoder state and the encoder hidden state (e.g., dot product)",
+    "crumbs": [
+      "LLM",
+      "Week 1"
+    ]
+  },
+  {
+    "objectID": "pages/LLM/Week01.html#definition",
+    "href": "pages/LLM/Week01.html#definition",
+    "title": "Sequence-to-Sequence Models and Attention Mechanisms",
+    "section": "Definition",
+    "text": "Definition\nSelf-attention is a type of attention mechanism where the model attends to different positions within the same input sequence. It allows the model to learn relationships between different words in a sentence and capture contextual information.",
+    "crumbs": [
+      "LLM",
+      "Week 1"
+    ]
+  },
+  {
+    "objectID": "pages/LLM/Week01.html#example",
+    "href": "pages/LLM/Week01.html#example",
+    "title": "Sequence-to-Sequence Models and Attention Mechanisms",
+    "section": "Example",
+    "text": "Example\nConsider the sentence: “The animal didn’t cross the street because it was too tired.”\n\nSelf-attention helps the model understand that “it” refers to “animal.”\nIf we modify the sentence to: “The animal didn’t cross the street because it was congested,” self-attention helps the model understand that “it” now refers to “street.”",
+    "crumbs": [
+      "LLM",
+      "Week 1"
+    ]
+  },
+  {
+    "objectID": "pages/LLM/Week01.html#goal",
+    "href": "pages/LLM/Week01.html#goal",
+    "title": "Sequence-to-Sequence Models and Attention Mechanisms",
+    "section": "Goal",
+    "text": "Goal\nGiven a word in a sentence, self-attention aims to compute the relational score between that word and all other words in the sentence.",
+    "crumbs": [
+      "LLM",
+      "Week 1"
+    ]
+  },
+  {
+    "objectID": "pages/LLM/Week01.html#relational-score-table",
+    "href": "pages/LLM/Week01.html#relational-score-table",
+    "title": "Sequence-to-Sequence Models and Attention Mechanisms",
+    "section": "Relational Score Table",
+    "text": "Relational Score Table\n\n\n\nWord\nThe\nanimal\ndidn’t\ncross\nthe\nstreet\nbecause\nit\n\n\n\n\nThe\n0.6\n0.1\n0.05\n0.05\n0.02\n0.02\n0.02\n0.1\n\n\nanimal\n0.02\n0.5\n0.06\n0.15\n0.02\n0.05\n0.01\n0.12\n\n\ndidn’t\n0.01\n0.35\n0.45\n0.1\n0.01\n0.02\n0.01\n0.03\n\n\n…\n…\n…\n…\n…\n…\n…\n…\n…",
+    "crumbs": [
+      "LLM",
+      "Week 1"
+    ]
+  },
+  {
+    "objectID": "pages/LLM/Week01.html#motivation",
+    "href": "pages/LLM/Week01.html#motivation",
+    "title": "Sequence-to-Sequence Models and Attention Mechanisms",
+    "section": "Motivation",
+    "text": "Motivation\n\nSimilar to using multiple filters in Convolutional Neural Networks (CNNs) to learn different features, multi-head attention allows the model to capture different aspects of the relationships between words in a sentence.\nEach attention head learns to focus on a different type of relationship (e.g., syntactic, semantic).",
+    "crumbs": [
+      "LLM",
+      "Week 1"
+    ]
+  },
+  {
+    "objectID": "pages/LLM/Week01.html#mechanism",
+    "href": "pages/LLM/Week01.html#mechanism",
+    "title": "Sequence-to-Sequence Models and Attention Mechanisms",
+    "section": "Mechanism",
+    "text": "Mechanism\n\nMulti-head attention consists of multiple self-attention heads operating in parallel.\nEach head has its own set of learnable parameters (WQ, WK, WV).\nThe outputs of the different heads are concatenated and then transformed through a linear layer.",
+    "crumbs": [
+      "LLM",
+      "Week 1"
+    ]
+  },
+  {
+    "objectID": "pages/LLM/Week01.html#benefits",
+    "href": "pages/LLM/Week01.html#benefits",
+    "title": "Sequence-to-Sequence Models and Attention Mechanisms",
+    "section": "Benefits",
+    "text": "Benefits\n\nCaptures richer contextual information.\nAllows for parallel computation.",
+    "crumbs": [
+      "LLM",
+      "Week 1"
+    ]
+  },
+  {
+    "objectID": "pages/LLM/Week01.html#encoder-and-decoder",
+    "href": "pages/LLM/Week01.html#encoder-and-decoder",
+    "title": "Sequence-to-Sequence Models and Attention Mechanisms",
+    "section": "Encoder and Decoder",
+    "text": "Encoder and Decoder\n\nThe Transformer architecture is based on the encoder-decoder framework but replaces RNNs with attention mechanisms.",
+    "crumbs": [
+      "LLM",
+      "Week 1"
+    ]
+  },
+  {
+    "objectID": "pages/LLM/Week01.html#encoder-components",
+    "href": "pages/LLM/Week01.html#encoder-components",
+    "title": "Sequence-to-Sequence Models and Attention Mechanisms",
+    "section": "Encoder Components",
+    "text": "Encoder Components\n\nWord Embedding: Converts words into vector representations.\nSelf-Attention: Captures relationships between words in the input sequence.\nFeed Forward Networks: Processes the output of the self-attention layer.",
+    "crumbs": [
+      "LLM",
+      "Week 1"
+    ]
+  },
+  {
+    "objectID": "pages/LLM/Week01.html#decoder-components",
+    "href": "pages/LLM/Week01.html#decoder-components",
+    "title": "Sequence-to-Sequence Models and Attention Mechanisms",
+    "section": "Decoder Components",
+    "text": "Decoder Components\n\nWord Embedding: Converts words into vector representations.\nSelf-Attention: Captures relationships between words in the output sequence.\nEncoder-Decoder Attention: Allows the decoder to attend to different parts of the input sequence.\nFeed Forward Networks: Processes the output of the attention layers.",
+    "crumbs": [
+      "LLM",
+      "Week 1"
+    ]
+  },
+  {
+    "objectID": "pages/LLM/Week01.html#computation",
+    "href": "pages/LLM/Week01.html#computation",
+    "title": "Sequence-to-Sequence Models and Attention Mechanisms",
+    "section": "Computation",
+    "text": "Computation\nThe scaled dot-product attention is a core component of the Transformer architecture. It computes the attention weights as follows:\n\nQuery (Q), Key (K), and Value (V):\n\nThe input sequence is transformed into three matrices: Q, K, and V, using learnable weight matrices.\n\nScaled Dot Product:\n\nThe dot product of Q and K is computed, and then scaled down by the square root of the dimension of the key vectors (dk).\n\nSoftmax:\n\nA softmax function is applied to the scaled dot product to obtain the attention weights.\n\nWeighted Sum:\n\nThe attention weights are multiplied with the value matrix V, and the results are summed to produce the output.",
+    "crumbs": [
+      "LLM",
+      "Week 1"
+    ]
+  },
+  {
+    "objectID": "pages/LLM/Week01.html#mathematical-representation",
+    "href": "pages/LLM/Week01.html#mathematical-representation",
+    "title": "Sequence-to-Sequence Models and Attention Mechanisms",
+    "section": "Mathematical Representation",
+    "text": "Mathematical Representation\n\\[ Attention(Q, K, V) = softmax(\\frac{QK^T}{\\sqrt{d_k}})V \\]",
+    "crumbs": [
+      "LLM",
+      "Week 1"
+    ]
+  },
+  {
+    "objectID": "pages/LLM/Week01.html#organizational-structure",
+    "href": "pages/LLM/Week01.html#organizational-structure",
+    "title": "Introduction to Large Language Models",
+    "section": "",
+    "text": "Large Language Models (LLMs): These models are designed to understand and generate human language text. They encompass various architectures and techniques, including transformers and attention mechanisms.\n\n\n\n\n\nEvolution of LLMs: The evolution of LLMs has seen significant advancements from simple RNN-based models to more complex architectures like transformers. These advancements have been driven by the need to improve performance and overcome challenges like vanishing/exploding gradients.\n\n\n\n\n\nNatural Language Processing (NLP): LLMs are widely used in various NLP tasks, including machine translation, text summarization, and sentiment analysis.\nChatbots and Virtual Assistants: LLMs power many modern chatbots and virtual assistants, enabling them to understand and respond to user queries effectively.\n\n\n\n\n\nTransformers: A type of model architecture that uses self-attention mechanisms to process input data.\nAttention Mechanisms: Techniques that allow models to focus on different parts of the input sequence when generating output.\n\n\n\n\n\nParallelization: One of the main challenges in training LLMs is the difficulty in parallelizing computations across time steps.\nVanishing/Exploding Gradients: These issues can hinder the training process and lead to poor model performance.\n\n\n\n\n\nMulti-Headed Self-Attention: A technique that allows the model to focus on different positions of the input sequence simultaneously.\nCross-Attention: A variant of attention that allows the model to attend to different parts of the input sequence when generating each part of the output sequence.",
+    "crumbs": [
+      "LLM",
+      "Week 1"
+    ]
+  },
+  {
+    "objectID": "pages/LLM/Week01.html#content-for-each-main-topic",
+    "href": "pages/LLM/Week01.html#content-for-each-main-topic",
+    "title": "Introduction to Large Language Models",
+    "section": "",
+    "text": "Sequence to Sequence (Seq2Seq) Models: These models use an encoder-decoder architecture to process input sequences and generate output sequences.\n\n\n\n\n\nMachine Translation: Seq2Seq models are commonly used for translating text from one language to another.\n\n\n\n\n\nEncoder RNN: A recurrent neural network that processes the input sequence and generates a context vector.\nDecoder RNN: A recurrent neural network that uses the context vector to generate the output sequence.\n\n\n\n\n\nTensorFlow and PyTorch: Popular libraries for implementing Seq2Seq models.\n\n\n\n\n\n\n\n\nAttention Mechanism: A technique that allows models to focus on different parts of the input sequence when generating each part of the output sequence.\n\n\n\n\n\nMachine Translation: Attention mechanisms improve the performance of Seq2Seq models by allowing them to focus on relevant parts of the input sequence.\n\n\n\n\n\nContext Vector: A weighted sum of the hidden states of the encoder, representing the relevant information from the input sequence.\nAttention Weights: The weights assigned to each hidden state of the encoder, determining the relevance of each part of the input sequence.\n\n\n\n\n\nTensorFlow and PyTorch: Libraries for implementing attention mechanisms.\n\n\n\n\n\n\n\n\nTransformers: A type of model architecture that uses self-attention mechanisms to process input data. Transformers have been highly successful in various NLP tasks.\n\n\n\n\n\nMachine Translation: Transformers have achieved state-of-the-art performance in machine translation tasks.\nText Summarization: Transformers are used to generate concise summaries of longer texts.\n\n\n\n\n\nSelf-Attention: A mechanism that allows the model to focus on different positions of the input sequence simultaneously.\nMulti-Headed Self-Attention: A technique that extends self-attention by using multiple attention heads, each focusing on different aspects of the input sequence.\n\n\n\n\n\nTensorFlow and PyTorch: Libraries for implementing transformer models.",
+    "crumbs": [
+      "LLM",
+      "Week 1"
+    ]
+  },
+  {
+    "objectID": "pages/LLM/Week01.html#mathematical-content",
+    "href": "pages/LLM/Week01.html#mathematical-content",
+    "title": "Introduction to Large Language Models",
+    "section": "",
+    "text": "The context vector \\(c_t\\) for the output \\(y_t\\) is calculated as follows: \\[\nc_t = \\sum_{i=1}^{n} \\alpha_{it} h_i\n\\]\n\n\n\nThe weights \\(\\alpha_{it}\\) are combined with the respective hidden states \\(h_i\\): - \\(\\alpha_{11} h_1 + \\alpha_{12} h_2 + \\alpha_{13} h_3 + \\alpha_{14} h_4 + \\alpha_{15} h_5\\)\n\n\n\n\n\n\\[\n\\begin{bmatrix}\nh_1 \\\\\nh_2 \\\\\nh_3 \\\\\nh_4 \\\\\nh_5\n\\end{bmatrix}\n\\]\n\n\n\n\\[\n\\begin{bmatrix}\n\\alpha_{11} \\\\\n\\alpha_{12} \\\\\n\\alpha_{13} \\\\\n\\alpha_{14} \\\\\n\\alpha_{15}\n\\end{bmatrix}\n\\]",
+    "crumbs": [
+      "LLM",
+      "Week 1"
+    ]
+  },
+  {
+    "objectID": "pages/LLM/Week01.html#visual-elements",
+    "href": "pages/LLM/Week01.html#visual-elements",
+    "title": "Introduction to Large Language Models",
+    "section": "",
+    "text": "Encoder RNN Diagram: Illustrates the hidden states of an encoder RNN.\nDecoder RNN Diagram: Shows the hidden states of a decoder RNN.\nAttention Mechanism Diagram: Depicts the process of generating a context vector for output at a specific time step in a decoder.",
+    "crumbs": [
+      "LLM",
+      "Week 1"
+    ]
+  },
+  {
+    "objectID": "pages/LLM/Week01.html#interpreted-text",
+    "href": "pages/LLM/Week01.html#interpreted-text",
+    "title": "Introduction to Large Language Models",
+    "section": "",
+    "text": "[Interpreted from OCR: The image appears to depict a mechanism for generating a context vector for output at a specific time step in a decoder, possibly in the context of a neural machine translation model or a similar sequence-to-sequence model.]",
+    "crumbs": [
+      "LLM",
+      "Week 1"
+    ]
+  },
+  {
+    "objectID": "pages/LLM/Week01.html#concept-connections",
+    "href": "pages/LLM/Week01.html#concept-connections",
+    "title": "Introduction to Large Language Models",
+    "section": "",
+    "text": "Transformers and Attention Mechanisms: Transformers leverage attention mechanisms to process input data, allowing them to focus on different parts of the input sequence simultaneously.\nSeq2Seq Models and Attention: Seq2Seq models benefit from attention mechanisms, which improve their performance by allowing them to focus on relevant parts of the input sequence.",
+    "crumbs": [
+      "LLM",
+      "Week 1"
+    ]
+  },
+  {
+    "objectID": "pages/LLM/Week01.html#summary-and-key-takeaways",
+    "href": "pages/LLM/Week01.html#summary-and-key-takeaways",
+    "title": "Introduction to Large Language Models",
+    "section": "",
+    "text": "Large Language Models: LLMs encompass various architectures and techniques, including transformers and attention mechanisms.\nApplications: LLMs are used in various NLP tasks, including machine translation, text summarization, and chatbots.\nChallenges: Training LLMs involves challenges like parallelization and vanishing/exploding gradients.\nTechniques: Multi-headed self-attention and cross-attention are key techniques used in LLMs.",
+    "crumbs": [
+      "LLM",
+      "Week 1"
+    ]
+  },
+  {
+    "objectID": "pages/LLM/Week01.html#review-questions",
+    "href": "pages/LLM/Week01.html#review-questions",
+    "title": "Introduction to Large Language Models",
+    "section": "",
+    "text": "What are Large Language Models (LLMs), and what are their main applications?\nExplain the concept of multi-headed self-attention and its significance in transformer models.\nWhat are the main challenges in training LLMs, and how can they be addressed?\nDescribe the encoder-decoder architecture used in Seq2Seq models and the role of attention mechanisms in improving their performance.\nHow do transformers differ from traditional Seq2Seq models, and what advantages do they offer?\nWhat are the key tools and libraries used for implementing LLMs, and how do they facilitate the development of these models?\nProvide an example of how attention mechanisms can be used to improve the performance of a machine translation model.",
+    "crumbs": [
+      "LLM",
+      "Week 1"
+    ]
   }
 ]

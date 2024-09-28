@@ -1,0 +1,1216 @@
+# DL4CV_Week07_Part05.pdf - Page 1
+
+```markdown
+# Deep Learning for Computer Vision
+
+# CNNs for Human Understanding: Human Pose and Crowds
+
+**Vineeth N Balasubramanian**
+
+Department of Computer Science and Engineering
+Indian Institute of Technology, Hyderabad
+
+![IIT Hyderabad Logo](link-to-image)
+
+**Vineeth N B (IIT-H)**
+
+## 7.5 CNNs for Human Understanding: Pose and Crowd
+
+---
+
+Vineeth N Balasubramanian
+
+Department of Computer Science and Engineering
+Indian Institute of Technology, Hyderabad
+
+---
+
+Page 1 of 19
+```
+
+# DL4CV_Week07_Part05.pdf - Page 2
+
+# Human Pose Estimation
+
+- Problem of localization of human joints (also known as keypoints - elbows, wrists, etc.) in images or videos
+
+![Human Pose Estimation Diagrams](image1.png)
+![Human Pose Estimation Examples](image2.png)
+
+Vineeth N B (IIT-H) 
+§7.5 CNNs for Human Understanding: Pose and Crowd
+
+2 / 19
+
+# DL4CV_Week07_Part05.pdf - Page 3
+
+```markdown
+# Human Pose Estimation
+
+![Human Pose Estimation Diagram](image-url)
+
+- Problem of localization of human joints (also known as keypoints – elbows, wrists, etc.) in images or videos
+
+![Human Pose Estimation Examples](image-url)
+
+- HPE task pipelines broadly classified into:
+  - **Single-Person Pipeline**:
+    - Regression-based
+    - Detection-Based
+  - **Multi-Person Pipeline**:
+    - Top-down
+    - Bottom-up approaches
+
+**Credit**: Bearman *et al.*, Toshev *et al*
+
+*Vineeth N B (IIIT-H) §7.5 CNNs for Human Understanding: Pose and Crowd*
+
+```
+
+# DL4CV_Week07_Part05.pdf - Page 4
+
+```markdown
+# HPE: How to evaluate?
+
+- **Percentage of Correct Parts (PCP)**: A limb is considered detected if distance between detected joint and true joint < half limb length (denoted as PCP@0.5)
+
+![NPTEL Logo](https://example.com/nptel_logo.png)
+
+*Credit: A 2019 Guide to Human Pose Estimation with Deep Learning by Nanonets*
+
+*Vineeth N B (IIIT-H)*
+
+*87.5 CNNs for Human Understanding: Pose and Crowd*
+
+*Page 3 / 19*
+```
+
+# DL4CV_Week07_Part05.pdf - Page 5
+
+```markdown
+# HPE: How to evaluate?
+
+- **Percentage of Correct Parts (PCP)**: A limb is considered detected if distance between detected joint and true joint \< half limb length (denoted as PCP@0.5)
+
+- **Percentage of Detected Joints (PDJ)**: A detected joint is correct if distance between predicted and true joint is within certain fraction of torso diameter; e.g. PDJ@0.2 \iff distance between predicted and true joint \< 0.2 \times \text{torso diameter}
+
+![NPTEL](https://example.com/placeholder-for-nptel-logo.png)
+
+*Credit: A 2019 Guide to Human Pose Estimation with Deep Learning by Nanonets*
+
+*Vineeth N B (IIT-H)*
+
+*§7.5 CNNs for Human Understanding: Pose and Crowd*
+```
+
+# DL4CV_Week07_Part05.pdf - Page 6
+
+```markdown
+# HPE: How to evaluate?
+
+- **Percentage of Correct Parts (PCP)**: A limb is considered detected if distance between detected joint and true joint < half limb length (denoted as PCP@0.5)
+
+- **Percentage of Detected Joints (PDJ)**: A detected joint is correct if distance between predicted and true joint is within certain fraction of torso diameter; e.g. PDJ@0.2 ⇒ distance between predicted and true joint < 0.2× torso diameter
+
+- **Object Keypoint Similarity (OKS) based mAP**:
+
+  \[
+  OKS = \frac{\sum_i \exp\left(\frac{-d_i^2}{2s^2k_i^2}\right) \delta(v_i > 0)}{\sum_i \delta(v_i > 0)}
+  \]
+
+  where \(d_i\) is Euclidean distance between detected keypoint and corresponding ground truth, \(v_i\) is visibility flag of ground truth, \(s\) is object scale, and \(k\) is per-keypoint constant that controls falloff (OKS is IoU equivalent for keypoint evaluation)
+
+**Credit:** *A 2019 Guide to Human Pose Estimation with Deep Learning by Nanonets*
+
+*Vineeth N B (IIT-H) §7.5 CNNs for Human Understanding: Pose and Crowd*
+```
+
+# DL4CV_Week07_Part05.pdf - Page 7
+
+```markdown
+# Regression-based Methods: DeepPose<sup>1</sup>
+
+- First work to kick off deep learning-based HPE
+
+![NPTEL Logo](image_url)
+
+<sup>1</sup> Toshev et al, *DeepPose: Human Pose Estimation via Deep Neural Networks*, CVPR 2014
+
+*Vineeth N B (IIT-H)*
+
+*§7.5 CNNs for Human Understanding: Pose and Crowd*
+
+---
+
+4 / 19
+```
+
+# DL4CV_Week07_Part05.pdf - Page 8
+
+```markdown
+# Regression-based Methods: DeepPose[^1]
+
+- **First work to kick off deep learning-based HPE**
+
+  - **Model**: AlexNet-inspired
+
+  - **I/O**: Input image; Output is \( y = (..., y_i^T, ...)^T \) where \( y_i \) contains \( x \) and \( y \) coordinates of \( i^{th} \) joint
+  - **Loss**: \( L_2 \)-norm for regression
+
+    ![Initial stage](image_url_placeholder)
+
+    - **Initial stage**: DNN-based regressor
+
+### NPTEL
+
+*Vineeth N B (IIIT-H)*
+
+*§7.5 CNNs for Human Understanding: Pose and Crowd*
+```
+
+[^1]: Placeholder for the footnote reference.
+```
+
+# DL4CV_Week07_Part05.pdf - Page 9
+
+
+
+```markdown
+# Regression-based Methods: DeepPose1
+
+- **First work to kick off deep learning-based HPE**
+
+  - **Model**: AlexNet-inspired
+  - **I/O**: Input image; Output is **y = (..., y_t^i, ...)^T** where y_i contains x and y coordinates of i-th joint
+  - **Loss**: L2-norm for regression
+
+- **Predictions are refined using Cascaded Regressors**
+
+  - **Initial stage**
+    - ![Initial stage diagram](image_url)
+
+  - **Stage s**
+    - ![Stage s diagram](image_url)
+
+    - **DNN-based refiner**
+      - send refined values to next stage
+
+_NPTEl_
+
+*Vineeth N B (IIT-H) §7.5 CNNs for Human Understanding: Pose and Crowd*
+```
+
+# DL4CV_Week07_Part05.pdf - Page 10
+
+```markdown
+# Regression-based Methods: DeepPose<sup>1</sup>
+
+- First work to kick off deep learning-based HPE
+
+## Model: AlexNet-inspired
+- **I/O:** Input image; Output is \( y = (..., y_i^T, ...)^T \) where \( y_i \) contains \( x \) and \( y \) coordinates of \( i^{th} \) joint
+- **Loss:** \( L_2 \)-norm for regression
+
+- Predictions are refined using **Cascaded Regressors**
+  - Cropped images along with predicted joints are fed to network in next stages
+  - Forces model to learn generic features across finer image scales leading to high precision
+
+![Initial stage](image-url)
+
+### Initial stage
+- 220 x 220 image
+- Series of layered processing (Conv, Pool, Dense)
+- Produces refined coordinates \( (x, y) \)
+
+![Stage s](image-url)
+
+### Stage s
+- Cropped image around predicted joints
+- Further layered processing (Conv, Pool, Dense)
+- Produces refined coordinates \( (x^{(s)}, y^{(s)}) \)
+- Refined values sent to next stage
+
+<sup>1</sup> Toshev et al, DeepPose: Human Pose Estimation via Deep Neural Networks, CVPR 2014
+
+Vineeth N B (IIT-H)
+
+§7.5 CNNs for Human Understanding: Pose and Crowd
+```
+
+# DL4CV_Week07_Part05.pdf - Page 11
+
+```markdown
+# Regression-based Methods: Iterative Error Feedback<sup>2</sup>
+
+- Mean pose recursively updated to match ground truth
+
+![NPTEL Logo](image_url)
+
+<sup>2</sup>Carreira et al., Human Pose Estimation with Iterative Error Feedback, CVPR 2016
+
+Vineeth N B (IIT-H)
+
+§7.5 CNNs for Human Understanding: Pose and Crowd
+
+---
+
+5 / 19
+```
+
+# DL4CV_Week07_Part05.pdf - Page 12
+
+```markdown
+# Regression-based Methods: Iterative Error Feedback<sup>2</sup>
+
+- Mean pose recursively updated to match ground truth
+- Given image concatenated with output representation, \( f \) is trained to predict "correction" that brings mean poses closer to ground truth
+
+![Image](image_url)
+
+\[
+\begin{aligned}
+    &I \\
+    &\ \downarrow \\
+    &y_0 \quad \quad \quad \quad \quad \quad \quad 
+    \begin{array}{c}
+        \rightarrow \\
+        x_{t+1}
+    \end{array} \quad \quad \quad \quad \quad \quad \quad
+    \begin{array}{c}
+        \rightarrow \\
+        y_t
+    \end{array} \quad \quad \quad \quad \quad \quad \quad
+    \begin{array}{c}
+        \rightarrow \\
+        x_t
+    \end{array}
+    \quad \quad \quad \quad \quad \quad \quad
+    \begin{array}{c}
+        \rightarrow \\
+        c_t
+    \end{array} \quad \quad \quad \quad \quad \quad \quad
+    \begin{array}{c}
+        f(\cdot) \\
+        \rightarrow \\
+        y_t - y_{t+1} \\
+        \downarrow \\
+        g(\cdot)
+    \end{array}
+\end{aligned}
+\]
+
+<sup>2</sup> Carreira et al., Human Pose Estimation with Iterative Error Feedback, CVPR 2016
+
+Vineeth N B (IIT-H) §7.5 CNNs for Human Understanding: Pose and Crowd
+
+5 / 19
+```
+
+# DL4CV_Week07_Part05.pdf - Page 13
+
+```markdown
+# Regression-based Methods: Iterative Error Feedback
+
+- Mean pose recursively updated to match ground truth
+- Given image concatenated with output representation, \( f \) is trained to predict “correction” that brings mean poses closer to ground truth
+- Mathematically:
+
+  \[
+  \begin{aligned}
+  x_0 &= I \\
+  \epsilon_t &= f(x_t) \\
+  y_{t+1} &= y_t + \epsilon_t \\
+  x_{t+1} &= x_t \bigoplus g(y_{t+1})
+  \end{aligned}
+  \]
+
+![NPTEL](https://via.placeholder.com/150)
+
+---
+
+Carreira et al., Human Pose Estimation with Iterative Error Feedback, CVPR 2016
+
+Vineeth N B (IIT-H)
+
+§7.5 CNNs for Human Understanding: Pose and Crowd
+
+---
+
+**5 / 19**
+```
+
+# DL4CV_Week07_Part05.pdf - Page 14
+
+```markdown
+# Regression-based Methods: Iterative Error Feedback<sup>2</sup>
+
+- Mean pose recursively updated to match ground truth
+- Given image concatenated with output representation, \( f \) is trained to predict “correction” that brings mean poses closer to ground truth
+- **Mathematically**:
+
+\[ x_0 = I \]
+
+\[ \epsilon_t = f(x_t) \]
+
+\[ y_{t+1} = y_t + \epsilon_t \]
+
+\[ x_{t+1} = x_t \oplus g(y_{t+1}) \]
+
+---
+
+<sup>2</sup> Carreira et al., Human Pose Estimation with Iterative Error Feedback, CVPR 2016
+
+Vineeth N B (IIIT-H)
+
+§7.5 CNNs for Human Understanding: Pose and Crowd
+
+![Image Placeholder](image-url)
+
+## Diagram Explanation
+
+![Diagram](diagram-url)
+
+Mean maps: 
+
+Step 1:
+
+Step 2:
+
+Step 3:
+
+Ground Truth
+
+1. **Image 1 Description**
+2. **Image 2 Description**
+3. **Image 3 Description**
+
+---
+
+**References**
+
+Vineeth N B (IIIT-H)
+
+§7.5 CNNs for Human Understanding: Pose and Crowd
+```
+
+# DL4CV_Week07_Part05.pdf - Page 15
+
+```markdown
+# Detection-based Methods
+
+## Overview of Cascaded Architecture
+
+![Cascaded Architecture Diagram](image_url)
+
+### Coarse Heat-Map Model
+
+**Input:** Image
+
+**Process:**
+1. **206x236** Input Image
+2. **128x128** Cropped Image
+3. **64x64** Further Cropped Image
+
+**Crop module functionality for a single joint**
+
+### Fine Heat-Map Model
+
+**Input:** Coarse Heat-Map
+
+**Process:**
+1. **18x18** Upsampled Heat-Map
+2. **18x18x16** Intermediate Layer
+3. **18x18x36** Further Intermediate Layer
+4. **18x18x16** Another Intermediate Layer
+5. **6x6x32** Final Intermediate Layer
+6. **6x6x3** Final Layer
+
+**The fine heat-map network for a single joint**
+
+### Recover spatial accuracy lost due to pooling of model by using additional ConvNet to refine localization result of coarse heat-map
+
+#### Example Image Results
+
+![Example Image 1](example_image_1_url)
+
+![Example Image 2](example_image_2_url)
+
+![Example Image 3](example_image_3_url)
+
+#### References
+
+- Tompson et al., *Efficient Object Localization using Convolutional Networks*, CVPR 2015
+- Vineeth N B (IIIT-H), *§7.5 CNNs for Human Understanding: Pose and Crowd*
+
+---
+
+**6 / 19**
+```
+
+# DL4CV_Week07_Part05.pdf - Page 16
+
+```markdown
+# Multi-Person Pose Estimation: Top-Down Pipeline
+
+![NPTEL Logo](image_url)
+
+Vineeth N B (IIT-H) §7.5 CNNs for Human Understanding: Pose and Crowd 7 / 19
+
+## Key Concepts
+
+### Overview of Multi-Person Pose Estimation
+
+- **Pose Estimation**: The process of determining the spatial location of body parts in relation to one another.
+- **Top-Down Pipeline**: An approach where individual poses are detected from the entire body image.
+
+### Steps in the Top-Down Pipeline
+
+1. **Input Image**: The full body image containing multiple persons.
+2. **Feature Extraction**: Using convolutional neural networks (CNNs) to extract relevant features from the image.
+3. **Pose Detection**: Identifying the key joints and their locations.
+4. **Association**: Connecting the detected joints to form a complete pose.
+5. **Refinement**: Adjusting the pose to ensure accuracy.
+
+### Mathematical Formulation
+
+- **Feature Extraction**:
+  \[
+  \mathbf{F} = \text{CNN}(\mathbf{I})
+  \]
+  where \(\mathbf{I}\) is the input image and \(\mathbf{F}\) is the extracted feature map.
+
+- **Pose Detection**:
+  \[
+  \mathbf{J} = \text{Detect}(\mathbf{F})
+  \]
+  where \(\text{Detect}\) is the function that detects key joints.
+
+- **Association**:
+  \[
+  \mathbf{P} = \text{Associate}(\mathbf{J})
+  \]
+  where \(\mathbf{P}\) is the complete pose and \(\text{Associate}\) is the function that associates joints.
+
+### Applications
+
+- **Human-Computer Interaction**: Enhancing the interaction between humans and computers.
+- **Sports Analytics**: Analyzing player movements in sports.
+- **Healthcare**: Monitoring patient movements and postures.
+
+### Challenges
+
+- **Occlusions**: When one person blocks the view of another.
+- **Pose Variations**: Different poses, such as sitting, standing, or running.
+- **Scaling**: Handling variations in size and distance from the camera.
+
+### Future Directions
+
+- **Real-Time Processing**: Improving the speed of pose estimation.
+- **Multiple Modalities**: Integrating pose estimation with other sensors, such as depth cameras.
+- **Adaptive Models**: Developing models that can adapt to new environments and scenarios.
+
+For more information, refer to the latest research papers on CNNs for human understanding and pose estimation.
+```
+
+# DL4CV_Week07_Part05.pdf - Page 17
+
+```markdown
+# Multi-Person Pose Estimation: Top-Down Pipeline
+
+- Detect all persons from given image
+- Single-person approaches performed in each detected bounding box
+- Context information from whole image can be used to improve performance
+
+![Top-Down Pipeline](https://via.placeholder.com/150) 
+
+**Fig. 7** Framework of top-down pipeline.
+
+![Top-Down Pipeline Illustration](https://via.placeholder.com/150)
+
+**Fig. 8** An illustration of top down pipeline:
+(a) Input image, (b) two persons detected by human detector, (c) cropped single person image, (d) single person pose detection result, and (e) multi-person pose detection result.
+
+**Credit**: Dang et al. Deep Learning based 2D Human Pose Estimation: A Survey, 2019
+
+Vineeth N B (IIIT-H)
+
+§7.5 CNNs for Human Understanding: Pose and Crowd
+
+```
+
+# DL4CV_Week07_Part05.pdf - Page 18
+
+```markdown
+# Multi-Person Pose Estimation: Bottom-Up Pipeline
+
+- Procedure reversed from top-down
+- All body parts (keypoints) are detected in first stage, then associated to human instances in second stage
+- Inference stage likely to be faster - since no need to detect pose for each person separately
+
+![Bottom-Up Pipeline Framework](image-url)
+
+![Bottom-Up Pipeline Illustration](image-url)
+
+**Fig. 10** Framework of bottom-up pipeline.
+
+**Fig. 11** An illustration of bottom-up pipeline. (a) Input image, (b) keypoints of all the person, and (c) all detected keypoints are connected to form human instance.
+
+**Credit:** Dang et al, *Deep Learning based 2D Human Pose Estimation: A Survey*, 2019
+
+*Vineeth N B (IIIT-H)*
+
+**§7.5 CNNs for Human Understanding: Pose and Crowd**
+
+8 / 19
+```
+
+# DL4CV_Week07_Part05.pdf - Page 19
+
+```markdown
+# Crowd Counting
+
+![Crowd Image 1](image1.png) ![Crowd Image 2](image2.png)
+
+**Estimating crowd density in images a crucial task for urban planning, public safety and security**
+
+*Credit: ShanghaiTech Dataset (Analytics Vidhya)*
+
+*Vineeth N B (IIIT-H)*
+
+*§7.5 CNNs for Human Understanding: Pose and Crowd*
+
+Date: 9 / 19
+```
+
+# DL4CV_Week07_Part05.pdf - Page 20
+
+ may not capture diagrams and images.
+
+```markdown
+# Crowd Counting: Why is it hard?
+
+![Image](url_to_image1)
+- (a) Occlusion
+  
+![Image](url_to_image2)
+- (b) Complex background
+  
+![Image](url_to_image3)
+- (c) Scale variation
+  
+![Image](url_to_image4)
+- (d) Non-uniform distribution
+  
+![Image](url_to_image5)
+- (e) Perspective distortion
+
+![Image](url_to_image6)
+- (f) Rotation
+
+![Image](url_to_image7)
+- (g) Illumination variation
+
+![Image](url_to_image8)
+- (h) Weather changes
+
+**Credit:** Gao et al., CNN-based Density Estimation and Crowd Counting: A Survey, 2020
+
+Vineeth N B (IIT-H) §7.5 CNNs for Human Understanding: Pose and Crowd
+```
+
+# DL4CV_Week07_Part05.pdf - Page 21
+
+```markdown
+# CNNs for Crowd Counting
+
+- **Basic CNN**: Basic CNN layers with no additional feature information
+
+- **Multi-column**: Usually adopt different columns to capture multi-scale information corresponding to different receptive fields
+
+- **Single-column**: Usually deploy single and deeper CNNs; premise to not increase complexity of network
+
+![CNNs for Crowd Counting](image_url)
+
+**Basic Networks**
+
+```
+Input -> [CNN Layers] -> Density Map
+```
+
+**Multi-Column Networks**
+
+```
+Input ->
+[CNN Layers] -> [CNN Layers] -> [CNN Layers] -> Density Map
+```
+
+**Single-Column Networks**
+
+```
+Input -> [CNN Layers] -> Density Map
+```
+
+*Credit: Gao et al, CNN-based Density Estimation and Crowd Counting: A Survey, 2020*
+
+*Vineeth N B (IIIT-H)*
+*§7.5 CNNs for Human Understanding: Pose and Crowd*
+```
+
+# DL4CV_Week07_Part05.pdf - Page 22
+
+ is not required for this task.
+
+```markdown
+# Basic CNN Approach
+
+## One of first efforts to use CNNs for direct regression; based on AlexNet architecture for dense crowd counting
+
+**Wang et al., Deep People Counting in Extremely Dense Crowds, ACM MM 2015**
+
+**Vineeth N B (IIIT-H)**
+
+### 87.5 CNNs for Human Understanding: Pose and Crowd
+
+#### Positive Samples:
+- ![Image 1](image_path_1)
+- ![Image 2](image_path_2)
+- ![Image 3](image_path_3)
+- ![Image 4](image_path_4)
+
+#### Negative Samples:
+- ![Image 5](image_path_5)
+- ![Image 6](image_path_6)
+- ![Image 7](image_path_7)
+- ![Image 8](image_path_8)
+
+**Input** -> **Conv1** -> **Conv2** -> **Conv3** -> **Conv4** -> **Conv5** -> **Fc6** -> **Fc7** -> **Output**
+
+- **Input**: (227 x 227 x 3)
+- **Conv1**: (96 x 96 x 96)
+- **Conv2**: (55 x 55 x 256)
+- **Conv3**: (27 x 27 x 384)
+- **Conv4**: (13 x 13 x 384)
+- **Conv5**: (6 x 6 x 256)
+- **Fc6**: (4096)
+- **Fc7**: (4096)
+- **Output**: Single value
+
+**Source**:
+
+- Wang et al., Deep People Counting in Extremely Dense Crowds, ACM MM 2015
+- Vineeth N B (IIIT-H), 87.5 CNNs for Human Understanding: Pose and Crowd
+- Slide 12 / 19
+```
+
+# DL4CV_Week07_Part05.pdf - Page 23
+
+```markdown
+# Basic CNN Approach<sup>4</sup>
+
+## Input and Output Examples
+
+![Positive Samples](image1.png) ![Negative Samples](image2.png)
+
+- **Positive Samples**: Examples where the ground truth counts are non-zero.
+- **Negative Samples**: Examples where the ground truth counts are zeros.
+
+## CNN Architecture
+
+![CNN Architecture Diagram](image3.png)
+
+- **Input**: The initial input layer.
+- **Conv1, Conv2, Conv3, Conv4, Conv5**: Convolutional layers with increasing depth and complexity.
+- **Fc6, Fc7**: Fully connected layers.
+- **Output**: The final output layer.
+
+## Description
+
+- One of the first efforts to use CNNs for direct regression; based on AlexNet architecture for dense crowd counting.
+- Expanded set of negative samples, whose ground truth counts are zeros, used to reduce interference.
+
+---
+
+<sup>4</sup> Wang et al., Deep People Counting in Extremely Dense Crowds, ACM MM 2015
+
+Vineeth N B (IIIT-H) 
+“CNNs for Human Understanding: Pose and Crowd”
+
+---
+
+*Page 12 / 19*
+```
+
+# DL4CV_Week07_Part05.pdf - Page 24
+
+```markdown
+# Basic CNN Approach
+
+![Basic CNN Diagram](image_url)
+
+- **Positive Samples**
+
+    ![Positive Samples](image_url)
+
+- **Negative Samples**
+
+    ![Negative Samples](image_url)
+
+## Key Points
+
+- One of the first efforts to use CNNs for direct regression; based on AlexNet architecture for dense crowd counting
+- Expanded set of negative samples, whose ground truth counts are zeros, used to reduce interference
+- Sensitive to density, distribution of crowd and scale of people
+
+---
+
+**References**
+
+Wang et al., Deep People Counting in Extremely Dense Crowds, ACM MM 2015
+
+Vineeth N B (III-T-H)
+
+§7.5 CNNs for Human Understanding: Pose and Crowd
+
+---
+
+**Date**: 12 / 19
+```
+
+# DL4CV_Week07_Part05.pdf - Page 25
+
+```markdown
+# Multi-column CNN
+
+- **Focused on multi-scale problem in crowd counting**
+
+## Multi-column architecture:
+
+- Features learned by each column CNN adaptive to large variation in people/head size due to perspective effect or across different image resolutions
+
+- Replaced fully connected layer with convolution layer whose filter size is 1 × 1: input image can be of arbitrary size to avoid distortion
+
+![Diagram](image_url_placeholder)
+
+_Zhang et al, Single-Image Crowd Counting via Multi-Column Convolutional Neural Network, CVPR 2016_
+
+## Test image | Ground-truth | Estimation
+
+![Test Image](image_url_placeholder) | ![Ground-truth](image_url_placeholder) | ![Estimation](image_url_placeholder)
+
+_Vineeth N B (IIT-H) §7.5 CNNs for Human Understanding: Pose and Crowd_
+
+---
+
+Page 13 / 19
+```
+
+# DL4CV_Week07_Part05.pdf - Page 26
+
+```markdown
+# Multi-column CNN<sup>5</sup>
+
+- Trains several independent CNN crowd density regressors on image patches (each regressor same as previous method of Zhang et al)
+
+- **Switch classifier** trained alternatively on regressions to select best one for density estimation ⇒ offers ability to model large-scale variations and leverage local variations in density in crowd scene
+
+- Weighted averaging used to fuse features is global in nature
+
+![Diagram of Switch-CNN](image_url_here)
+
+**Switch Layer**
+
+| R1           | R2           | R3           |
+|--------------|--------------|--------------|
+| C: 9x9 | 16            |              |
+| M-P: 2x2                 |              |
+| C: 7x7 | 32            |              |
+| M-P: 2x2                 |              |
+| C: 7x7 | 16            |              |
+| C: 1x1 | 1             |              |
+|--------------|--------------|--------------|
+| C: 7x7 | 20            |              |
+| M-P: 2x2                 |              |
+| C: 5x5 | 40            |              |
+| M-P: 2x2                 |              |
+| C: 5x5 | 20            |              |
+| C: 1x1 | 10            |              |
+|--------------|--------------|--------------|
+| C: 3x3 | 24            |              |
+| M-P: 2x2                 |              |
+| C: 3x3 | 48            |              |
+| M-P: 2x2                 |              |
+| C: 3x3 | 12            |              |
+| C: 1x1 | 4             |              |
+
+**Switch Layer**
+
+| Layers          | Output Size |
+|-----------------|-------------|
+| 2C: 3x3 | 64          |
+| M-P: 2x2                  |
+| 2C: 3x3 | 128         |
+| M-P: 2x2                  |
+| 3C: 3x3 | 256         |
+| M-P: 2x2                  |
+| 3C: 3x3 | 512         |
+| M-P: 2x2                  |
+| 3C: 3x3 | 512         |
+| M-P: 2x2                  |
+| 1C: 1x1 | 512         |
+| fc | 3             |
+
+**Legend**
+
+- C: Convolution
+- M-P: Max Pool
+- G-A-P: Global Average Pool
+- fc: Fully Connected
+
+**Output**
+
+- Density map
+- Crowd count
+
+---
+
+*Sam et al., Switching Convolutional Neural Network for Crowd Counting, CVPR 2017*
+
+*Vimeeth N B (IIT-H)*
+
+*§7.5 CNNs for Human Understanding: Pose and Crowd*
+```
+
+# DL4CV_Week07_Part05.pdf - Page 27
+
+```markdown
+# Single-column CNN<sup>6</sup>
+
+![Image of a crowd scene](image_url)
+
+- Based on observation that using a single column from multi-column networks retained 70% of accuracy on some datasets; hence, used a single-column CNN with single filter size as backbone
+
+## Density Map
+![Density Map](image_url)
+
+- GT = 499
+- \( L_D = 0.01 \)
+
+## Head Count
+![Head Count](image_url)
+
+- ≈ 449
+- \( L_H = \frac{50}{500} = 0.1 \)
+
+---
+
+<sup>6</sup> Zhang et al., Crowd Counting via Scale-Adaptive Convolutional Neural Network, WACV 2018
+
+Vineeth N B (IIT-H) §7.5 CNNs for Human Understanding: Pose and Crowd
+
+---
+
+```
+
+# DL4CV_Week07_Part05.pdf - Page 28
+
+```markdown
+# Single-column CNN<sup>6</sup>
+
+![CNN Diagram](image_url)
+
+- Based on observation that using a single column from multi-column networks retained 70% of accuracy on some datasets; hence, used a single-column CNN with single filter size as backbone
+- By combining feature maps of multiple layers, could adapt network to variations in pedestrian (head) scale and perspective
+
+> <sup>6</sup>Zhang et al., Crowd Counting via Scale-Adaptive Convolutional Neural Network, WACV 2018
+
+Vineeth N B (IIT-H)
+
+§7.5 CNNs for Human Understanding: Pose and Crowd
+
+![Density Map](image_url)
+
+**Ground Truth (GT) = 499**
+
+**Loss Density (L<sub>D</sub>) = 0.01**
+
+![Head Count](image_url)
+
+**Count = 449**
+
+**Loss Count (L<sub>Y</sub>) = \frac{50}{500} = 0.1**
+```
+
+# DL4CV_Week07_Part05.pdf - Page 29
+
+```markdown
+# Single-column CNN<sup>6</sup>
+
+![Image of Crowd](image_url)
+
+- **Based on observation that using a single column from multi-column networks retained 70% of accuracy on some datasets; hence, used a single-column CNN with single filter size as backbone**
+- **By combining feature maps of multiple layers, could adapt network to variations in pedestrian (head) scale and perspective**
+- **Used deconv layer to adapt network output instead of upsampling/elementwise summation**
+
+---
+
+**Density Map** ![Density Map](density_map_url) **GT = 499**
+
+**Loss: \( L_D = 0.01 \)**
+
+**Head Count**
+
+**Predicted: \( \approx 449 \)**
+
+**Loss: \( L_Y = \frac{50}{500} = 0.1 \)**
+
+---
+
+<sup>6</sup>Zhang et al., Crowd Counting via Scale-Adaptive Convolutional Neural Network, WACV 2018
+
+Vineeth N B (IIIT-H)
+
+§7.5 CNNs for Human Understanding: Pose and Crowd
+
+---
+
+15 / 19
+```
+
+
+# DL4CV_Week07_Part05.pdf - Page 30
+
+```markdown
+# Single-column CNN<sup>6</sup>
+
+![Single-column CNN diagram](image_url)
+
+- **Based on observation that using a single column from multi-column networks retained 70% of accuracy on some datasets; hence, used a single-column CNN with single filter size as backbone**
+- **By combining feature maps of multiple layers, could adapt network to variations in pedestrian (head) scale and perspective**
+- **Used deconv layer to adapt network output instead of upsampling/elementwise summation**
+- **Entire network is optimized for density map estimation as well as for head count estimate**
+
+<sup>6</sup> Zhang et al., Crowd Counting via Scale-Adaptive Convolutional Neural Network, WACV 2018
+
+Vineeth N B (IIT-H)
+
+§7.5 CNNs for Human Understanding: Pose and Crowd
+
+---
+
+**Density Map**  
+GT = 499
+
+\(L_D = 0.01\)
+
+---
+
+**Head Count**
+
+= 449
+
+\(L_y = \frac{50}{500} = 0.1\)
+
+---
+
+_References:_
+
+- Zhang et al., Crowd Counting via Scale-Adaptive Convolutional Neural Network, WACV 2018
+```
+
+# DL4CV_Week07_Part05.pdf - Page 31
+
+```markdown
+# Another Single-column CNN
+
+- Observed that low-level features from same depth of different columns in multi-column CNNs are similar
+
+![Scale Pyramid Module](image_url)
+
+**Scale Pyramid Module**
+
+![Diagram](image_url)
+
+![Counting Examples](image_url)
+
+```markdown
+**Chen et al., Scale Pyramid Network for Crowd Counting, WACV 2019**
+
+**Vineeth N B (IIT-H)**
+
+**§7.5 CNNs for Human Understanding: Pose and Crowd**
+
+---
+
+**Count: 182**
+
+**Estimate: 182.60**
+
+---
+
+**Count: 68**
+
+**Estimate: 63.68**
+
+---
+
+**Count: 384**
+
+**Estimate: 412.64**
+```
+
+**Note:** Replace `image_url` with the actual URLs or paths to the images if available. The placeholders are used where the OCR process could not capture the image directly.
+```
+
+# DL4CV_Week07_Part05.pdf - Page 32
+
+```markdown
+# Another Single-column CNN<sup>7</sup>
+
+- Observed that low-level features from same depth of different columns in multi-column CNNs are similar
+- Employ a single-column structure as shared backbone and extract multi-scale features from high-level features in high layers
+
+![Scale Pyramid Module](image_url)
+
+![Crowd Counting Examples](image_url)
+
+## Scale Pyramid Network for Crowd Counting, WACV 2019
+
+Vineeth N B (IIT-H)
+
+### §7.5 CNNs for Human Understanding: Pose and Crowd
+
+<sup>7</sup> Chen et al., Scale Pyramid Network for Crowd Counting, WACV 2019
+
+---
+
+## References
+
+1. **Chen et al., Scale Pyramid Network for Crowd Counting, WACV 2019**
+   - **Title**: Scale Pyramid Network for Crowd Counting
+   - **Conference**: WACV 2019
+   - **Authors**: Vineeth N B (IIT-H)
+
+---
+
+### Notes
+
+- The image placeholders (`image_url`) should be replaced with the actual image URLs or paths.
+- Ensure all scientific terms, symbols, and formulas are accurately captured.
+- Maintain the original formatting structure and scientific context.
+```
+
+# DL4CV_Week07_Part05.pdf - Page 33
+
+```markdown
+# Another Single-column CNN
+
+- Observed that low-level features from same depth of different columns in multi-column CNNs are similar
+- Employ a single-column structure as shared backbone and extract multi-scale features from high-level features in high layers
+- Use dilated convolutions which can obtain different receptive fields at different rates; this Scale Pyramid Module placed between Conv4_3 and Conv5_1 of VGG16
+
+![Scale Pyramid Module](image_placeholder.png)
+
+## Scale Pyramid Module
+
+![Visualization of Scale Pyramid Module](image_placeholder.png)
+
+![Example Images and Corresponding Feature Maps](image_placeholder.png)
+
+```markdown
+Count: 183
+Estimate: 182.60
+
+Count: 68
+Estimate: 63.68
+
+Count: 384
+Estimate: 412.64
+```
+
+*Chen et al., Scale Pyramid Network for Crowd Counting, WACV 2019*
+
+*Vineeth N B (III-T-H)*
+
+*§7.5 CNNs for Human Understanding: Pose and Crowd*
+
+Page 16/19
+```
+
+# DL4CV_Week07_Part05.pdf - Page 34
+
+```markdown
+# Homework Readings
+
+## Homework
+
+### Readings
+
+- [A detailed blog post on human pose estimation by Nanonets](#)
+- [Gao et al, CNN-based Density Estimation and Crowd Counting: A Survey, 2020](#)
+- [(Optional) Dang et al, Deep Learning Based 2D Human Pose Estimation: A Survey, 2019](#)
+
+### Exercise
+
+**Exercise:**
+
+CNNs for human understanding can especially suffer from biases in datasets (towards a particular race, ethnic background or gender); how do you find if a model is biased?
+
+---
+
+*Vineeth N B (IIIT-H)*
+
+*§7.5 CNNs for Human Understanding: Pose and Crowd*
+
+*17 / 19*
+```
+
+# DL4CV_Week07_Part05.pdf - Page 35
+
+```markdown
+# References
+
+## References
+
+[1] Alexander Toshev and Christian Szegedy. "DeepPose: Human Pose Estimation via Deep Neural Networks". In: *2014 IEEE Conference on Computer Vision and Pattern Recognition* (2014), pp. 1653–1660.
+
+[2] Amy L. Bearman, Stanford, and Catherine Dong. "Human Pose Estimation and Activity Classification Using Convolutional Neural Networks". In: 2015.
+
+[3] Jonathan Tompson et al. "Efficient object localization using Convolutional Networks". In: *2015 IEEE Conference on Computer Vision and Pattern Recognition (CVPR)* (2015), pp. 648–656.
+
+[4] Chuan Wang et al. "Deep People Counting in Extremely Dense Crowds". In: Oct. 2015, pp. 1299–1302.
+
+[5] João Carreira et al. "Human Pose Estimation with Iterative Error Feedback". In: *2016 IEEE Conference on Computer Vision and Pattern Recognition (CVPR)* (2016), pp. 4733–4742.
+
+[6] Yingying Zhang et al. "Single-Image Crowd Counting via Multi-Column Convolutional Neural Network". In: *2016 IEEE Conference on Computer Vision and Pattern Recognition (CVPR)* (2016), pp. 589–597.
+
+[7] Deepak Sam, Shiv Surya, and R. Babu. "Switching Convolutional Neural Network for Crowd Counting". In: July 2017, pp. 4031–4039.
+
+---
+
+*Vineeth N B (IIT-H)*
+
+*§7.5 CNNs for Human Understanding: Pose and Crowd*
+
+*18 / 19*
+```
+
+# DL4CV_Week07_Part05.pdf - Page 36
+
+ accuracy is critical.
+
+```markdown
+# References II
+
+- **Lu Zhang, Miaojing Shi, and Qiaobo Chen**. "Crowd Counting via Scale-Adaptive Convolutional Neural Network". *In: 2018 IEEE Winter Conference on Applications of Computer Vision (WACV)* (2018), pp. 1115–1121.
+
+- **Xinya Chen et al.** "Scale Pyramid Network for Crowd Counting". *In: 2019 IEEE Winter Conference on Applications of Computer Vision (WACV)* (2019), pp. 1941–1950.
+
+- **Q. Dang et al.** "Deep learning based 2D human pose estimation: A survey". *In: Tsinghua Science and Technology* 24.6 (2019), pp. 663–676.
+
+- **Guangshuai Gao et al.** "CNN-based Density Estimation and Crowd Counting: A Survey". *In: ArXiv abs/2003.12783* (2020).
+
+![NPTEL](https://example.com/nptel.png)
+
+*Vineeth N B (IIT-H) 87.5 CNNs for Human Understanding: Pose and Crowd* 19 / 19
+```
+

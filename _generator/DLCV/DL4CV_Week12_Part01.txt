@@ -1,0 +1,1780 @@
+# DL4CV_Week12_Part01.pdf - Page 1
+
+```markdown
+# Deep Learning for Computer Vision
+
+## Zero-shot and Few-shot Learning
+
+**Vineeth N Balasubramanian**
+
+Department of Computer Science and Engineering
+Indian Institute of Technology, Hyderabad
+
+![IIT Hyderabad Logo](url)
+
+---
+
+Vineeth N B (IIT-H)
+
+### §12.1 Zero-shot and Few-shot Learning
+
+---
+
+```
+
+# DL4CV_Week12_Part01.pdf - Page 2
+
+```markdown
+# Review
+
+## Question
+
+- Last lecture, we saw methods that use videos as input for generating videos. Can we generate a video from a single image?
+
+*Image placeholder*
+
+_Vineeth N B (IIT-H)_
+
+_§12.1 Zero-shot and Few-shot Learning_
+
+_2 / 33_
+```
+
+# DL4CV_Week12_Part01.pdf - Page 3
+
+ the output should be structured in a markdown format with proper headings, paragraphs, lists, and any images or OCR data from the text.
+
+```markdown
+# Review
+
+## Question
+
+- **Last lecture, we saw methods that use videos as input for generating videos. Can we generate a video from a single image? See this article and this paper; it uses single-shot learning, which is what this lecture is about.**
+
+![OCR Image Data](image_url_placeholder)
+
+**Vineeth N B (IIT-H)**
+
+**§12.1 Zero-shot and Few-shot Learning**
+
+2 / 33
+```
+
+# DL4CV_Week12_Part01.pdf - Page 4
+
+ the OCR output from the provided image:
+
+---
+
+**Page Title**: Learning with Limited Supervision
+
+**Content**:
+
+### Problem
+
+- **Deep learning models** → **heavy reliance** on labeled data during training
+  - ![Graphic Placeholder](image_url_placeholder)
+- Not directly suited to learn from few samples
+- Regularization techniques reduce overfitting in low data regimes, but do not solve the problem
+
+---
+
+*Footer Information*: 
+- **Vineeth N B (IIT-H)**
+- **§12.1 Zero-shot and Few-shot Learning**
+- **NPTEL**
+- **Slide Number**: 3 / 33
+
+---
+
+**Formatted Output**:
+
+```markdown
+# Learning with Limited Supervision
+
+## Problem
+
+- **Deep learning models** → **heavy reliance** on labeled data during training
+  - ![Graphic Placeholder](image_url_placeholder)
+- Not directly suited to learn from few samples
+- Regularization techniques reduce overfitting in low data regimes, but do not solve the problem
+
+*Footer Information*:
+- **Vineeth N B (IIT-H)**
+- **§12.1 Zero-shot and Few-shot Learning**
+- **NPTEL**
+- **Slide Number**: 3 / 33
+```
+
+```
+
+# DL4CV_Week12_Part01.pdf - Page 5
+
+```markdown
+# Learning with Limited Supervision
+
+## Problem
+
+- Deep learning models → heavy reliance on labeled data during training
+- Not directly suited to learn from few samples
+- Regularization techniques reduce overfitting in low data regimes, but do not solve the problem
+
+## Solution
+
+- Train models capable of rapidly generalizing to new tasks with only a few samples
+- Enable models to perform under practical scenarios where data annotation is infeasible or new classes are dynamically included with time
+
+*Credit: Chen et al, A Closer Look at Few-Shot Classification, ICLR 2019*
+
+![Problem Diagram](image1.png)
+
+![Solution Diagram](image2.png)
+
+*Vineeth N B (IIIT-H) §12.1 Zero-shot and Few-shot Learning*
+```
+
+Please replace `image1.png` and `image2.png` with the actual image URLs or filenames if you have them. If the images cannot be captured through OCR, you may want to describe them in text form or use placeholders.
+
+# DL4CV_Week12_Part01.pdf - Page 6
+
+```markdown
+# Problem Setting
+
+Let $x$ denote an image/feature (produced by a pre-trained network), $y$ denote label
+
+## Few-Shot Learning (FSL)
+
+- Training data $D_{train} = (x_i, y_i)_{i=1}^T$, where few training samples for certain classes
+- Specifically, N-way-K-shot FSL problem: $D_{train}$ contains only few examples, $K$, from $N$ of the overall number of classes (other classes called base classes)
+
+![NPTEL Logo](https://example.com/nptel-logo.png)
+
+Vineeth N B (IIT-H) 
+
+$12.1$ Zero-shot and Few-shot Learning 
+
+4 / 33
+```
+
+# DL4CV_Week12_Part01.pdf - Page 7
+
+```markdown
+# Problem Setting
+
+Let $x$ denote an image/feature (produced by a pre-trained network), $y$ denote label
+
+## Few-Shot Learning (FSL)
+
+- Training data $D_{train} = (x_i, y_i)_{i=1}^{1}$, where few training samples for certain classes
+- Specifically, N-way-K-shot FSL problem: $D_{train}$ contains only few examples, $K$, from $N$ of the overall number of classes (other classes called base classes)
+
+## Zero-Shot Learning (ZSL)
+
+- Training data $S = \{(x, y, a(y)) | x \in X^s, y \in Y^s, a(y) \in A\}$, where $X^s$ is set of image/features from seen classes, $Y^s$ is set of seen class labels, $a(y)$ is semantic embedding for class $y$
+- Test set $U = \{(x, y, a(y)) | x \in X^u, y \in Y^u, a(y) \in A\}$, where $X^u$ is set of unseen class image/features, $Y^u$ is set of unseen class labels, $Y^u \cap Y^s = \emptyset$
+```
+
+# DL4CV_Week12_Part01.pdf - Page 8
+
+```markdown
+# Problem Setting
+
+Based on classes that a model sees in test phase, FSL/ZSL problem generally categorized into two settings:
+
+## Conventional FSL/ZSL:
+
+- Goal is to learn a classifier \( f : x \rightarrow Y^u \)
+- Image/feature \( x \) to be recognized at test time belongs only to unseen/few-shot classes
+
+![NPTel Logo](https://example.com/logo)
+
+_Source: Vineeth N B (IIT-H)_
+
+_§12.1 Zero-shot and Few-shot Learning_
+
+_Page 5 / 33_
+```
+
+# DL4CV_Week12_Part01.pdf - Page 9
+
+```markdown
+# Problem Setting
+
+Based on classes that a model sees in test phase, FSL/ZSL problem generally categorized into two settings:
+
+## Conventional FSL/ZSL:
+
+- Goal is to learn a classifier \( f : x \rightarrow Y^u \)
+- Image/feature \( x \) to be recognized at test time belongs only to unseen/few-shot classes
+
+## Generalized FSL/ZSL:
+
+- Goal is to learn a classifier \( f : x \rightarrow Y^u \cup Y^s \)
+- Image/feature \( x \) to be recognized at test time may belong to seen/base or unseen/few-shot classes
+- Practically more useful and challenging than conventional setting, since assumption that images at test time come only from unseen/few-shot classes need not hold
+
+---
+
+Vineeth N B. (IIIT-H)
+
+§12.1 Zero-shot and Few-shot Learning
+
+5 / 33
+```
+
+# DL4CV_Week12_Part01.pdf - Page 10
+
+```markdown
+# Recall: Supervised Learning
+
+## Empirical Risk Minimization
+
+Let \( p(x, y) \) be ground-truth joint probability distribution of input \( x \) and output \( y \).
+
+![NPTEL Logo](https://example.com/logo.png)
+
+Vineeth N B (IIT-H) §12.1 Zero-shot and Few-shot Learning
+
+---
+
+This markdown format retains the structure and content of the slide, ensuring the scientific terms and symbols are accurately represented. The image placeholder should be replaced with the actual image URL if available.
+```
+
+# DL4CV_Week12_Part01.pdf - Page 11
+
+```markdown
+# Recall: Supervised Learning
+
+## Empirical Risk Minimization
+
+Let \( p(x, y) \) be ground-truth joint probability distribution of input \( x \) and output \( y \).
+
+- Given hypothesis \( h \), we want to minimize its expected risk \( R \), loss measured w.r.t. \( p(x, y) \), i.e.
+
+\[
+R(h) = \int l(h(x), y) d(p(x, y)) = E[l(h(x), y)]
+\]
+
+![NPTEL Logo](https://example.com/logo.png)
+
+*Vineeth N B (IIT-H)*
+*$12.1 Zero-shot and Few-shot Learning*
+*6 / 33*
+```
+
+# DL4CV_Week12_Part01.pdf - Page 12
+
+```markdown
+# Recall: Supervised Learning
+
+## Empirical Risk Minimization
+
+Let \( p(x, y) \) be ground-truth joint probability distribution of input \( x \) and output \( y \).
+
+- Given hypothesis \( h \), we want to minimize its expected risk \( R \), loss measured w.r.t. \( p(x, y) \), i.e.
+
+  \[
+  R(h) = \int l(h(x), y) d(p(x, y)) = E[l(h(x), y)]
+  \]
+
+- As \( p(x, y) \) is unknown, empirical risk \( R_I(h) \) is used as proxy for \( R(h) \), leading to empirical risk minimization:
+
+  \[
+  R_I(h) = \frac{1}{I} \sum_{i=1}^{I} l(h(x_i, y_i))
+  \]
+
+![Diagram Placeholder](image_url)
+
+*Credit: Wang et al., Generalizing from a Few Examples: A Survey on Few-Shot Learning, ACM Computing Surveys'20*
+
+*Vineeth N B (IIT-H)*
+
+*$12.1 Zero-shot and Few-shot Learning*
+
+*6 / 33*
+```
+
+# DL4CV_Week12_Part01.pdf - Page 13
+
+```markdown
+# Recall: Supervised Learning
+
+Let $h \in H$ be a hypothesis from $x$ to $y$ in hypothesis space defined by $H$.
+
+![NPTEL Logo](image-url)
+
+**Vineeth N B (IIT-H)**
+
+**$12.1$ Zero-shot and Few-shot Learning**
+
+Page 7 / 33
+```
+
+# DL4CV_Week12_Part01.pdf - Page 14
+
+```markdown
+# Recall: Supervised Learning
+
+Let $h \in H$ be a hypothesis from $x$ to $y$ in hypothesis space defined by $H$
+
+- $\hat{h} = \arg \min_h R(h)$ be function that minimizes expected risk;
+- $h^* = \arg \min_{h \in H} R(h)$ be function in $H$ that minimizes expected risk
+- $h_I = \arg \min_{h \in H} R_I(h)$ be function in $H$ that minimizes empirical risk
+
+![NPTEL Logo](image_url)
+
+Vineeth N B (IIT-H) §12.1 Zero-shot and Few-shot Learning
+
+7 / 33
+```
+
+# DL4CV_Week12_Part01.pdf - Page 15
+
+```markdown
+# Recall: Supervised Learning
+
+Let $h \in H$ be a hypothesis from $x$ to $y$ in hypothesis space defined by $H$
+
+- $\hat{h} = \arg \min_h R(h)$ be function that minimizes expected risk;
+- $h^* = \arg \min_{h \in H} R(h)$ be function in $H$ that minimizes expected risk
+- $h_I = \arg \min_{h \in H} R_I(h)$ be function in $H$ that minimizes empirical risk
+
+## Error Decomposition:
+
+$$
+E[R(h_I) - R(\hat{h})] = \underbrace{E[R(h^*) - R(\hat{h})]}_{\mathcal{E}_{\text{app}}(H)} + \underbrace{E[R(h_I) - R(h^*)]}_{\mathcal{E}_{\text{est}}(H, I)}
+$$
+
+![NPTEL](https://example.com/image)
+
+Vineeth N B. ([IIT-H](#)) §12.1 Zero-shot and Few-shot Learning #7 / 33
+```
+
+# DL4CV_Week12_Part01.pdf - Page 16
+
+```markdown
+# Recall: Supervised Learning
+
+Let $h \in H$ be a hypothesis from $x$ to $y$ in hypothesis space defined by $H$
+
+- $\hat{h} = \arg \min_h R(h)$ be function that minimizes expected risk;
+- $h^* = \arg \min_{h \in H} R(h)$ be function in $H$ that minimizes expected risk
+- $h_I = \arg \min_{h \in H} R_I(h)$ be function in $H$ that minimizes empirical risk
+
+## Error Decomposition:
+
+$$
+E[R(h_I) - R(\hat{h})] = \underbrace{E[R(h^*) - R(\hat{h})]}_{E_{app}(H)} + \underbrace{E[R(h_I) - R(h^*)]}_{E_{est}(H, I)}
+$$
+
+- $E_{app}$ (approximation error) measures how closely functions in $H$ can approximate optimal hypothesis $\hat{h}$
+- $E_{est}$ (estimation error) measures effect of minimizing empirical risk $R_I(h)$ instead of expected risk $R(h)$ within $H$
+
+*Credit: Wang et al, Generalizing from a Few Examples: A Survey on Few-Shot Learning, ACM Computing Surveys'20*
+
+*Vineeth N B (IIT-H)*
+
+*$12.1$ Zero-shot and Few-shot Learning*
+
+*7 / 33*
+```
+
+# DL4CV_Week12_Part01.pdf - Page 17
+
+```markdown
+# Problems with Few/Zero-shot Setting
+
+- $\mathcal{E}_{est} \implies$ can be reduced with large training dataset
+- Sufficient labeled train data with (i.e. large $l$) $\implies$ Empirical risk minimizer $R(h_{l})$ gives good approximation to best possible $R(h^*)$
+
+![Diagram](image_placeholder.png)
+
+Vineeth N B (IIT-H) §12.1 Zero-shot and Few-shot Learning 8 / 33
+```
+
+# DL4CV_Week12_Part01.pdf - Page 18
+
+```markdown
+# Problems with Few/Zero-shot Setting
+
+- $\mathcal{E}_{est}$ $\implies$ can be reduced with large training dataset
+- Sufficient labeled train data with (i.e. large $I$) $\implies$ Empirical risk minimizer $R(h_I)$ gives good approximation to best possible $R(h^*)$
+
+## Few-shot Learning:
+
+### Comparison of learning with sufficient and few training samples
+
+- ![](large_i.png)
+- ![](small_i.png)
+
+#### Large $I$
+- optimal: $h^*$
+- $h_{est}$ in $\mathcal{H}$, $h_I$
+  - estimation error $\mathcal{E}_{est}$
+  - approximation error $\mathcal{E}_{app}$
+
+#### Small $I$
+- $h^*$, $h_I$, $h_{est}$
+  - $\mathcal{E}_{app}$
+  - $\mathcal{E}_{est}$
+
+#### Few-shot Learning:
+- Number of labeled examples $I$ is small
+- $R_I(h)$ $\implies$ far from being good approximation of expected risk $R(h)$
+- Resultant empirical risk minimizer $h_I$ overfits
+
+**Credit:** Wang et al. *Generalizing from a Few Examples: A Survey on Few-Shot Learning*, ACM Computing Surveys'20
+
+Vineeth N B ([IIT-H]) $§12.1$ Zero-shot and Few-shot Learning
+
+```
+
+# DL4CV_Week12_Part01.pdf - Page 19
+
+```markdown
+# Addressing Few/Zero-shot Learning
+
+## Different perspectives of addressing few-shot learning
+
+### Data
+![Data Diagram](data_diagram.png)
+
+- Learn to augment training set → increase number of samples to \( I >> I \)
+- More accurate empirical risk minimizer \( h^*_I \) can be obtained
+
+### Model
+![Model Diagram](model_diagram.png)
+
+### Algorithm
+![Algorithm Diagram](algorithm_diagram.png)
+
+## Data
+![Data Diagram](data_diagram.png)
+
+### Model
+![Model Diagram](model_diagram.png)
+
+### Algorithm
+![Algorithm Diagram](algorithm_diagram.png)
+
+**Vineeth N B (IIT-H)**
+
+**§12.1 Zero-shot and Few-shot Learning**
+
+* Slide 9 / 33 *
+```
+
+# DL4CV_Week12_Part01.pdf - Page 20
+
+# Addressing Few/Zero-shot Learning
+
+## Different perspectives of addressing few-shot learning
+
+### Data
+- Learn to augment training set \(\implies\) increase number of samples to \(i \gg I\)
+- More accurate empirical risk minimizer \(h_t\) can be obtained
+
+### Model
+- Constrain complexity of \(H \implies\) much smaller hypothesis space \(\hat{H}\)
+- Then, \(D_{train}\) may be sufficient to learn a reliable \(h_I\)
+
+![Diagram](image_placeholder)
+
+**Credit:** Wang et al., *Generalizing from a Few Examples: A Survey on Few-Shot Learning*, ACM Computing Surveys'20
+
+Vineeth N B (IIT-H)
+$12.1$ Zero-shot and Few-shot Learning
+
+---
+
+### Diagram
+
+(a) Data
+
+![Diagram](image_placeholder)
+
+(b) Model
+
+![Diagram](image_placeholder)
+
+(c) Algorithm
+
+![Diagram](image_placeholder)
+
+### Data
+- Learn to augment training set \(\implies\) increase number of samples to \(i \gg I\)
+- More accurate empirical risk minimizer \(h_t\) can be obtained
+
+### Model
+- Constrain complexity of \(H \implies\) much smaller hypothesis space \(\hat{H}\)
+- Then, \(D_{train}\) may be sufficient to learn a reliable \(h_I\)
+
+# DL4CV_Week12_Part01.pdf - Page 21
+
+```markdown
+# Addressing Few/Zero-shot Learning
+
+## Different perspectives of addressing few-shot learning
+
+### Data.
+
+![Data Diagram](data-diagram.png)
+
+### Model.
+
+![Model Diagram](model-diagram.png)
+
+### Algorithm.
+
+![Algorithm Diagram](algorithm-diagram.png)
+
+### Algorithm
+
+- **Search for parameters θ for best hypothesis h* in H**
+  - Prior knowledge alters search strategy by providing a good initialization (gray triangle in Fig (c))
+
+**Credit: Wang et al, Generalizing from a Few Examples: A Survey on Few-Shot Learning, ACM Computing Surveys '20**
+
+*Vineeth N B (IIT-H)*
+
+*$12.1 Zero-shot and Few-shot Learning*
+
+*10 / 33*
+```
+
+# DL4CV_Week12_Part01.pdf - Page 22
+
+```markdown
+# Taxonomy of Methods
+
+## Taxonomy of Methods
+
+### Model
+- **Embedding Learning**
+
+### Data
+- **Hallucination/Feature Synthesis**
+
+### Algorithm
+- **Parameter Initialization**
+
+---
+
+**Workflow**
+
+1. **Model**: Constraint hypothesis space by prior knowledge
+2. **Data**: Augment training dataset using prior knowledge
+3. **Algorithm**: Alter search strategy in hypothesis space by prior knowledge
+
+---
+
+**References**
+
+- Vineeth N B (IIT-H)
+- §12.1 Zero-shot and Few-shot Learning
+- Slide 11 / 33
+
+```
+
+# DL4CV_Week12_Part01.pdf - Page 23
+
+```markdown
+# Embedding Learning Methods
+
+## Intuition:
+
+- Address few-shot learning by "learning to compare"
+- If model can determine similarity of two images (and perhaps corresponding semantics of classes), it can classify unseen input in relation to labeled instance seen during training
+
+![NPTEL Logo](#)
+
+Vineeth N B (IIT-H) 
+
+§12.1 Zero-shot and Few-shot Learning
+
+12 / 33
+```
+
+# DL4CV_Week12_Part01.pdf - Page 24
+
+# Embedding Learning Methods
+
+## Intuition:
+
+- Address few-shot learning by "learning to compare"
+- If model can determine similarity of two images (and perhaps corresponding semantics of classes), it can classify unseen input in relation to labeled instance seen during training
+
+## Method:
+
+- Learn separate embedding functions for training samples \( D_{train} \) and test samples \( D_{test} \)
+- Train sophisticated comparison models end-to-end via **meta-learning**
+- At test time, predict based on comparing distance between \( x_{test} \) feature and training set features from each class
+
+*Credit: Wang et al, Generalizing from a Few Examples: A Survey on Few-Shot Learning, ACM Computing Surveys 20*
+
+---
+
+*Vineeth N B (IIT-B)*
+*$12.1 Zero-shot and Few-shot Learning*
+*12 / 33*
+
+# DL4CV_Week12_Part01.pdf - Page 25
+
+```markdown
+# Problem Setup: Meta-Learning
+
+- **N-way-K-shot**: N different classes in $D_{train}$ with K samples per class
+- $D_{meta-train} = (D_{train}, D_{test})$ set $\rightarrow$ one task/episode
+- Ensure $D_{meta-train}$ and $D_{meta-test}$ have disjoint/different classes
+
+![Image of Meta-Learning Process](image_url)
+
+**Credit**: Hugo Larochelle
+
+*Vineeth N B (IIIT-H)*
+
+*$§12.1$ Zero-shot and Few-shot Learning*
+
+*13 / 33*
+```
+
+# DL4CV_Week12_Part01.pdf - Page 26
+
+```markdown
+# Problem Setup: Meta-Learning
+
+## Learning Algorithm A
+
+- **Input**: Training set \( D_{train} = (x_i, y_i)_{i=1}^I \)
+- **Output**: Parameter \(\theta\) model \(M\) (the learner)
+- **Objective**: Good performance on \( D_{test} = (x_i', y_i') \)
+
+## Meta-Learning Algorithm
+
+- **Input**: Meta-training set \( D_{meta-train} = (D_{train}^{(n)}, D_{test}^{(n)})_{n=1}^N \) of tasks/episodes
+- **Output**: Parameter \(\Theta\) algorithm \(A\) (the meta-learner)
+- **Objective**: Good performance on meta-test set \( D_{meta-test} = (D_{train}^{(n)}, D_{test}^{(n)})_{n=1}^N \)
+
+*Source: Vineeth N B (IIT-H) §12.1 Zero-shot and Few-shot Learning*
+
+*Page 14 / 33*
+```
+
+# DL4CV_Week12_Part01.pdf - Page 27
+
+```markdown
+# Training Setup: Meta-Learning
+
+- **Training**: Repeat meta-loop for each task/mini-batch of tasks in $D_{meta-train}$ as shown
+- **Inference**: On tasks/episodes in $D_{meta-test}$
+
+![Training Setup Diagram](image_url)
+
+**Meta-Train** $D_{meta-train}$:
+1. Images 1, 2, 3, 4, 5, ...
+   - **$D_{train}$**: Training data
+   - **$D_{test}$**: Testing data
+
+**Meta-Test** $D_{meta-test}$:
+1. Images 1, 2, 3, 4, 5, ...
+   - **$D_{train}$**: Training data
+   - **$D_{test}$**: Testing data
+
+**Process Flow**:
+1. Training data (meta-train): Images feed into the Meta-learner ($A$)
+2. Meta-learner ($A$) processes the training data
+3. Learner ($\mathcal{M}$) uses the processed data from the meta-learner
+4. Loss is calculated and fed back for optimization
+5. Inference with meta-test data following the same pipeline
+
+**References**:
+- Vineeth N B (IIT-H)
+- §12.1 Zero-shot and Few-shot Learning
+
+_Page 15 / 33_
+```
+
+# DL4CV_Week12_Part01.pdf - Page 28
+
+```markdown
+# Training Setup: Meta-Learning
+
+- **Training**: Repeat meta-loop for each task/mini-batch of tasks in \(D_{meta-train}\) as shown
+  - Meta-Train \(P_{meta-train}\)
+
+- **Inference**: On tasks/episodes in \(D_{meta-test}\)
+  - Meta-Test \(P_{meta-test}\)
+
+Problem setup matches training and inference to enable generalization to new classes at test-time
+
+*Credit: Hugo Larochelle*
+
+*Vimeeth N B (IIT-H)*
+
+*§12.1 Zero-shot and Few-shot Learning*
+
+*15 / 33*
+```
+
+![Training Setup Visual](https://via.placeholder.com/800x450?text=Training+Setup+Visual)
+
+**Training Setup: Meta-Learning**
+
+- **Training**: Repeat meta-loop for each task/mini-batch of tasks in \(D_{meta-train}\) as shown
+  - Meta-Train \(P_{meta-train}\)
+
+- **Inference**: On tasks/episodes in \(D_{meta-test}\)
+  - Meta-Test \(P_{meta-test}\)
+
+Problem setup matches training and inference to enable generalization to new classes at test-time
+
+*Credit: Hugo Larochelle*
+
+*Vimeeth N B (IIT-H)*
+
+*§12.1 Zero-shot and Few-shot Learning*
+
+*15 / 33*
+```
+
+# DL4CV_Week12_Part01.pdf - Page 29
+
+```markdown
+# Matching Networks<sup>1</sup>
+
+- **Parametric models**: Slowly learn model parameters from training examples;
+  Require large datasets to avoid overfitting
+
+- **Non-parametric models**: Allow novel examples to be rapidly assimilated;
+  Robust to catastrophic forgetting
+
+![NPTEL](image_placeholder.png)
+
+<sup>1</sup>Vinyals et al., Matching Networks for One Shot Learning, NeurIPS 2016
+
+Vineeth N B (IIIT-H) §12.1 Zero-shot and Few-shot Learning
+
+---
+
+16 / 33
+```
+
+# DL4CV_Week12_Part01.pdf - Page 30
+
+```markdown
+# Matching Networks<sup>1</sup>
+
+- **Parametric models**: Slowly learn model parameters from training examples; Require large datasets to avoid overfitting
+
+- **Non-parametric models**: Allow novel examples to be rapidly assimilated; Robust to catastrophic forgetting
+
+  **Idea**: Combine best of both worlds
+
+  - **Training Phase**: Learn cosine similarity-based embedding models (parametric meta-learners)
+
+  - **Test Phase**: Use Nearest Neighbors (non-parametric) in learned embedding space
+
+  ![MatchingNet](https://via.placeholder.com/150)
+
+  - **MatchingNet** diagram:
+    - **S**: Support
+    - **Q**: Query
+    - **Y**: Output
+    - Cosine distance is used to calculate similarity between support and query.
+
+<sup>1</sup>Vinyals et al., Matching Networks for One Shot Learning, NeurIPS 2016
+
+Vineeth N B (IIT-H)
+
+$12.1 Zero-shot and Few-shot Learning$
+
+---
+
+16 / 33
+```
+
+# DL4CV_Week12_Part01.pdf - Page 31
+
+# Matching Networks
+
+```markdown
+# Matching Networks
+
+![Matching Networks Diagram](url_to_image)
+
+- **Bi-directional LSTM**: The bidirectional LSTM (gθ) processes the input data from the training set \( \mathcal{D}^{\text{tr}} \).
+  - Examples from \( \mathcal{D}^{\text{tr}} \) are shown with images of different dogs.
+- **Convolutional Encoder**: The convolutional encoder \( hθ \) processes the input data from the test set \( \mathcal{D}^{\text{ts}} \).
+  - Example from \( \mathcal{D}^{\text{ts}} \) is shown with an image of another dog.
+
+In the diagram:
+- The training data \( \mathcal{D}^{\text{tr}} \) is fed into the bi-directional LSTM.
+- The test data \( \mathcal{D}^{\text{ts}} \) is processed by the convolutional encoder.
+- The output from the bi-directional LSTM is combined using an attention mechanism.
+
+### Equation
+
+\[ \hat{y}_{ts} = \sum_{i=1}^{k} a(\hat{x}, x_i) * y_i \]
+
+Where \( a(\hat{x}, x_i) \) denotes the attention mechanism over examples.
+
+**Footer**: 
+
+- **Vineeth N B (IIT-H)**
+- **§12.1 Zero-shot and Few-shot Learning**
+- **Page 17 / 33**
+```
+
+# DL4CV_Week12_Part01.pdf - Page 32
+
+```markdown
+# Matching Networks
+
+![Diagram of Matching Networks](image_url_placeholder)
+
+## Diagram Explanation
+
+- **D_i^tr**: Dataset images for training.
+  - Example images include a dog, cat, bear, and another dog.
+- **Bidirectional LSTM**: Used to encode the sequence of features.
+- **gθ**: Structure within the network for processing.
+- **Convolutional encoder hθ**: Extracts features from images.
+- **D_i^ts**: Target dataset image.
+  - Example image is a German Shepherd.
+- **y_k**: Output or representation in the network.
+- **Attention Mechanism**:
+  - **a(·, ·)**: Attention mechanism over examples.
+  - **y_hat_ts = Σ (a(x̂, x_i) * y_i) for i = 1 to k**: Summation of attention-weighted examples.
+
+### Simplest Form of Attention Mechanism
+
+- **Softmax over Cosine Distances**:
+  - **c(·, ·)**: Cosine distance function.
+  - **a(x̂, x_i) = c^c(h(x̂), g(x_i)) / Σ_j c^c(h(x̂), g(x_j)) for j = 1 to k**: Formula for calculating attention weights.
+
+Vineeth N B (IIT-H)
+
+$12.1$ Zero-shot and Few-shot Learning
+
+17 / 33
+```
+
+# DL4CV_Week12_Part01.pdf - Page 33
+
+```markdown
+# Relation Networks<sup>2</sup>
+
+## Idea:
+
+- Train data-driven learnable non-linear metric end-to-end instead of manually picking one
+- Enables model to extract complex non-linear relationship among data samples ⇒ generalize better to novel classes
+- Easily extensible to tackle more difficult zero-shot setting
+
+![NPTEl Logo](https://example.com/logo.png)
+
+---
+
+<sup>2Sung et al, Feature Generating Networks for Zero-Shot Learning, CVPR 2018</sup>
+
+*Vineeth N B (IIIT-H)*
+
+*§12.1 Zero-shot and Few-shot Learning*
+
+*Page 18 / 33*
+```
+
+# DL4CV_Week12_Part01.pdf - Page 34
+
+```markdown
+# Relation Networks<sup>2</sup>
+
+## Idea:
+
+- Train data-driven learnable non-linear metric end-to-end instead of manually picking one
+- Enables model to extract complex non-linear relationship among data samples ⇒ generalize better to novel classes
+- Easily extensible to tackle more difficult zero-shot setting
+
+![RelationNet](image_url)
+
+## RelationNet
+
+### Training Phase:
+- Meta-learn both embedding module (for feature representation) and relation module (learned transferable deep metric) end-to-end
+
+### Test Phase:
+- Use relation scores in embedding space to classify new samples
+
+_<sup>2</sup>Sung et al, Feature Generating Networks for Zero-Shot Learning, CVPR 2018_
+
+_Vineeth N B (IIT-H)_
+
+_$12.1 Zero-shot and Few-shot Learning_
+
+_18 / 33_
+```
+
+# DL4CV_Week12_Part01.pdf - Page 35
+
+```markdown
+# Relation Networks
+
+## One-shot Learning:
+
+- Samples \( x_j \in Q \) and \( x_i \in S \) are fed into embedding module \( f_\varphi \).
+
+![Embedding Module Diagram](image-url)
+
+- Feature maps \( f_\varphi(x_j) \) and \( f_\varphi(x_i) \) combined with concatenation operator \( C(f_\varphi(x_j), f_\varphi(x_i)) \) to extract relations.
+
+### Embedding Module
+
+- **Embedding Module**: Processes the input samples to extract feature maps.
+- **Attention Module**: Focuses on important aspects of the input data.
+- **Feature Multiplication**: Combines features from the attention module and embedding module.
+- **Relation One-shot Learning**: Uses the combined features to extract relations.
+
+---
+
+Vineeth N B (IIT-H) 
+
+§12.1 Zero-shot and Few-shot Learning
+
+---
+
+19 / 33
+```
+
+# DL4CV_Week12_Part01.pdf - Page 36
+
+# Relation Networks
+
+## One-shot Learning:
+
+- Samples \( x_j \in Q \) and \( x_i \in S \) are fed into embedding module \( f_\varphi \)
+
+  ![Embedding Module](image_url_here)
+
+- Feature maps \( f_\varphi(x_j) \) and \( f_\varphi(x_i) \) combined with concatenation operator \( C(f_\varphi(x_j), f_\varphi(x_i)) \) to extract relations
+
+  ```
+  r_{ij} = g_{\phi}(C(f_\varphi(x_j), f_\varphi(x_i)))
+  ```
+
+  - Combined feature map fed into relation module \( g_{\phi} \), produces a scalar \( \in (0, 1) \)
+
+  ```
+  r_{ij} = g_{\phi}(C(f_\varphi(x_j), f_\varphi(x_i)))
+  ```
+
+### Vineeth N B (IIT-H)
+
+#### §12.1 Zero-shot and Few-shot Learning
+
+---
+
+19 / 33
+
+# DL4CV_Week12_Part01.pdf - Page 37
+
+```markdown
+# Relation Networks
+
+## One-shot Learning:
+
+- Samples \( x_j \in Q \) and \( x_i \in S \) are fed into embedding module \( f_\varphi \).
+
+- Feature maps \( f_\varphi(x_j) \) and \( f_\varphi(x_i) \) combined with concatenation operator \( C(f_\varphi(x_j), f_\varphi(x_i)) \) to extract relations.
+
+- Combined feature map fed into relation module \( g_\phi \), \( \Longrightarrow \) produces a scalar \( \epsilon \in (0, 1) \)
+
+\[ r_{ij} = g_\phi(C(f_\varphi(x_j), f_\varphi(x_i))) \]
+
+## Objective:
+
+\[ \varphi, \phi \leftarrow \arg \min_\varphi, \phi \sum_{i=1}^m \sum_{j=1}^n (r_{ij} - 1(y_i = y_j))^2 \]
+
+*Vineeth N B (IIIT-H)*
+
+*§12.1 Zero-shot and Few-shot Learning*
+
+*19 / 33*
+
+![Diagram](image.png)
+
+*Embedding Module*
+
+*Relation Module*
+
+*Feature Multiplicative*
+```
+
+# DL4CV_Week12_Part01.pdf - Page 38
+
+# Relation Networks: Application to Few/Zero-shot Learning
+
+## Few-shot Learning (K shot; k > 1)
+
+- Use element-wise sum over embedding module outputs of samples from each training class (class feature map)
+- Combine pooled class-level feature maps with query image feature map
+  - Number of relation scores for one query is always C (both one-shot or few-shot setting)
+
+![Image from Vineeth N B](https://via.placeholder.com/150)
+
+_Section from:_ Vineeth N B (IIIT-H)
+
+**Slide:** §12.1 Zero-shot and Few-shot Learning
+
+_Slide Number:_ 20 / 33
+
+# DL4CV_Week12_Part01.pdf - Page 39
+
+```markdown
+# Relation Networks: Application to Few/Zero-shot Learning
+
+## Few-shot Learning (K shot; k > 1)
+
+- Use element-wise sum over embedding module outputs of samples from each training class (class feature map)
+- Combine pooled class-level feature maps with query image feature map
+  - Number of relation scores for one query is always C (both one-shot or few-shot setting)
+
+## Zero-shot Learning:
+
+- Support set contains semantic class embeddings ⇒ vector \(v_c\) instead of one-shot image for each class
+- In addition to \(f_{\varphi_1}\) (for query images), introduce embedding module \(f_{\varphi_2}\) to handle semantic attributes
+
+  \[ r_{ij} = g_{\phi}\left(C\left(f_{\varphi_2}(v_c), f_{\varphi_1}(x_j)\right)\right) \]
+
+*Vineeth N B (IIT-H) §12.1 Zero-shot and Few-shot Learning*
+
+---
+
+20 / 33
+```
+
+This markdown format ensures that the content is well-structured, with clear headings, bullet points, and inline equations. It maintains the scientific integrity of the original text, including formulas and semantic attributes.
+
+# DL4CV_Week12_Part01.pdf - Page 40
+
+```markdown
+# Taxonomy of Methods
+
+## Taxonomy of Methods
+
+```
+![](https://via.placeholder.com/150) 
+
+- **Model**
+  - **Embedding Learning**
+  - constrain hypothesis space by prior knowledge
+
+- **Data**
+  - **Hallucination/Feature Synthesis**
+  - augment training dataset using prior knowledge
+
+- **Algorithm**
+  - **Parameter Initialization**
+  - alter search strategy in hypothesis space by prior knowledge
+
+*Vineeth N B (IIT-H) §12.1 Zero-shot and Few-shot Learning*
+
+```
+
+# DL4CV_Week12_Part01.pdf - Page 41
+
+```markdown
+# Hallucination/Feature Synthesis Methods
+
+**Intuition:**
+
+- Directly deal with data deficiency by “learning to augment”
+- Learn a generative model to hallucinate new novel class data for data augmentation
+- Reduce few/zero-shot problem to a standard supervised learning problem
+
+![NPTEL](image_placeholder.png)
+
+*Vineeth N B (IIT-H)*
+
+*§12.1 Zero-shot and Few-shot Learning*
+
+*22 / 33*
+```
+
+# DL4CV_Week12_Part01.pdf - Page 42
+
+```markdown
+# Hallucination/Feature Synthesis Methods
+
+## Intuition:
+
+- Directly deal with data deficiency by “learning to augment”
+- Learn a generative model to hallucinate new novel class data for data augmentation
+- Reduce few/zero-shot problem to a standard supervised learning problem
+
+![Generation Flow Diagram](image-url)
+
+## Method:
+
+- Learn a generator conditioned on meta-information using data in base classes
+- Generate novel class features conditioned on unseen class meta-information
+- Train a classifier on base class samples and generated novel class samples
+
+**Credit:** Wang et al., Generalizing from a Few Examples: A Survey on Few-Shot Learning, ACM Computing Surveys'20
+
+_Vineeth N B (IIT-H)_
+
+$12.1 Zero-shot and Few-shot Learning$
+
+---
+
+22 / 33
+```
+
+# DL4CV_Week12_Part01.pdf - Page 43
+
+```markdown
+# Feature Generating Networks (f-CLSWGAN)³
+
+## Method:
+
+- Given train set $S$ of seen classes, learn a conditional generator $G: Z \times C \rightarrow X$, which takes random Gaussian noise $z \in Z \subset R^{dz}$ and class embedding $c(y) \in C$, and outputs image feature $\hat{x} \in X$.
+
+- To ensure $\hat{x}$ are well-suited to train a discriminative classifier, minimize classification loss over generated features $\hat{x}$.
+
+![Diagram](placeholder_image_url)
+
+---
+
+³Xian et al., Feature Generating Networks for Zero-Shot Learning, CVPR 2018
+
+Vineeth N B (IITH)
+
+§12.1 Zero-shot and Few-shot Learning
+
+---
+
+23 / 33
+```
+
+# DL4CV_Week12_Part01.pdf - Page 44
+
+```markdown
+# Feature Generating Networks (f-CLSWGAN)^3
+
+## Method:
+
+- Given train set $S$ of seen classes, learn a conditional generator $G : Z \times C \rightarrow X$, which takes random Gaussian noise $z \in Z \subset \mathbb{R}^{dz}$ and class embedding $c(y) \in C$, and outputs image feature $\hat{x} \in X$.
+
+  To ensure $\hat{x}$ are well-suited to train a discriminative classifier, minimize classification loss over generated features $\hat{x}$.
+
+## Extension to Few-shot Learning:
+
+- For FSL, along with seen classes data set $S$, the training data also includes few labeled samples for each unseen class as well.
+
+---
+
+_^3 Xian et al., Feature Generating Networks for Zero-Shot Learning, CVPR 2018_
+
+_Vineeth N B (IIT-H)_
+
+_$12.1 Zero-shot and Few-shot Learning_
+```
+
+# DL4CV_Week12_Part01.pdf - Page 45
+
+```markdown
+# Feature Generating Networks (f-CLSWGAN)
+
+![Diagram](https://via.placeholder.com/800x450)
+
+**Loss Formulation:**
+
+## GAN Loss:
+
+\[
+\mathcal{L}_{WGAN} = \mathbb{E}[D(x, c(y))] - \mathbb{E}[D(\tilde{x}, c(y))] - \lambda \mathbb{E}[(\| \nabla_{\tilde{x}} D(\tilde{x}, c(y)) \|_2 - 1)^2]
+\]
+
+## Classification Loss:
+
+\[
+\mathcal{L}_{CLS} = - \mathbb{E}_{\tilde{x} \sim p_{\tilde{x}}} [\log P(y | \tilde{x}; \theta)]
+\]
+
+## Final loss:
+
+\[
+L_{total} = \min_G \max_D \mathcal{L}_{WGAN} + \beta \mathcal{L}_{CLS}
+\]
+
+*Vineeth N B (IIIT-H)*
+
+*$12.1$ Zero-shot and Few-shot Learning*
+
+*24 / 33*
+```
+
+# DL4CV_Week12_Part01.pdf - Page 46
+
+```markdown
+# Feature Generating Networks (f-CLSWGAN)
+
+![Image of f-CLSWGAN architecture](image_url)
+
+## Loss Formulation:
+
+### GAN Loss:
+\[
+\mathcal{L}_{WGAN} = E[D(x, c(y))] - E[D(\hat{x}, c(y))] - \lambda E[(||\nabla_{\hat{x}} D(\hat{x}, c(y))||_2 - 1)^2]
+\]
+
+### Classification Loss:
+\[
+\mathcal{L}_{CLS} = -E_{\hat{x} \sim p_{\hat{x}}} [\log P(y|\hat{x}; \theta)]
+\]
+
+### Final loss:
+\[
+L_{total} = \min_G \max_D \mathcal{L}_{WGAN} + \beta \mathcal{L}_{CLS}
+\]
+
+## Training Classifier:
+
+- Use pre-trained generator to generate samples novel/unseen class samples conditioned on class embeddings
+- Train softmax classifier on train set and generated unseen class image features
+
+_Vineeth N B (IIIT-H)_
+
+_$12.1 Zero-shot and Few-shot Learning_
+
+_24 / 33_
+```
+
+# DL4CV_Week12_Part01.pdf - Page 47
+
+```markdown
+# Taxonomy of Methods
+
+## Taxonomy of Methods
+
+```mermaid
+graph TD;
+    A[Taxonomy of Methods] --> B[Model];
+    A --> C[Data];
+    A --> D[Algorithm];
+
+    B --> E[Embedding Learning];
+    C --> F[Hallucination/Feature Synthesis];
+    D --> G[Parameter Initialization];
+
+    B[Model] -->|constrain hypothesis space by prior knowledge| A[Taxonomy of Methods];
+    C[Data] -->|augment training dataset using prior knowledge| A[Taxonomy of Methods];
+    D[Algorithm] -->|alter search strategy in hypothesis space by prior knowledge| A[Taxonomy of Methods];
+```
+
+*Vineeth N B (IIT-H)*
+
+*$12.1 Zero-shot and Few-shot Learning*
+
+*25 / 33*
+```
+
+# DL4CV_Week12_Part01.pdf - Page 48
+
+```markdown
+# Parameter Initialization Methods
+
+## Intuition:
+
+- Tackle the few-shot learning problem by "learning to fine-tune"
+- Learn parameters that transfer via few-gradient steps (fine-tuning) to novel tasks
+
+![NPTEL Logo](image_url)
+
+Vineeth N B (IIT-H) §12.1 Zero-shot and Few-shot Learning 26 / 33
+```
+
+# DL4CV_Week12_Part01.pdf - Page 49
+
+# Parameter Initialization Methods
+
+## Intuition:
+
+- Tackle the few-shot learning problem by “learning to fine-tune”
+- Learn parameters that transfer via few-gradient steps (fine-tuning) to novel tasks
+
+![Graphical representation of the few-shot learning process](image_placeholder)
+
+### Method:
+
+- For each task/episode \((D^i_{train}, D^i_{test})\), update task-specific parameters \(\Phi_i\) to minimize \(L(\theta, D^i_{train})\)
+  - For each task/episode \((D^i_{train}, D^i_{test})\), update task-specific parameters \(\Phi_i\) to minimize \(L(\theta, D^i_{train})\)
+- Update meta parameter \(\theta\) to minimize \(\sum L(\Phi_i, D^i_{test})\)
+  - Update meta parameter \(\theta\) to minimize \(\sum L(\Phi_i, D^i_{test})\)
+- At test time, use few gradient steps to adapt classify novel classes
+  - At test time, use few gradient steps to adapt classify novel classes
+
+**Credit:** Wang et al. Generalizing from a Few Examples: A Survey on Few-Shot Learning, ACM Computing Surveys'20
+
+---
+
+**Vineeth N B (IIIT-H)**
+
+**$12.1 Zero-shot and Few-shot Learning**
+
+**26 / 33**
+
+# DL4CV_Week12_Part01.pdf - Page 50
+
+```markdown
+# MAML<sup>4</sup>
+
+## Key Idea: Acquire task-specific parameters (\(\Phi_i\)) through optimization
+
+![MAML Diagram](image_url)
+
+**Figure 1.** Diagram of our model-agnostic meta-learning algorithm (MAML), which optimizes for a representation \(\Phi\) that can quickly adapt to new tasks.
+
+![Diagram](image_url)
+
+---
+
+**MAML**
+
+- **S** \(\sqrt{f_\theta}\) \(\rightarrow\) **Linear** \(\rightarrow\) **Y**
+  - \(L_{N-way}\)
+- **Q** \(-f_\theta\) \(\rightarrow\) **Linear** \(\rightarrow\) \(\tilde{Y}\)
+
+- Gradient
+
+---
+
+- meta-learning
+  - \(\theta\)
+- learning/adaptation
+  - \(\nabla L_1\), \(\nabla L_2\), \(\nabla L_3\)
+
+---
+
+- \(\theta_1^*\)
+- \(\theta_2^*\)
+- \(\theta_3^*\)
+
+---
+
+**References**
+- Finn et al., Model-Agnostic Meta-Learning for Fast Adaptation of Deep Networks, ICML 2017
+- Vineeth N B (IIT-H)
+- §12.1 Zero-shot and Few-shot Learning
+
+---
+
+<div align="right">27 / 33</div>
+```
+
+# DL4CV_Week12_Part01.pdf - Page 51
+
+```markdown
+# MAML<sup>4</sup>
+
+![Diagram](image_url)
+
+**Key Idea:** Acquire task-specific parameters (\(\Phi_i\)) through optimization
+
+**Formulation**
+- Learn prior such that model can adapt to new tasks
+- One form of prior knowledge: **Parameter Initialization**
+
+![NPTEL](image_url)
+
+*Figure 1. Diagram of our model-agnostic meta-learning algorithm (MAML), which optimizes for a representation \(\theta\) that can quickly adapt to new tasks.*
+
+**References**
+- Finn et al., Model-Agnostic Meta-Learning for Fast Adaptation of Deep Networks, ICML 2017
+- Vineeth N B (IIT-H)
+- §12.1 Zero-shot and Few-shot Learning
+
+---
+
+```
+
+# DL4CV_Week12_Part01.pdf - Page 52
+
+```markdown
+# MAML
+
+![MAML Diagram](image_url)
+
+**Key Idea:** Acquire task-specific parameters (\(\Phi_i\)) through optimization
+
+### Formulation
+
+- Learn prior such that model can adapt to new tasks
+- One form of prior knowledge: **Parameter Initialization**
+- **Task-specific Update:**
+  \[
+  \theta_i' = \theta - \alpha \nabla_{\theta} L(\theta, D_{train}^i) \quad (\text{Single or multiple SGD updates})
+  \]
+
+*Figure 1. Diagram of our model-agnostic meta-learning algorithm (MAML), which optimizes for a representation \(\theta\) that can quickly adapt to new tasks.*
+
+---
+
+**Reference:**
+Finn et al., Model-Agnostic Meta-Learning for Fast Adaptation of Deep Networks, ICML 2017
+
+Vineeth N B (IIT-H)
+
+**Section:**
+$12.1 Zero$-$shot and Few$-$shot Learning
+
+---
+
+Page: 27 / 33
+```
+
+# DL4CV_Week12_Part01.pdf - Page 53
+
+```markdown
+# MAML
+
+![MAML Diagram](image_url)
+
+**Key Idea:** Acquire task-specific parameters (\(\Phi_i\)) through optimization
+
+### Formulation
+
+- Learn prior such that model can adapt to new tasks
+  - **One form of prior knowledge**: Parameter Initialization
+
+### Task-specific Update:
+
+\[
+\theta_i' = \theta - \alpha \nabla_\theta L(\theta, D_{train}^i) \quad \text{(Single or multiple SGD updates)}
+\]
+
+### Meta Fine-tuning:
+
+\[
+\theta = \theta - \beta \nabla_\theta \sum_i L(\theta_i', D_{test}^i)
+\]
+
+\[
+\theta = \theta - \beta \nabla_\theta \sum_i L(\theta - \alpha \nabla_\theta L(\theta, D_{train}^i), D_{test}^i)
+\]
+
+(Second-order derivatives)
+
+*Finn et al., Model-Agnostic Meta-Learning for Fast Adaptation of Deep Networks, ICML 2017*
+
+*Vineeth N B (IIT-H)*
+
+*$12.1 Zero-shot and Few-shot Learning*
+
+*27 / 33*
+```
+
+# DL4CV_Week12_Part01.pdf - Page 54
+
+```markdown
+# MAML: Few-shot Algorithm
+
+## Algorithm 2 MAML for Few-Shot Supervised Learning
+
+**Require:** \( p(T) \): distribution over tasks
+
+**Require:** \( \alpha, \beta \): step size hyperparameters
+
+1. randomly initialize \( \theta \)
+2. while not done do
+3. Sample batch of tasks \( T_i \sim p(T) \)
+4. for all \( T_i \) do
+5. Sample \( K \) datapoints \( D = \{x^{(j)}, y^{(j)}\} \) from \( T_i \)
+6. Evaluate \( \nabla_\theta L_{T_i}(f_\theta) \) using \( D \) and \( L_{T_i} \) in Equation (2) or (3)
+7. Compute adapted parameters with gradient descent:
+   \[
+   \theta_i' = \theta - \alpha \nabla_\theta L_{T_i}(f_\theta)
+   \]
+8. Sample datapoints \( D_i' = \{x^{(j)}, y^{(j)}\} \) from \( T_i \) for the meta-update
+9. end for
+10. Update \( \theta \leftarrow \theta - \beta \nabla_\theta \sum_{T_i \sim p(T)} L_{T_i}(f_{\theta_i'}) \) using each \( D_i' \)
+     and \( L_{T_i} \) in Equation 2 or 3
+11. end while
+
+*Vineeth N B (IIT-H)*
+
+*$12.1 Zero-shot and Few-shot Learning*
+
+*28 / 33*
+```
+
+# DL4CV_Week12_Part01.pdf - Page 55
+
+```markdown
+# Meta-Learning for Generalized Zero-Shot Learning<sup>5</sup>
+
+**Idea:**
+
+- Learn a GAN conditioned on class attributes and train using meta-learning framework (MAML) to facilitate generalization to novel classes
+- Mimic ZSL setup during training: for each task/episode \( T_i = T_{tr}, T_{val} \), classes of \( T_{tr} \) and \( T_{val} \) are disjoint
+
+---
+
+<center>
+  ![NPTEL Logo](image-url)
+</center>
+
+---
+
+<sup>5</sup> Verma et al., *Meta-Learning for Generalized Zero-Shot Learning*, AAAI 2020
+
+Vineeth N B (IIT-H)
+
+§12.1 Zero-shot and Few-shot Learning
+
+---
+
+Page 29 / 33
+```
+
+# DL4CV_Week12_Part01.pdf - Page 56
+
+```markdown
+# Meta-Learning for Generalized Zero-Shot Learning<sup>5</sup>
+
+## Idea:
+
+- Learn a GAN conditioned on class attributes and train using meta-learning framework (MAML) to facilitate generalization to novel classes
+- Mimic ZSL setup during training: for each task/episode $T_i = T_{tr}, T_{val}$, classes of $T_{tr}$ and $T_{val}$ are disjoint
+
+![Diagram of the Meta-Learning Framework](image_url)
+
+## Method:
+
+- Consider a GAN coupled with classifier module (to classify examples generated by generator) and three meta-learners (Generator $G$, Discriminator $D$, and Classifier $C$) as shown
+- Let $\theta_d, \theta_g$ and $\theta_c$ be parameters of $D, G$ and $C$ respectively, and $\theta_{gc} = [\theta_g, \theta_c]$
+
+<sup>5</sup>Verma et al., Meta-Learning for Generalized Zero-Shot Learning, AAAI 2020
+
+Vineeth N B (IIT-H)
+
+$12.1$ Zero-shot and Few-shot Learning
+
+29 / 33
+```
+
+# DL4CV_Week12_Part01.pdf - Page 57
+
+```markdown
+# Objective
+
+![Objective Image](image_url)
+
+## Objective
+
+**Objective**
+
+\[
+\max_{\theta_d} \mathbb{E}[D(\mathbf{x}, \mathbf{a}_c|\theta_d)] - \mathbb{E}_{\mathbf{a}_c, \mathbf{x} \sim P_{\theta_g}} [D(\tilde{\mathbf{x}}, \mathbf{a}_c|\theta_d)]
+\]
+
+\[
+\min_{\theta_{gc}} - \mathbb{E}_{\mathbf{a}_c, \mathbf{z} \sim \mathcal{N}(0, I)} [D(G(\mathbf{a}_c, \mathbf{z}|\theta_g), \mathbf{a}_c|\theta_d)] + C(y|\tilde{\mathbf{x}}, \theta_c)
+\]
+
+*Vineeth N B (IIT-H)*
+
+*$12.1$ Zero-shot and Few-shot Learning*
+
+*30 / 33*
+
+### Slide Details:
+
+- The left part of the slide contains a diagram with colored Gaussian distributions and labeled vectors.
+- The right part presents the objective function in mathematical notation, with two primary formulas.
+  - The first formula aims to maximize the expected value of the discriminator \( D \) given the input \( \mathbf{x} \) and \( \mathbf{a}_c \) with parameters \( \theta_d \).
+  - The second formula aims to minimize a combination of the expected value of the discriminator and a cost function \( C \) given \( y \), \( \tilde{\mathbf{x}} \), and parameters \( \theta_c \).
+
+### Notes:
+
+- The slide appears to be part of a presentation on machine learning, specifically focusing on zero-shot and few-shot learning methods.
+- The objective functions pertain to optimizing generative and discriminative models.
+```
+
+# DL4CV_Week12_Part01.pdf - Page 58
+
+ content and ensure the scientific integrity of the content. 
+
+```markdown
+# Objective
+
+## Objective
+
+```math
+\text{Objective}
+```
+```math
+\max_{\theta_d} \mathbb{E}[D(x, \mathbf{a}_c|\theta_d)] - 
+\mathbb{E}_{\mathbf{a}_c, \tilde{x} \sim P_{\theta_g}}[D(\tilde{x}, \mathbf{a}_c|\theta_d)]
+```
+```math
+\min_{\theta_{gc}} - \mathbb{E}_{\mathbf{a}_c, \mathbf{z} \sim \mathcal{N}(0, I)}
+[D(G(\mathbf{a}_c, \mathbf{z}|\theta_g), \mathbf{a}_c|\theta_d)] +
+C(y|\tilde{x}, \theta_c)
+```
+## Updates
+
+```math
+\theta_d' = \theta_d + \eta_1 \nabla_{\theta_d} l_D^{D}(\theta_d)
+```
+```math
+\theta_{gc}' = \theta_{gc} - \eta_2 \nabla_{\theta_{gc}} l_{GC}^{C}(\theta_{gc})
+```
+
+## Diagram
+
+![Diagram](image_url_placeholder)
+
+## References
+
+Vineeth N B (IIT-H)
+
+§12.1 Zero-shot and Few-shot Learning
+
+Page 30 / 33
+```
+```markdown
+# Objective
+
+## Objective
+
+```math
+\text{Objective}
+```
+```math
+\max_{\theta_d} \mathbb{E}[D(x, \mathbf{a}_c|\theta_d)] -
+\mathbb{E}_{\mathbf{a}_c, \tilde{x} \sim P_{\theta_g}}[D(\tilde{x}, \mathbf{a}_c|\theta_d)]
+```
+```math
+\min_{\theta_{gc}} - \mathbb{E}_{\mathbf{a}_c, \mathbf{z} \sim \mathcal{N}(0, I)}
+[D(G(\mathbf{a}_c, \mathbf{z}|\theta_g), \mathbf{a}_c|\theta_d)] +
+C(y|\tilde{x}, \theta_c)
+```
+
+## Updates
+
+```math
+\theta_d' = \theta_d + \eta_1 \nabla_{\theta_d} l_D^{D}(\theta_d)
+```
+```math
+\theta_{gc}' = \theta_{gc} - \eta_2 \nabla_{\theta_{gc}} l_{GC}^{C}(\theta_{gc})
+```
+
+## Diagram
+
+![Diagram](image_url_placeholder)
+
+## References
+
+Vineeth N B (IIT-H)
+
+§12.1 Zero-shot and Few-shot Learning
+
+Page 30 / 33
+```
+
+# DL4CV_Week12_Part01.pdf - Page 59
+
+```markdown
+# Objective
+
+![Objective Diagram](image-url)
+
+```math
+\max_{\theta_d} \sum_{\theta_d \in \sim p(T)} l^D(\theta_d) = \max_{\theta_d} \sum_{\theta_d \in \sim p(T)} l^D(\theta_d + \eta_1 \nabla_{\theta_d} l^D(\theta_d))
+```
+
+```math
+\theta_d \leftarrow \theta_d + \beta_1 \nabla_{\theta_d} \sum_{\theta_d \in \sim p(T)} l^D(\theta_d)
+```
+
+```math
+\min_{\theta_{gc}} \sum_{\theta_{gc} \in \sim p(T)} l^{GC}(\theta_{gc})
+```
+
+```math
+\theta_{gc} \leftarrow \theta_{gc} - \beta_2 \nabla_{\theta_{gc}} \sum_{\theta_{gc} \in \sim p(T)} l^{GC}(\theta_{gc})
+```
+
+**Vineeth N B (IIT-H)**
+
+**§12.1 Zero-shot and Few-shot Learning**
+
+```
+31 / 33
+```
+```
+
+# DL4CV_Week12_Part01.pdf - Page 60
+
+```markdown
+# Generation and ZSL Classification
+
+## Generation
+
+- After training, we can generate unseen class examples given class-attribute vectors as:
+
+  $$
+  \hat{\mathbf{x}} = G_{\theta_y}(\mathbf{z}, \mathbf{a}) : \quad \mathbf{a} \in \mathbb{R}^d
+  $$
+
+  where $\mathbf{a}$ denotes class-attributes of unseen classes and $\mathbf{z} \sim \mathcal{N}(0, I)$ and $\mathbf{z} \in \mathbb{R}^k$.
+
+*Vineeth N B (IIIT-H) - §12.1 Zero-shot and Few-shot Learning*
+
+*Image placeholder:*
+![NPTEL](image_url)
+```
+
+# DL4CV_Week12_Part01.pdf - Page 61
+
+```markdown
+# Generation and ZSL Classification
+
+## Generation
+
+- After training, we can generate unseen class examples given class-attribute vectors as:
+
+    \[
+    \hat{\mathbf{x}} = G_{\theta_{y}}(\mathbf{z}, \mathbf{a}) : \mathbf{a} \in \mathbb{R}^{d}
+    \]
+
+    where \(\mathbf{a}\) denotes class-attributes of unseen classes and \(\mathbf{z} \sim \mathcal{N}(0, I)\) and \(\mathbf{z} \in \mathbb{R}^{k}\).
+
+## Classification
+
+- Once unseen class samples are generated \(\Longrightarrow\) we train any classifier (e.g., SVM or softmax classifier) with these samples as labeled training data.
+
+*Vineeth N B (IIIT-H) §12.1 Zero-shot and Few-shot Learning 32 / 33*
+```
+
+# DL4CV_Week12_Part01.pdf - Page 62
+
+```markdown
+# Homework
+
+## Readings
+
+- [Lilian Weng, Meta-Learning: Learning to Learn Fast](#)
+- [(YouTube video) Few-shot Learning with Meta-Learning: Progress Made and Challenges Ahead](#)
+- [Meta-Learning: from Few-Shot Learning to Rapid Reinforcement Learning, Tutorial at ICML 2019](#)
+- [Zero-shot Learning: An Introduction](#)
+
+---
+
+_Vineeth N B (IIT-H)_
+
+_$12.1 Zero-shot and Few-shot Learning_
+
+_33 / 33_
+```
+
