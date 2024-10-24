@@ -1,0 +1,804 @@
+# W3-Lec9-2POStagging.pdf - Page 1
+
+```markdown
+# BSCS5002: Introduction to Natural Language Processing
+
+## Methods of Part-of-Speech Tagging
+
+### Parameswari Krishnamurthy
+
+**Language Technologies Research Centre**
+**IIIT-Hyderabad**
+
+**Email:** param.krishna@iiit.ac.in
+
+---
+
+![IIIT-Hyderabad Logo](https://example.com/logo.png)
+
+**International Institute of Information Technology**
+
+**HYDERABAD**
+
+---
+
+**BS-DS IIITM (BSCS5002)**
+
+*Page 1 / 36*
+```
+
+# W3-Lec9-2POStagging.pdf - Page 2
+
+# Methods of POS Tagging
+
+- Rule-based POS tagging
+- Transformation-based POS tagging
+- Statistical-based POS tagging
+  - Stochastic (Probabilistic) POS Tagging
+    - Hidden Markov Models (HMM)
+    - Maximum Entropy Models
+    - Conditional Random Fields (CRF)
+- Machine Learning-based POS Tagging
+  - Neural Networks
+  - Deep Learning Models
+  - Large Language Models (like BERT), finetuned
+- Hybrid Methods
+  - Combination of rule-based, statistical, and machine learning approaches.
+  - Example: Integration of CRFs with neural network features.
+
+B5-DS IITM (BSCS5002) 2 / 30
+
+# W3-Lec9-2POStagging.pdf - Page 3
+
+```markdown
+# 1. Rule-based Tagging
+
+- Typically start with a dictionary of words and possible tags
+- Assign all possible tags to words using the dictionary
+- Write rules by hand to selectively remove tags
+- Stop when each word has exactly one (presumably correct) tag
+
+![BS-DS IITM (BSCS5002)](https://example.com/logo.png)
+
+Page 3 / 36
+```
+
+# W3-Lec9-2POStagging.pdf - Page 4
+
+```markdown
+# Example
+
+**She promised to back the bill**
+
+- **She**: PRP (Pronoun)
+- **promised**: VBD (Verb, past tense) / VBN (Verb, past participle)
+- **to**: PRP (Preposition) / TO (Infinitive marker)
+- **back**: VB (Verb) / JJ (Adjective) / RB (Adverb) / NN (Noun)
+- **the**: DT (Determiner)
+- **bill**: NN (Noun) / VB (Verb)
+
+_BS-DS IITM (BSCS5002)_
+```
+
+# W3-Lec9-2POStagging.pdf - Page 5
+
+```markdown
+# Example
+
+**She promised to back the bill**
+
+- **she**: PRP
+- **promised**: VBN, VBD
+- **to**: PRP, TO
+- **back**: VB, JJ, RB, NN
+- **the**: DT
+- **bill**: NN, VB
+```
+
+# W3-Lec9-2POStagging.pdf - Page 6
+
+```markdown
+# First Stage:
+
+- Utilizes a dictionary to assign each word a list of potential parts-of-speech.
+
+# Second Stage:
+
+- Applies large lists of hand-written disambiguation rules to narrow down the list to a single part-of-speech for each word.
+
+![BS-DS IITM (BSCS5002)](https://example.com/image.png)
+
+Page 6 / 36
+```
+
+# W3-Lec9-2POStagging.pdf - Page 7
+
+```markdown
+# EngCG ENGTWOL Tagger
+
+- A rule-based POS tagger designed for English and other languages.
+- Richer Dictionary includes morphological and syntactic features (e.g., subcategory frames) as well as possible POS.
+- Uses two-level morphological analysis on input and returns all possible POS.
+- Apply negative constraints (>=3744) to rule out incorrect POS.
+
+![BS-DS IITM (BSCS5002)](https://example.com/logo.png)
+
+Page 7 / 36
+```
+
+# W3-Lec9-2POStagging.pdf - Page 8
+
+# Rule-based POS Tagging: Pros and Cons
+
+## Pros:
+- **Transparency**: Easy to understand and interpret.
+- **Customization**: Can be tailored to specific languages or domains.
+- **No Training Data Required**: Doesn’t require a large annotated corpus.
+
+## Cons:
+- **Limited Coverage**: May miss out on complex linguistic phenomena.
+- **Scalability**: Difficult to maintain as the number of rules increases.
+- **Performance**: Generally less accurate than statistical or machine learning methods.
+
+*BS-DS IITM (BSCS5002)*
+
+*8 / 36*
+
+# W3-Lec9-2POStagging.pdf - Page 9
+
+# Transformation-based Tagging
+
+## Transformation-based Tagging (TBL)
+
+- **Introduced by:** Eric Brill in 1992.
+- **Objective:** Develops a rule-based model that iteratively refines an initial state through transformations.
+- **Key Components:**
+  - **Initial State:** Assigns a naive label, often using a simple method like the most frequent tag.
+  - **Transformations:** Rules that correct errors in the current tagging based on context.
+  - **Learning Process:**
+    - Identify errors in current tagging.
+    - Create a transformation rule to correct these errors.
+    - Apply the rule and iterate.
+  - **Final Output:** A sequence of rules applied to improve tagging accuracy.
+
+![B5-DS IITM (BSCS5002)](https://example.com/image.png)
+
+Page 9 / 36
+
+# W3-Lec9-2POStagging.pdf - Page 11
+
+```markdown
+# TBL as Painting Analogy
+
+![Painting Analogy](image_url)
+
+- **BS-DS IITM (BSCS5002)**
+- **11 / 36**
+```
+
+# W3-Lec9-2POStagging.pdf - Page 12
+
+# TBL as Painting Analogy
+
+![Painting Analogy](image_url)
+
+- **Title**: TBL as Painting Analogy
+
+- **Description**: This image serves as an analogy to explain the concept of TBL (Table-based Learning) by comparing it to painting. 
+
+- **Visual Elements**:
+  - **Background**: The entire background is colored in blue, representing the sky and base context.
+  - **House**: A simple house structure with a triangular roof, two windows, and a door in the center is depicted. The house is colored in a shade of purple.
+  - **Smiley Face**: On the left side of the image, there is a smiley face, which adds a playful element to the analogy.
+  - **Ground**: The ground is colored green, representing the base or foundation.
+
+- **Label**: The word "Green" is written at the bottom right corner of the image, likely indicating the color of the ground.
+
+- **Footer Information**:
+  - **Standard**: BS-DS IITM (BSCS5002)
+  - **Page Number**: 12 / 36
+
+This analogy aims to simplify the understanding of TBL by associating it with a familiar scenario of painting, highlighting the different components and their roles within the context.
+
+# W3-Lec9-2POStagging.pdf - Page 13
+
+# TBL as Painting Analogy
+
+![TBL Painting Analogy](image_url)
+
+- **Smiley Face**: Representing the core or central focus
+- **Brown Roof**: Indicating the top structure or framework
+- **Blue Sections**: Representing specific areas or sections
+  - Label "Blue" on the left and right sections
+- **Brown Door**: Representing an entrance or central access point
+  - Label "Brown" on the door
+- **Green Ground**: Representing the base or foundational layer
+  - Label "Green" at the bottom
+
+---
+
+**BS-DS IITM (BSCS5002)**
+
+Page 13 / 36
+
+# W3-Lec9-2POStagging.pdf - Page 14
+
+```markdown
+# TBL as Painting Analogy
+
+![Image of a Painting](image_url)
+
+- **Top Left Corner**: 
+  - Smiley face with happy expression
+
+- **Background**:
+  - **Sky**: Blue
+
+- **House Structure**:
+  - **Roof**: Brown
+  - **Walls**: 
+    - Left Wall: Red
+    - Right Wall: Red
+    - Door: Brown
+  - **Windows**:
+    - Left Window: Blue
+    - Right Window: Blue
+  - **Foundation**: Green
+
+- **Color Labels**:
+  - Blue
+  - Brown
+  - Green
+  - Red
+
+**Footer**:
+- BS-DS IITM (BSCS5002)
+- Page Number: 14 / 36
+```
+
+# W3-Lec9-2POStagging.pdf - Page 15
+
+# TBL as Painting Analogy
+
+![Image of a house painting with color labels](image-url)
+
+- **Yellow**: Smiley face located in the upper left corner
+- **Blue**: Background color
+  - Two smaller blue panels on the left and right sides of the house
+- **Brown**: House roof and door
+  - Roof is labeled "Brown" at the top
+  - Door is labeled "Brown" in the center
+- **Red**: House walls
+  - Labeled "Red" on the right side wall
+- **Green**: Ground area
+  - Labeled "Green" at the bottom
+
+**Source**: BS-DS IITM (BSCS5002)
+
+---
+
+Page Number: 15 / 36
+
+# W3-Lec9-2POStagging.pdf - Page 16
+
+```markdown
+# Transformation Rules
+
+**Change tag a to b when:**
+
+- **Internal evidence:** Based on morphology.
+
+- **Contextual evidence:**
+  - One or more of the preceding/following words has a specific tag.
+  - One or more of the preceding/following words is a specific word.
+  - One or more of the preceding/following words has a certain form.
+
+- **Order of rules is important.**
+
+- **Cascading effects:**
+  - Rules can change a correct tag into an incorrect tag.
+  - Another rule might be required to correct that "mistake."
+
+*Source: BS-DS IITM (BSCS5002)*
+
+*Page: 16 / 36*
+```
+
+# W3-Lec9-2POStagging.pdf - Page 17
+
+# Transformation-based Tagging: Examples
+
+## Examples of Transformation Rules:
+
+- **Rule 1:**
+  - If a word is currently tagged `NN`, and has a suffix of length 1 which consists of the letter `'s'`, change its tag to `NNS`.
+
+- **Rule 2:**
+  - If a word has a suffix of length 2 consisting of the letter sequence `'ly'`, change its tag to `RB` (regardless of the initial tag).
+
+- **Rule 3:**
+  - Change `VBN` to `VBD` if the previous word is tagged as `NN`.
+
+- **Rule 4:**
+  - Change `VBD` to `VBN` if the previous word is `'by'`.
+
+# W3-Lec9-2POStagging.pdf - Page 18
+
+```markdown
+# Transformation-based Tagging: Example Sequence
+
+## Example after Lexical Lookup:
+
+- Booth/NP killed/VBN Abraham/NP Lincoln/NP
+- Abraham/NP Lincoln/NP was/AUX shot/VBD by/BY Booth/NP
+- He/PPS witnessed/VBD Lincoln/NP killed/VBN by/BY Booth/NP
+
+## After Applying Contextual Rule: vbn → vbd PREVTAG np
+
+- Booth/NP killed/VBD Abraham/NP Lincoln/NP
+- Abraham/NP Lincoln/NP was/AUX shot/VBD by/BY Booth/NP
+- He/PPS witnessed/VBD Lincoln/NP killed/VBD by/BY Booth/NP
+
+## After Applying Contextual Rule: vbd → vbn NEXTWORD by
+
+- Booth/NP killed/VBN Abraham/NP Lincoln/NP
+- Abraham/NP Lincoln/NP was/AUX shot/VBN by/BY Booth/NP
+- He/PPS witnessed/VBD Lincoln/NP killed/VBN by/BY Booth/NP
+```
+
+# W3-Lec9-2POStagging.pdf - Page 19
+
+# Transformation-Based (Brill) Tagging
+
+## Combines Rule-based and Stochastic Tagging:
+
+- **Rule-based**: Uses rules to specify tags in a certain environment.
+- **Stochastic approach**: Utilizes a tagged corpus to find the best-performing rules.
+
+### Key Features:
+
+- Rules are learned from data.
+
+### Input:
+
+- **Tagged Corpus**: Provides the training data for learning rules.
+- **Dictionary**: Contains the most frequent tags associated with words.
+
+---
+
+BS-DS IITM (BSCS5002) 
+
+19 / 36
+
+# W3-Lec9-2POStagging.pdf - Page 20
+
+# Brill Tagger: Process Overview
+
+## Initial Tagging:
+
+- **Step 1:** The Brill Tagger starts with a base tagging method that assigns a preliminary tag to each word.
+- **Method:** Often uses a simple statistical model, such as the most frequent tag for each word.
+
+## Rule Learning:
+
+- **Step 2:** Iteratively applies a set of transformation rules to refine the initial tags.
+- **Transformation Rules:** Each rule consists of a condition and an action. For example:
+  - **Condition:** If a word is tagged as a noun and follows a preposition.
+  - **Action:** Change the tag to a verb.
+
+---
+
+_BS-DS IITM (BSCS5002)_
+
+_Page 20 of 30_
+
+# W3-Lec9-2POStagging.pdf - Page 21
+
+# Brill Tagger: Process Overview
+
+## Evaluation and Application:
+
+- **Step 3:** After each rule is applied, the tagging accuracy is evaluated.
+- **Selection:** The rule that most improves accuracy is retained.
+- **Iteration:** Process is repeated until a stopping criterion is met (e.g., no further improvements).
+
+## Final Output:
+
+- **Result:** A sequence of ordered transformation rules applied to new data to produce accurate POS tags.
+
+*BS-DS IITM (BSCS5002)*
+
+*21 / 36*
+
+# W3-Lec9-2POStagging.pdf - Page 22
+
+# TBL Tagging Algorithm
+
+## Step 1:
+Label every word with the most likely tag (from dictionary).
+
+## Step 2:
+Check every possible transformation and select the one which most improves tag accuracy (compared to the gold standard).
+
+## Step 3:
+Re-tag the corpus by applying this rule, and add the rule to the end of the rule set.
+
+### Repeat Steps 2-3
+Continue until some stopping criterion is reached, e.g., X% correct with respect to the training corpus.
+
+### Result:
+An ordered set of transformation rules to use on new data that is tagged only with the most likely POS tags.
+
+*BS-DS IITM (BSCS5002)*
+
+*22 / 36*
+
+# W3-Lec9-2POStagging.pdf - Page 23
+
+# Transformation-Based Tagging: Example
+
+## Step 1: Label every word with its most-likely tag
+
+- **Example:**
+  The word "race" occurs in the Brown corpus with the following probabilities:
+  - \(\mathrm{P(NN|race)} = 0.98\)
+  - \(\mathrm{P(VB|race)} = 0.02\)
+
+- **Initial tagging:**
+  ```
+  ... is/VBZ expected/VBN to/TO race/NN tomorrow/NN
+  ```
+
+## Step 2: Apply Transformation Rule
+
+- **Rule:**
+  "Change NN to VB when the previous tag is TO."
+
+- **Tagging after applying rule:**
+  ```
+  ... is/VBZ expected/VBN to/TO race/VB tomorrow/NN
+  ```
+
+### Explanation:
+
+- The word "race" was initially tagged as a noun (NN) because it is more commonly used as a noun (with a probability of 0.98). However, based on the context provided by the preceding word "to" (tagged as TO), the rule changes the tag to VB (verb), which makes more sense in this context.
+
+---
+
+_BS-DS IITM (BSCS5002)_
+
+_23 / 30_
+
+# W3-Lec9-2POStagging.pdf - Page 24
+
+```markdown
+# 3. Stochastic (Probabilistic) Tagging
+
+## Overview:
+
+- Uses statistical methods to predict POS tags based on probabilities.
+- Models the likelihood of tag sequences and word-tag pairs.
+
+## Key Concepts:
+
+- **Probability Model:** Estimates the probability of a sequence of tags given a sequence of words.
+- **Training Data:** A tagged corpus is used to estimate probabilities.
+- **Tag Sequences:** Determines the most likely sequence of tags for a given sequence of words.
+```
+
+# W3-Lec9-2POStagging.pdf - Page 25
+
+```markdown
+# How do they work?
+
+## Training a POS Tagger: Key Points
+
+### Training Process:
+- The tagger must be "trained" on a corpus of tagged data.
+- Training involves learning tagging rules automatically from this data.
+
+### Training Corpus:
+- Typically, a small "training corpus" is used.
+- The corpus is hand-tagged with POS tags to provide a reference.
+
+### Learning Tagging Rules:
+- Rules are defined to identify the most likely sequence of tags.
+- Rules are based on:
+  - **Internal Evidence:** Morphological features of words (e.g., suffixes).
+  - **External Evidence:** Context provided by surrounding words.
+  - **Probabilities:** Statistical models estimating the likelihood of tag sequences.
+
+### Two types of Probabilities
+- **Individual word Probabilities**
+- **Tag Sequence Probabilities**
+
+---
+
+_BS-DS IITM (BSCS5002)_
+
+_25 / 30_
+```
+
+# W3-Lec9-2POStagging.pdf - Page 26
+
+# Learning Individual Word Probabilities
+
+## Individual Word Probabilities:
+
+- The probability that a given tag \( t \) is appropriate for a given word \( w \) is estimated from the training corpus.
+- This probability helps in determining the likelihood of each possible tag for a word.
+
+## Formula for Learning Individual Word Probabilities:
+
+- The probability \( P(t \mid w) \) is the probability that a given tag \( t \) is appropriate for a given word \( w \).
+- It is calculated using:
+
+  \[
+  P(t \mid w) = \frac{f(t, w)}{f(w)}
+  \]
+
+### Where:
+
+- \( f(t, w) \) is the frequency of the word \( w \) occurring with the tag \( t \).
+- \( f(w) \) is the total frequency of the word \( w \) in the corpus.
+
+---
+
+BS-DS IITM (BSCS5002) 26 / 36
+
+# W3-Lec9-2POStagging.pdf - Page 27
+
+```markdown
+# Example:
+
+- Consider the word "run" which occurs 4800 times in the training corpus.
+  - 3600 times as a verb
+  - 1200 times as a noun
+- The probability of "run" being a verb is calculated as:
+
+  \[
+  P(\text{verb} \mid \text{run}) = \frac{\text{Number of occurrences of "run" as a verb}}{\text{Total number of occurrences of "run"}} = \frac{3600}{4800} = 0.75
+  \]
+
+# Interpretation:
+
+- \( P(\text{verb} \mid \text{run}) = 0.75 \) indicates that there is a 75% probability that the word "run" is used as a verb.
+
+![BS-DS IITM (BSCS5002)](https://example.com/logo.png)
+
+Page 27 / 36
+```
+
+# W3-Lec9-2POStagging.pdf - Page 28
+
+# Tag Sequence Probability
+
+**Tag Sequence Probability:**
+
+- The probability that a given tag sequence \( t_1, t_2, \ldots, t_n \) is appropriate for a given word sequence \( w_1, w_2, \ldots, w_n \) is denoted as:
+
+\[ P(t_1, t_2, \ldots, t_n \mid w_1, w_2, \ldots, w_n) \]
+
+**Challenge:**
+
+- Calculating this probability directly for the entire sequence is complex.
+- Instead, it’s often simplified using the chain rule:
+
+\[ P(t_1, t_2, t_3, \ldots \mid w_1, w_2, w_3, \ldots) = P(t_1) \times P(t_2 \mid t_1) \times P(t_3 \mid t_1, t_2) \times \cdots \]
+
+**Explanation:**
+
+- The joint probability is decomposed into a product of conditional probabilities.
+- This approach reduces complexity by breaking down the problem into manageable parts.
+
+(BS-DS IITM (BSCS5002))
+
+28 / 30
+
+# W3-Lec9-2POStagging.pdf - Page 29
+
+# Subsequence Models for Tag Probability
+
+## Using Subsequences:
+
+- Direct computation of full sequence probabilities is complex.
+- Simplified models using smaller subsequences (2 or 3 tags) are more tractable.
+- **Bigram Model:**
+  - Uses a sequence of 2 tags.
+  - Probability of a tag sequence \( t_1, t_2 \) is:
+    \[
+    P(t_1, t_2) = P(t_2 \mid t_1)
+    \]
+
+- **Trigram Model:**
+  - Uses a sequence of 3 tags.
+  - Probability of a tag sequence \( t_1, t_2, t_3 \) is:
+    \[
+    P(t_1, t_2, t_3) = P(t_2 \mid t_1) \times P(t_3 \mid t_2)
+    \]
+
+- **N-gram Model:**
+  - Generalizes to sequences of \( N \) tags.
+  - Probability of a tag sequence \( t_1, t_2, \ldots, t_N \) is:
+    \[
+    P(t_1, t_2, \ldots, t_N) = \prod_{i=2}^N P(t_i \mid t_{i-1}, \ldots, t_{i-N+1})
+    \]
+
+*Source: BS-DS IITM (BSCS5002)*
+
+*Page: 29 / 30*
+
+# W3-Lec9-2POStagging.pdf - Page 30
+
+```markdown
+# Common Models:
+
+- **Hidden Markov Model (HMM):**
+  - Models sequences of tags (states) and words (observations).
+  - Uses transition probabilities (tag-to-tag) and emission probabilities (word-to-tag).
+
+- **Maximum Entropy Models:**
+  - Uses a probabilistic model to handle multiple features and constraints.
+
+- **Conditional Random Fields (CRF):**
+  - Models the conditional probability of a tag sequence given the observed data.
+  - Handles dependencies between tags more flexibly.
+
+---
+
+_BS-DS IITM (BSCS5002)_
+
+```
+
+# W3-Lec9-2POStagging.pdf - Page 31
+
+# POS Evaluation
+
+Evaluating POS (Part-of-Speech) tagging systems involves measuring how well the system's output matches the gold standard (human-defined) labels. We will explore:
+
+- Confusion Matrix
+- Accuracy
+- Precision and Recall
+- F-Measure
+
+*BS-DS IITM (BSCS5002)*
+
+*31 / 36*
+
+# W3-Lec9-2POStagging.pdf - Page 32
+
+```markdown
+# Confusion Matrix
+
+A confusion matrix visualizes how a tagging system performs relative to gold labels. It includes:
+
+- **True Positives (TP)**: Correctly identified positive cases
+- **False Positives (FP)**: Incorrectly identified as positive
+- **True Negatives (TN)**: Correctly identified negative cases
+- **False Negatives (FN)**: Incorrectly identified as negative
+
+|                    | Gold Positive | Gold Negative |
+|--------------------|---------------|---------------|
+| **System Positive**| **TP**        | **FP**        |
+| **System Negative**| **FN**        | **TN**        |
+
+---
+
+**BSCS5002**
+```
+
+# W3-Lec9-2POStagging.pdf - Page 33
+
+# Accuracy
+
+Accuracy measures the overall correctness of the tagging system. It is defined as:
+
+$$ \text{Accuracy} = \frac{TP + TN}{TP + FP + TN + FN} $$
+
+Accuracy can be misleading in cases of class imbalance, where one class is much more frequent than the other.
+
+---
+
+*Source: BS-DS IITM (BSCS5002)*
+
+---
+
+Page Number: 33 / 36
+
+# W3-Lec9-2POStagging.pdf - Page 34
+
+# Precision and Recall
+
+**Precision** measures the accuracy of positive predictions:
+
+\[ \text{Precision} = \frac{\text{TP}}{\text{TP} + \text{FP}} \]
+
+**Recall** measures the ability to find all relevant positive instances:
+
+\[ \text{Recall} = \frac{\text{TP}}{\text{TP} + \text{FN}} \]
+
+Both precision and recall are important metrics, especially in cases of unbalanced datasets.
+
+(Source: BS-DS IITM (BSCS5002))
+
+Page: 34 / 36
+
+# W3-Lec9-2POStagging.pdf - Page 35
+
+```markdown
+# Precision, Recall and Accuracy
+
+```markdown
+## Precision, Recall and Accuracy
+
+![Precision, Recall and Accuracy](image-url)
+
+### Definitions:
+
+- **Gold Standard Labels**:
+  - Gold Positive
+  - Gold Negative
+
+- **System Output Labels**:
+  - System Positive
+  - System Negative
+
+### Confusion Matrix:
+
+|                     | Gold Positive | Gold Negative |
+|---------------------|---------------|---------------|
+| **System Positive** | true Positive | false Positive|
+| **System Negative** | false Negative| true Negative |
+
+### Formulas:
+
+- **Precision**:
+  \[
+  \text{precision} = \frac{\text{tp}}{\text{tp} + \text{fp}}
+  \]
+  Where:
+  - \(\text{tp}\) = true Positive
+  - \(\text{fp}\) = false Positive
+
+- **Recall**:
+  \[
+  \text{recall} = \frac{\text{tp}}{\text{tp} + \text{fn}}
+  \]
+  Where:
+  - \(\text{tp}\) = true Positive
+  - \(\text{fn}\) = false Negative
+
+- **Accuracy**:
+  \[
+  \text{accuracy} = \frac{\text{tp} + \text{tn}}{\text{tp} + \text{fp} + \text{tn} + \text{fn}}
+  \]
+  Where:
+  - \(\text{tp}\) = true Positive
+  - \(\text{tn}\) = true Negative
+  - \(\text{fp}\) = false Positive
+  - \(\text{fn}\) = false Negative
+
+### Reference:
+- BS-DS IITM (BSCS5002)
+```
+
+Note: Replace `"image-url"` with the actual URL or path to the image if you want to include it in the markdown document.
+
+# W3-Lec9-2POStagging.pdf - Page 36
+
+# F-Measure
+
+The F-measure combines precision and recall into a single metric. It is defined as:
+
+$$F_\beta = \frac{(1 + \beta^2) \cdot \text{Precision} \cdot \text{Recall}}{\beta^2 \cdot \text{Precision} + \text{Recall}}$$
+
+For $\beta = 1$, it simplifies to the F1 score:
+
+$$F_1 = \frac{2 \cdot \text{Precision} \cdot \text{Recall}}{\text{Precision} + \text{Recall}}$$
+
+The F-measure balances precision and recall, with $\beta$ adjusting the importance of recall versus precision.
+
+_BSCS5002_
+
+_36 / 36_
+

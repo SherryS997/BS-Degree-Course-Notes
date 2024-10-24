@@ -1,0 +1,626 @@
+# W3-Lec8-POStagging.pdf - Page 1
+
+```markdown
+# BSCS5002: Introduction to Natural Language Processing
+
+## Part-of-Speech Tagging
+
+**Parameswari Krishnamurthy**
+
+*Language Technologies Research Centre*
+*IIIT-Hyderabad*
+
+*param.krishna@iiit.ac.in*
+
+![IIIT Logo](https://www.iiit.ac.in/wp-content/uploads/2020/03/cropped-official_logo.png)
+
+*International Institute of Information Technology*
+*HYDERABAD*
+
+![IIIT Hyderabad Logo](https://www.iiit.ac.in/wp-content/uploads/2020/03/cropped-iiit_hyderabad_logo.png)
+
+*BS-DS IITM (BSCS5002)*
+
+*1 / 31*
+```
+
+# W3-Lec8-POStagging.pdf - Page 2
+
+```markdown
+# Part-of-Speech (POS) Tagging
+
+- Assigning grammatical categories (e.g., noun, verb, adjective) to words in a sentence.
+- Helps in understanding the syntactic structure and meaning of sentences.
+- Done using POS taggers, which assign tags based on word context and linguistic rules.
+- Example POS tags:
+  - Noun (NN)
+  - Verb (VB)
+  - Adjective (JJ)
+  - Adverb (RB)
+  - Pronoun (PRP)
+  - Determiner (DT)
+- POS tagging is a fundamental task in natural language processing (NLP).
+- Used in various applications such as information retrieval, sentiment analysis, and machine translation.
+
+![BS-DS IITM (BSCS5002)](https://example.com/logo.png)
+
+Page 2 / 3
+```
+
+# W3-Lec8-POStagging.pdf - Page 3
+
+```markdown
+# POS Tagging in NLP
+
+![Image](image-url)
+
+**PRP** | **VBP** | **TO** | **VB** | **NNS**
+--- | --- | --- | --- | ---
+I | Like | to | read | books
+
+---
+
+_BS-DS IITM (BSCS5002)_
+
+---
+
+Page 3 / 31
+```
+
+Note: Replace `image-url` with the actual URL or path to the image.
+
+This markdown format ensures the content is accurately represented, including the tables and image, while maintaining proper formatting.
+
+# W3-Lec8-POStagging.pdf - Page 4
+
+# What is POS Tagging?
+
+- The process of assigning a part-of-speech to each word in a sentence.
+- It is normally a sentence-based approach.
+- Given a sentence formed of a sequence of words, POS tagging tries to label (tag) each word with its correct part of speech (also named word category, word class, or lexical category).
+
+![POS Tagging Diagram](image_url)
+
+**WORDS**
+
+- the
+- the
+- put
+- the
+- keys
+- on
+- the
+- table
+
+**TAGS**
+
+- N
+- V
+- PRP
+- DET
+
+(Note: Replace `image_url` with the actual URL or path of the image if available.)
+
+BS-DS IITM (BSCS5002)
+
+# W3-Lec8-POStagging.pdf - Page 5
+
+```markdown
+# Some Examples
+
+| Abbreviation | Category       | Examples             |
+|-------------|----------------|----------------------|
+| NN          | noun           | chair, bandwidth, pacing |
+| VB          | verb           | study, debate, munch  |
+| ADJ         | adjective      | purple, tall, ridiculous |
+| ADV         | adverb         | unfortunately, slowly |
+| PRP         | preposition    | of, by, to            |
+| PRO         | pronoun        | I, me, mine           |
+| DET         | determiner     | the, a, that, those    |
+| CC          | conjuncts      | and, but              |
+
+*Source: BS-DS IITM (BSCS5002)*
+```
+
+# W3-Lec8-POStagging.pdf - Page 6
+
+# Difference b/w Morphological Analyzer and POS
+
+## MA
+- Finds internal structure of a word (root form, affixes, etc.)
+- word-based approach
+- needs smaller number of categories
+- one/more analysis for a word
+  e.g.
+  ```plaintext
+  back <back,adj,norm>
+  <back,n,3,s,g,0>
+  <back,adv>
+  <back,v>
+  ```
+
+## POS
+- assigning a POS tag to the given surface form word
+- sentence-based approach
+- needs a lots of categories
+- one analysis for a word
+  ```plaintext
+  The back door = JJ (ADJ)
+  On my back = NN
+  Win the voters back = RB (ADV)
+  Promised to back the bill = VB
+  ```
+
+*BS-DS IITM (BSCS5002)*
+
+# W3-Lec8-POStagging.pdf - Page 7
+
+```markdown
+# Why POS tagging?
+
+- First step in parsing
+- More tractable than full parsing, intermediate representation
+- Resolves lexical ambiguity
+  e.g. this
+  - *This is a nice day* = **PRP**
+  - *This day is nice* = **DET**
+  - *You can go this far* = **ADV**
+  - The POS tagging problem is to determine the POS tag for a particular instance of a word.
+
+BS-DS IITM (BSCS5002)
+
+7 / 31
+```
+
+# W3-Lec8-POStagging.pdf - Page 8
+
+```markdown
+# Why POS tagging?
+
+- Useful as a step for several other, more complex NLP tasks, e.g.
+
+  - **Speech synthesis pronunciation**
+
+    | Word       | Tag  |
+    |------------|------|
+    | Lead       | Lead |
+    | INsult     | inSULT |
+    | Object     | objECT |
+    | OVERflow  | overFLOW |
+    | DIScount   | disCOUNT |
+    | CONtent    | conTENT |
+
+  - **Parsing:** e.g. Time flies like an arrow
+    - Is flies a N or V?
+
+- **Word prediction in speech recognition**
+  - Possessive pronouns (my, your, her) are likely to be followed by nouns
+  - Personal pronouns (I, you, he) are likely to be followed by verbs
+
+(BS-DS IITM (BSCS5002))
+```
+
+# W3-Lec8-POStagging.pdf - Page 9
+
+```markdown
+# Challenges in POS Tagging
+
+## BS-DS IITM (BSCS5002)
+
+### Slide 9 / 31
+```
+
+# W3-Lec8-POStagging.pdf - Page 10
+
+# Why POS tagging is hard?
+
+## Challenges:
+
+- **Ambiguity: multiple category**
+- In a sentence, obviously there exist some words for which more than one POS tag is possible.
+  - e.g. *Can can the can*
+    While disambiguating a particular word, humans exploit several mechanisms and information sources:
+    - the roles of other words in the sentence,
+    - the syntactic structure of the sentence,
+    - the domain of the text, and
+    - the world knowledge.
+
+(BS-DS IITM (BSCS5002))
+
+10 / 31
+
+# W3-Lec8-POStagging.pdf - Page 11
+
+# Challenges
+
+- **Garden-Path Sentences**
+
+- **Examples:**
+
+  - **The horse raced past the barn fell.**
+
+    - **first interpretation:** The government is planning to raise taxes...
+    - **final interpretation:** The plans of the government to raise taxes were defeated.
+
+  - **The old man the boat**
+
+    - **first interpretation:** The man, who is old...
+    - **final interpretation:** The boat is manned by the old.
+
+Source: BS-DS IITM (BSCS5002)
+
+Page: 11 / 31
+
+# W3-Lec8-POStagging.pdf - Page 12
+
+```markdown
+# Example-1
+
+- **Ambiguous POS contexts**
+  - *Girls have broken hearts*
+  - *Time flies like an arrow.*
+
+- **Possible POS assignments:**
+  - Time/[V,N] flies/[V,N] like/[V,Prep] an/Det arrow/N
+  - Time/N flies/V like/Prep an/Det arrow/N
+  - Time/N flies/N like/Prep an/Det arrow/N
+  - Time/N flies/N like/V an/Det arrow/N
+
+- **Unknown Words**
+  - *I like that app*
+
+*BSCS5002 IITM (BSCS5002)*
+
+*12 / 31*
+```
+
+# W3-Lec8-POStagging.pdf - Page 13
+
+```markdown
+# How to Proceed?
+
+A natural question that may arise is:
+- what are these parts of speech?
+- or how do we specify a set of suitable parts of speech?
+
+Famous traditional POS tags:
+
+- **noun**
+- **verb**
+- **adjective**
+- **adverb**
+- **pronoun**
+- **preposition**
+- **conjunction**
+- **interjection**
+
+What about *five*, *the*, `$`? 
+
+_BS-DS IITM (BSCS5002)_
+
+*13 / 31*
+```
+
+# W3-Lec8-POStagging.pdf - Page 14
+
+# Word Classes
+
+The significance of the POS for language processing is that it gives a significant amount of information about the word and its neighbors.
+
+Two types of Word Classes:
+
+- **Open word classes**
+  - new members are added
+  - Four major open classes: nouns, verbs, adjectives, and adverbs.
+
+- **Closed word classes**
+  - Having relatively fixed membership
+  - closed classes: prepositions, determiners, conjunctions etc
+
+BS-DS IITM (BSCS5002)                                                                                                                                                              14 / 31
+
+# W3-Lec8-POStagging.pdf - Page 15
+
+# Open Word Classes
+
+## (i) Nouns
+
+Nouns are traditionally grouped into **proper nouns** and **common nouns**. **Proper nouns**: (NNP)
+
+Rani, Kasargod, and IBM
+
+Not preceded by articles, e.g., the book is upstairs, but (**the**) Rani is upstairs.
+
+BS-DS IITM (BSCS5002) 15 / 31
+
+# W3-Lec8-POStagging.pdf - Page 16
+
+```markdown
+# Common nouns: (NN)
+
+1. **Count nouns:**
+   - Allow grammatical enumeration, i.e., both singular and plural (goat/goats), and can be counted (one goat/ two goats)
+
+2. **Mass nouns:**
+   - Something is conceptualized as a homogeneous group, snow, salt, and communism.
+   - Appear without articles where singular nouns cannot (Snow is white but not *Goal is white)
+```
+
+*Source: BS-DS IITM (BSCS5002) 16 / 31*
+```
+
+# W3-Lec8-POStagging.pdf - Page 17
+
+# Nouns of Space and Time (NST)
+
+Nouns of space and time (NST) or adverbial nouns (Krishnamurti & Gwynn, 1985:98; Whitman, 2002:561) form a special type of nouns without number marking.
+
+These forms also function as postpositions when they take nouns as their complements.
+
+When they occur without noun complements, they are categorized as nouns with the following features.
+
+(i) NST have the ability to form an oblique stem, which can be used adjectively;
+
+(ii) NST have the ability to add case markers and postpositions to the oblique stem;
+
+(iii) NST have the ability to add third-person pronominal suffixes to the oblique stem.
+
+BS-DS IITM (BSCS5002)
+
+17 / 31
+
+# W3-Lec8-POStagging.pdf - Page 18
+
+```markdown
+# 2. Verbs
+
+- Most of the words referring to actions and processes including main verbs like **draw**, **provide**, **differ**, and **go**.
+
+- A number of morphological forms: non-3rd-person-sg (**eat**), 3rd-person-sg (**eats**), progressive (**eating**), past participle (**eaten**)
+
+---
+
+*Source: BS-DS IITM (BSCS5002)*
+
+*Page: 18 / 31*
+```
+
+# W3-Lec8-POStagging.pdf - Page 19
+
+```markdown
+# i. Finite Verbs (VF)
+A finite form is one that can stand as the main verb of a sentence and occur before a final pause (full stop).
+
+e.g. Tam: **patittán** 'he read'
+
+# ii. Non-finite Verbs (VNF)
+A non-finite form cannot stand as a main verb and rarely occurs before a final pause.
+
+e.g. avan **patittā** nallatu 'It is good if he reads'
+
+# iii. Infinitive (VINF)
+e.g. nān cinimā **pāṛkka vantēn** 'I came to see the cinema'
+
+# iv. Gerund (VNG)
+e.g. **cirittal utfmukku** nallatu. 'laughing is good for health'
+
+---
+
+*BS-DS IITM (BSCS5002)*
+
+*19 / 31*
+```
+
+# W3-Lec8-POStagging.pdf - Page 20
+
+```markdown
+v. Auxiliary (VAUX)
+e.g. ní vears véntám. 'you don’t come'
+```
+
+**BS-DS IITM (BSCS5002)**
+
+**Page 20 / 31**
+```
+
+# W3-Lec8-POStagging.pdf - Page 21
+
+# Adjectives (JJ)
+
+- **Terms describing properties or qualities**
+- **Most languages have adjectives for the concepts of color (white, black), age (old, young), and value (good, bad), but**
+
+---
+
+BS-DS IITM (BSCS5002)
+
+21 / 31
+
+# W3-Lec8-POStagging.pdf - Page 23
+
+```markdown
+# Adverbs (JJ)
+
+- **Words viewed as modifying something (often verbs)**
+- **Directional (or locative) adverbs:** specify the direction or location of some action, *hoe, here, downhill*
+- **Manner adverb:** describe the manner of some action or process, *slowly, slinkily, delicately*
+- **Temporal adverbs:** describe the time that some action or event took place, *yesterday, Monday*
+- **Degree adverbs:** specify the extent of some action, process, or property, *extremely, very, somewhat*
+
+![BS-DS IITM (BSCS5002)](https://example.com/image.png)
+
+Page 23 of 31
+```
+
+# W3-Lec8-POStagging.pdf - Page 24
+
+```markdown
+# Closed Classes
+
+- **Pronouns**: *I, you, he*
+- **Prepositions**: *on, under, over, near, by, at, from, to, with*
+- **Determiners**: *a, an, the*
+- **Pronouns**: *she, who, I, others*
+- **Conjunctions**: *and, but, or, as, if, when*
+- **Particles**: *up, down, on, off, in, out, at, by*
+- **Numerals**: *one, two, three, first, second, third*
+
+![BS-DS IITM (BSCS5002)](https://example.com/link-to-image)
+24 / 31
+```
+
+# W3-Lec8-POStagging.pdf - Page 25
+
+```markdown
+# Tagsets
+
+- **Part-of-Speech (POS) tagsets** are collections of labels used to classify words based on their grammatical roles in sentences
+
+- **Granularity**: Need to Decide the level of granularity needed for the tagset.
+  - For example, more detailed tagsets might distinguish between different types of nouns or verbs.
+
+- **Types**:
+  - **Universal tagsets**: Designed for cross-linguistic compatibility (e.g., Universal Dependencies).
+  - **Standardized tagsets**: Widely accepted and used in specific languages (e.g., Penn Treebank for English).
+  - **Language-specific tagsets**: Tailored for specific languages (e.g., BIS for Indian languages).
+
+*Source: BS-DS IITM (BSCS5002)*
+
+*Page 25 of 31*
+```
+
+This markdown format ensures the structure and content of the original text are accurately preserved.
+
+# W3-Lec8-POStagging.pdf - Page 26
+
+```markdown
+# Penn Treebank Tagset:
+
+| Tag | Description | Example | Tag | Description | Example | Tag | Description | Example |
+|-----|-------------|---------|-----|-------------|---------|-----|-------------|---------|
+| CC  | coordinating conjunction | *and, but, or* | PDT | predeterminer | *all, both* | VBP | verb non-3sg present | *eats* |
+| CD  | cardinal number | *one, two* | POS | possessive ending | *’s* | VBZ | verb 3sg pres | *eats* |
+| DT  | determiner | *a, the* | PRP | personal pronoun | *I, you, he* | WDT | wh-determiner | *which, that* |
+| EX  | existential “there” | *there* | PRPS | possessive pronoun | *your, one’s* | WP  | wh-pronoun | *what, who* |
+| FW  | foreign word | *mea culpa* | RB  | adverb | *quickly* | WPS | wh-possessive | *whose* |
+| IN  | preposition/ subordin-conj | *of, in, by* | RBR | comparative adverb | *faster* | WRB | wh-adverb | *how, where* |
+| JJ  | adjective | *yellow* | RBS | superlative adverb | *fastest* | $ | dollar sign | $ |
+| JJR | comparative adj | *bigger* | RP  | particle | *up, off* | #  | pound sign | # |
+| JJS | superlative adj | *wildest* | SYM | symbol | *+,% &* | " | left quote | *“* |
+| LS  | list item marker | *1, 2, One* | TO  | "to" | *to* | " | right quote | *”* |
+| MD  | modal | *can, should* | UH  | interjection | *ah, oops* | ( | left paren | *(* |
+| NN  | sing or mass noun | *llama* | VB  | verb base form | *eat* | ) | right paren | *)* |
+| NNS | noun, plural | *llamas* | VBD | verb past tense | *ate* | , | comma | *,* |
+| NNP | proper noun, sing. | *IBM* | VBG | verb gerund | *eating* | . | sent-end punct | *. ! ?* |
+| NNPS | proper noun, plu. | *Carolinas* | VBN | verb past part. | *eaten* | ; | sent-mid punct | *; : ...* |
+
+_BS-DS IITM (BSCS5002)_
+
+_Page 26 / 31_
+```
+
+# W3-Lec8-POStagging.pdf - Page 27
+
+# Universal Dependencies-POS
+
+- **Universal Dependencies(UD) POS tagset** is a standardized set of tags used for part-of-speech tagging across multiple languages.
+- Developed as part of the Universal Dependencies project, it aims to provide a consistent POS tagging framework for cross-linguistic research and applications.
+- It supports the development of cross-linguistic NLP tools and resources.
+- **Universal Coverage**: Designed to capture syntactic and grammatical categories across different languages in a consistent manner.
+- **Minimalist Approach**: Focuses on core grammatical categories to ensure broad applicability while avoiding language-specific complexities.
+
+![BS-DS IITM (BSCS5002)](https://example.com/logo.png)
+
+Page 27 / 31
+
+# W3-Lec8-POStagging.pdf - Page 28
+
+```markdown
+# UD POS Tags
+
+| Open class words     | Closed class words | Other  |
+|----------------------|--------------------|--------|
+| **ADJ**              | **ADP**            | **PUNCT**|
+| **ADV**              | **AUX**            | **SYM** |
+| **INTJ**             | **CCONJ**          | **X**   |
+| **NOUN**             | **DET**            |        |
+| **PROPN**            | **NUM**            |        |
+| **VERB**             | **PART**           |        |
+|                      | **PRON**           |        |
+|                      | **SCONJ**          |        |
+
+*Source: BS-DS IITM (BSCS5002)*
+```
+
+# W3-Lec8-POStagging.pdf - Page 29
+
+# Indian language Tagset: BIS
+
+- The BIS POS tagset is specifically designed for Indian languages under the Bureau of Indian Standards (BIS) (IS 17627 : 2021)
+- It was developed to standardize POS tagging across various Indian languages.
+- The tagset is multilingual and covers a wide range of Indian languages, including Hindi, Tamil, Telugu, Bengali, Marathi, and others.
+- The BIS tagset is based on a hierarchical structure that captures both coarse-grained and fine-grained linguistic categories.
+- It includes both universal categories (e.g., Nouns, Verbs) and language-specific tags to address the unique features of Indian languages.
+
+(Source: BS-DS IITM (BSCS5002))
+
+Page number: 29 / 31
+
+# W3-Lec8-POStagging.pdf - Page 30
+
+```markdown
+# BIS-POS tags
+
+- Common Noun (NN)
+- Proper Noun (NNP)
+- Noun of Space and Time (NST)
+- Pronoun (PR)
+- Personal (PRP)
+- Reflexive (PRF)
+- Relative (PRL)
+- Reciprocal (PRC)
+- Wh-word (PRQ)
+- Demonstrative (DM)
+- Main Verb (VM)
+- Finite Verb (VF)
+- Non-finite Verb (VNF)
+- Infinitive (VINF)
+- Gerund (VNG)
+- Auxiliary (VAUX)
+- Adjective (JJ)
+- Adverb (RB)
+- Postposition (PSP)
+- Conjunction (CC)
+- Coordinator (CCD)
+- Subordinator (CCS)
+- Quotative (UT)
+- Particles (RP)
+- Classifier (CL)
+- Interjection (INJ)
+- Intensifier (INTF)
+- Negation (NEG)
+- Quantifiers (QT)
+- Residuals (RD)
+- Foreign word (RDF)
+- Symbol (SYM)
+- Punctuation (PUNC)
+- Unknown (UNK)
+- Echowords (ECH)
+
+BS-DS IITM (BSCS5002)
+```
+
+# W3-Lec8-POStagging.pdf - Page 31
+
+```markdown
+# Methods of POS tagging
+
+- Rule-based POS tagging
+- Transformation based POS tagging
+- Statistical based POS tagging
+
+![BS-DS IITM (BSCS5002)](https://example.com/logo.png)
+
+Page 31 / 31
+```
+

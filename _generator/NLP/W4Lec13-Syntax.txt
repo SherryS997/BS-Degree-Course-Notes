@@ -1,0 +1,3286 @@
+# W4Lec13-Syntax.pdf - Page 1
+
+```markdown
+# BSCS5002: Introduction to Natural Language Processing
+
+## Syntax, Context-Free Grammar, and Constituency Parsing
+
+**Parameswari Krishnamurthy**
+
+*Language Technologies Research Centre*
+*IIIT-Hyderabad*
+
+*param.krishna@iiit.ac.in*
+
+![IIIT-Hyderabad Logo](https://www.iiit.ac.in/sites/default/files/iiit_logo.png)
+
+---
+
+*International Institute of Information Technology*
+*HYDERABAD*
+
+---
+
+*BSCS-DS IITM (BSCS5002)*
+
+*1 / 41*
+```
+
+# W4Lec13-Syntax.pdf - Page 2
+
+# Introduction to Syntax
+
+- **Syntax** refers to the set of rules, principles, and processes that govern the structure of sentences in a language.
+- These rules determine how words and phrases are combined to form well-structured sentences.
+
+## Well-formedness vs Ill-formedness:
+
+- A sentence is well-formed if it follows the syntactic rules of the language.
+- **Example:**
+  - *I am happy.* (Well-formed)
+  - *\*I saw girl the tall.* (Ill-formed – incorrect word order)
+- Syntax helps identify these grammatical errors by enforcing the structure.
+
+*BSc-DS IITM (BSCS5002)*
+*2 / 41*
+
+# W4Lec13-Syntax.pdf - Page 3
+
+# Key Concepts in Syntax
+
+- **Syntactic Categories:** 
+  These are categories of words that have similar syntactic behavior.
+
+- **Lexical Categories:**
+  These include content words such as:
+  - **Nouns:** Refers to people, objects, or ideas (e.g., boy, school, idea).
+  - **Verbs:** Describes actions or states (e.g., run, think, is).
+  - **Adjectives:** Provides descriptive qualities of nouns (e.g., big, red, fast).
+  - **Adverbs:** Modifies verbs, adjectives, or other adverbs (e.g., quickly, very, always).
+
+- **Functional Categories:**
+  These serve grammatical purposes and include:
+  - **Determiners:** Specifies a noun (e.g., the, a, an).
+  - **Prepositions:** Shows relationships between nouns (e.g., in, on, under).
+  - **Conjunctions:** Connects words, phrases, or clauses (e.g., and, but, because).
+
+- **Example:**
+  - **The cat sat on the mat.**
+    - **The (Determiner)**, cat (Noun), sat (Verb), on (Preposition), the mat (Noun Phrase).
+
+*BS-DS IITM (BSCS5002)*
+
+*3 / 41*
+
+# W4Lec13-Syntax.pdf - Page 4
+
+# Phrasal Categories
+
+- **Noun Phrase (NP)**:
+  - A group of words that functions as a noun in a sentence.
+  - Examples:
+    - John (Simple NP)
+    - The little boy (NP with Determiner and Adjective)
+    - The cat on the mat (NP with Prepositional Phrase)
+  - Phrase structure rule: NP → (Det) (Adj)* N (PP)
+
+BS-DS IITM (BSCS5002) 4 / 41
+
+# W4Lec13-Syntax.pdf - Page 5
+
+# Phrasal Categories
+
+- **Verb Phrase (VP)**:
+  - A phrase that includes a verb and its complements or modifiers.
+  - Examples:
+    - She runs (Simple VP)
+    - John sang a song (VP with Object)
+    - John sang a song in the shower (VP with Prepositional Phrase)
+  - Phrase structure rule: VP → V (NP)* (PP) (Adv)*
+
+BS-DS IITM (BSCS5002) 5 / 41
+
+# W4Lec13-Syntax.pdf - Page 6
+
+```markdown
+# Phrasal Categories
+
+- **Prepositional Phrase (PP):**
+  - A phrase that begins with a preposition and is followed by a noun phrase.
+  - **Examples:**
+    - *in the house*
+    - *with a friend*
+  - **Phrase structure rule:** `PP → P NP`
+
+---
+
+Reference: BS-DS IITM (BSCS5002)
+
+Page 6 / 41
+```
+
+# W4Lec13-Syntax.pdf - Page 7
+
+```markdown
+# Phrase Structure Grammar (PSG)
+
+- **Phrase Structure Grammar (PSG)** is a type of generative grammar that describes the syntactic structure of sentences using phrase structure rules.
+
+- It breaks down a sentence into its constituent parts, or phrases, which are categorized into syntactic types (e.g., NP, VP, PP).
+
+- **Example Sentence:** *The cat sat on the mat.*
+
+---
+
+BS-DS IITM (BSCS5002) 
+
+Page 7 / 41
+```
+
+# W4Lec13-Syntax.pdf - Page 8
+
+```markdown
+# Phrase Structure Grammar (PSG)
+
+```markdown
+- **S**
+  - **NP**
+    - **Det**
+      - The
+    - **N**
+      - cat
+  - **VP**
+    - **V**
+      - sat
+    - **PP**
+      - **P**
+        - on
+      - **NP**
+        - **Det**
+          - the
+        - **N**
+          - mat
+```
+
+## Phrase Structure Rule:
+
+- **S** → **NP** **VP**
+- **NP** → **Det** **N**
+- **VP** → **V** **PP**
+- **PP** → **P** **NP**
+```
+
+Note: The provided structure follows a hierarchical format used in Phrase Structure Grammar (PSG) to describe the syntax of a sentence. The rules outline how different parts of speech (S, NP, VP, PP, Det, N, V, P) can combine to form a complete sentence.
+
+# W4Lec13-Syntax.pdf - Page 9
+
+```markdown
+# Sentence Structure in Syntax
+
+- A sentence must contain both a Noun Phrase (NP) and a Verb Phrase (VP).
+
+- The most basic sentence structure can be described using the following phrase structure rule:
+  - S → NP VP
+  - Example:
+    - The dog barked.
+    - NP = The dog
+    - VP = barked
+
+- A sentence is ill-formed if it does not follow this basic structure.
+
+- Example of Ill-formed Sentences:
+  - *The dog. (Missing VP)
+  - *Barked. (Missing NP)
+
+*Source: BS-DS IITM (BSCS5002)*
+```
+
+# W4Lec13-Syntax.pdf - Page 10
+
+# Types of Clauses and Sentences
+
+- **Types of Clauses:**
+  - **Independent Clause:** A clause that can stand alone as a sentence (e.g., *I went to the store*).
+  - **Dependent Clause:** A clause that cannot stand alone and depends on the main clause (e.g., *If I go out*).
+
+- **Types of Sentences:**
+  - **Simple Sentence:** Contains one independent clause (e.g., *I like pizza*).
+  - **Compound Sentence:** Contains two or more independent clauses (e.g., *I like pizza and he likes pasta*).
+  - **Complex Sentence:** Contains one independent clause and at least one dependent clause (e.g., *I laughed when he fell*).
+  - **Compound-Complex Sentence:** Contains at least two independent clauses and one or more dependent clauses (e.g., *I laughed when he fell, but he was fine*).
+
+BS-DS IITM (BSCS5002)
+
+# W4Lec13-Syntax.pdf - Page 11
+
+```markdown
+# Complexities in Syntax: Ambiguities, Garden-Path, Recursiveness, Ellipsis
+
+- **Ambiguities:**
+  - **Structural Ambiguity:** Occurs when a sentence can be parsed in more than one way (e.g., *I saw a man with a telescope*).
+  - **Coordination Ambiguity:** When the scope of conjunctions like "and" is unclear (e.g., *old men and women*).
+
+- **Garden-Path Sentences:**
+  - Sentences that lead to an incorrect initial interpretation (e.g., *The old man the boat*).
+
+- **Recursiveness:**
+  - A structure that repeats itself within a sentence (e.g., *This is the cat that ate the rat that ate the cheese*).
+
+- **Ellipsis:**
+  - Omission of words that are understood in context (e.g., *I did it; he didn't*).
+
+---
+
+_BS-DS IITM (BSCS5002)_
+
+---
+
+_11 / 41_
+```
+
+# W4Lec13-Syntax.pdf - Page 12
+
+```markdown
+# Introduction to Context-Free Grammar (CFG)
+
+- **Context-Free Grammar (CFG)** is a formal system for describing the syntax of natural languages.
+
+- CFGs use **production rules** to define how words and phrases can be grouped and ordered.
+
+- It consists of:
+  - A set of **non-terminal symbols** (e.g., *NP*, *VP*).
+  - A set of **terminal symbols** (e.g., words like *flight*, *the*).
+  - A set of **production rules** (e.g., *S → NP VP*).
+  - A **designated start symbol** (often *S* for "sentence").
+
+- **Example:**
+  - *S → NP VP* (A sentence consists of a noun phrase and a verb phrase)
+
+![BS-DS IITM (BSCS5002)](https://example.com/image.png)
+
+*Page 12 / 41*
+```
+
+# W4Lec13-Syntax.pdf - Page 13
+
+# CFG Rules and Example
+
+- CFG rules express how symbols can be rewritten as other symbols:
+
+  - **NP → Det Nominal** (A noun phrase can be a determiner followed by a nominal).
+  - **VP → Verb NP** (A verb phrase can be a verb followed by a noun phrase).
+  - **Nominal → Noun | Nominal Noun** (A nominal can be a noun or a series of nouns).
+
+- The symbols on the left of the arrow are non-terminal symbols, while those on the right can be terminals or non-terminals.
+
+- **Example:**
+
+  - **NP → Det Nominal → Det Noun → the flight**
+
+    This means that "the flight" is a valid noun phrase.
+
+---
+
+BS-DS IITM (BSCS5002)
+
+---
+
+Page 13 / 41
+
+# W4Lec13-Syntax.pdf - Page 14
+
+# Parsing with CFG and Parse Trees
+
+- **Parsing** is the process of assigning a syntactic structure (like a tree) to a sentence according to a grammar.
+
+- **Parse Trees** are graphical representations of the syntactic structure of a sentence.
+
+- Each node represents a symbol, and its children represent what it can be rewritten into CFG rules.
+
+(BS-DS IITM (BSCS5002))
+
+Page 14 / 41
+
+# W4Lec13-Syntax.pdf - Page 15
+
+# Example of Parsing: "a flight"
+
+- **Example: Parsing "a flight"**
+
+  - NP → Det Nominal
+  - Det → a
+  - Nominal → Noun
+  - Noun → flight
+
+- This generates the following parse tree:
+
+  ```
+      NP
+     / \
+   Det  Nom
+    |   / \
+    a Noun 
+       |
+     flight
+  ```
+
+(Source: BSCS5002)
+
+# W4Lec13-Syntax.pdf - Page 16
+
+```markdown
+# $\mathcal{L}_0$ and the lexicon for $\mathcal{L}_0$
+
+- The grammar rules we have seen so far, which we will call $\mathcal{L}_0$.
+- We can use the or-symbol '|' to indicate that a non-terminal has alternate possible expansions.
+
+![Figure 1: The lexicon for $\mathcal{L}_0$](image_url)
+
+| Noun | flights | flight | breeze | trip | morning |
+|------|---------|--------|--------|------|---------|
+| Verb | is | prefer | like | need | want | fly | do |
+| Adjective | cheapest | non-stop | first | latest |
+|          | other | direct |
+| Pronoun | me | I | you | it |
+| Proper-Noun | Alaska | Baltimore | Los Angeles |
+|          | Chicago | United | American |
+| Determiner | the | a | an | this | these | that |
+| Preposition | from | to | on | near | in |
+| Conjunction | and | or | but |
+
+*BS-DS IITM (BSCS5002)*
+*16 / 41*
+```
+
+# W4Lec13-Syntax.pdf - Page 17
+
+```markdown
+# L₀ and the lexicon for L₀
+
+## Grammar Rules
+
+| Grammar Rules                          | Examples                             |
+|----------------------------------------|--------------------------------------|
+| S → NP VP                              | I + want a morning flight            |
+| NP → Pronoun                            | I                                   |
+| NP → Proper-Noun                       | Los Angeles                         |
+| NP → Det Nominal                       | a + flight                          |
+| NP → Nominal Noun                      | morning + flight                   |
+| NP → Noun                              | flights                             |
+| VP → Verb                              | do                                  |
+| VP → Verb NP                           | want + a flight                     |
+| VP → Verb NP PP                        | leave + Boston + in the morning     |
+| VP → Verb PP                           | leaving + on Thursday               |
+| PP → Preposition NP                    | from + Los Angeles                  |
+
+## Figure 2: The grammar for L₀, with example phrases for each rule.
+
+BSC-DS IITM (BSCS5002)
+
+Page 17 / 41
+```
+
+# W4Lec13-Syntax.pdf - Page 18
+
+# Parse Tree
+
+![Parse Tree Image](image_url)
+
+**Figure 3:** The parse tree for "I prefer a morning flight" according to grammar $L_0$
+
+- We can also represent a parse tree in a more compact format called bracketed notation. Here is the bracketed representation of the parse tree from the figure above:
+
+```markdown
+[S[NP[ProI]][VP[Vprefer][NP[Deta][Nom[Nmorning][Nounmoming'][Nounflight']]]]]
+```
+
+(Note: Ensure to replace `image_url` with the actual URL of the image representing the parse tree.)
+
+BS-DS IITM (BSCS5002) 18 / 41
+
+# W4Lec13-Syntax.pdf - Page 19
+
+# Treebanks
+
+- **Definition:** A treebank is a corpus in which every sentence is annotated with a parse tree.
+
+- **Role:** Treebanks are crucial for parsing and linguistic investigations of syntactic phenomena.
+
+- **Creation:** Generally made by running a parser over sentences and then having the parses hand-corrected by human linguists.
+
+- **Examples:**
+  - Penn Treebank includes English, Arabic, and Chinese treebanks.
+  - Treebank representations often use LISP-style parenthesized notation or standard node-and-line trees.
+
+- **Grammar Extraction:** Sentences in a treebank implicitly constitute a grammar of the language, allowing extraction of CFG rules.
+
+---
+
+_BS-DS IITM (BSCS5002)_
+
+_Page 19 / 41_
+
+# W4Lec13-Syntax.pdf - Page 20
+
+# Penn Treebank Sentences
+
+```markdown
+((S
+  (NP-SBJ (DT That)
+    (JJ cold) (, , .)
+    (JJ empty) (NN sky) )
+  (VP (VBD was)
+    (ADJP-PRD (JJ full)
+      (PP (IN of)
+        (NP (NN fire)
+          (CC and)
+          (NN light) ))))
+  (, . .) ))
+
+(a)
+
+((S
+  (NP-SBJ The/DT flight/NN )
+  (VP should/MD
+    (VP arrive/VB
+      (PP-TMP at/IN
+        (NP eleven/CD a.m/RB ))
+      (NP-TMP tomorrow/NN ))))
+  ))
+
+(b)
+```
+
+**Figure 4: Parses from the LDC Treebank3**
+```
+
+**BS-DS IITM (BSCS5002)**
+
+**20 / 41**
+
+# W4Lec13-Syntax.pdf - Page 21
+
+# Penn Treebank
+
+![Tree diagram](image_url)
+
+**Figure 5: The tree corresponding to the Brown corpus sentence in the previous figure.**
+
+BS-DS IITM (BSCS5002) 21 / 41
+
+# W4Lec13-Syntax.pdf - Page 22
+
+# Penn Treebank
+
+```markdown
+| Grammar                          | Lexicon                |
+|----------------------------------|------------------------|
+| `S -> NP VP`                     | `DT -> the | that`          |
+| `S -> NP VP`                     | `JJ -> cold | empty | full`     |
+| `NP -> DT NN`                    | `NN -> sky | fire | light | flight | tomorrow`  |
+| `NP -> NN CC NN`                 | `CC -> and`           |
+| `NP -> DT JJ, JJ NN`             | `IN -> of | at`            |
+| `NP -> NN`                       | `CD -> eleven`        |
+| `VP -> MD VP`                    | `RB -> a.m.`          |
+| `VP -> VBD ADJP`                 | `VB -> arrive`        |
+| `VP -> MD VP`                    | `VBD -> was | said`          |
+| `VP -> VB PP NP`                 | `MD -> should | would`        |
+| `ADJP -> JJ PP`                 |                       |
+| `PP -> IN NP`                    |                       |
+| `PP -> IN NP RB`                 |                       |
+```
+
+**Figure 6:** CFG grammar rules and lexicon from the treebank sentences in the previous figure.
+```
+
+- **Grammar** 
+  - `S -> NP VP`
+  - `S -> NP VP`
+  - `NP -> DT NN`
+  - `NP -> NN CC NN`
+  - `NP -> DT JJ, JJ NN`
+  - `NP -> NN`
+  - `VP -> MD VP`
+  - `VP -> VBD ADJP`
+  - `VP -> MD VP`
+  - `VP -> VB PP NP`
+  - `ADJP -> JJ PP`
+  - `PP -> IN NP`
+  - `PP -> IN NP RB`
+
+- **Lexicon**
+  - `DT -> the | that`
+  - `JJ -> cold | empty | full`
+  - `NN -> sky | fire | light | flight | tomorrow`
+  - `CC -> and`
+  - `IN -> of | at`
+  - `CD -> eleven`
+  - `RB -> a.m.`
+  - `VB -> arrive`
+  - `VBD -> was | said`
+  - `MD -> should | would`
+
+Source: BS-DS IITM (BSCS5002)
+
+Page: 22 / 41
+
+# W4Lec13-Syntax.pdf - Page 23
+
+```markdown
+# CFG Rules from Penn Treebank
+
+- The sentences in a treebank implicitly constitute a grammar for the language.
+- From parsed sentences, CFG rules can be extracted.
+- The grammar used in the Penn Treebank is very flat, leading to many rules.
+- Example: There are approximately 4,500 different rules for expanding Verb Phrases (VP).
+- These rules include variations for different combinations of prepositional phrases (PP) and verb arguments.
+
+## Examples of CFG Rules for VP Expansion:
+
+- VP → VBD PP
+- VP → VBD PP PP
+- VP → VBD PP PP PP
+- VP → VBD PP PP PP PP
+- VP → VB ADVP PP
+- VP → VB PP ADVP
+- VP → ADVP VB PP
+```
+
+# W4Lec13-Syntax.pdf - Page 24
+
+# Grammar Equivalence and Normal Form
+
+- **Grammar Equivalence:**
+  - Two grammars are **strongly equivalent** if they generate the same set of strings and assign the same phrase structure to each sentence (allowing renaming of non-terminal symbols).
+  - Two grammars are **weakly equivalent** if they generate the same set of strings but do not necessarily assign the same phrase structure.
+
+- **Normal Form:**
+  - **Chomsky Normal Form (CNF):** A context-free grammar is in CNF if each rule is of the form \( A \rightarrow BC \) (two non-terminals) or \( A \rightarrow a \) (a terminal), where \( A, B, C \) are non-terminals, and \( a \) is a terminal. It cannot have empty (ε) productions.
+  - **Binary Branching:** CNF ensures that every rule leads to binary branching, meaning that each rule breaks down into at most two components.
+  - **Conversion:** Any context-free grammar can be converted into CNF. For example, a rule like \( A \rightarrow BCD \) can be split into two binary rules:
+    - \( A \rightarrow BX \)
+    - \( X \rightarrow CD \)
+
+- **Advantages:** Using binary branching can sometimes produce smaller grammars compared to non-binary forms.
+
+Source: BS-DS IITM (BSCS5002)
+
+Page 24 / 41
+
+# W4Lec13-Syntax.pdf - Page 25
+
+# Grammar Equivalence and Normal Form
+
+## Grammar
+
+- S → NP VP
+- S → Aux NP VP
+- S → VP
+- NP → Pronoun
+- NP → Proper-Noun
+- NP → Det Nominal
+- Nominal → Noun
+- Nominal → Nominal Noun
+- Nominal → Nominal PP
+- VP → Verb
+- VP → Verb NP
+- VP → Verb NP PP
+- VP → Verb PP
+- VP → VP PP
+- PP → Preposition NP
+
+## Lexicon
+
+- Det → that | this | the | a
+- Noun → book | flight | meal | money
+- Verb → book | include | prefer
+- Pronoun → I | she | me
+- Proper-Noun → Houston | NWA
+- Aux → does
+- Preposition → from | to | on | near | through
+
+*Figure 7: The 𝓛₁ miniature English grammar and lexicon.*
+
+*BS-DS IITM (BSCS5002)*
+
+*25 / 41*
+
+# W4Lec13-Syntax.pdf - Page 26
+
+# Ambiguities in Context-Free Grammar (CFG)
+
+- Ambiguity occurs when a sentence can be parsed in more than one way.
+
+## Types of Ambiguities:
+
+- **Structural Ambiguity**: Multiple valid parse trees for a sentence (e.g., *I saw the man with the telescope*).
+
+- **Lexical Ambiguity**: A word can have multiple meanings (e.g., *bank* could refer to a financial institution or the side of a river).
+
+## Example: *I saw the man with the telescope*
+
+- Ambiguous because "*with the telescope*" can modify either "*saw*" or "*the man*."
+
+- Two possible parse trees:
+
+  - *I [saw the man] [with the telescope]* (I used the telescope to see the man).
+
+  - *I saw [the man with the telescope]* (The man I saw had a telescope).
+
+---
+
+_BS-DS IITM (BSCS5002)_
+
+_26 / 41_
+
+# W4Lec13-Syntax.pdf - Page 27
+
+```markdown
+# Ambiguity:
+
+I saw the man [with the telescope] vs. I saw [the man with the telescope]
+
+BS-DS IITM (BSCS5002) 27 / 41
+```
+
+# W4Lec13-Syntax.pdf - Page 28
+
+# Introduction to Constituency Parsing
+
+- Constituency Parsing is the process of analyzing the syntactic structure of a sentence by breaking it down into its constituent parts (phrases or subphrases).
+- Constituents behave as single units within a sentence, and parsing aims to identify these groupings.
+- The most common constituents are noun phrases, verb phrases, and prepositional phrases.
+- **Example:** *The cat sat on the mat.*
+
+  - **Noun Phrase (NP) =** *The cat*
+  - **Verb Phrase (VP) =** *sat on the mat*
+
+*BS-DS IITM (BSCS5002)*
+
+# W4Lec13-Syntax.pdf - Page 29
+
+# Constituents in Natural Language
+
+- Constituents are groups of words that function as a single unit in a sentence.
+- Evidence for constituents can be found through tests such as substitution, movement, and coordination.
+
+### Example: Harry the Horse arrived.
+
+- The noun phrase Harry the Horse can be substituted with he, showing that it forms a constituent.
+
+---
+
+BS-DS IITM (BSC5002) 
+
+Page 29 of 41
+
+# W4Lec13-Syntax.pdf - Page 30
+
+# Introduction to CKY Parsing
+
+- Cocke-Kasami-Younger (CKY) algorithm, the most widely used dynamic-programming based approach to parsing, is a dynamic programming algorithm used for parsing sentences using context-free grammars in Chomsky Normal Form (CNF).
+
+- The algorithm efficiently handles parsing by systematically exploring all possible substructures of a sentence.
+
+- CKY parsing is particularly useful for identifying all possible parse trees for a given sentence, which is crucial for handling ambiguity.
+
+BS-DS IITM (BSCS5002)
+
+30 / 41
+
+# W4Lec13-Syntax.pdf - Page 31
+
+# Requirements for CKY Parsing
+
+- **CKY Parsing requires the grammar to be in Chomsky Normal Form (CNF).**
+
+- **Chomsky Normal Form:** A rule in CNF is of the form \(A \rightarrow BC\) or \(A \rightarrow a\), where:
+  - \(A\), \(B\), and \(C\) are non-terminals.
+  - \(a\) is a terminal (word).
+
+- Conversion to CNF involves eliminating epsilon rules, unit productions, and ensuring all productions are binary branching.
+
+---
+
+Source: BS-DS IITM (BSCS5002)
+
+Page Number: 31 / 41
+
+# W4Lec13-Syntax.pdf - Page 32
+
+# Illustration
+
+```markdown
+| $\mathcal{L}_1$ Grammar                         | $\mathcal{L}_1$ in CNF                        |
+|-----------------------------------------------|---------------------------------------------|
+| $S \rightarrow NP \ VP$                        | $S \rightarrow NP \ VP$                     |
+| $S \rightarrow Aux \ NP \ VP$                  | $S \rightarrow XI \ VP$                    |
+|                                             | $XI \rightarrow Aux \ NP$                  |
+| $S \rightarrow VP$                             | $S \rightarrow book \ | \ include \ | \ prefer$|
+|                                             | $S \rightarrow Verb \ NP$                  |
+|                                             | $S \rightarrow Verb \ PP$                  |
+|                                             | $S \rightarrow X2 \ PP$                    |
+|                                             | $S \rightarrow VP \ PP$                    |
+|                                             | $NP \rightarrow I \ | \ she \ | \ me$    |
+| $NP \rightarrow Pronoun$                      | $NP \rightarrow TWA \ | \ Houston$  |
+| $NP \rightarrow Proper-Noun$                  | $NP \rightarrow Det \ Nominal$            |
+| $NP \rightarrow Det \ Nominal$                | $Nominal \rightarrow book \ | \ flight \ | \ meal \ | \ money$ |
+| $Nominal \rightarrow Noun$                    | $Nominal \rightarrow Nominal \ Noun$      |
+| $Nominal \rightarrow Nominal \ PP$            | $Nominal \rightarrow Nominal \ PP$        |
+| $VP \rightarrow Verb$                         | $VP \rightarrow Verb \ NP$                 |
+| $VP \rightarrow Verb \ NP \ PP$                | $VP \rightarrow Verb \ NP$                 |
+| $VP \rightarrow Verb \ PP$                    | $VP \rightarrow Verb \ PP$                 |
+| $VP \rightarrow VP \ PP$                      | $VP \rightarrow VP \ PP$                   |
+| $PP \rightarrow Preposition \ NP$             | $PP \rightarrow Preposition \ NP$         |
+```
+
+![Figure 8: $\mathcal{L}_1$ Grammar and its conversion to CNF.](image_url)
+
+**BSCS5002**
+
+**32 / 41**
+```
+
+# W4Lec13-Syntax.pdf - Page 33
+
+# CKY Parsing Algorithm
+
+- The CKY algorithm fills a parse table by examining all possible substrings of the input sentence.
+
+- For each substring, the algorithm checks all possible ways to split it into two parts and applies grammar rules to form constituents.
+
+- The table is filled in a bottom-up manner, starting with the smallest substrings and working up to the full sentence.
+
+- The presence of a start symbol (S) spanning the entire input in the parse table indicates that the sentence is grammatically correct.
+
+(Source: BS-DS IITM (BSCS5002))
+```
+
+# W4Lec13-Syntax.pdf - Page 34
+
+# Example of CKY Parsing
+
+- **Sentence:** *Book the flight through Houston.*
+
+- **Parse table initialization:** Start by filling cells corresponding to single words using lexical rules.
+
+- **Iteratively fill the table by combining entries based on binary rules from CNF:**
+  - **Example:** If NP and VP are found, check rules that can combine them into larger constituents.
+
+- **The goal is to fill the top-right cell with the start symbol S.**
+
+---
+
+_BS-DS IITM (BSCS5002)_
+
+_34 / 41_
+
+# W4Lec13-Syntax.pdf - Page 35
+
+# CKY Algorithm Workflow
+
+## Step-by-Step Process:
+
+1. **Initialization**: Fill the diagonal of the CKY table with parts of speech for each word in the sentence using lexical rules.
+
+2. **Filling the Table**:
+    - For each cell, consider all possible ways to split the substring into two parts.
+    - Check grammar rules for combining the two parts and add any valid constituents to the cell.
+
+3. **Final Step**: If the top-right cell contains the start symbol ‘S’, the sentence is valid.
+
+## Key Advantages of CKY Parsing:
+
+- Handles ambiguous sentences by finding all possible parses.
+- Efficient dynamic programming approach.
+- Suitable for sentences parsed using CNF grammars.
+
+---
+
+*Source*: BS-DS IITM (BSCS5002)
+
+*Slide*: 35 / 41
+
+# W4Lec13-Syntax.pdf - Page 36
+
+```markdown
+# CKY Parsing Algorithm (Illustration)
+
+## Figure 9: Completed parse table for *Book the flight through Houston.*
+
+![CKY Parsing Algorithm Illustration](image_url)
+
+```markdown
+The image illustrates the completed parse table for the sentence "Book the flight through Houston" using the CKY (Cocke-Younger-Kasami) parsing algorithm. 
+
+### Parse Table Breakdown
+
+| Index  | Word     | Part of Speech | Function | Start Index | End Index |
+|--------|----------|----------------|----------|-------------|-----------|
+| [0,1]  | Book     | S: VP: Verb    | Normal   | Noun        |           |
+| [0,2]  | the      | Det            | NP       |             |           |
+| [1,2]  | the      | S: VPX2        | Normal   | Noun        |           |
+| [0,3]  | fight    | S: VPX2        | NP       |             |           |
+| [0,4]  | through  | S: VPX2        | Prep     | PP          |           |
+| [1,3]  | through  | Normal         | Noun     |             |           |
+| [0,5]  | Houston  | NP             | Proper   | Noun        |           |
+| [1,4]  | Houston  | PP             |          |             |           |
+
+### Structure of the Parse Table
+
+- **Arrows**: Indicate the hierarchical relationships between different parts of the parse tree.
+- **Colored Cells**: Represent the parsed constituents at various levels of the sentence structure.
+
+- **Row Index**: Represents the start and end indices of the words in the sentence.
+- **Column Index**: Represents the part of speech and function of the words.
+
+### Example Breakdown
+
+1. **Word "Book"**:
+   - Index: [0,1]
+   - Part of Speech: S: VP: Verb
+   - Function: Normal
+   - Type: Noun
+
+2. **Word "the"**:
+   - Index: [0,2]
+   - Part of Speech: Det
+   - Function: NP
+
+3. **Word "fight"**:
+   - Index: [0,3]
+   - Part of Speech: S: VPX2
+   - Function: NP
+
+4. **Word "through"**:
+   - Index: [0,4]
+   - Part of Speech: S: VPX2
+   - Function: Prep
+   - Type: PP
+
+5. **Word "Houston"**:
+   - Index: [0,5]
+   - Part of Speech: NP
+   - Function: Proper
+   - Type: Noun
+
+Each cell in the parse table is filled with the part of speech and function labels that describe the constituent structure of the sentence. The hierarchical relationships are depicted with arrows, showing the composition of larger constituents from smaller ones.
+
+```
+
+# W4Lec13-Syntax.pdf - Page 37
+
+# CKY in Practice
+
+## Parsing Tables
+
+### Table 1
+
+| Book             | the    | flight  | through  | Houston |
+|------------------|--------|---------|----------|---------|
+| S, VP, Verb, Nominal, Noun | [0,1] | [0,2] | [0,3] | [0,4] |
+| Det              |        | [0,2] | [0,3]   | [0,4]  |
+|                   |        | [1,2] | [1,3]   | [1,4]  |
+| Nominal, Noun    |        |        | [1,4]   |        |
+|                   |        |        | [2,3]   | [2,4]  |
+| Prep             |        |        | [2,4]   |        |
+| NP, Proper, Noun |        |        | [3,4]   |        |
+|                   |        |        |        | [4,5]  |
+
+### Table 2
+
+| Book             | the    | flight  | through  | Houston |
+|------------------|--------|---------|----------|---------|
+| S, VP, Verb, Nominal, Noun | [0,1] | [0,2] | [0,3] | [0,4] |
+| Det              |        | [0,2] | [0,3]   | [0,4]  |
+|                   |        | [1,2] | [1,3]   | [1,4]  |
+| Nominal, Noun    |        |        | [1,4]   |        |
+|                   |        |        | [2,3]   | [2,4]  |
+| Prep             |        |        | [2,4]   |        |
+|                   |        |        |        | [3,4]  |
+| NP, Proper, Noun |        |        |        | [4,5]  |
+
+### Notes
+- The arrows in Table 2 indicate the steps where the parsing process moves to combine sub-trees.
+- Each cell in the tables represents the combination of parts of speech to form the final parse tree.
+- The numbers in brackets indicate the span of the sentence covered by that particular parse node.
+
+### References
+This content is based on the BS-DS IITM (BSCS5002) course material.
+
+# W4Lec13-Syntax.pdf - Page 38
+
+# CKY in Practice
+
+## Parsing by Cocke-Younger-Kasami (CYK) Algorithm
+
+### Example Sentence: "Book the flight through Houston"
+
+### Parsing Table
+
+#### Step 1: Initialize Columns
+
+| Word    | Book  | the   | flight   | through | Houston |
+|---------|-------|-------|----------|---------|---------|
+| S, VP, Verb, Nominal, Noun | [0.1] |         |         |         |         |
+|         | [0.2] | [0.3] | [0.3]    | [0.4]   | [0.5]   |
+|         |       | DCT   | NP       |         | NP      |
+|         |       |       | [0.2]    |         |         |
+|         |       |       | [0.3]    |         |         |
+|         |       |       | NP       |         |         |
+|         |       |       | [0.3]    |         |         |
+|         |       |       | [0.4]    |         |         |
+|         |       |       | [0.4]    |         |         |
+|         |       |       | [0.4]    |         |         |
+|         |       |       | [0.5]    |         |         |
+|         |       |       | [0.5]    |         |         |
+|         |       |       | [0.5]    |         |         |
+|         |       |       | [0.5]    |         |         |
+|         |       |       | [0.5]    |         |         |
+|         |       |       | [0.4]    |         |         |
+|         |       |       | [0.4]    |         |         |
+|         |       |       | [0.4]    |         |         |
+|         |       |       | [0.5]    |         |         |
+|         |       |       | [0.5]    |         |         |
+|         |       |       | [0.5]    |         |         |
+|         |       |       | [0.5]    |         |         |
+|         |       |       | [0.5]    |         |         |
+|         |       |       | [0.5]    |         |         |
+|         |       |       | [0.5]    |         |         |
+|         |       |       | [0.5]    |         |         |
+|         |       |       | [0.5]    |         |         |
+|         |       |       | [0.5]    |         |         |
+|         |       |       | [0.5]    |         |         |
+|         |       |       | [0.5]    |         |         |
+|         |       |       | [0.5]    |         |         |
+|         |       |       | [0.5]    |         |         |
+|         |       |       | [0.5]    |         |         |
+|         |       |       | [0.5]    |         |         |
+|         |       |       | [0.5]    |         |         |
+|         |       |       | [0.5]    |         |         |
+|         |       |       | [0.5]    |         |         |
+|         |       |       | [0.5]    |         |         |
+|         |       |       | [0.5]    |         |         |
+|         |       |       | [0.5]    |         |         |
+|         |       |       | [0.5]    |         |         |
+|         |       |       | [0.5]    |         |         |
+|         |       |       | [0.5]    |         |         |
+|         |       |       | [0.5]    |         |         |
+|         |       |       | [0.5]    |         |         |
+|         |       |       | [0.5]    |         |         |
+|         |       |       | [0.5]    |         |         |
+|         |       |       | [0.5]    |         |         |
+|         |       |       | [0.5]    |         |         |
+|         |       |       | [0.5]    |         |         |
+|         |       |       | [0.5]    |         |         |
+|         |       |       | [0.5]    |         |         |
+|         |       |       | [0.5]    |         |         |
+|         |       |       | [0.5]    |         |         |
+|         |       |       | [0.5]    |         |         |
+|         |       |       | [0.5]    |         |         |
+|         |       |       | [0.5]    |         |         |
+|         |       |       | [0.5]    |         |         |
+|         |       |       | [0.5]    |         |         |
+|         |       |       | [0.5]    |         |         |
+|         |       |       | [0.5]    |         |         |
+|         |       |       | [0.5]    |         |         |
+|         |       |       | [0.5]    |         |         |
+|         |       |       | [0.5]    |         |         |
+|         |       |       | [0.5]    |         |         |
+|         |       |       | [0.5]    |         |         |
+|         |       |       | [0.5]    |         |         |
+|         |       |       | [0.5]    |         |         |
+|         |       |       | [0.5]    |         |         |
+|         |       |       | [0.5]    |         |         |
+|         |       |       | [0.5]    |         |         |
+|         |       |       | [0.5]    |         |         |
+|         |       |       | [0.5]    |         |         |
+|         |       |       | [0.5]    |         |         |
+|         |       |       | [0.5]    |         |         |
+|         |       |       | [0.5]    |         |         |
+|         |       |       | [0.5]    |         |         |
+|         |       |       | [0.5]    |         |         |
+|         |       |       | [0.5]    |         |         |
+|         |       |       | [0.5]    |         |         |
+|         |       |       | [0.5]    |         |         |
+|         |       |       | [0.5]    |         |         |
+|         |       |       | [0.5]    |         |         |
+|         |       |       | [0.5]    |         |         |
+|         |       |       | [0.5]    |         |         |
+|         |       |       | [0.5]    |         |         |
+|         |       |       | [0.5]    |         |         |
+|         |       |       | [0.5]    |         |         |
+|         |       |       | [0.5]    |         |         |
+|         |       |       | [0.5]    |         |         |
+|         |       |       | [0.5]    |         |         |
+|         |       |       | [0.5]    |         |         |
+|         |       |       | [0.5]    |         |         |
+|         |       |       | [0.5]    |         |         |
+|         |       |       | [0.5]    |         |         |
+|         |       |       | [0.5]    |         |         |
+|         |       |       | [0.5]    |         |         |
+|         |       |       | [0.5]    |         |         |
+|         |       |       | [0.5]    |         |         |
+|         |       |       | [0.5]    |         |         |
+|         |       |       | [0.5]    |         |         |
+|         |       |       | [0.5]    |         |         |
+|         |       |       | [0.5]    |         |         |
+|         |       |       | [0.5]    |         |         |
+|         |       |       | [0.5]    |         |         |
+|         |       |       | [0.5]    |         |         |
+|         |       |       | [0.5]    |         |         |
+|         |       |       | [0.5]    |         |         |
+|         |       |       | [0.5]    |         |         |
+|         |       |       | [0.5]    |         |         |
+|         |       |       | [0.5]    |         |         |
+|         |       |       | [0.5]    |         |         |
+|         |       |       | [0.5]    |         |         |
+|         |       |       | [0.5]    |         |         |
+|         |       |       | [0.5]    |         |         |
+|         |       |       | [0.5]    |         |         |
+|         |       |       | [0.5]    |         |         |
+|         |       |       | [0.5]    |         |         |
+|         |       |       | [0.5]    |         |         |
+|         |       |       | [0.5]    |         |         |
+|         |       |       | [0.5]    |         |         |
+|         |       |       | [0.5]    |         |         |
+|         |       |       | [0.5]    |         |         |
+|         |       |       | [0.5]    |         |         |
+|         |       |       | [0.5]    |         |         |
+|         |       |       | [0.5]    |         |         |
+|         |       |       | [0.5]    |         |         |
+|         |       |       | [0.5]    |         |         |
+|         |       |       | [0.5]    |         |         |
+|         |       |       | [0.5]    |         |         |
+|         |       |       | [0.5]    |         |         |
+|         |       |       | [0.5]    |         |         |
+|         |       |       | [0.5]    |         |         |
+|         |       |       | [0.5]    |         |         |
+|         |       |       | [0.5]    |         |         |
+|         |       |       | [0.5]    |         |         |
+|         |       |       | [0.5]    |         |         |
+|         |       |       | [0.5]    |         |         |
+|         |       |       | [0.5]    |         |         |
+|         |       |       | [0.5]    |         |         |
+|         |       |       | [0.5]    |         |         |
+|         |       |       | [0.5]    |         |         |
+|         |       |       | [0.5]    |         |         |
+|         |       |       | [0.5]    |         |         |
+|         |       |       | [0.5]    |         |         |
+|         |       |       | [0.5]    |         |         |
+|         |       |       | [0.5]    |         |         |
+|         |       |       | [0.5]    |         |         |
+|         |       |       | [0.5]    |         |         |
+|         |       |       | [0.5]    |         |         |
+|         |       |       | [0.5]    |         |         |
+|         |       |       | [0.5]    |         |         |
+|         |       |       | [0.5]    |         |         |
+|         |       |       | [0.5]    |         |         |
+|         |       |       | [0.5]    |         |         |
+|         |       |       | [0.5]    |         |         |
+|         |       |       | [0.5]    |         |         |
+|         |       |       | [0.5]    |         |         |
+|         |       |       | [0.5]    |         |         |
+|         |       |       | [0.5]    |         |         |
+|         |       |       | [0.5]    |         |         |
+|         |       |       | [0.5]    |         |         |
+|         |       |       | [0.5]    |         |         |
+|         |       |       | [0.5]    |         |         |
+|         |       |       | [0.5]    |         |         |
+|         |       |       | [0.5]    |         |         |
+|         |       |       | [0.5]    |         |         |
+|         |       |       | [0.5]    |         |         |
+|         |       |       | [0.5]    |         |         |
+|         |       |       | [0.5]    |         |         |
+|         |       |       | [0.5]    |         |         |
+|         |       |       | [0.5]    |         |         |
+|         |       |       | [0.5]    |         |         |
+|         |       |       | [0.5]    |         |         |
+|         |       |       | [0.5]    |         |         |
+|         |       |       | [0.5]    |         |         |
+|         |       |       | [0.5]    |         |         |
+|         |       |       | [0.5]    |         |         |
+|         |       |       | [0.5]    |         |         |
+|         |       |       | [0.5]    |         |         |
+|         |       |       | [0.5]    |         |         |
+|         |       |       | [0.5]    |         |         |
+|         |       |       | [0.5]    |         |         |
+|         |       |       | [0.5]    |         |         |
+|         |       |       | [0.5]    |         |         |
+|         |       |       | [0.5]    |         |         |
+|         |       |       | [0.5]    |         |         |
+|         |       |       | [0.5]    |         |         |
+|         |       |       | [0.5]    |         |         |
+|         |       |       | [0.5]    |         |         |
+|         |       |       | [0.5]    |         |         |
+|         |       |       | [0.5]    |         |         |
+|         |       |       | [0.5]    |         |         |
+|         |       |       | [0.5]    |         |         |
+|         |       |       | [0.5]    |         |         |
+|         |       |       | [0.5]    |         |         |
+|         |       |       | [0.5]    |         |         |
+|         |       |       | [0.5]    |         |         |
+|         |       |       | [0.5]    |         |         |
+|         |       |       | [0.5]    |         |         |
+|         |       |       | [0.5]    |         |         |
+|         |       |       | [0.5]    |         |         |
+|         |       |       | [0.5]    |         |         |
+|         |       |       | [0.5]    |         |         |
+|         |       |       | [0.5]    |         |         |
+|         |       |       | [0.5]    |         |         |
+|         |       |       | [0.5]    |         |         |
+|         |       |       | [0.5]    |         |         |
+|         |       |       | [0.5]    |         |         |
+|         |       |       | [0.5]    |         |         |
+|         |       |       | [0.5]    |         |         |
+|         |       |       | [0.5]    |         |         |
+|         |       |       | [0.5]    |         |         |
+|         |       |       | [0.5]    |         |         |
+|         |       |       | [0.5]    |         |         |
+|         |       |       | [0.5]    |         |         |
+|         |       |       | [0.5]    |         |         |
+|         |       |       | [0.5]    |         |         |
+|         |       |       | [0.5]    |         |         |
+|         |       |       | [0.5]    |         |         |
+|         |       |       | [0.5]    |         |         |
+|         |       |       | [0.5]    |         |         |
+|         |       |       | [0.5]    |         |         |
+|         |       |       | [0.5]    |         |         |
+|         |       |       | [0.5]    |         |         |
+|         |       |       | [0.5]    |         |         |
+|         |       |       | [0.5]    |         |         |
+|         |       |       | [0.5]    |         |         |
+|         |       |       | [0.5]    |         |         |
+|         |       |       | [0.5]    |         |         |
+|         |       |       | [0.5]    |         |         |
+|         |       |       | [0.5]    |         |         |
+|         |       |       | [0.5]    |         |         |
+|         |       |       | [0.5]    |         |         |
+|         |       |       | [0.5]    |         |         |
+|         |       |       | [0.5]    |         |         |
+|         |       |       | [0.5]    |         |         |
+|         |       |       | [0.5]    |         |         |
+|         |       |       | [0.5]    |         |         |
+|         |       |       | [0.5]    |         |         |
+|         |       |       | [0.5]    |         |         |
+|         |       |       | [0.5]    |         |         |
+|         |       |       | [0.5]    |         |         |
+|         |       |       | [0.5]    |         |         |
+|         |       |       | [0.5]    |         |         |
+|         |       |       | [0.5]    |         |         |
+|         |       |       | [0.5]    |         |         |
+|         |       |       | [0.5]    |         |         |
+|         |       |       | [0.5]    |         |         |
+|         |       |       | [0.5]    |         |         |
+|         |       |       | [0.5]    |         |         |
+|         |       |       | [0.5]    |         |         |
+|         |       |       | [0.5]    |         |         |
+|         |       |       | [0.5]    |         |         |
+|         |       |       | [0.5]    |         |         |
+|         |       |       | [0.5]    |         |         |
+|         |       |       | [0.5]    |         |         |
+|         |       |       | [0.5]    |         |         |
+|         |       |       | [0.5]    |         |         |
+|         |       |       | [0.5]    |         |         |
+|         |       |       | [0.5]    |         |         |
+|         |       |       | [0.5]    |         |         |
+|         |       |       | [0.5]    |         |         |
+|         |       |       | [0.5]    |         |         |
+|         |       |       | [0.5]    |         |         |
+|         |       |       | [0.5]    |         |         |
+|         |       |       | [0.5]    |         |         |
+|         |       |       | [0.5]    |         |         |
+|         |       |       | [0.5]    |         |         |
+|         |       |       | [0.5]    |         |         |
+|         |       |       | [0.5]    |         |         |
+|         |       |       | [0.5]    |         |         |
+|         |       |       | [0.5]    |         |         |
+|         |       |       | [0.5]    |         |         |
+|         |       |       | [0.5]    |         |         |
+|         |       |       | [0.5]    |         |         |
+|         |       |       | [0.5]    |         |         |
+|         |       |       | [0.5]    |         |         |
+|         |       |       | [0.5]    |         |         |
+|         |       |       | [0.5]    |         |         |
+|         |       |       | [0.5]    |         |         |
+|         |       |       | [0.5]    |         |         |
+|         |       |       | [0.5]    |         |         |
+|         |       |       | [0.5]    |         |         |
+|         |       |       | [0.5]    |         |         |
+|         |       |       | [0.5]    |         |         |
+|         |       |       | [0.5]    |         |         |
+|         |       |       | [0.5]    |         |         |
+|         |       |       | [0.5]    |         |         |
+|         |       |       | [0.5]    |         |         |
+|         |       |       | [0.5]    |         |         |
+|         |       |       | [0.5]    |         |         |
+|         |       |       | [0.5]    |         |         |
+|         |       |       | [0.5]    |         |         |
+|         |       |       | [0.5]    |         |         |
+|         |       |       | [0.5]    |         |         |
+|         |       |       | [0.5]    |         |         |
+|         |       |       | [0.5]    |         |         |
+|         |       |       | [0.5]    |         |         |
+|         |       |       | [0.5]    |         |         |
+|         |       |       | [0.5]    |         |         |
+|         |       |       | [0.5]    |         |         |
+|         |       |       | [0.5]    |         |         |
+|         |       |       | [0.5]    |         |         |
+|         |       |       | [0.5]    |         |         |
+|         |       |       | [0.5]    |         |         |
+|         |       |       | [0.5]    |         |         |
+|         |       |       | [0.5]    |         |         |
+|         |       |       | [0.5]    |         |         |
+|         |       |       | [0.5]    |         |         |
+|         |       |       | [0.5]    |         |         |
+|         |       |       | [0.5]    |         |         |
+|         |       |       | [0.5]    |         |         |
+|         |       |       | [0.5]    |         |         |
+|         |       |       | [0.5]    |         |         |
+|         |       |       | [0.5]    |         |         |
+|         |       |       | [0.5]    |         |         |
+|         |       |       | [0.5]    |         |         |
+|         |       |       | [0.5]    |         |         |
+|         |       |       | [0.5]    |         |         |
+|         |       |       | [0.5]    |         |         |
+|         |       |       | [0.5]    |         |         |
+|         |       |       | [0.5]    |         |         |
+|         |       |       | [0.5]    |         |         |
+|         |       |       | [0.5]    |         |         |
+|         |       |       | [0.5]    |         |         |
+|         |       |       | [0.5]    |         |         |
+|         |       |       | [0.5]    |         |         |
+|         |       |       | [0.5]    |         |         |
+|         |       |       | [0.5]    |         |         |
+|         |       |       | [0.5]    |         |         |
+|         |       |       | [0.5]    |         |         |
+|         |       |       | [0.5]    |         |         |
+|         |       |       | [0.5]    |         |         |
+|         |       |       | [0.5]    |         |         |
+|         |       |       | [0.5]    |         |         |
+|         |       |       | [0.5]    |         |         |
+|         |       |       | [0.5]    |         |         |
+|         |       |       | [0.5]    |         |         |
+|         |       |       | [0.5]    |         |         |
+|         |       |       | [0.5]    |         |         |
+|         |       |       | [0.5]    |         |         |
+|         |       |       | [0.5]    |         |         |
+|         |       |       | [0.5]    |         |         |
+|         |       |       | [0.5]    |         |         |
+|         |       |       | [0.5]    |         |         |
+|         |       |       | [0.5]    |         |         |
+|         |       |       | [0.5]    |         |         |
+|         |       |       | [0.5]    |         |         |
+|         |       |       | [0.5]    |         |         |
+|         |       |       | [0.5]    |         |         |
+|         |       |       | [0.5]    |         |         |
+|         |       |       | [0.5]    |         |         |
+|         |       |       | [0.5]    |         |         |
+|         |       |       | [0.5]    |         |         |
+|         |       |       | [0.5]    |         |         |
+|         |       |       | [0
+
+# W4Lec13-Syntax.pdf - Page 39
+
+```markdown
+# CKY in Practice
+
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+ 
+```markdown
+```
+```
+
+# W4Lec13-Syntax.pdf - Page 40
+
+# Practical Considerations of CKY Parsing
+
+- **Efficiency:** CKY is efficient for parsing because it avoids redundant computations by storing results of subproblems.
+
+- **Ambiguity Handling:** CKY can handle multiple parse trees by maintaining all possible constituents in the parse table.
+
+- **Limitations:** Requires conversion to CNF, which can lead to an increase in grammar size and complexity.
+
+- **Applications:** Used in natural language processing tasks like syntax checking, language understanding, and as a foundation for more advanced parsing algorithms.
+
+_BS-DS IITM (BSCS5002)_
+
+_40 / 41_
+
+# W4Lec13-Syntax.pdf - Page 41
+
+```markdown
+# Conclusion
+
+- **Syntax** defines the structure of sentences, specifying how words combine to form grammatically correct sentences.
+
+- **Syntactic Categories** (like Noun, Verb, Adjective) help categorize words based on their grammatical roles.
+
+- **Phrasal Categories** (such as NP, VP, PP) represent groups of words functioning as a single syntactic unit.
+
+- **Constituency Parsing** breaks down sentences into their constituents, identifying how words group together.
+
+- **Context-Free Grammar** (CFG) provides a formal system to describe sentence structure using production rules.
+
+- **CKY Parsing** is an efficient algorithm for parsing sentences using a grammar in Chomsky Normal Form (CNF).
+
+- **Treebanks** provide syntactic annotations for sentences, allowing extraction of rules and aiding in parsing tasks.
+
+_BS-DS IITM (BSCS5002)_
+
+_41 / 41_
+```
+

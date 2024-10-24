@@ -1,0 +1,441 @@
+```markdown
+# BSCS5002: Introduction to Natural Language Processing
+
+## Week 2 Lecture-2: Text Analysis: Stemming and Lemmatization
+
+**Parameswari Krishnamurthy**
+
+---
+
+**Language Technologies Research Centre**
+
+**IIIT-Hyderabad**
+
+**Email:** param.kishna@iiit.ac.in
+
+---
+
+![IIIT Logo](https://example.com/logo.png) ![Tree Logo](https://example.com/tree_logo.png)
+
+**INTERNATIONAL INSTITUTE OF INFORMATION TECHNOLOGY**
+
+**HYDERABAD**
+
+---
+
+**BS-DS IITM (BSCS5002)**
+
+---
+
+*Page 1/12*
+```
+
+Certainly! Below is the detailed markdown format of the provided slide:
+
+```markdown
+# Text Analysis: Linguistic Representation
+
+---
+
+**Slide Content:**
+- The slide appears to be titled "Text Analysis: Linguistic Representation."
+- The slide features a large blue rectangle at the top containing the title text in white.
+- The bottom of the slide includes a footer with the text "BS-DS IITM (BSCS5002)" and a small icon representing the slide number "2 / 12."
+
+---
+
+**Details:**
+- **Background:** The slide has a clean, white background.
+- **Font:** The title is presented in a sans-serif font, with the text "Text Analysis" in upper case and "Linguistic Representation" in lower case.
+- **Footer:** The footer is aligned to the right, indicating that this slide is part of a presentation for the course "BS-DS IITM" with the course code "BSCS5002". The slide number "2 / 12" is displayed towards the right side of the footer.
+
+---
+
+**Potential Content for the Slide:**
+- This slide could be introducing a section of a presentation on text analysis, specifically focusing on methods or concepts related to linguistic representation.
+- It might cover topics such as:
+  - Natural Language Processing (NLP)
+  - Tokenization
+  - Part-of-Speech Tagging
+  - Syntax and Semantic Analysis
+  - Linguistic features extraction
+
+```
+
+# Stemming
+
+**Stemming** refers to the process of slicing a word with the intention of removing affixes. Known as crude chopping of affixes.
+
+---
+
+BS-DS IITM (BSCS5002) 
+
+3 / 12
+
+# Stemming
+
+**Stemming** refers to the process of slicing a word with the intention of removing affixes. Known as crude chopping of affixes.
+
+Stemming is **problematic** in the linguistic perspective, since it sometimes produces words that are not in the language, **or else words that have a different meaning**.
+
+BS-DS IITM (BSCS5002) 3 / 12
+
+# Stemming
+
+**Stemming** refers to the process of slicing a word with the intention of removing affixes. Known as crude chopping of affixes.
+
+Stemming is **problematic** in the linguistic perspective, since it sometimes produces words that are not in the language, or else words that have a different meaning.
+
+- Language dependent
+
+**Example :**
+
+BS-DS IITM (BSCS5002) 3 / 12
+
+```markdown
+# Stemming
+
+**Stemming** refers to the process of slicing a word with the intention of removing affixes. Known as crude chopping of affixes.
+
+**Stemming** is **problematic** in the linguistic perspective, since it sometimes produces words that are not in the language, or else words that have a different meaning.
+
+- Language dependent
+
+**Example:**
+- arguing -> argu, flies -> fli
+- playing -> play, caring -> car
+- news -> new
+
+_BS-DS IITM (BSCS5002)_
+
+_3 / 12_
+```
+
+```markdown
+# Examples of Stemming
+
+- **Original Word** → **Stemmed Form**
+
+  - "Caring" → "car"
+  - "Studied" → "stud"
+  - "Running" → "run"
+  - "Happiness" → "happi"
+```
+
+```markdown
+# Advantages and Disadvantages of Stemming
+
+- **Advantages of Stemming**
+  - Fast and simple to implement.
+  - Reduces dimensionality of text data, making it easier to analyze.
+```
+
+This markdown format ensures that the text is clearly organized and easy to read.
+
+# Advantages and Disadvantages of Stemming
+
+- **Advantages of Stemming**
+  - Fast and simple to implement.
+  - Reduces dimensionality of text data, making it easier to analyze.
+
+- **Disadvantages of Stemming**
+  - Sometimes too aggressive, leading to non-words.
+  - Example: "studies" → "studi"
+
+---
+
+**BS-DS IITM (BSCS5002)**
+
+---
+
+*Page 5 of 12*
+
+# Advantages and Disadvantages of Stemming
+
+- **Advantages of Stemming**
+  - Fast and simple to implement.
+  - Reduces dimensionality of text data, making it easier to analyze.
+
+- **Disadvantages of Stemming**
+  - Sometimes too aggressive, leading to non-words.
+    - Example: "studies" → "studi"
+  - May result in words that lose their meaning.
+    - Example: "caring" → "car"
+
+---
+
+_BS-DS IITM (BSCS5002)_
+
+# Lemmatization
+
+**Lemmatization** has the objective of reducing a word to its base form, also called **Lemma**, therefore grouping together different forms of the same word.
+
+---
+
+BS-DS IITM (BSCS5002)
+
+# Lemmatization
+
+**Lemmatization** has the objective of reducing a word to its base form, also called **Lemma**, therefore grouping together different forms of the same word.
+
+- Have to find correct dictionary headword form
+
+---
+
+This markdown format maintains the structure and content of the original scientific text or slides, ensuring accuracy and clarity.
+
+```markdown
+# Lemmatization
+
+**Lemmatization** has the objective of reducing a word to its base form, also called **Lemma**, therefore grouping together different forms of the same word.
+
+- Have to find correct dictionary headword form
+
+**Example:**
+- am, are, is > be
+
+(BSCS5002)
+```
+
+# Lemmatization
+
+Lemmatization has the objective of reducing a word to its base form, also called Lemma, therefore grouping together different forms of the same word.
+
+- Have to find correct dictionary headword form
+
+**Example:**
+
+- am, are, is `>` be
+- car, cars, car’s, cars’ `>` car
+
+*Source: BS-DS IITM (BSCS5002)*
+
+*Slide Number: 6 / 12*
+
+```markdown
+# Lemmatization
+
+**Lemmatization** has the objective of reducing a word to its base form, also called **Lemma**, therefore grouping together different forms of the same word.
+
+- Have to find correct dictionary headword form
+
+**Example:**
+
+- am, are, is > be
+- car, cars, car's, cars' > car
+- the boy's cars are different colors > the boy car be different color
+
+---
+
+_BS-DS IITM (BSCS5002)_
+
+_Page 6 / 12_
+```
+
+```markdown
+# Lemmatization
+
+Lemmatization has the objective of reducing a word to its base form, also called Lemma, therefore grouping together different forms of the same word.
+
+- Have to find correct dictionary headword form
+
+## Example:
+
+- `am, are, is` > `be`
+- `car, cars, car's, cars'` > `car`
+- `the boy's cars are different colors` > `the boy car be different color`
+
+Lemmatization and stemming are mutually exclusive, and the former is much more resource-intensive than the latter.
+```
+
+```markdown
+# How It Works?
+
+- **Lemmatization** requires a detailed understanding of the word's part of speech (POS) and context to transform it into the correct lemma.
+```
+
+**Note**: The specific content details in the provided slides are brief and focus on the concept of lemmatization. The markdown format maintains the bullet points and headers for clarity.
+
+```markdown
+# How It Works?
+
+- **Lemmatization** requires a detailed understanding of the word’s part of speech (POS) and context to transform it into the correct lemma.
+- **Examples of Lemmatization**
+
+### Original Word → Lemma
+- "Caring" → "care"
+
+*Source: BS-DS IITM (BSCS5002)*
+```
+
+```markdown
+# How It Works?
+
+- Lemmatization requires a detailed understanding of the word’s part of speech (POS) and context to transform it into the correct lemma.
+
+- **Examples of Lemmatization**
+
+  - **Original Word → Lemma**
+
+    - "Caring" → "care"
+    - "Studies" → "study"
+
+---
+
+**BS-DS IITM (BSCS5002)**
+```
+
+```markdown
+# How It Works?
+
+- Lemmatization requires a detailed understanding of the word’s part of speech (POS) and context to transform it into the correct lemma.
+- Examples of Lemmatization
+
+  ## Original Word → Lemma
+
+  - "Caring" → "care"
+  - "Studies" → "study"
+  - "Running" → "run"
+```
+
+```markdown
+# How It Works?
+
+- Lemmatization requires a detailed understanding of the word's part of speech (POS) and context to transform it into the correct lemma.
+
+- **Examples of Lemmatization**
+
+  - **Original Word → Lemma**
+
+    - "Caring" → "care"
+    - "Studies" → "study"
+    - "Running" → "run"
+    - "Better" → "good"
+
+*Source: BS-DS IITM (BSCS5002)*
+```
+
+## How It Works?
+
+- **Lemmatization** requires a detailed understanding of the word’s part of speech (POS) and context to transform it into the correct lemma.
+
+- **Examples of Lemmatization**
+
+  - **Original Word → Lemma**
+    - "Caring" → "care"
+    - "Studies" → "study"
+    - "Running" → "run"
+    - "Better" → "good"
+
+![BS-DS IITM (BSCS5002)](https://example.com/logo.png)
+
+Page 7/12
+
+```markdown
+# Advantages and Disadvantages of Lemmatization
+
+- **Advantages of Lemmatization:**
+  - More accurate than stemming because it produces real words.
+  - Maintains the meaning and grammatical correctness of words.
+
+---
+
+**Source:** BS-DS IITM (BSCS5002)
+
+**Slide Number:** 8 / 12
+```
+
+# Advantages and Disadvantages of Lemmatization
+
+- **Advantages of Lemmatization:**
+  - More accurate than stemming because it produces real words.
+  - Maintains the meaning and grammatical correctness of words.
+
+- **Disadvantages of Lemmatization:**
+  - Slower and more complex to implement.
+  - Requires additional resources like a dictionary or POS tagger.
+
+*Source: BS-DS IITM (BSCS5002)*
+
+# Stemming Vs. Lemmatization
+
+## Stemming
+
+![Stemming Diagram](image1.png)
+
+- Interchange
+- Interchanger
+- Interchangeable
+- Interchanging
+
+## Lemmatization
+
+![Lemmatization Diagram](image2.png)
+
+- Interchange
+- Interchanger
+- Interchangeable
+- Interchanging
+
+---
+
+### Stemming vs Lemmatization
+
+---
+
+**BS-DS IITM (BSCS5002)**
+
+---
+
+Page 9 / 12
+
+# Comparison of Stemming and Lemmatization
+
+| Feature   | Stemming                          | Lemmatization                       |
+|-----------|-----------------------------------|-------------------------------------|
+| **Approach** | Rule-based, chops off suffixes     | Dictionary-based, considers POS    |
+| **Result**  | Stem (may not be a real word)     | Lemma (always a real word)         |
+| **Speed**  | Faster, less computationally intensive | Slower, more computationally intensive |
+| **Accuracy** | Less accurate, may distort meaning | More accurate, preserves meaning    |
+| **Use Case** | Simple text processing            | Advanced text analysis and NLP tasks |
+| **"Running"** | Stem: "runn"                      | Lemma: "run"                        |
+| **"Studies"** | Stem: "studi"                     | Lemma: "study"                      |
+
+*Source: BS-DS IITM (BSCS5002)*
+
+*Page 10 / 12*
+
+```markdown
+# Practical Applications of Stemming
+
+- **Search Engines:**
+  - Reduces variations of words to their base form to improve search results.
+  - For example, searching for "run" might also return "running" and "ran."
+
+- **Text Mining:**
+  - Simplifies words in a large dataset, making it easier to analyze patterns.
+
+---
+
+_BS-DS IITM (BSCS5002)_
+
+11 / 12
+```
+
+# Practical Applications of Lemmatization
+
+- **Machine Translation:**
+  - Ensures that words are translated accurately by maintaining their base form.
+
+- **Sentiment Analysis:**
+  - Improves the accuracy of text sentiment analysis by understanding the correct form of words.
+
+- **Speech Recognition:**
+  - Helps in identifying the correct form of spoken words to improve transcription accuracy.
+
+---
+
+_BS-DS IITM (BSCS5002)_
+
+12 / 12
+

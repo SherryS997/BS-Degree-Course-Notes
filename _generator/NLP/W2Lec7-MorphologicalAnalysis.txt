@@ -1,0 +1,1374 @@
+# W2Lec7-MorphologicalAnalysis.pdf - Page 1
+
+```markdown
+# BSCS5002: Introduction to Natural Language Processing
+
+## Week 2 Lecture-3: Morphological Analysis
+
+**Parameswari Krishnamurthy**
+
+**Language Technologies Research Centre**
+
+**IIIT-Hyderabad**
+
+**param.kishna@iiit.ac.in**
+
+![IIIT Logo](https://www.iiit.ac.in/sites/default/files/iiit_logo.png)
+
+---
+
+INTERNATIONAL INSTITUTE OF INFORMATION TECHNOLOGY
+
+HYDERABAD
+
+---
+
+**BS-DS IITM (BSCS5002)**
+
+1 / 66
+```
+
+# W2Lec7-MorphologicalAnalysis.pdf - Page 2
+
+```markdown
+# Morphological Analysis
+
+- Analyzing the structure and form of words.
+- Breaking down words into morphemes.
+- Understanding prefixes, suffixes, and inflections.
+- Important in languages with rich morphology.
+- Utilized in natural language processing tasks.
+- Crucial for understanding complex word forms.
+
+---
+
+BSC-DS IITM (BSCS5002)
+
+2 / 66
+```
+
+# W2Lec7-MorphologicalAnalysis.pdf - Page 3
+
+# Complex Morpheme Segmentation in Some Languages
+
+- Some languages require complex morpheme segmentation.
+
+## Turkish:
+
+- Uygarlastiramadiklariamizdanmissinizcasina
+  '(behaving) as if you are among those whom we could not civilize'
+
+- Uygar 'civilized' + las 'become' + tir 'cause' + ama 'not able' + dik 'past' + lar 'plural' + imiz '1pl' + dan 'ablative' + mis 'past' + siniz '2pl' + casino
+  'as if'
+
+*Source: BS-DS IITM (BSCS5002)*
+
+*Page: 3 / 66*
+
+# W2Lec7-MorphologicalAnalysis.pdf - Page 4
+
+```markdown
+# Example for derivation from Telugu:
+
+**pagalagottiMcipettaMananivvadAlacukooleekapootunnAanu.**
+**pagulu+a-kotti+iMcu+i-pettu+a-manu+a-ivvu+a-daluvu+i-konu+a-leeka-poo+ tunn+1,sg,any**
+**break+inf-strike+cause+cpm-benefactive+inf-tell+inf-permit+inf-think+cpm- reflexive+inf-neg+go+prog+1, sg**
+
+'I could not think to permit someone to tell for my sake to break something'
+
+(pc, G. Uma Maheshwar Rao)
+
+*Source: BS-DS IITM (BSCS5002)*
+```
+
+# W2Lec7-MorphologicalAnalysis.pdf - Page 5
+
+# Morphological Typology
+
+## Isolating
+**Mandarin**
+
+![Mandarin Example](image_url)
+
+| Color  | Word     | Meaning         |
+|--------|----------|-----------------|
+| Blue   | méi      | America         |
+| Red    | guō      | country         |
+| Yellow | rēn      | person          |
+
+=> 
+
+| Color  | Word     | Meaning         |
+|--------|----------|-----------------|
+| Blue   | méi      | American        |
+| Red    | guō      |                 |
+| Yellow | rēn      |                 |
+
+## Agglutinative
+**Tamil**
+
+![Tamil Example](image_url)
+
+| Color  | Word    | Meaning         |
+|--------|---------|-----------------|
+| Blue   | pe.su   | speak           |
+| Red    | kir     | PRESENT         |
+| Yellow | e.n     | 1ST PERSON SINGULAR |
+
+=> 
+
+| Color  | Word    | Meaning         |
+|--------|---------|-----------------|
+| Blue   | pe.su   |                 |
+| Red    | kir     |                 |
+| Yellow | e.n     |                 |
+
+I am speaking
+
+## Fusional
+**Spanish**
+
+![Spanish Example](image_url)
+
+| Color  | Word    | Meaning         |
+|--------|---------|-----------------|
+| Blue   | ind     | PRESENT INDICATIVE |
+| Red    | hablar  | speak           |
+| Yellow | yo      | 1ST PERSON SINGULAR |
+
+=> 
+
+| Color  | Word    | Meaning         |
+|--------|---------|-----------------|
+| Gradient | hablo  | I speak         |
+
+## Polysynthetic
+**Mohawk**
+
+![Mohawk Example](image_url)
+
+| Color  | Word   | Meaning         |
+|--------|--------|-----------------|
+| Green  | s      | again           |
+| Green  | a      | PAST            |
+| Blue   | huewa  | She/he          |
+| Red    | nho    | door            |
+| Red    | tu     | close           |
+| Yellow | kw     | un              |
+| Yellow | eha    | for             |
+| Yellow | et     | PERF             |
+
+=> 
+
+| Gradient | Word   | Meaning         |
+|----------|--------|-----------------|
+| Gradient | sahuwanhotukwahse? | she opened the door for him again |
+
+**BS-DS IITM (BSCS5002)**
+
+# W2Lec7-MorphologicalAnalysis.pdf - Page 6
+
+Certainly! Below is the detailed markdown representation of the provided text or slide:
+
+```markdown
+# Slide: Introduction
+
+---
+
+### Slide Content:
+- **Title:** Introduction
+- **Footer:** BS-DS IITM (BSCS5002) 6 / 66
+
+---
+
+This markdown format includes the title of the slide "Introduction" prominently displayed at the top, followed by a horizontal rule. The footer contains the text "BS-DS IITM (BSCS5002) 6 / 66", indicating the course and slide number.
+
+```
+
+This markdown format ensures that the content is accurately represented with proper formatting and structure.
+
+# W2Lec7-MorphologicalAnalysis.pdf - Page 7
+
+```markdown
+# Introduction
+
+## What is Computational Morphology?
+
+- Computational morphology deals with developing techniques and theories for computational analysis and synthesis of word forms.
+
+## What do you need to understand?
+
+- Theoretical knowledge of morphology of languages
+- Computational techniques for implementation
+
+## Where is the application?
+
+- Hyphenation, Spell Checking, Stemmers etc.
+- Machine Translation, QA system, Content Analysis, Speech Synthesis etc.
+
+*BS-DS IITM (BSCS5002)*
+
+*7 / 66*
+```
+
+# W2Lec7-MorphologicalAnalysis.pdf - Page 8
+
+Certainly! Below is the detailed markdown representation of the provided text or slide:
+
+```markdown
+# Slide Content
+
+## What is Morphology?
+
+### Slide Details
+- **Presentation**: BS-DS IITM (BSCS5002)
+- **Slide Number**: 8 / 66
+```
+
+### Notes:
+- The main content of the slide asks the question "What is Morphology?" suggesting it is part of a lecture or presentation on the topic.
+- The slide is part of a series, as indicated by the slide number "8 / 66."
+- The presentation is associated with "BS-DS IITM (BSCS5002)," which likely refers to a specific course or module within a curriculum.
+- The design is simple, with a blue header containing the main question and a matching blue footer with the presentation details.
+
+This format maintains the structure and content of the original slide while converting it into a markdown format.
+
+# W2Lec7-MorphologicalAnalysis.pdf - Page 9
+
+# What is Morphology?
+
+Two dominant views of Morphology:-
+
+- Morphology is the study of
+  - the mental system involved in word formation
+  - words, their internal structure, and their formal relationships.
+
+Its etymology is Greek:
+- *morph-* means 'shape, form'
+- *morphology* is the study of form or forms.
+  The word 'morphologie' was first used by August Schleicher in 1859.
+
+The earliest and the first morphological analysis of a human language:
+- *Ashtadhyayi* by Panini.
+
+ BS-DS IITM (BSCS5002)
+
+# W2Lec7-MorphologicalAnalysis.pdf - Page 10
+
+# Concepts of Morphology
+
+- **Null Hypothesis:** Morphological processing can be undesirable since every word in a language may be stored and accessed as and when required.
+
+- Continuously new words are integrated while others are drifting out of use.
+
+- However, in any human language
+  - possible words are infinite in number!
+  - actual and attested words are also unmanageably large in number.
+
+- Hence, it is necessary to formulate **Morphological rules or Word Formation Strategies** to permit us to recognize or produce new words.
+
+(Source: BS-DS IITM (BSCS5002))
+
+Page 10 / 66
+
+# W2Lec7-MorphologicalAnalysis.pdf - Page 11
+
+```markdown
+# BS-DS IITM (BSCS5002)
+
+## Slide 11 / 66
+
+- **Native speakers create new words from the existing ones or borrow from other languages as and when necessary.**
+
+- **The discovery of these mechanisms and the intuitive knowledge underlying this creativity is what is usually known as morphology.**
+
+- **Speakers possess intuitive knowledge about:**
+  - words are related to each other partially in the form and meaning
+
+    e.g. walk, walks, walked, walking, walker, walkathon etc.
+```
+
+# W2Lec7-MorphologicalAnalysis.pdf - Page 12
+
+```markdown
+# Native Speaker's Linguistic Abilities
+
+- **Native speaker’s ability to derive or relate the words in terms of their form and meaning:**
+  - active
+  - activity
+  - activate
+  - activator
+  - activation
+
+- **Alternatively native speaker’s ability to reject \*cat-en, \*cat-z, \*cat-iz, (for cats), walk \*walken; drive \*drived; read \*readed, \*readen; active \*activement, \*activance, and \*activant as illformed is because of the knowledge of morphology.**
+
+---
+
+_BS-DS IITM (BSCS5002)_
+
+_Page 12 / 66_
+```
+
+# W2Lec7-MorphologicalAnalysis.pdf - Page 13
+
+```markdown
+# Morphology
+
+There are two basic divisions in morphology:
+
+1. **Inflectional Morphology** (conjugation/declension)
+   - This branch of morphology deals with the rules governing word formation within a language through inflection. Inflectional morphology involves changes to words to express grammatical categories such as tense, number, case, and gender. Examples include adding "-s" to form the plural of nouns in English (e.g., "cats") or changing verb endings to indicate past tense (e.g., "walked").
+
+2. **Lexical Morphology** (word formation)
+   - Lexical morphology focuses on the creation of new words through processes such as derivation and compounding. This includes the formation of new words from existing word parts, such as prefixes, suffixes, and infixes. Examples include forming the adjective "happy" from the noun "happiness" or creating the verb "unhappy" by adding the prefix "un-" to "happy".
+
+---
+
+_BS-DS IITM (BSCS5002)_
+
+_Page 13 / 66_
+```
+
+# W2Lec7-MorphologicalAnalysis.pdf - Page 14
+
+Certainly! Below is the detailed markdown format based on the provided image:
+
+```markdown
+# Building Blocks of Morphology
+
+---
+
+### BS-DS IITM (BSCS5002)
+
+---
+
+Page 14 / 66
+```
+
+If you have more specific content or additional slides to convert, please provide them, and I will be happy to assist further!
+
+# W2Lec7-MorphologicalAnalysis.pdf - Page 15
+
+```markdown
+# Building Blocks of Morphology
+
+**Morpheme:** the smallest meaningful linguistic unit. Some morphemes are identical with words, but many morphemes are smaller than words.
+
+\[ \text{Morpheme} \leq \text{Word} \]
+
+---
+
+- **Morphemes**
+
+  - **Free**
+
+    - **Lexical** \((child, teach)\)
+
+    - **Functional** \((and, the)\)
+
+  - **Bound**
+
+    - **Derivational** \((re-, -ness)\)
+
+    - **Inflectional** \((-'s, -ed)\)
+
+---
+
+*BS-DS IITM (BSCS5002)*
+*15 / 66*
+```
+
+# W2Lec7-MorphologicalAnalysis.pdf - Page 16
+
+```markdown
+# Free Morpheme:
+A morpheme that can stand alone, that is a complete word; an independent morpheme.
+
+- Examples: **walk**, **book**, **but**, **of** and etc.,
+
+# Lexical Morpheme:
+A morpheme that denotes the content words. They receive inflection.
+
+- Open class categories such as **Nouns**, **Verbs** and **Adjectives**.
+- Closed class categories such as **Pronouns**, **Number words** and **Nouns of space and time (NST)**.
+
+# Functional Morpheme:
+A morpheme that denotes the functional words. They do NOT receive inflection and are indeclinables or avyayas.
+
+- Categories such as **Prepositions/Postpositions**, **Conjunctions**, **Interjections**, **Adverbs**, **Demonstratives**, **Intensifiers**, **Quotatives** etc.,
+
+*Source: BS-DS IITM (BSCS5002)*
+
+*Page: 16 / 66*
+```
+
+# W2Lec7-MorphologicalAnalysis.pdf - Page 17
+
+```markdown
+# Bound Morpheme
+A morpheme that cannot stand alone, but must be attached to something else.
+
+Examples:
+- **-ed** 'past tense marker',
+- **-s** 'plural marker',
+- **-er** 'comparative maker'
+
+# Inflectional Morpheme
+Creates new forms of the same word with the addition of grammatical properties; the basic meaning (and the category) of the word is the same.
+
+## Inflection in English:
+### a. With nouns:
+- book
+- books
+- book's
+- books'
+
+### b. With verbs:
+- ride
+- rides
+- rode
+- ridden
+- riding
+
+### c. With adjectives:
+- old
+- older
+- oldest
+
+### d. With numbers:
+- seven
+- seventh
+
+---
+
+_BS-DS IITM (BSCS5002)_
+
+_Page 17 / 66_
+```
+
+# W2Lec7-MorphologicalAnalysis.pdf - Page 18
+
+```markdown
+# Derivational Morpheme
+creates a new word with a different meaning that may belong to a different or to the same grammatical category.
+
+- RE + WRITE = rewrite "write again", verb
+- WRITE + ER = writer "one who writes", noun
+
+## Derivation in English:
+a. Verb to Noun: kill => killer
+b. Noun to Verb: glory => glorify
+c. Adjective to Noun: dark => darkness
+d. Noun to Adjective: person => personal
+e. Adjective to Verb: modern => modernize
+f. Verb to Adjective: walk => walkable
+g. Adjective to Adverb: great => greatly
+
+_BS-DS IITM (BSCS5002)_
+
+_18 / 66_
+```
+
+# W2Lec7-MorphologicalAnalysis.pdf - Page 19
+
+```markdown
+# Affix
+
+## Affixes:
+An affix is a bound morpheme that is attached to stem to form a word.
+
+### Affixes may be derivational
+eg. -ish boy = boy-ish
+-less care = care-less
+
+### Affixes may be inflectional
+eg. -s book = book-s
+-ed work = work-ed
+
+BS-DS IITM (BSCS5002)
+
+19 / 66
+```
+
+# W2Lec7-MorphologicalAnalysis.pdf - Page 20
+
+```markdown
+# Concatenative phenomena
+
+## Prefix
+
+**Definition:**
+
+a bound morpheme added before a root/stem, or at the beginning of a word.
+
+**Example:**
+
+- un- as in undo
+
+**Schema:**
+
+prefix-root/stem
+
+## Suffix
+
+**Definition:**
+
+a bound morpheme added after a stem, or at the end of a word.
+
+**Example:**
+
+- ing as in looking
+
+**Schema:**
+
+root/stem-suffix
+
+---
+
+*Source: BS-DS IITM (BSCS5002)*
+
+*Page: 20 / 66*
+```
+
+# W2Lec7-MorphologicalAnalysis.pdf - Page 21
+
+# Non-concatenative phenomena
+
+## Infix:
+
+an affix added within a single morpheme, i.e appears within a stem.
+
+eg. Philippines
+bili 'buy' is a root
+bumili 'bought' is an example for infix and -um- is a past tense marker.
+
+## Circumfix:
+
+A circumfix is an affix made up of two separate parts which surround and attach to a root or stem.
+
+In Dutch, ge\_\_te is a plural suffix
+berg 'mountain'  gebergte 'mountains'
+vogel 'bird'  gevogelte 'birds'
+raam 'frame'  geraamte 'frames'
+
+BS-DS IITM (BSCS5002)
+
+Page 21 / 66
+
+# W2Lec7-MorphologicalAnalysis.pdf - Page 22
+
+# Non-concatenative phenomena
+
+Semitic languages exhibit a very peculiar type of morphology, often called **root-template morphology**.
+
+**Eg. Arabic root “ktb” produces the following wordforms:**
+
+Template | a (active) | uØ (passive)
+--- | --- | ---
+CVCVC | katab | kutib | 'write'
+CVCCVC | kattab | kuttib | 'cause to write'
+CVVCVC | ka:tab | ku:tib | 'correspond'
+tVVCVVC | taka:tab | tuku:tib | 'write each other'
+nCVVCVC | nka:tab | nku:tib | 'subscribe'
+CtVCVC | ktatab | ktutib | 'write'
+stVCCVC | staktab | stukib | 'dictate'
+
+(B_S-DS IITM (BSCS5002))
+
+*Page 22 / 66*
+
+# W2Lec7-MorphologicalAnalysis.pdf - Page 23
+
+# Exercise:
+
+```markdown
+buyers = buy-er-s (3)
+walk = walk (1)
+winter = winter (1)
+establish = establish (1)
+establishment = establish-ment (2)
+establishmentary = establish-ment-ary (3)
+establishmentarian = establish-ment-ari-an (4)
+establishmentarianism = establish-ment-ari-an-ism (5)
+antiestablishmentarianism = anti-establish-ment-ari-an-ism (6)
+antidisestablishmentarianism = anti-dis-establish-ment-ari-an-ism (7)
+```
+
+![BS-DS IITM (BSCS5002)](https://example.com/logo.png)
+
+Page 23 / 66
+
+# W2Lec7-MorphologicalAnalysis.pdf - Page 24
+
+# Allomorph
+
+- The physical variation of a morpheme is called as allomorphs.
+- A morpheme may display allomorphy, i.e. have more than one form.
+- The allomorphs are physically different forms, but they indicate same meaning of a morpheme.
+
+## Types of allomorph:
+
+- **Phonologically Conditioned Allomorph**
+- **Lexically Conditioned Allomorph**
+- **Suppletive**
+
+---
+
+BS-DS IITM (BSCS5002)
+
+24 / 66
+
+# W2Lec7-MorphologicalAnalysis.pdf - Page 25
+
+# Allomorph
+
+## Phonologically Conditioned Allomorph
+
+The variants in the pronunciation of the plural are phonologically conditioned allomorphs, because the choice depends only on the phonological characteristics of the element to which it attaches.
+
+The English plural morpheme has three allomorphs:
+- /s/ bits, tips, tacks,
+- /z/ dogs, slabs
+- /ɪz/ ladies, bodies
+
+Here, [s],[z],[ɪz] are the allomorphs the morpheme let’s say /z/.
+
+---
+
+_BS-DS IITM (BSCS5002)_
+
+_25 / 66_
+
+# W2Lec7-MorphologicalAnalysis.pdf - Page 26
+
+# Allomorph
+
+## Lexically Conditioned Allomorph
+
+When the choice of allomorphs are unpredictable from the knowledge of language’s Morphology and Phonology, they are lexically conditioned allomorphs. Since there is no pattern, there is no rule: the information is just in the lexicon.
+
+**English:**
+
+- two oxen *two oxes *two ox
+- two deer *two deers *two deeren
+- man men
+- child children
+- sheep sheep
+
+*BS-DS IITM (BSCS5002)*
+
+*26 / 66*
+
+# W2Lec7-MorphologicalAnalysis.pdf - Page 27
+
+```markdown
+# Allomorph
+
+Suppletion is an extreme form of allomorph in which two completely different roots realize the same morpheme.
+
+eg.
+
+- go | went
+- be | is | was | were | am
+- good | better | best
+- bad | worse | worst
+- one | first
+- two | second
+
+BSCS5002
+```
+
+# W2Lec7-MorphologicalAnalysis.pdf - Page 28
+
+```markdown
+# Stem allomorphy: Allomorphy can also exist in stems.
+
+## Vāk (voice)
+
+|                 | Singular         | Plural         |
+| --------------- | ---------------- | -------------- |
+| **Nominative**  | /vaːk/           | /vaːtfʲ-as/    |
+| **Genitive**    | /vaːtfʲ-as/      | /vaːtfʲ-aːm/   |
+| **Instrumental**| /vaːtfʲ-aː/      | /vaːg-bʲis/    |
+| **Locative**    | /vaːtfʲ-i/       | /vaːk-si/      |
+
+The three allomorphs of the Sanskrit word, **vāk** /vaːk/, /vaːtfʲ/ and /vaːg/
+```
+
+# W2Lec7-MorphologicalAnalysis.pdf - Page 29
+
+Sure, I can help with that. Please provide the scientific text or slides you need converted, and I will process it for you.
+
+# W2Lec7-MorphologicalAnalysis.pdf - Page 30
+
+# Morphological Typology
+
+- Languages can be classified into groups based on a number of different linguistic criteria.
+- One such way to categorize languages is by the type and extent of **morphology** that they use.
+- Some languages string many morphemes together to form words. They are called **synthetic languages**.
+- While some other languages tend to realize most words as independent or mono-morphemic segments. They are called as **analytic languages**.
+- This typology should be seen not as a strict dichotomy between analytic and synthetic, but rather as a scale on which languages can be placed depending on the degree to which they exhibit that type of morphology.
+
+BS-DS IITM (BSCS5002) 30 / 66
+
+# W2Lec7-MorphologicalAnalysis.pdf - Page 31
+
+# Morphological Typology
+
+Morphological typology is the basis for the broad classification of Languages of the world into four major Morphological types:
+
+- **Isolating Languages (analytic)**:
+  - each word tends to consist of a single, independent morpheme
+  - there are no bound forms i.e. affixes
+  - grammatical markers, for features like tense and case, are generally realized as unattached (free) morphemes.
+  - morpheme = word
+  - grammatical changes are indicated by word order
+
+BS-DS IITM (BSCS5002)
+
+---
+
+Page 31 / 66
+
+# W2Lec7-MorphologicalAnalysis.pdf - Page 32
+
+```markdown
+# Analytical Languages
+
+Analytical languages are most common in Southeast Asia (Chinese, Vietnamese), but some such languages are also found among the Austronesian languages (Fijian, Tongan) and some Niger-Congo languages (Gbe, Yoruba).
+
+## Example from Vietnamese:
+
+- **Text:** `no se khong doc sach he FUT NEG read book 'he will not read book'`
+
+## Example from Chinese:
+
+- **Text:** `Ta ba shu mai le He NOM book buy Asp 'He bought the book.'`
+
+---
+
+_BS-DS IITM (BSCS5002)_
+
+_Page 32 / 60_
+```
+
+# W2Lec7-MorphologicalAnalysis.pdf - Page 33
+
+# Morphological Typology
+
+## Agglutinative Languages (synthetic):
+
+- all bound forms are affixes
+- they are added to a stem like beads on a string
+- every affix represents different morphological feature
+- each morpheme represents only one grammatical meaning
+- morpheme < word
+- word order is slightly less important than it was in analytic languages.
+- eg. Dravidian, Turkish, Finnish, Hungarian etc.
+
+BS-DS IITM (BSCS5002)
+
+33 / 66
+
+# W2Lec7-MorphologicalAnalysis.pdf - Page 34
+
+```markdown
+# Example from Telugu (Dravidian)
+
+illu 'house'
+
+iMti- ni 'house (object)'
+
+iMti- ki 'to the house'
+
+iMti- lō 'in the house'
+
+iMti- tō 'with the house'
+
+...
+
+rA 'to come'
+
+vacc- A- nu 'I came'
+
+vacc- A- mu 'we came'
+
+vacc- A- vu 'you(sg.) came'
+
+vacc- A- ru 'you(pl.) came'
+
+vacc- A- du 'he came'
+
+---
+
+BS-DS IITM (BSCS5002)
+
+34 / 66
+```
+
+# W2Lec7-MorphologicalAnalysis.pdf - Page 35
+
+```markdown
+# Example for derivation from Telugu:
+
+**pagalago**VttiMcipeVttamananivvaxalacukolekapowunn**A**nu.
+
+pagulu+a-koVttu+iMcu+i-peVttu+a-manu+a-ivvu+a-xaluvu+i-koVnu+a-leka-po+ wunn+1,sg,any
+break+inf-strike+cause+cpm-benefactive+inf-tell+inf-permit+inf-think+cpm-reflexive+inf-neg+go+prog+1, sg
+
+'I could not think to permit someone to tell for my sake to break something' (pc, G. Uma Maheshwar Rao)
+
+_BS-DS IITM (BSC5002)_
+
+_35 / 66_
+```
+
+# W2Lec7-MorphologicalAnalysis.pdf - Page 36
+
+```markdown
+# Morphological Typology
+
+- **Inflectional Languages (fusional):**
+  - distinct features are merged into a single bound form (portmanteau morph)
+  - morpheme boundaries are difficult to identify
+  - every suffix has several grammatical functions
+
+The classical Indo-European languages like Sanskrit, Greek, Latin etc. are examples of flexional languages where in the inflectional morphemes are said to be “fused” together.
+
+### Example from Ancient Greek:
+
+| Greek Word  | Gloss                       |
+| ----------- | --------------------------- |
+| λυ-δ       | `1S:PRES:ACT:IND` (I am releasing)            |
+| λυ-δμαι    | `1S:PRES:ACT:SBJV` (I should release)         |
+| λυ-ομαι    | `1S:PRES:PASS:IND` (I am being released)      |
+| λυ-ομι    | `1S:PRES:ACT:OPT` (I might release)           |
+| λυ-εται    | `3S:PRES:PASS:IND` (He is being released)     |
+```
+
+*BSCS5002*
+```
+
+# W2Lec7-MorphologicalAnalysis.pdf - Page 37
+
+```markdown
+# Russian:
+
+| Case     | Singular    | Plural       |
+|---------|-------------|--------------|
+| Nominative | knig-a      | knig-i       |
+| Genitive  | knig-i      | knig-Ø      |
+| Dative   | knig-e      | knig-am      |
+| Accusative | knig-u      | knig-i       |
+| Instrumental | knig-oj     | knig-ami     |
+
+![BS-DS IITM (BSCS5002)](https://example.com/logo.png)
+
+Page 37 of 66
+```
+
+# W2Lec7-MorphologicalAnalysis.pdf - Page 38
+
+```markdown
+# Incorporating Languages (polysynthetic):
+
+- all bound forms are affixes
+- Inflections are incorporated into the word.
+- ability to form words that are equivalent to whole sentences in other languages
+- morphologically extremely complex
+- Generally, morphology is more important than context and syntax.
+- eg. Icelandic/Aleutian
+
+BSCS5002
+
+38 / 66
+```
+
+# W2Lec7-MorphologicalAnalysis.pdf - Page 39
+
+```markdown
+# Inuktitut, for instance the word-phrase:
+## tavvakiutiqarpiit
+roughly translates to "Do you have any tobacco for sale?"
+
+# Yup'ik (Alaska):
+## anglay-li-ciq- sugnar- quq-llu
+boat- make-FUT- PROB- 3sg.NOM-also
+## 'Also, he probably will make a boat'
+
+---
+
+BS-DS IITM (BSCS5002)
+
+39 / 66
+```
+
+# W2Lec7-MorphologicalAnalysis.pdf - Page 40
+
+# Morphological Model
+
+---
+
+**BS-DS IITM (BSCS5002)**
+
+---
+
+Page 40 / 66
+
+# W2Lec7-MorphologicalAnalysis.pdf - Page 41
+
+# Morphological Modeling
+
+Modelling speaker’s knowledge about words.
+
+Morphologists propose three models (Hockett, 1954) describing morphological formations:
+
+1. **Item and Arrangement (IA)**
+
+2. **Item and Process (IP)**
+
+3. **Word and Paradigm (WP)**
+
+---
+
+*Source: BS-DS IITM (BSCS5002)*
+
+*Page Number: 41 / 66*
+
+# W2Lec7-MorphologicalAnalysis.pdf - Page 42
+
+```markdown
+# Item and Arrangement
+
+## 1. Item and Arrangement (IA)
+
+- **Morpheme Based Morphology**
+- Conceived as object oriented concatenation.
+- No notion of basic allomorphs
+- Word-forms are analyzed as sequences of concatenated morphemes
+- Cut and paste method
+- *anti-dis-establish-ment-ar-ian-ism* is analyzed as *establish*, a root morpheme and the rest as bound derivational morphemes.
+
+![BS-DS IITM (BSCS5002)](https://example.com/image.png)
+
+Page 42 / 66
+```
+
+# W2Lec7-MorphologicalAnalysis.pdf - Page 43
+
+```markdown
+Example:
+
+(i) -s plural is pronounced [s] after voiceless obstruent
+e.g.
+book ⇒ books [s]
+cat ⇒ cats [s]
+
+(ii) -s plural is pronounced [z] after voiced sounds
+e.g.
+bag ⇒ bags [z]
+lamb ⇒ lambs [z]
+
+(iii) -s plural is pronounced [ɪz] after sibilant consonants such as [s], [z], [ʃ], [s], [ts], [d3]
+e.g.
+bus ⇒ buses [ɪz]
+watch ⇒ watches [ɪz]
+```
+
+
+# W2Lec7-MorphologicalAnalysis.pdf - Page 44
+
+# Item and Arrangement
+
+- In this approach, the relationship between allomorphs like [s], [z], [iz], [ren], [en] and [0] are missed out.
+- Furthermore it assumes that words are always composed of discrete sequences of morphemes.
+- However, in a number of languages linear sequencing of morphemes is not the favoured method of deriving words.
+- Therefore, a morpheme-based model quickly leads to complications when one tries to analyze many forms of allomorphy.
+- Analyzing words as sequences of morphemes simply ignores the intuition that words are related to each other in more than one aspect i.e. formally and semantically.
+
+*BS-DS IITM (BSCS5002)*
+
+*44 / 66*
+
+# W2Lec7-MorphologicalAnalysis.pdf - Page 45
+
+# Item and Arrangement
+
+For example, the word cats can be easily sliced into cat and the plural morpheme -s.
+
+But a similar analysis of the words geese, men, feet etc. into their corresponding roots and plural morphemes runs into difficulty.
+
+---
+
+BS-DS IITM (BSCS5002) 45 / 66
+
+# W2Lec7-MorphologicalAnalysis.pdf - Page 46
+
+```markdown
+# Item and Process
+
+## 2. Item and Process
+
+- **Lexeme based Morphology**
+- **Applying rules to form new words**
+- **Notion of allomorphs**
+- **An inflectional rule takes a lexeme, changes it as is required by the rule, and outputs a word-form.**
+- **Bypasses the difficulties inherent in the Item-and-Arrangement approach.**
+
+BS-DS IITM (BSCS5002)
+
+46 / 66
+```
+
+# W2Lec7-MorphologicalAnalysis.pdf - Page 47
+
+# Item and Process
+
+- There is a concept of allomorph in IP.
+- Let’s take again English plural formation.
+- If /z/ is taken as basic morpheme, it has allomorphs like [s], [z], [iz], [ren], [en] and [0].
+
+  - Rule 1: /z/ → [s] / [-voiced]___#
+  - Rule 2: /z/ → [z] / [+voiced]___#
+  - Rule 3: /z/ → [iz] / [+sibilant]___#
+
+- The problematic cases like men can start with man and apply the rules of plural formation which automatically massage the form into a well-formed word-form.
+  - Rule 4: man + /z/ → men
+  - Rule 5: child + /z/ → children
+
+BS-DS IITM (BSCS5002) 47 / 66
+
+# W2Lec7-MorphologicalAnalysis.pdf - Page 48
+
+# Word and Paradigm
+
+## 3. Word and Paradigm
+
+- **Word based Morphology**
+- **Paradigm as the central notion**
+- **Good to tackle exceptions in a language**
+- Instead of stating rules to combine morphemes into word-forms, or to generate word-forms from stems, word-based morphology makes generalizations that hold between various forms of inflectional paradigms.
+- Words are treated as whole words that are related to each other by analogical rules.
+- The assumption is, a **morpho-syntactic Property (P)** is associated with the root/stem (X). Words (XP) are viewed as exponents of P.
+- Each paradigm is different in their **morpho-phonemic / add-delete** processes.
+
+*BS-DS IITM (BSCS5002)*
+
+*48 / 66*
+
+# W2Lec7-MorphologicalAnalysis.pdf - Page 49
+
+# Word and Paradigm
+
+For example, **PLAY**verb is a Lexeme which has the following paradigm.
+
+| WORDFORMS       | FORMATIVES            |
+|-----------------|-----------------------|
+| play            | present, 1-SG, 1-PL, 2-SG, 2-PL, 3-PL |
+| plays           | present, 3-SG         |
+| played          | past                  |
+| played          | participle            |
+| playing         | progressive           |
+
+BSCS5002
+
+49 / 66
+
+# W2Lec7-MorphologicalAnalysis.pdf - Page 50
+
+# Word and Paradigm
+
+For example,
+**GO|verb** is a Lexeme that has the following paradigm.
+
+| WORDFORMS   | FORMATIVES          |
+|-------------|---------------------|
+| play        | go                  | present, 1-SG, 1-PL, 2-SG, 2-PL, 3-PL |
+| plays       | goes                | present, 3-SG   |
+| played      | went                | past            |
+| played      | gone                | participle      |
+| playing     | going               | progressive     |
+
+*BS-DS IITM (BSCS5002)*
+
+*Page 50 / 66*
+
+# W2Lec7-MorphologicalAnalysis.pdf - Page 51
+
+# Word and Paradigm
+
+For example,
+CUT|verb is a Lexeme that has the following paradigm.
+
+| WORDFORMS | FORMATIVES |
+|-----------|------------|
+| play      | cut        | present, 1-SG, 1-PL, 2-SG, 2-PL, 3-PL |
+| plays     | goes       | cuts     | present, 3-SG |
+| played    | went       | cut      | past       |
+| played    | gone       | cut      | participle |
+| playing   | going      | cutting  | progressive |
+
+BS-DS IITM (BSCS5002)
+
+# W2Lec7-MorphologicalAnalysis.pdf - Page 52
+
+# Word and Paradigm
+
+Paradigms PLAY, GO, CUT share similar morpho-syntactic properties, but differ in their add-del rules.
+
+| WORDFORMS                       | FORMATIVES                   |
+|---------------------------------|------------------------------|
+| play (φ,φ)                      | present, 1-SG, 1-PL, 2-SG, 2-PL |
+| plays (φ,s)                     | present, 3-SG                 |
+| played (φ,ed)                   | past                         |
+| played (φ,ed)                   | participle                   |
+| playing (φ,ing)                 | progressive                  |
+| go (φ,φ)                        | present, 1-SG, 1-PL, 2-SG, 2-PL |
+| goes (φ,es)                     | present, 3-SG                 |
+| went (go, went)                 | past                         |
+| gone (φ, ne)                    | participle                   |
+| going (φ, ing)                  | progressive                  |
+| cut (φ,φ)                       | present, 1-SG, 1-PL, 2-SG, 2-PL |
+| cuts (φ,s)                      | present, 3-SG                 |
+| cut (φ,φ)                       | past                         |
+| cut (φ,φ)                       | participle                   |
+| cutting (φ, ting)               | progressive                  |
+
+BS-DS IITM (BSCS5002) 52 / 66
+
+# W2Lec7-MorphologicalAnalysis.pdf - Page 53
+
+# Typology Vs. Model
+
+## Morphological Typology Vs. Model
+
+The three models of morphology (IA, IP and WP) more or less match languages with different morphological types (agglutination (synthetic), inflectional (fusional) and incorporation (polysynthetic)).
+
+- The **Item-and-Arrangement** approach fits very naturally with **agglutinative** languages;
+- while the **Item-and-Process** and **Word-and-Paradigm** approaches usually address **flexional** languages;
+- **Word-and Paradigm** approach fits very well to **incorporating** languages.
+
+(BS-DS IITM (BSCS5002))
+
+53 / 66
+
+# W2Lec7-MorphologicalAnalysis.pdf - Page 54
+
+Sure! Please provide the scientific text or slide image you would like me to perform OCR on.
+
+# W2Lec7-MorphologicalAnalysis.pdf - Page 55
+
+# Computational model: Finite State Technology
+
+- [ ] Finite State Automata
+- [ ] Finite State Transducers
+
+**Finite State Automata (FSA)** is a abstract mathematical device which describes processes involving inputs and processing it. FSA may have several states and switches between them. Each state is crossed depending on the input symbol and performs the computational tasks associated with the input.
+
+A Finite State Automaton is a machine composed of
+
+- [ ] An input tape
+- [ ] A finite number of states, with one initial and one or more accepting states
+- [ ] Actions in terms of transitions from one state to the other, depending on the current state and the input
+
+*Source: BS-DS IITM (BSCS5002)*
+
+*Slide number: 55 / 66*
+
+# W2Lec7-MorphologicalAnalysis.pdf - Page 57
+
+# Finite State Transducer:
+
+- **FST** unlike **FSA** works on two tapes; input and output tape.
+- FSAs can recognize a string but do not give the internal structures.
+- But **FSTs** can recognize and able to provide the internal structure of any input.
+- They read from one tape and write on another tape.
+- So it is possible to turn **FST** to analyse and generate the forms.
+
+![BS-DS IITM (BSCS5002)](57/66)
+
+# W2Lec7-MorphologicalAnalysis.pdf - Page 58
+
+```markdown
+# A simple FST that recognises various verb forms of 'EAT' viz. eat, eats, eaten and eating is shown below.
+
+![Finite State Transducer (FST)](image_url)
+
+- **S1**: `e/e`
+- **S2**: `a/a`
+- **S3**: `t/t`
+- **S4**: `e/Ø` (eaten, eating)
+  - **S5**: `s/Ø` (eats)
+    - **eat, v, 3p.sg. pres**
+  - **S6**: `e/Ø` (eat)
+    - **S7**: `n/Ø` (eating)
+      - **eat, v, participle**
+  - **S8**: `i/Ø` (eat)
+    - **S9**: `n/Ø` (eating)
+      - **S10**: `g/Ø` (eating)
+        - **S11**: `Ø` (progress)
+          - **eat, v, progress**
+  - **S12**: `n/Ø` (eat)
+    - **eat, v, non-3p.sg. pres**
+
+- **eat, v, non-3p.sg. pres**
+
+*Source: BS-DS IITM (BSCS5002)*
+
+*Slide Number: 58 / 66*
+```
+
+# W2Lec7-MorphologicalAnalysis.pdf - Page 59
+
+```markdown
+# Morphological Analyzers & Generators
+
+## BS-DS IITM (BSCS5002)
+
+### Slide Number: 59 / 66
+```
+
+# W2Lec7-MorphologicalAnalysis.pdf - Page 60
+
+```markdown
+# Morphological Analyzer:
+
+Analyses given wordforms as root, lcat, gend, num, pers, cm/tam and other grammatical information.
+
+Basic module for any NLP tasks.
+
+**Input:** wordform
+
+**Output:** root + lcat + feature values
+
+| Language | Input   | Output                                            |
+|----------|---------|---------------------------------------------------|
+| Tamil    | ArYü    | rt=ArYü, lcat=n, g=n, n=sg, p=3, c=dir, cm=0      |
+|          |         | rt=ArYü, lcat=v, g=any, n=sg, p=2, tam=IMP         |
+|          |         | rt=ArYü, lcat=num, g=n, n=sg, p=3, c=dir, cm=0     |
+|          | avarE   | rt=avar, lcat=pn, g=fm, n=sg, p=3, c=obl, cm=E     |
+|          |         | rt=avarE, lcat=n, g=n, n=sg, p=3, c=dir, cm=0     |
+```
+
+*Source: BS-DS IITM (BSCS5002), slide 60/66*
+```
+
+# W2Lec7-MorphologicalAnalysis.pdf - Page 61
+
+```markdown
+# Morphological Generators:
+
+- **Generates wordforms from given root, lcat, gend, num, pers, cm/tam and other grammatical information.**
+- **Used in Machine Translation, Speech synthesis, TTS and etc.**
+
+### Input: wordform
+### Output: root + lcat + feature values
+
+| Language | Input                        | Output       |
+|----------|------------------------------|--------------|
+| Tamil    | rt=ArYu, lcat=n, g=n, n=sg, p=3, c=dir, cm=0 | ArYu       |
+|          | rt=ArYu, lcat=v, g=any, n=sg, p=2, tam=IMP | ArYu       |
+|          | rt=ArYu, lcat=num, g=n, n=sg, p=3, c=dir, cm=0 | ArYu       |
+|          | rt=avar, lcat=pn, g=fm, n=sg, p=3, c=obl, cm=E | avarE      |
+|          | rt=avarE, lcat=n, g=n, n=sg, p=3, c=dir, cm=0 | avarE      |
+
+*BS-DS IITM (BSCS5002)*
+
+*61 / 66*
+```
+
+# W2Lec7-MorphologicalAnalysis.pdf - Page 62
+
+```markdown
+# Morphological Analysis and Generation
+
+- **Morphological analysis and generation: Inverse processes.**
+- **Analysis** may involve **non-determinism**, since more than one analysis is possible.
+- **Generation** is a **deterministic process**.
+- In case a language allows spelling variation, to that extent, generation also involves non-determinism
+
+_BS-DS IITM (BSCS5002)_
+
+_Page 62 / 66_
+```
+
+# W2Lec7-MorphologicalAnalysis.pdf - Page 63
+
+# Models for Indian Languages
+
+## Best suitable Linguistic models for Indian languages:-
+
+### Word and Paradigm Model
+
+- Not much Linguistic background required
+- Anybody with adequate language background can implement
+- Several fast tools are available
+
+#### Resources Required:
+
+- Paradigm Class and Table
+- Morphological Lexicon
+- Category, Feature Definition
+
+*BSCS5002 IITM (BSCS5002)*
+
+*63 / 66*
+
+# W2Lec7-MorphologicalAnalysis.pdf - Page 64
+
+# Models for Indian Languages
+
+## Computational Model:-
+
+### Finite state Model
+
+Several off-the-shelf tools available for FST which support Word and Paradigm model
+
+1. Apertium (Lttoolbox)
+2. Helsinki Finite-State Transducer Technology (HFST)
+3. XFST (Xerox Finite State Tool)
+4. SFST (Stuttgart Finite State Transducer Tools) etc.
+
+---
+
+BS-DS IITM (BSCS5002)
+
+64 / 66
+
+# W2Lec7-MorphologicalAnalysis.pdf - Page 65
+
+Certainly! Below is the converted content in detailed markdown format based on the provided image:
+
+```markdown
+# Conclusion
+
+---
+
+**BS-DS IITM (BSCS5002)**
+
+---
+
+Page 65 / 66
+```
+
+Any additional content or specific details from the scientific text or slides can be added here as needed. If you need further formatting or specific content from the image included, please provide more details or context.
+
+# W2Lec7-MorphologicalAnalysis.pdf - Page 66
+
+```markdown
+# Conclusion
+
+- MA & MG are indispensable modules for any NLP applications in Indian languages
+
+- Understanding morpheme-phonemics and morpheme-syntax are required for WP model
+
+- Not morphology:
+  - Tokenization (before morphology)
+  - Stemming and Lemmatization (instead of morphology)
+  - POS tagging (after morphology)
+
+- Selecting the appropriate morphological analysis is a challenging task which are done by other specific modules.
+
+BSCS5002
+```
+

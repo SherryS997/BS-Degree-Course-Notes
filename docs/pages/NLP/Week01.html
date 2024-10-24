@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Introduction to Natural Language Processing – BS Degree Notes</title>
+<title>Natural Language Processing (NLP) Notes – BS Degree Notes</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -398,6 +398,53 @@ ul.task-list li input[type="checkbox"] {
  <span class="menu-text">Week 1</span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../pages/NLP/Week02.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 2</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../pages/NLP/Week03.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 3</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="false">
+ <span class="menu-text">LLM</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../pages/LLM/Week01.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 1</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../pages/LLM/Week02.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 2</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../pages/LLM/Week03.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 3</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../pages/LLM/Week04.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 4</span></a>
+  </div>
+</li>
       </ul>
   </li>
     </ul>
@@ -410,73 +457,141 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#what-is-natural-language" id="toc-what-is-natural-language" class="nav-link active" data-scroll-target="#what-is-natural-language">What is Natural Language?</a>
-  <ul class="collapse">
-  <li><a href="#definition-and-scope" id="toc-definition-and-scope" class="nav-link" data-scroll-target="#definition-and-scope">Definition and Scope</a></li>
-  <li><a href="#examples-of-natural-languages" id="toc-examples-of-natural-languages" class="nav-link" data-scroll-target="#examples-of-natural-languages">Examples of Natural Languages</a></li>
-  <li><a href="#importance-of-natural-language" id="toc-importance-of-natural-language" class="nav-link" data-scroll-target="#importance-of-natural-language">Importance of Natural Language</a></li>
-  </ul></li>
-  <li><a href="#what-is-nlp" id="toc-what-is-nlp" class="nav-link" data-scroll-target="#what-is-nlp">What is NLP?</a>
-  <ul class="collapse">
-  <li><a href="#definition-and-scope-1" id="toc-definition-and-scope-1" class="nav-link" data-scroll-target="#definition-and-scope-1">Definition and Scope</a></li>
-  <li><a href="#applications-of-nlp" id="toc-applications-of-nlp" class="nav-link" data-scroll-target="#applications-of-nlp">Applications of NLP</a></li>
-  <li><a href="#nlp-as-a-field-of-ai" id="toc-nlp-as-a-field-of-ai" class="nav-link" data-scroll-target="#nlp-as-a-field-of-ai">NLP as a Field of AI</a></li>
-  <li><a href="#goals-of-nlp" id="toc-goals-of-nlp" class="nav-link" data-scroll-target="#goals-of-nlp">Goals of NLP</a></li>
-  </ul></li>
-  <li><a href="#levels-of-language-processing" id="toc-levels-of-language-processing" class="nav-link" data-scroll-target="#levels-of-language-processing">Levels of Language Processing</a>
+  <li><a href="#natural-language-processing" id="toc-natural-language-processing" class="nav-link active" data-scroll-target="#natural-language-processing">Natural Language Processing</a>
   <ul class="collapse">
   <li><a href="#overview" id="toc-overview" class="nav-link" data-scroll-target="#overview">Overview</a></li>
-  <li><a href="#phonological-level" id="toc-phonological-level" class="nav-link" data-scroll-target="#phonological-level">Phonological Level</a>
-  <ul class="collapse">
-  <li><a href="#key-components" id="toc-key-components" class="nav-link" data-scroll-target="#key-components">Key Components</a></li>
-  <li><a href="#examples" id="toc-examples" class="nav-link" data-scroll-target="#examples">Examples</a></li>
+  <li><a href="#key-concepts" id="toc-key-concepts" class="nav-link" data-scroll-target="#key-concepts">Key Concepts</a></li>
+  <li><a href="#applications" id="toc-applications" class="nav-link" data-scroll-target="#applications">Applications</a></li>
+  <li><a href="#techniques-and-algorithms" id="toc-techniques-and-algorithms" class="nav-link" data-scroll-target="#techniques-and-algorithms">Techniques and Algorithms</a></li>
+  <li><a href="#challenges" id="toc-challenges" class="nav-link" data-scroll-target="#challenges">Challenges</a></li>
   </ul></li>
-  <li><a href="#morphological-level" id="toc-morphological-level" class="nav-link" data-scroll-target="#morphological-level">Morphological Level</a>
+  <li><a href="#levels-of-nlp" id="toc-levels-of-nlp" class="nav-link" data-scroll-target="#levels-of-nlp">Levels of NLP</a>
   <ul class="collapse">
-  <li><a href="#key-components-1" id="toc-key-components-1" class="nav-link" data-scroll-target="#key-components-1">Key Components</a></li>
-  <li><a href="#examples-1" id="toc-examples-1" class="nav-link" data-scroll-target="#examples-1">Examples</a></li>
-  </ul></li>
-  <li><a href="#lexical-level" id="toc-lexical-level" class="nav-link" data-scroll-target="#lexical-level">Lexical Level</a>
+  <li><a href="#level-1-phonology" id="toc-level-1-phonology" class="nav-link" data-scroll-target="#level-1-phonology">Level 1: Phonology</a></li>
+  <li><a href="#level-2-morphology" id="toc-level-2-morphology" class="nav-link" data-scroll-target="#level-2-morphology">Level 2: Morphology</a></li>
+  <li><a href="#level-3-lexical" id="toc-level-3-lexical" class="nav-link" data-scroll-target="#level-3-lexical">Level 3: Lexical</a></li>
+  <li><a href="#level-4-syntactic" id="toc-level-4-syntactic" class="nav-link" data-scroll-target="#level-4-syntactic">Level 4: Syntactic</a></li>
+  <li><a href="#level-5-semantic" id="toc-level-5-semantic" class="nav-link" data-scroll-target="#level-5-semantic">Level 5: Semantic</a></li>
+  <li><a href="#level-6-discourse" id="toc-level-6-discourse" class="nav-link" data-scroll-target="#level-6-discourse">Level 6: Discourse</a></li>
+  <li><a href="#level-7-pragmatic" id="toc-level-7-pragmatic" class="nav-link" data-scroll-target="#level-7-pragmatic">Level 7: Pragmatic</a></li>
+  <li><a href="#processing-levels-vs.-tasks-and-applications" id="toc-processing-levels-vs.-tasks-and-applications" class="nav-link" data-scroll-target="#processing-levels-vs.-tasks-and-applications">Processing Levels vs.&nbsp;Tasks and Applications</a>
   <ul class="collapse">
-  <li><a href="#key-components-2" id="toc-key-components-2" class="nav-link" data-scroll-target="#key-components-2">Key Components</a></li>
-  <li><a href="#examples-2" id="toc-examples-2" class="nav-link" data-scroll-target="#examples-2">Examples</a></li>
-  </ul></li>
-  <li><a href="#syntactic-level" id="toc-syntactic-level" class="nav-link" data-scroll-target="#syntactic-level">Syntactic Level</a>
-  <ul class="collapse">
-  <li><a href="#key-components-3" id="toc-key-components-3" class="nav-link" data-scroll-target="#key-components-3">Key Components</a></li>
-  <li><a href="#examples-3" id="toc-examples-3" class="nav-link" data-scroll-target="#examples-3">Examples</a></li>
-  </ul></li>
-  <li><a href="#semantic-level" id="toc-semantic-level" class="nav-link" data-scroll-target="#semantic-level">Semantic Level</a>
-  <ul class="collapse">
-  <li><a href="#key-components-4" id="toc-key-components-4" class="nav-link" data-scroll-target="#key-components-4">Key Components</a></li>
-  <li><a href="#examples-4" id="toc-examples-4" class="nav-link" data-scroll-target="#examples-4">Examples</a></li>
-  </ul></li>
-  <li><a href="#discourse-level" id="toc-discourse-level" class="nav-link" data-scroll-target="#discourse-level">Discourse Level</a>
-  <ul class="collapse">
-  <li><a href="#key-components-5" id="toc-key-components-5" class="nav-link" data-scroll-target="#key-components-5">Key Components</a></li>
-  <li><a href="#examples-5" id="toc-examples-5" class="nav-link" data-scroll-target="#examples-5">Examples</a></li>
-  </ul></li>
-  <li><a href="#pragmatic-level" id="toc-pragmatic-level" class="nav-link" data-scroll-target="#pragmatic-level">Pragmatic Level</a>
-  <ul class="collapse">
-  <li><a href="#key-components-6" id="toc-key-components-6" class="nav-link" data-scroll-target="#key-components-6">Key Components</a></li>
-  <li><a href="#examples-6" id="toc-examples-6" class="nav-link" data-scroll-target="#examples-6">Examples</a></li>
+  <li><a href="#processing-levels" id="toc-processing-levels" class="nav-link" data-scroll-target="#processing-levels">Processing Levels</a></li>
+  <li><a href="#tasks-and-applications" id="toc-tasks-and-applications" class="nav-link" data-scroll-target="#tasks-and-applications">Tasks and Applications</a></li>
   </ul></li>
   </ul></li>
-  <li><a href="#challenges-in-nlp" id="toc-challenges-in-nlp" class="nav-link" data-scroll-target="#challenges-in-nlp">Challenges in NLP</a>
+  <li><a href="#ambiguity-in-natural-language" id="toc-ambiguity-in-natural-language" class="nav-link" data-scroll-target="#ambiguity-in-natural-language">Ambiguity in Natural Language</a>
   <ul class="collapse">
-  <li><a href="#overview-1" id="toc-overview-1" class="nav-link" data-scroll-target="#overview-1">Overview</a></li>
-  <li><a href="#ambiguity" id="toc-ambiguity" class="nav-link" data-scroll-target="#ambiguity">Ambiguity</a></li>
-  <li><a href="#linguistic-diversity" id="toc-linguistic-diversity" class="nav-link" data-scroll-target="#linguistic-diversity">Linguistic Diversity</a></li>
-  <li><a href="#limited-resources-for-low-resource-languages" id="toc-limited-resources-for-low-resource-languages" class="nav-link" data-scroll-target="#limited-resources-for-low-resource-languages">Limited Resources for Low-Resource Languages</a></li>
-  <li><a href="#dialectal-variations-and-sociolects" id="toc-dialectal-variations-and-sociolects" class="nav-link" data-scroll-target="#dialectal-variations-and-sociolects">Dialectal Variations and Sociolects</a></li>
-  <li><a href="#idiolects-and-individual-language-use" id="toc-idiolects-and-individual-language-use" class="nav-link" data-scroll-target="#idiolects-and-individual-language-use">Idiolects and Individual Language Use</a></li>
+  <li><a href="#types-of-ambiguity" id="toc-types-of-ambiguity" class="nav-link" data-scroll-target="#types-of-ambiguity">Types of Ambiguity</a></li>
+  <li><a href="#syntactic-ambiguity" id="toc-syntactic-ambiguity" class="nav-link" data-scroll-target="#syntactic-ambiguity">Syntactic Ambiguity</a></li>
+  <li><a href="#semantic-ambiguity" id="toc-semantic-ambiguity" class="nav-link" data-scroll-target="#semantic-ambiguity">Semantic Ambiguity</a></li>
+  <li><a href="#pragmatic-ambiguity" id="toc-pragmatic-ambiguity" class="nav-link" data-scroll-target="#pragmatic-ambiguity">Pragmatic Ambiguity</a></li>
+  </ul></li>
+  <li><a href="#linguistic-diversity" id="toc-linguistic-diversity" class="nav-link" data-scroll-target="#linguistic-diversity">Linguistic Diversity</a>
+  <ul class="collapse">
+  <li><a href="#introduction" id="toc-introduction" class="nav-link" data-scroll-target="#introduction">Introduction</a></li>
+  <li><a href="#language-variations" id="toc-language-variations" class="nav-link" data-scroll-target="#language-variations">Language Variations</a></li>
+  <li><a href="#cultural-nuances" id="toc-cultural-nuances" class="nav-link" data-scroll-target="#cultural-nuances">Cultural Nuances</a></li>
+  <li><a href="#sapir-whorf-hypothesis" id="toc-sapir-whorf-hypothesis" class="nav-link" data-scroll-target="#sapir-whorf-hypothesis">Sapir-Whorf Hypothesis</a></li>
+  <li><a href="#color-names" id="toc-color-names" class="nav-link" data-scroll-target="#color-names">Color Names</a></li>
+  <li><a href="#multiword-expressions-and-metaphors" id="toc-multiword-expressions-and-metaphors" class="nav-link" data-scroll-target="#multiword-expressions-and-metaphors">Multiword Expressions and Metaphors</a></li>
+  </ul></li>
+  <li><a href="#low-resource-nlp" id="toc-low-resource-nlp" class="nav-link" data-scroll-target="#low-resource-nlp">Low-Resource NLP</a>
+  <ul class="collapse">
+  <li><a href="#introduction-1" id="toc-introduction-1" class="nav-link" data-scroll-target="#introduction-1">Introduction</a></li>
+  <li><a href="#data-domains" id="toc-data-domains" class="nav-link" data-scroll-target="#data-domains">Data Domains</a></li>
+  <li><a href="#world-languages" id="toc-world-languages" class="nav-link" data-scroll-target="#world-languages">World Languages</a></li>
+  </ul></li>
+  <li><a href="#nlp-technologiesapplications" id="toc-nlp-technologiesapplications" class="nav-link" data-scroll-target="#nlp-technologiesapplications">NLP Technologies/Applications</a>
+  <ul class="collapse">
+  <li><a href="#language-categories" id="toc-language-categories" class="nav-link" data-scroll-target="#language-categories">Language Categories</a></li>
+  <li><a href="#nlp-technologiesapplications-1" id="toc-nlp-technologiesapplications-1" class="nav-link" data-scroll-target="#nlp-technologiesapplications-1">NLP Technologies/Applications</a></li>
+  <li><a href="#diagram" id="toc-diagram" class="nav-link" data-scroll-target="#diagram">Diagram</a></li>
+  </ul></li>
+  <li><a href="#phonological-level-in-nlp" id="toc-phonological-level-in-nlp" class="nav-link" data-scroll-target="#phonological-level-in-nlp">Phonological Level in NLP</a>
+  <ul class="collapse">
+  <li><a href="#phonemes" id="toc-phonemes" class="nav-link" data-scroll-target="#phonemes">Phonemes</a></li>
+  <li><a href="#phonetic-transcription" id="toc-phonetic-transcription" class="nav-link" data-scroll-target="#phonetic-transcription">Phonetic Transcription</a></li>
+  <li><a href="#prosody" id="toc-prosody" class="nav-link" data-scroll-target="#prosody">Prosody</a></li>
+  <li><a href="#phonological-processing" id="toc-phonological-processing" class="nav-link" data-scroll-target="#phonological-processing">Phonological Processing</a></li>
+  <li><a href="#phonological-rules" id="toc-phonological-rules" class="nav-link" data-scroll-target="#phonological-rules">Phonological Rules</a></li>
+  <li><a href="#speech-recognition" id="toc-speech-recognition" class="nav-link" data-scroll-target="#speech-recognition">Speech Recognition</a></li>
+  <li><a href="#text-to-speech-synthesis" id="toc-text-to-speech-synthesis" class="nav-link" data-scroll-target="#text-to-speech-synthesis">Text-to-Speech Synthesis</a></li>
+  </ul></li>
+  <li><a href="#morphological-level-in-nlp" id="toc-morphological-level-in-nlp" class="nav-link" data-scroll-target="#morphological-level-in-nlp">Morphological Level in NLP</a>
+  <ul class="collapse">
+  <li><a href="#morphological-analysis" id="toc-morphological-analysis" class="nav-link" data-scroll-target="#morphological-analysis">Morphological Analysis</a></li>
+  <li><a href="#lemmatization" id="toc-lemmatization" class="nav-link" data-scroll-target="#lemmatization">Lemmatization</a></li>
+  <li><a href="#stemming" id="toc-stemming" class="nav-link" data-scroll-target="#stemming">Stemming</a></li>
+  <li><a href="#part-of-speech-tagging" id="toc-part-of-speech-tagging" class="nav-link" data-scroll-target="#part-of-speech-tagging">Part-of-Speech Tagging</a></li>
+  </ul></li>
+  <li><a href="#syntactic-level-in-nlp" id="toc-syntactic-level-in-nlp" class="nav-link" data-scroll-target="#syntactic-level-in-nlp">Syntactic Level in NLP</a>
+  <ul class="collapse">
+  <li><a href="#parsing" id="toc-parsing" class="nav-link" data-scroll-target="#parsing">Parsing</a></li>
+  <li><a href="#dependency-parsing" id="toc-dependency-parsing" class="nav-link" data-scroll-target="#dependency-parsing">Dependency Parsing</a></li>
+  <li><a href="#grammar-rules" id="toc-grammar-rules" class="nav-link" data-scroll-target="#grammar-rules">Grammar Rules</a></li>
+  <li><a href="#syntactic-analysis-in-nlp" id="toc-syntactic-analysis-in-nlp" class="nav-link" data-scroll-target="#syntactic-analysis-in-nlp">Syntactic Analysis in NLP</a></li>
+  </ul></li>
+  <li><a href="#discourse-level-in-nlp" id="toc-discourse-level-in-nlp" class="nav-link" data-scroll-target="#discourse-level-in-nlp">Discourse Level in NLP</a>
+  <ul class="collapse">
+  <li><a href="#coherence" id="toc-coherence" class="nav-link" data-scroll-target="#coherence">Coherence</a></li>
+  <li><a href="#cohesion" id="toc-cohesion" class="nav-link" data-scroll-target="#cohesion">Cohesion</a></li>
+  <li><a href="#anaphora-resolution" id="toc-anaphora-resolution" class="nav-link" data-scroll-target="#anaphora-resolution">Anaphora Resolution</a></li>
+  <li><a href="#discourse-analysis-in-nlp" id="toc-discourse-analysis-in-nlp" class="nav-link" data-scroll-target="#discourse-analysis-in-nlp">Discourse Analysis in NLP</a></li>
+  <li><a href="#applications-of-discourse-analysis" id="toc-applications-of-discourse-analysis" class="nav-link" data-scroll-target="#applications-of-discourse-analysis">Applications of Discourse Analysis</a></li>
+  <li><a href="#discourse-markers" id="toc-discourse-markers" class="nav-link" data-scroll-target="#discourse-markers">Discourse Markers</a></li>
+  <li><a href="#register-variation" id="toc-register-variation" class="nav-link" data-scroll-target="#register-variation">Register Variation</a></li>
+  <li><a href="#politeness-theory" id="toc-politeness-theory" class="nav-link" data-scroll-target="#politeness-theory">Politeness Theory</a></li>
+  </ul></li>
+  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References</a></li>
+  <li><a href="#why-nlp-is-hard" id="toc-why-nlp-is-hard" class="nav-link" data-scroll-target="#why-nlp-is-hard">Why NLP is hard?</a>
+  <ul class="collapse">
   <li><a href="#evolution-of-language" id="toc-evolution-of-language" class="nav-link" data-scroll-target="#evolution-of-language">Evolution of Language</a></li>
-  <li><a href="#data-quality-and-quantity-issues" id="toc-data-quality-and-quantity-issues" class="nav-link" data-scroll-target="#data-quality-and-quantity-issues">Data Quality and Quantity Issues</a></li>
+  <li><a href="#data-quality-and-quantity" id="toc-data-quality-and-quantity" class="nav-link" data-scroll-target="#data-quality-and-quantity">Data Quality and Quantity</a></li>
   <li><a href="#computational-complexity" id="toc-computational-complexity" class="nav-link" data-scroll-target="#computational-complexity">Computational Complexity</a></li>
   <li><a href="#cultural-and-ethical-considerations" id="toc-cultural-and-ethical-considerations" class="nav-link" data-scroll-target="#cultural-and-ethical-considerations">Cultural and Ethical Considerations</a></li>
   </ul></li>
-  <li><a href="#summary-and-key-takeaways" id="toc-summary-and-key-takeaways" class="nav-link" data-scroll-target="#summary-and-key-takeaways">Summary and Key Takeaways</a></li>
-  <li><a href="#review-questions" id="toc-review-questions" class="nav-link" data-scroll-target="#review-questions">Review Questions</a></li>
+  <li><a href="#ambiguity-at-many-levels" id="toc-ambiguity-at-many-levels" class="nav-link" data-scroll-target="#ambiguity-at-many-levels">Ambiguity at Many Levels</a>
+  <ul class="collapse">
+  <li><a href="#word-senses" id="toc-word-senses" class="nav-link" data-scroll-target="#word-senses">Word Senses</a></li>
+  <li><a href="#part-of-speech" id="toc-part-of-speech" class="nav-link" data-scroll-target="#part-of-speech">Part of Speech</a></li>
+  <li><a href="#syntactic-structure" id="toc-syntactic-structure" class="nav-link" data-scroll-target="#syntactic-structure">Syntactic Structure</a></li>
+  <li><a href="#quantifier-scope" id="toc-quantifier-scope" class="nav-link" data-scroll-target="#quantifier-scope">Quantifier Scope</a></li>
+  <li><a href="#multiple" id="toc-multiple" class="nav-link" data-scroll-target="#multiple">Multiple</a></li>
+  </ul></li>
+  <li><a href="#language-map-of-india" id="toc-language-map-of-india" class="nav-link" data-scroll-target="#language-map-of-india">Language Map of India</a>
+  <ul class="collapse">
+  <li><a href="#overview-1" id="toc-overview-1" class="nav-link" data-scroll-target="#overview-1">Overview</a></li>
+  <li><a href="#north-india" id="toc-north-india" class="nav-link" data-scroll-target="#north-india">North India</a></li>
+  <li><a href="#east-india" id="toc-east-india" class="nav-link" data-scroll-target="#east-india">East India</a></li>
+  <li><a href="#west-india" id="toc-west-india" class="nav-link" data-scroll-target="#west-india">West India</a></li>
+  <li><a href="#south-india" id="toc-south-india" class="nav-link" data-scroll-target="#south-india">South India</a></li>
+  <li><a href="#central-india" id="toc-central-india" class="nav-link" data-scroll-target="#central-india">Central India</a></li>
+  <li><a href="#northeastern-india" id="toc-northeastern-india" class="nav-link" data-scroll-target="#northeastern-india">Northeastern India</a></li>
+  <li><a href="#special-regions" id="toc-special-regions" class="nav-link" data-scroll-target="#special-regions">Special Regions</a></li>
+  </ul></li>
+  <li><a href="#dialectal-variations" id="toc-dialectal-variations" class="nav-link" data-scroll-target="#dialectal-variations">Dialectal Variations</a>
+  <ul class="collapse">
+  <li><a href="#introduction-2" id="toc-introduction-2" class="nav-link" data-scroll-target="#introduction-2">Introduction</a></li>
+  <li><a href="#examples" id="toc-examples" class="nav-link" data-scroll-target="#examples">Examples</a></li>
+  <li><a href="#pronunciation-variations" id="toc-pronunciation-variations" class="nav-link" data-scroll-target="#pronunciation-variations">Pronunciation Variations</a></li>
+  <li><a href="#vocabulary-differences" id="toc-vocabulary-differences" class="nav-link" data-scroll-target="#vocabulary-differences">Vocabulary Differences</a></li>
+  <li><a href="#grammar-differences" id="toc-grammar-differences" class="nav-link" data-scroll-target="#grammar-differences">Grammar Differences</a></li>
+  <li><a href="#implications-of-dialectal-variations" id="toc-implications-of-dialectal-variations" class="nav-link" data-scroll-target="#implications-of-dialectal-variations">Implications of Dialectal Variations</a></li>
+  </ul></li>
+  <li><a href="#sociolects" id="toc-sociolects" class="nav-link" data-scroll-target="#sociolects">Sociolects</a>
+  <ul class="collapse">
+  <li><a href="#definition" id="toc-definition" class="nav-link" data-scroll-target="#definition">Definition</a></li>
+  <li><a href="#examples-1" id="toc-examples-1" class="nav-link" data-scroll-target="#examples-1">Examples</a></li>
+  <li><a href="#significance" id="toc-significance" class="nav-link" data-scroll-target="#significance">Significance</a></li>
+  <li><a href="#implications" id="toc-implications" class="nav-link" data-scroll-target="#implications">Implications</a></li>
+  </ul></li>
+  <li><a href="#ambiguity-in-relationships-actions-promises-and-orders" id="toc-ambiguity-in-relationships-actions-promises-and-orders" class="nav-link" data-scroll-target="#ambiguity-in-relationships-actions-promises-and-orders">Ambiguity in Relationships, Actions, Promises, and Orders</a>
+  <ul class="collapse">
+  <li><a href="#ambiguity-in-relationships" id="toc-ambiguity-in-relationships" class="nav-link" data-scroll-target="#ambiguity-in-relationships">Ambiguity in Relationships</a></li>
+  <li><a href="#ambiguity-in-actions" id="toc-ambiguity-in-actions" class="nav-link" data-scroll-target="#ambiguity-in-actions">Ambiguity in Actions</a></li>
+  <li><a href="#ambiguity-in-promises-and-orders" id="toc-ambiguity-in-promises-and-orders" class="nav-link" data-scroll-target="#ambiguity-in-promises-and-orders">Ambiguity in Promises and Orders</a></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
@@ -485,7 +600,7 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../pages/NLP/Week01.html">NLP</a></li><li class="breadcrumb-item"><a href="../../pages/NLP/Week01.html">Week 1</a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">Introduction to Natural Language Processing</h1>
+<h1 class="title">Natural Language Processing (NLP) Notes</h1>
 </div>
 
 
@@ -502,268 +617,866 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<section id="what-is-natural-language" class="level1">
-<h1>What is Natural Language?</h1>
-<section id="definition-and-scope" class="level2">
-<h2 class="anchored" data-anchor-id="definition-and-scope">Definition and Scope</h2>
-<p>Natural Language (NL) refers to the languages spoken by humans for everyday communication. It is distinct from formal or artificial languages, such as programming languages, and non-human communication systems.</p>
-</section>
-<section id="examples-of-natural-languages" class="level2">
-<h2 class="anchored" data-anchor-id="examples-of-natural-languages">Examples of Natural Languages</h2>
-<p>Examples of natural languages include English, Tamil, Hindi, Mandarin, Spanish, and many others.</p>
-</section>
-<section id="importance-of-natural-language" class="level2">
-<h2 class="anchored" data-anchor-id="importance-of-natural-language">Importance of Natural Language</h2>
-<p>Understanding natural language is essential for various applications, including chatbots, sentiment analysis, machine translation, and speech recognition.</p>
-</section>
-</section>
-<section id="what-is-nlp" class="level1">
-<h1>What is NLP?</h1>
-<section id="definition-and-scope-1" class="level2">
-<h2 class="anchored" data-anchor-id="definition-and-scope-1">Definition and Scope</h2>
-<p>Natural Language Processing (NLP) enables computer systems to understand, interpret, and generate human language. It combines computational linguistics with machine learning and deep learning models to process and analyze large amounts of natural language data.</p>
-</section>
-<section id="applications-of-nlp" class="level2">
-<h2 class="anchored" data-anchor-id="applications-of-nlp">Applications of NLP</h2>
-<p>Applications of NLP include chatbots, sentiment analysis, machine translation, speech recognition, and many others.</p>
-</section>
-<section id="nlp-as-a-field-of-ai" class="level2">
-<h2 class="anchored" data-anchor-id="nlp-as-a-field-of-ai">NLP as a Field of AI</h2>
-<p>NLP is a field of artificial intelligence that focuses on the interaction between computers and humans using natural language.</p>
-</section>
-<section id="goals-of-nlp" class="level2">
-<h2 class="anchored" data-anchor-id="goals-of-nlp">Goals of NLP</h2>
-<p>The goal of NLP is to enable computers to understand, interpret, and generate human language in a way that is both valuable and meaningful.</p>
-</section>
-</section>
-<section id="levels-of-language-processing" class="level1">
-<h1>Levels of Language Processing</h1>
+<section id="natural-language-processing" class="level1">
+<h1>Natural Language Processing</h1>
 <section id="overview" class="level2">
 <h2 class="anchored" data-anchor-id="overview">Overview</h2>
-<p>The levels of language processing in NLP include:</p>
-<ol type="1">
-<li>Phonological Level</li>
-<li>Morphological Level</li>
-<li>Lexical Level</li>
-<li>Syntactic Level</li>
-<li>Semantic Level</li>
-<li>Discourse Level</li>
-<li>Pragmatic Level</li>
-</ol>
+<p>Natural Language Processing (NLP) is a subfield of artificial intelligence (AI) that focuses on the interaction between computers and humans through natural language. The primary goal of NLP is to enable computers to understand, interpret, and generate human language.</p>
 </section>
-<section id="phonological-level" class="level2">
-<h2 class="anchored" data-anchor-id="phonological-level">Phonological Level</h2>
-<p>The phonological level focuses on the processing of sounds in natural language, including their organization and patterns.</p>
-<section id="key-components" class="level3">
-<h3 class="anchored" data-anchor-id="key-components">Key Components</h3>
+<section id="key-concepts" class="level2">
+<h2 class="anchored" data-anchor-id="key-concepts">Key Concepts</h2>
 <ul>
-<li>Phonemes: The smallest units of sound that distinguish meaning.</li>
-<li>Phonetic Transcription: Representing sounds using phonetic symbols (e.g., IPA).</li>
-<li>Prosody: The rhythm, stress, and intonation patterns of speech that convey meaning beyond the words themselves.</li>
+<li><strong>Tokenization</strong>: The process of breaking down a text into individual units, such as words or sentences.</li>
+<li><strong>Parsing</strong>: The process of analyzing the grammatical structure of a sentence.</li>
+<li><strong>Semantic Analysis</strong>: The process of understanding the meaning of a sentence.</li>
+<li><strong>Syntax Analysis</strong>: The process of understanding the grammatical structure of a sentence.</li>
+<li><strong>Speech Recognition</strong>: The process of converting spoken language into text.</li>
 </ul>
 </section>
-<section id="examples" class="level3">
-<h3 class="anchored" data-anchor-id="examples">Examples</h3>
+<section id="applications" class="level2">
+<h2 class="anchored" data-anchor-id="applications">Applications</h2>
 <ul>
-<li>Speech Recognition: Identifying spoken words by analyzing phonemes.</li>
-<li>Text-to-Speech (TTS): Generating spoken language from text while considering prosody for natural-sounding speech.</li>
-<li>Accent Recognition: Differentiating between various accents (e.g., American vs.&nbsp;British English) by analyzing phonetic patterns.</li>
+<li><strong>Sentiment Analysis</strong>: Determining the sentiment or emotion behind a piece of text.</li>
+<li><strong>Machine Translation</strong>: Automatically translating text from one language to another.</li>
+<li><strong>Chatbots</strong>: Automated conversational agents that interact with users in natural language.</li>
+<li><strong>Text Summarization</strong>: Automatically generating a summary of a longer text.</li>
+<li><strong>Named Entity Recognition</strong>: Identifying and categorizing key information in text.</li>
 </ul>
 </section>
-</section>
-<section id="morphological-level" class="level2">
-<h2 class="anchored" data-anchor-id="morphological-level">Morphological Level</h2>
-<p>The morphological level involves the study of the structure and formation of words, including their internal components.</p>
-<section id="key-components-1" class="level3">
-<h3 class="anchored" data-anchor-id="key-components-1">Key Components</h3>
+<section id="techniques-and-algorithms" class="level2">
+<h2 class="anchored" data-anchor-id="techniques-and-algorithms">Techniques and Algorithms</h2>
 <ul>
-<li>Morphemes: The smallest meaningful units of language (e.g., prefixes, suffixes, roots).</li>
-<li>Inflection: Modifications of words to express different grammatical categories (e.g., tense, number).</li>
-<li>Derivation: The process of creating new words by adding prefixes or suffixes (e.g., “happy” → “unhappy”).</li>
+<li><strong>Rule-Based Systems</strong>: Use hand-crafted rules to parse and understand text.</li>
+<li><strong>Statistical Methods</strong>: Use statistical models to predict linguistic properties.</li>
+<li><strong>Deep Learning</strong>: Uses neural networks to model complex linguistic patterns.</li>
 </ul>
 </section>
-<section id="examples-1" class="level3">
-<h3 class="anchored" data-anchor-id="examples-1">Examples</h3>
+<section id="challenges" class="level2">
+<h2 class="anchored" data-anchor-id="challenges">Challenges</h2>
 <ul>
-<li>Morphological Analysis: Analyzing the structure of words (prefixes, suffixes).</li>
-<li>Lemmatization: Reducing words to their base or dictionary form.</li>
-<li>Stemming: Cutting words to their root forms.</li>
-<li>Part-of-Speech Tagging: Identifying the grammatical category of words based on their morphology.</li>
+<li><strong>Ambiguity</strong>: Multiple meanings of words and phrases.</li>
+<li><strong>Context Dependency</strong>: Understanding the context in which a sentence is used.</li>
+<li><strong>Noisy Data</strong>: Errors and inconsistencies in text data.</li>
 </ul>
 </section>
 </section>
-<section id="lexical-level" class="level2">
-<h2 class="anchored" data-anchor-id="lexical-level">Lexical Level</h2>
-<p>The lexical level deals with the vocabulary of a language, focusing on the meaning and usage of words.</p>
-<section id="key-components-2" class="level3">
-<h3 class="anchored" data-anchor-id="key-components-2">Key Components</h3>
+<section id="levels-of-nlp" class="level1">
+<h1>Levels of NLP</h1>
+<section id="level-1-phonology" class="level3">
+<h3 class="anchored" data-anchor-id="level-1-phonology">Level 1: Phonology</h3>
 <ul>
-<li>Tokenization: The process of breaking text into individual words or tokens.</li>
-<li>Lexical Semantics: The study of word meanings, relationships, and nuances (synonyms, antonyms, hypernyms).</li>
-<li>Vocabulary: The set of words available in a language or a specific domain.</li>
+<li><strong>Interpreting speech sounds</strong>: Phonology is the study of speech sounds and their relationship to language.</li>
 </ul>
 </section>
-<section id="examples-2" class="level3">
-<h3 class="anchored" data-anchor-id="examples-2">Examples</h3>
+<section id="level-2-morphology" class="level3">
+<h3 class="anchored" data-anchor-id="level-2-morphology">Level 2: Morphology</h3>
 <ul>
-<li>Tokenization: Breaking text into individual words or tokens.</li>
-<li>Lexical Semantics: Understanding the meanings of words and their relationships.</li>
-<li>Synonym Detection: Identifying words with similar meanings.</li>
+<li><strong>Interpreting componential nature of words</strong>: Morphology is the study of words and their internal structure, including the relationships between morphemes.</li>
 </ul>
 </section>
-</section>
-<section id="syntactic-level" class="level2">
-<h2 class="anchored" data-anchor-id="syntactic-level">Syntactic Level</h2>
-<p>The syntactic level involves the arrangement of words to form grammatical sentences and the study of sentence structure.</p>
-<section id="key-components-3" class="level3">
-<h3 class="anchored" data-anchor-id="key-components-3">Key Components</h3>
+<section id="level-3-lexical" class="level3">
+<h3 class="anchored" data-anchor-id="level-3-lexical">Level 3: Lexical</h3>
 <ul>
-<li>Parsing: The process of analyzing the grammatical structure of a sentence.</li>
-<li>Constituency Parsing: Identifying phrases within sentences based on hierarchical structure.</li>
-<li>Dependency Parsing: Establishing relationships between words in a sentence and their dependencies.</li>
+<li><strong>Interpreting the meanings of individual words</strong>: Lexical analysis involves understanding the meanings of individual words, including their semantic and syntactic properties.</li>
 </ul>
 </section>
-<section id="examples-3" class="level3">
-<h3 class="anchored" data-anchor-id="examples-3">Examples</h3>
+<section id="level-4-syntactic" class="level3">
+<h3 class="anchored" data-anchor-id="level-4-syntactic">Level 4: Syntactic</h3>
 <ul>
-<li>Parsing: Analyzing the grammatical structure of a sentence.</li>
-<li>Constituency Parsing: Identifying phrases within sentences.</li>
-<li>Dependency Parsing: Establishing relationships between words.</li>
+<li><strong>Uncovering the grammatical structures of sentences</strong>: Syntactic analysis focuses on the grammatical structure of sentences, including the relationships between words and phrases.</li>
 </ul>
 </section>
-</section>
-<section id="semantic-level" class="level2">
-<h2 class="anchored" data-anchor-id="semantic-level">Semantic Level</h2>
-<p>The semantic level deals with the meaning of words and phrases, focusing on their relationships and nuances.</p>
-<section id="key-components-4" class="level3">
-<h3 class="anchored" data-anchor-id="key-components-4">Key Components</h3>
+<section id="level-5-semantic" class="level3">
+<h3 class="anchored" data-anchor-id="level-5-semantic">Level 5: Semantic</h3>
 <ul>
-<li>Word Sense Disambiguation: Resolving the meaning of words with multiple senses.</li>
-<li>Semantic Role Labeling: Identifying the roles played by entities in a sentence.</li>
-<li>Coreference Resolution: Identifying which words refer back to others.</li>
+<li><strong>Determining meanings of sentences by focusing on word-level meanings</strong>: Semantic analysis involves understanding the meaning of sentences by analyzing the meanings of individual words and their relationships.</li>
 </ul>
 </section>
-<section id="examples-4" class="level3">
-<h3 class="anchored" data-anchor-id="examples-4">Examples</h3>
+<section id="level-6-discourse" class="level3">
+<h3 class="anchored" data-anchor-id="level-6-discourse">Level 6: Discourse</h3>
 <ul>
-<li>Word Sense Disambiguation: Resolving the meaning of words.</li>
-<li>Semantic Role Labeling: Identifying the roles played by entities.</li>
-<li>Coreference Resolution: Identifying which words refer back to others.</li>
+<li><strong>Focusing on properties of texts as a whole and making connections between sentences</strong>: Discourse analysis examines the properties of texts as a whole, including the relationships between sentences and the context in which they are used.</li>
 </ul>
 </section>
-</section>
-<section id="discourse-level" class="level2">
-<h2 class="anchored" data-anchor-id="discourse-level">Discourse Level</h2>
-<p>The discourse level deals with how sentences relate to one another in larger contexts, focusing on coherence and cohesion in language.</p>
-<section id="key-components-5" class="level3">
-<h3 class="anchored" data-anchor-id="key-components-5">Key Components</h3>
+<section id="level-7-pragmatic" class="level3">
+<h3 class="anchored" data-anchor-id="level-7-pragmatic">Level 7: Pragmatic</h3>
 <ul>
-<li>Coherence: The logical flow of ideas in a text, ensuring that sentences connect meaningfully.</li>
-<li>Cohesion: The grammatical and lexical linking within a text that helps maintain the flow.</li>
-<li>Anaphora Resolution: Identifying which words refer back to others.</li>
+<li><strong>Understanding purposeful use of language in situations</strong>: Pragmatic analysis involves understanding the purposeful use of language in specific situations, including the context, intentions, and expectations of the communication.</li>
 </ul>
 </section>
-<section id="examples-5" class="level3">
-<h3 class="anchored" data-anchor-id="examples-5">Examples</h3>
+<section id="processing-levels-vs.-tasks-and-applications" class="level2">
+<h2 class="anchored" data-anchor-id="processing-levels-vs.-tasks-and-applications">Processing Levels vs.&nbsp;Tasks and Applications</h2>
+<section id="processing-levels" class="level3">
+<h3 class="anchored" data-anchor-id="processing-levels">Processing Levels</h3>
 <ul>
-<li>Coherence: Ensuring that sentences connect meaningfully.</li>
-<li>Cohesion: Maintaining the flow of ideas in a text.</li>
-<li>Anaphora Resolution: Identifying which words refer back to others.</li>
+<li><strong>Character &amp; strings level</strong>: This level involves processing individual characters and strings of text.</li>
+<li><strong>Word token level</strong>: This level involves processing words as individual tokens, often including tasks like tokenization and part-of-speech tagging.</li>
+<li><strong>Sentence level</strong>: This level involves processing sentences as individual units, often including tasks like sentence boundary detection and sentence classification.</li>
+<li><strong>Sentence window level</strong>: This level involves processing a window of surrounding sentences, often used in tasks like named entity recognition and dependency parsing.</li>
+<li><strong>Paragraph &amp; passages level</strong>: This level involves processing larger units of text, often including tasks like text summarization and text classification.</li>
+<li><strong>Whole document level</strong>: This level involves processing entire documents, often including tasks like document similarity calculation and document clustering.</li>
+<li><strong>Multi-document collection level</strong>: This level involves processing multiple documents, often including tasks like multi-document summarization and document ranking.</li>
 </ul>
 </section>
-</section>
-<section id="pragmatic-level" class="level2">
-<h2 class="anchored" data-anchor-id="pragmatic-level">Pragmatic Level</h2>
-<p>The pragmatic level deals with the purposeful use of language in situations, focusing on context and implicit meaning.</p>
-<section id="key-components-6" class="level3">
-<h3 class="anchored" data-anchor-id="key-components-6">Key Components</h3>
+<section id="tasks-and-applications" class="level3">
+<h3 class="anchored" data-anchor-id="tasks-and-applications">Tasks and Applications</h3>
 <ul>
-<li>Speech Acts: The phrase “Can you pass the salt?” is a request, not just a question about capability.</li>
-<li>Deixis: The interpretation of “here” and “tomorrow” depends on the speaker’s location and the current day.</li>
-<li>Contextual Understanding: In a conversation where one person says, “It’s cold in here,” they may be implying a request to close a window rather than just stating a fact.</li>
-</ul>
-</section>
-<section id="examples-6" class="level3">
-<h3 class="anchored" data-anchor-id="examples-6">Examples</h3>
-<ul>
-<li>Speech Acts: Understanding the purpose of language in a situation.</li>
-<li>Deixis: Understanding the interpretation of words based on context.</li>
-<li>Contextual Understanding: Understanding the meaning of language in a conversation.</li>
+<li><strong>Word tokenization, sentence boundary detection, gene symbol recognition, text pattern extraction</strong>: These tasks involve processing individual words, sentences, and larger units of text to extract meaningful information.</li>
+<li><strong>POS-tagging, parsing, chunking, term extraction, gene mention recognition</strong>: These tasks involve identifying the parts of speech, grammatical structure, and semantic information in text.</li>
+<li><strong>Sentence classification and retrieval and ranking, question answering, automatic summarization</strong>: These tasks involve classifying sentences, retrieving relevant information, and generating summaries of text.</li>
+<li><strong>Anaphora resolution</strong>: This task involves identifying and resolving references to earlier mentions in text.</li>
+<li><strong>Detection of rhetorical zones</strong>: This task involves identifying the structure and organization of text, including the use of rhetorical devices.</li>
+<li><strong>Document similarity calculation</strong>: This task involves measuring the similarity between documents.</li>
+<li><strong>Document clustering, multi-document summarization</strong>: These tasks involve grouping similar documents together and generating summaries of multiple documents.</li>
 </ul>
 </section>
 </section>
 </section>
-<section id="challenges-in-nlp" class="level1">
-<h1>Challenges in NLP</h1>
-<section id="overview-1" class="level2">
-<h2 class="anchored" data-anchor-id="overview-1">Overview</h2>
-<p>NLP faces various challenges, including:</p>
-<ol type="1">
-<li>Ambiguity at various levels</li>
-<li>Linguistic diversity</li>
-<li>Limited resources for low-resource languages</li>
-<li>Dialectal variations and sociolects</li>
-<li>Idiolects and individual language use</li>
-<li>Evolution of language</li>
-<li>Data quality and quantity issues</li>
-<li>Computational complexity</li>
-<li>Cultural and ethical considerations</li>
-</ol>
+<section id="ambiguity-in-natural-language" class="level1">
+<h1>Ambiguity in Natural Language</h1>
+<section id="types-of-ambiguity" class="level2">
+<h2 class="anchored" data-anchor-id="types-of-ambiguity">Types of Ambiguity</h2>
+<ul>
+<li><strong>Lexical Ambiguity</strong>: A type of ambiguity where words have multiple meanings or senses.
+<ul>
+<li><strong>Homonyms</strong>: Words that are spelled and/or pronounced the same but have different meanings.
+<ul>
+<li>Example: bank (financial institution) vs.&nbsp;bank (slope or incline)</li>
+</ul></li>
+<li><strong>Polysemy</strong>: Words that have multiple related meanings.
+<ul>
+<li>Example: spring (season) vs.&nbsp;spring (coiled metal object that stores energy)</li>
+</ul></li>
+</ul></li>
+</ul>
 </section>
-<section id="ambiguity" class="level2">
-<h2 class="anchored" data-anchor-id="ambiguity">Ambiguity</h2>
-<p>Ambiguity occurs when words or sentences can have multiple meanings depending on context.</p>
+<section id="syntactic-ambiguity" class="level2">
+<h2 class="anchored" data-anchor-id="syntactic-ambiguity">Syntactic Ambiguity</h2>
+<ul>
+<li><strong>Attachment</strong>: Ambiguity in how words or phrases are attached to a sentence.
+<ul>
+<li>Example: “I saw a man with a telescope.” (the man has a telescope or the man is with someone who has a telescope)</li>
+</ul></li>
+<li><strong>Coordination</strong>: Ambiguity in how words or phrases are coordinated in a sentence.
+<ul>
+<li>Example: “I want to eat a sandwich and go for a walk.” (eating a sandwich and going for a walk are two separate activities or eating a sandwich and going for a walk are two parts of a single activity)</li>
+</ul></li>
+</ul>
 </section>
-<section id="linguistic-diversity" class="level2">
-<h2 class="anchored" data-anchor-id="linguistic-diversity">Linguistic Diversity</h2>
-<p>Linguistic diversity refers to the existence of many languages, each with its own grammar, syntax, and nuances.</p>
+<section id="semantic-ambiguity" class="level2">
+<h2 class="anchored" data-anchor-id="semantic-ambiguity">Semantic Ambiguity</h2>
+<ul>
+<li><strong>Quantifier Scope</strong>: Ambiguity in how quantifiers (words like “all” or “some”) apply to a sentence.
+<ul>
+<li>Example: “Every child loves some movie.” (every child loves at least one movie or every child loves the same movie)</li>
+</ul></li>
+<li><strong>Anaphoric</strong>: Ambiguity in how words or phrases refer back to something in the sentence.
+<ul>
+<li>Example: “I have a book on my desk. I need to read it and then my friend will read it.” (the book on my desk or my friend’s book)</li>
+</ul></li>
+</ul>
 </section>
-<section id="limited-resources-for-low-resource-languages" class="level2">
-<h2 class="anchored" data-anchor-id="limited-resources-for-low-resource-languages">Limited Resources for Low-Resource Languages</h2>
-<p>Low-resource languages often lack large annotated datasets and linguistic tools, making it difficult to develop accurate NLP models.</p>
+<section id="pragmatic-ambiguity" class="level2">
+<h2 class="anchored" data-anchor-id="pragmatic-ambiguity">Pragmatic Ambiguity</h2>
+<ul>
+<li><strong>Deictic</strong>: Ambiguity in how words or phrases refer to context-dependent information.
+<ul>
+<li>Example: “I’m going to the store. Do you want to come with me?” (the store that is being referred to is not specified)</li>
+</ul></li>
+<li><strong>Speech Act</strong>: Ambiguity in how words or phrases convey a particular meaning or intention.
+<ul>
+<li>Example: “I’m so hungry I could eat a horse.” (the speaker is actually hungry or the speaker is using an idiomatic expression)</li>
+</ul></li>
+<li><strong>Irony/Sarcasm</strong>: Ambiguity in how words or phrases convey a meaning that is opposite of their literal meaning.
+<ul>
+<li>Example: “What a beautiful day!” (the speaker is actually referring to the weather being bad)</li>
+</ul></li>
+</ul>
 </section>
-<section id="dialectal-variations-and-sociolects" class="level2">
-<h2 class="anchored" data-anchor-id="dialectal-variations-and-sociolects">Dialectal Variations and Sociolects</h2>
-<p>Dialectal variations and sociolects refer to the use of language depending on geographical region, social class, education level, or occupation.</p>
 </section>
-<section id="idiolects-and-individual-language-use" class="level2">
-<h2 class="anchored" data-anchor-id="idiolects-and-individual-language-use">Idiolects and Individual Language Use</h2>
-<p>Idiolects refer to the unique form of language used by an individual, reflecting their background, experiences, and personality.</p>
+<section id="linguistic-diversity" class="level1">
+<h1>Linguistic Diversity</h1>
+<section id="introduction" class="level2">
+<h2 class="anchored" data-anchor-id="introduction">Introduction</h2>
+<p>Linguistic diversity refers to the wide range of languages, dialects, and cultural nuances that exist within human communication. In NLP, linguistic diversity presents a significant challenge, as algorithms must be able to handle and analyze multiple languages, dialects, and cultural contexts.</p>
 </section>
+<section id="language-variations" class="level2">
+<h2 class="anchored" data-anchor-id="language-variations">Language Variations</h2>
+<p>Language variations refer to differences in vocabulary, grammar, and syntax between languages or dialects. For example, the English language has multiple dialects, such as American English, British English, and African American Vernacular English. NLP algorithms must be able to recognize and accommodate these variations.</p>
+</section>
+<section id="cultural-nuances" class="level2">
+<h2 class="anchored" data-anchor-id="cultural-nuances">Cultural Nuances</h2>
+<p>Cultural nuances refer to the subtle differences in meaning and context that arise from cultural background and experience. For instance, the phrase “break a leg” can be interpreted as a blessing or a curse, depending on the cultural context. NLP algorithms must be able to recognize and accommodate these nuances.</p>
+</section>
+<section id="sapir-whorf-hypothesis" class="level2">
+<h2 class="anchored" data-anchor-id="sapir-whorf-hypothesis">Sapir-Whorf Hypothesis</h2>
+<p>The Sapir-Whorf Hypothesis suggests that the language we speak both affects and reflects our view of the world. This means that different languages may have different ways of describing the world, which can impact how speakers perceive reality.</p>
+</section>
+<section id="color-names" class="level2">
+<h2 class="anchored" data-anchor-id="color-names">Color Names</h2>
+<p>Different languages have varying numbers of color names. For example:</p>
+<ul>
+<li>Russian has relatively few color names, while Japanese has hundreds.</li>
+<li>Multilingual individuals may have difficulty translating color names between languages, as the same color name may have different meanings or connotations.</li>
+</ul>
+</section>
+<section id="multiword-expressions-and-metaphors" class="level2">
+<h2 class="anchored" data-anchor-id="multiword-expressions-and-metaphors">Multiword Expressions and Metaphors</h2>
+<p>Multiword expressions, such as idioms and phrasal verbs, can be culturally specific and challenging to translate. For instance:</p>
+<ul>
+<li>The expression “it’s raining cats and dogs” is a common English idiom, but its equivalent in other languages may not convey the same meaning.</li>
+<li>Metaphors, such as “love is a journey,” can also be culturally specific and require careful consideration when translating.</li>
+</ul>
+</section>
+</section>
+<section id="low-resource-nlp" class="level1">
+<h1>Low-Resource NLP</h1>
+<section id="introduction-1" class="level2">
+<h2 class="anchored" data-anchor-id="introduction-1">Introduction</h2>
+<p>Low-resource NLP refers to the challenges and opportunities that arise when dealing with languages or domains that have limited or no existing resources. This can include languages with few or no machine translation systems, limited text data, or a lack of annotated datasets.</p>
+</section>
+<section id="data-domains" class="level2">
+<h2 class="anchored" data-anchor-id="data-domains">Data Domains</h2>
+<p>Low-resource NLP often involves working with diverse data domains, such as:</p>
+<ul>
+<li><strong>Bible</strong>: A rich source of text data with many languages and translations.</li>
+<li><strong>Parliamentary proceedings</strong>: Official transcripts of government meetings, often available in multiple languages.</li>
+<li><strong>Newswire</strong>: News articles from various sources, providing a wealth of information on current events.</li>
+<li><strong>Wikipedia</strong>: A vast online encyclopedia with articles in many languages, covering a wide range of topics.</li>
+<li><strong>Novels</strong>: Fictional works that can provide insight into language usage and cultural context.</li>
+<li><strong>TEDtalks</strong>: Public talks on various subjects, often with transcripts available.</li>
+<li><strong>Telephone conversations</strong>: Real-world conversations that can be used to train dialogue systems.</li>
+<li><strong>Twitter conversations</strong>: Social media interactions that can provide valuable insights into language usage and trends.</li>
+</ul>
+</section>
+<section id="world-languages" class="level2">
+<h2 class="anchored" data-anchor-id="world-languages">World Languages</h2>
+<p>Low-resource NLP involves working with a wide range of world languages, including:</p>
+<ul>
+<li><strong>English</strong>: A widely spoken language with many resources available.</li>
+<li><strong>French</strong>: A official language in several countries and a popular language for international communication.</li>
+<li><strong>Germanic languages</strong>: A family of languages that includes English, German, Dutch, and others.</li>
+<li><strong>Chinese</strong>: A language with a vast number of dialects and a growing presence in international communication.</li>
+<li><strong>Arabic</strong>: An official language in several countries and an important language for international communication.</li>
+<li><strong>Hindi</strong>: A widely spoken language in India and a popular language for international communication.</li>
+<li><strong>Czech</strong>: A language spoken in the Czech Republic and a popular language for international communication.</li>
+<li><strong>Hebrew</strong>: A language spoken in Israel and a popular language for international communication.</li>
+<li><strong>6K World Languages</strong>: Thousands of languages that are not widely spoken or resourced, presenting significant challenges for NLP.</li>
+</ul>
+</section>
+</section>
+<section id="nlp-technologiesapplications" class="level1">
+<h1>NLP Technologies/Applications</h1>
+<section id="language-categories" class="level2">
+<h2 class="anchored" data-anchor-id="language-categories">Language Categories</h2>
+<p>Low-resource NLP involves working with various language categories, including:</p>
+<ul>
+<li><strong>Some European Languages</strong>: Languages such as French, German, and Italian.</li>
+<li><strong>UN Languages</strong>: Languages such as Spanish, Chinese, and Arabic.</li>
+<li><strong>Medium-Resourced Languages</strong>: Languages such as Hindi, Czech, and Hebrew, which have some resources available.</li>
+<li><strong>Resource-Poor Languages</strong>: Thousands of languages that have limited or no resources available.</li>
+</ul>
+</section>
+<section id="nlp-technologiesapplications-1" class="level2">
+<h2 class="anchored" data-anchor-id="nlp-technologiesapplications-1">NLP Technologies/Applications</h2>
+<p>Low-resource NLP involves applying various NLP technologies and applications, including:</p>
+<ul>
+<li><strong>ASR (Automatic Speech Recognition)</strong>: Technology that enables computers to recognize and transcribe spoken language.</li>
+<li><strong>MT (Machine Translation)</strong>: Technology that enables computers to translate text from one language to another.</li>
+<li><strong>Dialogue</strong>: Technology that enables computers to engage in conversations with humans.</li>
+<li><strong>QA (Question Answering)</strong>: Technology that enables computers to answer questions based on text data.</li>
+<li><strong>Summarization</strong>: Technology that enables computers to summarize long pieces of text into shorter summaries.</li>
+<li><strong>SRL (Semantic Role Labeling)</strong>: Technology that enables computers to identify the roles played by entities in a sentence.</li>
+<li><strong>Coreference</strong>: Technology that enables computers to identify the relationships between entities in a sentence.</li>
+<li><strong>Parsing</strong>: Technology that enables computers to analyze the grammatical structure of a sentence.</li>
+<li><strong>NER (Named Entity Recognition)</strong>: Technology that enables computers to identify and categorize named entities in text.</li>
+<li><strong>POS Tagging (Part-Of-Speech Tagging)</strong>: Technology that enables computers to identify the parts of speech in a sentence.</li>
+<li><strong>Lemmatization</strong>: Technology that enables computers to reduce words to their base form.</li>
+</ul>
+</section>
+<section id="diagram" class="level2">
+<h2 class="anchored" data-anchor-id="diagram">Diagram</h2>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 63%">
+<col style="width: 36%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Language Categories</th>
+<th>NLP Technologies/Applications</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Some European Languages</strong>: French, German, Italian</td>
+<td>ASR</td>
+</tr>
+<tr class="even">
+<td><strong>UN Languages</strong>: Spanish, Chinese, Arabic</td>
+<td>MT</td>
+</tr>
+<tr class="odd">
+<td><strong>Medium-Resourced Languages</strong>: Hindi, Czech, Hebrew</td>
+<td>Dialogue</td>
+</tr>
+<tr class="even">
+<td><strong>Resource-Poor Languages</strong>: Thousands of languages</td>
+<td>QA</td>
+</tr>
+<tr class="odd">
+<td></td>
+<td>Summarization</td>
+</tr>
+<tr class="even">
+<td></td>
+<td>…</td>
+</tr>
+<tr class="odd">
+<td></td>
+<td>SRL</td>
+</tr>
+<tr class="even">
+<td></td>
+<td>Coreference</td>
+</tr>
+<tr class="odd">
+<td></td>
+<td>Parsing</td>
+</tr>
+<tr class="even">
+<td></td>
+<td>NER</td>
+</tr>
+<tr class="odd">
+<td></td>
+<td>POS Tagging</td>
+</tr>
+<tr class="even">
+<td></td>
+<td>Lemmatization</td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+<section id="phonological-level-in-nlp" class="level1">
+<h1>Phonological Level in NLP</h1>
+<section id="phonemes" class="level2">
+<h2 class="anchored" data-anchor-id="phonemes">Phonemes</h2>
+<ul>
+<li><strong>Definition</strong>: Phonemes are the smallest units of sound that distinguish meaning in speech.</li>
+<li><strong>Examples</strong>: In English, the words “pat” and “bat” differ only in their final phoneme (/t/ vs.&nbsp;/b/).</li>
+<li><strong>Importance</strong>: Phonemes are essential in NLP as they provide a foundation for speech recognition, synthesis, and analysis.</li>
+</ul>
+</section>
+<section id="phonetic-transcription" class="level2">
+<h2 class="anchored" data-anchor-id="phonetic-transcription">Phonetic Transcription</h2>
+<ul>
+<li><strong>Definition</strong>: Phonetic transcription represents sounds using phonetic symbols (e.g., the International Phonetic Alphabet, IPA).</li>
+<li><strong>Examples</strong>: The word “hello” might be transcribed as /həˈloʊ/ in the IPA.</li>
+<li><strong>Importance</strong>: Phonetic transcription enables precise representation of speech sounds, facilitating tasks like speech recognition and synthesis.</li>
+</ul>
+</section>
+<section id="prosody" class="level2">
+<h2 class="anchored" data-anchor-id="prosody">Prosody</h2>
+<ul>
+<li><strong>Definition</strong>: Prosody refers to the rhythm, stress, and intonation patterns of speech that convey meaning beyond the words themselves.</li>
+<li><strong>Examples</strong>: Emphasis on certain words or phrases, tone of voice, and pauses can alter the meaning of a sentence.</li>
+<li><strong>Importance</strong>: Prosody is crucial in NLP as it influences the interpretation of spoken language and can be used to convey emotional or attitudinal information.</li>
+</ul>
+</section>
+<section id="phonological-processing" class="level2">
+<h2 class="anchored" data-anchor-id="phonological-processing">Phonological Processing</h2>
+<ul>
+<li><strong>Definition</strong>: Phonological processing involves analyzing the sound structure of words and phrases to identify phonemes, syllables, and other phonological features.</li>
+<li><strong>Examples</strong>: Identifying word boundaries, syllable division, and phoneme sequences are all part of phonological processing.</li>
+<li><strong>Importance</strong>: Phonological processing is essential for speech recognition, synthesis, and analysis, as well as text-to-speech systems.</li>
+</ul>
+</section>
+<section id="phonological-rules" class="level2">
+<h2 class="anchored" data-anchor-id="phonological-rules">Phonological Rules</h2>
+<ul>
+<li><strong>Definition</strong>: Phonological rules are patterns or regularities that govern the sound structure of a language.</li>
+<li><strong>Examples</strong>: In English, the rule that /k/ and /g/ are often pronounced as /t/ and /d/ before /o/ and /u/ is a phonological rule.</li>
+<li><strong>Importance</strong>: Phonological rules help explain how sounds are used and combined in a language, facilitating tasks like speech recognition and synthesis.</li>
+</ul>
+</section>
+<section id="speech-recognition" class="level2">
+<h2 class="anchored" data-anchor-id="speech-recognition">Speech Recognition</h2>
+<ul>
+<li><strong>Definition</strong>: Speech recognition involves identifying spoken words or phrases from audio recordings.</li>
+<li><strong>Examples</strong>: Speech recognition systems use phonological analysis to recognize spoken words and phrases.</li>
+<li><strong>Importance</strong>: Speech recognition is a critical application of phonological analysis in NLP, enabling tasks like voice assistants and speech-to-text systems.</li>
+</ul>
+</section>
+<section id="text-to-speech-synthesis" class="level2">
+<h2 class="anchored" data-anchor-id="text-to-speech-synthesis">Text-to-Speech Synthesis</h2>
+<ul>
+<li><strong>Definition</strong>: Text-to-speech synthesis involves generating spoken words or phrases from written text.</li>
+<li><strong>Examples</strong>: Text-to-speech systems use phonological analysis to generate spoken words and phrases.</li>
+<li><strong>Importance</strong>: Text-to-speech synthesis is another critical application of phonological analysis in NLP, enabling tasks like screen readers and voice assistants.</li>
+</ul>
+</section>
+</section>
+<section id="morphological-level-in-nlp" class="level1">
+<h1>Morphological Level in NLP</h1>
+<section id="morphological-analysis" class="level2">
+<h2 class="anchored" data-anchor-id="morphological-analysis">Morphological Analysis</h2>
+<ul>
+<li><strong>Definition</strong>: Morphological analysis involves examining the internal structure of words to identify their constituent parts, such as prefixes, suffixes, and roots.</li>
+<li><strong>Examples</strong>: Analyzing the word “unhappiness” might involve breaking it down into its constituent parts: “un-” (prefix), “happy” (root), and “-ness” (suffix).</li>
+</ul>
+</section>
+<section id="lemmatization" class="level2">
+<h2 class="anchored" data-anchor-id="lemmatization">Lemmatization</h2>
+<ul>
+<li><strong>Definition</strong>: Lemmatization is the process of reducing words to their base or dictionary form, often referred to as the lemma.</li>
+<li><strong>Examples</strong>: Lemmatizing the word “better” might result in the base form “good.”</li>
+</ul>
+</section>
+<section id="stemming" class="level2">
+<h2 class="anchored" data-anchor-id="stemming">Stemming</h2>
+<ul>
+<li><strong>Definition</strong>: Stemming involves cutting words to their root forms, often using a set of predefined rules.</li>
+<li><strong>Examples</strong>: Stemming the words “running,” “runner,” and “ran” might result in the root form “run.”</li>
+</ul>
+</section>
+<section id="part-of-speech-tagging" class="level2">
+<h2 class="anchored" data-anchor-id="part-of-speech-tagging">Part-of-Speech Tagging</h2>
+<ul>
+<li><strong>Definition</strong>: Part-of-speech tagging involves identifying the grammatical category of words based on their morphology.</li>
+<li><strong>Examples</strong>: Tagging the word “running” as a verb or noun depending on the context is an example of part-of-speech tagging.</li>
+</ul>
+</section>
+</section>
+<section id="syntactic-level-in-nlp" class="level1">
+<h1>Syntactic Level in NLP</h1>
+<section id="parsing" class="level2">
+<h2 class="anchored" data-anchor-id="parsing">Parsing</h2>
+<ul>
+<li><p><strong>Definition</strong>: Parsing is the process of analyzing the grammatical structure of a sentence, often represented as a parse tree.</p></li>
+<li><p><strong>Examples</strong>: Parsing the sentence “The cat sat on the mat” might result in a parse tree:</p>
+<pre><code>[NP The cat] [VP sat [PP on [NP the mat]]]</code></pre></li>
+<li><p><strong>Types of Parsing</strong>: There are various types of parsing, including:</p>
+<ul>
+<li><strong>Syntactic Parsing</strong>: Focuses on the grammatical structure of a sentence.</li>
+<li><strong>Semantic Parsing</strong>: Focuses on the meaning of a sentence.</li>
+<li><strong>Dependency Parsing</strong>: Represents the grammatical structure of a sentence as a tree, with words as nodes and dependencies as edges.</li>
+</ul></li>
+</ul>
+</section>
+<section id="dependency-parsing" class="level2">
+<h2 class="anchored" data-anchor-id="dependency-parsing">Dependency Parsing</h2>
+<ul>
+<li><p><strong>Definition</strong>: Dependency parsing is a type of parsing that represents the grammatical structure of a sentence as a tree, with words as nodes and dependencies as edges.</p></li>
+<li><p><strong>Examples</strong>: Dependency parsing the sentence “She loves him” might result in a dependency tree:</p>
+<pre><code>loves ← She
+loves → him</code></pre></li>
+<li><p><strong>Types of Dependency Parsing</strong>: There are various types of dependency parsing, including:</p>
+<ul>
+<li><strong>Basic Dependency Parsing</strong>: Focuses on the core dependencies between words.</li>
+<li><strong>Enhanced Dependency Parsing</strong>: Includes additional information, such as grammatical functions and semantic roles.</li>
+</ul></li>
+</ul>
+</section>
+<section id="grammar-rules" class="level2">
+<h2 class="anchored" data-anchor-id="grammar-rules">Grammar Rules</h2>
+<ul>
+<li><strong>Definition</strong>: Grammar rules are the underlying principles that govern the structure of a language.</li>
+<li><strong>Examples</strong>: Grammar rules in English might include:
+<ul>
+<li><strong>Subject-Verb-Object (SVO) structure</strong>: A common sentence structure in English, where the subject comes first, followed by the verb, and then the object.</li>
+<li><strong>Differences in structure</strong>: Other languages, such as Hindi, may have a Subject-Object-Verb (SOV) structure.</li>
+</ul></li>
+</ul>
+</section>
+<section id="syntactic-analysis-in-nlp" class="level2">
+<h2 class="anchored" data-anchor-id="syntactic-analysis-in-nlp">Syntactic Analysis in NLP</h2>
+<ul>
+<li><strong>Syntactic Analysis</strong>: Involves analyzing the grammatical structure of a sentence to identify its components and relationships.</li>
+<li><strong>Techniques</strong>: Various techniques can be used for syntactic analysis, including parsing, dependency parsing, and grammar-based approaches.</li>
+<li><strong>Applications</strong>: Syntactic analysis has numerous applications in NLP, including:
+<ul>
+<li><strong>Language understanding</strong>: Syntactic analysis helps computers understand the meaning of sentences and sentences structure.</li>
+<li><strong>Language generation</strong>: Syntactic analysis is used in language generation tasks, such as text summarization and machine translation.</li>
+<li><strong>Language modeling</strong>: Syntactic analysis is used in language modeling tasks, such as language prediction and language completion.</li>
+</ul></li>
+</ul>
+</section>
+</section>
+<section id="discourse-level-in-nlp" class="level1">
+<h1>Discourse Level in NLP</h1>
+<section id="coherence" class="level2">
+<h2 class="anchored" data-anchor-id="coherence">Coherence</h2>
+<ul>
+<li><strong>Definition</strong>: Coherence refers to the logical flow of ideas in a text, ensuring that sentences connect meaningfully.</li>
+<li><strong>Examples</strong>: In the text “The cat was sleeping. The cat chased a mouse. The cat was happy.”, coherence is maintained by the logical connection between the sentences.</li>
+</ul>
+</section>
+<section id="cohesion" class="level2">
+<h2 class="anchored" data-anchor-id="cohesion">Cohesion</h2>
+<ul>
+<li><strong>Definition</strong>: Cohesion refers to the grammatical and lexical linking within a text that helps maintain the flow.</li>
+<li><strong>Examples</strong>: In the text “The cat was sleeping. It was a beautiful day. The cat was happy.”, cohesion is maintained by the use of pronouns (“It”) and adverbs (“a beautiful day”) that link the sentences together.</li>
+</ul>
+</section>
+<section id="anaphora-resolution" class="level2">
+<h2 class="anchored" data-anchor-id="anaphora-resolution">Anaphora Resolution</h2>
+<ul>
+<li><strong>Definition</strong>: Anaphora resolution involves identifying which words refer back to others (e.g., resolving pronouns to their antecedents).</li>
+<li><strong>Examples</strong>: In the text “John saw a book. He bought it.”, anaphora resolution involves identifying the pronoun “He” as referring to the antecedent “John”.</li>
+</ul>
+</section>
+<section id="discourse-analysis-in-nlp" class="level2">
+<h2 class="anchored" data-anchor-id="discourse-analysis-in-nlp">Discourse Analysis in NLP</h2>
+<ul>
+<li><strong>Discourse Analysis</strong>: Involves analyzing the structure and organization of a text to understand its meaning and purpose.</li>
+<li><strong>Techniques</strong>: Various techniques can be used for discourse analysis, including:
+<ul>
+<li><strong>Text Segmentation</strong>: Breaking down a text into smaller units, such as sentences or paragraphs.</li>
+<li><strong>Text Classification</strong>: Classifying a text into a specific category or genre.</li>
+<li><strong>Text Summarization</strong>: Summarizing a text to convey its main ideas and key points.</li>
+</ul></li>
+</ul>
+</section>
+<section id="applications-of-discourse-analysis" class="level2">
+<h2 class="anchored" data-anchor-id="applications-of-discourse-analysis">Applications of Discourse Analysis</h2>
+<ul>
+<li><strong>Language Understanding</strong>: Discourse analysis helps computers understand the meaning and purpose of a text.</li>
+<li><strong>Language Generation</strong>: Discourse analysis is used in language generation tasks, such as text summarization and machine translation.</li>
+<li><strong>Language Modeling</strong>: Discourse analysis is used in language modeling tasks, such as language prediction and language completion.</li>
+</ul>
+</section>
+<section id="discourse-markers" class="level2">
+<h2 class="anchored" data-anchor-id="discourse-markers">Discourse Markers</h2>
+<ul>
+<li><strong>Definition</strong>: Discourse markers are words or phrases that help to organize and structure a text.</li>
+<li><strong>Examples</strong>: Discourse markers include words like “however”, “in addition”, and “therefore”.</li>
+<li><strong>Function</strong>: Discourse markers help to signal the relationship between ideas and sentences in a text.</li>
+</ul>
+</section>
+<section id="register-variation" class="level2">
+<h2 class="anchored" data-anchor-id="register-variation">Register Variation</h2>
+<ul>
+<li><strong>Definition</strong>: Register variation refers to the different styles of language used in different contexts or situations.</li>
+<li><strong>Examples</strong>: Register variation can be seen in the use of formal vs.&nbsp;informal language, or in the use of technical vs.&nbsp;non-technical vocabulary.</li>
+<li><strong>Function</strong>: Register variation helps to convey social identity and context in language use.</li>
+</ul>
+</section>
+<section id="politeness-theory" class="level2">
+<h2 class="anchored" data-anchor-id="politeness-theory">Politeness Theory</h2>
+<ul>
+<li><strong>Definition</strong>: Politeness theory refers to the ways in which language is used to show respect, deference, or solidarity.</li>
+<li><strong>Examples</strong>: Politeness theory can be seen in the use of honorifics, titles, or formal language.</li>
+<li><strong>Function</strong>: Politeness theory helps to regulate social interaction and maintain social relationships.</li>
+</ul>
+</section>
+</section>
+<section id="references" class="level1">
+<h1>References</h1>
+<ul>
+<li><em>Discourse Analysis in Natural Language Processing</em> by Christopher D. Manning and Hinrich Schütze</li>
+<li><em>Text Analysis in Natural Language Processing</em> by Sebastian Riedel and Mark Steedman</li>
+</ul>
+</section>
+<section id="why-nlp-is-hard" class="level1">
+<h1>Why NLP is hard?</h1>
 <section id="evolution-of-language" class="level2">
 <h2 class="anchored" data-anchor-id="evolution-of-language">Evolution of Language</h2>
-<p>Language is constantly changing with new slang, idioms, and phrases emerging, making it challenging for NLP systems to keep up.</p>
+<ul>
+<li><strong>Language is constantly changing</strong>: New slang, idioms, and phrases emerge, making it challenging for NLP systems to keep up.</li>
+<li><strong>Adaptability is crucial</strong>: NLP models must be able to adapt to changing language trends and nuances.</li>
+</ul>
 </section>
-<section id="data-quality-and-quantity-issues" class="level2">
-<h2 class="anchored" data-anchor-id="data-quality-and-quantity-issues">Data Quality and Quantity Issues</h2>
-<p>High-quality, annotated data is necessary for training NLP models, but it is often scarce and expensive to obtain.</p>
+<section id="data-quality-and-quantity" class="level2">
+<h2 class="anchored" data-anchor-id="data-quality-and-quantity">Data Quality and Quantity</h2>
+<ul>
+<li><strong>High-quality, annotated data</strong>: NLP models require high-quality, annotated data for training, but it is often scarce and expensive to obtain.</li>
+<li><strong>Large datasets are necessary</strong>: Large datasets are required for effective machine learning, but compiling these datasets can be challenging.</li>
+</ul>
 </section>
 <section id="computational-complexity" class="level2">
 <h2 class="anchored" data-anchor-id="computational-complexity">Computational Complexity</h2>
-<p>Advanced NLP models require significant computational resources for training and inference.</p>
+<ul>
+<li><strong>Advanced NLP models require significant computational resources</strong>: Training and inference for advanced NLP models, such as transformers, require significant computational resources.</li>
+<li><strong>Computational complexity is a significant challenge</strong>: Ensuring that NLP models can be run efficiently on available hardware is a significant challenge.</li>
+</ul>
 </section>
 <section id="cultural-and-ethical-considerations" class="level2">
 <h2 class="anchored" data-anchor-id="cultural-and-ethical-considerations">Cultural and Ethical Considerations</h2>
-<p>NLP systems must be designed to avoid biases and respect cultural differences.</p>
+<ul>
+<li><strong>Avoiding biases</strong>: NLP systems must be designed to avoid biases and respect cultural differences.</li>
+<li><strong>Fairness and reducing biases</strong>: Ensuring fairness and reducing biases in NLP models is a significant challenge.</li>
+</ul>
 </section>
 </section>
-<section id="summary-and-key-takeaways" class="level1">
-<h1>Summary and Key Takeaways</h1>
-<p>NLP is a field of artificial intelligence that focuses on the interaction between computers and humans using natural language. The levels of language processing in NLP include phonological, morphological, lexical, syntactic, semantic, discourse, and pragmatic levels. Each level contributes uniquely in NLP applications. Understanding the challenges in NLP is essential for developing effective NLP systems.</p>
+<section id="ambiguity-at-many-levels" class="level1">
+<h1>Ambiguity at Many Levels</h1>
+<section id="word-senses" class="level3">
+<h3 class="anchored" data-anchor-id="word-senses">Word Senses</h3>
+<ul>
+<li><strong>Bank</strong>: Refers to a financial institution or the side of a river.
+<ul>
+<li>Example: “I went to the bank to deposit my paycheck.” (financial institution)</li>
+<li>Example: “The bank of the river was lined with trees.” (side of a river)</li>
+</ul></li>
+</ul>
 </section>
-<section id="review-questions" class="level1">
-<h1>Review Questions</h1>
-<ol type="1">
-<li>What is the primary goal of NLP?</li>
-<li>What are the different levels of language processing in NLP?</li>
-<li>How does phonological processing contribute to NLP applications?</li>
-<li>What is the significance of morphological processing in NLP?</li>
-<li>How does semantic processing enhance understanding of language in NLP?</li>
-<li>What are the key components of the discourse level in NLP?</li>
-<li>How does pragmatic processing relate to context and implicit meaning in NLP?</li>
-</ol>
+<section id="part-of-speech" class="level3">
+<h3 class="anchored" data-anchor-id="part-of-speech">Part of Speech</h3>
+<ul>
+<li><strong>Blue</strong>: Can be a noun (referring to the color) or a verb (meaning to make something blue).
+<ul>
+<li>Example: “The blue car is parked outside.” (noun)</li>
+<li>Example: “Can you blue the dress to match the curtains?” (verb)</li>
+</ul></li>
+</ul>
+</section>
+<section id="syntactic-structure" class="level3">
+<h3 class="anchored" data-anchor-id="syntactic-structure">Syntactic Structure</h3>
+<ul>
+<li><strong>I Saw a Man with a Telescope</strong>: The preposition “with” can be analyzed in different ways, depending on the intended meaning.
+<ul>
+<li>Example: “I saw a man with a telescope observing the stars.” (the man has a telescope)</li>
+<li>Example: “I saw a man with a telescope in the attic.” (the man is with someone who has a telescope)</li>
+</ul></li>
+</ul>
+</section>
+<section id="quantifier-scope" class="level3">
+<h3 class="anchored" data-anchor-id="quantifier-scope">Quantifier Scope</h3>
+<ul>
+<li><strong>Every Child Loves Some Movie</strong>: The quantifier “every” applies to the children, while the quantifier “some” refers to a subset of movies.
+<ul>
+<li>Example: “Every child loves some movie, but not every child loves the same movie.” (some children love the same movie, but others love different movies)</li>
+</ul></li>
+</ul>
+</section>
+<section id="multiple" class="level3">
+<h3 class="anchored" data-anchor-id="multiple">Multiple</h3>
+<ul>
+<li><strong>I Saw Her Duck</strong>: The word “duck” can refer to a type of bird or a verb meaning to lower or dip something.
+<ul>
+<li>Example: “I saw her duck swim in the pond.” (the bird)</li>
+<li>Example: “Can you duck down so you don’t hit your head?” (the verb)</li>
+</ul></li>
+</ul>
+</section>
+</section>
+<section id="language-map-of-india" class="level1">
+<h1>Language Map of India</h1>
+<section id="overview-1" class="level2">
+<h2 class="anchored" data-anchor-id="overview-1">Overview</h2>
+<p>The language map of India presents a diverse linguistic landscape with numerous languages spoken across the country. The map highlights the various languages spoken in different regions, including North, East, West, South, Central, and Northeastern India.</p>
+</section>
+<section id="north-india" class="level2">
+<h2 class="anchored" data-anchor-id="north-india">North India</h2>
+<ul>
+<li><strong>Punjabi:</strong> Spoken primarily in Punjab and also in parts of Haryana, Delhi, and Chandigarh.</li>
+<li><strong>Hindi:</strong> Official language of India, widely spoken in Uttar Pradesh, Madhya Pradesh, Bihar, Rajasthan, Haryana, Delhi, and other parts of North India.</li>
+<li><strong>Bengali:</strong> Spoken in West Bengal and Assam.</li>
+<li><strong>Gujarati:</strong> Official language of Gujarat and also spoken in parts of Maharashtra and other states.</li>
+<li><strong>Marathi:</strong> Official language of Maharashtra and also spoken in parts of Gujarat and other states.</li>
+<li><strong>Oriya:</strong> Official language of Odisha and also spoken in parts of West Bengal and other states.</li>
+<li><strong>Kashmiri:</strong> Official language of Jammu and Kashmir and also spoken in parts of Himachal Pradesh and other states.</li>
+<li><strong>Sanskrit:</strong> Widely studied and used in various contexts throughout North India.</li>
+</ul>
+</section>
+<section id="east-india" class="level2">
+<h2 class="anchored" data-anchor-id="east-india">East India</h2>
+<ul>
+<li><strong>Bengali:</strong> Official language of West Bengal and also spoken in Assam and other parts of East India.</li>
+<li><strong>Oriya:</strong> Official language of Odisha and also spoken in parts of West Bengal and other states.</li>
+<li><strong>Assamese:</strong> Official language of Assam and also spoken in parts of Meghalaya and other states.</li>
+<li><strong>Bodo:</strong> Official language of Assam and also spoken in parts of Meghalaya and other states.</li>
+<li><strong>Manipuri:</strong> Official language of Manipur and also spoken in parts of Assam and other states.</li>
+<li><strong>Nepali:</strong> Official language of Sikkim and also spoken in parts of West Bengal and other states.</li>
+<li><strong>Santhali:</strong> Official language of Jharkhand and also spoken in parts of Odisha and other states.</li>
+</ul>
+</section>
+<section id="west-india" class="level2">
+<h2 class="anchored" data-anchor-id="west-india">West India</h2>
+<ul>
+<li><strong>Gujarati:</strong> Official language of Gujarat and also spoken in parts of Maharashtra and other states.</li>
+<li><strong>Marathi:</strong> Official language of Maharashtra and also spoken in parts of Gujarat and other states.</li>
+<li><strong>Konkani:</strong> Official language of Goa and also spoken in parts of Maharashtra and Gujarat.</li>
+<li><strong>Malayalam:</strong> Official language of Kerala and also spoken in parts of Tamil Nadu and other states.</li>
+<li><strong>Tamil:</strong> Official language of Tamil Nadu and also spoken in parts of Kerala and other states.</li>
+</ul>
+</section>
+<section id="south-india" class="level2">
+<h2 class="anchored" data-anchor-id="south-india">South India</h2>
+<ul>
+<li><strong>Malayalam:</strong> Official language of Kerala and also spoken in parts of Tamil Nadu and other states.</li>
+<li><strong>Tamil:</strong> Official language of Tamil Nadu and also spoken in parts of Kerala and other states.</li>
+<li><strong>Telugu:</strong> Official language of Andhra Pradesh and Telangana and also spoken in parts of Karnataka and other states.</li>
+<li><strong>Kannada:</strong> Official language of Karnataka and also spoken in parts of Andhra Pradesh and other states.</li>
+<li><strong>Gondi:</strong> Official language of Chhattisgarh and also spoken in parts of Maharashtra, Madhya Pradesh, and other states.</li>
+<li><strong>Kui:</strong> Official language of Odisha and also spoken in parts of Andhra Pradesh and other states.</li>
+<li><strong>Kurukh:</strong> Official language of Jharkhand and also spoken in parts of Odisha and other states.</li>
+</ul>
+</section>
+<section id="central-india" class="level2">
+<h2 class="anchored" data-anchor-id="central-india">Central India</h2>
+<ul>
+<li><strong>Hindi:</strong> Official language of India, widely spoken in Uttar Pradesh, Madhya Pradesh, Bihar, Rajasthan, Haryana, Delhi, and other parts of Central India.</li>
+<li><strong>Bundeli:</strong> Official language of Bundelkhand region and also spoken in parts of Uttar Pradesh and other states.</li>
+<li><strong>Gadhavi:</strong> Official language of Gujarat and also spoken in parts of Maharashtra and other states.</li>
+<li><strong>Pahari:</strong> Official language of Uttarakhand and also spoken in parts of Himachal Pradesh and other states.</li>
+</ul>
+</section>
+<section id="northeastern-india" class="level2">
+<h2 class="anchored" data-anchor-id="northeastern-india">Northeastern India</h2>
+<ul>
+<li><strong>Assamese:</strong> Official language of Assam and also spoken in parts of Meghalaya and other states.</li>
+<li><strong>Bodo:</strong> Official language of Assam and also spoken in parts of Meghalaya and other states.</li>
+<li><strong>Manipuri:</strong> Official language of Manipur and also spoken in parts of Assam and other states.</li>
+<li><strong>Nepali:</strong> Official language of Sikkim and also spoken in parts of West Bengal and other states.</li>
+<li><strong>Santhali:</strong> Official language of Jharkhand and also spoken in parts of Odisha and other states.</li>
+<li><strong>Tibetan:</strong> Official language of Ladakh and also spoken in parts of Sikkim and other states.</li>
+</ul>
+</section>
+<section id="special-regions" class="level2">
+<h2 class="anchored" data-anchor-id="special-regions">Special Regions</h2>
+<ul>
+<li><strong>English:</strong> Widely spoken throughout India and used as a common language.</li>
+<li><strong>Urdu:</strong> Official language of Jammu and Kashmir and also spoken in parts of Uttar Pradesh and other states.</li>
+<li><strong>Sindhi:</strong> Official language of Maharashtra and also spoken in parts of Gujarat and other states.</li>
+<li><strong>Tulu:</strong> Official language of Karnataka and also spoken in parts of Kerala and other states.</li>
+<li><strong>Bhili:</strong> Official language of Maharashtra and also spoken in parts of Gujarat and other states.</li>
+</ul>
+</section>
+</section>
+<section id="dialectal-variations" class="level1">
+<h1>Dialectal Variations</h1>
+<section id="introduction-2" class="level2">
+<h2 class="anchored" data-anchor-id="introduction-2">Introduction</h2>
+<p>Dialectal variations refer to distinct forms of a language spoken by specific groups, often distinguished by geographical regions. Each dialect can have unique vocabulary, grammar, and pronunciation.</p>
+</section>
+<section id="examples" class="level2">
+<h2 class="anchored" data-anchor-id="examples">Examples</h2>
+<ul>
+<li><strong>American English vs.&nbsp;British/Indian English</strong>: The word “truck” is commonly used in American English, whereas in British (and Indian) English, the same vehicle is referred to as a “lorry”.</li>
+<li><strong>Pronunciation differences</strong>: The pronunciation of certain words, like “tomato” (toh-MAH-toh vs.&nbsp;to-MAY-to), also differs between regions.</li>
+</ul>
+</section>
+<section id="pronunciation-variations" class="level2">
+<h2 class="anchored" data-anchor-id="pronunciation-variations">Pronunciation Variations</h2>
+<p>Pronunciation variations are a key aspect of dialectal differences. Even within the same language, different regions or communities may have distinct ways of pronouncing words.</p>
+<ul>
+<li><strong>Vowel shifts</strong>: Changes in vowel pronunciation can significantly impact the sound and meaning of words.</li>
+<li><strong>Consonant differences</strong>: Variations in consonant pronunciation can also affect the overall sound of a language.</li>
+</ul>
+</section>
+<section id="vocabulary-differences" class="level2">
+<h2 class="anchored" data-anchor-id="vocabulary-differences">Vocabulary Differences</h2>
+<p>Vocabulary differences are another significant aspect of dialectal variations. Words may have different meanings or connotations in different dialects.</p>
+<ul>
+<li><strong>Regional slang</strong>: Slang words or phrases may be unique to specific regions or communities.</li>
+<li><strong>Idiomatic expressions</strong>: Idioms and colloquialisms can vary significantly between dialects.</li>
+</ul>
+</section>
+<section id="grammar-differences" class="level2">
+<h2 class="anchored" data-anchor-id="grammar-differences">Grammar Differences</h2>
+<p>Grammar differences are also common in dialectal variations. Sentence structure, verb conjugation, and other grammatical elements may differ between dialects.</p>
+<ul>
+<li><strong>Sentence structure</strong>: The order of words in a sentence can change between dialects.</li>
+<li><strong>Verb conjugation</strong>: Verb forms may vary depending on the dialect.</li>
+</ul>
+</section>
+<section id="implications-of-dialectal-variations" class="level2">
+<h2 class="anchored" data-anchor-id="implications-of-dialectal-variations">Implications of Dialectal Variations</h2>
+<p>Dialectal variations have significant implications for language learning, communication, and cultural understanding.</p>
+<ul>
+<li><strong>Language learning</strong>: Dialectal variations can present challenges for language learners, who must adapt to unique vocabulary, grammar, and pronunciation.</li>
+<li><strong>Communication</strong>: Dialectal variations can lead to misunderstandings or miscommunications, particularly if speakers are not aware of the differences.</li>
+<li><strong>Cultural understanding</strong>: Recognizing dialectal variations can deepen cultural understanding and appreciation, as it highlights the diversity and richness of human language.</li>
+</ul>
+</section>
+</section>
+<section id="sociolects" class="level1">
+<h1>Sociolects</h1>
+<section id="definition" class="level2">
+<h2 class="anchored" data-anchor-id="definition">Definition</h2>
+<p>Sociolects refer to variations in language used by specific social groups, often influenced by factors such as class, education, or occupation. The way language is used can signal social identity and status.</p>
+</section>
+<section id="examples-1" class="level2">
+<h2 class="anchored" data-anchor-id="examples-1">Examples</h2>
+<ul>
+<li><strong>Formal vs.&nbsp;Informal Language</strong>: In formal settings, people might say, “Good morning, how are you?” while in informal contexts, they might simply say, “Hey, what’s up?”</li>
+<li><strong>Professional Jargon</strong>: Professional jargon is another example of sociolect, where specific terms are used within particular industries (e.g., legal jargon, medical terminology).</li>
+</ul>
+</section>
+<section id="significance" class="level2">
+<h2 class="anchored" data-anchor-id="significance">Significance</h2>
+<p>Sociolects are significant because they reflect the social context in which language is used. By understanding sociolects, we can gain insights into the social dynamics and power structures within a community.</p>
+<ul>
+<li><strong>Social Identity</strong>: Sociolects can signal social identity and status, highlighting the importance of language in shaping our social relationships.</li>
+<li><strong>Power Dynamics</strong>: Understanding sociolects can also help us recognize the power dynamics at play in different social contexts, where certain groups may have more access to certain language varieties.</li>
+</ul>
+</section>
+<section id="implications" class="level2">
+<h2 class="anchored" data-anchor-id="implications">Implications</h2>
+<p>The study of sociolects has implications for various fields, including linguistics, sociology, and education.</p>
+<ul>
+<li><strong>Language Teaching</strong>: Understanding sociolects can inform language teaching practices, helping educators to create more effective language learning strategies that take into account the social context of language use.</li>
+<li><strong>Communication</strong>: Recognizing sociolects can also improve communication across different social groups, by acknowledging the language varieties used by different communities.</li>
+</ul>
+</section>
+</section>
+<section id="ambiguity-in-relationships-actions-promises-and-orders" class="level1">
+<h1>Ambiguity in Relationships, Actions, Promises, and Orders</h1>
+<section id="ambiguity-in-relationships" class="level2">
+<h2 class="anchored" data-anchor-id="ambiguity-in-relationships">Ambiguity in Relationships</h2>
+<ul>
+<li><strong>Mary and Sue are sisters.</strong>
+<ul>
+<li>How are Mary and Sue related?</li>
+<li>Sisters</li>
+</ul></li>
+<li><strong>Mary and Sue are mothers.</strong>
+<ul>
+<li>How are Mary and Sue related?</li>
+<li>Mothers</li>
+</ul></li>
+</ul>
+</section>
+<section id="ambiguity-in-actions" class="level2">
+<h2 class="anchored" data-anchor-id="ambiguity-in-actions">Ambiguity in Actions</h2>
+<ul>
+<li><strong>Joan made sure to thank Susan for all the help she had received.</strong>
+<ul>
+<li>Who had received help?</li>
+<li>Joan</li>
+<li>Susan</li>
+</ul></li>
+<li><strong>Joan made sure to thank Susan for all the help she had given.</strong>
+<ul>
+<li>Who had given help?</li>
+<li>Joan</li>
+<li>Susan</li>
+</ul></li>
+</ul>
+</section>
+<section id="ambiguity-in-promises-and-orders" class="level2">
+<h2 class="anchored" data-anchor-id="ambiguity-in-promises-and-orders">Ambiguity in Promises and Orders</h2>
+<ul>
+<li><strong>John promised Bill to leave so an hour later he left.</strong>
+<ul>
+<li>Who left an hour later?</li>
+<li>John</li>
+<li>Bill</li>
+</ul></li>
+<li><strong>John ordered Bill to leave so an hour later he left.</strong>
+<ul>
+<li>Who left an hour later?</li>
+<li>John</li>
+<li>Bill</li>
+</ul></li>
+</ul>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->

@@ -1,0 +1,529 @@
+# W2Lec5-Text-Processing.pdf - Page 1
+
+```markdown
+# BSCS5002: Introduction to Natural Language Processing
+
+## Week 2 Lecture-1: Text Processing
+
+**Parameswari Krishnamurthy**
+
+Language Technologies Research Centre
+IIIT-Hyderabad
+
+*param.krishna@iiit.ac.in*
+
+![IIIT Logo](https://www.iiit.ac.in/images/iiit-logo.png) ![IIIT Hyderabad Logo](https://www.iiit.ac.in/images/iiit-hyderabad-logo.png)
+
+---
+
+**Note**: This is a placeholder for the images as the OCR process cannot capture images directly. Replace with actual image URLs if available.
+
+---
+
+**BSCS5002** (BSCS5002) 1 / 24
+```
+
+# W2Lec5-Text-Processing.pdf - Page 2
+
+```markdown
+# NLP Pipeline
+
+## Steps in the NLP Pipeline
+
+1. **Data Collection**
+   - Gathering the initial dataset for processing.
+
+2. **Text Cleaning**
+   - Removing noise and irrelevant information from the text.
+   - Handling missing or inconsistent data.
+
+3. **Pre-processing**
+   - Converting text into a standardized format.
+   - Tokenization and normalization.
+
+4. **Feature Engineering**
+   - Extracting relevant features from the pre-processed data.
+   - Creating numerical representations of text.
+
+5. **Modeling**
+   - Building and training the NLP models.
+   - Utilizing algorithms like SVM, LSTM, or transformers.
+
+6. **Evaluation**
+   - Assessing the performance of the models.
+   - Using metrics such as accuracy, precision, recall, and F1-score.
+
+7. **Deployment**
+   - Implementing the trained model in a production environment.
+   - Ensuring scalability and efficiency.
+
+8. **Monitoring and Model Updating**
+   - Continuously monitoring the performance of the deployed model.
+   - Updating the model with new data and improvements.
+
+```
+
+# W2Lec5-Text-Processing.pdf - Page 3
+
+```markdown
+## Data Collection
+
+### BS-DS IITM (BSCS5002)
+
+---
+
+This slide appears to be part of a presentation on data collection within the context of the "BS-DS IITM (BSCS5002)" course. 
+
+#### Content
+
+- The header of the slide indicates "Data Collection" in bold text against a blue background.
+- The course identification "BS-DS IITM (BSCS5002)" is located at the bottom center of the slide in a blue banner.
+
+#### Notes
+
+- This likely represents a section title or a new chapter within a larger presentation on data science topics.
+- The "3 / 24" at the lower-right corner indicates that this is the third slide in a presentation with 24 slides in total.
+
+#### Additional Information
+
+- The design is minimalistic, focusing on the title and possibly preparing the audience for an in-depth discussion on data collection methodologies.
+- The blue banner at the bottom is consistent with the branding or theme of the presentation materials.
+
+---
+
+For more detailed content or specific methodologies related to data collection, please refer to the presentation slides that follow this section.
+
+---
+
+```
+
+# W2Lec5-Text-Processing.pdf - Page 4
+
+```markdown
+# Data Collection
+
+Gather text data from various sources such as websites, books, articles, and social media.
+
+## Challenges:
+
+- **Data Quality**
+  - Incomplete or missing data
+  - Inconsistent data formats
+  - Presence of noise and outliers
+
+- **Data Privacy and Security**
+  - Ensuring data anonymization
+  - Compliance with regulations (e.g., GDPR)
+  - Securing data storage and transfer
+
+![BS-DS IITM (BSCS5002)](image-url)
+
+4 / 24
+```
+
+# W2Lec5-Text-Processing.pdf - Page 5
+
+```markdown
+# Data Collection
+
+## Challenges:
+
+- **Data Accessibility**
+  - Limited access to proprietary or sensitive data
+  - High costs of acquiring certain datasets
+  - Technical barriers to accessing data from various sources
+
+- **Data Volume and Variety**
+  - Managing large volumes of data (Big Data)
+  - Integrating data from multiple sources and formats
+  - Handling unstructured data (e.g., text, images, videos)
+
+- **Bias and Representativeness**
+  - Ensuring the data is representative of the population
+  - Avoiding sampling bias
+  - Addressing any inherent biases in the data collection process
+
+*Source: BS-DS IITM (BSCS5002)*
+```
+
+# W2Lec5-Text-Processing.pdf - Page 6
+
+```markdown
+# Text Cleaning
+
+## BS-DS IITM (BSCS5002)
+
+### Slide 6/24
+
+### Text Cleaning
+
+```
+
+# W2Lec5-Text-Processing.pdf - Page 7
+
+```markdown
+# Text Cleaning
+
+- **Remove Noise:**
+  - **Punctuation, Numbers, and Special Characters:**
+    - **Original Text:** "Hello! This is an example text with numbers 12345 and symbols $%&."
+    - **Cleaned Text:** "Hello This is an example text with numbers and symbols"
+    - Removing noise helps focus on the meaningful parts of the text.
+
+- **Correct Spelling Errors and Normalize Text:**
+  - **Original Text:** "This sentence contains a spelling error."
+  - **Corrected Text:** "This sentence contains a spelling error."
+  - Normalization involves converting text to a standard form, such as converting different forms of a word to a single form (e.g., "color" and "colour" to "color").
+
+- **Handle Misspellings, Slang, and Abbreviations:**
+  - **Original Text:** "OMG, this txt is gr8!"
+  - **Normalized Text:** "Oh my god, this text is great!"
+  - Converting slang and abbreviations to their full forms ensures clarity and consistency.
+
+*Source: BS-DS IITM (BSCS5002)*
+```
+
+# W2Lec5-Text-Processing.pdf - Page 8
+
+```markdown
+# Text Pre-processing
+
+## BS-DS IITM (BSCS5002)
+
+### Slide Content
+
+**Text Pre-processing**
+
+*(No additional content from the image)*
+
+---
+
+*Footer Information:*
+
+- **BS-DS IITM (BSCS5002)**
+- **Slide 8 of 24**
+```
+
+# W2Lec5-Text-Processing.pdf - Page 9
+
+```markdown
+# Text Pre-processing
+
+## Data Cleaning
+
+1. **Source text**: The process starts with the raw text that needs to be pre-processed.
+2. **Identify noise**: Detect any irrelevant or unwanted data in the source text.
+3. **Noise removal**: Eliminate the identified noise to improve data quality.
+4. **Character normalization**: Standardize the characters to ensure consistency.
+5. **Data masking**: Mask sensitive information to protect privacy.
+6. **Clean text**: The output of this stage is the cleaned text.
+
+## Linguistic Processing
+
+1. **Tokenization**: Break down the cleaned text into smaller units called tokens.
+2. **POS tagging**: Assign parts of speech (noun, verb, adjective, etc.) to each token.
+3. **Lemmatization**: Reduce words to their base or root form.
+4. **Named-entity recognition**: Identify and classify named entities (people, organizations, locations) in the text.
+5. **Prepared text**: The final output of this stage is the prepared text.
+
+![Diagram]()
+
+**Source**: BS-DS IITM (BSCS5002)
+```
+
+# W2Lec5-Text-Processing.pdf - Page 10
+
+```markdown
+# Text Preprocessing
+
+- Text preprocessing is crucial for improving the quality of text data before applying NLP techniques.
+- It improves the quality of text data before applying NLP techniques.
+- **Enhances Accuracy**: Clean and well-processed text improves the performance of NLP tasks like parsing and named entity recognition.
+- **Reduces Noise**: Removing irrelevant information (e.g., stop words) helps focus on meaningful content.
+- **Facilitates Consistency**: Normalization techniques ensure uniformity in text data, aiding better understanding and analysis.
+- **Improves Training Efficiency**: Preprocessed text speeds up training by reducing complexity and dimensionality.
+- **Boosts Model Quality**: Clean and standardized data helps in learning more accurate language patterns.
+- **Mitigates Bias**: Proper preprocessing can help in reducing biases present in the raw text.
+
+_BS-DS IITM (BSCS5002)_
+
+![Placeholder](image_url)
+
+```
+
+# W2Lec5-Text-Processing.pdf - Page 11
+
+```markdown
+# Text Preprocessing Steps
+
+- **Tokenization**: Split text into individual words or sentences.
+
+- **Lowercasing**: Convert all text to lowercase to ensure consistency.
+
+- **Stop Words Removal**: Eliminate common words (e.g., "and", "the") that add little value.
+
+- **Normalization**: Convert text into a standardized format by addressing various inconsistencies and variations.
+
+- **Stemming/Lemmatization**: Reduce words to their base or root form.
+
+---
+
+*Source: BS-DS IITM (BSCS5002)*
+
+---
+
+*Slide Number: 11 / 24*
+```
+
+# W2Lec5-Text-Processing.pdf - Page 12
+
+```markdown
+# Text Preprocessing: Tokenization
+
+Tokenization is the process of splitting text into smaller units called tokens (sentences and words).
+
+- **Sentence tokenization** is the process of splitting text into individual sentences.
+
+## Challenges:
+
+- Handling punctuation marks that do not indicate the end of a sentence (Dr., e.g., Ph.D. etc.)
+- Differentiating between periods in abbreviations and sentence boundaries
+- Dealing with sentences that include quotes orparentheses
+
+![BS-DS IITM (BSCS5002)](12 / 24)
+```
+
+# W2Lec5-Text-Processing.pdf - Page 13
+
+```markdown
+# Sentence tokenization
+
+- **Original Text:** “Dr.Indhu, an expert in AI, visited Chennai. She gave a talk on Ph.D. research at IIT Madras. Her presentation was insightful, e.g., she discussed various algorithms. After the event, we went to 'Marina Beach' for a relaxing evening.”
+
+- **Sentence Tokenized Text:**
+  - “Dr. Indhu, an expert in AI, visited Chennai.”
+  - “She gave a talk on Ph.D. research at IIT Madras.”
+  - “Her presentation was insightful, e.g., she discussed various algorithms.”
+  - “After the event, we went to 'Marina Beach' for a relaxing evening.”
+
+![IIT Madras Logo](image_url)
+
+_BSCS5002_
+
+13 / 24
+```
+
+# W2Lec5-Text-Processing.pdf - Page 14
+
+```markdown
+# Text Preprocessing: Word Tokenization
+
+Word tokenization is the process of splitting text into individual words.
+
+## Challenges:
+
+- Can't just blindly remove punctuation. Full stops (`.`") are ambiguous; **Dr.**, **m.p.h.**, **Ph.D.**
+- Email addresses, URLs, etc. contain alphabets, numbers, as well as special characters (`"@`, `"`, `"`, `"_")`
+- Languages like English use contractions (`"we're"`, `"I'm"`) which, when tokenized by this approach, creates tokens `"re"`, `"m"`, which are not meaningful.
+
+![BS-DS IITM (BSCS5002)](image.png) 14 / 24
+```
+
+# W2Lec5-Text-Processing.pdf - Page 15
+
+```markdown
+# Lowercasing
+
+Lowercasing is the process of converting all characters in a text to lowercase. This step standardizes text data by eliminating case differences, which helps in uniform analysis.
+
+## Why is Lowercasing Important?
+
+- **Uniform Representation**: Treats words with different cases as identical, which is crucial for accurate text analysis and processing.
+- **Simplifies Matching**: Helps in text matching and retrieval tasks by reducing case sensitivity.
+- **Improves Model Efficiency**: Ensures that text data is consistent, enhancing the performance of machine learning models.
+
+![BS-DS IITM (BSCS5002)](https://example.com/image.png) 15 / 24
+```
+
+# W2Lec5-Text-Processing.pdf - Page 16
+
+```markdown
+# Lowercasing
+
+## Example
+
+### Original Text:
+```markdown
+"The quick brown Fox jumps over the lazy DOG."
+```
+
+### After Lowercasing:
+```markdown
+"the quick brown fox jumps over the lazy dog."
+```
+
+- Consider a search engine querying for "quick Brown fox" in a database of documents.
+- Lowercasing ensures that the search results match regardless of the case used in the query or the documents.
+
+![Image of the slide](image_url)
+
+BS-DS IITM (BSCS5002)
+
+16 / 24
+```
+
+# W2Lec5-Text-Processing.pdf - Page 17
+
+```markdown
+# Text Preprocessing: Stopword Removal
+
+Stopword removal involves eliminating common words that add little value (e.g., "and", "the").
+
+## Challenges:
+
+- **Determining the appropriate stopword list for the specific context**: tasks such as information retrieval, sentiment analysis, and topic modeling.
+- **Ensuring important words are not mistakenly removed** (e.g., "no" in "no pain no gain").
+
+## When to NOT remove stopwords:
+
+- **If the task involves understanding the context or sentiment**: for example, in sentiment analysis, words like "not" in "not happy" are crucial for understanding the sentiment.
+- **For tasks like machine translation or text generation**: retaining stopwords is important to preserve the grammatical structure and meaning of sentences.
+
+![Example Image](https://via.placeholder.com/150)
+
+*Source: BS-DS IITM (BSCS5002)*
+
+*Slide: 17 / 24*
+```
+
+# W2Lec5-Text-Processing.pdf - Page 18
+
+```markdown
+# Text Preprocessing: Normalization
+
+Normalization involves converting text to a standard format, such as lowercasing, expanding abbreviations, and correcting spelling errors.
+
+## Challenges:
+
+- Handling variations in spelling (e.g., "favourite" vs "favorite")
+- Dealing with domain-specific abbreviations and slang
+- Correcting spelling errors without introducing new errors
+
+## Example:
+
+- **Original Text**: "LOL, that was the funniest joke ever!!!"
+- **Normalized Text**: "Laugh out loud, that was the funniest joke ever"
+
+![BS-DS IITM (BSCS5002)](https://example.com/image.png) 16 / 24
+```
+
+# W2Lec5-Text-Processing.pdf - Page 19
+
+```markdown
+# Unicodes Normalization
+
+## Normalizaiton in Hindi an Example:
+
+![Hindi Text](image_url)
+
+Showing 4 Unicode Codepoints
+
+| Browser | Codepoint | Name                | # Fonts | Script   |
+|---------|-----------|---------------------|---------|----------|
+| [Browser Icon](image_url) | U+0958    | DEVANAGARI LETTER QA | 87      | Devanagari |
+| [Browser Icon](image_url) | U+0920    | SPACE               | 39946   | Common    |
+| [Browser Icon](image_url) | U+0915    | DEVANAGARI LETTER KA | 90      | Devanagari |
+| [Browser Icon](image_url) | U+093C    | DEVANAGARI SIGN NUKTA | 87   | Devanagari |
+
+Figure: Devanagari Example for Normalization
+
+BS-DS IITM (BSCS5002)
+
+19 / 24
+```
+
+# W2Lec5-Text-Processing.pdf - Page 20
+
+```markdown
+# Spelling Normalization
+
+- A Telugu word can be written in different forms:
+  - taruvatā
+  - tarvatā
+  - taravatā
+
+- Spellings of these kinds which might be valid and most frequent in corpus need to be normalized.
+```
+
+# W2Lec5-Text-Processing.pdf - Page 21
+
+```markdown
+# Stemming and Lemmatization
+
+## Stemming
+
+**Stemming** is a process that removes suffixes from words to reduce them to a base form. It uses heuristic rules and does not always produce valid dictionary words.
+
+## Lemmatization
+
+**Lemmatization** reduces words to their base or dictionary form (lemma) by considering the context and ensuring the root form is a valid word. It involves more complex analysis compared to stemming.
+
+![BS-DS IITM (BSCS5002)](https://example.com/image.png)
+
+21 / 24
+```
+
+# W2Lec5-Text-Processing.pdf - Page 22
+
+```markdown
+# Stemming and Lemmatization
+
+## Stemming Example:
+
+- **Original Words:** "flies", "flying", "flied"
+- **Stemmed Form:** "fli/fly"
+
+## Lemmatization Example:
+
+- **Original Words:** "flies", "flying", "flied"
+- **Lemmatized Form:** "fly"
+
+![BS-DS IITM (BSCS5002)](22 / 24)
+```
+
+# W2Lec5-Text-Processing.pdf - Page 23
+
+```markdown
+# Stemming and Lemmatization
+
+## Key Differences
+
+- **Approach**: Stemming uses heuristic rules to strip suffixes, while lemmatization uses a dictionary and context.
+
+- **Output**: Stemming can produce non-words, while lemmatization produces valid words.
+
+- **Complexity**: Lemmatization involves more sophisticated analysis and is more accurate but computationally more expensive than stemming.
+
+![BSCS5002](BSCS5002) 23 / 24
+```
+
+# W2Lec5-Text-Processing.pdf - Page 24
+
+```markdown
+# Conclusion
+
+- **Importance of Text Preprocessing**: Proper preprocessing is essential for effective NLP applications. It ensures that the data is clean, consistent, and ready for analysis.
+
+- **Key Steps**: The main steps include data collection, text cleaning, and preprocessing techniques like tokenization, lowercasing, stopword removal, and normalization.
+
+- **Challenges**: Each step comes with its own set of challenges, including handling noise, ensuring data privacy, managing different text formats, and addressing biases.
+
+- **Best Practices**: Always adapt preprocessing steps to the specific requirements of your NLP task and ensure that the processed text maintains its integrity and meaning.
+
+- **Future Directions**: As NLP continues to evolve, keeping up with advancements in preprocessing techniques and tools will be crucial for improving the accuracy and efficiency of text analysis.
+
+![](image_placeholder.png)
+
+BS-DS IITM (BSCS5002) 24 / 24
+```
+

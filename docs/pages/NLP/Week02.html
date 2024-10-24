@@ -1,0 +1,1927 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.5.56">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Text Processing and Analysis – BS Degree Notes</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="https://lalten.github.io/lmweb/style/latinmodern-roman.css">
+<link rel="stylesheet" href="https://lalten.github.io/lmweb/style/latinmodern-sans.css">
+<link rel="stylesheet" href="https://lalten.github.io/lmweb/style/latinmodern-mono.css">
+</head>
+
+<body class="nav-sidebar docked">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../pages/NLP/Week01.html">NLP</a></li><li class="breadcrumb-item"><a href="../../pages/NLP/Week02.html">Week 2</a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="../../">BS Degree Notes</a> 
+        <div class="sidebar-tools-main">
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Home</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="false">
+ <span class="menu-text">Deep Learning</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../pages/DL/Week01_1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 1.1</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../pages/DL/Week01_2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 1.2</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../pages/DL/Week02.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 2</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../pages/DL/Week03.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 3</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../pages/DL/Week04.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 4</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../pages/DL/Week05.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 5</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../pages/DL/Week06.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 6</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="false">
+ <span class="menu-text">AI: Search Methods</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../pages/AI/Week01.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 1</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../pages/AI/Week02.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 2</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../pages/AI/Week03.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 3</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../pages/AI/Week04.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 4</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../pages/AI/Week05.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 5</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../pages/AI/Week06.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 6</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="false">
+ <span class="menu-text">Software Testing</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../pages/ST/Week01.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 1</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../pages/ST/Week02.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 2</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../pages/ST/Week03.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 3</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../pages/ST/Week04.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 4</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../pages/ST/Week05.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 5</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../pages/ST/Week06.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 6</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../pages/ST/Week07.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 7</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../pages/ST/Week08.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 8</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../pages/ST/Week09.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 9</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../pages/ST/Week10.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 10</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../pages/ST/Week11.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 11</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../pages/ST/Week12.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 12</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="false">
+ <span class="menu-text">Software Engineering</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../pages/SE/Week01.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 1</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../pages/SE/Week02.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 2</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../pages/SE/Week03.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 3</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../pages/SE/Week04.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 4</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../pages/SE/Week09.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 9</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../pages/SE/Week10.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 10</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../pages/SE/Week11.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 11</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="false">
+ <span class="menu-text">Reinforcement Learning</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../pages/RL/Week01_1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 1.1</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../pages/RL/Week01_2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 1.2</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../pages/RL/Week02.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 2</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true">
+ <span class="menu-text">NLP</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../pages/NLP/Week01.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 1</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../pages/NLP/Week02.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">Week 2</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../pages/NLP/Week03.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 3</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="false">
+ <span class="menu-text">LLM</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../pages/LLM/Week01.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 1</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../pages/LLM/Week02.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 2</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../pages/LLM/Week03.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 3</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../pages/LLM/Week04.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 4</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#text-preprocessing" id="toc-text-preprocessing" class="nav-link active" data-scroll-target="#text-preprocessing">Text Preprocessing</a>
+  <ul class="collapse">
+  <li><a href="#text-preprocessing-stopword-removal" id="toc-text-preprocessing-stopword-removal" class="nav-link" data-scroll-target="#text-preprocessing-stopword-removal">Text Preprocessing: Stopword Removal</a></li>
+  <li><a href="#text-preprocessing-normalization" id="toc-text-preprocessing-normalization" class="nav-link" data-scroll-target="#text-preprocessing-normalization">Text Preprocessing: Normalization</a></li>
+  <li><a href="#unicode-normalization" id="toc-unicode-normalization" class="nav-link" data-scroll-target="#unicode-normalization">Unicode Normalization</a></li>
+  <li><a href="#spelling-normalization" id="toc-spelling-normalization" class="nav-link" data-scroll-target="#spelling-normalization">Spelling Normalization</a></li>
+  </ul></li>
+  <li><a href="#stemming-and-lemmatization" id="toc-stemming-and-lemmatization" class="nav-link" data-scroll-target="#stemming-and-lemmatization">Stemming and Lemmatization</a>
+  <ul class="collapse">
+  <li><a href="#stemming" id="toc-stemming" class="nav-link" data-scroll-target="#stemming">Stemming</a></li>
+  <li><a href="#lemmatization" id="toc-lemmatization" class="nav-link" data-scroll-target="#lemmatization">Lemmatization</a></li>
+  <li><a href="#comparison" id="toc-comparison" class="nav-link" data-scroll-target="#comparison">Comparison</a></li>
+  <li><a href="#applications" id="toc-applications" class="nav-link" data-scroll-target="#applications">Applications</a></li>
+  <li><a href="#relationship-to-part-of-speech-pos-tagging" id="toc-relationship-to-part-of-speech-pos-tagging" class="nav-link" data-scroll-target="#relationship-to-part-of-speech-pos-tagging">Relationship to Part-of-Speech (POS) Tagging</a></li>
+  <li><a href="#note-on-language-modeling" id="toc-note-on-language-modeling" class="nav-link" data-scroll-target="#note-on-language-modeling">Note on Language Modeling</a></li>
+  </ul></li>
+  <li><a href="#morphological-analysis" id="toc-morphological-analysis" class="nav-link" data-scroll-target="#morphological-analysis">Morphological Analysis</a>
+  <ul class="collapse">
+  <li><a href="#what-is-morphology" id="toc-what-is-morphology" class="nav-link" data-scroll-target="#what-is-morphology">What is Morphology?</a></li>
+  <li><a href="#concepts-of-morphology" id="toc-concepts-of-morphology" class="nav-link" data-scroll-target="#concepts-of-morphology">Concepts of Morphology</a></li>
+  <li><a href="#native-speakers-linguistic-abilities-and-morphology" id="toc-native-speakers-linguistic-abilities-and-morphology" class="nav-link" data-scroll-target="#native-speakers-linguistic-abilities-and-morphology">Native Speaker’s Linguistic Abilities and Morphology</a></li>
+  <li><a href="#branches-of-morphology" id="toc-branches-of-morphology" class="nav-link" data-scroll-target="#branches-of-morphology">Branches of Morphology</a></li>
+  <li><a href="#morpheme-types-and-examples" id="toc-morpheme-types-and-examples" class="nav-link" data-scroll-target="#morpheme-types-and-examples">Morpheme Types and Examples</a></li>
+  <li><a href="#affixes-position-and-function" id="toc-affixes-position-and-function" class="nav-link" data-scroll-target="#affixes-position-and-function">Affixes: Position and Function</a></li>
+  <li><a href="#non-concatenative-morphology" id="toc-non-concatenative-morphology" class="nav-link" data-scroll-target="#non-concatenative-morphology">Non-Concatenative Morphology</a></li>
+  <li><a href="#allomorphy-variations-in-morphemes" id="toc-allomorphy-variations-in-morphemes" class="nav-link" data-scroll-target="#allomorphy-variations-in-morphemes">Allomorphy: Variations in Morphemes</a></li>
+  <li><a href="#morphological-analysis-practical-significance" id="toc-morphological-analysis-practical-significance" class="nav-link" data-scroll-target="#morphological-analysis-practical-significance">Morphological Analysis: Practical Significance</a></li>
+  </ul></li>
+  <li><a href="#morphological-typology" id="toc-morphological-typology" class="nav-link" data-scroll-target="#morphological-typology">Morphological Typology</a></li>
+  <li><a href="#morphological-models" id="toc-morphological-models" class="nav-link" data-scroll-target="#morphological-models">Morphological Models</a>
+  <ul class="collapse">
+  <li><a href="#item-and-arrangement-ia" id="toc-item-and-arrangement-ia" class="nav-link" data-scroll-target="#item-and-arrangement-ia">Item and Arrangement (IA)</a></li>
+  <li><a href="#item-and-process-ip" id="toc-item-and-process-ip" class="nav-link" data-scroll-target="#item-and-process-ip">Item and Process (IP)</a></li>
+  <li><a href="#word-and-paradigm-wp" id="toc-word-and-paradigm-wp" class="nav-link" data-scroll-target="#word-and-paradigm-wp">Word and Paradigm (WP)</a></li>
+  </ul></li>
+  <li><a href="#computational-morphology" id="toc-computational-morphology" class="nav-link" data-scroll-target="#computational-morphology">Computational Morphology</a>
+  <ul class="collapse">
+  <li><a href="#key-goals-and-tasks" id="toc-key-goals-and-tasks" class="nav-link" data-scroll-target="#key-goals-and-tasks">Key Goals and Tasks</a></li>
+  <li><a href="#applications-1" id="toc-applications-1" class="nav-link" data-scroll-target="#applications-1">Applications</a></li>
+  <li><a href="#techniques-and-approaches" id="toc-techniques-and-approaches" class="nav-link" data-scroll-target="#techniques-and-approaches">Techniques and Approaches</a></li>
+  <li><a href="#challenges" id="toc-challenges" class="nav-link" data-scroll-target="#challenges">Challenges</a></li>
+  <li><a href="#future-directions" id="toc-future-directions" class="nav-link" data-scroll-target="#future-directions">Future Directions</a></li>
+  </ul></li>
+  <li><a href="#finite-state-technology" id="toc-finite-state-technology" class="nav-link" data-scroll-target="#finite-state-technology">Finite State Technology</a>
+  <ul class="collapse">
+  <li><a href="#finite-state-automata-fsa" id="toc-finite-state-automata-fsa" class="nav-link" data-scroll-target="#finite-state-automata-fsa">Finite State Automata (FSA)</a></li>
+  <li><a href="#finite-state-transducers-fst" id="toc-finite-state-transducers-fst" class="nav-link" data-scroll-target="#finite-state-transducers-fst">Finite State Transducers (FST)</a></li>
+  </ul></li>
+  <li><a href="#morphological-analyzers-and-generators" id="toc-morphological-analyzers-and-generators" class="nav-link" data-scroll-target="#morphological-analyzers-and-generators">Morphological Analyzers and Generators</a>
+  <ul class="collapse">
+  <li><a href="#morphological-analyzers" id="toc-morphological-analyzers" class="nav-link" data-scroll-target="#morphological-analyzers">Morphological Analyzers</a></li>
+  <li><a href="#morphological-generators" id="toc-morphological-generators" class="nav-link" data-scroll-target="#morphological-generators">Morphological Generators</a></li>
+  <li><a href="#relationship-between-analysis-and-generation" id="toc-relationship-between-analysis-and-generation" class="nav-link" data-scroll-target="#relationship-between-analysis-and-generation">Relationship Between Analysis and Generation</a></li>
+  </ul></li>
+  <li><a href="#models-for-indian-languages" id="toc-models-for-indian-languages" class="nav-link" data-scroll-target="#models-for-indian-languages">Models for Indian Languages</a>
+  <ul class="collapse">
+  <li><a href="#linguistic-models" id="toc-linguistic-models" class="nav-link" data-scroll-target="#linguistic-models">Linguistic Models</a></li>
+  <li><a href="#computational-models" id="toc-computational-models" class="nav-link" data-scroll-target="#computational-models">Computational Models</a></li>
+  <li><a href="#example-morphological-rule-representation-in-fst" id="toc-example-morphological-rule-representation-in-fst" class="nav-link" data-scroll-target="#example-morphological-rule-representation-in-fst">Example: Morphological Rule Representation in FST</a></li>
+  </ul></li>
+  <li><a href="#review-questions" id="toc-review-questions" class="nav-link" data-scroll-target="#review-questions">Review Questions</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../pages/NLP/Week01.html">NLP</a></li><li class="breadcrumb-item"><a href="../../pages/NLP/Week02.html">Week 2</a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title">Text Processing and Analysis</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="text-preprocessing" class="level2">
+<h2 class="anchored" data-anchor-id="text-preprocessing">Text Preprocessing</h2>
+<section id="text-preprocessing-stopword-removal" class="level3">
+<h3 class="anchored" data-anchor-id="text-preprocessing-stopword-removal">Text Preprocessing: Stopword Removal</h3>
+<ul>
+<li>Stopwords are common words that typically carry less meaning in a sentence (e.g., “a,” “the,” “is,” “in”).</li>
+<li>Removing them can be beneficial for certain NLP tasks but detrimental to others.</li>
+<li><strong>Challenges:</strong>
+<ul>
+<li><strong>Context-Dependent Importance:</strong> Stopwords can be crucial for understanding negation (“not happy”) or subtle sentiment.</li>
+<li><strong>Task-Specific Lists:</strong> The ideal stopword list varies depending on the task (e.g., sentiment analysis, information retrieval).</li>
+</ul></li>
+<li><strong>When NOT to remove stopwords:</strong>
+<ul>
+<li><strong>Sentiment Analysis:</strong> Stopwords like “not,” “very,” or “too” significantly impact sentiment.</li>
+<li><strong>Machine Translation:</strong> Stopwords contribute to grammatical structure and natural flow in translated text.</li>
+<li><strong>Text Generation:</strong> Preserving stopwords aids in creating human-like text.</li>
+</ul></li>
+</ul>
+</section>
+<section id="text-preprocessing-normalization" class="level3">
+<h3 class="anchored" data-anchor-id="text-preprocessing-normalization">Text Preprocessing: Normalization</h3>
+<ul>
+<li>Normalization standardizes text by resolving inconsistencies and variations to make it uniform for processing.</li>
+<li><strong>Common Normalization Techniques:</strong>
+<ul>
+<li><strong>Lowercasing:</strong> Converts all characters to lowercase (e.g., “The” → “the”).</li>
+<li><strong>Expanding Contractions:</strong> Expands shortened word forms (e.g., “can’t” → “cannot”).</li>
+<li><strong>Handling Numbers:</strong> Converting numerical representations to a standard format or words (e.g., “100” → “one hundred”).</li>
+<li><strong>Spelling Correction:</strong> Correcting misspellings (e.g., “teh” → “the”).</li>
+</ul></li>
+<li><strong>Challenges:</strong>
+<ul>
+<li><strong>Ambiguity:</strong> Abbreviations can have multiple meanings (e.g., “US” could refer to the United States or “us”).</li>
+<li><strong>Domain-Specificity:</strong> Slang and jargon may require specialized normalization.</li>
+<li><strong>Over-Normalization:</strong> Aggressive normalization can alter the intended meaning (e.g., converting all instances of “US” to “United States” may be incorrect).</li>
+</ul></li>
+</ul>
+</section>
+<section id="unicode-normalization" class="level3">
+<h3 class="anchored" data-anchor-id="unicode-normalization">Unicode Normalization</h3>
+<ul>
+<li>Unicode is a standard for representing text characters from different writing systems.</li>
+<li>Multiple Unicode code points can represent the same character, leading to inconsistencies during processing.</li>
+<li>Unicode normalization ensures that characters with the same visual appearance are treated identically.
+<ul>
+<li>Example: The Devanagari letter “क” can be represented as a single code point (U+0915) or a combination (U+0915 U+093C). Normalization would ensure these are treated as the same character.</li>
+</ul></li>
+</ul>
+</section>
+<section id="spelling-normalization" class="level3">
+<h3 class="anchored" data-anchor-id="spelling-normalization">Spelling Normalization</h3>
+<ul>
+<li>Addresses inconsistencies in spelling within a language.</li>
+<li>Particularly relevant for languages with multiple acceptable spellings for the same word.</li>
+<li>Example: In Telugu, the word “taruvatā” can be spelled as “tarvatā” or “taravātā.” Spelling normalization standardizes these variations.</li>
+</ul>
+</section>
+</section>
+<section id="stemming-and-lemmatization" class="level2">
+<h2 class="anchored" data-anchor-id="stemming-and-lemmatization">Stemming and Lemmatization</h2>
+<section id="stemming" class="level3">
+<h3 class="anchored" data-anchor-id="stemming">Stemming</h3>
+<ul>
+<li><strong>Definition:</strong> A heuristic process that removes suffixes from words to reduce them to a base form, often called a stem.</li>
+<li><strong>Mechanism:</strong> Employs a set of rules or algorithms to chop off word endings based on common patterns.</li>
+<li><strong>Accuracy:</strong> Stemming is relatively crude and does not always produce valid dictionary words. It can be prone to over-stemming (removing too much) or under-stemming (removing too little).</li>
+<li><strong>Examples:</strong>
+<ul>
+<li>“flies” → “fli”</li>
+<li>“running” → “run”</li>
+<li>“studies” → “studi” (over-stemming)</li>
+</ul></li>
+<li><strong>Advantages:</strong>
+<ul>
+<li><strong>Computational Efficiency:</strong> Stemming algorithms are generally fast and require minimal resources.</li>
+<li><strong>Dimensionality Reduction:</strong> Reduces the number of unique words in a text, which can be helpful for some NLP tasks.</li>
+</ul></li>
+<li><strong>Disadvantages:</strong>
+<ul>
+<li><strong>Loss of Meaning:</strong> Stemming can strip away meaningful parts of words, leading to a loss of semantic information.</li>
+<li><strong>Inaccuracy:</strong> May produce non-words or stems that don’t accurately reflect the word’s base meaning.</li>
+<li><strong>Language Dependency:</strong> Stemming rules are often language-specific and may not generalize well across languages.</li>
+</ul></li>
+</ul>
+</section>
+<section id="lemmatization" class="level3">
+<h3 class="anchored" data-anchor-id="lemmatization">Lemmatization</h3>
+<ul>
+<li><strong>Definition:</strong> A more sophisticated process that reduces words to their base or dictionary form, known as a lemma, by considering the word’s part of speech (POS) and morphological context.</li>
+<li><strong>Mechanism:</strong> Typically uses a dictionary (lexicon) and morphological analysis to identify the correct lemma for a given word.</li>
+<li><strong>Accuracy:</strong> Lemmatization tends to be more accurate than stemming because it produces valid dictionary words and preserves more semantic information.</li>
+<li><strong>Examples:</strong>
+<ul>
+<li>“flies” → “fly”</li>
+<li>“running” → “run”</li>
+<li>“studies” → “study”</li>
+<li>“better” → “good” (recognizes comparative form)</li>
+</ul></li>
+<li><strong>Advantages:</strong>
+<ul>
+<li><strong>Increased Accuracy:</strong> Lemmas are valid words, improving the accuracy of subsequent NLP tasks.</li>
+<li><strong>Meaning Preservation:</strong> Retains more of the word’s original meaning, leading to better understanding of text.</li>
+</ul></li>
+<li><strong>Disadvantages:</strong>
+<ul>
+<li><strong>Computational Complexity:</strong> Lemmatization algorithms are more complex and computationally expensive than stemming algorithms.</li>
+<li><strong>Resource Requirements:</strong> Requires a dictionary and potentially a POS tagger, which can be resource-intensive for some languages.</li>
+</ul></li>
+</ul>
+</section>
+<section id="comparison" class="level3">
+<h3 class="anchored" data-anchor-id="comparison">Comparison</h3>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Feature</th>
+<th>Stemming</th>
+<th>Lemmatization</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Approach</strong></td>
+<td>Rule-based, suffix removal</td>
+<td>Dictionary-based, morphological analysis</td>
+</tr>
+<tr class="even">
+<td><strong>Output</strong></td>
+<td>Stem (may not be a valid word)</td>
+<td>Lemma (always a valid word)</td>
+</tr>
+<tr class="odd">
+<td><strong>Accuracy</strong></td>
+<td>Lower</td>
+<td>Higher</td>
+</tr>
+<tr class="even">
+<td><strong>Speed</strong></td>
+<td>Faster</td>
+<td>Slower</td>
+</tr>
+<tr class="odd">
+<td><strong>Resource Requirements</strong></td>
+<td>Low</td>
+<td>Higher</td>
+</tr>
+<tr class="even">
+<td><strong>Example: “running”</strong></td>
+<td>“runn”</td>
+<td>“run”</td>
+</tr>
+<tr class="odd">
+<td><strong>Example: “better”</strong></td>
+<td>“better”</td>
+<td>“good”</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="applications" class="level3">
+<h3 class="anchored" data-anchor-id="applications">Applications</h3>
+<ul>
+<li><strong>Stemming:</strong> Often used in tasks where speed and reduced dimensionality are more important than high accuracy, such as information retrieval or basic text analysis.</li>
+<li><strong>Lemmatization:</strong> Preferred in tasks that require greater accuracy and preservation of meaning, such as machine translation, sentiment analysis, text summarization, and question answering.</li>
+</ul>
+</section>
+<section id="relationship-to-part-of-speech-pos-tagging" class="level3">
+<h3 class="anchored" data-anchor-id="relationship-to-part-of-speech-pos-tagging">Relationship to Part-of-Speech (POS) Tagging</h3>
+<ul>
+<li>Lemmatization often relies on POS tagging to accurately identify the correct lemma. For example, the word “saw” can be either a noun (a tool for cutting) or the past tense of the verb “see.” The POS tag helps disambiguate these cases and select the appropriate lemma.</li>
+</ul>
+</section>
+<section id="note-on-language-modeling" class="level3">
+<h3 class="anchored" data-anchor-id="note-on-language-modeling">Note on Language Modeling</h3>
+<p>In some language modeling applications, using stemmed or lemmatized forms can improve the model’s ability to generalize and capture relationships between words with similar meanings, especially in cases where the dataset is limited. However, the choice between stemming and lemmatization (or neither) depends on the specific task and the nature of the data.</p>
+</section>
+</section>
+<section id="morphological-analysis" class="level2">
+<h2 class="anchored" data-anchor-id="morphological-analysis">Morphological Analysis</h2>
+<section id="what-is-morphology" class="level3">
+<h3 class="anchored" data-anchor-id="what-is-morphology">What is Morphology?</h3>
+<ul>
+<li>Morphology is the study of the internal structure of words and how words are formed.</li>
+<li>It analyzes the ways in which morphemes (the smallest meaningful units) combine to create words.</li>
+<li>It also examines the rules and patterns that govern these combinations.</li>
+</ul>
+</section>
+<section id="concepts-of-morphology" class="level3">
+<h3 class="anchored" data-anchor-id="concepts-of-morphology">Concepts of Morphology</h3>
+<ul>
+<li>The “Null Hypothesis” suggests that we could simply store every word in a language, but this is impractical due to:
+<ul>
+<li>The constant influx of new words and the obsolescence of others.</li>
+<li>The potentially infinite number of possible words in a language.</li>
+</ul></li>
+<li>Therefore, we need <strong>morphological rules</strong> or <strong>word formation strategies</strong> to help us understand and generate new words.</li>
+</ul>
+</section>
+<section id="native-speakers-linguistic-abilities-and-morphology" class="level3">
+<h3 class="anchored" data-anchor-id="native-speakers-linguistic-abilities-and-morphology">Native Speaker’s Linguistic Abilities and Morphology</h3>
+<ul>
+<li>Native speakers have an intuitive understanding of morphology.</li>
+<li>This allows them to:
+<ul>
+<li>Recognize how words are related in form and meaning (e.g., <em>active, activity, activate, activator, activation</em>).</li>
+<li>Identify ill-formed or non-existent words (e.g., <em>cat-en, walk-en, drive-ed</em>).</li>
+</ul></li>
+</ul>
+</section>
+<section id="branches-of-morphology" class="level3">
+<h3 class="anchored" data-anchor-id="branches-of-morphology">Branches of Morphology</h3>
+<ol type="1">
+<li><strong>Inflectional Morphology:</strong>
+<ul>
+<li>Deals with changes in word form to express grammatical features without changing the core meaning or part of speech.</li>
+<li>Examples:
+<ul>
+<li><strong>Tense:</strong> <em>walk, walked, walking</em></li>
+<li><strong>Number:</strong> <em>cat, cats</em></li>
+<li><strong>Case:</strong> <em>he, him</em></li>
+<li><strong>Gender:</strong> <em>actor, actress</em></li>
+</ul></li>
+</ul></li>
+<li><strong>Lexical Morphology:</strong>
+<ul>
+<li>Focuses on the creation of new words with different meanings or parts of speech.</li>
+<li>Processes involved:
+<ul>
+<li><strong>Derivation:</strong> Adding affixes to change meaning or category (e.g., <em>happy + ness → happiness</em>).</li>
+<li><strong>Compounding:</strong> Combining two or more words to form a new word (e.g., <em>black + board → blackboard</em>).</li>
+</ul></li>
+</ul></li>
+</ol>
+</section>
+<section id="morpheme-types-and-examples" class="level3">
+<h3 class="anchored" data-anchor-id="morpheme-types-and-examples">Morpheme Types and Examples</h3>
+<ul>
+<li><strong>Morpheme:</strong> The smallest meaningful unit in a language.</li>
+<li><strong>Free Morphemes:</strong> Can stand alone as words.
+<ul>
+<li><strong>Lexical Morphemes:</strong> Content words (nouns, verbs, adjectives, adverbs). Examples: <em>cat, dog, run, beautiful, quickly</em>.</li>
+<li><strong>Functional Morphemes:</strong> Function words (prepositions, conjunctions, articles, pronouns). Examples: <em>in, on, and, the, a, she, he, it</em>.</li>
+</ul></li>
+<li><strong>Bound Morphemes:</strong> Cannot stand alone and must attach to other morphemes.
+<ul>
+<li><strong>Derivational Morphemes:</strong> Create new words by changing the meaning or part of speech. Examples:
+<ul>
+<li>Prefixes: <em>un- (unhappy), re- (rewrite), pre- (prepaid)</em></li>
+<li>Suffixes: <em>-ness (happiness), -er (teacher), -ment (government)</em></li>
+</ul></li>
+<li><strong>Inflectional Morphemes:</strong> Indicate grammatical relations or features without changing the core meaning or part of speech. Examples:
+<ul>
+<li>Noun plurals: <em>-s (cats), -es (boxes), -en (children)</em></li>
+<li>Verb tenses: <em>-ed (walked), -ing (walking)</em></li>
+<li>Adjective comparatives/superlatives: <em>-er (taller), -est (tallest)</em></li>
+</ul></li>
+</ul></li>
+</ul>
+</section>
+<section id="affixes-position-and-function" class="level3">
+<h3 class="anchored" data-anchor-id="affixes-position-and-function">Affixes: Position and Function</h3>
+<ul>
+<li><strong>Affix:</strong> A bound morpheme that attaches to a root or stem.</li>
+<li><strong>Types based on position:</strong>
+<ul>
+<li><strong>Prefix:</strong> Attaches before the root (e.g., <em>un-happy, pre-fix</em>).</li>
+<li><strong>Suffix:</strong> Attaches after the root (e.g., <em>happi-ness, teach-er</em>).</li>
+<li><strong>Infix:</strong> Attaches within the root (rare in English, but found in other languages).</li>
+<li><strong>Circumfix:</strong> Two parts that surround the root (e.g., <em>ge-lieb-t</em> in German for “loved”).</li>
+</ul></li>
+</ul>
+</section>
+<section id="non-concatenative-morphology" class="level3">
+<h3 class="anchored" data-anchor-id="non-concatenative-morphology">Non-Concatenative Morphology</h3>
+<ul>
+<li>Not all morphological processes involve simple concatenation (adding affixes).</li>
+<li><strong>Root-and-Pattern Morphology (Semitic Languages):</strong>
+<ul>
+<li>Roots consist of consonants (e.g., <em>ktb</em> in Arabic meaning “write”).</li>
+<li>Vowel patterns are interleaved with the consonants to create different word forms (e.g., <em>kataba</em> “he wrote”, <em>kutiba</em> “it was written”).</li>
+</ul></li>
+<li><strong>Other Non-Concatenative Processes:</strong>
+<ul>
+<li><strong>Reduplication:</strong> Repeating part or all of a word to change its meaning (e.g., <em>bye-bye</em>).</li>
+<li><strong>Internal Modification:</strong> Changing vowels within a root (e.g., <em>sing, sang, sung</em>).</li>
+</ul></li>
+</ul>
+</section>
+<section id="allomorphy-variations-in-morphemes" class="level3">
+<h3 class="anchored" data-anchor-id="allomorphy-variations-in-morphemes">Allomorphy: Variations in Morphemes</h3>
+<ul>
+<li><strong>Allomorphs:</strong> Different forms of the same morpheme.</li>
+<li><strong>Types of Allomorphy:</strong>
+<ul>
+<li><strong>Phonologically Conditioned:</strong> The choice of allomorph depends on the surrounding sounds.
+<ul>
+<li>Example: English plural marker /-z/ has allomorphs /-s/, /-z/, and /-əz/ depending on the final sound of the noun.</li>
+</ul></li>
+<li><strong>Lexically Conditioned:</strong> The choice of allomorph is specific to a particular word and must be learned.
+<ul>
+<li>Example: The plural of <em>ox</em> is <em>oxen</em>, not <em>oxes</em>.</li>
+</ul></li>
+<li><strong>Suppletion:</strong> The allomorphs are completely different and have no phonetic similarity.
+<ul>
+<li>Example: <em>go/went, good/better/best</em></li>
+</ul></li>
+</ul></li>
+</ul>
+</section>
+<section id="morphological-analysis-practical-significance" class="level3">
+<h3 class="anchored" data-anchor-id="morphological-analysis-practical-significance">Morphological Analysis: Practical Significance</h3>
+<ul>
+<li>Morphological analysis is crucial in many Natural Language Processing (NLP) applications, including:
+<ul>
+<li><strong>Machine Translation:</strong> Accurately translating words with complex morphology requires understanding their internal structure.</li>
+<li><strong>Information Retrieval:</strong> Stemming and lemmatization (reducing words to their base forms) improve search accuracy.</li>
+<li><strong>Part-of-Speech Tagging:</strong> Identifying the part of speech of a word often depends on its morphological affixes.</li>
+<li><strong>Text-to-Speech Synthesis:</strong> Generating correct pronunciation requires understanding morpheme boundaries and their associated sounds.</li>
+<li><strong>Spell Checking:</strong> Morphological analysis can help detect and correct spelling errors based on morphological rules.</li>
+</ul></li>
+</ul>
+</section>
+</section>
+<section id="morphological-typology" class="level2">
+<h2 class="anchored" data-anchor-id="morphological-typology">Morphological Typology</h2>
+<p>Morphological typology is a way of classifying languages based on how they form words. It considers the types of morphemes used and how they are combined. Languages can be placed on a spectrum, ranging from <strong>analytic</strong> languages (with minimal morphology) to <strong>synthetic</strong> languages (with rich morphology).</p>
+<p>Here’s a breakdown of the main types:</p>
+<p><strong>1. Isolating (Analytic) Languages:</strong></p>
+<ul>
+<li><strong>Characteristics:</strong>
+<ul>
+<li>Words typically consist of single, independent morphemes.</li>
+<li>Minimal or no bound morphemes (affixes).</li>
+<li>Grammatical relationships are conveyed through word order and function words.</li>
+<li>Essentially, morpheme = word.</li>
+</ul></li>
+<li><strong>Examples:</strong>
+<ul>
+<li>Vietnamese</li>
+<li>Chinese</li>
+<li>Many Southeast Asian and some Niger-Congo languages.</li>
+</ul></li>
+</ul>
+<p><strong>2. Agglutinative (Synthetic) Languages:</strong></p>
+<ul>
+<li><strong>Characteristics:</strong>
+<ul>
+<li>Words are formed by stringing together multiple morphemes (like beads on a string).</li>
+<li>Each morpheme carries a distinct grammatical meaning.</li>
+<li>Morpheme boundaries are clear.</li>
+<li>Word order is less crucial than in isolating languages.</li>
+</ul></li>
+<li><strong>Examples:</strong>
+<ul>
+<li>Turkish</li>
+<li>Finnish</li>
+<li>Hungarian</li>
+<li>Japanese</li>
+<li>Korean</li>
+<li>Dravidian languages (e.g., Tamil, Telugu, Kannada).</li>
+</ul></li>
+<li><strong>Example (Turkish):</strong>
+<ul>
+<li><code>ev</code> (house)</li>
+<li><code>evler</code> (houses) - <code>-ler</code> is a plural suffix.</li>
+<li><code>evlerim</code> (my houses) - <code>-im</code> is a possessive suffix.</li>
+<li><code>evlerimde</code> (in my houses) - <code>-de</code> is a locative suffix.</li>
+</ul></li>
+</ul>
+<p><strong>3. Fusional (Inflectional) Languages:</strong></p>
+<ul>
+<li><strong>Characteristics:</strong>
+<ul>
+<li>Morphemes can express multiple grammatical meanings simultaneously (a single affix might represent tense, person, and number all at once).</li>
+<li>Morpheme boundaries can be less clear.</li>
+<li>Word order is relatively flexible.</li>
+</ul></li>
+<li><strong>Examples:</strong>
+<ul>
+<li>Indo-European languages (e.g., Sanskrit, Latin, Greek, Spanish, Russian, German).</li>
+</ul></li>
+<li><strong>Example (Latin):</strong>
+<ul>
+<li><code>amo</code> (I love) - <code>-o</code> represents first person singular, present tense, indicative mood, active voice.</li>
+<li><code>amas</code> (you love) - <code>-as</code> represents second person singular.</li>
+<li><code>amabam</code> (I was loving) - <code>-bam</code> represents first person singular, imperfect tense.</li>
+</ul></li>
+</ul>
+<p><strong>4. Incorporating (Polysynthetic) Languages:</strong></p>
+<ul>
+<li><strong>Characteristics:</strong>
+<ul>
+<li>Highly complex words with many morphemes.</li>
+<li>Nouns and verbs are often incorporated into a single word unit.</li>
+<li>A single word can express what would be an entire sentence in other languages.</li>
+<li>Morphology plays a dominant role in grammar.</li>
+</ul></li>
+<li><strong>Examples:</strong>
+<ul>
+<li>Inuktitut</li>
+<li>Yup’ik</li>
+<li>Many Native American languages.</li>
+</ul></li>
+<li><strong>Example (Yup’ik):</strong>
+<ul>
+<li><code>angyaghllangyugtuq</code> (he wants a big boat) can be broken down into smaller meaningful units.</li>
+</ul></li>
+</ul>
+<p><strong>Morphological typology is not absolute:</strong> Languages don’t always fit neatly into a single category. Many languages exhibit features of multiple types. For example, English has characteristics of both isolating and fusional languages.</p>
+</section>
+<section id="morphological-models" class="level2">
+<h2 class="anchored" data-anchor-id="morphological-models">Morphological Models</h2>
+<p>Morphological models aim to represent the internal structure of words and the rules governing their formation. These models provide a framework for understanding how morphemes combine to create complex words and how different word forms relate to each other.</p>
+<section id="item-and-arrangement-ia" class="level3">
+<h3 class="anchored" data-anchor-id="item-and-arrangement-ia">Item and Arrangement (IA)</h3>
+<ul>
+<li><strong>Core Idea:</strong> Words are built by linearly concatenating morphemes, like arranging beads on a string.</li>
+<li><strong>Focus:</strong> Morphemes are the central units, and their order is crucial.</li>
+<li><strong>Suitable for:</strong> Agglutinative languages where morpheme boundaries are clear and each morpheme has a distinct meaning.</li>
+<li><strong>Example:</strong> The word “unbreakable” can be segmented into: un- + break + -able.</li>
+<li><strong>Formal Representation:</strong> A word <span class="math inline">\(W\)</span> can be represented as a sequence of morphemes <span class="math inline">\(M_1, M_2, ..., M_n\)</span>, where <span class="math inline">\(W = M_1 + M_2 + ... + M_n\)</span>.</li>
+<li><strong>Limitations:</strong>
+<ul>
+<li>Doesn’t handle allomorphy (different forms of the same morpheme) well.</li>
+<li>Struggles with non-concatenative processes (e.g., infixes, vowel changes).</li>
+</ul></li>
+</ul>
+</section>
+<section id="item-and-process-ip" class="level3">
+<h3 class="anchored" data-anchor-id="item-and-process-ip">Item and Process (IP)</h3>
+<ul>
+<li><strong>Core Idea:</strong> Words are generated by applying rules (processes) to a base form (lexeme).</li>
+<li><strong>Focus:</strong> Rules are central, and they can modify or combine morphemes.</li>
+<li><strong>Suitable for:</strong> Fusional languages where morphemes may fuse together and have multiple grammatical functions.</li>
+<li><strong>Example:</strong> The plural form “mice” is derived from the lexeme “mouse” by a rule that involves vowel change and suffixation.</li>
+<li><strong>Formal Representation:</strong> A word <span class="math inline">\(W\)</span> is derived from a lexeme <span class="math inline">\(L\)</span> by applying a sequence of rules <span class="math inline">\(R_1, R_2, ..., R_n\)</span>, where <span class="math inline">\(W = R_n(...R_2(R_1(L))...)\)</span>.</li>
+<li><strong>Advantages:</strong>
+<ul>
+<li>Can account for allomorphy by specifying different rules for different contexts.</li>
+<li>Can handle some non-concatenative processes.</li>
+</ul></li>
+<li><strong>Limitations:</strong>
+<ul>
+<li>Can become complex if a language has many irregular forms.</li>
+<li>May not capture the relationships between different word forms efficiently.</li>
+</ul></li>
+</ul>
+</section>
+<section id="word-and-paradigm-wp" class="level3">
+<h3 class="anchored" data-anchor-id="word-and-paradigm-wp">Word and Paradigm (WP)</h3>
+<ul>
+<li><strong>Core Idea:</strong> Words are organized into paradigms (sets of related word forms). Rules describe relationships within a paradigm.</li>
+<li><strong>Focus:</strong> Paradigms are central, emphasizing the interconnectedness of word forms.</li>
+<li><strong>Suitable for:</strong> Fusional and incorporating languages where paradigms play a significant role in morphology.</li>
+<li><strong>Example:</strong> The verb “sing” has a paradigm that includes: sing, sings, sang, sung, singing. Rules describe how these forms relate based on tense, person, and number.</li>
+<li><strong>Formal Representation:</strong> A paradigm <span class="math inline">\(P\)</span> consists of a set of word forms <span class="math inline">\(\{W_1, W_2, ..., W_n\}\)</span>. Rules describe how each <span class="math inline">\(W_i\)</span> is derived from a base form and the relevant grammatical features.</li>
+<li><strong>Advantages:</strong>
+<ul>
+<li>Captures the systematic relationships between word forms.</li>
+<li>Can handle exceptions and irregular forms within a paradigm.</li>
+</ul></li>
+<li><strong>Limitations:</strong>
+<ul>
+<li>May not be as efficient for languages with very productive morphology (many possible word forms).</li>
+<li>Requires more linguistic knowledge to define paradigms and rules.</li>
+</ul></li>
+</ul>
+</section>
+</section>
+<section id="computational-morphology" class="level2">
+<h2 class="anchored" data-anchor-id="computational-morphology">Computational Morphology</h2>
+<p>Computational morphology deals with the development of algorithms and techniques to computationally analyze and generate the structure and form of words. It bridges the gap between theoretical linguistic knowledge about morphology and its practical implementation in computer systems.</p>
+<section id="key-goals-and-tasks" class="level3">
+<h3 class="anchored" data-anchor-id="key-goals-and-tasks">Key Goals and Tasks</h3>
+<ul>
+<li><strong>Morphological Analysis:</strong>
+<ul>
+<li>Given a word form (surface form), identify its constituent morphemes (root, prefixes, suffixes, etc.) and their associated grammatical information (part-of-speech, tense, number, gender, etc.).</li>
+<li>Example: Analyzing “unbreakable” as: un- (prefix) + break (root) + -able (suffix).</li>
+</ul></li>
+<li><strong>Morphological Generation:</strong>
+<ul>
+<li>Given a root or base form and a set of grammatical features, generate the corresponding word form.</li>
+<li>Example: Generating “played” from the root “play” and the past tense feature.</li>
+</ul></li>
+<li><strong>Morphological Disambiguation:</strong>
+<ul>
+<li>In some cases, a word form can have multiple possible morphological analyses. Computational morphology aims to resolve this ambiguity based on context or other linguistic cues.</li>
+<li>Example: “flies” can be analyzed as the plural noun (insect) or the 3rd person singular present tense verb.</li>
+</ul></li>
+</ul>
+</section>
+<section id="applications-1" class="level3">
+<h3 class="anchored" data-anchor-id="applications-1">Applications</h3>
+<p>Computational morphology plays a crucial role in various Natural Language Processing (NLP) applications, including:</p>
+<ul>
+<li><strong>Machine Translation:</strong> Accurate translation requires understanding the morphology of both source and target languages.</li>
+<li><strong>Information Retrieval:</strong> Stemming and lemmatization (techniques closely related to morphology) improve search results by reducing word variations to their base forms.</li>
+<li><strong>Text-to-Speech Synthesis:</strong> Generating correct pronunciations requires knowledge of how morphemes combine and affect pronunciation.</li>
+<li><strong>Spell Checking and Grammar Correction:</strong> Detecting and correcting spelling errors often involves morphological analysis to identify incorrect morpheme combinations.</li>
+<li><strong>Part-of-Speech Tagging:</strong> Morphological analysis can be used to assign part-of-speech tags to words, which is a fundamental step in many NLP tasks.</li>
+</ul>
+</section>
+<section id="techniques-and-approaches" class="level3">
+<h3 class="anchored" data-anchor-id="techniques-and-approaches">Techniques and Approaches</h3>
+<p>Various techniques are employed in computational morphology, drawing from different areas of computer science and linguistics, including:</p>
+<ul>
+<li><strong>Finite-State Automata (FSA) and Transducers (FST):</strong> These powerful formalisms are commonly used to model morphological processes. FSAs can recognize word forms, while FSTs can analyze and generate word forms by mapping between surface forms and underlying representations.</li>
+<li><strong>Rule-Based Systems:</strong> These systems utilize handcrafted linguistic rules to describe morphological processes. These rules often capture regular patterns and exceptions in a language’s morphology.</li>
+<li><strong>Statistical and Machine Learning Methods:</strong> These approaches learn morphological patterns from large amounts of text data. Techniques like Hidden Markov Models (HMMs) and neural networks can be trained to perform analysis and generation tasks.</li>
+<li><strong>Hybrid Approaches:</strong> Combine rule-based and statistical methods to leverage the strengths of both approaches.</li>
+</ul>
+</section>
+<section id="challenges" class="level3">
+<h3 class="anchored" data-anchor-id="challenges">Challenges</h3>
+<p>Computational morphology faces several challenges, particularly when dealing with complex or less-resourced languages:</p>
+<ul>
+<li><strong>Morphological Ambiguity:</strong> As mentioned earlier, many words can have multiple possible analyses, making disambiguation a key challenge.</li>
+<li><strong>Irregularity and Exceptions:</strong> Many languages have irregular forms and exceptions to general rules, which can be difficult to model computationally.</li>
+<li><strong>Data Sparsity:</strong> For less-resourced languages, the lack of sufficient training data can hinder the development of robust statistical models.</li>
+<li><strong>Cross-Lingual Variation:</strong> Different languages have vastly different morphological systems, making it difficult to develop universal methods.</li>
+</ul>
+</section>
+<section id="future-directions" class="level3">
+<h3 class="anchored" data-anchor-id="future-directions">Future Directions</h3>
+<ul>
+<li><strong>Deep Learning for Morphology:</strong> Recent advances in deep learning have shown promising results in various NLP tasks, including morphology. Neural network architectures can learn complex morphological patterns from data, potentially overcoming some of the limitations of traditional methods.</li>
+<li><strong>Multilingual and Cross-Lingual Morphology:</strong> Developing models that can handle multiple languages or transfer knowledge between languages is an active area of research.</li>
+<li><strong>Morphology for Low-Resource Languages:</strong> Finding ways to build effective morphological analyzers and generators for languages with limited data is crucial for expanding the reach of NLP technologies.</li>
+</ul>
+</section>
+</section>
+<section id="finite-state-technology" class="level2">
+<h2 class="anchored" data-anchor-id="finite-state-technology">Finite State Technology</h2>
+<section id="finite-state-automata-fsa" class="level3">
+<h3 class="anchored" data-anchor-id="finite-state-automata-fsa">Finite State Automata (FSA)</h3>
+<ul>
+<li>A mathematical model representing a system with a finite number of states and transitions between them based on input symbols.</li>
+<li>Formally defined as a 5-tuple: <span class="math inline">\(A = (Q, \Sigma, \delta, q_0, F)\)</span>, where:
+<ul>
+<li><span class="math inline">\(Q\)</span>: A finite set of states.</li>
+<li><span class="math inline">\(\Sigma\)</span>: A finite set of input symbols (alphabet).</li>
+<li><span class="math inline">\(\delta\)</span>: A transition function: <span class="math inline">\(Q \times \Sigma \rightarrow Q\)</span>.</li>
+<li><span class="math inline">\(q_0\)</span>: The initial state (<span class="math inline">\(q_0 \in Q\)</span>).</li>
+<li><span class="math inline">\(F\)</span>: A set of final (accepting) states (<span class="math inline">\(F \subseteq Q\)</span>).</li>
+</ul></li>
+<li>FSAs can be represented visually using state diagrams.</li>
+<li>Primarily used for recognizing strings that belong to a specific language (defined by the FSA).</li>
+<li><strong>Limitations:</strong> FSAs can only recognize regular languages, which have limitations in expressiveness. They cannot, for example, recognize languages with nested structures like balanced parentheses.</li>
+</ul>
+</section>
+<section id="finite-state-transducers-fst" class="level3">
+<h3 class="anchored" data-anchor-id="finite-state-transducers-fst">Finite State Transducers (FST)</h3>
+<ul>
+<li>An extension of FSA that maps input strings to output strings.</li>
+<li>Formally defined as a 6-tuple: <span class="math inline">\(T = (Q, \Sigma, \Gamma, \delta, q_0, F)\)</span>, where:
+<ul>
+<li><span class="math inline">\(Q\)</span>, <span class="math inline">\(\Sigma\)</span>, <span class="math inline">\(q_0\)</span>, and <span class="math inline">\(F\)</span> are the same as in FSA.</li>
+<li><span class="math inline">\(\Gamma\)</span>: A finite set of output symbols.</li>
+<li><span class="math inline">\(\delta\)</span>: A transition function: <span class="math inline">\(Q \times \Sigma \rightarrow Q \times \Gamma^*\)</span>. (It outputs a string from <span class="math inline">\(\Gamma^*\)</span> instead of just a single state).</li>
+</ul></li>
+<li>FSTs can be represented visually using state diagrams with transitions labeled by input/output pairs (e.g., “a:b” means on input “a”, output “b”).</li>
+<li><strong>Advantages in Morphology:</strong>
+<ul>
+<li>Can analyze a word and simultaneously output its morphological structure (e.g., root, affixes, grammatical features).</li>
+<li>Can generate word forms from a given root and set of grammatical features.</li>
+<li>Can handle complex morphological phenomena like allomorphy (by using different output symbols for different allomorphs of the same morpheme).</li>
+</ul></li>
+</ul>
+<p><strong>Example (Simplified):</strong></p>
+<p>Consider an FST for English pluralization:</p>
+<ul>
+<li>States: {Singular, Plural}</li>
+<li>Input Alphabet: {cat, dog, box, … , -s}</li>
+<li>Output Alphabet: {cat, dog, box, … , cats, dogs, boxes, …}</li>
+<li>Transitions:
+<ul>
+<li>(Singular, cat) -&gt; (Singular, cat)</li>
+<li>(Singular, dog) -&gt; (Singular, dog)</li>
+<li>(Singular, -s) -&gt; (Plural, s)<br>
+</li>
+<li>(Plural, -s) -&gt; (Plural, s) // To handle cases like “cats’s”</li>
+</ul></li>
+</ul>
+<p>This FST would map “cat-s” to “cats” and “dog-s” to “dogs” but would not handle irregular plurals. A more complex FST would be needed for a complete morphological analysis and generation system.</p>
+<p><strong>Advantages of FSTs in NLP:</strong></p>
+<ul>
+<li><strong>Efficiency:</strong> FST operations are generally efficient, making them suitable for real-time applications.</li>
+<li><strong>Composability:</strong> FSTs can be combined to create more complex systems (e.g., combining an FST for stemming with an FST for POS tagging).</li>
+<li><strong>Formalism:</strong> FSTs provide a rigorous mathematical framework for modeling linguistic phenomena.</li>
+</ul>
+<p><strong>Tools and Libraries:</strong></p>
+<p>Several tools and libraries support FST-based morphological analysis and generation, including:</p>
+<ul>
+<li><strong>XFST (Xerox Finite State Tool)</strong></li>
+<li><strong>HFST (Helsinki Finite-State Transducer Technology)</strong></li>
+<li><strong>SFST (Stuttgart Finite State Transducer Tools)</strong></li>
+<li><strong>OpenFST (open-source library)</strong></li>
+</ul>
+</section>
+</section>
+<section id="morphological-analyzers-and-generators" class="level2">
+<h2 class="anchored" data-anchor-id="morphological-analyzers-and-generators">Morphological Analyzers and Generators</h2>
+<section id="morphological-analyzers" class="level3">
+<h3 class="anchored" data-anchor-id="morphological-analyzers">Morphological Analyzers</h3>
+<ul>
+<li><p><strong>Functionality:</strong> These are crucial tools that take a wordform as input and break it down into its constituent morphemes, providing information about the root, part of speech (lexical category), and various grammatical features like gender, number, person, case, tense, aspect, mood, etc.</p></li>
+<li><p><strong>Input:</strong> A single wordform (e.g., “played”, “running”, “happily”).</p></li>
+<li><p><strong>Output:</strong></p>
+<ul>
+<li><strong>Root/Stem:</strong> The base form of the word (e.g., “play”, “run”, “happy”).</li>
+<li><strong>Lexical Category (lcat):</strong> The part of speech (e.g., noun, verb, adjective, adverb).</li>
+<li><strong>Grammatical Features:</strong> A set of features associated with the wordform, represented as attribute-value pairs (e.g., <code>g=masculine</code>, <code>n=plural</code>, <code>p=3rd</code>, <code>t=past</code>).</li>
+</ul></li>
+<li><p><strong>Example:</strong> For the English word “played”, a morphological analyzer might output: <code>root=play, lcat=verb, t=past, asp=perfective</code></p></li>
+<li><p><strong>Applications:</strong></p>
+<ul>
+<li><strong>Information Retrieval:</strong> Improves search accuracy by understanding the root forms of words.</li>
+<li><strong>Machine Translation:</strong> Helps in identifying the correct translation of words based on their grammatical features.</li>
+<li><strong>Text Summarization:</strong> Aids in extracting the core meaning of sentences by analyzing the root forms and parts of speech.</li>
+</ul></li>
+</ul>
+</section>
+<section id="morphological-generators" class="level3">
+<h3 class="anchored" data-anchor-id="morphological-generators">Morphological Generators</h3>
+<ul>
+<li><p><strong>Functionality:</strong> These tools perform the inverse operation of morphological analyzers. They take a root/stem, lexical category, and a set of desired grammatical features as input and generate the corresponding inflected wordform.</p></li>
+<li><p><strong>Input:</strong></p>
+<ul>
+<li><strong>Root/Stem:</strong> The base form of the word.</li>
+<li><strong>Lexical Category:</strong> The intended part of speech.</li>
+<li><strong>Grammatical Features:</strong> The desired grammatical features for the output wordform.</li>
+</ul></li>
+<li><p><strong>Output:</strong> The inflected wordform that corresponds to the given input (e.g., “played”, “cats”, “highest”).</p></li>
+<li><p><strong>Example:</strong> Given the input: <code>root=play, lcat=verb, t=present, p=3rd, n=singular</code> A morphological generator would output: “plays”</p></li>
+<li><p><strong>Applications:</strong></p>
+<ul>
+<li><strong>Machine Translation:</strong> Generates the correct inflected forms of words in the target language.</li>
+<li><strong>Text Generation:</strong> Produces grammatically correct and contextually appropriate word forms in generated text.</li>
+<li><strong>Speech Synthesis:</strong> Creates the appropriate inflected forms for natural-sounding speech output.</li>
+</ul></li>
+<li><p><strong>Determinism:</strong></p>
+<ul>
+<li>Generation is generally a <strong>deterministic</strong> process if only one correct form exists for the given input.</li>
+<li>However, it can be <strong>non-deterministic</strong> if a language allows for spelling variations or multiple possible inflected forms for the same set of features.</li>
+</ul></li>
+</ul>
+</section>
+<section id="relationship-between-analysis-and-generation" class="level3">
+<h3 class="anchored" data-anchor-id="relationship-between-analysis-and-generation">Relationship Between Analysis and Generation</h3>
+<ul>
+<li><strong>Inverse Processes:</strong> Morphological analysis and generation are fundamentally inverse processes. Analysis breaks down a word, while generation builds it up.</li>
+<li><strong>Non-Determinism in Analysis:</strong> Morphological analysis can be <strong>non-deterministic</strong>, as a single wordform might have multiple possible analyses, especially in languages with complex morphology or ambiguous word forms.</li>
+<li><strong>Determinism in Generation:</strong> As mentioned earlier, generation is usually deterministic, assuming a one-to-one mapping between input features and output wordform.</li>
+</ul>
+</section>
+</section>
+<section id="models-for-indian-languages" class="level2">
+<h2 class="anchored" data-anchor-id="models-for-indian-languages">Models for Indian Languages</h2>
+<section id="linguistic-models" class="level3">
+<h3 class="anchored" data-anchor-id="linguistic-models">Linguistic Models</h3>
+<p>The <strong>Word and Paradigm (WP)</strong> model is particularly well-suited for Indian languages due to several factors:</p>
+<ul>
+<li><strong>Reduced Linguistic Expertise:</strong> Implementing the WP model doesn’t necessitate a deep understanding of formal linguistic theory. Individuals with a good grasp of the language’s structure and morphology can effectively develop and utilize this model.</li>
+<li><strong>Ease of Implementation:</strong> The WP model is relatively straightforward to implement, making it accessible for a wider range of developers and researchers.</li>
+<li><strong>Availability of Tools:</strong> Numerous tools and resources are available to support the creation and application of WP-based morphological analyzers and generators for Indian languages.</li>
+</ul>
+<section id="resources-for-wp-model" class="level4">
+<h4 class="anchored" data-anchor-id="resources-for-wp-model">Resources for WP Model:</h4>
+<p>To effectively utilize the WP model, the following resources are essential:</p>
+<ul>
+<li><strong>Paradigm Class and Table:</strong> This defines the different inflectional classes in the language and the corresponding inflectional patterns for each class. For example, a noun paradigm class might include singular and plural forms, different cases (nominative, accusative, etc.), and perhaps gender agreement.</li>
+<li><strong>Morphological Lexicon:</strong> This is a dictionary that lists the root or stem form of each word along with its part of speech and other relevant information (e.g., gender, inherent case).</li>
+<li><strong>Category and Feature Definitions:</strong> A clear definition of the grammatical categories (e.g., noun, verb, adjective) and their associated features (e.g., tense, aspect, mood for verbs; number, gender, case for nouns) used in the language is necessary for accurate morphological analysis and generation.</li>
+</ul>
+</section>
+</section>
+<section id="computational-models" class="level3">
+<h3 class="anchored" data-anchor-id="computational-models">Computational Models</h3>
+<p><strong>Finite State Technology</strong>, particularly <strong>Finite State Transducers (FSTs)</strong>, has proven to be an effective computational model for implementing morphological analysis and generation in Indian languages. This is primarily because:</p>
+<ul>
+<li><strong>Support for WP Model:</strong> FSTs can be readily adapted to implement the WP model, allowing for the representation of paradigms and inflectional rules.</li>
+<li><strong>Availability of Tools:</strong> Several readily available tools provide comprehensive support for building and working with FSTs. These include:
+<ul>
+<li><strong>Apertium (Lttoolbox):</strong> An open-source platform for developing machine translation systems that includes tools for creating and using FSTs.</li>
+<li><strong>Helsinki Finite-State Transducer Technology (HFST):</strong> A suite of tools for creating, manipulating, and applying FSTs.</li>
+<li><strong>XFST (Xerox Finite State Tool):</strong> A powerful tool developed at Xerox PARC for working with FSTs, widely used in both research and commercial applications.</li>
+<li><strong>SFST (Stuttgart Finite State Transducer Tools):</strong> Another set of tools specifically designed for building and using FSTs, often used for morphological analysis and generation.</li>
+</ul></li>
+</ul>
+<p>These tools simplify the development process and allow researchers to leverage the power of FSTs for building robust morphological processors for Indian languages.</p>
+</section>
+<section id="example-morphological-rule-representation-in-fst" class="level3">
+<h3 class="anchored" data-anchor-id="example-morphological-rule-representation-in-fst">Example: Morphological Rule Representation in FST</h3>
+<p>Let’s consider a simplified example of representing a morphological rule in an FST for an Indian language. Suppose we want to represent the rule for forming the plural of nouns ending in -a by replacing -a with -ulu (e.g., kurci -&gt; kurcilu).</p>
+<p>We could represent this using an FST transition as follows:</p>
+<pre><code>a:ulu/N.PL</code></pre>
+<p>This transition indicates that if the input symbol is ‘a’ and the word is a noun (N), the FST will output ‘ulu’ and mark the word as plural (PL).</p>
+<p>This is a basic illustration, and real-world FSTs for Indian languages would involve a complex network of states and transitions to capture the intricate rules of their morphology.</p>
+</section>
+</section>
+<section id="review-questions" class="level2">
+<h2 class="anchored" data-anchor-id="review-questions">Review Questions</h2>
+<p><strong>Text Preprocessing:</strong></p>
+<ol type="1">
+<li>What are stopwords, and why are they sometimes removed during text preprocessing?</li>
+<li>Describe situations where removing stopwords might be detrimental to NLP tasks.</li>
+<li>Explain the concept of text normalization and provide examples of common normalization techniques.</li>
+<li>What challenges might arise during text normalization, and how can they be addressed?</li>
+<li>What is Unicode normalization, and why is it important?</li>
+<li>How does spelling normalization help in text processing?</li>
+</ol>
+<p><strong>Stemming and Lemmatization:</strong></p>
+<ol start="7" type="1">
+<li>Define stemming and lemmatization. What are the key differences between them?</li>
+<li>Explain the advantages and disadvantages of stemming and lemmatization.</li>
+<li>Provide examples of how stemming and lemmatization might affect the meaning of words.</li>
+<li>When would you choose stemming over lemmatization, and vice versa?</li>
+<li>How is lemmatization related to part-of-speech (POS) tagging?</li>
+</ol>
+<p><strong>Morphological Analysis:</strong></p>
+<ol start="12" type="1">
+<li>What is morphology, and why is it important in natural language processing?</li>
+<li>Explain the concept of a morpheme and provide examples of free and bound morphemes.</li>
+<li>What are the two main branches of morphology, and what do they focus on?</li>
+<li>Define and provide examples of different types of affixes (prefixes, suffixes, infixes, circumfixes).</li>
+<li>What is non-concatenative morphology? Give examples of languages that use non-concatenative processes.</li>
+<li>What are allomorphs? Explain the different types of allomorphy with examples.</li>
+<li>Describe some practical applications of morphological analysis in NLP.</li>
+</ol>
+<p><strong>Morphological Typology:</strong></p>
+<ol start="19" type="1">
+<li>What is morphological typology? Explain the four main types of languages based on their morphology.</li>
+<li>Provide examples of languages that belong to each morphological type.</li>
+<li>Explain the key characteristics of isolating, agglutinative, fusional, and incorporating languages.</li>
+<li>Is it possible for a language to exhibit features of multiple morphological types? Explain with an example.</li>
+</ol>
+<p><strong>Morphological Models:</strong></p>
+<ol start="23" type="1">
+<li>What are the three main morphological models (Item and Arrangement, Item and Process, Word and Paradigm)? Explain their core ideas and how they represent word formation.</li>
+<li>For each model, discuss its strengths, limitations, and the types of languages it is best suited for.</li>
+<li>How do these models relate to the different morphological types discussed earlier?</li>
+</ol>
+<p><strong>Computational Morphology:</strong></p>
+<ol start="26" type="1">
+<li>What is computational morphology, and what are its main goals and tasks?</li>
+<li>Explain the difference between morphological analysis and morphological generation.</li>
+<li>Describe some of the challenges in developing computational morphology systems, especially for complex or less-resourced languages.</li>
+<li>How are finite-state automata (FSA) and finite-state transducers (FST) used in computational morphology?</li>
+<li>List some tools and libraries that are commonly used for developing morphological analyzers and generators.</li>
+</ol>
+<p><strong>Models for Indian Languages:</strong></p>
+<ol start="31" type="1">
+<li>Why is the Word and Paradigm (WP) model considered suitable for Indian languages?</li>
+<li>What resources are required to effectively utilize the WP model for an Indian language?</li>
+<li>Explain how finite-state transducers (FSTs) can be used to implement the WP model for morphological analysis and generation in Indian languages.</li>
+</ol>
+<p><strong>Finite State Technology:</strong></p>
+<ol start="34" type="1">
+<li>What are finite-state automata (FSA) and finite-state transducers (FST)? How do they differ?</li>
+<li>Provide a formal definition of an FSA and an FST.</li>
+<li>Explain the advantages of using FSTs for modeling morphological processes.</li>
+<li>Give a simplified example of how an FST can be used for a morphological task like pluralization.</li>
+<li>List some advantages of FSTs in Natural Language Processing (NLP) beyond morphology.</li>
+</ol>
+<p><strong>Morphological Analyzers and Generators:</strong></p>
+<ol start="39" type="1">
+<li>Explain the functionality of a morphological analyzer and a morphological generator.</li>
+<li>What are the inputs and outputs of a morphological analyzer and a morphological generator?</li>
+<li>Provide examples of how morphological analyzers and generators are used in NLP applications.</li>
+<li>Discuss the concepts of determinism and non-determinism in the context of morphological analysis and generation.</li>
+</ol>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const disableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'prefetch';
+    }
+  }
+  const enableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'stylesheet';
+    }
+  }
+  const manageTransitions = (selector, allowTransitions) => {
+    const els = window.document.querySelectorAll(selector);
+    for (let i=0; i < els.length; i++) {
+      const el = els[i];
+      if (allowTransitions) {
+        el.classList.remove('notransition');
+      } else {
+        el.classList.add('notransition');
+      }
+    }
+  }
+  const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+    const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+    const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+    let newTheme = '';
+    if(darkModeDefault) {
+      newTheme = isAlternate ? baseTheme : alternateTheme;
+    } else {
+      newTheme = isAlternate ? alternateTheme : baseTheme;
+    }
+    const changeGiscusTheme = () => {
+      // From: https://github.com/giscus/giscus/issues/336
+      const sendMessage = (message) => {
+        const iframe = document.querySelector('iframe.giscus-frame');
+        if (!iframe) return;
+        iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+      }
+      sendMessage({
+        setConfig: {
+          theme: newTheme
+        }
+      });
+    }
+    const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+    if (isGiscussLoaded) {
+      changeGiscusTheme();
+    }
+  }
+  const toggleColorMode = (alternate) => {
+    // Switch the stylesheets
+    const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+    manageTransitions('#quarto-margin-sidebar .nav-link', false);
+    if (alternate) {
+      enableStylesheet(alternateStylesheets);
+      for (const sheetNode of alternateStylesheets) {
+        if (sheetNode.id === "quarto-bootstrap") {
+          toggleBodyColorMode(sheetNode);
+        }
+      }
+    } else {
+      disableStylesheet(alternateStylesheets);
+      toggleBodyColorPrimary();
+    }
+    manageTransitions('#quarto-margin-sidebar .nav-link', true);
+    // Switch the toggles
+    const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+    for (let i=0; i < toggles.length; i++) {
+      const toggle = toggles[i];
+      if (toggle) {
+        if (alternate) {
+          toggle.classList.add("alternate");     
+        } else {
+          toggle.classList.remove("alternate");
+        }
+      }
+    }
+    // Hack to workaround the fact that safari doesn't
+    // properly recolor the scrollbar when toggling (#1455)
+    if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+      manageTransitions("body", false);
+      window.scrollTo(0, 1);
+      setTimeout(() => {
+        window.scrollTo(0, 0);
+        manageTransitions("body", true);
+      }, 40);  
+    }
+  }
+  const isFileUrl = () => { 
+    return window.location.protocol === 'file:';
+  }
+  const hasAlternateSentinel = () => {  
+    let styleSentinel = getColorSchemeSentinel();
+    if (styleSentinel !== null) {
+      return styleSentinel === "alternate";
+    } else {
+      return false;
+    }
+  }
+  const setStyleSentinel = (alternate) => {
+    const value = alternate ? "alternate" : "default";
+    if (!isFileUrl()) {
+      window.localStorage.setItem("quarto-color-scheme", value);
+    } else {
+      localAlternateSentinel = value;
+    }
+  }
+  const getColorSchemeSentinel = () => {
+    if (!isFileUrl()) {
+      const storageValue = window.localStorage.getItem("quarto-color-scheme");
+      return storageValue != null ? storageValue : localAlternateSentinel;
+    } else {
+      return localAlternateSentinel;
+    }
+  }
+  const darkModeDefault = false;
+  let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+  // Dark / light mode switch
+  window.quartoToggleColorScheme = () => {
+    // Read the current dark / light value 
+    let toAlternate = !hasAlternateSentinel();
+    toggleColorMode(toAlternate);
+    setStyleSentinel(toAlternate);
+    toggleGiscusIfUsed(toAlternate, darkModeDefault);
+  };
+  // Ensure there is a toggle, if there isn't float one in the top right
+  if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+    const a = window.document.createElement('a');
+    a.classList.add('top-right');
+    a.classList.add('quarto-color-scheme-toggle');
+    a.href = "";
+    a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+    const i = window.document.createElement("i");
+    i.classList.add('bi');
+    a.appendChild(i);
+    window.document.body.appendChild(a);
+  }
+  // Switch to dark mode if need be
+  if (hasAlternateSentinel()) {
+    toggleColorMode(true);
+  } else {
+    toggleColorMode(false);
+  }
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const onCopySuccess = function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
+  });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

@@ -1,0 +1,1025 @@
+# W3-Lec11-HMM-Max-CRF.pdf - Page 1
+
+```markdown
+# BSCS5002: Introduction to Natural Language Processing
+
+## Sequence Modeling: HMM, MEMM, and CRF
+
+### Parameswari Krishnamurthy
+
+**Language Technologies Research Centre**
+**IIIT-Hyderabad**
+
+**Email:** param.kishna@iiit.ac.in
+
+![IIIT Logo](https://www.iiit.ac.in/sites/default/files/IIIT_Logo.png)
+
+---
+
+**International Institute of Information Technology**
+
+**HYDERABAD**
+
+---
+
+**BSCS5002 (IITM)**
+
+**1 / 36**
+```
+
+# W3-Lec11-HMM-Max-CRF.pdf - Page 2
+
+```markdown
+# Sequence modeling
+
+- **Sequence modeling** involves predicting or labeling sequences of data, such as words in a sentence.
+- Common tasks: **Part-of-Speech (POS) tagging** and **Named Entity Recognition (NER)**.
+- Models used:
+  - Hidden Markov Model (HMM)
+  - Maximum Entropy Markov Model (MEMM)
+  - Conditional Random Field (CRF)
+
+BS-DS IITM (BSCS5002) 2 / 36
+```
+
+# W3-Lec11-HMM-Max-CRF.pdf - Page 3
+
+# 1. Hidden Markov Models (HMM)
+
+- A Hidden Markov Model (HMM) is used to model systems where we observe outputs but not the underlying states.
+
+- In the context of POS tagging:
+  - **Hidden States:** The sequence of POS tags (NN, VB, etc.) that we aim to predict.
+  - **Observable Symbols:** The actual words in the sentence.
+
+Source: BS-DS IITM (BSCS5002)
+
+Page 3 / 36
+
+# W3-Lec11-HMM-Max-CRF.pdf - Page 4
+
+-DS IITM (BSCS5002) 4 / 36
+
+# HMM in POS Tagging
+
+## Example Sentence: "Secretariat is expected to race tomorrow"
+
+- The goal is to assign the correct POS tag to each word.
+- Words are observable symbols; POS tags are hidden states.
+- HMM helps us determine the most likely sequence of POS tags given the sentence.
+
+
+# W3-Lec11-HMM-Max-CRF.pdf - Page 5
+
+# Components of HMM
+
+- **States:** Hidden variables that influence the observed outcomes.
+  - **Example:** POS tags like Noun (NN), Verb (VB), etc.
+  
+- **Observations:** The visible outcomes influenced by the hidden states.
+  - **Example:** Words in a sentence like "dog", "runs", etc.
+  
+- **Transition Probabilities:** Probability of transitioning from one state to another.
+  - **Example:** P(VB | NN), i.e., the probability of a Verb following a Noun.
+  
+- **Emission Probabilities:** Probability of an observation being generated from a state.
+  - **Example:** P("race" | VB), i.e., the probability of the word "race" being generated given that the state is Verb.
+  
+- **Initial State Distribution:** Probability distribution over the initial states.
+  - **Example:** P(NN), i.e., the probability that the first word in a sentence is a Noun.
+
+BS-DS IITM (BSCS5002)
+
+5 / 30
+
+# W3-Lec11-HMM-Max-CRF.pdf - Page 6
+
+```markdown
+# Why is it "Hidden"?
+
+- The term "hidden" refers to the fact that the POS tags (states) are not directly observable.
+- We only see the words (observable symbols) and must infer the POS tags using HMM.
+- HMM finds the most likely sequence of POS tags that could produce the observed sequence of words.
+
+BSC-DS IITM (BSCS5002) 6 / 36
+```
+
+# W3-Lec11-HMM-Max-CRF.pdf - Page 7
+
+# HMM in Pos tagging
+
+```markdown
+# HMM in Pos tagging
+
+![HMM in Pos tagging diagram](image_url)
+
+- **Transition Probability**: 
+  - $P(N \rightarrow M)$
+  - $P(M \rightarrow V)$
+  - $P(V \rightarrow N)$
+
+- **Emission Probability**:
+  - $P(\text{John} \mid N)$
+  - $P(\text{can} \mid M)$
+  - $P(\text{See} \mid V)$
+  - $P(\text{Will} \mid N)$
+
+**Components**:
+- Nodes (N, M, V, N): Represent states in the HMM
+- Arrows: Indicate transition probabilities between states
+- Dotted lines: Indicate emission probabilities from states to specific words
+
+**Notations**:
+- $P(\cdot)$: Probability function
+- N, M, V: States (e.g., Noun, Verb)
+- John, can, See, Will: Observations (words)
+
+**BS-DS IITM (BSCS5002)**
+```
+
+Note: The `image_url` placeholder should be replaced with the actual URL or path to the image if available. The detailed breakdown of the diagram and the relationships between components are provided in the markdown format as requested.
+
+# W3-Lec11-HMM-Max-CRF.pdf - Page 8
+
+# POS Tagging Example
+
+- John can see Will
+- In this example, we consider three POS tags: Noun, Model, and Verb.
+- Let the sentence be tagged as **Noun, Model, Verb, Noun**.
+- To calculate the probability associated with this particular sequence of tags, we need:
+
+  ## Transition Probabilities: 
+  The likelihood of a particular sequence of tags. For example:
+  - How likely is it that a Noun is followed by a Model?
+  - How likely is it that a Model is followed by a Verb?
+  - How likely is it that a Verb is followed by a Noun?
+
+  ## Emission Probabilities:
+  The likelihood of each word given its tag. For example:
+  - The probability that “John” is a Noun.
+  - The probability that “can” is a Model.
+  - The probability that “see” is a Verb.
+  - The probability that “Will” is a Noun.
+
+- For accurate tagging, both transition and emission probabilities should be high for the given sequence.
+
+---
+
+BS-DS IITM (BSCS5002)
+
+8 / 30
+
+# W3-Lec11-HMM-Max-CRF.pdf - Page 9
+
+```markdown
+# More Examples
+
+## Example 1
+```markdown
+N  N  M  V  N
+Mary  Jane  can  See  Will
+```
+- "N" above "Mary", "Jane", and "Will"
+- "M" above "can"
+- "V" above "See"
+
+## Example 2
+```markdown
+N  M  V  N
+Spot  will  see  Mary
+```
+- "N" above "Spot" and "Mary"
+- "M" above "will"
+- "V" above "see"
+
+## Example 3
+```markdown
+M  N  V  N
+Will  Jane  spot  Mary ?
+```
+- "N" above "Will" and "Jane"
+- "M" above "Will"
+- "V" above "spot"
+- Question mark at the end
+
+## Example 4
+```markdown
+N  M  V  N
+Mary  will  pat  Spot
+```
+- "N" above "Mary" and "Spot"
+- "M" above "will"
+- "V" above "pat"
+```
+```
+
+# W3-Lec11-HMM-Max-CRF.pdf - Page 10
+
+# Emission Probabilities Counting Table
+
+- In the previous sentences, the word “Mary” appears four times as a Noun.
+- To calculate the emission probabilities, we create a counting table as follows:
+
+```markdown
+| Words   | Noun | Model | Verb |
+|---------|------|-------|------|
+| Mary    | 4    | 0     | 0    |
+| Jane    | 2    | 0     | 0    |
+| Will    | 1    | 3     | 0    |
+| Spot    | 2    | 0     | 1    |
+| Can     | 0    | 1     | 0    |
+| See     | 0    | 0     | 2    |
+| pat     | 0    | 0     | 1    |
+```
+
+*Table: Counting Table for Emission Probabilities*
+
+
+BS-DS IITM (BSCS5002)
+
+10 / 36
+
+# W3-Lec11-HMM-Max-CRF.pdf - Page 11
+
+# Normalized Emission Probabilities
+
+- We divide each column by the total number of appearances for that POS tag.
+- For example, 'Noun' appears 9 times, so we divide each value in the 'Noun' column by 9.
+
+| Words   | Noun                 | Model               | Verb                 |
+|---------|----------------------|---------------------|----------------------|
+| Mary    | 4/9                  | 0                   | 0                    |
+| Jane    | 2/9                  | 0                   | 0                    |
+| Will    | 1/9                  | 3/4                 | 0                    |
+| Spot    | 2/9                  | 0                   | 1/4                  |
+| Can     | 0                    | 1/4                 | 0                    |
+| See     | 0                    | 0                   | 2/4                  |
+| pat     | 0                    | 0                   | 1                    |
+
+*Table: Normalized Emission Probabilities*
+
+*BSCS5002*
+
+*11 / 36*
+
+# W3-Lec11-HMM-Max-CRF.pdf - Page 12
+
+# Calculating Transition Probabilities
+
+- To calculate transition probabilities, we introduce two additional tags: `<S>` and `<E>`. `<S>` is placed at the beginning of each sentence and `<E>` is placed at the end of each sentence.
+- These tags help to define the boundaries of the sentences and manage transitions between POS tags.
+
+![Image](https://via.placeholder.com/150)
+
+- **Tags:**
+  - `<S>`: Start of a sentence
+  - `<E>`: End of a sentence
+  - `N`: Noun
+  - `M`: Modal
+  - `V`: Verb
+  - `?`: Unknown or special tag
+
+## Example Sentences
+
+### Sentence 1
+- `<S> Mary Jane can See Will <E>`
+  - `N N M V N`
+
+### Sentence 2
+- `<S> Spot will see Mary <E>`
+  - `N M V N`
+
+### Sentence 3
+- `<S> Will Jane spot Mary ? <E>`
+  - `M N N V N`
+
+### Sentence 4
+- `<S> Mary will pat Spot <E>`
+  - `N M N V`
+
+---
+
+**Source:** BS-DS IITM (BSCS5002)
+
+**Slide Number:** 12 / 36
+
+# W3-Lec11-HMM-Max-CRF.pdf - Page 13
+
+# Transition Probability Table
+
+- Let us create a table and fill it with the co-occurrence counts of the tags:
+
+  |       | N   | M   | V   | <E> |
+  |-------|-----|-----|-----|-----|
+  | <S>   | 3   | 1   | 0   | 0   |
+  | N     | 1   | 3   | 1   | 4   |
+  | M     | 1   | 0   | 3   | 0   |
+  | V     | 4   | 0   | 0   | 0   |
+
+  **Table: Co-occurrence Counts of POS Tags**
+
+- In the table:
+  - The `<S>` tag is followed by the `N` tag three times, so the first entry is 3.
+  - The Model tag follows the `<S>` once, so the second entry is 1.
+  - The rest of the table is filled in a similar manner.
+
+---
+
+BSCS5002 | BS-DS IITM (BSCS5002) | 13 / 36
+
+# W3-Lec11-HMM-Max-CRF.pdf - Page 14
+
+```markdown
+# Slide Content
+
+- Next, divide each term in a row by the total number of co-occurrences for that tag.
+
+- For example, the Model tag is followed by **any other tag** four times.
+- Divide each element in the third row by 4.
+
+  ```markdown
+  |        | N  | M  | V  | <E> |
+  |--------|----|----|----|------|
+  | <S>    | 3/4| 1/3| 0  | 0    |
+  | N      | 6/9| 4/9| 1/3| 4/9  |
+  | M      | 1/4| 0  | 3/4| 0    |
+  | V      | 0  | 0  | 0  | 0    |
+  ```
+
+  **Table: Normalized Transition Probabilities**
+
+- These are the respective transition probabilities for the given sentences.
+- Now, how does the **HMM** determine the appropriate sequence of tags for a new sentence using these probabilities?
+
+**Footer:**
+- BS-DS IITM (BSCS5002)
+- Page 14 / 36
+```
+
+# W3-Lec11-HMM-Max-CRF.pdf - Page 15
+
+Sure! Here is the extracted content from the provided scientific text or slides converted into a detailed markdown format:
+
+```markdown
+# BS-DS IITM (BSCS5002)
+
+## Slide 15 / 36
+
+### Sentence Structure Analysis
+
+#### Row 1
+- **Left Side:**
+  - ![Magenta Ellipse with S](https://via.placeholder.com/15)
+  - ![Blue Circle with N](https://via.placeholder.com/15)
+  - ![Blue Circle with N](https://via.placeholder.com/15)
+- **Middle:**
+  - **Mary**
+  - **Jane**
+  - **can**
+  - **See**
+  - **Will**
+- **Right Side:**
+  - ![Yellow Circle with M](https://via.placeholder.com/15)
+  - ![Red Circle with V](https://via.placeholder.com/15)
+  - ![Blue Circle with N](https://via.placeholder.com/15)
+  - ![Magenta Ellipse with E](https://via.placeholder.com/15)
+
+#### Row 2
+- **Left Side:**
+  - ![Magenta Ellipse with S](https://via.placeholder.com/15)
+  - ![Blue Circle with N](https://via.placeholder.com/15)
+  - ![Blue Circle with N](https://via.placeholder.com/15)
+- **Middle:**
+  - **Spot**
+  - **will**
+  - **see**
+  - **Mary**
+- **Right Side:**
+  - ![Yellow Circle with M](https://via.placeholder.com/15)
+  - ![Red Circle with V](https://via.placeholder.com/15)
+  - ![Blue Circle with N](https://via.placeholder.com/15)
+  - ![Magenta Ellipse with E](https://via.placeholder.com/15)
+
+#### Row 3
+- **Left Side:**
+  - ![Magenta Ellipse with S](https://via.placeholder.com/15)
+  - ![Yellow Circle with M](https://via.placeholder.com/15)
+  - ![Blue Circle with N](https://via.placeholder.com/15)
+- **Middle:**
+  - **Will**
+  - **Jane**
+  - **spot**
+  - **Mary?**
+- **Right Side:**
+  - ![Red Circle with V](https://via.placeholder.com/15)
+  - ![Blue Circle with N](https://via.placeholder.com/15)
+  - ![Magenta Ellipse with E](https://via.placeholder.com/15)
+
+#### Row 4
+- **Left Side:**
+  - ![Magenta Ellipse with S](https://via.placeholder.com/15)
+  - ![Blue Circle with N](https://via.placeholder.com/15)
+  - ![Blue Circle with N](https://via.placeholder.com/15)
+- **Middle:**
+  - **Mary**
+  - **will**
+  - **pat**
+  - **Spot**
+- **Right Side:**
+  - ![Yellow Circle with M](https://via.placeholder.com/15)
+  - ![Red Circle with V](https://via.placeholder.com/15)
+  - ![Blue Circle with N](https://via.placeholder.com/15)
+  - ![Magenta Ellipse with E](https://via.placeholder.com/15)
+```
+
+This markdown format maintains the structure, symbols, and relative positions of the elements in the provided slide.
+
+# W3-Lec11-HMM-Max-CRF.pdf - Page 16
+
+```markdown
+# Example Sentence
+
+Consider the sentence: _"Will can spot Mary"_
+
+- Suppose the sentence is tagged incorrectly as follows:
+  - Will as a Model
+  - Can as a Verb
+  - Spot as a Noun
+  - Mary as a Noun
+
+_BS-DS IITM (BSCS5002)_
+
+_Page 16 / 36_
+```
+
+# W3-Lec11-HMM-Max-CRF.pdf - Page 17
+
+```markdown
+# 81 possible combinations for the sentence 'Will can spot Mary'
+
+![Diagram](image_url)
+
+- **Top Row**: Nodes labeled "N" for each word: "Will", "can", "spot", "Mary"
+  - "Will": 1/9
+  - "can": 0
+  - "spot": 2/9
+  - "Mary": 4/9
+
+- **Middle Row**: Nodes labeled "M" for each word: "Will", "can", "spot", "Mary"
+  - "Will": 3/4
+  - "can": 1/4
+  - "spot": 0
+  - "Mary": 0
+
+- **Bottom Row**: Nodes labeled "V" for each word: "Will", "can", "spot", "Mary"
+  - "Will": 0
+  - "can": 0
+  - "spot": 1/4
+  - "Mary": 0
+
+- **Start Node**: Labeled "S" on the left side
+- **End Node**: Labeled "E" on the right side
+
+**Reference**: BS-DS IITM (BSCS5002)
+```
+
+
+# W3-Lec11-HMM-Max-CRF.pdf - Page 18
+
+```markdown
+# Delete all the vertices and edges with probability zero and also include transition probability
+
+![Graph Visualization](image_url)
+
+- **Vertices and Edges:**
+  - **Vertex `N` (Will):**
+    - Connected to `E` with probability 3/4
+    - Connected to `N` with probability 1/8
+    - Connected to `M` with probability 3/9
+  - **Vertex `M`:**
+    - Connected to `N` with probability 1/4
+    - Connected to `V` with probability 3/4
+  - **Vertex `N` (Mary):**
+    - Connected to `N` with probability 1/9
+    - Connected to `V` with probability 4/9
+    - Connected to `E` with probability 4/9
+  - **Vertex `V`:**
+    - Connected to `M` with probability 1
+    - Connected to `N` with probability 3/4
+  - **Edge Labels:**
+    - Will to `N`: 3/4
+    - `N` (Will) to `N` (Mary): 1/8
+    - `N` (Will) to `M`: 3/9
+    - `M` to `N` (Mary): 1/4
+    - `M` to `V`: 3/4
+    - `N` (Mary) to `V`: 4/9
+    - `N` (Mary) to `E`: 4/9
+    - `V` to `M`: 1
+    - `V` to `N` (Mary): 3/4
+
+**Source:** BS-DS IITM (BSCS5002) [Slide 18 / 36]
+```
+
+# W3-Lec11-HMM-Max-CRF.pdf - Page 19
+
+```markdown
+# Path 1
+
+- **Path**: <S> → N → M → N → N → <E>
+- **Probability**: \( \frac{3}{4} \times \frac{1}{9} \times \frac{3}{9} \times \frac{1}{4} \times \frac{1}{4} \times \frac{2}{9} \times \frac{1}{9} \times \frac{4}{9} \times \frac{4}{9} = 0.00000846754 \)
+
+# Path 2
+
+- **Path**: <S> → N → M → V → N → <E>
+- **Probability**: \( \frac{3}{4} \times \frac{1}{9} \times \frac{3}{9} \times \frac{1}{4} \times \frac{3}{4} \times \frac{1}{4} \times \frac{1}{4} \times \frac{4}{9} \times \frac{4}{9} = 0.00025720164 \)
+
+- **Key Points**:
+  - Clearly, the probability of the second sequence is much higher.
+  - Hence the HMM tags each word in the sentence according to this sequence.
+
+_BSCS5002_
+```
+
+# W3-Lec11-HMM-Max-CRF.pdf - Page 20
+
+# Optimizing HMM using the Viterbi Algorithm
+
+- **Previous Optimization:**
+  - Reduced the number of paths from 81 to 2.
+
+- **Further Optimization with Viterbi:**
+  - Apply the Viterbi algorithm to further reduce computations.
+  - Consider the same example and apply the Viterbi algorithm.
+
+- **Vertex with Two Paths:**
+  - Analyze the two mini-paths leading to the vertex.
+  - Focus on the path with the lowest probability.
+
+- **Path Pruning:**
+  - Calculate probabilities for all paths leading to a node.
+  - Remove edges with lower probability.
+  - Nodes with zero probability have no edges.
+
+![B5-DS IITM (BSCS5002)](https://example.com/logo.png) 
+
+Page 20 / 30
+
+# W3-Lec11-HMM-Max-CRF.pdf - Page 21
+
+# Consider the mini path having the lowest probability.
+
+```markdown
+![Image](image_url)
+
+**BS-DS IITM (BSCS5002)**
+
+**21 / 36**
+```
+
+## Diagram Explanation
+
+### Left Side Diagram
+
+- **Nodes:**
+  - **N**: Will (green, top-left)
+  - **N**: Can (green, top-right)
+  - **M**: (yellow, middle-right)
+  - **M**: (yellow, middle-left)
+  - **V**: (blue, bottom)
+
+- **Probabilities:**
+  - From N to M: 3/4
+  - From N to Can: 3/9
+  - From M to M: 0
+  - From M to V: 1/4
+  - From M to N: 0.08
+  - From V to N: 0.19
+  - From V to M: 0.006
+  - From V to V: 0.8
+
+- **Equations:**
+  - 0.08 * 3/4 * 1/4 = 0.003
+  - 0.19 * 0 * 0 = 0
+  - 0.006 * 0 = 0
+
+### Right Side Diagram
+
+- **Nodes:**
+  - **N**: Will (green, top-left)
+  - **N**: Can (green, top-right)
+  - **M**: (yellow, middle-right)
+  - **M**: (yellow, middle-left)
+  - **V**: (blue, bottom)
+
+- **Probabilities:**
+  - From N to M: 3/4
+  - From N to Can: 3/9
+  - From M to M: 0
+  - From M to V: 1/4
+  - From M to N: 0.08
+  - From V to N: 0.19
+  - From V to M: 0.006
+  - From V to V: 0.8
+
+- **Equations:**
+  - 0.08 * 3/4 * 1/4 = 0.003
+  - 0.19 * 0 * 0 = 0
+  - 0.006 * 0 = 0
+
+```markdown
+![Image](image_url)
+
+**BS-DS IITM (BSCS5002)**
+
+**21 / 36**
+```
+
+# W3-Lec11-HMM-Max-CRF.pdf - Page 22
+
+```markdown
+# Nodes with Zero Probability:
+
+- Some nodes may have a probability of zero.
+- Such nodes have no edges attached, as all paths to them have zero probability.
+
+![Graph with Nodes and Edges](image_url)
+
+- **Will**:
+  - N (Green): Probability = 0.08
+  - M (Yellow): Probability = 0.19
+  - V (Blue): Probability = 0
+
+- **Can**:
+  - N (Green): Probability = 0
+  - M (Yellow): Probability = 0.006
+  - V (Blue): Probability = 0
+
+- **Spot**:
+  - N (Green): Probability = 0.0003
+  - M (Yellow): Probability = 0
+  - V (Blue): Probability = 0.00113
+
+- **Mary**:
+  - N (Green): Probability = 0.0005
+  - M (Yellow): Probability = 0
+  - V (Blue): Probability = 0
+
+**Edges**:
+- Will → N: 3/4
+- Will → M: 1/4
+- Can → N: 3/4
+- Can → M: 1/4
+- Spot → N: 1/4
+- Spot → M: 3/4
+- Mary → N: 4/9
+- Mary → M: 5/9
+- Mary → V: 1/9
+
+**Probabilities on Edges**:
+- Will → N: 0.08
+- Will → M: 0.19
+- Can → N: 0
+- Can → M: 0.006
+- Spot → N: 0.0003
+- Spot → M: 0
+- Mary → N: 0.0005
+- Mary → M: 0
+- Mary → V: 0.000225
+
+*Source*: BS-DS IITM (BSCS5002)
+
+*Slide Number*: 22 / 36
+```
+
+# W3-Lec11-HMM-Max-CRF.pdf - Page 23
+
+# Key Algorithms in HMM
+
+- **Forward Algorithm:**
+  - Calculates the probability of an observation sequence given the model.
+  - **Formula:**
+
+    \[
+    \alpha_t(i) = P(O_1, O_2, \ldots, O_t, Q_t = S_i \mid \lambda)
+    \]
+
+  - Where \(\alpha_t(i)\) is the probability of observing the sequence up to time \(t\) and being in state \(i\).
+
+- **Backward Algorithm:**
+  - Calculates the probability of the ending state given the observation sequence.
+  - **Formula:**
+
+    \[
+    \beta_t(i) = P(O_{t+1}, O_{t+2}, \ldots, O_T \mid Q_t = S_i, \lambda)
+    \]
+
+  - Where \(\beta_t(i)\) is the probability of observing the sequence from time \(t + 1\) to the end given the state \(i\) at time \(t\).
+
+---
+
+*BS-DS IITM (BSCS5002)*
+
+*23 / 30*
+
+# W3-Lec11-HMM-Max-CRF.pdf - Page 24
+
+# Viterbi Algorithm:
+
+- Finds the most probable sequence of hidden states.
+- **Formula:**
+
+  \[
+  \delta_t(i) = \max_{Q_{1}, Q_{2}, \ldots, Q_{t-1}} P(O_{1}, O_{2}, \ldots, O_{t}, Q_{t} = S_i \mid \lambda)
+  \]
+
+  Where \(\delta_t(i)\) represents the highest probability of the state sequence up to time \(t\) ending in state \(i\).
+
+# Baum-Welch Algorithm:
+
+- Used for training HMM, updating model parameters using observed data.
+- **Procedure:** Iteratively adjusts transition and emission probabilities to maximize the likelihood of the observed data.
+
+---
+
+BS-DS IITM (BSCS5002)
+
+24 / 36
+
+# W3-Lec11-HMM-Max-CRF.pdf - Page 25
+
+```markdown
+# Challenges and Limitations of HMM
+
+## Assumption of Markov Property:
+- Current state depends only on the previous state.
+
+## Fixed Number of States:
+- HMMs require a predefined number of states.
+
+## Data Sparsity:
+- Difficulty in estimating probabilities with limited data.
+
+## Long-Range Dependencies:
+- HMMs struggle with capturing dependencies beyond the immediate previous state.
+
+*Source: BS-DS IITM (BSCS5002)*
+```
+
+# W3-Lec11-HMM-Max-CRF.pdf - Page 26
+
+-BS-DS IITM (BSCS5002)
+
+# Maximum Entropy Markov Model
+
+- **MEMM** is a discriminative model used for sequence labeling tasks like POS tagging and NER.
+- It combines the strengths of Maximum Entropy and Markov models.
+- **Conditional Probability:**
+  - MEMM models the conditional probability of a tag given the previous tag and the current observation.
+- **Feature-Based:**
+  - MEMM allows the use of arbitrary features of the input data.
+  - Examples include word suffixes, prefixes, surrounding words, capitalization, etc.
+
+---
+
+Page 26 / 36
+
+# W3-Lec11-HMM-Max-CRF.pdf - Page 27
+
+```markdown
+# Example of POS tagging with MEMM
+
+## Discriminative model, model conditional probability \( Pr(T | W) \) directly.
+
+\[ Pr(T|W) = \prod_{i=1}^{L} Pr(t_i|t_{i-1}, w_i) = \prod_{i=1}^{L} \frac{\exp(\sum_j \beta_j f_j(t_{i-1}, w_i))}{Z(t_{i-1}, w_i)} \]
+
+where \( t_0 \) is a dummy start state.
+
+Source: Gui et al. 2019, slide 46.
+
+---
+
+**BSC-DS IITM (BSCS5002)**
+
+27 / 36
+```
+
+# W3-Lec11-HMM-Max-CRF.pdf - Page 28
+
+# HMM vs. MEMM: Generative vs. Discriminative Models
+
+- **HMM (Hidden Markov Model):** Generative Model
+  - Words are modeled as observations generated from hidden states.
+  - Probabilities are formulated using:
+    - Likelihood: \( P(W \mid T) \)
+    - Prior: \( P(T) \)
+  - Maximizes the joint probability \( P(W, T) \) for decoding the tag sequence.
+
+- **MEMM (Maximum Entropy Markov Model):** Discriminative Model
+  - Directly models the posterior probability \( P(T \mid W) \).
+  - Discriminates among possible tag sequences given a word sequence.
+  - Uses conditional probability, conditioned on the previous tag and current word.
+
+## Training and Flexibility
+
+- **HMM:**
+  - Probabilities are obtained by training on a text corpus.
+
+- **MEMM:**
+  - Builds a distribution by adding features (e.g., capitalization, hyphens, word endings).
+  - Selects the maximum entropy distribution given the feature constraints.
+  - More flexible: Allows for diverse, non-independent features.
+
+*Source: BS-DS IITM (BSCS5002)*
+
+# W3-Lec11-HMM-Max-CRF.pdf - Page 29
+
+```markdown
+# BS-DS IITM (BSCS5002)
+
+## Slide Content
+
+### Hidden Markov Model
+
+```plaintext
+Secretariat is expected to race tomorrow
+
+    NNP       VBZ      VBN      TO      VB      NR
+```
+
+### Maximum Entropy Markov Model
+
+```plaintext
+#    Secretariat is expected to race tomorrow
+
+    #   NNP       VBZ      VBN      TO      VB      NR
+```
+
+### Source
+
+Adapted from Jurafsky and Martin 2009, fig. 6.20.
+
+---
+
+Page 29 / 36
+```
+
+# W3-Lec11-HMM-Max-CRF.pdf - Page 30
+
+# Disadvantages of MEMM and the Need for CRF
+
+- **Disadvantages of MEMM:**
+  - **Label Bias Problem:**
+    - MEMM assigns probabilities based on local decisions at each state.
+    - States with fewer outgoing transitions (fewer choices) are often favored, regardless of the overall sequence quality.
+  - **Limited Global Context:**
+    - MEMM only considers the current word and previous tag for prediction.
+    - It does not account for the entire sequence context, which may lead to suboptimal tagging.
+
+![BS-DS IITM (BSCS5002)](BSCS5002) 30 / 36
+
+# W3-Lec11-HMM-Max-CRF.pdf - Page 31
+
+# 3. Conditional Random Fields
+
+- **CRF** is a type of discriminative probabilistic model used for labeling and segmenting structured data.
+
+- Unlike **HMM**, which is generative, **CRF** models the conditional probability of the label sequence given the observation sequence.
+
+- Unlike **MEMM**, **CRF** models the entire sequence jointly, avoiding the label bias problem associated with locally normalized models like **MEMM**.
+
+- **Why Use CRF for POS Tagging?**
+
+  - **CRF** considers the entire sentence when predicting the POS tags, leading to more accurate and context-aware tagging.
+
+  - It overcomes the label bias problem present in models like **MEMM**.
+
+---
+
+*BS-DS IITM (BSCS5002)*
+
+*31 / 36*
+
+# W3-Lec11-HMM-Max-CRF.pdf - Page 32
+
+# How CRF Works in POS Tagging
+
+- **Modeling Sequence Data:**
+  - CRF models the conditional probability \( P(T \mid W) \), where \( T \) is the sequence of tags and \( W \) is the sequence of words.
+  - The model uses features from the entire sequence to determine the most likely tag sequence.
+
+- **Feature Functions:**
+  - CRF leverages feature functions to capture relevant patterns in the data, such as:
+    - Word identity, prefixes, suffixes
+    - Previous tags, capitalization, word shapes
+  - These features help in making informed decisions about the POS tags.
+
+![BS-DS IITM (BSCS5002)](BS-DS-IITM-BSCS5002)
+
+32 / 36
+
+# W3-Lec11-HMM-Max-CRF.pdf - Page 33
+
+# Advantages of CRF in POS Tagging
+
+- **Overcoming Label Bias:**
+  - CRF does not suffer from the label bias problem because it normalizes across all possible tag sequences, ensuring consistency.
+
+- **Global Optimization:**
+  - CRF optimizes the entire label sequence jointly, considering the full sentence context rather than making local decisions.
+
+- **Flexibility:**
+  - CRF allows for the inclusion of diverse and non-independent features, enhancing its adaptability to different POS tagging challenges.
+
+---
+
+BS-DS IITM (BSCS5002)
+
+33 / 36
+
+# W3-Lec11-HMM-Max-CRF.pdf - Page 34
+
+```markdown
+# MEMM v.s. CRF
+
+## MEMM
+
+![MEMM Diagram](image_url)
+
+- **NNP**: Secretariat
+- **VBZ**: is
+- **VBN**: expected
+- **TO**: to
+- **VB**: race
+- **NR**: tomorrow
+
+## CRF
+
+![CRF Diagram](image_url)
+
+- **NNP**: Secretariat
+- **VBZ**: is
+- **VBN**: expected
+- **TO**: to
+- **VB**: race
+- **NR**: tomorrow
+
+---
+
+_BS-DS IITM (BSCS5002)_
+
+_Page 34 of 36_
+```
+
+# W3-Lec11-HMM-Max-CRF.pdf - Page 35
+
+# Conclusion: HMM, MEMM, and CRF
+
+- **HMM (Hidden Markov Model)**:
+  - **Type**: Generative Model
+  - **Probability**: Models joint probability \(P(W, T) = P(W \mid T) \times P(T)\)
+  - **Advantages**: Simple, interpretable, uses well-established algorithms like Viterbi.
+  - **Disadvantages**: Limited by assumptions of independence and can struggle with complex features.
+
+- **MEMM (Maximum Entropy Markov Model)**:
+  - **Type**: Discriminative Model
+  - **Probability**: Models conditional probability \(P(T \mid W)\)
+  - **Advantages**: Incorporates rich, non-independent features, flexible.
+  - **Disadvantages**: Suffers from label bias problem due to local normalization.
+
+- **CRF (Conditional Random Field)**:
+  - **Type**: Discriminative Model
+  - **Probability**: Models global conditional probability \(P(T \mid W)\) across the entire sequence.
+  - **Advantages**: Overcomes label bias, handles entire sequences jointly, allows for diverse features.
+  - **Disadvantages**: Computationally intensive, complex to implement and train.
+
+BS-DS IITM (BSCS5002) 35 / 36
+
+# W3-Lec11-HMM-Max-CRF.pdf - Page 36
+
+# Summary
+
+$$\vec{s} = s_{t}, s_{2}, \ldots s_{n} \quad \vec{o} = o_{1}, o_{2}, \ldots o_{n}$$
+
+### HMM
+$$P(\vec{s}, \vec{o}) \propto \prod_{t=1}^{|n|} P(s_{t} | s_{t-1}) P(o_{t} | s_{t})$$
+
+### MEMM
+$$P(\vec{s} | \vec{o}) \propto \prod_{t=1}^{n} P(s_{t} | s_{t-1}, o_{t})$$
+
+$$\propto \sum_{j} \frac{1}{Z_{s_{t-1}, o_{t}}} \exp \left( \sum_{j} \lambda_{j} f_{j}(s_{t}, s_{t-1}) + \sum_{k} \mu_{k} g_{k}(s_{t}, x_{t}) \right)$$
+
+### CRF
+$$P(\vec{s} | \vec{o}) \propto \frac{1}{Z_{o}} \prod_{t=1}^{n} \exp \left( \sum_{j} \lambda_{j} f_{j}(s_{t}, s_{t-1}) + \sum_{k} \mu_{k} g_{k}(s_{t}, x_{t}) \right)$$
+
+![Image](https://via.placeholder.com/150)
+
+![Image](https://via.placeholder.com/150)
+
+![Image](https://via.placeholder.com/150)
+
+---
+
+BS-DS IITM (BSCS5002)
+
+36 / 36
+

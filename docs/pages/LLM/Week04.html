@@ -1,0 +1,1505 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.5.56">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Decoding Strategies, BERT – BS Degree Notes</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="https://lalten.github.io/lmweb/style/latinmodern-roman.css">
+<link rel="stylesheet" href="https://lalten.github.io/lmweb/style/latinmodern-sans.css">
+<link rel="stylesheet" href="https://lalten.github.io/lmweb/style/latinmodern-mono.css">
+</head>
+
+<body class="nav-sidebar docked">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../pages/LLM/Week01.html">LLM</a></li><li class="breadcrumb-item"><a href="../../pages/LLM/Week04.html">Week 4</a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="../../">BS Degree Notes</a> 
+        <div class="sidebar-tools-main">
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Home</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="false">
+ <span class="menu-text">Deep Learning</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../pages/DL/Week01_1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 1.1</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../pages/DL/Week01_2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 1.2</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../pages/DL/Week02.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 2</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../pages/DL/Week03.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 3</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../pages/DL/Week04.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 4</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../pages/DL/Week05.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 5</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../pages/DL/Week06.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 6</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="false">
+ <span class="menu-text">AI: Search Methods</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../pages/AI/Week01.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 1</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../pages/AI/Week02.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 2</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../pages/AI/Week03.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 3</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../pages/AI/Week04.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 4</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../pages/AI/Week05.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 5</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../pages/AI/Week06.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 6</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="false">
+ <span class="menu-text">Software Testing</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../pages/ST/Week01.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 1</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../pages/ST/Week02.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 2</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../pages/ST/Week03.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 3</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../pages/ST/Week04.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 4</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../pages/ST/Week05.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 5</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../pages/ST/Week06.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 6</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../pages/ST/Week07.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 7</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../pages/ST/Week08.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 8</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../pages/ST/Week09.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 9</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../pages/ST/Week10.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 10</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../pages/ST/Week11.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 11</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../pages/ST/Week12.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 12</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="false">
+ <span class="menu-text">Software Engineering</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../pages/SE/Week01.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 1</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../pages/SE/Week02.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 2</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../pages/SE/Week03.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 3</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../pages/SE/Week04.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 4</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../pages/SE/Week09.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 9</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../pages/SE/Week10.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 10</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../pages/SE/Week11.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 11</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="false">
+ <span class="menu-text">Reinforcement Learning</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../pages/RL/Week01_1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 1.1</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../pages/RL/Week01_2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 1.2</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../pages/RL/Week02.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 2</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="false">
+ <span class="menu-text">NLP</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../pages/NLP/Week01.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 1</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../pages/NLP/Week02.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 2</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../pages/NLP/Week03.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 3</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="true">
+ <span class="menu-text">LLM</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../pages/LLM/Week01.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 1</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../pages/LLM/Week02.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 2</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../pages/LLM/Week03.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 3</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../pages/LLM/Week04.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">Week 4</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#transformer-architecture-in-machine-translation" id="toc-transformer-architecture-in-machine-translation" class="nav-link active" data-scroll-target="#transformer-architecture-in-machine-translation">Transformer Architecture in Machine Translation</a>
+  <ul class="collapse">
+  <li><a href="#input-encoding" id="toc-input-encoding" class="nav-link" data-scroll-target="#input-encoding">Input Encoding</a></li>
+  <li><a href="#encoder" id="toc-encoder" class="nav-link" data-scroll-target="#encoder">Encoder</a></li>
+  <li><a href="#decoder" id="toc-decoder" class="nav-link" data-scroll-target="#decoder">Decoder</a></li>
+  <li><a href="#output-generation" id="toc-output-generation" class="nav-link" data-scroll-target="#output-generation">Output Generation</a></li>
+  </ul></li>
+  <li><a href="#transformer-architecture-in-nlp-tasks" id="toc-transformer-architecture-in-nlp-tasks" class="nav-link" data-scroll-target="#transformer-architecture-in-nlp-tasks">Transformer Architecture in NLP Tasks</a></li>
+  <li><a href="#data-challenges-and-transformer-models" id="toc-data-challenges-and-transformer-models" class="nav-link" data-scroll-target="#data-challenges-and-transformer-models">Data Challenges and Transformer Models</a></li>
+  <li><a href="#decoding-strategies" id="toc-decoding-strategies" class="nav-link" data-scroll-target="#decoding-strategies">Decoding Strategies</a>
+  <ul class="collapse">
+  <li><a href="#exhaustive-search" id="toc-exhaustive-search" class="nav-link" data-scroll-target="#exhaustive-search">Exhaustive Search</a></li>
+  <li><a href="#greedy-search" id="toc-greedy-search" class="nav-link" data-scroll-target="#greedy-search">Greedy Search</a></li>
+  <li><a href="#beam-search" id="toc-beam-search" class="nav-link" data-scroll-target="#beam-search">Beam Search</a></li>
+  <li><a href="#sampling-based-decoding" id="toc-sampling-based-decoding" class="nav-link" data-scroll-target="#sampling-based-decoding">Sampling-based Decoding</a></li>
+  </ul></li>
+  <li><a href="#bidirectional-encoder-representations-from-transformers-bert" id="toc-bidirectional-encoder-representations-from-transformers-bert" class="nav-link" data-scroll-target="#bidirectional-encoder-representations-from-transformers-bert">Bidirectional Encoder Representations from Transformers (BERT)</a>
+  <ul class="collapse">
+  <li><a href="#masked-language-modeling-mlm" id="toc-masked-language-modeling-mlm" class="nav-link" data-scroll-target="#masked-language-modeling-mlm">Masked Language Modeling (MLM)</a></li>
+  <li><a href="#next-sentence-prediction-nsp" id="toc-next-sentence-prediction-nsp" class="nav-link" data-scroll-target="#next-sentence-prediction-nsp">Next Sentence Prediction (NSP)</a></li>
+  <li><a href="#input-representation" id="toc-input-representation" class="nav-link" data-scroll-target="#input-representation">Input Representation</a></li>
+  <li><a href="#architecture" id="toc-architecture" class="nav-link" data-scroll-target="#architecture">Architecture</a></li>
+  <li><a href="#special-tokens" id="toc-special-tokens" class="nav-link" data-scroll-target="#special-tokens">Special Tokens</a></li>
+  <li><a href="#masking-strategy" id="toc-masking-strategy" class="nav-link" data-scroll-target="#masking-strategy">Masking Strategy</a></li>
+  <li><a href="#pre-training-data-and-objectives" id="toc-pre-training-data-and-objectives" class="nav-link" data-scroll-target="#pre-training-data-and-objectives">Pre-training Data and Objectives</a></li>
+  <li><a href="#parameter-calculation-for-bert" id="toc-parameter-calculation-for-bert" class="nav-link" data-scroll-target="#parameter-calculation-for-bert">Parameter Calculation for BERT</a></li>
+  </ul></li>
+  <li><a href="#adapting-bert-to-downstream-tasks" id="toc-adapting-bert-to-downstream-tasks" class="nav-link" data-scroll-target="#adapting-bert-to-downstream-tasks">Adapting BERT to Downstream Tasks</a>
+  <ul class="collapse">
+  <li><a href="#feature-extraction" id="toc-feature-extraction" class="nav-link" data-scroll-target="#feature-extraction">Feature Extraction</a></li>
+  <li><a href="#fine-tuning" id="toc-fine-tuning" class="nav-link" data-scroll-target="#fine-tuning">Fine-tuning</a></li>
+  </ul></li>
+  <li><a href="#extractive-question-answering-with-bert" id="toc-extractive-question-answering-with-bert" class="nav-link" data-scroll-target="#extractive-question-answering-with-bert">Extractive Question Answering with BERT</a>
+  <ul class="collapse">
+  <li><a href="#input-representation-1" id="toc-input-representation-1" class="nav-link" data-scroll-target="#input-representation-1">Input Representation</a></li>
+  <li><a href="#span-prediction" id="toc-span-prediction" class="nav-link" data-scroll-target="#span-prediction">Span Prediction</a></li>
+  <li><a href="#training-and-inference" id="toc-training-and-inference" class="nav-link" data-scroll-target="#training-and-inference">Training and Inference</a></li>
+  </ul></li>
+  <li><a href="#review-questions" id="toc-review-questions" class="nav-link" data-scroll-target="#review-questions">Review Questions</a>
+  <ul class="collapse">
+  <li><a href="#transformer-architecture-and-applications" id="toc-transformer-architecture-and-applications" class="nav-link" data-scroll-target="#transformer-architecture-and-applications">Transformer Architecture and Applications</a></li>
+  <li><a href="#decoding-strategies-1" id="toc-decoding-strategies-1" class="nav-link" data-scroll-target="#decoding-strategies-1">Decoding Strategies</a></li>
+  <li><a href="#bert-architecture-and-fine-tuning" id="toc-bert-architecture-and-fine-tuning" class="nav-link" data-scroll-target="#bert-architecture-and-fine-tuning">BERT Architecture and Fine-tuning</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../pages/LLM/Week01.html">LLM</a></li><li class="breadcrumb-item"><a href="../../pages/LLM/Week04.html">Week 4</a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title">Decoding Strategies, BERT</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="transformer-architecture-in-machine-translation" class="level2">
+<h2 class="anchored" data-anchor-id="transformer-architecture-in-machine-translation">Transformer Architecture in Machine Translation</h2>
+<p>The transformer architecture revolutionized machine translation by replacing recurrent neural networks with an attention-based mechanism. It consists of an encoder and a decoder, both composed of stacked blocks.</p>
+<section id="input-encoding" class="level3">
+<h3 class="anchored" data-anchor-id="input-encoding">Input Encoding</h3>
+<p>Both the source and target sequences are first converted into embeddings, which are vectors representing the meaning of words. Positional encodings are added to these embeddings to provide information about the word order, as the transformer architecture itself doesn’t inherently capture sequence order. These encodings are typically sinusoidal functions of the position and dimension:</p>
+<p><span class="math display">\[
+PE_{(pos,2i)} = \sin(pos / 10000^{2i/d_{model}}) \\
+PE_{(pos,2i+1)} = \cos(pos / 10000^{2i/d_{model}})
+\]</span></p>
+<p>where <span class="math inline">\(pos\)</span> is the position of the word, <span class="math inline">\(i\)</span> is the dimension index, and <span class="math inline">\(d_{model}\)</span> is the embedding dimension.</p>
+</section>
+<section id="encoder" class="level3">
+<h3 class="anchored" data-anchor-id="encoder">Encoder</h3>
+<p>The encoder consists of <span class="math inline">\(N\)</span> identical layers stacked on top of each other. Each layer has two sub-layers: a multi-head self-attention mechanism and a position-wise fully connected feed-forward network. A residual connection and layer normalization are applied around each of these two sub-layers.</p>
+<section id="multi-head-self-attention" class="level4">
+<h4 class="anchored" data-anchor-id="multi-head-self-attention">Multi-Head Self-Attention</h4>
+<p>This mechanism allows the model to attend to different parts of the input sequence when encoding a particular word. It computes attention weights by projecting the input embeddings into query (<span class="math inline">\(Q\)</span>), key (<span class="math inline">\(K\)</span>), and value (<span class="math inline">\(V\)</span>) matrices. The attention weights are calculated as:</p>
+<p><span class="math display">\[
+\text{Attention}(Q, K, V) = \text{softmax}(\frac{QK^T}{\sqrt{d_k}})V
+\]</span></p>
+<p>where <span class="math inline">\(d_k\)</span> is the dimension of the key vectors. Multi-head attention performs this operation multiple times with different learned projections and concatenates the results.</p>
+</section>
+<section id="position-wise-feed-forward-network" class="level4">
+<h4 class="anchored" data-anchor-id="position-wise-feed-forward-network">Position-wise Feed-Forward Network</h4>
+<p>This network consists of two linear transformations with a ReLU activation in between:</p>
+<p><span class="math display">\[
+\text{FFN}(x) = \max(0, xW_1 + b_1)W_2 + b_2
+\]</span></p>
+</section>
+</section>
+<section id="decoder" class="level3">
+<h3 class="anchored" data-anchor-id="decoder">Decoder</h3>
+<p>The decoder also consists of <span class="math inline">\(N\)</span> identical layers. In addition to the two sub-layers present in the encoder, the decoder inserts a third sub-layer, which performs multi-head attention over the output of the encoder stack. Similar to the encoder, residual connections and layer normalization are applied around each of the sub-layers.</p>
+<section id="masked-multi-head-attention" class="level4">
+<h4 class="anchored" data-anchor-id="masked-multi-head-attention">Masked Multi-Head Attention</h4>
+<p>The decoder uses masked multi-head attention to prevent positions from attending to subsequent positions. This ensures that the prediction for position <span class="math inline">\(i\)</span> depends only on the known outputs at positions less than <span class="math inline">\(i\)</span>.</p>
+</section>
+<section id="multi-head-cross-attention" class="level4">
+<h4 class="anchored" data-anchor-id="multi-head-cross-attention">Multi-Head Cross-Attention</h4>
+<p>This mechanism allows the decoder to attend to the encoder’s output, effectively incorporating information from the source sequence when generating the target sequence. The query matrix comes from the previous decoder layer, while the key and value matrices come from the encoder output.</p>
+</section>
+</section>
+<section id="output-generation" class="level3">
+<h3 class="anchored" data-anchor-id="output-generation">Output Generation</h3>
+<p>The final decoder layer outputs a vector of logits, which are then passed through a linear layer and a softmax function to produce a probability distribution over the target vocabulary. The word with the highest probability is chosen as the next word in the translated sequence.</p>
+</section>
+</section>
+<section id="transformer-architecture-in-nlp-tasks" class="level2">
+<h2 class="anchored" data-anchor-id="transformer-architecture-in-nlp-tasks">Transformer Architecture in NLP Tasks</h2>
+<p>The transformer architecture, initially designed for machine translation, has proven remarkably versatile and effective across a wide range of Natural Language Processing (NLP) tasks. Instead of training a new architecture for each task, the same underlying transformer structure can be adapted, significantly reducing development time and often leveraging knowledge gained during pre-training on large text corpora. However, fine-tuning with a task-specific dataset is crucial for optimal performance.</p>
+<p>Here’s how the transformer is applied to different NLP tasks:</p>
+<ul>
+<li><p><strong>Prediction of Class/Sentiment:</strong> In sentiment analysis or other classification tasks, the input text is fed into the transformer. The output is a predicted class label or a sentiment score. This can be achieved by adding a classification layer on top of the transformer’s output representations, typically taking the representation of a special classification token ([CLS]) as input.</p></li>
+<li><p><strong>Text Summarization:</strong> For summarization, the input is the text to be summarized. The transformer generates a condensed version of the input, capturing the key information. Different approaches exist, including extractive summarization (selecting important phrases from the input) and abstractive summarization (generating new text that summarizes the input). The transformer can be trained to directly output the summary using sequence-to-sequence learning.</p></li>
+<li><p><strong>Question Answering:</strong> In question answering, the transformer receives both the input text and a question about it. The model’s output is the answer to the question, extracted from or generated based on the input text. For extractive question answering, the transformer can be trained to predict the start and end positions of the answer span within the input text. This often involves predicting two probability distributions over the input tokens, one for the start position and one for the end position. For example, given an input sequence of length <span class="math inline">\(n\)</span>, the model might predict <span class="math inline">\(s_i\)</span> and <span class="math inline">\(e_j\)</span> representing the probabilities of the <span class="math inline">\(i\)</span>-th and <span class="math inline">\(j\)</span>-th tokens being the start and end of the answer span, respectively.</p></li>
+</ul>
+<p><span class="math display">\[ s_i = P(\text{start} = i | \text{input text, question}) \]</span> <span class="math display">\[ e_j = P(\text{end} = j | \text{input text, question}) \]</span></p>
+<p>These examples illustrate the adaptability of the transformer architecture. By modifying the inputs and outputs and training on task-specific data, the same core architecture can excel in various NLP tasks.</p>
+</section>
+<section id="data-challenges-and-transformer-models" class="level2">
+<h2 class="anchored" data-anchor-id="data-challenges-and-transformer-models">Data Challenges and Transformer Models</h2>
+<p>Labelled data is scarce and expensive to create, posing a significant challenge for training effective NLP models. Conversely, vast amounts of unlabelled text data are readily available online, presenting an opportunity to improve model performance. The key challenge lies in how to effectively leverage this unlabelled data. One approach is to use unlabelled data for pre-training a language model and then fine-tune it on a smaller labelled dataset. This helps the model learn general language patterns from the unlabelled data, which can then be refined for specific tasks using the labelled data.</p>
+<p>Several questions arise when considering the use of unlabelled data:</p>
+<ul>
+<li><strong>Training Objective:</strong> What should be the training objective when using unlabelled data? Traditional supervised learning objectives rely on labelled data. For unlabelled data, alternative objectives like language modeling, masking, or autoencoding are necessary. These objectives focus on predicting contextual information or reconstructing the input itself, allowing the model to learn inherent language structure.</li>
+<li><strong>Downstream Task Adaptation:</strong> How can we ensure that the knowledge gained from unlabelled data effectively transfers to downstream tasks? The goal is to minimize the amount of fine-tuning required on labelled data for each specific task. Techniques like transfer learning and few-shot learning address this by enabling the model to generalize well from pre-training on unlabelled data to fine-tuning on limited labelled examples. The success of this adaptation depends on the alignment between the pre-training objective and the downstream tasks. For example, a model pre-trained on a masking task might adapt better to tasks involving filling missing information, while a model pre-trained on next-word prediction might be more suitable for text generation tasks.</li>
+<li><strong>Evaluation:</strong> How can we evaluate the effectiveness of pre-training on unlabelled data? Standard evaluation metrics for supervised tasks require labelled data. For pre-training, alternative metrics like perplexity (for language models) or reconstruction error (for autoencoders) can be used to assess the model’s ability to capture language patterns. Ultimately, the true test of effective pre-training lies in the performance improvement observed on downstream tasks after fine-tuning.</li>
+</ul>
+</section>
+<section id="decoding-strategies" class="level2">
+<h2 class="anchored" data-anchor-id="decoding-strategies">Decoding Strategies</h2>
+<p>Decoding strategies are algorithms used to generate text from language models. They determine how to select the next word in a sequence given the model’s predicted probabilities for each word in the vocabulary. Different strategies offer trade-offs between computational cost, output quality, and diversity.</p>
+<section id="exhaustive-search" class="level3">
+<h3 class="anchored" data-anchor-id="exhaustive-search">Exhaustive Search</h3>
+<p>Exhaustive search is a decoding strategy that guarantees finding the most probable sequence of words according to the language model. It achieves this by systematically evaluating <em>every possible</em> sequence up to a predefined length and selecting the sequence with the highest overall probability.</p>
+<p><strong>Procedure:</strong></p>
+<ol type="1">
+<li><p><strong>Initialization:</strong> Starting with an empty sequence or a given prompt, the algorithm considers all words in the vocabulary <span class="math inline">\(\mathcal{V}\)</span> as potential candidates for the first word.</p></li>
+<li><p><strong>Expansion:</strong> At each subsequent time step <span class="math inline">\(t\)</span>, the algorithm expands each existing sequence from the previous step by appending every possible word from the vocabulary. This creates <span class="math inline">\(|\mathcal{V}|\)</span> new sequences for each sequence from the previous step. If there were <span class="math inline">\(N_{t-1}\)</span> sequences at time step <span class="math inline">\(t-1\)</span>, there will be <span class="math inline">\(N_{t-1} \times |\mathcal{V}|\)</span> sequences at time step <span class="math inline">\(t\)</span>.</p></li>
+<li><p><strong>Probability Calculation:</strong> For each newly generated sequence, the algorithm calculates its probability. This probability is the product of the conditional probabilities of each word given the preceding words in the sequence:</p>
+<p><span class="math display">\[ P(w_1, w_2, ..., w_t) = \prod_{i=1}^{t} P(w_i | w_1, w_2, ..., w_{i-1}) \]</span></p>
+<p>where <span class="math inline">\(w_i\)</span> represents the word at position <span class="math inline">\(i\)</span> in the sequence. These conditional probabilities are obtained from the language model.</p></li>
+<li><p><strong>Sequence Selection:</strong> After generating all possible sequences of the desired length <span class="math inline">\(T\)</span>, the algorithm selects the sequence with the highest probability as the output.</p></li>
+</ol>
+<p><strong>Computational Complexity:</strong></p>
+<p>The main drawback of exhaustive search is its computational cost. The number of sequences generated grows exponentially with the sequence length. Specifically, for a vocabulary of size <span class="math inline">\(|\mathcal{V}|\)</span> and a desired sequence length <span class="math inline">\(T\)</span>, the algorithm needs to evaluate <span class="math inline">\(|\mathcal{V}|^T\)</span> sequences. This makes exhaustive search impractical for all but the shortest sequences and smallest vocabularies. For example, with a vocabulary size of 30,000 and a desired sequence length of just 5, the number of sequences to evaluate is <span class="math inline">\(30000^5\)</span>, an astronomically large number.</p>
+<p><strong>Advantages:</strong></p>
+<ul>
+<li><strong>Optimality:</strong> Exhaustive search guarantees finding the sequence with the highest probability according to the language model.</li>
+</ul>
+<p><strong>Disadvantages:</strong></p>
+<ul>
+<li><strong>Computational Intractability:</strong> The exponential complexity makes it infeasible for practical applications with realistic vocabulary sizes and sequence lengths.</li>
+</ul>
+</section>
+<section id="greedy-search" class="level3">
+<h3 class="anchored" data-anchor-id="greedy-search">Greedy Search</h3>
+<p>Greedy search is a deterministic decoding strategy that selects the word with the highest probability at each time step. This approach is computationally efficient but can lead to suboptimal and repetitive text.</p>
+<p><strong>Algorithm:</strong></p>
+<ol type="1">
+<li><strong>Initialization:</strong> Start with an empty sequence or a given prompt.</li>
+<li><strong>Iteration:</strong> For each time step <span class="math inline">\(t\)</span>:
+<ul>
+<li>Obtain the probability distribution <span class="math inline">\(P(w_t | w_{1:t-1})\)</span> over the vocabulary <span class="math inline">\(\mathcal{V}\)</span>, conditioned on the previously generated words <span class="math inline">\(w_{1:t-1}\)</span>.</li>
+<li>Select the word <span class="math inline">\(w_t^*\)</span> with the highest probability: <span class="math display">\[ w_t^* = \arg\max_{w_t \in \mathcal{V}} P(w_t | w_{1:t-1}) \]</span></li>
+<li>Append <span class="math inline">\(w_t^*\)</span> to the generated sequence.</li>
+</ul></li>
+<li><strong>Termination:</strong> Stop when a predefined sequence length is reached or a special end-of-sequence token is generated.</li>
+</ol>
+<p><strong>Advantages:</strong></p>
+<ul>
+<li><strong>Computational Efficiency:</strong> Greedy search is significantly faster than exhaustive search and less computationally intensive than beam search, as it only requires evaluating <span class="math inline">\(|\mathcal{V}|\)</span> probabilities at each time step.</li>
+<li><strong>Simplicity:</strong> The algorithm is easy to implement and understand.</li>
+</ul>
+<p><strong>Disadvantages:</strong></p>
+<ul>
+<li><strong>Suboptimal Sequences:</strong> Greedy search may not find the most likely sequence overall. By making locally optimal choices at each time step, it might miss sequences with higher overall probability. For example, a sequence with a slightly less probable first word could lead to much more probable subsequent words, resulting in a higher overall probability.</li>
+<li><strong>Lack of Diversity:</strong> Greedy decoding tends to produce repetitive and predictable text. If the model strongly favors certain words, those words might be repeatedly selected, leading to outputs like “I like to think that I like to think that…”</li>
+<li><strong>Inability to Recover from Early Mistakes:</strong> An incorrect word choice early in the generation process can lead to a cascade of errors, as subsequent predictions are conditioned on the erroneous prefix.</li>
+</ul>
+<p><strong>Example:</strong></p>
+<p>Consider a vocabulary <span class="math inline">\(\mathcal{V} = \{\text{the, quick, brown, fox, jumps, over, lazy, dog}\}\)</span>. If the model predicts the following probabilities for the first two words:</p>
+<ul>
+<li><span class="math inline">\(P(\text{the}) = 0.4\)</span></li>
+<li><span class="math inline">\(P(\text{quick}) = 0.3\)</span></li>
+<li><span class="math inline">\(P(\text{brown}) = 0.2\)</span></li>
+<li><span class="math inline">\(P(\text{fox}) = 0.1\)</span></li>
+</ul>
+<p>And for the second word, given the first word is “the”:</p>
+<ul>
+<li><span class="math inline">\(P(\text{quick} | \text{the}) = 0.5\)</span></li>
+<li><span class="math inline">\(P(\text{brown} | \text{the}) = 0.3\)</span></li>
+<li><span class="math inline">\(P(\text{fox} | \text{the}) = 0.2\)</span></li>
+</ul>
+<p>Greedy search would select “the” as the first word. Then, conditioned on “the”, it would select “quick” as the second word. While “the” might have been the most probable first word in isolation, it’s possible that another less probable first word could have led to a higher probability second word, making the overall sequence more probable.</p>
+</section>
+<section id="beam-search" class="level3">
+<h3 class="anchored" data-anchor-id="beam-search">Beam Search</h3>
+<p>Beam search is a decoding strategy that aims to find a more likely sequence than greedy search while remaining computationally tractable compared to exhaustive search. It operates by maintaining a set of <span class="math inline">\(k\)</span> most probable sequences (the “beam”) at each time step.</p>
+<p>The process begins with an initial beam containing the <span class="math inline">\(k\)</span> most likely words for the first position in the sequence. At each subsequent time step, the algorithm expands each sequence in the beam by considering all possible next words from the vocabulary. For each expanded sequence, it calculates the probability by multiplying the existing sequence probability by the conditional probability of the new word given the preceding words. This results in <span class="math inline">\(k \times |\mathcal{V}|\)</span> candidate sequences, where <span class="math inline">\(|\mathcal{V}|\)</span> is the vocabulary size. The algorithm then selects the top <span class="math inline">\(k\)</span> sequences with the highest probabilities from these candidates to form the new beam. This iterative process continues until the desired sequence length is reached.</p>
+<p>The final beam contains <span class="math inline">\(k\)</span> complete sequences, and the sequence with the highest overall probability is chosen as the output. The parameter <span class="math inline">\(k\)</span>, called the beam size, controls the trade-off between exploration and computational cost.</p>
+<p><strong>Illustrative Example:</strong></p>
+<p>Consider a vocabulary <span class="math inline">\(\mathcal{V} = \{A, B, C\}\)</span> and a beam size of <span class="math inline">\(k = 2\)</span>. Suppose the model outputs the following conditional probabilities at each time step:</p>
+<p><strong>Time Step 1:</strong></p>
+<p><span class="math inline">\(P(A) = 0.5\)</span>, <span class="math inline">\(P(B) = 0.4\)</span>, <span class="math inline">\(P(C) = 0.1\)</span></p>
+<p>The initial beam contains the two most likely words: <span class="math inline">\(\{A, B\}\)</span>.</p>
+<p><strong>Time Step 2:</strong></p>
+<p><span class="math inline">\(P(A|A) = 0.1\)</span>, <span class="math inline">\(P(B|A) = 0.2\)</span>, <span class="math inline">\(P(C|A) = 0.5\)</span></p>
+<p><span class="math inline">\(P(A|B) = 0.2\)</span>, <span class="math inline">\(P(B|B) = 0.2\)</span>, <span class="math inline">\(P(C|B) = 0.6\)</span></p>
+<p>Expanding the beam results in six candidates: <span class="math inline">\(\{AA, AB, AC, BA, BB, BC\}\)</span>. Calculating the probabilities:</p>
+<p><span class="math inline">\(P(AA) = P(A) \times P(A|A) = 0.5 \times 0.1 = 0.05\)</span></p>
+<p><span class="math inline">\(P(AB) = P(A) \times P(B|A) = 0.5 \times 0.2 = 0.1\)</span></p>
+<p><span class="math inline">\(P(AC) = P(A) \times P(C|A) = 0.5 \times 0.5 = 0.25\)</span></p>
+<p><span class="math inline">\(P(BA) = P(B) \times P(A|B) = 0.4 \times 0.2 = 0.08\)</span></p>
+<p><span class="math inline">\(P(BB) = P(B) \times P(B|B) = 0.4 \times 0.2 = 0.08\)</span></p>
+<p><span class="math inline">\(P(BC) = P(B) \times P(C|B) = 0.4 \times 0.6 = 0.24\)</span></p>
+<p>The top two sequences with the highest probabilities are <span class="math inline">\(\{AC, BC\}\)</span>, which form the new beam.</p>
+<p>This process continues for subsequent time steps, with the beam always containing the <span class="math inline">\(k\)</span> most promising sequences. The final output is the most probable complete sequence in the last beam.</p>
+<p><strong>Strengths and Limitations:</strong></p>
+<p>Beam search offers a balance between finding likely sequences and computational efficiency. It often produces more fluent and grammatically correct text compared to greedy search. However, it can still be prone to generating repetitive or predictable outputs, especially when the beam size is small. The choice of beam size is a crucial factor, influencing the trade-off between diversity and likelihood of the generated text.</p>
+</section>
+<section id="sampling-based-decoding" class="level3">
+<h3 class="anchored" data-anchor-id="sampling-based-decoding">Sampling-based Decoding</h3>
+<p>Sampling-based methods introduce randomness into the decoding process, allowing for more diverse and potentially creative text generation. These methods don’t always choose the most probable word but instead sample from the probability distribution over the vocabulary. This randomness can lead to more interesting and human-like text generation, as it breaks the deterministic nature of greedy and beam search, which tend to produce repetitive and predictable outputs.</p>
+<section id="temperature-sampling" class="level4">
+<h4 class="anchored" data-anchor-id="temperature-sampling">Temperature Sampling</h4>
+<p>Temperature sampling modifies the predicted probabilities before sampling, controlling the randomness of the selection. Given logits <span class="math inline">\(u_i\)</span> (pre-softmax output of the model for each word <span class="math inline">\(i\)</span> in the vocabulary) and a temperature parameter <span class="math inline">\(T &gt; 0\)</span>, the probabilities are calculated as:</p>
+<p><span class="math display">\[ P(x = i|x_{1:t-1}) = \frac{\exp(\frac{u_i}{T})}{\sum_{j} \exp(\frac{u_j}{T})} \]</span></p>
+<ul>
+<li><p><strong>High Temperatures (<span class="math inline">\(T &gt; 1\)</span>):</strong> Flatten the probability distribution, increasing the likelihood of selecting less probable words. This leads to more diverse and surprising outputs, but at the cost of potentially reduced coherence and grammatical correctness.</p></li>
+<li><p><strong>Low Temperatures (<span class="math inline">\(T &lt; 1\)</span>):</strong> Concentrate the probability mass on the most likely words, reducing the chance of selecting less probable words. This results in more predictable and grammatically correct outputs, but potentially at the expense of creativity and diversity.</p></li>
+<li><p><strong>Standard Temperature (<span class="math inline">\(T = 1\)</span>):</strong> Corresponds to directly sampling from the model’s original predicted probabilities, without any modification.</p></li>
+</ul>
+</section>
+<section id="top-k-sampling" class="level4">
+<h4 class="anchored" data-anchor-id="top-k-sampling">Top-K Sampling</h4>
+<p>Top-k sampling restricts the sampling process to the <span class="math inline">\(k\)</span> most probable words at each time step. The probabilities of these <span class="math inline">\(k\)</span> words are renormalized to sum to 1, and a word is sampled from this modified distribution.</p>
+<ul>
+<li><p><strong>Diversity vs.&nbsp;Coherence:</strong> The choice of <span class="math inline">\(k\)</span> determines the trade-off between diversity and coherence in the generated text. Smaller values of <span class="math inline">\(k\)</span> result in more predictable and coherent outputs, as the selection is more focused on the most probable words. Larger values of <span class="math inline">\(k\)</span> allow for more diverse outputs by including less probable words in the sampling pool.</p></li>
+<li><p><strong>Addressing the ‘Tail’ Problem:</strong> Top-k sampling helps address the issue of sampling from the “tail” of the distribution, where very low probability words might lead to nonsensical or irrelevant outputs. By focusing on the top <span class="math inline">\(k\)</span> words, the sampling process is constrained to more meaningful options.</p></li>
+</ul>
+</section>
+<section id="top-p-nucleus-sampling" class="level4">
+<h4 class="anchored" data-anchor-id="top-p-nucleus-sampling">Top-P (Nucleus) Sampling</h4>
+<p>Top-p sampling, also known as nucleus sampling, dynamically adjusts the number of words considered at each time step based on their cumulative probability. It selects the smallest set of words whose cumulative probability exceeds a predefined threshold <span class="math inline">\(p\)</span> (typically between 0 and 1). The probabilities of these selected words are renormalized, and a word is sampled from this set.</p>
+<ul>
+<li><p><strong>Adapting to Probability Distributions:</strong> Top-p sampling adapts to the shape of the probability distribution. When the distribution is flat (high uncertainty), it considers a larger set of words, allowing for more diverse outputs. When the distribution is peaked (high certainty), it focuses on a smaller set of words, resulting in more predictable outputs.</p></li>
+<li><p><strong>Balancing Exploration and Exploitation:</strong> This dynamic selection allows for a balance between exploring less probable words and exploiting the most probable ones, making it a more robust sampling strategy compared to fixed top-k sampling, especially for varying probability distributions.</p></li>
+</ul>
+</section>
+</section>
+</section>
+<section id="bidirectional-encoder-representations-from-transformers-bert" class="level2">
+<h2 class="anchored" data-anchor-id="bidirectional-encoder-representations-from-transformers-bert">Bidirectional Encoder Representations from Transformers (BERT)</h2>
+<p>BERT leverages the transformer’s encoder architecture to learn deep bidirectional representations of text. Unlike unidirectional models like GPT, which process text from left to right, BERT considers the context of both preceding and following words for each token, enabling a richer understanding of language.</p>
+<section id="masked-language-modeling-mlm" class="level3">
+<h3 class="anchored" data-anchor-id="masked-language-modeling-mlm">Masked Language Modeling (MLM)</h3>
+<p>BERT’s pre-training relies heavily on Masked Language Modeling (MLM). During pre-training, a portion of the input tokens (typically 15%) is randomly masked. The model then attempts to predict these masked tokens based on the context provided by the surrounding unmasked tokens. This bidirectional approach allows the model to learn relationships between words in a more comprehensive way compared to unidirectional methods.</p>
+</section>
+<section id="next-sentence-prediction-nsp" class="level3">
+<h3 class="anchored" data-anchor-id="next-sentence-prediction-nsp">Next Sentence Prediction (NSP)</h3>
+<p>In addition to MLM, BERT is also pre-trained with Next Sentence Prediction (NSP). This task involves predicting whether two given sentences are consecutive in the original text. This helps BERT understand relationships between sentences, beneficial for downstream tasks requiring sentence-level understanding like Question Answering.</p>
+</section>
+<section id="input-representation" class="level3">
+<h3 class="anchored" data-anchor-id="input-representation">Input Representation</h3>
+<p>BERT’s input representation incorporates three key embeddings for each token:</p>
+<ul>
+<li><strong>Token Embeddings:</strong> Represent the individual words in the vocabulary.</li>
+<li><strong>Segment Embeddings:</strong> Distinguish between tokens belonging to different segments (sentences). This is crucial for the NSP task.</li>
+<li><strong>Position Embeddings:</strong> Encode the position of each token within the sequence.</li>
+</ul>
+<p>These three embeddings are summed to create a comprehensive input representation for each token.</p>
+</section>
+<section id="architecture" class="level3">
+<h3 class="anchored" data-anchor-id="architecture">Architecture</h3>
+<p>The core of BERT is a multi-layer bidirectional transformer encoder. The base model has 12 layers, while the large model has 24 layers. Each layer consists of multi-head self-attention mechanisms and feed-forward networks. The output of the final encoder layer provides a contextualized representation for each token, capturing the meaning of the word within its context.</p>
+</section>
+<section id="special-tokens" class="level3">
+<h3 class="anchored" data-anchor-id="special-tokens">Special Tokens</h3>
+<p>BERT utilizes special tokens to demarcate segments and handle specific tasks:</p>
+<ul>
+<li><strong>[CLS]</strong>: Classification token. The final hidden representation of this token is typically used for classification tasks.</li>
+<li><strong>[SEP]</strong>: Separator token. Indicates the boundary between sentences.</li>
+<li><strong>[MASK]</strong>: Mask token. Replaces the original token during the MLM task.</li>
+</ul>
+</section>
+<section id="masking-strategy" class="level3">
+<h3 class="anchored" data-anchor-id="masking-strategy">Masking Strategy</h3>
+<p>BERT’s masking strategy is crucial for effective pre-training. The 15% of masked tokens are not simply replaced with [MASK]. Instead:</p>
+<ul>
+<li>80% are replaced with [MASK].</li>
+<li>10% are replaced with a random word from the vocabulary.</li>
+<li>10% remain unchanged.</li>
+</ul>
+<p>This approach forces the model to learn more robust representations, as it cannot rely solely on the [MASK] token to identify the missing word.</p>
+</section>
+<section id="pre-training-data-and-objectives" class="level3">
+<h3 class="anchored" data-anchor-id="pre-training-data-and-objectives">Pre-training Data and Objectives</h3>
+<p>BERT is pre-trained on a massive dataset consisting of BookCorpus (800M words) and English Wikipedia (2.5B words), encompassing a diverse range of topics and writing styles. The pre-training objective function combines the losses from MLM and NSP:</p>
+<p><span class="math display">\[
+\mathcal{L} = \frac{1}{|\mathcal{M}|} \sum_{y_i \in \mathcal{M}} -\log(\hat{y}_i) + \mathcal{L}_{cls}
+\]</span></p>
+<p>where:</p>
+<ul>
+<li><span class="math inline">\(\mathcal{M}\)</span> represents the set of masked tokens.</li>
+<li><span class="math inline">\(\hat{y}_i\)</span> is the predicted probability distribution for the i-th masked token.</li>
+<li><span class="math inline">\(\mathcal{L}_{cls}\)</span> is the loss function for the NSP task.</li>
+</ul>
+<p>This dual objective allows BERT to learn rich contextualized representations that capture both word-level and sentence-level information, making it highly effective for a wide range of downstream NLP tasks.</p>
+</section>
+<section id="parameter-calculation-for-bert" class="level3">
+<h3 class="anchored" data-anchor-id="parameter-calculation-for-bert">Parameter Calculation for BERT</h3>
+<p>The BERT base model has approximately 110 million parameters. Let’s break down the calculation:</p>
+<p><strong>Embedding Layer:</strong></p>
+<ul>
+<li><strong>Token Embeddings:</strong> Vocabulary size (<span class="math inline">\(|V|\)</span>) x embedding dimension (<span class="math inline">\(d_{model}\)</span>) = 30,522 x 768 ≈ 23.4M parameters.</li>
+<li><strong>Segment Embeddings:</strong> Number of segments (2) x embedding dimension (<span class="math inline">\(d_{model}\)</span>) = 2 x 768 ≈ 1.5K parameters.</li>
+<li><strong>Position Embeddings:</strong> Maximum sequence length (<span class="math inline">\(T\)</span>) x embedding dimension (<span class="math inline">\(d_{model}\)</span>) = 512 x 768 ≈ 0.4M parameters.</li>
+</ul>
+<p><strong>Encoder Layers (12 layers in BERT base):</strong></p>
+<p>Each encoder layer has two main components: self-attention and a feed-forward network.</p>
+<ul>
+<li><strong>Self-Attention:</strong>
+<ul>
+<li>For each of the 12 attention heads:
+<ul>
+<li>Three weight matrices (<span class="math inline">\(W_Q\)</span>, <span class="math inline">\(W_K\)</span>, <span class="math inline">\(W_V\)</span>) for query, key, and value: <span class="math inline">\(d_{model}\)</span> x <span class="math inline">\(d_k\)</span> = 768 x 64 = 49,152 parameters each.</li>
+<li>One output projection matrix (<span class="math inline">\(W_O\)</span>): <span class="math inline">\(d_{model}\)</span> x <span class="math inline">\(d_{model}\)</span> = 768 x 768 = 589,824 parameters.</li>
+</ul></li>
+<li>Total parameters per head: 3 x 49,152 + 589,824 ≈ 737,280 parameters.</li>
+<li>Total parameters for all 12 heads: 12 x 737,280 ≈ 8.8M parameters.</li>
+</ul></li>
+<li><strong>Feed-Forward Network:</strong>
+<ul>
+<li>Two linear transformations with intermediate size 3072:
+<ul>
+<li>First transformation: <span class="math inline">\(d_{model}\)</span> x 3072 = 768 x 3072 ≈ 2.3M parameters.</li>
+<li>Second transformation: 3072 x <span class="math inline">\(d_{model}\)</span> = 3072 x 768 ≈ 2.3M parameters.</li>
+</ul></li>
+<li>Total parameters for the feed-forward network: 2.3M + 2.3M ≈ 4.6M parameters.</li>
+</ul></li>
+</ul>
+<p><strong>Total Parameters per Encoder Layer:</strong> 8.8M (self-attention) + 4.6M (FFN) ≈ 13.4M parameters.</p>
+<p><strong>Total Parameters for all 12 Encoder Layers:</strong> 12 x 13.4M ≈ 160.8M parameters.</p>
+<p><strong>Total Parameters in BERT base:</strong></p>
+<p>23.4M (embeddings) + 160.8M (encoders) ≈ <strong>184.2M parameters.</strong></p>
+<p><strong>Note:</strong> This calculation ignores bias terms and parameters associated with layer normalization for simplicity. The actual number of parameters in the BERT base model is slightly lower, around 110 million, due to parameter sharing within the attention heads and other optimizations.</p>
+</section>
+</section>
+<section id="adapting-bert-to-downstream-tasks" class="level2">
+<h2 class="anchored" data-anchor-id="adapting-bert-to-downstream-tasks">Adapting BERT to Downstream Tasks</h2>
+<p>Pre-trained BERT models can be adapted to various downstream Natural Language Processing (NLP) tasks without extensive modifications. Two primary approaches are commonly used: feature extraction and fine-tuning.</p>
+<section id="feature-extraction" class="level3">
+<h3 class="anchored" data-anchor-id="feature-extraction">Feature Extraction</h3>
+<p>In feature extraction, BERT acts as a fixed feature encoder. The input sequence is processed by BERT, and the output representation, typically the hidden state of the [CLS] token or an aggregation of hidden states from the last encoder layer, is used as a feature vector for a separate downstream model.</p>
+<p>This approach is advantageous when labeled data for the downstream task is limited. Since BERT’s parameters are frozen, the risk of overfitting to the small downstream dataset is reduced. However, it may not capture task-specific nuances as effectively as fine-tuning.</p>
+<p>Example: For sentence classification, the feature vector extracted from BERT can be fed into a simple classifier like logistic regression or a support vector machine.</p>
+</section>
+<section id="fine-tuning" class="level3">
+<h3 class="anchored" data-anchor-id="fine-tuning">Fine-tuning</h3>
+<p>Fine-tuning involves updating BERT’s parameters alongside the parameters of a task-specific layer added on top of BERT. The entire model is trained end-to-end on the labeled data for the downstream task.</p>
+<p>This approach allows BERT to adapt to the specific task and potentially achieve better performance than feature extraction. However, it requires more labeled data and is more susceptible to overfitting if the downstream dataset is small.</p>
+<section id="fine-tuning-procedure" class="level4">
+<h4 class="anchored" data-anchor-id="fine-tuning-procedure">Fine-tuning Procedure</h4>
+<ol type="1">
+<li><p><strong>Add Task-Specific Layer:</strong> A task-specific layer, such as a classification layer for sentiment analysis or a question answering head for extractive question answering, is added on top of the final BERT encoder layer. This layer is initialized randomly.</p></li>
+<li><p><strong>Unfreeze BERT Layers:</strong> While some fine-tuning approaches freeze lower BERT layers to preserve general language knowledge, often, all BERT layers are unfrozen to allow for full adaptation.</p></li>
+<li><p><strong>Train on Downstream Data:</strong> The entire model, including BERT and the task-specific layer, is trained on the labeled data for the downstream task. The loss function is specific to the task (e.g., cross-entropy loss for classification).</p></li>
+<li><p><strong>Hyperparameter Tuning:</strong> Fine-tuning often requires adjusting hyperparameters such as learning rate, batch size, and the number of training epochs to optimize performance on the downstream task.</p></li>
+</ol>
+<p><strong>Note:</strong> Masking of input tokens, a core aspect of BERT’s pre-training, is typically not performed during fine-tuning. This is because the [MASK] token is not present in downstream tasks, and the model needs to learn to process actual words.</p>
+</section>
+</section>
+</section>
+<section id="extractive-question-answering-with-bert" class="level2">
+<h2 class="anchored" data-anchor-id="extractive-question-answering-with-bert">Extractive Question Answering with BERT</h2>
+<p>Extractive Question Answering is a task where, given a question and a context paragraph, the model needs to identify the span of text within the paragraph that answers the question. BERT can be fine-tuned for this task by adding a prediction layer on top of the pre-trained encoder.</p>
+<section id="input-representation-1" class="level3">
+<h3 class="anchored" data-anchor-id="input-representation-1">Input Representation</h3>
+<p>The question and paragraph are concatenated as input to BERT, separated by the special [SEP] token. A special [CLS] token is prepended to the beginning of the input. Each token is embedded using the learned word embeddings, segment embeddings (to distinguish between question and context), and positional embeddings. This input sequence is then processed by the layers of the BERT encoder.</p>
+</section>
+<section id="span-prediction" class="level3">
+<h3 class="anchored" data-anchor-id="span-prediction">Span Prediction</h3>
+<p>The final hidden representations from the BERT encoder, denoted as <span class="math inline">\(h_1, h_2, ..., h_n\)</span>, where <span class="math inline">\(n\)</span> is the length of the input sequence, are used to predict the start and end positions of the answer span. Two learnable vectors, <span class="math inline">\(S\)</span> (for start) and <span class="math inline">\(E\)</span> (for end), of the same dimension as the hidden states, are introduced.</p>
+<p>The probability of the <span class="math inline">\(i\)</span>-th word being the start token is calculated as:</p>
+<p><span class="math display">\[ s_i = \frac{\exp(S \cdot h_i)}{\sum_{j=1}^{n} \exp(S \cdot h_j)} \]</span></p>
+<p>Similarly, the probability of the <span class="math inline">\(i\)</span>-th word being the end token is:</p>
+<p><span class="math display">\[ e_i = \frac{\exp(E \cdot h_i)}{\sum_{j=1}^{n} \exp(E \cdot h_j)} \]</span></p>
+<p>These equations use the dot product between the start/end vectors and the hidden states to capture the relevance of each word to being the start or end of the answer span. The softmax function normalizes the scores to obtain probabilities.</p>
+</section>
+<section id="training-and-inference" class="level3">
+<h3 class="anchored" data-anchor-id="training-and-inference">Training and Inference</h3>
+<p>During training, the model is presented with question-paragraph pairs along with the ground-truth start and end positions of the answer span. The loss function is typically the sum of the cross-entropy losses for the start and end position predictions. This encourages the model to learn the <span class="math inline">\(S\)</span> and <span class="math inline">\(E\)</span> vectors that accurately identify the answer span.</p>
+<p>During inference, the model predicts the most likely start and end positions based on the calculated probabilities <span class="math inline">\(s_i\)</span> and <span class="math inline">\(e_i\)</span>. The span between these positions is extracted as the answer. If the predicted end position is before the start position, an empty string is returned, indicating that the model could not find a valid answer span in the context.</p>
+</section>
+</section>
+<section id="review-questions" class="level2">
+<h2 class="anchored" data-anchor-id="review-questions">Review Questions</h2>
+<section id="transformer-architecture-and-applications" class="level3">
+<h3 class="anchored" data-anchor-id="transformer-architecture-and-applications">Transformer Architecture and Applications</h3>
+<ol type="1">
+<li>Explain the key differences between recurrent neural networks and the transformer architecture for sequence processing. What are the advantages of using transformers?</li>
+<li>Describe the role of positional encodings in the transformer architecture. Why are they necessary? How are they typically calculated?</li>
+<li>Explain the concept of multi-head attention. What are the benefits of using multiple attention heads?</li>
+<li>How is the transformer architecture adapted for tasks like sentiment classification, text summarization, and question answering? Provide specific examples for each task.</li>
+<li>Describe the challenges of using labeled versus unlabeled data in NLP. How can unlabeled data be leveraged to improve model performance?</li>
+</ol>
+</section>
+<section id="decoding-strategies-1" class="level3">
+<h3 class="anchored" data-anchor-id="decoding-strategies-1">Decoding Strategies</h3>
+<ol start="6" type="1">
+<li>What are decoding strategies, and why are they important in text generation?</li>
+<li>Explain the exhaustive search decoding strategy. Why is it computationally expensive?</li>
+<li>Describe the greedy search decoding strategy. What are its advantages and disadvantages?</li>
+<li>How does beam search improve upon greedy search? Explain the role of the beam size in beam search.</li>
+<li>What are the key differences between temperature sampling, top-k sampling, and top-p sampling? Explain how each method influences the diversity and coherence of the generated text.</li>
+<li>When would you prefer one sampling method over the others? Provide specific scenarios and justifications.</li>
+</ol>
+</section>
+<section id="bert-architecture-and-fine-tuning" class="level3">
+<h3 class="anchored" data-anchor-id="bert-architecture-and-fine-tuning">BERT Architecture and Fine-tuning</h3>
+<ol start="12" type="1">
+<li>What does BERT stand for, and what is its main contribution to NLP? How does it differ from unidirectional language models like GPT?</li>
+<li>Explain the concept of Masked Language Modeling (MLM) and its role in BERT’s pre-training.</li>
+<li>What is Next Sentence Prediction (NSP), and why is it included in BERT’s pre-training objective?</li>
+<li>Describe the three types of embeddings used in BERT’s input representation. Why is each type important?</li>
+<li>Explain BERT’s masking strategy. Why isn’t a simple [MASK] token replacement sufficient for effective pre-training?</li>
+<li>Describe the two main approaches for adapting BERT to downstream tasks: feature extraction and fine-tuning. What are the advantages and disadvantages of each approach? When would you choose one over the other?</li>
+<li>Explain how BERT can be fine-tuned for extractive question answering. How are the start and end positions of the answer span predicted? What loss function is typically used during training?</li>
+<li>Calculate the approximate number of parameters in a simplified version of the BERT base model. Break down the calculation by components (embeddings, attention heads, feed-forward networks, etc.).</li>
+</ol>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const disableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'prefetch';
+    }
+  }
+  const enableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'stylesheet';
+    }
+  }
+  const manageTransitions = (selector, allowTransitions) => {
+    const els = window.document.querySelectorAll(selector);
+    for (let i=0; i < els.length; i++) {
+      const el = els[i];
+      if (allowTransitions) {
+        el.classList.remove('notransition');
+      } else {
+        el.classList.add('notransition');
+      }
+    }
+  }
+  const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+    const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+    const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+    let newTheme = '';
+    if(darkModeDefault) {
+      newTheme = isAlternate ? baseTheme : alternateTheme;
+    } else {
+      newTheme = isAlternate ? alternateTheme : baseTheme;
+    }
+    const changeGiscusTheme = () => {
+      // From: https://github.com/giscus/giscus/issues/336
+      const sendMessage = (message) => {
+        const iframe = document.querySelector('iframe.giscus-frame');
+        if (!iframe) return;
+        iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+      }
+      sendMessage({
+        setConfig: {
+          theme: newTheme
+        }
+      });
+    }
+    const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+    if (isGiscussLoaded) {
+      changeGiscusTheme();
+    }
+  }
+  const toggleColorMode = (alternate) => {
+    // Switch the stylesheets
+    const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+    manageTransitions('#quarto-margin-sidebar .nav-link', false);
+    if (alternate) {
+      enableStylesheet(alternateStylesheets);
+      for (const sheetNode of alternateStylesheets) {
+        if (sheetNode.id === "quarto-bootstrap") {
+          toggleBodyColorMode(sheetNode);
+        }
+      }
+    } else {
+      disableStylesheet(alternateStylesheets);
+      toggleBodyColorPrimary();
+    }
+    manageTransitions('#quarto-margin-sidebar .nav-link', true);
+    // Switch the toggles
+    const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+    for (let i=0; i < toggles.length; i++) {
+      const toggle = toggles[i];
+      if (toggle) {
+        if (alternate) {
+          toggle.classList.add("alternate");     
+        } else {
+          toggle.classList.remove("alternate");
+        }
+      }
+    }
+    // Hack to workaround the fact that safari doesn't
+    // properly recolor the scrollbar when toggling (#1455)
+    if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+      manageTransitions("body", false);
+      window.scrollTo(0, 1);
+      setTimeout(() => {
+        window.scrollTo(0, 0);
+        manageTransitions("body", true);
+      }, 40);  
+    }
+  }
+  const isFileUrl = () => { 
+    return window.location.protocol === 'file:';
+  }
+  const hasAlternateSentinel = () => {  
+    let styleSentinel = getColorSchemeSentinel();
+    if (styleSentinel !== null) {
+      return styleSentinel === "alternate";
+    } else {
+      return false;
+    }
+  }
+  const setStyleSentinel = (alternate) => {
+    const value = alternate ? "alternate" : "default";
+    if (!isFileUrl()) {
+      window.localStorage.setItem("quarto-color-scheme", value);
+    } else {
+      localAlternateSentinel = value;
+    }
+  }
+  const getColorSchemeSentinel = () => {
+    if (!isFileUrl()) {
+      const storageValue = window.localStorage.getItem("quarto-color-scheme");
+      return storageValue != null ? storageValue : localAlternateSentinel;
+    } else {
+      return localAlternateSentinel;
+    }
+  }
+  const darkModeDefault = false;
+  let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+  // Dark / light mode switch
+  window.quartoToggleColorScheme = () => {
+    // Read the current dark / light value 
+    let toAlternate = !hasAlternateSentinel();
+    toggleColorMode(toAlternate);
+    setStyleSentinel(toAlternate);
+    toggleGiscusIfUsed(toAlternate, darkModeDefault);
+  };
+  // Ensure there is a toggle, if there isn't float one in the top right
+  if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+    const a = window.document.createElement('a');
+    a.classList.add('top-right');
+    a.classList.add('quarto-color-scheme-toggle');
+    a.href = "";
+    a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+    const i = window.document.createElement("i");
+    i.classList.add('bi');
+    a.appendChild(i);
+    window.document.body.appendChild(a);
+  }
+  // Switch to dark mode if need be
+  if (hasAlternateSentinel()) {
+    toggleColorMode(true);
+  } else {
+    toggleColorMode(false);
+  }
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const onCopySuccess = function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
+  });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

@@ -1,0 +1,1412 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.5.56">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Transformer Decoder Explained – BS Degree Notes</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="https://lalten.github.io/lmweb/style/latinmodern-roman.css">
+<link rel="stylesheet" href="https://lalten.github.io/lmweb/style/latinmodern-sans.css">
+<link rel="stylesheet" href="https://lalten.github.io/lmweb/style/latinmodern-mono.css">
+</head>
+
+<body class="nav-sidebar docked">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../pages/LLM/Week01.html">LLM</a></li><li class="breadcrumb-item"><a href="../../pages/LLM/Week02.html">Week 2</a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="../../">BS Degree Notes</a> 
+        <div class="sidebar-tools-main">
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Home</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="false">
+ <span class="menu-text">Deep Learning</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../pages/DL/Week01_1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 1.1</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../pages/DL/Week01_2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 1.2</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../pages/DL/Week02.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 2</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../pages/DL/Week03.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 3</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../pages/DL/Week04.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 4</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../pages/DL/Week05.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 5</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../pages/DL/Week06.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 6</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="false">
+ <span class="menu-text">AI: Search Methods</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../pages/AI/Week01.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 1</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../pages/AI/Week02.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 2</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../pages/AI/Week03.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 3</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../pages/AI/Week04.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 4</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../pages/AI/Week05.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 5</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../pages/AI/Week06.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 6</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="false">
+ <span class="menu-text">Software Testing</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../pages/ST/Week01.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 1</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../pages/ST/Week02.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 2</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../pages/ST/Week03.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 3</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../pages/ST/Week04.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 4</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../pages/ST/Week05.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 5</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../pages/ST/Week06.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 6</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../pages/ST/Week07.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 7</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../pages/ST/Week08.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 8</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../pages/ST/Week09.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 9</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../pages/ST/Week10.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 10</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../pages/ST/Week11.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 11</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../pages/ST/Week12.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 12</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="false">
+ <span class="menu-text">Software Engineering</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../pages/SE/Week01.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 1</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../pages/SE/Week02.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 2</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../pages/SE/Week03.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 3</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../pages/SE/Week04.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 4</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../pages/SE/Week09.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 9</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../pages/SE/Week10.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 10</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../pages/SE/Week11.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 11</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="false">
+ <span class="menu-text">Reinforcement Learning</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../pages/RL/Week01_1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 1.1</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../pages/RL/Week01_2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 1.2</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../pages/RL/Week02.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 2</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="false">
+ <span class="menu-text">NLP</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../pages/NLP/Week01.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 1</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../pages/NLP/Week02.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 2</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../pages/NLP/Week03.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 3</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="true">
+ <span class="menu-text">LLM</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../pages/LLM/Week01.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 1</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../pages/LLM/Week02.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">Week 2</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../pages/LLM/Week03.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 3</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../pages/LLM/Week04.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 4</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#decoder-stack" id="toc-decoder-stack" class="nav-link active" data-scroll-target="#decoder-stack">Decoder Stack</a></li>
+  <li><a href="#teacher-forcing" id="toc-teacher-forcing" class="nav-link" data-scroll-target="#teacher-forcing">Teacher Forcing</a></li>
+  <li><a href="#masked-self-attention-detailed" id="toc-masked-self-attention-detailed" class="nav-link" data-scroll-target="#masked-self-attention-detailed">Masked (Self) Attention (Detailed)</a></li>
+  <li><a href="#masking-in-matrix-representation" id="toc-masking-in-matrix-representation" class="nav-link" data-scroll-target="#masking-in-matrix-representation">Masking in Matrix Representation</a></li>
+  <li><a href="#masked-multi-head-self-attention" id="toc-masked-multi-head-self-attention" class="nav-link" data-scroll-target="#masked-multi-head-self-attention">Masked Multi-Head Self Attention</a></li>
+  <li><a href="#multi-head-cross-attention" id="toc-multi-head-cross-attention" class="nav-link" data-scroll-target="#multi-head-cross-attention">Multi-Head Cross Attention</a></li>
+  <li><a href="#first-decoder-layer" id="toc-first-decoder-layer" class="nav-link" data-scroll-target="#first-decoder-layer">First Decoder Layer</a></li>
+  <li><a href="#number-of-parameters" id="toc-number-of-parameters" class="nav-link" data-scroll-target="#number-of-parameters">Number of Parameters</a></li>
+  <li><a href="#decoder-output" id="toc-decoder-output" class="nav-link" data-scroll-target="#decoder-output">Decoder Output</a></li>
+  <li><a href="#positional-encoding" id="toc-positional-encoding" class="nav-link" data-scroll-target="#positional-encoding">Positional Encoding</a></li>
+  <li><a href="#distance-matrix-and-positional-encoding-properties" id="toc-distance-matrix-and-positional-encoding-properties" class="nav-link" data-scroll-target="#distance-matrix-and-positional-encoding-properties">Distance Matrix and Positional Encoding Properties</a></li>
+  <li><a href="#transformer-architecture-layers-and-gradient-flow" id="toc-transformer-architecture-layers-and-gradient-flow" class="nav-link" data-scroll-target="#transformer-architecture-layers-and-gradient-flow">Transformer Architecture (Layers and Gradient Flow)</a></li>
+  <li><a href="#the-complete-layer-encoder" id="toc-the-complete-layer-encoder" class="nav-link" data-scroll-target="#the-complete-layer-encoder">The Complete Layer (Encoder)</a>
+  <ul class="collapse">
+  <li><a href="#multi-head-attention-block" id="toc-multi-head-attention-block" class="nav-link" data-scroll-target="#multi-head-attention-block">Multi-Head Attention Block</a></li>
+  <li><a href="#position-wise-feed-forward-network" id="toc-position-wise-feed-forward-network" class="nav-link" data-scroll-target="#position-wise-feed-forward-network">Position-wise Feed-Forward Network</a></li>
+  <li><a href="#residual-connections-and-layer-normalization" id="toc-residual-connections-and-layer-normalization" class="nav-link" data-scroll-target="#residual-connections-and-layer-normalization">Residual Connections and Layer Normalization</a></li>
+  </ul></li>
+  <li><a href="#the-transformer-architecture-overall" id="toc-the-transformer-architecture-overall" class="nav-link" data-scroll-target="#the-transformer-architecture-overall">The Transformer Architecture (Overall)</a></li>
+  <li><a href="#review-questions" id="toc-review-questions" class="nav-link" data-scroll-target="#review-questions">Review Questions</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../pages/LLM/Week01.html">LLM</a></li><li class="breadcrumb-item"><a href="../../pages/LLM/Week02.html">Week 2</a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title">Transformer Decoder Explained</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="decoder-stack" class="level2">
+<h2 class="anchored" data-anchor-id="decoder-stack">Decoder Stack</h2>
+<p>The decoder is a stack of <span class="math inline">\(N = 6\)</span> identical layers. Each layer is composed of three sublayers:</p>
+<ol type="1">
+<li><p><strong>Masked Multi-Head (Self) Attention:</strong> This sublayer performs self-attention on the decoder’s input, but masks future tokens to prevent the model from “cheating” during training. This ensures that the prediction for a given token depends only on the preceding tokens.</p></li>
+<li><p><strong>Multi-Head (Cross) Attention:</strong> This sublayer performs attention over the output of the encoder. It allows the decoder to focus on relevant parts of the input sequence when generating the output sequence. The queries come from the decoder’s previous sublayer (masked self-attention), while the keys and values come from the encoder’s output.</p></li>
+<li><p><strong>Feed Forward Network:</strong> This is a position-wise feed-forward network applied to each position’s output from the multi-head cross-attention sublayer. It consists of two linear transformations with a ReLU activation in between.</p></li>
+</ol>
+<p>Each of these sublayers employs a residual connection around it, followed by layer normalization. This can be represented as:</p>
+<p><span class="math display">\[
+\text{LayerNorm}(x + \text{Sublayer}(x))
+\]</span> where <span class="math inline">\(x\)</span> is the input to the sublayer, and Sublayer represents the masked self-attention, cross-attention, or feed-forward network.</p>
+</section>
+<section id="teacher-forcing" class="level2">
+<h2 class="anchored" data-anchor-id="teacher-forcing">Teacher Forcing</h2>
+<p>Teacher forcing mitigates error accumulation during decoder training. In standard autoregressive decoding, each prediction is conditioned on the <em>previous prediction</em>. A mistake early in the sequence can cascade, leading to subsequent errors and slower training.</p>
+<p>Teacher forcing uses the <em>ground truth</em> (correct target sequence) as input at each timestep, alongside the previous prediction. This provides a stronger learning signal, correcting errors immediately and facilitating faster convergence.</p>
+<p>More formally, let <span class="math inline">\(y = (y_1, y_2, ..., y_T)\)</span> be the target sequence and <span class="math inline">\(\hat{y} = (\hat{y}_1, \hat{y}_2, ..., \hat{y}_T)\)</span> be the predicted sequence. In autoregressive decoding without teacher forcing:</p>
+<p><span class="math inline">\(P(\hat{y}|x) = \prod_{t=1}^{T} P(\hat{y}_t|\hat{y}_{&lt;t}, x)\)</span></p>
+<p>where <span class="math inline">\(x\)</span> is the input sequence. With teacher forcing, the probability becomes:</p>
+<p><span class="math inline">\(P(\hat{y}|x, y) = \prod_{t=1}^{T} P(\hat{y}_t|y_{&lt;t}, x)\)</span></p>
+<p>This means the prediction at time <span class="math inline">\(t\)</span> is conditioned on the <em>actual</em> previous tokens <span class="math inline">\(y_{&lt;t}\)</span> from the target sequence, instead of the predicted tokens <span class="math inline">\(\hat{y}_{&lt;t}\)</span>.</p>
+<p>During inference, teacher forcing is disabled, and the model reverts to standard autoregressive decoding. The decoder acts as an auto-regressor, using its own previous predictions as input. This ensures that during deployment, the model can generate sequences independently, without relying on ground truth.</p>
+</section>
+<section id="masked-self-attention-detailed" class="level2">
+<h2 class="anchored" data-anchor-id="masked-self-attention-detailed">Masked (Self) Attention (Detailed)</h2>
+<p>Masked self-attention in the decoder operates similarly to standard self-attention but incorporates a mask to prevent the model from attending to future tokens. This is crucial during training to ensure the model learns to predict the next token based only on the preceding context.</p>
+<p>The process begins by calculating the query (<span class="math inline">\(Q\)</span>), key (<span class="math inline">\(K\)</span>), and value (<span class="math inline">\(V\)</span>) matrices. These are obtained by multiplying the input matrix <span class="math inline">\(H\)</span> (representing the embedded input tokens) with the learned weight matrices <span class="math inline">\(W_Q\)</span>, <span class="math inline">\(W_K\)</span>, and <span class="math inline">\(W_V\)</span> respectively:</p>
+<p><span class="math inline">\(Q = H W_Q\)</span> <span class="math inline">\(K = H W_K\)</span> <span class="math inline">\(V = H W_V\)</span></p>
+<p>Next, the attention weights are calculated. This involves a matrix multiplication of <span class="math inline">\(Q\)</span> and <span class="math inline">\(K^T\)</span>, scaling by <span class="math inline">\(1/\sqrt{d_k}\)</span> (where <span class="math inline">\(d_k\)</span> is the dimension of the key vectors), and applying the softmax function. The masking is applied <em>before</em> the softmax:</p>
+<p><span class="math display">\[
+\text{Attention}(Q, K, V) = \text{softmax}\left(\frac{QK^T}{\sqrt{d_k}} + M\right)V
+\]</span></p>
+<p>Where <span class="math inline">\(M\)</span> is the masking matrix. <span class="math inline">\(M\)</span> is an upper triangular matrix filled with negative infinity (<span class="math inline">\(-\infty\)</span>). Adding this to the attention scores before the softmax effectively zeros out the attention weights corresponding to future tokens. This prevents information from future tokens from influencing the prediction of the current token.</p>
+<p>The output of the softmax operation is a matrix of attention weights, where each row represents a token in the input sequence, and each column represents the attention given to other tokens (including itself). Because of the mask, the attention weights for future tokens are zero.</p>
+<p>Finally, these attention weights are multiplied with the value matrix <span class="math inline">\(V\)</span> to obtain the context vector for each token. This context vector is a weighted sum of the value vectors of all preceding tokens, where the weights are determined by the attention mechanism.</p>
+</section>
+<section id="masking-in-matrix-representation" class="level2">
+<h2 class="anchored" data-anchor-id="masking-in-matrix-representation">Masking in Matrix Representation</h2>
+<p>Masking assigns zero weights (<span class="math inline">\(\alpha_{ij} = 0\)</span>) to masked value vectors (<span class="math inline">\(v_j\)</span>) in a sequence. This is achieved during the self-attention calculation by adding a mask matrix <em>M</em> to the attention matrix <em>A</em> before applying the softmax function.</p>
+<p>Given the query matrix <em>Q</em>, key matrix <em>K</em>, and value matrix <em>V</em>, the attention matrix <em>A</em> is calculated as:</p>
+<p><span class="math display">\[ A = Q^T K \]</span></p>
+<p>The mask matrix <em>M</em> is added to <em>A</em>:</p>
+<p><span class="math display">\[ A' = A + M \]</span></p>
+<p>Finally, the output <em>Z</em> is calculated using the softmax function:</p>
+<p><span class="math display">\[ Z = \text{softmax}(A') V^T = \text{softmax}(A + M) V^T \]</span></p>
+<p>The mask <em>M</em> is a triangular matrix. The lower triangular portion (including the diagonal) consists of zeros, allowing attention to be computed between current and previous tokens. The upper triangular portion contains negative infinity (<span class="math inline">\(-\infty\)</span>). During the softmax operation, the negative infinity values become effectively zero, preventing attention to subsequent (future) tokens in the sequence. This mechanism is crucial for ensuring the decoder only attends to past tokens during training, mimicking the autoregressive behavior needed during inference.</p>
+<p>For example, for a sequence of length 5, the mask <em>M</em> would be:</p>
+<p><span class="math display">\[
+M = \begin{bmatrix}
+0 &amp; -\infty &amp; -\infty &amp; -\infty &amp; -\infty \\
+0 &amp; 0 &amp; -\infty &amp; -\infty &amp; -\infty \\
+0 &amp; 0 &amp; 0 &amp; -\infty &amp; -\infty \\
+0 &amp; 0 &amp; 0 &amp; 0 &amp; -\infty \\
+0 &amp; 0 &amp; 0 &amp; 0 &amp; 0
+\end{bmatrix}
+\]</span> Adding <em>M</em> to <em>A</em> effectively zeros out the elements corresponding to future tokens in the attention matrix <em>A’</em>, ensuring the decoder doesn’t “look ahead” during training.</p>
+</section>
+<section id="masked-multi-head-self-attention" class="level2">
+<h2 class="anchored" data-anchor-id="masked-multi-head-self-attention">Masked Multi-Head Self Attention</h2>
+<p>The purpose of the masked multi-head self-attention mechanism within the decoder is to allow each position to attend to all preceding positions in the input sequence, including itself, while preventing attention to future positions. This is crucial during training with teacher forcing to prevent the model from “cheating” by looking ahead at the target sequence.</p>
+<p>The process begins by creating the query (<span class="math inline">\(Q_1\)</span>), key (<span class="math inline">\(K_1\)</span>), and value (<span class="math inline">\(V_1\)</span>) matrices for the self-attention mechanism. These are derived from the input matrix <span class="math inline">\(H\)</span> (which can be thought of as a sequence of word embeddings combined with positional encodings) and multiplied by learned weight matrices <span class="math inline">\(W_{Q_1}\)</span>, <span class="math inline">\(W_{K_1}\)</span>, and <span class="math inline">\(W_{V_1}\)</span>, respectively.</p>
+<p><span class="math inline">\(Q_1 = W_{Q_1} H\)</span> <span class="math inline">\(K_1 = W_{K_1} H\)</span> <span class="math inline">\(V_1 = W_{V_1} H\)</span></p>
+<p>The attention matrix <span class="math inline">\(A\)</span> is then calculated by performing a dot product between the transpose of the query matrix and the key matrix.</p>
+<p><span class="math inline">\(A = Q_1^T K_1\)</span></p>
+<p>This attention matrix <span class="math inline">\(A\)</span> represents the pairwise similarities between all positions in the input sequence. However, since we want to prevent attention to future tokens, we apply a mask <span class="math inline">\(M\)</span> to this attention matrix.</p>
+<p>The mask <span class="math inline">\(M\)</span> is an upper triangular matrix where the upper triangle (representing attention to future tokens) is filled with negative infinity (<span class="math inline">\(-\infty\)</span>) and the lower triangle (representing attention to past and present tokens) is filled with zeros.</p>
+<p>Adding the mask to the attention matrix effectively nullifies the attention weights for future tokens:</p>
+<p><span class="math display">\[
+A' = A + M
+\]</span></p>
+<p>Next, a softmax function is applied to the masked attention matrix <span class="math inline">\(A'\)</span> to obtain the attention weights matrix <span class="math inline">\(Z\)</span>. These weights represent the normalized importance of each past token (including the current token) when generating the output for the current position.</p>
+<p><span class="math display">\[
+Z = \text{softmax}(A') = \text{softmax}(A + M)
+\]</span></p>
+<p>Finally, the output of the masked multi-head self-attention is calculated by a weighted sum of the value vectors <span class="math inline">\(V_1\)</span>, where the weights are determined by the attention weights matrix <span class="math inline">\(Z\)</span>.</p>
+<p><span class="math display">\[
+\text{Output} = Z V_1^T
+\]</span></p>
+<p>This output is then typically passed through a feed-forward network and a layer normalization step. The “multi-head” aspect involves repeating this process multiple times with different learned weight matrices (<span class="math inline">\(W_{Q_1}\)</span>, <span class="math inline">\(W_{K_1}\)</span>, <span class="math inline">\(W_{V_1}\)</span>) for each “head,” and concatenating the results before feeding them into the feed-forward network. This allows the model to capture different aspects of the relationships between words in the sequence.</p>
+</section>
+<section id="multi-head-cross-attention" class="level2">
+<h2 class="anchored" data-anchor-id="multi-head-cross-attention">Multi-Head Cross Attention</h2>
+<p>Multi-Head Cross Attention is a crucial mechanism in the decoder of the transformer architecture. It allows the decoder to attend to different parts of the encoded input sequence when generating the output sequence. Unlike self-attention, which focuses on relationships within a single sequence (either input or output), cross-attention connects the decoder and encoder.</p>
+<p>The process begins with three sets of matrices: Queries (<span class="math inline">\(Q_2\)</span>), Keys (<span class="math inline">\(K_2\)</span>), and Values (<span class="math inline">\(V_2\)</span>). Critically, the queries are derived from the decoder’s <em>current</em> layer’s output (often after a self-attention operation and denoted as <span class="math inline">\(S\)</span>), while the keys and values originate from the <em>encoder’s</em> final layer output (denoted as <span class="math inline">\(E\)</span>). This is where the “cross” in cross-attention comes from.</p>
+<p>These matrices are derived using linear transformations:</p>
+<p><span class="math inline">\(Q_2 = W_{Q_2} S\)</span> <span class="math inline">\(K_2 = W_{K_2} E\)</span> <span class="math inline">\(V_2 = W_{V_2} E\)</span></p>
+<p>Where <span class="math inline">\(W_{Q_2}\)</span>, <span class="math inline">\(W_{K_2}\)</span>, and <span class="math inline">\(W_{V_2}\)</span> are learned weight matrices specific to the cross-attention operation.</p>
+<p>Next, the attention weights are calculated. This begins by performing a dot-product attention operation between the queries and keys:</p>
+<p><span class="math inline">\(Attention(Q_2, K_2, V_2) = \text{softmax}(\frac{Q_2 K_2^T}{\sqrt{d_k}}) V_2\)</span></p>
+<p>Here, <span class="math inline">\(d_k\)</span> is the dimensionality of the keys (and queries), and the scaling factor <span class="math inline">\(\frac{1}{\sqrt{d_k}}\)</span> is used for stability during training. The softmax function normalizes the attention weights to represent a probability distribution over the input sequence.</p>
+<p>The “multi-head” aspect involves performing this attention mechanism multiple times with different learned linear transformations for <span class="math inline">\(Q_2\)</span>, <span class="math inline">\(K_2\)</span>, and <span class="math inline">\(V_2\)</span>. This allows the model to capture different aspects of the relationship between the input and output sequences. The output of each head is then concatenated and projected through a final linear layer to produce the overall multi-head cross-attention output.</p>
+<p>Therefore the full process can be represesnted as:</p>
+<p><span class="math display">\[
+\text{MultiHead}(Q_2, K_2, V_2) = \text{Concat}(\text{head}_1,...,\text{head}_h)W^O
+\]</span></p>
+<p>where for each head,</p>
+<p><span class="math display">\[
+\text{head}_i = \text{Attention}(Q_2 W^Q_i, K_2 W^K_i, V_2 W^V_i)
+\]</span></p>
+<p>The resulting context vector from the multi-head cross attention is then typically combined with the decoder’s self-attention output and passed through a feed-forward network.</p>
+</section>
+<section id="first-decoder-layer" class="level2">
+<h2 class="anchored" data-anchor-id="first-decoder-layer">First Decoder Layer</h2>
+<p>The first decoder layer receives input from two primary sources: the output of the previous decoder layer (or the input embeddings for the first layer) and the output of the encoder stack. Within the decoder layer, the following operations occur sequentially:</p>
+<ol type="1">
+<li><p><strong>Masked Multi-Head Self-Attention:</strong> This operation attends to the input sequence, considering only the preceding tokens. The masking prevents the model from “looking ahead” at future tokens during training, mimicking the way a human would generate a sequence word by word. This layer receives a sequence of token embeddings. Let’s represent this input as <span class="math inline">\(H = [h_1, h_2, ..., h_T]\)</span>, where <span class="math inline">\(h_i\)</span> represents the embedding for the <span class="math inline">\(i\)</span>-th token and <span class="math inline">\(T\)</span> is the sequence length. This layer outputs a new sequence of vectors, say <span class="math inline">\(S = [s_1, s_2, ..., s_T]\)</span>.</p></li>
+<li><p><strong>Add &amp; Layer Norm:</strong> The output <span class="math inline">\(S\)</span> of the self-attention layer is then added to the original input <span class="math inline">\(H\)</span> (residual connection). This helps with gradient flow during training. The result is then normalized using layer normalization, stabilizing the training dynamics. This can be represented as:</p></li>
+</ol>
+<p><span class="math display">\[
+H' = \text{LayerNorm}(H + S)
+\]</span></p>
+<ol start="3" type="1">
+<li><p><strong>Multi-Head Cross-Attention:</strong> This operation allows the decoder to attend to the encoder’s output, effectively incorporating information from the input sequence. This layer takes two inputs: the output <span class="math inline">\(H'\)</span> from the previous step and the encoder’s output, typically denoted as <span class="math inline">\(E = [e_1, e_2, ..., e_{T'}]\)</span>, where <span class="math inline">\(e_i\)</span> represents the encoder’s representation of the <span class="math inline">\(i\)</span>-th input token and <span class="math inline">\(T'\)</span> is the input sequence length. The output of this layer is another sequence of vectors, say <span class="math inline">\(C = [c_1, c_2, ..., c_T]\)</span>.</p></li>
+<li><p><strong>Add &amp; Layer Norm:</strong> Similar to step 2, the output <span class="math inline">\(C\)</span> of the cross-attention is added to <span class="math inline">\(H'\)</span> and then layer normalized:</p></li>
+</ol>
+<p><span class="math display">\[
+H'' = \text{LayerNorm}(H' + C)
+\]</span></p>
+<ol start="5" type="1">
+<li><strong>Feed-Forward Network:</strong> This layer applies a fully connected feed-forward network to each vector in the sequence <span class="math inline">\(H''\)</span> independently. This network typically consists of two linear transformations with a ReLU activation function in between. The output of this layer is the final output of the decoder layer, which is then passed to the next decoder layer or used for prediction in the final layer.</li>
+</ol>
+</section>
+<section id="number-of-parameters" class="level2">
+<h2 class="anchored" data-anchor-id="number-of-parameters">Number of Parameters</h2>
+<ul>
+<li><strong>Masked Multi-Head Attention:</strong> ~1 million parameters</li>
+<li><strong>Multi-Head Cross Attention:</strong> ~1 million parameters</li>
+<li><strong>Feed Forward Network (FFN):</strong> ~2 million parameters. This is calculated as follows: The FFN has two linear transformations. The first expands the dimensionality from 512 to 2048, and the second reduces it back to 512. Additionally, there’s a bias term for each output neuron in both layers. <span class="math display">\[ \text{FFN Parameters} = (512 \times 2048 + 2048) + (2048 \times 512 + 512)\]</span> <span class="math display">\[ = 2 \times (512 \times 2048) + 2048 + 512 \]</span> <span class="math display">\[ \approx 2 \times 10^6 \]</span></li>
+<li><strong>Total per decoder layer:</strong> ~4 million parameters (sum of the above).</li>
+</ul>
+</section>
+<section id="decoder-output" class="level2">
+<h2 class="anchored" data-anchor-id="decoder-output">Decoder Output</h2>
+<p>The output from the topmost decoder layer, let’s denote it as <span class="math inline">\(O\)</span>, undergoes a linear transformation using a weight matrix <span class="math inline">\(W_D\)</span>. The dimensions of <span class="math inline">\(O\)</span> are <span class="math inline">\(T \times d_{model}\)</span>, where <span class="math inline">\(T\)</span> is the sequence length and <span class="math inline">\(d_{model}\)</span> is the model dimension (typically 512). <span class="math inline">\(W_D\)</span> has dimensions <span class="math inline">\(d_{model} \times |V|\)</span>, where <span class="math inline">\(|V|\)</span> is the vocabulary size. The resulting matrix, let’s call it <span class="math inline">\(L\)</span>, will therefore have dimensions <span class="math inline">\(T \times |V|\)</span>. Each row in <span class="math inline">\(L\)</span> corresponds to a position in the output sequence, and each column represents a logit score for each word in the vocabulary. This can be represented as:</p>
+<p><span class="math display">\[ L = O W_D \]</span></p>
+<p>The matrix <span class="math inline">\(L\)</span> then has a softmax function applied to each row independently. This converts the logits into probabilities, producing a probability distribution over the vocabulary for each position in the output sequence. This gives us the matrix <span class="math inline">\(P\)</span>, also of size <span class="math inline">\(T \times |V|\)</span>. This operation can be expressed as:</p>
+<p><span class="math display">\[ P_{t,v} = \frac{e^{L_{t,v}}}{\sum_{v'=1}^{|V|} e^{L_{t,v'}}} \]</span></p>
+<p>where <span class="math inline">\(P_{t,v}\)</span> represents the probability of the <span class="math inline">\(v\)</span>-th word in the vocabulary being at the <span class="math inline">\(t\)</span>-th position in the output sequence.</p>
+<p>This final probability distribution <span class="math inline">\(P\)</span> is used to predict the next word in the generated sequence during inference, typically by selecting the word with the highest probability at each time step. The matrix <span class="math inline">\(W_D\)</span>, due to its size, contributes a substantial number of parameters to the overall model (approximately <span class="math inline">\(512 \times |V|\)</span>, which can be in the tens of millions depending on the vocabulary size). This transformation from the decoder’s output to word probabilities is crucial for generating text.</p>
+</section>
+<section id="positional-encoding" class="level2">
+<h2 class="anchored" data-anchor-id="positional-encoding">Positional Encoding</h2>
+<p>Positional encoding is crucial for transformers because self-attention mechanisms are permutation-invariant, meaning they don’t inherently understand word order. Therefore, positional information must be explicitly added to the input embeddings. Several approaches could be considered:</p>
+<ul>
+<li><p><strong>Constant Vector:</strong> Assigning a constant vector <span class="math inline">\(p_j\)</span> to each position <span class="math inline">\(j\)</span> is too simplistic and wouldn’t allow the model to differentiate effectively between different positions.</p></li>
+<li><p><strong>One-Hot Encoding:</strong> Representing each position <span class="math inline">\(j\)</span> with a one-hot vector is another option. However, this doesn’t capture the relative distances between words. The Euclidean distance between any two one-hot vectors would be <span class="math inline">\(\sqrt{2}\)</span>, regardless of their positions in the sentence.</p></li>
+<li><p><strong>Learned Embeddings:</strong> Learning an embedding for each possible position is possible, but becomes impractical for long sequences and doesn’t generalize well to sentences longer than those seen during training. This approach wouldn’t be suitable for dynamic sentence lengths.</p></li>
+</ul>
+<p>The solution adopted by transformers is <strong>sinusoidal positional encoding</strong>. This method embeds a unique pattern of features for each position <span class="math inline">\(j\)</span>, allowing the model to attend by relative position. The encoding function is defined as:</p>
+<p><span class="math display">\[
+PE_{(j, i)} = \begin{cases}
+\sin \left( \frac{j}{10000^{\frac{2i}{d_{model}}}} \right) &amp; \text{if } i \text{ is even} \\
+\cos \left( \frac{j}{10000^{\frac{2i-1}{d_{model}}}} \right) &amp; \text{if } i \text{ is odd}
+\end{cases}
+\]</span></p>
+<p>where:</p>
+<ul>
+<li><span class="math inline">\(j\)</span> is the position of the word in the sequence.</li>
+<li><span class="math inline">\(i\)</span> is the dimension of the positional encoding vector (ranges from 0 to <span class="math inline">\(d_{model} - 1\)</span>).</li>
+<li><span class="math inline">\(d_{model}\)</span> is the dimension of the word embeddings (typically 512).</li>
+</ul>
+<p>This function generates a unique vector <span class="math inline">\(p_j\)</span> for each position <span class="math inline">\(j\)</span>. The alternating sine and cosine functions create a pattern that allows the model to learn relative positional information. This approach has the advantage of generalizing to unseen sequence lengths.</p>
+<p>Visualizing the positional encoding matrix as a heatmap, where rows represent positions (<span class="math inline">\(j\)</span>) and columns represent dimensions (<span class="math inline">\(i\)</span>), reveals distinct patterns for each position. The first word in any sentence will always have the same positional encoding <span class="math inline">\(p_0\)</span>, characterized by alternating 0s and 1s when visualized as a heatmap. This alternating pattern is specifically produced by the sinusoidal function when <span class="math inline">\(j=0\)</span>. For subsequent positions (<span class="math inline">\(j &gt; 0\)</span>), the sinusoidal function generates increasingly complex patterns that encode relative positional information. This allows the model to distinguish between words at different positions, even if the absolute positions are beyond what it encountered during training.</p>
+</section>
+<section id="distance-matrix-and-positional-encoding-properties" class="level2">
+<h2 class="anchored" data-anchor-id="distance-matrix-and-positional-encoding-properties">Distance Matrix and Positional Encoding Properties</h2>
+<p>The distance matrix for word positions in a sentence reveals a specific pattern: the distance increases as we move left or right from the main diagonal (representing the distance of a word from itself), and this pattern is symmetric around the center of the sentence. This characteristic is important for capturing relationships between words based on their relative positions.</p>
+<p>Consider the example sentence “I enjoyed the film transformer”. Its distance matrix is:</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th></th>
+<th>I</th>
+<th>Enjoyed</th>
+<th>the</th>
+<th>film</th>
+<th>transformer</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>I</strong></td>
+<td>0</td>
+<td>1</td>
+<td>2</td>
+<td>3</td>
+<td>4</td>
+</tr>
+<tr class="even">
+<td><strong>Enjoyed</strong></td>
+<td>1</td>
+<td>0</td>
+<td>1</td>
+<td>2</td>
+<td>3</td>
+</tr>
+<tr class="odd">
+<td><strong>the</strong></td>
+<td>2</td>
+<td>1</td>
+<td>0</td>
+<td>1</td>
+<td>2</td>
+</tr>
+<tr class="even">
+<td><strong>film</strong></td>
+<td>3</td>
+<td>2</td>
+<td>1</td>
+<td>0</td>
+<td>1</td>
+</tr>
+<tr class="odd">
+<td><strong>transformer</strong></td>
+<td>4</td>
+<td>3</td>
+<td>2</td>
+<td>1</td>
+<td>0</td>
+</tr>
+</tbody>
+</table>
+<p>A key question is whether different positional encoding methods preserve this distance relationship.</p>
+<p>One-hot encoding, while a simple method for representing categorical variables, fails to capture this property. The Euclidean distance between any two distinct one-hot vectors is always <span class="math inline">\(\sqrt{2}\)</span>, regardless of the words’ positions in the sentence. This constant distance means the positional information encoded is not meaningfully related to the actual distances between words.</p>
+<p><span class="math display">\[
+\text{Distance}(v_i, v_j) = \sqrt{\sum_{k=1}^{n} (v_{ik} - v_{jk})^2} = \sqrt{2} \quad \text{for } i \neq j
+\]</span> where <span class="math inline">\(v_i\)</span> and <span class="math inline">\(v_j\)</span> are one-hot vectors representing different positions.</p>
+<p>The sinusoidal positional encoding, however, is designed to incorporate this relative distance information. The use of sine and cosine functions with varying frequencies allows for the encoding of different positional relationships. While the exact relationship between the positional encoding vectors and the distance matrix isn’t a direct linear mapping, the sinusoidal encoding allows the model to learn and represent relative positions effectively. This is visually confirmed by plotting the positional encoding vectors, which reveals distinct patterns corresponding to different positions and relative distances.</p>
+</section>
+<section id="transformer-architecture-layers-and-gradient-flow" class="level2">
+<h2 class="anchored" data-anchor-id="transformer-architecture-layers-and-gradient-flow">Transformer Architecture (Layers and Gradient Flow)</h2>
+<p>The transformer architecture employs a deep network structure, with the encoder and decoder each comprised of multiple identical layers. The encoder layer contains one attention layer and two hidden layers (feed-forward networks), while the decoder layer has two attention layers (one masked self-attention and one cross-attention) and two hidden layers. This deep architecture (42 layers in the original paper) necessitates mechanisms to ensure proper gradient flow during training and to accelerate the learning process.</p>
+<p>To address the vanishing gradient problem often encountered in deep networks, residual connections are employed around each attention and feed-forward sublayer. These connections allow gradients to bypass the transformations within these sublayers, facilitating easier propagation to earlier layers. Mathematically, a residual connection can be represented as:</p>
+<p><span class="math display">\[
+\text{Output} = \text{Sublayer}(\text{Input}) + \text{Input}
+\]</span></p>
+<p>This addition of the original input to the sublayer output ensures that a portion of the gradient is directly passed back during backpropagation.</p>
+<p>Furthermore, layer normalization is used to stabilize and speed up training. Unlike batch normalization, which normalizes activations across a batch of samples, layer normalization normalizes across the features within a single layer. This makes layer normalization less sensitive to batch size, a crucial advantage for training with variable-length sequences or small batch sizes. The layer normalization operation can be described as follows:</p>
+<ol type="1">
+<li><strong>Calculate mean:</strong> <span class="math inline">\(\mu = \frac{1}{H} \sum_{i=1}^{H} x_i\)</span> , where <span class="math inline">\(H\)</span> is the number of hidden units in the layer and <span class="math inline">\(x_i\)</span> is the activation of the <span class="math inline">\(i\)</span>-th unit.</li>
+<li><strong>Calculate standard deviation:</strong> <span class="math inline">\(\sigma = \sqrt{\frac{1}{H} \sum_{i=1}^{H} (x_i - \mu)^2}\)</span></li>
+<li><strong>Normalize:</strong> <span class="math inline">\(\hat{x_i} = \frac{x_i - \mu}{\sqrt{\sigma^2 + \epsilon}}\)</span>, where <span class="math inline">\(\epsilon\)</span> is a small constant for numerical stability.</li>
+<li><strong>Scale and shift:</strong> <span class="math inline">\(y_i = \gamma \hat{x_i} + \beta\)</span>, where <span class="math inline">\(\gamma\)</span> and <span class="math inline">\(\beta\)</span> are learnable parameters that allow the network to restore the representational power potentially lost during normalization.</li>
+</ol>
+<p>These layer normalization operations are applied after each residual connection, contributing to a more stable and efficient training process. The combination of residual connections and layer normalization is crucial for enabling the successful training of very deep transformer architectures.</p>
+</section>
+<section id="the-complete-layer-encoder" class="level2">
+<h2 class="anchored" data-anchor-id="the-complete-layer-encoder">The Complete Layer (Encoder)</h2>
+<p>The complete encoder layer consists of two main sublayers: a multi-head attention block and a position-wise feed-forward network. Both of these sublayers employ residual connections and layer normalization.</p>
+<section id="multi-head-attention-block" class="level3">
+<h3 class="anchored" data-anchor-id="multi-head-attention-block">Multi-Head Attention Block</h3>
+<p>This block performs scaled dot-product attention multiple times in parallel (the “heads”), then concatenates the results and projects them linearly. Within each head:</p>
+<ol type="1">
+<li><p><strong>Linear Projections:</strong> The input <span class="math inline">\(X\)</span> is projected into query (<span class="math inline">\(Q\)</span>), key (<span class="math inline">\(K\)</span>), and value (<span class="math inline">\(V\)</span>) matrices using learned weight matrices <span class="math inline">\(W_Q\)</span>, <span class="math inline">\(W_K\)</span>, and <span class="math inline">\(W_V\)</span> respectively.</p>
+<p><span class="math inline">\(Q = X W_Q\)</span> <span class="math inline">\(K = X W_K\)</span> <span class="math inline">\(V = X W_V\)</span></p></li>
+<li><p><strong>Scaled Dot-Product Attention:</strong> Attention weights are calculated by taking the dot product of the query matrix with the transpose of the key matrix, scaling it down by the square root of the key dimension (<span class="math inline">\(d_k\)</span>) to prevent vanishing gradients, applying a softmax function to normalize the weights, and finally multiplying the result with the value matrix.</p>
+<p><span class="math display">\[
+\text{Attention}(Q, K, V) = \text{softmax}\left(\frac{QK^T}{\sqrt{d_k}}\right)V
+\]</span></p></li>
+<li><p><strong>Concatenation and Linear Projection:</strong> The outputs of all attention heads are concatenated and then projected linearly using another learned weight matrix <span class="math inline">\(W_O\)</span>.</p>
+<p><span class="math display">\[
+\text{MultiHead}(Q, K, V) = \text{Concat}(\text{head}_1, ..., \text{head}_h)W_O
+\]</span></p></li>
+</ol>
+</section>
+<section id="position-wise-feed-forward-network" class="level3">
+<h3 class="anchored" data-anchor-id="position-wise-feed-forward-network">Position-wise Feed-Forward Network</h3>
+<p>This network consists of two linear transformations with a ReLU activation in between. It is applied independently to each position in the sequence.</p>
+<p><span class="math display">\[
+\text{FFN}(x) = \text{max}(0, xW_1 + b_1)W_2 + b_2
+\]</span></p>
+</section>
+<section id="residual-connections-and-layer-normalization" class="level3">
+<h3 class="anchored" data-anchor-id="residual-connections-and-layer-normalization">Residual Connections and Layer Normalization</h3>
+<p>Both the multi-head attention block and the feed-forward network utilize residual connections and layer normalization. The input to each sublayer is added to the output of the sublayer (residual connection), and then layer normalization is applied to the sum. This helps with gradient flow and training stability. Specifically:</p>
+<p><span class="math display">\[
+\text{LayerNorm}(\text{Sublayer}(x) + x)
+\]</span> Where “Sublayer” can be either the multi-head attention block or the feed-forward network.</p>
+</section>
+</section>
+<section id="the-transformer-architecture-overall" class="level2">
+<h2 class="anchored" data-anchor-id="the-transformer-architecture-overall">The Transformer Architecture (Overall)</h2>
+<p>The Transformer architecture eschews recurrence and instead relies entirely on an attention mechanism to draw global dependencies between input and output. It’s trained with learned embeddings, unlike some models that use pre-trained embeddings.</p>
+<p>The model starts with input embeddings for each word in the source sequence. Learned positional encodings are added to these embeddings to provide information about word order, crucial because the attention mechanism itself is permutation-invariant.</p>
+<p>The encoder consists of a stack of identical layers. Each layer comprises two sub-layers: a multi-head self-attention mechanism and a position-wise fully connected feed-forward network. Residual connections around each of these sub-layers are employed, followed by layer normalization. This structure allows for easier gradient flow during training and can help mitigate vanishing gradient issues. The output of the final encoder layer provides a contextualized representation of the entire input sequence.</p>
+<p>The decoder also consists of a stack of identical layers. Each decoder layer includes the two sub-layers from the encoder (multi-head self-attention and feed-forward network) but adds a third sub-layer: a multi-head cross-attention mechanism. This cross-attention layer allows the decoder to focus on relevant parts of the encoded input sequence when generating the output sequence. Similar to the encoder, residual connections and layer normalization are applied after each sub-layer in the decoder.</p>
+<p>Crucially, the decoder operates autoregressively. During training, teacher forcing can be employed, where the ground-truth output is provided as input to the decoder. However, during inference, the decoder generates the output sequence one token at a time, with each previously generated token becoming input for generating the next one. The decoder’s self-attention mechanism is masked to prevent it from attending to future tokens in the output sequence during both training and inference. This masking ensures that the prediction for a given position depends only on the preceding tokens.</p>
+<p>The output of the final decoder layer is then projected to a logits vector, the dimension of which is equivalent to the output vocabulary size. A softmax function is applied to these logits to produce a probability distribution over the vocabulary. The token with the highest probability is then selected as the output for that position in the generated sequence.</p>
+</section>
+<section id="review-questions" class="level2">
+<h2 class="anchored" data-anchor-id="review-questions">Review Questions</h2>
+<ol type="1">
+<li><p><strong>Explain the purpose of the mask in the decoder’s self-attention mechanism. How is it implemented, and what is its impact on the attention weights?</strong> Your answer should cover the structure of the mask matrix and its effect on preventing information leakage from future tokens.</p></li>
+<li><p><strong>Describe the difference between self-attention and cross-attention in the transformer architecture. What are the inputs to each, and how do they contribute to the overall functioning of the encoder and decoder?</strong> Focus on where the queries, keys, and values come from in each case.</p></li>
+<li><p><strong>Teacher forcing is a crucial technique during transformer training. Explain how it works and why it’s beneficial. What happens during inference when teacher forcing is disabled?</strong> Your explanation should include the difference in conditional probabilities with and without teacher forcing.</p></li>
+<li><p><strong>Why are positional encodings necessary in the transformer architecture? Discuss the limitations of alternative approaches like one-hot encoding and learned embeddings, and explain how sinusoidal positional encoding addresses these limitations.</strong> Be sure to explain the properties of the sinusoidal function and how it represents positional information.</p></li>
+<li><p><strong>Describe the complete flow of information through a single encoder layer and a single decoder layer in a transformer. What are the sub-layers involved, and how are residual connections and layer normalization incorporated?</strong> Your response should include the order of operations and the mathematical representations of the residual connections and layer normalization.</p></li>
+<li><p><strong>The output of the transformer decoder is a probability distribution over the vocabulary. Explain the steps involved in transforming the output of the final decoder layer into this probability distribution. What role does the weight matrix <span class="math inline">\(W_D\)</span> play, and what are its dimensions?</strong> Your answer should explain the linear transformation and softmax operation, including the dimensions of the matrices involved.</p></li>
+<li><p><strong>Why are residual connections and layer normalization used in the transformer architecture? What problem do they address, and how do they contribute to the training process?</strong> Make sure to differentiate between layer normalization and batch normalization.</p></li>
+<li><p><strong>Explain the “multi-head” aspect of the attention mechanism. How does it work, and what are its benefits?</strong> Your answer should describe how the multiple heads operate and how their outputs are combined.</p></li>
+<li><p><strong>Considering the distance matrix of word positions in a sentence, explain why one-hot encoding is insufficient for representing positional information. How does sinusoidal positional encoding address this shortcoming?</strong> Discuss the Euclidean distance between one-hot vectors and how the sinusoidal encoding captures relative distances.</p></li>
+<li><p><strong>Given the equation for sinusoidal positional encoding (<span class="math inline">\(PE_{(j,i)}\)</span>), what is the characteristic pattern of the positional encoding <span class="math inline">\(p_0\)</span> for the first word (<span class="math inline">\(j=0\)</span>) in any sentence? How does this pattern relate to the sinusoidal function?</strong> Describe the alternating 0s and 1s visualized in the heatmap.</p></li>
+</ol>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const disableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'prefetch';
+    }
+  }
+  const enableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'stylesheet';
+    }
+  }
+  const manageTransitions = (selector, allowTransitions) => {
+    const els = window.document.querySelectorAll(selector);
+    for (let i=0; i < els.length; i++) {
+      const el = els[i];
+      if (allowTransitions) {
+        el.classList.remove('notransition');
+      } else {
+        el.classList.add('notransition');
+      }
+    }
+  }
+  const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+    const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+    const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+    let newTheme = '';
+    if(darkModeDefault) {
+      newTheme = isAlternate ? baseTheme : alternateTheme;
+    } else {
+      newTheme = isAlternate ? alternateTheme : baseTheme;
+    }
+    const changeGiscusTheme = () => {
+      // From: https://github.com/giscus/giscus/issues/336
+      const sendMessage = (message) => {
+        const iframe = document.querySelector('iframe.giscus-frame');
+        if (!iframe) return;
+        iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+      }
+      sendMessage({
+        setConfig: {
+          theme: newTheme
+        }
+      });
+    }
+    const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+    if (isGiscussLoaded) {
+      changeGiscusTheme();
+    }
+  }
+  const toggleColorMode = (alternate) => {
+    // Switch the stylesheets
+    const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+    manageTransitions('#quarto-margin-sidebar .nav-link', false);
+    if (alternate) {
+      enableStylesheet(alternateStylesheets);
+      for (const sheetNode of alternateStylesheets) {
+        if (sheetNode.id === "quarto-bootstrap") {
+          toggleBodyColorMode(sheetNode);
+        }
+      }
+    } else {
+      disableStylesheet(alternateStylesheets);
+      toggleBodyColorPrimary();
+    }
+    manageTransitions('#quarto-margin-sidebar .nav-link', true);
+    // Switch the toggles
+    const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+    for (let i=0; i < toggles.length; i++) {
+      const toggle = toggles[i];
+      if (toggle) {
+        if (alternate) {
+          toggle.classList.add("alternate");     
+        } else {
+          toggle.classList.remove("alternate");
+        }
+      }
+    }
+    // Hack to workaround the fact that safari doesn't
+    // properly recolor the scrollbar when toggling (#1455)
+    if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+      manageTransitions("body", false);
+      window.scrollTo(0, 1);
+      setTimeout(() => {
+        window.scrollTo(0, 0);
+        manageTransitions("body", true);
+      }, 40);  
+    }
+  }
+  const isFileUrl = () => { 
+    return window.location.protocol === 'file:';
+  }
+  const hasAlternateSentinel = () => {  
+    let styleSentinel = getColorSchemeSentinel();
+    if (styleSentinel !== null) {
+      return styleSentinel === "alternate";
+    } else {
+      return false;
+    }
+  }
+  const setStyleSentinel = (alternate) => {
+    const value = alternate ? "alternate" : "default";
+    if (!isFileUrl()) {
+      window.localStorage.setItem("quarto-color-scheme", value);
+    } else {
+      localAlternateSentinel = value;
+    }
+  }
+  const getColorSchemeSentinel = () => {
+    if (!isFileUrl()) {
+      const storageValue = window.localStorage.getItem("quarto-color-scheme");
+      return storageValue != null ? storageValue : localAlternateSentinel;
+    } else {
+      return localAlternateSentinel;
+    }
+  }
+  const darkModeDefault = false;
+  let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+  // Dark / light mode switch
+  window.quartoToggleColorScheme = () => {
+    // Read the current dark / light value 
+    let toAlternate = !hasAlternateSentinel();
+    toggleColorMode(toAlternate);
+    setStyleSentinel(toAlternate);
+    toggleGiscusIfUsed(toAlternate, darkModeDefault);
+  };
+  // Ensure there is a toggle, if there isn't float one in the top right
+  if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+    const a = window.document.createElement('a');
+    a.classList.add('top-right');
+    a.classList.add('quarto-color-scheme-toggle');
+    a.href = "";
+    a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+    const i = window.document.createElement("i");
+    i.classList.add('bi');
+    a.appendChild(i);
+    window.document.body.appendChild(a);
+  }
+  // Switch to dark mode if need be
+  if (hasAlternateSentinel()) {
+    toggleColorMode(true);
+  } else {
+    toggleColorMode(false);
+  }
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const onCopySuccess = function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
+  });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

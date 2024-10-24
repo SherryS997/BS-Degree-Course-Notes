@@ -1,0 +1,380 @@
+# W4Lec15-SemanticRoleLabelling.pdf - Page 1
+
+```markdown
+# BSCS5002: Introduction to Natural Language Processing
+
+## Meaning Representation: Logical Semantics & Semantic Role Labelling
+
+**Parameswari Krishnamurthy**
+
+_Language Technologies Research Centre_
+
+_IIIT-Hyderabad_
+
+_param.krishna@iiit.ac.in_
+
+---
+
+![IIIT-Hyderabad Logo](https://example.com/logo.png)
+
+**INTERNATIONAL INSTITUTE OF INFORMATION TECHNOLOGY**
+
+_HYDERABAD_
+
+---
+
+_BS-DS IIITM (BSCS5002)_
+
+_1 / 22_
+```
+
+# W4Lec15-SemanticRoleLabelling.pdf - Page 2
+
+# Introduction to Meaning Representation
+
+- Meaning Representation involves representing the meaning of natural language in a form that machines can process and manipulate.
+- It is crucial for enabling deeper understanding and inference in tasks like machine translation, question answering, and summarization.
+- Two major approaches in meaning representation:
+  - Logical Semantics
+  - Semantic Role Labeling (SRL)
+
+BS-DS IITM (BSCS5002) 
+2 / 22
+
+# W4Lec15-SemanticRoleLabelling.pdf - Page 3
+
+```markdown
+# Challenges in Meaning Representation
+
+- **Natural language is ambiguous, context-dependent, and flexible.**
+- **Meaning must be captured in a formalized, precise structure to enable:**
+  - Inference
+  - Reasoning
+  - Question answering
+- **Complexities include handling negation, quantifiers, modality, and disambiguation.**
+
+*BS-DS IITM (BSCS5002) 3 / 22*
+```
+
+# W4Lec15-SemanticRoleLabelling.pdf - Page 4
+
+# Logical Semantics Overview
+
+- **Logical Semantics** is the study of meaning using formal logic.
+- It provides a precise, unambiguous structure for representing sentence meaning.
+- It helps us answer questions like:
+  - What are the truth conditions of a sentence?
+  - How do we represent meaning in a form that computers can process?
+- The most common formalism is **First-Order Logic (FOL)**.
+
+BS-DS IITM (BSCS5002) 4 / 22
+
+# W4Lec15-SemanticRoleLabelling.pdf - Page 5
+
+```markdown
+# Components of First-Order Logic (FOL)
+
+- **Constants**: Represent specific entities (e.g., 'John').
+
+- **Predicates**: Express properties or relations between entities (e.g., Loves(John, Mary)).
+
+- **Variables**: Represent arbitrary entities (e.g., ∀x, ∃y).
+
+- **Quantifiers**: Express quantities (e.g., ∀x, ∃y).
+
+- **Connectives**: Logical operators (e.g., AND, OR, NOT).
+
+---
+
+*Source: BS-DS IITM (BSCS5002)*
+
+*Page: 5 / 22*
+```
+
+# W4Lec15-SemanticRoleLabelling.pdf - Page 6
+
+# Example of First-Order Logic (FOL)
+
+**Sentence:** John loves Mary.
+
+- **Logical Form:** 'Loves(John, Mary)'
+- **Predicate:** 'Loves'
+- **Arguments:** 'John' and 'Mary'
+- **Interpretation:** This formal representation can be used for reasoning, querying, and making inferences.
+
+---
+
+_BS-DS IITM (BSCS5002)_
+
+_6 / 22_
+
+# W4Lec15-SemanticRoleLabelling.pdf - Page 7
+
+# Quantifiers in First-Order Logic (FOL)
+
+- **Universal Quantifier (∀)**: Indicates that the statement applies to all entities.
+
+  - **Example**: All humans are mortal can be written as
+    \[
+    \forall x (\text{Human}(x) \rightarrow \text{Mortal}(x)).
+    \]
+
+- **Existential Quantifier (∃)**: Indicates that the statement applies to at least one entity.
+
+  - **Example**: There exists a person who loves Mary can be written as
+    \[
+    \exists x (\text{Person}(x) \land \text{Loves}(x, \text{Mary})).
+    \]
+
+---
+
+BS-DS IITM (BSCS5002)
+
+7 / 22
+
+# W4Lec15-SemanticRoleLabelling.pdf - Page 8
+
+# Logical Semantics and Truth Conditions
+
+- **Truth Conditions**: Logical semantics can be used to define when a statement is true or false.
+- A sentence like `Loves(John, Mary)` is true if, in the world, John loves Mary.
+- This is essential for building systems that can reason about the truth of statements or make inferences.
+
+_BS-DS IITM (BSCS5002)_
+
+_Page 8 / 22_
+
+# W4Lec15-SemanticRoleLabelling.pdf - Page 9
+
+# What is Semantic Role Labeling (SRL)?
+
+- **Semantic Role Labeling (SRL)** is a process that identifies the roles of words in a sentence (who did what to whom).
+  - It captures the relationships between the predicate (verb) and its arguments (subject, object, etc.).
+  - SRL helps in understanding the meaning of sentences in tasks like machine translation, summarization, and question answering.
+
+*Source:* BS-DS IITM (BSCS5002)
+
+*Page Number:* 9 / 22
+
+# W4Lec15-SemanticRoleLabelling.pdf - Page 10
+
+# Importance of Semantic Role Labeling (SRL)
+
+- **SRL enables machines to understand who is doing what to whom, when, and where.**
+
+- **It abstracts away from surface syntax, focusing on the deeper semantic structure of sentences.**
+
+- **SRL is widely used in NLP tasks like information extraction, machine translation, and textual entailment.**
+
+---
+
+BS-DS IITM (BSCS5002)
+
+10 / 22
+
+# W4Lec15-SemanticRoleLabelling.pdf - Page 11
+
+-DS IITM (BSCS5002)
+
+# Key Concepts in SRL
+
+- **Predicate**: The main verb or action in the sentence.
+- **Arguments**: The participants involved in the action.
+- **Semantic Roles**:
+  - **Agent**: The doer of the action.
+  - **Patient**: The entity affected by the action.
+  - **Instrument**: The tool used to perform the action.
+  - **Location**: Where the action occurs.
+
+11 / 22
+
+
+# W4Lec15-SemanticRoleLabelling.pdf - Page 12
+
+```markdown
+# Table: Thematic roles with their definitions.
+
+| Thematic Role | Definition                                           | Example                                            |
+|---------------|-------------------------------------------------------|----------------------------------------------------|
+| Agent         | The volitional cause of an event                      | *The waiter spilled the soup.*                     |
+| Experiencer   | The experiencer of an event                           | *John has a headache.*                           |
+| Force         | The non-volitional cause of the event                 | *The wind blows debris from the mall into our yards.* |
+| Theme         | The participant most directly affected by an event    | *Only after Benjamin Franklin broke the ice...*   |
+| Result        | The end product of an event                           | *The city built a regulation-size baseball diamond...*|
+| Content       | The proposition or content of a propositional event   | *Mona asked "You met Mary Ann at a supermarket?"*  |
+| Instrument    | An instrument used in an event                        | *He poached catfish, stunning them with a shocking device...*|
+| Beneficiary   | The beneficiary of an event                           | *Whenever Ann Callahan makes hotel reservations for her boss...* |
+| Source        | The origin of the object of a transfer event          | *I flew in from Boston.*                         |
+| Goal          | The destination of an object of a transfer event     | *I drove to Portland.*                          |
+
+---
+
+*Source: Speech and Language Processing. Daniel Jurafsky & James H. Martin.*
+
+*BS-DS IITM (BSCS5002)*
+
+*Page 12 / 22*
+```
+
+# W4Lec15-SemanticRoleLabelling.pdf - Page 13
+
+# Example of Semantic Role Labeling (SRL)
+
+## Figure: 1
+
+```
+Instrument
+    |
+    |  Theme
+    |  |
+Agent --- Kumar broke the statue with a rock
+```
+
+## Figure: 2
+
+```
+Goal
+    |
+    |  Source
+    |  |
+Agent --- Kumar drove to Chennai from Hyderabad
+```
+
+---
+
+BS-DS IITM (BSCS5002)            13 / 22
+
+# W4Lec15-SemanticRoleLabelling.pdf - Page 14
+
+```markdown
+# Example of Semantic Role Labeling (SRL)
+
+## Figure: 3
+
+```
+![Figure: 3](image_url_for_figure_3)
+
+```
+Rohit asked "have you finished the assignment?"
+```
+
+- **Agent**: Rohit
+- **Content**: "have you finished the assignment?"
+
+## Figure: 4
+
+```
+![Figure: 4](image_url_for_figure_4)
+
+```
+Ramya makes delicious dishes for her children.
+```
+
+- **Agent**: Ramya
+- **Theme**: delicious dishes
+- **Beneficiary**: her children
+
+---
+
+_BS-DS IITM (BSCS5002)_
+
+_Page 14 / 22_
+```
+
+# W4Lec15-SemanticRoleLabelling.pdf - Page 15
+
+# Example of Semantic Role Labeling (SRL)
+
+**Sentence:** John gave Mary a book.
+
+- Predicate: Gave
+- Agent (Who): John (the giver)
+- Recipient (To whom): Mary (the receiver)
+- Theme (What): A book (the item given)
+- SRL Tags: [John] (Agent) [gave] (Predicate) [Mary] (Recipient) [a book] (Theme)
+
+---
+
+_BS-DS IITM (BSCS5002)_
+
+_Page 15 / 22_
+
+# W4Lec15-SemanticRoleLabelling.pdf - Page 16
+
+# Semantic Role Sets
+
+- Different semantic role sets are used in SRL systems:
+  - **PropBank:** Focuses on predicate-argument structures for verbs.
+  - **FrameNet:** Uses a broader set of semantic roles based on frames and scenarios.
+- These role sets help standardize the labeling of different roles in sentences.
+
+[BS-DS IITM (BSCS5002)](https://www.bs-ds.org) 
+
+Page Number: 16 / 22
+
+# W4Lec15-SemanticRoleLabelling.pdf - Page 17
+
+# PropBank and FrameNet
+
+- **PropBank**: Annotates predicates and their arguments based on verb-specific roles (e.g., 'Arg0', 'Arg1' for subject and object roles).
+- **FrameNet**: Groups words into semantic frames that capture relationships between different participants in a scenario.
+- Both frameworks are commonly used in SRL tasks to represent meaning in a structured way.
+
+BS-DS IITM (BSCS5002)                17 / 22
+
+# W4Lec15-SemanticRoleLabelling.pdf - Page 18
+
+# SRL and Machine Learning
+
+- Supervised learning is often used to train SRL models.
+- These models learn to identify semantic roles by training on labeled data (e.g., PropBank annotations).
+- Techniques include Conditional Random Fields (CRF), Recurrent Neural Networks (RNNs), and Transformers.
+
+BS-DS IITM (BSCS5002)
+
+18 / 22
+
+# W4Lec15-SemanticRoleLabelling.pdf - Page 19
+
+# Evaluation Metrics for SRL
+
+- **Precision**: Proportion of correctly identified roles out of all roles identified.
+- **Recall**: Proportion of correctly identified roles out of all true roles.
+- **F1 Score**: Harmonic mean of precision and recall.
+
+![BS-DS IITM (BSCS5002)](https://example.com/image.png)
+
+Page 19 / 22
+
+# W4Lec15-SemanticRoleLabelling.pdf - Page 20
+
+# Logical Semantics vs. SRL
+
+- **Logical Semantics:** Focuses on truth conditions and logical structure of sentences.
+- **Semantic Role Labeling:** Focuses on identifying the roles of participants in an action.
+- **Both approaches contribute to understanding meaning, but they do so in different ways.**
+
+BS-DS IITM (BSCS5002) 20 / 22
+
+# W4Lec15-SemanticRoleLabelling.pdf - Page 21
+
+# Applications of Logical Semantics and SRL
+
+- **Logical Semantics**: Used in formal reasoning, query systems, and ontology mapping.
+- **Semantic Role Labeling**: Used in information extraction, machine translation, and summarization.
+- **Both techniques are essential for enabling machines to "understand" natural language.**
+
+(Source: BS-DS IIT M (BSCS5002), Slide 21 of 22)
+
+# W4Lec15-SemanticRoleLabelling.pdf - Page 22
+
+# Conclusion
+
+- Meaning representation is crucial for building systems that can understand and reason with natural language.
+- Logical Semantics provides a formal structure for reasoning about truth conditions.
+- Semantic Role Labeling (SRL) captures relationships between words in a sentence, focusing on "who did what to whom."
+
+(Source: BS-DS IITM (BSCS5002))
+
+Page number: 22 / 22
+

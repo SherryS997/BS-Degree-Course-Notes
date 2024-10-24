@@ -1,0 +1,3754 @@
+# W1Lec3-WhyNLPHard.pdf - Page 1
+
+```markdown
+# BSCS5002: Introduction to Natural Language Processing
+
+## Lecture 3: Why is it hard to process natural language?
+
+**Parameswari Krishnamurthy**
+
+**Language Technologies Research Centre**
+**IIIT-Hyderabad**
+
+**Email:** param.krishna@iiit.ac.in
+
+![IIIT-Hyderabad Logo](https://example.com/logo.png)
+
+**INTERNATIONAL INSTITUTE OF INFORMATION TECHNOLOGY**
+
+**HYDERABAD**
+
+---
+
+**Slide Number:** 1 / 34
+
+---
+
+**Course:** BS-DS IIITM (BSCS5002)
+```
+
+# W1Lec3-WhyNLPHard.pdf - Page 2
+
+```markdown
+# Natural Language Processing Tasks
+
+## Core technologies
+
+- Language modelling
+- Part-of-speech tagging
+- Syntactic parsing
+- Named-entity recognition
+- Coreference resolution
+- Word sense disambiguation
+- Semantic Role Labelling
+- ...
+
+## Applications
+
+- Machine Translation
+- Information Retrieval
+- Question Answering
+- Dialogue Systems
+- Information Extraction
+- Summarization
+- Sentiment Analysis
+- ...
+```
+
+# W1Lec3-WhyNLPHard.pdf - Page 3
+
+-DS IITM (BSCS5002)
+
+# Why NLP is hard?
+
+## 1. Ambiguity at many levels:
+
+- Word senses: bank (finance or river?)
+- Part of speech: chair (noun or verb?)
+- Syntactic structure: I saw a man with a telescope
+- Quantifier scope: Every child loves some movie
+- Multiple: I saw her duck
+
+  -> NLP algorithms model ambiguity, and choose the correct analysis in context
+
+## 2. Linguistic diversity
+
+BS-DS IITM (BSCS5002)
+
+---
+
+This markdown format properly preserves the structure and content of the original slide, including headings, lists, and special formatting instructions.
+
+# W1Lec3-WhyNLPHard.pdf - Page 4
+
+```markdown
+# Linguistic Diversity: Semantics
+
+Every language describes the world in a different way, for example, it depends on culture or historical conditions.
+
+![Color Naming Chart](https://example.com/color_naming_chart.png)
+
+- Russian has relatively few names for colors; Japanese has hundreds
+- Multiword expressions, e.g. it's raining cats and dogs or wake up and metaphors, e.g. Love is a journey are very different across languages
+
+**Sapir-Whorf Hypothesis:**
+the language we speak both affects and reflects our view of the world
+
+*BSC-DS IITM (BSCS5002)*
+```
+
+# W1Lec3-WhyNLPHard.pdf - Page 5
+
+```markdown
+# Linguistic Diversity: Language Families
+
+[www.ethnologue.com](http://www.ethnologue.com)
+
+1. **Niger–Congo** (1,538 languages) (20.6%)
+2. **Austronesian** (1,257 languages) (16.8%)
+3. **Trans–New Guinea** (480 languages) (6.4%)
+4. **Sino-Tibetan** (457 languages) (6.1%)
+5. **Indo-European** (444 languages) (5.9%)
+6. **Australian** (378 languages) (5.1%)
+7. **Afro-Asiatic** (375 languages) (5.0%)
+8. **Nilo-Saharan** (205 languages) (2.7%)
+9. **Oto-Manguean** (177 languages) (2.4%)
+10. **Austroasiatic** (169 languages) (2.3%)
+11. **Volta Congo** (108 languages) (1.5%)
+12. **Tai–Kadai** (95 languages) (1.3%)
+13. **Dravidian** (85 languages) (1.1%)
+14. **Tupian** (76 languages) (1.0%)
+```
+
+# W1Lec3-WhyNLPHard.pdf - Page 6
+
+```markdown
+# Why NLP is hard?
+
+## 1. Ambiguity at many levels:
+
+- **Word senses:** *bank* (finance or river?)
+- **Part of speech:** *blue* (noun or verb?)
+- **Syntactic structure:** *I saw a man with a telescope*
+- **Quantifier scope:** *Every child loves some movie*
+- **Multiple:** *I saw her duck*
+
+  -> NLP algorithms model ambiguity, and choose the correct analysis in context
+
+## 2. Linguistic diversity
+
+- 6-7K languages in the world, > 14 language families
+- Languages diverge across all levels of linguistic structure
+
+  -> no generic solution for a particular NLP task
+- **Most of the languages do not have sufficient resources to build statistical NLP models**
+
+BSCS5002
+```
+
+# W1Lec3-WhyNLPHard.pdf - Page 7
+
+```markdown
+# Low-Resource Languages
+
+**Low-resource languages** – languages lacking large monolingual or parallel corpora and/or manually crafted linguistic resources sufficient for building statistical NLP applications.
+
+---
+
+Source: BS-DS IITM (BSCS5002)
+
+Page Number: 7 / 34
+```
+
+# W1Lec3-WhyNLPHard.pdf - Page 8
+
+```markdown
+# What NLP Technologies are Resource-Rich?
+
+## NLP Technologies/Applications
+
+- ASR
+- MT
+- Dialogue
+- QA
+- Summarization
+- ...
+- SRL
+- Coref
+- Parsing
+- NER
+- POS tagging
+- Lemmatization
+
+![Graph](image_url)
+
+- **Some European Languages**: French, Portuguese, ...
+- **UN Languages**: Chinese, Arabic, Russian, ...
+- **Medium-Resourced Languages** (dozens): Czech, Hindi, ...
+- **Resource-Poor Languages** (thousands): Middle, ...
+
+**Note**: This graph represents the distribution of various NLP technologies and their application to different languages, categorized by resource availability.
+
+**BS-DS IITM (BSCS5002)**
+```
+
+# W1Lec3-WhyNLPHard.pdf - Page 9
+
+# Low-Resource NLP is Not Only About Multilinguality
+
+## NLP Technologies/Applications
+
+- ASR
+- MT
+- Dialogue
+- QA
+- Summarization
+- ...
+- SRL
+- Coref
+- Parsing
+- NER
+- POS tagging
+- Lemmatization
+
+## Data Domains
+
+- Bible
+- Parliamentary proceedings
+- Newswire
+- Wikipedia
+- Novels
+- TED talks
+- Telephone conversations
+- Twitter conversations
+
+## 6K World Languages
+
+### Some European Languages
+
+- English
+- Persian
+- French
+
+### UN Languages
+
+- Arabic
+- Chinese
+
+### Medium-Resourced Languages (dozens)
+
+- Russian
+- Czech
+- Hebrew
+
+### Resource-Poor Languages (thousands)
+
+## BS-DS IITM (BSCS5002)
+
+9 / 34
+
+# W1Lec3-WhyNLPHard.pdf - Page 10
+
+```markdown
+# Why NLP is hard?
+
+## Ambiguity in Language
+
+### Sentence Ambiguity
+
+```plaintext
+The man couldn't lift his son because he was so weak. ➔ Who was weak?
+
+- The man
+- His son
+```
+
+```plaintext
+The man couldn't lift his son because he was so heavy. ➔ Who was heavy?
+
+- The man
+- His son
+```
+
+### Semantic Ambiguity
+
+```plaintext
+Mary and Sue are sisters.
+Mary and Sue are mothers.
+➔ How are Mary and Sue related?
+```
+
+### Syntactic Ambiguity
+
+```plaintext
+Joan made sure to thank Susan for all the help she had received. ➔ Who had received help?
+
+- Joan
+- Susan
+
+Joan made sure to thank Susan for all the help she had given. ➔ Who had given help?
+
+- Joan
+- Susan
+```
+
+### Pragmatic Ambiguity
+
+```plaintext
+John promised Bill to leave so an hour later he left.
+John ordered Bill to leave so an hour later he left.
+➔ Who left an hour later?
+
+- John
+- Bill
+```
+```
+
+# W1Lec3-WhyNLPHard.pdf - Page 11
+
+# 1. Ambiguity in Natural Language
+
+- **Ambiguity**: A major challenge in NLP, where words, phrases or sentences can have multiple interpretations.
+- **Impact on NLP**: Ambiguity makes it difficult for algorithms to correctly understand and process language.
+- **Types of ambiguity**:
+
+  | Type of Ambiguity              | Description                                      |
+  | ------------------------------ | -------------------------------------------------- |
+  | Lexical Ambiguity              | - Homonyms                                        |
+  |                                | - Polysemy                                        |
+  | Syntactic Ambiguity            | - Attachment                                      |
+  |                                | - Coordination                                    |
+  | Semantic Ambiguity             | - Quantifier                                      |
+  |                                | - Scope                                           |
+  |                                | - Anaphoric                                       |
+  | Pragmatic Ambiguity            | - Deictic                                         |
+  |                                | - Speech Act                                      |
+  |                                | - Irony/Sarcasm                                   |
+
+*Source: BS-DS IITM (BSCS5002)*
+
+*Slide Number: 11 / 34*
+
+# W1Lec3-WhyNLPHard.pdf - Page 12
+
+```markdown
+# A. Lexical Ambiguity
+
+**Lexical Ambiguity:** Occurs when a word has multiple meanings.
+
+- **i. Homonyms:**
+  - Words that sound alike or are spelled alike but have different meanings.
+    - **English Example:** **Bark** (the sound a dog makes vs. the outer covering of a tree)
+
+- **ii. Polysemy:**
+  - A single word with multiple related meanings.
+    - **English Example:** **Head** (the top part of a body vs. leader of an organization)
+
+*Source: BS-DS IITM (BSCS5002)*
+
+*Slide Number: 12 / 34*
+```
+
+# W1Lec3-WhyNLPHard.pdf - Page 13
+
+```markdown
+# B. Syntactic Ambiguity
+
+**Syntactic Ambiguity:** Occurs when a sentence can be parsed in more than one way due to its structure.
+
+- **Attachment:**
+  - Ambiguity arises when it is unclear which part of the sentence a modifier (e.g., a prepositional phrase) is associated with.
+  - **Example:** He saw the man with the telescope.
+    - (Did he use a telescope to see the man or did he see a man who had a telescope?)
+
+- **Coordination:**
+  - Ambiguity occurs when it is unclear how conjunctions like "and" or "or" connect different parts of a sentence.
+  - **Example:** Old men and women were admitted free.
+    - (Were only old men admitted free or both old men and all women?)
+
+![Note](https://example.com/note.png)
+
+Source: BS-DS IITM (BSCS5002)
+
+Page 13 of 34
+```
+
+# W1Lec3-WhyNLPHard.pdf - Page 14
+
+```markdown
+# C. Semantic Ambiguity
+
+**Semantic Ambiguity:** Occurs when a sentence or phrase can have multiple meanings due to the interpretation of words or phrases.
+
+- **Quantifier Scope Ambiguity:**
+  Ambiguity arises when it’s unclear how far a quantifier (like “all” or “some”) applies within a sentence.
+
+  **Example:** All students read some books.
+  (Does it mean each student reads the same books or different books?)
+
+- **Anaphoric Ambiguity:**
+  Ambiguity occurs when a pronoun or a referring expression can be linked to multiple possible antecedents.
+
+  **Example:** John told Peter he would win.
+  (Is “he” referring to John or Peter?)
+
+```
+
+# W1Lec3-WhyNLPHard.pdf - Page 15
+
+```markdown
+# D. Pragmatic Ambiguity
+
+**Pragmatic Ambiguity:** Occurs when a sentence can be interpreted in multiple ways based on context, tone or conversational implications.
+
+- **Deictic Ambiguity:**
+  Ambiguity arises when it is unclear to who or what a deictic expression (like "this," "that," "here," "there") refers.
+
+  **Example:** I'll meet you there.
+  (Where is "there"?)
+
+- **Speech Act Ambiguity:**
+  Ambiguity occurs when it is unclear what kind of speech act (e.g., request, statement, command) a sentence represents.
+
+  **Example:** Can you pass the salt?
+  (Is this a question about ability or a polite request?)
+```
+
+# W1Lec3-WhyNLPHard.pdf - Page 16
+
+# D. Pragmatic Ambiguity
+
+- **Irony/Sarcasm:**
+  Ambiguity arises when the intended meaning is the opposite of the literal meaning.
+
+  - **Example:** Oh, great! Another meeting!
+    (Is the speaker genuinely excited or are they being sarcastic?)
+
+---
+
+BS-DS IITM (BSCS5002) 16 / 34
+
+# W1Lec3-WhyNLPHard.pdf - Page 17
+
+```markdown
+# 2. Challenges in Multilingual NLP
+
+- **Processing multiple languages poses unique challenges in NLP, especially in a multilingual country like India.**
+
+- **Differences in grammar, syntax, word order, and vocabulary between languages make it difficult to develop unified models.**
+
+## Indian Context:
+
+- **India has 22 official languages (9 as per 8th schedule), each with distinct linguistic characteristics.**
+
+- **Many Indian languages, like Hindi, Telugu and Tamil, differ significantly from English and among themselves, making multilingual NLP particularly challenging.**
+```
+
+# W1Lec3-WhyNLPHard.pdf - Page 18
+
+```markdown
+# Language Map of India
+
+![Language Map of India](image_url)
+
+- **North and North-East India:**
+  - **Punjabi:** Punjab
+  - **Bengali:** West Bengal, Assam (partially)
+  - **Assamese:** Assam (majority)
+  - **Tibetan:** Himachal Pradesh, Sikkim
+  - **Nepali:** Sikkim, West Bengal
+  - **Gujarati:** Gujarat
+  - **Kashmiri:** Jammu and Kashmir
+  - **Ladakhi:** Ladakh
+
+- **Central India:**
+  - **Hindi:** Uttar Pradesh, Bihar, Madhya Pradesh, Chhattisgarh
+  - **Marathi:** Maharashtra
+  - **Bundeli:** Madhya Pradesh
+  - **Oriya:** Odisha
+  - **Nepali:** Sikkim, West Bengal
+  - **Kannada:** Karnataka
+  - **Telugu:** Andhra Pradesh, Telangana
+  - **Gondi:** Chhattisgarh, Madhya Pradesh, Maharashtra, Odisha
+  - **Lambadi:** Chhattisgarh, Madhya Pradesh, Maharashtra, Telangana
+  - **Kumaoni:** Uttarakhand
+
+- **South India:**
+  - **Tamil:** Tamil Nadu, Puducherry
+  - **Malayalam:** Kerala
+  - **Kannada:** Karnataka
+  - **Telugu:** Andhra Pradesh, Telangana
+  - **Tulu:** Karnataka
+  - **Kodava:** Karnataka
+  - **Konkani:** Goa, Karnataka, Maharashtra
+  - **Mangalorean:** Karnataka
+  - **Deccan:** Maharashtra, Karnataka
+  - **Gurjara:** Rajasthan
+  - **Limbu:** Sikkim
+  - **Sadri:** Chhattisgarh
+  - **Chhattisgarhi:** Chhattisgarh
+  - **Ho:** Odisha, Jharkhand
+  - **Santali:** Jharkhand, Odisha, West Bengal
+
+- **East India:**
+  - **Bodo:** Assam
+  - **Manipuri:** Manipur
+  - **Nepali:** Sikkim, West Bengal
+  - **Mizo:** Mizoram
+  - **Dong:** Manipur, Nagaland
+  - **Tangkhul:** Manipur
+
+- **West India:**
+  - **Gujarati:** Gujarat
+  - **Marathi:** Maharashtra
+  - **Konkani:** Goa, Karnataka, Maharashtra
+  - **Sindhi:** Gujarat, Rajasthan
+  - **Malwi:** Madhya Pradesh
+  - **Kannada:** Karnataka
+  - **Telugu:** Andhra Pradesh, Telangana
+  - **Gondi:** Chhattisgarh, Madhya Pradesh, Maharashtra, Odisha
+  - **Lambadi:** Chhattisgarh, Madhya Pradesh, Maharashtra, Telangana
+
+- **Islands:**
+  - **Konkani:** Goa, Karnataka, Maharashtra
+  - **Malayalam:** Kerala
+  - **Tamil:** Tamil Nadu, Puducherry
+  - **Oriya:** Odisha
+  - **Kannada:** Karnataka
+  - **Telugu:** Andhra Pradesh, Telangana
+  - **Dhivehi:** Lakshadweep
+
+Source: Daniel Dalet / g-maps.com
+
+Scale: 500 km, 200 miles
+
+Note: This map represents the linguistic diversity of India with each state or region labeled according to the dominant language spoken in that area.
+```
+
+# W1Lec3-WhyNLPHard.pdf - Page 19
+
+# Multilingualism in use
+
+## Tiruchirappalli International Airport (Tamil-Hindi-English)
+
+![Tiruchirappalli International Airport](image1.jpg)
+
+## Imphal International Airport (Meitei-Hindi-English)
+
+![Imphal International Airport](image2.jpg)
+
+*BS-DS IITM (BSCS5002)*
+
+*19 / 34*
+
+# W1Lec3-WhyNLPHard.pdf - Page 20
+
+```markdown
+# Indian Languages
+
+```markdown
+## Languages List
+
+### Punjabi
+- Punjabi
+- Bhattiani
+- Khatri
+- Bhateeja
+- Others
+
+### Odia
+- Odia
+- Sambalpuri
+- Bhatri
+- Proja (Drai)
+- Bhojpuri
+- Bhoiya
+- Koli
+- Others
+
+### Nepali
+- Nepali
+- Others
+
+### Marathi
+- Marathi
+- Others
+- Ara
+- Kol
+
+### Manipuri
+- Manipuri
+- Others
+
+### Maithili
+- Maithili
+- Others
+
+### Konkani
+- Konkani
+- Others
+
+### Kannada
+- Kannada
+- Others
+
+### Gujarati
+- Gujarati
+- Others
+
+### Hindi
+- Hindi
+- Bhojpuri
+- Braj Bhasha
+- Bundeli
+- Bagheli
+- Chhattisgarhi
+- Dhundhari
+- Haryanvi
+- Kashmiri
+- Kangri
+- Kumaoni
+- Magahi
+- Malvi
+- Marwari
+- Nagpuri
+- Nimadi
+- Oriya
+- Panjabi
+- Rajasthani
+- Rohilla
+- Saraiiki
+- Sindhi
+- Surji
+- Urdu
+- Vagdi
+
+### Bengali
+- Bengali
+- Others
+
+### Telugu
+- Telugu
+- Others
+
+### Tamil
+- Tamil
+- Others
+
+### Malayalam
+- Malayalam
+- Others
+
+### Sanskrit
+- Sanskrit
+- Others
+
+### Santali
+- Santali
+- Others
+
+### Rajasthani
+- Rajasthani
+- Others
+
+### Oriya
+- Oriya
+- Others
+
+### Odia
+- Odia
+- Others
+
+### Marwari
+- Marwari
+- Others
+
+### Magahi
+- Magahi
+- Others
+
+### Kannada
+- Kannada
+- Others
+
+### Gujarati
+- Gujarati
+- Others
+
+### Bengali
+- Bengali
+- Others
+
+### Telugu
+- Telugu
+- Others
+
+### Tamil
+- Tamil
+- Others
+
+### Malayalam
+- Malayalam
+- Others
+
+### Sanskrit
+- Sanskrit
+- Others
+
+### Santali
+- Santali
+- Others
+
+### Rajasthani
+- Rajasthani
+- Others
+
+### Oriya
+- Oriya
+- Others
+
+### Odia
+- Odia
+- Others
+
+### Marwari
+- Marwari
+- Others
+
+### Magahi
+- Magahi
+- Others
+
+### Kannada
+- Kannada
+- Others
+
+### Gujarati
+- Gujarati
+- Others
+
+### Bengali
+- Bengali
+- Others
+
+### Telugu
+- Telugu
+- Others
+
+### Tamil
+- Tamil
+- Others
+
+### Malayalam
+- Malayalam
+- Others
+
+### Sanskrit
+- Sanskrit
+- Others
+
+### Santali
+- Santali
+- Others
+
+### Rajasthani
+- Rajasthani
+- Others
+
+### Oriya
+- Oriya
+- Others
+
+### Odia
+- Odia
+- Others
+
+### Marwari
+- Marwari
+- Others
+
+### Magahi
+- Magahi
+- Others
+
+### Kannada
+- Kannada
+- Others
+
+### Gujarati
+- Gujarati
+- Others
+
+### Bengali
+- Bengali
+- Others
+
+### Telugu
+- Telugu
+- Others
+
+### Tamil
+- Tamil
+- Others
+
+### Malayalam
+- Malayalam
+- Others
+
+### Sanskrit
+- Sanskrit
+- Others
+
+### Santali
+- Santali
+- Others
+
+### Rajasthani
+- Rajasthani
+- Others
+
+### Oriya
+- Oriya
+- Others
+
+### Odia
+- Odia
+- Others
+
+### Marwari
+- Marwari
+- Others
+
+### Magahi
+- Magahi
+- Others
+
+### Kannada
+- Kannada
+- Others
+
+### Gujarati
+- Gujarati
+- Others
+
+### Bengali
+- Bengali
+- Others
+
+### Telugu
+- Telugu
+- Others
+
+### Tamil
+- Tamil
+- Others
+
+### Malayalam
+- Malayalam
+- Others
+
+### Sanskrit
+- Sanskrit
+- Others
+
+### Santali
+- Santali
+- Others
+
+### Rajasthani
+- Rajasthani
+- Others
+
+### Oriya
+- Oriya
+- Others
+
+### Odia
+- Odia
+- Others
+
+### Marwari
+- Marwari
+- Others
+
+### Magahi
+- Magahi
+- Others
+
+### Kannada
+- Kannada
+- Others
+
+### Gujarati
+- Gujarati
+- Others
+
+### Bengali
+- Bengali
+- Others
+
+### Telugu
+- Telugu
+- Others
+
+### Tamil
+- Tamil
+- Others
+
+### Malayalam
+- Malayalam
+- Others
+
+### Sanskrit
+- Sanskrit
+- Others
+
+### Santali
+- Santali
+- Others
+
+### Rajasthani
+- Rajasthani
+- Others
+
+### Oriya
+- Oriya
+- Others
+
+### Odia
+- Odia
+- Others
+
+### Marwari
+- Marwari
+- Others
+
+### Magahi
+- Magahi
+- Others
+
+### Kannada
+- Kannada
+- Others
+
+### Gujarati
+- Gujarati
+- Others
+
+### Bengali
+- Bengali
+- Others
+
+### Telugu
+- Telugu
+- Others
+
+### Tamil
+- Tamil
+- Others
+
+### Malayalam
+- Malayalam
+- Others
+
+### Sanskrit
+- Sanskrit
+- Others
+
+### Santali
+- Santali
+- Others
+
+### Rajasthani
+- Rajasthani
+- Others
+
+### Oriya
+- Oriya
+- Others
+
+### Odia
+- Odia
+- Others
+
+### Marwari
+- Marwari
+- Others
+
+### Magahi
+- Magahi
+- Others
+
+### Kannada
+- Kannada
+- Others
+
+### Gujarati
+- Gujarati
+- Others
+
+### Bengali
+- Bengali
+- Others
+
+### Telugu
+- Telugu
+- Others
+
+### Tamil
+- Tamil
+- Others
+
+### Malayalam
+- Malayalam
+- Others
+
+### Sanskrit
+- Sanskrit
+- Others
+
+### Santali
+- Santali
+- Others
+
+### Rajasthani
+- Rajasthani
+- Others
+
+### Oriya
+- Oriya
+- Others
+
+### Odia
+- Odia
+- Others
+
+### Marwari
+- Marwari
+- Others
+
+### Magahi
+- Magahi
+- Others
+
+### Kannada
+- Kannada
+- Others
+
+### Gujarati
+- Gujarati
+- Others
+
+### Bengali
+- Bengali
+- Others
+
+### Telugu
+- Telugu
+- Others
+
+### Tamil
+- Tamil
+- Others
+
+### Malayalam
+- Malayalam
+- Others
+
+### Sanskrit
+- Sanskrit
+- Others
+
+### Santali
+- Santali
+- Others
+
+### Rajasthani
+- Rajasthani
+- Others
+
+### Oriya
+- Oriya
+- Others
+
+### Odia
+- Odia
+- Others
+
+### Marwari
+- Marwari
+- Others
+
+### Magahi
+- Magahi
+- Others
+
+### Kannada
+- Kannada
+- Others
+
+### Gujarati
+- Gujarati
+- Others
+
+### Bengali
+- Bengali
+- Others
+
+### Telugu
+- Telugu
+- Others
+
+### Tamil
+- Tamil
+- Others
+
+### Malayalam
+- Malayalam
+- Others
+
+### Sanskrit
+- Sanskrit
+- Others
+
+### Santali
+- Santali
+- Others
+
+### Rajasthani
+- Rajasthani
+- Others
+
+### Oriya
+- Oriya
+- Others
+
+### Odia
+- Odia
+- Others
+
+### Marwari
+- Marwari
+- Others
+
+### Magahi
+- Magahi
+- Others
+
+### Kannada
+- Kannada
+- Others
+
+### Gujarati
+- Gujarati
+- Others
+
+### Bengali
+- Bengali
+- Others
+
+### Telugu
+- Telugu
+- Others
+
+### Tamil
+- Tamil
+- Others
+
+### Malayalam
+- Malayalam
+- Others
+
+### Sanskrit
+- Sanskrit
+- Others
+
+### Santali
+- Santali
+- Others
+
+### Rajasthani
+- Rajasthani
+- Others
+
+### Oriya
+- Oriya
+- Others
+
+### Odia
+- Odia
+- Others
+
+### Marwari
+- Marwari
+- Others
+
+### Magahi
+- Magahi
+- Others
+
+### Kannada
+- Kannada
+- Others
+
+### Gujarati
+- Gujarati
+- Others
+
+### Bengali
+- Bengali
+- Others
+
+### Telugu
+- Telugu
+- Others
+
+### Tamil
+- Tamil
+- Others
+
+### Malayalam
+- Malayalam
+- Others
+
+### Sanskrit
+- Sanskrit
+- Others
+
+### Santali
+- Santali
+- Others
+
+### Rajasthani
+- Rajasthani
+- Others
+
+### Oriya
+- Oriya
+- Others
+
+### Odia
+- Odia
+- Others
+
+### Marwari
+- Marwari
+- Others
+
+### Magahi
+- Magahi
+- Others
+
+### Kannada
+- Kannada
+- Others
+
+### Gujarati
+- Gujarati
+- Others
+
+### Bengali
+- Bengali
+- Others
+
+### Telugu
+- Telugu
+- Others
+
+### Tamil
+- Tamil
+- Others
+
+### Malayalam
+- Malayalam
+- Others
+
+### Sanskrit
+- Sanskrit
+- Others
+
+### Santali
+- Santali
+- Others
+
+### Rajasthani
+- Rajasthani
+- Others
+
+### Oriya
+- Oriya
+- Others
+
+### Odia
+- Odia
+- Others
+
+### Marwari
+- Marwari
+- Others
+
+### Magahi
+- Magahi
+- Others
+
+### Kannada
+- Kannada
+- Others
+
+### Gujarati
+- Gujarati
+- Others
+
+### Bengali
+- Bengali
+- Others
+
+### Telugu
+- Telugu
+- Others
+
+### Tamil
+- Tamil
+- Others
+
+### Malayalam
+- Malayalam
+- Others
+
+### Sanskrit
+- Sanskrit
+- Others
+
+### Santali
+- Santali
+- Others
+
+### Rajasthani
+- Rajasthani
+- Others
+
+### Oriya
+- Oriya
+- Others
+
+### Odia
+- Odia
+- Others
+
+### Marwari
+- Marwari
+- Others
+
+### Magahi
+- Magahi
+- Others
+
+### Kannada
+- Kannada
+- Others
+
+### Gujarati
+- Gujarati
+- Others
+
+### Bengali
+- Bengali
+- Others
+
+### Telugu
+- Telugu
+- Others
+
+### Tamil
+- Tamil
+- Others
+
+### Malayalam
+- Malayalam
+- Others
+
+### Sanskrit
+- Sanskrit
+- Others
+
+### Santali
+- Santali
+- Others
+
+### Rajasthani
+- Rajasthani
+- Others
+
+### Oriya
+- Oriya
+- Others
+
+### Odia
+- Odia
+- Others
+
+### Marwari
+- Marwari
+- Others
+
+### Magahi
+- Magahi
+- Others
+
+### Kannada
+- Kannada
+- Others
+
+### Gujarati
+- Gujarati
+- Others
+
+### Bengali
+- Bengali
+- Others
+
+### Telugu
+- Telugu
+- Others
+
+### Tamil
+- Tamil
+- Others
+
+### Malayalam
+- Malayalam
+- Others
+
+### Sanskrit
+- Sanskrit
+- Others
+
+### Santali
+- Santali
+- Others
+
+### Rajasthani
+- Rajasthani
+- Others
+
+### Oriya
+- Oriya
+- Others
+
+### Odia
+- Odia
+- Others
+
+### Marwari
+- Marwari
+- Others
+
+### Magahi
+- Magahi
+- Others
+
+### Kannada
+- Kannada
+- Others
+
+### Gujarati
+- Gujarati
+- Others
+
+### Bengali
+- Bengali
+- Others
+
+### Telugu
+- Telugu
+- Others
+
+### Tamil
+- Tamil
+- Others
+
+### Malayalam
+- Malayalam
+- Others
+
+### Sanskrit
+- Sanskrit
+- Others
+
+### Santali
+- Santali
+- Others
+
+### Rajasthani
+- Rajasthani
+- Others
+
+### Oriya
+- Oriya
+- Others
+
+### Odia
+- Odia
+- Others
+
+### Marwari
+- Marwari
+- Others
+
+### Magahi
+- Magahi
+- Others
+
+### Kannada
+- Kannada
+- Others
+
+### Gujarati
+- Gujarati
+- Others
+
+### Bengali
+- Bengali
+- Others
+
+### Telugu
+- Telugu
+- Others
+
+### Tamil
+- Tamil
+- Others
+
+### Malayalam
+- Malayalam
+- Others
+
+### Sanskrit
+- Sanskrit
+- Others
+
+### Santali
+- Santali
+- Others
+
+### Rajasthani
+- Rajasthani
+- Others
+
+### Oriya
+- Oriya
+- Others
+
+### Odia
+- Odia
+- Others
+
+### Marwari
+- Marwari
+- Others
+
+### Magahi
+- Magahi
+- Others
+
+### Kannada
+- Kannada
+- Others
+
+### Gujarati
+- Gujarati
+- Others
+
+### Bengali
+- Bengali
+- Others
+
+### Telugu
+- Telugu
+- Others
+
+### Tamil
+- Tamil
+- Others
+
+### Malayalam
+- Malayalam
+- Others
+
+### Sanskrit
+- Sanskrit
+- Others
+
+### Santali
+- Santali
+- Others
+
+### Rajasthani
+- Rajasthani
+- Others
+
+### Oriya
+- Oriya
+- Others
+
+### Odia
+- Odia
+- Others
+
+### Marwari
+- Marwari
+- Others
+
+### Magahi
+- Magahi
+- Others
+
+### Kannada
+- Kannada
+- Others
+
+### Gujarati
+- Gujarati
+- Others
+
+### Bengali
+- Bengali
+- Others
+
+### Telugu
+- Telugu
+- Others
+
+### Tamil
+- Tamil
+- Others
+
+### Malayalam
+- Malayalam
+- Others
+
+### Sanskrit
+- Sanskrit
+- Others
+
+### Santali
+- Santali
+- Others
+
+### Rajasthani
+- Rajasthani
+- Others
+
+### Oriya
+- Oriya
+- Others
+
+### Odia
+- Odia
+- Others
+
+### Marwari
+- Marwari
+- Others
+
+### Magahi
+- Magahi
+- Others
+
+### Kannada
+- Kannada
+- Others
+
+### Gujarati
+- Gujarati
+- Others
+
+### Bengali
+- Bengali
+- Others
+
+### Telugu
+- Telugu
+- Others
+
+### Tamil
+- Tamil
+- Others
+
+### Malayalam
+- Malayalam
+- Others
+
+### Sanskrit
+- Sanskrit
+- Others
+
+### Santali
+- Santali
+- Others
+
+### Rajasthani
+- Rajasthani
+- Others
+
+### Oriya
+- Oriya
+- Others
+
+### Odia
+- Odia
+- Others
+
+### Marwari
+- Marwari
+- Others
+
+### Magahi
+- Magahi
+- Others
+
+### Kannada
+- Kannada
+- Others
+
+### Gujarati
+- Gujarati
+- Others
+
+### Bengali
+- Bengali
+- Others
+
+### Telugu
+- Telugu
+- Others
+
+### Tamil
+- Tamil
+- Others
+
+### Malayalam
+- Malayalam
+- Others
+
+### Sanskrit
+- Sanskrit
+- Others
+
+### Santali
+- Santali
+- Others
+
+### Rajasthani
+- Rajasthani
+- Others
+
+### Oriya
+- Oriya
+- Others
+
+### Odia
+- Odia
+- Others
+
+### Marwari
+- Marwari
+- Others
+
+### Magahi
+- Magahi
+- Others
+
+### Kannada
+- Kannada
+- Others
+
+### Gujarati
+- Gujarati
+- Others
+
+### Bengali
+- Bengali
+- Others
+
+### Telugu
+- Telugu
+- Others
+
+### Tamil
+- Tamil
+- Others
+
+### Malayalam
+- Malayalam
+- Others
+
+### Sanskrit
+- Sanskrit
+- Others
+
+### Santali
+- Santali
+- Others
+
+### Rajasthani
+- Rajasthani
+- Others
+
+### Oriya
+- Oriya
+- Others
+
+### Odia
+- Odia
+- Others
+
+### Marwari
+- Marwari
+- Others
+
+### Magahi
+- Magahi
+- Others
+
+### Kannada
+- Kannada
+- Others
+
+### Gujarati
+- Gujarati
+- Others
+
+### Bengali
+- Bengali
+- Others
+
+### Telugu
+- Telugu
+- Others
+
+### Tamil
+- Tamil
+- Others
+
+### Malayalam
+- Malayalam
+- Others
+
+### Sanskrit
+- Sanskrit
+- Others
+
+### Santali
+- Santali
+- Others
+
+### Rajasthani
+- Rajasthani
+- Others
+
+### Oriya
+- Oriya
+- Others
+
+### Odia
+- Odia
+- Others
+
+### Marwari
+- Marwari
+- Others
+
+### Magahi
+- Magahi
+- Others
+
+### Kannada
+- Kannada
+- Others
+
+### Gujarati
+- Gujarati
+- Others
+
+### Bengali
+- Bengali
+- Others
+
+### Telugu
+- Telugu
+- Others
+
+### Tamil
+- Tamil
+- Others
+
+### Malayalam
+- Malayalam
+- Others
+
+### Sanskrit
+- Sanskrit
+- Others
+
+### Santali
+- Santali
+- Others
+
+### Rajasthani
+- Rajasthani
+- Others
+
+### Oriya
+- Oriya
+- Others
+
+### Odia
+- Odia
+- Others
+
+### Marwari
+- Marwari
+- Others
+
+### Magahi
+- Magahi
+- Others
+
+### Kannada
+- Kannada
+- Others
+
+### Gujarati
+- Gujarati
+- Others
+
+### Bengali
+- Bengali
+- Others
+
+### Telugu
+- Telugu
+- Others
+
+### Tamil
+- Tamil
+- Others
+
+### Malayalam
+- Malayalam
+- Others
+
+### Sanskrit
+- Sanskrit
+- Others
+
+### Santali
+- Santali
+- Others
+
+### Rajasthani
+- Rajasthani
+- Others
+
+### Oriya
+- Oriya
+- Others
+
+### Odia
+- Odia
+- Others
+
+### Marwari
+- Marwari
+- Others
+
+### Magahi
+- Magahi
+- Others
+
+### Kannada
+- Kannada
+- Others
+
+### Gujarati
+- Gujarati
+- Others
+
+### Bengali
+- Bengali
+- Others
+
+### Telugu
+- Telugu
+- Others
+
+### Tamil
+- Tamil
+- Others
+
+### Malayalam
+- Malayalam
+- Others
+
+### Sanskrit
+- Sanskrit
+- Others
+
+### Santali
+- Santali
+- Others
+
+### Rajasthani
+- Rajasthani
+- Others
+
+### Oriya
+- Oriya
+- Others
+
+### Odia
+- Odia
+- Others
+
+### Marwari
+- Marwari
+- Others
+
+### Magahi
+- Magahi
+- Others
+
+### Kannada
+- Kannada
+- Others
+
+### Gujarati
+- Gujarati
+- Others
+
+### Bengali
+- Bengali
+- Others
+
+### Telugu
+- Telugu
+- Others
+
+### Tamil
+- Tamil
+- Others
+
+### Malayalam
+- Malayalam
+- Others
+
+### Sanskrit
+- Sanskrit
+- Others
+
+### Santali
+- Santali
+- Others
+
+### Rajasthani
+- Rajasthani
+- Others
+
+### Oriya
+- Oriya
+- Others
+
+### Odia
+- Odia
+- Others
+
+### Marwari
+- Marwari
+- Others
+
+### Magahi
+- Magahi
+- Others
+
+### Kannada
+- Kannada
+- Others
+
+### Gujarati
+- Gujarati
+- Others
+
+### Bengali
+- Bengali
+- Others
+
+### Telugu
+- Telugu
+- Others
+
+### Tamil
+- Tamil
+- Others
+
+### Malayalam
+- Malayalam
+- Others
+
+### Sanskrit
+- Sanskrit
+- Others
+
+### Santali
+- Santali
+- Others
+
+### Rajasthani
+- Rajasthani
+- Others
+
+### Oriya
+- Oriya
+- Others
+
+### Odia
+- Odia
+- Others
+
+### Marwari
+- Marwari
+- Others
+
+### Magahi
+- Magahi
+- Others
+
+### Kannada
+- Kannada
+- Others
+
+### Gujarati
+- Gujarati
+- Others
+
+### Bengali
+- Bengali
+- Others
+
+### Telugu
+- Telugu
+- Others
+
+### Tamil
+- Tamil
+- Others
+
+### Malayalam
+- Malayalam
+- Others
+
+### Sanskrit
+- Sanskrit
+- Others
+
+### Santali
+- Santali
+- Others
+
+### Rajasthani
+- Rajasthani
+- Others
+
+### Oriya
+- Oriya
+- Others
+
+### Odia
+- Odia
+- Others
+
+### Marwari
+- Marwari
+- Others
+
+### Magahi
+- Magahi
+- Others
+
+### Kannada
+- Kannada
+- Others
+
+### Gujarati
+- Gujarati
+- Others
+
+### Bengali
+- Bengali
+- Others
+
+### Telugu
+- Telugu
+- Others
+
+### Tamil
+- Tamil
+- Others
+
+### Malayalam
+- Malayalam
+- Others
+
+### Sanskrit
+- Sanskrit
+- Others
+
+### Santali
+- Santali
+- Others
+
+### Rajasthani
+- Rajasthani
+- Others
+
+### Oriya
+- Oriya
+- Others
+
+### Odia
+- Odia
+- Others
+
+### Marwari
+- Marwari
+- Others
+
+### Magahi
+- Magahi
+- Others
+
+### Kannada
+- Kannada
+- Others
+
+### Gujarati
+- Gujarati
+- Others
+
+### Bengali
+- Bengali
+- Others
+
+### Telugu
+- Telugu
+- Others
+
+### Tamil
+- Tamil
+- Others
+
+### Malayalam
+- Malayalam
+- Others
+
+### Sanskrit
+- Sanskrit
+- Others
+
+### Santali
+- Santali
+- Others
+
+### Rajasthani
+- Rajasthani
+- Others
+
+### Oriya
+- Oriya
+- Others
+
+### Odia
+- Odia
+- Others
+
+### Marwari
+- Marwari
+- Others
+
+### Magahi
+- Magahi
+- Others
+
+### Kannada
+- Kannada
+- Others
+
+### Gujarati
+- Gujarati
+- Others
+
+### Bengali
+- Bengali
+- Others
+
+### Telugu
+- Telugu
+- Others
+
+### Tamil
+- Tamil
+- Others
+
+### Malayalam
+- Malayalam
+- Others
+
+### Sanskrit
+- Sanskrit
+- Others
+
+### Santali
+- Santali
+- Others
+
+### Rajasthani
+- Rajasthani
+- Others
+
+### Oriya
+- Oriya
+- Others
+
+### Odia
+- Odia
+- Others
+
+### Marwari
+- Marwari
+- Others
+
+### Magahi
+- Magahi
+- Others
+
+### Kannada
+- Kannada
+- Others
+
+### Gujarati
+- Gujarati
+- Others
+
+### Bengali
+- Bengali
+- Others
+
+### Telugu
+- Telugu
+- Others
+
+### Tamil
+- Tamil
+- Others
+
+### Malayalam
+- Malayalam
+- Others
+
+### Sanskrit
+- Sanskrit
+- Others
+
+### Santali
+- Santali
+- Others
+
+### Rajasthani
+- Rajasthani
+- Others
+
+### Oriya
+- Oriya
+- Others
+
+### Odia
+- Odia
+- Others
+
+### Marwari
+- Marwari
+- Others
+
+### Magahi
+- Magahi
+- Others
+
+### Kannada
+- Kannada
+- Others
+
+### Gujarati
+- Gujarati
+- Others
+
+### Bengali
+- Bengali
+- Others
+
+### Telugu
+- Telugu
+- Others
+
+### Tamil
+- Tamil
+- Others
+
+### Malayalam
+- Malayalam
+- Others
+
+### Sanskrit
+- Sanskrit
+- Others
+
+### Santali
+- Santali
+- Others
+
+### Rajasthani
+- Rajasthani
+- Others
+
+### Oriya
+- Oriya
+- Others
+
+### Odia
+- Odia
+- Others
+
+### Marwari
+- Marwari
+- Others
+
+### Magahi
+- Magahi
+- Others
+
+### Kannada
+- Kannada
+- Others
+
+### Gujarati
+- Gujarati
+- Others
+
+### Bengali
+- Bengali
+- Others
+
+### Telugu
+- Telugu
+- Others
+
+### Tamil
+- Tamil
+- Others
+
+### Malayalam
+- Malayalam
+- Others
+
+### Sanskrit
+- Sanskrit
+- Others
+
+### Santali
+- Santali
+- Others
+
+### Rajasthani
+- Rajasthani
+- Others
+
+### Oriya
+- Oriya
+- Others
+
+### Odia
+- Odia
+- Others
+
+### Marwari
+- Marwari
+- Others
+
+### Magahi
+- Magahi
+- Others
+
+### Kannada
+- Kannada
+- Others
+
+### Gujarati
+- Gujarati
+- Others
+
+### Bengali
+- Bengali
+- Others
+
+### Telugu
+- Telugu
+- Others
+
+### Tamil
+- Tamil
+- Others
+
+### Malayalam
+- Malayalam
+- Others
+
+### Sanskrit
+- Sanskrit
+- Others
+
+### Santali
+- Santali
+- Others
+
+### Rajasthani
+- Rajasthani
+- Others
+
+### Oriya
+- Oriya
+- Others
+
+### Odia
+- Odia
+- Others
+
+### Marwari
+- Marwari
+- Others
+
+### Magahi
+- Magahi
+- Others
+
+### Kannada
+- Kannada
+- Others
+
+### Gujarati
+- Gujarati
+- Others
+
+### Bengali
+- Bengali
+- Others
+
+### Telugu
+- Telugu
+- Others
+
+### Tamil
+- Tamil
+- Others
+
+### Malayalam
+- Malayalam
+- Others
+
+### Sanskrit
+- Sanskrit
+- Others
+
+### Santali
+- Santali
+- Others
+
+### Rajasthani
+- Rajasthani
+- Others
+
+### Oriya
+- Oriya
+- Others
+
+### Odia
+- Odia
+- Others
+
+### Marwari
+- Marwari
+- Others
+
+### Magahi
+- Magahi
+- Others
+
+### Kannada
+- Kannada
+- Others
+
+### Gujarati
+- Gujarati
+- Others
+
+### Bengali
+- Bengali
+- Others
+
+### Telugu
+- Telugu
+- Others
+
+### Tamil
+- Tamil
+- Others
+
+### Malayalam
+- Malayalam
+- Others
+
+### Sanskrit
+- Sanskrit
+- Others
+
+### Santali
+- Santali
+- Others
+
+### Rajasthani
+- Rajasthani
+- Others
+
+### Oriya
+- Oriya
+- Others
+
+### Odia
+- Odia
+- Others
+
+### Marwari
+- Marwari
+- Others
+
+### Magahi
+- Magahi
+- Others
+
+### Kannada
+- Kannada
+- Others
+
+### Gujarati
+- Gujarati
+- Others
+
+### Bengali
+- Bengali
+- Others
+
+### Telugu
+- Telugu
+- Others
+
+### Tamil
+- Tamil
+- Others
+
+### Malayalam
+- Malayalam
+- Others
+
+### Sanskrit
+- Sanskrit
+- Others
+
+### Santali
+- Santali
+- Others
+
+### Rajasthani
+- Rajasthani
+- Others
+
+### Oriya
+- Oriya
+- Others
+
+### Odia
+- Odia
+- Others
+
+### Marwari
+- Marwari
+- Others
+
+### Magahi
+- Magahi
+- Others
+
+### Kannada
+- Kannada
+- Others
+
+### Gujarati
+- Gujarati
+- Others
+
+### Bengali
+- Bengali
+- Others
+
+### Telugu
+- Telugu
+- Others
+
+### Tamil
+- Tamil
+- Others
+
+### Malayalam
+- Malayalam
+- Others
+
+### Sanskrit
+- Sanskrit
+- Others
+
+### Santali
+- Santali
+- Others
+
+### Rajasthani
+- Rajasthani
+- Others
+
+### Oriya
+- Oriya
+- Others
+
+### Odia
+- Odia
+- Others
+
+### Marwari
+- Marwari
+- Others
+
+### Magahi
+- Magahi
+- Others
+
+### Kannada
+- Kannada
+- Others
+
+### Gujarati
+- Gujarati
+- Others
+
+### Bengali
+- Bengali
+- Others
+
+### Telugu
+- Telugu
+- Others
+
+### Tamil
+- Tamil
+- Others
+
+### Malayalam
+- Malayalam
+- Others
+
+### Sanskrit
+- Sanskrit
+- Others
+
+### Santali
+- Santali
+- Others
+
+### Rajasthani
+- Rajasthani
+- Others
+
+### Oriya
+- Oriya
+- Others
+
+### Odia
+- Odia
+- Others
+
+### Marwari
+- Marwari
+- Others
+
+### Magahi
+- Magahi
+- Others
+
+### Kannada
+- Kannada
+- Others
+
+### Gujarati
+- Gujarati
+- Others
+
+### Bengali
+- Bengali
+- Others
+
+### Telugu
+- Telugu
+- Others
+
+### Tamil
+- Tamil
+- Others
+
+### Malayalam
+- Malayalam
+- Others
+
+### Sanskrit
+- Sanskrit
+- Others
+
+### Santali
+- Santali
+- Others
+
+### Rajasthani
+- Rajasthani
+- Others
+
+### Oriya
+- Oriya
+- Others
+
+### Odia
+- Odia
+- Others
+
+### Marwari
+- Marwari
+- Others
+
+### Magahi
+- Magahi
+- Others
+
+### Kannada
+- Kannada
+- Others
+
+### Gujarati
+- Gujarati
+- Others
+
+### Bengali
+- Bengali
+- Others
+
+### Telugu
+- Telugu
+- Others
+
+### Tamil
+- Tamil
+- Others
+
+### Malayalam
+- Malayalam
+- Others
+
+### Sanskrit
+- Sanskrit
+- Others
+
+### Santali
+- Santali
+- Others
+
+### Rajasthani
+- Rajasthani
+- Others
+
+### Oriya
+- Oriya
+- Others
+
+### Odia
+- Odia
+- Others
+
+### Marwari
+- Marwari
+- Others
+
+### Magahi
+- Magahi
+- Others
+
+### Kannada
+- Kannada
+- Others
+
+### Gujarati
+- Gujarati
+- Others
+
+### Bengali
+- Bengali
+- Others
+
+### Telugu
+- Telugu
+- Others
+
+### Tamil
+- Tamil
+- Others
+
+### Malayalam
+- Malayalam
+- Others
+
+### Sanskrit
+- Sanskrit
+- Others
+
+### Santali
+- Santali
+- Others
+
+### Rajasthani
+- Rajasthani
+- Others
+
+### Oriya
+- Oriya
+- Others
+
+### Odia
+- Odia
+- Others
+
+### Marwari
+- Marwari
+- Others
+
+### Magahi
+- Magahi
+- Others
+
+### Kannada
+- Kannada
+- Others
+
+### Gujarati
+- Gujarati
+- Others
+
+### Bengali
+- Bengali
+- Others
+
+### Telugu
+- Telugu
+- Others
+
+### Tamil
+- Tamil
+- Others
+
+### Malayalam
+- Malayalam
+- Others
+
+### Sanskrit
+- Sanskrit
+- Others
+
+### Santali
+- Santali
+- Others
+
+### Rajasthani
+- Rajasthani
+- Others
+
+### Oriya
+- Oriya
+- Others
+
+### Odia
+- Odia
+- Others
+
+### Marwari
+- Marwari
+- Others
+
+### Magahi
+- Magahi
+- Others
+
+### Kannada
+- Kannada
+- Others
+
+### Gujarati
+- Gujarati
+- Others
+
+### Bengali
+- Bengali
+- Others
+
+### Telugu
+- Telugu
+- Others
+
+### Tamil
+- Tamil
+- Others
+
+### Malayalam
+- Malayalam
+- Others
+
+### Sanskrit
+- Sanskrit
+- Others
+
+### Santali
+- Santali
+- Others
+
+### Rajasthani
+- Rajasthani
+- Others
+
+### Oriya
+- Oriya
+- Others
+
+### Odia
+- Odia
+- Others
+
+### Marwari
+- Marwari
+- Others
+
+### Magahi
+- Magahi
+- Others
+
+### Kannada
+- Kannada
+- Others
+
+### Gujarati
+- Gujarati
+- Others
+
+### Bengali
+- Bengali
+- Others
+
+### Telugu
+- Telugu
+- Others
+
+### Tamil
+- Tamil
+- Others
+
+### Malayalam
+- Malayalam
+- Others
+
+### Sanskrit
+- Sanskrit
+- Others
+
+### Santali
+- Santali
+- Others
+
+### Rajasthani
+- Rajasthani
+- Others
+
+### Oriya
+- Oriya
+- Others
+
+### Odia
+- Odia
+- Others
+
+### Marwari
+- Marwari
+- Others
+
+### Magahi
+- Magahi
+- Others
+
+### Kannada
+- Kannada
+- Others
+
+### Gujarati
+- Gujarati
+- Others
+
+### Bengali
+- Bengali
+- Others
+
+### Telugu
+- Telugu
+- Others
+
+### Tamil
+- Tamil
+- Others
+
+### Malayalam
+- Malayalam
+- Others
+
+### Sanskrit
+- Sanskrit
+- Others
+
+### Santali
+- Santali
+- Others
+
+### Rajasthani
+- Rajasthani
+- Others
+
+### Oriya
+- Oriya
+- Others
+
+### Odia
+- Odia
+- Others
+
+### Marwari
+- Marwari
+- Others
+
+### Magahi
+- Magahi
+- Others
+
+### Kannada
+- Kannada
+- Others
+
+### Gujarati
+- Gujarati
+- Others
+
+### Bengali
+- Bengali
+- Others
+
+### Telugu
+- Telugu
+- Others
+
+### Tamil
+- Tamil
+- Others
+
+### Malayalam
+- Malayalam
+- Others
+
+### Sanskrit
+- Sanskrit
+- Others
+
+### Santali
+- Santali
+- Others
+
+### Rajasthani
+- Rajasthani
+- Others
+
+### Oriya
+- Oriya
+- Others
+
+### Odia
+- Odia
+- Others
+
+### Marwari
+- Marwari
+- Others
+
+### Magahi
+- Magahi
+- Others
+
+### Kannada
+- Kannada
+- Others
+
+### Gujarati
+- Gujarati
+- Others
+
+### Bengali
+- Bengali
+- Others
+
+### Telugu
+- Telugu
+- Others
+
+### Tamil
+- Tamil
+- Others
+
+### Malayalam
+- Malayalam
+- Others
+
+### Sanskrit
+- Sanskrit
+- Others
+
+### Santali
+- Santali
+- Others
+
+### Rajasthani
+- Rajasthani
+- Others
+
+### Oriya
+- Oriya
+- Others
+
+### Odia
+- Odia
+- Others
+
+### Marwari
+- Marwari
+- Others
+
+### Magahi
+- Magahi
+- Others
+
+### Kannada
+- Kannada
+- Others
+
+### Gujarati
+- Gujarati
+- Others
+
+### Bengali
+- Bengali
+- Others
+
+### Telugu
+- Telugu
+- Others
+
+### Tamil
+- Tamil
+- Others
+
+### Malayalam
+- Malayalam
+- Others
+
+### Sanskrit
+- Sanskrit
+- Others
+
+### Santali
+- Santali
+- Others
+
+### Rajasthani
+- Rajasthani
+- Others
+
+### Oriya
+- Oriya
+- Others
+
+### Odia
+- Odia
+- Others
+
+### Marwari
+- Marwari
+- Others
+
+### Magahi
+- Magahi
+- Others
+
+### Kannada
+- Kannada
+- Others
+
+### Gujarati
+- Gujarati
+- Others
+
+### Bengali
+- Bengali
+- Others
+
+### Telugu
+- Telugu
+- Others
+
+### Tamil
+- Tamil
+- Others
+
+### Malayalam
+- Malayalam
+- Others
+
+### Sanskrit
+- Sanskrit
+- Others
+
+### Santali
+- Santali
+- Others
+
+### Rajasthani
+- Rajasthani
+- Others
+
+### Oriya
+- Oriya
+- Others
+
+### Odia
+- Odia
+- Others
+
+### Marwari
+- Marwari
+- Others
+
+### Magahi
+- Magahi
+- Others
+
+### Kannada
+- Kannada
+- Others
+
+### Gujarati
+- Gujarati
+- Others
+
+### Bengali
+- Bengali
+- Others
+
+### Telugu
+- Telugu
+- Others
+
+### Tamil
+- Tamil
+- Others
+
+### Malayalam
+- Malayalam
+- Others
+
+### Sanskrit
+- Sanskrit
+- Others
+
+### Santali
+- Santali
+- Others
+
+### Rajasthani
+- Rajasthani
+- Others
+
+### Oriya
+- Oriya
+- Others
+
+### Odia
+- Odia
+- Others
+
+### Marwari
+- Marwari
+- Others
+
+### Magahi
+- Magahi
+- Others
+
+### Kannada
+- Kannada
+- Others
+
+### Gujarati
+- Gujarati
+- Others
+
+### Bengali
+- Bengali
+- Others
+
+### Telugu
+- Telugu
+- Others
+
+### Tamil
+- Tamil
+- Others
+
+### Malayalam
+- Malayalam
+- Others
+
+### Sanskrit
+- Sanskrit
+- Others
+
+### Santali
+- Santali
+- Others
+
+### Rajasthani
+- Rajasthani
+- Others
+
+### Oriya
+- Oriya
+- Others
+
+### Odia
+- Odia
+- Others
+
+### Marwari
+- Marwari
+- Others
+
+### Magahi
+- Magahi
+- Others
+
+### Kannada
+- Kannada
+- Others
+
+### Gujarati
+- Gujarati
+- Others
+
+### Bengali
+- Bengali
+- Others
+
+### Telugu
+- Telugu
+- Others
+
+### Tamil
+- Tamil
+-
+
+# W1Lec3-WhyNLPHard.pdf - Page 21
+
+```markdown
+# Most Diverse Indian State
+
+## NAGALAND - Languages spoken by the people
+
+```plaintext
+- PHOM (2.71%)
+- ZELIANG (3.05%)
+- RENGMA (3.11%)
+- KHIEMNUNGAN (3.13%)
+- HINDI (3.18%)
+- CHANGO (3.32%)
+- YIMCHUNGRE (3.75%)
+- BENGALI (3.78%)
+- SANGTEM (3.83%)
+- CHAKRU/CHOKRI (4.60%)
+- ANGAMI (7.66%)
+- LOTHA (8.97%)
+- NEPALI (2.20%)
+- OTHER-LANG (22.67%)
+- KONYAK (12.34%)
+- AO (11.68%)
+```
+
+*Chart: Shivakumar Jolad • Source: Census 2011 • Created with Datawrapper*
+```
+
+# W1Lec3-WhyNLPHard.pdf - Page 22
+
+```markdown
+# Least Diverse Indian State
+
+## KERALA - Languages spoken by the people
+
+```mermaid
+pie
+    title KERALA - Languages spoken by the people
+    "Malayalam" : 97.03
+    "Tamil" : 1.50
+    "Tulu" : 0.37
+    "Kannada" : 0.26
+    "Konkini" : 0.21
+    "Hindi" : 0.16
+    "Other-Lang" : 0.15
+    "Telugu" : 0.11
+    "Bengali" : 0.09
+    "Other" : 0.13
+```
+
+*Chart: Shivakumar Jolad - Source: Census 2011 - Created with Datawrapper*
+```
+
+# W1Lec3-WhyNLPHard.pdf - Page 23
+
+# Languages of India
+
+## Indo-Aryan Family:
+
+Assamese, Baigani, Banjari, Bengali, Bhatri, Bhili, Bunjia, Chakma, Chhattisgarhi, Dhanki, Dhodia, Dhundhari, Gadiali, Gamit/Gavti, Garasia/Girasia, Gojri/Gujjari, Gujarati, Hajong, Halbi, Harauti, Hindi, Jaunsari, Kachchi, Khotta, Kinnui, Kokni, Konkani, Kotwalia, Kudamamali, Thar, Lambani or Lamani, Laria, Magahi, Mahl, Marathi, Mavchi, Mewnri, Nagpuri, Naikadi, Nimari, Oriya, Rathi, Sarhodi, Shiva, Tharu, Wagri, Warli.
+
+# W1Lec3-WhyNLPHard.pdf - Page 24
+
+# Languages of India
+
+## Tibeto-Burman Family:
+Adi Ashing, Adi Bokar, Adi Bori, Adi Gallong, Adi Komkar, Adi Milang, Adi Minyong, Adi Padam, Adi Karko, Pailibo, Adi Pangi, Adi Pasi, Adi Ramo, Adi Shimong, Adi Tangam, Aimol, Anal, Angami, Ao, Apatani, Balti, Bangni/Dafla, Bawm, Bhotia, Biate, Bodo, Bugun, Chakhesang, Champa, Chang, Chir, Chote, Chung, Dalu, Deori, Dokpa/Droskat, Duhlijan-Twang, Gangte, Garo, Halam, Hmar, Hrusso/Aka, Hualngo, Kabui, Kachari, Kagati, Kak barak, Khamba, Khampa, Khamptang, Koch, Koireng, Konyak, Kuki, Ladakhi, Lahauli, Lai Hawlh, Lakher/Mara, Lalung, Lamgang, Lepcha, Lisu, Lotha, Lushai/Mizo, Mag/Mogh, Mao, Maram, Maring, Membra, Mikir, Miri, Mishmi, Monpa, Monsang, Moyon, Na, Naga, Sherdukpen, Nishi, Nocte, Paite, Pang, Phom, Pochury, Ralte, Rengma, Riang, Sajalong/Miju, Sangtam, Sema, Sherpa, Singpho, Sulung, Tagin, Tangsa, Thado, Tangkhul, Tibetan, Toto, Vaiphei, Wancho, Yim-chungre, Zakhring/Meyer, Zemi, Zou.
+
+# W1Lec3-WhyNLPHard.pdf - Page 25
+
+# Languages of India
+
+## Dravidian Family:
+
+- Dhurwa, Gadaba tribe, Gond, Kadar tribe, Kannada, Kodagu, Kolami, Koraga, Kota, Koya/Koi, Kui, Kurukh, Kurvi, Malayalam, Malta, Maria, Naiki, Parji, Pengo, Tamil, Telugu, Toda, Tulu, Yerukula.
+
+## Austro-Asiatic Family:
+
+- Asuri, Bhumij tribe, Birhor tribe, Birjia tribe, Bondo, Diday, Gutob, Ho, Juang, Kharia, Khasia, Kherwari, Korku, Korwa, Kurmi, Lodha, Mundari, Nicobarse, Santali, Saora/Savara, Shompen, Thar.
+
+## Andamanese Family:
+
+- Andamanese Tribe, Jarawa tribe, Onge, Sentinelese.
+
+# W1Lec3-WhyNLPHard.pdf - Page 26
+
+# Indian Language and Data Resources
+
+```markdown
+| Language    | Code | Pop. (M) | CC Size (%) | Cat. |
+|-------------|------|----------|-------------|------|
+| English     | en   | 1,452    | 45.8786     | H    |
+| Russian     | ru   | 258      | 5.9692      | H    |
+| German      | de   | 134      | 5.8811      | H    |
+| Chinese     | zh   | 1,118    | 4.8747      | H    |
+| Japanese    | jp   | 125      | 4.7884      | H    |
+| French      | fr   | 274      | 4.7254      | H    |
+| Spanish     | es   | 548      | 4.4690      | H    |
+| Italian     | it   | 68       | 2.5712      | H    |
+| Dutch       | nl   | 30       | 2.0585      | H    |
+| Polish      | pl   | 45       | 1.6636      | H    |
+| Portuguese  | pt   | 257      | 1.1505      | H    |
+| Vietnamese  | vi   | 85       | 1.0299      | H    |
+| Turkish     | tr   | 88       | 0.8439      | M    |
+| Indonesian   | id   | 199      | 0.7991      | M    |
+| Swedish     | sv   | 13       | 0.6969      | M    |
+| Arabic      | ar   | 274      | 0.6658      | M    |
+| Persian     | fa   | 130      | 0.6582      | M    |
+| Korean      | ko   | 81       | 0.6498      | M    |
+| Greek       | el   | 13       | 0.5870      | M    |
+| Thai        | th   | 60       | 0.4143      | M    |
+| Ukrainian   | uk   | 33       | 0.3304      | M    |
+| Bulgarian   | bg   | 8        | 0.2900      | M    |
+| Hindi       | hi   | 602      | 0.1588      | M    |
+```
+
+*Source: B5-DS IITM (BSCS5002)*
+```
+
+# W1Lec3-WhyNLPHard.pdf - Page 27
+
+# Indian Language and Data Resources
+
+| Language     | Code | First Speakers | Second Speakers | Data Ratio |
+|--------------|------|----------------|-----------------|------------|
+| Bengali      | bn   | 272            | 0.0930          | L          |
+| Tamil        | ta   | 86             | 0.0446          | L          |
+| Urdu         | ur   | 231            | 0.0274          | L          |
+| Malayalam    | ml   | 36             | 0.0222          | L          |
+| Marathi      | mr   | 99             | 0.0213          | L          |
+| Telugu       | te   | 95             | 0.0183          | L          |
+| Gujarati     | gu   | 62             | 0.0126          | L          |
+| Burmese      | my   | 33             | 0.0126          | L          |
+| Kannada      | kn   | 64             | 0.0122          | L          |
+| Swahili      | sw   | 71             | 0.0077          | X          |
+| Punjabi      | pa   | 113            | 0.0061          | X          |
+| Kyrgyz       | ky   | 5              | 0.0049          | X          |
+| Odia         | or   | 39             | 0.0044          | X          |
+| Assamese     | as   | 15             | 0.0025          | X          |
+
+**Table 1:** List of languages, language codes, numbers of first and second speakers, data ratios in the CommonCrawl corpus, and language categories. The languages are grouped into categories based on their data ratios in the CommonCrawl corpus: High Resource (H, > 1%), Medium Resource (M, ≥ 0.1%), and Low Resource (L, > 0.01%), and Extremely-Low Resource (X, < 0.01%).
+
+*Source: IITM (BSCS5002)*
+
+# W1Lec3-WhyNLPHard.pdf - Page 28
+
+# Challenges with Low-Resource Languages
+
+- Many Indian languages have limited digital resources, making it difficult to train NLP models effectively.
+- Lack of large annotated datasets and linguistic tools hinders the development of accurate NLP models for these languages.
+
+## Example:
+
+- Languages like Telugu, Tamil, Bengali, etc. despite having millions of speakers, are underrepresented in NLP resources compared to English or Hindi.
+- This creates a disparity in the quality of NLP applications, such as machine translation, sentiment analysis, and speech recognition.
+
+BS-DS IITM (BSCS5002) 28 / 34
+
+# W1Lec3-WhyNLPHard.pdf - Page 29
+
+# 3. Language Variability Across Speakers
+
+- Language varies significantly across different speakers based on a variety of factors.
+- This variability can be observed in different dialects, sociolects, and idiolects.
+
+---
+
+Text source: Slide from BS-DS IITM (BSCS5002)
+Slide number: 29 / 34
+
+# W1Lec3-WhyNLPHard.pdf - Page 30
+
+# A. Dialectal Variations:
+
+- **Dialects** are distinct forms of a language spoken by specific groups, often distinguished by geographical regions. Each dialect can have unique vocabulary, grammar, and pronunciation.
+
+- **Example:**
+  - In American English, the word **"truck"** is commonly used, whereas in British (and Indian) English, the same vehicle is referred to as a **"lorry"**.
+  - The pronunciation of certain words, like **"tomato"** (toh-MAH-toh vs. to-MAY-to), also differs between regions.
+
+(Source: BS-DS IITM (BSCS5002))
+
+Page 30 / 34
+
+# W1Lec3-WhyNLPHard.pdf - Page 31
+
+# B. Sociolects:
+
+- Sociolects refer to variations in language used by specific social groups, often influenced by factors such as class, education, or occupation. The way language is used can signal social identity and status.
+- **Example:**
+  - In formal settings, people might say, **"Good morning, how are you?"** while in informal contexts, they might simply say, **"Hey, what's up?"**
+  - Professional jargon is another example of sociolect, where specific terms are used within particular industries (e.g., legal jargon, medical terminology).
+
+BS-DS IITM (BSCS5002)
+
+31 / 34
+
+# W1Lec3-WhyNLPHard.pdf - Page 32
+
+# C. Idiolects:
+
+- An idiolect is the unique form of language used by an individual. This includes personal preferences in word choice, pronunciation, and sentence structure. It reflects a person’s background, experiences, and personality.
+
+- **Example:**
+  - One person might frequently use certain filler words like “you know” or “like,” while another avoids them.
+  - Some individuals may have unique phrases or expressions that are distinctly their own.
+
+---
+
+**Source:** BS-DS IITM (BSCS5002)
+
+**Page Number:** 32 / 34
+
+# W1Lec3-WhyNLPHard.pdf - Page 33
+
+```markdown
+# Why NLP is hard?
+
+- **Ambiguity:** Words and sentences can have multiple meanings depending on context.
+  - Example: "I saw the man with the telescope."
+
+- **Context and Semantics:** Understanding the context and meaning behind words and sentences requires deep comprehension.
+  - Example: Sarcasm and irony can be difficult for machines to detect.
+
+- **Variety of Languages:** Each language has its own rules, syntax and nuances.
+  - NLP models need to be adaptable to multiple languages and dialects.
+
+*Source: BS-DS IITM (BSCS5002)*
+
+*Page: 33 / 34*
+```
+
+# W1Lec3-WhyNLPHard.pdf - Page 34
+
+-DS IITM (BSCS5002)
+
+# Why NLP is hard?
+
+- **Evolution of Language**:
+  - Language is constantly changing with new slang, idioms and phrases emerging.
+  - Keeping up with these changes is challenging for NLP systems.
+
+- **Data Quality and Quantity**:
+  - High-quality, annotated data is necessary for training NLP models, but it is often scarce and expensive to obtain.
+  - Large datasets are required for effective machine learning, but these can be difficult to compile.
+
+- **Computational Complexity**:
+  - Advanced NLP models require significant computational resources for training and inference.
+  - Deep learning models, such as transformers, are computationally intensive.
+
+- **Cultural and Ethical Considerations**:
+  - NLP systems must be designed to avoid biases and respect cultural differences.
+  - Ensuring fairness and reducing biases in NLP models is a significant challenge.
+
+BS-DS IITM (BSCS5002)
+

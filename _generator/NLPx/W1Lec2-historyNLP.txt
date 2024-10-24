@@ -1,0 +1,518 @@
+# W1Lec2-historyNLP.pdf - Page 1
+
+```markdown
+# BSCS5002: Introduction to Natural Language Processing
+
+## Lecture 2: History of NLP
+
+**Parameswari Krishnamurthy**
+
+Language Technologies Research Centre
+IIIT-Hyderabad
+
+param.kishna@iiit.ac.in
+
+![IIIT Logo](https://www.iiit.ac.in/images/iiit-logo.png) ![Tree Logo](https://www.iiit.ac.in/images/tree-logo.png)
+
+---
+
+### International Institute of Information Technology
+### Hyderabad
+
+---
+
+*IIIT Logo* 
+*Tree Logo*
+
+---
+
+**BS-DS IIITM (BSCS5002)** 
+
+---
+
+*Page 1 of 21*
+```
+
+# W1Lec2-historyNLP.pdf - Page 2
+
+```markdown
+# Introduction to NLP
+
+- **NLP** is a field of artificial intelligence that focuses on the interaction between computers and humans using natural language.
+- The goal is to enable computers to understand, interpret, and generate human language in a way that is both valuable and meaningful.
+- NLP combines computational linguistics with machine learning, deep learning, and other AI techniques.
+```
+
+# W1Lec2-historyNLP.pdf - Page 3
+
+```markdown
+# Early Beginnings: 1950-1960
+
+- **Warren Weaver and his Translation Memorandum (1949)**
+  - **Foundation**: His ideas were rooted in information theory, successes in code breaking during WWII.
+
+- **1950s**: Machine translation emerged as one of the first major applications, igniting significant interest in NLP.
+  - The initial systems were simplistic, primarily using dictionary lookups and basic word order rules.
+
+- **Georgetown–IBM Experiment (1954)**: First public demonstration of a machine translation system at IBM's New York headquarters.
+  - Translated 49 carefully selected Russian sentences into English, mainly in the field of chemistry.
+
+- **In 1957**, Noam Chomsky introduced the concept of generative grammar in his renowned book *Syntactic Structures*.
+
+---
+
+*Source: BS-DS IITM (BSCS5002)*
+```
+
+# W1Lec2-historyNLP.pdf - Page 4
+
+```markdown
+# Rule-based MT
+
+## English-Spanish:
+
+![Dictionary and Word Order Rules](https://via.placeholder.com/150)
+
+### Dictionary:
+- The -> Il
+- Red -> Rosso
+- House -> Casa
+
+### Word Order Rules:
+- Adjective + Noun -> Noun + Adjective
+
+### Examples:
+
+```markdown
+The red house
+```
+- **Dictionary lookup:** "The red house" -> "Il rosso casa"
+- **Reorder words:** "Il rosso casa" -> "La casa roja"
+
+```markdown
+But it should be...
+```
+
+- La casa roja
+
+![Source](https://medium.com/nlplanet/a-brief-timeline-of-nlp-bc45b640f07d)
+
+---
+
+*BS-DS IITM (BSCS5002)*
+
+---
+
+*Page 4 / 21*
+```
+
+# W1Lec2-historyNLP.pdf - Page 5
+
+```markdown
+# 1960-1970
+
+- **1960s - 1970s**: Continued development of rule-based systems like ELIZA, a program that mimicked a Rogerian psychotherapist.
+
+![ELIZA Interface](https://example.com/eliza_interface)
+
+**Welcome to**
+
+```
+EEE functions
+LL    III    ZZZZZZ   AAAAA
+EE    LL    II    ZZ   AA  AA
+EEE functions
+LL    II    ZZZ    AAAAAA
+EE    LL    II    ZZ   AA  AA
+EEE functions
+LLLLL III ZZZZZZ   AA   AA
+```
+
+Eliza is a mock Rogerian psychotherapist. The original program was described by Joseph Weizenbaum in 1966. This implementation by Norbert Landsteiner 2005.
+
+**ELIZA**: Is something troubling you?
+**YOU**: Men are all alike.
+**ELIZA**: What is the connection, do you suppose?
+**YOU**: They're always bugging us about something or other.
+**ELIZA**: Can you think of a specific example?
+**YOU**: Well, my boyfriend made me come here.
+**ELIZA**: Is it important to you that your boyfriend made you come here?
+**YOU**: He says I'm depressed much of the time.
+**ELIZA**: I am sorry to hear that you are depressed.
+**YOU**: It's true. I am unhappy.
+**ELIZA**: Can you explain what made you unhappy?
+**YOU**:
+
+source: [https://en.wikipedia.org/wiki/ELIZA](https://en.wikipedia.org/wiki/ELIZA)
+```
+
+# W1Lec2-historyNLP.pdf - Page 6
+
+```markdown
+# 1960-1970
+
+- Turing Test: A Benchmark for Machine Intelligence
+
+## Turing Test:
+
+![Turing Test Diagram](image_url)
+
+**During the Turing Test**, the human interrogator asks several questions to both players. Based on the answers, the interrogator attempts to determine which player is a computer and which player is a human respondent.
+
+- **Player A**: Computer
+  ![Computer](computer_image_url)
+
+- **Player B**: Human Responder
+  ![Human Responder](human_image_url)
+
+- **Player C**: Interrogator
+  ![Interrogator](interrogator_image_url)
+
+**Source: ABC News**
+
+![ABC News Logo](abc_news_image_url)
+
+---
+
+**Note**: The diagram illustrates the setup of the Turing Test, including the roles of the computer, human respondent, and interrogator. Arrows indicate the flow of questions and answers between the players and the interrogator.
+
+---
+
+**Reference**: BS-DS IITM (BSCS5002)
+```
+
+# W1Lec2-historyNLP.pdf - Page 7
+
+```markdown
+# 1960-1970
+
+- **ALPAC Report (1966):** Shifting Focus in Machine Translation
+  - US govt formed it to evaluate progress in computational linguistics.
+  - However, the limitations of these systems eventually led to the first **AI winter**, a period of reduced funding and interest.
+
+```
+
+# W1Lec2-historyNLP.pdf - Page 8
+
+```markdown
+# Late 1970s
+
+- Despite a slowdown in NLP research during the 1970s, significant advancements were made in computationally tractable theories of grammar.
+
+## Case Grammars:
+
+- Focused on the role of noun phrases and their relationships to verbs.
+- Provided a framework for understanding sentence structure based on semantic roles.
+
+## Semantic Networks:
+
+- Graph-based representations of knowledge.
+- Used to model relationships between concepts and entities, enhancing natural language understanding.
+
+## Conceptual Dependency Theory:
+
+- Aimed at representing the meaning of sentences in a structured format.
+- Emphasized the importance of semantic relationships over syntactic structures.
+
+![Diagram Placeholder](image_url)
+
+---
+
+_BS-DS IITM (BSCS5002)_
+
+_8 / 21_
+```
+
+# W1Lec2-historyNLP.pdf - Page 9
+
+```markdown
+# NLP in the 1980s: Expert Systems
+
+- **Symbolic Approaches** also known as **Expert Systems**, these approaches dominated NLP in the 1980s.
+- Utilized **hard-coded rules** and **ontologies** (knowledge bases containing facts, concepts, and relationships within a domain).
+
+## Ontologies:
+
+- Ontologies stored facts and relationships, essential for reasoning in expert systems.
+- For example, if the system knows that "All humans are mortal" and "Socrates is a human," it can infer that "Socrates is mortal."
+
+![Diagram Placeholder](image_url)
+
+BS-DS IITM (BSCS5002)
+```
+
+# W1Lec2-historyNLP.pdf - Page 10
+
+```markdown
+# Transition to Statistical Models: Late 1980s - Early 1990s
+
+- **Shift from Symbolic to Statistical Models:**
+  - Statistical models began to replace expert systems.
+  - These models could learn from data rather than relying on manually coded rules.
+
+- **Machine Learning:**
+  - Statistical models utilized machine learning to learn patterns and rules automatically.
+  - This marked a significant shift in NLP research and application.
+
+- **Advances in Computational Resources:**
+  - Increased computational power in the late 1980s and 1990s enabled the training of more complex models.
+  - Facilitated the training of the first **Recurrent Neural Networks (RNNs)**.
+
+*Source: BS-DS IITM (BSCS5002)*
+```
+
+# W1Lec2-historyNLP.pdf - Page 11
+
+```markdown
+# Neural Networks in the 2000s
+
+## Increased Use of Neural Networks:
+
+- Initially applied for language modeling.
+- Focused on predicting the next word in a sequence based on previous words.
+
+## Introduction of Word Embeddings:
+
+- Represented words as dense vectors of numbers.
+- Words with similar meanings are mapped to similar vector representations.
+
+_BSC-DS IITM (BSCS5002)_
+
+![Slide Image](image-placeholder.png)
+```
+
+# W1Lec2-historyNLP.pdf - Page 12
+
+```markdown
+# Graphical Representation of Vectors
+
+![Graphical Representation](image_url)
+
+- Mathematics
+    - ![Vector Representation](image_url)
+
+- **Statistics**
+    - ![Vector Representation](image_url)
+
+**Key Points:**
+- "Mathematics" is similar to "Statistics"
+- "Tiger" is similar to "Lion"
+
+**Source:**
+- BS-DS IITM (BSCS5002)
+- Slide Number: 12 / 21
+```
+
+# W1Lec2-historyNLP.pdf - Page 13
+
+```markdown
+# Graphical Representation of Vectors
+
+![Graphical Representation of Vectors](image-url)
+
+## Equation Representation
+
+```math
+\text{King} - \text{Man} + \text{Woman} \approx \text{Queen}
+```
+
+## Vector Relationships
+
+```math
+\text{vector(king)} - \text{vector(man)} + \text{vector(woman)} \approx \text{vector(queen)}
+```
+
+### Visualization
+
+- **King** is represented as a vector starting from an origin.
+- **Man** is represented with a vector pointing in a specific opposite direction.
+- **Woman** is represented with a vector pointing in a specific direction.
+
+The combination of these vectors approximates the vector **Queen**.
+
+### Diagram Description
+
+In the diagram:
+
+- **King** is connected to **Queen** by an orange arrow (subtracting **Man**).
+- **King** is connected to **Man** by a cyan arrow.
+- **Man** is connected to **Woman** by a green arrow.
+- **Woman** is connected to **Queen** by a purple arrow.
+
+Each connection represents a vector relationship.
+
+```math
+\text{King} \rightarrow \text{Man}
+\text{Man} \rightarrow \text{Woman}
+\text{Woman} \rightarrow \text{Queen}
+```
+
+### Note
+
+The notation `vector(king)`, `vector(man)`, `vector(woman)`, and `vector(queen)` represent the respective vectors in vector space.
+
+---
+
+*Source: BS-DS IITM (BSCS5002)*
+```
+
+# W1Lec2-historyNLP.pdf - Page 14
+
+```markdown
+# Challenges and Innovations
+
+- **Struggled** to efficiently learn word representations.
+- Often trained on small text corpora, leading to **suboptimal embeddings**.
+- Google Translate:
+  - Released in 2006 as the first commercially successful NLP system.
+- Utilized statistical models for automatic document translation.
+```
+
+# W1Lec2-historyNLP.pdf - Page 15
+
+```markdown
+# Impact of Word Embeddings
+
+- **Pre-trained Embeddings:**
+  - Using pre-trained embeddings as features improved performance across various NLP tasks.
+  - Enabled better encapsulation of text meaning.
+
+- **Common Neural Networks:**
+  - Dominant architectures included **LSTM RNNs** and **Convolutional Neural Networks (CNNs)**.
+
+*BS-DS IITM (BSCS5002)*
+```
+
+# W1Lec2-historyNLP.pdf - Page 16
+
+```markdown
+# Encoder-Decoder Model: 2014
+
+- **General formalization of sequence-to-sequence problems**, crucial for tasks like machine translation.
+- **Encoder**: Encodes input into a context vector.
+- **Decoder**: Decodes the context vector into an output sequence.
+
+*Source: BS-DS IITM (BSCS5002)*
+```
+
+# W1Lec2-historyNLP.pdf - Page 17
+
+```markdown
+# Encoder-Decoder based MT
+
+## English-Spanish:
+
+### Translating with an Encoder-Decoder system
+
+![Encoder-Decoder system](https://medium.com.nlplanet/a-brief-timeline-of-nlp-bc45b640f07d)
+
+1. **Encoder**
+   - Input: *The red house*
+   - Output: Context vector [0.3, 0.6, -0.2, ..., 0.1]
+
+2. **Context vector**
+   - Example: [0.3, 0.6, -0.2, ..., 0.1]
+
+3. **Decoder**
+   - Input: Context vector
+   - Output: *La casa roja*
+
+*Source*: [https://medium.com.nlplanet/a-brief-timeline-of-nlp-bc45b640f07d](https://medium.com.nlplanet/a-brief-timeline-of-nlp-bc45b640f07d)
+
+**Note**: This figure is from a presentation by B5-D5 IITM (BSCS5002).
+```
+
+# W1Lec2-historyNLP.pdf - Page 18
+
+```markdown
+# Success of Transformers and Attention Mechanisms
+
+- **Attention Mechanisms**: Presented in the landmark paper "Attention Is All You Need."
+- **Revolutionized NLP**: By eliminating recurrent connections and relying solely on attention mechanisms.
+- **Capable of capturing long-range dependencies and context efficiently**.
+- **Facilitated training on large datasets**, leading to better performance across NLP tasks.
+- **Enhance information flow between encoder and decoder**.
+- **Improved performance of sequence-to-sequence models**.
+
+*Source: BS-DS IITM (BSCS5002) 18 / 21*
+```
+
+# W1Lec2-historyNLP.pdf - Page 19
+
+```markdown
+# Advancements in Pre-trained Language Models
+
+- **Training on Large Datasets:**
+  - Transformers trained on vast amounts of internet text in a self-supervised manner.
+  - Led to the development of powerful pre-trained models.
+
+- **Fine-tuning:**
+  - Pre-trained models can be adapted to various tasks with minimal additional training (fine-tuning).
+  - Enables quick application to new tasks and domains.
+
+![]() <!-- Placeholder for image content if OCR can't capture it directly -->
+
+*BS-DS IITM (BSCS5002)*
+*19 / 21*
+```
+
+# W1Lec2-historyNLP.pdf - Page 20
+
+```markdown
+# History of NLP
+
+![History of NLP Timeline](image-url)
+
+- **1950s**
+  - Interest in Translation
+  - "Syntactic Structures" by Chomsky
+  - Generative Grammars
+  - **ELIZA**: ALPAC Report and First AI Winter
+
+- **1960s**
+  - Case Grammars
+  - Semantic Networks and Conceptual Dependency Theory
+
+- **1970s**
+  - Ontologies
+  - Expert Systems
+
+- **1980s**
+  - Statistical Models
+  - RNNs and LSTMs
+
+- **1990s**
+  - Language Modelling
+  - Word Embeddings
+  - Google Translate
+
+- **2000s**
+  - Word2Vec
+  - Rise of LSTMs and CNNs
+  - Encoder-Decoder Architecture
+
+- **2010s**
+  - Attention and Transformers
+  - Pre-trained Models and Transfer Learning
+  - **GPT and Large Language Models**
+```
+
+# W1Lec2-historyNLP.pdf - Page 21
+
+```markdown
+# Conclusion
+
+- **NLP has evolved significantly from its early beginnings and continues to be a rapidly growing field.**
+
+- **The 2000s to 2020s saw a significant transformation in NLP through the introduction of neural networks, word embeddings, and transformer models.**
+
+- **These advancements enhanced the ability to understand and generate human language effectively.**
+
+- **Ongoing trends include the development of increasingly larger language models that excel in a wide range of NLP tasks.**
+
+- **The future may involve more advanced pre-trained models, better understanding of context, and more robust multilingual models.**
+
+- **Ethical considerations, such as bias in NLP models, are becoming increasingly important.**
+
+```
+

@@ -1,0 +1,545 @@
+# W1Lec4-Levels-Fundamentals.pdf - Page 1
+
+```markdown
+# BSCS5002: Introduction to Natural Language Processing
+
+## Lecture 4: Levels of Language Processing and Linguistic Fundamentals
+
+**Parameswari Krishnamurthy**
+
+**Language Technologies Research Centre**
+
+**IIIT-Hyderabad**
+
+**param.krishna@iiit.ac.in**
+
+![IIIT Logo](https://www.iiit.ac.in/sites/default/files/iiit-logo.png)
+
+**International Institute of Information Technology**
+
+**Hyderabad**
+
+![IIIT-H Logo](https://www.iiit.ac.in/sites/default/files/iiit-logo.png)
+
+---
+
+**Slides:**
+- Slide 1/27
+- BS-DS IITM (BSCS5002)
+```
+
+# W1Lec4-Levels-Fundamentals.pdf - Page 2
+
+-DS IITM (BSCS5002)
+
+# Levels of Language Processing in NLP
+
+- Natural Language Processing (NLP) involves multiple levels of language processing.
+- Each level addresses different linguistic features and contributes to understanding and generating natural language.
+
+## Levels of Language Processing:
+
+- **Phonological level**
+- **Morphological level**
+- **Lexical Level**
+- **Syntactic Level**
+- **Semantic Level**
+- **Discourse Level**
+- **Pragmatic Level**
+
+2 / 27
+
+# W1Lec4-Levels-Fundamentals.pdf - Page 3
+
+# Levels of NLP
+
+## Diagram Overview
+
+The image presents a diagram detailing the "Levels of NLP" (Natural Language Processing). The diagram identifies seven distinct levels, each with a specific focus on different aspects of language interpretation and processing.
+
+## Levels of NLP
+
+1. **Phonology**
+   - **Description**: Interpreting speech sounds.
+
+2. **Morphology**
+   - **Description**: Interpreting the compositional nature of words, which are composed of morphemes.
+
+3. **Lexical**
+   - **Description**: Interpreting the meanings of individual words.
+
+4. **Syntactic**
+   - **Description**: Uncovering the grammatical structures of sentences.
+
+5. **Semantic**
+   - **Description**: Determining the meanings of sentences by focusing on word-level meanings.
+
+6. **Discourse**
+   - **Description**: Focusing on properties of texts as a whole and making connections between sentences.
+
+7. **Pragmatic**
+   - **Description**: Understanding the purposeful use of language in situations.
+
+## References
+
+- Feldman, 1999, pp. 62-64.
+- Liddy, 2010, pp. 3867-3868.
+
+## Additional Information
+
+- The image is labeled as part of the "BS-DS IITM (BSCS5002)" course material.
+- The slide number is indicated as "3 / 27" at the bottom right corner.
+
+This markdown format maintains the detailed structure and information present in the original image, ensuring clarity and readability.
+
+# W1Lec4-Levels-Fundamentals.pdf - Page 4
+
+Here is the detailed markdown format of the provided image content:
+
+---
+
+# Levels and Applications of NLP
+
+## Processing Level
+1. **Character & strings level**
+2. **Word token level**
+3. **Sentence level**
+4. **Sentence window level**
+5. **Paragraph & passages level**
+6. **Whole document level**
+7. **Multi-document collection level**
+
+## Tasks and Applications
+1. **Character & strings level**
+   - Word tokenization, sentence boundary detection, gene symbol recognition, text pattern extraction
+
+2. **Word token level**
+   - POS-tagging, parsing, chunking, term extraction, gene mention recognition
+
+3. **Sentence level**
+   - Sentence classification and retrieval and ranking, question answering, automatic summarization
+
+4. **Sentence window level**
+   - Anaphora resolution
+
+5. **Paragraph & passages level**
+   - Detection of rhetorical zones
+
+6. **Whole document level**
+   - Document similarity calculation
+
+7. **Multi-document collection level**
+   - Document clustering, multi-document summarization
+
+---
+
+*source: [researchgate.net/profile/Martin-Krallinger](https://www.researchgate.net/profile/Martin-Krallinger)*
+
+---
+
+*BS-DS IITM (BSCS5002)*
+
+*4 / 27*
+
+# W1Lec4-Levels-Fundamentals.pdf - Page 5
+
+# 1. Phonological Level in NLP
+
+## Definition:
+
+- The phonological level in NLP focuses on the processing of sounds in natural language, including their organization and patterns.
+
+## Significance in NLP:
+
+- Essential for applications like speech recognition and text-to-speech systems.
+- Helps in understanding pronunciation, accent variations and phonetic transcription.
+
+---
+
+*Source: BS-DS IITM (BSCS5002)*
+
+*Page: 5 / 27*
+
+# W1Lec4-Levels-Fundamentals.pdf - Page 6
+
+-DS IITM (BSCS5002)
+
+# 1. Phonological Level in NLP
+
+## Key Components:
+
+- **Phonemes:** The smallest units of sound that distinguish meaning.
+- **Phonetic Transcription:** Representing sounds using phonetic symbols (e.g., IPA).
+- **Prosody:** The rhythm, stress and intonation patterns of speech that convey meaning beyond the words themselves.
+
+6 / 27
+
+
+# W1Lec4-Levels-Fundamentals.pdf - Page 7
+
+```markdown
+# 1. Phonological Level in NLP
+
+## Examples in NLP:
+
+- **Speech Recognition:** Identifying spoken words by analyzing phonemes. For example, recognizing "cat" vs. "bat" based on initial phoneme differentiation.
+
+- **Text-to-Speech (TTS):** Generating spoken language from text while considering prosody for natural-sounding speech. For example, varying intonation in questions vs. statements.
+
+- **Accent Recognition:** Differentiating between various accents (e.g., American vs. British English) by analyzing phonetic patterns.
+
+*Source: BS-DS IITM (BSCS5002)*
+```
+
+# W1Lec4-Levels-Fundamentals.pdf - Page 8
+
+```markdown
+# 2. Morphological Level in NLP
+
+## Definition:
+
+- The morphological level in NLP involves the study of the structure and formation of words, including their internal components.
+
+## Significance in NLP:
+
+- Crucial for tasks such as morphological analysis, lemmatization and stemming and part-of-speech tagging.
+- Helps in understanding word forms, variations and their meanings.
+
+![BS-DS IITM (BSCS5002)](https://example.com/image.png)
+```
+
+Please replace `https://example.com/image.png` with the actual URL of the image if available.
+
+---
+
+This markdown format maintains the structure and content of the original text while ensuring readability and consistency.
+
+# W1Lec4-Levels-Fundamentals.pdf - Page 9
+
+```markdown
+# 2. Morphological Level in NLP
+
+## Key Components:
+
+- **Morphemes**: The smallest meaningful units of language (e.g., prefixes, suffixes, roots).
+
+- **Inflection**: Modifications of words to express different grammatical categories (e.g., tense, number).
+
+- **Derivation**: The process of creating new words by adding prefixes or suffixes (e.g., "happy" -> "unhappy").
+
+---
+
+*Source: BS-DS IITM (BSCS5002)*
+```
+
+# W1Lec4-Levels-Fundamentals.pdf - Page 10
+
+```markdown
+# 2. Morphological Level in NLP
+
+## Examples in NLP:
+
+- **Morphological Analysis:** Analyzing the structure of words (prefixes, suffixes).
+
+- **Lemmatization:** Reducing words to their base or dictionary form. For instance, "better" is lemmatized to "good."
+
+- **Stemming:** Cutting words to their root forms. For example, "running," "runner," and "ran" may all stem to "run."
+
+- **Part-of-Speech Tagging:** Identifying the grammatical category of words based on their morphology. For example, "running" can be tagged as a verb or noun depending on context.
+```
+
+# W1Lec4-Levels-Fundamentals.pdf - Page 11
+
+```markdown
+# 3. Lexical Level in NLP
+
+## Definition:
+
+- The lexical level in NLP deals with the vocabulary of a language, focusing on the meaning and usage of words.
+
+## Significance in NLP:
+
+- Essential for understanding the meaning of text, word relationships and language generation.
+- Important for tasks such as information retrieval, sentiment analysis and machine translation.
+
+*Source: BS-DS IITM (BSCS5002)*
+```
+
+# W1Lec4-Levels-Fundamentals.pdf - Page 12
+
+```markdown
+# 3. Lexical Level in NLP
+
+## Key Components:
+
+- **Tokenization**: The process of breaking text into individual words or tokens.
+
+- **Lexical Semantics**: The study of word meanings, relationships and nuances (synonyms, antonyms, hyponyms).
+
+- **Vocabulary**: The set of words available in a language or a specific domain.
+```
+
+# W1Lec4-Levels-Fundamentals.pdf - Page 13
+
+```markdown
+# 3. Lexical Level in NLP
+
+## Examples in NLP:
+
+- **Tokenization**: The sentence *"The quick brown fox jumps over the lazy dog."* is tokenized into:
+
+  ```
+  [The, quick, brown, fox, jumps, over, the, lazy, dog]
+  ```
+
+- **Lexical Semantics**: Understanding that the word *"bank"* can mean a financial institution or the side of a river based on context.
+
+- **Synonym Detection**: Identifying that *"happy"* and *"joyful"* convey similar meanings in sentiment analysis tasks.
+```
+
+# W1Lec4-Levels-Fundamentals.pdf - Page 14
+
+```markdown
+# 4. Syntactic Level in NLP
+
+**Definition:**
+
+- The syntactic level in NLP involves the arrangement of words to form grammatical sentences and the study of sentence structure.
+
+**Significance in NLP:**
+
+- Crucial for understanding sentence meaning and structure.
+- Important for tasks such as parsing, machine translation and information extraction.
+```
+
+# W1Lec4-Levels-Fundamentals.pdf - Page 15
+
+```markdown
+# 4. Syntactic Level in NLP
+
+## Key Components:
+
+- **Parsing:** The process of analyzing the grammatical structure of a sentence.
+
+- **Constituency Parsing:** Identifying phrases within sentences based on hierarchical structure.
+
+- **Dependency Parsing:** Establishing relationships between words in a sentence and their dependencies.
+
+![BS-DS IITM (BSCS5002)](https://example.com/image)
+
+Page 15 / 27
+```
+
+# W1Lec4-Levels-Fundamentals.pdf - Page 16
+
+```markdown
+# 4. Syntactic Level in NLP
+
+## Examples in NLP:
+
+- **Parsing:** For the sentence *"The cat sat on the mat."*, parsing can show:
+  ```
+  [NP The cat] [VP sat [PP on [NP the mat]]]
+  ```
+
+- **Dependency Parsing:** In the sentence *"She loves him."*, dependencies can be visualized as:
+  ```
+  loves ← She
+  loves → him
+  ```
+
+- **Grammar Rules:** Syntax can be governed by rules such as:
+  - Subject-Verb-Object (SVO) structure in English.
+  - Differences in structure like Subject-Object-Verb (SOV) in Hindi.
+
+*BS-DS IITM (BSCS5002)*
+```
+
+# W1Lec4-Levels-Fundamentals.pdf - Page 17
+
+```markdown
+# 5. Semantic Level in NLP
+
+## Definition:
+
+- The semantic level in NLP deals with the meaning of words, phrases and sentences, focusing on how meaning is constructed and interpreted.
+
+## Significance in NLP:
+
+- Essential for understanding context and resolving ambiguities in language.
+- Important for tasks such as sentiment analysis, information retrieval and machine translation.
+
+_BS-DS IITM (BSCS5002)_
+
+_17 / 27_
+```
+
+# W1Lec4-Levels-Fundamentals.pdf - Page 18
+
+```markdown
+# 5. Semantic Level in NLP
+
+## Key Components:
+
+- **Word Sense Disambiguation (WSD)**: Determining which meaning of a word is used in context.
+
+- **Semantic Role Labeling (SRL)**: Identifying the roles that words play in a sentence (e.g., agent, action, object).
+
+- **Named Entity Recognition (NER)**: Recognizing and classifying entities in text (e.g., names, dates, locations).
+```
+
+# W1Lec4-Levels-Fundamentals.pdf - Page 19
+
+# 5. Semantic Level in NLP
+
+## Examples in NLP:
+
+- **Word Sense Disambiguation**: The word "bank" can mean a financial institution or the side of a river and WSD helps determine the correct meaning based on context (e.g., "He went to the bank to deposit money." vs. "The river bank was eroded.").
+
+- **Semantic Role Labeling**: In the sentence "John gave Mary a book", SRL identifies:
+  - Agent: John
+  - Recipient: Mary
+  - Theme: a book
+
+- **Named Entity Recognition**: In the sentence "Apple is looking at buying U.K. startup for dollar 1 billion", NER identifies:
+  - Organization: Apple
+  - Location: U.K.
+  - Monetary Value: dollar 1 billion
+
+*Source: BS-DS IITM (BSCS5002)*
+
+# W1Lec4-Levels-Fundamentals.pdf - Page 20
+
+```markdown
+# 6. Discourse Level in NLP
+
+## Definition:
+
+- The discourse level in NLP deals with how sentences relate to one another in larger contexts, focusing on coherence and cohesion in language.
+
+## Significance in NLP:
+
+- Essential for understanding context beyond individual sentences.
+- Important for tasks such as text summarization, machine translation and dialogue systems.
+```
+
+# W1Lec4-Levels-Fundamentals.pdf - Page 21
+
+```markdown
+# 6. Discourse Level in NLP
+
+## Key Components:
+
+- **Coherence**: The logical flow of ideas in a text, ensuring that sentences connect meaningfully.
+
+- **Cohesion**: The grammatical and lexical linking within a text that helps maintain the flow.
+
+- **Anaphora Resolution**: Identifying which words refer back to others (e.g., resolving pronouns to their antecedents).
+```
+
+# W1Lec4-Levels-Fundamentals.pdf - Page 22
+
+# 6. Discourse Level in NLP
+
+## Examples in NLP:
+
+- **Coherence:** In the text "She went to the bakery. She bought a loaf of bread.", the ideas are coherent as the second sentence logically follows the first.
+
+- **Cohesion:** The use of linking words such as "however," "therefore," and "moreover" helps create cohesion between sentences.
+
+- **Anaphora Resolution:** In the sentences "John loves his dog. It follows him everywhere.", resolving "it" refers to "his dog".
+
+# W1Lec4-Levels-Fundamentals.pdf - Page 23
+
+# 7. Pragmatic Level in NLP
+
+## Definition:
+
+- The pragmatic level in NLP focuses on how context influences the interpretation of meaning in communication, considering the speaker's intent and the situational context.
+
+## Significance in NLP:
+
+- Essential for understanding implied meanings, sarcasm and conversational dynamics.
+- Important for tasks such as dialogue systems, sentiment analysis and context-aware machine translation.
+
+---
+
+_BS-DS IITF (BSCS5002)_
+
+_23 / 27_
+
+# W1Lec4-Levels-Fundamentals.pdf - Page 24
+
+```markdown
+# 7. Pragmatic Level in NLP
+
+## Key Components:
+
+- **Speech Acts:** Actions performed via utterances (e.g., requests, promises, assertions).
+
+- **Deixis:** Words and phrases (like pronouns and demonstratives) that require contextual information to convey meaning (e.g., "here," "you").
+
+- **Contextual Understanding:** The ability to interpret meaning based on situational context and background knowledge.
+
+BS-DS IITM (BSCS5002)
+
+24 / 27
+```
+
+# W1Lec4-Levels-Fundamentals.pdf - Page 25
+
+# 7. Pragmatic Level in NLP
+
+## Examples in NLP:
+
+- **Speech Acts:** The phrase "Can you pass the salt?" is a request, not just a question about capability.
+- **Deixis:** In the sentence "I will meet you here tomorrow," the interpretation of "here" and "tomorrow" depends on the speaker's location and the current day.
+- **Contextual Understanding:** In a conversation where one person says, "It's cold in here," they may be implying a request to close a window rather than just stating a fact.
+
+---
+
+Source: BSCS 5002
+
+# W1Lec4-Levels-Fundamentals.pdf - Page 26
+
+-DS IITM (BSCS5002)
+
+# Conclusion
+
+- The levels of language processing in NLP are fundamental for interpreting human language effectively.
+- Each level contributes uniquely in NLP applications.
+
+## Levels of Language Processing
+
+### Phonological Level:
+- **Focus:** sounds and forms
+- **Essential for:** speech recognition and text-to-speech systems
+
+### Morphological, Lexical and Syntactic Levels:
+- **Deal with:** meanings and grammatical relationships
+- **Crucial for:** parsing and information extraction
+
+### Semantic and Discourse Levels:
+- **Enhance understanding of:** meaning beyond sentences
+- **Vital for:** machine translation and dialogue systems
+
+### Pragmatic Level:
+- **Emphasizes:** context in communication
+- **Relevant for:** conversational agents and sentiment analysis
+
+Page number: 26 / 27
+```
+
+# W1Lec4-Levels-Fundamentals.pdf - Page 27
+
+# Conclusion
+
+- Integrating insights from these levels leads to more accurate and effective interactions between humans and machines.
+- Advancements in these processing levels will enhance NLP capabilities, making them adept at understanding and generating language contextually and semantically.
+
+---
+
+**Bottom Note:**
+- BS-DS IITM (BSCS5002)
+- Page Number: 27 of 27
+
