@@ -53,7 +53,7 @@ Attention mechanisms address the limitations of traditional encoder-decoder RNNs
 
 - The context vector `ct` for output `yt` at time step `t` is computed as a weighted sum of the encoder hidden states:
 
-$$ct = \sum_{i=1}^{n} \alpha_{ti} h_i$$
+$$c_t = \sum_{i=1}^{n} \alpha_{ti} h_i$$
 
 where:
 

@@ -1,612 +1,466 @@
 ---
-title: Natural Language Processing (NLP) Notes
+title: Introduction to NLP
 ---
-# Natural Language Processing
 
-## Overview
+# Natural Language Processing Tasks
 
-Natural Language Processing (NLP) is a subfield of artificial intelligence (AI) that focuses on the interaction between computers and humans through natural language. The primary goal of NLP is to enable computers to understand, interpret, and generate human language.
+## Core Technologies
 
-## Key Concepts
+* **Language Modeling:**  Predicting the probability of a sequence of words.  Used in speech recognition, machine translation, and text generation.  A language model assigns a probability $P(w_1, w_2, ..., w_n)$ to a sequence of $n$ words.  N-gram models estimate this probability using the frequencies of word sequences in a corpus.  Neural language models use neural networks to learn more complex relationships between words.
 
-*   **Tokenization**: The process of breaking down a text into individual units, such as words or sentences.
-*   **Parsing**: The process of analyzing the grammatical structure of a sentence.
-*   **Semantic Analysis**: The process of understanding the meaning of a sentence.
-*   **Syntax Analysis**: The process of understanding the grammatical structure of a sentence.
-*   **Speech Recognition**: The process of converting spoken language into text.
+* **Part-of-Speech (POS) Tagging:** Assigning grammatical tags (e.g., noun, verb, adjective) to each word in a sentence.  Essential for syntactic parsing and other downstream tasks.  Accuracy is measured by comparing the predicted tags to a manually tagged corpus.
+
+* **Syntactic Parsing:** Analyzing the grammatical structure of a sentence to determine its syntactic relationships, often represented as parse trees.  Two main types: constituency parsing (grouping words into phrases) and dependency parsing (identifying relationships between individual words).
+
+* **Named Entity Recognition (NER):** Identifying and classifying named entities (e.g., person, organization, location, date) in text.  Crucial for information extraction and knowledge graph construction.  Evaluation metrics include precision, recall, and F1-score.
+
+* **Coreference Resolution:** Determining which mentions in a text refer to the same entity. For example, identifying that "he" and "John" refer to the same person. Improves text understanding and facilitates tasks like summarization and question answering.
+
+* **Word Sense Disambiguation (WSD):** Identifying the correct meaning of a word based on its context.  For example, determining whether "bank" refers to a financial institution or a river bank.  A challenging task due to the prevalence of polysemy in language.
+
+* **Semantic Role Labeling (SRL):**  Identifying the semantic roles of words in a sentence, such as agent, patient, instrument, and location.  This provides a deeper understanding of the meaning of a sentence beyond its syntactic structure.
+
 
 ## Applications
 
-*   **Sentiment Analysis**: Determining the sentiment or emotion behind a piece of text.
-*   **Machine Translation**: Automatically translating text from one language to another.
-*   **Chatbots**: Automated conversational agents that interact with users in natural language.
-*   **Text Summarization**: Automatically generating a summary of a longer text.
-*   **Named Entity Recognition**: Identifying and categorizing key information in text.
+* **Machine Translation (MT):** Automatically translating text from one language to another.  Statistical MT uses parallel corpora to learn translation probabilities. Neural MT uses neural networks to learn complex mappings between languages.
 
-## Techniques and Algorithms
+* **Information Retrieval (IR):**  Retrieving relevant documents from a collection based on a user's query.  Techniques include keyword search, boolean retrieval, and vector space models.  Evaluation metrics include precision and recall.
 
-*   **Rule-Based Systems**: Use hand-crafted rules to parse and understand text.
-*   **Statistical Methods**: Use statistical models to predict linguistic properties.
-*   **Deep Learning**: Uses neural networks to model complex linguistic patterns.
+* **Question Answering (QA):** Answering questions posed in natural language.  Requires understanding the question, finding relevant information, and generating an answer.
 
-## Challenges
+* **Dialogue Systems:** Building systems that can engage in conversations with humans.  Challenges include understanding user intent, managing dialogue flow, and generating appropriate responses.
 
-*   **Ambiguity**: Multiple meanings of words and phrases.
-*   **Context Dependency**: Understanding the context in which a sentence is used.
-*   **Noisy Data**: Errors and inconsistencies in text data.
+* **Information Extraction (IE):** Extracting structured information from unstructured text.  Techniques include named entity recognition, relation extraction, and event extraction.
 
-# Levels of NLP
+* **Summarization:**  Creating concise summaries of longer texts.  Approaches include extractive summarization (selecting important sentences) and abstractive summarization (generating new sentences).
 
-### Level 1: Phonology
+* **Sentiment Analysis:** Determining the emotional tone of a text, such as positive, negative, or neutral.  Used in market research, social media monitoring, and customer service.
 
-- **Interpreting speech sounds**: Phonology is the study of speech sounds and their relationship to language.
+# Why NLP is hard?
 
-### Level 2: Morphology
+## Ambiguity
+Natural language is inherently ambiguous, meaning that words, phrases, and sentences can have multiple interpretations. This makes it difficult for computers to determine the correct meaning.  Different types of ambiguity compound this challenge:
 
-- **Interpreting componential nature of words**: Morphology is the study of words and their internal structure, including the relationships between morphemes.
+* **Lexical Ambiguity:** Words can have multiple meanings (homonymy) or multiple senses (polysemy). For example, "bank" can refer to a financial institution or a river bank.  WSD (Word Sense Disambiguation) methods aim to resolve these by considering the surrounding context.  A simplified probabilistic approach could involve calculating $P(sense_i|context)$, where $sense_i$ is a particular meaning of the word.
 
-### Level 3: Lexical
+* **Syntactic Ambiguity:** The grammatical structure of a sentence can lead to different interpretations.  For instance, "I saw the man with the telescope" could mean the man possessed the telescope or the speaker used the telescope to see the man.  Parsing algorithms try to create the most likely parse tree, often employing probabilistic context-free grammars (PCFGs).  A PCFG assigns probabilities to different parse tree structures: $P(tree|sentence)$.
 
-- **Interpreting the meanings of individual words**: Lexical analysis involves understanding the meanings of individual words, including their semantic and syntactic properties.
+* **Semantic Ambiguity:** Even with a clear syntactic structure, sentences can have multiple meanings.  "Every child loves some movie" can mean each child loves a different movie or there's one movie loved by all.  Formal semantic representations, like lambda calculus, can help disambiguate, but mapping natural language to these representations is challenging.
 
-### Level 4: Syntactic
+* **Pragmatic Ambiguity:** The intended meaning of a sentence can depend heavily on the context of the conversation or the speaker's intentions.  "Can you pass the salt?" is typically a request, not a question about ability.  Modeling pragmatics often requires understanding world knowledge and social cues, which are difficult to encode computationally.  For example, sarcasm detection might use sentiment analysis in conjunction with contextual cues, but there's no foolproof formula.
 
-- **Uncovering the grammatical structures of sentences**: Syntactic analysis focuses on the grammatical structure of sentences, including the relationships between words and phrases.
+* **Referential Ambiguity:** Pronouns and other referring expressions can be ambiguous, especially in longer texts.  "He went to the store after he finished his homework." Who went to the store?  Coreference resolution aims to link these expressions to their intended referents.
 
-### Level 5: Semantic
 
-- **Determining meanings of sentences by focusing on word-level meanings**: Semantic analysis involves understanding the meaning of sentences by analyzing the meanings of individual words and their relationships.
+## Linguistic Diversity
 
-### Level 6: Discourse
+The vast number of languages, each with unique grammatical rules and structures, presents a major hurdle.  Directly porting NLP models from one language to another is rarely effective.
 
-- **Focusing on properties of texts as a whole and making connections between sentences**: Discourse analysis examines the properties of texts as a whole, including the relationships between sentences and the context in which they are used.
+* **Morphological Variation:** Languages differ in how words are formed.  Agglutinative languages (e.g., Turkish) combine multiple morphemes into single words, requiring complex morphological analysis.  This complexity makes tasks like stemming and lemmatization more challenging.  Computational morphology uses finite-state transducers (FSTs) to model these complex word formation processes.
 
-### Level 7: Pragmatic
+* **Syntactic Variation:** Word order and grammatical relations vary significantly across languages.  Subject-Verb-Object (SVO) is common in English, while Subject-Object-Verb (SOV) is common in others.  Parsing and machine translation need to adapt to these variations.  Treebanks, annotated with syntactic structure, are crucial for training parsers for different languages.
 
-- **Understanding purposeful use of language in situations**: Pragmatic analysis involves understanding the purposeful use of language in specific situations, including the context, intentions, and expectations of the communication.
+* **Semantic Variation:**  Languages can conceptualize and express the same meaning in different ways.  Color terms, spatial relations, and even basic concepts can have subtle variations. Cross-lingual word embeddings try to capture these semantic relationships across languages, but perfect alignment is difficult.  One approach uses bilingual dictionaries or parallel corpora to align embedding spaces.
 
-## Processing Levels vs. Tasks and Applications
 
-### Processing Levels
+## Data Sparsity
 
-*   **Character & strings level**: This level involves processing individual characters and strings of text.
-*   **Word token level**: This level involves processing words as individual tokens, often including tasks like tokenization and part-of-speech tagging.
-*   **Sentence level**: This level involves processing sentences as individual units, often including tasks like sentence boundary detection and sentence classification.
-*   **Sentence window level**: This level involves processing a window of surrounding sentences, often used in tasks like named entity recognition and dependency parsing.
-*   **Paragraph & passages level**: This level involves processing larger units of text, often including tasks like text summarization and text classification.
-*   **Whole document level**: This level involves processing entire documents, often including tasks like document similarity calculation and document clustering.
-*   **Multi-document collection level**: This level involves processing multiple documents, often including tasks like multi-document summarization and document ranking.
+Building robust statistical NLP models requires large amounts of annotated data. Many languages lack these resources, making it difficult to develop high-performing models.  This "low-resource" scenario forces researchers to explore techniques like:
 
-### Tasks and Applications
+* **Cross-lingual Transfer Learning:** Leveraging resources from high-resource languages to improve performance on low-resource ones.  Multilingual embeddings or transferring model parameters are common strategies.  Success depends on the relatedness of the languages and the specific task.
 
-*   **Word tokenization, sentence boundary detection, gene symbol recognition, text pattern extraction**: These tasks involve processing individual words, sentences, and larger units of text to extract meaningful information.
-*   **POS-tagging, parsing, chunking, term extraction, gene mention recognition**: These tasks involve identifying the parts of speech, grammatical structure, and semantic information in text.
-*   **Sentence classification and retrieval and ranking, question answering, automatic summarization**: These tasks involve classifying sentences, retrieving relevant information, and generating summaries of text.
-*   **Anaphora resolution**: This task involves identifying and resolving references to earlier mentions in text.
-*   **Detection of rhetorical zones**: This task involves identifying the structure and organization of text, including the use of rhetorical devices.
-*   **Document similarity calculation**: This task involves measuring the similarity between documents.
-*   **Document clustering, multi-document summarization**: These tasks involve grouping similar documents together and generating summaries of multiple documents.
+* **Unsupervised and Semi-supervised Learning:** Making the most of limited labeled data by incorporating unlabeled data. Techniques like self-training or using large language models can be beneficial.
+
+
+## Variability and Change
+
+Language is constantly evolving, with new words, slang, and expressions emerging continuously.  This dynamic nature makes it difficult for NLP systems to stay up-to-date.
+
+* **Dialectal Variation:**  Even within a single language, there are regional and social dialects with different pronunciation, vocabulary, and grammar. NLP models need to be robust enough to handle these variations.  Adaptation techniques might involve fine-tuning on dialect-specific data.
+
+* **Informal Language:** Social media and online communication introduce informal language, abbreviations, and emojis, posing new challenges for NLP systems.  Handling this requires models trained on informal text and specialized lexicons.
+
+
+## Computational Complexity
+
+Many NLP tasks are computationally intensive, particularly those involving deep learning models like transformers.  Training and deploying these models requires significant computational resources.  Optimizations and efficient hardware are necessary for practical applications.  For example, model compression techniques can reduce the size and computational requirements of large models.
 
 # Ambiguity in Natural Language
 
 ## Types of Ambiguity
 
-*   **Lexical Ambiguity**: A type of ambiguity where words have multiple meanings or senses.
-    - **Homonyms**: Words that are spelled and/or pronounced the same but have different meanings.
-        - Example: bank (financial institution) vs. bank (slope or incline)
-    - **Polysemy**: Words that have multiple related meanings.
-        - Example: spring (season) vs. spring (coiled metal object that stores energy)
+- **Lexical Ambiguity:**  Arises from the multiple meanings of individual words.
+    - **Homonymy:** Words with identical spelling and pronunciation but distinct unrelated meanings (e.g., "bat" - a nocturnal flying mammal vs. a piece of equipment used in baseball).  Consider the sentence:  "I saw a bat flying in the cave."  Without further context, the meaning of "bat" is ambiguous.
+    - **Polysemy:** Words with multiple related meanings (e.g., "bright" - shining with light vs. intelligent). The sentence "The student has a bright future" demonstrates polysemy; "bright" refers to intelligence and promise, not literal light emission.
+    - **Homographs:** Words with the same spelling but different pronunciations and meanings (e.g.,  "lead" - to guide/ /liːd/ vs. a metal /lɛd/).  The sentence, "The lead singer had a heavy lead apron for the x-ray" illustrates homographs with different pronunciations influencing meaning.
+    - **Homophones:** Words with the same pronunciation but different spellings and meanings (e.g., "to," "too," and "two").  "They went to the store to buy two apples" uses homophones, identifiable only through distinct spellings.
 
-## Syntactic Ambiguity
+- **Syntactic Ambiguity:**  Stems from the different ways words can be grammatically arranged in a sentence.
+    - **Prepositional Phrase Attachment:** Uncertainty in associating a prepositional phrase with a noun phrase or verb phrase (e.g., "I saw the man with the telescope").  Mathematically, two parse trees, $T_1$ and $T_2$, could exist where in $T_1$, the prepositional phrase modifies the verb (saw with the telescope), and in $T_2$ it modifies the noun (the man with the telescope).
+    - **Coordination Ambiguity:**  Ambiguity introduced by coordinating conjunctions like "and" and "or" (e.g., "old men and women"). Does this refer to both old men and old women, or old men and all women?  Boolean logic could represent the interpretations:  $Old(men) \wedge Old(women)$  vs. $Old(men) \wedge Women$.
 
-*   **Attachment**: Ambiguity in how words or phrases are attached to a sentence.
-    - Example: "I saw a man with a telescope." (the man has a telescope or the man is with someone who has a telescope)
-*   **Coordination**: Ambiguity in how words or phrases are coordinated in a sentence.
-    - Example: "I want to eat a sandwich and go for a walk." (eating a sandwich and going for a walk are two separate activities or eating a sandwich and going for a walk are two parts of a single activity)
+- **Semantic Ambiguity:** Concerns multiple possible meanings derived from word or phrase interpretations, even with a clear syntactic structure.
+    - **Quantifier Scope Ambiguity:** Uncertainty regarding the scope of quantifiers like "all," "some," or "every" (e.g., "Every student reads some books").  Does this mean there exists a set of books read by all students,  $\exists B (\forall S \in Students, Reads(S,B))$, or that each student reads a potentially different set of books, $\forall S \in Students, \exists B (Reads(S,B))$?
+    - **Anaphoric Ambiguity:**  Difficulty determining the referent of pronouns or other anaphoric expressions (e.g., "John told Peter he was happy"). Does "he" refer to John or Peter?
 
-## Semantic Ambiguity
+- **Pragmatic Ambiguity:**  Deals with meaning reliant on context, speaker intent, and world knowledge.
+    - **Deictic Ambiguity:** Uncertainty in interpreting words dependent on the speaker's context, such as "here," "there," "now," or "you" (e.g., "Meet me here tomorrow"). The meaning requires specific spatial and temporal information.
+    - **Speech Act Ambiguity:** Difficulty discerning the intent behind an utterance (e.g., "Can you close the window?").  This could be a question about ability or a polite request.
+    - **Irony and Sarcasm:** Intended meaning differs from literal meaning, requiring understanding of tone and context (e.g., "Oh great, another meeting!").
 
-*   **Quantifier Scope**: Ambiguity in how quantifiers (words like "all" or "some") apply to a sentence.
-    - Example: "Every child loves some movie." (every child loves at least one movie or every child loves the same movie)
-*   **Anaphoric**: Ambiguity in how words or phrases refer back to something in the sentence.
-    - Example: "I have a book on my desk. I need to read it and then my friend will read it." (the book on my desk or my friend's book)
 
-## Pragmatic Ambiguity
+# Challenges in Multilingual NLP
 
-*   **Deictic**: Ambiguity in how words or phrases refer to context-dependent information.
-    - Example: "I'm going to the store. Do you want to come with me?" (the store that is being referred to is not specified)
-*   **Speech Act**: Ambiguity in how words or phrases convey a particular meaning or intention.
-    - Example: "I'm so hungry I could eat a horse." (the speaker is actually hungry or the speaker is using an idiomatic expression)
-*   **Irony/Sarcasm**: Ambiguity in how words or phrases convey a meaning that is opposite of their literal meaning.
-    - Example: "What a beautiful day!" (the speaker is actually referring to the weather being bad)
+- **Data Sparsity:**  Many languages lack large, annotated datasets necessary for training robust NLP models. This leads to difficulties in tasks like machine translation, part-of-speech tagging, and named entity recognition. The distribution of available data often follows a power law, with a few high-resource languages dominating and a long tail of low-resource languages. This can be represented as $P(n) \propto n^{-\gamma}$, where $P(n)$ is the probability of observing a language with $n$ data points, and $\gamma$ is the power law exponent.
 
-# Linguistic Diversity
+- **Morphological Complexity:** Languages exhibit varying levels of morphological complexity. Agglutinative languages (e.g., Turkish, Finnish) combine multiple morphemes into single words, creating a large vocabulary and making it difficult to model word formation and inflection.  Consider a word with $m$ possible morphemes, each with an average frequency $f$. The number of potential word forms can explode to $f^m$, posing challenges for statistical models.
 
-## Introduction
+- **Syntactic Divergence:**  Languages differ significantly in their syntactic structures.  Word order, for example, can vary considerably (e.g., Subject-Verb-Object in English vs. Subject-Object-Verb in Hindi).  Creating models that generalize across diverse syntactic structures is a significant challenge.  Cross-lingual parsing, where a parser trained on one language is applied to another, often suffers from reduced performance due to these differences.  Let $A$ be the accuracy of a parser on language $L_1$, and let $\delta$ be the syntactic divergence between $L_1$ and $L_2$. The expected accuracy on $L_2$ might be $A - k\delta$, where $k$ is a constant representing the impact of divergence on performance.
 
-Linguistic diversity refers to the wide range of languages, dialects, and cultural nuances that exist within human communication. In NLP, linguistic diversity presents a significant challenge, as algorithms must be able to handle and analyze multiple languages, dialects, and cultural contexts.
+- **Semantic Variation:**  Even when languages share similar concepts, their semantic representations can differ.  Word sense disambiguation becomes more complex in a multilingual setting, as a single word can have different meanings or nuances across languages.  Cross-lingual word embeddings aim to capture semantic similarity across languages, but aligning these embeddings effectively remains a challenge.
 
-## Language Variations
+- **Lack of Linguistic Resources:**  For many languages, essential linguistic resources like annotated corpora, dictionaries, and grammatical rules are scarce or non-existent. This hinders the development of basic NLP tools and techniques, further exacerbating the data sparsity problem.  Building these resources manually is time-consuming and expensive, requiring expertise in linguistics and computational methods.
 
-Language variations refer to differences in vocabulary, grammar, and syntax between languages or dialects. For example, the English language has multiple dialects, such as American English, British English, and African American Vernacular English. NLP algorithms must be able to recognize and accommodate these variations.
+- **Cross-lingual Transfer Learning:** While transfer learning, where knowledge learned from one language is transferred to another, has shown promise, it faces challenges in effectively adapting to languages with different characteristics.  Negative transfer, where transferring knowledge actually hurts performance, can occur when the source and target languages are too dissimilar.  Finding optimal strategies for cross-lingual transfer learning remains an active area of research.
 
-## Cultural Nuances
+# Indian Language Data and Resources
 
-Cultural nuances refer to the subtle differences in meaning and context that arise from cultural background and experience. For instance, the phrase "break a leg" can be interpreted as a blessing or a curse, depending on the cultural context. NLP algorithms must be able to recognize and accommodate these nuances.
+- Significant disparity in data availability between Indian languages and resource-rich languages like English.
+- Data scarcity hinders development of robust NLP tools for many Indian languages.
+- Availability of resources like parallel corpora, annotated datasets, and linguistic tools varies greatly across languages.
+- Initiatives to create and share resources for low-resource Indian languages are underway, but challenges remain.
+- Code-switching (mixing languages in conversation) is common in India and presents a unique challenge for NLP models.  This requires specialized datasets and techniques.
+- Different scripts used for writing various Indian languages require specific processing methods for tasks like tokenization and transliteration.
+- Dialectal variations within Indian languages add complexity to data collection and model training.  Models might need to be trained on data from multiple dialects or adapted for specific dialects.
+- Oral languages with limited written resources require different approaches for NLP tasks.  Speech recognition and text-to-speech systems are particularly important for these languages.
+- Development of language-specific tools and resources, such as morphological analyzers and part-of-speech taggers, is crucial for advancing NLP in Indian languages.
+- Measuring data sparsity using metrics like type-token ratio (TTR) can help assess the challenges posed by different languages. TTR = $\frac{\text{Number of unique words}}{\text{Total number of words}}$. A higher TTR might indicate more data is needed for effective language modeling.
+-  Consider the conditional probability of a word $w$ given its context $c$, $P(w|c)$. In resource-rich languages, large datasets enable reliable estimation of this probability.  However, in low-resource scenarios, $P(w|c)$ becomes difficult to estimate accurately, hindering tasks like language modeling and machine translation.
+-  Resource availability also impacts the performance of downstream tasks. For example,  if the accuracy of a Part-of-Speech tagger is low due to limited training data, the performance of a subsequent task like dependency parsing will also be negatively impacted.
+-  Cross-lingual transfer learning, where knowledge from a high-resource language is transferred to a low-resource language, is a promising technique for mitigating data scarcity.
 
-## Sapir-Whorf Hypothesis
 
-The Sapir-Whorf Hypothesis suggests that the language we speak both affects and reflects our view of the world. This means that different languages may have different ways of describing the world, which can impact how speakers perceive reality.
+# Language Variability Across Speakers
 
-## Color Names
+Besides formal language, variations exist across speakers due to geographical, social, and individual factors. These variations are captured in dialects, sociolects, and idiolects and add to the complexity of NLP.
 
-Different languages have varying numbers of color names. For example:
+## Dialects
 
-*   Russian has relatively few color names, while Japanese has hundreds.
-*   Multilingual individuals may have difficulty translating color names between languages, as the same color name may have different meanings or connotations.
+Dialects are regional variations of a language. Differences can appear in several linguistic levels:
 
-## Multiword Expressions and Metaphors
+* **Phonetics and Phonology:**  Variations in pronunciation, intonation, and the sets of sounds used (phonemes).  For example, the same phoneme /r/ can be realized differently in different dialects.
+* **Morphology:**  Different morphemes (smallest meaningful units) or different rules for combining them may exist. For example, past tense formation can vary across dialects (e.g., "climbed" vs. "clumb").
+* **Syntax:** Word order and grammatical structures might differ.  A sentence grammatically correct in one dialect might not be in another.
+* **Lexicon:** Different words or meanings for the same word can exist (e.g., "soda" vs. "pop" vs. "soft drink").  This impacts vocabulary size and requires dialect-specific lexicons.
 
-Multiword expressions, such as idioms and phrasal verbs, can be culturally specific and challenging to translate. For instance:
+Dialects form a continuum, and variations exist not only geographically, with $d$ representing the geographical distance and $v$  a measure of language variation possibly correlating with $d$, but also based on other sociolinguistic parameters (age, gender, etc.) with say  $v_a$, $v_g$ variations due to age, gender respectively.
+$$
+v = f(d, other\_parameters)
+$$
 
-*   The expression "it's raining cats and dogs" is a common English idiom, but its equivalent in other languages may not convey the same meaning.
-*   Metaphors, such as "love is a journey," can also be culturally specific and require careful consideration when translating.
 
-# Low-Resource NLP
 
-## Introduction
+## Sociolects
 
-Low-resource NLP refers to the challenges and opportunities that arise when dealing with languages or domains that have limited or no existing resources. This can include languages with few or no machine translation systems, limited text data, or a lack of annotated datasets.
+Sociolects are variations based on social groups (age, gender, ethnicity, social class, etc.).  Factors influencing sociolects include:
 
-## Data Domains
+* **Social Class:**  Different social classes may use distinct vocabulary, pronunciation, and grammatical structures.  Certain linguistic features can become associated with prestige or lack thereof.
+* **Age:** Language use evolves across generations, leading to differences in slang, vocabulary, and even grammar. Younger generations often introduce new terms and expressions.
+* **Ethnicity:**  Ethnic groups may retain linguistic features from their heritage languages, influencing their use of the dominant language.  This can create distinct ethnolects.
+* **Gender:**  Studies have identified differences in language use between genders, although these are often subtle and complex.  These may include variations in intonation, vocabulary choice, and conversational styles.
+* **Occupation/Jargon:** Professional groups often develop specialized jargon or technical language related to their field.  This allows for precise communication within the group but can create barriers for outsiders.
 
-Low-resource NLP often involves working with diverse data domains, such as:
+## Idiolects
 
-*   **Bible**: A rich source of text data with many languages and translations.
-*   **Parliamentary proceedings**: Official transcripts of government meetings, often available in multiple languages.
-*   **Newswire**: News articles from various sources, providing a wealth of information on current events.
-*   **Wikipedia**: A vast online encyclopedia with articles in many languages, covering a wide range of topics.
-*   **Novels**: Fictional works that can provide insight into language usage and cultural context.
-*   **TEDtalks**: Public talks on various subjects, often with transcripts available.
-*   **Telephone conversations**: Real-world conversations that can be used to train dialogue systems.
-*   **Twitter conversations**: Social media interactions that can provide valuable insights into language usage and trends.
+An idiolect is the unique language variety of an individual. It's a combination of influences from all other linguistic variations plus individual characteristics:
 
-## World Languages
+* **Personal Experiences:**  An individual's experiences shape their vocabulary and language use. Frequent exposure to certain domains or topics leads to specialized vocabulary.
+* **Personality:**  Personality traits can influence language style. Extroverted individuals might use more elaborate language compared to introverted ones.
+* **Speech Habits:** Individuals develop unique speech patterns, including voice quality, intonation, and use of filler words (e.g., "um," "like").
+* **Physical/Cognitive Factors:** Physical and cognitive differences can impact speech production and comprehension, leading to variations in pronunciation and articulation.
 
-Low-resource NLP involves working with a wide range of world languages, including:
 
-*   **English**: A widely spoken language with many resources available.
-*   **French**: A official language in several countries and a popular language for international communication.
-*   **Germanic languages**: A family of languages that includes English, German, Dutch, and others.
-*   **Chinese**: A language with a vast number of dialects and a growing presence in international communication.
-*   **Arabic**: An official language in several countries and an important language for international communication.
-*   **Hindi**: A widely spoken language in India and a popular language for international communication.
-*   **Czech**: A language spoken in the Czech Republic and a popular language for international communication.
-*   **Hebrew**: A language spoken in Israel and a popular language for international communication.
-*   **6K World Languages**: Thousands of languages that are not widely spoken or resourced, presenting significant challenges for NLP.
+These variations (dialects, sociolects, idiolects) represent significant challenges for NLP systems, particularly in tasks like speech recognition, natural language understanding, and information retrieval. Adapting to this speaker variability requires robust models and diverse training data that encompass a wide range of language variations.
 
-# NLP Technologies/Applications
+# Levels of Language Processing in NLP
 
-## Language Categories
+## 1. Phonological Level
+- **Focus:** The sound structure of language.  Deals with phonemes (smallest units of sound), phonetics (physical production and perception of speech sounds), and phonotactics (rules governing sound combinations).
+- **NLP Tasks:** Speech recognition, text-to-speech synthesis, pronunciation modeling, and accent detection.
+- **Example:** Distinguishing between /kæt/ (cat) and /bæt/ (bat) relies on recognizing the distinct phonemes /k/ and /b/.  Prosody (rhythm, stress, intonation) also plays a role:  "You're going?" (question) vs. "You're going." (statement).
 
-Low-resource NLP involves working with various language categories, including:
+## 2. Morphological Level
+- **Focus:** The internal structure of words. Analyzes morphemes (smallest meaningful units), including roots, prefixes, suffixes, and inflections.
+- **NLP Tasks:** Morphological analysis (breaking words into morphemes), stemming (reducing words to root forms), lemmatization (finding dictionary forms), part-of-speech tagging.
+- **Example:**  "Unbreakable" comprises three morphemes: "un-" (prefix), "break" (root), and "-able" (suffix).  Lemmatizing "running" yields "run."
 
-*   **Some European Languages**: Languages such as French, German, and Italian.
-*   **UN Languages**: Languages such as Spanish, Chinese, and Arabic.
-*   **Medium-Resourced Languages**: Languages such as Hindi, Czech, and Hebrew, which have some resources available.
-*   **Resource-Poor Languages**: Thousands of languages that have limited or no resources available.
+## 3. Lexical Level
+- **Focus:** Individual words and their meanings.  Considers lexicon (vocabulary of a language) and lexical semantics (meaning relations between words).
+- **NLP Tasks:** Tokenization (splitting text into words), lexical analysis (identifying word boundaries and types), word sense disambiguation (determining correct meaning of polysemous words), synonym and antonym detection.
+- **Example:**  Resolving the ambiguity of "bank" (financial institution vs. river bank) based on surrounding words.
 
-## NLP Technologies/Applications
+## 4. Syntactic Level
+- **Focus:** How words combine to form phrases and sentences.  Deals with syntax (grammatical rules governing sentence structure) and parsing (analyzing sentence structure).
+- **NLP Tasks:** Parsing (creating parse trees to represent sentence structure), constituency parsing (grouping words into phrases), dependency parsing (identifying relationships between words), grammatical error detection.
+- **Example:**  Analyzing "The cat sat on the mat" to determine the subject ("cat"), verb ("sat"), and prepositional phrase ("on the mat").  Dependency parsing would show "sat" as the root, with "cat" as the subject and "mat" as the object of the preposition "on."
 
-Low-resource NLP involves applying various NLP technologies and applications, including:
+## 5. Semantic Level
+- **Focus:** The meaning of phrases and sentences.  Deals with semantic roles (roles words play in a sentence) and logical representations of sentence meaning.
+- **NLP Tasks:** Semantic role labeling, named entity recognition, semantic parsing (converting sentences into formal logical representations), relationship extraction.
+- **Example:** Identifying "John" as the agent and "Mary" as the recipient in "John gave Mary a book."
 
-*   **ASR (Automatic Speech Recognition)**: Technology that enables computers to recognize and transcribe spoken language.
-*   **MT (Machine Translation)**: Technology that enables computers to translate text from one language to another.
-*   **Dialogue**: Technology that enables computers to engage in conversations with humans.
-*   **QA (Question Answering)**: Technology that enables computers to answer questions based on text data.
-*   **Summarization**: Technology that enables computers to summarize long pieces of text into shorter summaries.
-*   **SRL (Semantic Role Labeling)**: Technology that enables computers to identify the roles played by entities in a sentence.
-*   **Coreference**: Technology that enables computers to identify the relationships between entities in a sentence.
-*   **Parsing**: Technology that enables computers to analyze the grammatical structure of a sentence.
-*   **NER (Named Entity Recognition)**: Technology that enables computers to identify and categorize named entities in text.
-*   **POS Tagging (Part-Of-Speech Tagging)**: Technology that enables computers to identify the parts of speech in a sentence.
-*   **Lemmatization**: Technology that enables computers to reduce words to their base form.
+## 6. Discourse Level
+- **Focus:** How sentences connect to form larger units of text (e.g., paragraphs, documents).  Considers discourse structure, coherence, and cohesion.
+- **NLP Tasks:** Anaphora resolution (pronoun resolution), text summarization, discourse parsing (analyzing discourse structure), coherence and cohesion analysis.
+- **Example:**  Resolving "he" to "John" in "John went to the store. He bought some milk."
 
-## Diagram
+## 7. Pragmatic Level
+- **Focus:**  How language is used in context.  Considers speaker intent, world knowledge, and the effects of utterances.
+- **NLP Tasks:** Speech act recognition (identifying the intent behind an utterance), sarcasm and irony detection, dialogue management.
+- **Example:** Recognizing "Can you pass the salt?" as a request, not a question about ability.  Interpreting "Great weather, isn't it?" as sarcastic if said during a downpour.
 
-| Language Categories                                         | NLP Technologies/Applications       |
-|------------------------------------------------------------|-----------------------------------|
-| **Some European Languages**: French, German, Italian      | ASR                               |
-| **UN Languages**: Spanish, Chinese, Arabic                 | MT                                |
-| **Medium-Resourced Languages**: Hindi, Czech, Hebrew       | Dialogue                          |
-| **Resource-Poor Languages**: Thousands of languages         | QA                                |
-|                                                            | Summarization                     |
-|                                                            | ...                               |
-|                                                            | SRL                               |
-|                                                            | Coreference                       |
-|                                                            | Parsing                           |
-|                                                            | NER                               |
-|                                                            | POS Tagging                       |
-|                                                            | Lemmatization                     |
+# Levels and Applications of NLP
 
-# Phonological Level in NLP
+This section details the various levels at which Natural Language Processing (NLP) operates and the corresponding tasks and applications at each level.  The levels range from the smallest units of characters to large collections of documents.
 
-## Phonemes
+## 1. Character & String Level
 
-- **Definition**: Phonemes are the smallest units of sound that distinguish meaning in speech.
-- **Examples**: In English, the words "pat" and "bat" differ only in their final phoneme (/t/ vs. /b/).
-- **Importance**: Phonemes are essential in NLP as they provide a foundation for speech recognition, synthesis, and analysis.
+This level deals with individual characters and strings of characters.  It forms the foundation for higher-level NLP tasks.
 
-## Phonetic Transcription
+* **Tasks/Applications:**
+    * **Word Tokenization:**  Segmenting text into individual words (tokens). Example:  "This is a sentence." becomes ["This", "is", "a", "sentence", "."].  Tokenization can be complex due to ambiguities like hyphenated words or special characters.
+    * **Sentence Boundary Detection:** Identifying the end of sentences, crucial for parsing and understanding. Challenges include abbreviations (e.g., "Dr.") and sentence fragments.
+    * **Gene Symbol Recognition:** In bioinformatics, identifying specific gene symbols within text.  This requires specialized knowledge of gene nomenclature.
+    * **Text Pattern Extraction:**  Identifying and extracting specific patterns within text, like email addresses, phone numbers, or other structured information using regular expressions.
 
-- **Definition**: Phonetic transcription represents sounds using phonetic symbols (e.g., the International Phonetic Alphabet, IPA).
-- **Examples**: The word "hello" might be transcribed as /həˈloʊ/ in the IPA.
-- **Importance**: Phonetic transcription enables precise representation of speech sounds, facilitating tasks like speech recognition and synthesis.
+## 2. Word Token Level
 
-## Prosody
+This level focuses on individual words (tokens) and their properties.
 
-- **Definition**: Prosody refers to the rhythm, stress, and intonation patterns of speech that convey meaning beyond the words themselves.
-- **Examples**: Emphasis on certain words or phrases, tone of voice, and pauses can alter the meaning of a sentence.
-- **Importance**: Prosody is crucial in NLP as it influences the interpretation of spoken language and can be used to convey emotional or attitudinal information.
+* **Tasks/Applications:**
+    * **Part-of-Speech (POS) Tagging:** Assigning grammatical tags (e.g., noun, verb, adjective) to each word. Example: "The quick brown fox jumps." becomes ["The/DET", "quick/ADJ", "brown/ADJ", "fox/NOUN", "jumps/VERB"].  Ambiguity can arise (e.g., "run" can be a noun or verb).
+    * **Parsing:** Analyzing the grammatical structure of a sentence, including identifying phrases and their relationships.  Different parsing techniques exist like constituency parsing and dependency parsing.
+    * **Chunking:** Grouping words into meaningful phrases (chunks), often used as a pre-processing step for other tasks.
+    * **Term Extraction:** Identifying important terms or keywords within text, useful for indexing and information retrieval.
+    * **Gene Mention Recognition:**  Similar to gene symbol recognition, but focusing on mentions of genes, which may be described in various ways.
 
-## Phonological Processing
+## 3. Sentence Level
 
-- **Definition**: Phonological processing involves analyzing the sound structure of words and phrases to identify phonemes, syllables, and other phonological features.
-- **Examples**: Identifying word boundaries, syllable division, and phoneme sequences are all part of phonological processing.
-- **Importance**: Phonological processing is essential for speech recognition, synthesis, and analysis, as well as text-to-speech systems.
+This level deals with individual sentences as complete units of meaning.
 
-## Phonological Rules
+* **Tasks/Applications:**
+    * **Sentence Classification:** Categorizing sentences based on their meaning or intent (e.g., sentiment analysis, spam detection).
+    * **Sentence Retrieval:**  Finding relevant sentences from a larger corpus based on a query.
+    * **Sentence Ranking:** Ordering sentences based on relevance, importance, or other criteria.
+    * **Question Answering:** Answering questions posed in natural language, requiring understanding of both the question and the relevant text.
+    * **Automatic Summarization:**  Generating concise summaries of individual sentences or longer texts.
 
-- **Definition**: Phonological rules are patterns or regularities that govern the sound structure of a language.
-- **Examples**: In English, the rule that /k/ and /g/ are often pronounced as /t/ and /d/ before /o/ and /u/ is a phonological rule.
-- **Importance**: Phonological rules help explain how sounds are used and combined in a language, facilitating tasks like speech recognition and synthesis.
+## 4. Sentence Window Level
 
-## Speech Recognition
+This level examines relationships between adjacent sentences within a text, forming a "window" of context.
 
-- **Definition**: Speech recognition involves identifying spoken words or phrases from audio recordings.
-- **Examples**: Speech recognition systems use phonological analysis to recognize spoken words and phrases.
-- **Importance**: Speech recognition is a critical application of phonological analysis in NLP, enabling tasks like voice assistants and speech-to-text systems.
+* **Tasks/Applications:**
+    * **Anaphora Resolution:** Resolving pronoun references to their correct antecedents in preceding sentences. Example:  "John went to the store. He bought milk."  "He" refers to "John."
 
-## Text-to-Speech Synthesis
+## 5. Paragraph & Passage Level
 
-- **Definition**: Text-to-speech synthesis involves generating spoken words or phrases from written text.
-- **Examples**: Text-to-speech systems use phonological analysis to generate spoken words and phrases.
-- **Importance**: Text-to-speech synthesis is another critical application of phonological analysis in NLP, enabling tasks like screen readers and voice assistants.
+This level considers larger units of text, like paragraphs and passages, focusing on their internal structure and organization.
 
-# Morphological Level in NLP
+* **Tasks/Applications:**
+    * **Detection of Rhetorical Zones:** Identifying different sections within a text based on their rhetorical purpose (e.g., introduction, argument, conclusion).
 
-## Morphological Analysis
+## 6. Whole Document Level
 
-- **Definition**: Morphological analysis involves examining the internal structure of words to identify their constituent parts, such as prefixes, suffixes, and roots.
-- **Examples**: Analyzing the word "unhappiness" might involve breaking it down into its constituent parts: "un-" (prefix), "happy" (root), and "-ness" (suffix).
+This level analyzes entire documents as single units.
 
-## Lemmatization
+* **Tasks/Applications:**
+    * **Document Similarity Calculation:** Determining how similar two documents are based on their content, useful for plagiarism detection or information retrieval.  Various similarity measures exist, such as cosine similarity using word embeddings.  If documents $D_1$ and $D_2$ have word embedding vectors $V_1$ and $V_2$ respectively, the cosine similarity is calculated as:
 
-- **Definition**: Lemmatization is the process of reducing words to their base or dictionary form, often referred to as the lemma.
-- **Examples**: Lemmatizing the word "better" might result in the base form "good."
+$$
+\text{Similarity}(D_1, D_2) = \frac{V_1 \cdot V_2}{||V_1|| \times ||V_2||}
+$$
 
-## Stemming
 
-- **Definition**: Stemming involves cutting words to their root forms, often using a set of predefined rules.
-- **Examples**: Stemming the words "running," "runner," and "ran" might result in the root form "run."
+## 7. Multi-Document Collection Level
 
-## Part-of-Speech Tagging
+This level deals with collections of documents, often large corpora.
 
-- **Definition**: Part-of-speech tagging involves identifying the grammatical category of words based on their morphology.
-- **Examples**: Tagging the word "running" as a verb or noun depending on the context is an example of part-of-speech tagging.
+* **Tasks/Applications:**
+    * **Document Clustering:** Grouping similar documents together based on their content.
+    * **Multi-Document Summarization:** Generating a summary that captures the key information from multiple documents on a related topic.
 
-# Syntactic Level in NLP
 
-## Parsing
+This hierarchical structure emphasizes the building-block nature of NLP, with each level contributing to more complex understanding and capabilities.
 
-- **Definition**: Parsing is the process of analyzing the grammatical structure of a sentence, often represented as a parse tree.
-- **Examples**: Parsing the sentence "The cat sat on the mat" might result in a parse tree:
-  ```
-  [NP The cat] [VP sat [PP on [NP the mat]]]
-  ```
-- **Types of Parsing**: There are various types of parsing, including:
-  *   **Syntactic Parsing**: Focuses on the grammatical structure of a sentence.
-  *   **Semantic Parsing**: Focuses on the meaning of a sentence.
-  *   **Dependency Parsing**: Represents the grammatical structure of a sentence as a tree, with words as nodes and dependencies as edges.
+# Early Beginnings of NLP (1950s-1970s)
 
-## Dependency Parsing
+- **Early Machine Translation (1950s):**  Driven by the Cold War's need for Russian translation, initial MT efforts were primarily rule-based, relying on dictionaries and basic syntactic transformations.  These systems struggled with the complexities of language, often producing literal and inaccurate translations.  The Georgetown-IBM experiment (1954) demonstrated a rudimentary system translating a small set of Russian sentences into English.
 
-- **Definition**: Dependency parsing is a type of parsing that represents the grammatical structure of a sentence as a tree, with words as nodes and dependencies as edges.
-- **Examples**: Dependency parsing the sentence "She loves him" might result in a dependency tree:
-  ```
-  loves ← She
-  loves → him
-  ```
-- **Types of Dependency Parsing**: There are various types of dependency parsing, including:
-  *   **Basic Dependency Parsing**: Focuses on the core dependencies between words.
-  *   **Enhanced Dependency Parsing**: Includes additional information, such as grammatical functions and semantic roles.
+- **Warren Weaver's Memorandum (1949):**  Weaver's memorandum, inspired by wartime code-breaking and information theory, proposed using statistical and cryptographic techniques for machine translation. This laid some of the groundwork for later statistical approaches.  He suggested that translation could be viewed as a decryption problem, mapping one language onto another using probabilities and contextual analysis.
 
-## Grammar Rules
+- **Chomsky's Influence (1957):** Noam Chomsky's work on generative grammar, particularly his book *Syntactic Structures*, significantly impacted linguistics and, subsequently, NLP.  His theories on the hierarchical structure of language and the existence of universal grammar provided a new framework for understanding syntax. While not directly applicable to early computational systems due to computational limitations at the time, it laid the theoretical foundation for later rule-based parsing approaches.
 
-- **Definition**: Grammar rules are the underlying principles that govern the structure of a language.
-- **Examples**: Grammar rules in English might include:
-  *   **Subject-Verb-Object (SVO) structure**: A common sentence structure in English, where the subject comes first, followed by the verb, and then the object.
-  *   **Differences in structure**: Other languages, such as Hindi, may have a Subject-Object-Verb (SOV) structure.
+- **ELIZA and SHRDLU (1960s-1970s):**  ELIZA, a program simulating a Rogerian psychotherapist, demonstrated the possibility of creating human-computer dialogue, although its understanding was superficial, based on pattern matching and keyword identification.  SHRDLU, developed by Terry Winograd, operated within a limited "blocks world" and could understand and execute commands related to moving virtual blocks, showcasing more advanced natural language understanding in a constrained environment.
 
-## Syntactic Analysis in NLP
+- **The ALPAC Report (1966) and the First AI Winter:** The ALPAC report, commissioned by the US government, assessed the progress of MT research and found that it fell short of expectations.  This led to a significant decrease in funding for NLP research, marking the beginning of the first AI winter. The report criticized the focus on fully automatic high-quality MT, advocating instead for investment in computational linguistics research and human-aided translation tools.
 
-- **Syntactic Analysis**: Involves analyzing the grammatical structure of a sentence to identify its components and relationships.
-- **Techniques**: Various techniques can be used for syntactic analysis, including parsing, dependency parsing, and grammar-based approaches.
-- **Applications**: Syntactic analysis has numerous applications in NLP, including:
-  *   **Language understanding**: Syntactic analysis helps computers understand the meaning of sentences and sentences structure.
-  *   **Language generation**: Syntactic analysis is used in language generation tasks, such as text summarization and machine translation.
-  *   **Language modeling**: Syntactic analysis is used in language modeling tasks, such as language prediction and language completion.
+- **Conceptual Dependency Theory (1970s):**  Developed by Roger Schank, Conceptual Dependency Theory aimed to represent the meaning of sentences in a canonical form, focusing on the actions and relationships between concepts rather than surface-level syntax.  This approach aimed to enable deeper semantic understanding and inference, influencing early work on natural language understanding.  It represented sentences as a series of primitive actions, enabling a degree of generalization across different sentence structures expressing similar meanings.
 
-# Discourse Level in NLP
+- **Limitations of Early Systems:**  Early NLP systems faced significant limitations due to limited computing power, lack of large datasets, and the inherent complexity of natural language.  Rule-based systems were brittle and difficult to scale, requiring extensive manual effort to encode linguistic rules.  The lack of robust statistical methods and data hampered the development of more data-driven approaches.
 
-## Coherence
+# NLP in the 1980s
 
-- **Definition**: Coherence refers to the logical flow of ideas in a text, ensuring that sentences connect meaningfully.
-- **Examples**: In the text "The cat was sleeping. The cat chased a mouse. The cat was happy.", coherence is maintained by the logical connection between the sentences.
+- **Dominance of Symbolic Approaches:**  The 1980s saw the rise of symbolic AI, where knowledge was represented through symbols and manipulated using logic and rules.  This heavily influenced NLP, leading to the development of **expert systems**.
 
-## Cohesion
+- **Expert Systems:** These systems aimed to emulate the decision-making of human experts in specific domains. They relied on:
+    - **Knowledge Bases:**  Structured repositories of facts, rules, and relationships within a domain, often represented using formal logic (e.g., predicate logic).  These knowledge bases were carefully crafted by domain experts.
+    - **Inference Engines:**  Algorithms that used the knowledge base to deduce new information or answer queries.  Common inference methods included forward chaining and backward chaining.
+    - **Natural Language Interfaces:**  While not the primary focus, some expert systems incorporated basic natural language interfaces to allow users to interact with them using more natural language-like input, although these were often limited in their capabilities.
 
-- **Definition**: Cohesion refers to the grammatical and lexical linking within a text that helps maintain the flow.
-- **Examples**: In the text "The cat was sleeping. It was a beautiful day. The cat was happy.", cohesion is maintained by the use of pronouns ("It") and adverbs ("a beautiful day") that link the sentences together.
+- **Focus on Rule-Based Systems:**  NLP systems in the 1980s predominantly employed hand-crafted rules for various tasks like parsing, part-of-speech tagging, and semantic analysis.  These rules were based on linguistic theories and encoded expert knowledge about language.
 
-## Anaphora Resolution
+- **Limitations of Expert Systems:** Although initially promising, expert systems faced several limitations:
+    - **Knowledge Acquisition Bottleneck:** Building and maintaining knowledge bases was a labor-intensive and time-consuming process, requiring significant effort from domain experts.  This limited their scalability to broader domains or languages.
+    - **Brittleness:** Expert systems struggled with ambiguity and unexpected input.  They could only handle situations explicitly covered in their knowledge bases and lacked the flexibility of human language understanding.
+    - **Lack of Robustness:**  The hand-crafted rules were often domain-specific and brittle, failing to generalize well to different contexts or variations in language use.
 
-- **Definition**: Anaphora resolution involves identifying which words refer back to others (e.g., resolving pronouns to their antecedents).
-- **Examples**: In the text "John saw a book. He bought it.", anaphora resolution involves identifying the pronoun "He" as referring to the antecedent "John".
+- **Early Machine Learning Influence:** Although statistically-driven methods did not come to the forefront until the late 1980s and 1990s, certain applications in the 1980s began to incorporate techniques like decision trees and probabilistic models to address some of these limitations by allowing systems to learn from data.
 
-## Discourse Analysis in NLP
+# NLP (Late 1980s - 2000s)
 
-- **Discourse Analysis**: Involves analyzing the structure and organization of a text to understand its meaning and purpose.
-- **Techniques**: Various techniques can be used for discourse analysis, including:
-  *   **Text Segmentation**: Breaking down a text into smaller units, such as sentences or paragraphs.
-  *   **Text Classification**: Classifying a text into a specific category or genre.
-  *   **Text Summarization**: Summarizing a text to convey its main ideas and key points.
+- **Transition to Statistical Methods (Late 1980s - Early 1990s):** A significant shift occurred from rule-based systems to statistical models. This was driven by the limitations of hand-crafted rules and the increasing availability of large text corpora.  Probabilistic models like Hidden Markov Models (HMMs) were applied to tasks such as part-of-speech tagging.  $P(t_i | t_{i-1})$ became a key concept, representing the probability of a tag given the previous tag.
 
-## Applications of Discourse Analysis
+- **Rise of Machine Learning:** Machine learning algorithms, particularly statistical learning methods, became central to NLP.  These methods allowed models to learn patterns and rules from data, rather than relying on explicit programming.  For example, in probabilistic parsing,  $P(tree | sentence)$ is estimated from a treebank, a corpus of parsed sentences.
 
-- **Language Understanding**: Discourse analysis helps computers understand the meaning and purpose of a text.
-- **Language Generation**: Discourse analysis is used in language generation tasks, such as text summarization and machine translation.
-- **Language Modeling**: Discourse analysis is used in language modeling tasks, such as language prediction and language completion.
+- **Early Neural Networks:**  While computationally limited at the time, research explored the use of neural networks, especially recurrent neural networks (RNNs), for language modeling.  Simple feedforward networks were also used for tasks like text classification.  However, training these early networks was challenging due to limited computational resources and the vanishing gradient problem in RNNs.
 
-## Discourse Markers
+- **Word Embeddings and Distributional Semantics:** The foundation for modern word embeddings was laid during this period.  Methods like Latent Semantic Analysis (LSA) and Latent Dirichlet Allocation (LDA) were developed to capture semantic relationships between words by analyzing their co-occurrence patterns in large text corpora. These methods represented words as vectors in a high-dimensional space, where semantically similar words were closer to each other.
 
-- **Definition**: Discourse markers are words or phrases that help to organize and structure a text.
-- **Examples**: Discourse markers include words like "however", "in addition", and "therefore".
-- **Function**: Discourse markers help to signal the relationship between ideas and sentences in a text.
+- **Statistical Machine Translation (SMT):**  SMT systems, based on statistical models trained on large parallel corpora (texts translated between two languages), became increasingly sophisticated.  These models used concepts like alignment models to map words and phrases between source and target languages, maximizing the probability of the target sentence given the source sentence: $argmax_{t} P(t|s)$. Phrase-based and hierarchical phrase-based models improved translation quality significantly.
 
-## Register Variation
+- **Growth of Annotated Corpora:**  The development of large annotated corpora, such as the Penn Treebank for syntactic parsing and PropBank for semantic role labeling, played a crucial role in advancing statistical NLP. These resources provided training data for supervised machine learning algorithms.
 
-- **Definition**: Register variation refers to the different styles of language used in different contexts or situations.
-- **Examples**: Register variation can be seen in the use of formal vs. informal language, or in the use of technical vs. non-technical vocabulary.
-- **Function**: Register variation helps to convey social identity and context in language use.
+- **Emergence of Open-Source NLP Tools:** The late 1990s and 2000s saw the emergence of open-source NLP tools and libraries, making NLP research and development more accessible.
 
-## Politeness Theory
 
-- **Definition**: Politeness theory refers to the ways in which language is used to show respect, deference, or solidarity.
-- **Examples**: Politeness theory can be seen in the use of honorifics, titles, or formal language.
-- **Function**: Politeness theory helps to regulate social interaction and maintain social relationships.
+# NLP (2010s - Present)
 
-# References
+- **Sequence-to-Sequence Models**: The encoder-decoder model, a general framework for sequence-to-sequence tasks like machine translation, gained prominence.  The encoder maps an input sequence to a fixed-length vector representation, and the decoder generates an output sequence based on this representation.
 
-*   *Discourse Analysis in Natural Language Processing* by Christopher D. Manning and Hinrich Schütze
-*   *Text Analysis in Natural Language Processing* by Sebastian Riedel and Mark Steedman
+- **Attention Mechanism**:  The introduction of the attention mechanism revolutionized NLP.  Attention allows the model to focus on different parts of the input sequence when generating each element of the output sequence.  For example, in machine translation, when translating the word "chat," the model might attend more to the French word "chat" (cat) than other words in the input sentence.  The attention weight $a_{ij}$  quantifies the relationship between the $i$-th output element and the $j$-th input element.
 
-# Why NLP is hard?
+- **Transformer Models**: The transformer architecture, based solely on attention mechanisms, eliminated the need for recurrent or convolutional layers. Transformers use self-attention to relate different positions within a single sequence to compute a representation of that sequence. This is particularly effective for capturing long-range dependencies.  The attention function can be described as:
 
-## Evolution of Language
+$$
+\text{Attention}(Q, K, V) = \text{softmax}\left(\frac{QK^T}{\sqrt{d_k}}\right)V
+$$
 
-- **Language is constantly changing**: New slang, idioms, and phrases emerge, making it challenging for NLP systems to keep up.
-- **Adaptability is crucial**: NLP models must be able to adapt to changing language trends and nuances.
+where $Q$, $K$, and $V$ are matrices representing queries, keys, and values respectively, and $d_k$ is the dimension of the keys.
 
-## Data Quality and Quantity
+- **Pre-trained Language Models**:  Large language models (LLMs) like BERT (Bidirectional Encoder Representations from Transformers) and GPT (Generative Pre-trained Transformer) are trained on massive text datasets using self-supervised learning objectives, such as masked language modeling (predicting masked words) or next sentence prediction.  These pre-trained models can then be fine-tuned for specific downstream tasks with relatively small amounts of task-specific data, achieving state-of-the-art results across a wide range of NLP tasks.
 
-- **High-quality, annotated data**: NLP models require high-quality, annotated data for training, but it is often scarce and expensive to obtain.
-- **Large datasets are necessary**: Large datasets are required for effective machine learning, but compiling these datasets can be challenging.
+- **Transfer Learning**: The paradigm of transfer learning, where knowledge learned from one task is transferred to another, became central to NLP. Pre-training on large datasets allows models to learn general language representations that are beneficial for a variety of downstream tasks.
 
-## Computational Complexity
+- **Few-Shot and Zero-Shot Learning**: With the advent of powerful LLMs, few-shot learning (adapting to new tasks with limited examples) and zero-shot learning (performing tasks without any examples) have become increasingly viable research directions.  This allows for application of NLP to scenarios with limited labeled data.
 
-- **Advanced NLP models require significant computational resources**: Training and inference for advanced NLP models, such as transformers, require significant computational resources.
-- **Computational complexity is a significant challenge**: Ensuring that NLP models can be run efficiently on available hardware is a significant challenge.
+- **Multilingual and Cross-lingual Models**:  Multilingual models, trained on data from multiple languages, enable cross-lingual transfer learning, where knowledge learned from high-resource languages can be applied to low-resource languages.
 
-## Cultural and Ethical Considerations
 
-- **Avoiding biases**: NLP systems must be designed to avoid biases and respect cultural differences.
-- **Fairness and reducing biases**: Ensuring fairness and reducing biases in NLP models is a significant challenge. 
+# Key Differences Between Human and Machine NLP
 
-# Ambiguity at Many Levels
+## Human
 
-### Word Senses
+- **Nuance and Implied Meaning:** Humans excel at understanding subtle nuances like sarcasm, humor, and metaphors, which often rely on complex contextual understanding and shared cultural knowledge.  Machines struggle with these aspects, often interpreting language literally.
+- **Creativity and Originality:** Humans can generate novel and creative text formats, styles, and content, whereas machines primarily rely on existing data patterns and struggle with true originality.  Think of stylistic elements like alliteration or assonance, where subtle phonetic patterns create an aesthetic effect.
+- **Adaptability and Generalization:** Humans readily adapt to new linguistic contexts, dialects, and even entirely new languages with relatively limited exposure.  Machines require substantial retraining and data for each new context.  Consider the ease with which a human can understand code-switching compared to a machine.
+- **Emotional Range and Empathy:** Human language understanding is deeply intertwined with emotion and empathy. We can perceive emotional undertones and respond appropriately. Machines lack this emotional depth, hindering their ability to engage in truly empathetic communication.
+- **World Knowledge and Reasoning:**  Humans possess extensive world knowledge and reasoning abilities, enabling them to understand complex cause-and-effect relationships, draw inferences, and resolve ambiguities effectively.  Machine reasoning is often limited by the data they are trained on and struggles with scenarios requiring real-world knowledge. For example, understanding a sentence like "The politician's shady dealings led to his downfall" requires understanding the concept of consequences and societal norms.
+- **Intuitive Grasp of Grammar:** Humans develop an intuitive understanding of grammar, even without formal training.  This allows us to generate and interpret grammatically complex and sometimes even incorrect sentences, recognizing intent despite errors. Machines often struggle with deviations from standard grammar, as their knowledge is based on pre-defined rules.
 
-- **Bank**: Refers to a financial institution or the side of a river.
-  - Example: "I went to the bank to deposit my paycheck." (financial institution)
-  - Example: "The bank of the river was lined with trees." (side of a river)
 
-### Part of Speech
+## Machine
 
-- **Blue**: Can be a noun (referring to the color) or a verb (meaning to make something blue).
-  - Example: "The blue car is parked outside." (noun)
-  - Example: "Can you blue the dress to match the curtains?" (verb)
+- **Computational Speed and Scale:** Machines can process vast amounts of textual data orders of magnitude faster than humans.  This enables them to perform tasks like large-scale document analysis, information retrieval, and statistical language modeling efficiently.  Consider analyzing millions of tweets for sentiment analysis—a task infeasible for humans.
+- **Pattern Recognition and Statistical Analysis:** Machines excel at identifying complex statistical patterns in language data, allowing them to perform tasks like predicting the next word in a sequence, identifying topic clusters, or detecting plagiarism.  Human pattern recognition abilities are comparatively limited in scale and speed.  Consider topic modeling, where machines can discover latent themes across a large collection of documents.
+- **Consistency and Objectivity:** Machines offer consistent performance, unaffected by factors like fatigue or bias (assuming the training data is unbiased).  This is crucial for tasks requiring objective analysis, like automated essay grading or legal document review.  Humans are more susceptible to subjective biases and inconsistencies.
+- **Automation and Scalability:**  Machines can automate tedious and repetitive NLP tasks, like translating documents, generating summaries, or extracting key information from text. This scalability is essential for handling large volumes of data in real-world applications.  Consider automating customer support through chatbots.
+- **Multilingual Capabilities:**  Machines can be trained to handle multiple languages, facilitating tasks like cross-lingual information retrieval and machine translation. While humans can also learn multiple languages, machines can operate across a wider range of languages more efficiently. Consider real-time translation services supporting dozens of languages.
+- **Precise Mathematical Representation:** Machines operate on precise mathematical representations of language, like word embeddings and distributional semantics.  This allows for quantifiable analysis and comparison of linguistic elements, enabling tasks like semantic similarity calculations. For example, measuring the cosine similarity between word vectors can determine the relatedness of words like "king" and "queen".  Human semantic understanding is more intuitive and difficult to quantify mathematically.  A simple representation would be: $similarity(king, queen) = cos(\theta)$, where $\theta$ is the angle between the vectors representing "king" and "queen".
 
-### Syntactic Structure
+# Review Questions
 
-- **I Saw a Man with a Telescope**: The preposition "with" can be analyzed in different ways, depending on the intended meaning.
-  - Example: "I saw a man with a telescope observing the stars." (the man has a telescope)
-  - Example: "I saw a man with a telescope in the attic." (the man is with someone who has a telescope)
+**Core Technologies & Applications:**
 
-### Quantifier Scope
+1.  What is Language Modeling and how is it applied in NLP tasks like machine translation? Explain the concept of n-gram models and how they estimate probability.  How do neural language models differ?
+2.  Why is Part-of-Speech tagging important for downstream NLP tasks?  How is tagging accuracy typically measured?
+3.  Explain the difference between constituency parsing and dependency parsing. Provide examples.
+4.  Define Named Entity Recognition (NER) and its significance in Information Extraction.  What are some common evaluation metrics used for NER?
+5.  How does Coreference Resolution improve text understanding and what role does it play in tasks like summarization?
+6.  What challenges does Word Sense Disambiguation (WSD) address?  Describe a simplified probabilistic approach for WSD.
+7.  Explain Semantic Role Labeling (SRL) and provide an example illustrating its usage.
+8.  What are the key differences between Statistical Machine Translation (SMT) and Neural Machine Translation (NMT)?
+9.  How is Information Retrieval (IR) evaluated?  Briefly describe different IR techniques.
+10. What are the main challenges in building effective Dialogue Systems?
+11. Describe how sentiment analysis is used in practical applications.
 
-- **Every Child Loves Some Movie**: The quantifier "every" applies to the children, while the quantifier "some" refers to a subset of movies.
-  - Example: "Every child loves some movie, but not every child loves the same movie." (some children love the same movie, but others love different movies)
+**Why NLP is Hard:**
 
-### Multiple
+1.  Explain the different types of ambiguity in natural language, providing clear examples for each type.  How do these ambiguities pose challenges for NLP systems?
+2.  Discuss the impact of linguistic diversity on NLP. How do morphological variations, syntactic variations, and semantic variations across languages affect NLP model development?
+3.  Explain the challenge of data sparsity in NLP.  How does it hinder the development of robust models, and what techniques can be used to address this issue?  What is cross-lingual transfer learning and how can it be applied to data sparsity problems?
+4.  How does the dynamic nature of language, with its constant evolution and variability, pose challenges for NLP?  Explain the concepts of dialectal variation and how it can be addressed in NLP.
+5.  Discuss the computational complexity challenges faced by many NLP tasks, particularly those employing deep learning models.  What strategies can be used to mitigate these challenges?
 
-- **I Saw Her Duck**: The word "duck" can refer to a type of bird or a verb meaning to lower or dip something.
-  - Example: "I saw her duck swim in the pond." (the bird)
-  - Example: "Can you duck down so you don't hit your head?" (the verb)
+**Ambiguity in Natural Language:**
 
-# Language Map of India
+1.  Differentiate between homonymy, polysemy, homographs, and homophones with examples. Why are they important to consider in NLP tasks?
+2.  Explain Prepositional Phrase Attachment and Coordination Ambiguity with examples. How can these ambiguities be represented mathematically or logically?
+3.  How does quantifier scope ambiguity affect the meaning of sentences? Provide examples and explain how formal semantic representations can be used to address this type of ambiguity.
+4.  Describe the challenges posed by deictic expressions and speech act ambiguity in NLP.  Provide examples.  Why is context crucial for resolving pragmatic ambiguity?
 
-## Overview
+**Challenges in Multilingual NLP:**
 
-The language map of India presents a diverse linguistic landscape with numerous languages spoken across the country. The map highlights the various languages spoken in different regions, including North, East, West, South, Central, and Northeastern India.
+1.  Explain how data sparsity is quantified and modeled in the context of multilingual NLP.  Discuss the implication of the power law distribution of language data.
+2.  How does morphological complexity affect NLP tasks? Provide examples of agglutinative languages and discuss the computational challenges they present.  How can finite-state transducers (FSTs) be helpful?
+3.  Describe the impact of syntactic divergence on NLP tasks like cross-lingual parsing. Provide examples of word order differences across languages.  How can treebanks mitigate these issues?
+4.  Explain the challenges of semantic variation in multilingual word sense disambiguation and cross-lingual word embeddings. How can bilingual dictionaries or parallel corpora help align embedding spaces?
+5.  Why is the lack of linguistic resources a major challenge in multilingual NLP? Discuss the difficulties in creating resources manually and the impact on NLP tool development.
+6.  What is negative transfer in cross-lingual transfer learning and under what circumstances can it occur?
 
-## North India
+**Indian Language Data and Resources:**
 
-*   **Punjabi:** Spoken primarily in Punjab and also in parts of Haryana, Delhi, and Chandigarh.
-*   **Hindi:** Official language of India, widely spoken in Uttar Pradesh, Madhya Pradesh, Bihar, Rajasthan, Haryana, Delhi, and other parts of North India.
-*   **Bengali:** Spoken in West Bengal and Assam.
-*   **Gujarati:** Official language of Gujarat and also spoken in parts of Maharashtra and other states.
-*   **Marathi:** Official language of Maharashtra and also spoken in parts of Gujarat and other states.
-*   **Oriya:** Official language of Odisha and also spoken in parts of West Bengal and other states.
-*   **Kashmiri:** Official language of Jammu and Kashmir and also spoken in parts of Himachal Pradesh and other states.
-*   **Sanskrit:** Widely studied and used in various contexts throughout North India.
+1.  Explain the unique challenges posed by code-switching in Indian languages for NLP tasks. What specialized datasets or techniques are needed to address these?
+2.  Discuss the impact of diverse scripts used for Indian languages on NLP preprocessing steps like tokenization and transliteration.
+3.  Why is dialectal variation within Indian languages a challenge for NLP model development? Discuss the need for multi-dialect training or dialect adaptation techniques.
+4.  What are the specific NLP challenges presented by oral languages with limited written resources?  Why are speech technologies important in these scenarios?
+5.  How can the development of language-specific NLP tools (like morphological analyzers) contribute to the advancement of NLP for Indian languages?
+6.  How can the type-token ratio (TTR) be used to assess data sparsity in Indian languages?
 
-## East India
+**Language Variability Across Speakers:**
 
-*   **Bengali:** Official language of West Bengal and also spoken in Assam and other parts of East India.
-*   **Oriya:** Official language of Odisha and also spoken in parts of West Bengal and other states.
-*   **Assamese:** Official language of Assam and also spoken in parts of Meghalaya and other states.
-*   **Bodo:** Official language of Assam and also spoken in parts of Meghalaya and other states.
-*   **Manipuri:** Official language of Manipur and also spoken in parts of Assam and other states.
-*   **Nepali:** Official language of Sikkim and also spoken in parts of West Bengal and other states.
-*   **Santhali:** Official language of Jharkhand and also spoken in parts of Odisha and other states.
+1. How do dialects vary at different linguistic levels (phonetics, morphology, syntax, lexicon)? Provide examples.
+2. What social factors influence the development of sociolects? Provide examples of how social class, age, ethnicity, gender, and occupation can affect language use.
+3. How do idiolects arise from personal experiences, personality traits, speech habits, and physical/cognitive factors?
+4.  Why do dialects, sociolects, and idiolects present challenges for NLP tasks like speech recognition and NLU?  How can these be addressed?
 
-## West India
 
-*   **Gujarati:** Official language of Gujarat and also spoken in parts of Maharashtra and other states.
-*   **Marathi:** Official language of Maharashtra and also spoken in parts of Gujarat and other states.
-*   **Konkani:** Official language of Goa and also spoken in parts of Maharashtra and Gujarat.
-*   **Malayalam:** Official language of Kerala and also spoken in parts of Tamil Nadu and other states.
-*   **Tamil:** Official language of Tamil Nadu and also spoken in parts of Kerala and other states.
+**Levels of Language Processing in NLP:**
 
-## South India
+1. Describe the focus of the phonological level and its relevance to specific NLP tasks.  How do phonemes and prosody play a role?
+2. Explain the focus of the morphological level and its importance for tasks like stemming and lemmatization.  Provide an example of morphological analysis.
+3. What is the lexical level concerned with? How is word sense disambiguation (WSD) relevant at this level?
+4. Describe the syntactic level and its role in parsing.  Explain the difference between constituency and dependency parsing in the context of an example sentence.
+5. What is the focus of the semantic level?  Explain how semantic role labeling (SRL) and named entity recognition (NER) operate at this level.
+6. Explain the discourse level and its relevance to tasks like anaphora resolution and text summarization.  Provide an example.
+7. What does the pragmatic level deal with in NLP? How is it relevant for understanding speech acts and detecting sarcasm or irony?  Give examples.
 
-*   **Malayalam:** Official language of Kerala and also spoken in parts of Tamil Nadu and other states.
-*   **Tamil:** Official language of Tamil Nadu and also spoken in parts of Kerala and other states.
-*   **Telugu:** Official language of Andhra Pradesh and Telangana and also spoken in parts of Karnataka and other states.
-*   **Kannada:** Official language of Karnataka and also spoken in parts of Andhra Pradesh and other states.
-*   **Gondi:** Official language of Chhattisgarh and also spoken in parts of Maharashtra, Madhya Pradesh, and other states.
-*   **Kui:** Official language of Odisha and also spoken in parts of Andhra Pradesh and other states.
-*   **Kurukh:** Official language of Jharkhand and also spoken in parts of Odisha and other states.
+**Levels and Applications of NLP:**
 
-## Central India
-
-*   **Hindi:** Official language of India, widely spoken in Uttar Pradesh, Madhya Pradesh, Bihar, Rajasthan, Haryana, Delhi, and other parts of Central India.
-*   **Bundeli:** Official language of Bundelkhand region and also spoken in parts of Uttar Pradesh and other states.
-*   **Gadhavi:** Official language of Gujarat and also spoken in parts of Maharashtra and other states.
-*   **Pahari:** Official language of Uttarakhand and also spoken in parts of Himachal Pradesh and other states.
-
-## Northeastern India
-
-*   **Assamese:** Official language of Assam and also spoken in parts of Meghalaya and other states.
-*   **Bodo:** Official language of Assam and also spoken in parts of Meghalaya and other states.
-*   **Manipuri:** Official language of Manipur and also spoken in parts of Assam and other states.
-*   **Nepali:** Official language of Sikkim and also spoken in parts of West Bengal and other states.
-*   **Santhali:** Official language of Jharkhand and also spoken in parts of Odisha and other states.
-*   **Tibetan:** Official language of Ladakh and also spoken in parts of Sikkim and other states.
-
-## Special Regions
-
-*   **English:** Widely spoken throughout India and used as a common language.
-*   **Urdu:** Official language of Jammu and Kashmir and also spoken in parts of Uttar Pradesh and other states.
-*   **Sindhi:** Official language of Maharashtra and also spoken in parts of Gujarat and other states.
-*   **Tulu:** Official language of Karnataka and also spoken in parts of Kerala and other states.
-*   **Bhili:** Official language of Maharashtra and also spoken in parts of Gujarat and other states.
-
-# Dialectal Variations
-
-## Introduction
-
-Dialectal variations refer to distinct forms of a language spoken by specific groups, often distinguished by geographical regions. Each dialect can have unique vocabulary, grammar, and pronunciation.
-
-## Examples
-
-*   **American English vs. British/Indian English**: The word "truck" is commonly used in American English, whereas in British (and Indian) English, the same vehicle is referred to as a "lorry".
-*   **Pronunciation differences**: The pronunciation of certain words, like "tomato" (toh-MAH-toh vs. to-MAY-to), also differs between regions.
-
-## Pronunciation Variations
-
-Pronunciation variations are a key aspect of dialectal differences. Even within the same language, different regions or communities may have distinct ways of pronouncing words.
-
-*   **Vowel shifts**: Changes in vowel pronunciation can significantly impact the sound and meaning of words.
-*   **Consonant differences**: Variations in consonant pronunciation can also affect the overall sound of a language.
-
-## Vocabulary Differences
-
-Vocabulary differences are another significant aspect of dialectal variations. Words may have different meanings or connotations in different dialects.
-
-*   **Regional slang**: Slang words or phrases may be unique to specific regions or communities.
-*   **Idiomatic expressions**: Idioms and colloquialisms can vary significantly between dialects.
-
-## Grammar Differences
-
-Grammar differences are also common in dialectal variations. Sentence structure, verb conjugation, and other grammatical elements may differ between dialects.
-
-*   **Sentence structure**: The order of words in a sentence can change between dialects.
-*   **Verb conjugation**: Verb forms may vary depending on the dialect.
-
-## Implications of Dialectal Variations
-
-Dialectal variations have significant implications for language learning, communication, and cultural understanding.
-
-*   **Language learning**: Dialectal variations can present challenges for language learners, who must adapt to unique vocabulary, grammar, and pronunciation.
-*   **Communication**: Dialectal variations can lead to misunderstandings or miscommunications, particularly if speakers are not aware of the differences.
-*   **Cultural understanding**: Recognizing dialectal variations can deepen cultural understanding and appreciation, as it highlights the diversity and richness of human language.
-
-# Sociolects
-
-## Definition
-
-Sociolects refer to variations in language used by specific social groups, often influenced by factors such as class, education, or occupation. The way language is used can signal social identity and status.
-
-## Examples
-
-*   **Formal vs. Informal Language**: In formal settings, people might say, "Good morning, how are you?" while in informal contexts, they might simply say, "Hey, what's up?"
-*   **Professional Jargon**: Professional jargon is another example of sociolect, where specific terms are used within particular industries (e.g., legal jargon, medical terminology).
-
-## Significance
-
-Sociolects are significant because they reflect the social context in which language is used. By understanding sociolects, we can gain insights into the social dynamics and power structures within a community.
-
-*   **Social Identity**: Sociolects can signal social identity and status, highlighting the importance of language in shaping our social relationships.
-*   **Power Dynamics**: Understanding sociolects can also help us recognize the power dynamics at play in different social contexts, where certain groups may have more access to certain language varieties.
-
-## Implications
-
-The study of sociolects has implications for various fields, including linguistics, sociology, and education.
-
-*   **Language Teaching**: Understanding sociolects can inform language teaching practices, helping educators to create more effective language learning strategies that take into account the social context of language use.
-*   **Communication**: Recognizing sociolects can also improve communication across different social groups, by acknowledging the language varieties used by different communities.
-
-# Ambiguity in Relationships, Actions, Promises, and Orders
-
-## Ambiguity in Relationships
-
-- **Mary and Sue are sisters.**
-  - How are Mary and Sue related?
-  - Sisters
-- **Mary and Sue are mothers.**
-  - How are Mary and Sue related?
-  - Mothers
-
-## Ambiguity in Actions
-
-- **Joan made sure to thank Susan for all the help she had received.**
-  - Who had received help?
-  - Joan
-  - Susan
-- **Joan made sure to thank Susan for all the help she had given.**
-  - Who had given help?
-  - Joan
-  - Susan
-
-## Ambiguity in Promises and Orders
-
-- **John promised Bill to leave so an hour later he left.**
-  - Who left an hour later?
-  - John
-  - Bill
-- **John ordered Bill to leave so an hour later he left.**
-  - Who left an hour later?
-  - John
-  - Bill 
+1.  Explain the tasks and applications relevant to the Character & String level of NLP. Discuss the challenges of tokenization and sentence boundary detection.
+2.  Describe the tasks and applications at the Word Token level, focusing on POS tagging and parsing.  Why is ambiguity a challenge at this level?
+3.  What are the key applications of NLP at the Sentence Level? Provide examples for sentence classification, retrieval, ranking, question answering, and summarization.
+4.  Explain the importance of the Sentence Window level for tasks like anaphora resolution. Provide a clear example.
+5.  What is the focus of the Paragraph & Passage level?  How is it used for detecting rhetorical zones?
+6.  Describe how document similarity is calculated at the Whole Document level. Explain the cosine similarity formula in the context of document vectors.
+7.  What tasks and applications are addressed at the Multi-Document Collection level? Provide examples for document clustering and multi-document summarization.
